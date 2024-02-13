@@ -1,0 +1,74 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::KinesisVideoSignalingChannels
+  module Types
+
+    class ClientLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetIceServerConfigRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor client_id: ::String
+      attr_accessor service: ("TURN")
+      attr_accessor username: ::String
+      SENSITIVE: []
+    end
+
+    class GetIceServerConfigResponse
+      attr_accessor ice_server_list: ::Array[Types::IceServer]
+      SENSITIVE: []
+    end
+
+    class IceServer
+      attr_accessor uris: ::Array[::String]
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      attr_accessor ttl: ::Integer
+      SENSITIVE: []
+    end
+
+    class InvalidArgumentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidClientException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NotAuthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SendAlexaOfferToMasterRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor sender_client_id: ::String
+      attr_accessor message_payload: ::String
+      SENSITIVE: []
+    end
+
+    class SendAlexaOfferToMasterResponse
+      attr_accessor answer: ::String
+      SENSITIVE: []
+    end
+
+    class SessionExpiredException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

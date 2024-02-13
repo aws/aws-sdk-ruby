@@ -207,7 +207,8 @@ module Aws
       end
     rescue TokenFileReadError, InvalidTokenError
       raise
-    rescue StandardError
+    rescue StandardError => e
+      warn("Error retrieving ECS Credentials: #{e.message}")
       '{}'
     end
 

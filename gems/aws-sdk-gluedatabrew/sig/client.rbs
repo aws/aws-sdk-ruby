@@ -1,0 +1,1172 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module GlueDataBrew
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchDeleteRecipeVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteRecipeVersionResponse]
+        def name: () -> ::String
+        def errors: () -> ::Array[Types::RecipeVersionErrorDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#batch_delete_recipe_version-instance_method
+      def batch_delete_recipe_version: (
+                                         name: ::String,
+                                         recipe_versions: Array[::String]
+                                       ) -> _BatchDeleteRecipeVersionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteRecipeVersionResponseSuccess
+
+      interface _CreateDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatasetResponse]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#create_dataset-instance_method
+      def create_dataset: (
+                            name: ::String,
+                            ?format: ("CSV" | "JSON" | "PARQUET" | "EXCEL" | "ORC"),
+                            ?format_options: {
+                              json: {
+                                multi_line: bool?
+                              }?,
+                              excel: {
+                                sheet_names: Array[::String]?,
+                                sheet_indexes: Array[::Integer]?,
+                                header_row: bool?
+                              }?,
+                              csv: {
+                                delimiter: ::String?,
+                                header_row: bool?
+                              }?
+                            },
+                            input: {
+                              s3_input_definition: {
+                                bucket: ::String,
+                                key: ::String?,
+                                bucket_owner: ::String?
+                              }?,
+                              data_catalog_input_definition: {
+                                catalog_id: ::String?,
+                                database_name: ::String,
+                                table_name: ::String,
+                                temp_directory: {
+                                  bucket: ::String,
+                                  key: ::String?,
+                                  bucket_owner: ::String?
+                                }?
+                              }?,
+                              database_input_definition: {
+                                glue_connection_name: ::String,
+                                database_table_name: ::String?,
+                                temp_directory: {
+                                  bucket: ::String,
+                                  key: ::String?,
+                                  bucket_owner: ::String?
+                                }?,
+                                query_string: ::String?
+                              }?,
+                              metadata: {
+                                source_arn: ::String?
+                              }?
+                            },
+                            ?path_options: {
+                              last_modified_date_condition: {
+                                expression: ::String,
+                                values_map: Hash[::String, ::String]
+                              }?,
+                              files_limit: {
+                                max_files: ::Integer,
+                                ordered_by: ("LAST_MODIFIED_DATE")?,
+                                order: ("DESCENDING" | "ASCENDING")?
+                              }?,
+                              parameters: Hash[::String, {
+                                  name: ::String,
+                                  type: ("Datetime" | "Number" | "String"),
+                                  datetime_options: {
+                                    format: ::String,
+                                    timezone_offset: ::String?,
+                                    locale_code: ::String?
+                                  }?,
+                                  create_column: bool?,
+                                  filter: {
+                                    expression: ::String,
+                                    values_map: Hash[::String, ::String]
+                                  }?
+                                }]?
+                            },
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateDatasetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetResponseSuccess
+
+      interface _CreateProfileJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProfileJobResponse]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#create_profile_job-instance_method
+      def create_profile_job: (
+                                dataset_name: ::String,
+                                ?encryption_key_arn: ::String,
+                                ?encryption_mode: ("SSE-KMS" | "SSE-S3"),
+                                name: ::String,
+                                ?log_subscription: ("ENABLE" | "DISABLE"),
+                                ?max_capacity: ::Integer,
+                                ?max_retries: ::Integer,
+                                output_location: {
+                                  bucket: ::String,
+                                  key: ::String?,
+                                  bucket_owner: ::String?
+                                },
+                                ?configuration: {
+                                  dataset_statistics_configuration: {
+                                    included_statistics: Array[::String]?,
+                                    overrides: Array[
+                                      {
+                                        statistic: ::String,
+                                        parameters: Hash[::String, ::String]
+                                      },
+                                    ]?
+                                  }?,
+                                  profile_columns: Array[
+                                    {
+                                      regex: ::String?,
+                                      name: ::String?
+                                    },
+                                  ]?,
+                                  column_statistics_configurations: Array[
+                                    {
+                                      selectors: Array[
+                                        {
+                                          regex: ::String?,
+                                          name: ::String?
+                                        },
+                                      ]?,
+                                      statistics: {
+                                        included_statistics: Array[::String]?,
+                                        overrides: Array[
+                                          {
+                                            statistic: ::String,
+                                            parameters: Hash[::String, ::String]
+                                          },
+                                        ]?
+                                      }
+                                    },
+                                  ]?,
+                                  entity_detector_configuration: {
+                                    entity_types: Array[::String],
+                                    allowed_statistics: Array[
+                                      {
+                                        statistics: Array[::String]
+                                      },
+                                    ]?
+                                  }?
+                                },
+                                ?validation_configurations: Array[
+                                  {
+                                    ruleset_arn: ::String,
+                                    validation_mode: ("CHECK_ALL")?
+                                  },
+                                ],
+                                role_arn: ::String,
+                                ?tags: Hash[::String, ::String],
+                                ?timeout: ::Integer,
+                                ?job_sample: {
+                                  mode: ("FULL_DATASET" | "CUSTOM_ROWS")?,
+                                  size: ::Integer?
+                                }
+                              ) -> _CreateProfileJobResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProfileJobResponseSuccess
+
+      interface _CreateProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProjectResponse]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#create_project-instance_method
+      def create_project: (
+                            dataset_name: ::String,
+                            name: ::String,
+                            recipe_name: ::String,
+                            ?sample: {
+                              size: ::Integer?,
+                              type: ("FIRST_N" | "LAST_N" | "RANDOM")
+                            },
+                            role_arn: ::String,
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProjectResponseSuccess
+
+      interface _CreateRecipeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRecipeResponse]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#create_recipe-instance_method
+      def create_recipe: (
+                           ?description: ::String,
+                           name: ::String,
+                           steps: Array[
+                             {
+                               action: {
+                                 operation: ::String,
+                                 parameters: Hash[::String, ::String]?
+                               },
+                               condition_expressions: Array[
+                                 {
+                                   condition: ::String,
+                                   value: ::String?,
+                                   target_column: ::String
+                                 },
+                               ]?
+                             },
+                           ],
+                           ?tags: Hash[::String, ::String]
+                         ) -> _CreateRecipeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRecipeResponseSuccess
+
+      interface _CreateRecipeJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRecipeJobResponse]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#create_recipe_job-instance_method
+      def create_recipe_job: (
+                               ?dataset_name: ::String,
+                               ?encryption_key_arn: ::String,
+                               ?encryption_mode: ("SSE-KMS" | "SSE-S3"),
+                               name: ::String,
+                               ?log_subscription: ("ENABLE" | "DISABLE"),
+                               ?max_capacity: ::Integer,
+                               ?max_retries: ::Integer,
+                               ?outputs: Array[
+                                 {
+                                   compression_format: ("GZIP" | "LZ4" | "SNAPPY" | "BZIP2" | "DEFLATE" | "LZO" | "BROTLI" | "ZSTD" | "ZLIB")?,
+                                   format: ("CSV" | "JSON" | "PARQUET" | "GLUEPARQUET" | "AVRO" | "ORC" | "XML" | "TABLEAUHYPER")?,
+                                   partition_columns: Array[::String]?,
+                                   location: {
+                                     bucket: ::String,
+                                     key: ::String?,
+                                     bucket_owner: ::String?
+                                   },
+                                   overwrite: bool?,
+                                   format_options: {
+                                     csv: {
+                                       delimiter: ::String?
+                                     }?
+                                   }?,
+                                   max_output_files: ::Integer?
+                                 },
+                               ],
+                               ?data_catalog_outputs: Array[
+                                 {
+                                   catalog_id: ::String?,
+                                   database_name: ::String,
+                                   table_name: ::String,
+                                   s3_options: {
+                                     location: {
+                                       bucket: ::String,
+                                       key: ::String?,
+                                       bucket_owner: ::String?
+                                     }
+                                   }?,
+                                   database_options: {
+                                     temp_directory: {
+                                       bucket: ::String,
+                                       key: ::String?,
+                                       bucket_owner: ::String?
+                                     }?,
+                                     table_name: ::String
+                                   }?,
+                                   overwrite: bool?
+                                 },
+                               ],
+                               ?database_outputs: Array[
+                                 {
+                                   glue_connection_name: ::String,
+                                   database_options: {
+                                     temp_directory: {
+                                       bucket: ::String,
+                                       key: ::String?,
+                                       bucket_owner: ::String?
+                                     }?,
+                                     table_name: ::String
+                                   },
+                                   database_output_mode: ("NEW_TABLE")?
+                                 },
+                               ],
+                               ?project_name: ::String,
+                               ?recipe_reference: {
+                                 name: ::String,
+                                 recipe_version: ::String?
+                               },
+                               role_arn: ::String,
+                               ?tags: Hash[::String, ::String],
+                               ?timeout: ::Integer
+                             ) -> _CreateRecipeJobResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRecipeJobResponseSuccess
+
+      interface _CreateRulesetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRulesetResponse]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#create_ruleset-instance_method
+      def create_ruleset: (
+                            name: ::String,
+                            ?description: ::String,
+                            target_arn: ::String,
+                            rules: Array[
+                              {
+                                name: ::String,
+                                disabled: bool?,
+                                check_expression: ::String,
+                                substitution_map: Hash[::String, ::String]?,
+                                threshold: {
+                                  value: ::Float,
+                                  type: ("GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN" | "LESS_THAN")?,
+                                  unit: ("COUNT" | "PERCENTAGE")?
+                                }?,
+                                column_selectors: Array[
+                                  {
+                                    regex: ::String?,
+                                    name: ::String?
+                                  },
+                                ]?
+                              },
+                            ],
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateRulesetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRulesetResponseSuccess
+
+      interface _CreateScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateScheduleResponse]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#create_schedule-instance_method
+      def create_schedule: (
+                             ?job_names: Array[::String],
+                             cron_expression: ::String,
+                             ?tags: Hash[::String, ::String],
+                             name: ::String
+                           ) -> _CreateScheduleResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateScheduleResponseSuccess
+
+      interface _DeleteDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDatasetResponse]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#delete_dataset-instance_method
+      def delete_dataset: (
+                            name: ::String
+                          ) -> _DeleteDatasetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDatasetResponseSuccess
+
+      interface _DeleteJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteJobResponse]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#delete_job-instance_method
+      def delete_job: (
+                        name: ::String
+                      ) -> _DeleteJobResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteJobResponseSuccess
+
+      interface _DeleteProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProjectResponse]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#delete_project-instance_method
+      def delete_project: (
+                            name: ::String
+                          ) -> _DeleteProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProjectResponseSuccess
+
+      interface _DeleteRecipeVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRecipeVersionResponse]
+        def name: () -> ::String
+        def recipe_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#delete_recipe_version-instance_method
+      def delete_recipe_version: (
+                                   name: ::String,
+                                   recipe_version: ::String
+                                 ) -> _DeleteRecipeVersionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRecipeVersionResponseSuccess
+
+      interface _DeleteRulesetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRulesetResponse]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#delete_ruleset-instance_method
+      def delete_ruleset: (
+                            name: ::String
+                          ) -> _DeleteRulesetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRulesetResponseSuccess
+
+      interface _DeleteScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteScheduleResponse]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#delete_schedule-instance_method
+      def delete_schedule: (
+                             name: ::String
+                           ) -> _DeleteScheduleResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteScheduleResponseSuccess
+
+      interface _DescribeDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDatasetResponse]
+        def created_by: () -> ::String
+        def create_date: () -> ::Time
+        def name: () -> ::String
+        def format: () -> ("CSV" | "JSON" | "PARQUET" | "EXCEL" | "ORC")
+        def format_options: () -> Types::FormatOptions
+        def input: () -> Types::Input
+        def last_modified_date: () -> ::Time
+        def last_modified_by: () -> ::String
+        def source: () -> ("S3" | "DATA-CATALOG" | "DATABASE")
+        def path_options: () -> Types::PathOptions
+        def tags: () -> ::Hash[::String, ::String]
+        def resource_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#describe_dataset-instance_method
+      def describe_dataset: (
+                              name: ::String
+                            ) -> _DescribeDatasetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDatasetResponseSuccess
+
+      interface _DescribeJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeJobResponse]
+        def create_date: () -> ::Time
+        def created_by: () -> ::String
+        def dataset_name: () -> ::String
+        def encryption_key_arn: () -> ::String
+        def encryption_mode: () -> ("SSE-KMS" | "SSE-S3")
+        def name: () -> ::String
+        def type: () -> ("PROFILE" | "RECIPE")
+        def last_modified_by: () -> ::String
+        def last_modified_date: () -> ::Time
+        def log_subscription: () -> ("ENABLE" | "DISABLE")
+        def max_capacity: () -> ::Integer
+        def max_retries: () -> ::Integer
+        def outputs: () -> ::Array[Types::Output]
+        def data_catalog_outputs: () -> ::Array[Types::DataCatalogOutput]
+        def database_outputs: () -> ::Array[Types::DatabaseOutput]
+        def project_name: () -> ::String
+        def profile_configuration: () -> Types::ProfileConfiguration
+        def validation_configurations: () -> ::Array[Types::ValidationConfiguration]
+        def recipe_reference: () -> Types::RecipeReference
+        def resource_arn: () -> ::String
+        def role_arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def timeout: () -> ::Integer
+        def job_sample: () -> Types::JobSample
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#describe_job-instance_method
+      def describe_job: (
+                          name: ::String
+                        ) -> _DescribeJobResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeJobResponseSuccess
+
+      interface _DescribeJobRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeJobRunResponse]
+        def attempt: () -> ::Integer
+        def completed_on: () -> ::Time
+        def dataset_name: () -> ::String
+        def error_message: () -> ::String
+        def execution_time: () -> ::Integer
+        def job_name: () -> ::String
+        def profile_configuration: () -> Types::ProfileConfiguration
+        def validation_configurations: () -> ::Array[Types::ValidationConfiguration]
+        def run_id: () -> ::String
+        def state: () -> ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT")
+        def log_subscription: () -> ("ENABLE" | "DISABLE")
+        def log_group_name: () -> ::String
+        def outputs: () -> ::Array[Types::Output]
+        def data_catalog_outputs: () -> ::Array[Types::DataCatalogOutput]
+        def database_outputs: () -> ::Array[Types::DatabaseOutput]
+        def recipe_reference: () -> Types::RecipeReference
+        def started_by: () -> ::String
+        def started_on: () -> ::Time
+        def job_sample: () -> Types::JobSample
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#describe_job_run-instance_method
+      def describe_job_run: (
+                              name: ::String,
+                              run_id: ::String
+                            ) -> _DescribeJobRunResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeJobRunResponseSuccess
+
+      interface _DescribeProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProjectResponse]
+        def create_date: () -> ::Time
+        def created_by: () -> ::String
+        def dataset_name: () -> ::String
+        def last_modified_date: () -> ::Time
+        def last_modified_by: () -> ::String
+        def name: () -> ::String
+        def recipe_name: () -> ::String
+        def resource_arn: () -> ::String
+        def sample: () -> Types::Sample
+        def role_arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def session_status: () -> ("ASSIGNED" | "FAILED" | "INITIALIZING" | "PROVISIONING" | "READY" | "RECYCLING" | "ROTATING" | "TERMINATED" | "TERMINATING" | "UPDATING")
+        def opened_by: () -> ::String
+        def open_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#describe_project-instance_method
+      def describe_project: (
+                              name: ::String
+                            ) -> _DescribeProjectResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProjectResponseSuccess
+
+      interface _DescribeRecipeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRecipeResponse]
+        def created_by: () -> ::String
+        def create_date: () -> ::Time
+        def last_modified_by: () -> ::String
+        def last_modified_date: () -> ::Time
+        def project_name: () -> ::String
+        def published_by: () -> ::String
+        def published_date: () -> ::Time
+        def description: () -> ::String
+        def name: () -> ::String
+        def steps: () -> ::Array[Types::RecipeStep]
+        def tags: () -> ::Hash[::String, ::String]
+        def resource_arn: () -> ::String
+        def recipe_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#describe_recipe-instance_method
+      def describe_recipe: (
+                             name: ::String,
+                             ?recipe_version: ::String
+                           ) -> _DescribeRecipeResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRecipeResponseSuccess
+
+      interface _DescribeRulesetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRulesetResponse]
+        def name: () -> ::String
+        def description: () -> ::String
+        def target_arn: () -> ::String
+        def rules: () -> ::Array[Types::Rule]
+        def create_date: () -> ::Time
+        def created_by: () -> ::String
+        def last_modified_by: () -> ::String
+        def last_modified_date: () -> ::Time
+        def resource_arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#describe_ruleset-instance_method
+      def describe_ruleset: (
+                              name: ::String
+                            ) -> _DescribeRulesetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRulesetResponseSuccess
+
+      interface _DescribeScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeScheduleResponse]
+        def create_date: () -> ::Time
+        def created_by: () -> ::String
+        def job_names: () -> ::Array[::String]
+        def last_modified_by: () -> ::String
+        def last_modified_date: () -> ::Time
+        def resource_arn: () -> ::String
+        def cron_expression: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#describe_schedule-instance_method
+      def describe_schedule: (
+                               name: ::String
+                             ) -> _DescribeScheduleResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeScheduleResponseSuccess
+
+      interface _ListDatasetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetsResponse]
+        def datasets: () -> ::Array[Types::Dataset]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#list_datasets-instance_method
+      def list_datasets: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListDatasetsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetsResponseSuccess
+
+      interface _ListJobRunsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListJobRunsResponse]
+        def job_runs: () -> ::Array[Types::JobRun]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#list_job_runs-instance_method
+      def list_job_runs: (
+                           name: ::String,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListJobRunsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobRunsResponseSuccess
+
+      interface _ListJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListJobsResponse]
+        def jobs: () -> ::Array[Types::Job]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#list_jobs-instance_method
+      def list_jobs: (
+                       ?dataset_name: ::String,
+                       ?max_results: ::Integer,
+                       ?next_token: ::String,
+                       ?project_name: ::String
+                     ) -> _ListJobsResponseSuccess
+                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobsResponseSuccess
+
+      interface _ListProjectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProjectsResponse]
+        def projects: () -> ::Array[Types::Project]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#list_projects-instance_method
+      def list_projects: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListProjectsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProjectsResponseSuccess
+
+      interface _ListRecipeVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecipeVersionsResponse]
+        def next_token: () -> ::String
+        def recipes: () -> ::Array[Types::Recipe]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#list_recipe_versions-instance_method
+      def list_recipe_versions: (
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
+                                  name: ::String
+                                ) -> _ListRecipeVersionsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecipeVersionsResponseSuccess
+
+      interface _ListRecipesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecipesResponse]
+        def recipes: () -> ::Array[Types::Recipe]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#list_recipes-instance_method
+      def list_recipes: (
+                          ?max_results: ::Integer,
+                          ?next_token: ::String,
+                          ?recipe_version: ::String
+                        ) -> _ListRecipesResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecipesResponseSuccess
+
+      interface _ListRulesetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRulesetsResponse]
+        def rulesets: () -> ::Array[Types::RulesetItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#list_rulesets-instance_method
+      def list_rulesets: (
+                           ?target_arn: ::String,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListRulesetsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRulesetsResponseSuccess
+
+      interface _ListSchedulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSchedulesResponse]
+        def schedules: () -> ::Array[Types::Schedule]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#list_schedules-instance_method
+      def list_schedules: (
+                            ?job_name: ::String,
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListSchedulesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSchedulesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PublishRecipeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PublishRecipeResponse]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#publish_recipe-instance_method
+      def publish_recipe: (
+                            ?description: ::String,
+                            name: ::String
+                          ) -> _PublishRecipeResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PublishRecipeResponseSuccess
+
+      interface _SendProjectSessionActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendProjectSessionActionResponse]
+        def result: () -> ::String
+        def name: () -> ::String
+        def action_id: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#send_project_session_action-instance_method
+      def send_project_session_action: (
+                                         ?preview: bool,
+                                         name: ::String,
+                                         ?recipe_step: {
+                                           action: {
+                                             operation: ::String,
+                                             parameters: Hash[::String, ::String]?
+                                           },
+                                           condition_expressions: Array[
+                                             {
+                                               condition: ::String,
+                                               value: ::String?,
+                                               target_column: ::String
+                                             },
+                                           ]?
+                                         },
+                                         ?step_index: ::Integer,
+                                         ?client_session_id: ::String,
+                                         ?view_frame: {
+                                           start_column_index: ::Integer,
+                                           column_range: ::Integer?,
+                                           hidden_columns: Array[::String]?,
+                                           start_row_index: ::Integer?,
+                                           row_range: ::Integer?,
+                                           analytics: ("ENABLE" | "DISABLE")?
+                                         }
+                                       ) -> _SendProjectSessionActionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendProjectSessionActionResponseSuccess
+
+      interface _StartJobRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartJobRunResponse]
+        def run_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#start_job_run-instance_method
+      def start_job_run: (
+                           name: ::String
+                         ) -> _StartJobRunResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartJobRunResponseSuccess
+
+      interface _StartProjectSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartProjectSessionResponse]
+        def name: () -> ::String
+        def client_session_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#start_project_session-instance_method
+      def start_project_session: (
+                                   name: ::String,
+                                   ?assume_control: bool
+                                 ) -> _StartProjectSessionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartProjectSessionResponseSuccess
+
+      interface _StopJobRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopJobRunResponse]
+        def run_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#stop_job_run-instance_method
+      def stop_job_run: (
+                          name: ::String,
+                          run_id: ::String
+                        ) -> _StopJobRunResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopJobRunResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDatasetResponse]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#update_dataset-instance_method
+      def update_dataset: (
+                            name: ::String,
+                            ?format: ("CSV" | "JSON" | "PARQUET" | "EXCEL" | "ORC"),
+                            ?format_options: {
+                              json: {
+                                multi_line: bool?
+                              }?,
+                              excel: {
+                                sheet_names: Array[::String]?,
+                                sheet_indexes: Array[::Integer]?,
+                                header_row: bool?
+                              }?,
+                              csv: {
+                                delimiter: ::String?,
+                                header_row: bool?
+                              }?
+                            },
+                            input: {
+                              s3_input_definition: {
+                                bucket: ::String,
+                                key: ::String?,
+                                bucket_owner: ::String?
+                              }?,
+                              data_catalog_input_definition: {
+                                catalog_id: ::String?,
+                                database_name: ::String,
+                                table_name: ::String,
+                                temp_directory: {
+                                  bucket: ::String,
+                                  key: ::String?,
+                                  bucket_owner: ::String?
+                                }?
+                              }?,
+                              database_input_definition: {
+                                glue_connection_name: ::String,
+                                database_table_name: ::String?,
+                                temp_directory: {
+                                  bucket: ::String,
+                                  key: ::String?,
+                                  bucket_owner: ::String?
+                                }?,
+                                query_string: ::String?
+                              }?,
+                              metadata: {
+                                source_arn: ::String?
+                              }?
+                            },
+                            ?path_options: {
+                              last_modified_date_condition: {
+                                expression: ::String,
+                                values_map: Hash[::String, ::String]
+                              }?,
+                              files_limit: {
+                                max_files: ::Integer,
+                                ordered_by: ("LAST_MODIFIED_DATE")?,
+                                order: ("DESCENDING" | "ASCENDING")?
+                              }?,
+                              parameters: Hash[::String, {
+                                  name: ::String,
+                                  type: ("Datetime" | "Number" | "String"),
+                                  datetime_options: {
+                                    format: ::String,
+                                    timezone_offset: ::String?,
+                                    locale_code: ::String?
+                                  }?,
+                                  create_column: bool?,
+                                  filter: {
+                                    expression: ::String,
+                                    values_map: Hash[::String, ::String]
+                                  }?
+                                }]?
+                            }
+                          ) -> _UpdateDatasetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDatasetResponseSuccess
+
+      interface _UpdateProfileJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProfileJobResponse]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#update_profile_job-instance_method
+      def update_profile_job: (
+                                ?configuration: {
+                                  dataset_statistics_configuration: {
+                                    included_statistics: Array[::String]?,
+                                    overrides: Array[
+                                      {
+                                        statistic: ::String,
+                                        parameters: Hash[::String, ::String]
+                                      },
+                                    ]?
+                                  }?,
+                                  profile_columns: Array[
+                                    {
+                                      regex: ::String?,
+                                      name: ::String?
+                                    },
+                                  ]?,
+                                  column_statistics_configurations: Array[
+                                    {
+                                      selectors: Array[
+                                        {
+                                          regex: ::String?,
+                                          name: ::String?
+                                        },
+                                      ]?,
+                                      statistics: {
+                                        included_statistics: Array[::String]?,
+                                        overrides: Array[
+                                          {
+                                            statistic: ::String,
+                                            parameters: Hash[::String, ::String]
+                                          },
+                                        ]?
+                                      }
+                                    },
+                                  ]?,
+                                  entity_detector_configuration: {
+                                    entity_types: Array[::String],
+                                    allowed_statistics: Array[
+                                      {
+                                        statistics: Array[::String]
+                                      },
+                                    ]?
+                                  }?
+                                },
+                                ?encryption_key_arn: ::String,
+                                ?encryption_mode: ("SSE-KMS" | "SSE-S3"),
+                                name: ::String,
+                                ?log_subscription: ("ENABLE" | "DISABLE"),
+                                ?max_capacity: ::Integer,
+                                ?max_retries: ::Integer,
+                                output_location: {
+                                  bucket: ::String,
+                                  key: ::String?,
+                                  bucket_owner: ::String?
+                                },
+                                ?validation_configurations: Array[
+                                  {
+                                    ruleset_arn: ::String,
+                                    validation_mode: ("CHECK_ALL")?
+                                  },
+                                ],
+                                role_arn: ::String,
+                                ?timeout: ::Integer,
+                                ?job_sample: {
+                                  mode: ("FULL_DATASET" | "CUSTOM_ROWS")?,
+                                  size: ::Integer?
+                                }
+                              ) -> _UpdateProfileJobResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProfileJobResponseSuccess
+
+      interface _UpdateProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProjectResponse]
+        def last_modified_date: () -> ::Time
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#update_project-instance_method
+      def update_project: (
+                            ?sample: {
+                              size: ::Integer?,
+                              type: ("FIRST_N" | "LAST_N" | "RANDOM")
+                            },
+                            role_arn: ::String,
+                            name: ::String
+                          ) -> _UpdateProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProjectResponseSuccess
+
+      interface _UpdateRecipeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRecipeResponse]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#update_recipe-instance_method
+      def update_recipe: (
+                           ?description: ::String,
+                           name: ::String,
+                           ?steps: Array[
+                             {
+                               action: {
+                                 operation: ::String,
+                                 parameters: Hash[::String, ::String]?
+                               },
+                               condition_expressions: Array[
+                                 {
+                                   condition: ::String,
+                                   value: ::String?,
+                                   target_column: ::String
+                                 },
+                               ]?
+                             },
+                           ]
+                         ) -> _UpdateRecipeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRecipeResponseSuccess
+
+      interface _UpdateRecipeJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRecipeJobResponse]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#update_recipe_job-instance_method
+      def update_recipe_job: (
+                               ?encryption_key_arn: ::String,
+                               ?encryption_mode: ("SSE-KMS" | "SSE-S3"),
+                               name: ::String,
+                               ?log_subscription: ("ENABLE" | "DISABLE"),
+                               ?max_capacity: ::Integer,
+                               ?max_retries: ::Integer,
+                               ?outputs: Array[
+                                 {
+                                   compression_format: ("GZIP" | "LZ4" | "SNAPPY" | "BZIP2" | "DEFLATE" | "LZO" | "BROTLI" | "ZSTD" | "ZLIB")?,
+                                   format: ("CSV" | "JSON" | "PARQUET" | "GLUEPARQUET" | "AVRO" | "ORC" | "XML" | "TABLEAUHYPER")?,
+                                   partition_columns: Array[::String]?,
+                                   location: {
+                                     bucket: ::String,
+                                     key: ::String?,
+                                     bucket_owner: ::String?
+                                   },
+                                   overwrite: bool?,
+                                   format_options: {
+                                     csv: {
+                                       delimiter: ::String?
+                                     }?
+                                   }?,
+                                   max_output_files: ::Integer?
+                                 },
+                               ],
+                               ?data_catalog_outputs: Array[
+                                 {
+                                   catalog_id: ::String?,
+                                   database_name: ::String,
+                                   table_name: ::String,
+                                   s3_options: {
+                                     location: {
+                                       bucket: ::String,
+                                       key: ::String?,
+                                       bucket_owner: ::String?
+                                     }
+                                   }?,
+                                   database_options: {
+                                     temp_directory: {
+                                       bucket: ::String,
+                                       key: ::String?,
+                                       bucket_owner: ::String?
+                                     }?,
+                                     table_name: ::String
+                                   }?,
+                                   overwrite: bool?
+                                 },
+                               ],
+                               ?database_outputs: Array[
+                                 {
+                                   glue_connection_name: ::String,
+                                   database_options: {
+                                     temp_directory: {
+                                       bucket: ::String,
+                                       key: ::String?,
+                                       bucket_owner: ::String?
+                                     }?,
+                                     table_name: ::String
+                                   },
+                                   database_output_mode: ("NEW_TABLE")?
+                                 },
+                               ],
+                               role_arn: ::String,
+                               ?timeout: ::Integer
+                             ) -> _UpdateRecipeJobResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRecipeJobResponseSuccess
+
+      interface _UpdateRulesetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRulesetResponse]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#update_ruleset-instance_method
+      def update_ruleset: (
+                            name: ::String,
+                            ?description: ::String,
+                            rules: Array[
+                              {
+                                name: ::String,
+                                disabled: bool?,
+                                check_expression: ::String,
+                                substitution_map: Hash[::String, ::String]?,
+                                threshold: {
+                                  value: ::Float,
+                                  type: ("GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN" | "LESS_THAN")?,
+                                  unit: ("COUNT" | "PERCENTAGE")?
+                                }?,
+                                column_selectors: Array[
+                                  {
+                                    regex: ::String?,
+                                    name: ::String?
+                                  },
+                                ]?
+                              },
+                            ]
+                          ) -> _UpdateRulesetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRulesetResponseSuccess
+
+      interface _UpdateScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateScheduleResponse]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#update_schedule-instance_method
+      def update_schedule: (
+                             ?job_names: Array[::String],
+                             cron_expression: ::String,
+                             name: ::String
+                           ) -> _UpdateScheduleResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateScheduleResponseSuccess
+    end
+  end
+end
+

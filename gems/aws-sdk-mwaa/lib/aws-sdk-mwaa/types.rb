@@ -368,6 +368,17 @@ module Aws::MWAA
       include Aws::Structure
     end
 
+    # @!attribute [rw] airflow_identity
+    #   The user name of the Apache Airflow identity creating the web login
+    #   token.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_identity
+    #   The name of the IAM identity creating the web login token. This
+    #   might be an IAM user, or an assumed or federated identity. For
+    #   example, `assumed-role/Admin/your-name`.
+    #   @return [String]
+    #
     # @!attribute [rw] web_server_hostname
     #   The Airflow web server hostname for the environment.
     #   @return [String]
@@ -379,6 +390,8 @@ module Aws::MWAA
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/CreateWebLoginTokenResponse AWS API Documentation
     #
     class CreateWebLoginTokenResponse < Struct.new(
+      :airflow_identity,
+      :iam_identity,
       :web_server_hostname,
       :web_token)
       SENSITIVE = [:web_token]
@@ -511,8 +524,7 @@ module Aws::MWAA
     #   @return [String]
     #
     # @!attribute [rw] kms_key
-    #   The Amazon Web Services Key Management Service (KMS) encryption key
-    #   used to encrypt the data in your environment.
+    #   The KMS encryption key used to encrypt the data in your environment.
     #   @return [String]
     #
     # @!attribute [rw] last_update
@@ -705,11 +717,17 @@ module Aws::MWAA
     #     complete, and the environment has been deleted.
     #
     #   * `UNAVAILABLE` - Indicates the request failed, but the environment
-    #     was unable to rollback and is not in a stable state.
+    #     did not return to its previous state and is not stable.
     #
     #   * `UPDATE_FAILED` - Indicates the request to update the environment
-    #     failed, and the environment has rolled back successfully and is
-    #     ready to use.
+    #     failed, and the environment was restored to its previous state
+    #     successfully and is ready to use.
+    #
+    #   * `MAINTENANCE` - Indicates that the environment is undergoing
+    #     maintenance. Depending on the type of work Amazon MWAA is
+    #     performing, your environment might become unavailable during this
+    #     process. After all operations are done, your environment will
+    #     return to its status prior to mainteneace operations.
     #
     #   We recommend reviewing our troubleshooting guide for a list of
     #   common errors and their solutions. For more information, see [Amazon
@@ -740,7 +758,7 @@ module Aws::MWAA
     #   @return [String]
     #
     # @!attribute [rw] webserver_url
-    #   The Apache Airflow *Web server* host name for the Amazon MWAA
+    #   The Apache Airflow *web server* host name for the Amazon MWAA
     #   environment. For more information, see [Accessing the Apache Airflow
     #   UI][1].
     #

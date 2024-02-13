@@ -1,0 +1,335 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::RolesAnywhere
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProfileRequest
+      attr_accessor duration_seconds: ::Integer
+      attr_accessor enabled: bool
+      attr_accessor managed_policy_arns: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor require_instance_properties: bool
+      attr_accessor role_arns: ::Array[::String]
+      attr_accessor session_policy: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateTrustAnchorRequest
+      attr_accessor enabled: bool
+      attr_accessor name: ::String
+      attr_accessor notification_settings: ::Array[Types::NotificationSetting]
+      attr_accessor source: Types::Source
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CredentialSummary
+      attr_accessor enabled: bool
+      attr_accessor failed: bool
+      attr_accessor issuer: ::String
+      attr_accessor seen_at: ::Time
+      attr_accessor serial_number: ::String
+      attr_accessor x509_certificate_data: ::String
+      SENSITIVE: []
+    end
+
+    class CrlDetail
+      attr_accessor created_at: ::Time
+      attr_accessor crl_arn: ::String
+      attr_accessor crl_data: ::String
+      attr_accessor crl_id: ::String
+      attr_accessor enabled: bool
+      attr_accessor name: ::String
+      attr_accessor trust_anchor_arn: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CrlDetailResponse
+      attr_accessor crl: Types::CrlDetail
+      SENSITIVE: []
+    end
+
+    class ImportCrlRequest
+      attr_accessor crl_data: ::String
+      attr_accessor enabled: bool
+      attr_accessor name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor trust_anchor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceProperty
+      attr_accessor failed: bool
+      attr_accessor properties: ::Hash[::String, ::String]
+      attr_accessor seen_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ListCrlsResponse
+      attr_accessor crls: ::Array[Types::CrlDetail]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProfilesResponse
+      attr_accessor next_token: ::String
+      attr_accessor profiles: ::Array[Types::ProfileDetail]
+      SENSITIVE: []
+    end
+
+    class ListRequest
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSubjectsResponse
+      attr_accessor next_token: ::String
+      attr_accessor subjects: ::Array[Types::SubjectSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListTrustAnchorsResponse
+      attr_accessor next_token: ::String
+      attr_accessor trust_anchors: ::Array[Types::TrustAnchorDetail]
+      SENSITIVE: []
+    end
+
+    class NotificationSetting
+      attr_accessor channel: ("ALL")
+      attr_accessor enabled: bool
+      attr_accessor event: ("CA_CERTIFICATE_EXPIRY" | "END_ENTITY_CERTIFICATE_EXPIRY")
+      attr_accessor threshold: ::Integer
+      SENSITIVE: []
+    end
+
+    class NotificationSettingDetail
+      attr_accessor channel: ("ALL")
+      attr_accessor configured_by: ::String
+      attr_accessor enabled: bool
+      attr_accessor event: ("CA_CERTIFICATE_EXPIRY" | "END_ENTITY_CERTIFICATE_EXPIRY")
+      attr_accessor threshold: ::Integer
+      SENSITIVE: []
+    end
+
+    class NotificationSettingKey
+      attr_accessor channel: ("ALL")
+      attr_accessor event: ("CA_CERTIFICATE_EXPIRY" | "END_ENTITY_CERTIFICATE_EXPIRY")
+      SENSITIVE: []
+    end
+
+    class ProfileDetail
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor duration_seconds: ::Integer
+      attr_accessor enabled: bool
+      attr_accessor managed_policy_arns: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor require_instance_properties: bool
+      attr_accessor role_arns: ::Array[::String]
+      attr_accessor session_policy: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ProfileDetailResponse
+      attr_accessor profile: Types::ProfileDetail
+      SENSITIVE: []
+    end
+
+    class PutNotificationSettingsRequest
+      attr_accessor notification_settings: ::Array[Types::NotificationSetting]
+      attr_accessor trust_anchor_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutNotificationSettingsResponse
+      attr_accessor trust_anchor: Types::TrustAnchorDetail
+      SENSITIVE: []
+    end
+
+    class ResetNotificationSettingsRequest
+      attr_accessor notification_setting_keys: ::Array[Types::NotificationSettingKey]
+      attr_accessor trust_anchor_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResetNotificationSettingsResponse
+      attr_accessor trust_anchor: Types::TrustAnchorDetail
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ScalarCrlRequest
+      attr_accessor crl_id: ::String
+      SENSITIVE: []
+    end
+
+    class ScalarProfileRequest
+      attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class ScalarSubjectRequest
+      attr_accessor subject_id: ::String
+      SENSITIVE: []
+    end
+
+    class ScalarTrustAnchorRequest
+      attr_accessor trust_anchor_id: ::String
+      SENSITIVE: []
+    end
+
+    class Source
+      attr_accessor source_data: Types::SourceData
+      attr_accessor source_type: ("AWS_ACM_PCA" | "CERTIFICATE_BUNDLE" | "SELF_SIGNED_REPOSITORY")
+      SENSITIVE: []
+    end
+
+    class SourceData
+      attr_accessor acm_pca_arn: ::String
+      attr_accessor x509_certificate_data: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AcmPcaArn < SourceData
+      end
+      class X509CertificateData < SourceData
+      end
+      class Unknown < SourceData
+      end
+    end
+
+    class SubjectDetail
+      attr_accessor created_at: ::Time
+      attr_accessor credentials: ::Array[Types::CredentialSummary]
+      attr_accessor enabled: bool
+      attr_accessor instance_properties: ::Array[Types::InstanceProperty]
+      attr_accessor last_seen_at: ::Time
+      attr_accessor subject_arn: ::String
+      attr_accessor subject_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor x509_subject: ::String
+      SENSITIVE: []
+    end
+
+    class SubjectDetailResponse
+      attr_accessor subject: Types::SubjectDetail
+      SENSITIVE: []
+    end
+
+    class SubjectSummary
+      attr_accessor created_at: ::Time
+      attr_accessor enabled: bool
+      attr_accessor last_seen_at: ::Time
+      attr_accessor subject_arn: ::String
+      attr_accessor subject_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor x509_subject: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: [:key, :value]
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TrustAnchorDetail
+      attr_accessor created_at: ::Time
+      attr_accessor enabled: bool
+      attr_accessor name: ::String
+      attr_accessor notification_settings: ::Array[Types::NotificationSettingDetail]
+      attr_accessor source: Types::Source
+      attr_accessor trust_anchor_arn: ::String
+      attr_accessor trust_anchor_id: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class TrustAnchorDetailResponse
+      attr_accessor trust_anchor: Types::TrustAnchorDetail
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateCrlRequest
+      attr_accessor crl_data: ::String
+      attr_accessor crl_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProfileRequest
+      attr_accessor duration_seconds: ::Integer
+      attr_accessor managed_policy_arns: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor role_arns: ::Array[::String]
+      attr_accessor session_policy: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTrustAnchorRequest
+      attr_accessor name: ::String
+      attr_accessor source: Types::Source
+      attr_accessor trust_anchor_id: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

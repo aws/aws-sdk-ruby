@@ -176,7 +176,7 @@ module Aws
             expect { client }.to raise_error(ArgumentError, /must be a String/)
           end
 
-          it 'can be used with a Resource client' do
+          it 'can be used with a Resource client', rbs_test: :skip do
             resource = S3::Resource.new(client: client)
             expect(resource.client.config).to eq(api_client.config)
           end

@@ -1393,6 +1393,9 @@ module Aws::CloudWatch
         o.name = "PutMetricData"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.request_compression = {
+          "encodings" => ["gzip"],
+        }
         o.input = Shapes::ShapeRef.new(shape: PutMetricDataInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)

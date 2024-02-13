@@ -1,0 +1,67 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Imagebuilder
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class CallRateLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ClientException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ForbiddenException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class IdempotentParameterMismatchException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidPaginationTokenException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidParameterCombinationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidParameterException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidParameterValueException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidRequestException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidVersionNumberException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceDependencyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceInUseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceUnavailableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

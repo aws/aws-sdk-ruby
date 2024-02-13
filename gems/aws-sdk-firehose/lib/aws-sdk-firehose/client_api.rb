@@ -209,6 +209,26 @@ module Aws::Firehose
     Serializer = Shapes::StructureShape.new(name: 'Serializer')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SizeInMBs = Shapes::IntegerShape.new(name: 'SizeInMBs')
+    SnowflakeAccountUrl = Shapes::StringShape.new(name: 'SnowflakeAccountUrl')
+    SnowflakeContentColumnName = Shapes::StringShape.new(name: 'SnowflakeContentColumnName')
+    SnowflakeDataLoadingOption = Shapes::StringShape.new(name: 'SnowflakeDataLoadingOption')
+    SnowflakeDatabase = Shapes::StringShape.new(name: 'SnowflakeDatabase')
+    SnowflakeDestinationConfiguration = Shapes::StructureShape.new(name: 'SnowflakeDestinationConfiguration')
+    SnowflakeDestinationDescription = Shapes::StructureShape.new(name: 'SnowflakeDestinationDescription')
+    SnowflakeDestinationUpdate = Shapes::StructureShape.new(name: 'SnowflakeDestinationUpdate')
+    SnowflakeKeyPassphrase = Shapes::StringShape.new(name: 'SnowflakeKeyPassphrase')
+    SnowflakeMetaDataColumnName = Shapes::StringShape.new(name: 'SnowflakeMetaDataColumnName')
+    SnowflakePrivateKey = Shapes::StringShape.new(name: 'SnowflakePrivateKey')
+    SnowflakePrivateLinkVpceId = Shapes::StringShape.new(name: 'SnowflakePrivateLinkVpceId')
+    SnowflakeRetryDurationInSeconds = Shapes::IntegerShape.new(name: 'SnowflakeRetryDurationInSeconds')
+    SnowflakeRetryOptions = Shapes::StructureShape.new(name: 'SnowflakeRetryOptions')
+    SnowflakeRole = Shapes::StringShape.new(name: 'SnowflakeRole')
+    SnowflakeRoleConfiguration = Shapes::StructureShape.new(name: 'SnowflakeRoleConfiguration')
+    SnowflakeS3BackupMode = Shapes::StringShape.new(name: 'SnowflakeS3BackupMode')
+    SnowflakeSchema = Shapes::StringShape.new(name: 'SnowflakeSchema')
+    SnowflakeTable = Shapes::StringShape.new(name: 'SnowflakeTable')
+    SnowflakeUser = Shapes::StringShape.new(name: 'SnowflakeUser')
+    SnowflakeVpcConfiguration = Shapes::StructureShape.new(name: 'SnowflakeVpcConfiguration')
     SourceDescription = Shapes::StructureShape.new(name: 'SourceDescription')
     SplunkBufferingHints = Shapes::StructureShape.new(name: 'SplunkBufferingHints')
     SplunkBufferingIntervalInSeconds = Shapes::IntegerShape.new(name: 'SplunkBufferingIntervalInSeconds')
@@ -373,6 +393,7 @@ module Aws::Firehose
     CreateDeliveryStreamInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagDeliveryStreamInputTagList, location_name: "Tags"))
     CreateDeliveryStreamInput.add_member(:amazon_open_search_serverless_destination_configuration, Shapes::ShapeRef.new(shape: AmazonOpenSearchServerlessDestinationConfiguration, location_name: "AmazonOpenSearchServerlessDestinationConfiguration"))
     CreateDeliveryStreamInput.add_member(:msk_source_configuration, Shapes::ShapeRef.new(shape: MSKSourceConfiguration, location_name: "MSKSourceConfiguration"))
+    CreateDeliveryStreamInput.add_member(:snowflake_destination_configuration, Shapes::ShapeRef.new(shape: SnowflakeDestinationConfiguration, location_name: "SnowflakeDestinationConfiguration"))
     CreateDeliveryStreamInput.struct_class = Types::CreateDeliveryStreamInput
 
     CreateDeliveryStreamOutput.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: DeliveryStreamARN, location_name: "DeliveryStreamARN"))
@@ -436,6 +457,7 @@ module Aws::Firehose
     DestinationDescription.add_member(:amazonopensearchservice_destination_description, Shapes::ShapeRef.new(shape: AmazonopensearchserviceDestinationDescription, location_name: "AmazonopensearchserviceDestinationDescription"))
     DestinationDescription.add_member(:splunk_destination_description, Shapes::ShapeRef.new(shape: SplunkDestinationDescription, location_name: "SplunkDestinationDescription"))
     DestinationDescription.add_member(:http_endpoint_destination_description, Shapes::ShapeRef.new(shape: HttpEndpointDestinationDescription, location_name: "HttpEndpointDestinationDescription"))
+    DestinationDescription.add_member(:snowflake_destination_description, Shapes::ShapeRef.new(shape: SnowflakeDestinationDescription, location_name: "SnowflakeDestinationDescription"))
     DestinationDescription.add_member(:amazon_open_search_serverless_destination_description, Shapes::ShapeRef.new(shape: AmazonOpenSearchServerlessDestinationDescription, location_name: "AmazonOpenSearchServerlessDestinationDescription"))
     DestinationDescription.struct_class = Types::DestinationDescription
 
@@ -850,6 +872,73 @@ module Aws::Firehose
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
+    SnowflakeDestinationConfiguration.add_member(:account_url, Shapes::ShapeRef.new(shape: SnowflakeAccountUrl, required: true, location_name: "AccountUrl"))
+    SnowflakeDestinationConfiguration.add_member(:private_key, Shapes::ShapeRef.new(shape: SnowflakePrivateKey, required: true, location_name: "PrivateKey"))
+    SnowflakeDestinationConfiguration.add_member(:key_passphrase, Shapes::ShapeRef.new(shape: SnowflakeKeyPassphrase, location_name: "KeyPassphrase"))
+    SnowflakeDestinationConfiguration.add_member(:user, Shapes::ShapeRef.new(shape: SnowflakeUser, required: true, location_name: "User"))
+    SnowflakeDestinationConfiguration.add_member(:database, Shapes::ShapeRef.new(shape: SnowflakeDatabase, required: true, location_name: "Database"))
+    SnowflakeDestinationConfiguration.add_member(:schema, Shapes::ShapeRef.new(shape: SnowflakeSchema, required: true, location_name: "Schema"))
+    SnowflakeDestinationConfiguration.add_member(:table, Shapes::ShapeRef.new(shape: SnowflakeTable, required: true, location_name: "Table"))
+    SnowflakeDestinationConfiguration.add_member(:snowflake_role_configuration, Shapes::ShapeRef.new(shape: SnowflakeRoleConfiguration, location_name: "SnowflakeRoleConfiguration"))
+    SnowflakeDestinationConfiguration.add_member(:data_loading_option, Shapes::ShapeRef.new(shape: SnowflakeDataLoadingOption, location_name: "DataLoadingOption"))
+    SnowflakeDestinationConfiguration.add_member(:meta_data_column_name, Shapes::ShapeRef.new(shape: SnowflakeMetaDataColumnName, location_name: "MetaDataColumnName"))
+    SnowflakeDestinationConfiguration.add_member(:content_column_name, Shapes::ShapeRef.new(shape: SnowflakeContentColumnName, location_name: "ContentColumnName"))
+    SnowflakeDestinationConfiguration.add_member(:snowflake_vpc_configuration, Shapes::ShapeRef.new(shape: SnowflakeVpcConfiguration, location_name: "SnowflakeVpcConfiguration"))
+    SnowflakeDestinationConfiguration.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    SnowflakeDestinationConfiguration.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
+    SnowflakeDestinationConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
+    SnowflakeDestinationConfiguration.add_member(:retry_options, Shapes::ShapeRef.new(shape: SnowflakeRetryOptions, location_name: "RetryOptions"))
+    SnowflakeDestinationConfiguration.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: SnowflakeS3BackupMode, location_name: "S3BackupMode"))
+    SnowflakeDestinationConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, required: true, location_name: "S3Configuration"))
+    SnowflakeDestinationConfiguration.struct_class = Types::SnowflakeDestinationConfiguration
+
+    SnowflakeDestinationDescription.add_member(:account_url, Shapes::ShapeRef.new(shape: SnowflakeAccountUrl, location_name: "AccountUrl"))
+    SnowflakeDestinationDescription.add_member(:user, Shapes::ShapeRef.new(shape: SnowflakeUser, location_name: "User"))
+    SnowflakeDestinationDescription.add_member(:database, Shapes::ShapeRef.new(shape: SnowflakeDatabase, location_name: "Database"))
+    SnowflakeDestinationDescription.add_member(:schema, Shapes::ShapeRef.new(shape: SnowflakeSchema, location_name: "Schema"))
+    SnowflakeDestinationDescription.add_member(:table, Shapes::ShapeRef.new(shape: SnowflakeTable, location_name: "Table"))
+    SnowflakeDestinationDescription.add_member(:snowflake_role_configuration, Shapes::ShapeRef.new(shape: SnowflakeRoleConfiguration, location_name: "SnowflakeRoleConfiguration"))
+    SnowflakeDestinationDescription.add_member(:data_loading_option, Shapes::ShapeRef.new(shape: SnowflakeDataLoadingOption, location_name: "DataLoadingOption"))
+    SnowflakeDestinationDescription.add_member(:meta_data_column_name, Shapes::ShapeRef.new(shape: SnowflakeMetaDataColumnName, location_name: "MetaDataColumnName"))
+    SnowflakeDestinationDescription.add_member(:content_column_name, Shapes::ShapeRef.new(shape: SnowflakeContentColumnName, location_name: "ContentColumnName"))
+    SnowflakeDestinationDescription.add_member(:snowflake_vpc_configuration, Shapes::ShapeRef.new(shape: SnowflakeVpcConfiguration, location_name: "SnowflakeVpcConfiguration"))
+    SnowflakeDestinationDescription.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    SnowflakeDestinationDescription.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
+    SnowflakeDestinationDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+    SnowflakeDestinationDescription.add_member(:retry_options, Shapes::ShapeRef.new(shape: SnowflakeRetryOptions, location_name: "RetryOptions"))
+    SnowflakeDestinationDescription.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: SnowflakeS3BackupMode, location_name: "S3BackupMode"))
+    SnowflakeDestinationDescription.add_member(:s3_destination_description, Shapes::ShapeRef.new(shape: S3DestinationDescription, location_name: "S3DestinationDescription"))
+    SnowflakeDestinationDescription.struct_class = Types::SnowflakeDestinationDescription
+
+    SnowflakeDestinationUpdate.add_member(:account_url, Shapes::ShapeRef.new(shape: SnowflakeAccountUrl, location_name: "AccountUrl"))
+    SnowflakeDestinationUpdate.add_member(:private_key, Shapes::ShapeRef.new(shape: SnowflakePrivateKey, location_name: "PrivateKey"))
+    SnowflakeDestinationUpdate.add_member(:key_passphrase, Shapes::ShapeRef.new(shape: SnowflakeKeyPassphrase, location_name: "KeyPassphrase"))
+    SnowflakeDestinationUpdate.add_member(:user, Shapes::ShapeRef.new(shape: SnowflakeUser, location_name: "User"))
+    SnowflakeDestinationUpdate.add_member(:database, Shapes::ShapeRef.new(shape: SnowflakeDatabase, location_name: "Database"))
+    SnowflakeDestinationUpdate.add_member(:schema, Shapes::ShapeRef.new(shape: SnowflakeSchema, location_name: "Schema"))
+    SnowflakeDestinationUpdate.add_member(:table, Shapes::ShapeRef.new(shape: SnowflakeTable, location_name: "Table"))
+    SnowflakeDestinationUpdate.add_member(:snowflake_role_configuration, Shapes::ShapeRef.new(shape: SnowflakeRoleConfiguration, location_name: "SnowflakeRoleConfiguration"))
+    SnowflakeDestinationUpdate.add_member(:data_loading_option, Shapes::ShapeRef.new(shape: SnowflakeDataLoadingOption, location_name: "DataLoadingOption"))
+    SnowflakeDestinationUpdate.add_member(:meta_data_column_name, Shapes::ShapeRef.new(shape: SnowflakeMetaDataColumnName, location_name: "MetaDataColumnName"))
+    SnowflakeDestinationUpdate.add_member(:content_column_name, Shapes::ShapeRef.new(shape: SnowflakeContentColumnName, location_name: "ContentColumnName"))
+    SnowflakeDestinationUpdate.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    SnowflakeDestinationUpdate.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
+    SnowflakeDestinationUpdate.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+    SnowflakeDestinationUpdate.add_member(:retry_options, Shapes::ShapeRef.new(shape: SnowflakeRetryOptions, location_name: "RetryOptions"))
+    SnowflakeDestinationUpdate.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: SnowflakeS3BackupMode, location_name: "S3BackupMode"))
+    SnowflakeDestinationUpdate.add_member(:s3_update, Shapes::ShapeRef.new(shape: S3DestinationUpdate, location_name: "S3Update"))
+    SnowflakeDestinationUpdate.struct_class = Types::SnowflakeDestinationUpdate
+
+    SnowflakeRetryOptions.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: SnowflakeRetryDurationInSeconds, location_name: "DurationInSeconds"))
+    SnowflakeRetryOptions.struct_class = Types::SnowflakeRetryOptions
+
+    SnowflakeRoleConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "Enabled"))
+    SnowflakeRoleConfiguration.add_member(:snowflake_role, Shapes::ShapeRef.new(shape: SnowflakeRole, location_name: "SnowflakeRole"))
+    SnowflakeRoleConfiguration.struct_class = Types::SnowflakeRoleConfiguration
+
+    SnowflakeVpcConfiguration.add_member(:private_link_vpce_id, Shapes::ShapeRef.new(shape: SnowflakePrivateLinkVpceId, required: true, location_name: "PrivateLinkVpceId"))
+    SnowflakeVpcConfiguration.struct_class = Types::SnowflakeVpcConfiguration
+
     SourceDescription.add_member(:kinesis_stream_source_description, Shapes::ShapeRef.new(shape: KinesisStreamSourceDescription, location_name: "KinesisStreamSourceDescription"))
     SourceDescription.add_member(:msk_source_description, Shapes::ShapeRef.new(shape: MSKSourceDescription, location_name: "MSKSourceDescription"))
     SourceDescription.struct_class = Types::SourceDescription
@@ -941,6 +1030,7 @@ module Aws::Firehose
     UpdateDestinationInput.add_member(:splunk_destination_update, Shapes::ShapeRef.new(shape: SplunkDestinationUpdate, location_name: "SplunkDestinationUpdate"))
     UpdateDestinationInput.add_member(:http_endpoint_destination_update, Shapes::ShapeRef.new(shape: HttpEndpointDestinationUpdate, location_name: "HttpEndpointDestinationUpdate"))
     UpdateDestinationInput.add_member(:amazon_open_search_serverless_destination_update, Shapes::ShapeRef.new(shape: AmazonOpenSearchServerlessDestinationUpdate, location_name: "AmazonOpenSearchServerlessDestinationUpdate"))
+    UpdateDestinationInput.add_member(:snowflake_destination_update, Shapes::ShapeRef.new(shape: SnowflakeDestinationUpdate, location_name: "SnowflakeDestinationUpdate"))
     UpdateDestinationInput.struct_class = Types::UpdateDestinationInput
 
     UpdateDestinationOutput.struct_class = Types::UpdateDestinationOutput

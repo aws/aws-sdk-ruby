@@ -55,7 +55,7 @@ module Aws::ManagedBlockchainQuery
     #   The container for the identifier for the token including the unique
     #   token ID and its blockchain network.
     #
-    #   <note markdown="1"> Only the native tokens BTC,ETH, and the ERC-20, ERC-721, and ERC
+    #   <note markdown="1"> Only the native tokens BTC and ETH, and the ERC-20, ERC-721, and ERC
     #   1155 token standards are supported.
     #
     #    </note>
@@ -113,7 +113,7 @@ module Aws::ManagedBlockchainQuery
     #   The container for the identifier for the token including the unique
     #   token ID and its blockchain network.
     #
-    #   <note markdown="1"> Only the native tokens BTC,ETH, and the ERC-20, ERC-721, and ERC
+    #   <note markdown="1"> Only the native tokens BTC and ETH, and the ERC-20, ERC-721, and ERC
     #   1155 token standards are supported.
     #
     #    </note>
@@ -166,7 +166,7 @@ module Aws::ManagedBlockchainQuery
     #   The container for the identifier for the token including the unique
     #   token ID and its blockchain network.
     #
-    #   <note markdown="1"> Only the native tokens BTC,ETH, and the ERC-20, ERC-721, and ERC
+    #   <note markdown="1"> Only the native tokens BTC and ETH, and the ERC-20, ERC-721, and ERC
     #   1155 token standards are supported.
     #
     #    </note>
@@ -210,6 +210,31 @@ module Aws::ManagedBlockchainQuery
     #
     class BlockchainInstant < Struct.new(
       :time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The container for the `ConfirmationStatusFilter` that filters for the
+    # [ *finality* ][1] of the results.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality
+    #
+    # @!attribute [rw] include
+    #   The container to determine whether to list results that have only
+    #   reached [ *finality* ][1]. Transactions that have reached finality
+    #   are always part of the response.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/ConfirmationStatusFilter AWS API Documentation
+    #
+    class ConfirmationStatusFilter < Struct.new(
+      :include)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -359,7 +384,7 @@ module Aws::ManagedBlockchainQuery
     #   The container for the identifier for the token including the unique
     #   token ID and its blockchain network.
     #
-    #   <note markdown="1"> Only the native tokens BTC,ETH, and the ERC-20, ERC-721, and ERC
+    #   <note markdown="1"> Only the native tokens BTC and ETH, and the ERC-20, ERC-721, and ERC
     #   1155 token standards are supported.
     #
     #    </note>
@@ -450,6 +475,17 @@ module Aws::ManagedBlockchainQuery
     #
     # @!attribute [rw] max_results
     #   The maximum number of contracts to list.
+    #
+    #   Default:`100`
+    #
+    #   <note markdown="1"> Even if additional results can be retrieved, the request can return
+    #   less results than `maxResults` or an empty array of results.
+    #
+    #    To retrieve the next set of results, make another request with the
+    #   returned `nextToken` value. The value of `nextToken` is `null` when
+    #   there are no more results to return
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/ListAssetContractsInput AWS API Documentation
@@ -506,6 +542,17 @@ module Aws::ManagedBlockchainQuery
     #
     # @!attribute [rw] max_results
     #   The maximum number of token balances to return.
+    #
+    #   Default:`100`
+    #
+    #   <note markdown="1"> Even if additional results can be retrieved, the request can return
+    #   less results than `maxResults` or an empty array of results.
+    #
+    #    To retrieve the next set of results, make another request with the
+    #   returned `nextToken` value. The value of `nextToken` is `null` when
+    #   there are no more results to return
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/ListTokenBalancesInput AWS API Documentation
@@ -554,6 +601,8 @@ module Aws::ManagedBlockchainQuery
     #
     # @!attribute [rw] max_results
     #   The maximum number of transaction events to list.
+    #
+    #   Default:`100`
     #
     #   <note markdown="1"> Even if additional results can be retrieved, the request can return
     #   less results than `maxResults` or an empty array of results.
@@ -613,9 +662,8 @@ module Aws::ManagedBlockchainQuery
     #   @return [Types::BlockchainInstant]
     #
     # @!attribute [rw] sort
-    #   Sorts items in an ascending order if the first page starts at
-    #   `fromTime`. Sorts items in a descending order if the first page
-    #   starts at `toTime`.
+    #   The order by which the results will be sorted. If `ASCENNDING` is
+    #   selected, the results will be ordered by `fromTime`.
     #   @return [Types::ListTransactionsSort]
     #
     # @!attribute [rw] next_token
@@ -625,6 +673,8 @@ module Aws::ManagedBlockchainQuery
     #
     # @!attribute [rw] max_results
     #   The maximum number of transactions to list.
+    #
+    #   Default:`100`
     #
     #   <note markdown="1"> Even if additional results can be retrieved, the request can return
     #   less results than `maxResults` or an empty array of results.
@@ -636,6 +686,16 @@ module Aws::ManagedBlockchainQuery
     #    </note>
     #   @return [Integer]
     #
+    # @!attribute [rw] confirmation_status_filter
+    #   This filter is used to include transactions in the response that
+    #   haven't reached [ *finality* ][1]. Transactions that have reached
+    #   finiality are always part of the response.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality
+    #   @return [Types::ConfirmationStatusFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/ListTransactionsInput AWS API Documentation
     #
     class ListTransactionsInput < Struct.new(
@@ -645,7 +705,8 @@ module Aws::ManagedBlockchainQuery
       :to_blockchain_instant,
       :sort,
       :next_token,
-      :max_results)
+      :max_results,
+      :confirmation_status_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -884,8 +945,8 @@ module Aws::ManagedBlockchainQuery
     # The container for the identifier for the token including the unique
     # token ID and its blockchain network.
     #
-    # <note markdown="1"> Only the native tokens BTC,ETH, and the ERC-20, ERC-721, and ERC 1155
-    # token standards are supported.
+    # <note markdown="1"> Only the native tokens BTC and ETH, and the ERC-20, ERC-721, and ERC
+    # 1155 token standards are supported.
     #
     #  </note>
     #
@@ -900,10 +961,10 @@ module Aws::ManagedBlockchainQuery
     # @!attribute [rw] token_id
     #   The unique identifier of the token.
     #
-    #   <note markdown="1"> You must specify this container with `btc` for the native BTC token,
-    #   and `eth` for the native ETH token. For all other token types you
-    #   must specify the `tokenId` in the 64 character hexadecimal `tokenid`
-    #   format.
+    #   <note markdown="1"> For native tokens, use the 3 character abbreviation that best
+    #   matches your token. For example, btc for Bitcoin, eth for Ether,
+    #   etc. For all other token types you must specify the `tokenId` in the
+    #   64 character hexadecimal `tokenid` format.
     #
     #    </note>
     #   @return [String]
@@ -960,22 +1021,6 @@ module Aws::ManagedBlockchainQuery
     # @!attribute [rw] number_of_transactions
     #   The number of transactions in the block.
     #   @return [Integer]
-    #
-    # @!attribute [rw] status
-    #   The status of the transaction.
-    #
-    #   This property is deprecated. You must use the `confirmationStatus`
-    #   and the `executionStatus` properties to determine if the `status` of
-    #   the transaction is `FINAL` or `FAILED`.
-    #
-    #    * Transactions with a `status` of `FINAL` will now have the
-    #     `confirmationStatus` set to `FINAL` and the `executionStatus` set
-    #     to `SUCCEEDED`.
-    #
-    #   * Transactions with a `status` of `FAILED` will now have the
-    #     `confirmationStatus` set to `FINAL` and the `executionStatus` set
-    #     to `FAILED`.
-    #   @return [String]
     #
     # @!attribute [rw] to
     #   The identifier of the transaction. It is generated whenever a
@@ -1042,7 +1087,6 @@ module Aws::ManagedBlockchainQuery
       :transaction_timestamp,
       :transaction_index,
       :number_of_transactions,
-      :status,
       :to,
       :from,
       :contract_address,
@@ -1138,12 +1182,18 @@ module Aws::ManagedBlockchainQuery
     #   The time when the transaction occurred.
     #   @return [Time]
     #
+    # @!attribute [rw] confirmation_status
+    #   Specifies whether to list transactions that have not reached
+    #   Finality.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-query-2023-05-04/TransactionOutputItem AWS API Documentation
     #
     class TransactionOutputItem < Struct.new(
       :transaction_hash,
       :network,
-      :transaction_timestamp)
+      :transaction_timestamp,
+      :confirmation_status)
       SENSITIVE = []
       include Aws::Structure
     end

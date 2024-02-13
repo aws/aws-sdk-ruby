@@ -312,6 +312,7 @@ module Aws::QuickSight
     ConditionalFormattingSolidColor = Shapes::StructureShape.new(name: 'ConditionalFormattingSolidColor')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConstantType = Shapes::StringShape.new(name: 'ConstantType')
+    ContextMenuOption = Shapes::StructureShape.new(name: 'ContextMenuOption')
     ContributionAnalysisDefault = Shapes::StructureShape.new(name: 'ContributionAnalysisDefault')
     ContributionAnalysisDefaultList = Shapes::ListShape.new(name: 'ContributionAnalysisDefaultList')
     ContributorDimensionList = Shapes::ListShape.new(name: 'ContributorDimensionList')
@@ -1753,6 +1754,7 @@ module Aws::QuickSight
     VisualCustomActionOperation = Shapes::StructureShape.new(name: 'VisualCustomActionOperation')
     VisualCustomActionOperationList = Shapes::ListShape.new(name: 'VisualCustomActionOperationList')
     VisualCustomActionTrigger = Shapes::StringShape.new(name: 'VisualCustomActionTrigger')
+    VisualInteractionOptions = Shapes::StructureShape.new(name: 'VisualInteractionOptions')
     VisualList = Shapes::ListShape.new(name: 'VisualList')
     VisualMenuOption = Shapes::StructureShape.new(name: 'VisualMenuOption')
     VisualPalette = Shapes::StructureShape.new(name: 'VisualPalette')
@@ -1761,8 +1763,10 @@ module Aws::QuickSight
     VpcConnectionProperties = Shapes::StructureShape.new(name: 'VpcConnectionProperties')
     Warehouse = Shapes::StringShape.new(name: 'Warehouse')
     WaterfallChartAggregatedFieldWells = Shapes::StructureShape.new(name: 'WaterfallChartAggregatedFieldWells')
+    WaterfallChartColorConfiguration = Shapes::StructureShape.new(name: 'WaterfallChartColorConfiguration')
     WaterfallChartConfiguration = Shapes::StructureShape.new(name: 'WaterfallChartConfiguration')
     WaterfallChartFieldWells = Shapes::StructureShape.new(name: 'WaterfallChartFieldWells')
+    WaterfallChartGroupColorConfiguration = Shapes::StructureShape.new(name: 'WaterfallChartGroupColorConfiguration')
     WaterfallChartOptions = Shapes::StructureShape.new(name: 'WaterfallChartOptions')
     WaterfallChartSortConfiguration = Shapes::StructureShape.new(name: 'WaterfallChartSortConfiguration')
     WaterfallVisual = Shapes::StructureShape.new(name: 'WaterfallVisual')
@@ -2340,6 +2344,7 @@ module Aws::QuickSight
     BarChartConfiguration.add_member(:tooltip, Shapes::ShapeRef.new(shape: TooltipOptions, location_name: "Tooltip"))
     BarChartConfiguration.add_member(:reference_lines, Shapes::ShapeRef.new(shape: ReferenceLineList, location_name: "ReferenceLines"))
     BarChartConfiguration.add_member(:contribution_analysis_defaults, Shapes::ShapeRef.new(shape: ContributionAnalysisDefaultList, location_name: "ContributionAnalysisDefaults"))
+    BarChartConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     BarChartConfiguration.struct_class = Types::BarChartConfiguration
 
     BarChartFieldWells.add_member(:bar_chart_aggregated_field_wells, Shapes::ShapeRef.new(shape: BarChartAggregatedFieldWells, location_name: "BarChartAggregatedFieldWells"))
@@ -2404,6 +2409,7 @@ module Aws::QuickSight
     BoxPlotChartConfiguration.add_member(:tooltip, Shapes::ShapeRef.new(shape: TooltipOptions, location_name: "Tooltip"))
     BoxPlotChartConfiguration.add_member(:reference_lines, Shapes::ShapeRef.new(shape: ReferenceLineList, location_name: "ReferenceLines"))
     BoxPlotChartConfiguration.add_member(:visual_palette, Shapes::ShapeRef.new(shape: VisualPalette, location_name: "VisualPalette"))
+    BoxPlotChartConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     BoxPlotChartConfiguration.struct_class = Types::BoxPlotChartConfiguration
 
     BoxPlotDimensionFieldList.member = Shapes::ShapeRef.new(shape: DimensionField)
@@ -2634,6 +2640,7 @@ module Aws::QuickSight
     ComboChartConfiguration.add_member(:tooltip, Shapes::ShapeRef.new(shape: TooltipOptions, location_name: "Tooltip"))
     ComboChartConfiguration.add_member(:reference_lines, Shapes::ShapeRef.new(shape: ReferenceLineList, location_name: "ReferenceLines"))
     ComboChartConfiguration.add_member(:visual_palette, Shapes::ShapeRef.new(shape: VisualPalette, location_name: "VisualPalette"))
+    ComboChartConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     ComboChartConfiguration.struct_class = Types::ComboChartConfiguration
 
     ComboChartFieldWells.add_member(:combo_chart_aggregated_field_wells, Shapes::ShapeRef.new(shape: ComboChartAggregatedFieldWells, location_name: "ComboChartAggregatedFieldWells"))
@@ -2720,6 +2727,9 @@ module Aws::QuickSight
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ConflictException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     ConflictException.struct_class = Types::ConflictException
+
+    ContextMenuOption.add_member(:availability_status, Shapes::ShapeRef.new(shape: DashboardBehavior, location_name: "AvailabilityStatus"))
+    ContextMenuOption.struct_class = Types::ContextMenuOption
 
     ContributionAnalysisDefault.add_member(:measure_field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "MeasureFieldId"))
     ContributionAnalysisDefault.add_member(:contributor_dimensions, Shapes::ShapeRef.new(shape: ContributorDimensionList, required: true, location_name: "ContributorDimensions"))
@@ -3119,6 +3129,7 @@ module Aws::QuickSight
     CustomContentConfiguration.add_member(:content_url, Shapes::ShapeRef.new(shape: URLOperationTemplate, location_name: "ContentUrl"))
     CustomContentConfiguration.add_member(:content_type, Shapes::ShapeRef.new(shape: CustomContentType, location_name: "ContentType"))
     CustomContentConfiguration.add_member(:image_scaling, Shapes::ShapeRef.new(shape: CustomContentImageScalingConfiguration, location_name: "ImageScaling"))
+    CustomContentConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     CustomContentConfiguration.struct_class = Types::CustomContentConfiguration
 
     CustomContentVisual.add_member(:visual_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "VisualId"))
@@ -4540,6 +4551,7 @@ module Aws::QuickSight
     FilledMapConfiguration.add_member(:tooltip, Shapes::ShapeRef.new(shape: TooltipOptions, location_name: "Tooltip"))
     FilledMapConfiguration.add_member(:window_options, Shapes::ShapeRef.new(shape: GeospatialWindowOptions, location_name: "WindowOptions"))
     FilledMapConfiguration.add_member(:map_style_options, Shapes::ShapeRef.new(shape: GeospatialMapStyleOptions, location_name: "MapStyleOptions"))
+    FilledMapConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     FilledMapConfiguration.struct_class = Types::FilledMapConfiguration
 
     FilledMapDimensionFieldList.member = Shapes::ShapeRef.new(shape: DimensionField)
@@ -4808,6 +4820,7 @@ module Aws::QuickSight
     FunnelChartConfiguration.add_member(:tooltip, Shapes::ShapeRef.new(shape: TooltipOptions, location_name: "Tooltip"))
     FunnelChartConfiguration.add_member(:data_label_options, Shapes::ShapeRef.new(shape: FunnelChartDataLabelOptions, location_name: "DataLabelOptions"))
     FunnelChartConfiguration.add_member(:visual_palette, Shapes::ShapeRef.new(shape: VisualPalette, location_name: "VisualPalette"))
+    FunnelChartConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     FunnelChartConfiguration.struct_class = Types::FunnelChartConfiguration
 
     FunnelChartDataLabelOptions.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
@@ -4855,6 +4868,7 @@ module Aws::QuickSight
     GaugeChartConfiguration.add_member(:data_labels, Shapes::ShapeRef.new(shape: DataLabelOptions, location_name: "DataLabels"))
     GaugeChartConfiguration.add_member(:tooltip_options, Shapes::ShapeRef.new(shape: TooltipOptions, location_name: "TooltipOptions"))
     GaugeChartConfiguration.add_member(:visual_palette, Shapes::ShapeRef.new(shape: VisualPalette, location_name: "VisualPalette"))
+    GaugeChartConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     GaugeChartConfiguration.struct_class = Types::GaugeChartConfiguration
 
     GaugeChartFieldWells.add_member(:values, Shapes::ShapeRef.new(shape: MeasureFieldList, location_name: "Values"))
@@ -4941,6 +4955,7 @@ module Aws::QuickSight
     GeospatialMapConfiguration.add_member(:map_style_options, Shapes::ShapeRef.new(shape: GeospatialMapStyleOptions, location_name: "MapStyleOptions"))
     GeospatialMapConfiguration.add_member(:point_style_options, Shapes::ShapeRef.new(shape: GeospatialPointStyleOptions, location_name: "PointStyleOptions"))
     GeospatialMapConfiguration.add_member(:visual_palette, Shapes::ShapeRef.new(shape: VisualPalette, location_name: "VisualPalette"))
+    GeospatialMapConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     GeospatialMapConfiguration.struct_class = Types::GeospatialMapConfiguration
 
     GeospatialMapFieldWells.add_member(:geospatial_map_aggregated_field_wells, Shapes::ShapeRef.new(shape: GeospatialMapAggregatedFieldWells, location_name: "GeospatialMapAggregatedFieldWells"))
@@ -5082,6 +5097,7 @@ module Aws::QuickSight
     HeatMapConfiguration.add_member(:legend, Shapes::ShapeRef.new(shape: LegendOptions, location_name: "Legend"))
     HeatMapConfiguration.add_member(:data_labels, Shapes::ShapeRef.new(shape: DataLabelOptions, location_name: "DataLabels"))
     HeatMapConfiguration.add_member(:tooltip, Shapes::ShapeRef.new(shape: TooltipOptions, location_name: "Tooltip"))
+    HeatMapConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     HeatMapConfiguration.struct_class = Types::HeatMapConfiguration
 
     HeatMapDimensionFieldList.member = Shapes::ShapeRef.new(shape: DimensionField)
@@ -5122,6 +5138,7 @@ module Aws::QuickSight
     HistogramConfiguration.add_member(:data_labels, Shapes::ShapeRef.new(shape: DataLabelOptions, location_name: "DataLabels"))
     HistogramConfiguration.add_member(:tooltip, Shapes::ShapeRef.new(shape: TooltipOptions, location_name: "Tooltip"))
     HistogramConfiguration.add_member(:visual_palette, Shapes::ShapeRef.new(shape: VisualPalette, location_name: "VisualPalette"))
+    HistogramConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     HistogramConfiguration.struct_class = Types::HistogramConfiguration
 
     HistogramFieldWells.add_member(:histogram_aggregated_field_wells, Shapes::ShapeRef.new(shape: HistogramAggregatedFieldWells, location_name: "HistogramAggregatedFieldWells"))
@@ -5189,6 +5206,7 @@ module Aws::QuickSight
 
     InsightConfiguration.add_member(:computations, Shapes::ShapeRef.new(shape: ComputationList, location_name: "Computations"))
     InsightConfiguration.add_member(:custom_narrative, Shapes::ShapeRef.new(shape: CustomNarrativeOptions, location_name: "CustomNarrative"))
+    InsightConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     InsightConfiguration.struct_class = Types::InsightConfiguration
 
     InsightVisual.add_member(:visual_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "VisualId"))
@@ -5292,6 +5310,7 @@ module Aws::QuickSight
     KPIConfiguration.add_member(:field_wells, Shapes::ShapeRef.new(shape: KPIFieldWells, location_name: "FieldWells"))
     KPIConfiguration.add_member(:sort_configuration, Shapes::ShapeRef.new(shape: KPISortConfiguration, location_name: "SortConfiguration"))
     KPIConfiguration.add_member(:kpi_options, Shapes::ShapeRef.new(shape: KPIOptions, location_name: "KPIOptions"))
+    KPIConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     KPIConfiguration.struct_class = Types::KPIConfiguration
 
     KPIFieldWells.add_member(:values, Shapes::ShapeRef.new(shape: MeasureFieldList, location_name: "Values"))
@@ -5394,6 +5413,7 @@ module Aws::QuickSight
     LineChartConfiguration.add_member(:tooltip, Shapes::ShapeRef.new(shape: TooltipOptions, location_name: "Tooltip"))
     LineChartConfiguration.add_member(:contribution_analysis_defaults, Shapes::ShapeRef.new(shape: ContributionAnalysisDefaultList, location_name: "ContributionAnalysisDefaults"))
     LineChartConfiguration.add_member(:visual_palette, Shapes::ShapeRef.new(shape: VisualPalette, location_name: "VisualPalette"))
+    LineChartConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     LineChartConfiguration.struct_class = Types::LineChartConfiguration
 
     LineChartDefaultSeriesSettings.add_member(:axis_binding, Shapes::ShapeRef.new(shape: AxisBinding, location_name: "AxisBinding"))
@@ -6179,6 +6199,7 @@ module Aws::QuickSight
     PieChartConfiguration.add_member(:tooltip, Shapes::ShapeRef.new(shape: TooltipOptions, location_name: "Tooltip"))
     PieChartConfiguration.add_member(:visual_palette, Shapes::ShapeRef.new(shape: VisualPalette, location_name: "VisualPalette"))
     PieChartConfiguration.add_member(:contribution_analysis_defaults, Shapes::ShapeRef.new(shape: ContributionAnalysisDefaultList, location_name: "ContributionAnalysisDefaults"))
+    PieChartConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     PieChartConfiguration.struct_class = Types::PieChartConfiguration
 
     PieChartFieldWells.add_member(:pie_chart_aggregated_field_wells, Shapes::ShapeRef.new(shape: PieChartAggregatedFieldWells, location_name: "PieChartAggregatedFieldWells"))
@@ -6236,6 +6257,7 @@ module Aws::QuickSight
     PivotTableConfiguration.add_member(:total_options, Shapes::ShapeRef.new(shape: PivotTableTotalOptions, location_name: "TotalOptions"))
     PivotTableConfiguration.add_member(:field_options, Shapes::ShapeRef.new(shape: PivotTableFieldOptions, location_name: "FieldOptions"))
     PivotTableConfiguration.add_member(:paginated_report_options, Shapes::ShapeRef.new(shape: PivotTablePaginatedReportOptions, location_name: "PaginatedReportOptions"))
+    PivotTableConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     PivotTableConfiguration.struct_class = Types::PivotTableConfiguration
 
     PivotTableDataPathOption.add_member(:data_path_list, Shapes::ShapeRef.new(shape: DataPathValueList, required: true, location_name: "DataPathList"))
@@ -6406,6 +6428,7 @@ module Aws::QuickSight
     RadarChartConfiguration.add_member(:color_label_options, Shapes::ShapeRef.new(shape: ChartAxisLabelOptions, location_name: "ColorLabelOptions"))
     RadarChartConfiguration.add_member(:legend, Shapes::ShapeRef.new(shape: LegendOptions, location_name: "Legend"))
     RadarChartConfiguration.add_member(:axes_range_scale, Shapes::ShapeRef.new(shape: RadarChartAxesRangeScale, location_name: "AxesRangeScale"))
+    RadarChartConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     RadarChartConfiguration.struct_class = Types::RadarChartConfiguration
 
     RadarChartFieldWells.add_member(:radar_chart_aggregated_field_wells, Shapes::ShapeRef.new(shape: RadarChartAggregatedFieldWells, location_name: "RadarChartAggregatedFieldWells"))
@@ -6689,6 +6712,7 @@ module Aws::QuickSight
     SankeyDiagramChartConfiguration.add_member(:field_wells, Shapes::ShapeRef.new(shape: SankeyDiagramFieldWells, location_name: "FieldWells"))
     SankeyDiagramChartConfiguration.add_member(:sort_configuration, Shapes::ShapeRef.new(shape: SankeyDiagramSortConfiguration, location_name: "SortConfiguration"))
     SankeyDiagramChartConfiguration.add_member(:data_labels, Shapes::ShapeRef.new(shape: DataLabelOptions, location_name: "DataLabels"))
+    SankeyDiagramChartConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     SankeyDiagramChartConfiguration.struct_class = Types::SankeyDiagramChartConfiguration
 
     SankeyDiagramFieldWells.add_member(:sankey_diagram_aggregated_field_wells, Shapes::ShapeRef.new(shape: SankeyDiagramAggregatedFieldWells, location_name: "SankeyDiagramAggregatedFieldWells"))
@@ -6723,6 +6747,7 @@ module Aws::QuickSight
     ScatterPlotConfiguration.add_member(:data_labels, Shapes::ShapeRef.new(shape: DataLabelOptions, location_name: "DataLabels"))
     ScatterPlotConfiguration.add_member(:tooltip, Shapes::ShapeRef.new(shape: TooltipOptions, location_name: "Tooltip"))
     ScatterPlotConfiguration.add_member(:visual_palette, Shapes::ShapeRef.new(shape: VisualPalette, location_name: "VisualPalette"))
+    ScatterPlotConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     ScatterPlotConfiguration.struct_class = Types::ScatterPlotConfiguration
 
     ScatterPlotFieldWells.add_member(:scatter_plot_categorically_aggregated_field_wells, Shapes::ShapeRef.new(shape: ScatterPlotCategoricallyAggregatedFieldWells, location_name: "ScatterPlotCategoricallyAggregatedFieldWells"))
@@ -7264,6 +7289,7 @@ module Aws::QuickSight
     TableConfiguration.add_member(:field_options, Shapes::ShapeRef.new(shape: TableFieldOptions, location_name: "FieldOptions"))
     TableConfiguration.add_member(:paginated_report_options, Shapes::ShapeRef.new(shape: TablePaginatedReportOptions, location_name: "PaginatedReportOptions"))
     TableConfiguration.add_member(:table_inline_visualizations, Shapes::ShapeRef.new(shape: TableInlineVisualizationList, location_name: "TableInlineVisualizations"))
+    TableConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     TableConfiguration.struct_class = Types::TableConfiguration
 
     TableFieldCustomIconContent.add_member(:icon, Shapes::ShapeRef.new(shape: TableFieldIconSetType, location_name: "Icon"))
@@ -7808,6 +7834,7 @@ module Aws::QuickSight
     TreeMapConfiguration.add_member(:legend, Shapes::ShapeRef.new(shape: LegendOptions, location_name: "Legend"))
     TreeMapConfiguration.add_member(:data_labels, Shapes::ShapeRef.new(shape: DataLabelOptions, location_name: "DataLabels"))
     TreeMapConfiguration.add_member(:tooltip, Shapes::ShapeRef.new(shape: TooltipOptions, location_name: "Tooltip"))
+    TreeMapConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     TreeMapConfiguration.struct_class = Types::TreeMapConfiguration
 
     TreeMapDimensionFieldList.member = Shapes::ShapeRef.new(shape: DimensionField)
@@ -8431,6 +8458,10 @@ module Aws::QuickSight
 
     VisualCustomActionOperationList.member = Shapes::ShapeRef.new(shape: VisualCustomActionOperation)
 
+    VisualInteractionOptions.add_member(:visual_menu_option, Shapes::ShapeRef.new(shape: VisualMenuOption, location_name: "VisualMenuOption"))
+    VisualInteractionOptions.add_member(:context_menu_option, Shapes::ShapeRef.new(shape: ContextMenuOption, location_name: "ContextMenuOption"))
+    VisualInteractionOptions.struct_class = Types::VisualInteractionOptions
+
     VisualList.member = Shapes::ShapeRef.new(shape: Visual)
 
     VisualMenuOption.add_member(:availability_status, Shapes::ShapeRef.new(shape: DashboardBehavior, location_name: "AvailabilityStatus"))
@@ -8456,6 +8487,9 @@ module Aws::QuickSight
     WaterfallChartAggregatedFieldWells.add_member(:breakdowns, Shapes::ShapeRef.new(shape: DimensionFieldList, location_name: "Breakdowns"))
     WaterfallChartAggregatedFieldWells.struct_class = Types::WaterfallChartAggregatedFieldWells
 
+    WaterfallChartColorConfiguration.add_member(:group_color_configuration, Shapes::ShapeRef.new(shape: WaterfallChartGroupColorConfiguration, location_name: "GroupColorConfiguration"))
+    WaterfallChartColorConfiguration.struct_class = Types::WaterfallChartColorConfiguration
+
     WaterfallChartConfiguration.add_member(:field_wells, Shapes::ShapeRef.new(shape: WaterfallChartFieldWells, location_name: "FieldWells"))
     WaterfallChartConfiguration.add_member(:sort_configuration, Shapes::ShapeRef.new(shape: WaterfallChartSortConfiguration, location_name: "SortConfiguration"))
     WaterfallChartConfiguration.add_member(:waterfall_chart_options, Shapes::ShapeRef.new(shape: WaterfallChartOptions, location_name: "WaterfallChartOptions"))
@@ -8466,10 +8500,17 @@ module Aws::QuickSight
     WaterfallChartConfiguration.add_member(:legend, Shapes::ShapeRef.new(shape: LegendOptions, location_name: "Legend"))
     WaterfallChartConfiguration.add_member(:data_labels, Shapes::ShapeRef.new(shape: DataLabelOptions, location_name: "DataLabels"))
     WaterfallChartConfiguration.add_member(:visual_palette, Shapes::ShapeRef.new(shape: VisualPalette, location_name: "VisualPalette"))
+    WaterfallChartConfiguration.add_member(:color_configuration, Shapes::ShapeRef.new(shape: WaterfallChartColorConfiguration, location_name: "ColorConfiguration"))
+    WaterfallChartConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     WaterfallChartConfiguration.struct_class = Types::WaterfallChartConfiguration
 
     WaterfallChartFieldWells.add_member(:waterfall_chart_aggregated_field_wells, Shapes::ShapeRef.new(shape: WaterfallChartAggregatedFieldWells, location_name: "WaterfallChartAggregatedFieldWells"))
     WaterfallChartFieldWells.struct_class = Types::WaterfallChartFieldWells
+
+    WaterfallChartGroupColorConfiguration.add_member(:positive_bar_color, Shapes::ShapeRef.new(shape: HexColor, location_name: "PositiveBarColor"))
+    WaterfallChartGroupColorConfiguration.add_member(:negative_bar_color, Shapes::ShapeRef.new(shape: HexColor, location_name: "NegativeBarColor"))
+    WaterfallChartGroupColorConfiguration.add_member(:total_bar_color, Shapes::ShapeRef.new(shape: HexColor, location_name: "TotalBarColor"))
+    WaterfallChartGroupColorConfiguration.struct_class = Types::WaterfallChartGroupColorConfiguration
 
     WaterfallChartOptions.add_member(:total_bar_label, Shapes::ShapeRef.new(shape: String, location_name: "TotalBarLabel"))
     WaterfallChartOptions.struct_class = Types::WaterfallChartOptions
@@ -8503,6 +8544,7 @@ module Aws::QuickSight
     WordCloudChartConfiguration.add_member(:sort_configuration, Shapes::ShapeRef.new(shape: WordCloudSortConfiguration, location_name: "SortConfiguration"))
     WordCloudChartConfiguration.add_member(:category_label_options, Shapes::ShapeRef.new(shape: ChartAxisLabelOptions, location_name: "CategoryLabelOptions"))
     WordCloudChartConfiguration.add_member(:word_cloud_options, Shapes::ShapeRef.new(shape: WordCloudOptions, location_name: "WordCloudOptions"))
+    WordCloudChartConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     WordCloudChartConfiguration.struct_class = Types::WordCloudChartConfiguration
 
     WordCloudDimensionFieldList.member = Shapes::ShapeRef.new(shape: DimensionField)

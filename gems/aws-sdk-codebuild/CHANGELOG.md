@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.103.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.102.0 (2024-01-19)
+------------------
+
+* Feature - Release CodeBuild Reserved Capacity feature
+
 1.101.0 (2024-01-08)
 ------------------
 

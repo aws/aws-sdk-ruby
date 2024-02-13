@@ -1,0 +1,568 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RAM
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcceptResourceShareInvitationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptResourceShareInvitationResponse]
+        def resource_share_invitation: () -> Types::ResourceShareInvitation
+        def client_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#accept_resource_share_invitation-instance_method
+      def accept_resource_share_invitation: (
+                                              resource_share_invitation_arn: ::String,
+                                              ?client_token: ::String
+                                            ) -> _AcceptResourceShareInvitationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptResourceShareInvitationResponseSuccess
+
+      interface _AssociateResourceShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateResourceShareResponse]
+        def resource_share_associations: () -> ::Array[Types::ResourceShareAssociation]
+        def client_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#associate_resource_share-instance_method
+      def associate_resource_share: (
+                                      resource_share_arn: ::String,
+                                      ?resource_arns: Array[::String],
+                                      ?principals: Array[::String],
+                                      ?client_token: ::String,
+                                      ?sources: Array[::String]
+                                    ) -> _AssociateResourceShareResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateResourceShareResponseSuccess
+
+      interface _AssociateResourceSharePermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateResourceSharePermissionResponse]
+        def return_value: () -> bool
+        def client_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#associate_resource_share_permission-instance_method
+      def associate_resource_share_permission: (
+                                                 resource_share_arn: ::String,
+                                                 permission_arn: ::String,
+                                                 ?replace: bool,
+                                                 ?client_token: ::String,
+                                                 ?permission_version: ::Integer
+                                               ) -> _AssociateResourceSharePermissionResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateResourceSharePermissionResponseSuccess
+
+      interface _CreatePermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePermissionResponse]
+        def permission: () -> Types::ResourceSharePermissionSummary
+        def client_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#create_permission-instance_method
+      def create_permission: (
+                               name: ::String,
+                               resource_type: ::String,
+                               policy_template: ::String,
+                               ?client_token: ::String,
+                               ?tags: Array[
+                                 {
+                                   key: ::String?,
+                                   value: ::String?
+                                 },
+                               ]
+                             ) -> _CreatePermissionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePermissionResponseSuccess
+
+      interface _CreatePermissionVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePermissionVersionResponse]
+        def permission: () -> Types::ResourceSharePermissionDetail
+        def client_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#create_permission_version-instance_method
+      def create_permission_version: (
+                                       permission_arn: ::String,
+                                       policy_template: ::String,
+                                       ?client_token: ::String
+                                     ) -> _CreatePermissionVersionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePermissionVersionResponseSuccess
+
+      interface _CreateResourceShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateResourceShareResponse]
+        def resource_share: () -> Types::ResourceShare
+        def client_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#create_resource_share-instance_method
+      def create_resource_share: (
+                                   name: ::String,
+                                   ?resource_arns: Array[::String],
+                                   ?principals: Array[::String],
+                                   ?tags: Array[
+                                     {
+                                       key: ::String?,
+                                       value: ::String?
+                                     },
+                                   ],
+                                   ?allow_external_principals: bool,
+                                   ?client_token: ::String,
+                                   ?permission_arns: Array[::String],
+                                   ?sources: Array[::String]
+                                 ) -> _CreateResourceShareResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResourceShareResponseSuccess
+
+      interface _DeletePermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePermissionResponse]
+        def return_value: () -> bool
+        def client_token: () -> ::String
+        def permission_status: () -> ("ATTACHABLE" | "UNATTACHABLE" | "DELETING" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#delete_permission-instance_method
+      def delete_permission: (
+                               permission_arn: ::String,
+                               ?client_token: ::String
+                             ) -> _DeletePermissionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePermissionResponseSuccess
+
+      interface _DeletePermissionVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePermissionVersionResponse]
+        def return_value: () -> bool
+        def client_token: () -> ::String
+        def permission_status: () -> ("ATTACHABLE" | "UNATTACHABLE" | "DELETING" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#delete_permission_version-instance_method
+      def delete_permission_version: (
+                                       permission_arn: ::String,
+                                       permission_version: ::Integer,
+                                       ?client_token: ::String
+                                     ) -> _DeletePermissionVersionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePermissionVersionResponseSuccess
+
+      interface _DeleteResourceShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourceShareResponse]
+        def return_value: () -> bool
+        def client_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#delete_resource_share-instance_method
+      def delete_resource_share: (
+                                   resource_share_arn: ::String,
+                                   ?client_token: ::String
+                                 ) -> _DeleteResourceShareResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourceShareResponseSuccess
+
+      interface _DisassociateResourceShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateResourceShareResponse]
+        def resource_share_associations: () -> ::Array[Types::ResourceShareAssociation]
+        def client_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#disassociate_resource_share-instance_method
+      def disassociate_resource_share: (
+                                         resource_share_arn: ::String,
+                                         ?resource_arns: Array[::String],
+                                         ?principals: Array[::String],
+                                         ?client_token: ::String,
+                                         ?sources: Array[::String]
+                                       ) -> _DisassociateResourceShareResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateResourceShareResponseSuccess
+
+      interface _DisassociateResourceSharePermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateResourceSharePermissionResponse]
+        def return_value: () -> bool
+        def client_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#disassociate_resource_share_permission-instance_method
+      def disassociate_resource_share_permission: (
+                                                    resource_share_arn: ::String,
+                                                    permission_arn: ::String,
+                                                    ?client_token: ::String
+                                                  ) -> _DisassociateResourceSharePermissionResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateResourceSharePermissionResponseSuccess
+
+      interface _EnableSharingWithAwsOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableSharingWithAwsOrganizationResponse]
+        def return_value: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#enable_sharing_with_aws_organization-instance_method
+      def enable_sharing_with_aws_organization: (
+                                                ) -> _EnableSharingWithAwsOrganizationResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableSharingWithAwsOrganizationResponseSuccess
+
+      interface _GetPermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPermissionResponse]
+        def permission: () -> Types::ResourceSharePermissionDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#get_permission-instance_method
+      def get_permission: (
+                            permission_arn: ::String,
+                            ?permission_version: ::Integer
+                          ) -> _GetPermissionResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPermissionResponseSuccess
+
+      interface _GetResourcePoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePoliciesResponse]
+        def policies: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#get_resource_policies-instance_method
+      def get_resource_policies: (
+                                   resource_arns: Array[::String],
+                                   ?principal: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _GetResourcePoliciesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePoliciesResponseSuccess
+
+      interface _GetResourceShareAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceShareAssociationsResponse]
+        def resource_share_associations: () -> ::Array[Types::ResourceShareAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#get_resource_share_associations-instance_method
+      def get_resource_share_associations: (
+                                             association_type: ("PRINCIPAL" | "RESOURCE"),
+                                             ?resource_share_arns: Array[::String],
+                                             ?resource_arn: ::String,
+                                             ?principal: ::String,
+                                             ?association_status: ("ASSOCIATING" | "ASSOCIATED" | "FAILED" | "DISASSOCIATING" | "DISASSOCIATED"),
+                                             ?next_token: ::String,
+                                             ?max_results: ::Integer
+                                           ) -> _GetResourceShareAssociationsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceShareAssociationsResponseSuccess
+
+      interface _GetResourceShareInvitationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceShareInvitationsResponse]
+        def resource_share_invitations: () -> ::Array[Types::ResourceShareInvitation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#get_resource_share_invitations-instance_method
+      def get_resource_share_invitations: (
+                                            ?resource_share_invitation_arns: Array[::String],
+                                            ?resource_share_arns: Array[::String],
+                                            ?next_token: ::String,
+                                            ?max_results: ::Integer
+                                          ) -> _GetResourceShareInvitationsResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceShareInvitationsResponseSuccess
+
+      interface _GetResourceSharesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceSharesResponse]
+        def resource_shares: () -> ::Array[Types::ResourceShare]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#get_resource_shares-instance_method
+      def get_resource_shares: (
+                                 ?resource_share_arns: Array[::String],
+                                 ?resource_share_status: ("PENDING" | "ACTIVE" | "FAILED" | "DELETING" | "DELETED"),
+                                 resource_owner: ("SELF" | "OTHER-ACCOUNTS"),
+                                 ?name: ::String,
+                                 ?tag_filters: Array[
+                                   {
+                                     tag_key: ::String?,
+                                     tag_values: Array[::String]?
+                                   },
+                                 ],
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer,
+                                 ?permission_arn: ::String,
+                                 ?permission_version: ::Integer
+                               ) -> _GetResourceSharesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceSharesResponseSuccess
+
+      interface _ListPendingInvitationResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPendingInvitationResourcesResponse]
+        def resources: () -> ::Array[Types::Resource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#list_pending_invitation_resources-instance_method
+      def list_pending_invitation_resources: (
+                                               resource_share_invitation_arn: ::String,
+                                               ?next_token: ::String,
+                                               ?max_results: ::Integer,
+                                               ?resource_region_scope: ("ALL" | "REGIONAL" | "GLOBAL")
+                                             ) -> _ListPendingInvitationResourcesResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPendingInvitationResourcesResponseSuccess
+
+      interface _ListPermissionAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPermissionAssociationsResponse]
+        def permissions: () -> ::Array[Types::AssociatedPermission]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#list_permission_associations-instance_method
+      def list_permission_associations: (
+                                          ?permission_arn: ::String,
+                                          ?permission_version: ::Integer,
+                                          ?association_status: ("ASSOCIATING" | "ASSOCIATED" | "FAILED" | "DISASSOCIATING" | "DISASSOCIATED"),
+                                          ?resource_type: ::String,
+                                          ?feature_set: ("CREATED_FROM_POLICY" | "PROMOTING_TO_STANDARD" | "STANDARD"),
+                                          ?default_version: bool,
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListPermissionAssociationsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPermissionAssociationsResponseSuccess
+
+      interface _ListPermissionVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPermissionVersionsResponse]
+        def permissions: () -> ::Array[Types::ResourceSharePermissionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#list_permission_versions-instance_method
+      def list_permission_versions: (
+                                      permission_arn: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListPermissionVersionsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPermissionVersionsResponseSuccess
+
+      interface _ListPermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPermissionsResponse]
+        def permissions: () -> ::Array[Types::ResourceSharePermissionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#list_permissions-instance_method
+      def list_permissions: (
+                              ?resource_type: ::String,
+                              ?next_token: ::String,
+                              ?max_results: ::Integer,
+                              ?permission_type: ("ALL" | "AWS_MANAGED" | "CUSTOMER_MANAGED")
+                            ) -> _ListPermissionsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPermissionsResponseSuccess
+
+      interface _ListPrincipalsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPrincipalsResponse]
+        def principals: () -> ::Array[Types::Principal]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#list_principals-instance_method
+      def list_principals: (
+                             resource_owner: ("SELF" | "OTHER-ACCOUNTS"),
+                             ?resource_arn: ::String,
+                             ?principals: Array[::String],
+                             ?resource_type: ::String,
+                             ?resource_share_arns: Array[::String],
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _ListPrincipalsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPrincipalsResponseSuccess
+
+      interface _ListReplacePermissionAssociationsWorkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReplacePermissionAssociationsWorkResponse]
+        def replace_permission_associations_works: () -> ::Array[Types::ReplacePermissionAssociationsWork]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#list_replace_permission_associations_work-instance_method
+      def list_replace_permission_associations_work: (
+                                                       ?work_ids: Array[::String],
+                                                       ?status: ("IN_PROGRESS" | "COMPLETED" | "FAILED"),
+                                                       ?next_token: ::String,
+                                                       ?max_results: ::Integer
+                                                     ) -> _ListReplacePermissionAssociationsWorkResponseSuccess
+                                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReplacePermissionAssociationsWorkResponseSuccess
+
+      interface _ListResourceSharePermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceSharePermissionsResponse]
+        def permissions: () -> ::Array[Types::ResourceSharePermissionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#list_resource_share_permissions-instance_method
+      def list_resource_share_permissions: (
+                                             resource_share_arn: ::String,
+                                             ?next_token: ::String,
+                                             ?max_results: ::Integer
+                                           ) -> _ListResourceSharePermissionsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceSharePermissionsResponseSuccess
+
+      interface _ListResourceTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceTypesResponse]
+        def resource_types: () -> ::Array[Types::ServiceNameAndResourceType]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#list_resource_types-instance_method
+      def list_resource_types: (
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer,
+                                 ?resource_region_scope: ("ALL" | "REGIONAL" | "GLOBAL")
+                               ) -> _ListResourceTypesResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceTypesResponseSuccess
+
+      interface _ListResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourcesResponse]
+        def resources: () -> ::Array[Types::Resource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#list_resources-instance_method
+      def list_resources: (
+                            resource_owner: ("SELF" | "OTHER-ACCOUNTS"),
+                            ?principal: ::String,
+                            ?resource_type: ::String,
+                            ?resource_arns: Array[::String],
+                            ?resource_share_arns: Array[::String],
+                            ?next_token: ::String,
+                            ?max_results: ::Integer,
+                            ?resource_region_scope: ("ALL" | "REGIONAL" | "GLOBAL")
+                          ) -> _ListResourcesResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourcesResponseSuccess
+
+      interface _PromotePermissionCreatedFromPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PromotePermissionCreatedFromPolicyResponse]
+        def permission: () -> Types::ResourceSharePermissionSummary
+        def client_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#promote_permission_created_from_policy-instance_method
+      def promote_permission_created_from_policy: (
+                                                    permission_arn: ::String,
+                                                    name: ::String,
+                                                    ?client_token: ::String
+                                                  ) -> _PromotePermissionCreatedFromPolicyResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PromotePermissionCreatedFromPolicyResponseSuccess
+
+      interface _PromoteResourceShareCreatedFromPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PromoteResourceShareCreatedFromPolicyResponse]
+        def return_value: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#promote_resource_share_created_from_policy-instance_method
+      def promote_resource_share_created_from_policy: (
+                                                        resource_share_arn: ::String
+                                                      ) -> _PromoteResourceShareCreatedFromPolicyResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PromoteResourceShareCreatedFromPolicyResponseSuccess
+
+      interface _RejectResourceShareInvitationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectResourceShareInvitationResponse]
+        def resource_share_invitation: () -> Types::ResourceShareInvitation
+        def client_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#reject_resource_share_invitation-instance_method
+      def reject_resource_share_invitation: (
+                                              resource_share_invitation_arn: ::String,
+                                              ?client_token: ::String
+                                            ) -> _RejectResourceShareInvitationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectResourceShareInvitationResponseSuccess
+
+      interface _ReplacePermissionAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReplacePermissionAssociationsResponse]
+        def replace_permission_associations_work: () -> Types::ReplacePermissionAssociationsWork
+        def client_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#replace_permission_associations-instance_method
+      def replace_permission_associations: (
+                                             from_permission_arn: ::String,
+                                             ?from_permission_version: ::Integer,
+                                             to_permission_arn: ::String,
+                                             ?client_token: ::String
+                                           ) -> _ReplacePermissionAssociationsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReplacePermissionAssociationsResponseSuccess
+
+      interface _SetDefaultPermissionVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetDefaultPermissionVersionResponse]
+        def return_value: () -> bool
+        def client_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#set_default_permission_version-instance_method
+      def set_default_permission_version: (
+                                            permission_arn: ::String,
+                                            permission_version: ::Integer,
+                                            ?client_token: ::String
+                                          ) -> _SetDefaultPermissionVersionResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetDefaultPermissionVersionResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          ?resource_share_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String?,
+                              value: ::String?
+                            },
+                          ],
+                          ?resource_arn: ::String
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            ?resource_share_arn: ::String,
+                            tag_keys: Array[::String],
+                            ?resource_arn: ::String
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateResourceShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResourceShareResponse]
+        def resource_share: () -> Types::ResourceShare
+        def client_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#update_resource_share-instance_method
+      def update_resource_share: (
+                                   resource_share_arn: ::String,
+                                   ?name: ::String,
+                                   ?allow_external_principals: bool,
+                                   ?client_token: ::String
+                                 ) -> _UpdateResourceShareResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResourceShareResponseSuccess
+    end
+  end
+end
+

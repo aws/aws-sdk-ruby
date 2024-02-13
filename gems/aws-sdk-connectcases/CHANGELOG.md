@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2024-01-22)
+------------------
+
+* Feature - This release adds the ability to view audit history on a case and introduces a new parameter, performedBy, for CreateCase and UpdateCase API's.
+
 1.18.0 (2023-12-15)
 ------------------
 

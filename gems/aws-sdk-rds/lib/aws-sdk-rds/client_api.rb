@@ -109,6 +109,7 @@ module Aws::RDS
     CreateDBProxyResponse = Shapes::StructureShape.new(name: 'CreateDBProxyResponse')
     CreateDBSecurityGroupMessage = Shapes::StructureShape.new(name: 'CreateDBSecurityGroupMessage')
     CreateDBSecurityGroupResult = Shapes::StructureShape.new(name: 'CreateDBSecurityGroupResult')
+    CreateDBShardGroupMessage = Shapes::StructureShape.new(name: 'CreateDBShardGroupMessage')
     CreateDBSnapshotMessage = Shapes::StructureShape.new(name: 'CreateDBSnapshotMessage')
     CreateDBSnapshotResult = Shapes::StructureShape.new(name: 'CreateDBSnapshotResult')
     CreateDBSubnetGroupMessage = Shapes::StructureShape.new(name: 'CreateDBSubnetGroupMessage')
@@ -246,6 +247,10 @@ module Aws::RDS
     DBSecurityGroupNotSupportedFault = Shapes::StructureShape.new(name: 'DBSecurityGroupNotSupportedFault')
     DBSecurityGroupQuotaExceededFault = Shapes::StructureShape.new(name: 'DBSecurityGroupQuotaExceededFault')
     DBSecurityGroups = Shapes::ListShape.new(name: 'DBSecurityGroups')
+    DBShardGroup = Shapes::StructureShape.new(name: 'DBShardGroup')
+    DBShardGroupAlreadyExistsFault = Shapes::StructureShape.new(name: 'DBShardGroupAlreadyExistsFault')
+    DBShardGroupNotFoundFault = Shapes::StructureShape.new(name: 'DBShardGroupNotFoundFault')
+    DBShardGroupsList = Shapes::ListShape.new(name: 'DBShardGroupsList')
     DBSnapshot = Shapes::StructureShape.new(name: 'DBSnapshot')
     DBSnapshotAlreadyExistsFault = Shapes::StructureShape.new(name: 'DBSnapshotAlreadyExistsFault')
     DBSnapshotAttribute = Shapes::StructureShape.new(name: 'DBSnapshotAttribute')
@@ -290,6 +295,7 @@ module Aws::RDS
     DeleteDBProxyRequest = Shapes::StructureShape.new(name: 'DeleteDBProxyRequest')
     DeleteDBProxyResponse = Shapes::StructureShape.new(name: 'DeleteDBProxyResponse')
     DeleteDBSecurityGroupMessage = Shapes::StructureShape.new(name: 'DeleteDBSecurityGroupMessage')
+    DeleteDBShardGroupMessage = Shapes::StructureShape.new(name: 'DeleteDBShardGroupMessage')
     DeleteDBSnapshotMessage = Shapes::StructureShape.new(name: 'DeleteDBSnapshotMessage')
     DeleteDBSnapshotResult = Shapes::StructureShape.new(name: 'DeleteDBSnapshotResult')
     DeleteDBSubnetGroupMessage = Shapes::StructureShape.new(name: 'DeleteDBSubnetGroupMessage')
@@ -335,6 +341,8 @@ module Aws::RDS
     DescribeDBProxyTargetsResponse = Shapes::StructureShape.new(name: 'DescribeDBProxyTargetsResponse')
     DescribeDBRecommendationsMessage = Shapes::StructureShape.new(name: 'DescribeDBRecommendationsMessage')
     DescribeDBSecurityGroupsMessage = Shapes::StructureShape.new(name: 'DescribeDBSecurityGroupsMessage')
+    DescribeDBShardGroupsMessage = Shapes::StructureShape.new(name: 'DescribeDBShardGroupsMessage')
+    DescribeDBShardGroupsResponse = Shapes::StructureShape.new(name: 'DescribeDBShardGroupsResponse')
     DescribeDBSnapshotAttributesMessage = Shapes::StructureShape.new(name: 'DescribeDBSnapshotAttributesMessage')
     DescribeDBSnapshotAttributesResult = Shapes::StructureShape.new(name: 'DescribeDBSnapshotAttributesResult')
     DescribeDBSnapshotTenantDatabasesMessage = Shapes::StructureShape.new(name: 'DescribeDBSnapshotTenantDatabasesMessage')
@@ -459,6 +467,7 @@ module Aws::RDS
     InvalidDBProxyEndpointStateFault = Shapes::StructureShape.new(name: 'InvalidDBProxyEndpointStateFault')
     InvalidDBProxyStateFault = Shapes::StructureShape.new(name: 'InvalidDBProxyStateFault')
     InvalidDBSecurityGroupStateFault = Shapes::StructureShape.new(name: 'InvalidDBSecurityGroupStateFault')
+    InvalidDBShardGroupStateFault = Shapes::StructureShape.new(name: 'InvalidDBShardGroupStateFault')
     InvalidDBSnapshotStateFault = Shapes::StructureShape.new(name: 'InvalidDBSnapshotStateFault')
     InvalidDBSubnetGroupFault = Shapes::StructureShape.new(name: 'InvalidDBSubnetGroupFault')
     InvalidDBSubnetGroupStateFault = Shapes::StructureShape.new(name: 'InvalidDBSubnetGroupStateFault')
@@ -469,6 +478,7 @@ module Aws::RDS
     InvalidExportTaskStateFault = Shapes::StructureShape.new(name: 'InvalidExportTaskStateFault')
     InvalidGlobalClusterStateFault = Shapes::StructureShape.new(name: 'InvalidGlobalClusterStateFault')
     InvalidIntegrationStateFault = Shapes::StructureShape.new(name: 'InvalidIntegrationStateFault')
+    InvalidMaxAcuFault = Shapes::StructureShape.new(name: 'InvalidMaxAcuFault')
     InvalidOptionGroupStateFault = Shapes::StructureShape.new(name: 'InvalidOptionGroupStateFault')
     InvalidResourceStateFault = Shapes::StructureShape.new(name: 'InvalidResourceStateFault')
     InvalidRestoreFault = Shapes::StructureShape.new(name: 'InvalidRestoreFault')
@@ -479,6 +489,8 @@ module Aws::RDS
     KMSKeyNotAccessibleFault = Shapes::StructureShape.new(name: 'KMSKeyNotAccessibleFault')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
     KmsKeyIdOrArn = Shapes::StringShape.new(name: 'KmsKeyIdOrArn')
+    LimitlessDatabase = Shapes::StructureShape.new(name: 'LimitlessDatabase')
+    LimitlessDatabaseStatus = Shapes::StringShape.new(name: 'LimitlessDatabaseStatus')
     ListTagsForResourceMessage = Shapes::StructureShape.new(name: 'ListTagsForResourceMessage')
     LocalWriteForwardingStatus = Shapes::StringShape.new(name: 'LocalWriteForwardingStatus')
     LogTypeList = Shapes::ListShape.new(name: 'LogTypeList')
@@ -486,6 +498,7 @@ module Aws::RDS
     LongOptional = Shapes::IntegerShape.new(name: 'LongOptional')
     Marker = Shapes::StringShape.new(name: 'Marker')
     MasterUserSecret = Shapes::StructureShape.new(name: 'MasterUserSecret')
+    MaxDBShardGroupLimitReached = Shapes::StructureShape.new(name: 'MaxDBShardGroupLimitReached')
     MaxRecords = Shapes::IntegerShape.new(name: 'MaxRecords')
     Metric = Shapes::StructureShape.new(name: 'Metric')
     MetricList = Shapes::ListShape.new(name: 'MetricList')
@@ -516,6 +529,7 @@ module Aws::RDS
     ModifyDBProxyTargetGroupRequest = Shapes::StructureShape.new(name: 'ModifyDBProxyTargetGroupRequest')
     ModifyDBProxyTargetGroupResponse = Shapes::StructureShape.new(name: 'ModifyDBProxyTargetGroupResponse')
     ModifyDBRecommendationMessage = Shapes::StructureShape.new(name: 'ModifyDBRecommendationMessage')
+    ModifyDBShardGroupMessage = Shapes::StructureShape.new(name: 'ModifyDBShardGroupMessage')
     ModifyDBSnapshotAttributeMessage = Shapes::StructureShape.new(name: 'ModifyDBSnapshotAttributeMessage')
     ModifyDBSnapshotAttributeResult = Shapes::StructureShape.new(name: 'ModifyDBSnapshotAttributeResult')
     ModifyDBSnapshotMessage = Shapes::StructureShape.new(name: 'ModifyDBSnapshotMessage')
@@ -592,6 +606,7 @@ module Aws::RDS
     RebootDBClusterResult = Shapes::StructureShape.new(name: 'RebootDBClusterResult')
     RebootDBInstanceMessage = Shapes::StructureShape.new(name: 'RebootDBInstanceMessage')
     RebootDBInstanceResult = Shapes::StructureShape.new(name: 'RebootDBInstanceResult')
+    RebootDBShardGroupMessage = Shapes::StructureShape.new(name: 'RebootDBShardGroupMessage')
     RecommendedAction = Shapes::StructureShape.new(name: 'RecommendedAction')
     RecommendedActionList = Shapes::ListShape.new(name: 'RecommendedActionList')
     RecommendedActionParameter = Shapes::StructureShape.new(name: 'RecommendedActionParameter')
@@ -725,6 +740,7 @@ module Aws::RDS
     TenantDatabasesList = Shapes::ListShape.new(name: 'TenantDatabasesList')
     TenantDatabasesMessage = Shapes::StructureShape.new(name: 'TenantDatabasesMessage')
     Timezone = Shapes::StructureShape.new(name: 'Timezone')
+    UnsupportedDBEngineVersionFault = Shapes::StructureShape.new(name: 'UnsupportedDBEngineVersionFault')
     UpgradeTarget = Shapes::StructureShape.new(name: 'UpgradeTarget')
     UserAuthConfig = Shapes::StructureShape.new(name: 'UserAuthConfig')
     UserAuthConfigInfo = Shapes::StructureShape.new(name: 'UserAuthConfigInfo')
@@ -1048,6 +1064,7 @@ module Aws::RDS
     CreateDBClusterMessage.add_member(:enable_performance_insights, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnablePerformanceInsights"))
     CreateDBClusterMessage.add_member(:performance_insights_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "PerformanceInsightsKMSKeyId"))
     CreateDBClusterMessage.add_member(:performance_insights_retention_period, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "PerformanceInsightsRetentionPeriod"))
+    CreateDBClusterMessage.add_member(:enable_limitless_database, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableLimitlessDatabase"))
     CreateDBClusterMessage.add_member(:serverless_v2_scaling_configuration, Shapes::ShapeRef.new(shape: ServerlessV2ScalingConfiguration, location_name: "ServerlessV2ScalingConfiguration"))
     CreateDBClusterMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
     CreateDBClusterMessage.add_member(:db_system_id, Shapes::ShapeRef.new(shape: String, location_name: "DBSystemId"))
@@ -1237,6 +1254,13 @@ module Aws::RDS
     CreateDBSecurityGroupResult.add_member(:db_security_group, Shapes::ShapeRef.new(shape: DBSecurityGroup, location_name: "DBSecurityGroup"))
     CreateDBSecurityGroupResult.struct_class = Types::CreateDBSecurityGroupResult
 
+    CreateDBShardGroupMessage.add_member(:db_shard_group_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBShardGroupIdentifier"))
+    CreateDBShardGroupMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
+    CreateDBShardGroupMessage.add_member(:compute_redundancy, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ComputeRedundancy"))
+    CreateDBShardGroupMessage.add_member(:max_acu, Shapes::ShapeRef.new(shape: DoubleOptional, required: true, location_name: "MaxACU"))
+    CreateDBShardGroupMessage.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PubliclyAccessible"))
+    CreateDBShardGroupMessage.struct_class = Types::CreateDBShardGroupMessage
+
     CreateDBSnapshotMessage.add_member(:db_snapshot_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBSnapshotIdentifier"))
     CreateDBSnapshotMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
     CreateDBSnapshotMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -1396,6 +1420,7 @@ module Aws::RDS
     DBCluster.add_member(:io_optimized_next_allowed_modification_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "IOOptimizedNextAllowedModificationTime"))
     DBCluster.add_member(:local_write_forwarding_status, Shapes::ShapeRef.new(shape: LocalWriteForwardingStatus, location_name: "LocalWriteForwardingStatus"))
     DBCluster.add_member(:aws_backup_recovery_point_arn, Shapes::ShapeRef.new(shape: String, location_name: "AwsBackupRecoveryPointArn"))
+    DBCluster.add_member(:limitless_database, Shapes::ShapeRef.new(shape: LimitlessDatabase, location_name: "LimitlessDatabase"))
     DBCluster.struct_class = Types::DBCluster
 
     DBClusterAlreadyExistsFault.struct_class = Types::DBClusterAlreadyExistsFault
@@ -1970,6 +1995,22 @@ module Aws::RDS
 
     DBSecurityGroups.member = Shapes::ShapeRef.new(shape: DBSecurityGroup, location_name: "DBSecurityGroup")
 
+    DBShardGroup.add_member(:db_shard_group_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "DBShardGroupResourceId"))
+    DBShardGroup.add_member(:db_shard_group_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBShardGroupIdentifier"))
+    DBShardGroup.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterIdentifier"))
+    DBShardGroup.add_member(:max_acu, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MaxACU"))
+    DBShardGroup.add_member(:compute_redundancy, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ComputeRedundancy"))
+    DBShardGroup.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    DBShardGroup.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PubliclyAccessible"))
+    DBShardGroup.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "Endpoint"))
+    DBShardGroup.struct_class = Types::DBShardGroup
+
+    DBShardGroupAlreadyExistsFault.struct_class = Types::DBShardGroupAlreadyExistsFault
+
+    DBShardGroupNotFoundFault.struct_class = Types::DBShardGroupNotFoundFault
+
+    DBShardGroupsList.member = Shapes::ShapeRef.new(shape: DBShardGroup, location_name: "DBShardGroup")
+
     DBSnapshot.add_member(:db_snapshot_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBSnapshotIdentifier"))
     DBSnapshot.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBInstanceIdentifier"))
     DBSnapshot.add_member(:snapshot_create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "SnapshotCreateTime"))
@@ -2151,6 +2192,9 @@ module Aws::RDS
 
     DeleteDBSecurityGroupMessage.add_member(:db_security_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBSecurityGroupName"))
     DeleteDBSecurityGroupMessage.struct_class = Types::DeleteDBSecurityGroupMessage
+
+    DeleteDBShardGroupMessage.add_member(:db_shard_group_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBShardGroupIdentifier"))
+    DeleteDBShardGroupMessage.struct_class = Types::DeleteDBShardGroupMessage
 
     DeleteDBSnapshotMessage.add_member(:db_snapshot_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBSnapshotIdentifier"))
     DeleteDBSnapshotMessage.struct_class = Types::DeleteDBSnapshotMessage
@@ -2387,6 +2431,16 @@ module Aws::RDS
     DescribeDBSecurityGroupsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
     DescribeDBSecurityGroupsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeDBSecurityGroupsMessage.struct_class = Types::DescribeDBSecurityGroupsMessage
+
+    DescribeDBShardGroupsMessage.add_member(:db_shard_group_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBShardGroupIdentifier"))
+    DescribeDBShardGroupsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeDBShardGroupsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeDBShardGroupsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
+    DescribeDBShardGroupsMessage.struct_class = Types::DescribeDBShardGroupsMessage
+
+    DescribeDBShardGroupsResponse.add_member(:db_shard_groups, Shapes::ShapeRef.new(shape: DBShardGroupsList, location_name: "DBShardGroups"))
+    DescribeDBShardGroupsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeDBShardGroupsResponse.struct_class = Types::DescribeDBShardGroupsResponse
 
     DescribeDBSnapshotAttributesMessage.add_member(:db_snapshot_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBSnapshotIdentifier"))
     DescribeDBSnapshotAttributesMessage.struct_class = Types::DescribeDBSnapshotAttributesMessage
@@ -2846,6 +2900,8 @@ module Aws::RDS
 
     InvalidDBSecurityGroupStateFault.struct_class = Types::InvalidDBSecurityGroupStateFault
 
+    InvalidDBShardGroupStateFault.struct_class = Types::InvalidDBShardGroupStateFault
+
     InvalidDBSnapshotStateFault.struct_class = Types::InvalidDBSnapshotStateFault
 
     InvalidDBSubnetGroupFault.struct_class = Types::InvalidDBSubnetGroupFault
@@ -2866,6 +2922,8 @@ module Aws::RDS
 
     InvalidIntegrationStateFault.struct_class = Types::InvalidIntegrationStateFault
 
+    InvalidMaxAcuFault.struct_class = Types::InvalidMaxAcuFault
+
     InvalidOptionGroupStateFault.struct_class = Types::InvalidOptionGroupStateFault
 
     InvalidResourceStateFault.struct_class = Types::InvalidResourceStateFault
@@ -2885,6 +2943,10 @@ module Aws::RDS
 
     KeyList.member = Shapes::ShapeRef.new(shape: String)
 
+    LimitlessDatabase.add_member(:status, Shapes::ShapeRef.new(shape: LimitlessDatabaseStatus, location_name: "Status"))
+    LimitlessDatabase.add_member(:min_required_acu, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MinRequiredACU"))
+    LimitlessDatabase.struct_class = Types::LimitlessDatabase
+
     ListTagsForResourceMessage.add_member(:resource_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceName"))
     ListTagsForResourceMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     ListTagsForResourceMessage.struct_class = Types::ListTagsForResourceMessage
@@ -2895,6 +2957,8 @@ module Aws::RDS
     MasterUserSecret.add_member(:secret_status, Shapes::ShapeRef.new(shape: String, location_name: "SecretStatus"))
     MasterUserSecret.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     MasterUserSecret.struct_class = Types::MasterUserSecret
+
+    MaxDBShardGroupLimitReached.struct_class = Types::MaxDBShardGroupLimitReached
 
     Metric.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     Metric.add_member(:references, Shapes::ShapeRef.new(shape: MetricReferenceList, location_name: "References"))
@@ -2999,6 +3063,7 @@ module Aws::RDS
     ModifyDBClusterMessage.add_member(:allow_engine_mode_change, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowEngineModeChange"))
     ModifyDBClusterMessage.add_member(:enable_local_write_forwarding, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableLocalWriteForwarding"))
     ModifyDBClusterMessage.add_member(:aws_backup_recovery_point_arn, Shapes::ShapeRef.new(shape: AwsBackupRecoveryPointArn, location_name: "AwsBackupRecoveryPointArn"))
+    ModifyDBClusterMessage.add_member(:enable_limitless_database, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableLimitlessDatabase"))
     ModifyDBClusterMessage.struct_class = Types::ModifyDBClusterMessage
 
     ModifyDBClusterParameterGroupMessage.add_member(:db_cluster_parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterParameterGroupName"))
@@ -3121,6 +3186,10 @@ module Aws::RDS
     ModifyDBRecommendationMessage.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     ModifyDBRecommendationMessage.add_member(:recommended_action_updates, Shapes::ShapeRef.new(shape: RecommendedActionUpdateList, location_name: "RecommendedActionUpdates"))
     ModifyDBRecommendationMessage.struct_class = Types::ModifyDBRecommendationMessage
+
+    ModifyDBShardGroupMessage.add_member(:db_shard_group_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBShardGroupIdentifier"))
+    ModifyDBShardGroupMessage.add_member(:max_acu, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MaxACU"))
+    ModifyDBShardGroupMessage.struct_class = Types::ModifyDBShardGroupMessage
 
     ModifyDBSnapshotAttributeMessage.add_member(:db_snapshot_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBSnapshotIdentifier"))
     ModifyDBSnapshotAttributeMessage.add_member(:attribute_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AttributeName"))
@@ -3491,6 +3560,9 @@ module Aws::RDS
 
     RebootDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
     RebootDBInstanceResult.struct_class = Types::RebootDBInstanceResult
+
+    RebootDBShardGroupMessage.add_member(:db_shard_group_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBShardGroupIdentifier"))
+    RebootDBShardGroupMessage.struct_class = Types::RebootDBShardGroupMessage
 
     RecommendedAction.add_member(:action_id, Shapes::ShapeRef.new(shape: String, location_name: "ActionId"))
     RecommendedAction.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "Title"))
@@ -4140,6 +4212,8 @@ module Aws::RDS
     Timezone.add_member(:timezone_name, Shapes::ShapeRef.new(shape: String, location_name: "TimezoneName"))
     Timezone.struct_class = Types::Timezone
 
+    UnsupportedDBEngineVersionFault.struct_class = Types::UnsupportedDBEngineVersionFault
+
     UpgradeTarget.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     UpgradeTarget.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     UpgradeTarget.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
@@ -4411,6 +4485,7 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: CreateDBClusterMessage)
         o.output = Shapes::ShapeRef.new(shape: CreateDBClusterResult)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientStorageClusterCapacityFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
@@ -4573,6 +4648,21 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotSupportedFault)
+      end)
+
+      api.add_operation(:create_db_shard_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDBShardGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateDBShardGroupMessage)
+        o.output = Shapes::ShapeRef.new(shape: DBShardGroup)
+        o.errors << Shapes::ShapeRef.new(shape: DBShardGroupAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: MaxDBShardGroupLimitReached)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidMaxAcuFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedDBEngineVersionFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
       end)
 
       api.add_operation(:create_db_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -4800,6 +4890,17 @@ module Aws::RDS
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBSecurityGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
+      end)
+
+      api.add_operation(:delete_db_shard_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDBShardGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDBShardGroupMessage)
+        o.output = Shapes::ShapeRef.new(shape: DBShardGroup)
+        o.errors << Shapes::ShapeRef.new(shape: DBShardGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBShardGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
       end)
 
       api.add_operation(:delete_db_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -5222,6 +5323,16 @@ module Aws::RDS
             "marker" => "marker"
           }
         )
+      end)
+
+      api.add_operation(:describe_db_shard_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDBShardGroups"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDBShardGroupsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDBShardGroupsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DBShardGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
       api.add_operation(:describe_db_snapshot_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -5765,6 +5876,18 @@ module Aws::RDS
         o.output = Shapes::ShapeRef.new(shape: DBRecommendationMessage)
       end)
 
+      api.add_operation(:modify_db_shard_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyDBShardGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyDBShardGroupMessage)
+        o.output = Shapes::ShapeRef.new(shape: DBShardGroup)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBShardGroupAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBShardGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidMaxAcuFault)
+      end)
+
       api.add_operation(:modify_db_snapshot, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ModifyDBSnapshot"
         o.http_method = "POST"
@@ -5896,6 +6019,16 @@ module Aws::RDS
         o.output = Shapes::ShapeRef.new(shape: RebootDBInstanceResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+      end)
+
+      api.add_operation(:reboot_db_shard_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RebootDBShardGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RebootDBShardGroupMessage)
+        o.output = Shapes::ShapeRef.new(shape: DBShardGroup)
+        o.errors << Shapes::ShapeRef.new(shape: DBShardGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBShardGroupStateFault)
       end)
 
       api.add_operation(:register_db_proxy_targets, Seahorse::Model::Operation.new.tap do |o|
@@ -6045,6 +6178,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterParameterGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
       end)
 
       api.add_operation(:restore_db_cluster_to_point_in_time, Seahorse::Model::Operation.new.tap do |o|
@@ -6072,6 +6206,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterParameterGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterAutomatedBackupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientDBInstanceCapacityFault)
       end)
 
       api.add_operation(:restore_db_instance_from_db_snapshot, Seahorse::Model::Operation.new.tap do |o|

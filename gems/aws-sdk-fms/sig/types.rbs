@@ -1,0 +1,1128 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::FMS
+  module Types
+
+    class AccountScope
+      attr_accessor accounts: ::Array[::String]
+      attr_accessor all_accounts_enabled: bool
+      attr_accessor exclude_specified_accounts: bool
+      SENSITIVE: []
+    end
+
+    class ActionTarget
+      attr_accessor resource_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class AdminAccountSummary
+      attr_accessor admin_account: ::String
+      attr_accessor default_admin: bool
+      attr_accessor status: ("ONBOARDING" | "ONBOARDING_COMPLETE" | "OFFBOARDING" | "OFFBOARDING_COMPLETE")
+      SENSITIVE: []
+    end
+
+    class AdminScope
+      attr_accessor account_scope: Types::AccountScope
+      attr_accessor organizational_unit_scope: Types::OrganizationalUnitScope
+      attr_accessor region_scope: Types::RegionScope
+      attr_accessor policy_type_scope: Types::PolicyTypeScope
+      SENSITIVE: []
+    end
+
+    class App
+      attr_accessor app_name: ::String
+      attr_accessor protocol: ::String
+      attr_accessor port: ::Integer
+      SENSITIVE: []
+    end
+
+    class AppsListData
+      attr_accessor list_id: ::String
+      attr_accessor list_name: ::String
+      attr_accessor list_update_token: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor apps_list: ::Array[Types::App]
+      attr_accessor previous_apps_list: ::Hash[::String, ::Array[Types::App]]
+      SENSITIVE: []
+    end
+
+    class AppsListDataSummary
+      attr_accessor list_arn: ::String
+      attr_accessor list_id: ::String
+      attr_accessor list_name: ::String
+      attr_accessor apps_list: ::Array[Types::App]
+      SENSITIVE: []
+    end
+
+    class AssociateAdminAccountRequest
+      attr_accessor admin_account: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateThirdPartyFirewallRequest
+      attr_accessor third_party_firewall: ("PALO_ALTO_NETWORKS_CLOUD_NGFW" | "FORTIGATE_CLOUD_NATIVE_FIREWALL")
+      SENSITIVE: []
+    end
+
+    class AssociateThirdPartyFirewallResponse
+      attr_accessor third_party_firewall_status: ("ONBOARDING" | "ONBOARD_COMPLETE" | "OFFBOARDING" | "OFFBOARD_COMPLETE" | "NOT_EXIST")
+      SENSITIVE: []
+    end
+
+    class AwsEc2InstanceViolation
+      attr_accessor violation_target: ::String
+      attr_accessor aws_ec2_network_interface_violations: ::Array[Types::AwsEc2NetworkInterfaceViolation]
+      SENSITIVE: []
+    end
+
+    class AwsEc2NetworkInterfaceViolation
+      attr_accessor violation_target: ::String
+      attr_accessor violating_security_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AwsVPCSecurityGroupViolation
+      attr_accessor violation_target: ::String
+      attr_accessor violation_target_description: ::String
+      attr_accessor partial_matches: ::Array[Types::PartialMatch]
+      attr_accessor possible_security_group_remediation_actions: ::Array[Types::SecurityGroupRemediationAction]
+      SENSITIVE: []
+    end
+
+    class BatchAssociateResourceRequest
+      attr_accessor resource_set_identifier: ::String
+      attr_accessor items: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchAssociateResourceResponse
+      attr_accessor resource_set_identifier: ::String
+      attr_accessor failed_items: ::Array[Types::FailedItem]
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateResourceRequest
+      attr_accessor resource_set_identifier: ::String
+      attr_accessor items: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateResourceResponse
+      attr_accessor resource_set_identifier: ::String
+      attr_accessor failed_items: ::Array[Types::FailedItem]
+      SENSITIVE: []
+    end
+
+    class ComplianceViolator
+      attr_accessor resource_id: ::String
+      attr_accessor violation_reason: ("WEB_ACL_MISSING_RULE_GROUP" | "RESOURCE_MISSING_WEB_ACL" | "RESOURCE_INCORRECT_WEB_ACL" | "RESOURCE_MISSING_SHIELD_PROTECTION" | "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION" | "RESOURCE_MISSING_SECURITY_GROUP" | "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP" | "SECURITY_GROUP_UNUSED" | "SECURITY_GROUP_REDUNDANT" | "FMS_CREATED_SECURITY_GROUP_EDITED" | "MISSING_FIREWALL" | "MISSING_FIREWALL_SUBNET_IN_AZ" | "MISSING_EXPECTED_ROUTE_TABLE" | "NETWORK_FIREWALL_POLICY_MODIFIED" | "FIREWALL_SUBNET_IS_OUT_OF_SCOPE" | "INTERNET_GATEWAY_MISSING_EXPECTED_ROUTE" | "FIREWALL_SUBNET_MISSING_EXPECTED_ROUTE" | "UNEXPECTED_FIREWALL_ROUTES" | "UNEXPECTED_TARGET_GATEWAY_ROUTES" | "TRAFFIC_INSPECTION_CROSSES_AZ_BOUNDARY" | "INVALID_ROUTE_CONFIGURATION" | "MISSING_TARGET_GATEWAY" | "INTERNET_TRAFFIC_NOT_INSPECTED" | "BLACK_HOLE_ROUTE_DETECTED" | "BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET" | "RESOURCE_MISSING_DNS_FIREWALL" | "ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT" | "FIREWALL_SUBNET_MISSING_VPCE_ENDPOINT")
+      attr_accessor resource_type: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DeleteAppsListRequest
+      attr_accessor list_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNotificationChannelRequest < Aws::EmptyStructure
+    end
+
+    class DeletePolicyRequest
+      attr_accessor policy_id: ::String
+      attr_accessor delete_all_policy_resources: bool
+      SENSITIVE: []
+    end
+
+    class DeleteProtocolsListRequest
+      attr_accessor list_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourceSetRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateAdminAccountRequest < Aws::EmptyStructure
+    end
+
+    class DisassociateThirdPartyFirewallRequest
+      attr_accessor third_party_firewall: ("PALO_ALTO_NETWORKS_CLOUD_NGFW" | "FORTIGATE_CLOUD_NATIVE_FIREWALL")
+      SENSITIVE: []
+    end
+
+    class DisassociateThirdPartyFirewallResponse
+      attr_accessor third_party_firewall_status: ("ONBOARDING" | "ONBOARD_COMPLETE" | "OFFBOARDING" | "OFFBOARD_COMPLETE" | "NOT_EXIST")
+      SENSITIVE: []
+    end
+
+    class DiscoveredResource
+      attr_accessor uri: ::String
+      attr_accessor account_id: ::String
+      attr_accessor type: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DnsDuplicateRuleGroupViolation
+      attr_accessor violation_target: ::String
+      attr_accessor violation_target_description: ::String
+      SENSITIVE: []
+    end
+
+    class DnsRuleGroupLimitExceededViolation
+      attr_accessor violation_target: ::String
+      attr_accessor violation_target_description: ::String
+      attr_accessor number_of_rule_groups_already_associated: ::Integer
+      SENSITIVE: []
+    end
+
+    class DnsRuleGroupPriorityConflictViolation
+      attr_accessor violation_target: ::String
+      attr_accessor violation_target_description: ::String
+      attr_accessor conflicting_priority: ::Integer
+      attr_accessor conflicting_policy_id: ::String
+      attr_accessor unavailable_priorities: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class EC2AssociateRouteTableAction
+      attr_accessor description: ::String
+      attr_accessor route_table_id: Types::ActionTarget
+      attr_accessor subnet_id: Types::ActionTarget
+      attr_accessor gateway_id: Types::ActionTarget
+      SENSITIVE: []
+    end
+
+    class EC2CopyRouteTableAction
+      attr_accessor description: ::String
+      attr_accessor vpc_id: Types::ActionTarget
+      attr_accessor route_table_id: Types::ActionTarget
+      SENSITIVE: []
+    end
+
+    class EC2CreateRouteAction
+      attr_accessor description: ::String
+      attr_accessor destination_cidr_block: ::String
+      attr_accessor destination_prefix_list_id: ::String
+      attr_accessor destination_ipv_6_cidr_block: ::String
+      attr_accessor vpc_endpoint_id: Types::ActionTarget
+      attr_accessor gateway_id: Types::ActionTarget
+      attr_accessor route_table_id: Types::ActionTarget
+      SENSITIVE: []
+    end
+
+    class EC2CreateRouteTableAction
+      attr_accessor description: ::String
+      attr_accessor vpc_id: Types::ActionTarget
+      SENSITIVE: []
+    end
+
+    class EC2DeleteRouteAction
+      attr_accessor description: ::String
+      attr_accessor destination_cidr_block: ::String
+      attr_accessor destination_prefix_list_id: ::String
+      attr_accessor destination_ipv_6_cidr_block: ::String
+      attr_accessor route_table_id: Types::ActionTarget
+      SENSITIVE: []
+    end
+
+    class EC2ReplaceRouteAction
+      attr_accessor description: ::String
+      attr_accessor destination_cidr_block: ::String
+      attr_accessor destination_prefix_list_id: ::String
+      attr_accessor destination_ipv_6_cidr_block: ::String
+      attr_accessor gateway_id: Types::ActionTarget
+      attr_accessor route_table_id: Types::ActionTarget
+      SENSITIVE: []
+    end
+
+    class EC2ReplaceRouteTableAssociationAction
+      attr_accessor description: ::String
+      attr_accessor association_id: Types::ActionTarget
+      attr_accessor route_table_id: Types::ActionTarget
+      SENSITIVE: []
+    end
+
+    class EvaluationResult
+      attr_accessor compliance_status: ("COMPLIANT" | "NON_COMPLIANT")
+      attr_accessor violator_count: ::Integer
+      attr_accessor evaluation_limit_exceeded: bool
+      SENSITIVE: []
+    end
+
+    class ExpectedRoute
+      attr_accessor ip_v4_cidr: ::String
+      attr_accessor prefix_list_id: ::String
+      attr_accessor ip_v6_cidr: ::String
+      attr_accessor contributing_subnets: ::Array[::String]
+      attr_accessor allowed_targets: ::Array[::String]
+      attr_accessor route_table_id: ::String
+      SENSITIVE: []
+    end
+
+    class FMSPolicyUpdateFirewallCreationConfigAction
+      attr_accessor description: ::String
+      attr_accessor firewall_creation_config: ::String
+      SENSITIVE: []
+    end
+
+    class FailedItem
+      attr_accessor uri: ::String
+      attr_accessor reason: ("NOT_VALID_ARN" | "NOT_VALID_PARTITION" | "NOT_VALID_REGION" | "NOT_VALID_SERVICE" | "NOT_VALID_RESOURCE_TYPE" | "NOT_VALID_ACCOUNT_ID")
+      SENSITIVE: []
+    end
+
+    class FirewallSubnetIsOutOfScopeViolation
+      attr_accessor firewall_subnet_id: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_availability_zone: ::String
+      attr_accessor subnet_availability_zone_id: ::String
+      attr_accessor vpc_endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class FirewallSubnetMissingVPCEndpointViolation
+      attr_accessor firewall_subnet_id: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_availability_zone: ::String
+      attr_accessor subnet_availability_zone_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAdminAccountRequest < Aws::EmptyStructure
+    end
+
+    class GetAdminAccountResponse
+      attr_accessor admin_account: ::String
+      attr_accessor role_status: ("READY" | "CREATING" | "PENDING_DELETION" | "DELETING" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class GetAdminScopeRequest
+      attr_accessor admin_account: ::String
+      SENSITIVE: []
+    end
+
+    class GetAdminScopeResponse
+      attr_accessor admin_scope: Types::AdminScope
+      attr_accessor status: ("ONBOARDING" | "ONBOARDING_COMPLETE" | "OFFBOARDING" | "OFFBOARDING_COMPLETE")
+      SENSITIVE: []
+    end
+
+    class GetAppsListRequest
+      attr_accessor list_id: ::String
+      attr_accessor default_list: bool
+      SENSITIVE: []
+    end
+
+    class GetAppsListResponse
+      attr_accessor apps_list: Types::AppsListData
+      attr_accessor apps_list_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetComplianceDetailRequest
+      attr_accessor policy_id: ::String
+      attr_accessor member_account: ::String
+      SENSITIVE: []
+    end
+
+    class GetComplianceDetailResponse
+      attr_accessor policy_compliance_detail: Types::PolicyComplianceDetail
+      SENSITIVE: []
+    end
+
+    class GetNotificationChannelRequest < Aws::EmptyStructure
+    end
+
+    class GetNotificationChannelResponse
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor sns_role_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicyRequest
+      attr_accessor policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicyResponse
+      attr_accessor policy: Types::Policy
+      attr_accessor policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetProtectionStatusRequest
+      attr_accessor policy_id: ::String
+      attr_accessor member_account_id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetProtectionStatusResponse
+      attr_accessor admin_account_id: ::String
+      attr_accessor service_type: ("WAF" | "WAFV2" | "SHIELD_ADVANCED" | "SECURITY_GROUPS_COMMON" | "SECURITY_GROUPS_CONTENT_AUDIT" | "SECURITY_GROUPS_USAGE_AUDIT" | "NETWORK_FIREWALL" | "DNS_FIREWALL" | "THIRD_PARTY_FIREWALL" | "IMPORT_NETWORK_FIREWALL")
+      attr_accessor data: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetProtocolsListRequest
+      attr_accessor list_id: ::String
+      attr_accessor default_list: bool
+      SENSITIVE: []
+    end
+
+    class GetProtocolsListResponse
+      attr_accessor protocols_list: Types::ProtocolsListData
+      attr_accessor protocols_list_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourceSetRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourceSetResponse
+      attr_accessor resource_set: Types::ResourceSet
+      attr_accessor resource_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetThirdPartyFirewallAssociationStatusRequest
+      attr_accessor third_party_firewall: ("PALO_ALTO_NETWORKS_CLOUD_NGFW" | "FORTIGATE_CLOUD_NATIVE_FIREWALL")
+      SENSITIVE: []
+    end
+
+    class GetThirdPartyFirewallAssociationStatusResponse
+      attr_accessor third_party_firewall_status: ("ONBOARDING" | "ONBOARD_COMPLETE" | "OFFBOARDING" | "OFFBOARD_COMPLETE" | "NOT_EXIST")
+      attr_accessor marketplace_onboarding_status: ("NO_SUBSCRIPTION" | "NOT_COMPLETE" | "COMPLETE")
+      SENSITIVE: []
+    end
+
+    class GetViolationDetailsRequest
+      attr_accessor policy_id: ::String
+      attr_accessor member_account: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class GetViolationDetailsResponse
+      attr_accessor violation_detail: Types::ViolationDetail
+      SENSITIVE: []
+    end
+
+    class InternalErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidInputException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTypeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAdminAccountsForOrganizationRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAdminAccountsForOrganizationResponse
+      attr_accessor admin_accounts: ::Array[Types::AdminAccountSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAdminsManagingAccountRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAdminsManagingAccountResponse
+      attr_accessor admin_accounts: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppsListsRequest
+      attr_accessor default_lists: bool
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAppsListsResponse
+      attr_accessor apps_lists: ::Array[Types::AppsListDataSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListComplianceStatusRequest
+      attr_accessor policy_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListComplianceStatusResponse
+      attr_accessor policy_compliance_status_list: ::Array[Types::PolicyComplianceStatus]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDiscoveredResourcesRequest
+      attr_accessor member_account_ids: ::Array[::String]
+      attr_accessor resource_type: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDiscoveredResourcesResponse
+      attr_accessor items: ::Array[Types::DiscoveredResource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMemberAccountsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMemberAccountsResponse
+      attr_accessor member_accounts: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPoliciesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPoliciesResponse
+      attr_accessor policy_list: ::Array[Types::PolicySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProtocolsListsRequest
+      attr_accessor default_lists: bool
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProtocolsListsResponse
+      attr_accessor protocols_lists: ::Array[Types::ProtocolsListDataSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceSetResourcesRequest
+      attr_accessor identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceSetResourcesResponse
+      attr_accessor items: ::Array[Types::Resource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceSetsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListResourceSetsResponse
+      attr_accessor resource_sets: ::Array[Types::ResourceSetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListThirdPartyFirewallFirewallPoliciesRequest
+      attr_accessor third_party_firewall: ("PALO_ALTO_NETWORKS_CLOUD_NGFW" | "FORTIGATE_CLOUD_NATIVE_FIREWALL")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListThirdPartyFirewallFirewallPoliciesResponse
+      attr_accessor third_party_firewall_firewall_policies: ::Array[Types::ThirdPartyFirewallFirewallPolicy]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkFirewallBlackHoleRouteDetectedViolation
+      attr_accessor violation_target: ::String
+      attr_accessor route_table_id: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor violating_routes: ::Array[Types::Route]
+      SENSITIVE: []
+    end
+
+    class NetworkFirewallInternetTrafficNotInspectedViolation
+      attr_accessor subnet_id: ::String
+      attr_accessor subnet_availability_zone: ::String
+      attr_accessor route_table_id: ::String
+      attr_accessor violating_routes: ::Array[Types::Route]
+      attr_accessor is_route_table_used_in_different_az: bool
+      attr_accessor current_firewall_subnet_route_table: ::String
+      attr_accessor expected_firewall_endpoint: ::String
+      attr_accessor firewall_subnet_id: ::String
+      attr_accessor expected_firewall_subnet_routes: ::Array[Types::ExpectedRoute]
+      attr_accessor actual_firewall_subnet_routes: ::Array[Types::Route]
+      attr_accessor internet_gateway_id: ::String
+      attr_accessor current_internet_gateway_route_table: ::String
+      attr_accessor expected_internet_gateway_routes: ::Array[Types::ExpectedRoute]
+      attr_accessor actual_internet_gateway_routes: ::Array[Types::Route]
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkFirewallInvalidRouteConfigurationViolation
+      attr_accessor affected_subnets: ::Array[::String]
+      attr_accessor route_table_id: ::String
+      attr_accessor is_route_table_used_in_different_az: bool
+      attr_accessor violating_route: Types::Route
+      attr_accessor current_firewall_subnet_route_table: ::String
+      attr_accessor expected_firewall_endpoint: ::String
+      attr_accessor actual_firewall_endpoint: ::String
+      attr_accessor expected_firewall_subnet_id: ::String
+      attr_accessor actual_firewall_subnet_id: ::String
+      attr_accessor expected_firewall_subnet_routes: ::Array[Types::ExpectedRoute]
+      attr_accessor actual_firewall_subnet_routes: ::Array[Types::Route]
+      attr_accessor internet_gateway_id: ::String
+      attr_accessor current_internet_gateway_route_table: ::String
+      attr_accessor expected_internet_gateway_routes: ::Array[Types::ExpectedRoute]
+      attr_accessor actual_internet_gateway_routes: ::Array[Types::Route]
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkFirewallMissingExpectedRTViolation
+      attr_accessor violation_target: ::String
+      attr_accessor vpc: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor current_route_table: ::String
+      attr_accessor expected_route_table: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkFirewallMissingExpectedRoutesViolation
+      attr_accessor violation_target: ::String
+      attr_accessor expected_routes: ::Array[Types::ExpectedRoute]
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkFirewallMissingFirewallViolation
+      attr_accessor violation_target: ::String
+      attr_accessor vpc: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor target_violation_reason: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkFirewallMissingSubnetViolation
+      attr_accessor violation_target: ::String
+      attr_accessor vpc: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor target_violation_reason: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkFirewallPolicy
+      attr_accessor firewall_deployment_model: ("CENTRALIZED" | "DISTRIBUTED")
+      SENSITIVE: []
+    end
+
+    class NetworkFirewallPolicyDescription
+      attr_accessor stateless_rule_groups: ::Array[Types::StatelessRuleGroup]
+      attr_accessor stateless_default_actions: ::Array[::String]
+      attr_accessor stateless_fragment_default_actions: ::Array[::String]
+      attr_accessor stateless_custom_actions: ::Array[::String]
+      attr_accessor stateful_rule_groups: ::Array[Types::StatefulRuleGroup]
+      attr_accessor stateful_default_actions: ::Array[::String]
+      attr_accessor stateful_engine_options: Types::StatefulEngineOptions
+      SENSITIVE: []
+    end
+
+    class NetworkFirewallPolicyModifiedViolation
+      attr_accessor violation_target: ::String
+      attr_accessor current_policy_description: Types::NetworkFirewallPolicyDescription
+      attr_accessor expected_policy_description: Types::NetworkFirewallPolicyDescription
+      SENSITIVE: []
+    end
+
+    class NetworkFirewallStatefulRuleGroupOverride
+      attr_accessor action: ("DROP_TO_ALERT")
+      SENSITIVE: []
+    end
+
+    class NetworkFirewallUnexpectedFirewallRoutesViolation
+      attr_accessor firewall_subnet_id: ::String
+      attr_accessor violating_routes: ::Array[Types::Route]
+      attr_accessor route_table_id: ::String
+      attr_accessor firewall_endpoint: ::String
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkFirewallUnexpectedGatewayRoutesViolation
+      attr_accessor gateway_id: ::String
+      attr_accessor violating_routes: ::Array[Types::Route]
+      attr_accessor route_table_id: ::String
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class OrganizationalUnitScope
+      attr_accessor organizational_units: ::Array[::String]
+      attr_accessor all_organizational_units_enabled: bool
+      attr_accessor exclude_specified_organizational_units: bool
+      SENSITIVE: []
+    end
+
+    class PartialMatch
+      attr_accessor reference: ::String
+      attr_accessor target_violation_reasons: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Policy
+      attr_accessor policy_id: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor policy_update_token: ::String
+      attr_accessor security_service_policy_data: Types::SecurityServicePolicyData
+      attr_accessor resource_type: ::String
+      attr_accessor resource_type_list: ::Array[::String]
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      attr_accessor exclude_resource_tags: bool
+      attr_accessor remediation_enabled: bool
+      attr_accessor delete_unused_fm_managed_resources: bool
+      attr_accessor include_map: ::Hash[("ACCOUNT" | "ORG_UNIT"), ::Array[::String]]
+      attr_accessor exclude_map: ::Hash[("ACCOUNT" | "ORG_UNIT"), ::Array[::String]]
+      attr_accessor resource_set_ids: ::Array[::String]
+      attr_accessor policy_description: ::String
+      attr_accessor policy_status: ("ACTIVE" | "OUT_OF_ADMIN_SCOPE")
+      SENSITIVE: []
+    end
+
+    class PolicyComplianceDetail
+      attr_accessor policy_owner: ::String
+      attr_accessor policy_id: ::String
+      attr_accessor member_account: ::String
+      attr_accessor violators: ::Array[Types::ComplianceViolator]
+      attr_accessor evaluation_limit_exceeded: bool
+      attr_accessor expired_at: ::Time
+      attr_accessor issue_info_map: ::Hash[("AWSCONFIG" | "AWSWAF" | "AWSSHIELD_ADVANCED" | "AWSVPC"), ::String]
+      SENSITIVE: []
+    end
+
+    class PolicyComplianceStatus
+      attr_accessor policy_owner: ::String
+      attr_accessor policy_id: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor member_account: ::String
+      attr_accessor evaluation_results: ::Array[Types::EvaluationResult]
+      attr_accessor last_updated: ::Time
+      attr_accessor issue_info_map: ::Hash[("AWSCONFIG" | "AWSWAF" | "AWSSHIELD_ADVANCED" | "AWSVPC"), ::String]
+      SENSITIVE: []
+    end
+
+    class PolicyOption
+      attr_accessor network_firewall_policy: Types::NetworkFirewallPolicy
+      attr_accessor third_party_firewall_policy: Types::ThirdPartyFirewallPolicy
+      SENSITIVE: []
+    end
+
+    class PolicySummary
+      attr_accessor policy_arn: ::String
+      attr_accessor policy_id: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor security_service_type: ("WAF" | "WAFV2" | "SHIELD_ADVANCED" | "SECURITY_GROUPS_COMMON" | "SECURITY_GROUPS_CONTENT_AUDIT" | "SECURITY_GROUPS_USAGE_AUDIT" | "NETWORK_FIREWALL" | "DNS_FIREWALL" | "THIRD_PARTY_FIREWALL" | "IMPORT_NETWORK_FIREWALL")
+      attr_accessor remediation_enabled: bool
+      attr_accessor delete_unused_fm_managed_resources: bool
+      attr_accessor policy_status: ("ACTIVE" | "OUT_OF_ADMIN_SCOPE")
+      SENSITIVE: []
+    end
+
+    class PolicyTypeScope
+      attr_accessor policy_types: ::Array[("WAF" | "WAFV2" | "SHIELD_ADVANCED" | "SECURITY_GROUPS_COMMON" | "SECURITY_GROUPS_CONTENT_AUDIT" | "SECURITY_GROUPS_USAGE_AUDIT" | "NETWORK_FIREWALL" | "DNS_FIREWALL" | "THIRD_PARTY_FIREWALL" | "IMPORT_NETWORK_FIREWALL")]
+      attr_accessor all_policy_types_enabled: bool
+      SENSITIVE: []
+    end
+
+    class PossibleRemediationAction
+      attr_accessor description: ::String
+      attr_accessor ordered_remediation_actions: ::Array[Types::RemediationActionWithOrder]
+      attr_accessor is_default_action: bool
+      SENSITIVE: []
+    end
+
+    class PossibleRemediationActions
+      attr_accessor description: ::String
+      attr_accessor actions: ::Array[Types::PossibleRemediationAction]
+      SENSITIVE: []
+    end
+
+    class ProtocolsListData
+      attr_accessor list_id: ::String
+      attr_accessor list_name: ::String
+      attr_accessor list_update_token: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor protocols_list: ::Array[::String]
+      attr_accessor previous_protocols_list: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class ProtocolsListDataSummary
+      attr_accessor list_arn: ::String
+      attr_accessor list_id: ::String
+      attr_accessor list_name: ::String
+      attr_accessor protocols_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PutAdminAccountRequest
+      attr_accessor admin_account: ::String
+      attr_accessor admin_scope: Types::AdminScope
+      SENSITIVE: []
+    end
+
+    class PutAppsListRequest
+      attr_accessor apps_list: Types::AppsListData
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PutAppsListResponse
+      attr_accessor apps_list: Types::AppsListData
+      attr_accessor apps_list_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutNotificationChannelRequest
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor sns_role_name: ::String
+      SENSITIVE: []
+    end
+
+    class PutPolicyRequest
+      attr_accessor policy: Types::Policy
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PutPolicyResponse
+      attr_accessor policy: Types::Policy
+      attr_accessor policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutProtocolsListRequest
+      attr_accessor protocols_list: Types::ProtocolsListData
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PutProtocolsListResponse
+      attr_accessor protocols_list: Types::ProtocolsListData
+      attr_accessor protocols_list_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourceSetRequest
+      attr_accessor resource_set: Types::ResourceSet
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PutResourceSetResponse
+      attr_accessor resource_set: Types::ResourceSet
+      attr_accessor resource_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RegionScope
+      attr_accessor regions: ::Array[::String]
+      attr_accessor all_regions_enabled: bool
+      SENSITIVE: []
+    end
+
+    class RemediationAction
+      attr_accessor description: ::String
+      attr_accessor ec2_create_route_action: Types::EC2CreateRouteAction
+      attr_accessor ec2_replace_route_action: Types::EC2ReplaceRouteAction
+      attr_accessor ec2_delete_route_action: Types::EC2DeleteRouteAction
+      attr_accessor ec2_copy_route_table_action: Types::EC2CopyRouteTableAction
+      attr_accessor ec2_replace_route_table_association_action: Types::EC2ReplaceRouteTableAssociationAction
+      attr_accessor ec2_associate_route_table_action: Types::EC2AssociateRouteTableAction
+      attr_accessor ec2_create_route_table_action: Types::EC2CreateRouteTableAction
+      attr_accessor fms_policy_update_firewall_creation_config_action: Types::FMSPolicyUpdateFirewallCreationConfigAction
+      SENSITIVE: []
+    end
+
+    class RemediationActionWithOrder
+      attr_accessor remediation_action: Types::RemediationAction
+      attr_accessor order: ::Integer
+      SENSITIVE: []
+    end
+
+    class Resource
+      attr_accessor uri: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceSet
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor update_token: ::String
+      attr_accessor resource_type_list: ::Array[::String]
+      attr_accessor last_update_time: ::Time
+      attr_accessor resource_set_status: ("ACTIVE" | "OUT_OF_ADMIN_SCOPE")
+      SENSITIVE: []
+    end
+
+    class ResourceSetSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor last_update_time: ::Time
+      attr_accessor resource_set_status: ("ACTIVE" | "OUT_OF_ADMIN_SCOPE")
+      SENSITIVE: []
+    end
+
+    class ResourceTag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceViolation
+      attr_accessor aws_vpc_security_group_violation: Types::AwsVPCSecurityGroupViolation
+      attr_accessor aws_ec2_network_interface_violation: Types::AwsEc2NetworkInterfaceViolation
+      attr_accessor aws_ec2_instance_violation: Types::AwsEc2InstanceViolation
+      attr_accessor network_firewall_missing_firewall_violation: Types::NetworkFirewallMissingFirewallViolation
+      attr_accessor network_firewall_missing_subnet_violation: Types::NetworkFirewallMissingSubnetViolation
+      attr_accessor network_firewall_missing_expected_rt_violation: Types::NetworkFirewallMissingExpectedRTViolation
+      attr_accessor network_firewall_policy_modified_violation: Types::NetworkFirewallPolicyModifiedViolation
+      attr_accessor network_firewall_internet_traffic_not_inspected_violation: Types::NetworkFirewallInternetTrafficNotInspectedViolation
+      attr_accessor network_firewall_invalid_route_configuration_violation: Types::NetworkFirewallInvalidRouteConfigurationViolation
+      attr_accessor network_firewall_black_hole_route_detected_violation: Types::NetworkFirewallBlackHoleRouteDetectedViolation
+      attr_accessor network_firewall_unexpected_firewall_routes_violation: Types::NetworkFirewallUnexpectedFirewallRoutesViolation
+      attr_accessor network_firewall_unexpected_gateway_routes_violation: Types::NetworkFirewallUnexpectedGatewayRoutesViolation
+      attr_accessor network_firewall_missing_expected_routes_violation: Types::NetworkFirewallMissingExpectedRoutesViolation
+      attr_accessor dns_rule_group_priority_conflict_violation: Types::DnsRuleGroupPriorityConflictViolation
+      attr_accessor dns_duplicate_rule_group_violation: Types::DnsDuplicateRuleGroupViolation
+      attr_accessor dns_rule_group_limit_exceeded_violation: Types::DnsRuleGroupLimitExceededViolation
+      attr_accessor possible_remediation_actions: Types::PossibleRemediationActions
+      attr_accessor firewall_subnet_is_out_of_scope_violation: Types::FirewallSubnetIsOutOfScopeViolation
+      attr_accessor route_has_out_of_scope_endpoint_violation: Types::RouteHasOutOfScopeEndpointViolation
+      attr_accessor third_party_firewall_missing_firewall_violation: Types::ThirdPartyFirewallMissingFirewallViolation
+      attr_accessor third_party_firewall_missing_subnet_violation: Types::ThirdPartyFirewallMissingSubnetViolation
+      attr_accessor third_party_firewall_missing_expected_route_table_violation: Types::ThirdPartyFirewallMissingExpectedRouteTableViolation
+      attr_accessor firewall_subnet_missing_vpc_endpoint_violation: Types::FirewallSubnetMissingVPCEndpointViolation
+      SENSITIVE: []
+    end
+
+    class Route
+      attr_accessor destination_type: ("IPV4" | "IPV6" | "PREFIX_LIST")
+      attr_accessor target_type: ("GATEWAY" | "CARRIER_GATEWAY" | "INSTANCE" | "LOCAL_GATEWAY" | "NAT_GATEWAY" | "NETWORK_INTERFACE" | "VPC_ENDPOINT" | "VPC_PEERING_CONNECTION" | "EGRESS_ONLY_INTERNET_GATEWAY" | "TRANSIT_GATEWAY")
+      attr_accessor destination: ::String
+      attr_accessor target: ::String
+      SENSITIVE: []
+    end
+
+    class RouteHasOutOfScopeEndpointViolation
+      attr_accessor subnet_id: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor route_table_id: ::String
+      attr_accessor violating_routes: ::Array[Types::Route]
+      attr_accessor subnet_availability_zone: ::String
+      attr_accessor subnet_availability_zone_id: ::String
+      attr_accessor current_firewall_subnet_route_table: ::String
+      attr_accessor firewall_subnet_id: ::String
+      attr_accessor firewall_subnet_routes: ::Array[Types::Route]
+      attr_accessor internet_gateway_id: ::String
+      attr_accessor current_internet_gateway_route_table: ::String
+      attr_accessor internet_gateway_routes: ::Array[Types::Route]
+      SENSITIVE: []
+    end
+
+    class SecurityGroupRemediationAction
+      attr_accessor remediation_action_type: ("REMOVE" | "MODIFY")
+      attr_accessor description: ::String
+      attr_accessor remediation_result: Types::SecurityGroupRuleDescription
+      attr_accessor is_default_action: bool
+      SENSITIVE: []
+    end
+
+    class SecurityGroupRuleDescription
+      attr_accessor ipv4_range: ::String
+      attr_accessor ipv6_range: ::String
+      attr_accessor prefix_list_id: ::String
+      attr_accessor protocol: ::String
+      attr_accessor from_port: ::Integer
+      attr_accessor to_port: ::Integer
+      SENSITIVE: []
+    end
+
+    class SecurityServicePolicyData
+      attr_accessor type: ("WAF" | "WAFV2" | "SHIELD_ADVANCED" | "SECURITY_GROUPS_COMMON" | "SECURITY_GROUPS_CONTENT_AUDIT" | "SECURITY_GROUPS_USAGE_AUDIT" | "NETWORK_FIREWALL" | "DNS_FIREWALL" | "THIRD_PARTY_FIREWALL" | "IMPORT_NETWORK_FIREWALL")
+      attr_accessor managed_service_data: ::String
+      attr_accessor policy_option: Types::PolicyOption
+      SENSITIVE: []
+    end
+
+    class StatefulEngineOptions
+      attr_accessor rule_order: ("STRICT_ORDER" | "DEFAULT_ACTION_ORDER")
+      SENSITIVE: []
+    end
+
+    class StatefulRuleGroup
+      attr_accessor rule_group_name: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor override: Types::NetworkFirewallStatefulRuleGroupOverride
+      SENSITIVE: []
+    end
+
+    class StatelessRuleGroup
+      attr_accessor rule_group_name: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThirdPartyFirewallFirewallPolicy
+      attr_accessor firewall_policy_id: ::String
+      attr_accessor firewall_policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class ThirdPartyFirewallMissingExpectedRouteTableViolation
+      attr_accessor violation_target: ::String
+      attr_accessor vpc: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor current_route_table: ::String
+      attr_accessor expected_route_table: ::String
+      SENSITIVE: []
+    end
+
+    class ThirdPartyFirewallMissingFirewallViolation
+      attr_accessor violation_target: ::String
+      attr_accessor vpc: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor target_violation_reason: ::String
+      SENSITIVE: []
+    end
+
+    class ThirdPartyFirewallMissingSubnetViolation
+      attr_accessor violation_target: ::String
+      attr_accessor vpc: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor target_violation_reason: ::String
+      SENSITIVE: []
+    end
+
+    class ThirdPartyFirewallPolicy
+      attr_accessor firewall_deployment_model: ("CENTRALIZED" | "DISTRIBUTED")
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ViolationDetail
+      attr_accessor policy_id: ::String
+      attr_accessor member_account: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor resource_violations: ::Array[Types::ResourceViolation]
+      attr_accessor resource_tags: ::Array[Types::Tag]
+      attr_accessor resource_description: ::String
+      SENSITIVE: []
+    end
+  end
+end

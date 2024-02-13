@@ -1,0 +1,856 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CloudWatch
+  module Types
+
+    class AlarmHistoryItem
+      attr_accessor alarm_name: ::String
+      attr_accessor alarm_type: ("CompositeAlarm" | "MetricAlarm")
+      attr_accessor timestamp: ::Time
+      attr_accessor history_item_type: ("ConfigurationUpdate" | "StateUpdate" | "Action")
+      attr_accessor history_summary: ::String
+      attr_accessor history_data: ::String
+      SENSITIVE: []
+    end
+
+    class AnomalyDetector
+      attr_accessor namespace: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor dimensions: ::Array[Types::Dimension]
+      attr_accessor stat: ::String
+      attr_accessor configuration: Types::AnomalyDetectorConfiguration
+      attr_accessor state_value: ("PENDING_TRAINING" | "TRAINED_INSUFFICIENT_DATA" | "TRAINED")
+      attr_accessor single_metric_anomaly_detector: Types::SingleMetricAnomalyDetector
+      attr_accessor metric_math_anomaly_detector: Types::MetricMathAnomalyDetector
+      SENSITIVE: []
+    end
+
+    class AnomalyDetectorConfiguration
+      attr_accessor excluded_time_ranges: ::Array[Types::Range]
+      attr_accessor metric_timezone: ::String
+      SENSITIVE: []
+    end
+
+    class CompositeAlarm
+      attr_accessor actions_enabled: bool
+      attr_accessor alarm_actions: ::Array[::String]
+      attr_accessor alarm_arn: ::String
+      attr_accessor alarm_configuration_updated_timestamp: ::Time
+      attr_accessor alarm_description: ::String
+      attr_accessor alarm_name: ::String
+      attr_accessor alarm_rule: ::String
+      attr_accessor insufficient_data_actions: ::Array[::String]
+      attr_accessor ok_actions: ::Array[::String]
+      attr_accessor state_reason: ::String
+      attr_accessor state_reason_data: ::String
+      attr_accessor state_updated_timestamp: ::Time
+      attr_accessor state_value: ("OK" | "ALARM" | "INSUFFICIENT_DATA")
+      attr_accessor state_transitioned_timestamp: ::Time
+      attr_accessor actions_suppressed_by: ("WaitPeriod" | "ExtensionPeriod" | "Alarm")
+      attr_accessor actions_suppressed_reason: ::String
+      attr_accessor actions_suppressor: ::String
+      attr_accessor actions_suppressor_wait_period: ::Integer
+      attr_accessor actions_suppressor_extension_period: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException < Aws::EmptyStructure
+    end
+
+    class DashboardEntry
+      attr_accessor dashboard_name: ::String
+      attr_accessor dashboard_arn: ::String
+      attr_accessor last_modified: ::Time
+      attr_accessor size: ::Integer
+      SENSITIVE: []
+    end
+
+    class DashboardInvalidInputError
+      attr_accessor message: ::String
+      attr_accessor dashboard_validation_messages: ::Array[Types::DashboardValidationMessage]
+      SENSITIVE: []
+    end
+
+    class DashboardNotFoundError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DashboardValidationMessage
+      attr_accessor data_path: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Datapoint
+      attr_accessor timestamp: ::Time
+      attr_accessor sample_count: ::Float
+      attr_accessor average: ::Float
+      attr_accessor sum: ::Float
+      attr_accessor minimum: ::Float
+      attr_accessor maximum: ::Float
+      attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+      attr_accessor extended_statistics: ::Hash[::String, ::Float]
+      SENSITIVE: []
+    end
+
+    class DeleteAlarmsInput
+      attr_accessor alarm_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteAnomalyDetectorInput
+      attr_accessor namespace: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor dimensions: ::Array[Types::Dimension]
+      attr_accessor stat: ::String
+      attr_accessor single_metric_anomaly_detector: Types::SingleMetricAnomalyDetector
+      attr_accessor metric_math_anomaly_detector: Types::MetricMathAnomalyDetector
+      SENSITIVE: []
+    end
+
+    class DeleteAnomalyDetectorOutput < Aws::EmptyStructure
+    end
+
+    class DeleteDashboardsInput
+      attr_accessor dashboard_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteDashboardsOutput < Aws::EmptyStructure
+    end
+
+    class DeleteInsightRulesInput
+      attr_accessor rule_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteInsightRulesOutput
+      attr_accessor failures: ::Array[Types::PartialFailure]
+      SENSITIVE: []
+    end
+
+    class DeleteMetricStreamInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMetricStreamOutput < Aws::EmptyStructure
+    end
+
+    class DescribeAlarmHistoryInput
+      attr_accessor alarm_name: ::String
+      attr_accessor alarm_types: ::Array[("CompositeAlarm" | "MetricAlarm")]
+      attr_accessor history_item_type: ("ConfigurationUpdate" | "StateUpdate" | "Action")
+      attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      attr_accessor max_records: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor scan_by: ("TimestampDescending" | "TimestampAscending")
+      SENSITIVE: []
+    end
+
+    class DescribeAlarmHistoryOutput
+      attr_accessor alarm_history_items: ::Array[Types::AlarmHistoryItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAlarmsForMetricInput
+      attr_accessor metric_name: ::String
+      attr_accessor namespace: ::String
+      attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
+      attr_accessor extended_statistic: ::String
+      attr_accessor dimensions: ::Array[Types::Dimension]
+      attr_accessor period: ::Integer
+      attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+      SENSITIVE: []
+    end
+
+    class DescribeAlarmsForMetricOutput
+      attr_accessor metric_alarms: ::Array[Types::MetricAlarm]
+      SENSITIVE: []
+    end
+
+    class DescribeAlarmsInput
+      attr_accessor alarm_names: ::Array[::String]
+      attr_accessor alarm_name_prefix: ::String
+      attr_accessor alarm_types: ::Array[("CompositeAlarm" | "MetricAlarm")]
+      attr_accessor children_of_alarm_name: ::String
+      attr_accessor parents_of_alarm_name: ::String
+      attr_accessor state_value: ("OK" | "ALARM" | "INSUFFICIENT_DATA")
+      attr_accessor action_prefix: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAlarmsOutput
+      attr_accessor composite_alarms: ::Array[Types::CompositeAlarm]
+      attr_accessor metric_alarms: ::Array[Types::MetricAlarm]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAnomalyDetectorsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor namespace: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor dimensions: ::Array[Types::Dimension]
+      attr_accessor anomaly_detector_types: ::Array[("SINGLE_METRIC" | "METRIC_MATH")]
+      SENSITIVE: []
+    end
+
+    class DescribeAnomalyDetectorsOutput
+      attr_accessor anomaly_detectors: ::Array[Types::AnomalyDetector]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInsightRulesInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeInsightRulesOutput
+      attr_accessor next_token: ::String
+      attr_accessor insight_rules: ::Array[Types::InsightRule]
+      SENSITIVE: []
+    end
+
+    class Dimension
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class DimensionFilter
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class DisableAlarmActionsInput
+      attr_accessor alarm_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisableInsightRulesInput
+      attr_accessor rule_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisableInsightRulesOutput
+      attr_accessor failures: ::Array[Types::PartialFailure]
+      SENSITIVE: []
+    end
+
+    class EnableAlarmActionsInput
+      attr_accessor alarm_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EnableInsightRulesInput
+      attr_accessor rule_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EnableInsightRulesOutput
+      attr_accessor failures: ::Array[Types::PartialFailure]
+      SENSITIVE: []
+    end
+
+    class GetDashboardInput
+      attr_accessor dashboard_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDashboardOutput
+      attr_accessor dashboard_arn: ::String
+      attr_accessor dashboard_body: ::String
+      attr_accessor dashboard_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetInsightRuleReportInput
+      attr_accessor rule_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor period: ::Integer
+      attr_accessor max_contributor_count: ::Integer
+      attr_accessor metrics: ::Array[::String]
+      attr_accessor order_by: ::String
+      SENSITIVE: []
+    end
+
+    class GetInsightRuleReportOutput
+      attr_accessor key_labels: ::Array[::String]
+      attr_accessor aggregation_statistic: ::String
+      attr_accessor aggregate_value: ::Float
+      attr_accessor approximate_unique_count: ::Integer
+      attr_accessor contributors: ::Array[Types::InsightRuleContributor]
+      attr_accessor metric_datapoints: ::Array[Types::InsightRuleMetricDatapoint]
+      SENSITIVE: []
+    end
+
+    class GetMetricDataInput
+      attr_accessor metric_data_queries: ::Array[Types::MetricDataQuery]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor next_token: ::String
+      attr_accessor scan_by: ("TimestampDescending" | "TimestampAscending")
+      attr_accessor max_datapoints: ::Integer
+      attr_accessor label_options: Types::LabelOptions
+      SENSITIVE: []
+    end
+
+    class GetMetricDataOutput
+      attr_accessor metric_data_results: ::Array[Types::MetricDataResult]
+      attr_accessor next_token: ::String
+      attr_accessor messages: ::Array[Types::MessageData]
+      SENSITIVE: []
+    end
+
+    class GetMetricStatisticsInput
+      attr_accessor namespace: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor dimensions: ::Array[Types::Dimension]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor period: ::Integer
+      attr_accessor statistics: ::Array[("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")]
+      attr_accessor extended_statistics: ::Array[::String]
+      attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+      SENSITIVE: []
+    end
+
+    class GetMetricStatisticsOutput
+      attr_accessor label: ::String
+      attr_accessor datapoints: ::Array[Types::Datapoint]
+      SENSITIVE: []
+    end
+
+    class GetMetricStreamInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetMetricStreamOutput
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor include_filters: ::Array[Types::MetricStreamFilter]
+      attr_accessor exclude_filters: ::Array[Types::MetricStreamFilter]
+      attr_accessor firehose_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor state: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_update_date: ::Time
+      attr_accessor output_format: ("json" | "opentelemetry0.7" | "opentelemetry1.0")
+      attr_accessor statistics_configurations: ::Array[Types::MetricStreamStatisticsConfiguration]
+      attr_accessor include_linked_accounts_metrics: bool
+      SENSITIVE: []
+    end
+
+    class GetMetricWidgetImageInput
+      attr_accessor metric_widget: ::String
+      attr_accessor output_format: ::String
+      SENSITIVE: []
+    end
+
+    class GetMetricWidgetImageOutput
+      attr_accessor metric_widget_image: ::String
+      SENSITIVE: []
+    end
+
+    class InsightRule
+      attr_accessor name: ::String
+      attr_accessor state: ::String
+      attr_accessor schema: ::String
+      attr_accessor definition: ::String
+      attr_accessor managed_rule: bool
+      SENSITIVE: []
+    end
+
+    class InsightRuleContributor
+      attr_accessor keys: ::Array[::String]
+      attr_accessor approximate_aggregate_value: ::Float
+      attr_accessor datapoints: ::Array[Types::InsightRuleContributorDatapoint]
+      SENSITIVE: []
+    end
+
+    class InsightRuleContributorDatapoint
+      attr_accessor timestamp: ::Time
+      attr_accessor approximate_value: ::Float
+      SENSITIVE: []
+    end
+
+    class InsightRuleMetricDatapoint
+      attr_accessor timestamp: ::Time
+      attr_accessor unique_contributors: ::Float
+      attr_accessor max_contributor_value: ::Float
+      attr_accessor sample_count: ::Float
+      attr_accessor average: ::Float
+      attr_accessor sum: ::Float
+      attr_accessor minimum: ::Float
+      attr_accessor maximum: ::Float
+      SENSITIVE: []
+    end
+
+    class InternalServiceFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidFormatFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNextToken
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterCombinationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterValueException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LabelOptions
+      attr_accessor timezone: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException < Aws::EmptyStructure
+    end
+
+    class LimitExceededFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListDashboardsInput
+      attr_accessor dashboard_name_prefix: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDashboardsOutput
+      attr_accessor dashboard_entries: ::Array[Types::DashboardEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedInsightRulesInput
+      attr_accessor resource_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListManagedInsightRulesOutput
+      attr_accessor managed_rules: ::Array[Types::ManagedRuleDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMetricStreamsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMetricStreamsOutput
+      attr_accessor next_token: ::String
+      attr_accessor entries: ::Array[Types::MetricStreamEntry]
+      SENSITIVE: []
+    end
+
+    class ListMetricsInput
+      attr_accessor namespace: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor dimensions: ::Array[Types::DimensionFilter]
+      attr_accessor next_token: ::String
+      attr_accessor recently_active: ("PT3H")
+      attr_accessor include_linked_accounts: bool
+      attr_accessor owning_account: ::String
+      SENSITIVE: []
+    end
+
+    class ListMetricsOutput
+      attr_accessor metrics: ::Array[Types::Metric]
+      attr_accessor next_token: ::String
+      attr_accessor owning_accounts: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ManagedRule
+      attr_accessor template_name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ManagedRuleDescription
+      attr_accessor template_name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor rule_state: Types::ManagedRuleState
+      SENSITIVE: []
+    end
+
+    class ManagedRuleState
+      attr_accessor rule_name: ::String
+      attr_accessor state: ::String
+      SENSITIVE: []
+    end
+
+    class MessageData
+      attr_accessor code: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class Metric
+      attr_accessor namespace: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor dimensions: ::Array[Types::Dimension]
+      SENSITIVE: []
+    end
+
+    class MetricAlarm
+      attr_accessor alarm_name: ::String
+      attr_accessor alarm_arn: ::String
+      attr_accessor alarm_description: ::String
+      attr_accessor alarm_configuration_updated_timestamp: ::Time
+      attr_accessor actions_enabled: bool
+      attr_accessor ok_actions: ::Array[::String]
+      attr_accessor alarm_actions: ::Array[::String]
+      attr_accessor insufficient_data_actions: ::Array[::String]
+      attr_accessor state_value: ("OK" | "ALARM" | "INSUFFICIENT_DATA")
+      attr_accessor state_reason: ::String
+      attr_accessor state_reason_data: ::String
+      attr_accessor state_updated_timestamp: ::Time
+      attr_accessor metric_name: ::String
+      attr_accessor namespace: ::String
+      attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
+      attr_accessor extended_statistic: ::String
+      attr_accessor dimensions: ::Array[Types::Dimension]
+      attr_accessor period: ::Integer
+      attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+      attr_accessor evaluation_periods: ::Integer
+      attr_accessor datapoints_to_alarm: ::Integer
+      attr_accessor threshold: ::Float
+      attr_accessor comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold" | "LessThanLowerOrGreaterThanUpperThreshold" | "LessThanLowerThreshold" | "GreaterThanUpperThreshold")
+      attr_accessor treat_missing_data: ::String
+      attr_accessor evaluate_low_sample_count_percentile: ::String
+      attr_accessor metrics: ::Array[Types::MetricDataQuery]
+      attr_accessor threshold_metric_id: ::String
+      attr_accessor evaluation_state: ("PARTIAL_DATA")
+      attr_accessor state_transitioned_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class MetricDataQuery
+      attr_accessor id: ::String
+      attr_accessor metric_stat: Types::MetricStat
+      attr_accessor expression: ::String
+      attr_accessor label: ::String
+      attr_accessor return_data: bool
+      attr_accessor period: ::Integer
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class MetricDataResult
+      attr_accessor id: ::String
+      attr_accessor label: ::String
+      attr_accessor timestamps: ::Array[::Time]
+      attr_accessor values: ::Array[::Float]
+      attr_accessor status_code: ("Complete" | "InternalError" | "PartialData" | "Forbidden")
+      attr_accessor messages: ::Array[Types::MessageData]
+      SENSITIVE: []
+    end
+
+    class MetricDatum
+      attr_accessor metric_name: ::String
+      attr_accessor dimensions: ::Array[Types::Dimension]
+      attr_accessor timestamp: ::Time
+      attr_accessor value: ::Float
+      attr_accessor statistic_values: Types::StatisticSet
+      attr_accessor values: ::Array[::Float]
+      attr_accessor counts: ::Array[::Float]
+      attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+      attr_accessor storage_resolution: ::Integer
+      SENSITIVE: []
+    end
+
+    class MetricMathAnomalyDetector
+      attr_accessor metric_data_queries: ::Array[Types::MetricDataQuery]
+      SENSITIVE: []
+    end
+
+    class MetricStat
+      attr_accessor metric: Types::Metric
+      attr_accessor period: ::Integer
+      attr_accessor stat: ::String
+      attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+      SENSITIVE: []
+    end
+
+    class MetricStreamEntry
+      attr_accessor arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_update_date: ::Time
+      attr_accessor name: ::String
+      attr_accessor firehose_arn: ::String
+      attr_accessor state: ::String
+      attr_accessor output_format: ("json" | "opentelemetry0.7" | "opentelemetry1.0")
+      SENSITIVE: []
+    end
+
+    class MetricStreamFilter
+      attr_accessor namespace: ::String
+      attr_accessor metric_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MetricStreamStatisticsConfiguration
+      attr_accessor include_metrics: ::Array[Types::MetricStreamStatisticsMetric]
+      attr_accessor additional_statistics: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MetricStreamStatisticsMetric
+      attr_accessor namespace: ::String
+      attr_accessor metric_name: ::String
+      SENSITIVE: []
+    end
+
+    class MissingRequiredParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PartialFailure
+      attr_accessor failure_resource: ::String
+      attr_accessor exception_type: ::String
+      attr_accessor failure_code: ::String
+      attr_accessor failure_description: ::String
+      SENSITIVE: []
+    end
+
+    class PutAnomalyDetectorInput
+      attr_accessor namespace: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor dimensions: ::Array[Types::Dimension]
+      attr_accessor stat: ::String
+      attr_accessor configuration: Types::AnomalyDetectorConfiguration
+      attr_accessor single_metric_anomaly_detector: Types::SingleMetricAnomalyDetector
+      attr_accessor metric_math_anomaly_detector: Types::MetricMathAnomalyDetector
+      SENSITIVE: []
+    end
+
+    class PutAnomalyDetectorOutput < Aws::EmptyStructure
+    end
+
+    class PutCompositeAlarmInput
+      attr_accessor actions_enabled: bool
+      attr_accessor alarm_actions: ::Array[::String]
+      attr_accessor alarm_description: ::String
+      attr_accessor alarm_name: ::String
+      attr_accessor alarm_rule: ::String
+      attr_accessor insufficient_data_actions: ::Array[::String]
+      attr_accessor ok_actions: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor actions_suppressor: ::String
+      attr_accessor actions_suppressor_wait_period: ::Integer
+      attr_accessor actions_suppressor_extension_period: ::Integer
+      SENSITIVE: []
+    end
+
+    class PutDashboardInput
+      attr_accessor dashboard_name: ::String
+      attr_accessor dashboard_body: ::String
+      SENSITIVE: []
+    end
+
+    class PutDashboardOutput
+      attr_accessor dashboard_validation_messages: ::Array[Types::DashboardValidationMessage]
+      SENSITIVE: []
+    end
+
+    class PutInsightRuleInput
+      attr_accessor rule_name: ::String
+      attr_accessor rule_state: ::String
+      attr_accessor rule_definition: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PutInsightRuleOutput < Aws::EmptyStructure
+    end
+
+    class PutManagedInsightRulesInput
+      attr_accessor managed_rules: ::Array[Types::ManagedRule]
+      SENSITIVE: []
+    end
+
+    class PutManagedInsightRulesOutput
+      attr_accessor failures: ::Array[Types::PartialFailure]
+      SENSITIVE: []
+    end
+
+    class PutMetricAlarmInput
+      attr_accessor alarm_name: ::String
+      attr_accessor alarm_description: ::String
+      attr_accessor actions_enabled: bool
+      attr_accessor ok_actions: ::Array[::String]
+      attr_accessor alarm_actions: ::Array[::String]
+      attr_accessor insufficient_data_actions: ::Array[::String]
+      attr_accessor metric_name: ::String
+      attr_accessor namespace: ::String
+      attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
+      attr_accessor extended_statistic: ::String
+      attr_accessor dimensions: ::Array[Types::Dimension]
+      attr_accessor period: ::Integer
+      attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+      attr_accessor evaluation_periods: ::Integer
+      attr_accessor datapoints_to_alarm: ::Integer
+      attr_accessor threshold: ::Float
+      attr_accessor comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold" | "LessThanLowerOrGreaterThanUpperThreshold" | "LessThanLowerThreshold" | "GreaterThanUpperThreshold")
+      attr_accessor treat_missing_data: ::String
+      attr_accessor evaluate_low_sample_count_percentile: ::String
+      attr_accessor metrics: ::Array[Types::MetricDataQuery]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor threshold_metric_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutMetricDataInput
+      attr_accessor namespace: ::String
+      attr_accessor metric_data: ::Array[Types::MetricDatum]
+      SENSITIVE: []
+    end
+
+    class PutMetricStreamInput
+      attr_accessor name: ::String
+      attr_accessor include_filters: ::Array[Types::MetricStreamFilter]
+      attr_accessor exclude_filters: ::Array[Types::MetricStreamFilter]
+      attr_accessor firehose_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor output_format: ("json" | "opentelemetry0.7" | "opentelemetry1.0")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor statistics_configurations: ::Array[Types::MetricStreamStatisticsConfiguration]
+      attr_accessor include_linked_accounts_metrics: bool
+      SENSITIVE: []
+    end
+
+    class PutMetricStreamOutput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class Range
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ResourceNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor resource_type: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class SetAlarmStateInput
+      attr_accessor alarm_name: ::String
+      attr_accessor state_value: ("OK" | "ALARM" | "INSUFFICIENT_DATA")
+      attr_accessor state_reason: ::String
+      attr_accessor state_reason_data: ::String
+      SENSITIVE: []
+    end
+
+    class SingleMetricAnomalyDetector
+      attr_accessor namespace: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor dimensions: ::Array[Types::Dimension]
+      attr_accessor stat: ::String
+      SENSITIVE: []
+    end
+
+    class StartMetricStreamsInput
+      attr_accessor names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StartMetricStreamsOutput < Aws::EmptyStructure
+    end
+
+    class StatisticSet
+      attr_accessor sample_count: ::Float
+      attr_accessor sum: ::Float
+      attr_accessor minimum: ::Float
+      attr_accessor maximum: ::Float
+      SENSITIVE: []
+    end
+
+    class StopMetricStreamsInput
+      attr_accessor names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StopMetricStreamsOutput < Aws::EmptyStructure
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+  end
+end

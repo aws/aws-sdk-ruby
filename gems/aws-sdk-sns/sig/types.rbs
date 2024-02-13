@@ -1,0 +1,664 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SNS
+  module Types
+
+    class AddPermissionInput
+      attr_accessor topic_arn: ::String
+      attr_accessor label: ::String
+      attr_accessor aws_account_id: ::Array[::String]
+      attr_accessor action_name: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AuthorizationErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchEntryIdsNotDistinctException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchRequestTooLongException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchResultErrorEntry
+      attr_accessor id: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor sender_fault: bool
+      SENSITIVE: []
+    end
+
+    class CheckIfPhoneNumberIsOptedOutInput
+      attr_accessor phone_number: ::String
+      SENSITIVE: []
+    end
+
+    class CheckIfPhoneNumberIsOptedOutResponse
+      attr_accessor is_opted_out: bool
+      SENSITIVE: []
+    end
+
+    class ConcurrentAccessException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConfirmSubscriptionInput
+      attr_accessor topic_arn: ::String
+      attr_accessor token: ::String
+      attr_accessor authenticate_on_unsubscribe: ::String
+      SENSITIVE: []
+    end
+
+    class ConfirmSubscriptionResponse
+      attr_accessor subscription_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEndpointResponse
+      attr_accessor endpoint_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePlatformApplicationInput
+      attr_accessor name: ::String
+      attr_accessor platform: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePlatformApplicationResponse
+      attr_accessor platform_application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePlatformEndpointInput
+      attr_accessor platform_application_arn: ::String
+      attr_accessor token: ::String
+      attr_accessor custom_user_data: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSMSSandboxPhoneNumberInput
+      attr_accessor phone_number: ::String
+      attr_accessor language_code: ("en-US" | "en-GB" | "es-419" | "es-ES" | "de-DE" | "fr-CA" | "fr-FR" | "it-IT" | "ja-JP" | "pt-BR" | "kr-KR" | "zh-CN" | "zh-TW")
+      SENSITIVE: []
+    end
+
+    class CreateSMSSandboxPhoneNumberResult < Aws::EmptyStructure
+    end
+
+    class CreateTopicInput
+      attr_accessor name: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor data_protection_policy: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTopicResponse
+      attr_accessor topic_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEndpointInput
+      attr_accessor endpoint_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePlatformApplicationInput
+      attr_accessor platform_application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSMSSandboxPhoneNumberInput
+      attr_accessor phone_number: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSMSSandboxPhoneNumberResult < Aws::EmptyStructure
+    end
+
+    class DeleteTopicInput
+      attr_accessor topic_arn: ::String
+      SENSITIVE: []
+    end
+
+    class EmptyBatchRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Endpoint
+      attr_accessor endpoint_arn: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class EndpointDisabledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FilterPolicyLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataProtectionPolicyInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataProtectionPolicyResponse
+      attr_accessor data_protection_policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetEndpointAttributesInput
+      attr_accessor endpoint_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetEndpointAttributesResponse
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetPlatformApplicationAttributesInput
+      attr_accessor platform_application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetPlatformApplicationAttributesResponse
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetSMSAttributesInput
+      attr_accessor attributes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetSMSAttributesResponse
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetSMSSandboxAccountStatusInput < Aws::EmptyStructure
+    end
+
+    class GetSMSSandboxAccountStatusResult
+      attr_accessor is_in_sandbox: bool
+      SENSITIVE: []
+    end
+
+    class GetSubscriptionAttributesInput
+      attr_accessor subscription_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetSubscriptionAttributesResponse
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetTopicAttributesInput
+      attr_accessor topic_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetTopicAttributesResponse
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class InternalErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidBatchEntryIdException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterValueException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSecurityException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KMSAccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KMSDisabledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KMSInvalidStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KMSNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KMSOptInRequired
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KMSThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListEndpointsByPlatformApplicationInput
+      attr_accessor platform_application_arn: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEndpointsByPlatformApplicationResponse
+      attr_accessor endpoints: ::Array[Types::Endpoint]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOriginationNumbersRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListOriginationNumbersResult
+      attr_accessor next_token: ::String
+      attr_accessor phone_numbers: ::Array[Types::PhoneNumberInformation]
+      SENSITIVE: []
+    end
+
+    class ListPhoneNumbersOptedOutInput
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPhoneNumbersOptedOutResponse
+      attr_accessor phone_numbers: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPlatformApplicationsInput
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPlatformApplicationsResponse
+      attr_accessor platform_applications: ::Array[Types::PlatformApplication]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSMSSandboxPhoneNumbersInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSMSSandboxPhoneNumbersResult
+      attr_accessor phone_numbers: ::Array[Types::SMSSandboxPhoneNumber]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubscriptionsByTopicInput
+      attr_accessor topic_arn: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubscriptionsByTopicResponse
+      attr_accessor subscriptions: ::Array[Types::Subscription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubscriptionsInput
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubscriptionsResponse
+      attr_accessor subscriptions: ::Array[Types::Subscription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListTopicsInput
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTopicsResponse
+      attr_accessor topics: ::Array[Types::Topic]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MessageAttributeValue
+      attr_accessor data_type: ::String
+      attr_accessor string_value: ::String
+      attr_accessor binary_value: ::String
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OptInPhoneNumberInput
+      attr_accessor phone_number: ::String
+      SENSITIVE: []
+    end
+
+    class OptInPhoneNumberResponse < Aws::EmptyStructure
+    end
+
+    class OptedOutException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PhoneNumberInformation
+      attr_accessor created_at: ::Time
+      attr_accessor phone_number: ::String
+      attr_accessor status: ::String
+      attr_accessor iso_2_country_code: ::String
+      attr_accessor route_type: ("Transactional" | "Promotional" | "Premium")
+      attr_accessor number_capabilities: ::Array[("SMS" | "MMS" | "VOICE")]
+      SENSITIVE: []
+    end
+
+    class PlatformApplication
+      attr_accessor platform_application_arn: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PlatformApplicationDisabledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PublishBatchInput
+      attr_accessor topic_arn: ::String
+      attr_accessor publish_batch_request_entries: ::Array[Types::PublishBatchRequestEntry]
+      SENSITIVE: []
+    end
+
+    class PublishBatchRequestEntry
+      attr_accessor id: ::String
+      attr_accessor message: ::String
+      attr_accessor subject: ::String
+      attr_accessor message_structure: ::String
+      attr_accessor message_attributes: ::Hash[::String, Types::MessageAttributeValue]
+      attr_accessor message_deduplication_id: ::String
+      attr_accessor message_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class PublishBatchResponse
+      attr_accessor successful: ::Array[Types::PublishBatchResultEntry]
+      attr_accessor failed: ::Array[Types::BatchResultErrorEntry]
+      SENSITIVE: []
+    end
+
+    class PublishBatchResultEntry
+      attr_accessor id: ::String
+      attr_accessor message_id: ::String
+      attr_accessor sequence_number: ::String
+      SENSITIVE: []
+    end
+
+    class PublishInput
+      attr_accessor topic_arn: ::String
+      attr_accessor target_arn: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor message: ::String
+      attr_accessor subject: ::String
+      attr_accessor message_structure: ::String
+      attr_accessor message_attributes: ::Hash[::String, Types::MessageAttributeValue]
+      attr_accessor message_deduplication_id: ::String
+      attr_accessor message_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class PublishResponse
+      attr_accessor message_id: ::String
+      attr_accessor sequence_number: ::String
+      SENSITIVE: []
+    end
+
+    class PutDataProtectionPolicyInput
+      attr_accessor resource_arn: ::String
+      attr_accessor data_protection_policy: ::String
+      SENSITIVE: []
+    end
+
+    class RemovePermissionInput
+      attr_accessor topic_arn: ::String
+      attr_accessor label: ::String
+      SENSITIVE: []
+    end
+
+    class ReplayLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SMSSandboxPhoneNumber
+      attr_accessor phone_number: ::String
+      attr_accessor status: ("Pending" | "Verified")
+      SENSITIVE: []
+    end
+
+    class SetEndpointAttributesInput
+      attr_accessor endpoint_arn: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SetPlatformApplicationAttributesInput
+      attr_accessor platform_application_arn: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SetSMSAttributesInput
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SetSMSAttributesResponse < Aws::EmptyStructure
+    end
+
+    class SetSubscriptionAttributesInput
+      attr_accessor subscription_arn: ::String
+      attr_accessor attribute_name: ::String
+      attr_accessor attribute_value: ::String
+      SENSITIVE: []
+    end
+
+    class SetTopicAttributesInput
+      attr_accessor topic_arn: ::String
+      attr_accessor attribute_name: ::String
+      attr_accessor attribute_value: ::String
+      SENSITIVE: []
+    end
+
+    class StaleTagException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SubscribeInput
+      attr_accessor topic_arn: ::String
+      attr_accessor protocol: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor return_subscription_arn: bool
+      SENSITIVE: []
+    end
+
+    class SubscribeResponse
+      attr_accessor subscription_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Subscription
+      attr_accessor subscription_arn: ::String
+      attr_accessor owner: ::String
+      attr_accessor protocol: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor topic_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SubscriptionLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagPolicyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyEntriesInBatchRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Topic
+      attr_accessor topic_arn: ::String
+      SENSITIVE: []
+    end
+
+    class TopicLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsubscribeInput
+      attr_accessor subscription_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UserErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VerificationException
+      attr_accessor message: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class VerifySMSSandboxPhoneNumberInput
+      attr_accessor phone_number: ::String
+      attr_accessor one_time_password: ::String
+      SENSITIVE: []
+    end
+
+    class VerifySMSSandboxPhoneNumberResult < Aws::EmptyStructure
+    end
+  end
+end

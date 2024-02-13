@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2024-02-12)
+------------------
+
+* Feature - Adds support for new options on GraphqlAPIs, Resolvers and  Data Sources for emitting Amazon CloudWatch metrics for enhanced monitoring of AppSync APIs.
+
+1.72.0 (2024-02-06)
+------------------
+
+* Feature - Support for environment variables in AppSync GraphQL APIs
+
+1.71.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.70.0 (2023-12-19)
 ------------------
 

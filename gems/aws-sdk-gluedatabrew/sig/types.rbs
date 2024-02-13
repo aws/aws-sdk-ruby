@@ -1,0 +1,1091 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::GlueDataBrew
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AllowedStatistics
+      attr_accessor statistics: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteRecipeVersionRequest
+      attr_accessor name: ::String
+      attr_accessor recipe_versions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteRecipeVersionResponse
+      attr_accessor name: ::String
+      attr_accessor errors: ::Array[Types::RecipeVersionErrorDetail]
+      SENSITIVE: []
+    end
+
+    class ColumnSelector
+      attr_accessor regex: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ColumnStatisticsConfiguration
+      attr_accessor selectors: ::Array[Types::ColumnSelector]
+      attr_accessor statistics: Types::StatisticsConfiguration
+      SENSITIVE: []
+    end
+
+    class ConditionExpression
+      attr_accessor condition: ::String
+      attr_accessor value: ::String
+      attr_accessor target_column: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDatasetRequest
+      attr_accessor name: ::String
+      attr_accessor format: ("CSV" | "JSON" | "PARQUET" | "EXCEL" | "ORC")
+      attr_accessor format_options: Types::FormatOptions
+      attr_accessor input: Types::Input
+      attr_accessor path_options: Types::PathOptions
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDatasetResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProfileJobRequest
+      attr_accessor dataset_name: ::String
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor encryption_mode: ("SSE-KMS" | "SSE-S3")
+      attr_accessor name: ::String
+      attr_accessor log_subscription: ("ENABLE" | "DISABLE")
+      attr_accessor max_capacity: ::Integer
+      attr_accessor max_retries: ::Integer
+      attr_accessor output_location: Types::S3Location
+      attr_accessor configuration: Types::ProfileConfiguration
+      attr_accessor validation_configurations: ::Array[Types::ValidationConfiguration]
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor timeout: ::Integer
+      attr_accessor job_sample: Types::JobSample
+      SENSITIVE: []
+    end
+
+    class CreateProfileJobResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProjectRequest
+      attr_accessor dataset_name: ::String
+      attr_accessor name: ::String
+      attr_accessor recipe_name: ::String
+      attr_accessor sample: Types::Sample
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateProjectResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRecipeJobRequest
+      attr_accessor dataset_name: ::String
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor encryption_mode: ("SSE-KMS" | "SSE-S3")
+      attr_accessor name: ::String
+      attr_accessor log_subscription: ("ENABLE" | "DISABLE")
+      attr_accessor max_capacity: ::Integer
+      attr_accessor max_retries: ::Integer
+      attr_accessor outputs: ::Array[Types::Output]
+      attr_accessor data_catalog_outputs: ::Array[Types::DataCatalogOutput]
+      attr_accessor database_outputs: ::Array[Types::DatabaseOutput]
+      attr_accessor project_name: ::String
+      attr_accessor recipe_reference: Types::RecipeReference
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor timeout: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateRecipeJobResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRecipeRequest
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor steps: ::Array[Types::RecipeStep]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateRecipeResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRulesetRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor target_arn: ::String
+      attr_accessor rules: ::Array[Types::Rule]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateRulesetResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateScheduleRequest
+      attr_accessor job_names: ::Array[::String]
+      attr_accessor cron_expression: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateScheduleResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CsvOptions
+      attr_accessor delimiter: ::String
+      attr_accessor header_row: bool
+      SENSITIVE: []
+    end
+
+    class CsvOutputOptions
+      attr_accessor delimiter: ::String
+      SENSITIVE: []
+    end
+
+    class DataCatalogInputDefinition
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor temp_directory: Types::S3Location
+      SENSITIVE: []
+    end
+
+    class DataCatalogOutput
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor s3_options: Types::S3TableOutputOptions
+      attr_accessor database_options: Types::DatabaseTableOutputOptions
+      attr_accessor overwrite: bool
+      SENSITIVE: []
+    end
+
+    class DatabaseInputDefinition
+      attr_accessor glue_connection_name: ::String
+      attr_accessor database_table_name: ::String
+      attr_accessor temp_directory: Types::S3Location
+      attr_accessor query_string: ::String
+      SENSITIVE: []
+    end
+
+    class DatabaseOutput
+      attr_accessor glue_connection_name: ::String
+      attr_accessor database_options: Types::DatabaseTableOutputOptions
+      attr_accessor database_output_mode: ("NEW_TABLE")
+      SENSITIVE: []
+    end
+
+    class DatabaseTableOutputOptions
+      attr_accessor temp_directory: Types::S3Location
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class Dataset
+      attr_accessor account_id: ::String
+      attr_accessor created_by: ::String
+      attr_accessor create_date: ::Time
+      attr_accessor name: ::String
+      attr_accessor format: ("CSV" | "JSON" | "PARQUET" | "EXCEL" | "ORC")
+      attr_accessor format_options: Types::FormatOptions
+      attr_accessor input: Types::Input
+      attr_accessor last_modified_date: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor source: ("S3" | "DATA-CATALOG" | "DATABASE")
+      attr_accessor path_options: Types::PathOptions
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DatasetParameter
+      attr_accessor name: ::String
+      attr_accessor type: ("Datetime" | "Number" | "String")
+      attr_accessor datetime_options: Types::DatetimeOptions
+      attr_accessor create_column: bool
+      attr_accessor filter: Types::FilterExpression
+      SENSITIVE: []
+    end
+
+    class DatetimeOptions
+      attr_accessor format: ::String
+      attr_accessor timezone_offset: ::String
+      attr_accessor locale_code: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDatasetRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDatasetResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteJobRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteJobResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProjectRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProjectResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRecipeVersionRequest
+      attr_accessor name: ::String
+      attr_accessor recipe_version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRecipeVersionResponse
+      attr_accessor name: ::String
+      attr_accessor recipe_version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRulesetRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRulesetResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteScheduleRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteScheduleResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetResponse
+      attr_accessor created_by: ::String
+      attr_accessor create_date: ::Time
+      attr_accessor name: ::String
+      attr_accessor format: ("CSV" | "JSON" | "PARQUET" | "EXCEL" | "ORC")
+      attr_accessor format_options: Types::FormatOptions
+      attr_accessor input: Types::Input
+      attr_accessor last_modified_date: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor source: ("S3" | "DATA-CATALOG" | "DATABASE")
+      attr_accessor path_options: Types::PathOptions
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJobRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJobResponse
+      attr_accessor create_date: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor dataset_name: ::String
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor encryption_mode: ("SSE-KMS" | "SSE-S3")
+      attr_accessor name: ::String
+      attr_accessor type: ("PROFILE" | "RECIPE")
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_date: ::Time
+      attr_accessor log_subscription: ("ENABLE" | "DISABLE")
+      attr_accessor max_capacity: ::Integer
+      attr_accessor max_retries: ::Integer
+      attr_accessor outputs: ::Array[Types::Output]
+      attr_accessor data_catalog_outputs: ::Array[Types::DataCatalogOutput]
+      attr_accessor database_outputs: ::Array[Types::DatabaseOutput]
+      attr_accessor project_name: ::String
+      attr_accessor profile_configuration: Types::ProfileConfiguration
+      attr_accessor validation_configurations: ::Array[Types::ValidationConfiguration]
+      attr_accessor recipe_reference: Types::RecipeReference
+      attr_accessor resource_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor timeout: ::Integer
+      attr_accessor job_sample: Types::JobSample
+      SENSITIVE: []
+    end
+
+    class DescribeJobRunRequest
+      attr_accessor name: ::String
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJobRunResponse
+      attr_accessor attempt: ::Integer
+      attr_accessor completed_on: ::Time
+      attr_accessor dataset_name: ::String
+      attr_accessor error_message: ::String
+      attr_accessor execution_time: ::Integer
+      attr_accessor job_name: ::String
+      attr_accessor profile_configuration: Types::ProfileConfiguration
+      attr_accessor validation_configurations: ::Array[Types::ValidationConfiguration]
+      attr_accessor run_id: ::String
+      attr_accessor state: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT")
+      attr_accessor log_subscription: ("ENABLE" | "DISABLE")
+      attr_accessor log_group_name: ::String
+      attr_accessor outputs: ::Array[Types::Output]
+      attr_accessor data_catalog_outputs: ::Array[Types::DataCatalogOutput]
+      attr_accessor database_outputs: ::Array[Types::DatabaseOutput]
+      attr_accessor recipe_reference: Types::RecipeReference
+      attr_accessor started_by: ::String
+      attr_accessor started_on: ::Time
+      attr_accessor job_sample: Types::JobSample
+      SENSITIVE: []
+    end
+
+    class DescribeProjectRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProjectResponse
+      attr_accessor create_date: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor dataset_name: ::String
+      attr_accessor last_modified_date: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor name: ::String
+      attr_accessor recipe_name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor sample: Types::Sample
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor session_status: ("ASSIGNED" | "FAILED" | "INITIALIZING" | "PROVISIONING" | "READY" | "RECYCLING" | "ROTATING" | "TERMINATED" | "TERMINATING" | "UPDATING")
+      attr_accessor opened_by: ::String
+      attr_accessor open_date: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeRecipeRequest
+      attr_accessor name: ::String
+      attr_accessor recipe_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRecipeResponse
+      attr_accessor created_by: ::String
+      attr_accessor create_date: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_date: ::Time
+      attr_accessor project_name: ::String
+      attr_accessor published_by: ::String
+      attr_accessor published_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor steps: ::Array[Types::RecipeStep]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor resource_arn: ::String
+      attr_accessor recipe_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRulesetRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRulesetResponse
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor target_arn: ::String
+      attr_accessor rules: ::Array[Types::Rule]
+      attr_accessor create_date: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_date: ::Time
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribeScheduleRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeScheduleResponse
+      attr_accessor create_date: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor job_names: ::Array[::String]
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_date: ::Time
+      attr_accessor resource_arn: ::String
+      attr_accessor cron_expression: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class EntityDetectorConfiguration
+      attr_accessor entity_types: ::Array[::String]
+      attr_accessor allowed_statistics: ::Array[Types::AllowedStatistics]
+      SENSITIVE: []
+    end
+
+    class ExcelOptions
+      attr_accessor sheet_names: ::Array[::String]
+      attr_accessor sheet_indexes: ::Array[::Integer]
+      attr_accessor header_row: bool
+      SENSITIVE: []
+    end
+
+    class FilesLimit
+      attr_accessor max_files: ::Integer
+      attr_accessor ordered_by: ("LAST_MODIFIED_DATE")
+      attr_accessor order: ("DESCENDING" | "ASCENDING")
+      SENSITIVE: []
+    end
+
+    class FilterExpression
+      attr_accessor expression: ::String
+      attr_accessor values_map: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class FormatOptions
+      attr_accessor json: Types::JsonOptions
+      attr_accessor excel: Types::ExcelOptions
+      attr_accessor csv: Types::CsvOptions
+      SENSITIVE: []
+    end
+
+    class Input
+      attr_accessor s3_input_definition: Types::S3Location
+      attr_accessor data_catalog_input_definition: Types::DataCatalogInputDefinition
+      attr_accessor database_input_definition: Types::DatabaseInputDefinition
+      attr_accessor metadata: Types::Metadata
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Job
+      attr_accessor account_id: ::String
+      attr_accessor created_by: ::String
+      attr_accessor create_date: ::Time
+      attr_accessor dataset_name: ::String
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor encryption_mode: ("SSE-KMS" | "SSE-S3")
+      attr_accessor name: ::String
+      attr_accessor type: ("PROFILE" | "RECIPE")
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_date: ::Time
+      attr_accessor log_subscription: ("ENABLE" | "DISABLE")
+      attr_accessor max_capacity: ::Integer
+      attr_accessor max_retries: ::Integer
+      attr_accessor outputs: ::Array[Types::Output]
+      attr_accessor data_catalog_outputs: ::Array[Types::DataCatalogOutput]
+      attr_accessor database_outputs: ::Array[Types::DatabaseOutput]
+      attr_accessor project_name: ::String
+      attr_accessor recipe_reference: Types::RecipeReference
+      attr_accessor resource_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor timeout: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor job_sample: Types::JobSample
+      attr_accessor validation_configurations: ::Array[Types::ValidationConfiguration]
+      SENSITIVE: []
+    end
+
+    class JobRun
+      attr_accessor attempt: ::Integer
+      attr_accessor completed_on: ::Time
+      attr_accessor dataset_name: ::String
+      attr_accessor error_message: ::String
+      attr_accessor execution_time: ::Integer
+      attr_accessor job_name: ::String
+      attr_accessor run_id: ::String
+      attr_accessor state: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT")
+      attr_accessor log_subscription: ("ENABLE" | "DISABLE")
+      attr_accessor log_group_name: ::String
+      attr_accessor outputs: ::Array[Types::Output]
+      attr_accessor data_catalog_outputs: ::Array[Types::DataCatalogOutput]
+      attr_accessor database_outputs: ::Array[Types::DatabaseOutput]
+      attr_accessor recipe_reference: Types::RecipeReference
+      attr_accessor started_by: ::String
+      attr_accessor started_on: ::Time
+      attr_accessor job_sample: Types::JobSample
+      attr_accessor validation_configurations: ::Array[Types::ValidationConfiguration]
+      SENSITIVE: []
+    end
+
+    class JobSample
+      attr_accessor mode: ("FULL_DATASET" | "CUSTOM_ROWS")
+      attr_accessor size: ::Integer
+      SENSITIVE: []
+    end
+
+    class JsonOptions
+      attr_accessor multi_line: bool
+      SENSITIVE: []
+    end
+
+    class ListDatasetsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatasetsResponse
+      attr_accessor datasets: ::Array[Types::Dataset]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobRunsRequest
+      attr_accessor name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobRunsResponse
+      attr_accessor job_runs: ::Array[Types::JobRun]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobsRequest
+      attr_accessor dataset_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor project_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobsResponse
+      attr_accessor jobs: ::Array[Types::Job]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProjectsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProjectsResponse
+      attr_accessor projects: ::Array[Types::Project]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecipeVersionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecipeVersionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor recipes: ::Array[Types::Recipe]
+      SENSITIVE: []
+    end
+
+    class ListRecipesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor recipe_version: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecipesResponse
+      attr_accessor recipes: ::Array[Types::Recipe]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRulesetsRequest
+      attr_accessor target_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRulesetsResponse
+      attr_accessor rulesets: ::Array[Types::RulesetItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSchedulesRequest
+      attr_accessor job_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSchedulesResponse
+      attr_accessor schedules: ::Array[Types::Schedule]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Metadata
+      attr_accessor source_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Output
+      attr_accessor compression_format: ("GZIP" | "LZ4" | "SNAPPY" | "BZIP2" | "DEFLATE" | "LZO" | "BROTLI" | "ZSTD" | "ZLIB")
+      attr_accessor format: ("CSV" | "JSON" | "PARQUET" | "GLUEPARQUET" | "AVRO" | "ORC" | "XML" | "TABLEAUHYPER")
+      attr_accessor partition_columns: ::Array[::String]
+      attr_accessor location: Types::S3Location
+      attr_accessor overwrite: bool
+      attr_accessor format_options: Types::OutputFormatOptions
+      attr_accessor max_output_files: ::Integer
+      SENSITIVE: []
+    end
+
+    class OutputFormatOptions
+      attr_accessor csv: Types::CsvOutputOptions
+      SENSITIVE: []
+    end
+
+    class PathOptions
+      attr_accessor last_modified_date_condition: Types::FilterExpression
+      attr_accessor files_limit: Types::FilesLimit
+      attr_accessor parameters: ::Hash[::String, Types::DatasetParameter]
+      SENSITIVE: []
+    end
+
+    class ProfileConfiguration
+      attr_accessor dataset_statistics_configuration: Types::StatisticsConfiguration
+      attr_accessor profile_columns: ::Array[Types::ColumnSelector]
+      attr_accessor column_statistics_configurations: ::Array[Types::ColumnStatisticsConfiguration]
+      attr_accessor entity_detector_configuration: Types::EntityDetectorConfiguration
+      SENSITIVE: []
+    end
+
+    class Project
+      attr_accessor account_id: ::String
+      attr_accessor create_date: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor dataset_name: ::String
+      attr_accessor last_modified_date: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor name: ::String
+      attr_accessor recipe_name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor sample: Types::Sample
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor role_arn: ::String
+      attr_accessor opened_by: ::String
+      attr_accessor open_date: ::Time
+      SENSITIVE: []
+    end
+
+    class PublishRecipeRequest
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class PublishRecipeResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class Recipe
+      attr_accessor created_by: ::String
+      attr_accessor create_date: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_date: ::Time
+      attr_accessor project_name: ::String
+      attr_accessor published_by: ::String
+      attr_accessor published_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor steps: ::Array[Types::RecipeStep]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor recipe_version: ::String
+      SENSITIVE: []
+    end
+
+    class RecipeAction
+      attr_accessor operation: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RecipeReference
+      attr_accessor name: ::String
+      attr_accessor recipe_version: ::String
+      SENSITIVE: []
+    end
+
+    class RecipeStep
+      attr_accessor action: Types::RecipeAction
+      attr_accessor condition_expressions: ::Array[Types::ConditionExpression]
+      SENSITIVE: []
+    end
+
+    class RecipeVersionErrorDetail
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      attr_accessor recipe_version: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Rule
+      attr_accessor name: ::String
+      attr_accessor disabled: bool
+      attr_accessor check_expression: ::String
+      attr_accessor substitution_map: ::Hash[::String, ::String]
+      attr_accessor threshold: Types::Threshold
+      attr_accessor column_selectors: ::Array[Types::ColumnSelector]
+      SENSITIVE: []
+    end
+
+    class RulesetItem
+      attr_accessor account_id: ::String
+      attr_accessor created_by: ::String
+      attr_accessor create_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_date: ::Time
+      attr_accessor name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor rule_count: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor target_arn: ::String
+      SENSITIVE: []
+    end
+
+    class S3Location
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      attr_accessor bucket_owner: ::String
+      SENSITIVE: []
+    end
+
+    class S3TableOutputOptions
+      attr_accessor location: Types::S3Location
+      SENSITIVE: []
+    end
+
+    class Sample
+      attr_accessor size: ::Integer
+      attr_accessor type: ("FIRST_N" | "LAST_N" | "RANDOM")
+      SENSITIVE: []
+    end
+
+    class Schedule
+      attr_accessor account_id: ::String
+      attr_accessor created_by: ::String
+      attr_accessor create_date: ::Time
+      attr_accessor job_names: ::Array[::String]
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_date: ::Time
+      attr_accessor resource_arn: ::String
+      attr_accessor cron_expression: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class SendProjectSessionActionRequest
+      attr_accessor preview: bool
+      attr_accessor name: ::String
+      attr_accessor recipe_step: Types::RecipeStep
+      attr_accessor step_index: ::Integer
+      attr_accessor client_session_id: ::String
+      attr_accessor view_frame: Types::ViewFrame
+      SENSITIVE: [:client_session_id]
+    end
+
+    class SendProjectSessionActionResponse
+      attr_accessor result: ::String
+      attr_accessor name: ::String
+      attr_accessor action_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartJobRunRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class StartJobRunResponse
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartProjectSessionRequest
+      attr_accessor name: ::String
+      attr_accessor assume_control: bool
+      SENSITIVE: []
+    end
+
+    class StartProjectSessionResponse
+      attr_accessor name: ::String
+      attr_accessor client_session_id: ::String
+      SENSITIVE: [:client_session_id]
+    end
+
+    class StatisticOverride
+      attr_accessor statistic: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StatisticsConfiguration
+      attr_accessor included_statistics: ::Array[::String]
+      attr_accessor overrides: ::Array[Types::StatisticOverride]
+      SENSITIVE: []
+    end
+
+    class StopJobRunRequest
+      attr_accessor name: ::String
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopJobRunResponse
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class Threshold
+      attr_accessor value: ::Float
+      attr_accessor type: ("GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN" | "LESS_THAN")
+      attr_accessor unit: ("COUNT" | "PERCENTAGE")
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDatasetRequest
+      attr_accessor name: ::String
+      attr_accessor format: ("CSV" | "JSON" | "PARQUET" | "EXCEL" | "ORC")
+      attr_accessor format_options: Types::FormatOptions
+      attr_accessor input: Types::Input
+      attr_accessor path_options: Types::PathOptions
+      SENSITIVE: []
+    end
+
+    class UpdateDatasetResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProfileJobRequest
+      attr_accessor configuration: Types::ProfileConfiguration
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor encryption_mode: ("SSE-KMS" | "SSE-S3")
+      attr_accessor name: ::String
+      attr_accessor log_subscription: ("ENABLE" | "DISABLE")
+      attr_accessor max_capacity: ::Integer
+      attr_accessor max_retries: ::Integer
+      attr_accessor output_location: Types::S3Location
+      attr_accessor validation_configurations: ::Array[Types::ValidationConfiguration]
+      attr_accessor role_arn: ::String
+      attr_accessor timeout: ::Integer
+      attr_accessor job_sample: Types::JobSample
+      SENSITIVE: []
+    end
+
+    class UpdateProfileJobResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProjectRequest
+      attr_accessor sample: Types::Sample
+      attr_accessor role_arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProjectResponse
+      attr_accessor last_modified_date: ::Time
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRecipeJobRequest
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor encryption_mode: ("SSE-KMS" | "SSE-S3")
+      attr_accessor name: ::String
+      attr_accessor log_subscription: ("ENABLE" | "DISABLE")
+      attr_accessor max_capacity: ::Integer
+      attr_accessor max_retries: ::Integer
+      attr_accessor outputs: ::Array[Types::Output]
+      attr_accessor data_catalog_outputs: ::Array[Types::DataCatalogOutput]
+      attr_accessor database_outputs: ::Array[Types::DatabaseOutput]
+      attr_accessor role_arn: ::String
+      attr_accessor timeout: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateRecipeJobResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRecipeRequest
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor steps: ::Array[Types::RecipeStep]
+      SENSITIVE: []
+    end
+
+    class UpdateRecipeResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRulesetRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor rules: ::Array[Types::Rule]
+      SENSITIVE: []
+    end
+
+    class UpdateRulesetResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateScheduleRequest
+      attr_accessor job_names: ::Array[::String]
+      attr_accessor cron_expression: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateScheduleResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationConfiguration
+      attr_accessor ruleset_arn: ::String
+      attr_accessor validation_mode: ("CHECK_ALL")
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ViewFrame
+      attr_accessor start_column_index: ::Integer
+      attr_accessor column_range: ::Integer
+      attr_accessor hidden_columns: ::Array[::String]
+      attr_accessor start_row_index: ::Integer
+      attr_accessor row_range: ::Integer
+      attr_accessor analytics: ("ENABLE" | "DISABLE")
+      SENSITIVE: []
+    end
+  end
+end

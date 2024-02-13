@@ -14,6 +14,7 @@ module Aws::CloudTrail
       option(
         :endpoint_provider,
         doc_type: 'Aws::CloudTrail::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -111,6 +112,8 @@ module Aws::CloudTrail
             Aws::CloudTrail::Endpoints::ListImportFailures.build(context)
           when :list_imports
             Aws::CloudTrail::Endpoints::ListImports.build(context)
+          when :list_insights_metric_data
+            Aws::CloudTrail::Endpoints::ListInsightsMetricData.build(context)
           when :list_public_keys
             Aws::CloudTrail::Endpoints::ListPublicKeys.build(context)
           when :list_queries

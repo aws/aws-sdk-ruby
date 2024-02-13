@@ -516,6 +516,7 @@ module Aws::IoT
     ElasticsearchType = Shapes::StringShape.new(name: 'ElasticsearchType')
     EnableCachingForHttp = Shapes::BooleanShape.new(name: 'EnableCachingForHttp')
     EnableIoTLoggingParams = Shapes::StructureShape.new(name: 'EnableIoTLoggingParams')
+    EnableOCSPCheck = Shapes::BooleanShape.new(name: 'EnableOCSPCheck')
     EnableTopicRuleRequest = Shapes::StructureShape.new(name: 'EnableTopicRuleRequest')
     Enabled = Shapes::BooleanShape.new(name: 'Enabled')
     EnabledBoolean = Shapes::BooleanShape.new(name: 'EnabledBoolean')
@@ -1092,6 +1093,7 @@ module Aws::IoT
     SecurityProfileTargetMappings = Shapes::ListShape.new(name: 'SecurityProfileTargetMappings')
     SecurityProfileTargets = Shapes::ListShape.new(name: 'SecurityProfileTargets')
     ServerCertificateArns = Shapes::ListShape.new(name: 'ServerCertificateArns')
+    ServerCertificateConfig = Shapes::StructureShape.new(name: 'ServerCertificateConfig')
     ServerCertificateStatus = Shapes::StringShape.new(name: 'ServerCertificateStatus')
     ServerCertificateStatusDetail = Shapes::StringShape.new(name: 'ServerCertificateStatusDetail')
     ServerCertificateSummary = Shapes::StructureShape.new(name: 'ServerCertificateSummary')
@@ -1979,6 +1981,7 @@ module Aws::IoT
     CreateDomainConfigurationRequest.add_member(:service_type, Shapes::ShapeRef.new(shape: ServiceType, location_name: "serviceType"))
     CreateDomainConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateDomainConfigurationRequest.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfig, location_name: "tlsConfig"))
+    CreateDomainConfigurationRequest.add_member(:server_certificate_config, Shapes::ShapeRef.new(shape: ServerCertificateConfig, location_name: "serverCertificateConfig"))
     CreateDomainConfigurationRequest.struct_class = Types::CreateDomainConfigurationRequest
 
     CreateDomainConfigurationResponse.add_member(:domain_configuration_name, Shapes::ShapeRef.new(shape: DomainConfigurationName, location_name: "domainConfigurationName"))
@@ -2605,6 +2608,7 @@ module Aws::IoT
     DescribeDomainConfigurationResponse.add_member(:domain_type, Shapes::ShapeRef.new(shape: DomainType, location_name: "domainType"))
     DescribeDomainConfigurationResponse.add_member(:last_status_change_date, Shapes::ShapeRef.new(shape: DateType, location_name: "lastStatusChangeDate"))
     DescribeDomainConfigurationResponse.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfig, location_name: "tlsConfig"))
+    DescribeDomainConfigurationResponse.add_member(:server_certificate_config, Shapes::ShapeRef.new(shape: ServerCertificateConfig, location_name: "serverCertificateConfig"))
     DescribeDomainConfigurationResponse.struct_class = Types::DescribeDomainConfigurationResponse
 
     DescribeEndpointRequest.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location: "querystring", location_name: "endpointType"))
@@ -4486,6 +4490,9 @@ module Aws::IoT
 
     ServerCertificateArns.member = Shapes::ShapeRef.new(shape: AcmCertificateArn)
 
+    ServerCertificateConfig.add_member(:enable_ocsp_check, Shapes::ShapeRef.new(shape: EnableOCSPCheck, location_name: "enableOCSPCheck"))
+    ServerCertificateConfig.struct_class = Types::ServerCertificateConfig
+
     ServerCertificateSummary.add_member(:server_certificate_arn, Shapes::ShapeRef.new(shape: AcmCertificateArn, location_name: "serverCertificateArn"))
     ServerCertificateSummary.add_member(:server_certificate_status, Shapes::ShapeRef.new(shape: ServerCertificateStatus, location_name: "serverCertificateStatus"))
     ServerCertificateSummary.add_member(:server_certificate_status_detail, Shapes::ShapeRef.new(shape: ServerCertificateStatusDetail, location_name: "serverCertificateStatusDetail"))
@@ -5005,6 +5012,7 @@ module Aws::IoT
     UpdateDomainConfigurationRequest.add_member(:domain_configuration_status, Shapes::ShapeRef.new(shape: DomainConfigurationStatus, location_name: "domainConfigurationStatus"))
     UpdateDomainConfigurationRequest.add_member(:remove_authorizer_config, Shapes::ShapeRef.new(shape: RemoveAuthorizerConfig, location_name: "removeAuthorizerConfig"))
     UpdateDomainConfigurationRequest.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfig, location_name: "tlsConfig"))
+    UpdateDomainConfigurationRequest.add_member(:server_certificate_config, Shapes::ShapeRef.new(shape: ServerCertificateConfig, location_name: "serverCertificateConfig"))
     UpdateDomainConfigurationRequest.struct_class = Types::UpdateDomainConfigurationRequest
 
     UpdateDomainConfigurationResponse.add_member(:domain_configuration_name, Shapes::ShapeRef.new(shape: ReservedDomainConfigurationName, location_name: "domainConfigurationName"))
@@ -8816,6 +8824,7 @@ module Aws::IoT
         o.input = Shapes::ShapeRef.new(shape: UpdatePackageRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdatePackageResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -8828,6 +8837,7 @@ module Aws::IoT
         o.input = Shapes::ShapeRef.new(shape: UpdatePackageConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdatePackageConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
@@ -8839,6 +8849,7 @@ module Aws::IoT
         o.input = Shapes::ShapeRef.new(shape: UpdatePackageVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdatePackageVersionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

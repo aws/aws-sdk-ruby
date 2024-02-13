@@ -1,0 +1,1183 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Route53Resolver
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateFirewallRuleGroupRequest
+      attr_accessor creator_request_id: ::String
+      attr_accessor firewall_rule_group_id: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor name: ::String
+      attr_accessor mutation_protection: ("ENABLED" | "DISABLED")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class AssociateFirewallRuleGroupResponse
+      attr_accessor firewall_rule_group_association: Types::FirewallRuleGroupAssociation
+      SENSITIVE: []
+    end
+
+    class AssociateResolverEndpointIpAddressRequest
+      attr_accessor resolver_endpoint_id: ::String
+      attr_accessor ip_address: Types::IpAddressUpdate
+      SENSITIVE: []
+    end
+
+    class AssociateResolverEndpointIpAddressResponse
+      attr_accessor resolver_endpoint: Types::ResolverEndpoint
+      SENSITIVE: []
+    end
+
+    class AssociateResolverQueryLogConfigRequest
+      attr_accessor resolver_query_log_config_id: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateResolverQueryLogConfigResponse
+      attr_accessor resolver_query_log_config_association: Types::ResolverQueryLogConfigAssociation
+      SENSITIVE: []
+    end
+
+    class AssociateResolverRuleRequest
+      attr_accessor resolver_rule_id: ::String
+      attr_accessor name: ::String
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateResolverRuleResponse
+      attr_accessor resolver_rule_association: Types::ResolverRuleAssociation
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFirewallDomainListRequest
+      attr_accessor creator_request_id: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateFirewallDomainListResponse
+      attr_accessor firewall_domain_list: Types::FirewallDomainList
+      SENSITIVE: []
+    end
+
+    class CreateFirewallRuleGroupRequest
+      attr_accessor creator_request_id: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateFirewallRuleGroupResponse
+      attr_accessor firewall_rule_group: Types::FirewallRuleGroup
+      SENSITIVE: []
+    end
+
+    class CreateFirewallRuleRequest
+      attr_accessor creator_request_id: ::String
+      attr_accessor firewall_rule_group_id: ::String
+      attr_accessor firewall_domain_list_id: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor action: ("ALLOW" | "BLOCK" | "ALERT")
+      attr_accessor block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE")
+      attr_accessor block_override_domain: ::String
+      attr_accessor block_override_dns_type: ("CNAME")
+      attr_accessor block_override_ttl: ::Integer
+      attr_accessor name: ::String
+      attr_accessor qtype: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFirewallRuleResponse
+      attr_accessor firewall_rule: Types::FirewallRule
+      SENSITIVE: []
+    end
+
+    class CreateOutpostResolverRequest
+      attr_accessor creator_request_id: ::String
+      attr_accessor name: ::String
+      attr_accessor instance_count: ::Integer
+      attr_accessor preferred_instance_type: ::String
+      attr_accessor outpost_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateOutpostResolverResponse
+      attr_accessor outpost_resolver: Types::OutpostResolver
+      SENSITIVE: []
+    end
+
+    class CreateResolverEndpointRequest
+      attr_accessor creator_request_id: ::String
+      attr_accessor name: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor direction: ("INBOUND" | "OUTBOUND")
+      attr_accessor ip_addresses: ::Array[Types::IpAddressRequest]
+      attr_accessor outpost_arn: ::String
+      attr_accessor preferred_instance_type: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor resolver_endpoint_type: ("IPV6" | "IPV4" | "DUALSTACK")
+      attr_accessor protocols: ::Array[("DoH" | "Do53" | "DoH-FIPS")]
+      SENSITIVE: []
+    end
+
+    class CreateResolverEndpointResponse
+      attr_accessor resolver_endpoint: Types::ResolverEndpoint
+      SENSITIVE: []
+    end
+
+    class CreateResolverQueryLogConfigRequest
+      attr_accessor name: ::String
+      attr_accessor destination_arn: ::String
+      attr_accessor creator_request_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateResolverQueryLogConfigResponse
+      attr_accessor resolver_query_log_config: Types::ResolverQueryLogConfig
+      SENSITIVE: []
+    end
+
+    class CreateResolverRuleRequest
+      attr_accessor creator_request_id: ::String
+      attr_accessor name: ::String
+      attr_accessor rule_type: ("FORWARD" | "SYSTEM" | "RECURSIVE")
+      attr_accessor domain_name: ::String
+      attr_accessor target_ips: ::Array[Types::TargetAddress]
+      attr_accessor resolver_endpoint_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateResolverRuleResponse
+      attr_accessor resolver_rule: Types::ResolverRule
+      SENSITIVE: []
+    end
+
+    class DeleteFirewallDomainListRequest
+      attr_accessor firewall_domain_list_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFirewallDomainListResponse
+      attr_accessor firewall_domain_list: Types::FirewallDomainList
+      SENSITIVE: []
+    end
+
+    class DeleteFirewallRuleGroupRequest
+      attr_accessor firewall_rule_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFirewallRuleGroupResponse
+      attr_accessor firewall_rule_group: Types::FirewallRuleGroup
+      SENSITIVE: []
+    end
+
+    class DeleteFirewallRuleRequest
+      attr_accessor firewall_rule_group_id: ::String
+      attr_accessor firewall_domain_list_id: ::String
+      attr_accessor qtype: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFirewallRuleResponse
+      attr_accessor firewall_rule: Types::FirewallRule
+      SENSITIVE: []
+    end
+
+    class DeleteOutpostResolverRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteOutpostResolverResponse
+      attr_accessor outpost_resolver: Types::OutpostResolver
+      SENSITIVE: []
+    end
+
+    class DeleteResolverEndpointRequest
+      attr_accessor resolver_endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResolverEndpointResponse
+      attr_accessor resolver_endpoint: Types::ResolverEndpoint
+      SENSITIVE: []
+    end
+
+    class DeleteResolverQueryLogConfigRequest
+      attr_accessor resolver_query_log_config_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResolverQueryLogConfigResponse
+      attr_accessor resolver_query_log_config: Types::ResolverQueryLogConfig
+      SENSITIVE: []
+    end
+
+    class DeleteResolverRuleRequest
+      attr_accessor resolver_rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResolverRuleResponse
+      attr_accessor resolver_rule: Types::ResolverRule
+      SENSITIVE: []
+    end
+
+    class DisassociateFirewallRuleGroupRequest
+      attr_accessor firewall_rule_group_association_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateFirewallRuleGroupResponse
+      attr_accessor firewall_rule_group_association: Types::FirewallRuleGroupAssociation
+      SENSITIVE: []
+    end
+
+    class DisassociateResolverEndpointIpAddressRequest
+      attr_accessor resolver_endpoint_id: ::String
+      attr_accessor ip_address: Types::IpAddressUpdate
+      SENSITIVE: []
+    end
+
+    class DisassociateResolverEndpointIpAddressResponse
+      attr_accessor resolver_endpoint: Types::ResolverEndpoint
+      SENSITIVE: []
+    end
+
+    class DisassociateResolverQueryLogConfigRequest
+      attr_accessor resolver_query_log_config_id: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateResolverQueryLogConfigResponse
+      attr_accessor resolver_query_log_config_association: Types::ResolverQueryLogConfigAssociation
+      SENSITIVE: []
+    end
+
+    class DisassociateResolverRuleRequest
+      attr_accessor vpc_id: ::String
+      attr_accessor resolver_rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateResolverRuleResponse
+      attr_accessor resolver_rule_association: Types::ResolverRuleAssociation
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FirewallConfig
+      attr_accessor id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor firewall_fail_open: ("ENABLED" | "DISABLED" | "USE_LOCAL_RESOURCE_SETTING")
+      SENSITIVE: []
+    end
+
+    class FirewallDomainList
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor domain_count: ::Integer
+      attr_accessor status: ("COMPLETE" | "COMPLETE_IMPORT_FAILED" | "IMPORTING" | "DELETING" | "UPDATING")
+      attr_accessor status_message: ::String
+      attr_accessor managed_owner_name: ::String
+      attr_accessor creator_request_id: ::String
+      attr_accessor creation_time: ::String
+      attr_accessor modification_time: ::String
+      SENSITIVE: []
+    end
+
+    class FirewallDomainListMetadata
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor creator_request_id: ::String
+      attr_accessor managed_owner_name: ::String
+      SENSITIVE: []
+    end
+
+    class FirewallRule
+      attr_accessor firewall_rule_group_id: ::String
+      attr_accessor firewall_domain_list_id: ::String
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor action: ("ALLOW" | "BLOCK" | "ALERT")
+      attr_accessor block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE")
+      attr_accessor block_override_domain: ::String
+      attr_accessor block_override_dns_type: ("CNAME")
+      attr_accessor block_override_ttl: ::Integer
+      attr_accessor creator_request_id: ::String
+      attr_accessor creation_time: ::String
+      attr_accessor modification_time: ::String
+      attr_accessor qtype: ::String
+      SENSITIVE: []
+    end
+
+    class FirewallRuleGroup
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor rule_count: ::Integer
+      attr_accessor status: ("COMPLETE" | "DELETING" | "UPDATING")
+      attr_accessor status_message: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor creator_request_id: ::String
+      attr_accessor share_status: ("NOT_SHARED" | "SHARED_WITH_ME" | "SHARED_BY_ME")
+      attr_accessor creation_time: ::String
+      attr_accessor modification_time: ::String
+      SENSITIVE: []
+    end
+
+    class FirewallRuleGroupAssociation
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor firewall_rule_group_id: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor mutation_protection: ("ENABLED" | "DISABLED")
+      attr_accessor managed_owner_name: ::String
+      attr_accessor status: ("COMPLETE" | "DELETING" | "UPDATING")
+      attr_accessor status_message: ::String
+      attr_accessor creator_request_id: ::String
+      attr_accessor creation_time: ::String
+      attr_accessor modification_time: ::String
+      SENSITIVE: []
+    end
+
+    class FirewallRuleGroupMetadata
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor creator_request_id: ::String
+      attr_accessor share_status: ("NOT_SHARED" | "SHARED_WITH_ME" | "SHARED_BY_ME")
+      SENSITIVE: []
+    end
+
+    class GetFirewallConfigRequest
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFirewallConfigResponse
+      attr_accessor firewall_config: Types::FirewallConfig
+      SENSITIVE: []
+    end
+
+    class GetFirewallDomainListRequest
+      attr_accessor firewall_domain_list_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFirewallDomainListResponse
+      attr_accessor firewall_domain_list: Types::FirewallDomainList
+      SENSITIVE: []
+    end
+
+    class GetFirewallRuleGroupAssociationRequest
+      attr_accessor firewall_rule_group_association_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFirewallRuleGroupAssociationResponse
+      attr_accessor firewall_rule_group_association: Types::FirewallRuleGroupAssociation
+      SENSITIVE: []
+    end
+
+    class GetFirewallRuleGroupPolicyRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetFirewallRuleGroupPolicyResponse
+      attr_accessor firewall_rule_group_policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetFirewallRuleGroupRequest
+      attr_accessor firewall_rule_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFirewallRuleGroupResponse
+      attr_accessor firewall_rule_group: Types::FirewallRuleGroup
+      SENSITIVE: []
+    end
+
+    class GetOutpostResolverRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetOutpostResolverResponse
+      attr_accessor outpost_resolver: Types::OutpostResolver
+      SENSITIVE: []
+    end
+
+    class GetResolverConfigRequest
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetResolverConfigResponse
+      attr_accessor resolver_config: Types::ResolverConfig
+      SENSITIVE: []
+    end
+
+    class GetResolverDnssecConfigRequest
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetResolverDnssecConfigResponse
+      attr_accessor resolver_dnssec_config: Types::ResolverDnssecConfig
+      SENSITIVE: []
+    end
+
+    class GetResolverEndpointRequest
+      attr_accessor resolver_endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetResolverEndpointResponse
+      attr_accessor resolver_endpoint: Types::ResolverEndpoint
+      SENSITIVE: []
+    end
+
+    class GetResolverQueryLogConfigAssociationRequest
+      attr_accessor resolver_query_log_config_association_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetResolverQueryLogConfigAssociationResponse
+      attr_accessor resolver_query_log_config_association: Types::ResolverQueryLogConfigAssociation
+      SENSITIVE: []
+    end
+
+    class GetResolverQueryLogConfigPolicyRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResolverQueryLogConfigPolicyResponse
+      attr_accessor resolver_query_log_config_policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetResolverQueryLogConfigRequest
+      attr_accessor resolver_query_log_config_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetResolverQueryLogConfigResponse
+      attr_accessor resolver_query_log_config: Types::ResolverQueryLogConfig
+      SENSITIVE: []
+    end
+
+    class GetResolverRuleAssociationRequest
+      attr_accessor resolver_rule_association_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetResolverRuleAssociationResponse
+      attr_accessor resolver_rule_association: Types::ResolverRuleAssociation
+      SENSITIVE: []
+    end
+
+    class GetResolverRulePolicyRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResolverRulePolicyResponse
+      attr_accessor resolver_rule_policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetResolverRuleRequest
+      attr_accessor resolver_rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetResolverRuleResponse
+      attr_accessor resolver_rule: Types::ResolverRule
+      SENSITIVE: []
+    end
+
+    class ImportFirewallDomainsRequest
+      attr_accessor firewall_domain_list_id: ::String
+      attr_accessor operation: ("REPLACE")
+      attr_accessor domain_file_url: ::String
+      SENSITIVE: []
+    end
+
+    class ImportFirewallDomainsResponse
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("COMPLETE" | "COMPLETE_IMPORT_FAILED" | "IMPORTING" | "DELETING" | "UPDATING")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServiceErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      attr_accessor field_name: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidPolicyDocument
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTagException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IpAddressRequest
+      attr_accessor subnet_id: ::String
+      attr_accessor ip: ::String
+      attr_accessor ipv_6: ::String
+      SENSITIVE: []
+    end
+
+    class IpAddressResponse
+      attr_accessor ip_id: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor ip: ::String
+      attr_accessor ipv_6: ::String
+      attr_accessor status: ("CREATING" | "FAILED_CREATION" | "ATTACHING" | "ATTACHED" | "REMAP_DETACHING" | "REMAP_ATTACHING" | "DETACHING" | "FAILED_RESOURCE_GONE" | "DELETING" | "DELETE_FAILED_FAS_EXPIRED" | "UPDATING" | "UPDATE_FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor creation_time: ::String
+      attr_accessor modification_time: ::String
+      SENSITIVE: []
+    end
+
+    class IpAddressUpdate
+      attr_accessor ip_id: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor ip: ::String
+      attr_accessor ipv_6: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ListFirewallConfigsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFirewallConfigsResponse
+      attr_accessor next_token: ::String
+      attr_accessor firewall_configs: ::Array[Types::FirewallConfig]
+      SENSITIVE: []
+    end
+
+    class ListFirewallDomainListsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFirewallDomainListsResponse
+      attr_accessor next_token: ::String
+      attr_accessor firewall_domain_lists: ::Array[Types::FirewallDomainListMetadata]
+      SENSITIVE: []
+    end
+
+    class ListFirewallDomainsRequest
+      attr_accessor firewall_domain_list_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFirewallDomainsResponse
+      attr_accessor next_token: ::String
+      attr_accessor domains: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListFirewallRuleGroupAssociationsRequest
+      attr_accessor firewall_rule_group_id: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor status: ("COMPLETE" | "DELETING" | "UPDATING")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFirewallRuleGroupAssociationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor firewall_rule_group_associations: ::Array[Types::FirewallRuleGroupAssociation]
+      SENSITIVE: []
+    end
+
+    class ListFirewallRuleGroupsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFirewallRuleGroupsResponse
+      attr_accessor next_token: ::String
+      attr_accessor firewall_rule_groups: ::Array[Types::FirewallRuleGroupMetadata]
+      SENSITIVE: []
+    end
+
+    class ListFirewallRulesRequest
+      attr_accessor firewall_rule_group_id: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor action: ("ALLOW" | "BLOCK" | "ALERT")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFirewallRulesResponse
+      attr_accessor next_token: ::String
+      attr_accessor firewall_rules: ::Array[Types::FirewallRule]
+      SENSITIVE: []
+    end
+
+    class ListOutpostResolversRequest
+      attr_accessor outpost_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOutpostResolversResponse
+      attr_accessor outpost_resolvers: ::Array[Types::OutpostResolver]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResolverConfigsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResolverConfigsResponse
+      attr_accessor next_token: ::String
+      attr_accessor resolver_configs: ::Array[Types::ResolverConfig]
+      SENSITIVE: []
+    end
+
+    class ListResolverDnssecConfigsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListResolverDnssecConfigsResponse
+      attr_accessor next_token: ::String
+      attr_accessor resolver_dnssec_configs: ::Array[Types::ResolverDnssecConfig]
+      SENSITIVE: []
+    end
+
+    class ListResolverEndpointIpAddressesRequest
+      attr_accessor resolver_endpoint_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResolverEndpointIpAddressesResponse
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor ip_addresses: ::Array[Types::IpAddressResponse]
+      SENSITIVE: []
+    end
+
+    class ListResolverEndpointsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListResolverEndpointsResponse
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor resolver_endpoints: ::Array[Types::ResolverEndpoint]
+      SENSITIVE: []
+    end
+
+    class ListResolverQueryLogConfigAssociationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor sort_by: ::String
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class ListResolverQueryLogConfigAssociationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor total_count: ::Integer
+      attr_accessor total_filtered_count: ::Integer
+      attr_accessor resolver_query_log_config_associations: ::Array[Types::ResolverQueryLogConfigAssociation]
+      SENSITIVE: []
+    end
+
+    class ListResolverQueryLogConfigsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor sort_by: ::String
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class ListResolverQueryLogConfigsResponse
+      attr_accessor next_token: ::String
+      attr_accessor total_count: ::Integer
+      attr_accessor total_filtered_count: ::Integer
+      attr_accessor resolver_query_log_configs: ::Array[Types::ResolverQueryLogConfig]
+      SENSITIVE: []
+    end
+
+    class ListResolverRuleAssociationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListResolverRuleAssociationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor resolver_rule_associations: ::Array[Types::ResolverRuleAssociation]
+      SENSITIVE: []
+    end
+
+    class ListResolverRulesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListResolverRulesResponse
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor resolver_rules: ::Array[Types::ResolverRule]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class OutpostResolver
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::String
+      attr_accessor modification_time: ::String
+      attr_accessor creator_request_id: ::String
+      attr_accessor id: ::String
+      attr_accessor instance_count: ::Integer
+      attr_accessor preferred_instance_type: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING" | "ACTION_NEEDED" | "FAILED_CREATION" | "FAILED_DELETION")
+      attr_accessor status_message: ::String
+      attr_accessor outpost_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutFirewallRuleGroupPolicyRequest
+      attr_accessor arn: ::String
+      attr_accessor firewall_rule_group_policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutFirewallRuleGroupPolicyResponse
+      attr_accessor return_value: bool
+      SENSITIVE: []
+    end
+
+    class PutResolverQueryLogConfigPolicyRequest
+      attr_accessor arn: ::String
+      attr_accessor resolver_query_log_config_policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutResolverQueryLogConfigPolicyResponse
+      attr_accessor return_value: bool
+      SENSITIVE: []
+    end
+
+    class PutResolverRulePolicyRequest
+      attr_accessor arn: ::String
+      attr_accessor resolver_rule_policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutResolverRulePolicyResponse
+      attr_accessor return_value: bool
+      SENSITIVE: []
+    end
+
+    class ResolverConfig
+      attr_accessor id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor autodefined_reverse: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "UPDATING_TO_USE_LOCAL_RESOURCE_SETTING" | "USE_LOCAL_RESOURCE_SETTING")
+      SENSITIVE: []
+    end
+
+    class ResolverDnssecConfig
+      attr_accessor id: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor validation_status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "UPDATING_TO_USE_LOCAL_RESOURCE_SETTING" | "USE_LOCAL_RESOURCE_SETTING")
+      SENSITIVE: []
+    end
+
+    class ResolverEndpoint
+      attr_accessor id: ::String
+      attr_accessor creator_request_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor direction: ("INBOUND" | "OUTBOUND")
+      attr_accessor ip_address_count: ::Integer
+      attr_accessor host_vpc_id: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "AUTO_RECOVERING" | "ACTION_NEEDED" | "DELETING")
+      attr_accessor status_message: ::String
+      attr_accessor creation_time: ::String
+      attr_accessor modification_time: ::String
+      attr_accessor outpost_arn: ::String
+      attr_accessor preferred_instance_type: ::String
+      attr_accessor resolver_endpoint_type: ("IPV6" | "IPV4" | "DUALSTACK")
+      attr_accessor protocols: ::Array[("DoH" | "Do53" | "DoH-FIPS")]
+      SENSITIVE: []
+    end
+
+    class ResolverQueryLogConfig
+      attr_accessor id: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor status: ("CREATING" | "CREATED" | "DELETING" | "FAILED")
+      attr_accessor share_status: ("NOT_SHARED" | "SHARED_WITH_ME" | "SHARED_BY_ME")
+      attr_accessor association_count: ::Integer
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor destination_arn: ::String
+      attr_accessor creator_request_id: ::String
+      attr_accessor creation_time: ::String
+      SENSITIVE: []
+    end
+
+    class ResolverQueryLogConfigAssociation
+      attr_accessor id: ::String
+      attr_accessor resolver_query_log_config_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "ACTION_NEEDED" | "DELETING" | "FAILED")
+      attr_accessor error: ("NONE" | "DESTINATION_NOT_FOUND" | "ACCESS_DENIED" | "INTERNAL_SERVICE_ERROR")
+      attr_accessor error_message: ::String
+      attr_accessor creation_time: ::String
+      SENSITIVE: []
+    end
+
+    class ResolverRule
+      attr_accessor id: ::String
+      attr_accessor creator_request_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor status: ("COMPLETE" | "DELETING" | "UPDATING" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor rule_type: ("FORWARD" | "SYSTEM" | "RECURSIVE")
+      attr_accessor name: ::String
+      attr_accessor target_ips: ::Array[Types::TargetAddress]
+      attr_accessor resolver_endpoint_id: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor share_status: ("NOT_SHARED" | "SHARED_WITH_ME" | "SHARED_BY_ME")
+      attr_accessor creation_time: ::String
+      attr_accessor modification_time: ::String
+      SENSITIVE: []
+    end
+
+    class ResolverRuleAssociation
+      attr_accessor id: ::String
+      attr_accessor resolver_rule_id: ::String
+      attr_accessor name: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor status: ("CREATING" | "COMPLETE" | "DELETING" | "FAILED" | "OVERRIDDEN")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class ResolverRuleConfig
+      attr_accessor name: ::String
+      attr_accessor target_ips: ::Array[Types::TargetAddress]
+      attr_accessor resolver_endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceExistsException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceUnavailableException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TargetAddress
+      attr_accessor ip: ::String
+      attr_accessor port: ::Integer
+      attr_accessor ipv_6: ::String
+      attr_accessor protocol: ("DoH" | "Do53" | "DoH-FIPS")
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnknownResourceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateFirewallConfigRequest
+      attr_accessor resource_id: ::String
+      attr_accessor firewall_fail_open: ("ENABLED" | "DISABLED" | "USE_LOCAL_RESOURCE_SETTING")
+      SENSITIVE: []
+    end
+
+    class UpdateFirewallConfigResponse
+      attr_accessor firewall_config: Types::FirewallConfig
+      SENSITIVE: []
+    end
+
+    class UpdateFirewallDomainsRequest
+      attr_accessor firewall_domain_list_id: ::String
+      attr_accessor operation: ("ADD" | "REMOVE" | "REPLACE")
+      attr_accessor domains: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateFirewallDomainsResponse
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("COMPLETE" | "COMPLETE_IMPORT_FAILED" | "IMPORTING" | "DELETING" | "UPDATING")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFirewallRuleGroupAssociationRequest
+      attr_accessor firewall_rule_group_association_id: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor mutation_protection: ("ENABLED" | "DISABLED")
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFirewallRuleGroupAssociationResponse
+      attr_accessor firewall_rule_group_association: Types::FirewallRuleGroupAssociation
+      SENSITIVE: []
+    end
+
+    class UpdateFirewallRuleRequest
+      attr_accessor firewall_rule_group_id: ::String
+      attr_accessor firewall_domain_list_id: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor action: ("ALLOW" | "BLOCK" | "ALERT")
+      attr_accessor block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE")
+      attr_accessor block_override_domain: ::String
+      attr_accessor block_override_dns_type: ("CNAME")
+      attr_accessor block_override_ttl: ::Integer
+      attr_accessor name: ::String
+      attr_accessor qtype: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFirewallRuleResponse
+      attr_accessor firewall_rule: Types::FirewallRule
+      SENSITIVE: []
+    end
+
+    class UpdateIpAddress
+      attr_accessor ip_id: ::String
+      attr_accessor ipv_6: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateOutpostResolverRequest
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor instance_count: ::Integer
+      attr_accessor preferred_instance_type: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateOutpostResolverResponse
+      attr_accessor outpost_resolver: Types::OutpostResolver
+      SENSITIVE: []
+    end
+
+    class UpdateResolverConfigRequest
+      attr_accessor resource_id: ::String
+      attr_accessor autodefined_reverse_flag: ("ENABLE" | "DISABLE" | "USE_LOCAL_RESOURCE_SETTING")
+      SENSITIVE: []
+    end
+
+    class UpdateResolverConfigResponse
+      attr_accessor resolver_config: Types::ResolverConfig
+      SENSITIVE: []
+    end
+
+    class UpdateResolverDnssecConfigRequest
+      attr_accessor resource_id: ::String
+      attr_accessor validation: ("ENABLE" | "DISABLE" | "USE_LOCAL_RESOURCE_SETTING")
+      SENSITIVE: []
+    end
+
+    class UpdateResolverDnssecConfigResponse
+      attr_accessor resolver_dnssec_config: Types::ResolverDnssecConfig
+      SENSITIVE: []
+    end
+
+    class UpdateResolverEndpointRequest
+      attr_accessor resolver_endpoint_id: ::String
+      attr_accessor name: ::String
+      attr_accessor resolver_endpoint_type: ("IPV6" | "IPV4" | "DUALSTACK")
+      attr_accessor update_ip_addresses: ::Array[Types::UpdateIpAddress]
+      attr_accessor protocols: ::Array[("DoH" | "Do53" | "DoH-FIPS")]
+      SENSITIVE: []
+    end
+
+    class UpdateResolverEndpointResponse
+      attr_accessor resolver_endpoint: Types::ResolverEndpoint
+      SENSITIVE: []
+    end
+
+    class UpdateResolverRuleRequest
+      attr_accessor resolver_rule_id: ::String
+      attr_accessor config: Types::ResolverRuleConfig
+      SENSITIVE: []
+    end
+
+    class UpdateResolverRuleResponse
+      attr_accessor resolver_rule: Types::ResolverRule
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

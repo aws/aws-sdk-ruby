@@ -1,0 +1,242 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CodeDeploy
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AlarmsLimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class ApplicationAlreadyExistsException < ::Aws::Errors::ServiceError
+      end
+      class ApplicationDoesNotExistException < ::Aws::Errors::ServiceError
+      end
+      class ApplicationLimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class ApplicationNameRequiredException < ::Aws::Errors::ServiceError
+      end
+      class ArnNotSupportedException < ::Aws::Errors::ServiceError
+      end
+      class BatchLimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class BucketNameFilterRequiredException < ::Aws::Errors::ServiceError
+      end
+      class DeploymentAlreadyCompletedException < ::Aws::Errors::ServiceError
+      end
+      class DeploymentAlreadyStartedException < ::Aws::Errors::ServiceError
+      end
+      class DeploymentConfigAlreadyExistsException < ::Aws::Errors::ServiceError
+      end
+      class DeploymentConfigDoesNotExistException < ::Aws::Errors::ServiceError
+      end
+      class DeploymentConfigInUseException < ::Aws::Errors::ServiceError
+      end
+      class DeploymentConfigLimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class DeploymentConfigNameRequiredException < ::Aws::Errors::ServiceError
+      end
+      class DeploymentDoesNotExistException < ::Aws::Errors::ServiceError
+      end
+      class DeploymentGroupAlreadyExistsException < ::Aws::Errors::ServiceError
+      end
+      class DeploymentGroupDoesNotExistException < ::Aws::Errors::ServiceError
+      end
+      class DeploymentGroupLimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class DeploymentGroupNameRequiredException < ::Aws::Errors::ServiceError
+      end
+      class DeploymentIdRequiredException < ::Aws::Errors::ServiceError
+      end
+      class DeploymentIsNotInReadyStateException < ::Aws::Errors::ServiceError
+      end
+      class DeploymentLimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class DeploymentNotStartedException < ::Aws::Errors::ServiceError
+      end
+      class DeploymentTargetDoesNotExistException < ::Aws::Errors::ServiceError
+      end
+      class DeploymentTargetIdRequiredException < ::Aws::Errors::ServiceError
+      end
+      class DeploymentTargetListSizeExceededException < ::Aws::Errors::ServiceError
+      end
+      class DescriptionTooLongException < ::Aws::Errors::ServiceError
+      end
+      class ECSServiceMappingLimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class GitHubAccountTokenDoesNotExistException < ::Aws::Errors::ServiceError
+      end
+      class GitHubAccountTokenNameRequiredException < ::Aws::Errors::ServiceError
+      end
+      class IamArnRequiredException < ::Aws::Errors::ServiceError
+      end
+      class IamSessionArnAlreadyRegisteredException < ::Aws::Errors::ServiceError
+      end
+      class IamUserArnAlreadyRegisteredException < ::Aws::Errors::ServiceError
+      end
+      class IamUserArnRequiredException < ::Aws::Errors::ServiceError
+      end
+      class InstanceDoesNotExistException < ::Aws::Errors::ServiceError
+      end
+      class InstanceIdRequiredException < ::Aws::Errors::ServiceError
+      end
+      class InstanceLimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class InstanceNameAlreadyRegisteredException < ::Aws::Errors::ServiceError
+      end
+      class InstanceNameRequiredException < ::Aws::Errors::ServiceError
+      end
+      class InstanceNotRegisteredException < ::Aws::Errors::ServiceError
+      end
+      class InvalidAlarmConfigException < ::Aws::Errors::ServiceError
+      end
+      class InvalidApplicationNameException < ::Aws::Errors::ServiceError
+      end
+      class InvalidArnException < ::Aws::Errors::ServiceError
+      end
+      class InvalidAutoRollbackConfigException < ::Aws::Errors::ServiceError
+      end
+      class InvalidAutoScalingGroupException < ::Aws::Errors::ServiceError
+      end
+      class InvalidBlueGreenDeploymentConfigurationException < ::Aws::Errors::ServiceError
+      end
+      class InvalidBucketNameFilterException < ::Aws::Errors::ServiceError
+      end
+      class InvalidComputePlatformException < ::Aws::Errors::ServiceError
+      end
+      class InvalidDeployedStateFilterException < ::Aws::Errors::ServiceError
+      end
+      class InvalidDeploymentConfigNameException < ::Aws::Errors::ServiceError
+      end
+      class InvalidDeploymentGroupNameException < ::Aws::Errors::ServiceError
+      end
+      class InvalidDeploymentIdException < ::Aws::Errors::ServiceError
+      end
+      class InvalidDeploymentInstanceTypeException < ::Aws::Errors::ServiceError
+      end
+      class InvalidDeploymentStatusException < ::Aws::Errors::ServiceError
+      end
+      class InvalidDeploymentStyleException < ::Aws::Errors::ServiceError
+      end
+      class InvalidDeploymentTargetIdException < ::Aws::Errors::ServiceError
+      end
+      class InvalidDeploymentWaitTypeException < ::Aws::Errors::ServiceError
+      end
+      class InvalidEC2TagCombinationException < ::Aws::Errors::ServiceError
+      end
+      class InvalidEC2TagException < ::Aws::Errors::ServiceError
+      end
+      class InvalidECSServiceException < ::Aws::Errors::ServiceError
+      end
+      class InvalidExternalIdException < ::Aws::Errors::ServiceError
+      end
+      class InvalidFileExistsBehaviorException < ::Aws::Errors::ServiceError
+      end
+      class InvalidGitHubAccountTokenException < ::Aws::Errors::ServiceError
+      end
+      class InvalidGitHubAccountTokenNameException < ::Aws::Errors::ServiceError
+      end
+      class InvalidIamSessionArnException < ::Aws::Errors::ServiceError
+      end
+      class InvalidIamUserArnException < ::Aws::Errors::ServiceError
+      end
+      class InvalidIgnoreApplicationStopFailuresValueException < ::Aws::Errors::ServiceError
+      end
+      class InvalidInputException < ::Aws::Errors::ServiceError
+      end
+      class InvalidInstanceIdException < ::Aws::Errors::ServiceError
+      end
+      class InvalidInstanceNameException < ::Aws::Errors::ServiceError
+      end
+      class InvalidInstanceStatusException < ::Aws::Errors::ServiceError
+      end
+      class InvalidInstanceTypeException < ::Aws::Errors::ServiceError
+      end
+      class InvalidKeyPrefixFilterException < ::Aws::Errors::ServiceError
+      end
+      class InvalidLifecycleEventHookExecutionIdException < ::Aws::Errors::ServiceError
+      end
+      class InvalidLifecycleEventHookExecutionStatusException < ::Aws::Errors::ServiceError
+      end
+      class InvalidLoadBalancerInfoException < ::Aws::Errors::ServiceError
+      end
+      class InvalidMinimumHealthyHostValueException < ::Aws::Errors::ServiceError
+      end
+      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+      end
+      class InvalidOnPremisesTagCombinationException < ::Aws::Errors::ServiceError
+      end
+      class InvalidOperationException < ::Aws::Errors::ServiceError
+      end
+      class InvalidRegistrationStatusException < ::Aws::Errors::ServiceError
+      end
+      class InvalidRevisionException < ::Aws::Errors::ServiceError
+      end
+      class InvalidRoleException < ::Aws::Errors::ServiceError
+      end
+      class InvalidSortByException < ::Aws::Errors::ServiceError
+      end
+      class InvalidSortOrderException < ::Aws::Errors::ServiceError
+      end
+      class InvalidTagException < ::Aws::Errors::ServiceError
+      end
+      class InvalidTagFilterException < ::Aws::Errors::ServiceError
+      end
+      class InvalidTagsToAddException < ::Aws::Errors::ServiceError
+      end
+      class InvalidTargetException < ::Aws::Errors::ServiceError
+      end
+      class InvalidTargetFilterNameException < ::Aws::Errors::ServiceError
+      end
+      class InvalidTargetGroupPairException < ::Aws::Errors::ServiceError
+      end
+      class InvalidTargetInstancesException < ::Aws::Errors::ServiceError
+      end
+      class InvalidTimeRangeException < ::Aws::Errors::ServiceError
+      end
+      class InvalidTrafficRoutingConfigurationException < ::Aws::Errors::ServiceError
+      end
+      class InvalidTriggerConfigException < ::Aws::Errors::ServiceError
+      end
+      class InvalidUpdateOutdatedInstancesOnlyValueException < ::Aws::Errors::ServiceError
+      end
+      class InvalidZonalDeploymentConfigurationException < ::Aws::Errors::ServiceError
+      end
+      class LifecycleEventAlreadyCompletedException < ::Aws::Errors::ServiceError
+      end
+      class LifecycleHookLimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class MultipleIamArnsProvidedException < ::Aws::Errors::ServiceError
+      end
+      class OperationNotSupportedException < ::Aws::Errors::ServiceError
+      end
+      class ResourceArnRequiredException < ::Aws::Errors::ServiceError
+      end
+      class ResourceValidationException < ::Aws::Errors::ServiceError
+      end
+      class RevisionDoesNotExistException < ::Aws::Errors::ServiceError
+      end
+      class RevisionRequiredException < ::Aws::Errors::ServiceError
+      end
+      class RoleRequiredException < ::Aws::Errors::ServiceError
+      end
+      class TagLimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class TagRequiredException < ::Aws::Errors::ServiceError
+      end
+      class TagSetListLimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class ThrottlingException < ::Aws::Errors::ServiceError
+      end
+      class TriggerTargetsLimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class UnsupportedActionForDeploymentTypeException < ::Aws::Errors::ServiceError
+      end
+    end
+  end
+end

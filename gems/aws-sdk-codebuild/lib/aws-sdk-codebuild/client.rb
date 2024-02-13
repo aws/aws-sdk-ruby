@@ -518,6 +518,7 @@ module Aws::CodeBuild
     #   resp.build_batches[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
     #   resp.build_batches[0].environment.image #=> String
     #   resp.build_batches[0].environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
+    #   resp.build_batches[0].environment.fleet.fleet_arn #=> String
     #   resp.build_batches[0].environment.environment_variables #=> Array
     #   resp.build_batches[0].environment.environment_variables[0].name #=> String
     #   resp.build_batches[0].environment.environment_variables[0].value #=> String
@@ -686,6 +687,7 @@ module Aws::CodeBuild
     #   resp.builds[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
     #   resp.builds[0].environment.image #=> String
     #   resp.builds[0].environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
+    #   resp.builds[0].environment.fleet.fleet_arn #=> String
     #   resp.builds[0].environment.environment_variables #=> Array
     #   resp.builds[0].environment.environment_variables[0].name #=> String
     #   resp.builds[0].environment.environment_variables[0].value #=> String
@@ -744,6 +746,57 @@ module Aws::CodeBuild
     # @param [Hash] params ({})
     def batch_get_builds(params = {}, options = {})
       req = build_request(:batch_get_builds, params)
+      req.send_request(options)
+    end
+
+    # Gets information about one or more compute fleets.
+    #
+    # @option params [required, Array<String>] :names
+    #   The names or ARNs of the compute fleets.
+    #
+    # @return [Types::BatchGetFleetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetFleetsOutput#fleets #fleets} => Array&lt;Types::Fleet&gt;
+    #   * {Types::BatchGetFleetsOutput#fleets_not_found #fleets_not_found} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_fleets({
+    #     names: ["NonEmptyString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.fleets #=> Array
+    #   resp.fleets[0].arn #=> String
+    #   resp.fleets[0].name #=> String
+    #   resp.fleets[0].id #=> String
+    #   resp.fleets[0].created #=> Time
+    #   resp.fleets[0].last_modified #=> Time
+    #   resp.fleets[0].status.status_code #=> String, one of "CREATING", "UPDATING", "ROTATING", "DELETING", "CREATE_FAILED", "UPDATE_ROLLBACK_FAILED", "ACTIVE"
+    #   resp.fleets[0].status.context #=> String, one of "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.fleets[0].status.message #=> String
+    #   resp.fleets[0].base_capacity #=> Integer
+    #   resp.fleets[0].environment_type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
+    #   resp.fleets[0].compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
+    #   resp.fleets[0].scaling_configuration.scaling_type #=> String, one of "TARGET_TRACKING_SCALING"
+    #   resp.fleets[0].scaling_configuration.target_tracking_scaling_configs #=> Array
+    #   resp.fleets[0].scaling_configuration.target_tracking_scaling_configs[0].metric_type #=> String, one of "FLEET_UTILIZATION_RATE"
+    #   resp.fleets[0].scaling_configuration.target_tracking_scaling_configs[0].target_value #=> Float
+    #   resp.fleets[0].scaling_configuration.max_capacity #=> Integer
+    #   resp.fleets[0].scaling_configuration.desired_capacity #=> Integer
+    #   resp.fleets[0].tags #=> Array
+    #   resp.fleets[0].tags[0].key #=> String
+    #   resp.fleets[0].tags[0].value #=> String
+    #   resp.fleets_not_found #=> Array
+    #   resp.fleets_not_found[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetFleets AWS API Documentation
+    #
+    # @overload batch_get_fleets(params = {})
+    # @param [Hash] params ({})
+    def batch_get_fleets(params = {}, options = {})
+      req = build_request(:batch_get_fleets, params)
       req.send_request(options)
     end
 
@@ -828,6 +881,7 @@ module Aws::CodeBuild
     #   resp.projects[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
     #   resp.projects[0].environment.image #=> String
     #   resp.projects[0].environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
+    #   resp.projects[0].environment.fleet.fleet_arn #=> String
     #   resp.projects[0].environment.environment_variables #=> Array
     #   resp.projects[0].environment.environment_variables[0].name #=> String
     #   resp.projects[0].environment.environment_variables[0].value #=> String
@@ -1002,6 +1056,172 @@ module Aws::CodeBuild
     # @param [Hash] params ({})
     def batch_get_reports(params = {}, options = {})
       req = build_request(:batch_get_reports, params)
+      req.send_request(options)
+    end
+
+    # Creates a compute fleet.
+    #
+    # @option params [required, String] :name
+    #   The name of the compute fleet.
+    #
+    # @option params [required, Integer] :base_capacity
+    #   The initial number of machines allocated to the ﬂeet, which deﬁnes the
+    #   number of builds that can run in parallel.
+    #
+    # @option params [required, String] :environment_type
+    #   The environment type of the compute fleet.
+    #
+    #   * The environment type `ARM_CONTAINER` is available only in regions US
+    #     East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland),
+    #     Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific
+    #     (Singapore), Asia Pacific (Sydney), EU (Frankfurt), and South
+    #     America (São Paulo).
+    #
+    #   * The environment type `LINUX_CONTAINER` is available only in regions
+    #     US East (N. Virginia), US East (Ohio), US West (Oregon), EU
+    #     (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
+    #     (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
+    #     Asia Pacific (Mumbai).
+    #
+    #   * The environment type `LINUX_GPU_CONTAINER` is available only in
+    #     regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU
+    #     (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), and Asia Pacific
+    #     (Sydney).
+    #
+    #   * The environment type `WINDOWS_SERVER_2019_CONTAINER` is available
+    #     only in regions US East (N. Virginia), US East (Ohio), US West
+    #     (Oregon), Asia Pacific (Sydney), Asia Pacific (Tokyo), Asia Pacific
+    #     (Mumbai) and EU (Ireland).
+    #
+    #   * The environment type `WINDOWS_SERVER_2022_CONTAINER` is available
+    #     only in regions US East (N. Virginia), US East (Ohio), US West
+    #     (Oregon), EU (Ireland), EU (Frankfurt), Asia Pacific (Sydney), Asia
+    #     Pacific (Singapore), Asia Pacific (Tokyo), South America (São Paulo)
+    #     and Asia Pacific (Mumbai).
+    #
+    #   For more information, see [Build environment compute types][1] in the
+    #   *CodeBuild user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #
+    # @option params [required, String] :compute_type
+    #   Information about the compute resources the compute fleet uses.
+    #   Available values include:
+    #
+    #   * `BUILD_GENERAL1_SMALL`: Use up to 3 GB memory and 2 vCPUs for
+    #     builds.
+    #
+    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 7 GB memory and 4 vCPUs for
+    #     builds.
+    #
+    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GB memory and 8 vCPUs for
+    #     builds, depending on your environment type.
+    #
+    #   * `BUILD_GENERAL1_XLARGE`: Use up to 70 GB memory and 36 vCPUs for
+    #     builds, depending on your environment type.
+    #
+    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 145 GB memory, 72 vCPUs, and 824
+    #     GB of SSD storage for builds. This compute type supports Docker
+    #     images up to 100 GB uncompressed.
+    #
+    #   If you use `BUILD_GENERAL1_SMALL`:
+    #
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 3 GB
+    #     memory and 2 vCPUs for builds.
+    #
+    #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 16 GB
+    #     memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+    #
+    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GB memory
+    #     and 2 vCPUs on ARM-based processors for builds.
+    #
+    #   If you use `BUILD_GENERAL1_LARGE`:
+    #
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 15 GB
+    #     memory and 8 vCPUs for builds.
+    #
+    #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 255 GB
+    #     memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
+    #
+    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GB memory
+    #     and 8 vCPUs on ARM-based processors for builds.
+    #
+    #   For more information, see [Build environment compute types][1] in the
+    #   *CodeBuild User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #
+    # @option params [Types::ScalingConfigurationInput] :scaling_configuration
+    #   The scaling configuration of the compute fleet.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tag key and value pairs associated with this compute fleet.
+    #
+    #   These tags are available for use by Amazon Web Services services that
+    #   support CodeBuild build project tags.
+    #
+    # @return [Types::CreateFleetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFleetOutput#fleet #fleet} => Types::Fleet
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_fleet({
+    #     name: "FleetName", # required
+    #     base_capacity: 1, # required
+    #     environment_type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER, LINUX_LAMBDA_CONTAINER, ARM_LAMBDA_CONTAINER
+    #     compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_XLARGE, BUILD_GENERAL1_2XLARGE, BUILD_LAMBDA_1GB, BUILD_LAMBDA_2GB, BUILD_LAMBDA_4GB, BUILD_LAMBDA_8GB, BUILD_LAMBDA_10GB
+    #     scaling_configuration: {
+    #       scaling_type: "TARGET_TRACKING_SCALING", # accepts TARGET_TRACKING_SCALING
+    #       target_tracking_scaling_configs: [
+    #         {
+    #           metric_type: "FLEET_UTILIZATION_RATE", # accepts FLEET_UTILIZATION_RATE
+    #           target_value: 1.0,
+    #         },
+    #       ],
+    #       max_capacity: 1,
+    #     },
+    #     tags: [
+    #       {
+    #         key: "KeyInput",
+    #         value: "ValueInput",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.fleet.arn #=> String
+    #   resp.fleet.name #=> String
+    #   resp.fleet.id #=> String
+    #   resp.fleet.created #=> Time
+    #   resp.fleet.last_modified #=> Time
+    #   resp.fleet.status.status_code #=> String, one of "CREATING", "UPDATING", "ROTATING", "DELETING", "CREATE_FAILED", "UPDATE_ROLLBACK_FAILED", "ACTIVE"
+    #   resp.fleet.status.context #=> String, one of "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.fleet.status.message #=> String
+    #   resp.fleet.base_capacity #=> Integer
+    #   resp.fleet.environment_type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
+    #   resp.fleet.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
+    #   resp.fleet.scaling_configuration.scaling_type #=> String, one of "TARGET_TRACKING_SCALING"
+    #   resp.fleet.scaling_configuration.target_tracking_scaling_configs #=> Array
+    #   resp.fleet.scaling_configuration.target_tracking_scaling_configs[0].metric_type #=> String, one of "FLEET_UTILIZATION_RATE"
+    #   resp.fleet.scaling_configuration.target_tracking_scaling_configs[0].target_value #=> Float
+    #   resp.fleet.scaling_configuration.max_capacity #=> Integer
+    #   resp.fleet.scaling_configuration.desired_capacity #=> Integer
+    #   resp.fleet.tags #=> Array
+    #   resp.fleet.tags[0].key #=> String
+    #   resp.fleet.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateFleet AWS API Documentation
+    #
+    # @overload create_fleet(params = {})
+    # @param [Hash] params ({})
+    def create_fleet(params = {}, options = {})
+      req = build_request(:create_fleet, params)
       req.send_request(options)
     end
 
@@ -1225,6 +1445,9 @@ module Aws::CodeBuild
     #       type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER, LINUX_LAMBDA_CONTAINER, ARM_LAMBDA_CONTAINER
     #       image: "NonEmptyString", # required
     #       compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_XLARGE, BUILD_GENERAL1_2XLARGE, BUILD_LAMBDA_1GB, BUILD_LAMBDA_2GB, BUILD_LAMBDA_4GB, BUILD_LAMBDA_8GB, BUILD_LAMBDA_10GB
+    #       fleet: {
+    #         fleet_arn: "String",
+    #       },
     #       environment_variables: [
     #         {
     #           name: "NonEmptyString", # required
@@ -1353,6 +1576,7 @@ module Aws::CodeBuild
     #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
     #   resp.project.environment.image #=> String
     #   resp.project.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
+    #   resp.project.environment.fleet.fleet_arn #=> String
     #   resp.project.environment.environment_variables #=> Array
     #   resp.project.environment.environment_variables[0].name #=> String
     #   resp.project.environment.environment_variables[0].value #=> String
@@ -1618,6 +1842,29 @@ module Aws::CodeBuild
     # @param [Hash] params ({})
     def delete_build_batch(params = {}, options = {})
       req = build_request(:delete_build_batch, params)
+      req.send_request(options)
+    end
+
+    # Deletes a compute fleet. When you delete a compute fleet, its builds
+    # are not deleted.
+    #
+    # @option params [required, String] :arn
+    #   The ARN of the compute fleet.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_fleet({
+    #     arn: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteFleet AWS API Documentation
+    #
+    # @overload delete_fleet(params = {})
+    # @param [Hash] params ({})
+    def delete_fleet(params = {}, options = {})
+      req = build_request(:delete_fleet, params)
       req.send_request(options)
     end
 
@@ -2368,6 +2615,78 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
+    # Gets a list of compute fleet names with each compute fleet name
+    # representing a single compute fleet.
+    #
+    # @option params [String] :next_token
+    #   During a previous call, if there are more than 100 items in the list,
+    #   only the first 100 items are returned, along with a unique string
+    #   called a *nextToken*. To get the next batch of items in the list, call
+    #   this operation again, adding the next token to the call. To get all of
+    #   the items in the list, keep calling this operation with each
+    #   subsequent next token that is returned, until no more next tokens are
+    #   returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of paginated compute fleets returned per response.
+    #   Use `nextToken` to iterate pages in the list of returned compute
+    #   fleets.
+    #
+    # @option params [String] :sort_order
+    #   The order in which to list compute fleets. Valid values include:
+    #
+    #   * `ASCENDING`: List in ascending order.
+    #
+    #   * `DESCENDING`: List in descending order.
+    #
+    #   Use `sortBy` to specify the criterion to be used to list compute fleet
+    #   names.
+    #
+    # @option params [String] :sort_by
+    #   The criterion to be used to list compute fleet names. Valid values
+    #   include:
+    #
+    #   * `CREATED_TIME`: List based on when each compute fleet was created.
+    #
+    #   * `LAST_MODIFIED_TIME`: List based on when information about each
+    #     compute fleet was last changed.
+    #
+    #   * `NAME`: List based on each compute fleet's name.
+    #
+    #   Use `sortOrder` to specify in what order to list the compute fleet
+    #   names based on the preceding criteria.
+    #
+    # @return [Types::ListFleetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFleetsOutput#next_token #next_token} => String
+    #   * {Types::ListFleetsOutput#fleets #fleets} => Array&lt;String&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_fleets({
+    #     next_token: "SensitiveString",
+    #     max_results: 1,
+    #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #     sort_by: "NAME", # accepts NAME, CREATED_TIME, LAST_MODIFIED_TIME
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.fleets #=> Array
+    #   resp.fleets[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListFleets AWS API Documentation
+    #
+    # @overload list_fleets(params = {})
+    # @param [Hash] params ({})
+    def list_fleets(params = {}, options = {})
+      req = build_request(:list_fleets, params)
+      req.send_request(options)
+    end
+
     # Gets a list of build project names, with each build project name
     # representing a single build project.
     #
@@ -2906,6 +3225,7 @@ module Aws::CodeBuild
     #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
     #   resp.build.environment.image #=> String
     #   resp.build.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
+    #   resp.build.environment.fleet.fleet_arn #=> String
     #   resp.build.environment.environment_variables #=> Array
     #   resp.build.environment.environment_variables[0].name #=> String
     #   resp.build.environment.environment_variables[0].value #=> String
@@ -3063,6 +3383,7 @@ module Aws::CodeBuild
     #   resp.build_batch.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
     #   resp.build_batch.environment.image #=> String
     #   resp.build_batch.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
+    #   resp.build_batch.environment.fleet.fleet_arn #=> String
     #   resp.build_batch.environment.environment_variables #=> Array
     #   resp.build_batch.environment.environment_variables[0].name #=> String
     #   resp.build_batch.environment.environment_variables[0].value #=> String
@@ -3368,6 +3689,10 @@ module Aws::CodeBuild
     #
     #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html
     #
+    # @option params [Types::ProjectFleet] :fleet_override
+    #   A ProjectFleet object specified for this build that overrides the one
+    #   defined in the build project.
+    #
     # @return [Types::StartBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartBuildOutput#build #build} => Types::Build
@@ -3489,6 +3814,9 @@ module Aws::CodeBuild
     #     },
     #     image_pull_credentials_type_override: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
     #     debug_session_enabled: false,
+    #     fleet_override: {
+    #       fleet_arn: "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3562,6 +3890,7 @@ module Aws::CodeBuild
     #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
     #   resp.build.environment.image #=> String
     #   resp.build.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
+    #   resp.build.environment.fleet.fleet_arn #=> String
     #   resp.build.environment.environment_variables #=> Array
     #   resp.build.environment.environment_variables[0].name #=> String
     #   resp.build.environment.environment_variables[0].value #=> String
@@ -4037,6 +4366,7 @@ module Aws::CodeBuild
     #   resp.build_batch.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
     #   resp.build_batch.environment.image #=> String
     #   resp.build_batch.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
+    #   resp.build_batch.environment.fleet.fleet_arn #=> String
     #   resp.build_batch.environment.environment_variables #=> Array
     #   resp.build_batch.environment.environment_variables[0].name #=> String
     #   resp.build_batch.environment.environment_variables[0].value #=> String
@@ -4201,6 +4531,7 @@ module Aws::CodeBuild
     #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
     #   resp.build.environment.image #=> String
     #   resp.build.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
+    #   resp.build.environment.fleet.fleet_arn #=> String
     #   resp.build.environment.environment_variables #=> Array
     #   resp.build.environment.environment_variables[0].name #=> String
     #   resp.build.environment.environment_variables[0].value #=> String
@@ -4345,6 +4676,7 @@ module Aws::CodeBuild
     #   resp.build_batch.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
     #   resp.build_batch.environment.image #=> String
     #   resp.build_batch.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
+    #   resp.build_batch.environment.fleet.fleet_arn #=> String
     #   resp.build_batch.environment.environment_variables #=> Array
     #   resp.build_batch.environment.environment_variables[0].name #=> String
     #   resp.build_batch.environment.environment_variables[0].value #=> String
@@ -4420,6 +4752,172 @@ module Aws::CodeBuild
     # @param [Hash] params ({})
     def stop_build_batch(params = {}, options = {})
       req = build_request(:stop_build_batch, params)
+      req.send_request(options)
+    end
+
+    # Updates a compute fleet.
+    #
+    # @option params [required, String] :arn
+    #   The ARN of the compute fleet.
+    #
+    # @option params [Integer] :base_capacity
+    #   The initial number of machines allocated to the compute ﬂeet, which
+    #   deﬁnes the number of builds that can run in parallel.
+    #
+    # @option params [String] :environment_type
+    #   The environment type of the compute fleet.
+    #
+    #   * The environment type `ARM_CONTAINER` is available only in regions US
+    #     East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland),
+    #     Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific
+    #     (Singapore), Asia Pacific (Sydney), EU (Frankfurt), and South
+    #     America (São Paulo).
+    #
+    #   * The environment type `LINUX_CONTAINER` is available only in regions
+    #     US East (N. Virginia), US East (Ohio), US West (Oregon), EU
+    #     (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
+    #     (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
+    #     Asia Pacific (Mumbai).
+    #
+    #   * The environment type `LINUX_GPU_CONTAINER` is available only in
+    #     regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU
+    #     (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), and Asia Pacific
+    #     (Sydney).
+    #
+    #   * The environment type `WINDOWS_SERVER_2019_CONTAINER` is available
+    #     only in regions US East (N. Virginia), US East (Ohio), US West
+    #     (Oregon), Asia Pacific (Sydney), Asia Pacific (Tokyo), Asia Pacific
+    #     (Mumbai) and EU (Ireland).
+    #
+    #   * The environment type `WINDOWS_SERVER_2022_CONTAINER` is available
+    #     only in regions US East (N. Virginia), US East (Ohio), US West
+    #     (Oregon), EU (Ireland), EU (Frankfurt), Asia Pacific (Sydney), Asia
+    #     Pacific (Singapore), Asia Pacific (Tokyo), South America (São Paulo)
+    #     and Asia Pacific (Mumbai).
+    #
+    #   For more information, see [Build environment compute types][1] in the
+    #   *CodeBuild user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #
+    # @option params [String] :compute_type
+    #   Information about the compute resources the compute fleet uses.
+    #   Available values include:
+    #
+    #   * `BUILD_GENERAL1_SMALL`: Use up to 3 GB memory and 2 vCPUs for
+    #     builds.
+    #
+    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 7 GB memory and 4 vCPUs for
+    #     builds.
+    #
+    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GB memory and 8 vCPUs for
+    #     builds, depending on your environment type.
+    #
+    #   * `BUILD_GENERAL1_XLARGE`: Use up to 70 GB memory and 36 vCPUs for
+    #     builds, depending on your environment type.
+    #
+    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 145 GB memory, 72 vCPUs, and 824
+    #     GB of SSD storage for builds. This compute type supports Docker
+    #     images up to 100 GB uncompressed.
+    #
+    #   If you use `BUILD_GENERAL1_SMALL`:
+    #
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 3 GB
+    #     memory and 2 vCPUs for builds.
+    #
+    #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 16 GB
+    #     memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+    #
+    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GB memory
+    #     and 2 vCPUs on ARM-based processors for builds.
+    #
+    #   If you use `BUILD_GENERAL1_LARGE`:
+    #
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 15 GB
+    #     memory and 8 vCPUs for builds.
+    #
+    #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 255 GB
+    #     memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
+    #
+    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GB memory
+    #     and 8 vCPUs on ARM-based processors for builds.
+    #
+    #   For more information, see [Build environment compute types][1] in the
+    #   *CodeBuild User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #
+    # @option params [Types::ScalingConfigurationInput] :scaling_configuration
+    #   The scaling configuration of the compute fleet.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tag key and value pairs associated with this compute fleet.
+    #
+    #   These tags are available for use by Amazon Web Services services that
+    #   support CodeBuild build project tags.
+    #
+    # @return [Types::UpdateFleetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFleetOutput#fleet #fleet} => Types::Fleet
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_fleet({
+    #     arn: "NonEmptyString", # required
+    #     base_capacity: 1,
+    #     environment_type: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER, LINUX_LAMBDA_CONTAINER, ARM_LAMBDA_CONTAINER
+    #     compute_type: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_XLARGE, BUILD_GENERAL1_2XLARGE, BUILD_LAMBDA_1GB, BUILD_LAMBDA_2GB, BUILD_LAMBDA_4GB, BUILD_LAMBDA_8GB, BUILD_LAMBDA_10GB
+    #     scaling_configuration: {
+    #       scaling_type: "TARGET_TRACKING_SCALING", # accepts TARGET_TRACKING_SCALING
+    #       target_tracking_scaling_configs: [
+    #         {
+    #           metric_type: "FLEET_UTILIZATION_RATE", # accepts FLEET_UTILIZATION_RATE
+    #           target_value: 1.0,
+    #         },
+    #       ],
+    #       max_capacity: 1,
+    #     },
+    #     tags: [
+    #       {
+    #         key: "KeyInput",
+    #         value: "ValueInput",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.fleet.arn #=> String
+    #   resp.fleet.name #=> String
+    #   resp.fleet.id #=> String
+    #   resp.fleet.created #=> Time
+    #   resp.fleet.last_modified #=> Time
+    #   resp.fleet.status.status_code #=> String, one of "CREATING", "UPDATING", "ROTATING", "DELETING", "CREATE_FAILED", "UPDATE_ROLLBACK_FAILED", "ACTIVE"
+    #   resp.fleet.status.context #=> String, one of "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.fleet.status.message #=> String
+    #   resp.fleet.base_capacity #=> Integer
+    #   resp.fleet.environment_type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
+    #   resp.fleet.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
+    #   resp.fleet.scaling_configuration.scaling_type #=> String, one of "TARGET_TRACKING_SCALING"
+    #   resp.fleet.scaling_configuration.target_tracking_scaling_configs #=> Array
+    #   resp.fleet.scaling_configuration.target_tracking_scaling_configs[0].metric_type #=> String, one of "FLEET_UTILIZATION_RATE"
+    #   resp.fleet.scaling_configuration.target_tracking_scaling_configs[0].target_value #=> Float
+    #   resp.fleet.scaling_configuration.max_capacity #=> Integer
+    #   resp.fleet.scaling_configuration.desired_capacity #=> Integer
+    #   resp.fleet.tags #=> Array
+    #   resp.fleet.tags[0].key #=> String
+    #   resp.fleet.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateFleet AWS API Documentation
+    #
+    # @overload update_fleet(params = {})
+    # @param [Hash] params ({})
+    def update_fleet(params = {}, options = {})
+      req = build_request(:update_fleet, params)
       req.send_request(options)
     end
 
@@ -4651,6 +5149,9 @@ module Aws::CodeBuild
     #       type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER, LINUX_GPU_CONTAINER, ARM_CONTAINER, WINDOWS_SERVER_2019_CONTAINER, LINUX_LAMBDA_CONTAINER, ARM_LAMBDA_CONTAINER
     #       image: "NonEmptyString", # required
     #       compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_XLARGE, BUILD_GENERAL1_2XLARGE, BUILD_LAMBDA_1GB, BUILD_LAMBDA_2GB, BUILD_LAMBDA_4GB, BUILD_LAMBDA_8GB, BUILD_LAMBDA_10GB
+    #       fleet: {
+    #         fleet_arn: "String",
+    #       },
     #       environment_variables: [
     #         {
     #           name: "NonEmptyString", # required
@@ -4779,6 +5280,7 @@ module Aws::CodeBuild
     #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER", "LINUX_GPU_CONTAINER", "ARM_CONTAINER", "WINDOWS_SERVER_2019_CONTAINER", "LINUX_LAMBDA_CONTAINER", "ARM_LAMBDA_CONTAINER"
     #   resp.project.environment.image #=> String
     #   resp.project.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB"
+    #   resp.project.environment.fleet.fleet_arn #=> String
     #   resp.project.environment.environment_variables #=> Array
     #   resp.project.environment.environment_variables[0].name #=> String
     #   resp.project.environment.environment_variables[0].value #=> String
@@ -5099,7 +5601,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.103.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

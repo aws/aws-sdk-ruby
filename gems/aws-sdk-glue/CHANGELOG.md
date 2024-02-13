@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.168.0 (2024-02-05)
+------------------
+
+* Feature - Introduce Catalog Encryption Role within Glue Data Catalog Settings. Introduce SASL/PLAIN as an authentication method for Glue Kafka connections
+
+1.167.0 (2024-01-31)
+------------------
+
+* Feature - Update page size limits for GetJobRuns and GetTriggers APIs.
+
+1.166.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.165.0 (2023-12-22)
 ------------------
 

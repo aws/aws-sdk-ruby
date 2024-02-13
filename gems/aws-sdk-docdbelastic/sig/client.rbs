@@ -1,0 +1,238 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DocDBElastic
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDBElastic/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterOutput]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDBElastic/Client.html#create_cluster-instance_method
+      def create_cluster: (
+                            admin_user_name: ::String,
+                            admin_user_password: ::String,
+                            auth_type: ("PLAIN_TEXT" | "SECRET_ARN"),
+                            ?client_token: ::String,
+                            cluster_name: ::String,
+                            ?kms_key_id: ::String,
+                            ?preferred_maintenance_window: ::String,
+                            shard_capacity: ::Integer,
+                            shard_count: ::Integer,
+                            ?subnet_ids: Array[::String],
+                            ?tags: Hash[::String, ::String],
+                            ?vpc_security_group_ids: Array[::String]
+                          ) -> _CreateClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
+
+      interface _CreateClusterSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterSnapshotOutput]
+        def snapshot: () -> Types::ClusterSnapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDBElastic/Client.html#create_cluster_snapshot-instance_method
+      def create_cluster_snapshot: (
+                                     cluster_arn: ::String,
+                                     snapshot_name: ::String,
+                                     ?tags: Hash[::String, ::String]
+                                   ) -> _CreateClusterSnapshotResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterSnapshotResponseSuccess
+
+      interface _DeleteClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClusterOutput]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDBElastic/Client.html#delete_cluster-instance_method
+      def delete_cluster: (
+                            cluster_arn: ::String
+                          ) -> _DeleteClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClusterResponseSuccess
+
+      interface _DeleteClusterSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClusterSnapshotOutput]
+        def snapshot: () -> Types::ClusterSnapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDBElastic/Client.html#delete_cluster_snapshot-instance_method
+      def delete_cluster_snapshot: (
+                                     snapshot_arn: ::String
+                                   ) -> _DeleteClusterSnapshotResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClusterSnapshotResponseSuccess
+
+      interface _GetClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetClusterOutput]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDBElastic/Client.html#get_cluster-instance_method
+      def get_cluster: (
+                         cluster_arn: ::String
+                       ) -> _GetClusterResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetClusterResponseSuccess
+
+      interface _GetClusterSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetClusterSnapshotOutput]
+        def snapshot: () -> Types::ClusterSnapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDBElastic/Client.html#get_cluster_snapshot-instance_method
+      def get_cluster_snapshot: (
+                                  snapshot_arn: ::String
+                                ) -> _GetClusterSnapshotResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetClusterSnapshotResponseSuccess
+
+      interface _ListClusterSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClusterSnapshotsOutput]
+        def next_token: () -> ::String
+        def snapshots: () -> ::Array[Types::ClusterSnapshotInList]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDBElastic/Client.html#list_cluster_snapshots-instance_method
+      def list_cluster_snapshots: (
+                                    ?cluster_arn: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListClusterSnapshotsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClusterSnapshotsResponseSuccess
+
+      interface _ListClustersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClustersOutput]
+        def clusters: () -> ::Array[Types::ClusterInList]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDBElastic/Client.html#list_clusters-instance_method
+      def list_clusters: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListClustersResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClustersResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDBElastic/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _RestoreClusterFromSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreClusterFromSnapshotOutput]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDBElastic/Client.html#restore_cluster_from_snapshot-instance_method
+      def restore_cluster_from_snapshot: (
+                                           cluster_name: ::String,
+                                           ?kms_key_id: ::String,
+                                           snapshot_arn: ::String,
+                                           ?subnet_ids: Array[::String],
+                                           ?tags: Hash[::String, ::String],
+                                           ?vpc_security_group_ids: Array[::String]
+                                         ) -> _RestoreClusterFromSnapshotResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreClusterFromSnapshotResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDBElastic/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDBElastic/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClusterOutput]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDBElastic/Client.html#update_cluster-instance_method
+      def update_cluster: (
+                            ?admin_user_password: ::String,
+                            ?auth_type: ("PLAIN_TEXT" | "SECRET_ARN"),
+                            ?client_token: ::String,
+                            cluster_arn: ::String,
+                            ?preferred_maintenance_window: ::String,
+                            ?shard_capacity: ::Integer,
+                            ?shard_count: ::Integer,
+                            ?subnet_ids: Array[::String],
+                            ?vpc_security_group_ids: Array[::String]
+                          ) -> _UpdateClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,39 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Kinesis
+    module Waiters
+
+      class StreamExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?stream_name: ::String,
+                    ?limit: ::Integer,
+                    ?exclusive_start_shard_id: ::String,
+                    ?stream_arn: ::String
+                  ) -> Client::_DescribeStreamResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeStreamResponseSuccess
+      end
+
+      class StreamNotExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?stream_name: ::String,
+                    ?limit: ::Integer,
+                    ?exclusive_start_shard_id: ::String,
+                    ?stream_arn: ::String
+                  ) -> Client::_DescribeStreamResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeStreamResponseSuccess
+      end
+    end
+  end
+end

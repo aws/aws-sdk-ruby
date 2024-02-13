@@ -653,6 +653,7 @@ module Aws::Glue
     HudiTarget = Shapes::StructureShape.new(name: 'HudiTarget')
     HudiTargetCompressionType = Shapes::StringShape.new(name: 'HudiTargetCompressionType')
     HudiTargetList = Shapes::ListShape.new(name: 'HudiTargetList')
+    IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
     IcebergInput = Shapes::StructureShape.new(name: 'IcebergInput')
     IcebergTarget = Shapes::StructureShape.new(name: 'IcebergTarget')
     IcebergTargetList = Shapes::ListShape.new(name: 'IcebergTargetList')
@@ -840,6 +841,8 @@ module Aws::Glue
     OrchestrationArgumentsValue = Shapes::StringShape.new(name: 'OrchestrationArgumentsValue')
     OrchestrationIAMRoleArn = Shapes::StringShape.new(name: 'OrchestrationIAMRoleArn')
     OrchestrationNameString = Shapes::StringShape.new(name: 'OrchestrationNameString')
+    OrchestrationPageSize200 = Shapes::IntegerShape.new(name: 'OrchestrationPageSize200')
+    OrchestrationPageSize25 = Shapes::IntegerShape.new(name: 'OrchestrationPageSize25')
     OrchestrationRoleArn = Shapes::StringShape.new(name: 'OrchestrationRoleArn')
     OrchestrationS3Location = Shapes::StringShape.new(name: 'OrchestrationS3Location')
     OrchestrationStatementCodeString = Shapes::StringShape.new(name: 'OrchestrationStatementCodeString')
@@ -2914,6 +2917,7 @@ module Aws::Glue
 
     EncryptionAtRest.add_member(:catalog_encryption_mode, Shapes::ShapeRef.new(shape: CatalogEncryptionMode, required: true, location_name: "CatalogEncryptionMode"))
     EncryptionAtRest.add_member(:sse_aws_kms_key_id, Shapes::ShapeRef.new(shape: NameString, location_name: "SseAwsKmsKeyId"))
+    EncryptionAtRest.add_member(:catalog_encryption_service_role, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "CatalogEncryptionServiceRole"))
     EncryptionAtRest.struct_class = Types::EncryptionAtRest
 
     EncryptionConfiguration.add_member(:s3_encryption, Shapes::ShapeRef.new(shape: S3EncryptionList, location_name: "S3Encryption"))
@@ -3309,7 +3313,7 @@ module Aws::Glue
 
     GetJobRunsRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "JobName"))
     GetJobRunsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
-    GetJobRunsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    GetJobRunsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: OrchestrationPageSize200, location_name: "MaxResults"))
     GetJobRunsRequest.struct_class = Types::GetJobRunsRequest
 
     GetJobRunsResponse.add_member(:job_runs, Shapes::ShapeRef.new(shape: JobRunList, location_name: "JobRuns"))
@@ -3622,7 +3626,7 @@ module Aws::Glue
 
     GetTriggersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
     GetTriggersRequest.add_member(:dependent_job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "DependentJobName"))
-    GetTriggersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    GetTriggersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: OrchestrationPageSize200, location_name: "MaxResults"))
     GetTriggersRequest.struct_class = Types::GetTriggersRequest
 
     GetTriggersResponse.add_member(:triggers, Shapes::ShapeRef.new(shape: TriggerList, location_name: "Triggers"))
@@ -4084,7 +4088,7 @@ module Aws::Glue
     LineageConfiguration.struct_class = Types::LineageConfiguration
 
     ListBlueprintsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
-    ListBlueprintsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListBlueprintsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: OrchestrationPageSize25, location_name: "MaxResults"))
     ListBlueprintsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
     ListBlueprintsRequest.struct_class = Types::ListBlueprintsRequest
 
@@ -4257,7 +4261,7 @@ module Aws::Glue
 
     ListTriggersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
     ListTriggersRequest.add_member(:dependent_job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "DependentJobName"))
-    ListTriggersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListTriggersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: OrchestrationPageSize200, location_name: "MaxResults"))
     ListTriggersRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
     ListTriggersRequest.struct_class = Types::ListTriggersRequest
 
@@ -4266,7 +4270,7 @@ module Aws::Glue
     ListTriggersResponse.struct_class = Types::ListTriggersResponse
 
     ListWorkflowsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
-    ListWorkflowsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListWorkflowsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: OrchestrationPageSize25, location_name: "MaxResults"))
     ListWorkflowsRequest.struct_class = Types::ListWorkflowsRequest
 
     ListWorkflowsResponse.add_member(:workflows, Shapes::ShapeRef.new(shape: WorkflowNames, location_name: "Workflows"))

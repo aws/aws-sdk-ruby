@@ -1,0 +1,765 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::AppRunner
+  module Types
+
+    class AssociateCustomDomainRequest
+      attr_accessor service_arn: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor enable_www_subdomain: bool
+      SENSITIVE: []
+    end
+
+    class AssociateCustomDomainResponse
+      attr_accessor dns_target: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor custom_domain: Types::CustomDomain
+      attr_accessor vpc_dns_targets: ::Array[Types::VpcDNSTarget]
+      SENSITIVE: []
+    end
+
+    class AuthenticationConfiguration
+      attr_accessor connection_arn: ::String
+      attr_accessor access_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AutoScalingConfiguration
+      attr_accessor auto_scaling_configuration_arn: ::String
+      attr_accessor auto_scaling_configuration_name: ::String
+      attr_accessor auto_scaling_configuration_revision: ::Integer
+      attr_accessor latest: bool
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor max_concurrency: ::Integer
+      attr_accessor min_size: ::Integer
+      attr_accessor max_size: ::Integer
+      attr_accessor created_at: ::Time
+      attr_accessor deleted_at: ::Time
+      attr_accessor has_associated_service: bool
+      attr_accessor is_default: bool
+      SENSITIVE: []
+    end
+
+    class AutoScalingConfigurationSummary
+      attr_accessor auto_scaling_configuration_arn: ::String
+      attr_accessor auto_scaling_configuration_name: ::String
+      attr_accessor auto_scaling_configuration_revision: ::Integer
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor created_at: ::Time
+      attr_accessor has_associated_service: bool
+      attr_accessor is_default: bool
+      SENSITIVE: []
+    end
+
+    class CertificateValidationRecord
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor value: ::String
+      attr_accessor status: ("PENDING_VALIDATION" | "SUCCESS" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class CodeConfiguration
+      attr_accessor configuration_source: ("REPOSITORY" | "API")
+      attr_accessor code_configuration_values: Types::CodeConfigurationValues
+      SENSITIVE: []
+    end
+
+    class CodeConfigurationValues
+      attr_accessor runtime: ("PYTHON_3" | "NODEJS_12" | "NODEJS_14" | "CORRETTO_8" | "CORRETTO_11" | "NODEJS_16" | "GO_1" | "DOTNET_6" | "PHP_81" | "RUBY_31" | "PYTHON_311" | "NODEJS_18")
+      attr_accessor build_command: ::String
+      attr_accessor start_command: ::String
+      attr_accessor port: ::String
+      attr_accessor runtime_environment_variables: ::Hash[::String, ::String]
+      attr_accessor runtime_environment_secrets: ::Hash[::String, ::String]
+      SENSITIVE: [:build_command, :start_command]
+    end
+
+    class CodeRepository
+      attr_accessor repository_url: ::String
+      attr_accessor source_code_version: Types::SourceCodeVersion
+      attr_accessor code_configuration: Types::CodeConfiguration
+      attr_accessor source_directory: ::String
+      SENSITIVE: []
+    end
+
+    class Connection
+      attr_accessor connection_name: ::String
+      attr_accessor connection_arn: ::String
+      attr_accessor provider_type: ("GITHUB" | "BITBUCKET")
+      attr_accessor status: ("PENDING_HANDSHAKE" | "AVAILABLE" | "ERROR" | "DELETED")
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ConnectionSummary
+      attr_accessor connection_name: ::String
+      attr_accessor connection_arn: ::String
+      attr_accessor provider_type: ("GITHUB" | "BITBUCKET")
+      attr_accessor status: ("PENDING_HANDSHAKE" | "AVAILABLE" | "ERROR" | "DELETED")
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateAutoScalingConfigurationRequest
+      attr_accessor auto_scaling_configuration_name: ::String
+      attr_accessor max_concurrency: ::Integer
+      attr_accessor min_size: ::Integer
+      attr_accessor max_size: ::Integer
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateAutoScalingConfigurationResponse
+      attr_accessor auto_scaling_configuration: Types::AutoScalingConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateConnectionRequest
+      attr_accessor connection_name: ::String
+      attr_accessor provider_type: ("GITHUB" | "BITBUCKET")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateConnectionResponse
+      attr_accessor connection: Types::Connection
+      SENSITIVE: []
+    end
+
+    class CreateObservabilityConfigurationRequest
+      attr_accessor observability_configuration_name: ::String
+      attr_accessor trace_configuration: Types::TraceConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateObservabilityConfigurationResponse
+      attr_accessor observability_configuration: Types::ObservabilityConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateServiceRequest
+      attr_accessor service_name: ::String
+      attr_accessor source_configuration: Types::SourceConfiguration
+      attr_accessor instance_configuration: Types::InstanceConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor health_check_configuration: Types::HealthCheckConfiguration
+      attr_accessor auto_scaling_configuration_arn: ::String
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor observability_configuration: Types::ServiceObservabilityConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateServiceResponse
+      attr_accessor service: Types::Service
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVpcConnectorRequest
+      attr_accessor vpc_connector_name: ::String
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateVpcConnectorResponse
+      attr_accessor vpc_connector: Types::VpcConnector
+      SENSITIVE: []
+    end
+
+    class CreateVpcIngressConnectionRequest
+      attr_accessor service_arn: ::String
+      attr_accessor vpc_ingress_connection_name: ::String
+      attr_accessor ingress_vpc_configuration: Types::IngressVpcConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateVpcIngressConnectionResponse
+      attr_accessor vpc_ingress_connection: Types::VpcIngressConnection
+      SENSITIVE: []
+    end
+
+    class CustomDomain
+      attr_accessor domain_name: ::String
+      attr_accessor enable_www_subdomain: bool
+      attr_accessor certificate_validation_records: ::Array[Types::CertificateValidationRecord]
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETE_FAILED" | "PENDING_CERTIFICATE_DNS_VALIDATION" | "BINDING_CERTIFICATE")
+      SENSITIVE: []
+    end
+
+    class DeleteAutoScalingConfigurationRequest
+      attr_accessor auto_scaling_configuration_arn: ::String
+      attr_accessor delete_all_revisions: bool
+      SENSITIVE: []
+    end
+
+    class DeleteAutoScalingConfigurationResponse
+      attr_accessor auto_scaling_configuration: Types::AutoScalingConfiguration
+      SENSITIVE: []
+    end
+
+    class DeleteConnectionRequest
+      attr_accessor connection_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectionResponse
+      attr_accessor connection: Types::Connection
+      SENSITIVE: []
+    end
+
+    class DeleteObservabilityConfigurationRequest
+      attr_accessor observability_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteObservabilityConfigurationResponse
+      attr_accessor observability_configuration: Types::ObservabilityConfiguration
+      SENSITIVE: []
+    end
+
+    class DeleteServiceRequest
+      attr_accessor service_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServiceResponse
+      attr_accessor service: Types::Service
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVpcConnectorRequest
+      attr_accessor vpc_connector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVpcConnectorResponse
+      attr_accessor vpc_connector: Types::VpcConnector
+      SENSITIVE: []
+    end
+
+    class DeleteVpcIngressConnectionRequest
+      attr_accessor vpc_ingress_connection_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVpcIngressConnectionResponse
+      attr_accessor vpc_ingress_connection: Types::VpcIngressConnection
+      SENSITIVE: []
+    end
+
+    class DescribeAutoScalingConfigurationRequest
+      attr_accessor auto_scaling_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAutoScalingConfigurationResponse
+      attr_accessor auto_scaling_configuration: Types::AutoScalingConfiguration
+      SENSITIVE: []
+    end
+
+    class DescribeCustomDomainsRequest
+      attr_accessor service_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeCustomDomainsResponse
+      attr_accessor dns_target: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor custom_domains: ::Array[Types::CustomDomain]
+      attr_accessor vpc_dns_targets: ::Array[Types::VpcDNSTarget]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeObservabilityConfigurationRequest
+      attr_accessor observability_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeObservabilityConfigurationResponse
+      attr_accessor observability_configuration: Types::ObservabilityConfiguration
+      SENSITIVE: []
+    end
+
+    class DescribeServiceRequest
+      attr_accessor service_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeServiceResponse
+      attr_accessor service: Types::Service
+      SENSITIVE: []
+    end
+
+    class DescribeVpcConnectorRequest
+      attr_accessor vpc_connector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeVpcConnectorResponse
+      attr_accessor vpc_connector: Types::VpcConnector
+      SENSITIVE: []
+    end
+
+    class DescribeVpcIngressConnectionRequest
+      attr_accessor vpc_ingress_connection_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeVpcIngressConnectionResponse
+      attr_accessor vpc_ingress_connection: Types::VpcIngressConnection
+      SENSITIVE: []
+    end
+
+    class DisassociateCustomDomainRequest
+      attr_accessor service_arn: ::String
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateCustomDomainResponse
+      attr_accessor dns_target: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor custom_domain: Types::CustomDomain
+      attr_accessor vpc_dns_targets: ::Array[Types::VpcDNSTarget]
+      SENSITIVE: []
+    end
+
+    class EgressConfiguration
+      attr_accessor egress_type: ("DEFAULT" | "VPC")
+      attr_accessor vpc_connector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class EncryptionConfiguration
+      attr_accessor kms_key: ::String
+      SENSITIVE: []
+    end
+
+    class HealthCheckConfiguration
+      attr_accessor protocol: ("TCP" | "HTTP")
+      attr_accessor path: ::String
+      attr_accessor interval: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor healthy_threshold: ::Integer
+      attr_accessor unhealthy_threshold: ::Integer
+      SENSITIVE: []
+    end
+
+    class ImageConfiguration
+      attr_accessor runtime_environment_variables: ::Hash[::String, ::String]
+      attr_accessor start_command: ::String
+      attr_accessor port: ::String
+      attr_accessor runtime_environment_secrets: ::Hash[::String, ::String]
+      SENSITIVE: [:start_command]
+    end
+
+    class ImageRepository
+      attr_accessor image_identifier: ::String
+      attr_accessor image_configuration: Types::ImageConfiguration
+      attr_accessor image_repository_type: ("ECR" | "ECR_PUBLIC")
+      SENSITIVE: []
+    end
+
+    class IngressConfiguration
+      attr_accessor is_publicly_accessible: bool
+      SENSITIVE: []
+    end
+
+    class IngressVpcConfiguration
+      attr_accessor vpc_id: ::String
+      attr_accessor vpc_endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceConfiguration
+      attr_accessor cpu: ::String
+      attr_accessor memory: ::String
+      attr_accessor instance_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServiceErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAutoScalingConfigurationsRequest
+      attr_accessor auto_scaling_configuration_name: ::String
+      attr_accessor latest_only: bool
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAutoScalingConfigurationsResponse
+      attr_accessor auto_scaling_configuration_summary_list: ::Array[Types::AutoScalingConfigurationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectionsRequest
+      attr_accessor connection_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectionsResponse
+      attr_accessor connection_summary_list: ::Array[Types::ConnectionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListObservabilityConfigurationsRequest
+      attr_accessor observability_configuration_name: ::String
+      attr_accessor latest_only: bool
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListObservabilityConfigurationsResponse
+      attr_accessor observability_configuration_summary_list: ::Array[Types::ObservabilityConfigurationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOperationsRequest
+      attr_accessor service_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListOperationsResponse
+      attr_accessor operation_summary_list: ::Array[Types::OperationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServicesForAutoScalingConfigurationRequest
+      attr_accessor auto_scaling_configuration_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServicesForAutoScalingConfigurationResponse
+      attr_accessor service_arn_list: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServicesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListServicesResponse
+      attr_accessor service_summary_list: ::Array[Types::ServiceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListVpcConnectorsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVpcConnectorsResponse
+      attr_accessor vpc_connectors: ::Array[Types::VpcConnector]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVpcIngressConnectionsFilter
+      attr_accessor service_arn: ::String
+      attr_accessor vpc_endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListVpcIngressConnectionsRequest
+      attr_accessor filter: Types::ListVpcIngressConnectionsFilter
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVpcIngressConnectionsResponse
+      attr_accessor vpc_ingress_connection_summary_list: ::Array[Types::VpcIngressConnectionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkConfiguration
+      attr_accessor egress_configuration: Types::EgressConfiguration
+      attr_accessor ingress_configuration: Types::IngressConfiguration
+      attr_accessor ip_address_type: ("IPV4" | "DUAL_STACK")
+      SENSITIVE: []
+    end
+
+    class ObservabilityConfiguration
+      attr_accessor observability_configuration_arn: ::String
+      attr_accessor observability_configuration_name: ::String
+      attr_accessor trace_configuration: Types::TraceConfiguration
+      attr_accessor observability_configuration_revision: ::Integer
+      attr_accessor latest: bool
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor created_at: ::Time
+      attr_accessor deleted_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ObservabilityConfigurationSummary
+      attr_accessor observability_configuration_arn: ::String
+      attr_accessor observability_configuration_name: ::String
+      attr_accessor observability_configuration_revision: ::Integer
+      SENSITIVE: []
+    end
+
+    class OperationSummary
+      attr_accessor id: ::String
+      attr_accessor type: ("START_DEPLOYMENT" | "CREATE_SERVICE" | "PAUSE_SERVICE" | "RESUME_SERVICE" | "DELETE_SERVICE" | "UPDATE_SERVICE")
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "FAILED" | "SUCCEEDED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_FAILED" | "ROLLBACK_SUCCEEDED")
+      attr_accessor target_arn: ::String
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class PauseServiceRequest
+      attr_accessor service_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PauseServiceResponse
+      attr_accessor service: Types::Service
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResumeServiceRequest
+      attr_accessor service_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResumeServiceResponse
+      attr_accessor service: Types::Service
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class Service
+      attr_accessor service_name: ::String
+      attr_accessor service_id: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor service_url: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor deleted_at: ::Time
+      attr_accessor status: ("CREATE_FAILED" | "RUNNING" | "DELETED" | "DELETE_FAILED" | "PAUSED" | "OPERATION_IN_PROGRESS")
+      attr_accessor source_configuration: Types::SourceConfiguration
+      attr_accessor instance_configuration: Types::InstanceConfiguration
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor health_check_configuration: Types::HealthCheckConfiguration
+      attr_accessor auto_scaling_configuration_summary: Types::AutoScalingConfigurationSummary
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor observability_configuration: Types::ServiceObservabilityConfiguration
+      SENSITIVE: []
+    end
+
+    class ServiceObservabilityConfiguration
+      attr_accessor observability_enabled: bool
+      attr_accessor observability_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceSummary
+      attr_accessor service_name: ::String
+      attr_accessor service_id: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor service_url: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATE_FAILED" | "RUNNING" | "DELETED" | "DELETE_FAILED" | "PAUSED" | "OPERATION_IN_PROGRESS")
+      SENSITIVE: []
+    end
+
+    class SourceCodeVersion
+      attr_accessor type: ("BRANCH")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SourceConfiguration
+      attr_accessor code_repository: Types::CodeRepository
+      attr_accessor image_repository: Types::ImageRepository
+      attr_accessor auto_deployments_enabled: bool
+      attr_accessor authentication_configuration: Types::AuthenticationConfiguration
+      SENSITIVE: []
+    end
+
+    class StartDeploymentRequest
+      attr_accessor service_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartDeploymentResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TraceConfiguration
+      attr_accessor vendor: ("AWSXRAY")
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDefaultAutoScalingConfigurationRequest
+      attr_accessor auto_scaling_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDefaultAutoScalingConfigurationResponse
+      attr_accessor auto_scaling_configuration: Types::AutoScalingConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateServiceRequest
+      attr_accessor service_arn: ::String
+      attr_accessor source_configuration: Types::SourceConfiguration
+      attr_accessor instance_configuration: Types::InstanceConfiguration
+      attr_accessor auto_scaling_configuration_arn: ::String
+      attr_accessor health_check_configuration: Types::HealthCheckConfiguration
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor observability_configuration: Types::ServiceObservabilityConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateServiceResponse
+      attr_accessor service: Types::Service
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateVpcIngressConnectionRequest
+      attr_accessor vpc_ingress_connection_arn: ::String
+      attr_accessor ingress_vpc_configuration: Types::IngressVpcConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateVpcIngressConnectionResponse
+      attr_accessor vpc_ingress_connection: Types::VpcIngressConnection
+      SENSITIVE: []
+    end
+
+    class VpcConnector
+      attr_accessor vpc_connector_name: ::String
+      attr_accessor vpc_connector_arn: ::String
+      attr_accessor vpc_connector_revision: ::Integer
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor created_at: ::Time
+      attr_accessor deleted_at: ::Time
+      SENSITIVE: []
+    end
+
+    class VpcDNSTarget
+      attr_accessor vpc_ingress_connection_arn: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class VpcIngressConnection
+      attr_accessor vpc_ingress_connection_arn: ::String
+      attr_accessor vpc_ingress_connection_name: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor status: ("AVAILABLE" | "PENDING_CREATION" | "PENDING_UPDATE" | "PENDING_DELETION" | "FAILED_CREATION" | "FAILED_UPDATE" | "FAILED_DELETION" | "DELETED")
+      attr_accessor account_id: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor ingress_vpc_configuration: Types::IngressVpcConfiguration
+      attr_accessor created_at: ::Time
+      attr_accessor deleted_at: ::Time
+      SENSITIVE: []
+    end
+
+    class VpcIngressConnectionSummary
+      attr_accessor vpc_ingress_connection_arn: ::String
+      attr_accessor service_arn: ::String
+      SENSITIVE: []
+    end
+  end
+end

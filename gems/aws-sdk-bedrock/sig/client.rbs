@@ -1,0 +1,412 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Bedrock
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateModelCustomizationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateModelCustomizationJobResponse]
+        def job_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#create_model_customization_job-instance_method
+      def create_model_customization_job: (
+                                            job_name: ::String,
+                                            custom_model_name: ::String,
+                                            role_arn: ::String,
+                                            ?client_request_token: ::String,
+                                            base_model_identifier: ::String,
+                                            ?customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING"),
+                                            ?custom_model_kms_key_id: ::String,
+                                            ?job_tags: Array[
+                                              {
+                                                key: ::String,
+                                                value: ::String
+                                              },
+                                            ],
+                                            ?custom_model_tags: Array[
+                                              {
+                                                key: ::String,
+                                                value: ::String
+                                              },
+                                            ],
+                                            training_data_config: {
+                                              s3_uri: ::String
+                                            },
+                                            ?validation_data_config: {
+                                              validators: Array[
+                                                {
+                                                  s3_uri: ::String
+                                                },
+                                              ]
+                                            },
+                                            output_data_config: {
+                                              s3_uri: ::String
+                                            },
+                                            hyper_parameters: Hash[::String, ::String],
+                                            ?vpc_config: {
+                                              subnet_ids: Array[::String],
+                                              security_group_ids: Array[::String]
+                                            }
+                                          ) -> _CreateModelCustomizationJobResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateModelCustomizationJobResponseSuccess
+
+      interface _CreateProvisionedModelThroughputResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProvisionedModelThroughputResponse]
+        def provisioned_model_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#create_provisioned_model_throughput-instance_method
+      def create_provisioned_model_throughput: (
+                                                 ?client_request_token: ::String,
+                                                 model_units: ::Integer,
+                                                 provisioned_model_name: ::String,
+                                                 model_id: ::String,
+                                                 ?commitment_duration: ("OneMonth" | "SixMonths"),
+                                                 ?tags: Array[
+                                                   {
+                                                     key: ::String,
+                                                     value: ::String
+                                                   },
+                                                 ]
+                                               ) -> _CreateProvisionedModelThroughputResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProvisionedModelThroughputResponseSuccess
+
+      interface _DeleteCustomModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCustomModelResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#delete_custom_model-instance_method
+      def delete_custom_model: (
+                                 model_identifier: ::String
+                               ) -> _DeleteCustomModelResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCustomModelResponseSuccess
+
+      interface _DeleteModelInvocationLoggingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteModelInvocationLoggingConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#delete_model_invocation_logging_configuration-instance_method
+      def delete_model_invocation_logging_configuration: (
+                                                         ) -> _DeleteModelInvocationLoggingConfigurationResponseSuccess
+                                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteModelInvocationLoggingConfigurationResponseSuccess
+
+      interface _DeleteProvisionedModelThroughputResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProvisionedModelThroughputResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#delete_provisioned_model_throughput-instance_method
+      def delete_provisioned_model_throughput: (
+                                                 provisioned_model_id: ::String
+                                               ) -> _DeleteProvisionedModelThroughputResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProvisionedModelThroughputResponseSuccess
+
+      interface _GetCustomModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCustomModelResponse]
+        def model_arn: () -> ::String
+        def model_name: () -> ::String
+        def job_name: () -> ::String
+        def job_arn: () -> ::String
+        def base_model_arn: () -> ::String
+        def customization_type: () -> ("FINE_TUNING" | "CONTINUED_PRE_TRAINING")
+        def model_kms_key_arn: () -> ::String
+        def hyper_parameters: () -> ::Hash[::String, ::String]
+        def training_data_config: () -> Types::TrainingDataConfig
+        def validation_data_config: () -> Types::ValidationDataConfig
+        def output_data_config: () -> Types::OutputDataConfig
+        def training_metrics: () -> Types::TrainingMetrics
+        def validation_metrics: () -> ::Array[Types::ValidatorMetric]
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_custom_model-instance_method
+      def get_custom_model: (
+                              model_identifier: ::String
+                            ) -> _GetCustomModelResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCustomModelResponseSuccess
+
+      interface _GetFoundationModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFoundationModelResponse]
+        def model_details: () -> Types::FoundationModelDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_foundation_model-instance_method
+      def get_foundation_model: (
+                                  model_identifier: ::String
+                                ) -> _GetFoundationModelResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFoundationModelResponseSuccess
+
+      interface _GetModelCustomizationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetModelCustomizationJobResponse]
+        def job_arn: () -> ::String
+        def job_name: () -> ::String
+        def output_model_name: () -> ::String
+        def output_model_arn: () -> ::String
+        def client_request_token: () -> ::String
+        def role_arn: () -> ::String
+        def status: () -> ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
+        def failure_message: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+        def end_time: () -> ::Time
+        def base_model_arn: () -> ::String
+        def hyper_parameters: () -> ::Hash[::String, ::String]
+        def training_data_config: () -> Types::TrainingDataConfig
+        def validation_data_config: () -> Types::ValidationDataConfig
+        def output_data_config: () -> Types::OutputDataConfig
+        def customization_type: () -> ("FINE_TUNING" | "CONTINUED_PRE_TRAINING")
+        def output_model_kms_key_arn: () -> ::String
+        def training_metrics: () -> Types::TrainingMetrics
+        def validation_metrics: () -> ::Array[Types::ValidatorMetric]
+        def vpc_config: () -> Types::VpcConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_model_customization_job-instance_method
+      def get_model_customization_job: (
+                                         job_identifier: ::String
+                                       ) -> _GetModelCustomizationJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetModelCustomizationJobResponseSuccess
+
+      interface _GetModelInvocationLoggingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetModelInvocationLoggingConfigurationResponse]
+        def logging_config: () -> Types::LoggingConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_model_invocation_logging_configuration-instance_method
+      def get_model_invocation_logging_configuration: (
+                                                      ) -> _GetModelInvocationLoggingConfigurationResponseSuccess
+                                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetModelInvocationLoggingConfigurationResponseSuccess
+
+      interface _GetProvisionedModelThroughputResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProvisionedModelThroughputResponse]
+        def model_units: () -> ::Integer
+        def desired_model_units: () -> ::Integer
+        def provisioned_model_name: () -> ::String
+        def provisioned_model_arn: () -> ::String
+        def model_arn: () -> ::String
+        def desired_model_arn: () -> ::String
+        def foundation_model_arn: () -> ::String
+        def status: () -> ("Creating" | "InService" | "Updating" | "Failed")
+        def creation_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+        def failure_message: () -> ::String
+        def commitment_duration: () -> ("OneMonth" | "SixMonths")
+        def commitment_expiration_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_provisioned_model_throughput-instance_method
+      def get_provisioned_model_throughput: (
+                                              provisioned_model_id: ::String
+                                            ) -> _GetProvisionedModelThroughputResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProvisionedModelThroughputResponseSuccess
+
+      interface _ListCustomModelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCustomModelsResponse]
+        def next_token: () -> ::String
+        def model_summaries: () -> ::Array[Types::CustomModelSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#list_custom_models-instance_method
+      def list_custom_models: (
+                                ?creation_time_before: ::Time,
+                                ?creation_time_after: ::Time,
+                                ?name_contains: ::String,
+                                ?base_model_arn_equals: ::String,
+                                ?foundation_model_arn_equals: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String,
+                                ?sort_by: ("CreationTime"),
+                                ?sort_order: ("Ascending" | "Descending")
+                              ) -> _ListCustomModelsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomModelsResponseSuccess
+
+      interface _ListFoundationModelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFoundationModelsResponse]
+        def model_summaries: () -> ::Array[Types::FoundationModelSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#list_foundation_models-instance_method
+      def list_foundation_models: (
+                                    ?by_provider: ::String,
+                                    ?by_customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING"),
+                                    ?by_output_modality: ("TEXT" | "IMAGE" | "EMBEDDING"),
+                                    ?by_inference_type: ("ON_DEMAND" | "PROVISIONED")
+                                  ) -> _ListFoundationModelsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFoundationModelsResponseSuccess
+
+      interface _ListModelCustomizationJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListModelCustomizationJobsResponse]
+        def next_token: () -> ::String
+        def model_customization_job_summaries: () -> ::Array[Types::ModelCustomizationJobSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#list_model_customization_jobs-instance_method
+      def list_model_customization_jobs: (
+                                           ?creation_time_after: ::Time,
+                                           ?creation_time_before: ::Time,
+                                           ?status_equals: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped"),
+                                           ?name_contains: ::String,
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String,
+                                           ?sort_by: ("CreationTime"),
+                                           ?sort_order: ("Ascending" | "Descending")
+                                         ) -> _ListModelCustomizationJobsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListModelCustomizationJobsResponseSuccess
+
+      interface _ListProvisionedModelThroughputsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProvisionedModelThroughputsResponse]
+        def next_token: () -> ::String
+        def provisioned_model_summaries: () -> ::Array[Types::ProvisionedModelSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#list_provisioned_model_throughputs-instance_method
+      def list_provisioned_model_throughputs: (
+                                                ?creation_time_after: ::Time,
+                                                ?creation_time_before: ::Time,
+                                                ?status_equals: ("Creating" | "InService" | "Updating" | "Failed"),
+                                                ?model_arn_equals: ::String,
+                                                ?name_contains: ::String,
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String,
+                                                ?sort_by: ("CreationTime"),
+                                                ?sort_order: ("Ascending" | "Descending")
+                                              ) -> _ListProvisionedModelThroughputsResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProvisionedModelThroughputsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutModelInvocationLoggingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutModelInvocationLoggingConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#put_model_invocation_logging_configuration-instance_method
+      def put_model_invocation_logging_configuration: (
+                                                        logging_config: {
+                                                          cloud_watch_config: {
+                                                            log_group_name: ::String,
+                                                            role_arn: ::String,
+                                                            large_data_delivery_s3_config: {
+                                                              bucket_name: ::String,
+                                                              key_prefix: ::String?
+                                                            }?
+                                                          }?,
+                                                          s3_config: {
+                                                            bucket_name: ::String,
+                                                            key_prefix: ::String?
+                                                          }?,
+                                                          text_data_delivery_enabled: bool?,
+                                                          image_data_delivery_enabled: bool?,
+                                                          embedding_data_delivery_enabled: bool?
+                                                        }
+                                                      ) -> _PutModelInvocationLoggingConfigurationResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutModelInvocationLoggingConfigurationResponseSuccess
+
+      interface _StopModelCustomizationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopModelCustomizationJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#stop_model_customization_job-instance_method
+      def stop_model_customization_job: (
+                                          job_identifier: ::String
+                                        ) -> _StopModelCustomizationJobResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopModelCustomizationJobResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateProvisionedModelThroughputResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProvisionedModelThroughputResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#update_provisioned_model_throughput-instance_method
+      def update_provisioned_model_throughput: (
+                                                 provisioned_model_id: ::String,
+                                                 ?desired_provisioned_model_name: ::String,
+                                                 ?desired_model_id: ::String
+                                               ) -> _UpdateProvisionedModelThroughputResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProvisionedModelThroughputResponseSuccess
+    end
+  end
+end
+

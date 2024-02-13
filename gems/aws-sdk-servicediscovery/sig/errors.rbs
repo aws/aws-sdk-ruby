@@ -1,0 +1,64 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ServiceDiscovery
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class CustomHealthNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DuplicateRequest < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def duplicate_operation_id: () -> ::String
+      end
+      class InstanceNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidInput < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NamespaceAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def creator_request_id: () -> ::String
+        def namespace_id: () -> ::String
+      end
+      class NamespaceNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class OperationNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RequestLimitExceeded < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceInUse < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceLimitExceeded < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def creator_request_id: () -> ::String
+        def service_id: () -> ::String
+      end
+      class ServiceNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyTagsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def resource_name: () -> ::String
+      end
+    end
+  end
+end

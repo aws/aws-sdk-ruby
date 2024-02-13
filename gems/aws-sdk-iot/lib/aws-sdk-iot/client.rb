@@ -1581,6 +1581,9 @@ module Aws::IoT
     # @option params [Types::TlsConfig] :tls_config
     #   An object that specifies the TLS configuration for a domain.
     #
+    # @option params [Types::ServerCertificateConfig] :server_certificate_config
+    #   The server certificate configuration.
+    #
     # @return [Types::CreateDomainConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainConfigurationResponse#domain_configuration_name #domain_configuration_name} => String
@@ -1606,6 +1609,9 @@ module Aws::IoT
     #     ],
     #     tls_config: {
     #       security_policy: "SecurityPolicy",
+    #     },
+    #     server_certificate_config: {
+    #       enable_ocsp_check: false,
     #     },
     #   })
     #
@@ -1902,10 +1908,16 @@ module Aws::IoT
     #
     # @option params [Array<String>] :destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed on
-    #   the device when the job successfully completes.
+    #   the device when the job successfully completes. The package version
+    #   must be in either the Published or Deprecated state when the job
+    #   deploys. For more information, see [Package version lifecycle][1].
     #
     #   **Note:**The following Length Constraints relates to a single ARN. Up
     #   to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2060,10 +2072,16 @@ module Aws::IoT
     #
     # @option params [Array<String>] :destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed on
-    #   the device when the job successfully completes.
+    #   the device when the job successfully completes. The package version
+    #   must be in either the Published or Deprecated state when the job
+    #   deploys. For more information, see [Package version lifecycle][1].
     #
     #   **Note:**The following Length Constraints relates to a single ARN. Up
     #   to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #
     # @return [Types::CreateJobTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5060,7 +5078,7 @@ module Aws::IoT
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_v2_logging_level({
-    #     target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID, EVENT_TYPE, DEVICE_DEFENDER
+    #     target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID
     #     target_name: "LogTargetName", # required
     #   })
     #
@@ -5836,6 +5854,7 @@ module Aws::IoT
     #   * {Types::DescribeDomainConfigurationResponse#domain_type #domain_type} => String
     #   * {Types::DescribeDomainConfigurationResponse#last_status_change_date #last_status_change_date} => Time
     #   * {Types::DescribeDomainConfigurationResponse#tls_config #tls_config} => Types::TlsConfig
+    #   * {Types::DescribeDomainConfigurationResponse#server_certificate_config #server_certificate_config} => Types::ServerCertificateConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -5859,6 +5878,7 @@ module Aws::IoT
     #   resp.domain_type #=> String, one of "ENDPOINT", "AWS_MANAGED", "CUSTOMER_MANAGED"
     #   resp.last_status_change_date #=> Time
     #   resp.tls_config.security_policy #=> String
+    #   resp.server_certificate_config.enable_ocsp_check #=> Boolean
     #
     # @overload describe_domain_configuration(params = {})
     # @param [Hash] params ({})
@@ -5867,8 +5887,13 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Returns a unique endpoint specific to the Amazon Web Services account
-    # making the call.
+    # Returns or creates a unique endpoint specific to the Amazon Web
+    # Services account making the call.
+    #
+    # <note markdown="1"> The first time `DescribeEndpoint` is called, an endpoint is created.
+    # All subsequent calls to `DescribeEndpoint` return the same endpoint.
+    #
+    #  </note>
     #
     # Requires permission to access the [DescribeEndpoint][1] action.
     #
@@ -7721,6 +7746,11 @@ module Aws::IoT
     end
 
     # Gets a registration code used to register a CA certificate with IoT.
+    #
+    # IoT will create a registration code as part of this API call if the
+    # registration code doesn't exist or has been deleted. If you already
+    # have a registration code, this API call will return the same
+    # registration code.
     #
     # Requires permission to access the [GetRegistrationCode][1] action.
     #
@@ -11502,7 +11532,7 @@ module Aws::IoT
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_v2_logging_levels({
-    #     target_type: "DEFAULT", # accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID, EVENT_TYPE, DEVICE_DEFENDER
+    #     target_type: "DEFAULT", # accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -11510,7 +11540,7 @@ module Aws::IoT
     # @example Response structure
     #
     #   resp.log_target_configurations #=> Array
-    #   resp.log_target_configurations[0].log_target.target_type #=> String, one of "DEFAULT", "THING_GROUP", "CLIENT_ID", "SOURCE_IP", "PRINCIPAL_ID", "EVENT_TYPE", "DEVICE_DEFENDER"
+    #   resp.log_target_configurations[0].log_target.target_type #=> String, one of "DEFAULT", "THING_GROUP", "CLIENT_ID", "SOURCE_IP", "PRINCIPAL_ID"
     #   resp.log_target_configurations[0].log_target.target_name #=> String
     #   resp.log_target_configurations[0].log_level #=> String, one of "DEBUG", "INFO", "ERROR", "WARN", "DISABLED"
     #   resp.next_token #=> String
@@ -12691,7 +12721,7 @@ module Aws::IoT
     #
     #   resp = client.set_v2_logging_level({
     #     log_target: { # required
-    #       target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID, EVENT_TYPE, DEVICE_DEFENDER
+    #       target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID
     #       target_name: "LogTargetName",
     #     },
     #     log_level: "DEBUG", # required, accepts DEBUG, INFO, ERROR, WARN, DISABLED
@@ -13747,6 +13777,9 @@ module Aws::IoT
     # @option params [Types::TlsConfig] :tls_config
     #   An object that specifies the TLS configuration for a domain.
     #
+    # @option params [Types::ServerCertificateConfig] :server_certificate_config
+    #   The server certificate configuration.
+    #
     # @return [Types::UpdateDomainConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDomainConfigurationResponse#domain_configuration_name #domain_configuration_name} => String
@@ -13764,6 +13797,9 @@ module Aws::IoT
     #     remove_authorizer_config: false,
     #     tls_config: {
     #       security_policy: "SecurityPolicy",
+    #     },
+    #     server_certificate_config: {
+    #       enable_ocsp_check: false,
     #     },
     #   })
     #
@@ -15063,7 +15099,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.116.0'
+      context[:gem_version] = '1.120.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

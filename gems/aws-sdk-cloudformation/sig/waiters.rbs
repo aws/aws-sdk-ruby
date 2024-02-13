@@ -1,0 +1,101 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudFormation
+    module Waiters
+
+      class ChangeSetCreateComplete
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    change_set_name: ::String,
+                    ?stack_name: ::String,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeChangeSetResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeChangeSetResponseSuccess
+      end
+
+      class StackCreateComplete
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?stack_name: ::String,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeStacksResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeStacksResponseSuccess
+      end
+
+      class StackDeleteComplete
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?stack_name: ::String,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeStacksResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeStacksResponseSuccess
+      end
+
+      class StackExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?stack_name: ::String,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeStacksResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeStacksResponseSuccess
+      end
+
+      class StackImportComplete
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?stack_name: ::String,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeStacksResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeStacksResponseSuccess
+      end
+
+      class StackRollbackComplete
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?stack_name: ::String,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeStacksResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeStacksResponseSuccess
+      end
+
+      class StackUpdateComplete
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?stack_name: ::String,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeStacksResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeStacksResponseSuccess
+      end
+
+      class TypeRegistrationComplete
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    registration_token: ::String
+                  ) -> Client::_DescribeTypeRegistrationResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeTypeRegistrationResponseSuccess
+      end
+    end
+  end
+end

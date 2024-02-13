@@ -1,0 +1,1537 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Rekognition
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateFacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateFacesResponse]
+        def associated_faces: () -> ::Array[Types::AssociatedFace]
+        def unsuccessful_face_associations: () -> ::Array[Types::UnsuccessfulFaceAssociation]
+        def user_status: () -> ("ACTIVE" | "UPDATING" | "CREATING" | "CREATED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#associate_faces-instance_method
+      def associate_faces: (
+                             collection_id: ::String,
+                             user_id: ::String,
+                             face_ids: Array[::String],
+                             ?user_match_threshold: ::Float,
+                             ?client_request_token: ::String
+                           ) -> _AssociateFacesResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateFacesResponseSuccess
+
+      interface _CompareFacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CompareFacesResponse]
+        def source_image_face: () -> Types::ComparedSourceImageFace
+        def face_matches: () -> ::Array[Types::CompareFacesMatch]
+        def unmatched_faces: () -> ::Array[Types::ComparedFace]
+        def source_image_orientation_correction: () -> ("ROTATE_0" | "ROTATE_90" | "ROTATE_180" | "ROTATE_270")
+        def target_image_orientation_correction: () -> ("ROTATE_0" | "ROTATE_90" | "ROTATE_180" | "ROTATE_270")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#compare_faces-instance_method
+      def compare_faces: (
+                           source_image: {
+                             bytes: ::String?,
+                             s3_object: {
+                               bucket: ::String?,
+                               name: ::String?,
+                               version: ::String?
+                             }?
+                           },
+                           target_image: {
+                             bytes: ::String?,
+                             s3_object: {
+                               bucket: ::String?,
+                               name: ::String?,
+                               version: ::String?
+                             }?
+                           },
+                           ?similarity_threshold: ::Float,
+                           ?quality_filter: ("NONE" | "AUTO" | "LOW" | "MEDIUM" | "HIGH")
+                         ) -> _CompareFacesResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CompareFacesResponseSuccess
+
+      interface _CopyProjectVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CopyProjectVersionResponse]
+        def project_version_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#copy_project_version-instance_method
+      def copy_project_version: (
+                                  source_project_arn: ::String,
+                                  source_project_version_arn: ::String,
+                                  destination_project_arn: ::String,
+                                  version_name: ::String,
+                                  output_config: {
+                                    s3_bucket: ::String?,
+                                    s3_key_prefix: ::String?
+                                  },
+                                  ?tags: Hash[::String, ::String],
+                                  ?kms_key_id: ::String
+                                ) -> _CopyProjectVersionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyProjectVersionResponseSuccess
+
+      interface _CreateCollectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCollectionResponse]
+        def status_code: () -> ::Integer
+        def collection_arn: () -> ::String
+        def face_model_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#create_collection-instance_method
+      def create_collection: (
+                               collection_id: ::String,
+                               ?tags: Hash[::String, ::String]
+                             ) -> _CreateCollectionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCollectionResponseSuccess
+
+      interface _CreateDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatasetResponse]
+        def dataset_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#create_dataset-instance_method
+      def create_dataset: (
+                            ?dataset_source: {
+                              ground_truth_manifest: {
+                                s3_object: {
+                                  bucket: ::String?,
+                                  name: ::String?,
+                                  version: ::String?
+                                }?
+                              }?,
+                              dataset_arn: ::String?
+                            },
+                            dataset_type: ("TRAIN" | "TEST"),
+                            project_arn: ::String
+                          ) -> _CreateDatasetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetResponseSuccess
+
+      interface _CreateFaceLivenessSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFaceLivenessSessionResponse]
+        def session_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#create_face_liveness_session-instance_method
+      def create_face_liveness_session: (
+                                          ?kms_key_id: ::String,
+                                          ?settings: {
+                                            output_config: {
+                                              s3_bucket: ::String,
+                                              s3_key_prefix: ::String?
+                                            }?,
+                                            audit_images_limit: ::Integer?
+                                          },
+                                          ?client_request_token: ::String
+                                        ) -> _CreateFaceLivenessSessionResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFaceLivenessSessionResponseSuccess
+
+      interface _CreateProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProjectResponse]
+        def project_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#create_project-instance_method
+      def create_project: (
+                            project_name: ::String,
+                            ?feature: ("CONTENT_MODERATION" | "CUSTOM_LABELS"),
+                            ?auto_update: ("ENABLED" | "DISABLED")
+                          ) -> _CreateProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProjectResponseSuccess
+
+      interface _CreateProjectVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProjectVersionResponse]
+        def project_version_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#create_project_version-instance_method
+      def create_project_version: (
+                                    project_arn: ::String,
+                                    version_name: ::String,
+                                    output_config: {
+                                      s3_bucket: ::String?,
+                                      s3_key_prefix: ::String?
+                                    },
+                                    ?training_data: {
+                                      assets: Array[
+                                        {
+                                          ground_truth_manifest: {
+                                            s3_object: {
+                                              bucket: ::String?,
+                                              name: ::String?,
+                                              version: ::String?
+                                            }?
+                                          }?
+                                        },
+                                      ]?
+                                    },
+                                    ?testing_data: {
+                                      assets: Array[
+                                        {
+                                          ground_truth_manifest: {
+                                            s3_object: {
+                                              bucket: ::String?,
+                                              name: ::String?,
+                                              version: ::String?
+                                            }?
+                                          }?
+                                        },
+                                      ]?,
+                                      auto_create: bool?
+                                    },
+                                    ?tags: Hash[::String, ::String],
+                                    ?kms_key_id: ::String,
+                                    ?version_description: ::String,
+                                    ?feature_config: {
+                                      content_moderation: {
+                                        confidence_threshold: ::Float?
+                                      }?
+                                    }
+                                  ) -> _CreateProjectVersionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProjectVersionResponseSuccess
+
+      interface _CreateStreamProcessorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStreamProcessorResponse]
+        def stream_processor_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#create_stream_processor-instance_method
+      def create_stream_processor: (
+                                     input: {
+                                       kinesis_video_stream: {
+                                         arn: ::String?
+                                       }?
+                                     },
+                                     output: {
+                                       kinesis_data_stream: {
+                                         arn: ::String?
+                                       }?,
+                                       s3_destination: {
+                                         bucket: ::String?,
+                                         key_prefix: ::String?
+                                       }?
+                                     },
+                                     name: ::String,
+                                     settings: {
+                                       face_search: {
+                                         collection_id: ::String?,
+                                         face_match_threshold: ::Float?
+                                       }?,
+                                       connected_home: {
+                                         labels: Array[::String],
+                                         min_confidence: ::Float?
+                                       }?
+                                     },
+                                     role_arn: ::String,
+                                     ?tags: Hash[::String, ::String],
+                                     ?notification_channel: {
+                                       sns_topic_arn: ::String
+                                     },
+                                     ?kms_key_id: ::String,
+                                     ?regions_of_interest: Array[
+                                       {
+                                         bounding_box: {
+                                           width: ::Float?,
+                                           height: ::Float?,
+                                           left: ::Float?,
+                                           top: ::Float?
+                                         }?,
+                                         polygon: Array[
+                                           {
+                                             x: ::Float?,
+                                             y: ::Float?
+                                           },
+                                         ]?
+                                       },
+                                     ],
+                                     ?data_sharing_preference: {
+                                       opt_in: bool
+                                     }
+                                   ) -> _CreateStreamProcessorResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStreamProcessorResponseSuccess
+
+      interface _CreateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateUserResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#create_user-instance_method
+      def create_user: (
+                         collection_id: ::String,
+                         user_id: ::String,
+                         ?client_request_token: ::String
+                       ) -> _CreateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserResponseSuccess
+
+      interface _DeleteCollectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCollectionResponse]
+        def status_code: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#delete_collection-instance_method
+      def delete_collection: (
+                               collection_id: ::String
+                             ) -> _DeleteCollectionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCollectionResponseSuccess
+
+      interface _DeleteDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDatasetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#delete_dataset-instance_method
+      def delete_dataset: (
+                            dataset_arn: ::String
+                          ) -> _DeleteDatasetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDatasetResponseSuccess
+
+      interface _DeleteFacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFacesResponse]
+        def deleted_faces: () -> ::Array[::String]
+        def unsuccessful_face_deletions: () -> ::Array[Types::UnsuccessfulFaceDeletion]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#delete_faces-instance_method
+      def delete_faces: (
+                          collection_id: ::String,
+                          face_ids: Array[::String]
+                        ) -> _DeleteFacesResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFacesResponseSuccess
+
+      interface _DeleteProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProjectResponse]
+        def status: () -> ("CREATING" | "CREATED" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#delete_project-instance_method
+      def delete_project: (
+                            project_arn: ::String
+                          ) -> _DeleteProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProjectResponseSuccess
+
+      interface _DeleteProjectPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProjectPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#delete_project_policy-instance_method
+      def delete_project_policy: (
+                                   project_arn: ::String,
+                                   policy_name: ::String,
+                                   ?policy_revision_id: ::String
+                                 ) -> _DeleteProjectPolicyResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProjectPolicyResponseSuccess
+
+      interface _DeleteProjectVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProjectVersionResponse]
+        def status: () -> ("TRAINING_IN_PROGRESS" | "TRAINING_COMPLETED" | "TRAINING_FAILED" | "STARTING" | "RUNNING" | "FAILED" | "STOPPING" | "STOPPED" | "DELETING" | "COPYING_IN_PROGRESS" | "COPYING_COMPLETED" | "COPYING_FAILED" | "DEPRECATED" | "EXPIRED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#delete_project_version-instance_method
+      def delete_project_version: (
+                                    project_version_arn: ::String
+                                  ) -> _DeleteProjectVersionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProjectVersionResponseSuccess
+
+      interface _DeleteStreamProcessorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteStreamProcessorResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#delete_stream_processor-instance_method
+      def delete_stream_processor: (
+                                     name: ::String
+                                   ) -> _DeleteStreamProcessorResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteStreamProcessorResponseSuccess
+
+      interface _DeleteUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteUserResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#delete_user-instance_method
+      def delete_user: (
+                         collection_id: ::String,
+                         user_id: ::String,
+                         ?client_request_token: ::String
+                       ) -> _DeleteUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteUserResponseSuccess
+
+      interface _DescribeCollectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCollectionResponse]
+        def face_count: () -> ::Integer
+        def face_model_version: () -> ::String
+        def collection_arn: () -> ::String
+        def creation_timestamp: () -> ::Time
+        def user_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#describe_collection-instance_method
+      def describe_collection: (
+                                 collection_id: ::String
+                               ) -> _DescribeCollectionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCollectionResponseSuccess
+
+      interface _DescribeDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDatasetResponse]
+        def dataset_description: () -> Types::DatasetDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#describe_dataset-instance_method
+      def describe_dataset: (
+                              dataset_arn: ::String
+                            ) -> _DescribeDatasetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDatasetResponseSuccess
+
+      interface _DescribeProjectVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProjectVersionsResponse]
+        def project_version_descriptions: () -> ::Array[Types::ProjectVersionDescription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#describe_project_versions-instance_method
+      def describe_project_versions: (
+                                       project_arn: ::String,
+                                       ?version_names: Array[::String],
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _DescribeProjectVersionsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProjectVersionsResponseSuccess
+
+      interface _DescribeProjectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProjectsResponse]
+        def project_descriptions: () -> ::Array[Types::ProjectDescription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#describe_projects-instance_method
+      def describe_projects: (
+                               ?next_token: ::String,
+                               ?max_results: ::Integer,
+                               ?project_names: Array[::String],
+                               ?features: Array[("CONTENT_MODERATION" | "CUSTOM_LABELS")]
+                             ) -> _DescribeProjectsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProjectsResponseSuccess
+
+      interface _DescribeStreamProcessorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStreamProcessorResponse]
+        def name: () -> ::String
+        def stream_processor_arn: () -> ::String
+        def status: () -> ("STOPPED" | "STARTING" | "RUNNING" | "FAILED" | "STOPPING" | "UPDATING")
+        def status_message: () -> ::String
+        def creation_timestamp: () -> ::Time
+        def last_update_timestamp: () -> ::Time
+        def input: () -> Types::StreamProcessorInput
+        def output: () -> Types::StreamProcessorOutput
+        def role_arn: () -> ::String
+        def settings: () -> Types::StreamProcessorSettings
+        def notification_channel: () -> Types::StreamProcessorNotificationChannel
+        def kms_key_id: () -> ::String
+        def regions_of_interest: () -> ::Array[Types::RegionOfInterest]
+        def data_sharing_preference: () -> Types::StreamProcessorDataSharingPreference
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#describe_stream_processor-instance_method
+      def describe_stream_processor: (
+                                       name: ::String
+                                     ) -> _DescribeStreamProcessorResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStreamProcessorResponseSuccess
+
+      interface _DetectCustomLabelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetectCustomLabelsResponse]
+        def custom_labels: () -> ::Array[Types::CustomLabel]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#detect_custom_labels-instance_method
+      def detect_custom_labels: (
+                                  project_version_arn: ::String,
+                                  image: {
+                                    bytes: ::String?,
+                                    s3_object: {
+                                      bucket: ::String?,
+                                      name: ::String?,
+                                      version: ::String?
+                                    }?
+                                  },
+                                  ?max_results: ::Integer,
+                                  ?min_confidence: ::Float
+                                ) -> _DetectCustomLabelsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectCustomLabelsResponseSuccess
+
+      interface _DetectFacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetectFacesResponse]
+        def face_details: () -> ::Array[Types::FaceDetail]
+        def orientation_correction: () -> ("ROTATE_0" | "ROTATE_90" | "ROTATE_180" | "ROTATE_270")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#detect_faces-instance_method
+      def detect_faces: (
+                          image: {
+                            bytes: ::String?,
+                            s3_object: {
+                              bucket: ::String?,
+                              name: ::String?,
+                              version: ::String?
+                            }?
+                          },
+                          ?attributes: Array[("DEFAULT" | "ALL" | "AGE_RANGE" | "BEARD" | "EMOTIONS" | "EYE_DIRECTION" | "EYEGLASSES" | "EYES_OPEN" | "GENDER" | "MOUTH_OPEN" | "MUSTACHE" | "FACE_OCCLUDED" | "SMILE" | "SUNGLASSES")]
+                        ) -> _DetectFacesResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectFacesResponseSuccess
+
+      interface _DetectLabelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetectLabelsResponse]
+        def labels: () -> ::Array[Types::Label]
+        def orientation_correction: () -> ("ROTATE_0" | "ROTATE_90" | "ROTATE_180" | "ROTATE_270")
+        def label_model_version: () -> ::String
+        def image_properties: () -> Types::DetectLabelsImageProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#detect_labels-instance_method
+      def detect_labels: (
+                           image: {
+                             bytes: ::String?,
+                             s3_object: {
+                               bucket: ::String?,
+                               name: ::String?,
+                               version: ::String?
+                             }?
+                           },
+                           ?max_labels: ::Integer,
+                           ?min_confidence: ::Float,
+                           ?features: Array[("GENERAL_LABELS" | "IMAGE_PROPERTIES")],
+                           ?settings: {
+                             general_labels: {
+                               label_inclusion_filters: Array[::String]?,
+                               label_exclusion_filters: Array[::String]?,
+                               label_category_inclusion_filters: Array[::String]?,
+                               label_category_exclusion_filters: Array[::String]?
+                             }?,
+                             image_properties: {
+                               max_dominant_colors: ::Integer?
+                             }?
+                           }
+                         ) -> _DetectLabelsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectLabelsResponseSuccess
+
+      interface _DetectModerationLabelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetectModerationLabelsResponse]
+        def moderation_labels: () -> ::Array[Types::ModerationLabel]
+        def moderation_model_version: () -> ::String
+        def human_loop_activation_output: () -> Types::HumanLoopActivationOutput
+        def project_version: () -> ::String
+        def content_types: () -> ::Array[Types::ContentType]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#detect_moderation_labels-instance_method
+      def detect_moderation_labels: (
+                                      image: {
+                                        bytes: ::String?,
+                                        s3_object: {
+                                          bucket: ::String?,
+                                          name: ::String?,
+                                          version: ::String?
+                                        }?
+                                      },
+                                      ?min_confidence: ::Float,
+                                      ?human_loop_config: {
+                                        human_loop_name: ::String,
+                                        flow_definition_arn: ::String,
+                                        data_attributes: {
+                                          content_classifiers: Array[("FreeOfPersonallyIdentifiableInformation" | "FreeOfAdultContent")]?
+                                        }?
+                                      },
+                                      ?project_version: ::String
+                                    ) -> _DetectModerationLabelsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectModerationLabelsResponseSuccess
+
+      interface _DetectProtectiveEquipmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetectProtectiveEquipmentResponse]
+        def protective_equipment_model_version: () -> ::String
+        def persons: () -> ::Array[Types::ProtectiveEquipmentPerson]
+        def summary: () -> Types::ProtectiveEquipmentSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#detect_protective_equipment-instance_method
+      def detect_protective_equipment: (
+                                         image: {
+                                           bytes: ::String?,
+                                           s3_object: {
+                                             bucket: ::String?,
+                                             name: ::String?,
+                                             version: ::String?
+                                           }?
+                                         },
+                                         ?summarization_attributes: {
+                                           min_confidence: ::Float,
+                                           required_equipment_types: Array[("FACE_COVER" | "HAND_COVER" | "HEAD_COVER")]
+                                         }
+                                       ) -> _DetectProtectiveEquipmentResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectProtectiveEquipmentResponseSuccess
+
+      interface _DetectTextResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetectTextResponse]
+        def text_detections: () -> ::Array[Types::TextDetection]
+        def text_model_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#detect_text-instance_method
+      def detect_text: (
+                         image: {
+                           bytes: ::String?,
+                           s3_object: {
+                             bucket: ::String?,
+                             name: ::String?,
+                             version: ::String?
+                           }?
+                         },
+                         ?filters: {
+                           word_filter: {
+                             min_confidence: ::Float?,
+                             min_bounding_box_height: ::Float?,
+                             min_bounding_box_width: ::Float?
+                           }?,
+                           regions_of_interest: Array[
+                             {
+                               bounding_box: {
+                                 width: ::Float?,
+                                 height: ::Float?,
+                                 left: ::Float?,
+                                 top: ::Float?
+                               }?,
+                               polygon: Array[
+                                 {
+                                   x: ::Float?,
+                                   y: ::Float?
+                                 },
+                               ]?
+                             },
+                           ]?
+                         }
+                       ) -> _DetectTextResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectTextResponseSuccess
+
+      interface _DisassociateFacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateFacesResponse]
+        def disassociated_faces: () -> ::Array[Types::DisassociatedFace]
+        def unsuccessful_face_disassociations: () -> ::Array[Types::UnsuccessfulFaceDisassociation]
+        def user_status: () -> ("ACTIVE" | "UPDATING" | "CREATING" | "CREATED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#disassociate_faces-instance_method
+      def disassociate_faces: (
+                                collection_id: ::String,
+                                user_id: ::String,
+                                ?client_request_token: ::String,
+                                face_ids: Array[::String]
+                              ) -> _DisassociateFacesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateFacesResponseSuccess
+
+      interface _DistributeDatasetEntriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DistributeDatasetEntriesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#distribute_dataset_entries-instance_method
+      def distribute_dataset_entries: (
+                                        datasets: Array[
+                                          {
+                                            arn: ::String
+                                          },
+                                        ]
+                                      ) -> _DistributeDatasetEntriesResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DistributeDatasetEntriesResponseSuccess
+
+      interface _GetCelebrityInfoResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCelebrityInfoResponse]
+        def urls: () -> ::Array[::String]
+        def name: () -> ::String
+        def known_gender: () -> Types::KnownGender
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#get_celebrity_info-instance_method
+      def get_celebrity_info: (
+                                id: ::String
+                              ) -> _GetCelebrityInfoResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCelebrityInfoResponseSuccess
+
+      interface _GetCelebrityRecognitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCelebrityRecognitionResponse]
+        def job_status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+        def status_message: () -> ::String
+        def video_metadata: () -> Types::VideoMetadata
+        def next_token: () -> ::String
+        def celebrities: () -> ::Array[Types::CelebrityRecognition]
+        def job_id: () -> ::String
+        def video: () -> Types::Video
+        def job_tag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#get_celebrity_recognition-instance_method
+      def get_celebrity_recognition: (
+                                       job_id: ::String,
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String,
+                                       ?sort_by: ("ID" | "TIMESTAMP")
+                                     ) -> _GetCelebrityRecognitionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCelebrityRecognitionResponseSuccess
+
+      interface _GetContentModerationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContentModerationResponse]
+        def job_status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+        def status_message: () -> ::String
+        def video_metadata: () -> Types::VideoMetadata
+        def moderation_labels: () -> ::Array[Types::ContentModerationDetection]
+        def next_token: () -> ::String
+        def moderation_model_version: () -> ::String
+        def job_id: () -> ::String
+        def video: () -> Types::Video
+        def job_tag: () -> ::String
+        def get_request_metadata: () -> Types::GetContentModerationRequestMetadata
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#get_content_moderation-instance_method
+      def get_content_moderation: (
+                                    job_id: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String,
+                                    ?sort_by: ("NAME" | "TIMESTAMP"),
+                                    ?aggregate_by: ("TIMESTAMPS" | "SEGMENTS")
+                                  ) -> _GetContentModerationResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContentModerationResponseSuccess
+
+      interface _GetFaceDetectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFaceDetectionResponse]
+        def job_status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+        def status_message: () -> ::String
+        def video_metadata: () -> Types::VideoMetadata
+        def next_token: () -> ::String
+        def faces: () -> ::Array[Types::FaceDetection]
+        def job_id: () -> ::String
+        def video: () -> Types::Video
+        def job_tag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#get_face_detection-instance_method
+      def get_face_detection: (
+                                job_id: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _GetFaceDetectionResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFaceDetectionResponseSuccess
+
+      interface _GetFaceLivenessSessionResultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFaceLivenessSessionResultsResponse]
+        def session_id: () -> ::String
+        def status: () -> ("CREATED" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "EXPIRED")
+        def confidence: () -> ::Float
+        def reference_image: () -> Types::AuditImage
+        def audit_images: () -> ::Array[Types::AuditImage]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#get_face_liveness_session_results-instance_method
+      def get_face_liveness_session_results: (
+                                               session_id: ::String
+                                             ) -> _GetFaceLivenessSessionResultsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFaceLivenessSessionResultsResponseSuccess
+
+      interface _GetFaceSearchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFaceSearchResponse]
+        def job_status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+        def status_message: () -> ::String
+        def next_token: () -> ::String
+        def video_metadata: () -> Types::VideoMetadata
+        def persons: () -> ::Array[Types::PersonMatch]
+        def job_id: () -> ::String
+        def video: () -> Types::Video
+        def job_tag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#get_face_search-instance_method
+      def get_face_search: (
+                             job_id: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             ?sort_by: ("INDEX" | "TIMESTAMP")
+                           ) -> _GetFaceSearchResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFaceSearchResponseSuccess
+
+      interface _GetLabelDetectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLabelDetectionResponse]
+        def job_status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+        def status_message: () -> ::String
+        def video_metadata: () -> Types::VideoMetadata
+        def next_token: () -> ::String
+        def labels: () -> ::Array[Types::LabelDetection]
+        def label_model_version: () -> ::String
+        def job_id: () -> ::String
+        def video: () -> Types::Video
+        def job_tag: () -> ::String
+        def get_request_metadata: () -> Types::GetLabelDetectionRequestMetadata
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#get_label_detection-instance_method
+      def get_label_detection: (
+                                 job_id: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String,
+                                 ?sort_by: ("NAME" | "TIMESTAMP"),
+                                 ?aggregate_by: ("TIMESTAMPS" | "SEGMENTS")
+                               ) -> _GetLabelDetectionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLabelDetectionResponseSuccess
+
+      interface _GetMediaAnalysisJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMediaAnalysisJobResponse]
+        def job_id: () -> ::String
+        def job_name: () -> ::String
+        def operations_config: () -> Types::MediaAnalysisOperationsConfig
+        def status: () -> ("CREATED" | "QUEUED" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+        def failure_details: () -> Types::MediaAnalysisJobFailureDetails
+        def creation_timestamp: () -> ::Time
+        def completion_timestamp: () -> ::Time
+        def input: () -> Types::MediaAnalysisInput
+        def output_config: () -> Types::MediaAnalysisOutputConfig
+        def kms_key_id: () -> ::String
+        def results: () -> Types::MediaAnalysisResults
+        def manifest_summary: () -> Types::MediaAnalysisManifestSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#get_media_analysis_job-instance_method
+      def get_media_analysis_job: (
+                                    job_id: ::String
+                                  ) -> _GetMediaAnalysisJobResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMediaAnalysisJobResponseSuccess
+
+      interface _GetPersonTrackingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPersonTrackingResponse]
+        def job_status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+        def status_message: () -> ::String
+        def video_metadata: () -> Types::VideoMetadata
+        def next_token: () -> ::String
+        def persons: () -> ::Array[Types::PersonDetection]
+        def job_id: () -> ::String
+        def video: () -> Types::Video
+        def job_tag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#get_person_tracking-instance_method
+      def get_person_tracking: (
+                                 job_id: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String,
+                                 ?sort_by: ("INDEX" | "TIMESTAMP")
+                               ) -> _GetPersonTrackingResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPersonTrackingResponseSuccess
+
+      interface _GetSegmentDetectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSegmentDetectionResponse]
+        def job_status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+        def status_message: () -> ::String
+        def video_metadata: () -> ::Array[Types::VideoMetadata]
+        def audio_metadata: () -> ::Array[Types::AudioMetadata]
+        def next_token: () -> ::String
+        def segments: () -> ::Array[Types::SegmentDetection]
+        def selected_segment_types: () -> ::Array[Types::SegmentTypeInfo]
+        def job_id: () -> ::String
+        def video: () -> Types::Video
+        def job_tag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#get_segment_detection-instance_method
+      def get_segment_detection: (
+                                   job_id: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _GetSegmentDetectionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSegmentDetectionResponseSuccess
+
+      interface _GetTextDetectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTextDetectionResponse]
+        def job_status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+        def status_message: () -> ::String
+        def video_metadata: () -> Types::VideoMetadata
+        def text_detections: () -> ::Array[Types::TextDetectionResult]
+        def next_token: () -> ::String
+        def text_model_version: () -> ::String
+        def job_id: () -> ::String
+        def video: () -> Types::Video
+        def job_tag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#get_text_detection-instance_method
+      def get_text_detection: (
+                                job_id: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _GetTextDetectionResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTextDetectionResponseSuccess
+
+      interface _IndexFacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::IndexFacesResponse]
+        def face_records: () -> ::Array[Types::FaceRecord]
+        def orientation_correction: () -> ("ROTATE_0" | "ROTATE_90" | "ROTATE_180" | "ROTATE_270")
+        def face_model_version: () -> ::String
+        def unindexed_faces: () -> ::Array[Types::UnindexedFace]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#index_faces-instance_method
+      def index_faces: (
+                         collection_id: ::String,
+                         image: {
+                           bytes: ::String?,
+                           s3_object: {
+                             bucket: ::String?,
+                             name: ::String?,
+                             version: ::String?
+                           }?
+                         },
+                         ?external_image_id: ::String,
+                         ?detection_attributes: Array[("DEFAULT" | "ALL" | "AGE_RANGE" | "BEARD" | "EMOTIONS" | "EYE_DIRECTION" | "EYEGLASSES" | "EYES_OPEN" | "GENDER" | "MOUTH_OPEN" | "MUSTACHE" | "FACE_OCCLUDED" | "SMILE" | "SUNGLASSES")],
+                         ?max_faces: ::Integer,
+                         ?quality_filter: ("NONE" | "AUTO" | "LOW" | "MEDIUM" | "HIGH")
+                       ) -> _IndexFacesResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _IndexFacesResponseSuccess
+
+      interface _ListCollectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCollectionsResponse]
+        def collection_ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+        def face_model_versions: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#list_collections-instance_method
+      def list_collections: (
+                              ?next_token: ::String,
+                              ?max_results: ::Integer
+                            ) -> _ListCollectionsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCollectionsResponseSuccess
+
+      interface _ListDatasetEntriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetEntriesResponse]
+        def dataset_entries: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#list_dataset_entries-instance_method
+      def list_dataset_entries: (
+                                  dataset_arn: ::String,
+                                  ?contains_labels: Array[::String],
+                                  ?labeled: bool,
+                                  ?source_ref_contains: ::String,
+                                  ?has_errors: bool,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListDatasetEntriesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetEntriesResponseSuccess
+
+      interface _ListDatasetLabelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetLabelsResponse]
+        def dataset_label_descriptions: () -> ::Array[Types::DatasetLabelDescription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#list_dataset_labels-instance_method
+      def list_dataset_labels: (
+                                 dataset_arn: ::String,
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _ListDatasetLabelsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetLabelsResponseSuccess
+
+      interface _ListFacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFacesResponse]
+        def faces: () -> ::Array[Types::Face]
+        def next_token: () -> ::String
+        def face_model_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#list_faces-instance_method
+      def list_faces: (
+                        collection_id: ::String,
+                        ?next_token: ::String,
+                        ?max_results: ::Integer,
+                        ?user_id: ::String,
+                        ?face_ids: Array[::String]
+                      ) -> _ListFacesResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFacesResponseSuccess
+
+      interface _ListMediaAnalysisJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMediaAnalysisJobsResponse]
+        def next_token: () -> ::String
+        def media_analysis_jobs: () -> ::Array[Types::MediaAnalysisJobDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#list_media_analysis_jobs-instance_method
+      def list_media_analysis_jobs: (
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListMediaAnalysisJobsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMediaAnalysisJobsResponseSuccess
+
+      interface _ListProjectPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProjectPoliciesResponse]
+        def project_policies: () -> ::Array[Types::ProjectPolicy]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#list_project_policies-instance_method
+      def list_project_policies: (
+                                   project_arn: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _ListProjectPoliciesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProjectPoliciesResponseSuccess
+
+      interface _ListStreamProcessorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStreamProcessorsResponse]
+        def next_token: () -> ::String
+        def stream_processors: () -> ::Array[Types::StreamProcessor]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#list_stream_processors-instance_method
+      def list_stream_processors: (
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListStreamProcessorsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStreamProcessorsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUsersResponse]
+        def users: () -> ::Array[Types::User]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#list_users-instance_method
+      def list_users: (
+                        collection_id: ::String,
+                        ?max_results: ::Integer,
+                        ?next_token: ::String
+                      ) -> _ListUsersResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUsersResponseSuccess
+
+      interface _PutProjectPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutProjectPolicyResponse]
+        def policy_revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#put_project_policy-instance_method
+      def put_project_policy: (
+                                project_arn: ::String,
+                                policy_name: ::String,
+                                ?policy_revision_id: ::String,
+                                policy_document: ::String
+                              ) -> _PutProjectPolicyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutProjectPolicyResponseSuccess
+
+      interface _RecognizeCelebritiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RecognizeCelebritiesResponse]
+        def celebrity_faces: () -> ::Array[Types::Celebrity]
+        def unrecognized_faces: () -> ::Array[Types::ComparedFace]
+        def orientation_correction: () -> ("ROTATE_0" | "ROTATE_90" | "ROTATE_180" | "ROTATE_270")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#recognize_celebrities-instance_method
+      def recognize_celebrities: (
+                                   image: {
+                                     bytes: ::String?,
+                                     s3_object: {
+                                       bucket: ::String?,
+                                       name: ::String?,
+                                       version: ::String?
+                                     }?
+                                   }
+                                 ) -> _RecognizeCelebritiesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RecognizeCelebritiesResponseSuccess
+
+      interface _SearchFacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchFacesResponse]
+        def searched_face_id: () -> ::String
+        def face_matches: () -> ::Array[Types::FaceMatch]
+        def face_model_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#search_faces-instance_method
+      def search_faces: (
+                          collection_id: ::String,
+                          face_id: ::String,
+                          ?max_faces: ::Integer,
+                          ?face_match_threshold: ::Float
+                        ) -> _SearchFacesResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchFacesResponseSuccess
+
+      interface _SearchFacesByImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchFacesByImageResponse]
+        def searched_face_bounding_box: () -> Types::BoundingBox
+        def searched_face_confidence: () -> ::Float
+        def face_matches: () -> ::Array[Types::FaceMatch]
+        def face_model_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#search_faces_by_image-instance_method
+      def search_faces_by_image: (
+                                   collection_id: ::String,
+                                   image: {
+                                     bytes: ::String?,
+                                     s3_object: {
+                                       bucket: ::String?,
+                                       name: ::String?,
+                                       version: ::String?
+                                     }?
+                                   },
+                                   ?max_faces: ::Integer,
+                                   ?face_match_threshold: ::Float,
+                                   ?quality_filter: ("NONE" | "AUTO" | "LOW" | "MEDIUM" | "HIGH")
+                                 ) -> _SearchFacesByImageResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchFacesByImageResponseSuccess
+
+      interface _SearchUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchUsersResponse]
+        def user_matches: () -> ::Array[Types::UserMatch]
+        def face_model_version: () -> ::String
+        def searched_face: () -> Types::SearchedFace
+        def searched_user: () -> Types::SearchedUser
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#search_users-instance_method
+      def search_users: (
+                          collection_id: ::String,
+                          ?user_id: ::String,
+                          ?face_id: ::String,
+                          ?user_match_threshold: ::Float,
+                          ?max_users: ::Integer
+                        ) -> _SearchUsersResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchUsersResponseSuccess
+
+      interface _SearchUsersByImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchUsersByImageResponse]
+        def user_matches: () -> ::Array[Types::UserMatch]
+        def face_model_version: () -> ::String
+        def searched_face: () -> Types::SearchedFaceDetails
+        def unsearched_faces: () -> ::Array[Types::UnsearchedFace]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#search_users_by_image-instance_method
+      def search_users_by_image: (
+                                   collection_id: ::String,
+                                   image: {
+                                     bytes: ::String?,
+                                     s3_object: {
+                                       bucket: ::String?,
+                                       name: ::String?,
+                                       version: ::String?
+                                     }?
+                                   },
+                                   ?user_match_threshold: ::Float,
+                                   ?max_users: ::Integer,
+                                   ?quality_filter: ("NONE" | "AUTO" | "LOW" | "MEDIUM" | "HIGH")
+                                 ) -> _SearchUsersByImageResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchUsersByImageResponseSuccess
+
+      interface _StartCelebrityRecognitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartCelebrityRecognitionResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#start_celebrity_recognition-instance_method
+      def start_celebrity_recognition: (
+                                         video: {
+                                           s3_object: {
+                                             bucket: ::String?,
+                                             name: ::String?,
+                                             version: ::String?
+                                           }?
+                                         },
+                                         ?client_request_token: ::String,
+                                         ?notification_channel: {
+                                           sns_topic_arn: ::String,
+                                           role_arn: ::String
+                                         },
+                                         ?job_tag: ::String
+                                       ) -> _StartCelebrityRecognitionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCelebrityRecognitionResponseSuccess
+
+      interface _StartContentModerationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartContentModerationResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#start_content_moderation-instance_method
+      def start_content_moderation: (
+                                      video: {
+                                        s3_object: {
+                                          bucket: ::String?,
+                                          name: ::String?,
+                                          version: ::String?
+                                        }?
+                                      },
+                                      ?min_confidence: ::Float,
+                                      ?client_request_token: ::String,
+                                      ?notification_channel: {
+                                        sns_topic_arn: ::String,
+                                        role_arn: ::String
+                                      },
+                                      ?job_tag: ::String
+                                    ) -> _StartContentModerationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartContentModerationResponseSuccess
+
+      interface _StartFaceDetectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartFaceDetectionResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#start_face_detection-instance_method
+      def start_face_detection: (
+                                  video: {
+                                    s3_object: {
+                                      bucket: ::String?,
+                                      name: ::String?,
+                                      version: ::String?
+                                    }?
+                                  },
+                                  ?client_request_token: ::String,
+                                  ?notification_channel: {
+                                    sns_topic_arn: ::String,
+                                    role_arn: ::String
+                                  },
+                                  ?face_attributes: ("DEFAULT" | "ALL"),
+                                  ?job_tag: ::String
+                                ) -> _StartFaceDetectionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFaceDetectionResponseSuccess
+
+      interface _StartFaceSearchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartFaceSearchResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#start_face_search-instance_method
+      def start_face_search: (
+                               video: {
+                                 s3_object: {
+                                   bucket: ::String?,
+                                   name: ::String?,
+                                   version: ::String?
+                                 }?
+                               },
+                               ?client_request_token: ::String,
+                               ?face_match_threshold: ::Float,
+                               collection_id: ::String,
+                               ?notification_channel: {
+                                 sns_topic_arn: ::String,
+                                 role_arn: ::String
+                               },
+                               ?job_tag: ::String
+                             ) -> _StartFaceSearchResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFaceSearchResponseSuccess
+
+      interface _StartLabelDetectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartLabelDetectionResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#start_label_detection-instance_method
+      def start_label_detection: (
+                                   video: {
+                                     s3_object: {
+                                       bucket: ::String?,
+                                       name: ::String?,
+                                       version: ::String?
+                                     }?
+                                   },
+                                   ?client_request_token: ::String,
+                                   ?min_confidence: ::Float,
+                                   ?notification_channel: {
+                                     sns_topic_arn: ::String,
+                                     role_arn: ::String
+                                   },
+                                   ?job_tag: ::String,
+                                   ?features: Array[("GENERAL_LABELS")],
+                                   ?settings: {
+                                     general_labels: {
+                                       label_inclusion_filters: Array[::String]?,
+                                       label_exclusion_filters: Array[::String]?,
+                                       label_category_inclusion_filters: Array[::String]?,
+                                       label_category_exclusion_filters: Array[::String]?
+                                     }?
+                                   }
+                                 ) -> _StartLabelDetectionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartLabelDetectionResponseSuccess
+
+      interface _StartMediaAnalysisJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMediaAnalysisJobResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#start_media_analysis_job-instance_method
+      def start_media_analysis_job: (
+                                      ?client_request_token: ::String,
+                                      ?job_name: ::String,
+                                      operations_config: {
+                                        detect_moderation_labels: {
+                                          min_confidence: ::Float?,
+                                          project_version: ::String?
+                                        }?
+                                      },
+                                      input: {
+                                        s3_object: {
+                                          bucket: ::String?,
+                                          name: ::String?,
+                                          version: ::String?
+                                        }
+                                      },
+                                      output_config: {
+                                        s3_bucket: ::String,
+                                        s3_key_prefix: ::String?
+                                      },
+                                      ?kms_key_id: ::String
+                                    ) -> _StartMediaAnalysisJobResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMediaAnalysisJobResponseSuccess
+
+      interface _StartPersonTrackingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartPersonTrackingResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#start_person_tracking-instance_method
+      def start_person_tracking: (
+                                   video: {
+                                     s3_object: {
+                                       bucket: ::String?,
+                                       name: ::String?,
+                                       version: ::String?
+                                     }?
+                                   },
+                                   ?client_request_token: ::String,
+                                   ?notification_channel: {
+                                     sns_topic_arn: ::String,
+                                     role_arn: ::String
+                                   },
+                                   ?job_tag: ::String
+                                 ) -> _StartPersonTrackingResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPersonTrackingResponseSuccess
+
+      interface _StartProjectVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartProjectVersionResponse]
+        def status: () -> ("TRAINING_IN_PROGRESS" | "TRAINING_COMPLETED" | "TRAINING_FAILED" | "STARTING" | "RUNNING" | "FAILED" | "STOPPING" | "STOPPED" | "DELETING" | "COPYING_IN_PROGRESS" | "COPYING_COMPLETED" | "COPYING_FAILED" | "DEPRECATED" | "EXPIRED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#start_project_version-instance_method
+      def start_project_version: (
+                                   project_version_arn: ::String,
+                                   min_inference_units: ::Integer,
+                                   ?max_inference_units: ::Integer
+                                 ) -> _StartProjectVersionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartProjectVersionResponseSuccess
+
+      interface _StartSegmentDetectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartSegmentDetectionResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#start_segment_detection-instance_method
+      def start_segment_detection: (
+                                     video: {
+                                       s3_object: {
+                                         bucket: ::String?,
+                                         name: ::String?,
+                                         version: ::String?
+                                       }?
+                                     },
+                                     ?client_request_token: ::String,
+                                     ?notification_channel: {
+                                       sns_topic_arn: ::String,
+                                       role_arn: ::String
+                                     },
+                                     ?job_tag: ::String,
+                                     ?filters: {
+                                       technical_cue_filter: {
+                                         min_segment_confidence: ::Float?,
+                                         black_frame: {
+                                           max_pixel_threshold: ::Float?,
+                                           min_coverage_percentage: ::Float?
+                                         }?
+                                       }?,
+                                       shot_filter: {
+                                         min_segment_confidence: ::Float?
+                                       }?
+                                     },
+                                     segment_types: Array[("TECHNICAL_CUE" | "SHOT")]
+                                   ) -> _StartSegmentDetectionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSegmentDetectionResponseSuccess
+
+      interface _StartStreamProcessorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartStreamProcessorResponse]
+        def session_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#start_stream_processor-instance_method
+      def start_stream_processor: (
+                                    name: ::String,
+                                    ?start_selector: {
+                                      kvs_stream_start_selector: {
+                                        producer_timestamp: ::Integer?,
+                                        fragment_number: ::String?
+                                      }?
+                                    },
+                                    ?stop_selector: {
+                                      max_duration_in_seconds: ::Integer?
+                                    }
+                                  ) -> _StartStreamProcessorResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartStreamProcessorResponseSuccess
+
+      interface _StartTextDetectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartTextDetectionResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#start_text_detection-instance_method
+      def start_text_detection: (
+                                  video: {
+                                    s3_object: {
+                                      bucket: ::String?,
+                                      name: ::String?,
+                                      version: ::String?
+                                    }?
+                                  },
+                                  ?client_request_token: ::String,
+                                  ?notification_channel: {
+                                    sns_topic_arn: ::String,
+                                    role_arn: ::String
+                                  },
+                                  ?job_tag: ::String,
+                                  ?filters: {
+                                    word_filter: {
+                                      min_confidence: ::Float?,
+                                      min_bounding_box_height: ::Float?,
+                                      min_bounding_box_width: ::Float?
+                                    }?,
+                                    regions_of_interest: Array[
+                                      {
+                                        bounding_box: {
+                                          width: ::Float?,
+                                          height: ::Float?,
+                                          left: ::Float?,
+                                          top: ::Float?
+                                        }?,
+                                        polygon: Array[
+                                          {
+                                            x: ::Float?,
+                                            y: ::Float?
+                                          },
+                                        ]?
+                                      },
+                                    ]?
+                                  }
+                                ) -> _StartTextDetectionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTextDetectionResponseSuccess
+
+      interface _StopProjectVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopProjectVersionResponse]
+        def status: () -> ("TRAINING_IN_PROGRESS" | "TRAINING_COMPLETED" | "TRAINING_FAILED" | "STARTING" | "RUNNING" | "FAILED" | "STOPPING" | "STOPPED" | "DELETING" | "COPYING_IN_PROGRESS" | "COPYING_COMPLETED" | "COPYING_FAILED" | "DEPRECATED" | "EXPIRED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#stop_project_version-instance_method
+      def stop_project_version: (
+                                  project_version_arn: ::String
+                                ) -> _StopProjectVersionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopProjectVersionResponseSuccess
+
+      interface _StopStreamProcessorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopStreamProcessorResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#stop_stream_processor-instance_method
+      def stop_stream_processor: (
+                                   name: ::String
+                                 ) -> _StopStreamProcessorResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopStreamProcessorResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateDatasetEntriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDatasetEntriesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#update_dataset_entries-instance_method
+      def update_dataset_entries: (
+                                    dataset_arn: ::String,
+                                    changes: {
+                                      ground_truth: ::String
+                                    }
+                                  ) -> _UpdateDatasetEntriesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDatasetEntriesResponseSuccess
+
+      interface _UpdateStreamProcessorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStreamProcessorResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#update_stream_processor-instance_method
+      def update_stream_processor: (
+                                     name: ::String,
+                                     ?settings_for_update: {
+                                       connected_home_for_update: {
+                                         labels: Array[::String]?,
+                                         min_confidence: ::Float?
+                                       }?
+                                     },
+                                     ?regions_of_interest_for_update: Array[
+                                       {
+                                         bounding_box: {
+                                           width: ::Float?,
+                                           height: ::Float?,
+                                           left: ::Float?,
+                                           top: ::Float?
+                                         }?,
+                                         polygon: Array[
+                                           {
+                                             x: ::Float?,
+                                             y: ::Float?
+                                           },
+                                         ]?
+                                       },
+                                     ],
+                                     ?data_sharing_preference_for_update: {
+                                       opt_in: bool
+                                     },
+                                     ?parameters_to_delete: Array[("ConnectedHomeMinConfidence" | "RegionsOfInterest")]
+                                   ) -> _UpdateStreamProcessorResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStreamProcessorResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#wait_until-instance_method
+      def wait_until: (:project_version_running waiter_name, 
+                    project_arn: ::String,
+                    ?version_names: Array[::String],
+                    ?next_token: ::String,
+                    ?max_results: ::Integer
+                  ) -> Client::_DescribeProjectVersionsResponseSuccess
+                    | (:project_version_running waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeProjectVersionsResponseSuccess
+                    | (:project_version_training_completed waiter_name, 
+                    project_arn: ::String,
+                    ?version_names: Array[::String],
+                    ?next_token: ::String,
+                    ?max_results: ::Integer
+                  ) -> Client::_DescribeProjectVersionsResponseSuccess
+                    | (:project_version_training_completed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeProjectVersionsResponseSuccess
+    end
+  end
+end
+

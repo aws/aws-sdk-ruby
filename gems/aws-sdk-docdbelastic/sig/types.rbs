@@ -1,0 +1,265 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::DocDBElastic
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Cluster
+      attr_accessor admin_user_name: ::String
+      attr_accessor auth_type: ("PLAIN_TEXT" | "SECRET_ARN")
+      attr_accessor cluster_arn: ::String
+      attr_accessor cluster_endpoint: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor create_time: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor shard_capacity: ::Integer
+      attr_accessor shard_count: ::Integer
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "IP_ADDRESS_LIMIT_EXCEEDED" | "INVALID_SECURITY_GROUP_ID" | "INVALID_SUBNET_ID" | "INACCESSIBLE_ENCRYPTION_CREDS")
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ClusterInList
+      attr_accessor cluster_arn: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "IP_ADDRESS_LIMIT_EXCEEDED" | "INVALID_SECURITY_GROUP_ID" | "INVALID_SUBNET_ID" | "INACCESSIBLE_ENCRYPTION_CREDS")
+      SENSITIVE: []
+    end
+
+    class ClusterSnapshot
+      attr_accessor admin_user_name: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor cluster_creation_time: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor snapshot_arn: ::String
+      attr_accessor snapshot_creation_time: ::String
+      attr_accessor snapshot_name: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "IP_ADDRESS_LIMIT_EXCEEDED" | "INVALID_SECURITY_GROUP_ID" | "INVALID_SUBNET_ID" | "INACCESSIBLE_ENCRYPTION_CREDS")
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ClusterSnapshotInList
+      attr_accessor cluster_arn: ::String
+      attr_accessor snapshot_arn: ::String
+      attr_accessor snapshot_creation_time: ::String
+      attr_accessor snapshot_name: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "IP_ADDRESS_LIMIT_EXCEEDED" | "INVALID_SECURITY_GROUP_ID" | "INVALID_SUBNET_ID" | "INACCESSIBLE_ENCRYPTION_CREDS")
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateClusterInput
+      attr_accessor admin_user_name: ::String
+      attr_accessor admin_user_password: ::String
+      attr_accessor auth_type: ("PLAIN_TEXT" | "SECRET_ARN")
+      attr_accessor client_token: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor shard_capacity: ::Integer
+      attr_accessor shard_count: ::Integer
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      SENSITIVE: [:admin_user_password]
+    end
+
+    class CreateClusterOutput
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class CreateClusterSnapshotInput
+      attr_accessor cluster_arn: ::String
+      attr_accessor snapshot_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateClusterSnapshotOutput
+      attr_accessor snapshot: Types::ClusterSnapshot
+      SENSITIVE: []
+    end
+
+    class DeleteClusterInput
+      attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClusterOutput
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class DeleteClusterSnapshotInput
+      attr_accessor snapshot_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClusterSnapshotOutput
+      attr_accessor snapshot: Types::ClusterSnapshot
+      SENSITIVE: []
+    end
+
+    class GetClusterInput
+      attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetClusterOutput
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class GetClusterSnapshotInput
+      attr_accessor snapshot_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetClusterSnapshotOutput
+      attr_accessor snapshot: Types::ClusterSnapshot
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListClusterSnapshotsInput
+      attr_accessor cluster_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClusterSnapshotsOutput
+      attr_accessor next_token: ::String
+      attr_accessor snapshots: ::Array[Types::ClusterSnapshotInList]
+      SENSITIVE: []
+    end
+
+    class ListClustersInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClustersOutput
+      attr_accessor clusters: ::Array[Types::ClusterInList]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreClusterFromSnapshotInput
+      attr_accessor cluster_name: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor snapshot_arn: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RestoreClusterFromSnapshotOutput
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateClusterInput
+      attr_accessor admin_user_password: ::String
+      attr_accessor auth_type: ("PLAIN_TEXT" | "SECRET_ARN")
+      attr_accessor client_token: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor shard_capacity: ::Integer
+      attr_accessor shard_count: ::Integer
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      SENSITIVE: [:admin_user_password]
+    end
+
+    class UpdateClusterOutput
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      attr_accessor message: ::String
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor message: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,0 +1,1070 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::LookoutEquipment
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CategoricalValues
+      attr_accessor status: ("POTENTIAL_ISSUE_DETECTED" | "NO_ISSUE_DETECTED")
+      attr_accessor number_of_category: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CountPercent
+      attr_accessor count: ::Integer
+      attr_accessor percentage: ::Float
+      SENSITIVE: []
+    end
+
+    class CreateDatasetRequest
+      attr_accessor dataset_name: ::String
+      attr_accessor dataset_schema: Types::DatasetSchema
+      attr_accessor server_side_kms_key_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDatasetResponse
+      attr_accessor dataset_name: ::String
+      attr_accessor dataset_arn: ::String
+      attr_accessor status: ("CREATED" | "INGESTION_IN_PROGRESS" | "ACTIVE" | "IMPORT_IN_PROGRESS")
+      SENSITIVE: []
+    end
+
+    class CreateInferenceSchedulerRequest
+      attr_accessor model_name: ::String
+      attr_accessor inference_scheduler_name: ::String
+      attr_accessor data_delay_offset_in_minutes: ::Integer
+      attr_accessor data_upload_frequency: ("PT5M" | "PT10M" | "PT15M" | "PT30M" | "PT1H")
+      attr_accessor data_input_configuration: Types::InferenceInputConfiguration
+      attr_accessor data_output_configuration: Types::InferenceOutputConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor server_side_kms_key_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateInferenceSchedulerResponse
+      attr_accessor inference_scheduler_arn: ::String
+      attr_accessor inference_scheduler_name: ::String
+      attr_accessor status: ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class CreateLabelGroupRequest
+      attr_accessor label_group_name: ::String
+      attr_accessor fault_codes: ::Array[::String]
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateLabelGroupResponse
+      attr_accessor label_group_name: ::String
+      attr_accessor label_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLabelRequest
+      attr_accessor label_group_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor rating: ("ANOMALY" | "NO_ANOMALY" | "NEUTRAL")
+      attr_accessor fault_code: ::String
+      attr_accessor notes: ::String
+      attr_accessor equipment: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLabelResponse
+      attr_accessor label_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateModelRequest
+      attr_accessor model_name: ::String
+      attr_accessor dataset_name: ::String
+      attr_accessor dataset_schema: Types::DatasetSchema
+      attr_accessor labels_input_configuration: Types::LabelsInputConfiguration
+      attr_accessor client_token: ::String
+      attr_accessor training_data_start_time: ::Time
+      attr_accessor training_data_end_time: ::Time
+      attr_accessor evaluation_data_start_time: ::Time
+      attr_accessor evaluation_data_end_time: ::Time
+      attr_accessor role_arn: ::String
+      attr_accessor data_pre_processing_configuration: Types::DataPreProcessingConfiguration
+      attr_accessor server_side_kms_key_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor off_condition: ::String
+      SENSITIVE: []
+    end
+
+    class CreateModelResponse
+      attr_accessor model_arn: ::String
+      attr_accessor status: ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS")
+      SENSITIVE: []
+    end
+
+    class CreateRetrainingSchedulerRequest
+      attr_accessor model_name: ::String
+      attr_accessor retraining_start_date: ::Time
+      attr_accessor retraining_frequency: ::String
+      attr_accessor lookback_window: ::String
+      attr_accessor promote_mode: ("MANAGED" | "MANUAL")
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRetrainingSchedulerResponse
+      attr_accessor model_name: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor status: ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class DataIngestionJobSummary
+      attr_accessor job_id: ::String
+      attr_accessor dataset_name: ::String
+      attr_accessor dataset_arn: ::String
+      attr_accessor ingestion_input_configuration: Types::IngestionInputConfiguration
+      attr_accessor status: ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS")
+      SENSITIVE: []
+    end
+
+    class DataPreProcessingConfiguration
+      attr_accessor target_sampling_rate: ("PT1S" | "PT5S" | "PT10S" | "PT15S" | "PT30S" | "PT1M" | "PT5M" | "PT10M" | "PT15M" | "PT30M" | "PT1H")
+      SENSITIVE: []
+    end
+
+    class DataQualitySummary
+      attr_accessor insufficient_sensor_data: Types::InsufficientSensorData
+      attr_accessor missing_sensor_data: Types::MissingSensorData
+      attr_accessor invalid_sensor_data: Types::InvalidSensorData
+      attr_accessor unsupported_timestamps: Types::UnsupportedTimestamps
+      attr_accessor duplicate_timestamps: Types::DuplicateTimestamps
+      SENSITIVE: []
+    end
+
+    class DatasetSchema
+      attr_accessor inline_data_schema: ::String
+      SENSITIVE: []
+    end
+
+    class DatasetSummary
+      attr_accessor dataset_name: ::String
+      attr_accessor dataset_arn: ::String
+      attr_accessor status: ("CREATED" | "INGESTION_IN_PROGRESS" | "ACTIVE" | "IMPORT_IN_PROGRESS")
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteDatasetRequest
+      attr_accessor dataset_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInferenceSchedulerRequest
+      attr_accessor inference_scheduler_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLabelGroupRequest
+      attr_accessor label_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLabelRequest
+      attr_accessor label_group_name: ::String
+      attr_accessor label_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteModelRequest
+      attr_accessor model_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRetrainingSchedulerRequest
+      attr_accessor model_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDataIngestionJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDataIngestionJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor dataset_arn: ::String
+      attr_accessor ingestion_input_configuration: Types::IngestionInputConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor status: ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS")
+      attr_accessor failed_reason: ::String
+      attr_accessor data_quality_summary: Types::DataQualitySummary
+      attr_accessor ingested_files_summary: Types::IngestedFilesSummary
+      attr_accessor status_detail: ::String
+      attr_accessor ingested_data_size: ::Integer
+      attr_accessor data_start_time: ::Time
+      attr_accessor data_end_time: ::Time
+      attr_accessor source_dataset_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetRequest
+      attr_accessor dataset_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetResponse
+      attr_accessor dataset_name: ::String
+      attr_accessor dataset_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor status: ("CREATED" | "INGESTION_IN_PROGRESS" | "ACTIVE" | "IMPORT_IN_PROGRESS")
+      attr_accessor schema: ::String
+      attr_accessor server_side_kms_key_id: ::String
+      attr_accessor ingestion_input_configuration: Types::IngestionInputConfiguration
+      attr_accessor data_quality_summary: Types::DataQualitySummary
+      attr_accessor ingested_files_summary: Types::IngestedFilesSummary
+      attr_accessor role_arn: ::String
+      attr_accessor data_start_time: ::Time
+      attr_accessor data_end_time: ::Time
+      attr_accessor source_dataset_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInferenceSchedulerRequest
+      attr_accessor inference_scheduler_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInferenceSchedulerResponse
+      attr_accessor model_arn: ::String
+      attr_accessor model_name: ::String
+      attr_accessor inference_scheduler_name: ::String
+      attr_accessor inference_scheduler_arn: ::String
+      attr_accessor status: ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      attr_accessor data_delay_offset_in_minutes: ::Integer
+      attr_accessor data_upload_frequency: ("PT5M" | "PT10M" | "PT15M" | "PT30M" | "PT1H")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor data_input_configuration: Types::InferenceInputConfiguration
+      attr_accessor data_output_configuration: Types::InferenceOutputConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor server_side_kms_key_id: ::String
+      attr_accessor latest_inference_result: ("ANOMALOUS" | "NORMAL")
+      SENSITIVE: []
+    end
+
+    class DescribeLabelGroupRequest
+      attr_accessor label_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLabelGroupResponse
+      attr_accessor label_group_name: ::String
+      attr_accessor label_group_arn: ::String
+      attr_accessor fault_codes: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeLabelRequest
+      attr_accessor label_group_name: ::String
+      attr_accessor label_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLabelResponse
+      attr_accessor label_group_name: ::String
+      attr_accessor label_group_arn: ::String
+      attr_accessor label_id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor rating: ("ANOMALY" | "NO_ANOMALY" | "NEUTRAL")
+      attr_accessor fault_code: ::String
+      attr_accessor notes: ::String
+      attr_accessor equipment: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeModelRequest
+      attr_accessor model_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeModelResponse
+      attr_accessor model_name: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor dataset_name: ::String
+      attr_accessor dataset_arn: ::String
+      attr_accessor schema: ::String
+      attr_accessor labels_input_configuration: Types::LabelsInputConfiguration
+      attr_accessor training_data_start_time: ::Time
+      attr_accessor training_data_end_time: ::Time
+      attr_accessor evaluation_data_start_time: ::Time
+      attr_accessor evaluation_data_end_time: ::Time
+      attr_accessor role_arn: ::String
+      attr_accessor data_pre_processing_configuration: Types::DataPreProcessingConfiguration
+      attr_accessor status: ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS")
+      attr_accessor training_execution_start_time: ::Time
+      attr_accessor training_execution_end_time: ::Time
+      attr_accessor failed_reason: ::String
+      attr_accessor model_metrics: ::String
+      attr_accessor last_updated_time: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor server_side_kms_key_id: ::String
+      attr_accessor off_condition: ::String
+      attr_accessor source_model_version_arn: ::String
+      attr_accessor import_job_start_time: ::Time
+      attr_accessor import_job_end_time: ::Time
+      attr_accessor active_model_version: ::Integer
+      attr_accessor active_model_version_arn: ::String
+      attr_accessor model_version_activated_at: ::Time
+      attr_accessor previous_active_model_version: ::Integer
+      attr_accessor previous_active_model_version_arn: ::String
+      attr_accessor previous_model_version_activated_at: ::Time
+      attr_accessor prior_model_metrics: ::String
+      attr_accessor latest_scheduled_retraining_failed_reason: ::String
+      attr_accessor latest_scheduled_retraining_status: ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS" | "CANCELED")
+      attr_accessor latest_scheduled_retraining_model_version: ::Integer
+      attr_accessor latest_scheduled_retraining_start_time: ::Time
+      attr_accessor latest_scheduled_retraining_available_data_in_days: ::Integer
+      attr_accessor next_scheduled_retraining_start_date: ::Time
+      attr_accessor accumulated_inference_data_start_time: ::Time
+      attr_accessor accumulated_inference_data_end_time: ::Time
+      attr_accessor retraining_scheduler_status: ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class DescribeModelVersionRequest
+      attr_accessor model_name: ::String
+      attr_accessor model_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeModelVersionResponse
+      attr_accessor model_name: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor model_version: ::Integer
+      attr_accessor model_version_arn: ::String
+      attr_accessor status: ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS" | "CANCELED")
+      attr_accessor source_type: ("TRAINING" | "RETRAINING" | "IMPORT")
+      attr_accessor dataset_name: ::String
+      attr_accessor dataset_arn: ::String
+      attr_accessor schema: ::String
+      attr_accessor labels_input_configuration: Types::LabelsInputConfiguration
+      attr_accessor training_data_start_time: ::Time
+      attr_accessor training_data_end_time: ::Time
+      attr_accessor evaluation_data_start_time: ::Time
+      attr_accessor evaluation_data_end_time: ::Time
+      attr_accessor role_arn: ::String
+      attr_accessor data_pre_processing_configuration: Types::DataPreProcessingConfiguration
+      attr_accessor training_execution_start_time: ::Time
+      attr_accessor training_execution_end_time: ::Time
+      attr_accessor failed_reason: ::String
+      attr_accessor model_metrics: ::String
+      attr_accessor last_updated_time: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor server_side_kms_key_id: ::String
+      attr_accessor off_condition: ::String
+      attr_accessor source_model_version_arn: ::String
+      attr_accessor import_job_start_time: ::Time
+      attr_accessor import_job_end_time: ::Time
+      attr_accessor imported_data_size_in_bytes: ::Integer
+      attr_accessor prior_model_metrics: ::String
+      attr_accessor retraining_available_data_in_days: ::Integer
+      attr_accessor auto_promotion_result: ("MODEL_PROMOTED" | "MODEL_NOT_PROMOTED" | "RETRAINING_INTERNAL_ERROR" | "RETRAINING_CUSTOMER_ERROR" | "RETRAINING_CANCELLED")
+      attr_accessor auto_promotion_result_reason: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeResourcePolicyResponse
+      attr_accessor policy_revision_id: ::String
+      attr_accessor resource_policy: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeRetrainingSchedulerRequest
+      attr_accessor model_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRetrainingSchedulerResponse
+      attr_accessor model_name: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor retraining_start_date: ::Time
+      attr_accessor retraining_frequency: ::String
+      attr_accessor lookback_window: ::String
+      attr_accessor status: ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      attr_accessor promote_mode: ("MANAGED" | "MANUAL")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DuplicateTimestamps
+      attr_accessor total_number_of_duplicate_timestamps: ::Integer
+      SENSITIVE: []
+    end
+
+    class ImportDatasetRequest
+      attr_accessor source_dataset_arn: ::String
+      attr_accessor dataset_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor server_side_kms_key_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ImportDatasetResponse
+      attr_accessor dataset_name: ::String
+      attr_accessor dataset_arn: ::String
+      attr_accessor status: ("CREATED" | "INGESTION_IN_PROGRESS" | "ACTIVE" | "IMPORT_IN_PROGRESS")
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class ImportModelVersionRequest
+      attr_accessor source_model_version_arn: ::String
+      attr_accessor model_name: ::String
+      attr_accessor dataset_name: ::String
+      attr_accessor labels_input_configuration: Types::LabelsInputConfiguration
+      attr_accessor client_token: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor server_side_kms_key_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor inference_data_import_strategy: ("NO_IMPORT" | "ADD_WHEN_EMPTY" | "OVERWRITE")
+      SENSITIVE: []
+    end
+
+    class ImportModelVersionResponse
+      attr_accessor model_name: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor model_version_arn: ::String
+      attr_accessor model_version: ::Integer
+      attr_accessor status: ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS" | "CANCELED")
+      SENSITIVE: []
+    end
+
+    class InferenceEventSummary
+      attr_accessor inference_scheduler_arn: ::String
+      attr_accessor inference_scheduler_name: ::String
+      attr_accessor event_start_time: ::Time
+      attr_accessor event_end_time: ::Time
+      attr_accessor diagnostics: ::String
+      attr_accessor event_duration_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class InferenceExecutionSummary
+      attr_accessor model_name: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor inference_scheduler_name: ::String
+      attr_accessor inference_scheduler_arn: ::String
+      attr_accessor scheduled_start_time: ::Time
+      attr_accessor data_start_time: ::Time
+      attr_accessor data_end_time: ::Time
+      attr_accessor data_input_configuration: Types::InferenceInputConfiguration
+      attr_accessor data_output_configuration: Types::InferenceOutputConfiguration
+      attr_accessor customer_result_object: Types::S3Object
+      attr_accessor status: ("IN_PROGRESS" | "SUCCESS" | "FAILED")
+      attr_accessor failed_reason: ::String
+      attr_accessor model_version: ::Integer
+      attr_accessor model_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InferenceInputConfiguration
+      attr_accessor s3_input_configuration: Types::InferenceS3InputConfiguration
+      attr_accessor input_time_zone_offset: ::String
+      attr_accessor inference_input_name_configuration: Types::InferenceInputNameConfiguration
+      SENSITIVE: []
+    end
+
+    class InferenceInputNameConfiguration
+      attr_accessor timestamp_format: ::String
+      attr_accessor component_timestamp_delimiter: ::String
+      SENSITIVE: []
+    end
+
+    class InferenceOutputConfiguration
+      attr_accessor s3_output_configuration: Types::InferenceS3OutputConfiguration
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class InferenceS3InputConfiguration
+      attr_accessor bucket: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class InferenceS3OutputConfiguration
+      attr_accessor bucket: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class InferenceSchedulerSummary
+      attr_accessor model_name: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor inference_scheduler_name: ::String
+      attr_accessor inference_scheduler_arn: ::String
+      attr_accessor status: ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      attr_accessor data_delay_offset_in_minutes: ::Integer
+      attr_accessor data_upload_frequency: ("PT5M" | "PT10M" | "PT15M" | "PT30M" | "PT1H")
+      attr_accessor latest_inference_result: ("ANOMALOUS" | "NORMAL")
+      SENSITIVE: []
+    end
+
+    class IngestedFilesSummary
+      attr_accessor total_number_of_files: ::Integer
+      attr_accessor ingested_number_of_files: ::Integer
+      attr_accessor discarded_files: ::Array[Types::S3Object]
+      SENSITIVE: []
+    end
+
+    class IngestionInputConfiguration
+      attr_accessor s3_input_configuration: Types::IngestionS3InputConfiguration
+      SENSITIVE: []
+    end
+
+    class IngestionS3InputConfiguration
+      attr_accessor bucket: ::String
+      attr_accessor prefix: ::String
+      attr_accessor key_pattern: ::String
+      SENSITIVE: []
+    end
+
+    class InsufficientSensorData
+      attr_accessor missing_complete_sensor_data: Types::MissingCompleteSensorData
+      attr_accessor sensors_with_short_date_range: Types::SensorsWithShortDateRange
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSensorData
+      attr_accessor affected_sensor_count: ::Integer
+      attr_accessor total_number_of_invalid_values: ::Integer
+      SENSITIVE: []
+    end
+
+    class LabelGroupSummary
+      attr_accessor label_group_name: ::String
+      attr_accessor label_group_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class LabelSummary
+      attr_accessor label_group_name: ::String
+      attr_accessor label_id: ::String
+      attr_accessor label_group_arn: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor rating: ("ANOMALY" | "NO_ANOMALY" | "NEUTRAL")
+      attr_accessor fault_code: ::String
+      attr_accessor equipment: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class LabelsInputConfiguration
+      attr_accessor s3_input_configuration: Types::LabelsS3InputConfiguration
+      attr_accessor label_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class LabelsS3InputConfiguration
+      attr_accessor bucket: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class LargeTimestampGaps
+      attr_accessor status: ("POTENTIAL_ISSUE_DETECTED" | "NO_ISSUE_DETECTED")
+      attr_accessor number_of_large_timestamp_gaps: ::Integer
+      attr_accessor max_timestamp_gap_in_days: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDataIngestionJobsRequest
+      attr_accessor dataset_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor status: ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS")
+      SENSITIVE: []
+    end
+
+    class ListDataIngestionJobsResponse
+      attr_accessor next_token: ::String
+      attr_accessor data_ingestion_job_summaries: ::Array[Types::DataIngestionJobSummary]
+      SENSITIVE: []
+    end
+
+    class ListDatasetsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor dataset_name_begins_with: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatasetsResponse
+      attr_accessor next_token: ::String
+      attr_accessor dataset_summaries: ::Array[Types::DatasetSummary]
+      SENSITIVE: []
+    end
+
+    class ListInferenceEventsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor inference_scheduler_name: ::String
+      attr_accessor interval_start_time: ::Time
+      attr_accessor interval_end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ListInferenceEventsResponse
+      attr_accessor next_token: ::String
+      attr_accessor inference_event_summaries: ::Array[Types::InferenceEventSummary]
+      SENSITIVE: []
+    end
+
+    class ListInferenceExecutionsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor inference_scheduler_name: ::String
+      attr_accessor data_start_time_after: ::Time
+      attr_accessor data_end_time_before: ::Time
+      attr_accessor status: ("IN_PROGRESS" | "SUCCESS" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ListInferenceExecutionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor inference_execution_summaries: ::Array[Types::InferenceExecutionSummary]
+      SENSITIVE: []
+    end
+
+    class ListInferenceSchedulersRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor inference_scheduler_name_begins_with: ::String
+      attr_accessor model_name: ::String
+      attr_accessor status: ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class ListInferenceSchedulersResponse
+      attr_accessor next_token: ::String
+      attr_accessor inference_scheduler_summaries: ::Array[Types::InferenceSchedulerSummary]
+      SENSITIVE: []
+    end
+
+    class ListLabelGroupsRequest
+      attr_accessor label_group_name_begins_with: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListLabelGroupsResponse
+      attr_accessor next_token: ::String
+      attr_accessor label_group_summaries: ::Array[Types::LabelGroupSummary]
+      SENSITIVE: []
+    end
+
+    class ListLabelsRequest
+      attr_accessor label_group_name: ::String
+      attr_accessor interval_start_time: ::Time
+      attr_accessor interval_end_time: ::Time
+      attr_accessor fault_code: ::String
+      attr_accessor equipment: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListLabelsResponse
+      attr_accessor next_token: ::String
+      attr_accessor label_summaries: ::Array[Types::LabelSummary]
+      SENSITIVE: []
+    end
+
+    class ListModelVersionsRequest
+      attr_accessor model_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor status: ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS" | "CANCELED")
+      attr_accessor source_type: ("TRAINING" | "RETRAINING" | "IMPORT")
+      attr_accessor created_at_end_time: ::Time
+      attr_accessor created_at_start_time: ::Time
+      attr_accessor max_model_version: ::Integer
+      attr_accessor min_model_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListModelVersionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor model_version_summaries: ::Array[Types::ModelVersionSummary]
+      SENSITIVE: []
+    end
+
+    class ListModelsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor status: ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS")
+      attr_accessor model_name_begins_with: ::String
+      attr_accessor dataset_name_begins_with: ::String
+      SENSITIVE: []
+    end
+
+    class ListModelsResponse
+      attr_accessor next_token: ::String
+      attr_accessor model_summaries: ::Array[Types::ModelSummary]
+      SENSITIVE: []
+    end
+
+    class ListRetrainingSchedulersRequest
+      attr_accessor model_name_begins_with: ::String
+      attr_accessor status: ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRetrainingSchedulersResponse
+      attr_accessor retraining_scheduler_summaries: ::Array[Types::RetrainingSchedulerSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSensorStatisticsRequest
+      attr_accessor dataset_name: ::String
+      attr_accessor ingestion_job_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSensorStatisticsResponse
+      attr_accessor sensor_statistics_summaries: ::Array[Types::SensorStatisticsSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class MissingCompleteSensorData
+      attr_accessor affected_sensor_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class MissingSensorData
+      attr_accessor affected_sensor_count: ::Integer
+      attr_accessor total_number_of_missing_values: ::Integer
+      SENSITIVE: []
+    end
+
+    class ModelSummary
+      attr_accessor model_name: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor dataset_name: ::String
+      attr_accessor dataset_arn: ::String
+      attr_accessor status: ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS")
+      attr_accessor created_at: ::Time
+      attr_accessor active_model_version: ::Integer
+      attr_accessor active_model_version_arn: ::String
+      attr_accessor latest_scheduled_retraining_status: ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS" | "CANCELED")
+      attr_accessor latest_scheduled_retraining_model_version: ::Integer
+      attr_accessor latest_scheduled_retraining_start_time: ::Time
+      attr_accessor next_scheduled_retraining_start_date: ::Time
+      attr_accessor retraining_scheduler_status: ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class ModelVersionSummary
+      attr_accessor model_name: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor model_version: ::Integer
+      attr_accessor model_version_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor status: ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS" | "CANCELED")
+      attr_accessor source_type: ("TRAINING" | "RETRAINING" | "IMPORT")
+      SENSITIVE: []
+    end
+
+    class MonotonicValues
+      attr_accessor status: ("POTENTIAL_ISSUE_DETECTED" | "NO_ISSUE_DETECTED")
+      attr_accessor monotonicity: ("DECREASING" | "INCREASING" | "STATIC")
+      SENSITIVE: []
+    end
+
+    class MultipleOperatingModes
+      attr_accessor status: ("POTENTIAL_ISSUE_DETECTED" | "NO_ISSUE_DETECTED")
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_policy: ::String
+      attr_accessor policy_revision_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyResponse
+      attr_accessor resource_arn: ::String
+      attr_accessor policy_revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RetrainingSchedulerSummary
+      attr_accessor model_name: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor status: ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      attr_accessor retraining_start_date: ::Time
+      attr_accessor retraining_frequency: ::String
+      attr_accessor lookback_window: ::String
+      SENSITIVE: []
+    end
+
+    class S3Object
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class SensorStatisticsSummary
+      attr_accessor component_name: ::String
+      attr_accessor sensor_name: ::String
+      attr_accessor data_exists: bool
+      attr_accessor missing_values: Types::CountPercent
+      attr_accessor invalid_values: Types::CountPercent
+      attr_accessor invalid_date_entries: Types::CountPercent
+      attr_accessor duplicate_timestamps: Types::CountPercent
+      attr_accessor categorical_values: Types::CategoricalValues
+      attr_accessor multiple_operating_modes: Types::MultipleOperatingModes
+      attr_accessor large_timestamp_gaps: Types::LargeTimestampGaps
+      attr_accessor monotonic_values: Types::MonotonicValues
+      attr_accessor data_start_time: ::Time
+      attr_accessor data_end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class SensorsWithShortDateRange
+      attr_accessor affected_sensor_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartDataIngestionJobRequest
+      attr_accessor dataset_name: ::String
+      attr_accessor ingestion_input_configuration: Types::IngestionInputConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartDataIngestionJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS")
+      SENSITIVE: []
+    end
+
+    class StartInferenceSchedulerRequest
+      attr_accessor inference_scheduler_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartInferenceSchedulerResponse
+      attr_accessor model_arn: ::String
+      attr_accessor model_name: ::String
+      attr_accessor inference_scheduler_name: ::String
+      attr_accessor inference_scheduler_arn: ::String
+      attr_accessor status: ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class StartRetrainingSchedulerRequest
+      attr_accessor model_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartRetrainingSchedulerResponse
+      attr_accessor model_name: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor status: ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class StopInferenceSchedulerRequest
+      attr_accessor inference_scheduler_name: ::String
+      SENSITIVE: []
+    end
+
+    class StopInferenceSchedulerResponse
+      attr_accessor model_arn: ::String
+      attr_accessor model_name: ::String
+      attr_accessor inference_scheduler_name: ::String
+      attr_accessor inference_scheduler_arn: ::String
+      attr_accessor status: ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class StopRetrainingSchedulerRequest
+      attr_accessor model_name: ::String
+      SENSITIVE: []
+    end
+
+    class StopRetrainingSchedulerResponse
+      attr_accessor model_name: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor status: ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedTimestamps
+      attr_accessor total_number_of_unsupported_timestamps: ::Integer
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateActiveModelVersionRequest
+      attr_accessor model_name: ::String
+      attr_accessor model_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateActiveModelVersionResponse
+      attr_accessor model_name: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor current_active_version: ::Integer
+      attr_accessor previous_active_version: ::Integer
+      attr_accessor current_active_version_arn: ::String
+      attr_accessor previous_active_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateInferenceSchedulerRequest
+      attr_accessor inference_scheduler_name: ::String
+      attr_accessor data_delay_offset_in_minutes: ::Integer
+      attr_accessor data_upload_frequency: ("PT5M" | "PT10M" | "PT15M" | "PT30M" | "PT1H")
+      attr_accessor data_input_configuration: Types::InferenceInputConfiguration
+      attr_accessor data_output_configuration: Types::InferenceOutputConfiguration
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateLabelGroupRequest
+      attr_accessor label_group_name: ::String
+      attr_accessor fault_codes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateModelRequest
+      attr_accessor model_name: ::String
+      attr_accessor labels_input_configuration: Types::LabelsInputConfiguration
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRetrainingSchedulerRequest
+      attr_accessor model_name: ::String
+      attr_accessor retraining_start_date: ::Time
+      attr_accessor retraining_frequency: ::String
+      attr_accessor lookback_window: ::String
+      attr_accessor promote_mode: ("MANAGED" | "MANUAL")
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

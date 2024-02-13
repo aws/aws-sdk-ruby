@@ -1,0 +1,153 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DatabaseMigrationService
+    module Waiters
+
+      class EndpointDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String
+                  ) -> Client::_DescribeEndpointsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeEndpointsResponseSuccess
+      end
+
+      class ReplicationInstanceAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String
+                  ) -> Client::_DescribeReplicationInstancesResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeReplicationInstancesResponseSuccess
+      end
+
+      class ReplicationInstanceDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String
+                  ) -> Client::_DescribeReplicationInstancesResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeReplicationInstancesResponseSuccess
+      end
+
+      class ReplicationTaskDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?without_settings: bool
+                  ) -> Client::_DescribeReplicationTasksResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeReplicationTasksResponseSuccess
+      end
+
+      class ReplicationTaskReady
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?without_settings: bool
+                  ) -> Client::_DescribeReplicationTasksResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeReplicationTasksResponseSuccess
+      end
+
+      class ReplicationTaskRunning
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?without_settings: bool
+                  ) -> Client::_DescribeReplicationTasksResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeReplicationTasksResponseSuccess
+      end
+
+      class ReplicationTaskStopped
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?without_settings: bool
+                  ) -> Client::_DescribeReplicationTasksResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeReplicationTasksResponseSuccess
+      end
+
+      class TestConnectionSucceeds
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String
+                  ) -> Client::_DescribeConnectionsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeConnectionsResponseSuccess
+      end
+    end
+  end
+end

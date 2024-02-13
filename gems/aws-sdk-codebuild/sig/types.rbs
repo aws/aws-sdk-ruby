@@ -1,0 +1,1265 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CodeBuild
+  module Types
+
+    class AccountLimitExceededException < Aws::EmptyStructure
+    end
+
+    class BatchDeleteBuildsInput
+      attr_accessor ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteBuildsOutput
+      attr_accessor builds_deleted: ::Array[::String]
+      attr_accessor builds_not_deleted: ::Array[Types::BuildNotDeleted]
+      SENSITIVE: []
+    end
+
+    class BatchGetBuildBatchesInput
+      attr_accessor ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetBuildBatchesOutput
+      attr_accessor build_batches: ::Array[Types::BuildBatch]
+      attr_accessor build_batches_not_found: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetBuildsInput
+      attr_accessor ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetBuildsOutput
+      attr_accessor builds: ::Array[Types::Build]
+      attr_accessor builds_not_found: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetFleetsInput
+      attr_accessor names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetFleetsOutput
+      attr_accessor fleets: ::Array[Types::Fleet]
+      attr_accessor fleets_not_found: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetProjectsInput
+      attr_accessor names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetProjectsOutput
+      attr_accessor projects: ::Array[Types::Project]
+      attr_accessor projects_not_found: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetReportGroupsInput
+      attr_accessor report_group_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetReportGroupsOutput
+      attr_accessor report_groups: ::Array[Types::ReportGroup]
+      attr_accessor report_groups_not_found: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetReportsInput
+      attr_accessor report_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetReportsOutput
+      attr_accessor reports: ::Array[Types::Report]
+      attr_accessor reports_not_found: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchRestrictions
+      attr_accessor maximum_builds_allowed: ::Integer
+      attr_accessor compute_types_allowed: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Build
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor build_number: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor current_phase: ::String
+      attr_accessor build_status: ("SUCCEEDED" | "FAILED" | "FAULT" | "TIMED_OUT" | "IN_PROGRESS" | "STOPPED")
+      attr_accessor source_version: ::String
+      attr_accessor resolved_source_version: ::String
+      attr_accessor project_name: ::String
+      attr_accessor phases: ::Array[Types::BuildPhase]
+      attr_accessor source: Types::ProjectSource
+      attr_accessor secondary_sources: ::Array[Types::ProjectSource]
+      attr_accessor secondary_source_versions: ::Array[Types::ProjectSourceVersion]
+      attr_accessor artifacts: Types::BuildArtifacts
+      attr_accessor secondary_artifacts: ::Array[Types::BuildArtifacts]
+      attr_accessor cache: Types::ProjectCache
+      attr_accessor environment: Types::ProjectEnvironment
+      attr_accessor service_role: ::String
+      attr_accessor logs: Types::LogsLocation
+      attr_accessor timeout_in_minutes: ::Integer
+      attr_accessor queued_timeout_in_minutes: ::Integer
+      attr_accessor build_complete: bool
+      attr_accessor initiator: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor network_interface: Types::NetworkInterface
+      attr_accessor encryption_key: ::String
+      attr_accessor exported_environment_variables: ::Array[Types::ExportedEnvironmentVariable]
+      attr_accessor report_arns: ::Array[::String]
+      attr_accessor file_system_locations: ::Array[Types::ProjectFileSystemLocation]
+      attr_accessor debug_session: Types::DebugSession
+      attr_accessor build_batch_arn: ::String
+      SENSITIVE: []
+    end
+
+    class BuildArtifacts
+      attr_accessor location: ::String
+      attr_accessor sha256sum: ::String
+      attr_accessor md5sum: ::String
+      attr_accessor override_artifact_name: bool
+      attr_accessor encryption_disabled: bool
+      attr_accessor artifact_identifier: ::String
+      attr_accessor bucket_owner_access: ("NONE" | "READ_ONLY" | "FULL")
+      SENSITIVE: []
+    end
+
+    class BuildBatch
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor current_phase: ::String
+      attr_accessor build_batch_status: ("SUCCEEDED" | "FAILED" | "FAULT" | "TIMED_OUT" | "IN_PROGRESS" | "STOPPED")
+      attr_accessor source_version: ::String
+      attr_accessor resolved_source_version: ::String
+      attr_accessor project_name: ::String
+      attr_accessor phases: ::Array[Types::BuildBatchPhase]
+      attr_accessor source: Types::ProjectSource
+      attr_accessor secondary_sources: ::Array[Types::ProjectSource]
+      attr_accessor secondary_source_versions: ::Array[Types::ProjectSourceVersion]
+      attr_accessor artifacts: Types::BuildArtifacts
+      attr_accessor secondary_artifacts: ::Array[Types::BuildArtifacts]
+      attr_accessor cache: Types::ProjectCache
+      attr_accessor environment: Types::ProjectEnvironment
+      attr_accessor service_role: ::String
+      attr_accessor log_config: Types::LogsConfig
+      attr_accessor build_timeout_in_minutes: ::Integer
+      attr_accessor queued_timeout_in_minutes: ::Integer
+      attr_accessor complete: bool
+      attr_accessor initiator: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor encryption_key: ::String
+      attr_accessor build_batch_number: ::Integer
+      attr_accessor file_system_locations: ::Array[Types::ProjectFileSystemLocation]
+      attr_accessor build_batch_config: Types::ProjectBuildBatchConfig
+      attr_accessor build_groups: ::Array[Types::BuildGroup]
+      attr_accessor debug_session_enabled: bool
+      SENSITIVE: []
+    end
+
+    class BuildBatchFilter
+      attr_accessor status: ("SUCCEEDED" | "FAILED" | "FAULT" | "TIMED_OUT" | "IN_PROGRESS" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class BuildBatchPhase
+      attr_accessor phase_type: ("SUBMITTED" | "DOWNLOAD_BATCHSPEC" | "IN_PROGRESS" | "COMBINE_ARTIFACTS" | "SUCCEEDED" | "FAILED" | "STOPPED")
+      attr_accessor phase_status: ("SUCCEEDED" | "FAILED" | "FAULT" | "TIMED_OUT" | "IN_PROGRESS" | "STOPPED")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor duration_in_seconds: ::Integer
+      attr_accessor contexts: ::Array[Types::PhaseContext]
+      SENSITIVE: []
+    end
+
+    class BuildGroup
+      attr_accessor identifier: ::String
+      attr_accessor depends_on: ::Array[::String]
+      attr_accessor ignore_failure: bool
+      attr_accessor current_build_summary: Types::BuildSummary
+      attr_accessor prior_build_summary_list: ::Array[Types::BuildSummary]
+      SENSITIVE: []
+    end
+
+    class BuildNotDeleted
+      attr_accessor id: ::String
+      attr_accessor status_code: ::String
+      SENSITIVE: []
+    end
+
+    class BuildPhase
+      attr_accessor phase_type: ("SUBMITTED" | "QUEUED" | "PROVISIONING" | "DOWNLOAD_SOURCE" | "INSTALL" | "PRE_BUILD" | "BUILD" | "POST_BUILD" | "UPLOAD_ARTIFACTS" | "FINALIZING" | "COMPLETED")
+      attr_accessor phase_status: ("SUCCEEDED" | "FAILED" | "FAULT" | "TIMED_OUT" | "IN_PROGRESS" | "STOPPED")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor duration_in_seconds: ::Integer
+      attr_accessor contexts: ::Array[Types::PhaseContext]
+      SENSITIVE: []
+    end
+
+    class BuildStatusConfig
+      attr_accessor context: ::String
+      attr_accessor target_url: ::String
+      SENSITIVE: []
+    end
+
+    class BuildSummary
+      attr_accessor arn: ::String
+      attr_accessor requested_on: ::Time
+      attr_accessor build_status: ("SUCCEEDED" | "FAILED" | "FAULT" | "TIMED_OUT" | "IN_PROGRESS" | "STOPPED")
+      attr_accessor primary_artifact: Types::ResolvedArtifact
+      attr_accessor secondary_artifacts: ::Array[Types::ResolvedArtifact]
+      SENSITIVE: []
+    end
+
+    class CloudWatchLogsConfig
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor group_name: ::String
+      attr_accessor stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class CodeCoverage
+      attr_accessor id: ::String
+      attr_accessor report_arn: ::String
+      attr_accessor file_path: ::String
+      attr_accessor line_coverage_percentage: ::Float
+      attr_accessor lines_covered: ::Integer
+      attr_accessor lines_missed: ::Integer
+      attr_accessor branch_coverage_percentage: ::Float
+      attr_accessor branches_covered: ::Integer
+      attr_accessor branches_missed: ::Integer
+      attr_accessor expired: ::Time
+      SENSITIVE: []
+    end
+
+    class CodeCoverageReportSummary
+      attr_accessor line_coverage_percentage: ::Float
+      attr_accessor lines_covered: ::Integer
+      attr_accessor lines_missed: ::Integer
+      attr_accessor branch_coverage_percentage: ::Float
+      attr_accessor branches_covered: ::Integer
+      attr_accessor branches_missed: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateFleetInput
+      attr_accessor name: ::String
+      attr_accessor base_capacity: ::Integer
+      attr_accessor environment_type: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER")
+      attr_accessor compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB")
+      attr_accessor scaling_configuration: Types::ScalingConfigurationInput
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateFleetOutput
+      attr_accessor fleet: Types::Fleet
+      SENSITIVE: []
+    end
+
+    class CreateProjectInput
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor source: Types::ProjectSource
+      attr_accessor secondary_sources: ::Array[Types::ProjectSource]
+      attr_accessor source_version: ::String
+      attr_accessor secondary_source_versions: ::Array[Types::ProjectSourceVersion]
+      attr_accessor artifacts: Types::ProjectArtifacts
+      attr_accessor secondary_artifacts: ::Array[Types::ProjectArtifacts]
+      attr_accessor cache: Types::ProjectCache
+      attr_accessor environment: Types::ProjectEnvironment
+      attr_accessor service_role: ::String
+      attr_accessor timeout_in_minutes: ::Integer
+      attr_accessor queued_timeout_in_minutes: ::Integer
+      attr_accessor encryption_key: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor badge_enabled: bool
+      attr_accessor logs_config: Types::LogsConfig
+      attr_accessor file_system_locations: ::Array[Types::ProjectFileSystemLocation]
+      attr_accessor build_batch_config: Types::ProjectBuildBatchConfig
+      attr_accessor concurrent_build_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateProjectOutput
+      attr_accessor project: Types::Project
+      SENSITIVE: []
+    end
+
+    class CreateReportGroupInput
+      attr_accessor name: ::String
+      attr_accessor type: ("TEST" | "CODE_COVERAGE")
+      attr_accessor export_config: Types::ReportExportConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateReportGroupOutput
+      attr_accessor report_group: Types::ReportGroup
+      SENSITIVE: []
+    end
+
+    class CreateWebhookInput
+      attr_accessor project_name: ::String
+      attr_accessor branch_filter: ::String
+      attr_accessor filter_groups: ::Array[::Array[Types::WebhookFilter]]
+      attr_accessor build_type: ("BUILD" | "BUILD_BATCH")
+      SENSITIVE: []
+    end
+
+    class CreateWebhookOutput
+      attr_accessor webhook: Types::Webhook
+      SENSITIVE: []
+    end
+
+    class DebugSession
+      attr_accessor session_enabled: bool
+      attr_accessor session_target: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBuildBatchInput
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBuildBatchOutput
+      attr_accessor status_code: ::String
+      attr_accessor builds_deleted: ::Array[::String]
+      attr_accessor builds_not_deleted: ::Array[Types::BuildNotDeleted]
+      SENSITIVE: []
+    end
+
+    class DeleteFleetInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFleetOutput < Aws::EmptyStructure
+    end
+
+    class DeleteProjectInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProjectOutput < Aws::EmptyStructure
+    end
+
+    class DeleteReportGroupInput
+      attr_accessor arn: ::String
+      attr_accessor delete_reports: bool
+      SENSITIVE: []
+    end
+
+    class DeleteReportGroupOutput < Aws::EmptyStructure
+    end
+
+    class DeleteReportInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReportOutput < Aws::EmptyStructure
+    end
+
+    class DeleteResourcePolicyInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyOutput < Aws::EmptyStructure
+    end
+
+    class DeleteSourceCredentialsInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSourceCredentialsOutput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWebhookInput
+      attr_accessor project_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWebhookOutput < Aws::EmptyStructure
+    end
+
+    class DescribeCodeCoveragesInput
+      attr_accessor report_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor sort_by: ("LINE_COVERAGE_PERCENTAGE" | "FILE_PATH")
+      attr_accessor min_line_coverage_percentage: ::Float
+      attr_accessor max_line_coverage_percentage: ::Float
+      SENSITIVE: []
+    end
+
+    class DescribeCodeCoveragesOutput
+      attr_accessor next_token: ::String
+      attr_accessor code_coverages: ::Array[Types::CodeCoverage]
+      SENSITIVE: []
+    end
+
+    class DescribeTestCasesInput
+      attr_accessor report_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filter: Types::TestCaseFilter
+      SENSITIVE: []
+    end
+
+    class DescribeTestCasesOutput
+      attr_accessor next_token: ::String
+      attr_accessor test_cases: ::Array[Types::TestCase]
+      SENSITIVE: []
+    end
+
+    class EnvironmentImage
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor versions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EnvironmentLanguage
+      attr_accessor language: ("JAVA" | "PYTHON" | "NODE_JS" | "RUBY" | "GOLANG" | "DOCKER" | "ANDROID" | "DOTNET" | "BASE" | "PHP")
+      attr_accessor images: ::Array[Types::EnvironmentImage]
+      SENSITIVE: []
+    end
+
+    class EnvironmentPlatform
+      attr_accessor platform: ("DEBIAN" | "AMAZON_LINUX" | "UBUNTU" | "WINDOWS_SERVER")
+      attr_accessor languages: ::Array[Types::EnvironmentLanguage]
+      SENSITIVE: []
+    end
+
+    class EnvironmentVariable
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      attr_accessor type: ("PLAINTEXT" | "PARAMETER_STORE" | "SECRETS_MANAGER")
+      SENSITIVE: []
+    end
+
+    class ExportedEnvironmentVariable
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class Fleet
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor created: ::Time
+      attr_accessor last_modified: ::Time
+      attr_accessor status: Types::FleetStatus
+      attr_accessor base_capacity: ::Integer
+      attr_accessor environment_type: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER")
+      attr_accessor compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB")
+      attr_accessor scaling_configuration: Types::ScalingConfigurationOutput
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class FleetStatus
+      attr_accessor status_code: ("CREATING" | "UPDATING" | "ROTATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_ROLLBACK_FAILED" | "ACTIVE")
+      attr_accessor context: ("CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetReportGroupTrendInput
+      attr_accessor report_group_arn: ::String
+      attr_accessor num_of_reports: ::Integer
+      attr_accessor trend_field: ("PASS_RATE" | "DURATION" | "TOTAL" | "LINE_COVERAGE" | "LINES_COVERED" | "LINES_MISSED" | "BRANCH_COVERAGE" | "BRANCHES_COVERED" | "BRANCHES_MISSED")
+      SENSITIVE: []
+    end
+
+    class GetReportGroupTrendOutput
+      attr_accessor stats: Types::ReportGroupTrendStats
+      attr_accessor raw_data: ::Array[Types::ReportWithRawData]
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyOutput
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class GitSubmodulesConfig
+      attr_accessor fetch_submodules: bool
+      SENSITIVE: []
+    end
+
+    class ImportSourceCredentialsInput
+      attr_accessor username: ::String
+      attr_accessor token: ::String
+      attr_accessor server_type: ("GITHUB" | "BITBUCKET" | "GITHUB_ENTERPRISE")
+      attr_accessor auth_type: ("OAUTH" | "BASIC_AUTH" | "PERSONAL_ACCESS_TOKEN")
+      attr_accessor should_overwrite: bool
+      SENSITIVE: [:token]
+    end
+
+    class ImportSourceCredentialsOutput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidInputException < Aws::EmptyStructure
+    end
+
+    class InvalidateProjectCacheInput
+      attr_accessor project_name: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidateProjectCacheOutput < Aws::EmptyStructure
+    end
+
+    class ListBuildBatchesForProjectInput
+      attr_accessor project_name: ::String
+      attr_accessor filter: Types::BuildBatchFilter
+      attr_accessor max_results: ::Integer
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBuildBatchesForProjectOutput
+      attr_accessor ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBuildBatchesInput
+      attr_accessor filter: Types::BuildBatchFilter
+      attr_accessor max_results: ::Integer
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBuildBatchesOutput
+      attr_accessor ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBuildsForProjectInput
+      attr_accessor project_name: ::String
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBuildsForProjectOutput
+      attr_accessor ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBuildsInput
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBuildsOutput
+      attr_accessor ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCuratedEnvironmentImagesInput < Aws::EmptyStructure
+    end
+
+    class ListCuratedEnvironmentImagesOutput
+      attr_accessor platforms: ::Array[Types::EnvironmentPlatform]
+      SENSITIVE: []
+    end
+
+    class ListFleetsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor sort_by: ("NAME" | "CREATED_TIME" | "LAST_MODIFIED_TIME")
+      SENSITIVE: [:next_token]
+    end
+
+    class ListFleetsOutput
+      attr_accessor next_token: ::String
+      attr_accessor fleets: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListProjectsInput
+      attr_accessor sort_by: ("NAME" | "CREATED_TIME" | "LAST_MODIFIED_TIME")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProjectsOutput
+      attr_accessor next_token: ::String
+      attr_accessor projects: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListReportGroupsInput
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor sort_by: ("NAME" | "CREATED_TIME" | "LAST_MODIFIED_TIME")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListReportGroupsOutput
+      attr_accessor next_token: ::String
+      attr_accessor report_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListReportsForReportGroupInput
+      attr_accessor report_group_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor max_results: ::Integer
+      attr_accessor filter: Types::ReportFilter
+      SENSITIVE: []
+    end
+
+    class ListReportsForReportGroupOutput
+      attr_accessor next_token: ::String
+      attr_accessor reports: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListReportsInput
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filter: Types::ReportFilter
+      SENSITIVE: []
+    end
+
+    class ListReportsOutput
+      attr_accessor next_token: ::String
+      attr_accessor reports: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListSharedProjectsInput
+      attr_accessor sort_by: ("ARN" | "MODIFIED_TIME")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSharedProjectsOutput
+      attr_accessor next_token: ::String
+      attr_accessor projects: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListSharedReportGroupsInput
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor sort_by: ("ARN" | "MODIFIED_TIME")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSharedReportGroupsOutput
+      attr_accessor next_token: ::String
+      attr_accessor report_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListSourceCredentialsInput < Aws::EmptyStructure
+    end
+
+    class ListSourceCredentialsOutput
+      attr_accessor source_credentials_infos: ::Array[Types::SourceCredentialsInfo]
+      SENSITIVE: []
+    end
+
+    class LogsConfig
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogsConfig
+      attr_accessor s3_logs: Types::S3LogsConfig
+      SENSITIVE: []
+    end
+
+    class LogsLocation
+      attr_accessor group_name: ::String
+      attr_accessor stream_name: ::String
+      attr_accessor deep_link: ::String
+      attr_accessor s3_deep_link: ::String
+      attr_accessor cloud_watch_logs_arn: ::String
+      attr_accessor s3_logs_arn: ::String
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogsConfig
+      attr_accessor s3_logs: Types::S3LogsConfig
+      SENSITIVE: []
+    end
+
+    class NetworkInterface
+      attr_accessor subnet_id: ::String
+      attr_accessor network_interface_id: ::String
+      SENSITIVE: []
+    end
+
+    class OAuthProviderException < Aws::EmptyStructure
+    end
+
+    class PhaseContext
+      attr_accessor status_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Project
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor source: Types::ProjectSource
+      attr_accessor secondary_sources: ::Array[Types::ProjectSource]
+      attr_accessor source_version: ::String
+      attr_accessor secondary_source_versions: ::Array[Types::ProjectSourceVersion]
+      attr_accessor artifacts: Types::ProjectArtifacts
+      attr_accessor secondary_artifacts: ::Array[Types::ProjectArtifacts]
+      attr_accessor cache: Types::ProjectCache
+      attr_accessor environment: Types::ProjectEnvironment
+      attr_accessor service_role: ::String
+      attr_accessor timeout_in_minutes: ::Integer
+      attr_accessor queued_timeout_in_minutes: ::Integer
+      attr_accessor encryption_key: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created: ::Time
+      attr_accessor last_modified: ::Time
+      attr_accessor webhook: Types::Webhook
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor badge: Types::ProjectBadge
+      attr_accessor logs_config: Types::LogsConfig
+      attr_accessor file_system_locations: ::Array[Types::ProjectFileSystemLocation]
+      attr_accessor build_batch_config: Types::ProjectBuildBatchConfig
+      attr_accessor concurrent_build_limit: ::Integer
+      attr_accessor project_visibility: ("PUBLIC_READ" | "PRIVATE")
+      attr_accessor public_project_alias: ::String
+      attr_accessor resource_access_role: ::String
+      SENSITIVE: []
+    end
+
+    class ProjectArtifacts
+      attr_accessor type: ("CODEPIPELINE" | "S3" | "NO_ARTIFACTS")
+      attr_accessor location: ::String
+      attr_accessor path: ::String
+      attr_accessor namespace_type: ("NONE" | "BUILD_ID")
+      attr_accessor name: ::String
+      attr_accessor packaging: ("NONE" | "ZIP")
+      attr_accessor override_artifact_name: bool
+      attr_accessor encryption_disabled: bool
+      attr_accessor artifact_identifier: ::String
+      attr_accessor bucket_owner_access: ("NONE" | "READ_ONLY" | "FULL")
+      SENSITIVE: []
+    end
+
+    class ProjectBadge
+      attr_accessor badge_enabled: bool
+      attr_accessor badge_request_url: ::String
+      SENSITIVE: []
+    end
+
+    class ProjectBuildBatchConfig
+      attr_accessor service_role: ::String
+      attr_accessor combine_artifacts: bool
+      attr_accessor restrictions: Types::BatchRestrictions
+      attr_accessor timeout_in_mins: ::Integer
+      attr_accessor batch_report_mode: ("REPORT_INDIVIDUAL_BUILDS" | "REPORT_AGGREGATED_BATCH")
+      SENSITIVE: []
+    end
+
+    class ProjectCache
+      attr_accessor type: ("NO_CACHE" | "S3" | "LOCAL")
+      attr_accessor location: ::String
+      attr_accessor modes: ::Array[("LOCAL_DOCKER_LAYER_CACHE" | "LOCAL_SOURCE_CACHE" | "LOCAL_CUSTOM_CACHE")]
+      SENSITIVE: []
+    end
+
+    class ProjectEnvironment
+      attr_accessor type: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER")
+      attr_accessor image: ::String
+      attr_accessor compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB")
+      attr_accessor fleet: Types::ProjectFleet
+      attr_accessor environment_variables: ::Array[Types::EnvironmentVariable]
+      attr_accessor privileged_mode: bool
+      attr_accessor certificate: ::String
+      attr_accessor registry_credential: Types::RegistryCredential
+      attr_accessor image_pull_credentials_type: ("CODEBUILD" | "SERVICE_ROLE")
+      SENSITIVE: []
+    end
+
+    class ProjectFileSystemLocation
+      attr_accessor type: ("EFS")
+      attr_accessor location: ::String
+      attr_accessor mount_point: ::String
+      attr_accessor identifier: ::String
+      attr_accessor mount_options: ::String
+      SENSITIVE: []
+    end
+
+    class ProjectFleet
+      attr_accessor fleet_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ProjectSource
+      attr_accessor type: ("CODECOMMIT" | "CODEPIPELINE" | "GITHUB" | "S3" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "NO_SOURCE")
+      attr_accessor location: ::String
+      attr_accessor git_clone_depth: ::Integer
+      attr_accessor git_submodules_config: Types::GitSubmodulesConfig
+      attr_accessor buildspec: ::String
+      attr_accessor auth: Types::SourceAuth
+      attr_accessor report_build_status: bool
+      attr_accessor build_status_config: Types::BuildStatusConfig
+      attr_accessor insecure_ssl: bool
+      attr_accessor source_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ProjectSourceVersion
+      attr_accessor source_identifier: ::String
+      attr_accessor source_version: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyInput
+      attr_accessor policy: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyOutput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RegistryCredential
+      attr_accessor credential: ::String
+      attr_accessor credential_provider: ("SECRETS_MANAGER")
+      SENSITIVE: []
+    end
+
+    class Report
+      attr_accessor arn: ::String
+      attr_accessor type: ("TEST" | "CODE_COVERAGE")
+      attr_accessor name: ::String
+      attr_accessor report_group_arn: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor status: ("GENERATING" | "SUCCEEDED" | "FAILED" | "INCOMPLETE" | "DELETING")
+      attr_accessor created: ::Time
+      attr_accessor expired: ::Time
+      attr_accessor export_config: Types::ReportExportConfig
+      attr_accessor truncated: bool
+      attr_accessor test_summary: Types::TestReportSummary
+      attr_accessor code_coverage_summary: Types::CodeCoverageReportSummary
+      SENSITIVE: []
+    end
+
+    class ReportExportConfig
+      attr_accessor export_config_type: ("S3" | "NO_EXPORT")
+      attr_accessor s3_destination: Types::S3ReportExportConfig
+      SENSITIVE: []
+    end
+
+    class ReportFilter
+      attr_accessor status: ("GENERATING" | "SUCCEEDED" | "FAILED" | "INCOMPLETE" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class ReportGroup
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("TEST" | "CODE_COVERAGE")
+      attr_accessor export_config: Types::ReportExportConfig
+      attr_accessor created: ::Time
+      attr_accessor last_modified: ::Time
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor status: ("ACTIVE" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class ReportGroupTrendStats
+      attr_accessor average: ::String
+      attr_accessor max: ::String
+      attr_accessor min: ::String
+      SENSITIVE: []
+    end
+
+    class ReportWithRawData
+      attr_accessor report_arn: ::String
+      attr_accessor data: ::String
+      SENSITIVE: []
+    end
+
+    class ResolvedArtifact
+      attr_accessor type: ("CODEPIPELINE" | "S3" | "NO_ARTIFACTS")
+      attr_accessor location: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException < Aws::EmptyStructure
+    end
+
+    class RetryBuildBatchInput
+      attr_accessor id: ::String
+      attr_accessor idempotency_token: ::String
+      attr_accessor retry_type: ("RETRY_ALL_BUILDS" | "RETRY_FAILED_BUILDS")
+      SENSITIVE: []
+    end
+
+    class RetryBuildBatchOutput
+      attr_accessor build_batch: Types::BuildBatch
+      SENSITIVE: []
+    end
+
+    class RetryBuildInput
+      attr_accessor id: ::String
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class RetryBuildOutput
+      attr_accessor build: Types::Build
+      SENSITIVE: []
+    end
+
+    class S3LogsConfig
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor location: ::String
+      attr_accessor encryption_disabled: bool
+      attr_accessor bucket_owner_access: ("NONE" | "READ_ONLY" | "FULL")
+      SENSITIVE: []
+    end
+
+    class S3ReportExportConfig
+      attr_accessor bucket: ::String
+      attr_accessor bucket_owner: ::String
+      attr_accessor path: ::String
+      attr_accessor packaging: ("ZIP" | "NONE")
+      attr_accessor encryption_key: ::String
+      attr_accessor encryption_disabled: bool
+      SENSITIVE: []
+    end
+
+    class ScalingConfigurationInput
+      attr_accessor scaling_type: ("TARGET_TRACKING_SCALING")
+      attr_accessor target_tracking_scaling_configs: ::Array[Types::TargetTrackingScalingConfiguration]
+      attr_accessor max_capacity: ::Integer
+      SENSITIVE: []
+    end
+
+    class ScalingConfigurationOutput
+      attr_accessor scaling_type: ("TARGET_TRACKING_SCALING")
+      attr_accessor target_tracking_scaling_configs: ::Array[Types::TargetTrackingScalingConfiguration]
+      attr_accessor max_capacity: ::Integer
+      attr_accessor desired_capacity: ::Integer
+      SENSITIVE: []
+    end
+
+    class SourceAuth
+      attr_accessor type: ("OAUTH")
+      attr_accessor resource: ::String
+      SENSITIVE: []
+    end
+
+    class SourceCredentialsInfo
+      attr_accessor arn: ::String
+      attr_accessor server_type: ("GITHUB" | "BITBUCKET" | "GITHUB_ENTERPRISE")
+      attr_accessor auth_type: ("OAUTH" | "BASIC_AUTH" | "PERSONAL_ACCESS_TOKEN")
+      SENSITIVE: []
+    end
+
+    class StartBuildBatchInput
+      attr_accessor project_name: ::String
+      attr_accessor secondary_sources_override: ::Array[Types::ProjectSource]
+      attr_accessor secondary_sources_version_override: ::Array[Types::ProjectSourceVersion]
+      attr_accessor source_version: ::String
+      attr_accessor artifacts_override: Types::ProjectArtifacts
+      attr_accessor secondary_artifacts_override: ::Array[Types::ProjectArtifacts]
+      attr_accessor environment_variables_override: ::Array[Types::EnvironmentVariable]
+      attr_accessor source_type_override: ("CODECOMMIT" | "CODEPIPELINE" | "GITHUB" | "S3" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "NO_SOURCE")
+      attr_accessor source_location_override: ::String
+      attr_accessor source_auth_override: Types::SourceAuth
+      attr_accessor git_clone_depth_override: ::Integer
+      attr_accessor git_submodules_config_override: Types::GitSubmodulesConfig
+      attr_accessor buildspec_override: ::String
+      attr_accessor insecure_ssl_override: bool
+      attr_accessor report_build_batch_status_override: bool
+      attr_accessor environment_type_override: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER")
+      attr_accessor image_override: ::String
+      attr_accessor compute_type_override: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB")
+      attr_accessor certificate_override: ::String
+      attr_accessor cache_override: Types::ProjectCache
+      attr_accessor service_role_override: ::String
+      attr_accessor privileged_mode_override: bool
+      attr_accessor build_timeout_in_minutes_override: ::Integer
+      attr_accessor queued_timeout_in_minutes_override: ::Integer
+      attr_accessor encryption_key_override: ::String
+      attr_accessor idempotency_token: ::String
+      attr_accessor logs_config_override: Types::LogsConfig
+      attr_accessor registry_credential_override: Types::RegistryCredential
+      attr_accessor image_pull_credentials_type_override: ("CODEBUILD" | "SERVICE_ROLE")
+      attr_accessor build_batch_config_override: Types::ProjectBuildBatchConfig
+      attr_accessor debug_session_enabled: bool
+      SENSITIVE: []
+    end
+
+    class StartBuildBatchOutput
+      attr_accessor build_batch: Types::BuildBatch
+      SENSITIVE: []
+    end
+
+    class StartBuildInput
+      attr_accessor project_name: ::String
+      attr_accessor secondary_sources_override: ::Array[Types::ProjectSource]
+      attr_accessor secondary_sources_version_override: ::Array[Types::ProjectSourceVersion]
+      attr_accessor source_version: ::String
+      attr_accessor artifacts_override: Types::ProjectArtifacts
+      attr_accessor secondary_artifacts_override: ::Array[Types::ProjectArtifacts]
+      attr_accessor environment_variables_override: ::Array[Types::EnvironmentVariable]
+      attr_accessor source_type_override: ("CODECOMMIT" | "CODEPIPELINE" | "GITHUB" | "S3" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "NO_SOURCE")
+      attr_accessor source_location_override: ::String
+      attr_accessor source_auth_override: Types::SourceAuth
+      attr_accessor git_clone_depth_override: ::Integer
+      attr_accessor git_submodules_config_override: Types::GitSubmodulesConfig
+      attr_accessor buildspec_override: ::String
+      attr_accessor insecure_ssl_override: bool
+      attr_accessor report_build_status_override: bool
+      attr_accessor build_status_config_override: Types::BuildStatusConfig
+      attr_accessor environment_type_override: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER")
+      attr_accessor image_override: ::String
+      attr_accessor compute_type_override: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB")
+      attr_accessor certificate_override: ::String
+      attr_accessor cache_override: Types::ProjectCache
+      attr_accessor service_role_override: ::String
+      attr_accessor privileged_mode_override: bool
+      attr_accessor timeout_in_minutes_override: ::Integer
+      attr_accessor queued_timeout_in_minutes_override: ::Integer
+      attr_accessor encryption_key_override: ::String
+      attr_accessor idempotency_token: ::String
+      attr_accessor logs_config_override: Types::LogsConfig
+      attr_accessor registry_credential_override: Types::RegistryCredential
+      attr_accessor image_pull_credentials_type_override: ("CODEBUILD" | "SERVICE_ROLE")
+      attr_accessor debug_session_enabled: bool
+      attr_accessor fleet_override: Types::ProjectFleet
+      SENSITIVE: []
+    end
+
+    class StartBuildOutput
+      attr_accessor build: Types::Build
+      SENSITIVE: []
+    end
+
+    class StopBuildBatchInput
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class StopBuildBatchOutput
+      attr_accessor build_batch: Types::BuildBatch
+      SENSITIVE: []
+    end
+
+    class StopBuildInput
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class StopBuildOutput
+      attr_accessor build: Types::Build
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TargetTrackingScalingConfiguration
+      attr_accessor metric_type: ("FLEET_UTILIZATION_RATE")
+      attr_accessor target_value: ::Float
+      SENSITIVE: []
+    end
+
+    class TestCase
+      attr_accessor report_arn: ::String
+      attr_accessor test_raw_data_path: ::String
+      attr_accessor prefix: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ::String
+      attr_accessor duration_in_nano_seconds: ::Integer
+      attr_accessor message: ::String
+      attr_accessor expired: ::Time
+      SENSITIVE: []
+    end
+
+    class TestCaseFilter
+      attr_accessor status: ::String
+      attr_accessor keyword: ::String
+      SENSITIVE: []
+    end
+
+    class TestReportSummary
+      attr_accessor total: ::Integer
+      attr_accessor status_counts: ::Hash[::String, ::Integer]
+      attr_accessor duration_in_nano_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateFleetInput
+      attr_accessor arn: ::String
+      attr_accessor base_capacity: ::Integer
+      attr_accessor environment_type: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER")
+      attr_accessor compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB")
+      attr_accessor scaling_configuration: Types::ScalingConfigurationInput
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class UpdateFleetOutput
+      attr_accessor fleet: Types::Fleet
+      SENSITIVE: []
+    end
+
+    class UpdateProjectInput
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor source: Types::ProjectSource
+      attr_accessor secondary_sources: ::Array[Types::ProjectSource]
+      attr_accessor source_version: ::String
+      attr_accessor secondary_source_versions: ::Array[Types::ProjectSourceVersion]
+      attr_accessor artifacts: Types::ProjectArtifacts
+      attr_accessor secondary_artifacts: ::Array[Types::ProjectArtifacts]
+      attr_accessor cache: Types::ProjectCache
+      attr_accessor environment: Types::ProjectEnvironment
+      attr_accessor service_role: ::String
+      attr_accessor timeout_in_minutes: ::Integer
+      attr_accessor queued_timeout_in_minutes: ::Integer
+      attr_accessor encryption_key: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor badge_enabled: bool
+      attr_accessor logs_config: Types::LogsConfig
+      attr_accessor file_system_locations: ::Array[Types::ProjectFileSystemLocation]
+      attr_accessor build_batch_config: Types::ProjectBuildBatchConfig
+      attr_accessor concurrent_build_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateProjectOutput
+      attr_accessor project: Types::Project
+      SENSITIVE: []
+    end
+
+    class UpdateProjectVisibilityInput
+      attr_accessor project_arn: ::String
+      attr_accessor project_visibility: ("PUBLIC_READ" | "PRIVATE")
+      attr_accessor resource_access_role: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProjectVisibilityOutput
+      attr_accessor project_arn: ::String
+      attr_accessor public_project_alias: ::String
+      attr_accessor project_visibility: ("PUBLIC_READ" | "PRIVATE")
+      SENSITIVE: []
+    end
+
+    class UpdateReportGroupInput
+      attr_accessor arn: ::String
+      attr_accessor export_config: Types::ReportExportConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class UpdateReportGroupOutput
+      attr_accessor report_group: Types::ReportGroup
+      SENSITIVE: []
+    end
+
+    class UpdateWebhookInput
+      attr_accessor project_name: ::String
+      attr_accessor branch_filter: ::String
+      attr_accessor rotate_secret: bool
+      attr_accessor filter_groups: ::Array[::Array[Types::WebhookFilter]]
+      attr_accessor build_type: ("BUILD" | "BUILD_BATCH")
+      SENSITIVE: []
+    end
+
+    class UpdateWebhookOutput
+      attr_accessor webhook: Types::Webhook
+      SENSITIVE: []
+    end
+
+    class VpcConfig
+      attr_accessor vpc_id: ::String
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Webhook
+      attr_accessor url: ::String
+      attr_accessor payload_url: ::String
+      attr_accessor secret: ::String
+      attr_accessor branch_filter: ::String
+      attr_accessor filter_groups: ::Array[::Array[Types::WebhookFilter]]
+      attr_accessor build_type: ("BUILD" | "BUILD_BATCH")
+      attr_accessor last_modified_secret: ::Time
+      SENSITIVE: []
+    end
+
+    class WebhookFilter
+      attr_accessor type: ("EVENT" | "BASE_REF" | "HEAD_REF" | "ACTOR_ACCOUNT_ID" | "FILE_PATH" | "COMMIT_MESSAGE")
+      attr_accessor pattern: ::String
+      attr_accessor exclude_matched_pattern: bool
+      SENSITIVE: []
+    end
+  end
+end

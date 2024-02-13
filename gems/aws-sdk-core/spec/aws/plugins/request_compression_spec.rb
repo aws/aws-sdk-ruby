@@ -15,28 +15,28 @@ module Aws
           'SomeOperation' => {
             'http' => { 'method' => 'POST', 'requestUri' => '/' },
             'input' => { 'shape' => 'SomeOperationRequest' },
-            'requestCompression' => {
+            'requestcompression' => {
               'encodings' => ['gzip']
             }
           },
           'OperationWithNoSupportedEncoding' => {
             'http' => { 'method' => 'POST', 'requestUri' => '/' },
             'input' => { 'shape' => 'SomeOperationRequest' },
-            'requestCompression' => {
+            'requestcompression' => {
               'encodings' => ['custom']
             }
           },
           'OperationWithSomeSupportedEncodings' => {
             'http' => { 'method' => 'POST', 'requestUri' => '/' },
             'input' => { 'shape' => 'SomeOperationRequest' },
-            'requestCompression' => {
+            'requestcompression' => {
               'encodings' => %w[custom gzip]
             }
           },
           'OperationStreaming' => {
             'http' => { 'method' => 'POST', 'requestUri' => '/' },
             'input' => { 'shape' => 'OperationStreamingRequest' },
-            'requestCompression' => {
+            'requestcompression' => {
               'encodings' => ['gzip']
             }
           }
@@ -120,7 +120,7 @@ module Aws
         end
       end
 
-      context 'requestCompression operation' do
+      context 'requestcompression operation' do
         it 'compresses the body and sets the content-encoding header' do
           resp = client.some_operation(body: uncompressed_body)
           expect(resp.context.http_request.headers['Content-Encoding']).to eq('gzip')

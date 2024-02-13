@@ -1,0 +1,387 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CodeGuruProfiler
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddNotificationChannelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddNotificationChannelsResponse]
+        def notification_configuration: () -> Types::NotificationConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#add_notification_channels-instance_method
+      def add_notification_channels: (
+                                       channels: Array[
+                                         {
+                                           event_publishers: Array[("AnomalyDetection")],
+                                           id: ::String?,
+                                           uri: ::String
+                                         },
+                                       ],
+                                       profiling_group_name: ::String
+                                     ) -> _AddNotificationChannelsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddNotificationChannelsResponseSuccess
+
+      interface _BatchGetFrameMetricDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetFrameMetricDataResponse]
+        def end_time: () -> ::Time
+        def end_times: () -> ::Array[Types::TimestampStructure]
+        def frame_metric_data: () -> ::Array[Types::FrameMetricDatum]
+        def resolution: () -> ("PT5M" | "PT1H" | "P1D")
+        def start_time: () -> ::Time
+        def unprocessed_end_times: () -> ::Hash[::String, ::Array[Types::TimestampStructure]]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#batch_get_frame_metric_data-instance_method
+      def batch_get_frame_metric_data: (
+                                         ?end_time: ::Time,
+                                         ?frame_metrics: Array[
+                                           {
+                                             frame_name: ::String,
+                                             thread_states: Array[::String],
+                                             type: ("AggregatedRelativeTotalTime")
+                                           },
+                                         ],
+                                         ?period: ::String,
+                                         profiling_group_name: ::String,
+                                         ?start_time: ::Time,
+                                         ?target_resolution: ("PT5M" | "PT1H" | "P1D")
+                                       ) -> _BatchGetFrameMetricDataResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetFrameMetricDataResponseSuccess
+
+      interface _ConfigureAgentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfigureAgentResponse]
+        def configuration: () -> Types::AgentConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#configure_agent-instance_method
+      def configure_agent: (
+                             ?fleet_instance_id: ::String,
+                             ?metadata: Hash[("ComputePlatform" | "AgentId" | "AwsRequestId" | "ExecutionEnvironment" | "LambdaFunctionArn" | "LambdaMemoryLimitInMB" | "LambdaRemainingTimeInMilliseconds" | "LambdaTimeGapBetweenInvokesInMilliseconds" | "LambdaPreviousExecutionTimeInMilliseconds"), ::String],
+                             profiling_group_name: ::String
+                           ) -> _ConfigureAgentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConfigureAgentResponseSuccess
+
+      interface _CreateProfilingGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProfilingGroupResponse]
+        def profiling_group: () -> Types::ProfilingGroupDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#create_profiling_group-instance_method
+      def create_profiling_group: (
+                                    ?agent_orchestration_config: {
+                                      profiling_enabled: bool
+                                    },
+                                    client_token: ::String,
+                                    ?compute_platform: ("Default" | "AWSLambda"),
+                                    profiling_group_name: ::String,
+                                    ?tags: Hash[::String, ::String]
+                                  ) -> _CreateProfilingGroupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProfilingGroupResponseSuccess
+
+      interface _DeleteProfilingGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProfilingGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#delete_profiling_group-instance_method
+      def delete_profiling_group: (
+                                    profiling_group_name: ::String
+                                  ) -> _DeleteProfilingGroupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProfilingGroupResponseSuccess
+
+      interface _DescribeProfilingGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProfilingGroupResponse]
+        def profiling_group: () -> Types::ProfilingGroupDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#describe_profiling_group-instance_method
+      def describe_profiling_group: (
+                                      profiling_group_name: ::String
+                                    ) -> _DescribeProfilingGroupResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProfilingGroupResponseSuccess
+
+      interface _GetFindingsReportAccountSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFindingsReportAccountSummaryResponse]
+        def next_token: () -> ::String
+        def report_summaries: () -> ::Array[Types::FindingsReportSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#get_findings_report_account_summary-instance_method
+      def get_findings_report_account_summary: (
+                                                 ?daily_reports_only: bool,
+                                                 ?max_results: ::Integer,
+                                                 ?next_token: ::String
+                                               ) -> _GetFindingsReportAccountSummaryResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFindingsReportAccountSummaryResponseSuccess
+
+      interface _GetNotificationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNotificationConfigurationResponse]
+        def notification_configuration: () -> Types::NotificationConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#get_notification_configuration-instance_method
+      def get_notification_configuration: (
+                                            profiling_group_name: ::String
+                                          ) -> _GetNotificationConfigurationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNotificationConfigurationResponseSuccess
+
+      interface _GetPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPolicyResponse]
+        def policy: () -> ::String
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#get_policy-instance_method
+      def get_policy: (
+                        profiling_group_name: ::String
+                      ) -> _GetPolicyResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPolicyResponseSuccess
+
+      interface _GetProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProfileResponse]
+        def content_encoding: () -> ::String
+        def content_type: () -> ::String
+        def profile: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#get_profile-instance_method
+      def get_profile: (
+                         ?accept: ::String,
+                         ?end_time: ::Time,
+                         ?max_depth: ::Integer,
+                         ?period: ::String,
+                         profiling_group_name: ::String,
+                         ?start_time: ::Time
+                       ) -> _GetProfileResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProfileResponseSuccess
+
+      interface _GetRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRecommendationsResponse]
+        def anomalies: () -> ::Array[Types::Anomaly]
+        def profile_end_time: () -> ::Time
+        def profile_start_time: () -> ::Time
+        def profiling_group_name: () -> ::String
+        def recommendations: () -> ::Array[Types::Recommendation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#get_recommendations-instance_method
+      def get_recommendations: (
+                                 end_time: ::Time,
+                                 ?locale: ::String,
+                                 profiling_group_name: ::String,
+                                 start_time: ::Time
+                               ) -> _GetRecommendationsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecommendationsResponseSuccess
+
+      interface _ListFindingsReportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFindingsReportsResponse]
+        def findings_report_summaries: () -> ::Array[Types::FindingsReportSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#list_findings_reports-instance_method
+      def list_findings_reports: (
+                                   ?daily_reports_only: bool,
+                                   end_time: ::Time,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String,
+                                   profiling_group_name: ::String,
+                                   start_time: ::Time
+                                 ) -> _ListFindingsReportsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFindingsReportsResponseSuccess
+
+      interface _ListProfileTimesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProfileTimesResponse]
+        def next_token: () -> ::String
+        def profile_times: () -> ::Array[Types::ProfileTime]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#list_profile_times-instance_method
+      def list_profile_times: (
+                                end_time: ::Time,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String,
+                                ?order_by: ("TimestampDescending" | "TimestampAscending"),
+                                period: ("PT5M" | "PT1H" | "P1D"),
+                                profiling_group_name: ::String,
+                                start_time: ::Time
+                              ) -> _ListProfileTimesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProfileTimesResponseSuccess
+
+      interface _ListProfilingGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProfilingGroupsResponse]
+        def next_token: () -> ::String
+        def profiling_group_names: () -> ::Array[::String]
+        def profiling_groups: () -> ::Array[Types::ProfilingGroupDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#list_profiling_groups-instance_method
+      def list_profiling_groups: (
+                                   ?include_description: bool,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListProfilingGroupsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProfilingGroupsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PostAgentProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PostAgentProfileResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#post_agent_profile-instance_method
+      def post_agent_profile: (
+                                agent_profile: ::String,
+                                content_type: ::String,
+                                ?profile_token: ::String,
+                                profiling_group_name: ::String
+                              ) -> _PostAgentProfileResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PostAgentProfileResponseSuccess
+
+      interface _PutPermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutPermissionResponse]
+        def policy: () -> ::String
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#put_permission-instance_method
+      def put_permission: (
+                            action_group: ("agentPermissions"),
+                            principals: Array[::String],
+                            profiling_group_name: ::String,
+                            ?revision_id: ::String
+                          ) -> _PutPermissionResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutPermissionResponseSuccess
+
+      interface _RemoveNotificationChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveNotificationChannelResponse]
+        def notification_configuration: () -> Types::NotificationConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#remove_notification_channel-instance_method
+      def remove_notification_channel: (
+                                         channel_id: ::String,
+                                         profiling_group_name: ::String
+                                       ) -> _RemoveNotificationChannelResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveNotificationChannelResponseSuccess
+
+      interface _RemovePermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemovePermissionResponse]
+        def policy: () -> ::String
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#remove_permission-instance_method
+      def remove_permission: (
+                               action_group: ("agentPermissions"),
+                               profiling_group_name: ::String,
+                               revision_id: ::String
+                             ) -> _RemovePermissionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemovePermissionResponseSuccess
+
+      interface _SubmitFeedbackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SubmitFeedbackResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#submit_feedback-instance_method
+      def submit_feedback: (
+                             anomaly_instance_id: ::String,
+                             ?comment: ::String,
+                             profiling_group_name: ::String,
+                             type: ("Positive" | "Negative")
+                           ) -> _SubmitFeedbackResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SubmitFeedbackResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateProfilingGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProfilingGroupResponse]
+        def profiling_group: () -> Types::ProfilingGroupDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruProfiler/Client.html#update_profiling_group-instance_method
+      def update_profiling_group: (
+                                    agent_orchestration_config: {
+                                      profiling_enabled: bool
+                                    },
+                                    profiling_group_name: ::String
+                                  ) -> _UpdateProfilingGroupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProfilingGroupResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,501 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ElasticLoadBalancing
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddTagsOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#add_tags-instance_method
+      def add_tags: (
+                      load_balancer_names: Array[::String],
+                      tags: Array[
+                        {
+                          key: ::String,
+                          value: ::String?
+                        },
+                      ]
+                    ) -> _AddTagsResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddTagsResponseSuccess
+
+      interface _ApplySecurityGroupsToLoadBalancerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApplySecurityGroupsToLoadBalancerOutput]
+        def security_groups: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#apply_security_groups_to_load_balancer-instance_method
+      def apply_security_groups_to_load_balancer: (
+                                                    load_balancer_name: ::String,
+                                                    security_groups: Array[::String]
+                                                  ) -> _ApplySecurityGroupsToLoadBalancerResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ApplySecurityGroupsToLoadBalancerResponseSuccess
+
+      interface _AttachLoadBalancerToSubnetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AttachLoadBalancerToSubnetsOutput]
+        def subnets: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#attach_load_balancer_to_subnets-instance_method
+      def attach_load_balancer_to_subnets: (
+                                             load_balancer_name: ::String,
+                                             subnets: Array[::String]
+                                           ) -> _AttachLoadBalancerToSubnetsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachLoadBalancerToSubnetsResponseSuccess
+
+      interface _ConfigureHealthCheckResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfigureHealthCheckOutput]
+        def health_check: () -> Types::HealthCheck
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#configure_health_check-instance_method
+      def configure_health_check: (
+                                    load_balancer_name: ::String,
+                                    health_check: {
+                                      target: ::String,
+                                      interval: ::Integer,
+                                      timeout: ::Integer,
+                                      unhealthy_threshold: ::Integer,
+                                      healthy_threshold: ::Integer
+                                    }
+                                  ) -> _ConfigureHealthCheckResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConfigureHealthCheckResponseSuccess
+
+      interface _CreateAppCookieStickinessPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAppCookieStickinessPolicyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#create_app_cookie_stickiness_policy-instance_method
+      def create_app_cookie_stickiness_policy: (
+                                                 load_balancer_name: ::String,
+                                                 policy_name: ::String,
+                                                 cookie_name: ::String
+                                               ) -> _CreateAppCookieStickinessPolicyResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppCookieStickinessPolicyResponseSuccess
+
+      interface _CreateLBCookieStickinessPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLBCookieStickinessPolicyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#create_lb_cookie_stickiness_policy-instance_method
+      def create_lb_cookie_stickiness_policy: (
+                                                load_balancer_name: ::String,
+                                                policy_name: ::String,
+                                                ?cookie_expiration_period: ::Integer
+                                              ) -> _CreateLBCookieStickinessPolicyResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLBCookieStickinessPolicyResponseSuccess
+
+      interface _CreateLoadBalancerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessPointOutput]
+        def dns_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#create_load_balancer-instance_method
+      def create_load_balancer: (
+                                  load_balancer_name: ::String,
+                                  listeners: Array[
+                                    {
+                                      protocol: ::String,
+                                      load_balancer_port: ::Integer,
+                                      instance_protocol: ::String?,
+                                      instance_port: ::Integer,
+                                      ssl_certificate_id: ::String?
+                                    },
+                                  ],
+                                  ?availability_zones: Array[::String],
+                                  ?subnets: Array[::String],
+                                  ?security_groups: Array[::String],
+                                  ?scheme: ::String,
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String?
+                                    },
+                                  ]
+                                ) -> _CreateLoadBalancerResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLoadBalancerResponseSuccess
+
+      interface _CreateLoadBalancerListenersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLoadBalancerListenerOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#create_load_balancer_listeners-instance_method
+      def create_load_balancer_listeners: (
+                                            load_balancer_name: ::String,
+                                            listeners: Array[
+                                              {
+                                                protocol: ::String,
+                                                load_balancer_port: ::Integer,
+                                                instance_protocol: ::String?,
+                                                instance_port: ::Integer,
+                                                ssl_certificate_id: ::String?
+                                              },
+                                            ]
+                                          ) -> _CreateLoadBalancerListenersResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLoadBalancerListenersResponseSuccess
+
+      interface _CreateLoadBalancerPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLoadBalancerPolicyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#create_load_balancer_policy-instance_method
+      def create_load_balancer_policy: (
+                                         load_balancer_name: ::String,
+                                         policy_name: ::String,
+                                         policy_type_name: ::String,
+                                         ?policy_attributes: Array[
+                                           {
+                                             attribute_name: ::String?,
+                                             attribute_value: ::String?
+                                           },
+                                         ]
+                                       ) -> _CreateLoadBalancerPolicyResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLoadBalancerPolicyResponseSuccess
+
+      interface _DeleteLoadBalancerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccessPointOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#delete_load_balancer-instance_method
+      def delete_load_balancer: (
+                                  load_balancer_name: ::String
+                                ) -> _DeleteLoadBalancerResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLoadBalancerResponseSuccess
+
+      interface _DeleteLoadBalancerListenersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLoadBalancerListenerOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#delete_load_balancer_listeners-instance_method
+      def delete_load_balancer_listeners: (
+                                            load_balancer_name: ::String,
+                                            load_balancer_ports: Array[::Integer]
+                                          ) -> _DeleteLoadBalancerListenersResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLoadBalancerListenersResponseSuccess
+
+      interface _DeleteLoadBalancerPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLoadBalancerPolicyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#delete_load_balancer_policy-instance_method
+      def delete_load_balancer_policy: (
+                                         load_balancer_name: ::String,
+                                         policy_name: ::String
+                                       ) -> _DeleteLoadBalancerPolicyResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLoadBalancerPolicyResponseSuccess
+
+      interface _DeregisterInstancesFromLoadBalancerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterEndPointsOutput]
+        def instances: () -> ::Array[Types::Instance]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#deregister_instances_from_load_balancer-instance_method
+      def deregister_instances_from_load_balancer: (
+                                                     load_balancer_name: ::String,
+                                                     instances: Array[
+                                                       {
+                                                         instance_id: ::String?
+                                                       },
+                                                     ]
+                                                   ) -> _DeregisterInstancesFromLoadBalancerResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterInstancesFromLoadBalancerResponseSuccess
+
+      interface _DescribeAccountLimitsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccountLimitsOutput]
+        def limits: () -> ::Array[Types::Limit]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#describe_account_limits-instance_method
+      def describe_account_limits: (
+                                     ?marker: ::String,
+                                     ?page_size: ::Integer
+                                   ) -> _DescribeAccountLimitsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccountLimitsResponseSuccess
+
+      interface _DescribeInstanceHealthResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEndPointStateOutput]
+        def instance_states: () -> ::Array[Types::InstanceState]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#describe_instance_health-instance_method
+      def describe_instance_health: (
+                                      load_balancer_name: ::String,
+                                      ?instances: Array[
+                                        {
+                                          instance_id: ::String?
+                                        },
+                                      ]
+                                    ) -> _DescribeInstanceHealthResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInstanceHealthResponseSuccess
+
+      interface _DescribeLoadBalancerAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLoadBalancerAttributesOutput]
+        def load_balancer_attributes: () -> Types::LoadBalancerAttributes
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#describe_load_balancer_attributes-instance_method
+      def describe_load_balancer_attributes: (
+                                               load_balancer_name: ::String
+                                             ) -> _DescribeLoadBalancerAttributesResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLoadBalancerAttributesResponseSuccess
+
+      interface _DescribeLoadBalancerPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLoadBalancerPoliciesOutput]
+        def policy_descriptions: () -> ::Array[Types::PolicyDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#describe_load_balancer_policies-instance_method
+      def describe_load_balancer_policies: (
+                                             ?load_balancer_name: ::String,
+                                             ?policy_names: Array[::String]
+                                           ) -> _DescribeLoadBalancerPoliciesResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLoadBalancerPoliciesResponseSuccess
+
+      interface _DescribeLoadBalancerPolicyTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLoadBalancerPolicyTypesOutput]
+        def policy_type_descriptions: () -> ::Array[Types::PolicyTypeDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#describe_load_balancer_policy_types-instance_method
+      def describe_load_balancer_policy_types: (
+                                                 ?policy_type_names: Array[::String]
+                                               ) -> _DescribeLoadBalancerPolicyTypesResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLoadBalancerPolicyTypesResponseSuccess
+
+      interface _DescribeLoadBalancersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccessPointsOutput]
+        def load_balancer_descriptions: () -> ::Array[Types::LoadBalancerDescription]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#describe_load_balancers-instance_method
+      def describe_load_balancers: (
+                                     ?load_balancer_names: Array[::String],
+                                     ?marker: ::String,
+                                     ?page_size: ::Integer
+                                   ) -> _DescribeLoadBalancersResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLoadBalancersResponseSuccess
+
+      interface _DescribeTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTagsOutput]
+        def tag_descriptions: () -> ::Array[Types::TagDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#describe_tags-instance_method
+      def describe_tags: (
+                           load_balancer_names: Array[::String]
+                         ) -> _DescribeTagsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTagsResponseSuccess
+
+      interface _DetachLoadBalancerFromSubnetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetachLoadBalancerFromSubnetsOutput]
+        def subnets: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#detach_load_balancer_from_subnets-instance_method
+      def detach_load_balancer_from_subnets: (
+                                               load_balancer_name: ::String,
+                                               subnets: Array[::String]
+                                             ) -> _DetachLoadBalancerFromSubnetsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetachLoadBalancerFromSubnetsResponseSuccess
+
+      interface _DisableAvailabilityZonesForLoadBalancerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveAvailabilityZonesOutput]
+        def availability_zones: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#disable_availability_zones_for_load_balancer-instance_method
+      def disable_availability_zones_for_load_balancer: (
+                                                          load_balancer_name: ::String,
+                                                          availability_zones: Array[::String]
+                                                        ) -> _DisableAvailabilityZonesForLoadBalancerResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableAvailabilityZonesForLoadBalancerResponseSuccess
+
+      interface _EnableAvailabilityZonesForLoadBalancerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddAvailabilityZonesOutput]
+        def availability_zones: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#enable_availability_zones_for_load_balancer-instance_method
+      def enable_availability_zones_for_load_balancer: (
+                                                         load_balancer_name: ::String,
+                                                         availability_zones: Array[::String]
+                                                       ) -> _EnableAvailabilityZonesForLoadBalancerResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableAvailabilityZonesForLoadBalancerResponseSuccess
+
+      interface _ModifyLoadBalancerAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyLoadBalancerAttributesOutput]
+        def load_balancer_name: () -> ::String
+        def load_balancer_attributes: () -> Types::LoadBalancerAttributes
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#modify_load_balancer_attributes-instance_method
+      def modify_load_balancer_attributes: (
+                                             load_balancer_name: ::String,
+                                             load_balancer_attributes: {
+                                               cross_zone_load_balancing: {
+                                                 enabled: bool
+                                               }?,
+                                               access_log: {
+                                                 enabled: bool,
+                                                 s3_bucket_name: ::String?,
+                                                 emit_interval: ::Integer?,
+                                                 s3_bucket_prefix: ::String?
+                                               }?,
+                                               connection_draining: {
+                                                 enabled: bool,
+                                                 timeout: ::Integer?
+                                               }?,
+                                               connection_settings: {
+                                                 idle_timeout: ::Integer
+                                               }?,
+                                               additional_attributes: Array[
+                                                 {
+                                                   key: ::String?,
+                                                   value: ::String?
+                                                 },
+                                               ]?
+                                             }
+                                           ) -> _ModifyLoadBalancerAttributesResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyLoadBalancerAttributesResponseSuccess
+
+      interface _RegisterInstancesWithLoadBalancerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterEndPointsOutput]
+        def instances: () -> ::Array[Types::Instance]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#register_instances_with_load_balancer-instance_method
+      def register_instances_with_load_balancer: (
+                                                   load_balancer_name: ::String,
+                                                   instances: Array[
+                                                     {
+                                                       instance_id: ::String?
+                                                     },
+                                                   ]
+                                                 ) -> _RegisterInstancesWithLoadBalancerResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterInstancesWithLoadBalancerResponseSuccess
+
+      interface _RemoveTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveTagsOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#remove_tags-instance_method
+      def remove_tags: (
+                         load_balancer_names: Array[::String],
+                         tags: Array[
+                           {
+                             key: ::String?
+                           },
+                         ]
+                       ) -> _RemoveTagsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveTagsResponseSuccess
+
+      interface _SetLoadBalancerListenerSSLCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetLoadBalancerListenerSSLCertificateOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#set_load_balancer_listener_ssl_certificate-instance_method
+      def set_load_balancer_listener_ssl_certificate: (
+                                                        load_balancer_name: ::String,
+                                                        load_balancer_port: ::Integer,
+                                                        ssl_certificate_id: ::String
+                                                      ) -> _SetLoadBalancerListenerSSLCertificateResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetLoadBalancerListenerSSLCertificateResponseSuccess
+
+      interface _SetLoadBalancerPoliciesForBackendServerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetLoadBalancerPoliciesForBackendServerOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#set_load_balancer_policies_for_backend_server-instance_method
+      def set_load_balancer_policies_for_backend_server: (
+                                                           load_balancer_name: ::String,
+                                                           instance_port: ::Integer,
+                                                           policy_names: Array[::String]
+                                                         ) -> _SetLoadBalancerPoliciesForBackendServerResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetLoadBalancerPoliciesForBackendServerResponseSuccess
+
+      interface _SetLoadBalancerPoliciesOfListenerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetLoadBalancerPoliciesOfListenerOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#set_load_balancer_policies_of_listener-instance_method
+      def set_load_balancer_policies_of_listener: (
+                                                    load_balancer_name: ::String,
+                                                    load_balancer_port: ::Integer,
+                                                    policy_names: Array[::String]
+                                                  ) -> _SetLoadBalancerPoliciesOfListenerResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetLoadBalancerPoliciesOfListenerResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancing/Client.html#wait_until-instance_method
+      def wait_until: (:any_instance_in_service waiter_name, 
+                    load_balancer_name: ::String,
+                    ?instances: Array[
+                      {
+                        instance_id: ::String?
+                      },
+                    ]
+                  ) -> Client::_DescribeInstanceHealthResponseSuccess
+                    | (:any_instance_in_service waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeInstanceHealthResponseSuccess
+                    | (:instance_deregistered waiter_name, 
+                    load_balancer_name: ::String,
+                    ?instances: Array[
+                      {
+                        instance_id: ::String?
+                      },
+                    ]
+                  ) -> Client::_DescribeInstanceHealthResponseSuccess
+                    | (:instance_deregistered waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeInstanceHealthResponseSuccess
+                    | (:instance_in_service waiter_name, 
+                    load_balancer_name: ::String,
+                    ?instances: Array[
+                      {
+                        instance_id: ::String?
+                      },
+                    ]
+                  ) -> Client::_DescribeInstanceHealthResponseSuccess
+                    | (:instance_in_service waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeInstanceHealthResponseSuccess
+    end
+  end
+end
+

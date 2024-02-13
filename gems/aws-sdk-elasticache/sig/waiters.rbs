@@ -1,0 +1,65 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ElastiCache
+    module Waiters
+
+      class CacheClusterAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?cache_cluster_id: ::String,
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?show_cache_node_info: bool,
+                    ?show_cache_clusters_not_in_replication_groups: bool
+                  ) -> Client::_DescribeCacheClustersResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeCacheClustersResponseSuccess
+      end
+
+      class CacheClusterDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?cache_cluster_id: ::String,
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?show_cache_node_info: bool,
+                    ?show_cache_clusters_not_in_replication_groups: bool
+                  ) -> Client::_DescribeCacheClustersResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeCacheClustersResponseSuccess
+      end
+
+      class ReplicationGroupAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?replication_group_id: ::String,
+                    ?max_records: ::Integer,
+                    ?marker: ::String
+                  ) -> Client::_DescribeReplicationGroupsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeReplicationGroupsResponseSuccess
+      end
+
+      class ReplicationGroupDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?replication_group_id: ::String,
+                    ?max_records: ::Integer,
+                    ?marker: ::String
+                  ) -> Client::_DescribeReplicationGroupsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeReplicationGroupsResponseSuccess
+      end
+    end
+  end
+end

@@ -1,0 +1,97 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IAM
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CredentialReportExpiredException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CredentialReportNotPresentException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CredentialReportNotReadyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DeleteConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DuplicateCertificateException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DuplicateSSHPublicKeyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class EntityAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class EntityTemporarilyUnmodifiableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidAuthenticationCodeException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidCertificateException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidInputException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidPublicKeyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidUserTypeException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class KeyPairMismatchException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MalformedCertificateException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MalformedPolicyDocumentException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchEntityException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PasswordPolicyViolationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PolicyEvaluationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PolicyNotAttachableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ReportGenerationLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceFailureException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceNotSupportedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnmodifiableEntityException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnrecognizedPublicKeyEncodingException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

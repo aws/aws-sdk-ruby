@@ -14,6 +14,7 @@ module Aws::Keyspaces
       option(
         :endpoint_provider,
         doc_type: 'Aws::Keyspaces::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -69,6 +70,8 @@ module Aws::Keyspaces
             Aws::Keyspaces::Endpoints::GetKeyspace.build(context)
           when :get_table
             Aws::Keyspaces::Endpoints::GetTable.build(context)
+          when :get_table_auto_scaling_settings
+            Aws::Keyspaces::Endpoints::GetTableAutoScalingSettings.build(context)
           when :list_keyspaces
             Aws::Keyspaces::Endpoints::ListKeyspaces.build(context)
           when :list_tables

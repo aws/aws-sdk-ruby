@@ -1,0 +1,61 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module GameLift
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class ConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class FleetCapacityExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class GameSessionFullException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class IdempotentParameterMismatchException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InternalServiceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidFleetStatusException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidGameSessionStatusException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidRequestException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class OutOfCapacityException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TaggingFailedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TerminalRoutingStrategyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnauthorizedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnsupportedRegionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

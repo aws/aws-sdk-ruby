@@ -1,0 +1,446 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::EMRServerless
+  module Types
+
+    class Application
+      attr_accessor application_id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor release_label: ::String
+      attr_accessor type: ::String
+      attr_accessor state: ("CREATING" | "CREATED" | "STARTING" | "STARTED" | "STOPPING" | "STOPPED" | "TERMINATED")
+      attr_accessor state_details: ::String
+      attr_accessor initial_capacity: ::Hash[::String, Types::InitialCapacityConfig]
+      attr_accessor maximum_capacity: Types::MaximumAllowedResources
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor auto_start_configuration: Types::AutoStartConfig
+      attr_accessor auto_stop_configuration: Types::AutoStopConfig
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor architecture: ("ARM64" | "X86_64")
+      attr_accessor image_configuration: Types::ImageConfiguration
+      attr_accessor worker_type_specifications: ::Hash[::String, Types::WorkerTypeSpecification]
+      attr_accessor runtime_configuration: ::Array[Types::Configuration]
+      attr_accessor monitoring_configuration: Types::MonitoringConfiguration
+      SENSITIVE: []
+    end
+
+    class ApplicationSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor release_label: ::String
+      attr_accessor type: ::String
+      attr_accessor state: ("CREATING" | "CREATED" | "STARTING" | "STARTED" | "STOPPING" | "STOPPED" | "TERMINATED")
+      attr_accessor state_details: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor architecture: ("ARM64" | "X86_64")
+      SENSITIVE: []
+    end
+
+    class AutoStartConfig
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class AutoStopConfig
+      attr_accessor enabled: bool
+      attr_accessor idle_timeout_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class CancelJobRunRequest
+      attr_accessor application_id: ::String
+      attr_accessor job_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelJobRunResponse
+      attr_accessor application_id: ::String
+      attr_accessor job_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class CloudWatchLoggingConfiguration
+      attr_accessor enabled: bool
+      attr_accessor log_group_name: ::String
+      attr_accessor log_stream_name_prefix: ::String
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor log_types: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class Configuration
+      attr_accessor classification: ::String
+      attr_accessor properties: ::Hash[::String, ::String]
+      attr_accessor configurations: ::Array[Types::Configuration]
+      SENSITIVE: [:properties]
+    end
+
+    class ConfigurationOverrides
+      attr_accessor application_configuration: ::Array[Types::Configuration]
+      attr_accessor monitoring_configuration: Types::MonitoringConfiguration
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApplicationRequest
+      attr_accessor name: ::String
+      attr_accessor release_label: ::String
+      attr_accessor type: ::String
+      attr_accessor client_token: ::String
+      attr_accessor initial_capacity: ::Hash[::String, Types::InitialCapacityConfig]
+      attr_accessor maximum_capacity: Types::MaximumAllowedResources
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor auto_start_configuration: Types::AutoStartConfig
+      attr_accessor auto_stop_configuration: Types::AutoStopConfig
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor architecture: ("ARM64" | "X86_64")
+      attr_accessor image_configuration: Types::ImageConfigurationInput
+      attr_accessor worker_type_specifications: ::Hash[::String, Types::WorkerTypeSpecificationInput]
+      attr_accessor runtime_configuration: ::Array[Types::Configuration]
+      attr_accessor monitoring_configuration: Types::MonitoringConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateApplicationResponse
+      attr_accessor application_id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationResponse < Aws::EmptyStructure
+    end
+
+    class GetApplicationRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetApplicationResponse
+      attr_accessor application: Types::Application
+      SENSITIVE: []
+    end
+
+    class GetDashboardForJobRunRequest
+      attr_accessor application_id: ::String
+      attr_accessor job_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDashboardForJobRunResponse
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobRunRequest
+      attr_accessor application_id: ::String
+      attr_accessor job_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobRunResponse
+      attr_accessor job_run: Types::JobRun
+      SENSITIVE: []
+    end
+
+    class Hive
+      attr_accessor query: ::String
+      attr_accessor init_query_file: ::String
+      attr_accessor parameters: ::String
+      SENSITIVE: [:query, :init_query_file, :parameters]
+    end
+
+    class ImageConfiguration
+      attr_accessor image_uri: ::String
+      attr_accessor resolved_image_digest: ::String
+      SENSITIVE: []
+    end
+
+    class ImageConfigurationInput
+      attr_accessor image_uri: ::String
+      SENSITIVE: []
+    end
+
+    class InitialCapacityConfig
+      attr_accessor worker_count: ::Integer
+      attr_accessor worker_configuration: Types::WorkerResourceConfig
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JobDriver
+      attr_accessor spark_submit: Types::SparkSubmit
+      attr_accessor hive: Types::Hive
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SparkSubmit < JobDriver
+      end
+      class Hive < JobDriver
+      end
+      class Unknown < JobDriver
+      end
+    end
+
+    class JobRun
+      attr_accessor application_id: ::String
+      attr_accessor job_run_id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_by: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor execution_role: ::String
+      attr_accessor state: ("SUBMITTED" | "PENDING" | "SCHEDULED" | "RUNNING" | "SUCCESS" | "FAILED" | "CANCELLING" | "CANCELLED")
+      attr_accessor state_details: ::String
+      attr_accessor release_label: ::String
+      attr_accessor configuration_overrides: Types::ConfigurationOverrides
+      attr_accessor job_driver: Types::JobDriver
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor total_resource_utilization: Types::TotalResourceUtilization
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor total_execution_duration_seconds: ::Integer
+      attr_accessor execution_timeout_minutes: ::Integer
+      attr_accessor billed_resource_utilization: Types::ResourceUtilization
+      SENSITIVE: []
+    end
+
+    class JobRunSummary
+      attr_accessor application_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_by: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor execution_role: ::String
+      attr_accessor state: ("SUBMITTED" | "PENDING" | "SCHEDULED" | "RUNNING" | "SUCCESS" | "FAILED" | "CANCELLING" | "CANCELLED")
+      attr_accessor state_details: ::String
+      attr_accessor release_label: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor states: ::Array[("CREATING" | "CREATED" | "STARTING" | "STARTED" | "STOPPING" | "STOPPED" | "TERMINATED")]
+      SENSITIVE: []
+    end
+
+    class ListApplicationsResponse
+      attr_accessor applications: ::Array[Types::ApplicationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobRunsRequest
+      attr_accessor application_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor created_at_after: ::Time
+      attr_accessor created_at_before: ::Time
+      attr_accessor states: ::Array[("SUBMITTED" | "PENDING" | "SCHEDULED" | "RUNNING" | "SUCCESS" | "FAILED" | "CANCELLING" | "CANCELLED")]
+      SENSITIVE: []
+    end
+
+    class ListJobRunsResponse
+      attr_accessor job_runs: ::Array[Types::JobRunSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ManagedPersistenceMonitoringConfiguration
+      attr_accessor enabled: bool
+      attr_accessor encryption_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class MaximumAllowedResources
+      attr_accessor cpu: ::String
+      attr_accessor memory: ::String
+      attr_accessor disk: ::String
+      SENSITIVE: []
+    end
+
+    class MonitoringConfiguration
+      attr_accessor s3_monitoring_configuration: Types::S3MonitoringConfiguration
+      attr_accessor managed_persistence_monitoring_configuration: Types::ManagedPersistenceMonitoringConfiguration
+      attr_accessor cloud_watch_logging_configuration: Types::CloudWatchLoggingConfiguration
+      SENSITIVE: []
+    end
+
+    class NetworkConfiguration
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceUtilization
+      attr_accessor v_cpu_hour: ::Float
+      attr_accessor memory_gb_hour: ::Float
+      attr_accessor storage_gb_hour: ::Float
+      SENSITIVE: []
+    end
+
+    class S3MonitoringConfiguration
+      attr_accessor log_uri: ::String
+      attr_accessor encryption_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SparkSubmit
+      attr_accessor entry_point: ::String
+      attr_accessor entry_point_arguments: ::Array[::String]
+      attr_accessor spark_submit_parameters: ::String
+      SENSITIVE: [:entry_point, :spark_submit_parameters]
+    end
+
+    class StartApplicationRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartApplicationResponse < Aws::EmptyStructure
+    end
+
+    class StartJobRunRequest
+      attr_accessor application_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor job_driver: Types::JobDriver
+      attr_accessor configuration_overrides: Types::ConfigurationOverrides
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor execution_timeout_minutes: ::Integer
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class StartJobRunResponse
+      attr_accessor application_id: ::String
+      attr_accessor job_run_id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopApplicationRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopApplicationResponse < Aws::EmptyStructure
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TotalResourceUtilization
+      attr_accessor v_cpu_hour: ::Float
+      attr_accessor memory_gb_hour: ::Float
+      attr_accessor storage_gb_hour: ::Float
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateApplicationRequest
+      attr_accessor application_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor initial_capacity: ::Hash[::String, Types::InitialCapacityConfig]
+      attr_accessor maximum_capacity: Types::MaximumAllowedResources
+      attr_accessor auto_start_configuration: Types::AutoStartConfig
+      attr_accessor auto_stop_configuration: Types::AutoStopConfig
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor architecture: ("ARM64" | "X86_64")
+      attr_accessor image_configuration: Types::ImageConfigurationInput
+      attr_accessor worker_type_specifications: ::Hash[::String, Types::WorkerTypeSpecificationInput]
+      attr_accessor release_label: ::String
+      attr_accessor runtime_configuration: ::Array[Types::Configuration]
+      attr_accessor monitoring_configuration: Types::MonitoringConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationResponse
+      attr_accessor application: Types::Application
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WorkerResourceConfig
+      attr_accessor cpu: ::String
+      attr_accessor memory: ::String
+      attr_accessor disk: ::String
+      SENSITIVE: []
+    end
+
+    class WorkerTypeSpecification
+      attr_accessor image_configuration: Types::ImageConfiguration
+      SENSITIVE: []
+    end
+
+    class WorkerTypeSpecificationInput
+      attr_accessor image_configuration: Types::ImageConfigurationInput
+      SENSITIVE: []
+    end
+  end
+end

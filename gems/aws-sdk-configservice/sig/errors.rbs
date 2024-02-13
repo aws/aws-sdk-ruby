@@ -1,0 +1,126 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ConfigService
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class ConformancePackTemplateValidationException < ::Aws::Errors::ServiceError
+      end
+      class IdempotentParameterMismatch < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InsufficientDeliveryPolicyException < ::Aws::Errors::ServiceError
+      end
+      class InsufficientPermissionsException < ::Aws::Errors::ServiceError
+      end
+      class InvalidConfigurationRecorderNameException < ::Aws::Errors::ServiceError
+      end
+      class InvalidDeliveryChannelNameException < ::Aws::Errors::ServiceError
+      end
+      class InvalidExpressionException < ::Aws::Errors::ServiceError
+      end
+      class InvalidLimitException < ::Aws::Errors::ServiceError
+      end
+      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+      end
+      class InvalidParameterValueException < ::Aws::Errors::ServiceError
+      end
+      class InvalidRecordingGroupException < ::Aws::Errors::ServiceError
+      end
+      class InvalidResultTokenException < ::Aws::Errors::ServiceError
+      end
+      class InvalidRoleException < ::Aws::Errors::ServiceError
+      end
+      class InvalidS3KeyPrefixException < ::Aws::Errors::ServiceError
+      end
+      class InvalidS3KmsKeyArnException < ::Aws::Errors::ServiceError
+      end
+      class InvalidSNSTopicARNException < ::Aws::Errors::ServiceError
+      end
+      class InvalidTimeRangeException < ::Aws::Errors::ServiceError
+      end
+      class LastDeliveryChannelDeleteFailedException < ::Aws::Errors::ServiceError
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class MaxActiveResourcesExceededException < ::Aws::Errors::ServiceError
+      end
+      class MaxNumberOfConfigRulesExceededException < ::Aws::Errors::ServiceError
+      end
+      class MaxNumberOfConfigurationRecordersExceededException < ::Aws::Errors::ServiceError
+      end
+      class MaxNumberOfConformancePacksExceededException < ::Aws::Errors::ServiceError
+      end
+      class MaxNumberOfDeliveryChannelsExceededException < ::Aws::Errors::ServiceError
+      end
+      class MaxNumberOfOrganizationConfigRulesExceededException < ::Aws::Errors::ServiceError
+      end
+      class MaxNumberOfOrganizationConformancePacksExceededException < ::Aws::Errors::ServiceError
+      end
+      class MaxNumberOfRetentionConfigurationsExceededException < ::Aws::Errors::ServiceError
+      end
+      class NoAvailableConfigurationRecorderException < ::Aws::Errors::ServiceError
+      end
+      class NoAvailableDeliveryChannelException < ::Aws::Errors::ServiceError
+      end
+      class NoAvailableOrganizationException < ::Aws::Errors::ServiceError
+      end
+      class NoRunningConfigurationRecorderException < ::Aws::Errors::ServiceError
+      end
+      class NoSuchBucketException < ::Aws::Errors::ServiceError
+      end
+      class NoSuchConfigRuleException < ::Aws::Errors::ServiceError
+      end
+      class NoSuchConfigRuleInConformancePackException < ::Aws::Errors::ServiceError
+      end
+      class NoSuchConfigurationAggregatorException < ::Aws::Errors::ServiceError
+      end
+      class NoSuchConfigurationRecorderException < ::Aws::Errors::ServiceError
+      end
+      class NoSuchConformancePackException < ::Aws::Errors::ServiceError
+      end
+      class NoSuchDeliveryChannelException < ::Aws::Errors::ServiceError
+      end
+      class NoSuchOrganizationConfigRuleException < ::Aws::Errors::ServiceError
+      end
+      class NoSuchOrganizationConformancePackException < ::Aws::Errors::ServiceError
+      end
+      class NoSuchRemediationConfigurationException < ::Aws::Errors::ServiceError
+      end
+      class NoSuchRemediationExceptionException < ::Aws::Errors::ServiceError
+      end
+      class NoSuchRetentionConfigurationException < ::Aws::Errors::ServiceError
+      end
+      class OrganizationAccessDeniedException < ::Aws::Errors::ServiceError
+      end
+      class OrganizationAllFeaturesNotEnabledException < ::Aws::Errors::ServiceError
+      end
+      class OrganizationConformancePackTemplateValidationException < ::Aws::Errors::ServiceError
+      end
+      class OversizedConfigurationItemException < ::Aws::Errors::ServiceError
+      end
+      class RemediationInProgressException < ::Aws::Errors::ServiceError
+      end
+      class ResourceConcurrentModificationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceInUseException < ::Aws::Errors::ServiceError
+      end
+      class ResourceNotDiscoveredException < ::Aws::Errors::ServiceError
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class TooManyTagsException < ::Aws::Errors::ServiceError
+      end
+      class ValidationException < ::Aws::Errors::ServiceError
+      end
+    end
+  end
+end

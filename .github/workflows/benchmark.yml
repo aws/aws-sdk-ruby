@@ -35,7 +35,8 @@ jobs:
 
       - name: Install gems
         run: |
-          bundle install --without docs repl development
+          bundle config set --local without 'docs repl development'
+          bundle install
 
       - name: SDK Build
         run: bundle exec rake build

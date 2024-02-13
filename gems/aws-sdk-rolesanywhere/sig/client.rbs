@@ -1,0 +1,442 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RolesAnywhere
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ProfileDetailResponse]
+        def profile: () -> Types::ProfileDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#create_profile-instance_method
+      def create_profile: (
+                            ?duration_seconds: ::Integer,
+                            ?enabled: bool,
+                            ?managed_policy_arns: Array[::String],
+                            name: ::String,
+                            ?require_instance_properties: bool,
+                            role_arns: Array[::String],
+                            ?session_policy: ::String,
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ]
+                          ) -> _CreateProfileResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProfileResponseSuccess
+
+      interface _CreateTrustAnchorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TrustAnchorDetailResponse]
+        def trust_anchor: () -> Types::TrustAnchorDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#create_trust_anchor-instance_method
+      def create_trust_anchor: (
+                                 ?enabled: bool,
+                                 name: ::String,
+                                 ?notification_settings: Array[
+                                   {
+                                     channel: ("ALL")?,
+                                     enabled: bool,
+                                     event: ("CA_CERTIFICATE_EXPIRY" | "END_ENTITY_CERTIFICATE_EXPIRY"),
+                                     threshold: ::Integer?
+                                   },
+                                 ],
+                                 source: {
+                                   source_data: {
+                                     acm_pca_arn: ::String?,
+                                     x509_certificate_data: ::String?
+                                   }?,
+                                   source_type: ("AWS_ACM_PCA" | "CERTIFICATE_BUNDLE" | "SELF_SIGNED_REPOSITORY")?
+                                 },
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String
+                                   },
+                                 ]
+                               ) -> _CreateTrustAnchorResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrustAnchorResponseSuccess
+
+      interface _DeleteCrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CrlDetailResponse]
+        def crl: () -> Types::CrlDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#delete_crl-instance_method
+      def delete_crl: (
+                        crl_id: ::String
+                      ) -> _DeleteCrlResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCrlResponseSuccess
+
+      interface _DeleteProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ProfileDetailResponse]
+        def profile: () -> Types::ProfileDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#delete_profile-instance_method
+      def delete_profile: (
+                            profile_id: ::String
+                          ) -> _DeleteProfileResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProfileResponseSuccess
+
+      interface _DeleteTrustAnchorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TrustAnchorDetailResponse]
+        def trust_anchor: () -> Types::TrustAnchorDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#delete_trust_anchor-instance_method
+      def delete_trust_anchor: (
+                                 trust_anchor_id: ::String
+                               ) -> _DeleteTrustAnchorResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTrustAnchorResponseSuccess
+
+      interface _DisableCrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CrlDetailResponse]
+        def crl: () -> Types::CrlDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#disable_crl-instance_method
+      def disable_crl: (
+                         crl_id: ::String
+                       ) -> _DisableCrlResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableCrlResponseSuccess
+
+      interface _DisableProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ProfileDetailResponse]
+        def profile: () -> Types::ProfileDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#disable_profile-instance_method
+      def disable_profile: (
+                             profile_id: ::String
+                           ) -> _DisableProfileResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableProfileResponseSuccess
+
+      interface _DisableTrustAnchorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TrustAnchorDetailResponse]
+        def trust_anchor: () -> Types::TrustAnchorDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#disable_trust_anchor-instance_method
+      def disable_trust_anchor: (
+                                  trust_anchor_id: ::String
+                                ) -> _DisableTrustAnchorResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableTrustAnchorResponseSuccess
+
+      interface _EnableCrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CrlDetailResponse]
+        def crl: () -> Types::CrlDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#enable_crl-instance_method
+      def enable_crl: (
+                        crl_id: ::String
+                      ) -> _EnableCrlResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableCrlResponseSuccess
+
+      interface _EnableProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ProfileDetailResponse]
+        def profile: () -> Types::ProfileDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#enable_profile-instance_method
+      def enable_profile: (
+                            profile_id: ::String
+                          ) -> _EnableProfileResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableProfileResponseSuccess
+
+      interface _EnableTrustAnchorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TrustAnchorDetailResponse]
+        def trust_anchor: () -> Types::TrustAnchorDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#enable_trust_anchor-instance_method
+      def enable_trust_anchor: (
+                                 trust_anchor_id: ::String
+                               ) -> _EnableTrustAnchorResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableTrustAnchorResponseSuccess
+
+      interface _GetCrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CrlDetailResponse]
+        def crl: () -> Types::CrlDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#get_crl-instance_method
+      def get_crl: (
+                     crl_id: ::String
+                   ) -> _GetCrlResponseSuccess
+                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCrlResponseSuccess
+
+      interface _GetProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ProfileDetailResponse]
+        def profile: () -> Types::ProfileDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#get_profile-instance_method
+      def get_profile: (
+                         profile_id: ::String
+                       ) -> _GetProfileResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProfileResponseSuccess
+
+      interface _GetSubjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SubjectDetailResponse]
+        def subject: () -> Types::SubjectDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#get_subject-instance_method
+      def get_subject: (
+                         subject_id: ::String
+                       ) -> _GetSubjectResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSubjectResponseSuccess
+
+      interface _GetTrustAnchorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TrustAnchorDetailResponse]
+        def trust_anchor: () -> Types::TrustAnchorDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#get_trust_anchor-instance_method
+      def get_trust_anchor: (
+                              trust_anchor_id: ::String
+                            ) -> _GetTrustAnchorResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTrustAnchorResponseSuccess
+
+      interface _ImportCrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CrlDetailResponse]
+        def crl: () -> Types::CrlDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#import_crl-instance_method
+      def import_crl: (
+                        crl_data: ::String,
+                        ?enabled: bool,
+                        name: ::String,
+                        ?tags: Array[
+                          {
+                            key: ::String,
+                            value: ::String
+                          },
+                        ],
+                        trust_anchor_arn: ::String
+                      ) -> _ImportCrlResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportCrlResponseSuccess
+
+      interface _ListCrlsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCrlsResponse]
+        def crls: () -> ::Array[Types::CrlDetail]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#list_crls-instance_method
+      def list_crls: (
+                       ?next_token: ::String,
+                       ?page_size: ::Integer
+                     ) -> _ListCrlsResponseSuccess
+                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCrlsResponseSuccess
+
+      interface _ListProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProfilesResponse]
+        def next_token: () -> ::String
+        def profiles: () -> ::Array[Types::ProfileDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#list_profiles-instance_method
+      def list_profiles: (
+                           ?next_token: ::String,
+                           ?page_size: ::Integer
+                         ) -> _ListProfilesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProfilesResponseSuccess
+
+      interface _ListSubjectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSubjectsResponse]
+        def next_token: () -> ::String
+        def subjects: () -> ::Array[Types::SubjectSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#list_subjects-instance_method
+      def list_subjects: (
+                           ?next_token: ::String,
+                           ?page_size: ::Integer
+                         ) -> _ListSubjectsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSubjectsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTrustAnchorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTrustAnchorsResponse]
+        def next_token: () -> ::String
+        def trust_anchors: () -> ::Array[Types::TrustAnchorDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#list_trust_anchors-instance_method
+      def list_trust_anchors: (
+                                ?next_token: ::String,
+                                ?page_size: ::Integer
+                              ) -> _ListTrustAnchorsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrustAnchorsResponseSuccess
+
+      interface _PutNotificationSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutNotificationSettingsResponse]
+        def trust_anchor: () -> Types::TrustAnchorDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#put_notification_settings-instance_method
+      def put_notification_settings: (
+                                       notification_settings: Array[
+                                         {
+                                           channel: ("ALL")?,
+                                           enabled: bool,
+                                           event: ("CA_CERTIFICATE_EXPIRY" | "END_ENTITY_CERTIFICATE_EXPIRY"),
+                                           threshold: ::Integer?
+                                         },
+                                       ],
+                                       trust_anchor_id: ::String
+                                     ) -> _PutNotificationSettingsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutNotificationSettingsResponseSuccess
+
+      interface _ResetNotificationSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResetNotificationSettingsResponse]
+        def trust_anchor: () -> Types::TrustAnchorDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#reset_notification_settings-instance_method
+      def reset_notification_settings: (
+                                         notification_setting_keys: Array[
+                                           {
+                                             channel: ("ALL")?,
+                                             event: ("CA_CERTIFICATE_EXPIRY" | "END_ENTITY_CERTIFICATE_EXPIRY")
+                                           },
+                                         ],
+                                         trust_anchor_id: ::String
+                                       ) -> _ResetNotificationSettingsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetNotificationSettingsResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateCrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CrlDetailResponse]
+        def crl: () -> Types::CrlDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#update_crl-instance_method
+      def update_crl: (
+                        ?crl_data: ::String,
+                        crl_id: ::String,
+                        ?name: ::String
+                      ) -> _UpdateCrlResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCrlResponseSuccess
+
+      interface _UpdateProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ProfileDetailResponse]
+        def profile: () -> Types::ProfileDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#update_profile-instance_method
+      def update_profile: (
+                            ?duration_seconds: ::Integer,
+                            ?managed_policy_arns: Array[::String],
+                            ?name: ::String,
+                            profile_id: ::String,
+                            ?role_arns: Array[::String],
+                            ?session_policy: ::String
+                          ) -> _UpdateProfileResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProfileResponseSuccess
+
+      interface _UpdateTrustAnchorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TrustAnchorDetailResponse]
+        def trust_anchor: () -> Types::TrustAnchorDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#update_trust_anchor-instance_method
+      def update_trust_anchor: (
+                                 ?name: ::String,
+                                 ?source: {
+                                   source_data: {
+                                     acm_pca_arn: ::String?,
+                                     x509_certificate_data: ::String?
+                                   }?,
+                                   source_type: ("AWS_ACM_PCA" | "CERTIFICATE_BUNDLE" | "SELF_SIGNED_REPOSITORY")?
+                                 },
+                                 trust_anchor_id: ::String
+                               ) -> _UpdateTrustAnchorResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTrustAnchorResponseSuccess
+    end
+  end
+end
+

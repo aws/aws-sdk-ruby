@@ -1,0 +1,667 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ConnectWisdomService
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateAssistantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAssistantResponse]
+        def assistant: () -> Types::AssistantData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#create_assistant-instance_method
+      def create_assistant: (
+                              ?client_token: ::String,
+                              ?description: ::String,
+                              name: ::String,
+                              ?server_side_encryption_configuration: {
+                                kms_key_id: ::String?
+                              },
+                              ?tags: Hash[::String, ::String],
+                              type: ("AGENT")
+                            ) -> _CreateAssistantResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssistantResponseSuccess
+
+      interface _CreateAssistantAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAssistantAssociationResponse]
+        def assistant_association: () -> Types::AssistantAssociationData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#create_assistant_association-instance_method
+      def create_assistant_association: (
+                                          assistant_id: ::String,
+                                          association: {
+                                            knowledge_base_id: ::String?
+                                          },
+                                          association_type: ("KNOWLEDGE_BASE"),
+                                          ?client_token: ::String,
+                                          ?tags: Hash[::String, ::String]
+                                        ) -> _CreateAssistantAssociationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssistantAssociationResponseSuccess
+
+      interface _CreateContentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateContentResponse]
+        def content: () -> Types::ContentData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#create_content-instance_method
+      def create_content: (
+                            ?client_token: ::String,
+                            knowledge_base_id: ::String,
+                            ?metadata: Hash[::String, ::String],
+                            name: ::String,
+                            ?override_link_out_uri: ::String,
+                            ?tags: Hash[::String, ::String],
+                            ?title: ::String,
+                            upload_id: ::String
+                          ) -> _CreateContentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContentResponseSuccess
+
+      interface _CreateKnowledgeBaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateKnowledgeBaseResponse]
+        def knowledge_base: () -> Types::KnowledgeBaseData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#create_knowledge_base-instance_method
+      def create_knowledge_base: (
+                                   ?client_token: ::String,
+                                   ?description: ::String,
+                                   knowledge_base_type: ("EXTERNAL" | "CUSTOM" | "QUICK_RESPONSES"),
+                                   name: ::String,
+                                   ?rendering_configuration: {
+                                     template_uri: ::String?
+                                   },
+                                   ?server_side_encryption_configuration: {
+                                     kms_key_id: ::String?
+                                   },
+                                   ?source_configuration: {
+                                     app_integrations: {
+                                       app_integration_arn: ::String,
+                                       object_fields: Array[::String]?
+                                     }?
+                                   },
+                                   ?tags: Hash[::String, ::String]
+                                 ) -> _CreateKnowledgeBaseResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKnowledgeBaseResponseSuccess
+
+      interface _CreateQuickResponseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateQuickResponseResponse]
+        def quick_response: () -> Types::QuickResponseData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#create_quick_response-instance_method
+      def create_quick_response: (
+                                   ?channels: Array[::String],
+                                   ?client_token: ::String,
+                                   content: {
+                                     content: ::String?
+                                   },
+                                   ?content_type: ::String,
+                                   ?description: ::String,
+                                   ?grouping_configuration: {
+                                     criteria: ::String?,
+                                     values: Array[::String]?
+                                   },
+                                   ?is_active: bool,
+                                   knowledge_base_id: ::String,
+                                   ?language: ::String,
+                                   name: ::String,
+                                   ?shortcut_key: ::String,
+                                   ?tags: Hash[::String, ::String]
+                                 ) -> _CreateQuickResponseResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQuickResponseResponseSuccess
+
+      interface _CreateSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSessionResponse]
+        def session: () -> Types::SessionData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#create_session-instance_method
+      def create_session: (
+                            assistant_id: ::String,
+                            ?client_token: ::String,
+                            ?description: ::String,
+                            name: ::String,
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateSessionResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSessionResponseSuccess
+
+      interface _DeleteAssistantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAssistantResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#delete_assistant-instance_method
+      def delete_assistant: (
+                              assistant_id: ::String
+                            ) -> _DeleteAssistantResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAssistantResponseSuccess
+
+      interface _DeleteAssistantAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAssistantAssociationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#delete_assistant_association-instance_method
+      def delete_assistant_association: (
+                                          assistant_association_id: ::String,
+                                          assistant_id: ::String
+                                        ) -> _DeleteAssistantAssociationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAssistantAssociationResponseSuccess
+
+      interface _DeleteContentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteContentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#delete_content-instance_method
+      def delete_content: (
+                            content_id: ::String,
+                            knowledge_base_id: ::String
+                          ) -> _DeleteContentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContentResponseSuccess
+
+      interface _DeleteImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteImportJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#delete_import_job-instance_method
+      def delete_import_job: (
+                               import_job_id: ::String,
+                               knowledge_base_id: ::String
+                             ) -> _DeleteImportJobResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteImportJobResponseSuccess
+
+      interface _DeleteKnowledgeBaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteKnowledgeBaseResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#delete_knowledge_base-instance_method
+      def delete_knowledge_base: (
+                                   knowledge_base_id: ::String
+                                 ) -> _DeleteKnowledgeBaseResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKnowledgeBaseResponseSuccess
+
+      interface _DeleteQuickResponseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteQuickResponseResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#delete_quick_response-instance_method
+      def delete_quick_response: (
+                                   knowledge_base_id: ::String,
+                                   quick_response_id: ::String
+                                 ) -> _DeleteQuickResponseResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteQuickResponseResponseSuccess
+
+      interface _GetAssistantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAssistantResponse]
+        def assistant: () -> Types::AssistantData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#get_assistant-instance_method
+      def get_assistant: (
+                           assistant_id: ::String
+                         ) -> _GetAssistantResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssistantResponseSuccess
+
+      interface _GetAssistantAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAssistantAssociationResponse]
+        def assistant_association: () -> Types::AssistantAssociationData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#get_assistant_association-instance_method
+      def get_assistant_association: (
+                                       assistant_association_id: ::String,
+                                       assistant_id: ::String
+                                     ) -> _GetAssistantAssociationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssistantAssociationResponseSuccess
+
+      interface _GetContentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContentResponse]
+        def content: () -> Types::ContentData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#get_content-instance_method
+      def get_content: (
+                         content_id: ::String,
+                         knowledge_base_id: ::String
+                       ) -> _GetContentResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContentResponseSuccess
+
+      interface _GetContentSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContentSummaryResponse]
+        def content_summary: () -> Types::ContentSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#get_content_summary-instance_method
+      def get_content_summary: (
+                                 content_id: ::String,
+                                 knowledge_base_id: ::String
+                               ) -> _GetContentSummaryResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContentSummaryResponseSuccess
+
+      interface _GetImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetImportJobResponse]
+        def import_job: () -> Types::ImportJobData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#get_import_job-instance_method
+      def get_import_job: (
+                            import_job_id: ::String,
+                            knowledge_base_id: ::String
+                          ) -> _GetImportJobResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetImportJobResponseSuccess
+
+      interface _GetKnowledgeBaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetKnowledgeBaseResponse]
+        def knowledge_base: () -> Types::KnowledgeBaseData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#get_knowledge_base-instance_method
+      def get_knowledge_base: (
+                                knowledge_base_id: ::String
+                              ) -> _GetKnowledgeBaseResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetKnowledgeBaseResponseSuccess
+
+      interface _GetQuickResponseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQuickResponseResponse]
+        def quick_response: () -> Types::QuickResponseData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#get_quick_response-instance_method
+      def get_quick_response: (
+                                knowledge_base_id: ::String,
+                                quick_response_id: ::String
+                              ) -> _GetQuickResponseResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQuickResponseResponseSuccess
+
+      interface _GetRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRecommendationsResponse]
+        def recommendations: () -> ::Array[Types::RecommendationData]
+        def triggers: () -> ::Array[Types::RecommendationTrigger]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#get_recommendations-instance_method
+      def get_recommendations: (
+                                 assistant_id: ::String,
+                                 ?max_results: ::Integer,
+                                 session_id: ::String,
+                                 ?wait_time_seconds: ::Integer
+                               ) -> _GetRecommendationsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecommendationsResponseSuccess
+
+      interface _GetSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSessionResponse]
+        def session: () -> Types::SessionData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#get_session-instance_method
+      def get_session: (
+                         assistant_id: ::String,
+                         session_id: ::String
+                       ) -> _GetSessionResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSessionResponseSuccess
+
+      interface _ListAssistantAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssistantAssociationsResponse]
+        def assistant_association_summaries: () -> ::Array[Types::AssistantAssociationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#list_assistant_associations-instance_method
+      def list_assistant_associations: (
+                                         assistant_id: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListAssistantAssociationsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssistantAssociationsResponseSuccess
+
+      interface _ListAssistantsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssistantsResponse]
+        def assistant_summaries: () -> ::Array[Types::AssistantSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#list_assistants-instance_method
+      def list_assistants: (
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListAssistantsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssistantsResponseSuccess
+
+      interface _ListContentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContentsResponse]
+        def content_summaries: () -> ::Array[Types::ContentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#list_contents-instance_method
+      def list_contents: (
+                           knowledge_base_id: ::String,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListContentsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContentsResponseSuccess
+
+      interface _ListImportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListImportJobsResponse]
+        def import_job_summaries: () -> ::Array[Types::ImportJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#list_import_jobs-instance_method
+      def list_import_jobs: (
+                              knowledge_base_id: ::String,
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListImportJobsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImportJobsResponseSuccess
+
+      interface _ListKnowledgeBasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListKnowledgeBasesResponse]
+        def knowledge_base_summaries: () -> ::Array[Types::KnowledgeBaseSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#list_knowledge_bases-instance_method
+      def list_knowledge_bases: (
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListKnowledgeBasesResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKnowledgeBasesResponseSuccess
+
+      interface _ListQuickResponsesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListQuickResponsesResponse]
+        def next_token: () -> ::String
+        def quick_response_summaries: () -> ::Array[Types::QuickResponseSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#list_quick_responses-instance_method
+      def list_quick_responses: (
+                                  knowledge_base_id: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListQuickResponsesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQuickResponsesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _NotifyRecommendationsReceivedResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::NotifyRecommendationsReceivedResponse]
+        def errors: () -> ::Array[Types::NotifyRecommendationsReceivedError]
+        def recommendation_ids: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#notify_recommendations_received-instance_method
+      def notify_recommendations_received: (
+                                             assistant_id: ::String,
+                                             recommendation_ids: Array[::String],
+                                             session_id: ::String
+                                           ) -> _NotifyRecommendationsReceivedResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _NotifyRecommendationsReceivedResponseSuccess
+
+      interface _QueryAssistantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::QueryAssistantResponse]
+        def next_token: () -> ::String
+        def results: () -> ::Array[Types::ResultData]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#query_assistant-instance_method
+      def query_assistant: (
+                             assistant_id: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             query_text: ::String
+                           ) -> _QueryAssistantResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _QueryAssistantResponseSuccess
+
+      interface _RemoveKnowledgeBaseTemplateUriResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveKnowledgeBaseTemplateUriResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#remove_knowledge_base_template_uri-instance_method
+      def remove_knowledge_base_template_uri: (
+                                                knowledge_base_id: ::String
+                                              ) -> _RemoveKnowledgeBaseTemplateUriResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveKnowledgeBaseTemplateUriResponseSuccess
+
+      interface _SearchContentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchContentResponse]
+        def content_summaries: () -> ::Array[Types::ContentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#search_content-instance_method
+      def search_content: (
+                            knowledge_base_id: ::String,
+                            ?max_results: ::Integer,
+                            ?next_token: ::String,
+                            search_expression: {
+                              filters: Array[
+                                {
+                                  field: ("NAME"),
+                                  operator: ("EQUALS"),
+                                  value: ::String
+                                },
+                              ]
+                            }
+                          ) -> _SearchContentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchContentResponseSuccess
+
+      interface _SearchQuickResponsesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchQuickResponsesResponse]
+        def next_token: () -> ::String
+        def results: () -> ::Array[Types::QuickResponseSearchResultData]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#search_quick_responses-instance_method
+      def search_quick_responses: (
+                                    ?attributes: Hash[::String, ::String],
+                                    knowledge_base_id: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String,
+                                    search_expression: {
+                                      filters: Array[
+                                        {
+                                          include_no_existence: bool?,
+                                          name: ::String,
+                                          operator: ("EQUALS" | "PREFIX"),
+                                          values: Array[::String]?
+                                        },
+                                      ]?,
+                                      order_on_field: {
+                                        name: ::String,
+                                        order: ("ASC" | "DESC")?
+                                      }?,
+                                      queries: Array[
+                                        {
+                                          allow_fuzziness: bool?,
+                                          name: ::String,
+                                          operator: ("CONTAINS" | "CONTAINS_AND_PREFIX"),
+                                          priority: ("HIGH" | "MEDIUM" | "LOW")?,
+                                          values: Array[::String]
+                                        },
+                                      ]?
+                                    }
+                                  ) -> _SearchQuickResponsesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchQuickResponsesResponseSuccess
+
+      interface _SearchSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchSessionsResponse]
+        def next_token: () -> ::String
+        def session_summaries: () -> ::Array[Types::SessionSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#search_sessions-instance_method
+      def search_sessions: (
+                             assistant_id: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             search_expression: {
+                               filters: Array[
+                                 {
+                                   field: ("NAME"),
+                                   operator: ("EQUALS"),
+                                   value: ::String
+                                 },
+                               ]
+                             }
+                           ) -> _SearchSessionsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchSessionsResponseSuccess
+
+      interface _StartContentUploadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartContentUploadResponse]
+        def headers_to_include: () -> ::Hash[::String, ::String]
+        def upload_id: () -> ::String
+        def url: () -> ::String
+        def url_expiry: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#start_content_upload-instance_method
+      def start_content_upload: (
+                                  content_type: ::String,
+                                  knowledge_base_id: ::String,
+                                  ?presigned_url_time_to_live: ::Integer
+                                ) -> _StartContentUploadResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartContentUploadResponseSuccess
+
+      interface _StartImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartImportJobResponse]
+        def import_job: () -> Types::ImportJobData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#start_import_job-instance_method
+      def start_import_job: (
+                              ?client_token: ::String,
+                              ?external_source_configuration: {
+                                configuration: {
+                                  connect_configuration: {
+                                    instance_id: ::String?
+                                  }?
+                                },
+                                source: ("AMAZON_CONNECT")
+                              },
+                              import_job_type: ("QUICK_RESPONSES"),
+                              knowledge_base_id: ::String,
+                              ?metadata: Hash[::String, ::String],
+                              upload_id: ::String
+                            ) -> _StartImportJobResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartImportJobResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateContentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateContentResponse]
+        def content: () -> Types::ContentData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#update_content-instance_method
+      def update_content: (
+                            content_id: ::String,
+                            knowledge_base_id: ::String,
+                            ?metadata: Hash[::String, ::String],
+                            ?override_link_out_uri: ::String,
+                            ?remove_override_link_out_uri: bool,
+                            ?revision_id: ::String,
+                            ?title: ::String,
+                            ?upload_id: ::String
+                          ) -> _UpdateContentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContentResponseSuccess
+
+      interface _UpdateKnowledgeBaseTemplateUriResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateKnowledgeBaseTemplateUriResponse]
+        def knowledge_base: () -> Types::KnowledgeBaseData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#update_knowledge_base_template_uri-instance_method
+      def update_knowledge_base_template_uri: (
+                                                knowledge_base_id: ::String,
+                                                template_uri: ::String
+                                              ) -> _UpdateKnowledgeBaseTemplateUriResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKnowledgeBaseTemplateUriResponseSuccess
+
+      interface _UpdateQuickResponseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateQuickResponseResponse]
+        def quick_response: () -> Types::QuickResponseData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectWisdomService/Client.html#update_quick_response-instance_method
+      def update_quick_response: (
+                                   ?channels: Array[::String],
+                                   ?content: {
+                                     content: ::String?
+                                   },
+                                   ?content_type: ::String,
+                                   ?description: ::String,
+                                   ?grouping_configuration: {
+                                     criteria: ::String?,
+                                     values: Array[::String]?
+                                   },
+                                   ?is_active: bool,
+                                   knowledge_base_id: ::String,
+                                   ?language: ::String,
+                                   ?name: ::String,
+                                   quick_response_id: ::String,
+                                   ?remove_description: bool,
+                                   ?remove_grouping_configuration: bool,
+                                   ?remove_shortcut_key: bool,
+                                   ?shortcut_key: ::String
+                                 ) -> _UpdateQuickResponseResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateQuickResponseResponseSuccess
+    end
+  end
+end
+

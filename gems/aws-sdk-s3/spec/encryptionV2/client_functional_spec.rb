@@ -561,7 +561,7 @@ module Aws
             end.to raise_exception(ArgumentError)
           end
 
-          it 'raises an IncorrectKeyException when given the wrong key' do
+          it 'raises an IncorrectKeyException when given the wrong key', rbs_test: :skip do
             client = Aws::S3::EncryptionV2::Client.new(options)
             data = stub_put(s3_client)
 

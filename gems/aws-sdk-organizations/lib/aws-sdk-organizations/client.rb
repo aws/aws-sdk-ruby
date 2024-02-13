@@ -770,12 +770,12 @@ module Aws::Organizations
     #   information on using CloudTrail with Organizations, see [Logging and
     #   monitoring in Organizations][2] in the *Organizations User Guide*.
     #
-    # <note markdown="1"> * You can close only 10% of member accounts, between 10 and 200,
+    # <note markdown="1"> * You can close only 10% of member accounts, between 10 and 1000,
     #   within a rolling 30 day period. This quota is not bound by a
     #   calendar month, but starts when you close an account. After you
     #   reach this limit, you can close additional accounts. For more
     #   information, see [Closing a member account in your organization][3]
-    #   in the *Organizations User Guide*.
+    #   and [Quotas for Organizations][4]in the *Organizations User Guide*.
     #
     # * To reinstate a closed account, contact Amazon Web Services Support
     #   within the 90-day grace period while the account is in SUSPENDED
@@ -785,7 +785,7 @@ module Aws::Organizations
     #   an Amazon Web Services GovCloud (US) account, the `CloseAccount`
     #   request will close both accounts. To learn important pre-closure
     #   details, see [ Closing an Amazon Web Services GovCloud (US)
-    #   account][4] in the <i> Amazon Web Services GovCloud User Guide</i>.
+    #   account][5] in the <i> Amazon Web Services GovCloud User Guide</i>.
     #
     #  </note>
     #
@@ -794,7 +794,8 @@ module Aws::Organizations
     # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
     # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration
     # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html
-    # [4]: https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/Closing-govcloud-account.html
+    # [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html
+    # [5]: https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/Closing-govcloud-account.html
     #
     # @option params [required, String] :account_id
     #   Retrieves the Amazon Web Services account Id for the current
@@ -1606,6 +1607,14 @@ module Aws::Organizations
     #   The policy text content to add to the new policy. The text that you
     #   supply must adhere to the rules of the policy type you specify in the
     #   `Type` parameter.
+    #
+    #   The maximum size of a policy document depends on the policy's type.
+    #   For more information, see [Maximum and minimum values][1] in the
+    #   *Organizations User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html#min-max-values
     #
     # @option params [required, String] :description
     #   An optional description to assign to the policy.
@@ -5635,9 +5644,14 @@ module Aws::Organizations
     #   policy's type. For more information, see [SCP syntax][1] in the
     #   *Organizations User Guide*.
     #
+    #   The maximum size of a policy document depends on the policy's type.
+    #   For more information, see [Maximum and minimum values][2] in the
+    #   *Organizations User Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_syntax.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html#min-max-values
     #
     # @return [Types::UpdatePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5736,7 +5750,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

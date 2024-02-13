@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2024-02-09)
+------------------
+
+* Feature - Creating a job will result in DeviceOfflineException when using an offline device, and DeviceRetiredException when using a retired device.
+
+1.33.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.32.0 (2023-12-04)
 ------------------
 

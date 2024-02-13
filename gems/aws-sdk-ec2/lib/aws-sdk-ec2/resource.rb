@@ -481,14 +481,13 @@ module Aws::EC2
     #   You cannot specify this option and the network interfaces option in
     #   the same request.
     # @option options [Array<Types::ElasticGpuSpecification>] :elastic_gpu_specification
-    #   An elastic GPU to associate with the instance. An Elastic GPU is a GPU
-    #   resource that you can attach to your Windows instance to accelerate
-    #   the graphics performance of your applications. For more information,
-    #   see [Amazon EC2 Elastic GPUs][1] in the *Amazon EC2 User Guide*.
+    #   Deprecated.
     #
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    #   workloads that require graphics acceleration, we recommend that you
+    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
     #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html
+    #    </note>
     # @option options [Array<Types::ElasticInferenceAccelerator>] :elastic_inference_accelerators
     #   An elastic inference accelerator to associate with the instance.
     #   Elastic inference accelerators are a resource you can attach to your
@@ -517,8 +516,6 @@ module Aws::EC2
     #   * Instances
     #
     #   * Volumes
-    #
-    #   * Elastic graphics
     #
     #   * Spot Instance requests
     #
@@ -769,7 +766,7 @@ module Aws::EC2
     #   disassociate it.
     # @option options [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency of the request. For more information, see [Ensuring
     #   idempotency][1].
     #
     #   Constraint: Maximum 64 ASCII characters.
@@ -845,6 +842,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     client_token: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -856,6 +854,14 @@ module Aws::EC2
     #   The ID of the VPC.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the network ACL.
+    # @option options [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     # @return [NetworkAcl]
     def create_network_acl(options = {})
       resp = Aws::Plugins::UserAgent.feature('resource') do
@@ -1114,6 +1120,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     client_token: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -1125,6 +1132,14 @@ module Aws::EC2
     #   The ID of the VPC.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the route table.
+    # @option options [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     # @return [RouteTable]
     def create_route_table(options = {})
       resp = Aws::Plugins::UserAgent.feature('resource') do
@@ -3474,6 +3489,9 @@ module Aws::EC2
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
     #   The filters.
+    #
+    #   * `association.gateway-id` - The ID of the gateway involved in the
+    #     association.
     #
     #   * `association.route-table-association-id` - The ID of an association
     #     ID for the route table.

@@ -1,0 +1,557 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module GreengrassV2
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateServiceRoleToAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateServiceRoleToAccountResponse]
+        def associated_at: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#associate_service_role_to_account-instance_method
+      def associate_service_role_to_account: (
+                                               role_arn: ::String
+                                             ) -> _AssociateServiceRoleToAccountResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateServiceRoleToAccountResponseSuccess
+
+      interface _BatchAssociateClientDeviceWithCoreDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchAssociateClientDeviceWithCoreDeviceResponse]
+        def error_entries: () -> ::Array[Types::AssociateClientDeviceWithCoreDeviceErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#batch_associate_client_device_with_core_device-instance_method
+      def batch_associate_client_device_with_core_device: (
+                                                            ?entries: Array[
+                                                              {
+                                                                thing_name: ::String
+                                                              },
+                                                            ],
+                                                            core_device_thing_name: ::String
+                                                          ) -> _BatchAssociateClientDeviceWithCoreDeviceResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchAssociateClientDeviceWithCoreDeviceResponseSuccess
+
+      interface _BatchDisassociateClientDeviceFromCoreDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDisassociateClientDeviceFromCoreDeviceResponse]
+        def error_entries: () -> ::Array[Types::DisassociateClientDeviceFromCoreDeviceErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#batch_disassociate_client_device_from_core_device-instance_method
+      def batch_disassociate_client_device_from_core_device: (
+                                                               ?entries: Array[
+                                                                 {
+                                                                   thing_name: ::String
+                                                                 },
+                                                               ],
+                                                               core_device_thing_name: ::String
+                                                             ) -> _BatchDisassociateClientDeviceFromCoreDeviceResponseSuccess
+                                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDisassociateClientDeviceFromCoreDeviceResponseSuccess
+
+      interface _CancelDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelDeploymentResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#cancel_deployment-instance_method
+      def cancel_deployment: (
+                               deployment_id: ::String
+                             ) -> _CancelDeploymentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelDeploymentResponseSuccess
+
+      interface _CreateComponentVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateComponentVersionResponse]
+        def arn: () -> ::String
+        def component_name: () -> ::String
+        def component_version: () -> ::String
+        def creation_timestamp: () -> ::Time
+        def status: () -> Types::CloudComponentStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#create_component_version-instance_method
+      def create_component_version: (
+                                      ?inline_recipe: ::String,
+                                      ?lambda_function: {
+                                        lambda_arn: ::String,
+                                        component_name: ::String?,
+                                        component_version: ::String?,
+                                        component_platforms: Array[
+                                          {
+                                            name: ::String?,
+                                            attributes: Hash[::String, ::String]?
+                                          },
+                                        ]?,
+                                        component_dependencies: Hash[::String, {
+                                            version_requirement: ::String?,
+                                            dependency_type: ("HARD" | "SOFT")?
+                                          }]?,
+                                        component_lambda_parameters: {
+                                          event_sources: Array[
+                                            {
+                                              topic: ::String,
+                                              type: ("PUB_SUB" | "IOT_CORE")
+                                            },
+                                          ]?,
+                                          max_queue_size: ::Integer?,
+                                          max_instances_count: ::Integer?,
+                                          max_idle_time_in_seconds: ::Integer?,
+                                          timeout_in_seconds: ::Integer?,
+                                          status_timeout_in_seconds: ::Integer?,
+                                          pinned: bool?,
+                                          input_payload_encoding_type: ("json" | "binary")?,
+                                          exec_args: Array[::String]?,
+                                          environment_variables: Hash[::String, ::String]?,
+                                          linux_process_params: {
+                                            isolation_mode: ("GreengrassContainer" | "NoContainer")?,
+                                            container_params: {
+                                              memory_size_in_kb: ::Integer?,
+                                              mount_ro_sysfs: bool?,
+                                              volumes: Array[
+                                                {
+                                                  source_path: ::String,
+                                                  destination_path: ::String,
+                                                  permission: ("ro" | "rw")?,
+                                                  add_group_owner: bool?
+                                                },
+                                              ]?,
+                                              devices: Array[
+                                                {
+                                                  path: ::String,
+                                                  permission: ("ro" | "rw")?,
+                                                  add_group_owner: bool?
+                                                },
+                                              ]?
+                                            }?
+                                          }?
+                                        }?
+                                      },
+                                      ?tags: Hash[::String, ::String],
+                                      ?client_token: ::String
+                                    ) -> _CreateComponentVersionResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateComponentVersionResponseSuccess
+
+      interface _CreateDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDeploymentResponse]
+        def deployment_id: () -> ::String
+        def iot_job_id: () -> ::String
+        def iot_job_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#create_deployment-instance_method
+      def create_deployment: (
+                               target_arn: ::String,
+                               ?deployment_name: ::String,
+                               ?components: Hash[::String, {
+                                   component_version: ::String?,
+                                   configuration_update: {
+                                     merge: ::String?,
+                                     reset: Array[::String]?
+                                   }?,
+                                   run_with: {
+                                     posix_user: ::String?,
+                                     system_resource_limits: {
+                                       memory: ::Integer?,
+                                       cpus: ::Float?
+                                     }?,
+                                     windows_user: ::String?
+                                   }?
+                                 }],
+                               ?iot_job_configuration: {
+                                 job_executions_rollout_config: {
+                                   exponential_rate: {
+                                     base_rate_per_minute: ::Integer,
+                                     increment_factor: ::Float,
+                                     rate_increase_criteria: {
+                                       number_of_notified_things: ::Integer?,
+                                       number_of_succeeded_things: ::Integer?
+                                     }
+                                   }?,
+                                   maximum_per_minute: ::Integer?
+                                 }?,
+                                 abort_config: {
+                                   criteria_list: Array[
+                                     {
+                                       failure_type: ("FAILED" | "REJECTED" | "TIMED_OUT" | "ALL"),
+                                       action: ("CANCEL"),
+                                       threshold_percentage: ::Float,
+                                       min_number_of_executed_things: ::Integer
+                                     },
+                                   ]
+                                 }?,
+                                 timeout_config: {
+                                   in_progress_timeout_in_minutes: ::Integer?
+                                 }?
+                               },
+                               ?deployment_policies: {
+                                 failure_handling_policy: ("ROLLBACK" | "DO_NOTHING")?,
+                                 component_update_policy: {
+                                   timeout_in_seconds: ::Integer?,
+                                   action: ("NOTIFY_COMPONENTS" | "SKIP_NOTIFY_COMPONENTS")?
+                                 }?,
+                                 configuration_validation_policy: {
+                                   timeout_in_seconds: ::Integer?
+                                 }?
+                               },
+                               ?parent_target_arn: ::String,
+                               ?tags: Hash[::String, ::String],
+                               ?client_token: ::String
+                             ) -> _CreateDeploymentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeploymentResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#delete_component-instance_method
+      def delete_component: (
+                              arn: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#delete_core_device-instance_method
+      def delete_core_device: (
+                                core_device_thing_name: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#delete_deployment-instance_method
+      def delete_deployment: (
+                               deployment_id: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeComponentResponse]
+        def arn: () -> ::String
+        def component_name: () -> ::String
+        def component_version: () -> ::String
+        def creation_timestamp: () -> ::Time
+        def publisher: () -> ::String
+        def description: () -> ::String
+        def status: () -> Types::CloudComponentStatus
+        def platforms: () -> ::Array[Types::ComponentPlatform]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#describe_component-instance_method
+      def describe_component: (
+                                arn: ::String
+                              ) -> _DescribeComponentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeComponentResponseSuccess
+
+      interface _DisassociateServiceRoleFromAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateServiceRoleFromAccountResponse]
+        def disassociated_at: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#disassociate_service_role_from_account-instance_method
+      def disassociate_service_role_from_account: (
+                                                  ) -> _DisassociateServiceRoleFromAccountResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateServiceRoleFromAccountResponseSuccess
+
+      interface _GetComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetComponentResponse]
+        def recipe_output_format: () -> ("JSON" | "YAML")
+        def recipe: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#get_component-instance_method
+      def get_component: (
+                           ?recipe_output_format: ("JSON" | "YAML"),
+                           arn: ::String
+                         ) -> _GetComponentResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetComponentResponseSuccess
+
+      interface _GetComponentVersionArtifactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetComponentVersionArtifactResponse]
+        def pre_signed_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#get_component_version_artifact-instance_method
+      def get_component_version_artifact: (
+                                            arn: ::String,
+                                            artifact_name: ::String
+                                          ) -> _GetComponentVersionArtifactResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetComponentVersionArtifactResponseSuccess
+
+      interface _GetConnectivityInfoResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectivityInfoResponse]
+        def connectivity_info: () -> ::Array[Types::ConnectivityInfo]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#get_connectivity_info-instance_method
+      def get_connectivity_info: (
+                                   thing_name: ::String
+                                 ) -> _GetConnectivityInfoResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectivityInfoResponseSuccess
+
+      interface _GetCoreDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCoreDeviceResponse]
+        def core_device_thing_name: () -> ::String
+        def core_version: () -> ::String
+        def platform: () -> ::String
+        def architecture: () -> ::String
+        def status: () -> ("HEALTHY" | "UNHEALTHY")
+        def last_status_update_timestamp: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#get_core_device-instance_method
+      def get_core_device: (
+                             core_device_thing_name: ::String
+                           ) -> _GetCoreDeviceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCoreDeviceResponseSuccess
+
+      interface _GetDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeploymentResponse]
+        def target_arn: () -> ::String
+        def revision_id: () -> ::String
+        def deployment_id: () -> ::String
+        def deployment_name: () -> ::String
+        def deployment_status: () -> ("ACTIVE" | "COMPLETED" | "CANCELED" | "FAILED" | "INACTIVE")
+        def iot_job_id: () -> ::String
+        def iot_job_arn: () -> ::String
+        def components: () -> ::Hash[::String, Types::ComponentDeploymentSpecification]
+        def deployment_policies: () -> Types::DeploymentPolicies
+        def iot_job_configuration: () -> Types::DeploymentIoTJobConfiguration
+        def creation_timestamp: () -> ::Time
+        def is_latest_for_target: () -> bool
+        def parent_target_arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#get_deployment-instance_method
+      def get_deployment: (
+                            deployment_id: ::String
+                          ) -> _GetDeploymentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeploymentResponseSuccess
+
+      interface _GetServiceRoleForAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceRoleForAccountResponse]
+        def associated_at: () -> ::String
+        def role_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#get_service_role_for_account-instance_method
+      def get_service_role_for_account: (
+                                        ) -> _GetServiceRoleForAccountResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceRoleForAccountResponseSuccess
+
+      interface _ListClientDevicesAssociatedWithCoreDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClientDevicesAssociatedWithCoreDeviceResponse]
+        def associated_client_devices: () -> ::Array[Types::AssociatedClientDevice]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#list_client_devices_associated_with_core_device-instance_method
+      def list_client_devices_associated_with_core_device: (
+                                                             core_device_thing_name: ::String,
+                                                             ?max_results: ::Integer,
+                                                             ?next_token: ::String
+                                                           ) -> _ListClientDevicesAssociatedWithCoreDeviceResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClientDevicesAssociatedWithCoreDeviceResponseSuccess
+
+      interface _ListComponentVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListComponentVersionsResponse]
+        def component_versions: () -> ::Array[Types::ComponentVersionListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#list_component_versions-instance_method
+      def list_component_versions: (
+                                     arn: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListComponentVersionsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComponentVersionsResponseSuccess
+
+      interface _ListComponentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListComponentsResponse]
+        def components: () -> ::Array[Types::Component]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#list_components-instance_method
+      def list_components: (
+                             ?scope: ("PRIVATE" | "PUBLIC"),
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListComponentsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComponentsResponseSuccess
+
+      interface _ListCoreDevicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCoreDevicesResponse]
+        def core_devices: () -> ::Array[Types::CoreDevice]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#list_core_devices-instance_method
+      def list_core_devices: (
+                               ?thing_group_arn: ::String,
+                               ?status: ("HEALTHY" | "UNHEALTHY"),
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListCoreDevicesResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCoreDevicesResponseSuccess
+
+      interface _ListDeploymentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeploymentsResponse]
+        def deployments: () -> ::Array[Types::Deployment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#list_deployments-instance_method
+      def list_deployments: (
+                              ?target_arn: ::String,
+                              ?history_filter: ("ALL" | "LATEST_ONLY"),
+                              ?parent_target_arn: ::String,
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListDeploymentsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeploymentsResponseSuccess
+
+      interface _ListEffectiveDeploymentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEffectiveDeploymentsResponse]
+        def effective_deployments: () -> ::Array[Types::EffectiveDeployment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#list_effective_deployments-instance_method
+      def list_effective_deployments: (
+                                        core_device_thing_name: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListEffectiveDeploymentsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEffectiveDeploymentsResponseSuccess
+
+      interface _ListInstalledComponentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInstalledComponentsResponse]
+        def installed_components: () -> ::Array[Types::InstalledComponent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#list_installed_components-instance_method
+      def list_installed_components: (
+                                       core_device_thing_name: ::String,
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String,
+                                       ?topology_filter: ("ALL" | "ROOT")
+                                     ) -> _ListInstalledComponentsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInstalledComponentsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ResolveComponentCandidatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResolveComponentCandidatesResponse]
+        def resolved_component_versions: () -> ::Array[Types::ResolvedComponentVersion]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#resolve_component_candidates-instance_method
+      def resolve_component_candidates: (
+                                          ?platform: {
+                                            name: ::String?,
+                                            attributes: Hash[::String, ::String]?
+                                          },
+                                          ?component_candidates: Array[
+                                            {
+                                              component_name: ::String?,
+                                              component_version: ::String?,
+                                              version_requirements: Hash[::String, ::String]?
+                                            },
+                                          ]
+                                        ) -> _ResolveComponentCandidatesResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResolveComponentCandidatesResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateConnectivityInfoResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectivityInfoResponse]
+        def version: () -> ::String
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GreengrassV2/Client.html#update_connectivity_info-instance_method
+      def update_connectivity_info: (
+                                      thing_name: ::String,
+                                      connectivity_info: Array[
+                                        {
+                                          id: ::String?,
+                                          host_address: ::String?,
+                                          port_number: ::Integer?,
+                                          metadata: ::String?
+                                        },
+                                      ]
+                                    ) -> _UpdateConnectivityInfoResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectivityInfoResponseSuccess
+    end
+  end
+end
+

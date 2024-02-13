@@ -14,6 +14,7 @@ module Aws::SageMaker
       option(
         :endpoint_provider,
         doc_type: 'Aws::SageMaker::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -223,6 +224,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::DeleteHubContent.build(context)
           when :delete_human_task_ui
             Aws::SageMaker::Endpoints::DeleteHumanTaskUi.build(context)
+          when :delete_hyper_parameter_tuning_job
+            Aws::SageMaker::Endpoints::DeleteHyperParameterTuningJob.build(context)
           when :delete_image
             Aws::SageMaker::Endpoints::DeleteImage.build(context)
           when :delete_image_version

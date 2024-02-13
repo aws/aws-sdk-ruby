@@ -1,0 +1,60 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IAM
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html
+    class SamlProvider
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#initialize-instance_method
+      def initialize: (String arn, Hash[Symbol, untyped] options) -> void
+                    | (arn: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#arn-instance_method
+      def arn: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#saml_metadata_document-instance_method
+      def saml_metadata_document: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#create_date-instance_method
+      def create_date: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#valid_until-instance_method
+      def valid_until: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#tags-instance_method
+      def tags: () -> ::Array[Types::Tag]
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#data-instance_method
+      def data: () -> Types::GetSAMLProviderResponse
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#delete-instance_method
+      def delete: (
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#update-instance_method
+      def update: (
+                    saml_metadata_document: ::String
+                  ) -> Types::UpdateSAMLProviderResponse
+                | (?Hash[Symbol, untyped]) -> Types::UpdateSAMLProviderResponse
+
+      class Collection < ::Aws::Resources::Collection[SamlProvider]
+      end
+    end
+  end
+end

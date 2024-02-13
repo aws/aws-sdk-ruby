@@ -19,7 +19,7 @@ module Aws
       expect(Aws.config).to eq({})
     end
 
-    it 'does not allow assigning config object to non-hash objects' do
+    it 'does not allow assigning config object to non-hash objects', rbs_test: :skip do
       expect { Aws.config = [1, 2, 3] }.to raise_error(ArgumentError)
     end
 

@@ -2210,6 +2210,11 @@ module Aws::Transfer
     #   object.
     #   @return [Types::SftpConnectorConfig]
     #
+    # @!attribute [rw] service_managed_egress_ip_addresses
+    #   The list of egress IP addresses of this connector. These IP
+    #   addresses are assigned automatically when you create the connector.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedConnector AWS API Documentation
     #
     class DescribedConnector < Struct.new(
@@ -2220,7 +2225,8 @@ module Aws::Transfer
       :access_role,
       :logging_role,
       :tags,
-      :sftp_config)
+      :sftp_config,
+      :service_managed_egress_ip_addresses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2677,6 +2683,16 @@ module Aws::Transfer
     #   have a file target.
     #   @return [Types::S3StorageOptions]
     #
+    # @!attribute [rw] as_2_service_managed_egress_ip_addresses
+    #   The list of egress IP addresses of this server. These IP addresses
+    #   are only relevant for servers that use the AS2 protocol. They are
+    #   used for sending asynchronous MDNs.
+    #
+    #   These IP addresses are assigned automatically when you create an AS2
+    #   server. Additionally, if you update an existing server and add the
+    #   AS2 protocol, static IP addresses are assigned as well.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedServer AWS API Documentation
     #
     class DescribedServer < Struct.new(
@@ -2700,7 +2716,8 @@ module Aws::Transfer
       :user_count,
       :workflow_details,
       :structured_log_destinations,
-      :s3_storage_options)
+      :s3_storage_options,
+      :as_2_service_managed_egress_ip_addresses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3164,7 +3181,7 @@ module Aws::Transfer
     #
     # @!attribute [rw] directory_id
     #   The identifier of the Directory Service directory that you want to
-    #   stop sharing.
+    #   use as your identity provider.
     #   @return [String]
     #
     # @!attribute [rw] function

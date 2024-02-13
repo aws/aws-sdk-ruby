@@ -1,0 +1,78 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::AppConfigData
+  module Types
+
+    class BadRequestDetails
+      attr_accessor invalid_parameters: ::Hash[::String, Types::InvalidParameterDetail]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class InvalidParameters < BadRequestDetails
+      end
+      class Unknown < BadRequestDetails
+      end
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      attr_accessor reason: ("InvalidParameters")
+      attr_accessor details: Types::BadRequestDetails
+      SENSITIVE: []
+    end
+
+    class GetLatestConfigurationRequest
+      attr_accessor configuration_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetLatestConfigurationResponse
+      attr_accessor next_poll_configuration_token: ::String
+      attr_accessor next_poll_interval_in_seconds: ::Integer
+      attr_accessor content_type: ::String
+      attr_accessor configuration: ::String
+      attr_accessor version_label: ::String
+      SENSITIVE: [:configuration]
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterDetail
+      attr_accessor problem: ("Corrupted" | "Expired" | "PollIntervalNotSatisfied")
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ("Application" | "ConfigurationProfile" | "Deployment" | "Environment" | "Configuration")
+      attr_accessor referenced_by: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartConfigurationSessionRequest
+      attr_accessor application_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor configuration_profile_identifier: ::String
+      attr_accessor required_minimum_poll_interval_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartConfigurationSessionResponse
+      attr_accessor initial_configuration_token: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

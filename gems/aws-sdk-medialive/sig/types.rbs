@@ -1,0 +1,3466 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MediaLive
+  module Types
+
+    class AacSettings
+      attr_accessor bitrate: ::Float
+      attr_accessor coding_mode: ("AD_RECEIVER_MIX" | "CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_5_1")
+      attr_accessor input_type: ("BROADCASTER_MIXED_AD" | "NORMAL")
+      attr_accessor profile: ("HEV1" | "HEV2" | "LC")
+      attr_accessor rate_control_mode: ("CBR" | "VBR")
+      attr_accessor raw_format: ("LATM_LOAS" | "NONE")
+      attr_accessor sample_rate: ::Float
+      attr_accessor spec: ("MPEG2" | "MPEG4")
+      attr_accessor vbr_quality: ("HIGH" | "LOW" | "MEDIUM_HIGH" | "MEDIUM_LOW")
+      SENSITIVE: []
+    end
+
+    class Ac3Settings
+      attr_accessor bitrate: ::Float
+      attr_accessor bitstream_mode: ("COMMENTARY" | "COMPLETE_MAIN" | "DIALOGUE" | "EMERGENCY" | "HEARING_IMPAIRED" | "MUSIC_AND_EFFECTS" | "VISUALLY_IMPAIRED" | "VOICE_OVER")
+      attr_accessor coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_3_2_LFE")
+      attr_accessor dialnorm: ::Integer
+      attr_accessor drc_profile: ("FILM_STANDARD" | "NONE")
+      attr_accessor lfe_filter: ("DISABLED" | "ENABLED")
+      attr_accessor metadata_control: ("FOLLOW_INPUT" | "USE_CONFIGURED")
+      attr_accessor attenuation_control: ("ATTENUATE_3_DB" | "NONE")
+      SENSITIVE: []
+    end
+
+    class AcceptInputDeviceTransferRequest
+      attr_accessor input_device_id: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptInputDeviceTransferResponse < Aws::EmptyStructure
+    end
+
+    class AccessDenied
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccountConfiguration
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class AncillarySourceSettings
+      attr_accessor source_ancillary_channel_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class ArchiveCdnSettings
+      attr_accessor archive_s3_settings: Types::ArchiveS3Settings
+      SENSITIVE: []
+    end
+
+    class ArchiveContainerSettings
+      attr_accessor m2ts_settings: Types::M2tsSettings
+      attr_accessor raw_settings: Types::RawSettings
+      SENSITIVE: []
+    end
+
+    class ArchiveGroupSettings
+      attr_accessor archive_cdn_settings: Types::ArchiveCdnSettings
+      attr_accessor destination: Types::OutputLocationRef
+      attr_accessor rollover_interval: ::Integer
+      SENSITIVE: []
+    end
+
+    class ArchiveOutputSettings
+      attr_accessor container_settings: Types::ArchiveContainerSettings
+      attr_accessor extension: ::String
+      attr_accessor name_modifier: ::String
+      SENSITIVE: []
+    end
+
+    class ArchiveS3Settings
+      attr_accessor canned_acl: ("AUTHENTICATED_READ" | "BUCKET_OWNER_FULL_CONTROL" | "BUCKET_OWNER_READ" | "PUBLIC_READ")
+      SENSITIVE: []
+    end
+
+    class AribDestinationSettings < Aws::EmptyStructure
+    end
+
+    class AribSourceSettings < Aws::EmptyStructure
+    end
+
+    class AudioChannelMapping
+      attr_accessor input_channel_levels: ::Array[Types::InputChannelLevel]
+      attr_accessor output_channel: ::Integer
+      SENSITIVE: []
+    end
+
+    class AudioCodecSettings
+      attr_accessor aac_settings: Types::AacSettings
+      attr_accessor ac_3_settings: Types::Ac3Settings
+      attr_accessor eac_3_atmos_settings: Types::Eac3AtmosSettings
+      attr_accessor eac_3_settings: Types::Eac3Settings
+      attr_accessor mp_2_settings: Types::Mp2Settings
+      attr_accessor pass_through_settings: Types::PassThroughSettings
+      attr_accessor wav_settings: Types::WavSettings
+      SENSITIVE: []
+    end
+
+    class AudioDescription
+      attr_accessor audio_normalization_settings: Types::AudioNormalizationSettings
+      attr_accessor audio_selector_name: ::String
+      attr_accessor audio_type: ("CLEAN_EFFECTS" | "HEARING_IMPAIRED" | "UNDEFINED" | "VISUAL_IMPAIRED_COMMENTARY")
+      attr_accessor audio_type_control: ("FOLLOW_INPUT" | "USE_CONFIGURED")
+      attr_accessor audio_watermarking_settings: Types::AudioWatermarkSettings
+      attr_accessor codec_settings: Types::AudioCodecSettings
+      attr_accessor language_code: ::String
+      attr_accessor language_code_control: ("FOLLOW_INPUT" | "USE_CONFIGURED")
+      attr_accessor name: ::String
+      attr_accessor remix_settings: Types::RemixSettings
+      attr_accessor stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class AudioDolbyEDecode
+      attr_accessor program_selection: ("ALL_CHANNELS" | "PROGRAM_1" | "PROGRAM_2" | "PROGRAM_3" | "PROGRAM_4" | "PROGRAM_5" | "PROGRAM_6" | "PROGRAM_7" | "PROGRAM_8")
+      SENSITIVE: []
+    end
+
+    class AudioHlsRenditionSelection
+      attr_accessor group_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class AudioLanguageSelection
+      attr_accessor language_code: ::String
+      attr_accessor language_selection_policy: ("LOOSE" | "STRICT")
+      SENSITIVE: []
+    end
+
+    class AudioNormalizationSettings
+      attr_accessor algorithm: ("ITU_1770_1" | "ITU_1770_2")
+      attr_accessor algorithm_control: ("CORRECT_AUDIO")
+      attr_accessor target_lkfs: ::Float
+      SENSITIVE: []
+    end
+
+    class AudioOnlyHlsSettings
+      attr_accessor audio_group_id: ::String
+      attr_accessor audio_only_image: Types::InputLocation
+      attr_accessor audio_track_type: ("ALTERNATE_AUDIO_AUTO_SELECT" | "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" | "ALTERNATE_AUDIO_NOT_AUTO_SELECT" | "AUDIO_ONLY_VARIANT_STREAM")
+      attr_accessor segment_type: ("AAC" | "FMP4")
+      SENSITIVE: []
+    end
+
+    class AudioPidSelection
+      attr_accessor pid: ::Integer
+      SENSITIVE: []
+    end
+
+    class AudioSelector
+      attr_accessor name: ::String
+      attr_accessor selector_settings: Types::AudioSelectorSettings
+      SENSITIVE: []
+    end
+
+    class AudioSelectorSettings
+      attr_accessor audio_hls_rendition_selection: Types::AudioHlsRenditionSelection
+      attr_accessor audio_language_selection: Types::AudioLanguageSelection
+      attr_accessor audio_pid_selection: Types::AudioPidSelection
+      attr_accessor audio_track_selection: Types::AudioTrackSelection
+      SENSITIVE: []
+    end
+
+    class AudioSilenceFailoverSettings
+      attr_accessor audio_selector_name: ::String
+      attr_accessor audio_silence_threshold_msec: ::Integer
+      SENSITIVE: []
+    end
+
+    class AudioTrack
+      attr_accessor track: ::Integer
+      SENSITIVE: []
+    end
+
+    class AudioTrackSelection
+      attr_accessor tracks: ::Array[Types::AudioTrack]
+      attr_accessor dolby_e_decode: Types::AudioDolbyEDecode
+      SENSITIVE: []
+    end
+
+    class AudioWatermarkSettings
+      attr_accessor nielsen_watermarks_settings: Types::NielsenWatermarksSettings
+      SENSITIVE: []
+    end
+
+    class AutomaticInputFailoverSettings
+      attr_accessor error_clear_time_msec: ::Integer
+      attr_accessor failover_conditions: ::Array[Types::FailoverCondition]
+      attr_accessor input_preference: ("EQUAL_INPUT_PREFERENCE" | "PRIMARY_INPUT_PREFERRED")
+      attr_accessor secondary_input_id: ::String
+      SENSITIVE: []
+    end
+
+    class AvailBlanking
+      attr_accessor avail_blanking_image: Types::InputLocation
+      attr_accessor state: ("DISABLED" | "ENABLED")
+      SENSITIVE: []
+    end
+
+    class AvailConfiguration
+      attr_accessor avail_settings: Types::AvailSettings
+      SENSITIVE: []
+    end
+
+    class AvailSettings
+      attr_accessor esam: Types::Esam
+      attr_accessor scte_35_splice_insert: Types::Scte35SpliceInsert
+      attr_accessor scte_35_time_signal_apos: Types::Scte35TimeSignalApos
+      SENSITIVE: []
+    end
+
+    class BadGatewayException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDelete
+      attr_accessor channel_ids: ::Array[::String]
+      attr_accessor input_ids: ::Array[::String]
+      attr_accessor input_security_group_ids: ::Array[::String]
+      attr_accessor multiplex_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteRequest
+      attr_accessor channel_ids: ::Array[::String]
+      attr_accessor input_ids: ::Array[::String]
+      attr_accessor input_security_group_ids: ::Array[::String]
+      attr_accessor multiplex_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteResponse
+      attr_accessor failed: ::Array[Types::BatchFailedResultModel]
+      attr_accessor successful: ::Array[Types::BatchSuccessfulResultModel]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteResultModel
+      attr_accessor failed: ::Array[Types::BatchFailedResultModel]
+      attr_accessor successful: ::Array[Types::BatchSuccessfulResultModel]
+      SENSITIVE: []
+    end
+
+    class BatchFailedResultModel
+      attr_accessor arn: ::String
+      attr_accessor code: ::String
+      attr_accessor id: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchScheduleActionCreateRequest
+      attr_accessor schedule_actions: ::Array[Types::ScheduleAction]
+      SENSITIVE: []
+    end
+
+    class BatchScheduleActionCreateResult
+      attr_accessor schedule_actions: ::Array[Types::ScheduleAction]
+      SENSITIVE: []
+    end
+
+    class BatchScheduleActionDeleteRequest
+      attr_accessor action_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchScheduleActionDeleteResult
+      attr_accessor schedule_actions: ::Array[Types::ScheduleAction]
+      SENSITIVE: []
+    end
+
+    class BatchStart
+      attr_accessor channel_ids: ::Array[::String]
+      attr_accessor multiplex_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchStartRequest
+      attr_accessor channel_ids: ::Array[::String]
+      attr_accessor multiplex_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchStartResponse
+      attr_accessor failed: ::Array[Types::BatchFailedResultModel]
+      attr_accessor successful: ::Array[Types::BatchSuccessfulResultModel]
+      SENSITIVE: []
+    end
+
+    class BatchStartResultModel
+      attr_accessor failed: ::Array[Types::BatchFailedResultModel]
+      attr_accessor successful: ::Array[Types::BatchSuccessfulResultModel]
+      SENSITIVE: []
+    end
+
+    class BatchStop
+      attr_accessor channel_ids: ::Array[::String]
+      attr_accessor multiplex_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchStopRequest
+      attr_accessor channel_ids: ::Array[::String]
+      attr_accessor multiplex_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchStopResponse
+      attr_accessor failed: ::Array[Types::BatchFailedResultModel]
+      attr_accessor successful: ::Array[Types::BatchSuccessfulResultModel]
+      SENSITIVE: []
+    end
+
+    class BatchStopResultModel
+      attr_accessor failed: ::Array[Types::BatchFailedResultModel]
+      attr_accessor successful: ::Array[Types::BatchSuccessfulResultModel]
+      SENSITIVE: []
+    end
+
+    class BatchSuccessfulResultModel
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor state: ::String
+      SENSITIVE: []
+    end
+
+    class BatchUpdateScheduleRequest
+      attr_accessor channel_id: ::String
+      attr_accessor creates: Types::BatchScheduleActionCreateRequest
+      attr_accessor deletes: Types::BatchScheduleActionDeleteRequest
+      SENSITIVE: []
+    end
+
+    class BatchUpdateScheduleResponse
+      attr_accessor creates: Types::BatchScheduleActionCreateResult
+      attr_accessor deletes: Types::BatchScheduleActionDeleteResult
+      SENSITIVE: []
+    end
+
+    class BatchUpdateScheduleResult
+      attr_accessor creates: Types::BatchScheduleActionCreateResult
+      attr_accessor deletes: Types::BatchScheduleActionDeleteResult
+      SENSITIVE: []
+    end
+
+    class BlackoutSlate
+      attr_accessor blackout_slate_image: Types::InputLocation
+      attr_accessor network_end_blackout: ("DISABLED" | "ENABLED")
+      attr_accessor network_end_blackout_image: Types::InputLocation
+      attr_accessor network_id: ::String
+      attr_accessor state: ("DISABLED" | "ENABLED")
+      SENSITIVE: []
+    end
+
+    class BurnInDestinationSettings
+      attr_accessor alignment: ("CENTERED" | "LEFT" | "SMART")
+      attr_accessor background_color: ("BLACK" | "NONE" | "WHITE")
+      attr_accessor background_opacity: ::Integer
+      attr_accessor font: Types::InputLocation
+      attr_accessor font_color: ("BLACK" | "BLUE" | "GREEN" | "RED" | "WHITE" | "YELLOW")
+      attr_accessor font_opacity: ::Integer
+      attr_accessor font_resolution: ::Integer
+      attr_accessor font_size: ::String
+      attr_accessor outline_color: ("BLACK" | "BLUE" | "GREEN" | "RED" | "WHITE" | "YELLOW")
+      attr_accessor outline_size: ::Integer
+      attr_accessor shadow_color: ("BLACK" | "NONE" | "WHITE")
+      attr_accessor shadow_opacity: ::Integer
+      attr_accessor shadow_x_offset: ::Integer
+      attr_accessor shadow_y_offset: ::Integer
+      attr_accessor teletext_grid_control: ("FIXED" | "SCALED")
+      attr_accessor x_position: ::Integer
+      attr_accessor y_position: ::Integer
+      SENSITIVE: []
+    end
+
+    class CancelInputDeviceTransferRequest
+      attr_accessor input_device_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelInputDeviceTransferResponse < Aws::EmptyStructure
+    end
+
+    class CaptionDescription
+      attr_accessor accessibility: ("DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES" | "IMPLEMENTS_ACCESSIBILITY_FEATURES")
+      attr_accessor caption_selector_name: ::String
+      attr_accessor destination_settings: Types::CaptionDestinationSettings
+      attr_accessor language_code: ::String
+      attr_accessor language_description: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CaptionDestinationSettings
+      attr_accessor arib_destination_settings: Types::AribDestinationSettings
+      attr_accessor burn_in_destination_settings: Types::BurnInDestinationSettings
+      attr_accessor dvb_sub_destination_settings: Types::DvbSubDestinationSettings
+      attr_accessor ebu_tt_d_destination_settings: Types::EbuTtDDestinationSettings
+      attr_accessor embedded_destination_settings: Types::EmbeddedDestinationSettings
+      attr_accessor embedded_plus_scte_20_destination_settings: Types::EmbeddedPlusScte20DestinationSettings
+      attr_accessor rtmp_caption_info_destination_settings: Types::RtmpCaptionInfoDestinationSettings
+      attr_accessor scte_20_plus_embedded_destination_settings: Types::Scte20PlusEmbeddedDestinationSettings
+      attr_accessor scte_27_destination_settings: Types::Scte27DestinationSettings
+      attr_accessor smpte_tt_destination_settings: Types::SmpteTtDestinationSettings
+      attr_accessor teletext_destination_settings: Types::TeletextDestinationSettings
+      attr_accessor ttml_destination_settings: Types::TtmlDestinationSettings
+      attr_accessor webvtt_destination_settings: Types::WebvttDestinationSettings
+      SENSITIVE: []
+    end
+
+    class CaptionLanguageMapping
+      attr_accessor caption_channel: ::Integer
+      attr_accessor language_code: ::String
+      attr_accessor language_description: ::String
+      SENSITIVE: []
+    end
+
+    class CaptionRectangle
+      attr_accessor height: ::Float
+      attr_accessor left_offset: ::Float
+      attr_accessor top_offset: ::Float
+      attr_accessor width: ::Float
+      SENSITIVE: []
+    end
+
+    class CaptionSelector
+      attr_accessor language_code: ::String
+      attr_accessor name: ::String
+      attr_accessor selector_settings: Types::CaptionSelectorSettings
+      SENSITIVE: []
+    end
+
+    class CaptionSelectorSettings
+      attr_accessor ancillary_source_settings: Types::AncillarySourceSettings
+      attr_accessor arib_source_settings: Types::AribSourceSettings
+      attr_accessor dvb_sub_source_settings: Types::DvbSubSourceSettings
+      attr_accessor embedded_source_settings: Types::EmbeddedSourceSettings
+      attr_accessor scte_20_source_settings: Types::Scte20SourceSettings
+      attr_accessor scte_27_source_settings: Types::Scte27SourceSettings
+      attr_accessor teletext_source_settings: Types::TeletextSourceSettings
+      SENSITIVE: []
+    end
+
+    class CdiInputSpecification
+      attr_accessor resolution: ("SD" | "HD" | "FHD" | "UHD")
+      SENSITIVE: []
+    end
+
+    class Channel
+      attr_accessor arn: ::String
+      attr_accessor cdi_input_specification: Types::CdiInputSpecification
+      attr_accessor channel_class: ("STANDARD" | "SINGLE_PIPELINE")
+      attr_accessor destinations: ::Array[Types::OutputDestination]
+      attr_accessor egress_endpoints: ::Array[Types::ChannelEgressEndpoint]
+      attr_accessor encoder_settings: Types::EncoderSettings
+      attr_accessor id: ::String
+      attr_accessor input_attachments: ::Array[Types::InputAttachment]
+      attr_accessor input_specification: Types::InputSpecification
+      attr_accessor log_level: ("ERROR" | "WARNING" | "INFO" | "DEBUG" | "DISABLED")
+      attr_accessor maintenance: Types::MaintenanceStatus
+      attr_accessor name: ::String
+      attr_accessor pipeline_details: ::Array[Types::PipelineDetail]
+      attr_accessor pipelines_running_count: ::Integer
+      attr_accessor role_arn: ::String
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED" | "UPDATING" | "UPDATE_FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc: Types::VpcOutputSettingsDescription
+      SENSITIVE: []
+    end
+
+    class ChannelConfigurationValidationError
+      attr_accessor message: ::String
+      attr_accessor validation_errors: ::Array[Types::ValidationError]
+      SENSITIVE: []
+    end
+
+    class ChannelEgressEndpoint
+      attr_accessor source_ip: ::String
+      SENSITIVE: []
+    end
+
+    class ChannelSummary
+      attr_accessor arn: ::String
+      attr_accessor cdi_input_specification: Types::CdiInputSpecification
+      attr_accessor channel_class: ("STANDARD" | "SINGLE_PIPELINE")
+      attr_accessor destinations: ::Array[Types::OutputDestination]
+      attr_accessor egress_endpoints: ::Array[Types::ChannelEgressEndpoint]
+      attr_accessor id: ::String
+      attr_accessor input_attachments: ::Array[Types::InputAttachment]
+      attr_accessor input_specification: Types::InputSpecification
+      attr_accessor log_level: ("ERROR" | "WARNING" | "INFO" | "DEBUG" | "DISABLED")
+      attr_accessor maintenance: Types::MaintenanceStatus
+      attr_accessor name: ::String
+      attr_accessor pipelines_running_count: ::Integer
+      attr_accessor role_arn: ::String
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED" | "UPDATING" | "UPDATE_FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc: Types::VpcOutputSettingsDescription
+      SENSITIVE: []
+    end
+
+    class ClaimDeviceRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class ClaimDeviceResponse < Aws::EmptyStructure
+    end
+
+    class ColorCorrection
+      attr_accessor input_color_space: ("HDR10" | "HLG_2020" | "REC_601" | "REC_709")
+      attr_accessor output_color_space: ("HDR10" | "HLG_2020" | "REC_601" | "REC_709")
+      attr_accessor uri: ::String
+      SENSITIVE: []
+    end
+
+    class ColorCorrectionSettings
+      attr_accessor global_color_corrections: ::Array[Types::ColorCorrection]
+      SENSITIVE: []
+    end
+
+    class ColorSpacePassthroughSettings < Aws::EmptyStructure
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateChannel
+      attr_accessor cdi_input_specification: Types::CdiInputSpecification
+      attr_accessor channel_class: ("STANDARD" | "SINGLE_PIPELINE")
+      attr_accessor destinations: ::Array[Types::OutputDestination]
+      attr_accessor encoder_settings: Types::EncoderSettings
+      attr_accessor input_attachments: ::Array[Types::InputAttachment]
+      attr_accessor input_specification: Types::InputSpecification
+      attr_accessor log_level: ("ERROR" | "WARNING" | "INFO" | "DEBUG" | "DISABLED")
+      attr_accessor maintenance: Types::MaintenanceCreateSettings
+      attr_accessor name: ::String
+      attr_accessor request_id: ::String
+      attr_accessor reserved: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc: Types::VpcOutputSettings
+      SENSITIVE: []
+    end
+
+    class CreateChannelRequest
+      attr_accessor cdi_input_specification: Types::CdiInputSpecification
+      attr_accessor channel_class: ("STANDARD" | "SINGLE_PIPELINE")
+      attr_accessor destinations: ::Array[Types::OutputDestination]
+      attr_accessor encoder_settings: Types::EncoderSettings
+      attr_accessor input_attachments: ::Array[Types::InputAttachment]
+      attr_accessor input_specification: Types::InputSpecification
+      attr_accessor log_level: ("ERROR" | "WARNING" | "INFO" | "DEBUG" | "DISABLED")
+      attr_accessor maintenance: Types::MaintenanceCreateSettings
+      attr_accessor name: ::String
+      attr_accessor request_id: ::String
+      attr_accessor reserved: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc: Types::VpcOutputSettings
+      SENSITIVE: []
+    end
+
+    class CreateChannelResponse
+      attr_accessor channel: Types::Channel
+      SENSITIVE: []
+    end
+
+    class CreateChannelResultModel
+      attr_accessor channel: Types::Channel
+      SENSITIVE: []
+    end
+
+    class CreateInput
+      attr_accessor destinations: ::Array[Types::InputDestinationRequest]
+      attr_accessor input_devices: ::Array[Types::InputDeviceSettings]
+      attr_accessor input_security_groups: ::Array[::String]
+      attr_accessor media_connect_flows: ::Array[Types::MediaConnectFlowRequest]
+      attr_accessor name: ::String
+      attr_accessor request_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor sources: ::Array[Types::InputSourceRequest]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE")
+      attr_accessor vpc: Types::InputVpcRequest
+      SENSITIVE: []
+    end
+
+    class CreateInputRequest
+      attr_accessor destinations: ::Array[Types::InputDestinationRequest]
+      attr_accessor input_devices: ::Array[Types::InputDeviceSettings]
+      attr_accessor input_security_groups: ::Array[::String]
+      attr_accessor media_connect_flows: ::Array[Types::MediaConnectFlowRequest]
+      attr_accessor name: ::String
+      attr_accessor request_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor sources: ::Array[Types::InputSourceRequest]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE")
+      attr_accessor vpc: Types::InputVpcRequest
+      SENSITIVE: []
+    end
+
+    class CreateInputResponse
+      attr_accessor input: Types::Input
+      SENSITIVE: []
+    end
+
+    class CreateInputResultModel
+      attr_accessor input: Types::Input
+      SENSITIVE: []
+    end
+
+    class CreateInputSecurityGroupRequest
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor whitelist_rules: ::Array[Types::InputWhitelistRuleCidr]
+      SENSITIVE: []
+    end
+
+    class CreateInputSecurityGroupResponse
+      attr_accessor security_group: Types::InputSecurityGroup
+      SENSITIVE: []
+    end
+
+    class CreateInputSecurityGroupResultModel
+      attr_accessor security_group: Types::InputSecurityGroup
+      SENSITIVE: []
+    end
+
+    class CreateMultiplex
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor multiplex_settings: Types::MultiplexSettings
+      attr_accessor name: ::String
+      attr_accessor request_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateMultiplexProgram
+      attr_accessor multiplex_program_settings: Types::MultiplexProgramSettings
+      attr_accessor program_name: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMultiplexProgramRequest
+      attr_accessor multiplex_id: ::String
+      attr_accessor multiplex_program_settings: Types::MultiplexProgramSettings
+      attr_accessor program_name: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMultiplexProgramResponse
+      attr_accessor multiplex_program: Types::MultiplexProgram
+      SENSITIVE: []
+    end
+
+    class CreateMultiplexProgramResultModel
+      attr_accessor multiplex_program: Types::MultiplexProgram
+      SENSITIVE: []
+    end
+
+    class CreateMultiplexRequest
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor multiplex_settings: Types::MultiplexSettings
+      attr_accessor name: ::String
+      attr_accessor request_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateMultiplexResponse
+      attr_accessor multiplex: Types::Multiplex
+      SENSITIVE: []
+    end
+
+    class CreateMultiplexResultModel
+      attr_accessor multiplex: Types::Multiplex
+      SENSITIVE: []
+    end
+
+    class CreatePartnerInput
+      attr_accessor request_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePartnerInputRequest
+      attr_accessor input_id: ::String
+      attr_accessor request_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePartnerInputResponse
+      attr_accessor input: Types::Input
+      SENSITIVE: []
+    end
+
+    class CreatePartnerInputResultModel
+      attr_accessor input: Types::Input
+      SENSITIVE: []
+    end
+
+    class CreateTagsRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DeleteChannelRequest
+      attr_accessor channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelResponse
+      attr_accessor arn: ::String
+      attr_accessor cdi_input_specification: Types::CdiInputSpecification
+      attr_accessor channel_class: ("STANDARD" | "SINGLE_PIPELINE")
+      attr_accessor destinations: ::Array[Types::OutputDestination]
+      attr_accessor egress_endpoints: ::Array[Types::ChannelEgressEndpoint]
+      attr_accessor encoder_settings: Types::EncoderSettings
+      attr_accessor id: ::String
+      attr_accessor input_attachments: ::Array[Types::InputAttachment]
+      attr_accessor input_specification: Types::InputSpecification
+      attr_accessor log_level: ("ERROR" | "WARNING" | "INFO" | "DEBUG" | "DISABLED")
+      attr_accessor maintenance: Types::MaintenanceStatus
+      attr_accessor name: ::String
+      attr_accessor pipeline_details: ::Array[Types::PipelineDetail]
+      attr_accessor pipelines_running_count: ::Integer
+      attr_accessor role_arn: ::String
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED" | "UPDATING" | "UPDATE_FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc: Types::VpcOutputSettingsDescription
+      SENSITIVE: []
+    end
+
+    class DeleteInputRequest
+      attr_accessor input_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInputResponse < Aws::EmptyStructure
+    end
+
+    class DeleteInputSecurityGroupRequest
+      attr_accessor input_security_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInputSecurityGroupResponse < Aws::EmptyStructure
+    end
+
+    class DeleteMultiplexProgramRequest
+      attr_accessor multiplex_id: ::String
+      attr_accessor program_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMultiplexProgramResponse
+      attr_accessor channel_id: ::String
+      attr_accessor multiplex_program_settings: Types::MultiplexProgramSettings
+      attr_accessor packet_identifiers_map: Types::MultiplexProgramPacketIdentifiersMap
+      attr_accessor pipeline_details: ::Array[Types::MultiplexProgramPipelineDetail]
+      attr_accessor program_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMultiplexRequest
+      attr_accessor multiplex_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMultiplexResponse
+      attr_accessor arn: ::String
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor destinations: ::Array[Types::MultiplexOutputDestination]
+      attr_accessor id: ::String
+      attr_accessor multiplex_settings: Types::MultiplexSettings
+      attr_accessor name: ::String
+      attr_accessor pipelines_running_count: ::Integer
+      attr_accessor program_count: ::Integer
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DeleteReservationRequest
+      attr_accessor reservation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReservationResponse
+      attr_accessor arn: ::String
+      attr_accessor count: ::Integer
+      attr_accessor currency_code: ::String
+      attr_accessor duration: ::Integer
+      attr_accessor duration_units: ("MONTHS")
+      attr_accessor end: ::String
+      attr_accessor fixed_price: ::Float
+      attr_accessor name: ::String
+      attr_accessor offering_description: ::String
+      attr_accessor offering_id: ::String
+      attr_accessor offering_type: ("NO_UPFRONT")
+      attr_accessor region: ::String
+      attr_accessor renewal_settings: Types::RenewalSettings
+      attr_accessor reservation_id: ::String
+      attr_accessor resource_specification: Types::ReservationResourceSpecification
+      attr_accessor start: ::String
+      attr_accessor state: ("ACTIVE" | "EXPIRED" | "CANCELED" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor usage_price: ::Float
+      SENSITIVE: []
+    end
+
+    class DeleteScheduleRequest
+      attr_accessor channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteScheduleResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTagsRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeAccountConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class DescribeAccountConfigurationResponse
+      attr_accessor account_configuration: Types::AccountConfiguration
+      SENSITIVE: []
+    end
+
+    class DescribeAccountConfigurationResultModel
+      attr_accessor account_configuration: Types::AccountConfiguration
+      SENSITIVE: []
+    end
+
+    class DescribeChannelRequest
+      attr_accessor channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChannelResponse
+      attr_accessor arn: ::String
+      attr_accessor cdi_input_specification: Types::CdiInputSpecification
+      attr_accessor channel_class: ("STANDARD" | "SINGLE_PIPELINE")
+      attr_accessor destinations: ::Array[Types::OutputDestination]
+      attr_accessor egress_endpoints: ::Array[Types::ChannelEgressEndpoint]
+      attr_accessor encoder_settings: Types::EncoderSettings
+      attr_accessor id: ::String
+      attr_accessor input_attachments: ::Array[Types::InputAttachment]
+      attr_accessor input_specification: Types::InputSpecification
+      attr_accessor log_level: ("ERROR" | "WARNING" | "INFO" | "DEBUG" | "DISABLED")
+      attr_accessor maintenance: Types::MaintenanceStatus
+      attr_accessor name: ::String
+      attr_accessor pipeline_details: ::Array[Types::PipelineDetail]
+      attr_accessor pipelines_running_count: ::Integer
+      attr_accessor role_arn: ::String
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED" | "UPDATING" | "UPDATE_FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc: Types::VpcOutputSettingsDescription
+      SENSITIVE: []
+    end
+
+    class DescribeInputDeviceRequest
+      attr_accessor input_device_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInputDeviceResponse
+      attr_accessor arn: ::String
+      attr_accessor connection_state: ("DISCONNECTED" | "CONNECTED")
+      attr_accessor device_settings_sync_state: ("SYNCED" | "SYNCING")
+      attr_accessor device_update_status: ("UP_TO_DATE" | "NOT_UP_TO_DATE" | "UPDATING")
+      attr_accessor hd_device_settings: Types::InputDeviceHdSettings
+      attr_accessor id: ::String
+      attr_accessor mac_address: ::String
+      attr_accessor name: ::String
+      attr_accessor network_settings: Types::InputDeviceNetworkSettings
+      attr_accessor serial_number: ::String
+      attr_accessor type: ("HD" | "UHD")
+      attr_accessor uhd_device_settings: Types::InputDeviceUhdSettings
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor availability_zone: ::String
+      attr_accessor medialive_input_arns: ::Array[::String]
+      attr_accessor output_type: ("NONE" | "MEDIALIVE_INPUT" | "MEDIACONNECT_FLOW")
+      SENSITIVE: []
+    end
+
+    class DescribeInputDeviceThumbnailRequest
+      attr_accessor input_device_id: ::String
+      attr_accessor accept: ("image/jpeg")
+      SENSITIVE: []
+    end
+
+    class DescribeInputDeviceThumbnailResponse
+      attr_accessor body: ::IO
+      attr_accessor content_type: ("image/jpeg")
+      attr_accessor content_length: ::Integer
+      attr_accessor etag: ::String
+      attr_accessor last_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeInputRequest
+      attr_accessor input_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInputResponse
+      attr_accessor arn: ::String
+      attr_accessor attached_channels: ::Array[::String]
+      attr_accessor destinations: ::Array[Types::InputDestination]
+      attr_accessor id: ::String
+      attr_accessor input_class: ("STANDARD" | "SINGLE_PIPELINE")
+      attr_accessor input_devices: ::Array[Types::InputDeviceSettings]
+      attr_accessor input_partner_ids: ::Array[::String]
+      attr_accessor input_source_type: ("STATIC" | "DYNAMIC")
+      attr_accessor media_connect_flows: ::Array[Types::MediaConnectFlow]
+      attr_accessor name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor sources: ::Array[Types::InputSource]
+      attr_accessor state: ("CREATING" | "DETACHED" | "ATTACHED" | "DELETING" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE")
+      SENSITIVE: []
+    end
+
+    class DescribeInputSecurityGroupRequest
+      attr_accessor input_security_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInputSecurityGroupResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor state: ("IDLE" | "IN_USE" | "UPDATING" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor whitelist_rules: ::Array[Types::InputWhitelistRule]
+      SENSITIVE: []
+    end
+
+    class DescribeMultiplexProgramRequest
+      attr_accessor multiplex_id: ::String
+      attr_accessor program_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMultiplexProgramResponse
+      attr_accessor channel_id: ::String
+      attr_accessor multiplex_program_settings: Types::MultiplexProgramSettings
+      attr_accessor packet_identifiers_map: Types::MultiplexProgramPacketIdentifiersMap
+      attr_accessor pipeline_details: ::Array[Types::MultiplexProgramPipelineDetail]
+      attr_accessor program_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMultiplexRequest
+      attr_accessor multiplex_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMultiplexResponse
+      attr_accessor arn: ::String
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor destinations: ::Array[Types::MultiplexOutputDestination]
+      attr_accessor id: ::String
+      attr_accessor multiplex_settings: Types::MultiplexSettings
+      attr_accessor name: ::String
+      attr_accessor pipelines_running_count: ::Integer
+      attr_accessor program_count: ::Integer
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribeOfferingRequest
+      attr_accessor offering_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeOfferingResponse
+      attr_accessor arn: ::String
+      attr_accessor currency_code: ::String
+      attr_accessor duration: ::Integer
+      attr_accessor duration_units: ("MONTHS")
+      attr_accessor fixed_price: ::Float
+      attr_accessor offering_description: ::String
+      attr_accessor offering_id: ::String
+      attr_accessor offering_type: ("NO_UPFRONT")
+      attr_accessor region: ::String
+      attr_accessor resource_specification: Types::ReservationResourceSpecification
+      attr_accessor usage_price: ::Float
+      SENSITIVE: []
+    end
+
+    class DescribeReservationRequest
+      attr_accessor reservation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReservationResponse
+      attr_accessor arn: ::String
+      attr_accessor count: ::Integer
+      attr_accessor currency_code: ::String
+      attr_accessor duration: ::Integer
+      attr_accessor duration_units: ("MONTHS")
+      attr_accessor end: ::String
+      attr_accessor fixed_price: ::Float
+      attr_accessor name: ::String
+      attr_accessor offering_description: ::String
+      attr_accessor offering_id: ::String
+      attr_accessor offering_type: ("NO_UPFRONT")
+      attr_accessor region: ::String
+      attr_accessor renewal_settings: Types::RenewalSettings
+      attr_accessor reservation_id: ::String
+      attr_accessor resource_specification: Types::ReservationResourceSpecification
+      attr_accessor start: ::String
+      attr_accessor state: ("ACTIVE" | "EXPIRED" | "CANCELED" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor usage_price: ::Float
+      SENSITIVE: []
+    end
+
+    class DescribeScheduleRequest
+      attr_accessor channel_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeScheduleResponse
+      attr_accessor next_token: ::String
+      attr_accessor schedule_actions: ::Array[Types::ScheduleAction]
+      SENSITIVE: []
+    end
+
+    class DescribeThumbnailsRequest
+      attr_accessor channel_id: ::String
+      attr_accessor pipeline_id: ::String
+      attr_accessor thumbnail_type: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeThumbnailsResponse
+      attr_accessor thumbnail_details: ::Array[Types::ThumbnailDetail]
+      SENSITIVE: []
+    end
+
+    class DescribeThumbnailsResultModel
+      attr_accessor thumbnail_details: ::Array[Types::ThumbnailDetail]
+      SENSITIVE: []
+    end
+
+    class DolbyVision81Settings < Aws::EmptyStructure
+    end
+
+    class DvbNitSettings
+      attr_accessor network_id: ::Integer
+      attr_accessor network_name: ::String
+      attr_accessor rep_interval: ::Integer
+      SENSITIVE: []
+    end
+
+    class DvbSdtSettings
+      attr_accessor output_sdt: ("SDT_FOLLOW" | "SDT_FOLLOW_IF_PRESENT" | "SDT_MANUAL" | "SDT_NONE")
+      attr_accessor rep_interval: ::Integer
+      attr_accessor service_name: ::String
+      attr_accessor service_provider_name: ::String
+      SENSITIVE: []
+    end
+
+    class DvbSubDestinationSettings
+      attr_accessor alignment: ("CENTERED" | "LEFT" | "SMART")
+      attr_accessor background_color: ("BLACK" | "NONE" | "WHITE")
+      attr_accessor background_opacity: ::Integer
+      attr_accessor font: Types::InputLocation
+      attr_accessor font_color: ("BLACK" | "BLUE" | "GREEN" | "RED" | "WHITE" | "YELLOW")
+      attr_accessor font_opacity: ::Integer
+      attr_accessor font_resolution: ::Integer
+      attr_accessor font_size: ::String
+      attr_accessor outline_color: ("BLACK" | "BLUE" | "GREEN" | "RED" | "WHITE" | "YELLOW")
+      attr_accessor outline_size: ::Integer
+      attr_accessor shadow_color: ("BLACK" | "NONE" | "WHITE")
+      attr_accessor shadow_opacity: ::Integer
+      attr_accessor shadow_x_offset: ::Integer
+      attr_accessor shadow_y_offset: ::Integer
+      attr_accessor teletext_grid_control: ("FIXED" | "SCALED")
+      attr_accessor x_position: ::Integer
+      attr_accessor y_position: ::Integer
+      SENSITIVE: []
+    end
+
+    class DvbSubSourceSettings
+      attr_accessor ocr_language: ("DEU" | "ENG" | "FRA" | "NLD" | "POR" | "SPA")
+      attr_accessor pid: ::Integer
+      SENSITIVE: []
+    end
+
+    class DvbTdtSettings
+      attr_accessor rep_interval: ::Integer
+      SENSITIVE: []
+    end
+
+    class Eac3AtmosSettings
+      attr_accessor bitrate: ::Float
+      attr_accessor coding_mode: ("CODING_MODE_5_1_4" | "CODING_MODE_7_1_4" | "CODING_MODE_9_1_6")
+      attr_accessor dialnorm: ::Integer
+      attr_accessor drc_line: ("FILM_LIGHT" | "FILM_STANDARD" | "MUSIC_LIGHT" | "MUSIC_STANDARD" | "NONE" | "SPEECH")
+      attr_accessor drc_rf: ("FILM_LIGHT" | "FILM_STANDARD" | "MUSIC_LIGHT" | "MUSIC_STANDARD" | "NONE" | "SPEECH")
+      attr_accessor height_trim: ::Float
+      attr_accessor surround_trim: ::Float
+      SENSITIVE: []
+    end
+
+    class Eac3Settings
+      attr_accessor attenuation_control: ("ATTENUATE_3_DB" | "NONE")
+      attr_accessor bitrate: ::Float
+      attr_accessor bitstream_mode: ("COMMENTARY" | "COMPLETE_MAIN" | "EMERGENCY" | "HEARING_IMPAIRED" | "VISUALLY_IMPAIRED")
+      attr_accessor coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_2_0" | "CODING_MODE_3_2")
+      attr_accessor dc_filter: ("DISABLED" | "ENABLED")
+      attr_accessor dialnorm: ::Integer
+      attr_accessor drc_line: ("FILM_LIGHT" | "FILM_STANDARD" | "MUSIC_LIGHT" | "MUSIC_STANDARD" | "NONE" | "SPEECH")
+      attr_accessor drc_rf: ("FILM_LIGHT" | "FILM_STANDARD" | "MUSIC_LIGHT" | "MUSIC_STANDARD" | "NONE" | "SPEECH")
+      attr_accessor lfe_control: ("LFE" | "NO_LFE")
+      attr_accessor lfe_filter: ("DISABLED" | "ENABLED")
+      attr_accessor lo_ro_center_mix_level: ::Float
+      attr_accessor lo_ro_surround_mix_level: ::Float
+      attr_accessor lt_rt_center_mix_level: ::Float
+      attr_accessor lt_rt_surround_mix_level: ::Float
+      attr_accessor metadata_control: ("FOLLOW_INPUT" | "USE_CONFIGURED")
+      attr_accessor passthrough_control: ("NO_PASSTHROUGH" | "WHEN_POSSIBLE")
+      attr_accessor phase_control: ("NO_SHIFT" | "SHIFT_90_DEGREES")
+      attr_accessor stereo_downmix: ("DPL2" | "LO_RO" | "LT_RT" | "NOT_INDICATED")
+      attr_accessor surround_ex_mode: ("DISABLED" | "ENABLED" | "NOT_INDICATED")
+      attr_accessor surround_mode: ("DISABLED" | "ENABLED" | "NOT_INDICATED")
+      SENSITIVE: []
+    end
+
+    class EbuTtDDestinationSettings
+      attr_accessor copyright_holder: ::String
+      attr_accessor fill_line_gap: ("DISABLED" | "ENABLED")
+      attr_accessor font_family: ::String
+      attr_accessor style_control: ("EXCLUDE" | "INCLUDE")
+      SENSITIVE: []
+    end
+
+    class EmbeddedDestinationSettings < Aws::EmptyStructure
+    end
+
+    class EmbeddedPlusScte20DestinationSettings < Aws::EmptyStructure
+    end
+
+    class EmbeddedSourceSettings
+      attr_accessor convert_608_to_708: ("DISABLED" | "UPCONVERT")
+      attr_accessor scte_20_detection: ("AUTO" | "OFF")
+      attr_accessor source_608_channel_number: ::Integer
+      attr_accessor source_608_track_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class Empty < Aws::EmptyStructure
+    end
+
+    class EncoderSettings
+      attr_accessor audio_descriptions: ::Array[Types::AudioDescription]
+      attr_accessor avail_blanking: Types::AvailBlanking
+      attr_accessor avail_configuration: Types::AvailConfiguration
+      attr_accessor blackout_slate: Types::BlackoutSlate
+      attr_accessor caption_descriptions: ::Array[Types::CaptionDescription]
+      attr_accessor feature_activations: Types::FeatureActivations
+      attr_accessor global_configuration: Types::GlobalConfiguration
+      attr_accessor motion_graphics_configuration: Types::MotionGraphicsConfiguration
+      attr_accessor nielsen_configuration: Types::NielsenConfiguration
+      attr_accessor output_groups: ::Array[Types::OutputGroup]
+      attr_accessor timecode_config: Types::TimecodeConfig
+      attr_accessor video_descriptions: ::Array[Types::VideoDescription]
+      attr_accessor thumbnail_configuration: Types::ThumbnailConfiguration
+      attr_accessor color_correction_settings: Types::ColorCorrectionSettings
+      SENSITIVE: []
+    end
+
+    class EpochLockingSettings
+      attr_accessor custom_epoch: ::String
+      attr_accessor jam_sync_time: ::String
+      SENSITIVE: []
+    end
+
+    class Esam
+      attr_accessor acquisition_point_id: ::String
+      attr_accessor ad_avail_offset: ::Integer
+      attr_accessor password_param: ::String
+      attr_accessor pois_endpoint: ::String
+      attr_accessor username: ::String
+      attr_accessor zone_identity: ::String
+      SENSITIVE: []
+    end
+
+    class FailoverCondition
+      attr_accessor failover_condition_settings: Types::FailoverConditionSettings
+      SENSITIVE: []
+    end
+
+    class FailoverConditionSettings
+      attr_accessor audio_silence_settings: Types::AudioSilenceFailoverSettings
+      attr_accessor input_loss_settings: Types::InputLossFailoverSettings
+      attr_accessor video_black_settings: Types::VideoBlackFailoverSettings
+      SENSITIVE: []
+    end
+
+    class FeatureActivations
+      attr_accessor input_prepare_schedule_actions: ("DISABLED" | "ENABLED")
+      attr_accessor output_static_image_overlay_schedule_actions: ("DISABLED" | "ENABLED")
+      SENSITIVE: []
+    end
+
+    class FecOutputSettings
+      attr_accessor column_depth: ::Integer
+      attr_accessor include_fec: ("COLUMN" | "COLUMN_AND_ROW")
+      attr_accessor row_length: ::Integer
+      SENSITIVE: []
+    end
+
+    class FixedModeScheduleActionStartSettings
+      attr_accessor time: ::String
+      SENSITIVE: []
+    end
+
+    class Fmp4HlsSettings
+      attr_accessor audio_rendition_sets: ::String
+      attr_accessor nielsen_id_3_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")
+      attr_accessor timed_metadata_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")
+      SENSITIVE: []
+    end
+
+    class FollowModeScheduleActionStartSettings
+      attr_accessor follow_point: ("END" | "START")
+      attr_accessor reference_action_name: ::String
+      SENSITIVE: []
+    end
+
+    class ForbiddenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FrameCaptureCdnSettings
+      attr_accessor frame_capture_s3_settings: Types::FrameCaptureS3Settings
+      SENSITIVE: []
+    end
+
+    class FrameCaptureGroupSettings
+      attr_accessor destination: Types::OutputLocationRef
+      attr_accessor frame_capture_cdn_settings: Types::FrameCaptureCdnSettings
+      SENSITIVE: []
+    end
+
+    class FrameCaptureHlsSettings < Aws::EmptyStructure
+    end
+
+    class FrameCaptureOutputSettings
+      attr_accessor name_modifier: ::String
+      SENSITIVE: []
+    end
+
+    class FrameCaptureS3Settings
+      attr_accessor canned_acl: ("AUTHENTICATED_READ" | "BUCKET_OWNER_FULL_CONTROL" | "BUCKET_OWNER_READ" | "PUBLIC_READ")
+      SENSITIVE: []
+    end
+
+    class FrameCaptureSettings
+      attr_accessor capture_interval: ::Integer
+      attr_accessor capture_interval_units: ("MILLISECONDS" | "SECONDS")
+      attr_accessor timecode_burnin_settings: Types::TimecodeBurninSettings
+      SENSITIVE: []
+    end
+
+    class GatewayTimeoutException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GlobalConfiguration
+      attr_accessor initial_audio_gain: ::Integer
+      attr_accessor input_end_action: ("NONE" | "SWITCH_AND_LOOP_INPUTS")
+      attr_accessor input_loss_behavior: Types::InputLossBehavior
+      attr_accessor output_locking_mode: ("EPOCH_LOCKING" | "PIPELINE_LOCKING")
+      attr_accessor output_timing_source: ("INPUT_CLOCK" | "SYSTEM_CLOCK")
+      attr_accessor support_low_framerate_inputs: ("DISABLED" | "ENABLED")
+      attr_accessor output_locking_settings: Types::OutputLockingSettings
+      SENSITIVE: []
+    end
+
+    class H264ColorSpaceSettings
+      attr_accessor color_space_passthrough_settings: Types::ColorSpacePassthroughSettings
+      attr_accessor rec_601_settings: Types::Rec601Settings
+      attr_accessor rec_709_settings: Types::Rec709Settings
+      SENSITIVE: []
+    end
+
+    class H264FilterSettings
+      attr_accessor temporal_filter_settings: Types::TemporalFilterSettings
+      SENSITIVE: []
+    end
+
+    class H264Settings
+      attr_accessor adaptive_quantization: ("AUTO" | "HIGH" | "HIGHER" | "LOW" | "MAX" | "MEDIUM" | "OFF")
+      attr_accessor afd_signaling: ("AUTO" | "FIXED" | "NONE")
+      attr_accessor bitrate: ::Integer
+      attr_accessor buf_fill_pct: ::Integer
+      attr_accessor buf_size: ::Integer
+      attr_accessor color_metadata: ("IGNORE" | "INSERT")
+      attr_accessor color_space_settings: Types::H264ColorSpaceSettings
+      attr_accessor entropy_encoding: ("CABAC" | "CAVLC")
+      attr_accessor filter_settings: Types::H264FilterSettings
+      attr_accessor fixed_afd: ("AFD_0000" | "AFD_0010" | "AFD_0011" | "AFD_0100" | "AFD_1000" | "AFD_1001" | "AFD_1010" | "AFD_1011" | "AFD_1101" | "AFD_1110" | "AFD_1111")
+      attr_accessor flicker_aq: ("DISABLED" | "ENABLED")
+      attr_accessor force_field_pictures: ("DISABLED" | "ENABLED")
+      attr_accessor framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
+      attr_accessor framerate_denominator: ::Integer
+      attr_accessor framerate_numerator: ::Integer
+      attr_accessor gop_b_reference: ("DISABLED" | "ENABLED")
+      attr_accessor gop_closed_cadence: ::Integer
+      attr_accessor gop_num_b_frames: ::Integer
+      attr_accessor gop_size: ::Float
+      attr_accessor gop_size_units: ("FRAMES" | "SECONDS")
+      attr_accessor level: ("H264_LEVEL_1" | "H264_LEVEL_1_1" | "H264_LEVEL_1_2" | "H264_LEVEL_1_3" | "H264_LEVEL_2" | "H264_LEVEL_2_1" | "H264_LEVEL_2_2" | "H264_LEVEL_3" | "H264_LEVEL_3_1" | "H264_LEVEL_3_2" | "H264_LEVEL_4" | "H264_LEVEL_4_1" | "H264_LEVEL_4_2" | "H264_LEVEL_5" | "H264_LEVEL_5_1" | "H264_LEVEL_5_2" | "H264_LEVEL_AUTO")
+      attr_accessor look_ahead_rate_control: ("HIGH" | "LOW" | "MEDIUM")
+      attr_accessor max_bitrate: ::Integer
+      attr_accessor min_i_interval: ::Integer
+      attr_accessor num_ref_frames: ::Integer
+      attr_accessor par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
+      attr_accessor par_denominator: ::Integer
+      attr_accessor par_numerator: ::Integer
+      attr_accessor profile: ("BASELINE" | "HIGH" | "HIGH_10BIT" | "HIGH_422" | "HIGH_422_10BIT" | "MAIN")
+      attr_accessor quality_level: ("ENHANCED_QUALITY" | "STANDARD_QUALITY")
+      attr_accessor qvbr_quality_level: ::Integer
+      attr_accessor rate_control_mode: ("CBR" | "MULTIPLEX" | "QVBR" | "VBR")
+      attr_accessor scan_type: ("INTERLACED" | "PROGRESSIVE")
+      attr_accessor scene_change_detect: ("DISABLED" | "ENABLED")
+      attr_accessor slices: ::Integer
+      attr_accessor softness: ::Integer
+      attr_accessor spatial_aq: ("DISABLED" | "ENABLED")
+      attr_accessor subgop_length: ("DYNAMIC" | "FIXED")
+      attr_accessor syntax: ("DEFAULT" | "RP2027")
+      attr_accessor temporal_aq: ("DISABLED" | "ENABLED")
+      attr_accessor timecode_insertion: ("DISABLED" | "PIC_TIMING_SEI")
+      attr_accessor timecode_burnin_settings: Types::TimecodeBurninSettings
+      SENSITIVE: []
+    end
+
+    class H265ColorSpaceSettings
+      attr_accessor color_space_passthrough_settings: Types::ColorSpacePassthroughSettings
+      attr_accessor dolby_vision_81_settings: Types::DolbyVision81Settings
+      attr_accessor hdr_10_settings: Types::Hdr10Settings
+      attr_accessor rec_601_settings: Types::Rec601Settings
+      attr_accessor rec_709_settings: Types::Rec709Settings
+      SENSITIVE: []
+    end
+
+    class H265FilterSettings
+      attr_accessor temporal_filter_settings: Types::TemporalFilterSettings
+      SENSITIVE: []
+    end
+
+    class H265Settings
+      attr_accessor adaptive_quantization: ("AUTO" | "HIGH" | "HIGHER" | "LOW" | "MAX" | "MEDIUM" | "OFF")
+      attr_accessor afd_signaling: ("AUTO" | "FIXED" | "NONE")
+      attr_accessor alternative_transfer_function: ("INSERT" | "OMIT")
+      attr_accessor bitrate: ::Integer
+      attr_accessor buf_size: ::Integer
+      attr_accessor color_metadata: ("IGNORE" | "INSERT")
+      attr_accessor color_space_settings: Types::H265ColorSpaceSettings
+      attr_accessor filter_settings: Types::H265FilterSettings
+      attr_accessor fixed_afd: ("AFD_0000" | "AFD_0010" | "AFD_0011" | "AFD_0100" | "AFD_1000" | "AFD_1001" | "AFD_1010" | "AFD_1011" | "AFD_1101" | "AFD_1110" | "AFD_1111")
+      attr_accessor flicker_aq: ("DISABLED" | "ENABLED")
+      attr_accessor framerate_denominator: ::Integer
+      attr_accessor framerate_numerator: ::Integer
+      attr_accessor gop_closed_cadence: ::Integer
+      attr_accessor gop_size: ::Float
+      attr_accessor gop_size_units: ("FRAMES" | "SECONDS")
+      attr_accessor level: ("H265_LEVEL_1" | "H265_LEVEL_2" | "H265_LEVEL_2_1" | "H265_LEVEL_3" | "H265_LEVEL_3_1" | "H265_LEVEL_4" | "H265_LEVEL_4_1" | "H265_LEVEL_5" | "H265_LEVEL_5_1" | "H265_LEVEL_5_2" | "H265_LEVEL_6" | "H265_LEVEL_6_1" | "H265_LEVEL_6_2" | "H265_LEVEL_AUTO")
+      attr_accessor look_ahead_rate_control: ("HIGH" | "LOW" | "MEDIUM")
+      attr_accessor max_bitrate: ::Integer
+      attr_accessor min_i_interval: ::Integer
+      attr_accessor par_denominator: ::Integer
+      attr_accessor par_numerator: ::Integer
+      attr_accessor profile: ("MAIN" | "MAIN_10BIT")
+      attr_accessor qvbr_quality_level: ::Integer
+      attr_accessor rate_control_mode: ("CBR" | "MULTIPLEX" | "QVBR")
+      attr_accessor scan_type: ("INTERLACED" | "PROGRESSIVE")
+      attr_accessor scene_change_detect: ("DISABLED" | "ENABLED")
+      attr_accessor slices: ::Integer
+      attr_accessor tier: ("HIGH" | "MAIN")
+      attr_accessor timecode_insertion: ("DISABLED" | "PIC_TIMING_SEI")
+      attr_accessor timecode_burnin_settings: Types::TimecodeBurninSettings
+      SENSITIVE: []
+    end
+
+    class Hdr10Settings
+      attr_accessor max_cll: ::Integer
+      attr_accessor max_fall: ::Integer
+      SENSITIVE: []
+    end
+
+    class HlsAkamaiSettings
+      attr_accessor connection_retry_interval: ::Integer
+      attr_accessor filecache_duration: ::Integer
+      attr_accessor http_transfer_mode: ("CHUNKED" | "NON_CHUNKED")
+      attr_accessor num_retries: ::Integer
+      attr_accessor restart_delay: ::Integer
+      attr_accessor salt: ::String
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
+    class HlsBasicPutSettings
+      attr_accessor connection_retry_interval: ::Integer
+      attr_accessor filecache_duration: ::Integer
+      attr_accessor num_retries: ::Integer
+      attr_accessor restart_delay: ::Integer
+      SENSITIVE: []
+    end
+
+    class HlsCdnSettings
+      attr_accessor hls_akamai_settings: Types::HlsAkamaiSettings
+      attr_accessor hls_basic_put_settings: Types::HlsBasicPutSettings
+      attr_accessor hls_media_store_settings: Types::HlsMediaStoreSettings
+      attr_accessor hls_s3_settings: Types::HlsS3Settings
+      attr_accessor hls_webdav_settings: Types::HlsWebdavSettings
+      SENSITIVE: []
+    end
+
+    class HlsGroupSettings
+      attr_accessor ad_markers: ::Array[("ADOBE" | "ELEMENTAL" | "ELEMENTAL_SCTE35")]
+      attr_accessor base_url_content: ::String
+      attr_accessor base_url_content_1: ::String
+      attr_accessor base_url_manifest: ::String
+      attr_accessor base_url_manifest_1: ::String
+      attr_accessor caption_language_mappings: ::Array[Types::CaptionLanguageMapping]
+      attr_accessor caption_language_setting: ("INSERT" | "NONE" | "OMIT")
+      attr_accessor client_cache: ("DISABLED" | "ENABLED")
+      attr_accessor codec_specification: ("RFC_4281" | "RFC_6381")
+      attr_accessor constant_iv: ::String
+      attr_accessor destination: Types::OutputLocationRef
+      attr_accessor directory_structure: ("SINGLE_DIRECTORY" | "SUBDIRECTORY_PER_STREAM")
+      attr_accessor discontinuity_tags: ("INSERT" | "NEVER_INSERT")
+      attr_accessor encryption_type: ("AES128" | "SAMPLE_AES")
+      attr_accessor hls_cdn_settings: Types::HlsCdnSettings
+      attr_accessor hls_id_3_segment_tagging: ("DISABLED" | "ENABLED")
+      attr_accessor i_frame_only_playlists: ("DISABLED" | "STANDARD")
+      attr_accessor incomplete_segment_behavior: ("AUTO" | "SUPPRESS")
+      attr_accessor index_n_segments: ::Integer
+      attr_accessor input_loss_action: ("EMIT_OUTPUT" | "PAUSE_OUTPUT")
+      attr_accessor iv_in_manifest: ("EXCLUDE" | "INCLUDE")
+      attr_accessor iv_source: ("EXPLICIT" | "FOLLOWS_SEGMENT_NUMBER")
+      attr_accessor keep_segments: ::Integer
+      attr_accessor key_format: ::String
+      attr_accessor key_format_versions: ::String
+      attr_accessor key_provider_settings: Types::KeyProviderSettings
+      attr_accessor manifest_compression: ("GZIP" | "NONE")
+      attr_accessor manifest_duration_format: ("FLOATING_POINT" | "INTEGER")
+      attr_accessor min_segment_length: ::Integer
+      attr_accessor mode: ("LIVE" | "VOD")
+      attr_accessor output_selection: ("MANIFESTS_AND_SEGMENTS" | "SEGMENTS_ONLY" | "VARIANT_MANIFESTS_AND_SEGMENTS")
+      attr_accessor program_date_time: ("EXCLUDE" | "INCLUDE")
+      attr_accessor program_date_time_clock: ("INITIALIZE_FROM_OUTPUT_TIMECODE" | "SYSTEM_CLOCK")
+      attr_accessor program_date_time_period: ::Integer
+      attr_accessor redundant_manifest: ("DISABLED" | "ENABLED")
+      attr_accessor segment_length: ::Integer
+      attr_accessor segmentation_mode: ("USE_INPUT_SEGMENTATION" | "USE_SEGMENT_DURATION")
+      attr_accessor segments_per_subdirectory: ::Integer
+      attr_accessor stream_inf_resolution: ("EXCLUDE" | "INCLUDE")
+      attr_accessor timed_metadata_id_3_frame: ("NONE" | "PRIV" | "TDRL")
+      attr_accessor timed_metadata_id_3_period: ::Integer
+      attr_accessor timestamp_delta_milliseconds: ::Integer
+      attr_accessor ts_file_mode: ("SEGMENTED_FILES" | "SINGLE_FILE")
+      SENSITIVE: []
+    end
+
+    class HlsId3SegmentTaggingScheduleActionSettings
+      attr_accessor tag: ::String
+      attr_accessor id_3: ::String
+      SENSITIVE: []
+    end
+
+    class HlsInputSettings
+      attr_accessor bandwidth: ::Integer
+      attr_accessor buffer_segments: ::Integer
+      attr_accessor retries: ::Integer
+      attr_accessor retry_interval: ::Integer
+      attr_accessor scte_35_source: ("MANIFEST" | "SEGMENTS")
+      SENSITIVE: []
+    end
+
+    class HlsMediaStoreSettings
+      attr_accessor connection_retry_interval: ::Integer
+      attr_accessor filecache_duration: ::Integer
+      attr_accessor media_store_storage_class: ("TEMPORAL")
+      attr_accessor num_retries: ::Integer
+      attr_accessor restart_delay: ::Integer
+      SENSITIVE: []
+    end
+
+    class HlsOutputSettings
+      attr_accessor h265_packaging_type: ("HEV1" | "HVC1")
+      attr_accessor hls_settings: Types::HlsSettings
+      attr_accessor name_modifier: ::String
+      attr_accessor segment_modifier: ::String
+      SENSITIVE: []
+    end
+
+    class HlsS3Settings
+      attr_accessor canned_acl: ("AUTHENTICATED_READ" | "BUCKET_OWNER_FULL_CONTROL" | "BUCKET_OWNER_READ" | "PUBLIC_READ")
+      SENSITIVE: []
+    end
+
+    class HlsSettings
+      attr_accessor audio_only_hls_settings: Types::AudioOnlyHlsSettings
+      attr_accessor fmp_4_hls_settings: Types::Fmp4HlsSettings
+      attr_accessor frame_capture_hls_settings: Types::FrameCaptureHlsSettings
+      attr_accessor standard_hls_settings: Types::StandardHlsSettings
+      SENSITIVE: []
+    end
+
+    class HlsTimedMetadataScheduleActionSettings
+      attr_accessor id_3: ::String
+      SENSITIVE: []
+    end
+
+    class HlsWebdavSettings
+      attr_accessor connection_retry_interval: ::Integer
+      attr_accessor filecache_duration: ::Integer
+      attr_accessor http_transfer_mode: ("CHUNKED" | "NON_CHUNKED")
+      attr_accessor num_retries: ::Integer
+      attr_accessor restart_delay: ::Integer
+      SENSITIVE: []
+    end
+
+    class HtmlMotionGraphicsSettings < Aws::EmptyStructure
+    end
+
+    class ImmediateModeScheduleActionStartSettings < Aws::EmptyStructure
+    end
+
+    class Input
+      attr_accessor arn: ::String
+      attr_accessor attached_channels: ::Array[::String]
+      attr_accessor destinations: ::Array[Types::InputDestination]
+      attr_accessor id: ::String
+      attr_accessor input_class: ("STANDARD" | "SINGLE_PIPELINE")
+      attr_accessor input_devices: ::Array[Types::InputDeviceSettings]
+      attr_accessor input_partner_ids: ::Array[::String]
+      attr_accessor input_source_type: ("STATIC" | "DYNAMIC")
+      attr_accessor media_connect_flows: ::Array[Types::MediaConnectFlow]
+      attr_accessor name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor sources: ::Array[Types::InputSource]
+      attr_accessor state: ("CREATING" | "DETACHED" | "ATTACHED" | "DELETING" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE")
+      SENSITIVE: []
+    end
+
+    class InputAttachment
+      attr_accessor automatic_input_failover_settings: Types::AutomaticInputFailoverSettings
+      attr_accessor input_attachment_name: ::String
+      attr_accessor input_id: ::String
+      attr_accessor input_settings: Types::InputSettings
+      SENSITIVE: []
+    end
+
+    class InputChannelLevel
+      attr_accessor gain: ::Integer
+      attr_accessor input_channel: ::Integer
+      SENSITIVE: []
+    end
+
+    class InputClippingSettings
+      attr_accessor input_timecode_source: ("ZEROBASED" | "EMBEDDED")
+      attr_accessor start_timecode: Types::StartTimecode
+      attr_accessor stop_timecode: Types::StopTimecode
+      SENSITIVE: []
+    end
+
+    class InputDestination
+      attr_accessor ip: ::String
+      attr_accessor port: ::String
+      attr_accessor url: ::String
+      attr_accessor vpc: Types::InputDestinationVpc
+      SENSITIVE: []
+    end
+
+    class InputDestinationRequest
+      attr_accessor stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class InputDestinationVpc
+      attr_accessor availability_zone: ::String
+      attr_accessor network_interface_id: ::String
+      SENSITIVE: []
+    end
+
+    class InputDevice
+      attr_accessor arn: ::String
+      attr_accessor connection_state: ("DISCONNECTED" | "CONNECTED")
+      attr_accessor device_settings_sync_state: ("SYNCED" | "SYNCING")
+      attr_accessor device_update_status: ("UP_TO_DATE" | "NOT_UP_TO_DATE" | "UPDATING")
+      attr_accessor hd_device_settings: Types::InputDeviceHdSettings
+      attr_accessor id: ::String
+      attr_accessor mac_address: ::String
+      attr_accessor name: ::String
+      attr_accessor network_settings: Types::InputDeviceNetworkSettings
+      attr_accessor serial_number: ::String
+      attr_accessor type: ("HD" | "UHD")
+      attr_accessor uhd_device_settings: Types::InputDeviceUhdSettings
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor availability_zone: ::String
+      attr_accessor medialive_input_arns: ::Array[::String]
+      attr_accessor output_type: ("NONE" | "MEDIALIVE_INPUT" | "MEDIACONNECT_FLOW")
+      SENSITIVE: []
+    end
+
+    class InputDeviceConfigurableSettings
+      attr_accessor configured_input: ("AUTO" | "HDMI" | "SDI")
+      attr_accessor max_bitrate: ::Integer
+      attr_accessor latency_ms: ::Integer
+      attr_accessor codec: ("HEVC" | "AVC")
+      attr_accessor mediaconnect_settings: Types::InputDeviceMediaConnectConfigurableSettings
+      attr_accessor audio_channel_pairs: ::Array[Types::InputDeviceConfigurableAudioChannelPairConfig]
+      SENSITIVE: []
+    end
+
+    class InputDeviceConfigurationValidationError
+      attr_accessor message: ::String
+      attr_accessor validation_errors: ::Array[Types::ValidationError]
+      SENSITIVE: []
+    end
+
+    class InputDeviceHdSettings
+      attr_accessor active_input: ("HDMI" | "SDI")
+      attr_accessor configured_input: ("AUTO" | "HDMI" | "SDI")
+      attr_accessor device_state: ("IDLE" | "STREAMING")
+      attr_accessor framerate: ::Float
+      attr_accessor height: ::Integer
+      attr_accessor max_bitrate: ::Integer
+      attr_accessor scan_type: ("INTERLACED" | "PROGRESSIVE")
+      attr_accessor width: ::Integer
+      attr_accessor latency_ms: ::Integer
+      SENSITIVE: []
+    end
+
+    class InputDeviceMediaConnectConfigurableSettings
+      attr_accessor flow_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor secret_arn: ::String
+      attr_accessor source_name: ::String
+      SENSITIVE: []
+    end
+
+    class InputDeviceMediaConnectSettings
+      attr_accessor flow_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor secret_arn: ::String
+      attr_accessor source_name: ::String
+      SENSITIVE: []
+    end
+
+    class InputDeviceNetworkSettings
+      attr_accessor dns_addresses: ::Array[::String]
+      attr_accessor gateway: ::String
+      attr_accessor ip_address: ::String
+      attr_accessor ip_scheme: ("STATIC" | "DHCP")
+      attr_accessor subnet_mask: ::String
+      SENSITIVE: []
+    end
+
+    class InputDeviceRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class InputDeviceSettings
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class InputDeviceSummary
+      attr_accessor arn: ::String
+      attr_accessor connection_state: ("DISCONNECTED" | "CONNECTED")
+      attr_accessor device_settings_sync_state: ("SYNCED" | "SYNCING")
+      attr_accessor device_update_status: ("UP_TO_DATE" | "NOT_UP_TO_DATE" | "UPDATING")
+      attr_accessor hd_device_settings: Types::InputDeviceHdSettings
+      attr_accessor id: ::String
+      attr_accessor mac_address: ::String
+      attr_accessor name: ::String
+      attr_accessor network_settings: Types::InputDeviceNetworkSettings
+      attr_accessor serial_number: ::String
+      attr_accessor type: ("HD" | "UHD")
+      attr_accessor uhd_device_settings: Types::InputDeviceUhdSettings
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor availability_zone: ::String
+      attr_accessor medialive_input_arns: ::Array[::String]
+      attr_accessor output_type: ("NONE" | "MEDIALIVE_INPUT" | "MEDIACONNECT_FLOW")
+      SENSITIVE: []
+    end
+
+    class InputDeviceUhdSettings
+      attr_accessor active_input: ("HDMI" | "SDI")
+      attr_accessor configured_input: ("AUTO" | "HDMI" | "SDI")
+      attr_accessor device_state: ("IDLE" | "STREAMING")
+      attr_accessor framerate: ::Float
+      attr_accessor height: ::Integer
+      attr_accessor max_bitrate: ::Integer
+      attr_accessor scan_type: ("INTERLACED" | "PROGRESSIVE")
+      attr_accessor width: ::Integer
+      attr_accessor latency_ms: ::Integer
+      attr_accessor codec: ("HEVC" | "AVC")
+      attr_accessor mediaconnect_settings: Types::InputDeviceMediaConnectSettings
+      attr_accessor audio_channel_pairs: ::Array[Types::InputDeviceUhdAudioChannelPairConfig]
+      SENSITIVE: []
+    end
+
+    class InputLocation
+      attr_accessor password_param: ::String
+      attr_accessor uri: ::String
+      attr_accessor username: ::String
+      SENSITIVE: []
+    end
+
+    class InputLossBehavior
+      attr_accessor black_frame_msec: ::Integer
+      attr_accessor input_loss_image_color: ::String
+      attr_accessor input_loss_image_slate: Types::InputLocation
+      attr_accessor input_loss_image_type: ("COLOR" | "SLATE")
+      attr_accessor repeat_frame_msec: ::Integer
+      SENSITIVE: []
+    end
+
+    class InputLossFailoverSettings
+      attr_accessor input_loss_threshold_msec: ::Integer
+      SENSITIVE: []
+    end
+
+    class InputPrepareScheduleActionSettings
+      attr_accessor input_attachment_name_reference: ::String
+      attr_accessor input_clipping_settings: Types::InputClippingSettings
+      attr_accessor url_path: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InputSecurityGroup
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor state: ("IDLE" | "IN_USE" | "UPDATING" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor whitelist_rules: ::Array[Types::InputWhitelistRule]
+      SENSITIVE: []
+    end
+
+    class InputSecurityGroupWhitelistRequest
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor whitelist_rules: ::Array[Types::InputWhitelistRuleCidr]
+      SENSITIVE: []
+    end
+
+    class InputSettings
+      attr_accessor audio_selectors: ::Array[Types::AudioSelector]
+      attr_accessor caption_selectors: ::Array[Types::CaptionSelector]
+      attr_accessor deblock_filter: ("DISABLED" | "ENABLED")
+      attr_accessor denoise_filter: ("DISABLED" | "ENABLED")
+      attr_accessor filter_strength: ::Integer
+      attr_accessor input_filter: ("AUTO" | "DISABLED" | "FORCED")
+      attr_accessor network_input_settings: Types::NetworkInputSettings
+      attr_accessor scte_35_pid: ::Integer
+      attr_accessor smpte_2038_data_preference: ("IGNORE" | "PREFER")
+      attr_accessor source_end_behavior: ("CONTINUE" | "LOOP")
+      attr_accessor video_selector: Types::VideoSelector
+      SENSITIVE: []
+    end
+
+    class InputSource
+      attr_accessor password_param: ::String
+      attr_accessor url: ::String
+      attr_accessor username: ::String
+      SENSITIVE: []
+    end
+
+    class InputSourceRequest
+      attr_accessor password_param: ::String
+      attr_accessor url: ::String
+      attr_accessor username: ::String
+      SENSITIVE: []
+    end
+
+    class InputSpecification
+      attr_accessor codec: ("MPEG2" | "AVC" | "HEVC")
+      attr_accessor maximum_bitrate: ("MAX_10_MBPS" | "MAX_20_MBPS" | "MAX_50_MBPS")
+      attr_accessor resolution: ("SD" | "HD" | "UHD")
+      SENSITIVE: []
+    end
+
+    class InputSwitchScheduleActionSettings
+      attr_accessor input_attachment_name_reference: ::String
+      attr_accessor input_clipping_settings: Types::InputClippingSettings
+      attr_accessor url_path: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InputVpcRequest
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InputWhitelistRule
+      attr_accessor cidr: ::String
+      SENSITIVE: []
+    end
+
+    class InputWhitelistRuleCidr
+      attr_accessor cidr: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServiceError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequest
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KeyProviderSettings
+      attr_accessor static_key_settings: Types::StaticKeySettings
+      SENSITIVE: []
+    end
+
+    class LimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelsResponse
+      attr_accessor channels: ::Array[Types::ChannelSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelsResultModel
+      attr_accessor channels: ::Array[Types::ChannelSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInputDeviceTransfersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor transfer_type: ::String
+      SENSITIVE: []
+    end
+
+    class ListInputDeviceTransfersResponse
+      attr_accessor input_device_transfers: ::Array[Types::TransferringInputDeviceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInputDeviceTransfersResultModel
+      attr_accessor input_device_transfers: ::Array[Types::TransferringInputDeviceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInputDevicesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInputDevicesResponse
+      attr_accessor input_devices: ::Array[Types::InputDeviceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInputDevicesResultModel
+      attr_accessor input_devices: ::Array[Types::InputDeviceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInputSecurityGroupsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInputSecurityGroupsResponse
+      attr_accessor input_security_groups: ::Array[Types::InputSecurityGroup]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInputSecurityGroupsResultModel
+      attr_accessor input_security_groups: ::Array[Types::InputSecurityGroup]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInputsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInputsResponse
+      attr_accessor inputs: ::Array[Types::Input]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInputsResultModel
+      attr_accessor inputs: ::Array[Types::Input]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMultiplexProgramsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor multiplex_id: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMultiplexProgramsResponse
+      attr_accessor multiplex_programs: ::Array[Types::MultiplexProgramSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMultiplexProgramsResultModel
+      attr_accessor multiplex_programs: ::Array[Types::MultiplexProgramSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMultiplexesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMultiplexesResponse
+      attr_accessor multiplexes: ::Array[Types::MultiplexSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMultiplexesResultModel
+      attr_accessor multiplexes: ::Array[Types::MultiplexSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOfferingsRequest
+      attr_accessor channel_class: ::String
+      attr_accessor channel_configuration: ::String
+      attr_accessor codec: ::String
+      attr_accessor duration: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor maximum_bitrate: ::String
+      attr_accessor maximum_framerate: ::String
+      attr_accessor next_token: ::String
+      attr_accessor resolution: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor special_feature: ::String
+      attr_accessor video_quality: ::String
+      SENSITIVE: []
+    end
+
+    class ListOfferingsResponse
+      attr_accessor next_token: ::String
+      attr_accessor offerings: ::Array[Types::Offering]
+      SENSITIVE: []
+    end
+
+    class ListOfferingsResultModel
+      attr_accessor next_token: ::String
+      attr_accessor offerings: ::Array[Types::Offering]
+      SENSITIVE: []
+    end
+
+    class ListReservationsRequest
+      attr_accessor channel_class: ::String
+      attr_accessor codec: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor maximum_bitrate: ::String
+      attr_accessor maximum_framerate: ::String
+      attr_accessor next_token: ::String
+      attr_accessor resolution: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor special_feature: ::String
+      attr_accessor video_quality: ::String
+      SENSITIVE: []
+    end
+
+    class ListReservationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor reservations: ::Array[Types::Reservation]
+      SENSITIVE: []
+    end
+
+    class ListReservationsResultModel
+      attr_accessor next_token: ::String
+      attr_accessor reservations: ::Array[Types::Reservation]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class M2tsSettings
+      attr_accessor absent_input_audio_behavior: ("DROP" | "ENCODE_SILENCE")
+      attr_accessor arib: ("DISABLED" | "ENABLED")
+      attr_accessor arib_captions_pid: ::String
+      attr_accessor arib_captions_pid_control: ("AUTO" | "USE_CONFIGURED")
+      attr_accessor audio_buffer_model: ("ATSC" | "DVB")
+      attr_accessor audio_frames_per_pes: ::Integer
+      attr_accessor audio_pids: ::String
+      attr_accessor audio_stream_type: ("ATSC" | "DVB")
+      attr_accessor bitrate: ::Integer
+      attr_accessor buffer_model: ("MULTIPLEX" | "NONE")
+      attr_accessor cc_descriptor: ("DISABLED" | "ENABLED")
+      attr_accessor dvb_nit_settings: Types::DvbNitSettings
+      attr_accessor dvb_sdt_settings: Types::DvbSdtSettings
+      attr_accessor dvb_sub_pids: ::String
+      attr_accessor dvb_tdt_settings: Types::DvbTdtSettings
+      attr_accessor dvb_teletext_pid: ::String
+      attr_accessor ebif: ("NONE" | "PASSTHROUGH")
+      attr_accessor ebp_audio_interval: ("VIDEO_AND_FIXED_INTERVALS" | "VIDEO_INTERVAL")
+      attr_accessor ebp_lookahead_ms: ::Integer
+      attr_accessor ebp_placement: ("VIDEO_AND_AUDIO_PIDS" | "VIDEO_PID")
+      attr_accessor ecm_pid: ::String
+      attr_accessor es_rate_in_pes: ("EXCLUDE" | "INCLUDE")
+      attr_accessor etv_platform_pid: ::String
+      attr_accessor etv_signal_pid: ::String
+      attr_accessor fragment_time: ::Float
+      attr_accessor klv: ("NONE" | "PASSTHROUGH")
+      attr_accessor klv_data_pids: ::String
+      attr_accessor nielsen_id_3_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")
+      attr_accessor null_packet_bitrate: ::Float
+      attr_accessor pat_interval: ::Integer
+      attr_accessor pcr_control: ("CONFIGURED_PCR_PERIOD" | "PCR_EVERY_PES_PACKET")
+      attr_accessor pcr_period: ::Integer
+      attr_accessor pcr_pid: ::String
+      attr_accessor pmt_interval: ::Integer
+      attr_accessor pmt_pid: ::String
+      attr_accessor program_num: ::Integer
+      attr_accessor rate_mode: ("CBR" | "VBR")
+      attr_accessor scte_27_pids: ::String
+      attr_accessor scte_35_control: ("NONE" | "PASSTHROUGH")
+      attr_accessor scte_35_pid: ::String
+      attr_accessor scte_35_preroll_pullup_milliseconds: ::Float
+      attr_accessor segmentation_markers: ("EBP" | "EBP_LEGACY" | "NONE" | "PSI_SEGSTART" | "RAI_ADAPT" | "RAI_SEGSTART")
+      attr_accessor segmentation_style: ("MAINTAIN_CADENCE" | "RESET_CADENCE")
+      attr_accessor segmentation_time: ::Float
+      attr_accessor timed_metadata_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")
+      attr_accessor timed_metadata_pid: ::String
+      attr_accessor transport_stream_id: ::Integer
+      attr_accessor video_pid: ::String
+      SENSITIVE: []
+    end
+
+    class M3u8Settings
+      attr_accessor audio_frames_per_pes: ::Integer
+      attr_accessor audio_pids: ::String
+      attr_accessor ecm_pid: ::String
+      attr_accessor nielsen_id_3_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")
+      attr_accessor pat_interval: ::Integer
+      attr_accessor pcr_control: ("CONFIGURED_PCR_PERIOD" | "PCR_EVERY_PES_PACKET")
+      attr_accessor pcr_period: ::Integer
+      attr_accessor pcr_pid: ::String
+      attr_accessor pmt_interval: ::Integer
+      attr_accessor pmt_pid: ::String
+      attr_accessor program_num: ::Integer
+      attr_accessor scte_35_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")
+      attr_accessor scte_35_pid: ::String
+      attr_accessor timed_metadata_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")
+      attr_accessor timed_metadata_pid: ::String
+      attr_accessor transport_stream_id: ::Integer
+      attr_accessor video_pid: ::String
+      attr_accessor klv_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")
+      attr_accessor klv_data_pids: ::String
+      SENSITIVE: []
+    end
+
+    class MaintenanceCreateSettings
+      attr_accessor maintenance_day: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")
+      attr_accessor maintenance_start_time: ::String
+      SENSITIVE: []
+    end
+
+    class MaintenanceStatus
+      attr_accessor maintenance_day: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")
+      attr_accessor maintenance_deadline: ::String
+      attr_accessor maintenance_scheduled_date: ::String
+      attr_accessor maintenance_start_time: ::String
+      SENSITIVE: []
+    end
+
+    class MaintenanceUpdateSettings
+      attr_accessor maintenance_day: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")
+      attr_accessor maintenance_scheduled_date: ::String
+      attr_accessor maintenance_start_time: ::String
+      SENSITIVE: []
+    end
+
+    class MediaConnectFlow
+      attr_accessor flow_arn: ::String
+      SENSITIVE: []
+    end
+
+    class MediaConnectFlowRequest
+      attr_accessor flow_arn: ::String
+      SENSITIVE: []
+    end
+
+    class MediaPackageGroupSettings
+      attr_accessor destination: Types::OutputLocationRef
+      SENSITIVE: []
+    end
+
+    class MediaPackageOutputDestinationSettings
+      attr_accessor channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class MediaPackageOutputSettings < Aws::EmptyStructure
+    end
+
+    class MotionGraphicsActivateScheduleActionSettings
+      attr_accessor duration: ::Integer
+      attr_accessor password_param: ::String
+      attr_accessor url: ::String
+      attr_accessor username: ::String
+      SENSITIVE: []
+    end
+
+    class MotionGraphicsConfiguration
+      attr_accessor motion_graphics_insertion: ("DISABLED" | "ENABLED")
+      attr_accessor motion_graphics_settings: Types::MotionGraphicsSettings
+      SENSITIVE: []
+    end
+
+    class MotionGraphicsDeactivateScheduleActionSettings < Aws::EmptyStructure
+    end
+
+    class MotionGraphicsSettings
+      attr_accessor html_motion_graphics_settings: Types::HtmlMotionGraphicsSettings
+      SENSITIVE: []
+    end
+
+    class Mp2Settings
+      attr_accessor bitrate: ::Float
+      attr_accessor coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_2_0")
+      attr_accessor sample_rate: ::Float
+      SENSITIVE: []
+    end
+
+    class Mpeg2FilterSettings
+      attr_accessor temporal_filter_settings: Types::TemporalFilterSettings
+      SENSITIVE: []
+    end
+
+    class Mpeg2Settings
+      attr_accessor adaptive_quantization: ("AUTO" | "HIGH" | "LOW" | "MEDIUM" | "OFF")
+      attr_accessor afd_signaling: ("AUTO" | "FIXED" | "NONE")
+      attr_accessor color_metadata: ("IGNORE" | "INSERT")
+      attr_accessor color_space: ("AUTO" | "PASSTHROUGH")
+      attr_accessor display_aspect_ratio: ("DISPLAYRATIO16X9" | "DISPLAYRATIO4X3")
+      attr_accessor filter_settings: Types::Mpeg2FilterSettings
+      attr_accessor fixed_afd: ("AFD_0000" | "AFD_0010" | "AFD_0011" | "AFD_0100" | "AFD_1000" | "AFD_1001" | "AFD_1010" | "AFD_1011" | "AFD_1101" | "AFD_1110" | "AFD_1111")
+      attr_accessor framerate_denominator: ::Integer
+      attr_accessor framerate_numerator: ::Integer
+      attr_accessor gop_closed_cadence: ::Integer
+      attr_accessor gop_num_b_frames: ::Integer
+      attr_accessor gop_size: ::Float
+      attr_accessor gop_size_units: ("FRAMES" | "SECONDS")
+      attr_accessor scan_type: ("INTERLACED" | "PROGRESSIVE")
+      attr_accessor subgop_length: ("DYNAMIC" | "FIXED")
+      attr_accessor timecode_insertion: ("DISABLED" | "GOP_TIMECODE")
+      attr_accessor timecode_burnin_settings: Types::TimecodeBurninSettings
+      SENSITIVE: []
+    end
+
+    class MsSmoothGroupSettings
+      attr_accessor acquisition_point_id: ::String
+      attr_accessor audio_only_timecode_control: ("PASSTHROUGH" | "USE_CONFIGURED_CLOCK")
+      attr_accessor certificate_mode: ("SELF_SIGNED" | "VERIFY_AUTHENTICITY")
+      attr_accessor connection_retry_interval: ::Integer
+      attr_accessor destination: Types::OutputLocationRef
+      attr_accessor event_id: ::String
+      attr_accessor event_id_mode: ("NO_EVENT_ID" | "USE_CONFIGURED" | "USE_TIMESTAMP")
+      attr_accessor event_stop_behavior: ("NONE" | "SEND_EOS")
+      attr_accessor filecache_duration: ::Integer
+      attr_accessor fragment_length: ::Integer
+      attr_accessor input_loss_action: ("EMIT_OUTPUT" | "PAUSE_OUTPUT")
+      attr_accessor num_retries: ::Integer
+      attr_accessor restart_delay: ::Integer
+      attr_accessor segmentation_mode: ("USE_INPUT_SEGMENTATION" | "USE_SEGMENT_DURATION")
+      attr_accessor send_delay_ms: ::Integer
+      attr_accessor sparse_track_type: ("NONE" | "SCTE_35" | "SCTE_35_WITHOUT_SEGMENTATION")
+      attr_accessor stream_manifest_behavior: ("DO_NOT_SEND" | "SEND")
+      attr_accessor timestamp_offset: ::String
+      attr_accessor timestamp_offset_mode: ("USE_CONFIGURED_OFFSET" | "USE_EVENT_START_DATE")
+      SENSITIVE: []
+    end
+
+    class MsSmoothOutputSettings
+      attr_accessor h265_packaging_type: ("HEV1" | "HVC1")
+      attr_accessor name_modifier: ::String
+      SENSITIVE: []
+    end
+
+    class Multiplex
+      attr_accessor arn: ::String
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor destinations: ::Array[Types::MultiplexOutputDestination]
+      attr_accessor id: ::String
+      attr_accessor multiplex_settings: Types::MultiplexSettings
+      attr_accessor name: ::String
+      attr_accessor pipelines_running_count: ::Integer
+      attr_accessor program_count: ::Integer
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MultiplexConfigurationValidationError
+      attr_accessor message: ::String
+      attr_accessor validation_errors: ::Array[Types::ValidationError]
+      SENSITIVE: []
+    end
+
+    class MultiplexGroupSettings < Aws::EmptyStructure
+    end
+
+    class MultiplexMediaConnectOutputDestinationSettings
+      attr_accessor entitlement_arn: ::String
+      SENSITIVE: []
+    end
+
+    class MultiplexOutputDestination
+      attr_accessor media_connect_settings: Types::MultiplexMediaConnectOutputDestinationSettings
+      SENSITIVE: []
+    end
+
+    class MultiplexOutputSettings
+      attr_accessor destination: Types::OutputLocationRef
+      SENSITIVE: []
+    end
+
+    class MultiplexProgram
+      attr_accessor channel_id: ::String
+      attr_accessor multiplex_program_settings: Types::MultiplexProgramSettings
+      attr_accessor packet_identifiers_map: Types::MultiplexProgramPacketIdentifiersMap
+      attr_accessor pipeline_details: ::Array[Types::MultiplexProgramPipelineDetail]
+      attr_accessor program_name: ::String
+      SENSITIVE: []
+    end
+
+    class MultiplexProgramChannelDestinationSettings
+      attr_accessor multiplex_id: ::String
+      attr_accessor program_name: ::String
+      SENSITIVE: []
+    end
+
+    class MultiplexProgramPacketIdentifiersMap
+      attr_accessor audio_pids: ::Array[::Integer]
+      attr_accessor dvb_sub_pids: ::Array[::Integer]
+      attr_accessor dvb_teletext_pid: ::Integer
+      attr_accessor etv_platform_pid: ::Integer
+      attr_accessor etv_signal_pid: ::Integer
+      attr_accessor klv_data_pids: ::Array[::Integer]
+      attr_accessor pcr_pid: ::Integer
+      attr_accessor pmt_pid: ::Integer
+      attr_accessor private_metadata_pid: ::Integer
+      attr_accessor scte_27_pids: ::Array[::Integer]
+      attr_accessor scte_35_pid: ::Integer
+      attr_accessor timed_metadata_pid: ::Integer
+      attr_accessor video_pid: ::Integer
+      SENSITIVE: []
+    end
+
+    class MultiplexProgramPipelineDetail
+      attr_accessor active_channel_pipeline: ::String
+      attr_accessor pipeline_id: ::String
+      SENSITIVE: []
+    end
+
+    class MultiplexProgramServiceDescriptor
+      attr_accessor provider_name: ::String
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class MultiplexProgramSettings
+      attr_accessor preferred_channel_pipeline: ("CURRENTLY_ACTIVE" | "PIPELINE_0" | "PIPELINE_1")
+      attr_accessor program_number: ::Integer
+      attr_accessor service_descriptor: Types::MultiplexProgramServiceDescriptor
+      attr_accessor video_settings: Types::MultiplexVideoSettings
+      SENSITIVE: []
+    end
+
+    class MultiplexProgramSummary
+      attr_accessor channel_id: ::String
+      attr_accessor program_name: ::String
+      SENSITIVE: []
+    end
+
+    class MultiplexSettings
+      attr_accessor maximum_video_buffer_delay_milliseconds: ::Integer
+      attr_accessor transport_stream_bitrate: ::Integer
+      attr_accessor transport_stream_id: ::Integer
+      attr_accessor transport_stream_reserved_bitrate: ::Integer
+      SENSITIVE: []
+    end
+
+    class MultiplexSettingsSummary
+      attr_accessor transport_stream_bitrate: ::Integer
+      SENSITIVE: []
+    end
+
+    class MultiplexStatmuxVideoSettings
+      attr_accessor maximum_bitrate: ::Integer
+      attr_accessor minimum_bitrate: ::Integer
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class MultiplexSummary
+      attr_accessor arn: ::String
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor multiplex_settings: Types::MultiplexSettingsSummary
+      attr_accessor name: ::String
+      attr_accessor pipelines_running_count: ::Integer
+      attr_accessor program_count: ::Integer
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MultiplexVideoSettings
+      attr_accessor constant_bitrate: ::Integer
+      attr_accessor statmux_settings: Types::MultiplexStatmuxVideoSettings
+      SENSITIVE: []
+    end
+
+    class NetworkInputSettings
+      attr_accessor hls_input_settings: Types::HlsInputSettings
+      attr_accessor server_validation: ("CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME" | "CHECK_CRYPTOGRAPHY_ONLY")
+      SENSITIVE: []
+    end
+
+    class NielsenCBET
+      attr_accessor cbet_check_digit_string: ::String
+      attr_accessor cbet_stepaside: ("DISABLED" | "ENABLED")
+      attr_accessor csid: ::String
+      SENSITIVE: []
+    end
+
+    class NielsenConfiguration
+      attr_accessor distributor_id: ::String
+      attr_accessor nielsen_pcm_to_id_3_tagging: ("DISABLED" | "ENABLED")
+      SENSITIVE: []
+    end
+
+    class NielsenNaesIiNw
+      attr_accessor check_digit_string: ::String
+      attr_accessor sid: ::Float
+      attr_accessor timezone: ("AMERICA_PUERTO_RICO" | "US_ALASKA" | "US_ARIZONA" | "US_CENTRAL" | "US_EASTERN" | "US_HAWAII" | "US_MOUNTAIN" | "US_PACIFIC" | "US_SAMOA" | "UTC")
+      SENSITIVE: []
+    end
+
+    class NielsenWatermarksSettings
+      attr_accessor nielsen_cbet_settings: Types::NielsenCBET
+      attr_accessor nielsen_distribution_type: ("FINAL_DISTRIBUTOR" | "PROGRAM_CONTENT")
+      attr_accessor nielsen_naes_ii_nw_settings: Types::NielsenNaesIiNw
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Offering
+      attr_accessor arn: ::String
+      attr_accessor currency_code: ::String
+      attr_accessor duration: ::Integer
+      attr_accessor duration_units: ("MONTHS")
+      attr_accessor fixed_price: ::Float
+      attr_accessor offering_description: ::String
+      attr_accessor offering_id: ::String
+      attr_accessor offering_type: ("NO_UPFRONT")
+      attr_accessor region: ::String
+      attr_accessor resource_specification: Types::ReservationResourceSpecification
+      attr_accessor usage_price: ::Float
+      SENSITIVE: []
+    end
+
+    class Output
+      attr_accessor audio_description_names: ::Array[::String]
+      attr_accessor caption_description_names: ::Array[::String]
+      attr_accessor output_name: ::String
+      attr_accessor output_settings: Types::OutputSettings
+      attr_accessor video_description_name: ::String
+      SENSITIVE: []
+    end
+
+    class OutputDestination
+      attr_accessor id: ::String
+      attr_accessor media_package_settings: ::Array[Types::MediaPackageOutputDestinationSettings]
+      attr_accessor multiplex_settings: Types::MultiplexProgramChannelDestinationSettings
+      attr_accessor settings: ::Array[Types::OutputDestinationSettings]
+      SENSITIVE: []
+    end
+
+    class OutputDestinationSettings
+      attr_accessor password_param: ::String
+      attr_accessor stream_name: ::String
+      attr_accessor url: ::String
+      attr_accessor username: ::String
+      SENSITIVE: []
+    end
+
+    class OutputGroup
+      attr_accessor name: ::String
+      attr_accessor output_group_settings: Types::OutputGroupSettings
+      attr_accessor outputs: ::Array[Types::Output]
+      SENSITIVE: []
+    end
+
+    class OutputGroupSettings
+      attr_accessor archive_group_settings: Types::ArchiveGroupSettings
+      attr_accessor frame_capture_group_settings: Types::FrameCaptureGroupSettings
+      attr_accessor hls_group_settings: Types::HlsGroupSettings
+      attr_accessor media_package_group_settings: Types::MediaPackageGroupSettings
+      attr_accessor ms_smooth_group_settings: Types::MsSmoothGroupSettings
+      attr_accessor multiplex_group_settings: Types::MultiplexGroupSettings
+      attr_accessor rtmp_group_settings: Types::RtmpGroupSettings
+      attr_accessor udp_group_settings: Types::UdpGroupSettings
+      SENSITIVE: []
+    end
+
+    class OutputLocationRef
+      attr_accessor destination_ref_id: ::String
+      SENSITIVE: []
+    end
+
+    class OutputLockingSettings
+      attr_accessor epoch_locking_settings: Types::EpochLockingSettings
+      attr_accessor pipeline_locking_settings: Types::PipelineLockingSettings
+      SENSITIVE: []
+    end
+
+    class OutputSettings
+      attr_accessor archive_output_settings: Types::ArchiveOutputSettings
+      attr_accessor frame_capture_output_settings: Types::FrameCaptureOutputSettings
+      attr_accessor hls_output_settings: Types::HlsOutputSettings
+      attr_accessor media_package_output_settings: Types::MediaPackageOutputSettings
+      attr_accessor ms_smooth_output_settings: Types::MsSmoothOutputSettings
+      attr_accessor multiplex_output_settings: Types::MultiplexOutputSettings
+      attr_accessor rtmp_output_settings: Types::RtmpOutputSettings
+      attr_accessor udp_output_settings: Types::UdpOutputSettings
+      SENSITIVE: []
+    end
+
+    class PassThroughSettings < Aws::EmptyStructure
+    end
+
+    class PauseStateScheduleActionSettings
+      attr_accessor pipelines: ::Array[Types::PipelinePauseStateSettings]
+      SENSITIVE: []
+    end
+
+    class PipelineDetail
+      attr_accessor active_input_attachment_name: ::String
+      attr_accessor active_input_switch_action_name: ::String
+      attr_accessor active_motion_graphics_action_name: ::String
+      attr_accessor active_motion_graphics_uri: ::String
+      attr_accessor pipeline_id: ::String
+      SENSITIVE: []
+    end
+
+    class PipelineLockingSettings < Aws::EmptyStructure
+    end
+
+    class PipelinePauseStateSettings
+      attr_accessor pipeline_id: ("PIPELINE_0" | "PIPELINE_1")
+      SENSITIVE: []
+    end
+
+    class PurchaseOffering
+      attr_accessor count: ::Integer
+      attr_accessor name: ::String
+      attr_accessor renewal_settings: Types::RenewalSettings
+      attr_accessor request_id: ::String
+      attr_accessor start: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PurchaseOfferingRequest
+      attr_accessor count: ::Integer
+      attr_accessor name: ::String
+      attr_accessor offering_id: ::String
+      attr_accessor renewal_settings: Types::RenewalSettings
+      attr_accessor request_id: ::String
+      attr_accessor start: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PurchaseOfferingResponse
+      attr_accessor reservation: Types::Reservation
+      SENSITIVE: []
+    end
+
+    class PurchaseOfferingResultModel
+      attr_accessor reservation: Types::Reservation
+      SENSITIVE: []
+    end
+
+    class RawSettings < Aws::EmptyStructure
+    end
+
+    class RebootInputDevice
+      attr_accessor force: ("NO" | "YES")
+      SENSITIVE: []
+    end
+
+    class RebootInputDeviceRequest
+      attr_accessor force: ("NO" | "YES")
+      attr_accessor input_device_id: ::String
+      SENSITIVE: []
+    end
+
+    class RebootInputDeviceResponse < Aws::EmptyStructure
+    end
+
+    class Rec601Settings < Aws::EmptyStructure
+    end
+
+    class Rec709Settings < Aws::EmptyStructure
+    end
+
+    class RejectInputDeviceTransferRequest
+      attr_accessor input_device_id: ::String
+      SENSITIVE: []
+    end
+
+    class RejectInputDeviceTransferResponse < Aws::EmptyStructure
+    end
+
+    class RemixSettings
+      attr_accessor channel_mappings: ::Array[Types::AudioChannelMapping]
+      attr_accessor channels_in: ::Integer
+      attr_accessor channels_out: ::Integer
+      SENSITIVE: []
+    end
+
+    class RenewalSettings
+      attr_accessor automatic_renewal: ("DISABLED" | "ENABLED" | "UNAVAILABLE")
+      attr_accessor renewal_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class Reservation
+      attr_accessor arn: ::String
+      attr_accessor count: ::Integer
+      attr_accessor currency_code: ::String
+      attr_accessor duration: ::Integer
+      attr_accessor duration_units: ("MONTHS")
+      attr_accessor end: ::String
+      attr_accessor fixed_price: ::Float
+      attr_accessor name: ::String
+      attr_accessor offering_description: ::String
+      attr_accessor offering_id: ::String
+      attr_accessor offering_type: ("NO_UPFRONT")
+      attr_accessor region: ::String
+      attr_accessor renewal_settings: Types::RenewalSettings
+      attr_accessor reservation_id: ::String
+      attr_accessor resource_specification: Types::ReservationResourceSpecification
+      attr_accessor start: ::String
+      attr_accessor state: ("ACTIVE" | "EXPIRED" | "CANCELED" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor usage_price: ::Float
+      SENSITIVE: []
+    end
+
+    class ReservationResourceSpecification
+      attr_accessor channel_class: ("STANDARD" | "SINGLE_PIPELINE")
+      attr_accessor codec: ("MPEG2" | "AVC" | "HEVC" | "AUDIO" | "LINK")
+      attr_accessor maximum_bitrate: ("MAX_10_MBPS" | "MAX_20_MBPS" | "MAX_50_MBPS")
+      attr_accessor maximum_framerate: ("MAX_30_FPS" | "MAX_60_FPS")
+      attr_accessor resolution: ("SD" | "HD" | "FHD" | "UHD")
+      attr_accessor resource_type: ("INPUT" | "OUTPUT" | "MULTIPLEX" | "CHANNEL")
+      attr_accessor special_feature: ("ADVANCED_AUDIO" | "AUDIO_NORMALIZATION" | "MGHD" | "MGUHD")
+      attr_accessor video_quality: ("STANDARD" | "ENHANCED" | "PREMIUM")
+      SENSITIVE: []
+    end
+
+    class ResourceConflict
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RtmpCaptionInfoDestinationSettings < Aws::EmptyStructure
+    end
+
+    class RtmpGroupSettings
+      attr_accessor ad_markers: ::Array[("ON_CUE_POINT_SCTE35")]
+      attr_accessor authentication_scheme: ("AKAMAI" | "COMMON")
+      attr_accessor cache_full_behavior: ("DISCONNECT_IMMEDIATELY" | "WAIT_FOR_SERVER")
+      attr_accessor cache_length: ::Integer
+      attr_accessor caption_data: ("ALL" | "FIELD1_608" | "FIELD1_AND_FIELD2_608")
+      attr_accessor input_loss_action: ("EMIT_OUTPUT" | "PAUSE_OUTPUT")
+      attr_accessor restart_delay: ::Integer
+      attr_accessor include_filler_nal_units: ("AUTO" | "DROP" | "INCLUDE")
+      SENSITIVE: []
+    end
+
+    class RtmpOutputSettings
+      attr_accessor certificate_mode: ("SELF_SIGNED" | "VERIFY_AUTHENTICITY")
+      attr_accessor connection_retry_interval: ::Integer
+      attr_accessor destination: Types::OutputLocationRef
+      attr_accessor num_retries: ::Integer
+      SENSITIVE: []
+    end
+
+    class ScheduleAction
+      attr_accessor action_name: ::String
+      attr_accessor schedule_action_settings: Types::ScheduleActionSettings
+      attr_accessor schedule_action_start_settings: Types::ScheduleActionStartSettings
+      SENSITIVE: []
+    end
+
+    class ScheduleActionSettings
+      attr_accessor hls_id_3_segment_tagging_settings: Types::HlsId3SegmentTaggingScheduleActionSettings
+      attr_accessor hls_timed_metadata_settings: Types::HlsTimedMetadataScheduleActionSettings
+      attr_accessor input_prepare_settings: Types::InputPrepareScheduleActionSettings
+      attr_accessor input_switch_settings: Types::InputSwitchScheduleActionSettings
+      attr_accessor motion_graphics_image_activate_settings: Types::MotionGraphicsActivateScheduleActionSettings
+      attr_accessor motion_graphics_image_deactivate_settings: Types::MotionGraphicsDeactivateScheduleActionSettings
+      attr_accessor pause_state_settings: Types::PauseStateScheduleActionSettings
+      attr_accessor scte_35_input_settings: Types::Scte35InputScheduleActionSettings
+      attr_accessor scte_35_return_to_network_settings: Types::Scte35ReturnToNetworkScheduleActionSettings
+      attr_accessor scte_35_splice_insert_settings: Types::Scte35SpliceInsertScheduleActionSettings
+      attr_accessor scte_35_time_signal_settings: Types::Scte35TimeSignalScheduleActionSettings
+      attr_accessor static_image_activate_settings: Types::StaticImageActivateScheduleActionSettings
+      attr_accessor static_image_deactivate_settings: Types::StaticImageDeactivateScheduleActionSettings
+      attr_accessor static_image_output_activate_settings: Types::StaticImageOutputActivateScheduleActionSettings
+      attr_accessor static_image_output_deactivate_settings: Types::StaticImageOutputDeactivateScheduleActionSettings
+      SENSITIVE: []
+    end
+
+    class ScheduleActionStartSettings
+      attr_accessor fixed_mode_schedule_action_start_settings: Types::FixedModeScheduleActionStartSettings
+      attr_accessor follow_mode_schedule_action_start_settings: Types::FollowModeScheduleActionStartSettings
+      attr_accessor immediate_mode_schedule_action_start_settings: Types::ImmediateModeScheduleActionStartSettings
+      SENSITIVE: []
+    end
+
+    class ScheduleDeleteResultModel < Aws::EmptyStructure
+    end
+
+    class ScheduleDescribeResultModel
+      attr_accessor next_token: ::String
+      attr_accessor schedule_actions: ::Array[Types::ScheduleAction]
+      SENSITIVE: []
+    end
+
+    class Scte20PlusEmbeddedDestinationSettings < Aws::EmptyStructure
+    end
+
+    class Scte20SourceSettings
+      attr_accessor convert_608_to_708: ("DISABLED" | "UPCONVERT")
+      attr_accessor source_608_channel_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class Scte27DestinationSettings < Aws::EmptyStructure
+    end
+
+    class Scte27SourceSettings
+      attr_accessor ocr_language: ("DEU" | "ENG" | "FRA" | "NLD" | "POR" | "SPA")
+      attr_accessor pid: ::Integer
+      SENSITIVE: []
+    end
+
+    class Scte35DeliveryRestrictions
+      attr_accessor archive_allowed_flag: ("ARCHIVE_NOT_ALLOWED" | "ARCHIVE_ALLOWED")
+      attr_accessor device_restrictions: ("NONE" | "RESTRICT_GROUP0" | "RESTRICT_GROUP1" | "RESTRICT_GROUP2")
+      attr_accessor no_regional_blackout_flag: ("REGIONAL_BLACKOUT" | "NO_REGIONAL_BLACKOUT")
+      attr_accessor web_delivery_allowed_flag: ("WEB_DELIVERY_NOT_ALLOWED" | "WEB_DELIVERY_ALLOWED")
+      SENSITIVE: []
+    end
+
+    class Scte35Descriptor
+      attr_accessor scte_35_descriptor_settings: Types::Scte35DescriptorSettings
+      SENSITIVE: []
+    end
+
+    class Scte35DescriptorSettings
+      attr_accessor segmentation_descriptor_scte_35_descriptor_settings: Types::Scte35SegmentationDescriptor
+      SENSITIVE: []
+    end
+
+    class Scte35InputScheduleActionSettings
+      attr_accessor input_attachment_name_reference: ::String
+      attr_accessor mode: ("FIXED" | "FOLLOW_ACTIVE")
+      SENSITIVE: []
+    end
+
+    class Scte35ReturnToNetworkScheduleActionSettings
+      attr_accessor splice_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class Scte35SegmentationDescriptor
+      attr_accessor delivery_restrictions: Types::Scte35DeliveryRestrictions
+      attr_accessor segment_num: ::Integer
+      attr_accessor segmentation_cancel_indicator: ("SEGMENTATION_EVENT_NOT_CANCELED" | "SEGMENTATION_EVENT_CANCELED")
+      attr_accessor segmentation_duration: ::Integer
+      attr_accessor segmentation_event_id: ::Integer
+      attr_accessor segmentation_type_id: ::Integer
+      attr_accessor segmentation_upid: ::String
+      attr_accessor segmentation_upid_type: ::Integer
+      attr_accessor segments_expected: ::Integer
+      attr_accessor sub_segment_num: ::Integer
+      attr_accessor sub_segments_expected: ::Integer
+      SENSITIVE: []
+    end
+
+    class Scte35SpliceInsert
+      attr_accessor ad_avail_offset: ::Integer
+      attr_accessor no_regional_blackout_flag: ("FOLLOW" | "IGNORE")
+      attr_accessor web_delivery_allowed_flag: ("FOLLOW" | "IGNORE")
+      SENSITIVE: []
+    end
+
+    class Scte35SpliceInsertScheduleActionSettings
+      attr_accessor duration: ::Integer
+      attr_accessor splice_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class Scte35TimeSignalApos
+      attr_accessor ad_avail_offset: ::Integer
+      attr_accessor no_regional_blackout_flag: ("FOLLOW" | "IGNORE")
+      attr_accessor web_delivery_allowed_flag: ("FOLLOW" | "IGNORE")
+      SENSITIVE: []
+    end
+
+    class Scte35TimeSignalScheduleActionSettings
+      attr_accessor scte_35_descriptors: ::Array[Types::Scte35Descriptor]
+      SENSITIVE: []
+    end
+
+    class SmpteTtDestinationSettings < Aws::EmptyStructure
+    end
+
+    class StandardHlsSettings
+      attr_accessor audio_rendition_sets: ::String
+      attr_accessor m3u_8_settings: Types::M3u8Settings
+      SENSITIVE: []
+    end
+
+    class StartChannelRequest
+      attr_accessor channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartChannelResponse
+      attr_accessor arn: ::String
+      attr_accessor cdi_input_specification: Types::CdiInputSpecification
+      attr_accessor channel_class: ("STANDARD" | "SINGLE_PIPELINE")
+      attr_accessor destinations: ::Array[Types::OutputDestination]
+      attr_accessor egress_endpoints: ::Array[Types::ChannelEgressEndpoint]
+      attr_accessor encoder_settings: Types::EncoderSettings
+      attr_accessor id: ::String
+      attr_accessor input_attachments: ::Array[Types::InputAttachment]
+      attr_accessor input_specification: Types::InputSpecification
+      attr_accessor log_level: ("ERROR" | "WARNING" | "INFO" | "DEBUG" | "DISABLED")
+      attr_accessor maintenance: Types::MaintenanceStatus
+      attr_accessor name: ::String
+      attr_accessor pipeline_details: ::Array[Types::PipelineDetail]
+      attr_accessor pipelines_running_count: ::Integer
+      attr_accessor role_arn: ::String
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED" | "UPDATING" | "UPDATE_FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc: Types::VpcOutputSettingsDescription
+      SENSITIVE: []
+    end
+
+    class StartInputDeviceMaintenanceWindowRequest
+      attr_accessor input_device_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartInputDeviceMaintenanceWindowResponse < Aws::EmptyStructure
+    end
+
+    class StartInputDeviceRequest
+      attr_accessor input_device_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartInputDeviceResponse < Aws::EmptyStructure
+    end
+
+    class StartMultiplexRequest
+      attr_accessor multiplex_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartMultiplexResponse
+      attr_accessor arn: ::String
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor destinations: ::Array[Types::MultiplexOutputDestination]
+      attr_accessor id: ::String
+      attr_accessor multiplex_settings: Types::MultiplexSettings
+      attr_accessor name: ::String
+      attr_accessor pipelines_running_count: ::Integer
+      attr_accessor program_count: ::Integer
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartTimecode
+      attr_accessor timecode: ::String
+      SENSITIVE: []
+    end
+
+    class StaticImageActivateScheduleActionSettings
+      attr_accessor duration: ::Integer
+      attr_accessor fade_in: ::Integer
+      attr_accessor fade_out: ::Integer
+      attr_accessor height: ::Integer
+      attr_accessor image: Types::InputLocation
+      attr_accessor image_x: ::Integer
+      attr_accessor image_y: ::Integer
+      attr_accessor layer: ::Integer
+      attr_accessor opacity: ::Integer
+      attr_accessor width: ::Integer
+      SENSITIVE: []
+    end
+
+    class StaticImageDeactivateScheduleActionSettings
+      attr_accessor fade_out: ::Integer
+      attr_accessor layer: ::Integer
+      SENSITIVE: []
+    end
+
+    class StaticImageOutputActivateScheduleActionSettings
+      attr_accessor duration: ::Integer
+      attr_accessor fade_in: ::Integer
+      attr_accessor fade_out: ::Integer
+      attr_accessor height: ::Integer
+      attr_accessor image: Types::InputLocation
+      attr_accessor image_x: ::Integer
+      attr_accessor image_y: ::Integer
+      attr_accessor layer: ::Integer
+      attr_accessor opacity: ::Integer
+      attr_accessor output_names: ::Array[::String]
+      attr_accessor width: ::Integer
+      SENSITIVE: []
+    end
+
+    class StaticImageOutputDeactivateScheduleActionSettings
+      attr_accessor fade_out: ::Integer
+      attr_accessor layer: ::Integer
+      attr_accessor output_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StaticKeySettings
+      attr_accessor key_provider_server: Types::InputLocation
+      attr_accessor static_key_value: ::String
+      SENSITIVE: []
+    end
+
+    class StopChannelRequest
+      attr_accessor channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopChannelResponse
+      attr_accessor arn: ::String
+      attr_accessor cdi_input_specification: Types::CdiInputSpecification
+      attr_accessor channel_class: ("STANDARD" | "SINGLE_PIPELINE")
+      attr_accessor destinations: ::Array[Types::OutputDestination]
+      attr_accessor egress_endpoints: ::Array[Types::ChannelEgressEndpoint]
+      attr_accessor encoder_settings: Types::EncoderSettings
+      attr_accessor id: ::String
+      attr_accessor input_attachments: ::Array[Types::InputAttachment]
+      attr_accessor input_specification: Types::InputSpecification
+      attr_accessor log_level: ("ERROR" | "WARNING" | "INFO" | "DEBUG" | "DISABLED")
+      attr_accessor maintenance: Types::MaintenanceStatus
+      attr_accessor name: ::String
+      attr_accessor pipeline_details: ::Array[Types::PipelineDetail]
+      attr_accessor pipelines_running_count: ::Integer
+      attr_accessor role_arn: ::String
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED" | "UPDATING" | "UPDATE_FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc: Types::VpcOutputSettingsDescription
+      SENSITIVE: []
+    end
+
+    class StopInputDeviceRequest
+      attr_accessor input_device_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopInputDeviceResponse < Aws::EmptyStructure
+    end
+
+    class StopMultiplexRequest
+      attr_accessor multiplex_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopMultiplexResponse
+      attr_accessor arn: ::String
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor destinations: ::Array[Types::MultiplexOutputDestination]
+      attr_accessor id: ::String
+      attr_accessor multiplex_settings: Types::MultiplexSettings
+      attr_accessor name: ::String
+      attr_accessor pipelines_running_count: ::Integer
+      attr_accessor program_count: ::Integer
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StopTimecode
+      attr_accessor last_frame_clipping_behavior: ("EXCLUDE_LAST_FRAME" | "INCLUDE_LAST_FRAME")
+      attr_accessor timecode: ::String
+      SENSITIVE: []
+    end
+
+    class TagsModel
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TeletextDestinationSettings < Aws::EmptyStructure
+    end
+
+    class TeletextSourceSettings
+      attr_accessor output_rectangle: Types::CaptionRectangle
+      attr_accessor page_number: ::String
+      SENSITIVE: []
+    end
+
+    class TemporalFilterSettings
+      attr_accessor post_filter_sharpening: ("AUTO" | "DISABLED" | "ENABLED")
+      attr_accessor strength: ("AUTO" | "STRENGTH_1" | "STRENGTH_2" | "STRENGTH_3" | "STRENGTH_4" | "STRENGTH_5" | "STRENGTH_6" | "STRENGTH_7" | "STRENGTH_8" | "STRENGTH_9" | "STRENGTH_10" | "STRENGTH_11" | "STRENGTH_12" | "STRENGTH_13" | "STRENGTH_14" | "STRENGTH_15" | "STRENGTH_16")
+      SENSITIVE: []
+    end
+
+    class Thumbnail
+      attr_accessor body: ::String
+      attr_accessor content_type: ::String
+      attr_accessor thumbnail_type: ("UNSPECIFIED" | "CURRENT_ACTIVE")
+      attr_accessor time_stamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ThumbnailConfiguration
+      attr_accessor state: ("AUTO" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ThumbnailData
+      attr_accessor body: ::String
+      SENSITIVE: []
+    end
+
+    class ThumbnailDetail
+      attr_accessor pipeline_id: ::String
+      attr_accessor thumbnails: ::Array[Types::Thumbnail]
+      SENSITIVE: []
+    end
+
+    class ThumbnailNoData < Aws::EmptyStructure
+    end
+
+    class TimecodeBurninSettings
+      attr_accessor font_size: ("EXTRA_SMALL_10" | "LARGE_48" | "MEDIUM_32" | "SMALL_16")
+      attr_accessor position: ("BOTTOM_CENTER" | "BOTTOM_LEFT" | "BOTTOM_RIGHT" | "MIDDLE_CENTER" | "MIDDLE_LEFT" | "MIDDLE_RIGHT" | "TOP_CENTER" | "TOP_LEFT" | "TOP_RIGHT")
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class TimecodeConfig
+      attr_accessor source: ("EMBEDDED" | "SYSTEMCLOCK" | "ZEROBASED")
+      attr_accessor sync_threshold: ::Integer
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TransferInputDevice
+      attr_accessor target_customer_id: ::String
+      attr_accessor target_region: ::String
+      attr_accessor transfer_message: ::String
+      SENSITIVE: []
+    end
+
+    class TransferInputDeviceRequest
+      attr_accessor input_device_id: ::String
+      attr_accessor target_customer_id: ::String
+      attr_accessor target_region: ::String
+      attr_accessor transfer_message: ::String
+      SENSITIVE: []
+    end
+
+    class TransferInputDeviceResponse < Aws::EmptyStructure
+    end
+
+    class TransferringInputDeviceSummary
+      attr_accessor id: ::String
+      attr_accessor message: ::String
+      attr_accessor target_customer_id: ::String
+      attr_accessor transfer_type: ("OUTGOING" | "INCOMING")
+      SENSITIVE: []
+    end
+
+    class TtmlDestinationSettings
+      attr_accessor style_control: ("PASSTHROUGH" | "USE_CONFIGURED")
+      SENSITIVE: []
+    end
+
+    class UdpContainerSettings
+      attr_accessor m2ts_settings: Types::M2tsSettings
+      SENSITIVE: []
+    end
+
+    class UdpGroupSettings
+      attr_accessor input_loss_action: ("DROP_PROGRAM" | "DROP_TS" | "EMIT_PROGRAM")
+      attr_accessor timed_metadata_id_3_frame: ("NONE" | "PRIV" | "TDRL")
+      attr_accessor timed_metadata_id_3_period: ::Integer
+      SENSITIVE: []
+    end
+
+    class UdpOutputSettings
+      attr_accessor buffer_msec: ::Integer
+      attr_accessor container_settings: Types::UdpContainerSettings
+      attr_accessor destination: Types::OutputLocationRef
+      attr_accessor fec_output_settings: Types::FecOutputSettings
+      SENSITIVE: []
+    end
+
+    class UnprocessableEntityException
+      attr_accessor element_path: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAccountConfigurationRequest
+      attr_accessor account_configuration: Types::AccountConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateAccountConfigurationRequestModel
+      attr_accessor account_configuration: Types::AccountConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateAccountConfigurationResponse
+      attr_accessor account_configuration: Types::AccountConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateAccountConfigurationResultModel
+      attr_accessor account_configuration: Types::AccountConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateChannel
+      attr_accessor cdi_input_specification: Types::CdiInputSpecification
+      attr_accessor destinations: ::Array[Types::OutputDestination]
+      attr_accessor encoder_settings: Types::EncoderSettings
+      attr_accessor input_attachments: ::Array[Types::InputAttachment]
+      attr_accessor input_specification: Types::InputSpecification
+      attr_accessor log_level: ("ERROR" | "WARNING" | "INFO" | "DEBUG" | "DISABLED")
+      attr_accessor maintenance: Types::MaintenanceUpdateSettings
+      attr_accessor name: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateChannelClass
+      attr_accessor channel_class: ("STANDARD" | "SINGLE_PIPELINE")
+      attr_accessor destinations: ::Array[Types::OutputDestination]
+      SENSITIVE: []
+    end
+
+    class UpdateChannelClassRequest
+      attr_accessor channel_class: ("STANDARD" | "SINGLE_PIPELINE")
+      attr_accessor channel_id: ::String
+      attr_accessor destinations: ::Array[Types::OutputDestination]
+      SENSITIVE: []
+    end
+
+    class UpdateChannelClassResponse
+      attr_accessor channel: Types::Channel
+      SENSITIVE: []
+    end
+
+    class UpdateChannelRequest
+      attr_accessor cdi_input_specification: Types::CdiInputSpecification
+      attr_accessor channel_id: ::String
+      attr_accessor destinations: ::Array[Types::OutputDestination]
+      attr_accessor encoder_settings: Types::EncoderSettings
+      attr_accessor input_attachments: ::Array[Types::InputAttachment]
+      attr_accessor input_specification: Types::InputSpecification
+      attr_accessor log_level: ("ERROR" | "WARNING" | "INFO" | "DEBUG" | "DISABLED")
+      attr_accessor maintenance: Types::MaintenanceUpdateSettings
+      attr_accessor name: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateChannelResponse
+      attr_accessor channel: Types::Channel
+      SENSITIVE: []
+    end
+
+    class UpdateChannelResultModel
+      attr_accessor channel: Types::Channel
+      SENSITIVE: []
+    end
+
+    class UpdateInput
+      attr_accessor destinations: ::Array[Types::InputDestinationRequest]
+      attr_accessor input_devices: ::Array[Types::InputDeviceRequest]
+      attr_accessor input_security_groups: ::Array[::String]
+      attr_accessor media_connect_flows: ::Array[Types::MediaConnectFlowRequest]
+      attr_accessor name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor sources: ::Array[Types::InputSourceRequest]
+      SENSITIVE: []
+    end
+
+    class UpdateInputDevice
+      attr_accessor hd_device_settings: Types::InputDeviceConfigurableSettings
+      attr_accessor name: ::String
+      attr_accessor uhd_device_settings: Types::InputDeviceConfigurableSettings
+      attr_accessor availability_zone: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateInputDeviceRequest
+      attr_accessor hd_device_settings: Types::InputDeviceConfigurableSettings
+      attr_accessor input_device_id: ::String
+      attr_accessor name: ::String
+      attr_accessor uhd_device_settings: Types::InputDeviceConfigurableSettings
+      attr_accessor availability_zone: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateInputDeviceResponse
+      attr_accessor arn: ::String
+      attr_accessor connection_state: ("DISCONNECTED" | "CONNECTED")
+      attr_accessor device_settings_sync_state: ("SYNCED" | "SYNCING")
+      attr_accessor device_update_status: ("UP_TO_DATE" | "NOT_UP_TO_DATE" | "UPDATING")
+      attr_accessor hd_device_settings: Types::InputDeviceHdSettings
+      attr_accessor id: ::String
+      attr_accessor mac_address: ::String
+      attr_accessor name: ::String
+      attr_accessor network_settings: Types::InputDeviceNetworkSettings
+      attr_accessor serial_number: ::String
+      attr_accessor type: ("HD" | "UHD")
+      attr_accessor uhd_device_settings: Types::InputDeviceUhdSettings
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor availability_zone: ::String
+      attr_accessor medialive_input_arns: ::Array[::String]
+      attr_accessor output_type: ("NONE" | "MEDIALIVE_INPUT" | "MEDIACONNECT_FLOW")
+      SENSITIVE: []
+    end
+
+    class UpdateInputRequest
+      attr_accessor destinations: ::Array[Types::InputDestinationRequest]
+      attr_accessor input_devices: ::Array[Types::InputDeviceRequest]
+      attr_accessor input_id: ::String
+      attr_accessor input_security_groups: ::Array[::String]
+      attr_accessor media_connect_flows: ::Array[Types::MediaConnectFlowRequest]
+      attr_accessor name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor sources: ::Array[Types::InputSourceRequest]
+      SENSITIVE: []
+    end
+
+    class UpdateInputResponse
+      attr_accessor input: Types::Input
+      SENSITIVE: []
+    end
+
+    class UpdateInputResultModel
+      attr_accessor input: Types::Input
+      SENSITIVE: []
+    end
+
+    class UpdateInputSecurityGroupRequest
+      attr_accessor input_security_group_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor whitelist_rules: ::Array[Types::InputWhitelistRuleCidr]
+      SENSITIVE: []
+    end
+
+    class UpdateInputSecurityGroupResponse
+      attr_accessor security_group: Types::InputSecurityGroup
+      SENSITIVE: []
+    end
+
+    class UpdateInputSecurityGroupResultModel
+      attr_accessor security_group: Types::InputSecurityGroup
+      SENSITIVE: []
+    end
+
+    class UpdateMultiplex
+      attr_accessor multiplex_settings: Types::MultiplexSettings
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateMultiplexProgram
+      attr_accessor multiplex_program_settings: Types::MultiplexProgramSettings
+      SENSITIVE: []
+    end
+
+    class UpdateMultiplexProgramRequest
+      attr_accessor multiplex_id: ::String
+      attr_accessor multiplex_program_settings: Types::MultiplexProgramSettings
+      attr_accessor program_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateMultiplexProgramResponse
+      attr_accessor multiplex_program: Types::MultiplexProgram
+      SENSITIVE: []
+    end
+
+    class UpdateMultiplexProgramResultModel
+      attr_accessor multiplex_program: Types::MultiplexProgram
+      SENSITIVE: []
+    end
+
+    class UpdateMultiplexRequest
+      attr_accessor multiplex_id: ::String
+      attr_accessor multiplex_settings: Types::MultiplexSettings
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateMultiplexResponse
+      attr_accessor multiplex: Types::Multiplex
+      SENSITIVE: []
+    end
+
+    class UpdateMultiplexResultModel
+      attr_accessor multiplex: Types::Multiplex
+      SENSITIVE: []
+    end
+
+    class UpdateReservation
+      attr_accessor name: ::String
+      attr_accessor renewal_settings: Types::RenewalSettings
+      SENSITIVE: []
+    end
+
+    class UpdateReservationRequest
+      attr_accessor name: ::String
+      attr_accessor renewal_settings: Types::RenewalSettings
+      attr_accessor reservation_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateReservationResponse
+      attr_accessor reservation: Types::Reservation
+      SENSITIVE: []
+    end
+
+    class UpdateReservationResultModel
+      attr_accessor reservation: Types::Reservation
+      SENSITIVE: []
+    end
+
+    class ValidationError
+      attr_accessor element_path: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class VideoBlackFailoverSettings
+      attr_accessor black_detect_threshold: ::Float
+      attr_accessor video_black_threshold_msec: ::Integer
+      SENSITIVE: []
+    end
+
+    class VideoCodecSettings
+      attr_accessor frame_capture_settings: Types::FrameCaptureSettings
+      attr_accessor h264_settings: Types::H264Settings
+      attr_accessor h265_settings: Types::H265Settings
+      attr_accessor mpeg_2_settings: Types::Mpeg2Settings
+      SENSITIVE: []
+    end
+
+    class VideoDescription
+      attr_accessor codec_settings: Types::VideoCodecSettings
+      attr_accessor height: ::Integer
+      attr_accessor name: ::String
+      attr_accessor respond_to_afd: ("NONE" | "PASSTHROUGH" | "RESPOND")
+      attr_accessor scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT")
+      attr_accessor sharpness: ::Integer
+      attr_accessor width: ::Integer
+      SENSITIVE: []
+    end
+
+    class VideoSelector
+      attr_accessor color_space: ("FOLLOW" | "HDR10" | "HLG_2020" | "REC_601" | "REC_709")
+      attr_accessor color_space_settings: Types::VideoSelectorColorSpaceSettings
+      attr_accessor color_space_usage: ("FALLBACK" | "FORCE")
+      attr_accessor selector_settings: Types::VideoSelectorSettings
+      SENSITIVE: []
+    end
+
+    class VideoSelectorColorSpaceSettings
+      attr_accessor hdr_10_settings: Types::Hdr10Settings
+      SENSITIVE: []
+    end
+
+    class VideoSelectorPid
+      attr_accessor pid: ::Integer
+      SENSITIVE: []
+    end
+
+    class VideoSelectorProgramId
+      attr_accessor program_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class VideoSelectorSettings
+      attr_accessor video_selector_pid: Types::VideoSelectorPid
+      attr_accessor video_selector_program_id: Types::VideoSelectorProgramId
+      SENSITIVE: []
+    end
+
+    class VpcOutputSettings
+      attr_accessor public_address_allocation_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class VpcOutputSettingsDescription
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor network_interface_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class WavSettings
+      attr_accessor bit_depth: ::Float
+      attr_accessor coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_2_0" | "CODING_MODE_4_0" | "CODING_MODE_8_0")
+      attr_accessor sample_rate: ::Float
+      SENSITIVE: []
+    end
+
+    class WebvttDestinationSettings
+      attr_accessor style_control: ("NO_STYLE_DATA" | "PASSTHROUGH")
+      SENSITIVE: []
+    end
+
+    class InputDeviceConfigurableAudioChannelPairConfig
+      attr_accessor id: ::Integer
+      attr_accessor profile: ("DISABLED" | "VBR-AAC_HHE-16000" | "VBR-AAC_HE-64000" | "VBR-AAC_LC-128000" | "CBR-AAC_HQ-192000" | "CBR-AAC_HQ-256000" | "CBR-AAC_HQ-384000" | "CBR-AAC_HQ-512000")
+      SENSITIVE: []
+    end
+
+    class InputDeviceUhdAudioChannelPairConfig
+      attr_accessor id: ::Integer
+      attr_accessor profile: ("DISABLED" | "VBR-AAC_HHE-16000" | "VBR-AAC_HE-64000" | "VBR-AAC_LC-128000" | "CBR-AAC_HQ-192000" | "CBR-AAC_HQ-256000" | "CBR-AAC_HQ-384000" | "CBR-AAC_HQ-512000")
+      SENSITIVE: []
+    end
+  end
+end

@@ -413,6 +413,7 @@ module Aws::IVS
     #   resp.channels[0].insecure_ingest #=> Boolean
     #   resp.channels[0].latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.channels[0].name #=> String
+    #   resp.channels[0].playback_restriction_policy_arn #=> String
     #   resp.channels[0].playback_url #=> String
     #   resp.channels[0].preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
     #   resp.channels[0].recording_configuration_arn #=> String
@@ -528,6 +529,11 @@ module Aws::IVS
     # @option params [String] :name
     #   Channel name.
     #
+    # @option params [String] :playback_restriction_policy_arn
+    #   Playback-restriction-policy ARN. A valid ARN value here both specifies
+    #   the ARN and enables playback restriction. Default: "" (empty string,
+    #   no playback restriction policy is applied).
+    #
     # @option params [String] :preset
     #   Optional transcode preset for the channel. This is selectable only for
     #   `ADVANCED_HD` and `ADVANCED_SD` channel types. For those channel
@@ -536,7 +542,8 @@ module Aws::IVS
     #   (`""`).
     #
     # @option params [String] :recording_configuration_arn
-    #   Recording-configuration ARN. Default: "" (empty string, recording is
+    #   Recording-configuration ARN. A valid ARN value here both specifies the
+    #   ARN and enables recording. Default: "" (empty string, recording is
     #   disabled).
     #
     # @option params [Hash<String,String>] :tags
@@ -572,6 +579,7 @@ module Aws::IVS
     #     insecure_ingest: false,
     #     latency_mode: "NORMAL", # accepts NORMAL, LOW
     #     name: "ChannelName",
+    #     playback_restriction_policy_arn: "ChannelPlaybackRestrictionPolicyArn",
     #     preset: "HIGHER_BANDWIDTH_DELIVERY", # accepts HIGHER_BANDWIDTH_DELIVERY, CONSTRAINED_BANDWIDTH_DELIVERY
     #     recording_configuration_arn: "ChannelRecordingConfigurationArn",
     #     tags: {
@@ -588,6 +596,7 @@ module Aws::IVS
     #   resp.channel.insecure_ingest #=> Boolean
     #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.channel.name #=> String
+    #   resp.channel.playback_restriction_policy_arn #=> String
     #   resp.channel.playback_url #=> String
     #   resp.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
     #   resp.channel.recording_configuration_arn #=> String
@@ -606,6 +615,84 @@ module Aws::IVS
     # @param [Hash] params ({})
     def create_channel(params = {}, options = {})
       req = build_request(:create_channel, params)
+      req.send_request(options)
+    end
+
+    # Creates a new playback restriction policy, for constraining playback
+    # by countries and/or origins.
+    #
+    # @option params [Array<String>] :allowed_countries
+    #   A list of country codes that control geoblocking restriction. Allowed
+    #   values are the officially assigned [ISO 3166-1 alpha-2][1] codes.
+    #   Default: All countries (an empty array).
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+    #
+    # @option params [Array<String>] :allowed_origins
+    #   A list of origin sites that control CORS restriction. Allowed values
+    #   are the same as valid values of the Origin header defined at
+    #   [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin][1].
+    #   Default: All origins (an empty array).
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin
+    #
+    # @option params [Boolean] :enable_strict_origin_enforcement
+    #   Whether channel playback is constrained by origin site. Default:
+    #   `false`.
+    #
+    # @option params [String] :name
+    #   Playback-restriction-policy name. The value does not need to be
+    #   unique.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Array of 1-50 maps, each of the form `string:string (key:value)`. See
+    #   [Tagging Amazon Web Services Resources][1] for more information,
+    #   including restrictions that apply to tags and "Tag naming limits and
+    #   requirements"; Amazon IVS has no service-specific constraints beyond
+    #   what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
+    # @return [Types::CreatePlaybackRestrictionPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePlaybackRestrictionPolicyResponse#playback_restriction_policy #playback_restriction_policy} => Types::PlaybackRestrictionPolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_playback_restriction_policy({
+    #     allowed_countries: ["PlaybackRestrictionPolicyAllowedCountry"],
+    #     allowed_origins: ["PlaybackRestrictionPolicyAllowedOrigin"],
+    #     enable_strict_origin_enforcement: false,
+    #     name: "PlaybackRestrictionPolicyName",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.playback_restriction_policy.allowed_countries #=> Array
+    #   resp.playback_restriction_policy.allowed_countries[0] #=> String
+    #   resp.playback_restriction_policy.allowed_origins #=> Array
+    #   resp.playback_restriction_policy.allowed_origins[0] #=> String
+    #   resp.playback_restriction_policy.arn #=> String
+    #   resp.playback_restriction_policy.enable_strict_origin_enforcement #=> Boolean
+    #   resp.playback_restriction_policy.name #=> String
+    #   resp.playback_restriction_policy.tags #=> Hash
+    #   resp.playback_restriction_policy.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreatePlaybackRestrictionPolicy AWS API Documentation
+    #
+    # @overload create_playback_restriction_policy(params = {})
+    # @param [Hash] params ({})
+    def create_playback_restriction_policy(params = {}, options = {})
+      req = build_request(:create_playback_restriction_policy, params)
       req.send_request(options)
     end
 
@@ -827,6 +914,28 @@ module Aws::IVS
       req.send_request(options)
     end
 
+    # Deletes the specified playback restriction policy.
+    #
+    # @option params [required, String] :arn
+    #   ARN of the playback restriction policy to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_playback_restriction_policy({
+    #     arn: "PlaybackRestrictionPolicyArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/DeletePlaybackRestrictionPolicy AWS API Documentation
+    #
+    # @overload delete_playback_restriction_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_playback_restriction_policy(params = {}, options = {})
+      req = build_request(:delete_playback_restriction_policy, params)
+      req.send_request(options)
+    end
+
     # Deletes the recording configuration for the specified ARN.
     #
     # If you try to delete a recording configuration that is associated with
@@ -902,6 +1011,7 @@ module Aws::IVS
     #   resp.channel.insecure_ingest #=> Boolean
     #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.channel.name #=> String
+    #   resp.channel.playback_restriction_policy_arn #=> String
     #   resp.channel.playback_url #=> String
     #   resp.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
     #   resp.channel.recording_configuration_arn #=> String
@@ -955,6 +1065,42 @@ module Aws::IVS
     # @param [Hash] params ({})
     def get_playback_key_pair(params = {}, options = {})
       req = build_request(:get_playback_key_pair, params)
+      req.send_request(options)
+    end
+
+    # Gets the specified playback restriction policy.
+    #
+    # @option params [required, String] :arn
+    #   ARN of the playback restriction policy to be returned.
+    #
+    # @return [Types::GetPlaybackRestrictionPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPlaybackRestrictionPolicyResponse#playback_restriction_policy #playback_restriction_policy} => Types::PlaybackRestrictionPolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_playback_restriction_policy({
+    #     arn: "PlaybackRestrictionPolicyArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.playback_restriction_policy.allowed_countries #=> Array
+    #   resp.playback_restriction_policy.allowed_countries[0] #=> String
+    #   resp.playback_restriction_policy.allowed_origins #=> Array
+    #   resp.playback_restriction_policy.allowed_origins[0] #=> String
+    #   resp.playback_restriction_policy.arn #=> String
+    #   resp.playback_restriction_policy.enable_strict_origin_enforcement #=> Boolean
+    #   resp.playback_restriction_policy.name #=> String
+    #   resp.playback_restriction_policy.tags #=> Hash
+    #   resp.playback_restriction_policy.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetPlaybackRestrictionPolicy AWS API Documentation
+    #
+    # @overload get_playback_restriction_policy(params = {})
+    # @param [Hash] params ({})
+    def get_playback_restriction_policy(params = {}, options = {})
+      req = build_request(:get_playback_restriction_policy, params)
       req.send_request(options)
     end
 
@@ -1096,6 +1242,7 @@ module Aws::IVS
     #   resp.stream_session.channel.insecure_ingest #=> Boolean
     #   resp.stream_session.channel.latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.stream_session.channel.name #=> String
+    #   resp.stream_session.channel.playback_restriction_policy_arn #=> String
     #   resp.stream_session.channel.playback_url #=> String
     #   resp.stream_session.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
     #   resp.stream_session.channel.recording_configuration_arn #=> String
@@ -1214,6 +1361,9 @@ module Aws::IVS
     # @option params [String] :filter_by_name
     #   Filters the channel list to match the specified name.
     #
+    # @option params [String] :filter_by_playback_restriction_policy_arn
+    #   Filters the channel list to match the specified policy.
+    #
     # @option params [String] :filter_by_recording_configuration_arn
     #   Filters the channel list to match the specified
     #   recording-configuration ARN.
@@ -1236,6 +1386,7 @@ module Aws::IVS
     #
     #   resp = client.list_channels({
     #     filter_by_name: "ChannelName",
+    #     filter_by_playback_restriction_policy_arn: "ChannelPlaybackRestrictionPolicyArn",
     #     filter_by_recording_configuration_arn: "ChannelRecordingConfigurationArn",
     #     max_results: 1,
     #     next_token: "PaginationToken",
@@ -1249,6 +1400,7 @@ module Aws::IVS
     #   resp.channels[0].insecure_ingest #=> Boolean
     #   resp.channels[0].latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.channels[0].name #=> String
+    #   resp.channels[0].playback_restriction_policy_arn #=> String
     #   resp.channels[0].preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
     #   resp.channels[0].recording_configuration_arn #=> String
     #   resp.channels[0].tags #=> Hash
@@ -1310,6 +1462,52 @@ module Aws::IVS
     # @param [Hash] params ({})
     def list_playback_key_pairs(params = {}, options = {})
       req = build_request(:list_playback_key_pairs, params)
+      req.send_request(options)
+    end
+
+    # Gets summary information about playback restriction policies.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of policies to return. Default: 1.
+    #
+    # @option params [String] :next_token
+    #   The first policy to retrieve. This is used for pagination; see the
+    #   `nextToken` response field.
+    #
+    # @return [Types::ListPlaybackRestrictionPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPlaybackRestrictionPoliciesResponse#next_token #next_token} => String
+    #   * {Types::ListPlaybackRestrictionPoliciesResponse#playback_restriction_policies #playback_restriction_policies} => Array&lt;Types::PlaybackRestrictionPolicySummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_playback_restriction_policies({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.playback_restriction_policies #=> Array
+    #   resp.playback_restriction_policies[0].allowed_countries #=> Array
+    #   resp.playback_restriction_policies[0].allowed_countries[0] #=> String
+    #   resp.playback_restriction_policies[0].allowed_origins #=> Array
+    #   resp.playback_restriction_policies[0].allowed_origins[0] #=> String
+    #   resp.playback_restriction_policies[0].arn #=> String
+    #   resp.playback_restriction_policies[0].enable_strict_origin_enforcement #=> Boolean
+    #   resp.playback_restriction_policies[0].name #=> String
+    #   resp.playback_restriction_policies[0].tags #=> Hash
+    #   resp.playback_restriction_policies[0].tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListPlaybackRestrictionPolicies AWS API Documentation
+    #
+    # @overload list_playback_restriction_policies(params = {})
+    # @param [Hash] params ({})
+    def list_playback_restriction_policies(params = {}, options = {})
+      req = build_request(:list_playback_restriction_policies, params)
       req.send_request(options)
     end
 
@@ -1683,7 +1881,7 @@ module Aws::IVS
     #
     # @option params [required, Array<String>] :tag_keys
     #   Array of tags to be removed. Array of maps, each of the form
-    #   s`tring:string (key:value)`. See [Tagging Amazon Web Services
+    #   `string:string (key:value)`. See [Tagging Amazon Web Services
     #   Resources][1] for more information, including restrictions that apply
     #   to tags and "Tag naming limits and requirements"; Amazon IVS has no
     #   service-specific constraints beyond what is documented there.
@@ -1732,6 +1930,11 @@ module Aws::IVS
     # @option params [String] :name
     #   Channel name.
     #
+    # @option params [String] :playback_restriction_policy_arn
+    #   Playback-restriction-policy ARN. A valid ARN value here both specifies
+    #   the ARN and enables playback restriction. If this is set to an empty
+    #   string, playback restriction policy is disabled.
+    #
     # @option params [String] :preset
     #   Optional transcode preset for the channel. This is selectable only for
     #   `ADVANCED_HD` and `ADVANCED_SD` channel types. For those channel
@@ -1740,9 +1943,9 @@ module Aws::IVS
     #   (`""`).
     #
     # @option params [String] :recording_configuration_arn
-    #   Recording-configuration ARN. If this is set to an empty string,
-    #   recording is disabled. A value other than an empty string indicates
-    #   that recording is enabled
+    #   Recording-configuration ARN. A valid ARN value here both specifies the
+    #   ARN and enables recording. If this is set to an empty string,
+    #   recording is disabled.
     #
     # @option params [String] :type
     #   Channel type, which determines the allowable resolution and bitrate.
@@ -1766,6 +1969,7 @@ module Aws::IVS
     #     insecure_ingest: false,
     #     latency_mode: "NORMAL", # accepts NORMAL, LOW
     #     name: "ChannelName",
+    #     playback_restriction_policy_arn: "ChannelPlaybackRestrictionPolicyArn",
     #     preset: "HIGHER_BANDWIDTH_DELIVERY", # accepts HIGHER_BANDWIDTH_DELIVERY, CONSTRAINED_BANDWIDTH_DELIVERY
     #     recording_configuration_arn: "ChannelRecordingConfigurationArn",
     #     type: "BASIC", # accepts BASIC, STANDARD, ADVANCED_SD, ADVANCED_HD
@@ -1779,6 +1983,7 @@ module Aws::IVS
     #   resp.channel.insecure_ingest #=> Boolean
     #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.channel.name #=> String
+    #   resp.channel.playback_restriction_policy_arn #=> String
     #   resp.channel.playback_url #=> String
     #   resp.channel.preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
     #   resp.channel.recording_configuration_arn #=> String
@@ -1795,6 +2000,73 @@ module Aws::IVS
       req.send_request(options)
     end
 
+    # Updates a specified playback restriction policy.
+    #
+    # @option params [Array<String>] :allowed_countries
+    #   A list of country codes that control geoblocking restriction. Allowed
+    #   values are the officially assigned [ISO 3166-1 alpha-2][1] codes.
+    #   Default: All countries (an empty array).
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+    #
+    # @option params [Array<String>] :allowed_origins
+    #   A list of origin sites that control CORS restriction. Allowed values
+    #   are the same as valid values of the Origin header defined at
+    #   [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin][1].
+    #   Default: All origins (an empty array).
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin
+    #
+    # @option params [required, String] :arn
+    #   ARN of the playback-restriction-policy to be updated.
+    #
+    # @option params [Boolean] :enable_strict_origin_enforcement
+    #   Whether channel playback is constrained by origin site. Default:
+    #   `false`.
+    #
+    # @option params [String] :name
+    #   Playback-restriction-policy name. The value does not need to be
+    #   unique.
+    #
+    # @return [Types::UpdatePlaybackRestrictionPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePlaybackRestrictionPolicyResponse#playback_restriction_policy #playback_restriction_policy} => Types::PlaybackRestrictionPolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_playback_restriction_policy({
+    #     allowed_countries: ["PlaybackRestrictionPolicyAllowedCountry"],
+    #     allowed_origins: ["PlaybackRestrictionPolicyAllowedOrigin"],
+    #     arn: "PlaybackRestrictionPolicyArn", # required
+    #     enable_strict_origin_enforcement: false,
+    #     name: "PlaybackRestrictionPolicyName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.playback_restriction_policy.allowed_countries #=> Array
+    #   resp.playback_restriction_policy.allowed_countries[0] #=> String
+    #   resp.playback_restriction_policy.allowed_origins #=> Array
+    #   resp.playback_restriction_policy.allowed_origins[0] #=> String
+    #   resp.playback_restriction_policy.arn #=> String
+    #   resp.playback_restriction_policy.enable_strict_origin_enforcement #=> Boolean
+    #   resp.playback_restriction_policy.name #=> String
+    #   resp.playback_restriction_policy.tags #=> Hash
+    #   resp.playback_restriction_policy.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UpdatePlaybackRestrictionPolicy AWS API Documentation
+    #
+    # @overload update_playback_restriction_policy(params = {})
+    # @param [Hash] params ({})
+    def update_playback_restriction_policy(params = {}, options = {})
+      req = build_request(:update_playback_restriction_policy, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1808,7 +2080,7 @@ module Aws::IVS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

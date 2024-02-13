@@ -50,7 +50,6 @@ require_relative 'aws-sdk-code-generator/views/docstring'
 require_relative 'aws-sdk-code-generator/views/errors_module'
 require_relative 'aws-sdk-code-generator/views/features/env'
 require_relative 'aws-sdk-code-generator/views/features/step_definitions'
-require_relative 'aws-sdk-code-generator/views/features/smoke_step_definitions'
 require_relative 'aws-sdk-code-generator/views/features/smoke'
 require_relative 'aws-sdk-code-generator/views/gemspec'
 require_relative 'aws-sdk-code-generator/views/resource_class'
@@ -75,6 +74,23 @@ require_relative 'aws-sdk-code-generator/yard_option_tag'
 # Public interfaces
 require_relative 'aws-sdk-code-generator/code_builder'
 require_relative 'aws-sdk-code-generator/gem_builder'
+
+# RBS
+require_relative 'aws-sdk-code-generator/rbs'
+require_relative 'aws-sdk-code-generator/rbs/error_list'
+require_relative 'aws-sdk-code-generator/rbs/method_signature'
+require_relative 'aws-sdk-code-generator/rbs/keyword_argument_builder'
+require_relative 'aws-sdk-code-generator/rbs/resource_action'
+require_relative 'aws-sdk-code-generator/rbs/resource_association'
+require_relative 'aws-sdk-code-generator/rbs/resource_batch_action'
+require_relative 'aws-sdk-code-generator/rbs/resource_client_request'
+require_relative 'aws-sdk-code-generator/rbs/waiter'
+require_relative 'aws-sdk-code-generator/views/rbs/client_class'
+require_relative 'aws-sdk-code-generator/views/rbs/errors_module'
+require_relative 'aws-sdk-code-generator/views/rbs/resource_class'
+require_relative 'aws-sdk-code-generator/views/rbs/root_resource_class'
+require_relative 'aws-sdk-code-generator/views/rbs/types_module'
+require_relative 'aws-sdk-code-generator/views/rbs/waiters_module'
 
 module AwsSdkCodeGenerator
 

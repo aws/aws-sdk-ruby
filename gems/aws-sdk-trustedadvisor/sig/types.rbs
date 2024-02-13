@@ -1,0 +1,331 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::TrustedAdvisor
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccountRecommendationLifecycleSummary
+      attr_accessor account_id: ::String
+      attr_accessor account_recommendation_arn: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor lifecycle_stage: ("in_progress" | "pending_response" | "dismissed" | "resolved")
+      attr_accessor update_reason: ::String
+      attr_accessor update_reason_code: ("non_critical_account" | "temporary_account" | "valid_business_case" | "other_methods_available" | "low_priority" | "not_applicable" | "other")
+      attr_accessor updated_on_behalf_of: ::String
+      attr_accessor updated_on_behalf_of_job_title: ::String
+      SENSITIVE: [:update_reason]
+    end
+
+    class CheckSummary
+      attr_accessor arn: ::String
+      attr_accessor aws_services: ::Array[::String]
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor name: ::String
+      attr_accessor pillars: ::Array[("cost_optimizing" | "performance" | "security" | "service_limits" | "fault_tolerance" | "operational_excellence")]
+      attr_accessor source: ("aws_config" | "compute_optimizer" | "cost_explorer" | "lse" | "manual" | "pse" | "rds" | "resilience" | "resilience_hub" | "security_hub" | "stir" | "ta_check" | "well_architected")
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetOrganizationRecommendationRequest
+      attr_accessor organization_recommendation_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetOrganizationRecommendationResponse
+      attr_accessor organization_recommendation: Types::OrganizationRecommendation
+      SENSITIVE: []
+    end
+
+    class GetRecommendationRequest
+      attr_accessor recommendation_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetRecommendationResponse
+      attr_accessor recommendation: Types::Recommendation
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListChecksRequest
+      attr_accessor aws_service: ::String
+      attr_accessor language: ("en" | "ja" | "zh" | "fr" | "de" | "ko" | "zh_TW" | "it" | "es" | "pt_BR" | "id")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor pillar: ("cost_optimizing" | "performance" | "security" | "service_limits" | "fault_tolerance" | "operational_excellence")
+      attr_accessor source: ("aws_config" | "compute_optimizer" | "cost_explorer" | "lse" | "manual" | "pse" | "rds" | "resilience" | "resilience_hub" | "security_hub" | "stir" | "ta_check" | "well_architected")
+      SENSITIVE: []
+    end
+
+    class ListChecksResponse
+      attr_accessor check_summaries: ::Array[Types::CheckSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOrganizationRecommendationAccountsRequest
+      attr_accessor affected_account_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor organization_recommendation_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ListOrganizationRecommendationAccountsResponse
+      attr_accessor account_recommendation_lifecycle_summaries: ::Array[Types::AccountRecommendationLifecycleSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOrganizationRecommendationResourcesRequest
+      attr_accessor affected_account_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor organization_recommendation_identifier: ::String
+      attr_accessor region_code: ::String
+      attr_accessor status: ("ok" | "warning" | "error")
+      SENSITIVE: []
+    end
+
+    class ListOrganizationRecommendationResourcesResponse
+      attr_accessor next_token: ::String
+      attr_accessor organization_recommendation_resource_summaries: ::Array[Types::OrganizationRecommendationResourceSummary]
+      SENSITIVE: []
+    end
+
+    class ListOrganizationRecommendationsRequest
+      attr_accessor after_last_updated_at: ::Time
+      attr_accessor aws_service: ::String
+      attr_accessor before_last_updated_at: ::Time
+      attr_accessor check_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor pillar: ("cost_optimizing" | "performance" | "security" | "service_limits" | "fault_tolerance" | "operational_excellence")
+      attr_accessor source: ("aws_config" | "compute_optimizer" | "cost_explorer" | "lse" | "manual" | "pse" | "rds" | "resilience" | "resilience_hub" | "security_hub" | "stir" | "ta_check" | "well_architected")
+      attr_accessor status: ("ok" | "warning" | "error")
+      attr_accessor type: ("standard" | "priority")
+      SENSITIVE: []
+    end
+
+    class ListOrganizationRecommendationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor organization_recommendation_summaries: ::Array[Types::OrganizationRecommendationSummary]
+      SENSITIVE: []
+    end
+
+    class ListRecommendationResourcesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor recommendation_identifier: ::String
+      attr_accessor region_code: ::String
+      attr_accessor status: ("ok" | "warning" | "error")
+      SENSITIVE: []
+    end
+
+    class ListRecommendationResourcesResponse
+      attr_accessor next_token: ::String
+      attr_accessor recommendation_resource_summaries: ::Array[Types::RecommendationResourceSummary]
+      SENSITIVE: []
+    end
+
+    class ListRecommendationsRequest
+      attr_accessor after_last_updated_at: ::Time
+      attr_accessor aws_service: ::String
+      attr_accessor before_last_updated_at: ::Time
+      attr_accessor check_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor pillar: ("cost_optimizing" | "performance" | "security" | "service_limits" | "fault_tolerance" | "operational_excellence")
+      attr_accessor source: ("aws_config" | "compute_optimizer" | "cost_explorer" | "lse" | "manual" | "pse" | "rds" | "resilience" | "resilience_hub" | "security_hub" | "stir" | "ta_check" | "well_architected")
+      attr_accessor status: ("ok" | "warning" | "error")
+      attr_accessor type: ("standard" | "priority")
+      SENSITIVE: []
+    end
+
+    class ListRecommendationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor recommendation_summaries: ::Array[Types::RecommendationSummary]
+      SENSITIVE: []
+    end
+
+    class OrganizationRecommendation
+      attr_accessor arn: ::String
+      attr_accessor aws_services: ::Array[::String]
+      attr_accessor check_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor lifecycle_stage: ("in_progress" | "pending_response" | "dismissed" | "resolved")
+      attr_accessor name: ::String
+      attr_accessor pillar_specific_aggregates: Types::RecommendationPillarSpecificAggregates
+      attr_accessor pillars: ::Array[("cost_optimizing" | "performance" | "security" | "service_limits" | "fault_tolerance" | "operational_excellence")]
+      attr_accessor resolved_at: ::Time
+      attr_accessor resources_aggregates: Types::RecommendationResourcesAggregates
+      attr_accessor source: ("aws_config" | "compute_optimizer" | "cost_explorer" | "lse" | "manual" | "pse" | "rds" | "resilience" | "resilience_hub" | "security_hub" | "stir" | "ta_check" | "well_architected")
+      attr_accessor status: ("ok" | "warning" | "error")
+      attr_accessor type: ("standard" | "priority")
+      attr_accessor update_reason: ::String
+      attr_accessor update_reason_code: ("non_critical_account" | "temporary_account" | "valid_business_case" | "other_methods_available" | "low_priority" | "not_applicable" | "other")
+      attr_accessor updated_on_behalf_of: ::String
+      attr_accessor updated_on_behalf_of_job_title: ::String
+      SENSITIVE: [:update_reason]
+    end
+
+    class OrganizationRecommendationResourceSummary
+      attr_accessor account_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor aws_resource_id: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor recommendation_arn: ::String
+      attr_accessor region_code: ::String
+      attr_accessor status: ("ok" | "warning" | "error")
+      SENSITIVE: []
+    end
+
+    class OrganizationRecommendationSummary
+      attr_accessor arn: ::String
+      attr_accessor aws_services: ::Array[::String]
+      attr_accessor check_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor lifecycle_stage: ("in_progress" | "pending_response" | "dismissed" | "resolved")
+      attr_accessor name: ::String
+      attr_accessor pillar_specific_aggregates: Types::RecommendationPillarSpecificAggregates
+      attr_accessor pillars: ::Array[("cost_optimizing" | "performance" | "security" | "service_limits" | "fault_tolerance" | "operational_excellence")]
+      attr_accessor resources_aggregates: Types::RecommendationResourcesAggregates
+      attr_accessor source: ("aws_config" | "compute_optimizer" | "cost_explorer" | "lse" | "manual" | "pse" | "rds" | "resilience" | "resilience_hub" | "security_hub" | "stir" | "ta_check" | "well_architected")
+      attr_accessor status: ("ok" | "warning" | "error")
+      attr_accessor type: ("standard" | "priority")
+      SENSITIVE: []
+    end
+
+    class Recommendation
+      attr_accessor arn: ::String
+      attr_accessor aws_services: ::Array[::String]
+      attr_accessor check_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor lifecycle_stage: ("in_progress" | "pending_response" | "dismissed" | "resolved")
+      attr_accessor name: ::String
+      attr_accessor pillar_specific_aggregates: Types::RecommendationPillarSpecificAggregates
+      attr_accessor pillars: ::Array[("cost_optimizing" | "performance" | "security" | "service_limits" | "fault_tolerance" | "operational_excellence")]
+      attr_accessor resolved_at: ::Time
+      attr_accessor resources_aggregates: Types::RecommendationResourcesAggregates
+      attr_accessor source: ("aws_config" | "compute_optimizer" | "cost_explorer" | "lse" | "manual" | "pse" | "rds" | "resilience" | "resilience_hub" | "security_hub" | "stir" | "ta_check" | "well_architected")
+      attr_accessor status: ("ok" | "warning" | "error")
+      attr_accessor type: ("standard" | "priority")
+      attr_accessor update_reason: ::String
+      attr_accessor update_reason_code: ("non_critical_account" | "temporary_account" | "valid_business_case" | "other_methods_available" | "low_priority" | "not_applicable" | "other")
+      attr_accessor updated_on_behalf_of: ::String
+      attr_accessor updated_on_behalf_of_job_title: ::String
+      SENSITIVE: [:update_reason]
+    end
+
+    class RecommendationCostOptimizingAggregates
+      attr_accessor estimated_monthly_savings: ::Float
+      attr_accessor estimated_percent_monthly_savings: ::Float
+      SENSITIVE: []
+    end
+
+    class RecommendationPillarSpecificAggregates
+      attr_accessor cost_optimizing: Types::RecommendationCostOptimizingAggregates
+      SENSITIVE: []
+    end
+
+    class RecommendationResourceSummary
+      attr_accessor arn: ::String
+      attr_accessor aws_resource_id: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor recommendation_arn: ::String
+      attr_accessor region_code: ::String
+      attr_accessor status: ("ok" | "warning" | "error")
+      SENSITIVE: []
+    end
+
+    class RecommendationResourcesAggregates
+      attr_accessor error_count: ::Integer
+      attr_accessor ok_count: ::Integer
+      attr_accessor warning_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class RecommendationSummary
+      attr_accessor arn: ::String
+      attr_accessor aws_services: ::Array[::String]
+      attr_accessor check_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor lifecycle_stage: ("in_progress" | "pending_response" | "dismissed" | "resolved")
+      attr_accessor name: ::String
+      attr_accessor pillar_specific_aggregates: Types::RecommendationPillarSpecificAggregates
+      attr_accessor pillars: ::Array[("cost_optimizing" | "performance" | "security" | "service_limits" | "fault_tolerance" | "operational_excellence")]
+      attr_accessor resources_aggregates: Types::RecommendationResourcesAggregates
+      attr_accessor source: ("aws_config" | "compute_optimizer" | "cost_explorer" | "lse" | "manual" | "pse" | "rds" | "resilience" | "resilience_hub" | "security_hub" | "stir" | "ta_check" | "well_architected")
+      attr_accessor status: ("ok" | "warning" | "error")
+      attr_accessor type: ("standard" | "priority")
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateOrganizationRecommendationLifecycleRequest
+      attr_accessor lifecycle_stage: ("pending_response" | "in_progress" | "dismissed" | "resolved")
+      attr_accessor organization_recommendation_identifier: ::String
+      attr_accessor update_reason: ::String
+      attr_accessor update_reason_code: ("non_critical_account" | "temporary_account" | "valid_business_case" | "other_methods_available" | "low_priority" | "not_applicable" | "other")
+      SENSITIVE: [:update_reason]
+    end
+
+    class UpdateRecommendationLifecycleRequest
+      attr_accessor lifecycle_stage: ("pending_response" | "in_progress" | "dismissed" | "resolved")
+      attr_accessor recommendation_identifier: ::String
+      attr_accessor update_reason: ::String
+      attr_accessor update_reason_code: ("non_critical_account" | "temporary_account" | "valid_business_case" | "other_methods_available" | "low_priority" | "not_applicable" | "other")
+      SENSITIVE: [:update_reason]
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

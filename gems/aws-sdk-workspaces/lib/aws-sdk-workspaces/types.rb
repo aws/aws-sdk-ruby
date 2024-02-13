@@ -2158,6 +2158,10 @@ module Aws::WorkSpaces
     #   paginated, provide this token to receive the next set of results.
     #   @return [String]
     #
+    # @!attribute [rw] workspace_name
+    #   The name of the user-decoupled WorkSpace.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesRequest AWS API Documentation
     #
     class DescribeWorkspacesRequest < Struct.new(
@@ -2166,7 +2170,8 @@ module Aws::WorkSpaces
       :user_name,
       :bundle_id,
       :limit,
-      :next_token)
+      :next_token,
+      :workspace_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4233,6 +4238,10 @@ module Aws::WorkSpaces
     #   Indicates whether the data stored on the root volume is encrypted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] workspace_name
+    #   The name of the user-decoupled WorkSpace.
+    #   @return [String]
+    #
     # @!attribute [rw] workspace_properties
     #   The properties of the WorkSpace.
     #   @return [Types::WorkspaceProperties]
@@ -4270,6 +4279,7 @@ module Aws::WorkSpaces
       :volume_encryption_key,
       :user_volume_encryption_enabled,
       :root_volume_encryption_enabled,
+      :workspace_name,
       :workspace_properties,
       :modification_states,
       :related_workspaces,
@@ -4747,14 +4757,9 @@ module Aws::WorkSpaces
     #   The running mode. For more information, see [Manage the WorkSpace
     #   Running Mode][1].
     #
-    #   <note markdown="1"> * The `MANUAL` value is only supported by Amazon WorkSpaces Core.
-    #     Contact your account team to be allow-listed to use this value.
-    #     For more information, see [Amazon WorkSpaces Core][2].
-    #
-    #   * Ensure you review your running mode to ensure you are using a
-    #     running mode that is optimal for your needs and budget. For more
-    #     information on switching running modes, see [ Can I switch between
-    #     hourly and monthly billing?][3]
+    #   <note markdown="1"> The `MANUAL` value is only supported by Amazon WorkSpaces Core.
+    #   Contact your account team to be allow-listed to use this value. For
+    #   more information, see [Amazon WorkSpaces Core][2].
     #
     #    </note>
     #
@@ -4762,7 +4767,6 @@ module Aws::WorkSpaces
     #
     #   [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html
     #   [2]: http://aws.amazon.com/workspaces/core/
-    #   [3]: https://aws.amazon.com/workspaces/faqs/#:~:text=Q%3A%20Can%20I%20switch%20between%20hourly%20and%20monthly%20billing%3F
     #   @return [String]
     #
     # @!attribute [rw] running_mode_auto_stop_timeout_in_minutes
@@ -4848,6 +4852,9 @@ module Aws::WorkSpaces
     # @!attribute [rw] user_name
     #   The user name of the user for the WorkSpace. This user name must
     #   exist in the Directory Service directory for the WorkSpace.
+    #
+    #   The reserved keyword, `[UNDEFINED]`, is used when creating
+    #   user-decoupled WorkSpaces.
     #   @return [String]
     #
     # @!attribute [rw] bundle_id
@@ -4876,6 +4883,10 @@ module Aws::WorkSpaces
     #   The tags for the WorkSpace.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] workspace_name
+    #   The name of the user-decoupled WorkSpace.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceRequest AWS API Documentation
     #
     class WorkspaceRequest < Struct.new(
@@ -4886,7 +4897,8 @@ module Aws::WorkSpaces
       :user_volume_encryption_enabled,
       :root_volume_encryption_enabled,
       :workspace_properties,
-      :tags)
+      :tags,
+      :workspace_name)
       SENSITIVE = []
       include Aws::Structure
     end

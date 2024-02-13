@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.52.0 (2024-01-24)
+------------------
+
+* Feature - DeviceSerialNumber parameter is now optional in StartConnection API
+
 1.51.0 (2023-11-28)
 ------------------
 

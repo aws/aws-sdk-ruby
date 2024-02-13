@@ -290,6 +290,7 @@
       },
       "errors":[
         {"shape":"DBClusterAlreadyExistsFault"},
+        {"shape":"InsufficientDBInstanceCapacityFault"},
         {"shape":"InsufficientStorageClusterCapacityFault"},
         {"shape":"DBClusterQuotaExceededFault"},
         {"shape":"StorageQuotaExceededFault"},
@@ -506,6 +507,27 @@
         {"shape":"DBSecurityGroupAlreadyExistsFault"},
         {"shape":"DBSecurityGroupQuotaExceededFault"},
         {"shape":"DBSecurityGroupNotSupportedFault"}
+      ]
+    },
+    "CreateDBShardGroup":{
+      "name":"CreateDBShardGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateDBShardGroupMessage"},
+      "output":{
+        "shape":"DBShardGroup",
+        "resultWrapper":"CreateDBShardGroupResult"
+      },
+      "errors":[
+        {"shape":"DBShardGroupAlreadyExistsFault"},
+        {"shape":"DBClusterNotFoundFault"},
+        {"shape":"MaxDBShardGroupLimitReached"},
+        {"shape":"InvalidDBClusterStateFault"},
+        {"shape":"InvalidMaxAcuFault"},
+        {"shape":"UnsupportedDBEngineVersionFault"},
+        {"shape":"InvalidVPCNetworkStateFault"}
       ]
     },
     "CreateDBSnapshot":{
@@ -841,6 +863,23 @@
       "errors":[
         {"shape":"InvalidDBSecurityGroupStateFault"},
         {"shape":"DBSecurityGroupNotFoundFault"}
+      ]
+    },
+    "DeleteDBShardGroup":{
+      "name":"DeleteDBShardGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteDBShardGroupMessage"},
+      "output":{
+        "shape":"DBShardGroup",
+        "resultWrapper":"DeleteDBShardGroupResult"
+      },
+      "errors":[
+        {"shape":"DBShardGroupNotFoundFault"},
+        {"shape":"InvalidDBShardGroupStateFault"},
+        {"shape":"InvalidDBClusterStateFault"}
       ]
     },
     "DeleteDBSnapshot":{
@@ -1309,6 +1348,22 @@
       },
       "errors":[
         {"shape":"DBSecurityGroupNotFoundFault"}
+      ]
+    },
+    "DescribeDBShardGroups":{
+      "name":"DescribeDBShardGroups",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeDBShardGroupsMessage"},
+      "output":{
+        "shape":"DescribeDBShardGroupsResponse",
+        "resultWrapper":"DescribeDBShardGroupsResult"
+      },
+      "errors":[
+        {"shape":"DBShardGroupNotFoundFault"},
+        {"shape":"DBClusterNotFoundFault"}
       ]
     },
     "DescribeDBSnapshotAttributes":{
@@ -1974,6 +2029,24 @@
       },
       "errors":[]
     },
+    "ModifyDBShardGroup":{
+      "name":"ModifyDBShardGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyDBShardGroupMessage"},
+      "output":{
+        "shape":"DBShardGroup",
+        "resultWrapper":"ModifyDBShardGroupResult"
+      },
+      "errors":[
+        {"shape":"InvalidDBClusterStateFault"},
+        {"shape":"DBShardGroupAlreadyExistsFault"},
+        {"shape":"DBShardGroupNotFoundFault"},
+        {"shape":"InvalidMaxAcuFault"}
+      ]
+    },
     "ModifyDBSnapshot":{
       "name":"ModifyDBSnapshot",
       "http":{
@@ -2179,6 +2252,22 @@
         {"shape":"DBInstanceNotFoundFault"}
       ]
     },
+    "RebootDBShardGroup":{
+      "name":"RebootDBShardGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RebootDBShardGroupMessage"},
+      "output":{
+        "shape":"DBShardGroup",
+        "resultWrapper":"RebootDBShardGroupResult"
+      },
+      "errors":[
+        {"shape":"DBShardGroupNotFoundFault"},
+        {"shape":"InvalidDBShardGroupStateFault"}
+      ]
+    },
     "RegisterDBProxyTargets":{
       "name":"RegisterDBProxyTargets",
       "http":{
@@ -2373,7 +2462,8 @@
         {"shape":"KMSKeyNotAccessibleFault"},
         {"shape":"DomainNotFoundFault"},
         {"shape":"DBClusterParameterGroupNotFoundFault"},
-        {"shape":"InvalidDBInstanceStateFault"}
+        {"shape":"InvalidDBInstanceStateFault"},
+        {"shape":"InsufficientDBInstanceCapacityFault"}
       ]
     },
     "RestoreDBClusterToPointInTime":{
@@ -2406,7 +2496,8 @@
         {"shape":"StorageQuotaExceededFault"},
         {"shape":"DomainNotFoundFault"},
         {"shape":"DBClusterParameterGroupNotFoundFault"},
-        {"shape":"DBClusterAutomatedBackupNotFoundFault"}
+        {"shape":"DBClusterAutomatedBackupNotFoundFault"},
+        {"shape":"InsufficientDBInstanceCapacityFault"}
       ]
     },
     "RestoreDBInstanceFromDBSnapshot":{
@@ -3470,6 +3561,7 @@
         "EnablePerformanceInsights":{"shape":"BooleanOptional"},
         "PerformanceInsightsKMSKeyId":{"shape":"String"},
         "PerformanceInsightsRetentionPeriod":{"shape":"IntegerOptional"},
+        "EnableLimitlessDatabase":{"shape":"BooleanOptional"},
         "ServerlessV2ScalingConfiguration":{"shape":"ServerlessV2ScalingConfiguration"},
         "NetworkType":{"shape":"String"},
         "DBSystemId":{"shape":"String"},
@@ -3742,6 +3834,21 @@
       "type":"structure",
       "members":{
         "DBSecurityGroup":{"shape":"DBSecurityGroup"}
+      }
+    },
+    "CreateDBShardGroupMessage":{
+      "type":"structure",
+      "required":[
+        "DBShardGroupIdentifier",
+        "DBClusterIdentifier",
+        "MaxACU"
+      ],
+      "members":{
+        "DBShardGroupIdentifier":{"shape":"String"},
+        "DBClusterIdentifier":{"shape":"String"},
+        "ComputeRedundancy":{"shape":"IntegerOptional"},
+        "MaxACU":{"shape":"DoubleOptional"},
+        "PubliclyAccessible":{"shape":"BooleanOptional"}
       }
     },
     "CreateDBSnapshotMessage":{
@@ -4039,7 +4146,8 @@
         "MasterUserSecret":{"shape":"MasterUserSecret"},
         "IOOptimizedNextAllowedModificationTime":{"shape":"TStamp"},
         "LocalWriteForwardingStatus":{"shape":"LocalWriteForwardingStatus"},
-        "AwsBackupRecoveryPointArn":{"shape":"String"}
+        "AwsBackupRecoveryPointArn":{"shape":"String"},
+        "LimitlessDatabase":{"shape":"LimitlessDatabase"}
       },
       "wrapper":true
     },
@@ -5273,6 +5381,48 @@
         "locationName":"DBSecurityGroup"
       }
     },
+    "DBShardGroup":{
+      "type":"structure",
+      "members":{
+        "DBShardGroupResourceId":{"shape":"String"},
+        "DBShardGroupIdentifier":{"shape":"String"},
+        "DBClusterIdentifier":{"shape":"String"},
+        "MaxACU":{"shape":"DoubleOptional"},
+        "ComputeRedundancy":{"shape":"IntegerOptional"},
+        "Status":{"shape":"String"},
+        "PubliclyAccessible":{"shape":"BooleanOptional"},
+        "Endpoint":{"shape":"String"}
+      }
+    },
+    "DBShardGroupAlreadyExistsFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"DBShardGroupAlreadyExists",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "DBShardGroupNotFoundFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"DBShardGroupNotFound",
+        "httpStatusCode":404,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "DBShardGroupsList":{
+      "type":"list",
+      "member":{
+        "shape":"DBShardGroup",
+        "locationName":"DBShardGroup"
+      }
+    },
     "DBSnapshot":{
       "type":"structure",
       "members":{
@@ -5678,6 +5828,13 @@
         "DBSecurityGroupName":{"shape":"String"}
       }
     },
+    "DeleteDBShardGroupMessage":{
+      "type":"structure",
+      "required":["DBShardGroupIdentifier"],
+      "members":{
+        "DBShardGroupIdentifier":{"shape":"String"}
+      }
+    },
     "DeleteDBSnapshotMessage":{
       "type":"structure",
       "required":["DBSnapshotIdentifier"],
@@ -6066,6 +6223,22 @@
         "DBSecurityGroupName":{"shape":"String"},
         "Filters":{"shape":"FilterList"},
         "MaxRecords":{"shape":"IntegerOptional"},
+        "Marker":{"shape":"String"}
+      }
+    },
+    "DescribeDBShardGroupsMessage":{
+      "type":"structure",
+      "members":{
+        "DBShardGroupIdentifier":{"shape":"String"},
+        "Filters":{"shape":"FilterList"},
+        "Marker":{"shape":"String"},
+        "MaxRecords":{"shape":"MaxRecords"}
+      }
+    },
+    "DescribeDBShardGroupsResponse":{
+      "type":"structure",
+      "members":{
+        "DBShardGroups":{"shape":"DBShardGroupsList"},
         "Marker":{"shape":"String"}
       }
     },
@@ -7184,6 +7357,17 @@
       },
       "exception":true
     },
+    "InvalidDBShardGroupStateFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidDBShardGroupState",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "InvalidDBSnapshotStateFault":{
       "type":"structure",
       "members":{
@@ -7294,6 +7478,17 @@
       },
       "exception":true
     },
+    "InvalidMaxAcuFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidMaxAcu",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "InvalidOptionGroupStateFault":{
       "type":"structure",
       "members":{
@@ -7387,6 +7582,26 @@
       "min":1,
       "pattern":"[a-zA-Z0-9_:\\-\\/]+"
     },
+    "LimitlessDatabase":{
+      "type":"structure",
+      "members":{
+        "Status":{"shape":"LimitlessDatabaseStatus"},
+        "MinRequiredACU":{"shape":"DoubleOptional"}
+      }
+    },
+    "LimitlessDatabaseStatus":{
+      "type":"string",
+      "enum":[
+        "active",
+        "not-in-use",
+        "enabled",
+        "disabled",
+        "enabling",
+        "disabling",
+        "modifying-max-capacity",
+        "error"
+      ]
+    },
     "ListTagsForResourceMessage":{
       "type":"structure",
       "required":["ResourceName"],
@@ -7423,6 +7638,17 @@
         "SecretStatus":{"shape":"String"},
         "KmsKeyId":{"shape":"String"}
       }
+    },
+    "MaxDBShardGroupLimitReached":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"MaxDBShardGroupLimitReached",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
     },
     "MaxRecords":{
       "type":"integer",
@@ -7583,7 +7809,8 @@
         "EngineMode":{"shape":"String"},
         "AllowEngineModeChange":{"shape":"Boolean"},
         "EnableLocalWriteForwarding":{"shape":"BooleanOptional"},
-        "AwsBackupRecoveryPointArn":{"shape":"AwsBackupRecoveryPointArn"}
+        "AwsBackupRecoveryPointArn":{"shape":"AwsBackupRecoveryPointArn"},
+        "EnableLimitlessDatabase":{"shape":"BooleanOptional"}
       }
     },
     "ModifyDBClusterParameterGroupMessage":{
@@ -7767,6 +7994,14 @@
         "Locale":{"shape":"String"},
         "Status":{"shape":"String"},
         "RecommendedActionUpdates":{"shape":"RecommendedActionUpdateList"}
+      }
+    },
+    "ModifyDBShardGroupMessage":{
+      "type":"structure",
+      "required":["DBShardGroupIdentifier"],
+      "members":{
+        "DBShardGroupIdentifier":{"shape":"String"},
+        "MaxACU":{"shape":"DoubleOptional"}
       }
     },
     "ModifyDBSnapshotAttributeMessage":{
@@ -8462,6 +8697,13 @@
       "type":"structure",
       "members":{
         "DBInstance":{"shape":"DBInstance"}
+      }
+    },
+    "RebootDBShardGroupMessage":{
+      "type":"structure",
+      "required":["DBShardGroupIdentifier"],
+      "members":{
+        "DBShardGroupIdentifier":{"shape":"String"}
       }
     },
     "RecommendedAction":{
@@ -9794,6 +10036,17 @@
       "members":{
         "TimezoneName":{"shape":"String"}
       }
+    },
+    "UnsupportedDBEngineVersionFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"UnsupportedDBEngineVersion",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
     },
     "UpgradeTarget":{
       "type":"structure",

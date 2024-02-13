@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.92.0 (2024-01-16)
+------------------
+
+* Feature - This release adds ContentType and TaxonomyLevel attributes to DetectModerationLabels and GetMediaAnalysisJob API responses.
+
 1.91.0 (2023-11-28)
 ------------------
 

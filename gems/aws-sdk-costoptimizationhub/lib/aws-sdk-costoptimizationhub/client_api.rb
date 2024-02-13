@@ -304,6 +304,7 @@ module Aws::CostOptimizationHub
     ListEnrollmentStatusesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListEnrollmentStatusesRequest.struct_class = Types::ListEnrollmentStatusesRequest
 
+    ListEnrollmentStatusesResponse.add_member(:include_member_accounts, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeMemberAccounts"))
     ListEnrollmentStatusesResponse.add_member(:items, Shapes::ShapeRef.new(shape: AccountEnrollmentStatuses, location_name: "items"))
     ListEnrollmentStatusesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListEnrollmentStatusesResponse.struct_class = Types::ListEnrollmentStatusesResponse

@@ -1357,7 +1357,8 @@ module Aws::Batch
     #   be an ARN in the format
     #   `arn:aws:batch:$\{Region\}:$\{Account\}:job-definition/$\{JobDefinitionName\}:$\{Revision\}`
     #   or a short version using the form
-    #   `$\{JobDefinitionName\}:$\{Revision\}`.
+    #   `$\{JobDefinitionName\}:$\{Revision\}`. This parameter can't be used
+    #   with other parameters.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results returned by `DescribeJobDefinitions` in
@@ -1531,6 +1532,7 @@ module Aws::Batch
     #   resp.job_definitions[0].container_properties.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.job_definitions[0].container_properties.runtime_platform.operating_system_family #=> String
     #   resp.job_definitions[0].container_properties.runtime_platform.cpu_architecture #=> String
+    #   resp.job_definitions[0].container_properties.repository_credentials.credentials_parameter #=> String
     #   resp.job_definitions[0].timeout.attempt_duration_seconds #=> Integer
     #   resp.job_definitions[0].node_properties.num_nodes #=> Integer
     #   resp.job_definitions[0].node_properties.main_node #=> Integer
@@ -1598,6 +1600,7 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.runtime_platform.operating_system_family #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.runtime_platform.cpu_architecture #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.repository_credentials.credentials_parameter #=> String
     #   resp.job_definitions[0].tags #=> Hash
     #   resp.job_definitions[0].tags["TagKey"] #=> String
     #   resp.job_definitions[0].propagate_tags #=> Boolean
@@ -1926,6 +1929,7 @@ module Aws::Batch
     #   resp.jobs[0].container.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.jobs[0].container.runtime_platform.operating_system_family #=> String
     #   resp.jobs[0].container.runtime_platform.cpu_architecture #=> String
+    #   resp.jobs[0].container.repository_credentials.credentials_parameter #=> String
     #   resp.jobs[0].node_details.node_index #=> Integer
     #   resp.jobs[0].node_details.is_main_node #=> Boolean
     #   resp.jobs[0].node_properties.num_nodes #=> Integer
@@ -1994,6 +1998,7 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].container.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.jobs[0].node_properties.node_range_properties[0].container.runtime_platform.operating_system_family #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].container.runtime_platform.cpu_architecture #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.repository_credentials.credentials_parameter #=> String
     #   resp.jobs[0].array_properties.status_summary #=> Hash
     #   resp.jobs[0].array_properties.status_summary["String"] #=> Integer
     #   resp.jobs[0].array_properties.size #=> Integer
@@ -2726,6 +2731,9 @@ module Aws::Batch
     #         operating_system_family: "String",
     #         cpu_architecture: "String",
     #       },
+    #       repository_credentials: {
+    #         credentials_parameter: "String", # required
+    #       },
     #     },
     #     node_properties: {
     #       num_nodes: 1, # required
@@ -2838,6 +2846,9 @@ module Aws::Batch
     #             runtime_platform: {
     #               operating_system_family: "String",
     #               cpu_architecture: "String",
+    #             },
+    #             repository_credentials: {
+    #               credentials_parameter: "String", # required
     #             },
     #           },
     #         },
@@ -2983,7 +2994,8 @@ module Aws::Batch
     #   The scheduling priority for the job. This only affects jobs in job
     #   queues with a fair share policy. Jobs with a higher scheduling
     #   priority are scheduled before jobs with a lower scheduling priority.
-    #   This overrides any scheduling priority in the job definition.
+    #   This overrides any scheduling priority in the job definition and works
+    #   only within a single share identifier.
     #
     #   The minimum supported value is 0 and the maximum supported value is
     #   9999.
@@ -3710,7 +3722,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

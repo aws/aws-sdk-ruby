@@ -1,0 +1,67 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AutoScaling
+    module Waiters
+
+      class GroupExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?auto_scaling_group_names: Array[::String],
+                    ?next_token: ::String,
+                    ?max_records: ::Integer,
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ]
+                  ) -> Client::_DescribeAutoScalingGroupsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeAutoScalingGroupsResponseSuccess
+      end
+
+      class GroupInService
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?auto_scaling_group_names: Array[::String],
+                    ?next_token: ::String,
+                    ?max_records: ::Integer,
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ]
+                  ) -> Client::_DescribeAutoScalingGroupsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeAutoScalingGroupsResponseSuccess
+      end
+
+      class GroupNotExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?auto_scaling_group_names: Array[::String],
+                    ?next_token: ::String,
+                    ?max_records: ::Integer,
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ]
+                  ) -> Client::_DescribeAutoScalingGroupsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeAutoScalingGroupsResponseSuccess
+      end
+    end
+  end
+end

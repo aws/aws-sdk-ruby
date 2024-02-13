@@ -1,0 +1,1646 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::AlexaForBusiness
+  module Types
+
+    class AddressBook
+      attr_accessor address_book_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class AddressBookData
+      attr_accessor address_book_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class AlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ApproveSkillRequest
+      attr_accessor skill_id: ::String
+      SENSITIVE: []
+    end
+
+    class ApproveSkillResponse < Aws::EmptyStructure
+    end
+
+    class AssociateContactWithAddressBookRequest
+      attr_accessor contact_arn: ::String
+      attr_accessor address_book_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateContactWithAddressBookResponse < Aws::EmptyStructure
+    end
+
+    class AssociateDeviceWithNetworkProfileRequest
+      attr_accessor device_arn: ::String
+      attr_accessor network_profile_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateDeviceWithNetworkProfileResponse < Aws::EmptyStructure
+    end
+
+    class AssociateDeviceWithRoomRequest
+      attr_accessor device_arn: ::String
+      attr_accessor room_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateDeviceWithRoomResponse < Aws::EmptyStructure
+    end
+
+    class AssociateSkillGroupWithRoomRequest
+      attr_accessor skill_group_arn: ::String
+      attr_accessor room_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateSkillGroupWithRoomResponse < Aws::EmptyStructure
+    end
+
+    class AssociateSkillWithSkillGroupRequest
+      attr_accessor skill_group_arn: ::String
+      attr_accessor skill_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateSkillWithSkillGroupResponse < Aws::EmptyStructure
+    end
+
+    class AssociateSkillWithUsersRequest
+      attr_accessor skill_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateSkillWithUsersResponse < Aws::EmptyStructure
+    end
+
+    class Audio
+      attr_accessor locale: ("en-US")
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class BusinessReport
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED")
+      attr_accessor failure_code: ("ACCESS_DENIED" | "NO_SUCH_BUCKET" | "INTERNAL_FAILURE")
+      attr_accessor s3_location: Types::BusinessReportS3Location
+      attr_accessor delivery_time: ::Time
+      attr_accessor download_url: ::String
+      SENSITIVE: []
+    end
+
+    class BusinessReportContentRange
+      attr_accessor interval: ("ONE_DAY" | "ONE_WEEK" | "THIRTY_DAYS")
+      SENSITIVE: []
+    end
+
+    class BusinessReportRecurrence
+      attr_accessor start_date: ::String
+      SENSITIVE: []
+    end
+
+    class BusinessReportS3Location
+      attr_accessor path: ::String
+      attr_accessor bucket_name: ::String
+      SENSITIVE: []
+    end
+
+    class BusinessReportSchedule
+      attr_accessor schedule_arn: ::String
+      attr_accessor schedule_name: ::String
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_key_prefix: ::String
+      attr_accessor format: ("CSV" | "CSV_ZIP")
+      attr_accessor content_range: Types::BusinessReportContentRange
+      attr_accessor recurrence: Types::BusinessReportRecurrence
+      attr_accessor last_business_report: Types::BusinessReport
+      SENSITIVE: []
+    end
+
+    class Category
+      attr_accessor category_id: ::Integer
+      attr_accessor category_name: ::String
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConferencePreference
+      attr_accessor default_conference_provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ConferenceProvider
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("CHIME" | "BLUEJEANS" | "FUZE" | "GOOGLE_HANGOUTS" | "POLYCOM" | "RINGCENTRAL" | "SKYPE_FOR_BUSINESS" | "WEBEX" | "ZOOM" | "CUSTOM")
+      attr_accessor ip_dial_in: Types::IPDialIn
+      attr_accessor pstn_dial_in: Types::PSTNDialIn
+      attr_accessor meeting_setting: Types::MeetingSetting
+      SENSITIVE: []
+    end
+
+    class Contact
+      attr_accessor contact_arn: ::String
+      attr_accessor display_name: ::String
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor phone_numbers: ::Array[Types::PhoneNumber]
+      attr_accessor sip_addresses: ::Array[Types::SipAddress]
+      SENSITIVE: [:phone_number]
+    end
+
+    class ContactData
+      attr_accessor contact_arn: ::String
+      attr_accessor display_name: ::String
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor phone_numbers: ::Array[Types::PhoneNumber]
+      attr_accessor sip_addresses: ::Array[Types::SipAddress]
+      SENSITIVE: [:phone_number]
+    end
+
+    class Content
+      attr_accessor text_list: ::Array[Types::Text]
+      attr_accessor ssml_list: ::Array[Types::Ssml]
+      attr_accessor audio_list: ::Array[Types::Audio]
+      SENSITIVE: []
+    end
+
+    class CreateAddressBookRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateAddressBookResponse
+      attr_accessor address_book_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBusinessReportScheduleRequest
+      attr_accessor schedule_name: ::String
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_key_prefix: ::String
+      attr_accessor format: ("CSV" | "CSV_ZIP")
+      attr_accessor content_range: Types::BusinessReportContentRange
+      attr_accessor recurrence: Types::BusinessReportRecurrence
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateBusinessReportScheduleResponse
+      attr_accessor schedule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConferenceProviderRequest
+      attr_accessor conference_provider_name: ::String
+      attr_accessor conference_provider_type: ("CHIME" | "BLUEJEANS" | "FUZE" | "GOOGLE_HANGOUTS" | "POLYCOM" | "RINGCENTRAL" | "SKYPE_FOR_BUSINESS" | "WEBEX" | "ZOOM" | "CUSTOM")
+      attr_accessor ip_dial_in: Types::IPDialIn
+      attr_accessor pstn_dial_in: Types::PSTNDialIn
+      attr_accessor meeting_setting: Types::MeetingSetting
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateConferenceProviderResponse
+      attr_accessor conference_provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateContactRequest
+      attr_accessor display_name: ::String
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor phone_numbers: ::Array[Types::PhoneNumber]
+      attr_accessor sip_addresses: ::Array[Types::SipAddress]
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:phone_number]
+    end
+
+    class CreateContactResponse
+      attr_accessor contact_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEndOfMeetingReminder
+      attr_accessor reminder_at_minutes: ::Array[::Integer]
+      attr_accessor reminder_type: ("ANNOUNCEMENT_TIME_CHECK" | "ANNOUNCEMENT_VARIABLE_TIME_LEFT" | "CHIME" | "KNOCK")
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class CreateGatewayGroupRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateGatewayGroupResponse
+      attr_accessor gateway_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateInstantBooking
+      attr_accessor duration_in_minutes: ::Integer
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class CreateMeetingRoomConfiguration
+      attr_accessor room_utilization_metrics_enabled: bool
+      attr_accessor end_of_meeting_reminder: Types::CreateEndOfMeetingReminder
+      attr_accessor instant_booking: Types::CreateInstantBooking
+      attr_accessor require_check_in: Types::CreateRequireCheckIn
+      attr_accessor proactive_join: Types::CreateProactiveJoin
+      SENSITIVE: []
+    end
+
+    class CreateNetworkProfileRequest
+      attr_accessor network_profile_name: ::String
+      attr_accessor description: ::String
+      attr_accessor ssid: ::String
+      attr_accessor security_type: ("OPEN" | "WEP" | "WPA_PSK" | "WPA2_PSK" | "WPA2_ENTERPRISE")
+      attr_accessor eap_method: ("EAP_TLS")
+      attr_accessor current_password: ::String
+      attr_accessor next_password: ::String
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor trust_anchors: ::Array[::String]
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:current_password, :next_password]
+    end
+
+    class CreateNetworkProfileResponse
+      attr_accessor network_profile_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProactiveJoin
+      attr_accessor enabled_by_motion: bool
+      SENSITIVE: []
+    end
+
+    class CreateProfileRequest
+      attr_accessor profile_name: ::String
+      attr_accessor timezone: ::String
+      attr_accessor address: ::String
+      attr_accessor distance_unit: ("METRIC" | "IMPERIAL")
+      attr_accessor temperature_unit: ("FAHRENHEIT" | "CELSIUS")
+      attr_accessor wake_word: ("ALEXA" | "AMAZON" | "ECHO" | "COMPUTER")
+      attr_accessor locale: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor setup_mode_disabled: bool
+      attr_accessor max_volume_limit: ::Integer
+      attr_accessor pstn_enabled: bool
+      attr_accessor data_retention_opt_in: bool
+      attr_accessor meeting_room_configuration: Types::CreateMeetingRoomConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateProfileResponse
+      attr_accessor profile_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRequireCheckIn
+      attr_accessor release_after_minutes: ::Integer
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class CreateRoomRequest
+      attr_accessor room_name: ::String
+      attr_accessor description: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor provider_calendar_id: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateRoomResponse
+      attr_accessor room_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSkillGroupRequest
+      attr_accessor skill_group_name: ::String
+      attr_accessor description: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateSkillGroupResponse
+      attr_accessor skill_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateUserRequest
+      attr_accessor user_id: ::String
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor email: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateUserResponse
+      attr_accessor user_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAddressBookRequest
+      attr_accessor address_book_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAddressBookResponse < Aws::EmptyStructure
+    end
+
+    class DeleteBusinessReportScheduleRequest
+      attr_accessor schedule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBusinessReportScheduleResponse < Aws::EmptyStructure
+    end
+
+    class DeleteConferenceProviderRequest
+      attr_accessor conference_provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConferenceProviderResponse < Aws::EmptyStructure
+    end
+
+    class DeleteContactRequest
+      attr_accessor contact_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteContactResponse < Aws::EmptyStructure
+    end
+
+    class DeleteDeviceRequest
+      attr_accessor device_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDeviceResponse < Aws::EmptyStructure
+    end
+
+    class DeleteDeviceUsageDataRequest
+      attr_accessor device_arn: ::String
+      attr_accessor device_usage_type: ("VOICE")
+      SENSITIVE: []
+    end
+
+    class DeleteDeviceUsageDataResponse < Aws::EmptyStructure
+    end
+
+    class DeleteGatewayGroupRequest
+      attr_accessor gateway_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGatewayGroupResponse < Aws::EmptyStructure
+    end
+
+    class DeleteNetworkProfileRequest
+      attr_accessor network_profile_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNetworkProfileResponse < Aws::EmptyStructure
+    end
+
+    class DeleteProfileRequest
+      attr_accessor profile_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProfileResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRoomRequest
+      attr_accessor room_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRoomResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRoomSkillParameterRequest
+      attr_accessor room_arn: ::String
+      attr_accessor skill_id: ::String
+      attr_accessor parameter_key: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRoomSkillParameterResponse < Aws::EmptyStructure
+    end
+
+    class DeleteSkillAuthorizationRequest
+      attr_accessor skill_id: ::String
+      attr_accessor room_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSkillAuthorizationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteSkillGroupRequest
+      attr_accessor skill_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSkillGroupResponse < Aws::EmptyStructure
+    end
+
+    class DeleteUserRequest
+      attr_accessor user_arn: ::String
+      attr_accessor enrollment_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserResponse < Aws::EmptyStructure
+    end
+
+    class DeveloperInfo
+      attr_accessor developer_name: ::String
+      attr_accessor privacy_policy: ::String
+      attr_accessor email: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class Device
+      attr_accessor device_arn: ::String
+      attr_accessor device_serial_number: ::String
+      attr_accessor device_type: ::String
+      attr_accessor device_name: ::String
+      attr_accessor software_version: ::String
+      attr_accessor mac_address: ::String
+      attr_accessor room_arn: ::String
+      attr_accessor device_status: ("READY" | "PENDING" | "WAS_OFFLINE" | "DEREGISTERED" | "FAILED")
+      attr_accessor device_status_info: Types::DeviceStatusInfo
+      attr_accessor network_profile_info: Types::DeviceNetworkProfileInfo
+      SENSITIVE: []
+    end
+
+    class DeviceData
+      attr_accessor device_arn: ::String
+      attr_accessor device_serial_number: ::String
+      attr_accessor device_type: ::String
+      attr_accessor device_name: ::String
+      attr_accessor software_version: ::String
+      attr_accessor mac_address: ::String
+      attr_accessor device_status: ("READY" | "PENDING" | "WAS_OFFLINE" | "DEREGISTERED" | "FAILED")
+      attr_accessor network_profile_arn: ::String
+      attr_accessor network_profile_name: ::String
+      attr_accessor room_arn: ::String
+      attr_accessor room_name: ::String
+      attr_accessor device_status_info: Types::DeviceStatusInfo
+      attr_accessor created_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DeviceEvent
+      attr_accessor type: ("CONNECTION_STATUS" | "DEVICE_STATUS")
+      attr_accessor value: ::String
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class DeviceNetworkProfileInfo
+      attr_accessor network_profile_arn: ::String
+      attr_accessor certificate_arn: ::String
+      attr_accessor certificate_expiration_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DeviceNotRegisteredException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeviceStatusDetail
+      attr_accessor feature: ("BLUETOOTH" | "VOLUME" | "NOTIFICATIONS" | "LISTS" | "SKILLS" | "NETWORK_PROFILE" | "SETTINGS" | "ALL")
+      attr_accessor code: ("DEVICE_SOFTWARE_UPDATE_NEEDED" | "DEVICE_WAS_OFFLINE" | "CREDENTIALS_ACCESS_FAILURE" | "TLS_VERSION_MISMATCH" | "ASSOCIATION_REJECTION" | "AUTHENTICATION_FAILURE" | "DHCP_FAILURE" | "INTERNET_UNAVAILABLE" | "DNS_FAILURE" | "UNKNOWN_FAILURE" | "CERTIFICATE_ISSUING_LIMIT_EXCEEDED" | "INVALID_CERTIFICATE_AUTHORITY" | "NETWORK_PROFILE_NOT_FOUND" | "INVALID_PASSWORD_STATE" | "PASSWORD_NOT_FOUND" | "PASSWORD_MANAGER_ACCESS_DENIED" | "CERTIFICATE_AUTHORITY_ACCESS_DENIED")
+      SENSITIVE: []
+    end
+
+    class DeviceStatusInfo
+      attr_accessor device_status_details: ::Array[Types::DeviceStatusDetail]
+      attr_accessor connection_status: ("ONLINE" | "OFFLINE")
+      attr_accessor connection_status_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DisassociateContactFromAddressBookRequest
+      attr_accessor contact_arn: ::String
+      attr_accessor address_book_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateContactFromAddressBookResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateDeviceFromRoomRequest
+      attr_accessor device_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateDeviceFromRoomResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateSkillFromSkillGroupRequest
+      attr_accessor skill_group_arn: ::String
+      attr_accessor skill_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateSkillFromSkillGroupResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateSkillFromUsersRequest
+      attr_accessor skill_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateSkillFromUsersResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateSkillGroupFromRoomRequest
+      attr_accessor skill_group_arn: ::String
+      attr_accessor room_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateSkillGroupFromRoomResponse < Aws::EmptyStructure
+    end
+
+    class EndOfMeetingReminder
+      attr_accessor reminder_at_minutes: ::Array[::Integer]
+      attr_accessor reminder_type: ("ANNOUNCEMENT_TIME_CHECK" | "ANNOUNCEMENT_VARIABLE_TIME_LEFT" | "CHIME" | "KNOCK")
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ForgetSmartHomeAppliancesRequest
+      attr_accessor room_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ForgetSmartHomeAppliancesResponse < Aws::EmptyStructure
+    end
+
+    class Gateway
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor gateway_group_arn: ::String
+      attr_accessor software_version: ::String
+      SENSITIVE: []
+    end
+
+    class GatewayGroup
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class GatewayGroupSummary
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class GatewaySummary
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor gateway_group_arn: ::String
+      attr_accessor software_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetAddressBookRequest
+      attr_accessor address_book_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetAddressBookResponse
+      attr_accessor address_book: Types::AddressBook
+      SENSITIVE: []
+    end
+
+    class GetConferencePreferenceRequest < Aws::EmptyStructure
+    end
+
+    class GetConferencePreferenceResponse
+      attr_accessor preference: Types::ConferencePreference
+      SENSITIVE: []
+    end
+
+    class GetConferenceProviderRequest
+      attr_accessor conference_provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetConferenceProviderResponse
+      attr_accessor conference_provider: Types::ConferenceProvider
+      SENSITIVE: []
+    end
+
+    class GetContactRequest
+      attr_accessor contact_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetContactResponse
+      attr_accessor contact: Types::Contact
+      SENSITIVE: []
+    end
+
+    class GetDeviceRequest
+      attr_accessor device_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeviceResponse
+      attr_accessor device: Types::Device
+      SENSITIVE: []
+    end
+
+    class GetGatewayGroupRequest
+      attr_accessor gateway_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetGatewayGroupResponse
+      attr_accessor gateway_group: Types::GatewayGroup
+      SENSITIVE: []
+    end
+
+    class GetGatewayRequest
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetGatewayResponse
+      attr_accessor gateway: Types::Gateway
+      SENSITIVE: []
+    end
+
+    class GetInvitationConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class GetInvitationConfigurationResponse
+      attr_accessor organization_name: ::String
+      attr_accessor contact_email: ::String
+      attr_accessor private_skill_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetNetworkProfileRequest
+      attr_accessor network_profile_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetNetworkProfileResponse
+      attr_accessor network_profile: Types::NetworkProfile
+      SENSITIVE: []
+    end
+
+    class GetProfileRequest
+      attr_accessor profile_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetProfileResponse
+      attr_accessor profile: Types::Profile
+      SENSITIVE: []
+    end
+
+    class GetRoomRequest
+      attr_accessor room_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetRoomResponse
+      attr_accessor room: Types::Room
+      SENSITIVE: []
+    end
+
+    class GetRoomSkillParameterRequest
+      attr_accessor room_arn: ::String
+      attr_accessor skill_id: ::String
+      attr_accessor parameter_key: ::String
+      SENSITIVE: []
+    end
+
+    class GetRoomSkillParameterResponse
+      attr_accessor room_skill_parameter: Types::RoomSkillParameter
+      SENSITIVE: []
+    end
+
+    class GetSkillGroupRequest
+      attr_accessor skill_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetSkillGroupResponse
+      attr_accessor skill_group: Types::SkillGroup
+      SENSITIVE: []
+    end
+
+    class IPDialIn
+      attr_accessor endpoint: ::String
+      attr_accessor comms_protocol: ("SIP" | "SIPS" | "H323")
+      SENSITIVE: []
+    end
+
+    class InstantBooking
+      attr_accessor duration_in_minutes: ::Integer
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class InvalidCertificateAuthorityException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidDeviceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSecretsManagerResourceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidServiceLinkedRoleStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidUserStatusException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListBusinessReportSchedulesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListBusinessReportSchedulesResponse
+      attr_accessor business_report_schedules: ::Array[Types::BusinessReportSchedule]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConferenceProvidersRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListConferenceProvidersResponse
+      attr_accessor conference_providers: ::Array[Types::ConferenceProvider]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeviceEventsRequest
+      attr_accessor device_arn: ::String
+      attr_accessor event_type: ("CONNECTION_STATUS" | "DEVICE_STATUS")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDeviceEventsResponse
+      attr_accessor device_events: ::Array[Types::DeviceEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGatewayGroupsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListGatewayGroupsResponse
+      attr_accessor gateway_groups: ::Array[Types::GatewayGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGatewaysRequest
+      attr_accessor gateway_group_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListGatewaysResponse
+      attr_accessor gateways: ::Array[Types::GatewaySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSkillsRequest
+      attr_accessor skill_group_arn: ::String
+      attr_accessor enablement_type: ("ENABLED" | "PENDING")
+      attr_accessor skill_type: ("PUBLIC" | "PRIVATE" | "ALL")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSkillsResponse
+      attr_accessor skill_summaries: ::Array[Types::SkillSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSkillsStoreCategoriesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSkillsStoreCategoriesResponse
+      attr_accessor category_list: ::Array[Types::Category]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSkillsStoreSkillsByCategoryRequest
+      attr_accessor category_id: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSkillsStoreSkillsByCategoryResponse
+      attr_accessor skills_store_skills: ::Array[Types::SkillsStoreSkill]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSmartHomeAppliancesRequest
+      attr_accessor room_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSmartHomeAppliancesResponse
+      attr_accessor smart_home_appliances: ::Array[Types::SmartHomeAppliance]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsRequest
+      attr_accessor arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTagsResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MeetingRoomConfiguration
+      attr_accessor room_utilization_metrics_enabled: bool
+      attr_accessor end_of_meeting_reminder: Types::EndOfMeetingReminder
+      attr_accessor instant_booking: Types::InstantBooking
+      attr_accessor require_check_in: Types::RequireCheckIn
+      attr_accessor proactive_join: Types::ProactiveJoin
+      SENSITIVE: []
+    end
+
+    class MeetingSetting
+      attr_accessor require_pin: ("YES" | "NO" | "OPTIONAL")
+      SENSITIVE: []
+    end
+
+    class NameInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkProfile
+      attr_accessor network_profile_arn: ::String
+      attr_accessor network_profile_name: ::String
+      attr_accessor description: ::String
+      attr_accessor ssid: ::String
+      attr_accessor security_type: ("OPEN" | "WEP" | "WPA_PSK" | "WPA2_PSK" | "WPA2_ENTERPRISE")
+      attr_accessor eap_method: ("EAP_TLS")
+      attr_accessor current_password: ::String
+      attr_accessor next_password: ::String
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor trust_anchors: ::Array[::String]
+      SENSITIVE: [:current_password, :next_password]
+    end
+
+    class NetworkProfileData
+      attr_accessor network_profile_arn: ::String
+      attr_accessor network_profile_name: ::String
+      attr_accessor description: ::String
+      attr_accessor ssid: ::String
+      attr_accessor security_type: ("OPEN" | "WEP" | "WPA_PSK" | "WPA2_PSK" | "WPA2_ENTERPRISE")
+      attr_accessor eap_method: ("EAP_TLS")
+      attr_accessor certificate_authority_arn: ::String
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PSTNDialIn
+      attr_accessor country_code: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor one_click_id_delay: ::String
+      attr_accessor one_click_pin_delay: ::String
+      SENSITIVE: []
+    end
+
+    class PhoneNumber
+      attr_accessor number: ::String
+      attr_accessor type: ("MOBILE" | "WORK" | "HOME")
+      SENSITIVE: [:number, :type]
+    end
+
+    class ProactiveJoin
+      attr_accessor enabled_by_motion: bool
+      SENSITIVE: []
+    end
+
+    class Profile
+      attr_accessor profile_arn: ::String
+      attr_accessor profile_name: ::String
+      attr_accessor is_default: bool
+      attr_accessor address: ::String
+      attr_accessor timezone: ::String
+      attr_accessor distance_unit: ("METRIC" | "IMPERIAL")
+      attr_accessor temperature_unit: ("FAHRENHEIT" | "CELSIUS")
+      attr_accessor wake_word: ("ALEXA" | "AMAZON" | "ECHO" | "COMPUTER")
+      attr_accessor locale: ::String
+      attr_accessor setup_mode_disabled: bool
+      attr_accessor max_volume_limit: ::Integer
+      attr_accessor pstn_enabled: bool
+      attr_accessor data_retention_opt_in: bool
+      attr_accessor address_book_arn: ::String
+      attr_accessor meeting_room_configuration: Types::MeetingRoomConfiguration
+      SENSITIVE: []
+    end
+
+    class ProfileData
+      attr_accessor profile_arn: ::String
+      attr_accessor profile_name: ::String
+      attr_accessor is_default: bool
+      attr_accessor address: ::String
+      attr_accessor timezone: ::String
+      attr_accessor distance_unit: ("METRIC" | "IMPERIAL")
+      attr_accessor temperature_unit: ("FAHRENHEIT" | "CELSIUS")
+      attr_accessor wake_word: ("ALEXA" | "AMAZON" | "ECHO" | "COMPUTER")
+      attr_accessor locale: ::String
+      SENSITIVE: []
+    end
+
+    class PutConferencePreferenceRequest
+      attr_accessor conference_preference: Types::ConferencePreference
+      SENSITIVE: []
+    end
+
+    class PutConferencePreferenceResponse < Aws::EmptyStructure
+    end
+
+    class PutInvitationConfigurationRequest
+      attr_accessor organization_name: ::String
+      attr_accessor contact_email: ::String
+      attr_accessor private_skill_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PutInvitationConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class PutRoomSkillParameterRequest
+      attr_accessor room_arn: ::String
+      attr_accessor skill_id: ::String
+      attr_accessor room_skill_parameter: Types::RoomSkillParameter
+      SENSITIVE: []
+    end
+
+    class PutRoomSkillParameterResponse < Aws::EmptyStructure
+    end
+
+    class PutSkillAuthorizationRequest
+      attr_accessor authorization_result: ::Hash[::String, ::String]
+      attr_accessor skill_id: ::String
+      attr_accessor room_arn: ::String
+      SENSITIVE: [:authorization_result]
+    end
+
+    class PutSkillAuthorizationResponse < Aws::EmptyStructure
+    end
+
+    class RegisterAVSDeviceRequest
+      attr_accessor client_id: ::String
+      attr_accessor user_code: ::String
+      attr_accessor product_id: ::String
+      attr_accessor device_serial_number: ::String
+      attr_accessor amazon_id: ::String
+      attr_accessor room_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class RegisterAVSDeviceResponse
+      attr_accessor device_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RejectSkillRequest
+      attr_accessor skill_id: ::String
+      SENSITIVE: []
+    end
+
+    class RejectSkillResponse < Aws::EmptyStructure
+    end
+
+    class RequireCheckIn
+      attr_accessor release_after_minutes: ::Integer
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class ResolveRoomRequest
+      attr_accessor user_id: ::String
+      attr_accessor skill_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResolveRoomResponse
+      attr_accessor room_arn: ::String
+      attr_accessor room_name: ::String
+      attr_accessor room_skill_parameters: ::Array[Types::RoomSkillParameter]
+      SENSITIVE: []
+    end
+
+    class ResourceAssociatedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class RevokeInvitationRequest
+      attr_accessor user_arn: ::String
+      attr_accessor enrollment_id: ::String
+      SENSITIVE: []
+    end
+
+    class RevokeInvitationResponse < Aws::EmptyStructure
+    end
+
+    class Room
+      attr_accessor room_arn: ::String
+      attr_accessor room_name: ::String
+      attr_accessor description: ::String
+      attr_accessor provider_calendar_id: ::String
+      attr_accessor profile_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RoomData
+      attr_accessor room_arn: ::String
+      attr_accessor room_name: ::String
+      attr_accessor description: ::String
+      attr_accessor provider_calendar_id: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor profile_name: ::String
+      SENSITIVE: []
+    end
+
+    class RoomSkillParameter
+      attr_accessor parameter_key: ::String
+      attr_accessor parameter_value: ::String
+      SENSITIVE: []
+    end
+
+    class SearchAddressBooksRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor sort_criteria: ::Array[Types::Sort]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchAddressBooksResponse
+      attr_accessor address_books: ::Array[Types::AddressBookData]
+      attr_accessor next_token: ::String
+      attr_accessor total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchContactsRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor sort_criteria: ::Array[Types::Sort]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchContactsResponse
+      attr_accessor contacts: ::Array[Types::ContactData]
+      attr_accessor next_token: ::String
+      attr_accessor total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchDevicesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor sort_criteria: ::Array[Types::Sort]
+      SENSITIVE: []
+    end
+
+    class SearchDevicesResponse
+      attr_accessor devices: ::Array[Types::DeviceData]
+      attr_accessor next_token: ::String
+      attr_accessor total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchNetworkProfilesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor sort_criteria: ::Array[Types::Sort]
+      SENSITIVE: []
+    end
+
+    class SearchNetworkProfilesResponse
+      attr_accessor network_profiles: ::Array[Types::NetworkProfileData]
+      attr_accessor next_token: ::String
+      attr_accessor total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchProfilesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor sort_criteria: ::Array[Types::Sort]
+      SENSITIVE: []
+    end
+
+    class SearchProfilesResponse
+      attr_accessor profiles: ::Array[Types::ProfileData]
+      attr_accessor next_token: ::String
+      attr_accessor total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchRoomsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor sort_criteria: ::Array[Types::Sort]
+      SENSITIVE: []
+    end
+
+    class SearchRoomsResponse
+      attr_accessor rooms: ::Array[Types::RoomData]
+      attr_accessor next_token: ::String
+      attr_accessor total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchSkillGroupsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor sort_criteria: ::Array[Types::Sort]
+      SENSITIVE: []
+    end
+
+    class SearchSkillGroupsResponse
+      attr_accessor skill_groups: ::Array[Types::SkillGroupData]
+      attr_accessor next_token: ::String
+      attr_accessor total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchUsersRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor sort_criteria: ::Array[Types::Sort]
+      SENSITIVE: []
+    end
+
+    class SearchUsersResponse
+      attr_accessor users: ::Array[Types::UserData]
+      attr_accessor next_token: ::String
+      attr_accessor total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SendAnnouncementRequest
+      attr_accessor room_filters: ::Array[Types::Filter]
+      attr_accessor content: Types::Content
+      attr_accessor time_to_live_in_seconds: ::Integer
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class SendAnnouncementResponse
+      attr_accessor announcement_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SendInvitationRequest
+      attr_accessor user_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SendInvitationResponse < Aws::EmptyStructure
+    end
+
+    class SipAddress
+      attr_accessor uri: ::String
+      attr_accessor type: ("WORK")
+      SENSITIVE: [:uri, :type]
+    end
+
+    class SkillDetails
+      attr_accessor product_description: ::String
+      attr_accessor invocation_phrase: ::String
+      attr_accessor release_date: ::String
+      attr_accessor end_user_license_agreement: ::String
+      attr_accessor generic_keywords: ::Array[::String]
+      attr_accessor bullet_points: ::Array[::String]
+      attr_accessor new_in_this_version_bullet_points: ::Array[::String]
+      attr_accessor skill_types: ::Array[::String]
+      attr_accessor reviews: ::Hash[::String, ::String]
+      attr_accessor developer_info: Types::DeveloperInfo
+      SENSITIVE: []
+    end
+
+    class SkillGroup
+      attr_accessor skill_group_arn: ::String
+      attr_accessor skill_group_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class SkillGroupData
+      attr_accessor skill_group_arn: ::String
+      attr_accessor skill_group_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class SkillNotLinkedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SkillSummary
+      attr_accessor skill_id: ::String
+      attr_accessor skill_name: ::String
+      attr_accessor supports_linking: bool
+      attr_accessor enablement_type: ("ENABLED" | "PENDING")
+      attr_accessor skill_type: ("PUBLIC" | "PRIVATE")
+      SENSITIVE: []
+    end
+
+    class SkillsStoreSkill
+      attr_accessor skill_id: ::String
+      attr_accessor skill_name: ::String
+      attr_accessor short_description: ::String
+      attr_accessor icon_url: ::String
+      attr_accessor sample_utterances: ::Array[::String]
+      attr_accessor skill_details: Types::SkillDetails
+      attr_accessor supports_linking: bool
+      SENSITIVE: []
+    end
+
+    class SmartHomeAppliance
+      attr_accessor friendly_name: ::String
+      attr_accessor description: ::String
+      attr_accessor manufacturer_name: ::String
+      SENSITIVE: []
+    end
+
+    class Sort
+      attr_accessor key: ::String
+      attr_accessor value: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class Ssml
+      attr_accessor locale: ("en-US")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class StartDeviceSyncRequest
+      attr_accessor room_arn: ::String
+      attr_accessor device_arn: ::String
+      attr_accessor features: ::Array[("BLUETOOTH" | "VOLUME" | "NOTIFICATIONS" | "LISTS" | "SKILLS" | "NETWORK_PROFILE" | "SETTINGS" | "ALL")]
+      SENSITIVE: []
+    end
+
+    class StartDeviceSyncResponse < Aws::EmptyStructure
+    end
+
+    class StartSmartHomeApplianceDiscoveryRequest
+      attr_accessor room_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartSmartHomeApplianceDiscoveryResponse < Aws::EmptyStructure
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class Text
+      attr_accessor locale: ("en-US")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAddressBookRequest
+      attr_accessor address_book_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAddressBookResponse < Aws::EmptyStructure
+    end
+
+    class UpdateBusinessReportScheduleRequest
+      attr_accessor schedule_arn: ::String
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_key_prefix: ::String
+      attr_accessor format: ("CSV" | "CSV_ZIP")
+      attr_accessor schedule_name: ::String
+      attr_accessor recurrence: Types::BusinessReportRecurrence
+      SENSITIVE: []
+    end
+
+    class UpdateBusinessReportScheduleResponse < Aws::EmptyStructure
+    end
+
+    class UpdateConferenceProviderRequest
+      attr_accessor conference_provider_arn: ::String
+      attr_accessor conference_provider_type: ("CHIME" | "BLUEJEANS" | "FUZE" | "GOOGLE_HANGOUTS" | "POLYCOM" | "RINGCENTRAL" | "SKYPE_FOR_BUSINESS" | "WEBEX" | "ZOOM" | "CUSTOM")
+      attr_accessor ip_dial_in: Types::IPDialIn
+      attr_accessor pstn_dial_in: Types::PSTNDialIn
+      attr_accessor meeting_setting: Types::MeetingSetting
+      SENSITIVE: []
+    end
+
+    class UpdateConferenceProviderResponse < Aws::EmptyStructure
+    end
+
+    class UpdateContactRequest
+      attr_accessor contact_arn: ::String
+      attr_accessor display_name: ::String
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor phone_numbers: ::Array[Types::PhoneNumber]
+      attr_accessor sip_addresses: ::Array[Types::SipAddress]
+      SENSITIVE: [:phone_number]
+    end
+
+    class UpdateContactResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDeviceRequest
+      attr_accessor device_arn: ::String
+      attr_accessor device_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDeviceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateEndOfMeetingReminder
+      attr_accessor reminder_at_minutes: ::Array[::Integer]
+      attr_accessor reminder_type: ("ANNOUNCEMENT_TIME_CHECK" | "ANNOUNCEMENT_VARIABLE_TIME_LEFT" | "CHIME" | "KNOCK")
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateGatewayGroupRequest
+      attr_accessor gateway_group_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGatewayGroupResponse < Aws::EmptyStructure
+    end
+
+    class UpdateGatewayRequest
+      attr_accessor gateway_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor software_version: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGatewayResponse < Aws::EmptyStructure
+    end
+
+    class UpdateInstantBooking
+      attr_accessor duration_in_minutes: ::Integer
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateMeetingRoomConfiguration
+      attr_accessor room_utilization_metrics_enabled: bool
+      attr_accessor end_of_meeting_reminder: Types::UpdateEndOfMeetingReminder
+      attr_accessor instant_booking: Types::UpdateInstantBooking
+      attr_accessor require_check_in: Types::UpdateRequireCheckIn
+      attr_accessor proactive_join: Types::UpdateProactiveJoin
+      SENSITIVE: []
+    end
+
+    class UpdateNetworkProfileRequest
+      attr_accessor network_profile_arn: ::String
+      attr_accessor network_profile_name: ::String
+      attr_accessor description: ::String
+      attr_accessor current_password: ::String
+      attr_accessor next_password: ::String
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor trust_anchors: ::Array[::String]
+      SENSITIVE: [:current_password, :next_password]
+    end
+
+    class UpdateNetworkProfileResponse < Aws::EmptyStructure
+    end
+
+    class UpdateProactiveJoin
+      attr_accessor enabled_by_motion: bool
+      SENSITIVE: []
+    end
+
+    class UpdateProfileRequest
+      attr_accessor profile_arn: ::String
+      attr_accessor profile_name: ::String
+      attr_accessor is_default: bool
+      attr_accessor timezone: ::String
+      attr_accessor address: ::String
+      attr_accessor distance_unit: ("METRIC" | "IMPERIAL")
+      attr_accessor temperature_unit: ("FAHRENHEIT" | "CELSIUS")
+      attr_accessor wake_word: ("ALEXA" | "AMAZON" | "ECHO" | "COMPUTER")
+      attr_accessor locale: ::String
+      attr_accessor setup_mode_disabled: bool
+      attr_accessor max_volume_limit: ::Integer
+      attr_accessor pstn_enabled: bool
+      attr_accessor data_retention_opt_in: bool
+      attr_accessor meeting_room_configuration: Types::UpdateMeetingRoomConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateProfileResponse < Aws::EmptyStructure
+    end
+
+    class UpdateRequireCheckIn
+      attr_accessor release_after_minutes: ::Integer
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateRoomRequest
+      attr_accessor room_arn: ::String
+      attr_accessor room_name: ::String
+      attr_accessor description: ::String
+      attr_accessor provider_calendar_id: ::String
+      attr_accessor profile_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRoomResponse < Aws::EmptyStructure
+    end
+
+    class UpdateSkillGroupRequest
+      attr_accessor skill_group_arn: ::String
+      attr_accessor skill_group_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSkillGroupResponse < Aws::EmptyStructure
+    end
+
+    class UserData
+      attr_accessor user_arn: ::String
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor email: ::String
+      attr_accessor enrollment_status: ("INITIALIZED" | "PENDING" | "REGISTERED" | "DISASSOCIATING" | "DEREGISTERING")
+      attr_accessor enrollment_id: ::String
+      SENSITIVE: []
+    end
+  end
+end

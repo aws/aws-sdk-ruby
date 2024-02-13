@@ -1,0 +1,1091 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Kafka
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchAssociateScramSecretResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchAssociateScramSecretResponse]
+        def cluster_arn: () -> ::String
+        def unprocessed_scram_secrets: () -> ::Array[Types::UnprocessedScramSecret]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#batch_associate_scram_secret-instance_method
+      def batch_associate_scram_secret: (
+                                          cluster_arn: ::String,
+                                          secret_arn_list: Array[::String]
+                                        ) -> _BatchAssociateScramSecretResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchAssociateScramSecretResponseSuccess
+
+      interface _CreateClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterResponse]
+        def cluster_arn: () -> ::String
+        def cluster_name: () -> ::String
+        def state: () -> ("ACTIVE" | "CREATING" | "DELETING" | "FAILED" | "HEALING" | "MAINTENANCE" | "REBOOTING_BROKER" | "UPDATING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#create_cluster-instance_method
+      def create_cluster: (
+                            broker_node_group_info: {
+                              broker_az_distribution: ("DEFAULT")?,
+                              client_subnets: Array[::String],
+                              instance_type: ::String,
+                              security_groups: Array[::String]?,
+                              storage_info: {
+                                ebs_storage_info: {
+                                  provisioned_throughput: {
+                                    enabled: bool?,
+                                    volume_throughput: ::Integer?
+                                  }?,
+                                  volume_size: ::Integer?
+                                }?
+                              }?,
+                              connectivity_info: {
+                                public_access: {
+                                  type: ::String?
+                                }?,
+                                vpc_connectivity: {
+                                  client_authentication: {
+                                    sasl: {
+                                      scram: {
+                                        enabled: bool?
+                                      }?,
+                                      iam: {
+                                        enabled: bool?
+                                      }?
+                                    }?,
+                                    tls: {
+                                      enabled: bool?
+                                    }?
+                                  }?
+                                }?
+                              }?,
+                              zone_ids: Array[::String]?
+                            },
+                            ?client_authentication: {
+                              sasl: {
+                                scram: {
+                                  enabled: bool?
+                                }?,
+                                iam: {
+                                  enabled: bool?
+                                }?
+                              }?,
+                              tls: {
+                                certificate_authority_arn_list: Array[::String]?,
+                                enabled: bool?
+                              }?,
+                              unauthenticated: {
+                                enabled: bool?
+                              }?
+                            },
+                            cluster_name: ::String,
+                            ?configuration_info: {
+                              arn: ::String,
+                              revision: ::Integer
+                            },
+                            ?encryption_info: {
+                              encryption_at_rest: {
+                                data_volume_kms_key_id: ::String
+                              }?,
+                              encryption_in_transit: {
+                                client_broker: ("TLS" | "TLS_PLAINTEXT" | "PLAINTEXT")?,
+                                in_cluster: bool?
+                              }?
+                            },
+                            ?enhanced_monitoring: ("DEFAULT" | "PER_BROKER" | "PER_TOPIC_PER_BROKER" | "PER_TOPIC_PER_PARTITION"),
+                            kafka_version: ::String,
+                            ?logging_info: {
+                              broker_logs: {
+                                cloud_watch_logs: {
+                                  enabled: bool,
+                                  log_group: ::String?
+                                }?,
+                                firehose: {
+                                  delivery_stream: ::String?,
+                                  enabled: bool
+                                }?,
+                                s3: {
+                                  bucket: ::String?,
+                                  enabled: bool,
+                                  prefix: ::String?
+                                }?
+                              }
+                            },
+                            number_of_broker_nodes: ::Integer,
+                            ?open_monitoring: {
+                              prometheus: {
+                                jmx_exporter: {
+                                  enabled_in_broker: bool
+                                }?,
+                                node_exporter: {
+                                  enabled_in_broker: bool
+                                }?
+                              }
+                            },
+                            ?tags: Hash[::String, ::String],
+                            ?storage_mode: ("LOCAL" | "TIERED")
+                          ) -> _CreateClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
+
+      interface _CreateClusterV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterV2Response]
+        def cluster_arn: () -> ::String
+        def cluster_name: () -> ::String
+        def state: () -> ("ACTIVE" | "CREATING" | "DELETING" | "FAILED" | "HEALING" | "MAINTENANCE" | "REBOOTING_BROKER" | "UPDATING")
+        def cluster_type: () -> ("PROVISIONED" | "SERVERLESS")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#create_cluster_v2-instance_method
+      def create_cluster_v2: (
+                               cluster_name: ::String,
+                               ?tags: Hash[::String, ::String],
+                               ?provisioned: {
+                                 broker_node_group_info: {
+                                   broker_az_distribution: ("DEFAULT")?,
+                                   client_subnets: Array[::String],
+                                   instance_type: ::String,
+                                   security_groups: Array[::String]?,
+                                   storage_info: {
+                                     ebs_storage_info: {
+                                       provisioned_throughput: {
+                                         enabled: bool?,
+                                         volume_throughput: ::Integer?
+                                       }?,
+                                       volume_size: ::Integer?
+                                     }?
+                                   }?,
+                                   connectivity_info: {
+                                     public_access: {
+                                       type: ::String?
+                                     }?,
+                                     vpc_connectivity: {
+                                       client_authentication: {
+                                         sasl: {
+                                           scram: {
+                                             enabled: bool?
+                                           }?,
+                                           iam: {
+                                             enabled: bool?
+                                           }?
+                                         }?,
+                                         tls: {
+                                           enabled: bool?
+                                         }?
+                                       }?
+                                     }?
+                                   }?,
+                                   zone_ids: Array[::String]?
+                                 },
+                                 client_authentication: {
+                                   sasl: {
+                                     scram: {
+                                       enabled: bool?
+                                     }?,
+                                     iam: {
+                                       enabled: bool?
+                                     }?
+                                   }?,
+                                   tls: {
+                                     certificate_authority_arn_list: Array[::String]?,
+                                     enabled: bool?
+                                   }?,
+                                   unauthenticated: {
+                                     enabled: bool?
+                                   }?
+                                 }?,
+                                 configuration_info: {
+                                   arn: ::String,
+                                   revision: ::Integer
+                                 }?,
+                                 encryption_info: {
+                                   encryption_at_rest: {
+                                     data_volume_kms_key_id: ::String
+                                   }?,
+                                   encryption_in_transit: {
+                                     client_broker: ("TLS" | "TLS_PLAINTEXT" | "PLAINTEXT")?,
+                                     in_cluster: bool?
+                                   }?
+                                 }?,
+                                 enhanced_monitoring: ("DEFAULT" | "PER_BROKER" | "PER_TOPIC_PER_BROKER" | "PER_TOPIC_PER_PARTITION")?,
+                                 open_monitoring: {
+                                   prometheus: {
+                                     jmx_exporter: {
+                                       enabled_in_broker: bool
+                                     }?,
+                                     node_exporter: {
+                                       enabled_in_broker: bool
+                                     }?
+                                   }
+                                 }?,
+                                 kafka_version: ::String,
+                                 logging_info: {
+                                   broker_logs: {
+                                     cloud_watch_logs: {
+                                       enabled: bool,
+                                       log_group: ::String?
+                                     }?,
+                                     firehose: {
+                                       delivery_stream: ::String?,
+                                       enabled: bool
+                                     }?,
+                                     s3: {
+                                       bucket: ::String?,
+                                       enabled: bool,
+                                       prefix: ::String?
+                                     }?
+                                   }
+                                 }?,
+                                 number_of_broker_nodes: ::Integer,
+                                 storage_mode: ("LOCAL" | "TIERED")?
+                               },
+                               ?serverless: {
+                                 vpc_configs: Array[
+                                   {
+                                     subnet_ids: Array[::String],
+                                     security_group_ids: Array[::String]?
+                                   },
+                                 ],
+                                 client_authentication: {
+                                   sasl: {
+                                     iam: {
+                                       enabled: bool?
+                                     }?
+                                   }?
+                                 }?
+                               }
+                             ) -> _CreateClusterV2ResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterV2ResponseSuccess
+
+      interface _CreateConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConfigurationResponse]
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def latest_revision: () -> Types::ConfigurationRevision
+        def name: () -> ::String
+        def state: () -> ("ACTIVE" | "DELETING" | "DELETE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#create_configuration-instance_method
+      def create_configuration: (
+                                  ?description: ::String,
+                                  ?kafka_versions: Array[::String],
+                                  name: ::String,
+                                  server_properties: ::String
+                                ) -> _CreateConfigurationResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationResponseSuccess
+
+      interface _CreateReplicatorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateReplicatorResponse]
+        def replicator_arn: () -> ::String
+        def replicator_name: () -> ::String
+        def replicator_state: () -> ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#create_replicator-instance_method
+      def create_replicator: (
+                               ?description: ::String,
+                               kafka_clusters: Array[
+                                 {
+                                   amazon_msk_cluster: {
+                                     msk_cluster_arn: ::String
+                                   },
+                                   vpc_config: {
+                                     security_group_ids: Array[::String]?,
+                                     subnet_ids: Array[::String]
+                                   }
+                                 },
+                               ],
+                               replication_info_list: Array[
+                                 {
+                                   consumer_group_replication: {
+                                     consumer_groups_to_exclude: Array[::String]?,
+                                     consumer_groups_to_replicate: Array[::String],
+                                     detect_and_copy_new_consumer_groups: bool?,
+                                     synchronise_consumer_group_offsets: bool?
+                                   },
+                                   source_kafka_cluster_arn: ::String,
+                                   target_compression_type: ("NONE" | "GZIP" | "SNAPPY" | "LZ4" | "ZSTD"),
+                                   target_kafka_cluster_arn: ::String,
+                                   topic_replication: {
+                                     copy_access_control_lists_for_topics: bool?,
+                                     copy_topic_configurations: bool?,
+                                     detect_and_copy_new_topics: bool?,
+                                     topics_to_exclude: Array[::String]?,
+                                     topics_to_replicate: Array[::String]
+                                   }
+                                 },
+                               ],
+                               replicator_name: ::String,
+                               service_execution_role_arn: ::String,
+                               ?tags: Hash[::String, ::String]
+                             ) -> _CreateReplicatorResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReplicatorResponseSuccess
+
+      interface _CreateVpcConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVpcConnectionResponse]
+        def vpc_connection_arn: () -> ::String
+        def state: () -> ("CREATING" | "AVAILABLE" | "INACTIVE" | "DEACTIVATING" | "DELETING" | "FAILED" | "REJECTED" | "REJECTING")
+        def authentication: () -> ::String
+        def vpc_id: () -> ::String
+        def client_subnets: () -> ::Array[::String]
+        def security_groups: () -> ::Array[::String]
+        def creation_time: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#create_vpc_connection-instance_method
+      def create_vpc_connection: (
+                                   target_cluster_arn: ::String,
+                                   authentication: ::String,
+                                   vpc_id: ::String,
+                                   client_subnets: Array[::String],
+                                   security_groups: Array[::String],
+                                   ?tags: Hash[::String, ::String]
+                                 ) -> _CreateVpcConnectionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVpcConnectionResponseSuccess
+
+      interface _DeleteClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClusterResponse]
+        def cluster_arn: () -> ::String
+        def state: () -> ("ACTIVE" | "CREATING" | "DELETING" | "FAILED" | "HEALING" | "MAINTENANCE" | "REBOOTING_BROKER" | "UPDATING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#delete_cluster-instance_method
+      def delete_cluster: (
+                            cluster_arn: ::String,
+                            ?current_version: ::String
+                          ) -> _DeleteClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClusterResponseSuccess
+
+      interface _DeleteConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConfigurationResponse]
+        def arn: () -> ::String
+        def state: () -> ("ACTIVE" | "DELETING" | "DELETE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#delete_configuration-instance_method
+      def delete_configuration: (
+                                  arn: ::String
+                                ) -> _DeleteConfigurationResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConfigurationResponseSuccess
+
+      interface _DeleteReplicatorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReplicatorResponse]
+        def replicator_arn: () -> ::String
+        def replicator_state: () -> ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#delete_replicator-instance_method
+      def delete_replicator: (
+                               ?current_version: ::String,
+                               replicator_arn: ::String
+                             ) -> _DeleteReplicatorResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteReplicatorResponseSuccess
+
+      interface _DeleteVpcConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVpcConnectionResponse]
+        def vpc_connection_arn: () -> ::String
+        def state: () -> ("CREATING" | "AVAILABLE" | "INACTIVE" | "DEACTIVATING" | "DELETING" | "FAILED" | "REJECTED" | "REJECTING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#delete_vpc_connection-instance_method
+      def delete_vpc_connection: (
+                                   arn: ::String
+                                 ) -> _DeleteVpcConnectionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVpcConnectionResponseSuccess
+
+      interface _DescribeClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterResponse]
+        def cluster_info: () -> Types::ClusterInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#describe_cluster-instance_method
+      def describe_cluster: (
+                              cluster_arn: ::String
+                            ) -> _DescribeClusterResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterResponseSuccess
+
+      interface _DescribeClusterV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterV2Response]
+        def cluster_info: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#describe_cluster_v2-instance_method
+      def describe_cluster_v2: (
+                                 cluster_arn: ::String
+                               ) -> _DescribeClusterV2ResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterV2ResponseSuccess
+
+      interface _DescribeClusterOperationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterOperationResponse]
+        def cluster_operation_info: () -> Types::ClusterOperationInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#describe_cluster_operation-instance_method
+      def describe_cluster_operation: (
+                                        cluster_operation_arn: ::String
+                                      ) -> _DescribeClusterOperationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterOperationResponseSuccess
+
+      interface _DescribeClusterOperationV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterOperationV2Response]
+        def cluster_operation_info: () -> Types::ClusterOperationV2
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#describe_cluster_operation_v2-instance_method
+      def describe_cluster_operation_v2: (
+                                           cluster_operation_arn: ::String
+                                         ) -> _DescribeClusterOperationV2ResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterOperationV2ResponseSuccess
+
+      interface _DescribeConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConfigurationResponse]
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def description: () -> ::String
+        def kafka_versions: () -> ::Array[::String]
+        def latest_revision: () -> Types::ConfigurationRevision
+        def name: () -> ::String
+        def state: () -> ("ACTIVE" | "DELETING" | "DELETE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#describe_configuration-instance_method
+      def describe_configuration: (
+                                    arn: ::String
+                                  ) -> _DescribeConfigurationResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConfigurationResponseSuccess
+
+      interface _DescribeConfigurationRevisionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConfigurationRevisionResponse]
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def description: () -> ::String
+        def revision: () -> ::Integer
+        def server_properties: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#describe_configuration_revision-instance_method
+      def describe_configuration_revision: (
+                                             arn: ::String,
+                                             revision: ::Integer
+                                           ) -> _DescribeConfigurationRevisionResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConfigurationRevisionResponseSuccess
+
+      interface _DescribeReplicatorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReplicatorResponse]
+        def creation_time: () -> ::Time
+        def current_version: () -> ::String
+        def is_replicator_reference: () -> bool
+        def kafka_clusters: () -> ::Array[Types::KafkaClusterDescription]
+        def replication_info_list: () -> ::Array[Types::ReplicationInfoDescription]
+        def replicator_arn: () -> ::String
+        def replicator_description: () -> ::String
+        def replicator_name: () -> ::String
+        def replicator_resource_arn: () -> ::String
+        def replicator_state: () -> ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED")
+        def service_execution_role_arn: () -> ::String
+        def state_info: () -> Types::ReplicationStateInfo
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#describe_replicator-instance_method
+      def describe_replicator: (
+                                 replicator_arn: ::String
+                               ) -> _DescribeReplicatorResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReplicatorResponseSuccess
+
+      interface _DescribeVpcConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVpcConnectionResponse]
+        def vpc_connection_arn: () -> ::String
+        def target_cluster_arn: () -> ::String
+        def state: () -> ("CREATING" | "AVAILABLE" | "INACTIVE" | "DEACTIVATING" | "DELETING" | "FAILED" | "REJECTED" | "REJECTING")
+        def authentication: () -> ::String
+        def vpc_id: () -> ::String
+        def subnets: () -> ::Array[::String]
+        def security_groups: () -> ::Array[::String]
+        def creation_time: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#describe_vpc_connection-instance_method
+      def describe_vpc_connection: (
+                                     arn: ::String
+                                   ) -> _DescribeVpcConnectionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVpcConnectionResponseSuccess
+
+      interface _BatchDisassociateScramSecretResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDisassociateScramSecretResponse]
+        def cluster_arn: () -> ::String
+        def unprocessed_scram_secrets: () -> ::Array[Types::UnprocessedScramSecret]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#batch_disassociate_scram_secret-instance_method
+      def batch_disassociate_scram_secret: (
+                                             cluster_arn: ::String,
+                                             secret_arn_list: Array[::String]
+                                           ) -> _BatchDisassociateScramSecretResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDisassociateScramSecretResponseSuccess
+
+      interface _GetBootstrapBrokersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBootstrapBrokersResponse]
+        def bootstrap_broker_string: () -> ::String
+        def bootstrap_broker_string_public_sasl_iam: () -> ::String
+        def bootstrap_broker_string_public_sasl_scram: () -> ::String
+        def bootstrap_broker_string_public_tls: () -> ::String
+        def bootstrap_broker_string_tls: () -> ::String
+        def bootstrap_broker_string_sasl_scram: () -> ::String
+        def bootstrap_broker_string_sasl_iam: () -> ::String
+        def bootstrap_broker_string_vpc_connectivity_tls: () -> ::String
+        def bootstrap_broker_string_vpc_connectivity_sasl_scram: () -> ::String
+        def bootstrap_broker_string_vpc_connectivity_sasl_iam: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#get_bootstrap_brokers-instance_method
+      def get_bootstrap_brokers: (
+                                   cluster_arn: ::String
+                                 ) -> _GetBootstrapBrokersResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBootstrapBrokersResponseSuccess
+
+      interface _GetCompatibleKafkaVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCompatibleKafkaVersionsResponse]
+        def compatible_kafka_versions: () -> ::Array[Types::CompatibleKafkaVersion]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#get_compatible_kafka_versions-instance_method
+      def get_compatible_kafka_versions: (
+                                           ?cluster_arn: ::String
+                                         ) -> _GetCompatibleKafkaVersionsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCompatibleKafkaVersionsResponseSuccess
+
+      interface _ListClusterOperationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClusterOperationsResponse]
+        def cluster_operation_info_list: () -> ::Array[Types::ClusterOperationInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#list_cluster_operations-instance_method
+      def list_cluster_operations: (
+                                     cluster_arn: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListClusterOperationsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClusterOperationsResponseSuccess
+
+      interface _ListClusterOperationsV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClusterOperationsV2Response]
+        def cluster_operation_info_list: () -> ::Array[Types::ClusterOperationV2Summary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#list_cluster_operations_v2-instance_method
+      def list_cluster_operations_v2: (
+                                        cluster_arn: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListClusterOperationsV2ResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClusterOperationsV2ResponseSuccess
+
+      interface _ListClustersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClustersResponse]
+        def cluster_info_list: () -> ::Array[Types::ClusterInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#list_clusters-instance_method
+      def list_clusters: (
+                           ?cluster_name_filter: ::String,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListClustersResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClustersResponseSuccess
+
+      interface _ListClustersV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClustersV2Response]
+        def cluster_info_list: () -> ::Array[Types::Cluster]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#list_clusters_v2-instance_method
+      def list_clusters_v2: (
+                              ?cluster_name_filter: ::String,
+                              ?cluster_type_filter: ::String,
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListClustersV2ResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClustersV2ResponseSuccess
+
+      interface _ListConfigurationRevisionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConfigurationRevisionsResponse]
+        def next_token: () -> ::String
+        def revisions: () -> ::Array[Types::ConfigurationRevision]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#list_configuration_revisions-instance_method
+      def list_configuration_revisions: (
+                                          arn: ::String,
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListConfigurationRevisionsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfigurationRevisionsResponseSuccess
+
+      interface _ListConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConfigurationsResponse]
+        def configurations: () -> ::Array[Types::Configuration]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#list_configurations-instance_method
+      def list_configurations: (
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListConfigurationsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfigurationsResponseSuccess
+
+      interface _ListKafkaVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListKafkaVersionsResponse]
+        def kafka_versions: () -> ::Array[Types::KafkaVersion]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#list_kafka_versions-instance_method
+      def list_kafka_versions: (
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListKafkaVersionsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKafkaVersionsResponseSuccess
+
+      interface _ListNodesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNodesResponse]
+        def next_token: () -> ::String
+        def node_info_list: () -> ::Array[Types::NodeInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#list_nodes-instance_method
+      def list_nodes: (
+                        cluster_arn: ::String,
+                        ?max_results: ::Integer,
+                        ?next_token: ::String
+                      ) -> _ListNodesResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNodesResponseSuccess
+
+      interface _ListReplicatorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReplicatorsResponse]
+        def next_token: () -> ::String
+        def replicators: () -> ::Array[Types::ReplicatorSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#list_replicators-instance_method
+      def list_replicators: (
+                              ?max_results: ::Integer,
+                              ?next_token: ::String,
+                              ?replicator_name_filter: ::String
+                            ) -> _ListReplicatorsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReplicatorsResponseSuccess
+
+      interface _ListScramSecretsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListScramSecretsResponse]
+        def next_token: () -> ::String
+        def secret_arn_list: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#list_scram_secrets-instance_method
+      def list_scram_secrets: (
+                                cluster_arn: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListScramSecretsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListScramSecretsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListClientVpcConnectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClientVpcConnectionsResponse]
+        def next_token: () -> ::String
+        def client_vpc_connections: () -> ::Array[Types::ClientVpcConnection]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#list_client_vpc_connections-instance_method
+      def list_client_vpc_connections: (
+                                         cluster_arn: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListClientVpcConnectionsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClientVpcConnectionsResponseSuccess
+
+      interface _ListVpcConnectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVpcConnectionsResponse]
+        def next_token: () -> ::String
+        def vpc_connections: () -> ::Array[Types::VpcConnection]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#list_vpc_connections-instance_method
+      def list_vpc_connections: (
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListVpcConnectionsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVpcConnectionsResponseSuccess
+
+      interface _RejectClientVpcConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectClientVpcConnectionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#reject_client_vpc_connection-instance_method
+      def reject_client_vpc_connection: (
+                                          cluster_arn: ::String,
+                                          vpc_connection_arn: ::String
+                                        ) -> _RejectClientVpcConnectionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectClientVpcConnectionResponseSuccess
+
+      interface _DeleteClusterPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClusterPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#delete_cluster_policy-instance_method
+      def delete_cluster_policy: (
+                                   cluster_arn: ::String
+                                 ) -> _DeleteClusterPolicyResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClusterPolicyResponseSuccess
+
+      interface _GetClusterPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetClusterPolicyResponse]
+        def current_version: () -> ::String
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#get_cluster_policy-instance_method
+      def get_cluster_policy: (
+                                cluster_arn: ::String
+                              ) -> _GetClusterPolicyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetClusterPolicyResponseSuccess
+
+      interface _PutClusterPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutClusterPolicyResponse]
+        def current_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#put_cluster_policy-instance_method
+      def put_cluster_policy: (
+                                cluster_arn: ::String,
+                                ?current_version: ::String,
+                                policy: ::String
+                              ) -> _PutClusterPolicyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutClusterPolicyResponseSuccess
+
+      interface _RebootBrokerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RebootBrokerResponse]
+        def cluster_arn: () -> ::String
+        def cluster_operation_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#reboot_broker-instance_method
+      def reboot_broker: (
+                           broker_ids: Array[::String],
+                           cluster_arn: ::String
+                         ) -> _RebootBrokerResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RebootBrokerResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateBrokerCountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBrokerCountResponse]
+        def cluster_arn: () -> ::String
+        def cluster_operation_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#update_broker_count-instance_method
+      def update_broker_count: (
+                                 cluster_arn: ::String,
+                                 current_version: ::String,
+                                 target_number_of_broker_nodes: ::Integer
+                               ) -> _UpdateBrokerCountResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBrokerCountResponseSuccess
+
+      interface _UpdateBrokerTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBrokerTypeResponse]
+        def cluster_arn: () -> ::String
+        def cluster_operation_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#update_broker_type-instance_method
+      def update_broker_type: (
+                                cluster_arn: ::String,
+                                current_version: ::String,
+                                target_instance_type: ::String
+                              ) -> _UpdateBrokerTypeResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBrokerTypeResponseSuccess
+
+      interface _UpdateBrokerStorageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBrokerStorageResponse]
+        def cluster_arn: () -> ::String
+        def cluster_operation_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#update_broker_storage-instance_method
+      def update_broker_storage: (
+                                   cluster_arn: ::String,
+                                   current_version: ::String,
+                                   target_broker_ebs_volume_info: Array[
+                                     {
+                                       kafka_broker_node_id: ::String,
+                                       provisioned_throughput: {
+                                         enabled: bool?,
+                                         volume_throughput: ::Integer?
+                                       }?,
+                                       volume_size_gb: ::Integer?
+                                     },
+                                   ]
+                                 ) -> _UpdateBrokerStorageResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBrokerStorageResponseSuccess
+
+      interface _UpdateConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConfigurationResponse]
+        def arn: () -> ::String
+        def latest_revision: () -> Types::ConfigurationRevision
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#update_configuration-instance_method
+      def update_configuration: (
+                                  arn: ::String,
+                                  ?description: ::String,
+                                  server_properties: ::String
+                                ) -> _UpdateConfigurationResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationResponseSuccess
+
+      interface _UpdateClusterConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClusterConfigurationResponse]
+        def cluster_arn: () -> ::String
+        def cluster_operation_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#update_cluster_configuration-instance_method
+      def update_cluster_configuration: (
+                                          cluster_arn: ::String,
+                                          configuration_info: {
+                                            arn: ::String,
+                                            revision: ::Integer
+                                          },
+                                          current_version: ::String
+                                        ) -> _UpdateClusterConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterConfigurationResponseSuccess
+
+      interface _UpdateClusterKafkaVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClusterKafkaVersionResponse]
+        def cluster_arn: () -> ::String
+        def cluster_operation_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#update_cluster_kafka_version-instance_method
+      def update_cluster_kafka_version: (
+                                          cluster_arn: ::String,
+                                          ?configuration_info: {
+                                            arn: ::String,
+                                            revision: ::Integer
+                                          },
+                                          current_version: ::String,
+                                          target_kafka_version: ::String
+                                        ) -> _UpdateClusterKafkaVersionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterKafkaVersionResponseSuccess
+
+      interface _UpdateConnectivityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectivityResponse]
+        def cluster_arn: () -> ::String
+        def cluster_operation_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#update_connectivity-instance_method
+      def update_connectivity: (
+                                 cluster_arn: ::String,
+                                 connectivity_info: {
+                                   public_access: {
+                                     type: ::String?
+                                   }?,
+                                   vpc_connectivity: {
+                                     client_authentication: {
+                                       sasl: {
+                                         scram: {
+                                           enabled: bool?
+                                         }?,
+                                         iam: {
+                                           enabled: bool?
+                                         }?
+                                       }?,
+                                       tls: {
+                                         enabled: bool?
+                                       }?
+                                     }?
+                                   }?
+                                 },
+                                 current_version: ::String
+                               ) -> _UpdateConnectivityResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectivityResponseSuccess
+
+      interface _UpdateMonitoringResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMonitoringResponse]
+        def cluster_arn: () -> ::String
+        def cluster_operation_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#update_monitoring-instance_method
+      def update_monitoring: (
+                               cluster_arn: ::String,
+                               current_version: ::String,
+                               ?enhanced_monitoring: ("DEFAULT" | "PER_BROKER" | "PER_TOPIC_PER_BROKER" | "PER_TOPIC_PER_PARTITION"),
+                               ?open_monitoring: {
+                                 prometheus: {
+                                   jmx_exporter: {
+                                     enabled_in_broker: bool
+                                   }?,
+                                   node_exporter: {
+                                     enabled_in_broker: bool
+                                   }?
+                                 }
+                               },
+                               ?logging_info: {
+                                 broker_logs: {
+                                   cloud_watch_logs: {
+                                     enabled: bool,
+                                     log_group: ::String?
+                                   }?,
+                                   firehose: {
+                                     delivery_stream: ::String?,
+                                     enabled: bool
+                                   }?,
+                                   s3: {
+                                     bucket: ::String?,
+                                     enabled: bool,
+                                     prefix: ::String?
+                                   }?
+                                 }
+                               }
+                             ) -> _UpdateMonitoringResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMonitoringResponseSuccess
+
+      interface _UpdateReplicationInfoResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateReplicationInfoResponse]
+        def replicator_arn: () -> ::String
+        def replicator_state: () -> ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#update_replication_info-instance_method
+      def update_replication_info: (
+                                     ?consumer_group_replication: {
+                                       consumer_groups_to_exclude: Array[::String],
+                                       consumer_groups_to_replicate: Array[::String],
+                                       detect_and_copy_new_consumer_groups: bool,
+                                       synchronise_consumer_group_offsets: bool
+                                     },
+                                     current_version: ::String,
+                                     replicator_arn: ::String,
+                                     source_kafka_cluster_arn: ::String,
+                                     target_kafka_cluster_arn: ::String,
+                                     ?topic_replication: {
+                                       copy_access_control_lists_for_topics: bool,
+                                       copy_topic_configurations: bool,
+                                       detect_and_copy_new_topics: bool,
+                                       topics_to_exclude: Array[::String],
+                                       topics_to_replicate: Array[::String]
+                                     }
+                                   ) -> _UpdateReplicationInfoResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateReplicationInfoResponseSuccess
+
+      interface _UpdateSecurityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSecurityResponse]
+        def cluster_arn: () -> ::String
+        def cluster_operation_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#update_security-instance_method
+      def update_security: (
+                             ?client_authentication: {
+                               sasl: {
+                                 scram: {
+                                   enabled: bool?
+                                 }?,
+                                 iam: {
+                                   enabled: bool?
+                                 }?
+                               }?,
+                               tls: {
+                                 certificate_authority_arn_list: Array[::String]?,
+                                 enabled: bool?
+                               }?,
+                               unauthenticated: {
+                                 enabled: bool?
+                               }?
+                             },
+                             cluster_arn: ::String,
+                             current_version: ::String,
+                             ?encryption_info: {
+                               encryption_at_rest: {
+                                 data_volume_kms_key_id: ::String
+                               }?,
+                               encryption_in_transit: {
+                                 client_broker: ("TLS" | "TLS_PLAINTEXT" | "PLAINTEXT")?,
+                                 in_cluster: bool?
+                               }?
+                             }
+                           ) -> _UpdateSecurityResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSecurityResponseSuccess
+
+      interface _UpdateStorageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStorageResponse]
+        def cluster_arn: () -> ::String
+        def cluster_operation_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#update_storage-instance_method
+      def update_storage: (
+                            cluster_arn: ::String,
+                            current_version: ::String,
+                            ?provisioned_throughput: {
+                              enabled: bool?,
+                              volume_throughput: ::Integer?
+                            },
+                            ?storage_mode: ("LOCAL" | "TIERED"),
+                            ?volume_size_gb: ::Integer
+                          ) -> _UpdateStorageResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStorageResponseSuccess
+    end
+  end
+end
+

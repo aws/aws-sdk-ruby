@@ -1,0 +1,79 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudControlApi
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ClientTokenConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ConcurrentOperationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class GeneralServiceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class HandlerFailureException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class HandlerInternalFailureException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidCredentialsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidRequestException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NetworkFailureException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NotStabilizedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NotUpdatableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PrivateTypeException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RequestTokenNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceInternalErrorException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ThrottlingException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TypeNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnsupportedActionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

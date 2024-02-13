@@ -24,6 +24,7 @@ module Aws::EventBridge
     ApiDestinationName = Shapes::StringShape.new(name: 'ApiDestinationName')
     ApiDestinationResponseList = Shapes::ListShape.new(name: 'ApiDestinationResponseList')
     ApiDestinationState = Shapes::StringShape.new(name: 'ApiDestinationState')
+    AppSyncParameters = Shapes::StructureShape.new(name: 'AppSyncParameters')
     Archive = Shapes::StructureShape.new(name: 'Archive')
     ArchiveArn = Shapes::StringShape.new(name: 'ArchiveArn')
     ArchiveDescription = Shapes::StringShape.new(name: 'ArchiveDescription')
@@ -154,6 +155,7 @@ module Aws::EventBridge
     EventSourceState = Shapes::StringShape.new(name: 'EventSourceState')
     EventTime = Shapes::TimestampShape.new(name: 'EventTime')
     FailoverConfig = Shapes::StructureShape.new(name: 'FailoverConfig')
+    GraphQLOperation = Shapes::StringShape.new(name: 'GraphQLOperation')
     HeaderKey = Shapes::StringShape.new(name: 'HeaderKey')
     HeaderParametersMap = Shapes::MapShape.new(name: 'HeaderParametersMap')
     HeaderValue = Shapes::StringShape.new(name: 'HeaderValue')
@@ -365,6 +367,9 @@ module Aws::EventBridge
     ApiDestination.struct_class = Types::ApiDestination
 
     ApiDestinationResponseList.member = Shapes::ShapeRef.new(shape: ApiDestination)
+
+    AppSyncParameters.add_member(:graph_ql_operation, Shapes::ShapeRef.new(shape: GraphQLOperation, location_name: "GraphQLOperation"))
+    AppSyncParameters.struct_class = Types::AppSyncParameters
 
     Archive.add_member(:archive_name, Shapes::ShapeRef.new(shape: ArchiveName, location_name: "ArchiveName"))
     Archive.add_member(:event_source_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "EventSourceArn"))
@@ -1249,6 +1254,7 @@ module Aws::EventBridge
     Target.add_member(:sage_maker_pipeline_parameters, Shapes::ShapeRef.new(shape: SageMakerPipelineParameters, location_name: "SageMakerPipelineParameters"))
     Target.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
     Target.add_member(:retry_policy, Shapes::ShapeRef.new(shape: RetryPolicy, location_name: "RetryPolicy"))
+    Target.add_member(:app_sync_parameters, Shapes::ShapeRef.new(shape: AppSyncParameters, location_name: "AppSyncParameters"))
     Target.struct_class = Types::Target
 
     TargetIdList.member = Shapes::ShapeRef.new(shape: TargetId)

@@ -1,0 +1,44 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SageMakerRuntime
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class InternalDependencyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InternalFailure < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InternalStreamFailure < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ModelError < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def original_status_code: () -> ::String
+        def original_message: () -> ::String
+        def log_stream_arn: () -> ::String
+      end
+      class ModelNotReadyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ModelStreamError < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def error_code: () -> ::String
+      end
+      class ServiceUnavailable < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ValidationError < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

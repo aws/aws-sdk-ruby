@@ -1,0 +1,362 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DAX
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DAX/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterResponse]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DAX/Client.html#create_cluster-instance_method
+      def create_cluster: (
+                            cluster_name: ::String,
+                            node_type: ::String,
+                            ?description: ::String,
+                            replication_factor: ::Integer,
+                            ?availability_zones: Array[::String],
+                            ?subnet_group_name: ::String,
+                            ?security_group_ids: Array[::String],
+                            ?preferred_maintenance_window: ::String,
+                            ?notification_topic_arn: ::String,
+                            iam_role_arn: ::String,
+                            ?parameter_group_name: ::String,
+                            ?tags: Array[
+                              {
+                                key: ::String?,
+                                value: ::String?
+                              },
+                            ],
+                            ?sse_specification: {
+                              enabled: bool
+                            },
+                            ?cluster_endpoint_encryption_type: ("NONE" | "TLS")
+                          ) -> _CreateClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
+
+      interface _CreateParameterGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateParameterGroupResponse]
+        def parameter_group: () -> Types::ParameterGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DAX/Client.html#create_parameter_group-instance_method
+      def create_parameter_group: (
+                                    parameter_group_name: ::String,
+                                    ?description: ::String
+                                  ) -> _CreateParameterGroupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateParameterGroupResponseSuccess
+
+      interface _CreateSubnetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSubnetGroupResponse]
+        def subnet_group: () -> Types::SubnetGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DAX/Client.html#create_subnet_group-instance_method
+      def create_subnet_group: (
+                                 subnet_group_name: ::String,
+                                 ?description: ::String,
+                                 subnet_ids: Array[::String]
+                               ) -> _CreateSubnetGroupResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSubnetGroupResponseSuccess
+
+      interface _DecreaseReplicationFactorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DecreaseReplicationFactorResponse]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DAX/Client.html#decrease_replication_factor-instance_method
+      def decrease_replication_factor: (
+                                         cluster_name: ::String,
+                                         new_replication_factor: ::Integer,
+                                         ?availability_zones: Array[::String],
+                                         ?node_ids_to_remove: Array[::String]
+                                       ) -> _DecreaseReplicationFactorResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DecreaseReplicationFactorResponseSuccess
+
+      interface _DeleteClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClusterResponse]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DAX/Client.html#delete_cluster-instance_method
+      def delete_cluster: (
+                            cluster_name: ::String
+                          ) -> _DeleteClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClusterResponseSuccess
+
+      interface _DeleteParameterGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteParameterGroupResponse]
+        def deletion_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DAX/Client.html#delete_parameter_group-instance_method
+      def delete_parameter_group: (
+                                    parameter_group_name: ::String
+                                  ) -> _DeleteParameterGroupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteParameterGroupResponseSuccess
+
+      interface _DeleteSubnetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSubnetGroupResponse]
+        def deletion_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DAX/Client.html#delete_subnet_group-instance_method
+      def delete_subnet_group: (
+                                 subnet_group_name: ::String
+                               ) -> _DeleteSubnetGroupResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSubnetGroupResponseSuccess
+
+      interface _DescribeClustersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClustersResponse]
+        def next_token: () -> ::String
+        def clusters: () -> ::Array[Types::Cluster]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DAX/Client.html#describe_clusters-instance_method
+      def describe_clusters: (
+                               ?cluster_names: Array[::String],
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _DescribeClustersResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClustersResponseSuccess
+
+      interface _DescribeDefaultParametersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDefaultParametersResponse]
+        def next_token: () -> ::String
+        def parameters: () -> ::Array[Types::Parameter]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DAX/Client.html#describe_default_parameters-instance_method
+      def describe_default_parameters: (
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _DescribeDefaultParametersResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDefaultParametersResponseSuccess
+
+      interface _DescribeEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEventsResponse]
+        def next_token: () -> ::String
+        def events: () -> ::Array[Types::Event]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DAX/Client.html#describe_events-instance_method
+      def describe_events: (
+                             ?source_name: ::String,
+                             ?source_type: ("CLUSTER" | "PARAMETER_GROUP" | "SUBNET_GROUP"),
+                             ?start_time: ::Time,
+                             ?end_time: ::Time,
+                             ?duration: ::Integer,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _DescribeEventsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventsResponseSuccess
+
+      interface _DescribeParameterGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeParameterGroupsResponse]
+        def next_token: () -> ::String
+        def parameter_groups: () -> ::Array[Types::ParameterGroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DAX/Client.html#describe_parameter_groups-instance_method
+      def describe_parameter_groups: (
+                                       ?parameter_group_names: Array[::String],
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _DescribeParameterGroupsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeParameterGroupsResponseSuccess
+
+      interface _DescribeParametersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeParametersResponse]
+        def next_token: () -> ::String
+        def parameters: () -> ::Array[Types::Parameter]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DAX/Client.html#describe_parameters-instance_method
+      def describe_parameters: (
+                                 parameter_group_name: ::String,
+                                 ?source: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _DescribeParametersResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeParametersResponseSuccess
+
+      interface _DescribeSubnetGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSubnetGroupsResponse]
+        def next_token: () -> ::String
+        def subnet_groups: () -> ::Array[Types::SubnetGroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DAX/Client.html#describe_subnet_groups-instance_method
+      def describe_subnet_groups: (
+                                    ?subnet_group_names: Array[::String],
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _DescribeSubnetGroupsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSubnetGroupsResponseSuccess
+
+      interface _IncreaseReplicationFactorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::IncreaseReplicationFactorResponse]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DAX/Client.html#increase_replication_factor-instance_method
+      def increase_replication_factor: (
+                                         cluster_name: ::String,
+                                         new_replication_factor: ::Integer,
+                                         ?availability_zones: Array[::String]
+                                       ) -> _IncreaseReplicationFactorResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _IncreaseReplicationFactorResponseSuccess
+
+      interface _ListTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsResponse]
+        def tags: () -> ::Array[Types::Tag]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DAX/Client.html#list_tags-instance_method
+      def list_tags: (
+                       resource_name: ::String,
+                       ?next_token: ::String
+                     ) -> _ListTagsResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsResponseSuccess
+
+      interface _RebootNodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RebootNodeResponse]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DAX/Client.html#reboot_node-instance_method
+      def reboot_node: (
+                         cluster_name: ::String,
+                         node_id: ::String
+                       ) -> _RebootNodeResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RebootNodeResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DAX/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_name: ::String,
+                          tags: Array[
+                            {
+                              key: ::String?,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DAX/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_name: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClusterResponse]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DAX/Client.html#update_cluster-instance_method
+      def update_cluster: (
+                            cluster_name: ::String,
+                            ?description: ::String,
+                            ?preferred_maintenance_window: ::String,
+                            ?notification_topic_arn: ::String,
+                            ?notification_topic_status: ::String,
+                            ?parameter_group_name: ::String,
+                            ?security_group_ids: Array[::String]
+                          ) -> _UpdateClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterResponseSuccess
+
+      interface _UpdateParameterGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateParameterGroupResponse]
+        def parameter_group: () -> Types::ParameterGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DAX/Client.html#update_parameter_group-instance_method
+      def update_parameter_group: (
+                                    parameter_group_name: ::String,
+                                    parameter_name_values: Array[
+                                      {
+                                        parameter_name: ::String?,
+                                        parameter_value: ::String?
+                                      },
+                                    ]
+                                  ) -> _UpdateParameterGroupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateParameterGroupResponseSuccess
+
+      interface _UpdateSubnetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSubnetGroupResponse]
+        def subnet_group: () -> Types::SubnetGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DAX/Client.html#update_subnet_group-instance_method
+      def update_subnet_group: (
+                                 subnet_group_name: ::String,
+                                 ?description: ::String,
+                                 ?subnet_ids: Array[::String]
+                               ) -> _UpdateSubnetGroupResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSubnetGroupResponseSuccess
+    end
+  end
+end
+

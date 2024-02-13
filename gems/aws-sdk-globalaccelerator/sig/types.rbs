@@ -1,0 +1,947 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::GlobalAccelerator
+  module Types
+
+    class Accelerator
+      attr_accessor accelerator_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor ip_address_type: ("IPV4" | "DUAL_STACK")
+      attr_accessor enabled: bool
+      attr_accessor ip_sets: ::Array[Types::IpSet]
+      attr_accessor dns_name: ::String
+      attr_accessor status: ("DEPLOYED" | "IN_PROGRESS")
+      attr_accessor created_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor dual_stack_dns_name: ::String
+      attr_accessor events: ::Array[Types::AcceleratorEvent]
+      SENSITIVE: []
+    end
+
+    class AcceleratorAttributes
+      attr_accessor flow_logs_enabled: bool
+      attr_accessor flow_logs_s3_bucket: ::String
+      attr_accessor flow_logs_s3_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class AcceleratorEvent
+      attr_accessor message: ::String
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class AcceleratorNotDisabledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AcceleratorNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AddCustomRoutingEndpointsRequest
+      attr_accessor endpoint_configurations: ::Array[Types::CustomRoutingEndpointConfiguration]
+      attr_accessor endpoint_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AddCustomRoutingEndpointsResponse
+      attr_accessor endpoint_descriptions: ::Array[Types::CustomRoutingEndpointDescription]
+      attr_accessor endpoint_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AddEndpointsRequest
+      attr_accessor endpoint_configurations: ::Array[Types::EndpointConfiguration]
+      attr_accessor endpoint_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AddEndpointsResponse
+      attr_accessor endpoint_descriptions: ::Array[Types::EndpointDescription]
+      attr_accessor endpoint_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AdvertiseByoipCidrRequest
+      attr_accessor cidr: ::String
+      SENSITIVE: []
+    end
+
+    class AdvertiseByoipCidrResponse
+      attr_accessor byoip_cidr: Types::ByoipCidr
+      SENSITIVE: []
+    end
+
+    class AllowCustomRoutingTrafficRequest
+      attr_accessor endpoint_group_arn: ::String
+      attr_accessor endpoint_id: ::String
+      attr_accessor destination_addresses: ::Array[::String]
+      attr_accessor destination_ports: ::Array[::Integer]
+      attr_accessor allow_all_traffic_to_endpoint: bool
+      SENSITIVE: []
+    end
+
+    class AssociatedEndpointGroupFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssociatedListenerFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Attachment
+      attr_accessor attachment_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor principals: ::Array[::String]
+      attr_accessor resources: ::Array[Types::Resource]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor created_time: ::Time
+      SENSITIVE: []
+    end
+
+    class AttachmentNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ByoipCidr
+      attr_accessor cidr: ::String
+      attr_accessor state: ("PENDING_PROVISIONING" | "READY" | "PENDING_ADVERTISING" | "ADVERTISING" | "PENDING_WITHDRAWING" | "PENDING_DEPROVISIONING" | "DEPROVISIONED" | "FAILED_PROVISION" | "FAILED_ADVERTISING" | "FAILED_WITHDRAW" | "FAILED_DEPROVISION")
+      attr_accessor events: ::Array[Types::ByoipCidrEvent]
+      SENSITIVE: []
+    end
+
+    class ByoipCidrEvent
+      attr_accessor message: ::String
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ByoipCidrNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CidrAuthorizationContext
+      attr_accessor message: ::String
+      attr_accessor signature: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAcceleratorRequest
+      attr_accessor name: ::String
+      attr_accessor ip_address_type: ("IPV4" | "DUAL_STACK")
+      attr_accessor ip_addresses: ::Array[::String]
+      attr_accessor enabled: bool
+      attr_accessor idempotency_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateAcceleratorResponse
+      attr_accessor accelerator: Types::Accelerator
+      SENSITIVE: []
+    end
+
+    class CreateCrossAccountAttachmentRequest
+      attr_accessor name: ::String
+      attr_accessor principals: ::Array[::String]
+      attr_accessor resources: ::Array[Types::Resource]
+      attr_accessor idempotency_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateCrossAccountAttachmentResponse
+      attr_accessor cross_account_attachment: Types::Attachment
+      SENSITIVE: []
+    end
+
+    class CreateCustomRoutingAcceleratorRequest
+      attr_accessor name: ::String
+      attr_accessor ip_address_type: ("IPV4" | "DUAL_STACK")
+      attr_accessor ip_addresses: ::Array[::String]
+      attr_accessor enabled: bool
+      attr_accessor idempotency_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateCustomRoutingAcceleratorResponse
+      attr_accessor accelerator: Types::CustomRoutingAccelerator
+      SENSITIVE: []
+    end
+
+    class CreateCustomRoutingEndpointGroupRequest
+      attr_accessor listener_arn: ::String
+      attr_accessor endpoint_group_region: ::String
+      attr_accessor destination_configurations: ::Array[Types::CustomRoutingDestinationConfiguration]
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCustomRoutingEndpointGroupResponse
+      attr_accessor endpoint_group: Types::CustomRoutingEndpointGroup
+      SENSITIVE: []
+    end
+
+    class CreateCustomRoutingListenerRequest
+      attr_accessor accelerator_arn: ::String
+      attr_accessor port_ranges: ::Array[Types::PortRange]
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCustomRoutingListenerResponse
+      attr_accessor listener: Types::CustomRoutingListener
+      SENSITIVE: []
+    end
+
+    class CreateEndpointGroupRequest
+      attr_accessor listener_arn: ::String
+      attr_accessor endpoint_group_region: ::String
+      attr_accessor endpoint_configurations: ::Array[Types::EndpointConfiguration]
+      attr_accessor traffic_dial_percentage: ::Float
+      attr_accessor health_check_port: ::Integer
+      attr_accessor health_check_protocol: ("TCP" | "HTTP" | "HTTPS")
+      attr_accessor health_check_path: ::String
+      attr_accessor health_check_interval_seconds: ::Integer
+      attr_accessor threshold_count: ::Integer
+      attr_accessor idempotency_token: ::String
+      attr_accessor port_overrides: ::Array[Types::PortOverride]
+      SENSITIVE: []
+    end
+
+    class CreateEndpointGroupResponse
+      attr_accessor endpoint_group: Types::EndpointGroup
+      SENSITIVE: []
+    end
+
+    class CreateListenerRequest
+      attr_accessor accelerator_arn: ::String
+      attr_accessor port_ranges: ::Array[Types::PortRange]
+      attr_accessor protocol: ("TCP" | "UDP")
+      attr_accessor client_affinity: ("NONE" | "SOURCE_IP")
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateListenerResponse
+      attr_accessor listener: Types::Listener
+      SENSITIVE: []
+    end
+
+    class CrossAccountResource
+      attr_accessor endpoint_id: ::String
+      attr_accessor attachment_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CustomRoutingAccelerator
+      attr_accessor accelerator_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor ip_address_type: ("IPV4" | "DUAL_STACK")
+      attr_accessor enabled: bool
+      attr_accessor ip_sets: ::Array[Types::IpSet]
+      attr_accessor dns_name: ::String
+      attr_accessor status: ("DEPLOYED" | "IN_PROGRESS")
+      attr_accessor created_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CustomRoutingAcceleratorAttributes
+      attr_accessor flow_logs_enabled: bool
+      attr_accessor flow_logs_s3_bucket: ::String
+      attr_accessor flow_logs_s3_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class CustomRoutingDestinationConfiguration
+      attr_accessor from_port: ::Integer
+      attr_accessor to_port: ::Integer
+      attr_accessor protocols: ::Array[("TCP" | "UDP")]
+      SENSITIVE: []
+    end
+
+    class CustomRoutingDestinationDescription
+      attr_accessor from_port: ::Integer
+      attr_accessor to_port: ::Integer
+      attr_accessor protocols: ::Array[("TCP" | "UDP")]
+      SENSITIVE: []
+    end
+
+    class CustomRoutingEndpointConfiguration
+      attr_accessor endpoint_id: ::String
+      attr_accessor attachment_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CustomRoutingEndpointDescription
+      attr_accessor endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class CustomRoutingEndpointGroup
+      attr_accessor endpoint_group_arn: ::String
+      attr_accessor endpoint_group_region: ::String
+      attr_accessor destination_descriptions: ::Array[Types::CustomRoutingDestinationDescription]
+      attr_accessor endpoint_descriptions: ::Array[Types::CustomRoutingEndpointDescription]
+      SENSITIVE: []
+    end
+
+    class CustomRoutingListener
+      attr_accessor listener_arn: ::String
+      attr_accessor port_ranges: ::Array[Types::PortRange]
+      SENSITIVE: []
+    end
+
+    class DeleteAcceleratorRequest
+      attr_accessor accelerator_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCrossAccountAttachmentRequest
+      attr_accessor attachment_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCustomRoutingAcceleratorRequest
+      attr_accessor accelerator_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCustomRoutingEndpointGroupRequest
+      attr_accessor endpoint_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCustomRoutingListenerRequest
+      attr_accessor listener_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEndpointGroupRequest
+      attr_accessor endpoint_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteListenerRequest
+      attr_accessor listener_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DenyCustomRoutingTrafficRequest
+      attr_accessor endpoint_group_arn: ::String
+      attr_accessor endpoint_id: ::String
+      attr_accessor destination_addresses: ::Array[::String]
+      attr_accessor destination_ports: ::Array[::Integer]
+      attr_accessor deny_all_traffic_to_endpoint: bool
+      SENSITIVE: []
+    end
+
+    class DeprovisionByoipCidrRequest
+      attr_accessor cidr: ::String
+      SENSITIVE: []
+    end
+
+    class DeprovisionByoipCidrResponse
+      attr_accessor byoip_cidr: Types::ByoipCidr
+      SENSITIVE: []
+    end
+
+    class DescribeAcceleratorAttributesRequest
+      attr_accessor accelerator_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAcceleratorAttributesResponse
+      attr_accessor accelerator_attributes: Types::AcceleratorAttributes
+      SENSITIVE: []
+    end
+
+    class DescribeAcceleratorRequest
+      attr_accessor accelerator_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAcceleratorResponse
+      attr_accessor accelerator: Types::Accelerator
+      SENSITIVE: []
+    end
+
+    class DescribeCrossAccountAttachmentRequest
+      attr_accessor attachment_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCrossAccountAttachmentResponse
+      attr_accessor cross_account_attachment: Types::Attachment
+      SENSITIVE: []
+    end
+
+    class DescribeCustomRoutingAcceleratorAttributesRequest
+      attr_accessor accelerator_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCustomRoutingAcceleratorAttributesResponse
+      attr_accessor accelerator_attributes: Types::CustomRoutingAcceleratorAttributes
+      SENSITIVE: []
+    end
+
+    class DescribeCustomRoutingAcceleratorRequest
+      attr_accessor accelerator_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCustomRoutingAcceleratorResponse
+      attr_accessor accelerator: Types::CustomRoutingAccelerator
+      SENSITIVE: []
+    end
+
+    class DescribeCustomRoutingEndpointGroupRequest
+      attr_accessor endpoint_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCustomRoutingEndpointGroupResponse
+      attr_accessor endpoint_group: Types::CustomRoutingEndpointGroup
+      SENSITIVE: []
+    end
+
+    class DescribeCustomRoutingListenerRequest
+      attr_accessor listener_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCustomRoutingListenerResponse
+      attr_accessor listener: Types::CustomRoutingListener
+      SENSITIVE: []
+    end
+
+    class DescribeEndpointGroupRequest
+      attr_accessor endpoint_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEndpointGroupResponse
+      attr_accessor endpoint_group: Types::EndpointGroup
+      SENSITIVE: []
+    end
+
+    class DescribeListenerRequest
+      attr_accessor listener_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeListenerResponse
+      attr_accessor listener: Types::Listener
+      SENSITIVE: []
+    end
+
+    class DestinationPortMapping
+      attr_accessor accelerator_arn: ::String
+      attr_accessor accelerator_socket_addresses: ::Array[Types::SocketAddress]
+      attr_accessor endpoint_group_arn: ::String
+      attr_accessor endpoint_id: ::String
+      attr_accessor endpoint_group_region: ::String
+      attr_accessor destination_socket_address: Types::SocketAddress
+      attr_accessor ip_address_type: ("IPV4" | "DUAL_STACK")
+      attr_accessor destination_traffic_state: ("ALLOW" | "DENY")
+      SENSITIVE: []
+    end
+
+    class EndpointAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EndpointConfiguration
+      attr_accessor endpoint_id: ::String
+      attr_accessor weight: ::Integer
+      attr_accessor client_ip_preservation_enabled: bool
+      attr_accessor attachment_arn: ::String
+      SENSITIVE: []
+    end
+
+    class EndpointDescription
+      attr_accessor endpoint_id: ::String
+      attr_accessor weight: ::Integer
+      attr_accessor health_state: ("INITIAL" | "HEALTHY" | "UNHEALTHY")
+      attr_accessor health_reason: ::String
+      attr_accessor client_ip_preservation_enabled: bool
+      SENSITIVE: []
+    end
+
+    class EndpointGroup
+      attr_accessor endpoint_group_arn: ::String
+      attr_accessor endpoint_group_region: ::String
+      attr_accessor endpoint_descriptions: ::Array[Types::EndpointDescription]
+      attr_accessor traffic_dial_percentage: ::Float
+      attr_accessor health_check_port: ::Integer
+      attr_accessor health_check_protocol: ("TCP" | "HTTP" | "HTTPS")
+      attr_accessor health_check_path: ::String
+      attr_accessor health_check_interval_seconds: ::Integer
+      attr_accessor threshold_count: ::Integer
+      attr_accessor port_overrides: ::Array[Types::PortOverride]
+      SENSITIVE: []
+    end
+
+    class EndpointGroupAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EndpointGroupNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EndpointIdentifier
+      attr_accessor endpoint_id: ::String
+      attr_accessor client_ip_preservation_enabled: bool
+      SENSITIVE: []
+    end
+
+    class EndpointNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IncorrectCidrStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServiceErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidArgumentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidPortRangeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IpSet
+      attr_accessor ip_family: ::String
+      attr_accessor ip_addresses: ::Array[::String]
+      attr_accessor ip_address_family: ("IPv4" | "IPv6")
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAcceleratorsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAcceleratorsResponse
+      attr_accessor accelerators: ::Array[Types::Accelerator]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListByoipCidrsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListByoipCidrsResponse
+      attr_accessor byoip_cidrs: ::Array[Types::ByoipCidr]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCrossAccountAttachmentsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCrossAccountAttachmentsResponse
+      attr_accessor cross_account_attachments: ::Array[Types::Attachment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCrossAccountResourceAccountsRequest < Aws::EmptyStructure
+    end
+
+    class ListCrossAccountResourceAccountsResponse
+      attr_accessor resource_owner_aws_account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListCrossAccountResourcesRequest
+      attr_accessor accelerator_arn: ::String
+      attr_accessor resource_owner_aws_account_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCrossAccountResourcesResponse
+      attr_accessor cross_account_resources: ::Array[Types::CrossAccountResource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomRoutingAcceleratorsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomRoutingAcceleratorsResponse
+      attr_accessor accelerators: ::Array[Types::CustomRoutingAccelerator]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomRoutingEndpointGroupsRequest
+      attr_accessor listener_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomRoutingEndpointGroupsResponse
+      attr_accessor endpoint_groups: ::Array[Types::CustomRoutingEndpointGroup]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomRoutingListenersRequest
+      attr_accessor accelerator_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomRoutingListenersResponse
+      attr_accessor listeners: ::Array[Types::CustomRoutingListener]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomRoutingPortMappingsByDestinationRequest
+      attr_accessor endpoint_id: ::String
+      attr_accessor destination_address: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomRoutingPortMappingsByDestinationResponse
+      attr_accessor destination_port_mappings: ::Array[Types::DestinationPortMapping]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomRoutingPortMappingsRequest
+      attr_accessor accelerator_arn: ::String
+      attr_accessor endpoint_group_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomRoutingPortMappingsResponse
+      attr_accessor port_mappings: ::Array[Types::PortMapping]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEndpointGroupsRequest
+      attr_accessor listener_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEndpointGroupsResponse
+      attr_accessor endpoint_groups: ::Array[Types::EndpointGroup]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListListenersRequest
+      attr_accessor accelerator_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListListenersResponse
+      attr_accessor listeners: ::Array[Types::Listener]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class Listener
+      attr_accessor listener_arn: ::String
+      attr_accessor port_ranges: ::Array[Types::PortRange]
+      attr_accessor protocol: ("TCP" | "UDP")
+      attr_accessor client_affinity: ("NONE" | "SOURCE_IP")
+      SENSITIVE: []
+    end
+
+    class ListenerNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PortMapping
+      attr_accessor accelerator_port: ::Integer
+      attr_accessor endpoint_group_arn: ::String
+      attr_accessor endpoint_id: ::String
+      attr_accessor destination_socket_address: Types::SocketAddress
+      attr_accessor protocols: ::Array[("TCP" | "UDP")]
+      attr_accessor destination_traffic_state: ("ALLOW" | "DENY")
+      SENSITIVE: []
+    end
+
+    class PortOverride
+      attr_accessor listener_port: ::Integer
+      attr_accessor endpoint_port: ::Integer
+      SENSITIVE: []
+    end
+
+    class PortRange
+      attr_accessor from_port: ::Integer
+      attr_accessor to_port: ::Integer
+      SENSITIVE: []
+    end
+
+    class ProvisionByoipCidrRequest
+      attr_accessor cidr: ::String
+      attr_accessor cidr_authorization_context: Types::CidrAuthorizationContext
+      SENSITIVE: []
+    end
+
+    class ProvisionByoipCidrResponse
+      attr_accessor byoip_cidr: Types::ByoipCidr
+      SENSITIVE: []
+    end
+
+    class RemoveCustomRoutingEndpointsRequest
+      attr_accessor endpoint_ids: ::Array[::String]
+      attr_accessor endpoint_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveEndpointsRequest
+      attr_accessor endpoint_identifiers: ::Array[Types::EndpointIdentifier]
+      attr_accessor endpoint_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Resource
+      attr_accessor endpoint_id: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class SocketAddress
+      attr_accessor ip_address: ::String
+      attr_accessor port: ::Integer
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TransactionInProgressException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAcceleratorAttributesRequest
+      attr_accessor accelerator_arn: ::String
+      attr_accessor flow_logs_enabled: bool
+      attr_accessor flow_logs_s3_bucket: ::String
+      attr_accessor flow_logs_s3_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAcceleratorAttributesResponse
+      attr_accessor accelerator_attributes: Types::AcceleratorAttributes
+      SENSITIVE: []
+    end
+
+    class UpdateAcceleratorRequest
+      attr_accessor accelerator_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor ip_address_type: ("IPV4" | "DUAL_STACK")
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateAcceleratorResponse
+      attr_accessor accelerator: Types::Accelerator
+      SENSITIVE: []
+    end
+
+    class UpdateCrossAccountAttachmentRequest
+      attr_accessor attachment_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor add_principals: ::Array[::String]
+      attr_accessor remove_principals: ::Array[::String]
+      attr_accessor add_resources: ::Array[Types::Resource]
+      attr_accessor remove_resources: ::Array[Types::Resource]
+      SENSITIVE: []
+    end
+
+    class UpdateCrossAccountAttachmentResponse
+      attr_accessor cross_account_attachment: Types::Attachment
+      SENSITIVE: []
+    end
+
+    class UpdateCustomRoutingAcceleratorAttributesRequest
+      attr_accessor accelerator_arn: ::String
+      attr_accessor flow_logs_enabled: bool
+      attr_accessor flow_logs_s3_bucket: ::String
+      attr_accessor flow_logs_s3_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCustomRoutingAcceleratorAttributesResponse
+      attr_accessor accelerator_attributes: Types::CustomRoutingAcceleratorAttributes
+      SENSITIVE: []
+    end
+
+    class UpdateCustomRoutingAcceleratorRequest
+      attr_accessor accelerator_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor ip_address_type: ("IPV4" | "DUAL_STACK")
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateCustomRoutingAcceleratorResponse
+      attr_accessor accelerator: Types::CustomRoutingAccelerator
+      SENSITIVE: []
+    end
+
+    class UpdateCustomRoutingListenerRequest
+      attr_accessor listener_arn: ::String
+      attr_accessor port_ranges: ::Array[Types::PortRange]
+      SENSITIVE: []
+    end
+
+    class UpdateCustomRoutingListenerResponse
+      attr_accessor listener: Types::CustomRoutingListener
+      SENSITIVE: []
+    end
+
+    class UpdateEndpointGroupRequest
+      attr_accessor endpoint_group_arn: ::String
+      attr_accessor endpoint_configurations: ::Array[Types::EndpointConfiguration]
+      attr_accessor traffic_dial_percentage: ::Float
+      attr_accessor health_check_port: ::Integer
+      attr_accessor health_check_protocol: ("TCP" | "HTTP" | "HTTPS")
+      attr_accessor health_check_path: ::String
+      attr_accessor health_check_interval_seconds: ::Integer
+      attr_accessor threshold_count: ::Integer
+      attr_accessor port_overrides: ::Array[Types::PortOverride]
+      SENSITIVE: []
+    end
+
+    class UpdateEndpointGroupResponse
+      attr_accessor endpoint_group: Types::EndpointGroup
+      SENSITIVE: []
+    end
+
+    class UpdateListenerRequest
+      attr_accessor listener_arn: ::String
+      attr_accessor port_ranges: ::Array[Types::PortRange]
+      attr_accessor protocol: ("TCP" | "UDP")
+      attr_accessor client_affinity: ("NONE" | "SOURCE_IP")
+      SENSITIVE: []
+    end
+
+    class UpdateListenerResponse
+      attr_accessor listener: Types::Listener
+      SENSITIVE: []
+    end
+
+    class WithdrawByoipCidrRequest
+      attr_accessor cidr: ::String
+      SENSITIVE: []
+    end
+
+    class WithdrawByoipCidrResponse
+      attr_accessor byoip_cidr: Types::ByoipCidr
+      SENSITIVE: []
+    end
+  end
+end

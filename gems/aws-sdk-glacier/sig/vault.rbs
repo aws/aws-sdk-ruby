@@ -1,0 +1,137 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Glacier
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html
+    class Vault
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#initialize-instance_method
+      def initialize: (String account_id, String name, Hash[Symbol, untyped] options) -> void
+                    | (account_id: String, name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#account_id-instance_method
+      def account_id: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#name-instance_method
+      def name: () -> String
+      alias vault_name name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#vault_arn-instance_method
+      def vault_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#creation_date-instance_method
+      def creation_date: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#last_inventory_date-instance_method
+      def last_inventory_date: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#number_of_archives-instance_method
+      def number_of_archives: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#size_in_bytes-instance_method
+      def size_in_bytes: () -> ::Integer
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#data-instance_method
+      def data: () -> Types::DescribeVaultOutput
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#create-instance_method
+      def create: (
+                  ) -> Types::CreateVaultOutput
+                | (?Hash[Symbol, untyped]) -> Types::CreateVaultOutput
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#delete-instance_method
+      def delete: (
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#initiate_inventory_retrieval-instance_method
+      def initiate_inventory_retrieval: (
+                                        ) -> Job
+                                      | (?Hash[Symbol, untyped]) -> Job
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#initiate_multipart_upload-instance_method
+      def initiate_multipart_upload: (
+                                       ?archive_description: ::String,
+                                       ?part_size: ::Integer
+                                     ) -> MultipartUpload
+                                   | (?Hash[Symbol, untyped]) -> MultipartUpload
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#upload_archive-instance_method
+      def upload_archive: (
+                            ?archive_description: ::String,
+                            ?checksum: ::String,
+                            ?body: ::String
+                          ) -> Archive
+                        | (?Hash[Symbol, untyped]) -> Archive
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#account-instance_method
+      def account: () -> Account
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#archive-instance_method
+      def archive: (String id) -> Archive
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#completed_jobs-instance_method
+      def completed_jobs: (
+                            ?statuscode: ::String
+                          ) -> Job::Collection
+                        | (?Hash[Symbol, untyped]) -> Job::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#failed_jobs-instance_method
+      def failed_jobs: (
+                         ?completed: ::String
+                       ) -> Job::Collection
+                     | (?Hash[Symbol, untyped]) -> Job::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#job-instance_method
+      def job: (String id) -> Job
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#jobs-instance_method
+      def jobs: (
+                  ?statuscode: ::String,
+                  ?completed: ::String
+                ) -> Job::Collection
+              | (?Hash[Symbol, untyped]) -> Job::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#jobs_in_progress-instance_method
+      def jobs_in_progress: (
+                              ?completed: ::String
+                            ) -> Job::Collection
+                          | (?Hash[Symbol, untyped]) -> Job::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#multipart_uplaods-instance_method
+      def multipart_uplaods: (
+                             ) -> MultipartUpload::Collection
+                           | (?Hash[Symbol, untyped]) -> MultipartUpload::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#multipart_upload-instance_method
+      def multipart_upload: (String id) -> MultipartUpload
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#notification-instance_method
+      def notification: () -> Notification
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Vault.html#succeeded_jobs-instance_method
+      def succeeded_jobs: (
+                            ?completed: ::String
+                          ) -> Job::Collection
+                        | (?Hash[Symbol, untyped]) -> Job::Collection
+
+      class Collection < ::Aws::Resources::Collection[Vault]
+      end
+    end
+  end
+end

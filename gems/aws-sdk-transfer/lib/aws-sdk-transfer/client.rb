@@ -2067,6 +2067,8 @@ module Aws::Transfer
     #   resp.connector.sftp_config.user_secret_id #=> String
     #   resp.connector.sftp_config.trusted_host_keys #=> Array
     #   resp.connector.sftp_config.trusted_host_keys[0] #=> String
+    #   resp.connector.service_managed_egress_ip_addresses #=> Array
+    #   resp.connector.service_managed_egress_ip_addresses[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeConnector AWS API Documentation
     #
@@ -2338,6 +2340,8 @@ module Aws::Transfer
     #   resp.server.structured_log_destinations #=> Array
     #   resp.server.structured_log_destinations[0] #=> String
     #   resp.server.s3_storage_options.directory_listing_optimization #=> String, one of "ENABLED", "DISABLED"
+    #   resp.server.as_2_service_managed_egress_ip_addresses #=> Array
+    #   resp.server.as_2_service_managed_egress_ip_addresses[0] #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4661,7 +4665,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

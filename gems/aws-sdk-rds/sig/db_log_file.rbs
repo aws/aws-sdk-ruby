@@ -1,0 +1,51 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RDS
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBLogFile.html
+    class DBLogFile
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBLogFile.html#initialize-instance_method
+      def initialize: (String instance_id, String name, Hash[Symbol, untyped] options) -> void
+                    | (instance_id: String, name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBLogFile.html#instance_id-instance_method
+      def instance_id: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBLogFile.html#name-instance_method
+      def name: () -> String
+      alias log_file_name name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBLogFile.html#last_written-instance_method
+      def last_written: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBLogFile.html#size-instance_method
+      def size: () -> ::Integer
+
+      def client: () -> Client
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBLogFile.html#data-instance_method
+      def data: () -> Types::DescribeDBLogFilesDetails
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBLogFile.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBLogFile.html#download-instance_method
+      def download: (
+                      ?marker: ::String,
+                      ?number_of_lines: ::Integer
+                    ) -> Types::DownloadDBLogFilePortionDetails
+                  | (?Hash[Symbol, untyped]) -> Types::DownloadDBLogFilePortionDetails
+
+      class Collection < ::Aws::Resources::Collection[DBLogFile]
+      end
+    end
+  end
+end

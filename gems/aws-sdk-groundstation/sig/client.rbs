@@ -1,0 +1,776 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module GroundStation
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CancelContactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ContactIdResponse]
+        def contact_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#cancel_contact-instance_method
+      def cancel_contact: (
+                            contact_id: ::String
+                          ) -> _CancelContactResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelContactResponseSuccess
+
+      interface _CreateConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfigIdResponse]
+        def config_arn: () -> ::String
+        def config_id: () -> ::String
+        def config_type: () -> ("antenna-downlink" | "antenna-downlink-demod-decode" | "antenna-uplink" | "dataflow-endpoint" | "tracking" | "uplink-echo" | "s3-recording")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#create_config-instance_method
+      def create_config: (
+                           config_data: {
+                             antenna_downlink_config: {
+                               spectrum_config: {
+                                 bandwidth: {
+                                   units: ("GHz" | "MHz" | "kHz"),
+                                   value: ::Float
+                                 },
+                                 center_frequency: {
+                                   units: ("GHz" | "MHz" | "kHz"),
+                                   value: ::Float
+                                 },
+                                 polarization: ("LEFT_HAND" | "NONE" | "RIGHT_HAND")?
+                               }
+                             }?,
+                             antenna_downlink_demod_decode_config: {
+                               decode_config: {
+                                 unvalidated_json: ::String
+                               },
+                               demodulation_config: {
+                                 unvalidated_json: ::String
+                               },
+                               spectrum_config: {
+                                 bandwidth: {
+                                   units: ("GHz" | "MHz" | "kHz"),
+                                   value: ::Float
+                                 },
+                                 center_frequency: {
+                                   units: ("GHz" | "MHz" | "kHz"),
+                                   value: ::Float
+                                 },
+                                 polarization: ("LEFT_HAND" | "NONE" | "RIGHT_HAND")?
+                               }
+                             }?,
+                             antenna_uplink_config: {
+                               spectrum_config: {
+                                 center_frequency: {
+                                   units: ("GHz" | "MHz" | "kHz"),
+                                   value: ::Float
+                                 },
+                                 polarization: ("LEFT_HAND" | "NONE" | "RIGHT_HAND")?
+                               },
+                               target_eirp: {
+                                 units: ("dBW"),
+                                 value: ::Float
+                               },
+                               transmit_disabled: bool?
+                             }?,
+                             dataflow_endpoint_config: {
+                               dataflow_endpoint_name: ::String,
+                               dataflow_endpoint_region: ::String?
+                             }?,
+                             s3_recording_config: {
+                               bucket_arn: ::String,
+                               prefix: ::String?,
+                               role_arn: ::String
+                             }?,
+                             tracking_config: {
+                               autotrack: ("PREFERRED" | "REMOVED" | "REQUIRED")
+                             }?,
+                             uplink_echo_config: {
+                               antenna_uplink_config_arn: ::String,
+                               enabled: bool
+                             }?
+                           },
+                           name: ::String,
+                           ?tags: Hash[::String, ::String]
+                         ) -> _CreateConfigResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigResponseSuccess
+
+      interface _CreateDataflowEndpointGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DataflowEndpointGroupIdResponse]
+        def dataflow_endpoint_group_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#create_dataflow_endpoint_group-instance_method
+      def create_dataflow_endpoint_group: (
+                                            ?contact_post_pass_duration_seconds: ::Integer,
+                                            ?contact_pre_pass_duration_seconds: ::Integer,
+                                            endpoint_details: Array[
+                                              {
+                                                aws_ground_station_agent_endpoint: {
+                                                  agent_status: ("SUCCESS" | "FAILED" | "ACTIVE" | "INACTIVE")?,
+                                                  audit_results: ("HEALTHY" | "UNHEALTHY")?,
+                                                  egress_address: {
+                                                    mtu: ::Integer?,
+                                                    socket_address: {
+                                                      name: ::String,
+                                                      port: ::Integer
+                                                    }
+                                                  },
+                                                  ingress_address: {
+                                                    mtu: ::Integer?,
+                                                    socket_address: {
+                                                      name: ::String,
+                                                      port_range: {
+                                                        maximum: ::Integer,
+                                                        minimum: ::Integer
+                                                      }
+                                                    }
+                                                  },
+                                                  name: ::String
+                                                }?,
+                                                endpoint: {
+                                                  address: {
+                                                    name: ::String,
+                                                    port: ::Integer
+                                                  }?,
+                                                  mtu: ::Integer?,
+                                                  name: ::String?,
+                                                  status: ("created" | "creating" | "deleted" | "deleting" | "failed")?
+                                                }?,
+                                                health_reasons: Array[("NO_REGISTERED_AGENT" | "INVALID_IP_OWNERSHIP" | "NOT_AUTHORIZED_TO_CREATE_SLR" | "UNVERIFIED_IP_OWNERSHIP" | "INITIALIZING_DATAPLANE" | "DATAPLANE_FAILURE" | "HEALTHY")]?,
+                                                health_status: ("UNHEALTHY" | "HEALTHY")?,
+                                                security_details: {
+                                                  role_arn: ::String,
+                                                  security_group_ids: Array[::String],
+                                                  subnet_ids: Array[::String]
+                                                }?
+                                              },
+                                            ],
+                                            ?tags: Hash[::String, ::String]
+                                          ) -> _CreateDataflowEndpointGroupResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataflowEndpointGroupResponseSuccess
+
+      interface _CreateEphemerisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EphemerisIdResponse]
+        def ephemeris_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#create_ephemeris-instance_method
+      def create_ephemeris: (
+                              ?enabled: bool,
+                              ?ephemeris: {
+                                oem: {
+                                  oem_data: ::String?,
+                                  s3_object: {
+                                    bucket: ::String?,
+                                    key: ::String?,
+                                    version: ::String?
+                                  }?
+                                }?,
+                                tle: {
+                                  s3_object: {
+                                    bucket: ::String?,
+                                    key: ::String?,
+                                    version: ::String?
+                                  }?,
+                                  tle_data: Array[
+                                    {
+                                      tle_line_1: ::String,
+                                      tle_line_2: ::String,
+                                      valid_time_range: {
+                                        end_time: ::Time,
+                                        start_time: ::Time
+                                      }
+                                    },
+                                  ]?
+                                }?
+                              },
+                              ?expiration_time: ::Time,
+                              ?kms_key_arn: ::String,
+                              name: ::String,
+                              ?priority: ::Integer,
+                              satellite_id: ::String,
+                              ?tags: Hash[::String, ::String]
+                            ) -> _CreateEphemerisResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEphemerisResponseSuccess
+
+      interface _CreateMissionProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::MissionProfileIdResponse]
+        def mission_profile_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#create_mission_profile-instance_method
+      def create_mission_profile: (
+                                    ?contact_post_pass_duration_seconds: ::Integer,
+                                    ?contact_pre_pass_duration_seconds: ::Integer,
+                                    dataflow_edges: Array[
+                                      Array[::String],
+                                    ],
+                                    minimum_viable_contact_duration_seconds: ::Integer,
+                                    name: ::String,
+                                    ?streams_kms_key: {
+                                      kms_alias_arn: ::String?,
+                                      kms_alias_name: ::String?,
+                                      kms_key_arn: ::String?
+                                    },
+                                    ?streams_kms_role: ::String,
+                                    ?tags: Hash[::String, ::String],
+                                    tracking_config_arn: ::String
+                                  ) -> _CreateMissionProfileResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMissionProfileResponseSuccess
+
+      interface _DeleteConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfigIdResponse]
+        def config_arn: () -> ::String
+        def config_id: () -> ::String
+        def config_type: () -> ("antenna-downlink" | "antenna-downlink-demod-decode" | "antenna-uplink" | "dataflow-endpoint" | "tracking" | "uplink-echo" | "s3-recording")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#delete_config-instance_method
+      def delete_config: (
+                           config_id: ::String,
+                           config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "antenna-uplink" | "dataflow-endpoint" | "tracking" | "uplink-echo" | "s3-recording")
+                         ) -> _DeleteConfigResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConfigResponseSuccess
+
+      interface _DeleteDataflowEndpointGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DataflowEndpointGroupIdResponse]
+        def dataflow_endpoint_group_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#delete_dataflow_endpoint_group-instance_method
+      def delete_dataflow_endpoint_group: (
+                                            dataflow_endpoint_group_id: ::String
+                                          ) -> _DeleteDataflowEndpointGroupResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataflowEndpointGroupResponseSuccess
+
+      interface _DeleteEphemerisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EphemerisIdResponse]
+        def ephemeris_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#delete_ephemeris-instance_method
+      def delete_ephemeris: (
+                              ephemeris_id: ::String
+                            ) -> _DeleteEphemerisResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEphemerisResponseSuccess
+
+      interface _DeleteMissionProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::MissionProfileIdResponse]
+        def mission_profile_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#delete_mission_profile-instance_method
+      def delete_mission_profile: (
+                                    mission_profile_id: ::String
+                                  ) -> _DeleteMissionProfileResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMissionProfileResponseSuccess
+
+      interface _DescribeContactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeContactResponse]
+        def contact_id: () -> ::String
+        def contact_status: () -> ("AVAILABLE" | "AWS_CANCELLED" | "AWS_FAILED" | "CANCELLED" | "CANCELLING" | "COMPLETED" | "FAILED" | "FAILED_TO_SCHEDULE" | "PASS" | "POSTPASS" | "PREPASS" | "SCHEDULED" | "SCHEDULING")
+        def dataflow_list: () -> ::Array[Types::DataflowDetail]
+        def end_time: () -> ::Time
+        def error_message: () -> ::String
+        def ground_station: () -> ::String
+        def maximum_elevation: () -> Types::Elevation
+        def mission_profile_arn: () -> ::String
+        def post_pass_end_time: () -> ::Time
+        def pre_pass_start_time: () -> ::Time
+        def region: () -> ::String
+        def satellite_arn: () -> ::String
+        def start_time: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#describe_contact-instance_method
+      def describe_contact: (
+                              contact_id: ::String
+                            ) -> _DescribeContactResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeContactResponseSuccess
+
+      interface _DescribeEphemerisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEphemerisResponse]
+        def creation_time: () -> ::Time
+        def enabled: () -> bool
+        def ephemeris_id: () -> ::String
+        def invalid_reason: () -> ("METADATA_INVALID" | "TIME_RANGE_INVALID" | "TRAJECTORY_INVALID" | "KMS_KEY_INVALID" | "VALIDATION_ERROR")
+        def name: () -> ::String
+        def priority: () -> ::Integer
+        def satellite_id: () -> ::String
+        def status: () -> ("VALIDATING" | "INVALID" | "ERROR" | "ENABLED" | "DISABLED" | "EXPIRED")
+        def supplied_data: () -> Types::EphemerisTypeDescription
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#describe_ephemeris-instance_method
+      def describe_ephemeris: (
+                                ephemeris_id: ::String
+                              ) -> _DescribeEphemerisResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEphemerisResponseSuccess
+
+      interface _GetAgentConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgentConfigurationResponse]
+        def agent_id: () -> ::String
+        def tasking_document: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#get_agent_configuration-instance_method
+      def get_agent_configuration: (
+                                     agent_id: ::String
+                                   ) -> _GetAgentConfigurationResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentConfigurationResponseSuccess
+
+      interface _GetConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConfigResponse]
+        def config_arn: () -> ::String
+        def config_data: () -> Types::ConfigTypeData
+        def config_id: () -> ::String
+        def config_type: () -> ("antenna-downlink" | "antenna-downlink-demod-decode" | "antenna-uplink" | "dataflow-endpoint" | "tracking" | "uplink-echo" | "s3-recording")
+        def name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#get_config-instance_method
+      def get_config: (
+                        config_id: ::String,
+                        config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "antenna-uplink" | "dataflow-endpoint" | "tracking" | "uplink-echo" | "s3-recording")
+                      ) -> _GetConfigResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfigResponseSuccess
+
+      interface _GetDataflowEndpointGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataflowEndpointGroupResponse]
+        def contact_post_pass_duration_seconds: () -> ::Integer
+        def contact_pre_pass_duration_seconds: () -> ::Integer
+        def dataflow_endpoint_group_arn: () -> ::String
+        def dataflow_endpoint_group_id: () -> ::String
+        def endpoints_details: () -> ::Array[Types::EndpointDetails]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#get_dataflow_endpoint_group-instance_method
+      def get_dataflow_endpoint_group: (
+                                         dataflow_endpoint_group_id: ::String
+                                       ) -> _GetDataflowEndpointGroupResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataflowEndpointGroupResponseSuccess
+
+      interface _GetMinuteUsageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMinuteUsageResponse]
+        def estimated_minutes_remaining: () -> ::Integer
+        def is_reserved_minutes_customer: () -> bool
+        def total_reserved_minute_allocation: () -> ::Integer
+        def total_scheduled_minutes: () -> ::Integer
+        def upcoming_minutes_scheduled: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#get_minute_usage-instance_method
+      def get_minute_usage: (
+                              month: ::Integer,
+                              year: ::Integer
+                            ) -> _GetMinuteUsageResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMinuteUsageResponseSuccess
+
+      interface _GetMissionProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMissionProfileResponse]
+        def contact_post_pass_duration_seconds: () -> ::Integer
+        def contact_pre_pass_duration_seconds: () -> ::Integer
+        def dataflow_edges: () -> ::Array[::Array[::String]]
+        def minimum_viable_contact_duration_seconds: () -> ::Integer
+        def mission_profile_arn: () -> ::String
+        def mission_profile_id: () -> ::String
+        def name: () -> ::String
+        def region: () -> ::String
+        def streams_kms_key: () -> Types::KmsKey
+        def streams_kms_role: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def tracking_config_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#get_mission_profile-instance_method
+      def get_mission_profile: (
+                                 mission_profile_id: ::String
+                               ) -> _GetMissionProfileResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMissionProfileResponseSuccess
+
+      interface _GetSatelliteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSatelliteResponse]
+        def current_ephemeris: () -> Types::EphemerisMetaData
+        def ground_stations: () -> ::Array[::String]
+        def norad_satellite_id: () -> ::Integer
+        def satellite_arn: () -> ::String
+        def satellite_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#get_satellite-instance_method
+      def get_satellite: (
+                           satellite_id: ::String
+                         ) -> _GetSatelliteResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSatelliteResponseSuccess
+
+      interface _ListConfigsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConfigsResponse]
+        def config_list: () -> ::Array[Types::ConfigListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#list_configs-instance_method
+      def list_configs: (
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListConfigsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfigsResponseSuccess
+
+      interface _ListContactsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContactsResponse]
+        def contact_list: () -> ::Array[Types::ContactData]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#list_contacts-instance_method
+      def list_contacts: (
+                           end_time: ::Time,
+                           ?ground_station: ::String,
+                           ?max_results: ::Integer,
+                           ?mission_profile_arn: ::String,
+                           ?next_token: ::String,
+                           ?satellite_arn: ::String,
+                           start_time: ::Time,
+                           status_list: Array[("AVAILABLE" | "AWS_CANCELLED" | "AWS_FAILED" | "CANCELLED" | "CANCELLING" | "COMPLETED" | "FAILED" | "FAILED_TO_SCHEDULE" | "PASS" | "POSTPASS" | "PREPASS" | "SCHEDULED" | "SCHEDULING")]
+                         ) -> _ListContactsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContactsResponseSuccess
+
+      interface _ListDataflowEndpointGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataflowEndpointGroupsResponse]
+        def dataflow_endpoint_group_list: () -> ::Array[Types::DataflowEndpointListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#list_dataflow_endpoint_groups-instance_method
+      def list_dataflow_endpoint_groups: (
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String
+                                         ) -> _ListDataflowEndpointGroupsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataflowEndpointGroupsResponseSuccess
+
+      interface _ListEphemeridesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEphemeridesResponse]
+        def ephemerides: () -> ::Array[Types::EphemerisItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#list_ephemerides-instance_method
+      def list_ephemerides: (
+                              end_time: ::Time,
+                              ?max_results: ::Integer,
+                              ?next_token: ::String,
+                              satellite_id: ::String,
+                              start_time: ::Time,
+                              ?status_list: Array[("VALIDATING" | "INVALID" | "ERROR" | "ENABLED" | "DISABLED" | "EXPIRED")]
+                            ) -> _ListEphemeridesResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEphemeridesResponseSuccess
+
+      interface _ListGroundStationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGroundStationsResponse]
+        def ground_station_list: () -> ::Array[Types::GroundStationData]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#list_ground_stations-instance_method
+      def list_ground_stations: (
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
+                                  ?satellite_id: ::String
+                                ) -> _ListGroundStationsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroundStationsResponseSuccess
+
+      interface _ListMissionProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMissionProfilesResponse]
+        def mission_profile_list: () -> ::Array[Types::MissionProfileListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#list_mission_profiles-instance_method
+      def list_mission_profiles: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListMissionProfilesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMissionProfilesResponseSuccess
+
+      interface _ListSatellitesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSatellitesResponse]
+        def next_token: () -> ::String
+        def satellites: () -> ::Array[Types::SatelliteListItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#list_satellites-instance_method
+      def list_satellites: (
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListSatellitesResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSatellitesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _RegisterAgentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterAgentResponse]
+        def agent_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#register_agent-instance_method
+      def register_agent: (
+                            agent_details: {
+                              agent_cpu_cores: Array[::Integer]?,
+                              agent_version: ::String,
+                              component_versions: Array[
+                                {
+                                  component_type: ::String,
+                                  versions: Array[::String]
+                                },
+                              ],
+                              instance_id: ::String,
+                              instance_type: ::String,
+                              reserved_cpu_cores: Array[::Integer]?
+                            },
+                            discovery_data: {
+                              capability_arns: Array[::String],
+                              private_ip_addresses: Array[::String],
+                              public_ip_addresses: Array[::String]
+                            }
+                          ) -> _RegisterAgentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterAgentResponseSuccess
+
+      interface _ReserveContactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ContactIdResponse]
+        def contact_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#reserve_contact-instance_method
+      def reserve_contact: (
+                             end_time: ::Time,
+                             ground_station: ::String,
+                             mission_profile_arn: ::String,
+                             satellite_arn: ::String,
+                             start_time: ::Time,
+                             ?tags: Hash[::String, ::String]
+                           ) -> _ReserveContactResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReserveContactResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAgentStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAgentStatusResponse]
+        def agent_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#update_agent_status-instance_method
+      def update_agent_status: (
+                                 agent_id: ::String,
+                                 aggregate_status: {
+                                   signature_map: Hash[::String, bool]?,
+                                   status: ("SUCCESS" | "FAILED" | "ACTIVE" | "INACTIVE")
+                                 },
+                                 component_statuses: Array[
+                                   {
+                                     bytes_received: ::Integer?,
+                                     bytes_sent: ::Integer?,
+                                     capability_arn: ::String,
+                                     component_type: ::String,
+                                     dataflow_id: ::String,
+                                     packets_dropped: ::Integer?,
+                                     status: ("SUCCESS" | "FAILED" | "ACTIVE" | "INACTIVE")
+                                   },
+                                 ],
+                                 task_id: ::String
+                               ) -> _UpdateAgentStatusResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentStatusResponseSuccess
+
+      interface _UpdateConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfigIdResponse]
+        def config_arn: () -> ::String
+        def config_id: () -> ::String
+        def config_type: () -> ("antenna-downlink" | "antenna-downlink-demod-decode" | "antenna-uplink" | "dataflow-endpoint" | "tracking" | "uplink-echo" | "s3-recording")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#update_config-instance_method
+      def update_config: (
+                           config_data: {
+                             antenna_downlink_config: {
+                               spectrum_config: {
+                                 bandwidth: {
+                                   units: ("GHz" | "MHz" | "kHz"),
+                                   value: ::Float
+                                 },
+                                 center_frequency: {
+                                   units: ("GHz" | "MHz" | "kHz"),
+                                   value: ::Float
+                                 },
+                                 polarization: ("LEFT_HAND" | "NONE" | "RIGHT_HAND")?
+                               }
+                             }?,
+                             antenna_downlink_demod_decode_config: {
+                               decode_config: {
+                                 unvalidated_json: ::String
+                               },
+                               demodulation_config: {
+                                 unvalidated_json: ::String
+                               },
+                               spectrum_config: {
+                                 bandwidth: {
+                                   units: ("GHz" | "MHz" | "kHz"),
+                                   value: ::Float
+                                 },
+                                 center_frequency: {
+                                   units: ("GHz" | "MHz" | "kHz"),
+                                   value: ::Float
+                                 },
+                                 polarization: ("LEFT_HAND" | "NONE" | "RIGHT_HAND")?
+                               }
+                             }?,
+                             antenna_uplink_config: {
+                               spectrum_config: {
+                                 center_frequency: {
+                                   units: ("GHz" | "MHz" | "kHz"),
+                                   value: ::Float
+                                 },
+                                 polarization: ("LEFT_HAND" | "NONE" | "RIGHT_HAND")?
+                               },
+                               target_eirp: {
+                                 units: ("dBW"),
+                                 value: ::Float
+                               },
+                               transmit_disabled: bool?
+                             }?,
+                             dataflow_endpoint_config: {
+                               dataflow_endpoint_name: ::String,
+                               dataflow_endpoint_region: ::String?
+                             }?,
+                             s3_recording_config: {
+                               bucket_arn: ::String,
+                               prefix: ::String?,
+                               role_arn: ::String
+                             }?,
+                             tracking_config: {
+                               autotrack: ("PREFERRED" | "REMOVED" | "REQUIRED")
+                             }?,
+                             uplink_echo_config: {
+                               antenna_uplink_config_arn: ::String,
+                               enabled: bool
+                             }?
+                           },
+                           config_id: ::String,
+                           config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "antenna-uplink" | "dataflow-endpoint" | "tracking" | "uplink-echo" | "s3-recording"),
+                           name: ::String
+                         ) -> _UpdateConfigResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigResponseSuccess
+
+      interface _UpdateEphemerisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EphemerisIdResponse]
+        def ephemeris_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#update_ephemeris-instance_method
+      def update_ephemeris: (
+                              enabled: bool,
+                              ephemeris_id: ::String,
+                              ?name: ::String,
+                              ?priority: ::Integer
+                            ) -> _UpdateEphemerisResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEphemerisResponseSuccess
+
+      interface _UpdateMissionProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::MissionProfileIdResponse]
+        def mission_profile_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#update_mission_profile-instance_method
+      def update_mission_profile: (
+                                    ?contact_post_pass_duration_seconds: ::Integer,
+                                    ?contact_pre_pass_duration_seconds: ::Integer,
+                                    ?dataflow_edges: Array[
+                                      Array[::String],
+                                    ],
+                                    ?minimum_viable_contact_duration_seconds: ::Integer,
+                                    mission_profile_id: ::String,
+                                    ?name: ::String,
+                                    ?streams_kms_key: {
+                                      kms_alias_arn: ::String?,
+                                      kms_alias_name: ::String?,
+                                      kms_key_arn: ::String?
+                                    },
+                                    ?streams_kms_role: ::String,
+                                    ?tracking_config_arn: ::String
+                                  ) -> _UpdateMissionProfileResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMissionProfileResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#wait_until-instance_method
+      def wait_until: (:contact_scheduled waiter_name, 
+                    contact_id: ::String
+                  ) -> Client::_DescribeContactResponseSuccess
+                    | (:contact_scheduled waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeContactResponseSuccess
+    end
+  end
+end
+

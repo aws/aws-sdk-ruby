@@ -1,0 +1,1575 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::StorageGateway
+  module Types
+
+    class ActivateGatewayInput
+      attr_accessor activation_key: ::String
+      attr_accessor gateway_name: ::String
+      attr_accessor gateway_timezone: ::String
+      attr_accessor gateway_region: ::String
+      attr_accessor gateway_type: ::String
+      attr_accessor tape_drive_type: ::String
+      attr_accessor medium_changer_type: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ActivateGatewayOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AddCacheInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor disk_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AddCacheOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AddTagsToResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class AddTagsToResourceOutput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AddUploadBufferInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor disk_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AddUploadBufferOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AddWorkingStorageInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor disk_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AddWorkingStorageOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssignTapePoolInput
+      attr_accessor tape_arn: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor bypass_governance_retention: bool
+      SENSITIVE: []
+    end
+
+    class AssignTapePoolOutput
+      attr_accessor tape_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateFileSystemInput
+      attr_accessor user_name: ::String
+      attr_accessor password: ::String
+      attr_accessor client_token: ::String
+      attr_accessor gateway_arn: ::String
+      attr_accessor location_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor audit_destination_arn: ::String
+      attr_accessor cache_attributes: Types::CacheAttributes
+      attr_accessor endpoint_network_configuration: Types::EndpointNetworkConfiguration
+      SENSITIVE: [:password]
+    end
+
+    class AssociateFileSystemOutput
+      attr_accessor file_system_association_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AttachVolumeInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor target_name: ::String
+      attr_accessor volume_arn: ::String
+      attr_accessor network_interface_id: ::String
+      attr_accessor disk_id: ::String
+      SENSITIVE: []
+    end
+
+    class AttachVolumeOutput
+      attr_accessor volume_arn: ::String
+      attr_accessor target_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AutomaticTapeCreationPolicyInfo
+      attr_accessor automatic_tape_creation_rules: ::Array[Types::AutomaticTapeCreationRule]
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AutomaticTapeCreationRule
+      attr_accessor tape_barcode_prefix: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor tape_size_in_bytes: ::Integer
+      attr_accessor minimum_num_tapes: ::Integer
+      attr_accessor worm: bool
+      SENSITIVE: []
+    end
+
+    class BandwidthRateLimitInterval
+      attr_accessor start_hour_of_day: ::Integer
+      attr_accessor start_minute_of_hour: ::Integer
+      attr_accessor end_hour_of_day: ::Integer
+      attr_accessor end_minute_of_hour: ::Integer
+      attr_accessor days_of_week: ::Array[::Integer]
+      attr_accessor average_upload_rate_limit_in_bits_per_sec: ::Integer
+      attr_accessor average_download_rate_limit_in_bits_per_sec: ::Integer
+      SENSITIVE: []
+    end
+
+    class CacheAttributes
+      attr_accessor cache_stale_timeout_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class CachediSCSIVolume
+      attr_accessor volume_arn: ::String
+      attr_accessor volume_id: ::String
+      attr_accessor volume_type: ::String
+      attr_accessor volume_status: ::String
+      attr_accessor volume_attachment_status: ::String
+      attr_accessor volume_size_in_bytes: ::Integer
+      attr_accessor volume_progress: ::Float
+      attr_accessor source_snapshot_id: ::String
+      attr_accessor volume_iscsi_attributes: Types::VolumeiSCSIAttributes
+      attr_accessor created_date: ::Time
+      attr_accessor volume_used_in_bytes: ::Integer
+      attr_accessor kms_key: ::String
+      attr_accessor target_name: ::String
+      SENSITIVE: []
+    end
+
+    class CancelArchivalInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor tape_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CancelArchivalOutput
+      attr_accessor tape_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CancelRetrievalInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor tape_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CancelRetrievalOutput
+      attr_accessor tape_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ChapInfo
+      attr_accessor target_arn: ::String
+      attr_accessor secret_to_authenticate_initiator: ::String
+      attr_accessor initiator_name: ::String
+      attr_accessor secret_to_authenticate_target: ::String
+      SENSITIVE: [:secret_to_authenticate_initiator, :secret_to_authenticate_target]
+    end
+
+    class CreateCachediSCSIVolumeInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor volume_size_in_bytes: ::Integer
+      attr_accessor snapshot_id: ::String
+      attr_accessor target_name: ::String
+      attr_accessor source_volume_arn: ::String
+      attr_accessor network_interface_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor kms_encrypted: bool
+      attr_accessor kms_key: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateCachediSCSIVolumeOutput
+      attr_accessor volume_arn: ::String
+      attr_accessor target_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateNFSFileShareInput
+      attr_accessor client_token: ::String
+      attr_accessor nfs_file_share_defaults: Types::NFSFileShareDefaults
+      attr_accessor gateway_arn: ::String
+      attr_accessor kms_encrypted: bool
+      attr_accessor kms_key: ::String
+      attr_accessor role: ::String
+      attr_accessor location_arn: ::String
+      attr_accessor default_storage_class: ::String
+      attr_accessor object_acl: ("private" | "public-read" | "public-read-write" | "authenticated-read" | "bucket-owner-read" | "bucket-owner-full-control" | "aws-exec-read")
+      attr_accessor client_list: ::Array[::String]
+      attr_accessor squash: ::String
+      attr_accessor read_only: bool
+      attr_accessor guess_mime_type_enabled: bool
+      attr_accessor requester_pays: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor file_share_name: ::String
+      attr_accessor cache_attributes: Types::CacheAttributes
+      attr_accessor notification_policy: ::String
+      attr_accessor vpc_endpoint_dns_name: ::String
+      attr_accessor bucket_region: ::String
+      attr_accessor audit_destination_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateNFSFileShareOutput
+      attr_accessor file_share_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSMBFileShareInput
+      attr_accessor client_token: ::String
+      attr_accessor gateway_arn: ::String
+      attr_accessor kms_encrypted: bool
+      attr_accessor kms_key: ::String
+      attr_accessor role: ::String
+      attr_accessor location_arn: ::String
+      attr_accessor default_storage_class: ::String
+      attr_accessor object_acl: ("private" | "public-read" | "public-read-write" | "authenticated-read" | "bucket-owner-read" | "bucket-owner-full-control" | "aws-exec-read")
+      attr_accessor read_only: bool
+      attr_accessor guess_mime_type_enabled: bool
+      attr_accessor requester_pays: bool
+      attr_accessor smbacl_enabled: bool
+      attr_accessor access_based_enumeration: bool
+      attr_accessor admin_user_list: ::Array[::String]
+      attr_accessor valid_user_list: ::Array[::String]
+      attr_accessor invalid_user_list: ::Array[::String]
+      attr_accessor audit_destination_arn: ::String
+      attr_accessor authentication: ::String
+      attr_accessor case_sensitivity: ("ClientSpecified" | "CaseSensitive")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor file_share_name: ::String
+      attr_accessor cache_attributes: Types::CacheAttributes
+      attr_accessor notification_policy: ::String
+      attr_accessor vpc_endpoint_dns_name: ::String
+      attr_accessor bucket_region: ::String
+      attr_accessor oplocks_enabled: bool
+      SENSITIVE: []
+    end
+
+    class CreateSMBFileShareOutput
+      attr_accessor file_share_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotFromVolumeRecoveryPointInput
+      attr_accessor volume_arn: ::String
+      attr_accessor snapshot_description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotFromVolumeRecoveryPointOutput
+      attr_accessor snapshot_id: ::String
+      attr_accessor volume_arn: ::String
+      attr_accessor volume_recovery_point_time: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotInput
+      attr_accessor volume_arn: ::String
+      attr_accessor snapshot_description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotOutput
+      attr_accessor volume_arn: ::String
+      attr_accessor snapshot_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateStorediSCSIVolumeInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor disk_id: ::String
+      attr_accessor snapshot_id: ::String
+      attr_accessor preserve_existing_data: bool
+      attr_accessor target_name: ::String
+      attr_accessor network_interface_id: ::String
+      attr_accessor kms_encrypted: bool
+      attr_accessor kms_key: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateStorediSCSIVolumeOutput
+      attr_accessor volume_arn: ::String
+      attr_accessor volume_size_in_bytes: ::Integer
+      attr_accessor target_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTapePoolInput
+      attr_accessor pool_name: ::String
+      attr_accessor storage_class: ("DEEP_ARCHIVE" | "GLACIER")
+      attr_accessor retention_lock_type: ("COMPLIANCE" | "GOVERNANCE" | "NONE")
+      attr_accessor retention_lock_time_in_days: ::Integer
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateTapePoolOutput
+      attr_accessor pool_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTapeWithBarcodeInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor tape_size_in_bytes: ::Integer
+      attr_accessor tape_barcode: ::String
+      attr_accessor kms_encrypted: bool
+      attr_accessor kms_key: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor worm: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateTapeWithBarcodeOutput
+      attr_accessor tape_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTapesInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor tape_size_in_bytes: ::Integer
+      attr_accessor client_token: ::String
+      attr_accessor num_tapes_to_create: ::Integer
+      attr_accessor tape_barcode_prefix: ::String
+      attr_accessor kms_encrypted: bool
+      attr_accessor kms_key: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor worm: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateTapesOutput
+      attr_accessor tape_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteAutomaticTapeCreationPolicyInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAutomaticTapeCreationPolicyOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBandwidthRateLimitInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor bandwidth_type: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBandwidthRateLimitOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChapCredentialsInput
+      attr_accessor target_arn: ::String
+      attr_accessor initiator_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChapCredentialsOutput
+      attr_accessor target_arn: ::String
+      attr_accessor initiator_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFileShareInput
+      attr_accessor file_share_arn: ::String
+      attr_accessor force_delete: bool
+      SENSITIVE: []
+    end
+
+    class DeleteFileShareOutput
+      attr_accessor file_share_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGatewayInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGatewayOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSnapshotScheduleInput
+      attr_accessor volume_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSnapshotScheduleOutput
+      attr_accessor volume_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTapeArchiveInput
+      attr_accessor tape_arn: ::String
+      attr_accessor bypass_governance_retention: bool
+      SENSITIVE: []
+    end
+
+    class DeleteTapeArchiveOutput
+      attr_accessor tape_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTapeInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor tape_arn: ::String
+      attr_accessor bypass_governance_retention: bool
+      SENSITIVE: []
+    end
+
+    class DeleteTapeOutput
+      attr_accessor tape_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTapePoolInput
+      attr_accessor pool_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTapePoolOutput
+      attr_accessor pool_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVolumeInput
+      attr_accessor volume_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVolumeOutput
+      attr_accessor volume_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAvailabilityMonitorTestInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAvailabilityMonitorTestOutput
+      attr_accessor gateway_arn: ::String
+      attr_accessor status: ("COMPLETE" | "FAILED" | "PENDING")
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeBandwidthRateLimitInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBandwidthRateLimitOutput
+      attr_accessor gateway_arn: ::String
+      attr_accessor average_upload_rate_limit_in_bits_per_sec: ::Integer
+      attr_accessor average_download_rate_limit_in_bits_per_sec: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeBandwidthRateLimitScheduleInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBandwidthRateLimitScheduleOutput
+      attr_accessor gateway_arn: ::String
+      attr_accessor bandwidth_rate_limit_intervals: ::Array[Types::BandwidthRateLimitInterval]
+      SENSITIVE: []
+    end
+
+    class DescribeCacheInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCacheOutput
+      attr_accessor gateway_arn: ::String
+      attr_accessor disk_ids: ::Array[::String]
+      attr_accessor cache_allocated_in_bytes: ::Integer
+      attr_accessor cache_used_percentage: ::Float
+      attr_accessor cache_dirty_percentage: ::Float
+      attr_accessor cache_hit_percentage: ::Float
+      attr_accessor cache_miss_percentage: ::Float
+      SENSITIVE: []
+    end
+
+    class DescribeCachediSCSIVolumesInput
+      attr_accessor volume_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeCachediSCSIVolumesOutput
+      attr_accessor cached_iscsi_volumes: ::Array[Types::CachediSCSIVolume]
+      SENSITIVE: []
+    end
+
+    class DescribeChapCredentialsInput
+      attr_accessor target_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChapCredentialsOutput
+      attr_accessor chap_credentials: ::Array[Types::ChapInfo]
+      SENSITIVE: []
+    end
+
+    class DescribeFileSystemAssociationsInput
+      attr_accessor file_system_association_arn_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeFileSystemAssociationsOutput
+      attr_accessor file_system_association_info_list: ::Array[Types::FileSystemAssociationInfo]
+      SENSITIVE: []
+    end
+
+    class DescribeGatewayInformationInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeGatewayInformationOutput
+      attr_accessor gateway_arn: ::String
+      attr_accessor gateway_id: ::String
+      attr_accessor gateway_name: ::String
+      attr_accessor gateway_timezone: ::String
+      attr_accessor gateway_state: ::String
+      attr_accessor gateway_network_interfaces: ::Array[Types::NetworkInterface]
+      attr_accessor gateway_type: ::String
+      attr_accessor next_update_availability_date: ::String
+      attr_accessor last_software_update: ::String
+      attr_accessor ec2_instance_id: ::String
+      attr_accessor ec2_instance_region: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor vpc_endpoint: ::String
+      attr_accessor cloud_watch_log_group_arn: ::String
+      attr_accessor host_environment: ("VMWARE" | "HYPER-V" | "EC2" | "KVM" | "OTHER" | "SNOWBALL")
+      attr_accessor endpoint_type: ::String
+      attr_accessor software_updates_end_date: ::String
+      attr_accessor deprecation_date: ::String
+      attr_accessor gateway_capacity: ("Small" | "Medium" | "Large")
+      attr_accessor supported_gateway_capacities: ::Array[("Small" | "Medium" | "Large")]
+      attr_accessor host_environment_id: ::String
+      attr_accessor software_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMaintenanceStartTimeInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMaintenanceStartTimeOutput
+      attr_accessor gateway_arn: ::String
+      attr_accessor hour_of_day: ::Integer
+      attr_accessor minute_of_hour: ::Integer
+      attr_accessor day_of_week: ::Integer
+      attr_accessor day_of_month: ::Integer
+      attr_accessor timezone: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeNFSFileSharesInput
+      attr_accessor file_share_arn_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeNFSFileSharesOutput
+      attr_accessor nfs_file_share_info_list: ::Array[Types::NFSFileShareInfo]
+      SENSITIVE: []
+    end
+
+    class DescribeSMBFileSharesInput
+      attr_accessor file_share_arn_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeSMBFileSharesOutput
+      attr_accessor smb_file_share_info_list: ::Array[Types::SMBFileShareInfo]
+      SENSITIVE: []
+    end
+
+    class DescribeSMBSettingsInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSMBSettingsOutput
+      attr_accessor gateway_arn: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor active_directory_status: ("ACCESS_DENIED" | "DETACHED" | "JOINED" | "JOINING" | "NETWORK_ERROR" | "TIMEOUT" | "UNKNOWN_ERROR")
+      attr_accessor smb_guest_password_set: bool
+      attr_accessor smb_security_strategy: ("ClientSpecified" | "MandatorySigning" | "MandatoryEncryption")
+      attr_accessor file_shares_visible: bool
+      attr_accessor smb_local_groups: Types::SMBLocalGroups
+      SENSITIVE: []
+    end
+
+    class DescribeSnapshotScheduleInput
+      attr_accessor volume_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSnapshotScheduleOutput
+      attr_accessor volume_arn: ::String
+      attr_accessor start_at: ::Integer
+      attr_accessor recurrence_in_hours: ::Integer
+      attr_accessor description: ::String
+      attr_accessor timezone: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class DescribeStorediSCSIVolumesInput
+      attr_accessor volume_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeStorediSCSIVolumesOutput
+      attr_accessor stored_iscsi_volumes: ::Array[Types::StorediSCSIVolume]
+      SENSITIVE: []
+    end
+
+    class DescribeTapeArchivesInput
+      attr_accessor tape_arns: ::Array[::String]
+      attr_accessor marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeTapeArchivesOutput
+      attr_accessor tape_archives: ::Array[Types::TapeArchive]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTapeRecoveryPointsInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeTapeRecoveryPointsOutput
+      attr_accessor gateway_arn: ::String
+      attr_accessor tape_recovery_point_infos: ::Array[Types::TapeRecoveryPointInfo]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTapesInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor tape_arns: ::Array[::String]
+      attr_accessor marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeTapesOutput
+      attr_accessor tapes: ::Array[Types::Tape]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUploadBufferInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUploadBufferOutput
+      attr_accessor gateway_arn: ::String
+      attr_accessor disk_ids: ::Array[::String]
+      attr_accessor upload_buffer_used_in_bytes: ::Integer
+      attr_accessor upload_buffer_allocated_in_bytes: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeVTLDevicesInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor vtl_device_arns: ::Array[::String]
+      attr_accessor marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeVTLDevicesOutput
+      attr_accessor gateway_arn: ::String
+      attr_accessor vtl_devices: ::Array[Types::VTLDevice]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkingStorageInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkingStorageOutput
+      attr_accessor gateway_arn: ::String
+      attr_accessor disk_ids: ::Array[::String]
+      attr_accessor working_storage_used_in_bytes: ::Integer
+      attr_accessor working_storage_allocated_in_bytes: ::Integer
+      SENSITIVE: []
+    end
+
+    class DetachVolumeInput
+      attr_accessor volume_arn: ::String
+      attr_accessor force_detach: bool
+      SENSITIVE: []
+    end
+
+    class DetachVolumeOutput
+      attr_accessor volume_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeviceiSCSIAttributes
+      attr_accessor target_arn: ::String
+      attr_accessor network_interface_id: ::String
+      attr_accessor network_interface_port: ::Integer
+      attr_accessor chap_enabled: bool
+      SENSITIVE: []
+    end
+
+    class DisableGatewayInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisableGatewayOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateFileSystemInput
+      attr_accessor file_system_association_arn: ::String
+      attr_accessor force_delete: bool
+      SENSITIVE: []
+    end
+
+    class DisassociateFileSystemOutput
+      attr_accessor file_system_association_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Disk
+      attr_accessor disk_id: ::String
+      attr_accessor disk_path: ::String
+      attr_accessor disk_node: ::String
+      attr_accessor disk_status: ::String
+      attr_accessor disk_size_in_bytes: ::Integer
+      attr_accessor disk_allocation_type: ::String
+      attr_accessor disk_allocation_resource: ::String
+      attr_accessor disk_attribute_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EndpointNetworkConfiguration
+      attr_accessor ip_addresses: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FileShareInfo
+      attr_accessor file_share_type: ("NFS" | "SMB")
+      attr_accessor file_share_arn: ::String
+      attr_accessor file_share_id: ::String
+      attr_accessor file_share_status: ::String
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class FileSystemAssociationInfo
+      attr_accessor file_system_association_arn: ::String
+      attr_accessor location_arn: ::String
+      attr_accessor file_system_association_status: ::String
+      attr_accessor audit_destination_arn: ::String
+      attr_accessor gateway_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor cache_attributes: Types::CacheAttributes
+      attr_accessor endpoint_network_configuration: Types::EndpointNetworkConfiguration
+      attr_accessor file_system_association_status_details: ::Array[Types::FileSystemAssociationStatusDetail]
+      SENSITIVE: []
+    end
+
+    class FileSystemAssociationStatusDetail
+      attr_accessor error_code: ::String
+      SENSITIVE: []
+    end
+
+    class FileSystemAssociationSummary
+      attr_accessor file_system_association_id: ::String
+      attr_accessor file_system_association_arn: ::String
+      attr_accessor file_system_association_status: ::String
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GatewayInfo
+      attr_accessor gateway_id: ::String
+      attr_accessor gateway_arn: ::String
+      attr_accessor gateway_type: ::String
+      attr_accessor gateway_operational_state: ::String
+      attr_accessor gateway_name: ::String
+      attr_accessor ec2_instance_id: ::String
+      attr_accessor ec2_instance_region: ::String
+      attr_accessor host_environment: ("VMWARE" | "HYPER-V" | "EC2" | "KVM" | "OTHER" | "SNOWBALL")
+      attr_accessor host_environment_id: ::String
+      attr_accessor deprecation_date: ::String
+      attr_accessor software_version: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerError
+      attr_accessor message: ::String
+      attr_accessor error: Types::StorageGatewayError
+      SENSITIVE: []
+    end
+
+    class InvalidGatewayRequestException
+      attr_accessor message: ::String
+      attr_accessor error: Types::StorageGatewayError
+      SENSITIVE: []
+    end
+
+    class JoinDomainInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor organizational_unit: ::String
+      attr_accessor domain_controllers: ::Array[::String]
+      attr_accessor timeout_in_seconds: ::Integer
+      attr_accessor user_name: ::String
+      attr_accessor password: ::String
+      SENSITIVE: [:password]
+    end
+
+    class JoinDomainOutput
+      attr_accessor gateway_arn: ::String
+      attr_accessor active_directory_status: ("ACCESS_DENIED" | "DETACHED" | "JOINED" | "JOINING" | "NETWORK_ERROR" | "TIMEOUT" | "UNKNOWN_ERROR")
+      SENSITIVE: []
+    end
+
+    class ListAutomaticTapeCreationPoliciesInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListAutomaticTapeCreationPoliciesOutput
+      attr_accessor automatic_tape_creation_policy_infos: ::Array[Types::AutomaticTapeCreationPolicyInfo]
+      SENSITIVE: []
+    end
+
+    class ListFileSharesInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListFileSharesOutput
+      attr_accessor marker: ::String
+      attr_accessor next_marker: ::String
+      attr_accessor file_share_info_list: ::Array[Types::FileShareInfo]
+      SENSITIVE: []
+    end
+
+    class ListFileSystemAssociationsInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListFileSystemAssociationsOutput
+      attr_accessor marker: ::String
+      attr_accessor next_marker: ::String
+      attr_accessor file_system_association_summary_list: ::Array[Types::FileSystemAssociationSummary]
+      SENSITIVE: []
+    end
+
+    class ListGatewaysInput
+      attr_accessor marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListGatewaysOutput
+      attr_accessor gateways: ::Array[Types::GatewayInfo]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListLocalDisksInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListLocalDisksOutput
+      attr_accessor gateway_arn: ::String
+      attr_accessor disks: ::Array[Types::Disk]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor resource_arn: ::String
+      attr_accessor marker: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListTapePoolsInput
+      attr_accessor pool_arns: ::Array[::String]
+      attr_accessor marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTapePoolsOutput
+      attr_accessor pool_infos: ::Array[Types::PoolInfo]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListTapesInput
+      attr_accessor tape_arns: ::Array[::String]
+      attr_accessor marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTapesOutput
+      attr_accessor tape_infos: ::Array[Types::TapeInfo]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListVolumeInitiatorsInput
+      attr_accessor volume_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListVolumeInitiatorsOutput
+      attr_accessor initiators: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListVolumeRecoveryPointsInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListVolumeRecoveryPointsOutput
+      attr_accessor gateway_arn: ::String
+      attr_accessor volume_recovery_point_infos: ::Array[Types::VolumeRecoveryPointInfo]
+      SENSITIVE: []
+    end
+
+    class ListVolumesInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListVolumesOutput
+      attr_accessor gateway_arn: ::String
+      attr_accessor marker: ::String
+      attr_accessor volume_infos: ::Array[Types::VolumeInfo]
+      SENSITIVE: []
+    end
+
+    class NFSFileShareDefaults
+      attr_accessor file_mode: ::String
+      attr_accessor directory_mode: ::String
+      attr_accessor group_id: ::Integer
+      attr_accessor owner_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class NFSFileShareInfo
+      attr_accessor nfs_file_share_defaults: Types::NFSFileShareDefaults
+      attr_accessor file_share_arn: ::String
+      attr_accessor file_share_id: ::String
+      attr_accessor file_share_status: ::String
+      attr_accessor gateway_arn: ::String
+      attr_accessor kms_encrypted: bool
+      attr_accessor kms_key: ::String
+      attr_accessor path: ::String
+      attr_accessor role: ::String
+      attr_accessor location_arn: ::String
+      attr_accessor default_storage_class: ::String
+      attr_accessor object_acl: ("private" | "public-read" | "public-read-write" | "authenticated-read" | "bucket-owner-read" | "bucket-owner-full-control" | "aws-exec-read")
+      attr_accessor client_list: ::Array[::String]
+      attr_accessor squash: ::String
+      attr_accessor read_only: bool
+      attr_accessor guess_mime_type_enabled: bool
+      attr_accessor requester_pays: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor file_share_name: ::String
+      attr_accessor cache_attributes: Types::CacheAttributes
+      attr_accessor notification_policy: ::String
+      attr_accessor vpc_endpoint_dns_name: ::String
+      attr_accessor bucket_region: ::String
+      attr_accessor audit_destination_arn: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkInterface
+      attr_accessor ipv_4_address: ::String
+      attr_accessor mac_address: ::String
+      attr_accessor ipv_6_address: ::String
+      SENSITIVE: []
+    end
+
+    class NotifyWhenUploadedInput
+      attr_accessor file_share_arn: ::String
+      SENSITIVE: []
+    end
+
+    class NotifyWhenUploadedOutput
+      attr_accessor file_share_arn: ::String
+      attr_accessor notification_id: ::String
+      SENSITIVE: []
+    end
+
+    class PoolInfo
+      attr_accessor pool_arn: ::String
+      attr_accessor pool_name: ::String
+      attr_accessor storage_class: ("DEEP_ARCHIVE" | "GLACIER")
+      attr_accessor retention_lock_type: ("COMPLIANCE" | "GOVERNANCE" | "NONE")
+      attr_accessor retention_lock_time_in_days: ::Integer
+      attr_accessor pool_status: ("ACTIVE" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class RefreshCacheInput
+      attr_accessor file_share_arn: ::String
+      attr_accessor folder_list: ::Array[::String]
+      attr_accessor recursive: bool
+      SENSITIVE: []
+    end
+
+    class RefreshCacheOutput
+      attr_accessor file_share_arn: ::String
+      attr_accessor notification_id: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveTagsFromResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RemoveTagsFromResourceOutput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResetCacheInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResetCacheOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RetrieveTapeArchiveInput
+      attr_accessor tape_arn: ::String
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RetrieveTapeArchiveOutput
+      attr_accessor tape_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RetrieveTapeRecoveryPointInput
+      attr_accessor tape_arn: ::String
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RetrieveTapeRecoveryPointOutput
+      attr_accessor tape_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SMBFileShareInfo
+      attr_accessor file_share_arn: ::String
+      attr_accessor file_share_id: ::String
+      attr_accessor file_share_status: ::String
+      attr_accessor gateway_arn: ::String
+      attr_accessor kms_encrypted: bool
+      attr_accessor kms_key: ::String
+      attr_accessor path: ::String
+      attr_accessor role: ::String
+      attr_accessor location_arn: ::String
+      attr_accessor default_storage_class: ::String
+      attr_accessor object_acl: ("private" | "public-read" | "public-read-write" | "authenticated-read" | "bucket-owner-read" | "bucket-owner-full-control" | "aws-exec-read")
+      attr_accessor read_only: bool
+      attr_accessor guess_mime_type_enabled: bool
+      attr_accessor requester_pays: bool
+      attr_accessor smbacl_enabled: bool
+      attr_accessor access_based_enumeration: bool
+      attr_accessor admin_user_list: ::Array[::String]
+      attr_accessor valid_user_list: ::Array[::String]
+      attr_accessor invalid_user_list: ::Array[::String]
+      attr_accessor audit_destination_arn: ::String
+      attr_accessor authentication: ::String
+      attr_accessor case_sensitivity: ("ClientSpecified" | "CaseSensitive")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor file_share_name: ::String
+      attr_accessor cache_attributes: Types::CacheAttributes
+      attr_accessor notification_policy: ::String
+      attr_accessor vpc_endpoint_dns_name: ::String
+      attr_accessor bucket_region: ::String
+      attr_accessor oplocks_enabled: bool
+      SENSITIVE: []
+    end
+
+    class SMBLocalGroups
+      attr_accessor gateway_admins: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableError
+      attr_accessor message: ::String
+      attr_accessor error: Types::StorageGatewayError
+      SENSITIVE: []
+    end
+
+    class SetLocalConsolePasswordInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor local_console_password: ::String
+      SENSITIVE: [:local_console_password]
+    end
+
+    class SetLocalConsolePasswordOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SetSMBGuestPasswordInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor password: ::String
+      SENSITIVE: [:password]
+    end
+
+    class SetSMBGuestPasswordOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ShutdownGatewayInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ShutdownGatewayOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartAvailabilityMonitorTestInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartAvailabilityMonitorTestOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartGatewayInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartGatewayOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StorageGatewayError
+      attr_accessor error_code: ("ActivationKeyExpired" | "ActivationKeyInvalid" | "ActivationKeyNotFound" | "GatewayInternalError" | "GatewayNotConnected" | "GatewayNotFound" | "GatewayProxyNetworkConnectionBusy" | "AuthenticationFailure" | "BandwidthThrottleScheduleNotFound" | "Blocked" | "CannotExportSnapshot" | "ChapCredentialNotFound" | "DiskAlreadyAllocated" | "DiskDoesNotExist" | "DiskSizeGreaterThanVolumeMaxSize" | "DiskSizeLessThanVolumeSize" | "DiskSizeNotGigAligned" | "DuplicateCertificateInfo" | "DuplicateSchedule" | "EndpointNotFound" | "IAMNotSupported" | "InitiatorInvalid" | "InitiatorNotFound" | "InternalError" | "InvalidGateway" | "InvalidEndpoint" | "InvalidParameters" | "InvalidSchedule" | "LocalStorageLimitExceeded" | "LunAlreadyAllocated " | "LunInvalid" | "JoinDomainInProgress" | "MaximumContentLengthExceeded" | "MaximumTapeCartridgeCountExceeded" | "MaximumVolumeCountExceeded" | "NetworkConfigurationChanged" | "NoDisksAvailable" | "NotImplemented" | "NotSupported" | "OperationAborted" | "OutdatedGateway" | "ParametersNotImplemented" | "RegionInvalid" | "RequestTimeout" | "ServiceUnavailable" | "SnapshotDeleted" | "SnapshotIdInvalid" | "SnapshotInProgress" | "SnapshotNotFound" | "SnapshotScheduleNotFound" | "StagingAreaFull" | "StorageFailure" | "TapeCartridgeNotFound" | "TargetAlreadyExists" | "TargetInvalid" | "TargetNotFound" | "UnauthorizedOperation" | "VolumeAlreadyExists" | "VolumeIdInvalid" | "VolumeInUse" | "VolumeNotFound" | "VolumeNotReady")
+      attr_accessor error_details: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StorediSCSIVolume
+      attr_accessor volume_arn: ::String
+      attr_accessor volume_id: ::String
+      attr_accessor volume_type: ::String
+      attr_accessor volume_status: ::String
+      attr_accessor volume_attachment_status: ::String
+      attr_accessor volume_size_in_bytes: ::Integer
+      attr_accessor volume_progress: ::Float
+      attr_accessor volume_disk_id: ::String
+      attr_accessor source_snapshot_id: ::String
+      attr_accessor preserved_existing_data: bool
+      attr_accessor volume_iscsi_attributes: Types::VolumeiSCSIAttributes
+      attr_accessor created_date: ::Time
+      attr_accessor volume_used_in_bytes: ::Integer
+      attr_accessor kms_key: ::String
+      attr_accessor target_name: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class Tape
+      attr_accessor tape_arn: ::String
+      attr_accessor tape_barcode: ::String
+      attr_accessor tape_created_date: ::Time
+      attr_accessor tape_size_in_bytes: ::Integer
+      attr_accessor tape_status: ::String
+      attr_accessor vtl_device: ::String
+      attr_accessor progress: ::Float
+      attr_accessor tape_used_in_bytes: ::Integer
+      attr_accessor kms_key: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor worm: bool
+      attr_accessor retention_start_date: ::Time
+      attr_accessor pool_entry_date: ::Time
+      SENSITIVE: []
+    end
+
+    class TapeArchive
+      attr_accessor tape_arn: ::String
+      attr_accessor tape_barcode: ::String
+      attr_accessor tape_created_date: ::Time
+      attr_accessor tape_size_in_bytes: ::Integer
+      attr_accessor completion_time: ::Time
+      attr_accessor retrieved_to: ::String
+      attr_accessor tape_status: ::String
+      attr_accessor tape_used_in_bytes: ::Integer
+      attr_accessor kms_key: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor worm: bool
+      attr_accessor retention_start_date: ::Time
+      attr_accessor pool_entry_date: ::Time
+      SENSITIVE: []
+    end
+
+    class TapeInfo
+      attr_accessor tape_arn: ::String
+      attr_accessor tape_barcode: ::String
+      attr_accessor tape_size_in_bytes: ::Integer
+      attr_accessor tape_status: ::String
+      attr_accessor gateway_arn: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor retention_start_date: ::Time
+      attr_accessor pool_entry_date: ::Time
+      SENSITIVE: []
+    end
+
+    class TapeRecoveryPointInfo
+      attr_accessor tape_arn: ::String
+      attr_accessor tape_recovery_point_time: ::Time
+      attr_accessor tape_size_in_bytes: ::Integer
+      attr_accessor tape_status: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAutomaticTapeCreationPolicyInput
+      attr_accessor automatic_tape_creation_rules: ::Array[Types::AutomaticTapeCreationRule]
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAutomaticTapeCreationPolicyOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBandwidthRateLimitInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor average_upload_rate_limit_in_bits_per_sec: ::Integer
+      attr_accessor average_download_rate_limit_in_bits_per_sec: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateBandwidthRateLimitOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBandwidthRateLimitScheduleInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor bandwidth_rate_limit_intervals: ::Array[Types::BandwidthRateLimitInterval]
+      SENSITIVE: []
+    end
+
+    class UpdateBandwidthRateLimitScheduleOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateChapCredentialsInput
+      attr_accessor target_arn: ::String
+      attr_accessor secret_to_authenticate_initiator: ::String
+      attr_accessor initiator_name: ::String
+      attr_accessor secret_to_authenticate_target: ::String
+      SENSITIVE: [:secret_to_authenticate_initiator, :secret_to_authenticate_target]
+    end
+
+    class UpdateChapCredentialsOutput
+      attr_accessor target_arn: ::String
+      attr_accessor initiator_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFileSystemAssociationInput
+      attr_accessor file_system_association_arn: ::String
+      attr_accessor user_name: ::String
+      attr_accessor password: ::String
+      attr_accessor audit_destination_arn: ::String
+      attr_accessor cache_attributes: Types::CacheAttributes
+      SENSITIVE: [:password]
+    end
+
+    class UpdateFileSystemAssociationOutput
+      attr_accessor file_system_association_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGatewayInformationInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor gateway_name: ::String
+      attr_accessor gateway_timezone: ::String
+      attr_accessor cloud_watch_log_group_arn: ::String
+      attr_accessor gateway_capacity: ("Small" | "Medium" | "Large")
+      SENSITIVE: []
+    end
+
+    class UpdateGatewayInformationOutput
+      attr_accessor gateway_arn: ::String
+      attr_accessor gateway_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGatewaySoftwareNowInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGatewaySoftwareNowOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateMaintenanceStartTimeInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor hour_of_day: ::Integer
+      attr_accessor minute_of_hour: ::Integer
+      attr_accessor day_of_week: ::Integer
+      attr_accessor day_of_month: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateMaintenanceStartTimeOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateNFSFileShareInput
+      attr_accessor file_share_arn: ::String
+      attr_accessor kms_encrypted: bool
+      attr_accessor kms_key: ::String
+      attr_accessor nfs_file_share_defaults: Types::NFSFileShareDefaults
+      attr_accessor default_storage_class: ::String
+      attr_accessor object_acl: ("private" | "public-read" | "public-read-write" | "authenticated-read" | "bucket-owner-read" | "bucket-owner-full-control" | "aws-exec-read")
+      attr_accessor client_list: ::Array[::String]
+      attr_accessor squash: ::String
+      attr_accessor read_only: bool
+      attr_accessor guess_mime_type_enabled: bool
+      attr_accessor requester_pays: bool
+      attr_accessor file_share_name: ::String
+      attr_accessor cache_attributes: Types::CacheAttributes
+      attr_accessor notification_policy: ::String
+      attr_accessor audit_destination_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateNFSFileShareOutput
+      attr_accessor file_share_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSMBFileShareInput
+      attr_accessor file_share_arn: ::String
+      attr_accessor kms_encrypted: bool
+      attr_accessor kms_key: ::String
+      attr_accessor default_storage_class: ::String
+      attr_accessor object_acl: ("private" | "public-read" | "public-read-write" | "authenticated-read" | "bucket-owner-read" | "bucket-owner-full-control" | "aws-exec-read")
+      attr_accessor read_only: bool
+      attr_accessor guess_mime_type_enabled: bool
+      attr_accessor requester_pays: bool
+      attr_accessor smbacl_enabled: bool
+      attr_accessor access_based_enumeration: bool
+      attr_accessor admin_user_list: ::Array[::String]
+      attr_accessor valid_user_list: ::Array[::String]
+      attr_accessor invalid_user_list: ::Array[::String]
+      attr_accessor audit_destination_arn: ::String
+      attr_accessor case_sensitivity: ("ClientSpecified" | "CaseSensitive")
+      attr_accessor file_share_name: ::String
+      attr_accessor cache_attributes: Types::CacheAttributes
+      attr_accessor notification_policy: ::String
+      attr_accessor oplocks_enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateSMBFileShareOutput
+      attr_accessor file_share_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSMBFileShareVisibilityInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor file_shares_visible: bool
+      SENSITIVE: []
+    end
+
+    class UpdateSMBFileShareVisibilityOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSMBLocalGroupsInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor smb_local_groups: Types::SMBLocalGroups
+      SENSITIVE: []
+    end
+
+    class UpdateSMBLocalGroupsOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSMBSecurityStrategyInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor smb_security_strategy: ("ClientSpecified" | "MandatorySigning" | "MandatoryEncryption")
+      SENSITIVE: []
+    end
+
+    class UpdateSMBSecurityStrategyOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSnapshotScheduleInput
+      attr_accessor volume_arn: ::String
+      attr_accessor start_at: ::Integer
+      attr_accessor recurrence_in_hours: ::Integer
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class UpdateSnapshotScheduleOutput
+      attr_accessor volume_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateVTLDeviceTypeInput
+      attr_accessor vtl_device_arn: ::String
+      attr_accessor device_type: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateVTLDeviceTypeOutput
+      attr_accessor vtl_device_arn: ::String
+      SENSITIVE: []
+    end
+
+    class VTLDevice
+      attr_accessor vtl_device_arn: ::String
+      attr_accessor vtl_device_type: ::String
+      attr_accessor vtl_device_vendor: ::String
+      attr_accessor vtl_device_product_identifier: ::String
+      attr_accessor device_iscsi_attributes: Types::DeviceiSCSIAttributes
+      SENSITIVE: []
+    end
+
+    class VolumeInfo
+      attr_accessor volume_arn: ::String
+      attr_accessor volume_id: ::String
+      attr_accessor gateway_arn: ::String
+      attr_accessor gateway_id: ::String
+      attr_accessor volume_type: ::String
+      attr_accessor volume_size_in_bytes: ::Integer
+      attr_accessor volume_attachment_status: ::String
+      SENSITIVE: []
+    end
+
+    class VolumeRecoveryPointInfo
+      attr_accessor volume_arn: ::String
+      attr_accessor volume_size_in_bytes: ::Integer
+      attr_accessor volume_usage_in_bytes: ::Integer
+      attr_accessor volume_recovery_point_time: ::String
+      SENSITIVE: []
+    end
+
+    class VolumeiSCSIAttributes
+      attr_accessor target_arn: ::String
+      attr_accessor network_interface_id: ::String
+      attr_accessor network_interface_port: ::Integer
+      attr_accessor lun_number: ::Integer
+      attr_accessor chap_enabled: bool
+      SENSITIVE: []
+    end
+  end
+end

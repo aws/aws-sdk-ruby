@@ -3212,8 +3212,8 @@ module Aws::AutoScaling
     #   capacity of the Auto Scaling group. It represents the minimum
     #   percentage of the group to keep in service, healthy, and ready to
     #   use to support your workload when replacing instances. Value range
-    #   is 0 to 100. After it's set, a value of `-1` will clear the
-    #   previously set value.
+    #   is 0 to 100. To clear a previously set value, specify a value of
+    #   `-1`.
     #   @return [Integer]
     #
     # @!attribute [rw] max_healthy_percentage
@@ -3221,8 +3221,8 @@ module Aws::AutoScaling
     #   capacity of the Auto Scaling group. It represents the maximum
     #   percentage of the group that can be in service and healthy, or
     #   pending, to support your workload when replacing instances. Value
-    #   range is 100 to 200. After it's set, a value of `-1` will clear the
-    #   previously set value.
+    #   range is 100 to 200. To clear a previously set value, specify a
+    #   value of `-1`.
     #
     #   Both `MinHealthyPercentage` and `MaxHealthyPercentage` must be
     #   specified, and the difference between them cannot be greater than
@@ -3619,37 +3619,90 @@ module Aws::AutoScaling
     #   @return [Array<String>]
     #
     # @!attribute [rw] spot_max_price_percentage_over_lowest_price
-    #   The price protection threshold for Spot Instances. This is the
-    #   maximum you’ll pay for a Spot Instance, expressed as a percentage
-    #   higher than the least expensive current generation M, C, or R
-    #   instance type with your specified attributes. When Amazon EC2 Auto
-    #   Scaling selects instance types with your attributes, we will exclude
-    #   instance types whose price is higher than your threshold. The
-    #   parameter accepts an integer, which Amazon EC2 Auto Scaling
-    #   interprets as a percentage. To turn off price protection, specify a
-    #   high value, such as `999999`.
+    #   \[Price protection\] The price protection threshold for Spot
+    #   Instances, as a percentage higher than an identified Spot price. The
+    #   identified Spot price is the price of the lowest priced current
+    #   generation C, M, or R instance type with your specified attributes.
+    #   If no current generation C, M, or R instance type matches your
+    #   attributes, then the identified price is from either the lowest
+    #   priced current generation instance types or, failing that, the
+    #   lowest priced previous generation instance types that match your
+    #   attributes. When Amazon EC2 Auto Scaling selects instance types with
+    #   your attributes, we will exclude instance types whose price exceeds
+    #   your specified threshold.
+    #
+    #   The parameter accepts an integer, which Amazon EC2 Auto Scaling
+    #   interprets as a percentage.
+    #
+    #   To turn off price protection, specify a high value, such as
+    #   `999999`.
     #
     #   If you set `DesiredCapacityType` to `vcpu` or `memory-mib`, the
-    #   price protection threshold is applied based on the per vCPU or per
-    #   memory price instead of the per instance price.
+    #   price protection threshold is based on the per-vCPU or per-memory
+    #   price instead of the per instance price.
+    #
+    #   <note markdown="1"> Only one of `SpotMaxPricePercentageOverLowestPrice` or
+    #   `MaxSpotPriceAsPercentageOfOptimalOnDemandPrice` can be specified.
+    #
+    #    </note>
     #
     #   Default: `100`
     #   @return [Integer]
     #
-    # @!attribute [rw] on_demand_max_price_percentage_over_lowest_price
-    #   The price protection threshold for On-Demand Instances. This is the
-    #   maximum you’ll pay for an On-Demand Instance, expressed as a
-    #   percentage higher than the least expensive current generation M, C,
-    #   or R instance type with your specified attributes. When Amazon EC2
-    #   Auto Scaling selects instance types with your attributes, we will
-    #   exclude instance types whose price is higher than your threshold.
+    # @!attribute [rw] max_spot_price_as_percentage_of_optimal_on_demand_price
+    #   \[Price protection\] The price protection threshold for Spot
+    #   Instances, as a percentage of an identified On-Demand price. The
+    #   identified On-Demand price is the price of the lowest priced current
+    #   generation C, M, or R instance type with your specified attributes.
+    #   If no current generation C, M, or R instance type matches your
+    #   attributes, then the identified price is from either the lowest
+    #   priced current generation instance types or, failing that, the
+    #   lowest priced previous generation instance types that match your
+    #   attributes. When Amazon EC2 Auto Scaling selects instance types with
+    #   your attributes, we will exclude instance types whose price exceeds
+    #   your specified threshold.
+    #
     #   The parameter accepts an integer, which Amazon EC2 Auto Scaling
-    #   interprets as a percentage. To turn off price protection, specify a
-    #   high value, such as `999999`.
+    #   interprets as a percentage.
+    #
+    #   To indicate no price protection threshold, specify a high value,
+    #   such as `999999`.
     #
     #   If you set `DesiredCapacityType` to `vcpu` or `memory-mib`, the
-    #   price protection threshold is applied based on the per vCPU or per
-    #   memory price instead of the per instance price.
+    #   price protection threshold is based on the per-vCPU or per-memory
+    #   price instead of the per instance price.
+    #
+    #   <note markdown="1"> Only one of `SpotMaxPricePercentageOverLowestPrice` or
+    #   `MaxSpotPriceAsPercentageOfOptimalOnDemandPrice` can be specified.
+    #   If you don't specify either, then
+    #   `SpotMaxPricePercentageOverLowestPrice` is used and the value for
+    #   that parameter defaults to `100`.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] on_demand_max_price_percentage_over_lowest_price
+    #   \[Price protection\] The price protection threshold for On-Demand
+    #   Instances, as a percentage higher than an identified On-Demand
+    #   price. The identified On-Demand price is the price of the lowest
+    #   priced current generation C, M, or R instance type with your
+    #   specified attributes. If no current generation C, M, or R instance
+    #   type matches your attributes, then the identified price is from
+    #   either the lowest priced current generation instance types or,
+    #   failing that, the lowest priced previous generation instance types
+    #   that match your attributes. When Amazon EC2 Auto Scaling selects
+    #   instance types with your attributes, we will exclude instance types
+    #   whose price exceeds your specified threshold.
+    #
+    #   The parameter accepts an integer, which Amazon EC2 Auto Scaling
+    #   interprets as a percentage.
+    #
+    #   To turn off price protection, specify a high value, such as
+    #   `999999`.
+    #
+    #   If you set `DesiredCapacityType` to `vcpu` or `memory-mib`, the
+    #   price protection threshold is applied based on the per-vCPU or
+    #   per-memory price instead of the per instance price.
     #
     #   Default: `20`
     #   @return [Integer]
@@ -3838,6 +3891,7 @@ module Aws::AutoScaling
       :excluded_instance_types,
       :instance_generations,
       :spot_max_price_percentage_over_lowest_price,
+      :max_spot_price_as_percentage_of_optimal_on_demand_price,
       :on_demand_max_price_percentage_over_lowest_price,
       :bare_metal,
       :burstable_performance,
@@ -5028,7 +5082,7 @@ module Aws::AutoScaling
     end
 
     # This structure defines the CloudWatch metric to return, along with the
-    # statistic, period, and unit.
+    # statistic and unit.
     #
     # For more information about the CloudWatch terminology below, see
     # [Amazon CloudWatch concepts][1] in the *Amazon CloudWatch User Guide*.

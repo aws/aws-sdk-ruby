@@ -1,0 +1,716 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SWF
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CountClosedWorkflowExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::WorkflowExecutionCount]
+        def count: () -> ::Integer
+        def truncated: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#count_closed_workflow_executions-instance_method
+      def count_closed_workflow_executions: (
+                                              domain: ::String,
+                                              ?start_time_filter: {
+                                                oldest_date: ::Time,
+                                                latest_date: ::Time?
+                                              },
+                                              ?close_time_filter: {
+                                                oldest_date: ::Time,
+                                                latest_date: ::Time?
+                                              },
+                                              ?execution_filter: {
+                                                workflow_id: ::String
+                                              },
+                                              ?type_filter: {
+                                                name: ::String,
+                                                version: ::String?
+                                              },
+                                              ?tag_filter: {
+                                                tag: ::String
+                                              },
+                                              ?close_status_filter: {
+                                                status: ("COMPLETED" | "FAILED" | "CANCELED" | "TERMINATED" | "CONTINUED_AS_NEW" | "TIMED_OUT")
+                                              }
+                                            ) -> _CountClosedWorkflowExecutionsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CountClosedWorkflowExecutionsResponseSuccess
+
+      interface _CountOpenWorkflowExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::WorkflowExecutionCount]
+        def count: () -> ::Integer
+        def truncated: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#count_open_workflow_executions-instance_method
+      def count_open_workflow_executions: (
+                                            domain: ::String,
+                                            start_time_filter: {
+                                              oldest_date: ::Time,
+                                              latest_date: ::Time?
+                                            },
+                                            ?type_filter: {
+                                              name: ::String,
+                                              version: ::String?
+                                            },
+                                            ?tag_filter: {
+                                              tag: ::String
+                                            },
+                                            ?execution_filter: {
+                                              workflow_id: ::String
+                                            }
+                                          ) -> _CountOpenWorkflowExecutionsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CountOpenWorkflowExecutionsResponseSuccess
+
+      interface _CountPendingActivityTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PendingTaskCount]
+        def count: () -> ::Integer
+        def truncated: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#count_pending_activity_tasks-instance_method
+      def count_pending_activity_tasks: (
+                                          domain: ::String,
+                                          task_list: {
+                                            name: ::String
+                                          }
+                                        ) -> _CountPendingActivityTasksResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CountPendingActivityTasksResponseSuccess
+
+      interface _CountPendingDecisionTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PendingTaskCount]
+        def count: () -> ::Integer
+        def truncated: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#count_pending_decision_tasks-instance_method
+      def count_pending_decision_tasks: (
+                                          domain: ::String,
+                                          task_list: {
+                                            name: ::String
+                                          }
+                                        ) -> _CountPendingDecisionTasksResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CountPendingDecisionTasksResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#deprecate_activity_type-instance_method
+      def deprecate_activity_type: (
+                                     domain: ::String,
+                                     activity_type: {
+                                       name: ::String,
+                                       version: ::String
+                                     }
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#deprecate_domain-instance_method
+      def deprecate_domain: (
+                              name: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#deprecate_workflow_type-instance_method
+      def deprecate_workflow_type: (
+                                     domain: ::String,
+                                     workflow_type: {
+                                       name: ::String,
+                                       version: ::String
+                                     }
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeActivityTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ActivityTypeDetail]
+        def type_info: () -> Types::ActivityTypeInfo
+        def configuration: () -> Types::ActivityTypeConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#describe_activity_type-instance_method
+      def describe_activity_type: (
+                                    domain: ::String,
+                                    activity_type: {
+                                      name: ::String,
+                                      version: ::String
+                                    }
+                                  ) -> _DescribeActivityTypeResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeActivityTypeResponseSuccess
+
+      interface _DescribeDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DomainDetail]
+        def domain_info: () -> Types::DomainInfo
+        def configuration: () -> Types::DomainConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#describe_domain-instance_method
+      def describe_domain: (
+                             name: ::String
+                           ) -> _DescribeDomainResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDomainResponseSuccess
+
+      interface _DescribeWorkflowExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::WorkflowExecutionDetail]
+        def execution_info: () -> Types::WorkflowExecutionInfo
+        def execution_configuration: () -> Types::WorkflowExecutionConfiguration
+        def open_counts: () -> Types::WorkflowExecutionOpenCounts
+        def latest_activity_task_timestamp: () -> ::Time
+        def latest_execution_context: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#describe_workflow_execution-instance_method
+      def describe_workflow_execution: (
+                                         domain: ::String,
+                                         execution: {
+                                           workflow_id: ::String,
+                                           run_id: ::String
+                                         }
+                                       ) -> _DescribeWorkflowExecutionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkflowExecutionResponseSuccess
+
+      interface _DescribeWorkflowTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::WorkflowTypeDetail]
+        def type_info: () -> Types::WorkflowTypeInfo
+        def configuration: () -> Types::WorkflowTypeConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#describe_workflow_type-instance_method
+      def describe_workflow_type: (
+                                    domain: ::String,
+                                    workflow_type: {
+                                      name: ::String,
+                                      version: ::String
+                                    }
+                                  ) -> _DescribeWorkflowTypeResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkflowTypeResponseSuccess
+
+      interface _GetWorkflowExecutionHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::History]
+        def events: () -> ::Array[Types::HistoryEvent]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#get_workflow_execution_history-instance_method
+      def get_workflow_execution_history: (
+                                            domain: ::String,
+                                            execution: {
+                                              workflow_id: ::String,
+                                              run_id: ::String
+                                            },
+                                            ?next_page_token: ::String,
+                                            ?maximum_page_size: ::Integer,
+                                            ?reverse_order: bool
+                                          ) -> _GetWorkflowExecutionHistoryResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkflowExecutionHistoryResponseSuccess
+
+      interface _ListActivityTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ActivityTypeInfos]
+        def type_infos: () -> ::Array[Types::ActivityTypeInfo]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#list_activity_types-instance_method
+      def list_activity_types: (
+                                 domain: ::String,
+                                 ?name: ::String,
+                                 registration_status: ("REGISTERED" | "DEPRECATED"),
+                                 ?next_page_token: ::String,
+                                 ?maximum_page_size: ::Integer,
+                                 ?reverse_order: bool
+                               ) -> _ListActivityTypesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListActivityTypesResponseSuccess
+
+      interface _ListClosedWorkflowExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::WorkflowExecutionInfos]
+        def execution_infos: () -> ::Array[Types::WorkflowExecutionInfo]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#list_closed_workflow_executions-instance_method
+      def list_closed_workflow_executions: (
+                                             domain: ::String,
+                                             ?start_time_filter: {
+                                               oldest_date: ::Time,
+                                               latest_date: ::Time?
+                                             },
+                                             ?close_time_filter: {
+                                               oldest_date: ::Time,
+                                               latest_date: ::Time?
+                                             },
+                                             ?execution_filter: {
+                                               workflow_id: ::String
+                                             },
+                                             ?close_status_filter: {
+                                               status: ("COMPLETED" | "FAILED" | "CANCELED" | "TERMINATED" | "CONTINUED_AS_NEW" | "TIMED_OUT")
+                                             },
+                                             ?type_filter: {
+                                               name: ::String,
+                                               version: ::String?
+                                             },
+                                             ?tag_filter: {
+                                               tag: ::String
+                                             },
+                                             ?next_page_token: ::String,
+                                             ?maximum_page_size: ::Integer,
+                                             ?reverse_order: bool
+                                           ) -> _ListClosedWorkflowExecutionsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClosedWorkflowExecutionsResponseSuccess
+
+      interface _ListDomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DomainInfos]
+        def domain_infos: () -> ::Array[Types::DomainInfo]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#list_domains-instance_method
+      def list_domains: (
+                          ?next_page_token: ::String,
+                          registration_status: ("REGISTERED" | "DEPRECATED"),
+                          ?maximum_page_size: ::Integer,
+                          ?reverse_order: bool
+                        ) -> _ListDomainsResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainsResponseSuccess
+
+      interface _ListOpenWorkflowExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::WorkflowExecutionInfos]
+        def execution_infos: () -> ::Array[Types::WorkflowExecutionInfo]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#list_open_workflow_executions-instance_method
+      def list_open_workflow_executions: (
+                                           domain: ::String,
+                                           start_time_filter: {
+                                             oldest_date: ::Time,
+                                             latest_date: ::Time?
+                                           },
+                                           ?type_filter: {
+                                             name: ::String,
+                                             version: ::String?
+                                           },
+                                           ?tag_filter: {
+                                             tag: ::String
+                                           },
+                                           ?next_page_token: ::String,
+                                           ?maximum_page_size: ::Integer,
+                                           ?reverse_order: bool,
+                                           ?execution_filter: {
+                                             workflow_id: ::String
+                                           }
+                                         ) -> _ListOpenWorkflowExecutionsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOpenWorkflowExecutionsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Array[Types::ResourceTag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListWorkflowTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::WorkflowTypeInfos]
+        def type_infos: () -> ::Array[Types::WorkflowTypeInfo]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#list_workflow_types-instance_method
+      def list_workflow_types: (
+                                 domain: ::String,
+                                 ?name: ::String,
+                                 registration_status: ("REGISTERED" | "DEPRECATED"),
+                                 ?next_page_token: ::String,
+                                 ?maximum_page_size: ::Integer,
+                                 ?reverse_order: bool
+                               ) -> _ListWorkflowTypesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkflowTypesResponseSuccess
+
+      interface _PollForActivityTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ActivityTask]
+        def task_token: () -> ::String
+        def activity_id: () -> ::String
+        def started_event_id: () -> ::Integer
+        def workflow_execution: () -> Types::WorkflowExecution
+        def activity_type: () -> Types::ActivityType
+        def input: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#poll_for_activity_task-instance_method
+      def poll_for_activity_task: (
+                                    domain: ::String,
+                                    task_list: {
+                                      name: ::String
+                                    },
+                                    ?identity: ::String
+                                  ) -> _PollForActivityTaskResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PollForActivityTaskResponseSuccess
+
+      interface _PollForDecisionTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DecisionTask]
+        def task_token: () -> ::String
+        def started_event_id: () -> ::Integer
+        def workflow_execution: () -> Types::WorkflowExecution
+        def workflow_type: () -> Types::WorkflowType
+        def events: () -> ::Array[Types::HistoryEvent]
+        def next_page_token: () -> ::String
+        def previous_started_event_id: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#poll_for_decision_task-instance_method
+      def poll_for_decision_task: (
+                                    domain: ::String,
+                                    task_list: {
+                                      name: ::String
+                                    },
+                                    ?identity: ::String,
+                                    ?next_page_token: ::String,
+                                    ?maximum_page_size: ::Integer,
+                                    ?reverse_order: bool,
+                                    ?start_at_previous_started_event: bool
+                                  ) -> _PollForDecisionTaskResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PollForDecisionTaskResponseSuccess
+
+      interface _RecordActivityTaskHeartbeatResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ActivityTaskStatus]
+        def cancel_requested: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#record_activity_task_heartbeat-instance_method
+      def record_activity_task_heartbeat: (
+                                            task_token: ::String,
+                                            ?details: ::String
+                                          ) -> _RecordActivityTaskHeartbeatResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RecordActivityTaskHeartbeatResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#register_activity_type-instance_method
+      def register_activity_type: (
+                                    domain: ::String,
+                                    name: ::String,
+                                    version: ::String,
+                                    ?description: ::String,
+                                    ?default_task_start_to_close_timeout: ::String,
+                                    ?default_task_heartbeat_timeout: ::String,
+                                    ?default_task_list: {
+                                      name: ::String
+                                    },
+                                    ?default_task_priority: ::String,
+                                    ?default_task_schedule_to_start_timeout: ::String,
+                                    ?default_task_schedule_to_close_timeout: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#register_domain-instance_method
+      def register_domain: (
+                             name: ::String,
+                             ?description: ::String,
+                             workflow_execution_retention_period_in_days: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String?
+                               },
+                             ]
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#register_workflow_type-instance_method
+      def register_workflow_type: (
+                                    domain: ::String,
+                                    name: ::String,
+                                    version: ::String,
+                                    ?description: ::String,
+                                    ?default_task_start_to_close_timeout: ::String,
+                                    ?default_execution_start_to_close_timeout: ::String,
+                                    ?default_task_list: {
+                                      name: ::String
+                                    },
+                                    ?default_task_priority: ::String,
+                                    ?default_child_policy: ("TERMINATE" | "REQUEST_CANCEL" | "ABANDON"),
+                                    ?default_lambda_role: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#request_cancel_workflow_execution-instance_method
+      def request_cancel_workflow_execution: (
+                                               domain: ::String,
+                                               workflow_id: ::String,
+                                               ?run_id: ::String
+                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#respond_activity_task_canceled-instance_method
+      def respond_activity_task_canceled: (
+                                            task_token: ::String,
+                                            ?details: ::String
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#respond_activity_task_completed-instance_method
+      def respond_activity_task_completed: (
+                                             task_token: ::String,
+                                             ?result: ::String
+                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#respond_activity_task_failed-instance_method
+      def respond_activity_task_failed: (
+                                          task_token: ::String,
+                                          ?reason: ::String,
+                                          ?details: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#respond_decision_task_completed-instance_method
+      def respond_decision_task_completed: (
+                                             task_token: ::String,
+                                             ?decisions: Array[
+                                               {
+                                                 decision_type: ("ScheduleActivityTask" | "RequestCancelActivityTask" | "CompleteWorkflowExecution" | "FailWorkflowExecution" | "CancelWorkflowExecution" | "ContinueAsNewWorkflowExecution" | "RecordMarker" | "StartTimer" | "CancelTimer" | "SignalExternalWorkflowExecution" | "RequestCancelExternalWorkflowExecution" | "StartChildWorkflowExecution" | "ScheduleLambdaFunction"),
+                                                 schedule_activity_task_decision_attributes: {
+                                                   activity_type: {
+                                                     name: ::String,
+                                                     version: ::String
+                                                   },
+                                                   activity_id: ::String,
+                                                   control: ::String?,
+                                                   input: ::String?,
+                                                   schedule_to_close_timeout: ::String?,
+                                                   task_list: {
+                                                     name: ::String
+                                                   }?,
+                                                   task_priority: ::String?,
+                                                   schedule_to_start_timeout: ::String?,
+                                                   start_to_close_timeout: ::String?,
+                                                   heartbeat_timeout: ::String?
+                                                 }?,
+                                                 request_cancel_activity_task_decision_attributes: {
+                                                   activity_id: ::String
+                                                 }?,
+                                                 complete_workflow_execution_decision_attributes: {
+                                                   result: ::String?
+                                                 }?,
+                                                 fail_workflow_execution_decision_attributes: {
+                                                   reason: ::String?,
+                                                   details: ::String?
+                                                 }?,
+                                                 cancel_workflow_execution_decision_attributes: {
+                                                   details: ::String?
+                                                 }?,
+                                                 continue_as_new_workflow_execution_decision_attributes: {
+                                                   input: ::String?,
+                                                   execution_start_to_close_timeout: ::String?,
+                                                   task_list: {
+                                                     name: ::String
+                                                   }?,
+                                                   task_priority: ::String?,
+                                                   task_start_to_close_timeout: ::String?,
+                                                   child_policy: ("TERMINATE" | "REQUEST_CANCEL" | "ABANDON")?,
+                                                   tag_list: Array[::String]?,
+                                                   workflow_type_version: ::String?,
+                                                   lambda_role: ::String?
+                                                 }?,
+                                                 record_marker_decision_attributes: {
+                                                   marker_name: ::String,
+                                                   details: ::String?
+                                                 }?,
+                                                 start_timer_decision_attributes: {
+                                                   timer_id: ::String,
+                                                   control: ::String?,
+                                                   start_to_fire_timeout: ::String
+                                                 }?,
+                                                 cancel_timer_decision_attributes: {
+                                                   timer_id: ::String
+                                                 }?,
+                                                 signal_external_workflow_execution_decision_attributes: {
+                                                   workflow_id: ::String,
+                                                   run_id: ::String?,
+                                                   signal_name: ::String,
+                                                   input: ::String?,
+                                                   control: ::String?
+                                                 }?,
+                                                 request_cancel_external_workflow_execution_decision_attributes: {
+                                                   workflow_id: ::String,
+                                                   run_id: ::String?,
+                                                   control: ::String?
+                                                 }?,
+                                                 start_child_workflow_execution_decision_attributes: {
+                                                   workflow_type: {
+                                                     name: ::String,
+                                                     version: ::String
+                                                   },
+                                                   workflow_id: ::String,
+                                                   control: ::String?,
+                                                   input: ::String?,
+                                                   execution_start_to_close_timeout: ::String?,
+                                                   task_list: {
+                                                     name: ::String
+                                                   }?,
+                                                   task_priority: ::String?,
+                                                   task_start_to_close_timeout: ::String?,
+                                                   child_policy: ("TERMINATE" | "REQUEST_CANCEL" | "ABANDON")?,
+                                                   tag_list: Array[::String]?,
+                                                   lambda_role: ::String?
+                                                 }?,
+                                                 schedule_lambda_function_decision_attributes: {
+                                                   id: ::String,
+                                                   name: ::String,
+                                                   control: ::String?,
+                                                   input: ::String?,
+                                                   start_to_close_timeout: ::String?
+                                                 }?
+                                               },
+                                             ],
+                                             ?execution_context: ::String,
+                                             ?task_list: {
+                                               name: ::String
+                                             },
+                                             ?task_list_schedule_to_start_timeout: ::String
+                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#signal_workflow_execution-instance_method
+      def signal_workflow_execution: (
+                                       domain: ::String,
+                                       workflow_id: ::String,
+                                       ?run_id: ::String,
+                                       signal_name: ::String,
+                                       ?input: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _StartWorkflowExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Run]
+        def run_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#start_workflow_execution-instance_method
+      def start_workflow_execution: (
+                                      domain: ::String,
+                                      workflow_id: ::String,
+                                      workflow_type: {
+                                        name: ::String,
+                                        version: ::String
+                                      },
+                                      ?task_list: {
+                                        name: ::String
+                                      },
+                                      ?task_priority: ::String,
+                                      ?input: ::String,
+                                      ?execution_start_to_close_timeout: ::String,
+                                      ?tag_list: Array[::String],
+                                      ?task_start_to_close_timeout: ::String,
+                                      ?child_policy: ("TERMINATE" | "REQUEST_CANCEL" | "ABANDON"),
+                                      ?lambda_role: ::String
+                                    ) -> _StartWorkflowExecutionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartWorkflowExecutionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#terminate_workflow_execution-instance_method
+      def terminate_workflow_execution: (
+                                          domain: ::String,
+                                          workflow_id: ::String,
+                                          ?run_id: ::String,
+                                          ?reason: ::String,
+                                          ?details: ::String,
+                                          ?child_policy: ("TERMINATE" | "REQUEST_CANCEL" | "ABANDON")
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#undeprecate_activity_type-instance_method
+      def undeprecate_activity_type: (
+                                       domain: ::String,
+                                       activity_type: {
+                                         name: ::String,
+                                         version: ::String
+                                       }
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#undeprecate_domain-instance_method
+      def undeprecate_domain: (
+                                name: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#undeprecate_workflow_type-instance_method
+      def undeprecate_workflow_type: (
+                                       domain: ::String,
+                                       workflow_type: {
+                                         name: ::String,
+                                         version: ::String
+                                       }
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+    end
+  end
+end
+

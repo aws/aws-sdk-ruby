@@ -1,0 +1,959 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ChimeSDKMediaPipelines
+  module Types
+
+    class ActiveSpeakerOnlyConfiguration
+      attr_accessor active_speaker_position: ("TopLeft" | "TopRight" | "BottomLeft" | "BottomRight")
+      SENSITIVE: []
+    end
+
+    class AmazonTranscribeCallAnalyticsProcessorConfiguration
+      attr_accessor language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR")
+      attr_accessor vocabulary_name: ::String
+      attr_accessor vocabulary_filter_name: ::String
+      attr_accessor vocabulary_filter_method: ("remove" | "mask" | "tag")
+      attr_accessor language_model_name: ::String
+      attr_accessor enable_partial_results_stabilization: bool
+      attr_accessor partial_results_stability: ("high" | "medium" | "low")
+      attr_accessor content_identification_type: ("PII")
+      attr_accessor content_redaction_type: ("PII")
+      attr_accessor pii_entity_types: ::String
+      attr_accessor filter_partial_results: bool
+      attr_accessor post_call_analytics_settings: Types::PostCallAnalyticsSettings
+      attr_accessor call_analytics_stream_categories: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AmazonTranscribeProcessorConfiguration
+      attr_accessor language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR")
+      attr_accessor vocabulary_name: ::String
+      attr_accessor vocabulary_filter_name: ::String
+      attr_accessor vocabulary_filter_method: ("remove" | "mask" | "tag")
+      attr_accessor show_speaker_label: bool
+      attr_accessor enable_partial_results_stabilization: bool
+      attr_accessor partial_results_stability: ("high" | "medium" | "low")
+      attr_accessor content_identification_type: ("PII")
+      attr_accessor content_redaction_type: ("PII")
+      attr_accessor pii_entity_types: ::String
+      attr_accessor language_model_name: ::String
+      attr_accessor filter_partial_results: bool
+      attr_accessor identify_language: bool
+      attr_accessor language_options: ::String
+      attr_accessor preferred_language: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR")
+      attr_accessor vocabulary_names: ::String
+      attr_accessor vocabulary_filter_names: ::String
+      SENSITIVE: []
+    end
+
+    class ArtifactsConcatenationConfiguration
+      attr_accessor audio: Types::AudioConcatenationConfiguration
+      attr_accessor video: Types::VideoConcatenationConfiguration
+      attr_accessor content: Types::ContentConcatenationConfiguration
+      attr_accessor data_channel: Types::DataChannelConcatenationConfiguration
+      attr_accessor transcription_messages: Types::TranscriptionMessagesConcatenationConfiguration
+      attr_accessor meeting_events: Types::MeetingEventsConcatenationConfiguration
+      attr_accessor composited_video: Types::CompositedVideoConcatenationConfiguration
+      SENSITIVE: []
+    end
+
+    class ArtifactsConfiguration
+      attr_accessor audio: Types::AudioArtifactsConfiguration
+      attr_accessor video: Types::VideoArtifactsConfiguration
+      attr_accessor content: Types::ContentArtifactsConfiguration
+      attr_accessor composited_video: Types::CompositedVideoArtifactsConfiguration
+      SENSITIVE: []
+    end
+
+    class AudioArtifactsConfiguration
+      attr_accessor mux_type: ("AudioOnly" | "AudioWithActiveSpeakerVideo" | "AudioWithCompositedVideo")
+      SENSITIVE: []
+    end
+
+    class AudioConcatenationConfiguration
+      attr_accessor state: ("Enabled")
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor code: ("BadRequest" | "Forbidden" | "NotFound" | "ResourceLimitExceeded" | "ServiceFailure" | "ServiceUnavailable" | "Throttling")
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class ChannelDefinition
+      attr_accessor channel_id: ::Integer
+      attr_accessor participant_role: ("AGENT" | "CUSTOMER")
+      SENSITIVE: []
+    end
+
+    class ChimeSdkMeetingConcatenationConfiguration
+      attr_accessor artifacts_configuration: Types::ArtifactsConcatenationConfiguration
+      SENSITIVE: []
+    end
+
+    class ChimeSdkMeetingConfiguration
+      attr_accessor source_configuration: Types::SourceConfiguration
+      attr_accessor artifacts_configuration: Types::ArtifactsConfiguration
+      SENSITIVE: []
+    end
+
+    class ChimeSdkMeetingLiveConnectorConfiguration
+      attr_accessor arn: ::String
+      attr_accessor mux_type: ("AudioWithCompositedVideo" | "AudioWithActiveSpeakerVideo")
+      attr_accessor composited_video: Types::CompositedVideoArtifactsConfiguration
+      attr_accessor source_configuration: Types::SourceConfiguration
+      SENSITIVE: [:arn]
+    end
+
+    class CompositedVideoArtifactsConfiguration
+      attr_accessor layout: ("GridView")
+      attr_accessor resolution: ("HD" | "FHD")
+      attr_accessor grid_view_configuration: Types::GridViewConfiguration
+      SENSITIVE: []
+    end
+
+    class CompositedVideoConcatenationConfiguration
+      attr_accessor state: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class ConcatenationSink
+      attr_accessor type: ("S3Bucket")
+      attr_accessor s3_bucket_sink_configuration: Types::S3BucketSinkConfiguration
+      SENSITIVE: []
+    end
+
+    class ConcatenationSource
+      attr_accessor type: ("MediaCapturePipeline")
+      attr_accessor media_capture_pipeline_source_configuration: Types::MediaCapturePipelineSourceConfiguration
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor code: ("BadRequest" | "Forbidden" | "NotFound" | "ResourceLimitExceeded" | "ServiceFailure" | "ServiceUnavailable" | "Throttling")
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class ContentArtifactsConfiguration
+      attr_accessor state: ("Enabled" | "Disabled")
+      attr_accessor mux_type: ("ContentOnly")
+      SENSITIVE: []
+    end
+
+    class ContentConcatenationConfiguration
+      attr_accessor state: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class CreateMediaCapturePipelineRequest
+      attr_accessor source_type: ("ChimeSdkMeeting")
+      attr_accessor source_arn: ::String
+      attr_accessor sink_type: ("S3Bucket")
+      attr_accessor sink_arn: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor chime_sdk_meeting_configuration: Types::ChimeSdkMeetingConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:source_arn, :sink_arn, :client_request_token]
+    end
+
+    class CreateMediaCapturePipelineResponse
+      attr_accessor media_capture_pipeline: Types::MediaCapturePipeline
+      SENSITIVE: []
+    end
+
+    class CreateMediaConcatenationPipelineRequest
+      attr_accessor sources: ::Array[Types::ConcatenationSource]
+      attr_accessor sinks: ::Array[Types::ConcatenationSink]
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:client_request_token]
+    end
+
+    class CreateMediaConcatenationPipelineResponse
+      attr_accessor media_concatenation_pipeline: Types::MediaConcatenationPipeline
+      SENSITIVE: []
+    end
+
+    class CreateMediaInsightsPipelineConfigurationRequest
+      attr_accessor media_insights_pipeline_configuration_name: ::String
+      attr_accessor resource_access_role_arn: ::String
+      attr_accessor real_time_alert_configuration: Types::RealTimeAlertConfiguration
+      attr_accessor elements: ::Array[Types::MediaInsightsPipelineConfigurationElement]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: [:resource_access_role_arn, :client_request_token]
+    end
+
+    class CreateMediaInsightsPipelineConfigurationResponse
+      attr_accessor media_insights_pipeline_configuration: Types::MediaInsightsPipelineConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateMediaInsightsPipelineRequest
+      attr_accessor media_insights_pipeline_configuration_arn: ::String
+      attr_accessor kinesis_video_stream_source_runtime_configuration: Types::KinesisVideoStreamSourceRuntimeConfiguration
+      attr_accessor media_insights_runtime_metadata: ::Hash[::String, ::String]
+      attr_accessor kinesis_video_stream_recording_source_runtime_configuration: Types::KinesisVideoStreamRecordingSourceRuntimeConfiguration
+      attr_accessor s3_recording_sink_runtime_configuration: Types::S3RecordingSinkRuntimeConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: [:media_insights_pipeline_configuration_arn, :media_insights_runtime_metadata, :client_request_token]
+    end
+
+    class CreateMediaInsightsPipelineResponse
+      attr_accessor media_insights_pipeline: Types::MediaInsightsPipeline
+      SENSITIVE: []
+    end
+
+    class CreateMediaLiveConnectorPipelineRequest
+      attr_accessor sources: ::Array[Types::LiveConnectorSourceConfiguration]
+      attr_accessor sinks: ::Array[Types::LiveConnectorSinkConfiguration]
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:client_request_token]
+    end
+
+    class CreateMediaLiveConnectorPipelineResponse
+      attr_accessor media_live_connector_pipeline: Types::MediaLiveConnectorPipeline
+      SENSITIVE: []
+    end
+
+    class CreateMediaPipelineKinesisVideoStreamPoolRequest
+      attr_accessor stream_configuration: Types::KinesisVideoStreamConfiguration
+      attr_accessor pool_name: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:client_request_token]
+    end
+
+    class CreateMediaPipelineKinesisVideoStreamPoolResponse
+      attr_accessor kinesis_video_stream_pool_configuration: Types::KinesisVideoStreamPoolConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateMediaStreamPipelineRequest
+      attr_accessor sources: ::Array[Types::MediaStreamSource]
+      attr_accessor sinks: ::Array[Types::MediaStreamSink]
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:client_request_token]
+    end
+
+    class CreateMediaStreamPipelineResponse
+      attr_accessor media_stream_pipeline: Types::MediaStreamPipeline
+      SENSITIVE: []
+    end
+
+    class DataChannelConcatenationConfiguration
+      attr_accessor state: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class DeleteMediaCapturePipelineRequest
+      attr_accessor media_pipeline_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMediaInsightsPipelineConfigurationRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMediaPipelineKinesisVideoStreamPoolRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMediaPipelineRequest
+      attr_accessor media_pipeline_id: ::String
+      SENSITIVE: []
+    end
+
+    class ForbiddenException
+      attr_accessor code: ("BadRequest" | "Forbidden" | "NotFound" | "ResourceLimitExceeded" | "ServiceFailure" | "ServiceUnavailable" | "Throttling")
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class FragmentSelector
+      attr_accessor fragment_selector_type: ("ProducerTimestamp" | "ServerTimestamp")
+      attr_accessor timestamp_range: Types::TimestampRange
+      SENSITIVE: []
+    end
+
+    class GetMediaCapturePipelineRequest
+      attr_accessor media_pipeline_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMediaCapturePipelineResponse
+      attr_accessor media_capture_pipeline: Types::MediaCapturePipeline
+      SENSITIVE: []
+    end
+
+    class GetMediaInsightsPipelineConfigurationRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetMediaInsightsPipelineConfigurationResponse
+      attr_accessor media_insights_pipeline_configuration: Types::MediaInsightsPipelineConfiguration
+      SENSITIVE: []
+    end
+
+    class GetMediaPipelineKinesisVideoStreamPoolRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetMediaPipelineKinesisVideoStreamPoolResponse
+      attr_accessor kinesis_video_stream_pool_configuration: Types::KinesisVideoStreamPoolConfiguration
+      SENSITIVE: []
+    end
+
+    class GetMediaPipelineRequest
+      attr_accessor media_pipeline_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMediaPipelineResponse
+      attr_accessor media_pipeline: Types::MediaPipeline
+      SENSITIVE: []
+    end
+
+    class GetSpeakerSearchTaskRequest
+      attr_accessor identifier: ::String
+      attr_accessor speaker_search_task_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSpeakerSearchTaskResponse
+      attr_accessor speaker_search_task: Types::SpeakerSearchTask
+      SENSITIVE: []
+    end
+
+    class GetVoiceToneAnalysisTaskRequest
+      attr_accessor identifier: ::String
+      attr_accessor voice_tone_analysis_task_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetVoiceToneAnalysisTaskResponse
+      attr_accessor voice_tone_analysis_task: Types::VoiceToneAnalysisTask
+      SENSITIVE: []
+    end
+
+    class GridViewConfiguration
+      attr_accessor content_share_layout: ("PresenterOnly" | "Horizontal" | "Vertical" | "ActiveSpeakerOnly")
+      attr_accessor presenter_only_configuration: Types::PresenterOnlyConfiguration
+      attr_accessor active_speaker_only_configuration: Types::ActiveSpeakerOnlyConfiguration
+      attr_accessor horizontal_layout_configuration: Types::HorizontalLayoutConfiguration
+      attr_accessor vertical_layout_configuration: Types::VerticalLayoutConfiguration
+      attr_accessor video_attribute: Types::VideoAttribute
+      attr_accessor canvas_orientation: ("Landscape" | "Portrait")
+      SENSITIVE: []
+    end
+
+    class HorizontalLayoutConfiguration
+      attr_accessor tile_order: ("JoinSequence" | "SpeakerSequence")
+      attr_accessor tile_position: ("Top" | "Bottom")
+      attr_accessor tile_count: ::Integer
+      attr_accessor tile_aspect_ratio: ::String
+      SENSITIVE: []
+    end
+
+    class IssueDetectionConfiguration
+      attr_accessor rule_name: ::String
+      SENSITIVE: []
+    end
+
+    class KeywordMatchConfiguration
+      attr_accessor rule_name: ::String
+      attr_accessor keywords: ::Array[::String]
+      attr_accessor negate: bool
+      SENSITIVE: []
+    end
+
+    class KinesisDataStreamSinkConfiguration
+      attr_accessor insights_target: ::String
+      SENSITIVE: [:insights_target]
+    end
+
+    class KinesisVideoStreamConfiguration
+      attr_accessor region: ::String
+      attr_accessor data_retention_in_hours: ::Integer
+      SENSITIVE: []
+    end
+
+    class KinesisVideoStreamConfigurationUpdate
+      attr_accessor data_retention_in_hours: ::Integer
+      SENSITIVE: []
+    end
+
+    class KinesisVideoStreamPoolConfiguration
+      attr_accessor pool_arn: ::String
+      attr_accessor pool_name: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor pool_status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "FAILED")
+      attr_accessor pool_size: ::Integer
+      attr_accessor stream_configuration: Types::KinesisVideoStreamConfiguration
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      SENSITIVE: [:pool_arn]
+    end
+
+    class KinesisVideoStreamPoolSummary
+      attr_accessor pool_name: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor pool_arn: ::String
+      SENSITIVE: [:pool_arn]
+    end
+
+    class KinesisVideoStreamRecordingSourceRuntimeConfiguration
+      attr_accessor streams: ::Array[Types::RecordingStreamConfiguration]
+      attr_accessor fragment_selector: Types::FragmentSelector
+      SENSITIVE: []
+    end
+
+    class KinesisVideoStreamSourceRuntimeConfiguration
+      attr_accessor streams: ::Array[Types::StreamConfiguration]
+      attr_accessor media_encoding: ("pcm")
+      attr_accessor media_sample_rate: ::Integer
+      SENSITIVE: []
+    end
+
+    class KinesisVideoStreamSourceTaskConfiguration
+      attr_accessor stream_arn: ::String
+      attr_accessor channel_id: ::Integer
+      attr_accessor fragment_number: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaFunctionSinkConfiguration
+      attr_accessor insights_target: ::String
+      SENSITIVE: [:insights_target]
+    end
+
+    class ListMediaCapturePipelinesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMediaCapturePipelinesResponse
+      attr_accessor media_capture_pipelines: ::Array[Types::MediaCapturePipelineSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMediaInsightsPipelineConfigurationsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMediaInsightsPipelineConfigurationsResponse
+      attr_accessor media_insights_pipeline_configurations: ::Array[Types::MediaInsightsPipelineConfigurationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMediaPipelineKinesisVideoStreamPoolsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMediaPipelineKinesisVideoStreamPoolsResponse
+      attr_accessor kinesis_video_stream_pools: ::Array[Types::KinesisVideoStreamPoolSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMediaPipelinesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMediaPipelinesResponse
+      attr_accessor media_pipelines: ::Array[Types::MediaPipelineSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class LiveConnectorRTMPConfiguration
+      attr_accessor url: ::String
+      attr_accessor audio_channels: ("Stereo" | "Mono")
+      attr_accessor audio_sample_rate: ::String
+      SENSITIVE: [:url]
+    end
+
+    class LiveConnectorSinkConfiguration
+      attr_accessor sink_type: ("RTMP")
+      attr_accessor rtmp_configuration: Types::LiveConnectorRTMPConfiguration
+      SENSITIVE: []
+    end
+
+    class LiveConnectorSourceConfiguration
+      attr_accessor source_type: ("ChimeSdkMeeting")
+      attr_accessor chime_sdk_meeting_live_connector_configuration: Types::ChimeSdkMeetingLiveConnectorConfiguration
+      SENSITIVE: []
+    end
+
+    class MediaCapturePipeline
+      attr_accessor media_pipeline_id: ::String
+      attr_accessor media_pipeline_arn: ::String
+      attr_accessor source_type: ("ChimeSdkMeeting")
+      attr_accessor source_arn: ::String
+      attr_accessor status: ("Initializing" | "InProgress" | "Failed" | "Stopping" | "Stopped" | "Paused" | "NotStarted")
+      attr_accessor sink_type: ("S3Bucket")
+      attr_accessor sink_arn: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      attr_accessor chime_sdk_meeting_configuration: Types::ChimeSdkMeetingConfiguration
+      SENSITIVE: [:source_arn, :sink_arn]
+    end
+
+    class MediaCapturePipelineSourceConfiguration
+      attr_accessor media_pipeline_arn: ::String
+      attr_accessor chime_sdk_meeting_configuration: Types::ChimeSdkMeetingConcatenationConfiguration
+      SENSITIVE: [:media_pipeline_arn]
+    end
+
+    class MediaCapturePipelineSummary
+      attr_accessor media_pipeline_id: ::String
+      attr_accessor media_pipeline_arn: ::String
+      SENSITIVE: []
+    end
+
+    class MediaConcatenationPipeline
+      attr_accessor media_pipeline_id: ::String
+      attr_accessor media_pipeline_arn: ::String
+      attr_accessor sources: ::Array[Types::ConcatenationSource]
+      attr_accessor sinks: ::Array[Types::ConcatenationSink]
+      attr_accessor status: ("Initializing" | "InProgress" | "Failed" | "Stopping" | "Stopped" | "Paused" | "NotStarted")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class MediaInsightsPipeline
+      attr_accessor media_pipeline_id: ::String
+      attr_accessor media_pipeline_arn: ::String
+      attr_accessor media_insights_pipeline_configuration_arn: ::String
+      attr_accessor status: ("Initializing" | "InProgress" | "Failed" | "Stopping" | "Stopped" | "Paused" | "NotStarted")
+      attr_accessor kinesis_video_stream_source_runtime_configuration: Types::KinesisVideoStreamSourceRuntimeConfiguration
+      attr_accessor media_insights_runtime_metadata: ::Hash[::String, ::String]
+      attr_accessor kinesis_video_stream_recording_source_runtime_configuration: Types::KinesisVideoStreamRecordingSourceRuntimeConfiguration
+      attr_accessor s3_recording_sink_runtime_configuration: Types::S3RecordingSinkRuntimeConfiguration
+      attr_accessor created_timestamp: ::Time
+      attr_accessor element_statuses: ::Array[Types::MediaInsightsPipelineElementStatus]
+      SENSITIVE: [:media_pipeline_arn, :media_insights_pipeline_configuration_arn, :media_insights_runtime_metadata]
+    end
+
+    class MediaInsightsPipelineConfiguration
+      attr_accessor media_insights_pipeline_configuration_name: ::String
+      attr_accessor media_insights_pipeline_configuration_arn: ::String
+      attr_accessor resource_access_role_arn: ::String
+      attr_accessor real_time_alert_configuration: Types::RealTimeAlertConfiguration
+      attr_accessor elements: ::Array[Types::MediaInsightsPipelineConfigurationElement]
+      attr_accessor media_insights_pipeline_configuration_id: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      SENSITIVE: [:media_insights_pipeline_configuration_arn, :resource_access_role_arn]
+    end
+
+    class MediaInsightsPipelineConfigurationElement
+      attr_accessor type: ("AmazonTranscribeCallAnalyticsProcessor" | "VoiceAnalyticsProcessor" | "AmazonTranscribeProcessor" | "KinesisDataStreamSink" | "LambdaFunctionSink" | "SqsQueueSink" | "SnsTopicSink" | "S3RecordingSink" | "VoiceEnhancementSink")
+      attr_accessor amazon_transcribe_call_analytics_processor_configuration: Types::AmazonTranscribeCallAnalyticsProcessorConfiguration
+      attr_accessor amazon_transcribe_processor_configuration: Types::AmazonTranscribeProcessorConfiguration
+      attr_accessor kinesis_data_stream_sink_configuration: Types::KinesisDataStreamSinkConfiguration
+      attr_accessor s3_recording_sink_configuration: Types::S3RecordingSinkConfiguration
+      attr_accessor voice_analytics_processor_configuration: Types::VoiceAnalyticsProcessorConfiguration
+      attr_accessor lambda_function_sink_configuration: Types::LambdaFunctionSinkConfiguration
+      attr_accessor sqs_queue_sink_configuration: Types::SqsQueueSinkConfiguration
+      attr_accessor sns_topic_sink_configuration: Types::SnsTopicSinkConfiguration
+      attr_accessor voice_enhancement_sink_configuration: Types::VoiceEnhancementSinkConfiguration
+      SENSITIVE: []
+    end
+
+    class MediaInsightsPipelineConfigurationSummary
+      attr_accessor media_insights_pipeline_configuration_name: ::String
+      attr_accessor media_insights_pipeline_configuration_id: ::String
+      attr_accessor media_insights_pipeline_configuration_arn: ::String
+      SENSITIVE: [:media_insights_pipeline_configuration_arn]
+    end
+
+    class MediaInsightsPipelineElementStatus
+      attr_accessor type: ("AmazonTranscribeCallAnalyticsProcessor" | "VoiceAnalyticsProcessor" | "AmazonTranscribeProcessor" | "KinesisDataStreamSink" | "LambdaFunctionSink" | "SqsQueueSink" | "SnsTopicSink" | "S3RecordingSink" | "VoiceEnhancementSink")
+      attr_accessor status: ("NotStarted" | "NotSupported" | "Initializing" | "InProgress" | "Failed" | "Stopping" | "Stopped" | "Paused")
+      SENSITIVE: []
+    end
+
+    class MediaLiveConnectorPipeline
+      attr_accessor sources: ::Array[Types::LiveConnectorSourceConfiguration]
+      attr_accessor sinks: ::Array[Types::LiveConnectorSinkConfiguration]
+      attr_accessor media_pipeline_id: ::String
+      attr_accessor media_pipeline_arn: ::String
+      attr_accessor status: ("Initializing" | "InProgress" | "Failed" | "Stopping" | "Stopped" | "Paused" | "NotStarted")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class MediaPipeline
+      attr_accessor media_capture_pipeline: Types::MediaCapturePipeline
+      attr_accessor media_live_connector_pipeline: Types::MediaLiveConnectorPipeline
+      attr_accessor media_concatenation_pipeline: Types::MediaConcatenationPipeline
+      attr_accessor media_insights_pipeline: Types::MediaInsightsPipeline
+      attr_accessor media_stream_pipeline: Types::MediaStreamPipeline
+      SENSITIVE: []
+    end
+
+    class MediaPipelineSummary
+      attr_accessor media_pipeline_id: ::String
+      attr_accessor media_pipeline_arn: ::String
+      SENSITIVE: []
+    end
+
+    class MediaStreamPipeline
+      attr_accessor media_pipeline_id: ::String
+      attr_accessor media_pipeline_arn: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      attr_accessor status: ("Initializing" | "InProgress" | "Failed" | "Stopping" | "Stopped" | "Paused" | "NotStarted")
+      attr_accessor sources: ::Array[Types::MediaStreamSource]
+      attr_accessor sinks: ::Array[Types::MediaStreamSink]
+      SENSITIVE: []
+    end
+
+    class MediaStreamSink
+      attr_accessor sink_arn: ::String
+      attr_accessor sink_type: ("KinesisVideoStreamPool")
+      attr_accessor reserved_stream_capacity: ::Integer
+      attr_accessor media_stream_type: ("MixedAudio" | "IndividualAudio")
+      SENSITIVE: [:sink_arn]
+    end
+
+    class MediaStreamSource
+      attr_accessor source_type: ("ChimeSdkMeeting")
+      attr_accessor source_arn: ::String
+      SENSITIVE: [:source_arn]
+    end
+
+    class MeetingEventsConcatenationConfiguration
+      attr_accessor state: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor code: ("BadRequest" | "Forbidden" | "NotFound" | "ResourceLimitExceeded" | "ServiceFailure" | "ServiceUnavailable" | "Throttling")
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class PostCallAnalyticsSettings
+      attr_accessor output_location: ::String
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor content_redaction_output: ("redacted" | "redacted_and_unredacted")
+      attr_accessor output_encryption_kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class PresenterOnlyConfiguration
+      attr_accessor presenter_position: ("TopLeft" | "TopRight" | "BottomLeft" | "BottomRight")
+      SENSITIVE: []
+    end
+
+    class RealTimeAlertConfiguration
+      attr_accessor disabled: bool
+      attr_accessor rules: ::Array[Types::RealTimeAlertRule]
+      SENSITIVE: []
+    end
+
+    class RealTimeAlertRule
+      attr_accessor type: ("KeywordMatch" | "Sentiment" | "IssueDetection")
+      attr_accessor keyword_match_configuration: Types::KeywordMatchConfiguration
+      attr_accessor sentiment_configuration: Types::SentimentConfiguration
+      attr_accessor issue_detection_configuration: Types::IssueDetectionConfiguration
+      SENSITIVE: []
+    end
+
+    class RecordingStreamConfiguration
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceLimitExceededException
+      attr_accessor code: ("BadRequest" | "Forbidden" | "NotFound" | "ResourceLimitExceeded" | "ServiceFailure" | "ServiceUnavailable" | "Throttling")
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class S3BucketSinkConfiguration
+      attr_accessor destination: ::String
+      SENSITIVE: [:destination]
+    end
+
+    class S3RecordingSinkConfiguration
+      attr_accessor destination: ::String
+      attr_accessor recording_file_format: ("Wav" | "Opus")
+      SENSITIVE: [:destination]
+    end
+
+    class S3RecordingSinkRuntimeConfiguration
+      attr_accessor destination: ::String
+      attr_accessor recording_file_format: ("Wav" | "Opus")
+      SENSITIVE: [:destination]
+    end
+
+    class SelectedVideoStreams
+      attr_accessor attendee_ids: ::Array[::String]
+      attr_accessor external_user_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SentimentConfiguration
+      attr_accessor rule_name: ::String
+      attr_accessor sentiment_type: ("NEGATIVE")
+      attr_accessor time_period: ::Integer
+      SENSITIVE: []
+    end
+
+    class ServiceFailureException
+      attr_accessor code: ("BadRequest" | "Forbidden" | "NotFound" | "ResourceLimitExceeded" | "ServiceFailure" | "ServiceUnavailable" | "Throttling")
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor code: ("BadRequest" | "Forbidden" | "NotFound" | "ResourceLimitExceeded" | "ServiceFailure" | "ServiceUnavailable" | "Throttling")
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class SnsTopicSinkConfiguration
+      attr_accessor insights_target: ::String
+      SENSITIVE: [:insights_target]
+    end
+
+    class SourceConfiguration
+      attr_accessor selected_video_streams: Types::SelectedVideoStreams
+      SENSITIVE: []
+    end
+
+    class SpeakerSearchTask
+      attr_accessor speaker_search_task_id: ::String
+      attr_accessor speaker_search_task_status: ("NotStarted" | "Initializing" | "InProgress" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class SqsQueueSinkConfiguration
+      attr_accessor insights_target: ::String
+      SENSITIVE: [:insights_target]
+    end
+
+    class StartSpeakerSearchTaskRequest
+      attr_accessor identifier: ::String
+      attr_accessor voice_profile_domain_arn: ::String
+      attr_accessor kinesis_video_stream_source_task_configuration: Types::KinesisVideoStreamSourceTaskConfiguration
+      attr_accessor client_request_token: ::String
+      SENSITIVE: [:voice_profile_domain_arn, :client_request_token]
+    end
+
+    class StartSpeakerSearchTaskResponse
+      attr_accessor speaker_search_task: Types::SpeakerSearchTask
+      SENSITIVE: []
+    end
+
+    class StartVoiceToneAnalysisTaskRequest
+      attr_accessor identifier: ::String
+      attr_accessor language_code: ("en-US")
+      attr_accessor kinesis_video_stream_source_task_configuration: Types::KinesisVideoStreamSourceTaskConfiguration
+      attr_accessor client_request_token: ::String
+      SENSITIVE: [:client_request_token]
+    end
+
+    class StartVoiceToneAnalysisTaskResponse
+      attr_accessor voice_tone_analysis_task: Types::VoiceToneAnalysisTask
+      SENSITIVE: []
+    end
+
+    class StopSpeakerSearchTaskRequest
+      attr_accessor identifier: ::String
+      attr_accessor speaker_search_task_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopVoiceToneAnalysisTaskRequest
+      attr_accessor identifier: ::String
+      attr_accessor voice_tone_analysis_task_id: ::String
+      SENSITIVE: []
+    end
+
+    class StreamChannelDefinition
+      attr_accessor number_of_channels: ::Integer
+      attr_accessor channel_definitions: ::Array[Types::ChannelDefinition]
+      SENSITIVE: []
+    end
+
+    class StreamConfiguration
+      attr_accessor stream_arn: ::String
+      attr_accessor fragment_number: ::String
+      attr_accessor stream_channel_definition: Types::StreamChannelDefinition
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottledClientException
+      attr_accessor code: ("BadRequest" | "Forbidden" | "NotFound" | "ResourceLimitExceeded" | "ServiceFailure" | "ServiceUnavailable" | "Throttling")
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class TimestampRange
+      attr_accessor start_timestamp: ::Time
+      attr_accessor end_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class TranscriptionMessagesConcatenationConfiguration
+      attr_accessor state: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class UnauthorizedClientException
+      attr_accessor code: ("BadRequest" | "Forbidden" | "NotFound" | "ResourceLimitExceeded" | "ServiceFailure" | "ServiceUnavailable" | "Throttling")
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateMediaInsightsPipelineConfigurationRequest
+      attr_accessor identifier: ::String
+      attr_accessor resource_access_role_arn: ::String
+      attr_accessor real_time_alert_configuration: Types::RealTimeAlertConfiguration
+      attr_accessor elements: ::Array[Types::MediaInsightsPipelineConfigurationElement]
+      SENSITIVE: [:resource_access_role_arn]
+    end
+
+    class UpdateMediaInsightsPipelineConfigurationResponse
+      attr_accessor media_insights_pipeline_configuration: Types::MediaInsightsPipelineConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateMediaInsightsPipelineStatusRequest
+      attr_accessor identifier: ::String
+      attr_accessor update_status: ("Pause" | "Resume")
+      SENSITIVE: []
+    end
+
+    class UpdateMediaPipelineKinesisVideoStreamPoolRequest
+      attr_accessor identifier: ::String
+      attr_accessor stream_configuration: Types::KinesisVideoStreamConfigurationUpdate
+      SENSITIVE: []
+    end
+
+    class UpdateMediaPipelineKinesisVideoStreamPoolResponse
+      attr_accessor kinesis_video_stream_pool_configuration: Types::KinesisVideoStreamPoolConfiguration
+      SENSITIVE: []
+    end
+
+    class VerticalLayoutConfiguration
+      attr_accessor tile_order: ("JoinSequence" | "SpeakerSequence")
+      attr_accessor tile_position: ("Left" | "Right")
+      attr_accessor tile_count: ::Integer
+      attr_accessor tile_aspect_ratio: ::String
+      SENSITIVE: []
+    end
+
+    class VideoArtifactsConfiguration
+      attr_accessor state: ("Enabled" | "Disabled")
+      attr_accessor mux_type: ("VideoOnly")
+      SENSITIVE: []
+    end
+
+    class VideoAttribute
+      attr_accessor corner_radius: ::Integer
+      attr_accessor border_color: ("Black" | "Blue" | "Red" | "Green" | "White" | "Yellow")
+      attr_accessor highlight_color: ("Black" | "Blue" | "Red" | "Green" | "White" | "Yellow")
+      attr_accessor border_thickness: ::Integer
+      SENSITIVE: []
+    end
+
+    class VideoConcatenationConfiguration
+      attr_accessor state: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class VoiceAnalyticsProcessorConfiguration
+      attr_accessor speaker_search_status: ("Enabled" | "Disabled")
+      attr_accessor voice_tone_analysis_status: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class VoiceEnhancementSinkConfiguration
+      attr_accessor disabled: bool
+      SENSITIVE: []
+    end
+
+    class VoiceToneAnalysisTask
+      attr_accessor voice_tone_analysis_task_id: ::String
+      attr_accessor voice_tone_analysis_task_status: ("NotStarted" | "Initializing" | "InProgress" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.120.0 (2024-02-09)
+------------------
+
+* Feature - This release allows AWS IoT Core users to enable Online Certificate Status Protocol (OCSP) Stapling for TLS X.509 Server Certificates when creating and updating AWS IoT Domain Configurations with Custom Domain.
+
+1.119.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.118.0 (2024-01-16)
+------------------
+
+* Feature - Revert release of LogTargetTypes
+
+1.117.0 (2024-01-11)
+------------------
+
+* Feature - Add ConflictException to Update APIs of AWS IoT Software Package Catalog
+
 1.116.0 (2023-12-14)
 ------------------
 

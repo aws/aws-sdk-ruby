@@ -2598,6 +2598,10 @@ module Aws::IoT
     #   An object that specifies the TLS configuration for a domain.
     #   @return [Types::TlsConfig]
     #
+    # @!attribute [rw] server_certificate_config
+    #   The server certificate configuration.
+    #   @return [Types::ServerCertificateConfig]
+    #
     class CreateDomainConfigurationRequest < Struct.new(
       :domain_configuration_name,
       :domain_name,
@@ -2606,7 +2610,8 @@ module Aws::IoT
       :authorizer_config,
       :service_type,
       :tags,
-      :tls_config)
+      :tls_config,
+      :server_certificate_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2902,10 +2907,17 @@ module Aws::IoT
     #
     # @!attribute [rw] destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed
-    #   on the device when the job successfully completes.
+    #   on the device when the job successfully completes. The package
+    #   version must be in either the Published or Deprecated state when the
+    #   job deploys. For more information, see [Package version
+    #   lifecycle][1].
     #
     #   **Note:**The following Length Constraints relates to a single ARN.
     #   Up to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #   @return [Array<String>]
     #
     class CreateJobRequest < Struct.new(
@@ -3019,10 +3031,17 @@ module Aws::IoT
     #
     # @!attribute [rw] destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed
-    #   on the device when the job successfully completes.
+    #   on the device when the job successfully completes. The package
+    #   version must be in either the Published or Deprecated state when the
+    #   job deploys. For more information, see [Package version
+    #   lifecycle][1].
     #
     #   **Note:**The following Length Constraints relates to a single ARN.
     #   Up to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #   @return [Array<String>]
     #
     class CreateJobTemplateRequest < Struct.new(
@@ -5390,6 +5409,10 @@ module Aws::IoT
     #   An object that specifies the TLS configuration for a domain.
     #   @return [Types::TlsConfig]
     #
+    # @!attribute [rw] server_certificate_config
+    #   The server certificate configuration.
+    #   @return [Types::ServerCertificateConfig]
+    #
     class DescribeDomainConfigurationResponse < Struct.new(
       :domain_configuration_name,
       :domain_configuration_arn,
@@ -5400,7 +5423,8 @@ module Aws::IoT
       :service_type,
       :domain_type,
       :last_status_change_date,
-      :tls_config)
+      :tls_config,
+      :server_certificate_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5739,10 +5763,17 @@ module Aws::IoT
     #
     # @!attribute [rw] destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed
-    #   on the device when the job successfully completes.
+    #   on the device when the job successfully completes. The package
+    #   version must be in either the Published or Deprecated state when the
+    #   job deploys. For more information, see [Package version
+    #   lifecycle][1].
     #
     #   **Note:**The following Length Constraints relates to a single ARN.
     #   Up to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #   @return [Array<String>]
     #
     class DescribeJobTemplateResponse < Struct.new(
@@ -8403,10 +8434,19 @@ module Aws::IoT
     #
     # @!attribute [rw] destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed
-    #   on the device when the job successfully completes.
+    #   on the device when the job successfully completes. The package
+    #   version must be in either the Published or Deprecated state when the
+    #   job deploys. For more information, see [Package version
+    #   lifecycle][1].The package version must be in either the Published or
+    #   Deprecated state when the job deploys. For more information, see
+    #   [Package version lifecycle][1].
     #
     #   **Note:**The following Length Constraints relates to a single ARN.
     #   Up to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #   @return [Array<String>]
     #
     class Job < Struct.new(
@@ -13584,6 +13624,27 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The server certificate configuration.
+    #
+    # @!attribute [rw] enable_ocsp_check
+    #   A Boolean value that indicates whether Online Certificate Status
+    #   Protocol (OCSP) server certificate check is enabled or not.
+    #
+    #   For more information, see [Configuring OCSP server-certificate
+    #   stapling in domain configuration][1] from Amazon Web Services IoT
+    #   Core Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-custom-domain-ocsp-config.html
+    #   @return [Boolean]
+    #
+    class ServerCertificateConfig < Struct.new(
+      :enable_ocsp_check)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that contains information about a server certificate.
     #
     # @!attribute [rw] server_certificate_arn
@@ -15915,12 +15976,17 @@ module Aws::IoT
     #   An object that specifies the TLS configuration for a domain.
     #   @return [Types::TlsConfig]
     #
+    # @!attribute [rw] server_certificate_config
+    #   The server certificate configuration.
+    #   @return [Types::ServerCertificateConfig]
+    #
     class UpdateDomainConfigurationRequest < Struct.new(
       :domain_configuration_name,
       :authorizer_config,
       :domain_configuration_status,
       :remove_authorizer_config,
-      :tls_config)
+      :tls_config,
+      :server_certificate_config)
       SENSITIVE = []
       include Aws::Structure
     end

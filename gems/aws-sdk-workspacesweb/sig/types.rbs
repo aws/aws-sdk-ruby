@@ -1,0 +1,920 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::WorkSpacesWeb
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateBrowserSettingsRequest
+      attr_accessor browser_settings_arn: ::String
+      attr_accessor portal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateBrowserSettingsResponse
+      attr_accessor browser_settings_arn: ::String
+      attr_accessor portal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateIpAccessSettingsRequest
+      attr_accessor ip_access_settings_arn: ::String
+      attr_accessor portal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateIpAccessSettingsResponse
+      attr_accessor ip_access_settings_arn: ::String
+      attr_accessor portal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateNetworkSettingsRequest
+      attr_accessor network_settings_arn: ::String
+      attr_accessor portal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateNetworkSettingsResponse
+      attr_accessor network_settings_arn: ::String
+      attr_accessor portal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateTrustStoreRequest
+      attr_accessor portal_arn: ::String
+      attr_accessor trust_store_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateTrustStoreResponse
+      attr_accessor portal_arn: ::String
+      attr_accessor trust_store_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateUserAccessLoggingSettingsRequest
+      attr_accessor portal_arn: ::String
+      attr_accessor user_access_logging_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateUserAccessLoggingSettingsResponse
+      attr_accessor portal_arn: ::String
+      attr_accessor user_access_logging_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateUserSettingsRequest
+      attr_accessor portal_arn: ::String
+      attr_accessor user_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateUserSettingsResponse
+      attr_accessor portal_arn: ::String
+      attr_accessor user_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class BrowserSettings
+      attr_accessor associated_portal_arns: ::Array[::String]
+      attr_accessor browser_policy: ::String
+      attr_accessor browser_settings_arn: ::String
+      SENSITIVE: [:browser_policy]
+    end
+
+    class BrowserSettingsSummary
+      attr_accessor browser_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Certificate
+      attr_accessor body: ::String
+      attr_accessor issuer: ::String
+      attr_accessor not_valid_after: ::Time
+      attr_accessor not_valid_before: ::Time
+      attr_accessor subject: ::String
+      attr_accessor thumbprint: ::String
+      SENSITIVE: []
+    end
+
+    class CertificateSummary
+      attr_accessor issuer: ::String
+      attr_accessor not_valid_after: ::Time
+      attr_accessor not_valid_before: ::Time
+      attr_accessor subject: ::String
+      attr_accessor thumbprint: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CookieSpecification
+      attr_accessor domain: ::String
+      attr_accessor name: ::String
+      attr_accessor path: ::String
+      SENSITIVE: []
+    end
+
+    class CookieSynchronizationConfiguration
+      attr_accessor allowlist: ::Array[Types::CookieSpecification]
+      attr_accessor blocklist: ::Array[Types::CookieSpecification]
+      SENSITIVE: []
+    end
+
+    class CreateBrowserSettingsRequest
+      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
+      attr_accessor browser_policy: ::String
+      attr_accessor client_token: ::String
+      attr_accessor customer_managed_key: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:browser_policy]
+    end
+
+    class CreateBrowserSettingsResponse
+      attr_accessor browser_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIdentityProviderRequest
+      attr_accessor client_token: ::String
+      attr_accessor identity_provider_details: ::Hash[::String, ::String]
+      attr_accessor identity_provider_name: ::String
+      attr_accessor identity_provider_type: ("SAML" | "Facebook" | "Google" | "LoginWithAmazon" | "SignInWithApple" | "OIDC")
+      attr_accessor portal_arn: ::String
+      SENSITIVE: [:identity_provider_details, :identity_provider_name]
+    end
+
+    class CreateIdentityProviderResponse
+      attr_accessor identity_provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIpAccessSettingsRequest
+      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      attr_accessor customer_managed_key: ::String
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor ip_rules: ::Array[Types::IpRule]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:description, :display_name, :ip_rules]
+    end
+
+    class CreateIpAccessSettingsResponse
+      attr_accessor ip_access_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateNetworkSettingsRequest
+      attr_accessor client_token: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateNetworkSettingsResponse
+      attr_accessor network_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePortalRequest
+      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
+      attr_accessor authentication_type: ("Standard" | "IAM_Identity_Center")
+      attr_accessor client_token: ::String
+      attr_accessor customer_managed_key: ::String
+      attr_accessor display_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:display_name]
+    end
+
+    class CreatePortalResponse
+      attr_accessor portal_arn: ::String
+      attr_accessor portal_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTrustStoreRequest
+      attr_accessor certificate_list: ::Array[::String]
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateTrustStoreResponse
+      attr_accessor trust_store_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateUserAccessLoggingSettingsRequest
+      attr_accessor client_token: ::String
+      attr_accessor kinesis_stream_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateUserAccessLoggingSettingsResponse
+      attr_accessor user_access_logging_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateUserSettingsRequest
+      attr_accessor additional_encryption_context: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration
+      attr_accessor copy_allowed: ("Disabled" | "Enabled")
+      attr_accessor customer_managed_key: ::String
+      attr_accessor disconnect_timeout_in_minutes: ::Integer
+      attr_accessor download_allowed: ("Disabled" | "Enabled")
+      attr_accessor idle_disconnect_timeout_in_minutes: ::Integer
+      attr_accessor paste_allowed: ("Disabled" | "Enabled")
+      attr_accessor print_allowed: ("Disabled" | "Enabled")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor upload_allowed: ("Disabled" | "Enabled")
+      SENSITIVE: [:cookie_synchronization_configuration]
+    end
+
+    class CreateUserSettingsResponse
+      attr_accessor user_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBrowserSettingsRequest
+      attr_accessor browser_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBrowserSettingsResponse < Aws::EmptyStructure
+    end
+
+    class DeleteIdentityProviderRequest
+      attr_accessor identity_provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIdentityProviderResponse < Aws::EmptyStructure
+    end
+
+    class DeleteIpAccessSettingsRequest
+      attr_accessor ip_access_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIpAccessSettingsResponse < Aws::EmptyStructure
+    end
+
+    class DeleteNetworkSettingsRequest
+      attr_accessor network_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNetworkSettingsResponse < Aws::EmptyStructure
+    end
+
+    class DeletePortalRequest
+      attr_accessor portal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePortalResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTrustStoreRequest
+      attr_accessor trust_store_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTrustStoreResponse < Aws::EmptyStructure
+    end
+
+    class DeleteUserAccessLoggingSettingsRequest
+      attr_accessor user_access_logging_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserAccessLoggingSettingsResponse < Aws::EmptyStructure
+    end
+
+    class DeleteUserSettingsRequest
+      attr_accessor user_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserSettingsResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateBrowserSettingsRequest
+      attr_accessor portal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateBrowserSettingsResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateIpAccessSettingsRequest
+      attr_accessor portal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateIpAccessSettingsResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateNetworkSettingsRequest
+      attr_accessor portal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateNetworkSettingsResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateTrustStoreRequest
+      attr_accessor portal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateTrustStoreResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateUserAccessLoggingSettingsRequest
+      attr_accessor portal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateUserAccessLoggingSettingsResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateUserSettingsRequest
+      attr_accessor portal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateUserSettingsResponse < Aws::EmptyStructure
+    end
+
+    class GetBrowserSettingsRequest
+      attr_accessor browser_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetBrowserSettingsResponse
+      attr_accessor browser_settings: Types::BrowserSettings
+      SENSITIVE: []
+    end
+
+    class GetIdentityProviderRequest
+      attr_accessor identity_provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetIdentityProviderResponse
+      attr_accessor identity_provider: Types::IdentityProvider
+      SENSITIVE: []
+    end
+
+    class GetIpAccessSettingsRequest
+      attr_accessor ip_access_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetIpAccessSettingsResponse
+      attr_accessor ip_access_settings: Types::IpAccessSettings
+      SENSITIVE: []
+    end
+
+    class GetNetworkSettingsRequest
+      attr_accessor network_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetNetworkSettingsResponse
+      attr_accessor network_settings: Types::NetworkSettings
+      SENSITIVE: []
+    end
+
+    class GetPortalRequest
+      attr_accessor portal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetPortalResponse
+      attr_accessor portal: Types::Portal
+      SENSITIVE: []
+    end
+
+    class GetPortalServiceProviderMetadataRequest
+      attr_accessor portal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetPortalServiceProviderMetadataResponse
+      attr_accessor portal_arn: ::String
+      attr_accessor service_provider_saml_metadata: ::String
+      SENSITIVE: []
+    end
+
+    class GetTrustStoreCertificateRequest
+      attr_accessor thumbprint: ::String
+      attr_accessor trust_store_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetTrustStoreCertificateResponse
+      attr_accessor certificate: Types::Certificate
+      attr_accessor trust_store_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetTrustStoreRequest
+      attr_accessor trust_store_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetTrustStoreResponse
+      attr_accessor trust_store: Types::TrustStore
+      SENSITIVE: []
+    end
+
+    class GetUserAccessLoggingSettingsRequest
+      attr_accessor user_access_logging_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetUserAccessLoggingSettingsResponse
+      attr_accessor user_access_logging_settings: Types::UserAccessLoggingSettings
+      SENSITIVE: []
+    end
+
+    class GetUserSettingsRequest
+      attr_accessor user_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetUserSettingsResponse
+      attr_accessor user_settings: Types::UserSettings
+      SENSITIVE: []
+    end
+
+    class IdentityProvider
+      attr_accessor identity_provider_arn: ::String
+      attr_accessor identity_provider_details: ::Hash[::String, ::String]
+      attr_accessor identity_provider_name: ::String
+      attr_accessor identity_provider_type: ("SAML" | "Facebook" | "Google" | "LoginWithAmazon" | "SignInWithApple" | "OIDC")
+      SENSITIVE: [:identity_provider_details, :identity_provider_name]
+    end
+
+    class IdentityProviderSummary
+      attr_accessor identity_provider_arn: ::String
+      attr_accessor identity_provider_name: ::String
+      attr_accessor identity_provider_type: ("SAML" | "Facebook" | "Google" | "LoginWithAmazon" | "SignInWithApple" | "OIDC")
+      SENSITIVE: [:identity_provider_name]
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class IpAccessSettings
+      attr_accessor associated_portal_arns: ::Array[::String]
+      attr_accessor creation_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor ip_access_settings_arn: ::String
+      attr_accessor ip_rules: ::Array[Types::IpRule]
+      SENSITIVE: [:description, :display_name, :ip_rules]
+    end
+
+    class IpAccessSettingsSummary
+      attr_accessor creation_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor ip_access_settings_arn: ::String
+      SENSITIVE: [:description, :display_name]
+    end
+
+    class IpRule
+      attr_accessor description: ::String
+      attr_accessor ip_range: ::String
+      SENSITIVE: [:description, :ip_range]
+    end
+
+    class ListBrowserSettingsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBrowserSettingsResponse
+      attr_accessor browser_settings: ::Array[Types::BrowserSettingsSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIdentityProvidersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor portal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListIdentityProvidersResponse
+      attr_accessor identity_providers: ::Array[Types::IdentityProviderSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIpAccessSettingsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIpAccessSettingsResponse
+      attr_accessor ip_access_settings: ::Array[Types::IpAccessSettingsSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkSettingsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkSettingsResponse
+      attr_accessor network_settings: ::Array[Types::NetworkSettingsSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPortalsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPortalsResponse
+      attr_accessor next_token: ::String
+      attr_accessor portals: ::Array[Types::PortalSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListTrustStoreCertificatesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor trust_store_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTrustStoreCertificatesResponse
+      attr_accessor certificate_list: ::Array[Types::CertificateSummary]
+      attr_accessor next_token: ::String
+      attr_accessor trust_store_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTrustStoresRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTrustStoresResponse
+      attr_accessor next_token: ::String
+      attr_accessor trust_stores: ::Array[Types::TrustStoreSummary]
+      SENSITIVE: []
+    end
+
+    class ListUserAccessLoggingSettingsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUserAccessLoggingSettingsResponse
+      attr_accessor next_token: ::String
+      attr_accessor user_access_logging_settings: ::Array[Types::UserAccessLoggingSettingsSummary]
+      SENSITIVE: []
+    end
+
+    class ListUserSettingsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUserSettingsResponse
+      attr_accessor next_token: ::String
+      attr_accessor user_settings: ::Array[Types::UserSettingsSummary]
+      SENSITIVE: []
+    end
+
+    class NetworkSettings
+      attr_accessor associated_portal_arns: ::Array[::String]
+      attr_accessor network_settings_arn: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkSettingsSummary
+      attr_accessor network_settings_arn: ::String
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class Portal
+      attr_accessor authentication_type: ("Standard" | "IAM_Identity_Center")
+      attr_accessor browser_settings_arn: ::String
+      attr_accessor browser_type: ("Chrome")
+      attr_accessor creation_date: ::Time
+      attr_accessor display_name: ::String
+      attr_accessor ip_access_settings_arn: ::String
+      attr_accessor network_settings_arn: ::String
+      attr_accessor portal_arn: ::String
+      attr_accessor portal_endpoint: ::String
+      attr_accessor portal_status: ("Incomplete" | "Pending" | "Active")
+      attr_accessor renderer_type: ("AppStream")
+      attr_accessor status_reason: ::String
+      attr_accessor trust_store_arn: ::String
+      attr_accessor user_access_logging_settings_arn: ::String
+      attr_accessor user_settings_arn: ::String
+      SENSITIVE: [:display_name]
+    end
+
+    class PortalSummary
+      attr_accessor authentication_type: ("Standard" | "IAM_Identity_Center")
+      attr_accessor browser_settings_arn: ::String
+      attr_accessor browser_type: ("Chrome")
+      attr_accessor creation_date: ::Time
+      attr_accessor display_name: ::String
+      attr_accessor ip_access_settings_arn: ::String
+      attr_accessor network_settings_arn: ::String
+      attr_accessor portal_arn: ::String
+      attr_accessor portal_endpoint: ::String
+      attr_accessor portal_status: ("Incomplete" | "Pending" | "Active")
+      attr_accessor renderer_type: ("AppStream")
+      attr_accessor trust_store_arn: ::String
+      attr_accessor user_access_logging_settings_arn: ::String
+      attr_accessor user_settings_arn: ::String
+      SENSITIVE: [:display_name]
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: [:key, :value]
+    end
+
+    class TagResourceRequest
+      attr_accessor client_token: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class TrustStore
+      attr_accessor associated_portal_arns: ::Array[::String]
+      attr_accessor trust_store_arn: ::String
+      SENSITIVE: []
+    end
+
+    class TrustStoreSummary
+      attr_accessor trust_store_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateBrowserSettingsRequest
+      attr_accessor browser_policy: ::String
+      attr_accessor browser_settings_arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: [:browser_policy]
+    end
+
+    class UpdateBrowserSettingsResponse
+      attr_accessor browser_settings: Types::BrowserSettings
+      SENSITIVE: []
+    end
+
+    class UpdateIdentityProviderRequest
+      attr_accessor client_token: ::String
+      attr_accessor identity_provider_arn: ::String
+      attr_accessor identity_provider_details: ::Hash[::String, ::String]
+      attr_accessor identity_provider_name: ::String
+      attr_accessor identity_provider_type: ("SAML" | "Facebook" | "Google" | "LoginWithAmazon" | "SignInWithApple" | "OIDC")
+      SENSITIVE: [:identity_provider_details, :identity_provider_name]
+    end
+
+    class UpdateIdentityProviderResponse
+      attr_accessor identity_provider: Types::IdentityProvider
+      SENSITIVE: []
+    end
+
+    class UpdateIpAccessSettingsRequest
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor ip_access_settings_arn: ::String
+      attr_accessor ip_rules: ::Array[Types::IpRule]
+      SENSITIVE: [:description, :display_name, :ip_rules]
+    end
+
+    class UpdateIpAccessSettingsResponse
+      attr_accessor ip_access_settings: Types::IpAccessSettings
+      SENSITIVE: []
+    end
+
+    class UpdateNetworkSettingsRequest
+      attr_accessor client_token: ::String
+      attr_accessor network_settings_arn: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateNetworkSettingsResponse
+      attr_accessor network_settings: Types::NetworkSettings
+      SENSITIVE: []
+    end
+
+    class UpdatePortalRequest
+      attr_accessor authentication_type: ("Standard" | "IAM_Identity_Center")
+      attr_accessor display_name: ::String
+      attr_accessor portal_arn: ::String
+      SENSITIVE: [:display_name]
+    end
+
+    class UpdatePortalResponse
+      attr_accessor portal: Types::Portal
+      SENSITIVE: []
+    end
+
+    class UpdateTrustStoreRequest
+      attr_accessor certificates_to_add: ::Array[::String]
+      attr_accessor certificates_to_delete: ::Array[::String]
+      attr_accessor client_token: ::String
+      attr_accessor trust_store_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTrustStoreResponse
+      attr_accessor trust_store_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateUserAccessLoggingSettingsRequest
+      attr_accessor client_token: ::String
+      attr_accessor kinesis_stream_arn: ::String
+      attr_accessor user_access_logging_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateUserAccessLoggingSettingsResponse
+      attr_accessor user_access_logging_settings: Types::UserAccessLoggingSettings
+      SENSITIVE: []
+    end
+
+    class UpdateUserSettingsRequest
+      attr_accessor client_token: ::String
+      attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration
+      attr_accessor copy_allowed: ("Disabled" | "Enabled")
+      attr_accessor disconnect_timeout_in_minutes: ::Integer
+      attr_accessor download_allowed: ("Disabled" | "Enabled")
+      attr_accessor idle_disconnect_timeout_in_minutes: ::Integer
+      attr_accessor paste_allowed: ("Disabled" | "Enabled")
+      attr_accessor print_allowed: ("Disabled" | "Enabled")
+      attr_accessor upload_allowed: ("Disabled" | "Enabled")
+      attr_accessor user_settings_arn: ::String
+      SENSITIVE: [:cookie_synchronization_configuration]
+    end
+
+    class UpdateUserSettingsResponse
+      attr_accessor user_settings: Types::UserSettings
+      SENSITIVE: []
+    end
+
+    class UserAccessLoggingSettings
+      attr_accessor associated_portal_arns: ::Array[::String]
+      attr_accessor kinesis_stream_arn: ::String
+      attr_accessor user_access_logging_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UserAccessLoggingSettingsSummary
+      attr_accessor kinesis_stream_arn: ::String
+      attr_accessor user_access_logging_settings_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UserSettings
+      attr_accessor associated_portal_arns: ::Array[::String]
+      attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration
+      attr_accessor copy_allowed: ("Disabled" | "Enabled")
+      attr_accessor disconnect_timeout_in_minutes: ::Integer
+      attr_accessor download_allowed: ("Disabled" | "Enabled")
+      attr_accessor idle_disconnect_timeout_in_minutes: ::Integer
+      attr_accessor paste_allowed: ("Disabled" | "Enabled")
+      attr_accessor print_allowed: ("Disabled" | "Enabled")
+      attr_accessor upload_allowed: ("Disabled" | "Enabled")
+      attr_accessor user_settings_arn: ::String
+      SENSITIVE: [:cookie_synchronization_configuration]
+    end
+
+    class UserSettingsSummary
+      attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration
+      attr_accessor copy_allowed: ("Disabled" | "Enabled")
+      attr_accessor disconnect_timeout_in_minutes: ::Integer
+      attr_accessor download_allowed: ("Disabled" | "Enabled")
+      attr_accessor idle_disconnect_timeout_in_minutes: ::Integer
+      attr_accessor paste_allowed: ("Disabled" | "Enabled")
+      attr_accessor print_allowed: ("Disabled" | "Enabled")
+      attr_accessor upload_allowed: ("Disabled" | "Enabled")
+      attr_accessor user_settings_arn: ::String
+      SENSITIVE: [:cookie_synchronization_configuration]
+    end
+
+    class ValidationException
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      attr_accessor message: ::String
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor message: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+  end
+end

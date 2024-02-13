@@ -1,0 +1,69 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EC2
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/RouteTableAssociation.html
+    class RouteTableAssociation
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/RouteTableAssociation.html#initialize-instance_method
+      def initialize: (String id, Hash[Symbol, untyped] options) -> void
+                    | (id: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/RouteTableAssociation.html#id-instance_method
+      def id: () -> String
+      alias route_table_association_id id
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/RouteTableAssociation.html#main-instance_method
+      def main: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/RouteTableAssociation.html#route_table_id-instance_method
+      def route_table_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/RouteTableAssociation.html#subnet_id-instance_method
+      def subnet_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/RouteTableAssociation.html#gateway_id-instance_method
+      def gateway_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/RouteTableAssociation.html#association_state-instance_method
+      def association_state: () -> Types::RouteTableAssociationState
+
+      def client: () -> Client
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/RouteTableAssociation.html#data-instance_method
+      def data: () -> Types::RouteTableAssociation
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/RouteTableAssociation.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/RouteTableAssociation.html#delete-instance_method
+      def delete: (
+                    ?dry_run: bool
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/RouteTableAssociation.html#replace_subnet-instance_method
+      def replace_subnet: (
+                            ?dry_run: bool,
+                            route_table_id: ::String
+                          ) -> RouteTableAssociation
+                        | (?Hash[Symbol, untyped]) -> RouteTableAssociation
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/RouteTableAssociation.html#route_table-instance_method
+      def route_table: () -> RouteTable?
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/RouteTableAssociation.html#subnet-instance_method
+      def subnet: () -> Subnet?
+
+      class Collection < ::Aws::Resources::Collection[RouteTableAssociation]
+      end
+    end
+  end
+end

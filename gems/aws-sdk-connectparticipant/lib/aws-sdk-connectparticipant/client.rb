@@ -752,7 +752,7 @@ module Aws::ConnectParticipant
     #   resp.transcript[0].type #=> String, one of "TYPING", "PARTICIPANT_JOINED", "PARTICIPANT_LEFT", "CHAT_ENDED", "TRANSFER_SUCCEEDED", "TRANSFER_FAILED", "MESSAGE", "EVENT", "ATTACHMENT", "CONNECTION_ACK", "MESSAGE_DELIVERED", "MESSAGE_READ"
     #   resp.transcript[0].participant_id #=> String
     #   resp.transcript[0].display_name #=> String
-    #   resp.transcript[0].participant_role #=> String, one of "AGENT", "CUSTOMER", "SYSTEM", "CUSTOM_BOT"
+    #   resp.transcript[0].participant_role #=> String, one of "AGENT", "CUSTOMER", "SYSTEM", "CUSTOM_BOT", "SUPERVISOR"
     #   resp.transcript[0].attachments #=> Array
     #   resp.transcript[0].attachments[0].content_type #=> String
     #   resp.transcript[0].attachments[0].attachment_id #=> String
@@ -1022,7 +1022,7 @@ module Aws::ConnectParticipant
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectparticipant'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

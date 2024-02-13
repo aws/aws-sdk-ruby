@@ -1,0 +1,335 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MarketplaceAgreement
+  module Types
+
+    class AcceptedTerm
+      attr_accessor byol_pricing_term: Types::ByolPricingTerm
+      attr_accessor configurable_upfront_pricing_term: Types::ConfigurableUpfrontPricingTerm
+      attr_accessor fixed_upfront_pricing_term: Types::FixedUpfrontPricingTerm
+      attr_accessor free_trial_pricing_term: Types::FreeTrialPricingTerm
+      attr_accessor legal_term: Types::LegalTerm
+      attr_accessor payment_schedule_term: Types::PaymentScheduleTerm
+      attr_accessor recurring_payment_term: Types::RecurringPaymentTerm
+      attr_accessor renewal_term: Types::RenewalTerm
+      attr_accessor support_term: Types::SupportTerm
+      attr_accessor usage_based_pricing_term: Types::UsageBasedPricingTerm
+      attr_accessor validity_term: Types::ValidityTerm
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ByolPricingTerm < AcceptedTerm
+      end
+      class ConfigurableUpfrontPricingTerm < AcceptedTerm
+      end
+      class FixedUpfrontPricingTerm < AcceptedTerm
+      end
+      class FreeTrialPricingTerm < AcceptedTerm
+      end
+      class LegalTerm < AcceptedTerm
+      end
+      class PaymentScheduleTerm < AcceptedTerm
+      end
+      class RecurringPaymentTerm < AcceptedTerm
+      end
+      class RenewalTerm < AcceptedTerm
+      end
+      class SupportTerm < AcceptedTerm
+      end
+      class UsageBasedPricingTerm < AcceptedTerm
+      end
+      class ValidityTerm < AcceptedTerm
+      end
+      class Unknown < AcceptedTerm
+      end
+    end
+
+    class Acceptor
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class AgreementViewSummary
+      attr_accessor acceptance_time: ::Time
+      attr_accessor acceptor: Types::Acceptor
+      attr_accessor agreement_id: ::String
+      attr_accessor agreement_type: ::String
+      attr_accessor end_time: ::Time
+      attr_accessor proposal_summary: Types::ProposalSummary
+      attr_accessor proposer: Types::Proposer
+      attr_accessor start_time: ::Time
+      attr_accessor status: ("ACTIVE" | "ARCHIVED" | "CANCELLED" | "EXPIRED" | "RENEWED" | "REPLACED" | "ROLLED_BACK" | "SUPERSEDED" | "TERMINATED")
+      SENSITIVE: []
+    end
+
+    class ByolPricingTerm
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurableUpfrontPricingTerm
+      attr_accessor configuration: Types::ConfigurableUpfrontPricingTermConfiguration
+      attr_accessor currency_code: ::String
+      attr_accessor rate_cards: ::Array[Types::ConfigurableUpfrontRateCardItem]
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurableUpfrontPricingTermConfiguration
+      attr_accessor dimensions: ::Array[Types::Dimension]
+      attr_accessor selector_value: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurableUpfrontRateCardItem
+      attr_accessor constraints: Types::Constraints
+      attr_accessor rate_card: ::Array[Types::RateCardItem]
+      attr_accessor selector: Types::Selector
+      SENSITIVE: []
+    end
+
+    class Constraints
+      attr_accessor multiple_dimension_selection: ::String
+      attr_accessor quantity_configuration: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAgreementInput
+      attr_accessor agreement_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAgreementOutput
+      attr_accessor acceptance_time: ::Time
+      attr_accessor acceptor: Types::Acceptor
+      attr_accessor agreement_id: ::String
+      attr_accessor agreement_type: ::String
+      attr_accessor end_time: ::Time
+      attr_accessor estimated_charges: Types::EstimatedCharges
+      attr_accessor proposal_summary: Types::ProposalSummary
+      attr_accessor proposer: Types::Proposer
+      attr_accessor start_time: ::Time
+      attr_accessor status: ("ACTIVE" | "ARCHIVED" | "CANCELLED" | "EXPIRED" | "RENEWED" | "REPLACED" | "ROLLED_BACK" | "SUPERSEDED" | "TERMINATED")
+      SENSITIVE: []
+    end
+
+    class Dimension
+      attr_accessor dimension_key: ::String
+      attr_accessor dimension_value: ::Integer
+      SENSITIVE: []
+    end
+
+    class DocumentItem
+      attr_accessor type: ::String
+      attr_accessor url: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class EstimatedCharges
+      attr_accessor agreement_value: ::String
+      attr_accessor currency_code: ::String
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FixedUpfrontPricingTerm
+      attr_accessor currency_code: ::String
+      attr_accessor duration: ::String
+      attr_accessor grants: ::Array[Types::GrantItem]
+      attr_accessor price: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class FreeTrialPricingTerm
+      attr_accessor duration: ::String
+      attr_accessor grants: ::Array[Types::GrantItem]
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class GetAgreementTermsInput
+      attr_accessor agreement_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetAgreementTermsOutput
+      attr_accessor accepted_terms: ::Array[Types::AcceptedTerm]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GrantItem
+      attr_accessor dimension_key: ::String
+      attr_accessor max_quantity: ::Integer
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class LegalTerm
+      attr_accessor documents: ::Array[Types::DocumentItem]
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class PaymentScheduleTerm
+      attr_accessor currency_code: ::String
+      attr_accessor schedule: ::Array[Types::ScheduleItem]
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ProposalSummary
+      attr_accessor offer_id: ::String
+      attr_accessor resources: ::Array[Types::Resource]
+      SENSITIVE: []
+    end
+
+    class Proposer
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class RateCardItem
+      attr_accessor dimension_key: ::String
+      attr_accessor price: ::String
+      SENSITIVE: []
+    end
+
+    class RecurringPaymentTerm
+      attr_accessor billing_period: ::String
+      attr_accessor currency_code: ::String
+      attr_accessor price: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class RenewalTerm
+      attr_accessor configuration: Types::RenewalTermConfiguration
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class RenewalTermConfiguration
+      attr_accessor enable_auto_renew: bool
+      SENSITIVE: []
+    end
+
+    class Resource
+      attr_accessor id: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("Agreement")
+      SENSITIVE: []
+    end
+
+    class ScheduleItem
+      attr_accessor charge_amount: ::String
+      attr_accessor charge_date: ::Time
+      SENSITIVE: []
+    end
+
+    class SearchAgreementsInput
+      attr_accessor catalog: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort: Types::Sort
+      SENSITIVE: []
+    end
+
+    class SearchAgreementsOutput
+      attr_accessor agreement_view_summaries: ::Array[Types::AgreementViewSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Selector
+      attr_accessor type: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class Sort
+      attr_accessor sort_by: ::String
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class SupportTerm
+      attr_accessor refund_policy: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class UsageBasedPricingTerm
+      attr_accessor currency_code: ::String
+      attr_accessor rate_cards: ::Array[Types::UsageBasedRateCardItem]
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class UsageBasedRateCardItem
+      attr_accessor rate_card: ::Array[Types::RateCardItem]
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor fields: ::Array[Types::ValidationExceptionField]
+      attr_accessor message: ::String
+      attr_accessor reason: ("INVALID_AGREEMENT_ID" | "MISSING_AGREEMENT_ID" | "INVALID_CATALOG" | "INVALID_FILTER_NAME" | "INVALID_FILTER_VALUES" | "INVALID_SORT_BY" | "INVALID_SORT_ORDER" | "INVALID_NEXT_TOKEN" | "INVALID_MAX_RESULTS" | "UNSUPPORTED_FILTERS" | "OTHER")
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor message: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ValidityTerm
+      attr_accessor agreement_duration: ::String
+      attr_accessor agreement_end_date: ::Time
+      attr_accessor agreement_start_date: ::Time
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,0 +1,62 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::WorkMailMessageFlow
+  module Types
+
+    class GetRawMessageContentRequest
+      attr_accessor message_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRawMessageContentResponse
+      attr_accessor message_content: ::IO
+      SENSITIVE: []
+    end
+
+    class InvalidContentLocation
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MessageFrozen
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MessageRejected
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PutRawMessageContentRequest
+      attr_accessor message_id: ::String
+      attr_accessor content: Types::RawMessageContent
+      SENSITIVE: []
+    end
+
+    class PutRawMessageContentResponse < Aws::EmptyStructure
+    end
+
+    class RawMessageContent
+      attr_accessor s3_reference: Types::S3Reference
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class S3Reference
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      attr_accessor object_version: ::String
+      SENSITIVE: []
+    end
+  end
+end

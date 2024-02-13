@@ -1,0 +1,54 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ApiGatewayManagementApi
+  module Types
+
+    class DeleteConnectionRequest
+      attr_accessor connection_id: ::String
+      SENSITIVE: []
+    end
+
+    class ForbiddenException < Aws::EmptyStructure
+    end
+
+    class GetConnectionRequest
+      attr_accessor connection_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectionResponse
+      attr_accessor connected_at: ::Time
+      attr_accessor identity: Types::Identity
+      attr_accessor last_active_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GoneException < Aws::EmptyStructure
+    end
+
+    class Identity
+      attr_accessor source_ip: ::String
+      attr_accessor user_agent: ::String
+      SENSITIVE: []
+    end
+
+    class PayloadTooLargeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PostToConnectionRequest
+      attr_accessor data: ::String
+      attr_accessor connection_id: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException < Aws::EmptyStructure
+    end
+  end
+end

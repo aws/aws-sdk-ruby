@@ -894,7 +894,7 @@ module Aws::CostOptimizationHub
     end
 
     # @!attribute [rw] account_id
-    #   The enrollment status of a specific account ID in the organization.
+    #   The account ID of a member account in the organization.
     #   @return [String]
     #
     # @!attribute [rw] include_organization_info
@@ -921,8 +921,14 @@ module Aws::CostOptimizationHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] include_member_accounts
+    #   The enrollment status of all member accounts in the organization if
+    #   the account is the management account.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] items
-    #   The account enrollment statuses.
+    #   The enrollment status of a specific account ID, including creation
+    #   and last updated timestamps.
     #   @return [Array<Types::AccountEnrollmentStatus>]
     #
     # @!attribute [rw] next_token
@@ -932,6 +938,7 @@ module Aws::CostOptimizationHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/ListEnrollmentStatusesResponse AWS API Documentation
     #
     class ListEnrollmentStatusesResponse < Struct.new(
+      :include_member_accounts,
       :items,
       :next_token)
       SENSITIVE = []

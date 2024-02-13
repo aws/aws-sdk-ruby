@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.142.0 (2024-02-09)
+------------------
+
+* Feature - Documentation only update for Amazon ECS.
+
+1.141.0 (2024-02-06)
+------------------
+
+* Feature - This release is a documentation only update to address customer issues.
+
+1.140.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.139.0 (2024-01-24)
+------------------
+
+* Feature - Documentation updates for Amazon ECS.
+
+1.138.0 (2024-01-22)
+------------------
+
+* Feature - This release adds support for Transport Layer Security (TLS) and Configurable Timeout to ECS Service Connect. TLS facilitates privacy and data security for inter-service communications, while Configurable Timeout allows customized per-request timeout and idle timeout for Service Connect services.
+
+1.137.0 (2024-01-11)
+------------------
+
+* Feature - This release adds support for adding an ElasticBlockStorage volume configurations in ECS RunTask/StartTask/CreateService/UpdateService APIs. The configuration allows for attaching EBS volumes to ECS Tasks.
+
 1.136.0 (2024-01-04)
 ------------------
 

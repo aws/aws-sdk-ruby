@@ -3912,6 +3912,7 @@
       "output":{"shape":"UpdatePackageResponse"},
       "errors":[
         {"shape":"ThrottlingException"},
+        {"shape":"ConflictException"},
         {"shape":"InternalServerException"},
         {"shape":"ValidationException"},
         {"shape":"ResourceNotFoundException"}
@@ -3929,6 +3930,7 @@
       "output":{"shape":"UpdatePackageConfigurationResponse"},
       "errors":[
         {"shape":"ThrottlingException"},
+        {"shape":"ConflictException"},
         {"shape":"InternalServerException"},
         {"shape":"ValidationException"}
       ],
@@ -3945,6 +3947,7 @@
       "output":{"shape":"UpdatePackageVersionResponse"},
       "errors":[
         {"shape":"ThrottlingException"},
+        {"shape":"ConflictException"},
         {"shape":"InternalServerException"},
         {"shape":"ValidationException"},
         {"shape":"ResourceNotFoundException"}
@@ -5792,7 +5795,8 @@
         "authorizerConfig":{"shape":"AuthorizerConfig"},
         "serviceType":{"shape":"ServiceType"},
         "tags":{"shape":"TagList"},
-        "tlsConfig":{"shape":"TlsConfig"}
+        "tlsConfig":{"shape":"TlsConfig"},
+        "serverCertificateConfig":{"shape":"ServerCertificateConfig"}
       }
     },
     "CreateDomainConfigurationResponse":{
@@ -7424,7 +7428,8 @@
         "serviceType":{"shape":"ServiceType"},
         "domainType":{"shape":"DomainType"},
         "lastStatusChangeDate":{"shape":"DateType"},
-        "tlsConfig":{"shape":"TlsConfig"}
+        "tlsConfig":{"shape":"TlsConfig"},
+        "serverCertificateConfig":{"shape":"ServerCertificateConfig"}
       }
     },
     "DescribeEndpointRequest":{
@@ -8279,6 +8284,7 @@
         "logLevel":{"shape":"LogLevel"}
       }
     },
+    "EnableOCSPCheck":{"type":"boolean"},
     "EnableTopicRuleRequest":{
       "type":"structure",
       "required":["ruleName"],
@@ -11403,9 +11409,7 @@
         "THING_GROUP",
         "CLIENT_ID",
         "SOURCE_IP",
-        "PRINCIPAL_ID",
-        "EVENT_TYPE",
-        "DEVICE_DEFENDER"
+        "PRINCIPAL_ID"
       ]
     },
     "LoggingOptionsPayload":{
@@ -12840,6 +12844,12 @@
       "max":1,
       "min":0
     },
+    "ServerCertificateConfig":{
+      "type":"structure",
+      "members":{
+        "enableOCSPCheck":{"shape":"EnableOCSPCheck"}
+      }
+    },
     "ServerCertificateStatus":{
       "type":"string",
       "enum":[
@@ -14214,7 +14224,8 @@
         "authorizerConfig":{"shape":"AuthorizerConfig"},
         "domainConfigurationStatus":{"shape":"DomainConfigurationStatus"},
         "removeAuthorizerConfig":{"shape":"RemoveAuthorizerConfig"},
-        "tlsConfig":{"shape":"TlsConfig"}
+        "tlsConfig":{"shape":"TlsConfig"},
+        "serverCertificateConfig":{"shape":"ServerCertificateConfig"}
       }
     },
     "UpdateDomainConfigurationResponse":{

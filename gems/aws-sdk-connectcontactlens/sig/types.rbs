@@ -1,0 +1,96 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ConnectContactLens
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Categories
+      attr_accessor matched_categories: ::Array[::String]
+      attr_accessor matched_details: ::Hash[::String, Types::CategoryDetails]
+      SENSITIVE: []
+    end
+
+    class CategoryDetails
+      attr_accessor points_of_interest: ::Array[Types::PointOfInterest]
+      SENSITIVE: []
+    end
+
+    class CharacterOffsets
+      attr_accessor begin_offset_char: ::Integer
+      attr_accessor end_offset_char: ::Integer
+      SENSITIVE: []
+    end
+
+    class InternalServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IssueDetected
+      attr_accessor character_offsets: Types::CharacterOffsets
+      SENSITIVE: []
+    end
+
+    class ListRealtimeContactAnalysisSegmentsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRealtimeContactAnalysisSegmentsResponse
+      attr_accessor segments: ::Array[Types::RealtimeContactAnalysisSegment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class PointOfInterest
+      attr_accessor begin_offset_millis: ::Integer
+      attr_accessor end_offset_millis: ::Integer
+      SENSITIVE: []
+    end
+
+    class RealtimeContactAnalysisSegment
+      attr_accessor transcript: Types::Transcript
+      attr_accessor categories: Types::Categories
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Transcript
+      attr_accessor id: ::String
+      attr_accessor participant_id: ::String
+      attr_accessor participant_role: ::String
+      attr_accessor content: ::String
+      attr_accessor begin_offset_millis: ::Integer
+      attr_accessor end_offset_millis: ::Integer
+      attr_accessor sentiment: ("POSITIVE" | "NEUTRAL" | "NEGATIVE")
+      attr_accessor issues_detected: ::Array[Types::IssueDetected]
+      SENSITIVE: []
+    end
+  end
+end

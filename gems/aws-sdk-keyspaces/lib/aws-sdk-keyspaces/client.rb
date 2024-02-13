@@ -639,6 +639,44 @@ module Aws::Keyspaces
     #   Once client-side timestamps are enabled for a table, this setting
     #   cannot be disabled.
     #
+    # @option params [Types::AutoScalingSpecification] :auto_scaling_specification
+    #   The optional auto scaling settings for a table in provisioned capacity
+    #   mode. Specifies if the service can manage throughput capacity
+    #   automatically on your behalf.
+    #
+    #   Auto scaling helps you provision throughput capacity for variable
+    #   workloads efficiently by increasing and decreasing your table's read
+    #   and write capacity automatically in response to application traffic.
+    #   For more information, see [Managing throughput capacity automatically
+    #   with Amazon Keyspaces auto scaling][1] in the *Amazon Keyspaces
+    #   Developer Guide*.
+    #
+    #   By default, auto scaling is disabled for a table.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html
+    #
+    # @option params [Array<Types::ReplicaSpecification>] :replica_specifications
+    #   The optional Amazon Web Services Region specific settings of a
+    #   multi-Region table. These settings overwrite the general settings of
+    #   the table for the specified Region.
+    #
+    #   For a multi-Region table in provisioned capacity mode, you can
+    #   configure the table's read capacity differently for each Region's
+    #   replica. The write capacity, however, remains synchronized between all
+    #   replicas to ensure that there's enough capacity to replicate writes
+    #   across all Regions. To define the read capacity for a table replica in
+    #   a specific Region, you can do so by configuring the following
+    #   parameters.
+    #
+    #   * `region`: The Region where these settings are applied. (Required)
+    #
+    #   * `readCapacityUnits`: The provisioned read capacity units. (Optional)
+    #
+    #   * `readCapacityAutoScaling`: The read capacity auto scaling settings
+    #     for the table. (Optional)
+    #
     # @return [Types::CreateTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTableResponse#resource_arn #resource_arn} => String
@@ -700,6 +738,53 @@ module Aws::Keyspaces
     #     client_side_timestamps: {
     #       status: "ENABLED", # required, accepts ENABLED
     #     },
+    #     auto_scaling_specification: {
+    #       write_capacity_auto_scaling: {
+    #         auto_scaling_disabled: false,
+    #         minimum_units: 1,
+    #         maximum_units: 1,
+    #         scaling_policy: {
+    #           target_tracking_scaling_policy_configuration: {
+    #             disable_scale_in: false,
+    #             scale_in_cooldown: 1,
+    #             scale_out_cooldown: 1,
+    #             target_value: 1.0, # required
+    #           },
+    #         },
+    #       },
+    #       read_capacity_auto_scaling: {
+    #         auto_scaling_disabled: false,
+    #         minimum_units: 1,
+    #         maximum_units: 1,
+    #         scaling_policy: {
+    #           target_tracking_scaling_policy_configuration: {
+    #             disable_scale_in: false,
+    #             scale_in_cooldown: 1,
+    #             scale_out_cooldown: 1,
+    #             target_value: 1.0, # required
+    #           },
+    #         },
+    #       },
+    #     },
+    #     replica_specifications: [
+    #       {
+    #         region: "region", # required
+    #         read_capacity_units: 1,
+    #         read_capacity_auto_scaling: {
+    #           auto_scaling_disabled: false,
+    #           minimum_units: 1,
+    #           maximum_units: 1,
+    #           scaling_policy: {
+    #             target_tracking_scaling_policy_configuration: {
+    #               disable_scale_in: false,
+    #               scale_in_cooldown: 1,
+    #               scale_out_cooldown: 1,
+    #               target_value: 1.0, # required
+    #             },
+    #           },
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -836,6 +921,7 @@ module Aws::Keyspaces
     #   * {Types::GetTableResponse#default_time_to_live #default_time_to_live} => Integer
     #   * {Types::GetTableResponse#comment #comment} => Types::Comment
     #   * {Types::GetTableResponse#client_side_timestamps #client_side_timestamps} => Types::ClientSideTimestamps
+    #   * {Types::GetTableResponse#replica_specifications #replica_specifications} => Array&lt;Types::ReplicaSpecificationSummary&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -873,6 +959,13 @@ module Aws::Keyspaces
     #   resp.default_time_to_live #=> Integer
     #   resp.comment.message #=> String
     #   resp.client_side_timestamps.status #=> String, one of "ENABLED"
+    #   resp.replica_specifications #=> Array
+    #   resp.replica_specifications[0].region #=> String
+    #   resp.replica_specifications[0].status #=> String, one of "ACTIVE", "CREATING", "UPDATING", "DELETING", "DELETED", "RESTORING", "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
+    #   resp.replica_specifications[0].capacity_specification.throughput_mode #=> String, one of "PAY_PER_REQUEST", "PROVISIONED"
+    #   resp.replica_specifications[0].capacity_specification.read_capacity_units #=> Integer
+    #   resp.replica_specifications[0].capacity_specification.write_capacity_units #=> Integer
+    #   resp.replica_specifications[0].capacity_specification.last_update_to_pay_per_request_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/GetTable AWS API Documentation
     #
@@ -880,6 +973,87 @@ module Aws::Keyspaces
     # @param [Hash] params ({})
     def get_table(params = {}, options = {})
       req = build_request(:get_table, params)
+      req.send_request(options)
+    end
+
+    # Returns auto scaling related settings of the specified table in JSON
+    # format. If the table is a multi-Region table, the Amazon Web Services
+    # Region specific auto scaling settings of the table are included.
+    #
+    # Amazon Keyspaces auto scaling helps you provision throughput capacity
+    # for variable workloads efficiently by increasing and decreasing your
+    # table's read and write capacity automatically in response to
+    # application traffic. For more information, see [Managing throughput
+    # capacity automatically with Amazon Keyspaces auto scaling][1] in the
+    # *Amazon Keyspaces Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html
+    #
+    # @option params [required, String] :keyspace_name
+    #   The name of the keyspace.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table.
+    #
+    # @return [Types::GetTableAutoScalingSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTableAutoScalingSettingsResponse#keyspace_name #keyspace_name} => String
+    #   * {Types::GetTableAutoScalingSettingsResponse#table_name #table_name} => String
+    #   * {Types::GetTableAutoScalingSettingsResponse#resource_arn #resource_arn} => String
+    #   * {Types::GetTableAutoScalingSettingsResponse#auto_scaling_specification #auto_scaling_specification} => Types::AutoScalingSpecification
+    #   * {Types::GetTableAutoScalingSettingsResponse#replica_specifications #replica_specifications} => Array&lt;Types::ReplicaAutoScalingSpecification&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_table_auto_scaling_settings({
+    #     keyspace_name: "KeyspaceName", # required
+    #     table_name: "TableName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.keyspace_name #=> String
+    #   resp.table_name #=> String
+    #   resp.resource_arn #=> String
+    #   resp.auto_scaling_specification.write_capacity_auto_scaling.auto_scaling_disabled #=> Boolean
+    #   resp.auto_scaling_specification.write_capacity_auto_scaling.minimum_units #=> Integer
+    #   resp.auto_scaling_specification.write_capacity_auto_scaling.maximum_units #=> Integer
+    #   resp.auto_scaling_specification.write_capacity_auto_scaling.scaling_policy.target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.auto_scaling_specification.write_capacity_auto_scaling.scaling_policy.target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.auto_scaling_specification.write_capacity_auto_scaling.scaling_policy.target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.auto_scaling_specification.write_capacity_auto_scaling.scaling_policy.target_tracking_scaling_policy_configuration.target_value #=> Float
+    #   resp.auto_scaling_specification.read_capacity_auto_scaling.auto_scaling_disabled #=> Boolean
+    #   resp.auto_scaling_specification.read_capacity_auto_scaling.minimum_units #=> Integer
+    #   resp.auto_scaling_specification.read_capacity_auto_scaling.maximum_units #=> Integer
+    #   resp.auto_scaling_specification.read_capacity_auto_scaling.scaling_policy.target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.auto_scaling_specification.read_capacity_auto_scaling.scaling_policy.target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.auto_scaling_specification.read_capacity_auto_scaling.scaling_policy.target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.auto_scaling_specification.read_capacity_auto_scaling.scaling_policy.target_tracking_scaling_policy_configuration.target_value #=> Float
+    #   resp.replica_specifications #=> Array
+    #   resp.replica_specifications[0].region #=> String
+    #   resp.replica_specifications[0].auto_scaling_specification.write_capacity_auto_scaling.auto_scaling_disabled #=> Boolean
+    #   resp.replica_specifications[0].auto_scaling_specification.write_capacity_auto_scaling.minimum_units #=> Integer
+    #   resp.replica_specifications[0].auto_scaling_specification.write_capacity_auto_scaling.maximum_units #=> Integer
+    #   resp.replica_specifications[0].auto_scaling_specification.write_capacity_auto_scaling.scaling_policy.target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.replica_specifications[0].auto_scaling_specification.write_capacity_auto_scaling.scaling_policy.target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.replica_specifications[0].auto_scaling_specification.write_capacity_auto_scaling.scaling_policy.target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.replica_specifications[0].auto_scaling_specification.write_capacity_auto_scaling.scaling_policy.target_tracking_scaling_policy_configuration.target_value #=> Float
+    #   resp.replica_specifications[0].auto_scaling_specification.read_capacity_auto_scaling.auto_scaling_disabled #=> Boolean
+    #   resp.replica_specifications[0].auto_scaling_specification.read_capacity_auto_scaling.minimum_units #=> Integer
+    #   resp.replica_specifications[0].auto_scaling_specification.read_capacity_auto_scaling.maximum_units #=> Integer
+    #   resp.replica_specifications[0].auto_scaling_specification.read_capacity_auto_scaling.scaling_policy.target_tracking_scaling_policy_configuration.disable_scale_in #=> Boolean
+    #   resp.replica_specifications[0].auto_scaling_specification.read_capacity_auto_scaling.scaling_policy.target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
+    #   resp.replica_specifications[0].auto_scaling_specification.read_capacity_auto_scaling.scaling_policy.target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
+    #   resp.replica_specifications[0].auto_scaling_specification.read_capacity_auto_scaling.scaling_policy.target_tracking_scaling_policy_configuration.target_value #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/GetTableAutoScalingSettings AWS API Documentation
+    #
+    # @overload get_table_auto_scaling_settings(params = {})
+    # @param [Hash] params ({})
+    def get_table_auto_scaling_settings(params = {}, options = {})
+      req = build_request(:get_table_auto_scaling_settings, params)
       req.send_request(options)
     end
 
@@ -1022,7 +1196,7 @@ module Aws::Keyspaces
       req.send_request(options)
     end
 
-    # Restores the specified table to the specified point in time within the
+    # Restores the table to the specified point in time within the
     # `earliest_restorable_timestamp` and the current time. For more
     # information about restore points, see [ Time window for PITR
     # continuous backups][1] in the *Amazon Keyspaces Developer Guide*.
@@ -1037,18 +1211,20 @@ module Aws::Keyspaces
     # the selected timestamp.
     #
     # In addition to the table's schema, data, and TTL settings,
-    # `RestoreTable` restores the capacity mode, encryption, and
-    # point-in-time recovery settings from the source table. Unlike the
-    # table's schema data and TTL settings, which are restored based on the
-    # selected timestamp, these settings are always restored based on the
-    # table's settings as of the current time or when the table was
-    # deleted.
+    # `RestoreTable` restores the capacity mode, auto scaling settings,
+    # encryption settings, and point-in-time recovery settings from the
+    # source table. Unlike the table's schema data and TTL settings, which
+    # are restored based on the selected timestamp, these settings are
+    # always restored based on the table's settings as of the current time
+    # or when the table was deleted.
     #
     # You can also overwrite these settings during restore:
     #
     # * Read/write capacity mode
     #
-    # * Provisioned throughput capacity settings
+    # * Provisioned throughput capacity units
+    #
+    # * Auto scaling settings
     #
     # * Point-in-time (PITR) settings
     #
@@ -1059,9 +1235,6 @@ module Aws::Keyspaces
     #
     # Note that the following settings are not restored, and you must
     # configure them manually for the new table:
-    #
-    # * Automatic scaling policies (for tables that use provisioned capacity
-    #   mode)
     #
     # * Identity and Access Management (IAM) policies
     #
@@ -1152,6 +1325,26 @@ module Aws::Keyspaces
     #
     #   [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html
     #
+    # @option params [Types::AutoScalingSpecification] :auto_scaling_specification
+    #   The optional auto scaling settings for the restored table in
+    #   provisioned capacity mode. Specifies if the service can manage
+    #   throughput capacity of a provisioned table automatically on your
+    #   behalf. Amazon Keyspaces auto scaling helps you provision throughput
+    #   capacity for variable workloads efficiently by increasing and
+    #   decreasing your table's read and write capacity automatically in
+    #   response to application traffic.
+    #
+    #   For more information, see [Managing throughput capacity automatically
+    #   with Amazon Keyspaces auto scaling][1] in the *Amazon Keyspaces
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html
+    #
+    # @option params [Array<Types::ReplicaSpecification>] :replica_specifications
+    #   The optional Region specific settings of a multi-Regional table.
+    #
     # @return [Types::RestoreTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreTableResponse#restored_table_arn #restored_table_arn} => String
@@ -1180,6 +1373,53 @@ module Aws::Keyspaces
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     auto_scaling_specification: {
+    #       write_capacity_auto_scaling: {
+    #         auto_scaling_disabled: false,
+    #         minimum_units: 1,
+    #         maximum_units: 1,
+    #         scaling_policy: {
+    #           target_tracking_scaling_policy_configuration: {
+    #             disable_scale_in: false,
+    #             scale_in_cooldown: 1,
+    #             scale_out_cooldown: 1,
+    #             target_value: 1.0, # required
+    #           },
+    #         },
+    #       },
+    #       read_capacity_auto_scaling: {
+    #         auto_scaling_disabled: false,
+    #         minimum_units: 1,
+    #         maximum_units: 1,
+    #         scaling_policy: {
+    #           target_tracking_scaling_policy_configuration: {
+    #             disable_scale_in: false,
+    #             scale_in_cooldown: 1,
+    #             scale_out_cooldown: 1,
+    #             target_value: 1.0, # required
+    #           },
+    #         },
+    #       },
+    #     },
+    #     replica_specifications: [
+    #       {
+    #         region: "region", # required
+    #         read_capacity_units: 1,
+    #         read_capacity_auto_scaling: {
+    #           auto_scaling_disabled: false,
+    #           minimum_units: 1,
+    #           maximum_units: 1,
+    #           scaling_policy: {
+    #             target_tracking_scaling_policy_configuration: {
+    #               disable_scale_in: false,
+    #               scale_in_cooldown: 1,
+    #               scale_out_cooldown: 1,
+    #               target_value: 1.0, # required
+    #             },
+    #           },
+    #         },
     #       },
     #     ],
     #   })
@@ -1276,9 +1516,9 @@ module Aws::Keyspaces
     end
 
     # Adds new columns to the table or updates one of the table's settings,
-    # for example capacity mode, encryption, point-in-time recovery, or ttl
-    # settings. Note that you can only update one specific table setting per
-    # update operation.
+    # for example capacity mode, auto scaling, encryption, point-in-time
+    # recovery, or ttl settings. Note that you can only update one specific
+    # table setting per update operation.
     #
     # @option params [required, String] :keyspace_name
     #   The name of the keyspace the specified table is stored in.
@@ -1392,6 +1632,30 @@ module Aws::Keyspaces
     #   Once client-side timestamps are enabled for a table, this setting
     #   cannot be disabled.
     #
+    # @option params [Types::AutoScalingSpecification] :auto_scaling_specification
+    #   The optional auto scaling settings to update for a table in
+    #   provisioned capacity mode. Specifies if the service can manage
+    #   throughput capacity of a provisioned table automatically on your
+    #   behalf. Amazon Keyspaces auto scaling helps you provision throughput
+    #   capacity for variable workloads efficiently by increasing and
+    #   decreasing your table's read and write capacity automatically in
+    #   response to application traffic.
+    #
+    #   If auto scaling is already enabled for the table, you can use
+    #   `UpdateTable` to update the minimum and maximum values or the auto
+    #   scaling policy settings independently.
+    #
+    #   For more information, see [Managing throughput capacity automatically
+    #   with Amazon Keyspaces auto scaling][1] in the *Amazon Keyspaces
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html
+    #
+    # @option params [Array<Types::ReplicaSpecification>] :replica_specifications
+    #   The Region specific settings of a multi-Regional table.
+    #
     # @return [Types::UpdateTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateTableResponse#resource_arn #resource_arn} => String
@@ -1426,6 +1690,53 @@ module Aws::Keyspaces
     #     client_side_timestamps: {
     #       status: "ENABLED", # required, accepts ENABLED
     #     },
+    #     auto_scaling_specification: {
+    #       write_capacity_auto_scaling: {
+    #         auto_scaling_disabled: false,
+    #         minimum_units: 1,
+    #         maximum_units: 1,
+    #         scaling_policy: {
+    #           target_tracking_scaling_policy_configuration: {
+    #             disable_scale_in: false,
+    #             scale_in_cooldown: 1,
+    #             scale_out_cooldown: 1,
+    #             target_value: 1.0, # required
+    #           },
+    #         },
+    #       },
+    #       read_capacity_auto_scaling: {
+    #         auto_scaling_disabled: false,
+    #         minimum_units: 1,
+    #         maximum_units: 1,
+    #         scaling_policy: {
+    #           target_tracking_scaling_policy_configuration: {
+    #             disable_scale_in: false,
+    #             scale_in_cooldown: 1,
+    #             scale_out_cooldown: 1,
+    #             target_value: 1.0, # required
+    #           },
+    #         },
+    #       },
+    #     },
+    #     replica_specifications: [
+    #       {
+    #         region: "region", # required
+    #         read_capacity_units: 1,
+    #         read_capacity_auto_scaling: {
+    #           auto_scaling_disabled: false,
+    #           minimum_units: 1,
+    #           maximum_units: 1,
+    #           scaling_policy: {
+    #             target_tracking_scaling_policy_configuration: {
+    #               disable_scale_in: false,
+    #               scale_in_cooldown: 1,
+    #               scale_out_cooldown: 1,
+    #               target_value: 1.0, # required
+    #             },
+    #           },
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1454,7 +1765,7 @@ module Aws::Keyspaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-keyspaces'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

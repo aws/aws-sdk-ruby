@@ -1,0 +1,499 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MQ
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateBrokerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBrokerResponse]
+        def broker_arn: () -> ::String
+        def broker_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#create_broker-instance_method
+      def create_broker: (
+                           ?authentication_strategy: ("SIMPLE" | "LDAP"),
+                           auto_minor_version_upgrade: bool,
+                           broker_name: ::String,
+                           ?configuration: {
+                             id: ::String,
+                             revision: ::Integer?
+                           },
+                           ?creator_request_id: ::String,
+                           deployment_mode: ("SINGLE_INSTANCE" | "ACTIVE_STANDBY_MULTI_AZ" | "CLUSTER_MULTI_AZ"),
+                           ?encryption_options: {
+                             kms_key_id: ::String?,
+                             use_aws_owned_key: bool
+                           },
+                           engine_type: ("ACTIVEMQ" | "RABBITMQ"),
+                           engine_version: ::String,
+                           host_instance_type: ::String,
+                           ?ldap_server_metadata: {
+                             hosts: Array[::String],
+                             role_base: ::String,
+                             role_name: ::String?,
+                             role_search_matching: ::String,
+                             role_search_subtree: bool?,
+                             service_account_password: ::String,
+                             service_account_username: ::String,
+                             user_base: ::String,
+                             user_role_name: ::String?,
+                             user_search_matching: ::String,
+                             user_search_subtree: bool?
+                           },
+                           ?logs: {
+                             audit: bool?,
+                             general: bool?
+                           },
+                           ?maintenance_window_start_time: {
+                             day_of_week: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY"),
+                             time_of_day: ::String,
+                             time_zone: ::String?
+                           },
+                           publicly_accessible: bool,
+                           ?security_groups: Array[::String],
+                           ?storage_type: ("EBS" | "EFS"),
+                           ?subnet_ids: Array[::String],
+                           ?tags: Hash[::String, ::String],
+                           users: Array[
+                             {
+                               console_access: bool?,
+                               groups: Array[::String]?,
+                               password: ::String,
+                               username: ::String,
+                               replication_user: bool?
+                             },
+                           ],
+                           ?data_replication_mode: ("NONE" | "CRDR"),
+                           ?data_replication_primary_broker_arn: ::String
+                         ) -> _CreateBrokerResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBrokerResponseSuccess
+
+      interface _CreateConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConfigurationResponse]
+        def arn: () -> ::String
+        def authentication_strategy: () -> ("SIMPLE" | "LDAP")
+        def created: () -> ::Time
+        def id: () -> ::String
+        def latest_revision: () -> Types::ConfigurationRevision
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#create_configuration-instance_method
+      def create_configuration: (
+                                  ?authentication_strategy: ("SIMPLE" | "LDAP"),
+                                  engine_type: ("ACTIVEMQ" | "RABBITMQ"),
+                                  engine_version: ::String,
+                                  name: ::String,
+                                  ?tags: Hash[::String, ::String]
+                                ) -> _CreateConfigurationResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#create_tags-instance_method
+      def create_tags: (
+                         resource_arn: ::String,
+                         ?tags: Hash[::String, ::String]
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CreateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateUserResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#create_user-instance_method
+      def create_user: (
+                         broker_id: ::String,
+                         ?console_access: bool,
+                         ?groups: Array[::String],
+                         password: ::String,
+                         username: ::String,
+                         ?replication_user: bool
+                       ) -> _CreateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserResponseSuccess
+
+      interface _DeleteBrokerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBrokerResponse]
+        def broker_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#delete_broker-instance_method
+      def delete_broker: (
+                           broker_id: ::String
+                         ) -> _DeleteBrokerResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBrokerResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#delete_tags-instance_method
+      def delete_tags: (
+                         resource_arn: ::String,
+                         tag_keys: Array[::String]
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteUserResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#delete_user-instance_method
+      def delete_user: (
+                         broker_id: ::String,
+                         username: ::String
+                       ) -> _DeleteUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteUserResponseSuccess
+
+      interface _DescribeBrokerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBrokerResponse]
+        def actions_required: () -> ::Array[Types::ActionRequired]
+        def authentication_strategy: () -> ("SIMPLE" | "LDAP")
+        def auto_minor_version_upgrade: () -> bool
+        def broker_arn: () -> ::String
+        def broker_id: () -> ::String
+        def broker_instances: () -> ::Array[Types::BrokerInstance]
+        def broker_name: () -> ::String
+        def broker_state: () -> ("CREATION_IN_PROGRESS" | "CREATION_FAILED" | "DELETION_IN_PROGRESS" | "RUNNING" | "REBOOT_IN_PROGRESS" | "CRITICAL_ACTION_REQUIRED" | "REPLICA")
+        def configurations: () -> Types::Configurations
+        def created: () -> ::Time
+        def deployment_mode: () -> ("SINGLE_INSTANCE" | "ACTIVE_STANDBY_MULTI_AZ" | "CLUSTER_MULTI_AZ")
+        def encryption_options: () -> Types::EncryptionOptions
+        def engine_type: () -> ("ACTIVEMQ" | "RABBITMQ")
+        def engine_version: () -> ::String
+        def host_instance_type: () -> ::String
+        def ldap_server_metadata: () -> Types::LdapServerMetadataOutput
+        def logs: () -> Types::LogsSummary
+        def maintenance_window_start_time: () -> Types::WeeklyStartTime
+        def pending_authentication_strategy: () -> ("SIMPLE" | "LDAP")
+        def pending_engine_version: () -> ::String
+        def pending_host_instance_type: () -> ::String
+        def pending_ldap_server_metadata: () -> Types::LdapServerMetadataOutput
+        def pending_security_groups: () -> ::Array[::String]
+        def publicly_accessible: () -> bool
+        def security_groups: () -> ::Array[::String]
+        def storage_type: () -> ("EBS" | "EFS")
+        def subnet_ids: () -> ::Array[::String]
+        def tags: () -> ::Hash[::String, ::String]
+        def users: () -> ::Array[Types::UserSummary]
+        def data_replication_metadata: () -> Types::DataReplicationMetadataOutput
+        def data_replication_mode: () -> ("NONE" | "CRDR")
+        def pending_data_replication_metadata: () -> Types::DataReplicationMetadataOutput
+        def pending_data_replication_mode: () -> ("NONE" | "CRDR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#describe_broker-instance_method
+      def describe_broker: (
+                             broker_id: ::String
+                           ) -> _DescribeBrokerResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBrokerResponseSuccess
+
+      interface _DescribeBrokerEngineTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBrokerEngineTypesResponse]
+        def broker_engine_types: () -> ::Array[Types::BrokerEngineType]
+        def max_results: () -> ::Integer
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#describe_broker_engine_types-instance_method
+      def describe_broker_engine_types: (
+                                          ?engine_type: ::String,
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _DescribeBrokerEngineTypesResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBrokerEngineTypesResponseSuccess
+
+      interface _DescribeBrokerInstanceOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBrokerInstanceOptionsResponse]
+        def broker_instance_options: () -> ::Array[Types::BrokerInstanceOption]
+        def max_results: () -> ::Integer
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#describe_broker_instance_options-instance_method
+      def describe_broker_instance_options: (
+                                              ?engine_type: ::String,
+                                              ?host_instance_type: ::String,
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String,
+                                              ?storage_type: ::String
+                                            ) -> _DescribeBrokerInstanceOptionsResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBrokerInstanceOptionsResponseSuccess
+
+      interface _DescribeConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConfigurationResponse]
+        def arn: () -> ::String
+        def authentication_strategy: () -> ("SIMPLE" | "LDAP")
+        def created: () -> ::Time
+        def description: () -> ::String
+        def engine_type: () -> ("ACTIVEMQ" | "RABBITMQ")
+        def engine_version: () -> ::String
+        def id: () -> ::String
+        def latest_revision: () -> Types::ConfigurationRevision
+        def name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#describe_configuration-instance_method
+      def describe_configuration: (
+                                    configuration_id: ::String
+                                  ) -> _DescribeConfigurationResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConfigurationResponseSuccess
+
+      interface _DescribeConfigurationRevisionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConfigurationRevisionResponse]
+        def configuration_id: () -> ::String
+        def created: () -> ::Time
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#describe_configuration_revision-instance_method
+      def describe_configuration_revision: (
+                                             configuration_id: ::String,
+                                             configuration_revision: ::String
+                                           ) -> _DescribeConfigurationRevisionResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConfigurationRevisionResponseSuccess
+
+      interface _DescribeUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeUserResponse]
+        def broker_id: () -> ::String
+        def console_access: () -> bool
+        def groups: () -> ::Array[::String]
+        def pending: () -> Types::UserPendingChanges
+        def username: () -> ::String
+        def replication_user: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#describe_user-instance_method
+      def describe_user: (
+                           broker_id: ::String,
+                           username: ::String
+                         ) -> _DescribeUserResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeUserResponseSuccess
+
+      interface _ListBrokersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBrokersResponse]
+        def broker_summaries: () -> ::Array[Types::BrokerSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#list_brokers-instance_method
+      def list_brokers: (
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListBrokersResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBrokersResponseSuccess
+
+      interface _ListConfigurationRevisionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConfigurationRevisionsResponse]
+        def configuration_id: () -> ::String
+        def max_results: () -> ::Integer
+        def next_token: () -> ::String
+        def revisions: () -> ::Array[Types::ConfigurationRevision]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#list_configuration_revisions-instance_method
+      def list_configuration_revisions: (
+                                          configuration_id: ::String,
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListConfigurationRevisionsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfigurationRevisionsResponseSuccess
+
+      interface _ListConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConfigurationsResponse]
+        def configurations: () -> ::Array[Types::Configuration]
+        def max_results: () -> ::Integer
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#list_configurations-instance_method
+      def list_configurations: (
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListConfigurationsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfigurationsResponseSuccess
+
+      interface _ListTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#list_tags-instance_method
+      def list_tags: (
+                       resource_arn: ::String
+                     ) -> _ListTagsResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsResponseSuccess
+
+      interface _ListUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUsersResponse]
+        def broker_id: () -> ::String
+        def max_results: () -> ::Integer
+        def next_token: () -> ::String
+        def users: () -> ::Array[Types::UserSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#list_users-instance_method
+      def list_users: (
+                        broker_id: ::String,
+                        ?max_results: ::Integer,
+                        ?next_token: ::String
+                      ) -> _ListUsersResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUsersResponseSuccess
+
+      interface _PromoteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PromoteResponse]
+        def broker_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#promote-instance_method
+      def promote: (
+                     broker_id: ::String,
+                     mode: ("SWITCHOVER" | "FAILOVER")
+                   ) -> _PromoteResponseSuccess
+                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PromoteResponseSuccess
+
+      interface _RebootBrokerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RebootBrokerResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#reboot_broker-instance_method
+      def reboot_broker: (
+                           broker_id: ::String
+                         ) -> _RebootBrokerResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RebootBrokerResponseSuccess
+
+      interface _UpdateBrokerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBrokerResponse]
+        def authentication_strategy: () -> ("SIMPLE" | "LDAP")
+        def auto_minor_version_upgrade: () -> bool
+        def broker_id: () -> ::String
+        def configuration: () -> Types::ConfigurationId
+        def engine_version: () -> ::String
+        def host_instance_type: () -> ::String
+        def ldap_server_metadata: () -> Types::LdapServerMetadataOutput
+        def logs: () -> Types::Logs
+        def maintenance_window_start_time: () -> Types::WeeklyStartTime
+        def security_groups: () -> ::Array[::String]
+        def data_replication_metadata: () -> Types::DataReplicationMetadataOutput
+        def data_replication_mode: () -> ("NONE" | "CRDR")
+        def pending_data_replication_metadata: () -> Types::DataReplicationMetadataOutput
+        def pending_data_replication_mode: () -> ("NONE" | "CRDR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#update_broker-instance_method
+      def update_broker: (
+                           ?authentication_strategy: ("SIMPLE" | "LDAP"),
+                           ?auto_minor_version_upgrade: bool,
+                           broker_id: ::String,
+                           ?configuration: {
+                             id: ::String,
+                             revision: ::Integer?
+                           },
+                           ?engine_version: ::String,
+                           ?host_instance_type: ::String,
+                           ?ldap_server_metadata: {
+                             hosts: Array[::String],
+                             role_base: ::String,
+                             role_name: ::String?,
+                             role_search_matching: ::String,
+                             role_search_subtree: bool?,
+                             service_account_password: ::String,
+                             service_account_username: ::String,
+                             user_base: ::String,
+                             user_role_name: ::String?,
+                             user_search_matching: ::String,
+                             user_search_subtree: bool?
+                           },
+                           ?logs: {
+                             audit: bool?,
+                             general: bool?
+                           },
+                           ?maintenance_window_start_time: {
+                             day_of_week: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY"),
+                             time_of_day: ::String,
+                             time_zone: ::String?
+                           },
+                           ?security_groups: Array[::String],
+                           ?data_replication_mode: ("NONE" | "CRDR")
+                         ) -> _UpdateBrokerResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBrokerResponseSuccess
+
+      interface _UpdateConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConfigurationResponse]
+        def arn: () -> ::String
+        def created: () -> ::Time
+        def id: () -> ::String
+        def latest_revision: () -> Types::ConfigurationRevision
+        def name: () -> ::String
+        def warnings: () -> ::Array[Types::SanitizationWarning]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#update_configuration-instance_method
+      def update_configuration: (
+                                  configuration_id: ::String,
+                                  data: ::String,
+                                  ?description: ::String
+                                ) -> _UpdateConfigurationResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationResponseSuccess
+
+      interface _UpdateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateUserResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MQ/Client.html#update_user-instance_method
+      def update_user: (
+                         broker_id: ::String,
+                         ?console_access: bool,
+                         ?groups: Array[::String],
+                         ?password: ::String,
+                         username: ::String,
+                         ?replication_user: bool
+                       ) -> _UpdateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserResponseSuccess
+    end
+  end
+end
+

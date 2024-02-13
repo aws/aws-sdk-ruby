@@ -1,0 +1,783 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module PcaConnectorAd
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectorResponse]
+        def connector_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#create_connector-instance_method
+      def create_connector: (
+                              certificate_authority_arn: ::String,
+                              ?client_token: ::String,
+                              directory_id: ::String,
+                              ?tags: Hash[::String, ::String],
+                              vpc_information: {
+                                security_group_ids: Array[::String]
+                              }
+                            ) -> _CreateConnectorResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectorResponseSuccess
+
+      interface _CreateDirectoryRegistrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDirectoryRegistrationResponse]
+        def directory_registration_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#create_directory_registration-instance_method
+      def create_directory_registration: (
+                                           ?client_token: ::String,
+                                           directory_id: ::String,
+                                           ?tags: Hash[::String, ::String]
+                                         ) -> _CreateDirectoryRegistrationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDirectoryRegistrationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#create_service_principal_name-instance_method
+      def create_service_principal_name: (
+                                           ?client_token: ::String,
+                                           connector_arn: ::String,
+                                           directory_registration_arn: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CreateTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTemplateResponse]
+        def template_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#create_template-instance_method
+      def create_template: (
+                             ?client_token: ::String,
+                             connector_arn: ::String,
+                             definition: {
+                               template_v2: {
+                                 certificate_validity: {
+                                   renewal_period: {
+                                     period: ::Integer,
+                                     period_type: ("HOURS" | "DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+                                   },
+                                   validity_period: {
+                                     period: ::Integer,
+                                     period_type: ("HOURS" | "DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+                                   }
+                                 },
+                                 enrollment_flags: {
+                                   enable_key_reuse_on_nt_token_keyset_storage_full: bool?,
+                                   include_symmetric_algorithms: bool?,
+                                   no_security_extension: bool?,
+                                   remove_invalid_certificate_from_personal_store: bool?,
+                                   user_interaction_required: bool?
+                                 },
+                                 extensions: {
+                                   application_policies: {
+                                     critical: bool?,
+                                     policies: Array[
+                                       {
+                                         policy_object_identifier: ::String?,
+                                         policy_type: ("ALL_APPLICATION_POLICIES" | "ANY_PURPOSE" | "ATTESTATION_IDENTITY_KEY_CERTIFICATE" | "CERTIFICATE_REQUEST_AGENT" | "CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "CTL_USAGE" | "DIGITAL_RIGHTS" | "DIRECTORY_SERVICE_EMAIL_REPLICATION" | "DISALLOWED_LIST" | "DNS_SERVER_TRUST" | "DOCUMENT_ENCRYPTION" | "DOCUMENT_SIGNING" | "DYNAMIC_CODE_GENERATOR" | "EARLY_LAUNCH_ANTIMALWARE_DRIVER" | "EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "ENCLAVE" | "ENCRYPTING_FILE_SYSTEM" | "ENDORSEMENT_KEY_CERTIFICATE" | "FILE_RECOVERY" | "HAL_EXTENSION" | "IP_SECURITY_END_SYSTEM" | "IP_SECURITY_IKE_INTERMEDIATE" | "IP_SECURITY_TUNNEL_TERMINATION" | "IP_SECURITY_USER" | "ISOLATED_USER_MODE" | "KDC_AUTHENTICATION" | "KERNEL_MODE_CODE_SIGNING" | "KEY_PACK_LICENSES" | "KEY_RECOVERY" | "KEY_RECOVERY_AGENT" | "LICENSE_SERVER_VERIFICATION" | "LIFETIME_SIGNING" | "MICROSOFT_PUBLISHER" | "MICROSOFT_TIME_STAMPING" | "MICROSOFT_TRUST_LIST_SIGNING" | "OCSP_SIGNING" | "OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "PLATFORM_CERTIFICATE" | "PREVIEW_BUILD_SIGNING" | "PRIVATE_KEY_ARCHIVAL" | "PROTECTED_PROCESS_LIGHT_VERIFICATION" | "PROTECTED_PROCESS_VERIFICATION" | "QUALIFIED_SUBORDINATION" | "REVOKED_LIST_SIGNER" | "ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION" | "ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION" | "ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL" | "ROOT_LIST_SIGNER" | "SECURE_EMAIL" | "SERVER_AUTHENTICATION" | "SMART_CARD_LOGIN" | "SPC_ENCRYPTED_DIGEST_RETRY_COUNT" | "SPC_RELAXED_PE_MARKER_CHECK" | "TIME_STAMPING" | "WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION" | "WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION" | "WINDOWS_HARDWARE_DRIVER_VERIFICATION" | "WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION" | "WINDOWS_KITS_COMPONENT" | "WINDOWS_RT_VERIFICATION" | "WINDOWS_SOFTWARE_EXTENSION_VERIFICATION" | "WINDOWS_STORE" | "WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "WINDOWS_TCB_COMPONENT" | "WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT" | "WINDOWS_UPDATE")?
+                                       },
+                                     ]
+                                   }?,
+                                   key_usage: {
+                                     critical: bool?,
+                                     usage_flags: {
+                                       data_encipherment: bool?,
+                                       digital_signature: bool?,
+                                       key_agreement: bool?,
+                                       key_encipherment: bool?,
+                                       non_repudiation: bool?
+                                     }
+                                   }
+                                 },
+                                 general_flags: {
+                                   auto_enrollment: bool?,
+                                   machine_type: bool?
+                                 },
+                                 private_key_attributes: {
+                                   crypto_providers: Array[::String]?,
+                                   key_spec: ("KEY_EXCHANGE" | "SIGNATURE"),
+                                   minimal_key_length: ::Integer
+                                 },
+                                 private_key_flags: {
+                                   client_version: ("WINDOWS_SERVER_2003" | "WINDOWS_SERVER_2008" | "WINDOWS_SERVER_2008_R2" | "WINDOWS_SERVER_2012" | "WINDOWS_SERVER_2012_R2" | "WINDOWS_SERVER_2016"),
+                                   exportable_key: bool?,
+                                   strong_key_protection_required: bool?
+                                 },
+                                 subject_name_flags: {
+                                   require_common_name: bool?,
+                                   require_directory_path: bool?,
+                                   require_dns_as_cn: bool?,
+                                   require_email: bool?,
+                                   san_require_directory_guid: bool?,
+                                   san_require_dns: bool?,
+                                   san_require_domain_dns: bool?,
+                                   san_require_email: bool?,
+                                   san_require_spn: bool?,
+                                   san_require_upn: bool?
+                                 },
+                                 superseded_templates: Array[::String]?
+                               }?,
+                               template_v3: {
+                                 certificate_validity: {
+                                   renewal_period: {
+                                     period: ::Integer,
+                                     period_type: ("HOURS" | "DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+                                   },
+                                   validity_period: {
+                                     period: ::Integer,
+                                     period_type: ("HOURS" | "DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+                                   }
+                                 },
+                                 enrollment_flags: {
+                                   enable_key_reuse_on_nt_token_keyset_storage_full: bool?,
+                                   include_symmetric_algorithms: bool?,
+                                   no_security_extension: bool?,
+                                   remove_invalid_certificate_from_personal_store: bool?,
+                                   user_interaction_required: bool?
+                                 },
+                                 extensions: {
+                                   application_policies: {
+                                     critical: bool?,
+                                     policies: Array[
+                                       {
+                                         policy_object_identifier: ::String?,
+                                         policy_type: ("ALL_APPLICATION_POLICIES" | "ANY_PURPOSE" | "ATTESTATION_IDENTITY_KEY_CERTIFICATE" | "CERTIFICATE_REQUEST_AGENT" | "CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "CTL_USAGE" | "DIGITAL_RIGHTS" | "DIRECTORY_SERVICE_EMAIL_REPLICATION" | "DISALLOWED_LIST" | "DNS_SERVER_TRUST" | "DOCUMENT_ENCRYPTION" | "DOCUMENT_SIGNING" | "DYNAMIC_CODE_GENERATOR" | "EARLY_LAUNCH_ANTIMALWARE_DRIVER" | "EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "ENCLAVE" | "ENCRYPTING_FILE_SYSTEM" | "ENDORSEMENT_KEY_CERTIFICATE" | "FILE_RECOVERY" | "HAL_EXTENSION" | "IP_SECURITY_END_SYSTEM" | "IP_SECURITY_IKE_INTERMEDIATE" | "IP_SECURITY_TUNNEL_TERMINATION" | "IP_SECURITY_USER" | "ISOLATED_USER_MODE" | "KDC_AUTHENTICATION" | "KERNEL_MODE_CODE_SIGNING" | "KEY_PACK_LICENSES" | "KEY_RECOVERY" | "KEY_RECOVERY_AGENT" | "LICENSE_SERVER_VERIFICATION" | "LIFETIME_SIGNING" | "MICROSOFT_PUBLISHER" | "MICROSOFT_TIME_STAMPING" | "MICROSOFT_TRUST_LIST_SIGNING" | "OCSP_SIGNING" | "OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "PLATFORM_CERTIFICATE" | "PREVIEW_BUILD_SIGNING" | "PRIVATE_KEY_ARCHIVAL" | "PROTECTED_PROCESS_LIGHT_VERIFICATION" | "PROTECTED_PROCESS_VERIFICATION" | "QUALIFIED_SUBORDINATION" | "REVOKED_LIST_SIGNER" | "ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION" | "ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION" | "ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL" | "ROOT_LIST_SIGNER" | "SECURE_EMAIL" | "SERVER_AUTHENTICATION" | "SMART_CARD_LOGIN" | "SPC_ENCRYPTED_DIGEST_RETRY_COUNT" | "SPC_RELAXED_PE_MARKER_CHECK" | "TIME_STAMPING" | "WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION" | "WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION" | "WINDOWS_HARDWARE_DRIVER_VERIFICATION" | "WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION" | "WINDOWS_KITS_COMPONENT" | "WINDOWS_RT_VERIFICATION" | "WINDOWS_SOFTWARE_EXTENSION_VERIFICATION" | "WINDOWS_STORE" | "WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "WINDOWS_TCB_COMPONENT" | "WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT" | "WINDOWS_UPDATE")?
+                                       },
+                                     ]
+                                   }?,
+                                   key_usage: {
+                                     critical: bool?,
+                                     usage_flags: {
+                                       data_encipherment: bool?,
+                                       digital_signature: bool?,
+                                       key_agreement: bool?,
+                                       key_encipherment: bool?,
+                                       non_repudiation: bool?
+                                     }
+                                   }
+                                 },
+                                 general_flags: {
+                                   auto_enrollment: bool?,
+                                   machine_type: bool?
+                                 },
+                                 hash_algorithm: ("SHA256" | "SHA384" | "SHA512"),
+                                 private_key_attributes: {
+                                   algorithm: ("RSA" | "ECDH_P256" | "ECDH_P384" | "ECDH_P521"),
+                                   crypto_providers: Array[::String]?,
+                                   key_spec: ("KEY_EXCHANGE" | "SIGNATURE"),
+                                   key_usage_property: {
+                                     property_flags: {
+                                       decrypt: bool?,
+                                       key_agreement: bool?,
+                                       sign: bool?
+                                     }?,
+                                     property_type: ("ALL")?
+                                   },
+                                   minimal_key_length: ::Integer
+                                 },
+                                 private_key_flags: {
+                                   client_version: ("WINDOWS_SERVER_2008" | "WINDOWS_SERVER_2008_R2" | "WINDOWS_SERVER_2012" | "WINDOWS_SERVER_2012_R2" | "WINDOWS_SERVER_2016"),
+                                   exportable_key: bool?,
+                                   require_alternate_signature_algorithm: bool?,
+                                   strong_key_protection_required: bool?
+                                 },
+                                 subject_name_flags: {
+                                   require_common_name: bool?,
+                                   require_directory_path: bool?,
+                                   require_dns_as_cn: bool?,
+                                   require_email: bool?,
+                                   san_require_directory_guid: bool?,
+                                   san_require_dns: bool?,
+                                   san_require_domain_dns: bool?,
+                                   san_require_email: bool?,
+                                   san_require_spn: bool?,
+                                   san_require_upn: bool?
+                                 },
+                                 superseded_templates: Array[::String]?
+                               }?,
+                               template_v4: {
+                                 certificate_validity: {
+                                   renewal_period: {
+                                     period: ::Integer,
+                                     period_type: ("HOURS" | "DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+                                   },
+                                   validity_period: {
+                                     period: ::Integer,
+                                     period_type: ("HOURS" | "DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+                                   }
+                                 },
+                                 enrollment_flags: {
+                                   enable_key_reuse_on_nt_token_keyset_storage_full: bool?,
+                                   include_symmetric_algorithms: bool?,
+                                   no_security_extension: bool?,
+                                   remove_invalid_certificate_from_personal_store: bool?,
+                                   user_interaction_required: bool?
+                                 },
+                                 extensions: {
+                                   application_policies: {
+                                     critical: bool?,
+                                     policies: Array[
+                                       {
+                                         policy_object_identifier: ::String?,
+                                         policy_type: ("ALL_APPLICATION_POLICIES" | "ANY_PURPOSE" | "ATTESTATION_IDENTITY_KEY_CERTIFICATE" | "CERTIFICATE_REQUEST_AGENT" | "CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "CTL_USAGE" | "DIGITAL_RIGHTS" | "DIRECTORY_SERVICE_EMAIL_REPLICATION" | "DISALLOWED_LIST" | "DNS_SERVER_TRUST" | "DOCUMENT_ENCRYPTION" | "DOCUMENT_SIGNING" | "DYNAMIC_CODE_GENERATOR" | "EARLY_LAUNCH_ANTIMALWARE_DRIVER" | "EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "ENCLAVE" | "ENCRYPTING_FILE_SYSTEM" | "ENDORSEMENT_KEY_CERTIFICATE" | "FILE_RECOVERY" | "HAL_EXTENSION" | "IP_SECURITY_END_SYSTEM" | "IP_SECURITY_IKE_INTERMEDIATE" | "IP_SECURITY_TUNNEL_TERMINATION" | "IP_SECURITY_USER" | "ISOLATED_USER_MODE" | "KDC_AUTHENTICATION" | "KERNEL_MODE_CODE_SIGNING" | "KEY_PACK_LICENSES" | "KEY_RECOVERY" | "KEY_RECOVERY_AGENT" | "LICENSE_SERVER_VERIFICATION" | "LIFETIME_SIGNING" | "MICROSOFT_PUBLISHER" | "MICROSOFT_TIME_STAMPING" | "MICROSOFT_TRUST_LIST_SIGNING" | "OCSP_SIGNING" | "OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "PLATFORM_CERTIFICATE" | "PREVIEW_BUILD_SIGNING" | "PRIVATE_KEY_ARCHIVAL" | "PROTECTED_PROCESS_LIGHT_VERIFICATION" | "PROTECTED_PROCESS_VERIFICATION" | "QUALIFIED_SUBORDINATION" | "REVOKED_LIST_SIGNER" | "ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION" | "ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION" | "ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL" | "ROOT_LIST_SIGNER" | "SECURE_EMAIL" | "SERVER_AUTHENTICATION" | "SMART_CARD_LOGIN" | "SPC_ENCRYPTED_DIGEST_RETRY_COUNT" | "SPC_RELAXED_PE_MARKER_CHECK" | "TIME_STAMPING" | "WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION" | "WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION" | "WINDOWS_HARDWARE_DRIVER_VERIFICATION" | "WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION" | "WINDOWS_KITS_COMPONENT" | "WINDOWS_RT_VERIFICATION" | "WINDOWS_SOFTWARE_EXTENSION_VERIFICATION" | "WINDOWS_STORE" | "WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "WINDOWS_TCB_COMPONENT" | "WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT" | "WINDOWS_UPDATE")?
+                                       },
+                                     ]
+                                   }?,
+                                   key_usage: {
+                                     critical: bool?,
+                                     usage_flags: {
+                                       data_encipherment: bool?,
+                                       digital_signature: bool?,
+                                       key_agreement: bool?,
+                                       key_encipherment: bool?,
+                                       non_repudiation: bool?
+                                     }
+                                   }
+                                 },
+                                 general_flags: {
+                                   auto_enrollment: bool?,
+                                   machine_type: bool?
+                                 },
+                                 hash_algorithm: ("SHA256" | "SHA384" | "SHA512")?,
+                                 private_key_attributes: {
+                                   algorithm: ("RSA" | "ECDH_P256" | "ECDH_P384" | "ECDH_P521")?,
+                                   crypto_providers: Array[::String]?,
+                                   key_spec: ("KEY_EXCHANGE" | "SIGNATURE"),
+                                   key_usage_property: {
+                                     property_flags: {
+                                       decrypt: bool?,
+                                       key_agreement: bool?,
+                                       sign: bool?
+                                     }?,
+                                     property_type: ("ALL")?
+                                   }?,
+                                   minimal_key_length: ::Integer
+                                 },
+                                 private_key_flags: {
+                                   client_version: ("WINDOWS_SERVER_2012" | "WINDOWS_SERVER_2012_R2" | "WINDOWS_SERVER_2016"),
+                                   exportable_key: bool?,
+                                   require_alternate_signature_algorithm: bool?,
+                                   require_same_key_renewal: bool?,
+                                   strong_key_protection_required: bool?,
+                                   use_legacy_provider: bool?
+                                 },
+                                 subject_name_flags: {
+                                   require_common_name: bool?,
+                                   require_directory_path: bool?,
+                                   require_dns_as_cn: bool?,
+                                   require_email: bool?,
+                                   san_require_directory_guid: bool?,
+                                   san_require_dns: bool?,
+                                   san_require_domain_dns: bool?,
+                                   san_require_email: bool?,
+                                   san_require_spn: bool?,
+                                   san_require_upn: bool?
+                                 },
+                                 superseded_templates: Array[::String]?
+                               }?
+                             },
+                             name: ::String,
+                             ?tags: Hash[::String, ::String]
+                           ) -> _CreateTemplateResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTemplateResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#create_template_group_access_control_entry-instance_method
+      def create_template_group_access_control_entry: (
+                                                        access_rights: {
+                                                          auto_enroll: ("ALLOW" | "DENY")?,
+                                                          enroll: ("ALLOW" | "DENY")?
+                                                        },
+                                                        ?client_token: ::String,
+                                                        group_display_name: ::String,
+                                                        group_security_identifier: ::String,
+                                                        template_arn: ::String
+                                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#delete_connector-instance_method
+      def delete_connector: (
+                              connector_arn: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#delete_directory_registration-instance_method
+      def delete_directory_registration: (
+                                           directory_registration_arn: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#delete_service_principal_name-instance_method
+      def delete_service_principal_name: (
+                                           connector_arn: ::String,
+                                           directory_registration_arn: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#delete_template-instance_method
+      def delete_template: (
+                             template_arn: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#delete_template_group_access_control_entry-instance_method
+      def delete_template_group_access_control_entry: (
+                                                        group_security_identifier: ::String,
+                                                        template_arn: ::String
+                                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectorResponse]
+        def connector: () -> Types::Connector
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#get_connector-instance_method
+      def get_connector: (
+                           connector_arn: ::String
+                         ) -> _GetConnectorResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectorResponseSuccess
+
+      interface _GetDirectoryRegistrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDirectoryRegistrationResponse]
+        def directory_registration: () -> Types::DirectoryRegistration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#get_directory_registration-instance_method
+      def get_directory_registration: (
+                                        directory_registration_arn: ::String
+                                      ) -> _GetDirectoryRegistrationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDirectoryRegistrationResponseSuccess
+
+      interface _GetServicePrincipalNameResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServicePrincipalNameResponse]
+        def service_principal_name: () -> Types::ServicePrincipalName
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#get_service_principal_name-instance_method
+      def get_service_principal_name: (
+                                        connector_arn: ::String,
+                                        directory_registration_arn: ::String
+                                      ) -> _GetServicePrincipalNameResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServicePrincipalNameResponseSuccess
+
+      interface _GetTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTemplateResponse]
+        def template: () -> Types::Template
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#get_template-instance_method
+      def get_template: (
+                          template_arn: ::String
+                        ) -> _GetTemplateResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTemplateResponseSuccess
+
+      interface _GetTemplateGroupAccessControlEntryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTemplateGroupAccessControlEntryResponse]
+        def access_control_entry: () -> Types::AccessControlEntry
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#get_template_group_access_control_entry-instance_method
+      def get_template_group_access_control_entry: (
+                                                     group_security_identifier: ::String,
+                                                     template_arn: ::String
+                                                   ) -> _GetTemplateGroupAccessControlEntryResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTemplateGroupAccessControlEntryResponseSuccess
+
+      interface _ListConnectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConnectorsResponse]
+        def connectors: () -> ::Array[Types::ConnectorSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#list_connectors-instance_method
+      def list_connectors: (
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListConnectorsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectorsResponseSuccess
+
+      interface _ListDirectoryRegistrationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDirectoryRegistrationsResponse]
+        def directory_registrations: () -> ::Array[Types::DirectoryRegistrationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#list_directory_registrations-instance_method
+      def list_directory_registrations: (
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListDirectoryRegistrationsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDirectoryRegistrationsResponseSuccess
+
+      interface _ListServicePrincipalNamesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServicePrincipalNamesResponse]
+        def next_token: () -> ::String
+        def service_principal_names: () -> ::Array[Types::ServicePrincipalNameSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#list_service_principal_names-instance_method
+      def list_service_principal_names: (
+                                          directory_registration_arn: ::String,
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListServicePrincipalNamesResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServicePrincipalNamesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTemplateGroupAccessControlEntriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTemplateGroupAccessControlEntriesResponse]
+        def access_control_entries: () -> ::Array[Types::AccessControlEntrySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#list_template_group_access_control_entries-instance_method
+      def list_template_group_access_control_entries: (
+                                                        ?max_results: ::Integer,
+                                                        ?next_token: ::String,
+                                                        template_arn: ::String
+                                                      ) -> _ListTemplateGroupAccessControlEntriesResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTemplateGroupAccessControlEntriesResponseSuccess
+
+      interface _ListTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTemplatesResponse]
+        def next_token: () -> ::String
+        def templates: () -> ::Array[Types::TemplateSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#list_templates-instance_method
+      def list_templates: (
+                            connector_arn: ::String,
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListTemplatesResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTemplatesResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#update_template-instance_method
+      def update_template: (
+                             ?definition: {
+                               template_v2: {
+                                 certificate_validity: {
+                                   renewal_period: {
+                                     period: ::Integer,
+                                     period_type: ("HOURS" | "DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+                                   },
+                                   validity_period: {
+                                     period: ::Integer,
+                                     period_type: ("HOURS" | "DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+                                   }
+                                 },
+                                 enrollment_flags: {
+                                   enable_key_reuse_on_nt_token_keyset_storage_full: bool?,
+                                   include_symmetric_algorithms: bool?,
+                                   no_security_extension: bool?,
+                                   remove_invalid_certificate_from_personal_store: bool?,
+                                   user_interaction_required: bool?
+                                 },
+                                 extensions: {
+                                   application_policies: {
+                                     critical: bool?,
+                                     policies: Array[
+                                       {
+                                         policy_object_identifier: ::String?,
+                                         policy_type: ("ALL_APPLICATION_POLICIES" | "ANY_PURPOSE" | "ATTESTATION_IDENTITY_KEY_CERTIFICATE" | "CERTIFICATE_REQUEST_AGENT" | "CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "CTL_USAGE" | "DIGITAL_RIGHTS" | "DIRECTORY_SERVICE_EMAIL_REPLICATION" | "DISALLOWED_LIST" | "DNS_SERVER_TRUST" | "DOCUMENT_ENCRYPTION" | "DOCUMENT_SIGNING" | "DYNAMIC_CODE_GENERATOR" | "EARLY_LAUNCH_ANTIMALWARE_DRIVER" | "EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "ENCLAVE" | "ENCRYPTING_FILE_SYSTEM" | "ENDORSEMENT_KEY_CERTIFICATE" | "FILE_RECOVERY" | "HAL_EXTENSION" | "IP_SECURITY_END_SYSTEM" | "IP_SECURITY_IKE_INTERMEDIATE" | "IP_SECURITY_TUNNEL_TERMINATION" | "IP_SECURITY_USER" | "ISOLATED_USER_MODE" | "KDC_AUTHENTICATION" | "KERNEL_MODE_CODE_SIGNING" | "KEY_PACK_LICENSES" | "KEY_RECOVERY" | "KEY_RECOVERY_AGENT" | "LICENSE_SERVER_VERIFICATION" | "LIFETIME_SIGNING" | "MICROSOFT_PUBLISHER" | "MICROSOFT_TIME_STAMPING" | "MICROSOFT_TRUST_LIST_SIGNING" | "OCSP_SIGNING" | "OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "PLATFORM_CERTIFICATE" | "PREVIEW_BUILD_SIGNING" | "PRIVATE_KEY_ARCHIVAL" | "PROTECTED_PROCESS_LIGHT_VERIFICATION" | "PROTECTED_PROCESS_VERIFICATION" | "QUALIFIED_SUBORDINATION" | "REVOKED_LIST_SIGNER" | "ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION" | "ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION" | "ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL" | "ROOT_LIST_SIGNER" | "SECURE_EMAIL" | "SERVER_AUTHENTICATION" | "SMART_CARD_LOGIN" | "SPC_ENCRYPTED_DIGEST_RETRY_COUNT" | "SPC_RELAXED_PE_MARKER_CHECK" | "TIME_STAMPING" | "WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION" | "WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION" | "WINDOWS_HARDWARE_DRIVER_VERIFICATION" | "WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION" | "WINDOWS_KITS_COMPONENT" | "WINDOWS_RT_VERIFICATION" | "WINDOWS_SOFTWARE_EXTENSION_VERIFICATION" | "WINDOWS_STORE" | "WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "WINDOWS_TCB_COMPONENT" | "WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT" | "WINDOWS_UPDATE")?
+                                       },
+                                     ]
+                                   }?,
+                                   key_usage: {
+                                     critical: bool?,
+                                     usage_flags: {
+                                       data_encipherment: bool?,
+                                       digital_signature: bool?,
+                                       key_agreement: bool?,
+                                       key_encipherment: bool?,
+                                       non_repudiation: bool?
+                                     }
+                                   }
+                                 },
+                                 general_flags: {
+                                   auto_enrollment: bool?,
+                                   machine_type: bool?
+                                 },
+                                 private_key_attributes: {
+                                   crypto_providers: Array[::String]?,
+                                   key_spec: ("KEY_EXCHANGE" | "SIGNATURE"),
+                                   minimal_key_length: ::Integer
+                                 },
+                                 private_key_flags: {
+                                   client_version: ("WINDOWS_SERVER_2003" | "WINDOWS_SERVER_2008" | "WINDOWS_SERVER_2008_R2" | "WINDOWS_SERVER_2012" | "WINDOWS_SERVER_2012_R2" | "WINDOWS_SERVER_2016"),
+                                   exportable_key: bool?,
+                                   strong_key_protection_required: bool?
+                                 },
+                                 subject_name_flags: {
+                                   require_common_name: bool?,
+                                   require_directory_path: bool?,
+                                   require_dns_as_cn: bool?,
+                                   require_email: bool?,
+                                   san_require_directory_guid: bool?,
+                                   san_require_dns: bool?,
+                                   san_require_domain_dns: bool?,
+                                   san_require_email: bool?,
+                                   san_require_spn: bool?,
+                                   san_require_upn: bool?
+                                 },
+                                 superseded_templates: Array[::String]?
+                               }?,
+                               template_v3: {
+                                 certificate_validity: {
+                                   renewal_period: {
+                                     period: ::Integer,
+                                     period_type: ("HOURS" | "DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+                                   },
+                                   validity_period: {
+                                     period: ::Integer,
+                                     period_type: ("HOURS" | "DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+                                   }
+                                 },
+                                 enrollment_flags: {
+                                   enable_key_reuse_on_nt_token_keyset_storage_full: bool?,
+                                   include_symmetric_algorithms: bool?,
+                                   no_security_extension: bool?,
+                                   remove_invalid_certificate_from_personal_store: bool?,
+                                   user_interaction_required: bool?
+                                 },
+                                 extensions: {
+                                   application_policies: {
+                                     critical: bool?,
+                                     policies: Array[
+                                       {
+                                         policy_object_identifier: ::String?,
+                                         policy_type: ("ALL_APPLICATION_POLICIES" | "ANY_PURPOSE" | "ATTESTATION_IDENTITY_KEY_CERTIFICATE" | "CERTIFICATE_REQUEST_AGENT" | "CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "CTL_USAGE" | "DIGITAL_RIGHTS" | "DIRECTORY_SERVICE_EMAIL_REPLICATION" | "DISALLOWED_LIST" | "DNS_SERVER_TRUST" | "DOCUMENT_ENCRYPTION" | "DOCUMENT_SIGNING" | "DYNAMIC_CODE_GENERATOR" | "EARLY_LAUNCH_ANTIMALWARE_DRIVER" | "EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "ENCLAVE" | "ENCRYPTING_FILE_SYSTEM" | "ENDORSEMENT_KEY_CERTIFICATE" | "FILE_RECOVERY" | "HAL_EXTENSION" | "IP_SECURITY_END_SYSTEM" | "IP_SECURITY_IKE_INTERMEDIATE" | "IP_SECURITY_TUNNEL_TERMINATION" | "IP_SECURITY_USER" | "ISOLATED_USER_MODE" | "KDC_AUTHENTICATION" | "KERNEL_MODE_CODE_SIGNING" | "KEY_PACK_LICENSES" | "KEY_RECOVERY" | "KEY_RECOVERY_AGENT" | "LICENSE_SERVER_VERIFICATION" | "LIFETIME_SIGNING" | "MICROSOFT_PUBLISHER" | "MICROSOFT_TIME_STAMPING" | "MICROSOFT_TRUST_LIST_SIGNING" | "OCSP_SIGNING" | "OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "PLATFORM_CERTIFICATE" | "PREVIEW_BUILD_SIGNING" | "PRIVATE_KEY_ARCHIVAL" | "PROTECTED_PROCESS_LIGHT_VERIFICATION" | "PROTECTED_PROCESS_VERIFICATION" | "QUALIFIED_SUBORDINATION" | "REVOKED_LIST_SIGNER" | "ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION" | "ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION" | "ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL" | "ROOT_LIST_SIGNER" | "SECURE_EMAIL" | "SERVER_AUTHENTICATION" | "SMART_CARD_LOGIN" | "SPC_ENCRYPTED_DIGEST_RETRY_COUNT" | "SPC_RELAXED_PE_MARKER_CHECK" | "TIME_STAMPING" | "WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION" | "WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION" | "WINDOWS_HARDWARE_DRIVER_VERIFICATION" | "WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION" | "WINDOWS_KITS_COMPONENT" | "WINDOWS_RT_VERIFICATION" | "WINDOWS_SOFTWARE_EXTENSION_VERIFICATION" | "WINDOWS_STORE" | "WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "WINDOWS_TCB_COMPONENT" | "WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT" | "WINDOWS_UPDATE")?
+                                       },
+                                     ]
+                                   }?,
+                                   key_usage: {
+                                     critical: bool?,
+                                     usage_flags: {
+                                       data_encipherment: bool?,
+                                       digital_signature: bool?,
+                                       key_agreement: bool?,
+                                       key_encipherment: bool?,
+                                       non_repudiation: bool?
+                                     }
+                                   }
+                                 },
+                                 general_flags: {
+                                   auto_enrollment: bool?,
+                                   machine_type: bool?
+                                 },
+                                 hash_algorithm: ("SHA256" | "SHA384" | "SHA512"),
+                                 private_key_attributes: {
+                                   algorithm: ("RSA" | "ECDH_P256" | "ECDH_P384" | "ECDH_P521"),
+                                   crypto_providers: Array[::String]?,
+                                   key_spec: ("KEY_EXCHANGE" | "SIGNATURE"),
+                                   key_usage_property: {
+                                     property_flags: {
+                                       decrypt: bool?,
+                                       key_agreement: bool?,
+                                       sign: bool?
+                                     }?,
+                                     property_type: ("ALL")?
+                                   },
+                                   minimal_key_length: ::Integer
+                                 },
+                                 private_key_flags: {
+                                   client_version: ("WINDOWS_SERVER_2008" | "WINDOWS_SERVER_2008_R2" | "WINDOWS_SERVER_2012" | "WINDOWS_SERVER_2012_R2" | "WINDOWS_SERVER_2016"),
+                                   exportable_key: bool?,
+                                   require_alternate_signature_algorithm: bool?,
+                                   strong_key_protection_required: bool?
+                                 },
+                                 subject_name_flags: {
+                                   require_common_name: bool?,
+                                   require_directory_path: bool?,
+                                   require_dns_as_cn: bool?,
+                                   require_email: bool?,
+                                   san_require_directory_guid: bool?,
+                                   san_require_dns: bool?,
+                                   san_require_domain_dns: bool?,
+                                   san_require_email: bool?,
+                                   san_require_spn: bool?,
+                                   san_require_upn: bool?
+                                 },
+                                 superseded_templates: Array[::String]?
+                               }?,
+                               template_v4: {
+                                 certificate_validity: {
+                                   renewal_period: {
+                                     period: ::Integer,
+                                     period_type: ("HOURS" | "DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+                                   },
+                                   validity_period: {
+                                     period: ::Integer,
+                                     period_type: ("HOURS" | "DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+                                   }
+                                 },
+                                 enrollment_flags: {
+                                   enable_key_reuse_on_nt_token_keyset_storage_full: bool?,
+                                   include_symmetric_algorithms: bool?,
+                                   no_security_extension: bool?,
+                                   remove_invalid_certificate_from_personal_store: bool?,
+                                   user_interaction_required: bool?
+                                 },
+                                 extensions: {
+                                   application_policies: {
+                                     critical: bool?,
+                                     policies: Array[
+                                       {
+                                         policy_object_identifier: ::String?,
+                                         policy_type: ("ALL_APPLICATION_POLICIES" | "ANY_PURPOSE" | "ATTESTATION_IDENTITY_KEY_CERTIFICATE" | "CERTIFICATE_REQUEST_AGENT" | "CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "CTL_USAGE" | "DIGITAL_RIGHTS" | "DIRECTORY_SERVICE_EMAIL_REPLICATION" | "DISALLOWED_LIST" | "DNS_SERVER_TRUST" | "DOCUMENT_ENCRYPTION" | "DOCUMENT_SIGNING" | "DYNAMIC_CODE_GENERATOR" | "EARLY_LAUNCH_ANTIMALWARE_DRIVER" | "EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "ENCLAVE" | "ENCRYPTING_FILE_SYSTEM" | "ENDORSEMENT_KEY_CERTIFICATE" | "FILE_RECOVERY" | "HAL_EXTENSION" | "IP_SECURITY_END_SYSTEM" | "IP_SECURITY_IKE_INTERMEDIATE" | "IP_SECURITY_TUNNEL_TERMINATION" | "IP_SECURITY_USER" | "ISOLATED_USER_MODE" | "KDC_AUTHENTICATION" | "KERNEL_MODE_CODE_SIGNING" | "KEY_PACK_LICENSES" | "KEY_RECOVERY" | "KEY_RECOVERY_AGENT" | "LICENSE_SERVER_VERIFICATION" | "LIFETIME_SIGNING" | "MICROSOFT_PUBLISHER" | "MICROSOFT_TIME_STAMPING" | "MICROSOFT_TRUST_LIST_SIGNING" | "OCSP_SIGNING" | "OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "PLATFORM_CERTIFICATE" | "PREVIEW_BUILD_SIGNING" | "PRIVATE_KEY_ARCHIVAL" | "PROTECTED_PROCESS_LIGHT_VERIFICATION" | "PROTECTED_PROCESS_VERIFICATION" | "QUALIFIED_SUBORDINATION" | "REVOKED_LIST_SIGNER" | "ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION" | "ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION" | "ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL" | "ROOT_LIST_SIGNER" | "SECURE_EMAIL" | "SERVER_AUTHENTICATION" | "SMART_CARD_LOGIN" | "SPC_ENCRYPTED_DIGEST_RETRY_COUNT" | "SPC_RELAXED_PE_MARKER_CHECK" | "TIME_STAMPING" | "WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION" | "WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION" | "WINDOWS_HARDWARE_DRIVER_VERIFICATION" | "WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION" | "WINDOWS_KITS_COMPONENT" | "WINDOWS_RT_VERIFICATION" | "WINDOWS_SOFTWARE_EXTENSION_VERIFICATION" | "WINDOWS_STORE" | "WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "WINDOWS_TCB_COMPONENT" | "WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT" | "WINDOWS_UPDATE")?
+                                       },
+                                     ]
+                                   }?,
+                                   key_usage: {
+                                     critical: bool?,
+                                     usage_flags: {
+                                       data_encipherment: bool?,
+                                       digital_signature: bool?,
+                                       key_agreement: bool?,
+                                       key_encipherment: bool?,
+                                       non_repudiation: bool?
+                                     }
+                                   }
+                                 },
+                                 general_flags: {
+                                   auto_enrollment: bool?,
+                                   machine_type: bool?
+                                 },
+                                 hash_algorithm: ("SHA256" | "SHA384" | "SHA512")?,
+                                 private_key_attributes: {
+                                   algorithm: ("RSA" | "ECDH_P256" | "ECDH_P384" | "ECDH_P521")?,
+                                   crypto_providers: Array[::String]?,
+                                   key_spec: ("KEY_EXCHANGE" | "SIGNATURE"),
+                                   key_usage_property: {
+                                     property_flags: {
+                                       decrypt: bool?,
+                                       key_agreement: bool?,
+                                       sign: bool?
+                                     }?,
+                                     property_type: ("ALL")?
+                                   }?,
+                                   minimal_key_length: ::Integer
+                                 },
+                                 private_key_flags: {
+                                   client_version: ("WINDOWS_SERVER_2012" | "WINDOWS_SERVER_2012_R2" | "WINDOWS_SERVER_2016"),
+                                   exportable_key: bool?,
+                                   require_alternate_signature_algorithm: bool?,
+                                   require_same_key_renewal: bool?,
+                                   strong_key_protection_required: bool?,
+                                   use_legacy_provider: bool?
+                                 },
+                                 subject_name_flags: {
+                                   require_common_name: bool?,
+                                   require_directory_path: bool?,
+                                   require_dns_as_cn: bool?,
+                                   require_email: bool?,
+                                   san_require_directory_guid: bool?,
+                                   san_require_dns: bool?,
+                                   san_require_domain_dns: bool?,
+                                   san_require_email: bool?,
+                                   san_require_spn: bool?,
+                                   san_require_upn: bool?
+                                 },
+                                 superseded_templates: Array[::String]?
+                               }?
+                             },
+                             ?reenroll_all_certificate_holders: bool,
+                             template_arn: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PcaConnectorAd/Client.html#update_template_group_access_control_entry-instance_method
+      def update_template_group_access_control_entry: (
+                                                        ?access_rights: {
+                                                          auto_enroll: ("ALLOW" | "DENY")?,
+                                                          enroll: ("ALLOW" | "DENY")?
+                                                        },
+                                                        ?group_display_name: ::String,
+                                                        group_security_identifier: ::String,
+                                                        template_arn: ::String
+                                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+    end
+  end
+end
+

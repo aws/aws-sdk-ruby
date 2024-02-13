@@ -1,0 +1,75 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ForecastQueryService
+  module Types
+
+    class DataPoint
+      attr_accessor timestamp: ::String
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class Forecast
+      attr_accessor predictions: ::Hash[::String, ::Array[Types::DataPoint]]
+      SENSITIVE: []
+    end
+
+    class InvalidInputException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class QueryForecastRequest
+      attr_accessor forecast_arn: ::String
+      attr_accessor start_date: ::String
+      attr_accessor end_date: ::String
+      attr_accessor filters: ::Hash[::String, ::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class QueryForecastResponse
+      attr_accessor forecast: Types::Forecast
+      SENSITIVE: []
+    end
+
+    class QueryWhatIfForecastRequest
+      attr_accessor what_if_forecast_arn: ::String
+      attr_accessor start_date: ::String
+      attr_accessor end_date: ::String
+      attr_accessor filters: ::Hash[::String, ::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class QueryWhatIfForecastResponse
+      attr_accessor forecast: Types::Forecast
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

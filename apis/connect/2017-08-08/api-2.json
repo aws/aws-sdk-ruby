@@ -8033,7 +8033,7 @@
     },
     "EvaluationNoteString":{
       "type":"string",
-      "max":1024,
+      "max":3072,
       "min":0
     },
     "EvaluationNotesMap":{
@@ -8555,7 +8555,7 @@
     "GroupingsV2":{
       "type":"list",
       "member":{"shape":"GroupingV2"},
-      "max":2
+      "max":3
     },
     "HierarchyGroup":{
       "type":"structure",
@@ -8929,7 +8929,8 @@
         "EARLY_MEDIA",
         "MULTI_PARTY_CONFERENCE",
         "HIGH_VOLUME_OUTBOUND",
-        "ENHANCED_CONTACT_MONITORING"
+        "ENHANCED_CONTACT_MONITORING",
+        "ENHANCED_CHAT_MONITORING"
       ]
     },
     "InstanceAttributeValue":{
@@ -11017,7 +11018,8 @@
         "AGENT",
         "CUSTOMER",
         "SYSTEM",
-        "CUSTOM_BOT"
+        "CUSTOM_BOT",
+        "SUPERVISOR"
       ]
     },
     "ParticipantTimerAction":{
@@ -11458,7 +11460,7 @@
     },
     "PredefinedAttributeName":{
       "type":"string",
-      "max":128,
+      "max":64,
       "min":1
     },
     "PredefinedAttributeSearchConditionList":{
@@ -11479,13 +11481,13 @@
     },
     "PredefinedAttributeStringValue":{
       "type":"string",
-      "max":128,
+      "max":64,
       "min":1
     },
     "PredefinedAttributeStringValuesList":{
       "type":"list",
       "member":{"shape":"PredefinedAttributeStringValue"},
-      "max":75,
+      "max":128,
       "min":1
     },
     "PredefinedAttributeSummary":{

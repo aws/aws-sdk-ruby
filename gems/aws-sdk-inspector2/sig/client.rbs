@@ -1,0 +1,2644 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Inspector2
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateMemberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateMemberResponse]
+        def account_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#associate_member-instance_method
+      def associate_member: (
+                              account_id: ::String
+                            ) -> _AssociateMemberResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateMemberResponseSuccess
+
+      interface _BatchGetAccountStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetAccountStatusResponse]
+        def accounts: () -> ::Array[Types::AccountState]
+        def failed_accounts: () -> ::Array[Types::FailedAccount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#batch_get_account_status-instance_method
+      def batch_get_account_status: (
+                                      ?account_ids: Array[::String]
+                                    ) -> _BatchGetAccountStatusResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetAccountStatusResponseSuccess
+
+      interface _BatchGetCodeSnippetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetCodeSnippetResponse]
+        def code_snippet_results: () -> ::Array[Types::CodeSnippetResult]
+        def errors: () -> ::Array[Types::CodeSnippetError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#batch_get_code_snippet-instance_method
+      def batch_get_code_snippet: (
+                                    finding_arns: Array[::String]
+                                  ) -> _BatchGetCodeSnippetResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetCodeSnippetResponseSuccess
+
+      interface _BatchGetFindingDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetFindingDetailsResponse]
+        def errors: () -> ::Array[Types::FindingDetailsError]
+        def finding_details: () -> ::Array[Types::FindingDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#batch_get_finding_details-instance_method
+      def batch_get_finding_details: (
+                                       finding_arns: Array[::String]
+                                     ) -> _BatchGetFindingDetailsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetFindingDetailsResponseSuccess
+
+      interface _BatchGetFreeTrialInfoResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetFreeTrialInfoResponse]
+        def accounts: () -> ::Array[Types::FreeTrialAccountInfo]
+        def failed_accounts: () -> ::Array[Types::FreeTrialInfoError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#batch_get_free_trial_info-instance_method
+      def batch_get_free_trial_info: (
+                                       account_ids: Array[::String]
+                                     ) -> _BatchGetFreeTrialInfoResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetFreeTrialInfoResponseSuccess
+
+      interface _BatchGetMemberEc2DeepInspectionStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetMemberEc2DeepInspectionStatusResponse]
+        def account_ids: () -> ::Array[Types::MemberAccountEc2DeepInspectionStatusState]
+        def failed_account_ids: () -> ::Array[Types::FailedMemberAccountEc2DeepInspectionStatusState]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#batch_get_member_ec2_deep_inspection_status-instance_method
+      def batch_get_member_ec2_deep_inspection_status: (
+                                                         ?account_ids: Array[::String]
+                                                       ) -> _BatchGetMemberEc2DeepInspectionStatusResponseSuccess
+                                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetMemberEc2DeepInspectionStatusResponseSuccess
+
+      interface _BatchUpdateMemberEc2DeepInspectionStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchUpdateMemberEc2DeepInspectionStatusResponse]
+        def account_ids: () -> ::Array[Types::MemberAccountEc2DeepInspectionStatusState]
+        def failed_account_ids: () -> ::Array[Types::FailedMemberAccountEc2DeepInspectionStatusState]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#batch_update_member_ec2_deep_inspection_status-instance_method
+      def batch_update_member_ec2_deep_inspection_status: (
+                                                            account_ids: Array[
+                                                              {
+                                                                account_id: ::String,
+                                                                activate_deep_inspection: bool
+                                                              },
+                                                            ]
+                                                          ) -> _BatchUpdateMemberEc2DeepInspectionStatusResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateMemberEc2DeepInspectionStatusResponseSuccess
+
+      interface _CancelFindingsReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelFindingsReportResponse]
+        def report_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#cancel_findings_report-instance_method
+      def cancel_findings_report: (
+                                    report_id: ::String
+                                  ) -> _CancelFindingsReportResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelFindingsReportResponseSuccess
+
+      interface _CancelSbomExportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelSbomExportResponse]
+        def report_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#cancel_sbom_export-instance_method
+      def cancel_sbom_export: (
+                                report_id: ::String
+                              ) -> _CancelSbomExportResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelSbomExportResponseSuccess
+
+      interface _CreateCisScanConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCisScanConfigurationResponse]
+        def scan_configuration_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#create_cis_scan_configuration-instance_method
+      def create_cis_scan_configuration: (
+                                           scan_name: ::String,
+                                           schedule: {
+                                             daily: {
+                                               start_time: {
+                                                 time_of_day: ::String,
+                                                 timezone: ::String
+                                               }
+                                             }?,
+                                             monthly: {
+                                               day: ("SUN" | "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT"),
+                                               start_time: {
+                                                 time_of_day: ::String,
+                                                 timezone: ::String
+                                               }
+                                             }?,
+                                             one_time: {
+                                             }?,
+                                             weekly: {
+                                               days: Array[("SUN" | "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT")],
+                                               start_time: {
+                                                 time_of_day: ::String,
+                                                 timezone: ::String
+                                               }
+                                             }?
+                                           },
+                                           security_level: ("LEVEL_1" | "LEVEL_2"),
+                                           ?tags: Hash[::String, ::String],
+                                           targets: {
+                                             account_ids: Array[::String],
+                                             target_resource_tags: Hash[::String, Array[::String]]
+                                           }
+                                         ) -> _CreateCisScanConfigurationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCisScanConfigurationResponseSuccess
+
+      interface _CreateFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFilterResponse]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#create_filter-instance_method
+      def create_filter: (
+                           action: ("NONE" | "SUPPRESS"),
+                           ?description: ::String,
+                           filter_criteria: {
+                             aws_account_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             code_vulnerability_detector_name: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             code_vulnerability_detector_tags: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             code_vulnerability_file_path: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             component_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             component_type: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ec2_instance_image_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ec2_instance_subnet_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ec2_instance_vpc_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ecr_image_architecture: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ecr_image_hash: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ecr_image_pushed_at: Array[
+                               {
+                                 end_inclusive: ::Time?,
+                                 start_inclusive: ::Time?
+                               },
+                             ]?,
+                             ecr_image_registry: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ecr_image_repository_name: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ecr_image_tags: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             epss_score: Array[
+                               {
+                                 lower_inclusive: ::Float?,
+                                 upper_inclusive: ::Float?
+                               },
+                             ]?,
+                             exploit_available: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             finding_arn: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             finding_status: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             finding_type: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             first_observed_at: Array[
+                               {
+                                 end_inclusive: ::Time?,
+                                 start_inclusive: ::Time?
+                               },
+                             ]?,
+                             fix_available: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             inspector_score: Array[
+                               {
+                                 lower_inclusive: ::Float?,
+                                 upper_inclusive: ::Float?
+                               },
+                             ]?,
+                             lambda_function_execution_role_arn: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             lambda_function_last_modified_at: Array[
+                               {
+                                 end_inclusive: ::Time?,
+                                 start_inclusive: ::Time?
+                               },
+                             ]?,
+                             lambda_function_layers: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             lambda_function_name: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             lambda_function_runtime: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             last_observed_at: Array[
+                               {
+                                 end_inclusive: ::Time?,
+                                 start_inclusive: ::Time?
+                               },
+                             ]?,
+                             network_protocol: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             port_range: Array[
+                               {
+                                 begin_inclusive: ::Integer?,
+                                 end_inclusive: ::Integer?
+                               },
+                             ]?,
+                             related_vulnerabilities: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             resource_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             resource_tags: Array[
+                               {
+                                 comparison: ("EQUALS"),
+                                 key: ::String,
+                                 value: ::String?
+                               },
+                             ]?,
+                             resource_type: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             severity: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             title: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             updated_at: Array[
+                               {
+                                 end_inclusive: ::Time?,
+                                 start_inclusive: ::Time?
+                               },
+                             ]?,
+                             vendor_severity: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             vulnerability_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             vulnerability_source: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             vulnerable_packages: Array[
+                               {
+                                 architecture: {
+                                   comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                   value: ::String
+                                 }?,
+                                 epoch: {
+                                   lower_inclusive: ::Float?,
+                                   upper_inclusive: ::Float?
+                                 }?,
+                                 name: {
+                                   comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                   value: ::String
+                                 }?,
+                                 release: {
+                                   comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                   value: ::String
+                                 }?,
+                                 source_lambda_layer_arn: {
+                                   comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                   value: ::String
+                                 }?,
+                                 source_layer_hash: {
+                                   comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                   value: ::String
+                                 }?,
+                                 version: {
+                                   comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                   value: ::String
+                                 }?
+                               },
+                             ]?
+                           },
+                           name: ::String,
+                           ?reason: ::String,
+                           ?tags: Hash[::String, ::String]
+                         ) -> _CreateFilterResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFilterResponseSuccess
+
+      interface _CreateFindingsReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFindingsReportResponse]
+        def report_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#create_findings_report-instance_method
+      def create_findings_report: (
+                                    ?filter_criteria: {
+                                      aws_account_id: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      code_vulnerability_detector_name: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      code_vulnerability_detector_tags: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      code_vulnerability_file_path: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      component_id: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      component_type: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      ec2_instance_image_id: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      ec2_instance_subnet_id: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      ec2_instance_vpc_id: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      ecr_image_architecture: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      ecr_image_hash: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      ecr_image_pushed_at: Array[
+                                        {
+                                          end_inclusive: ::Time?,
+                                          start_inclusive: ::Time?
+                                        },
+                                      ]?,
+                                      ecr_image_registry: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      ecr_image_repository_name: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      ecr_image_tags: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      epss_score: Array[
+                                        {
+                                          lower_inclusive: ::Float?,
+                                          upper_inclusive: ::Float?
+                                        },
+                                      ]?,
+                                      exploit_available: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      finding_arn: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      finding_status: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      finding_type: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      first_observed_at: Array[
+                                        {
+                                          end_inclusive: ::Time?,
+                                          start_inclusive: ::Time?
+                                        },
+                                      ]?,
+                                      fix_available: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      inspector_score: Array[
+                                        {
+                                          lower_inclusive: ::Float?,
+                                          upper_inclusive: ::Float?
+                                        },
+                                      ]?,
+                                      lambda_function_execution_role_arn: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      lambda_function_last_modified_at: Array[
+                                        {
+                                          end_inclusive: ::Time?,
+                                          start_inclusive: ::Time?
+                                        },
+                                      ]?,
+                                      lambda_function_layers: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      lambda_function_name: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      lambda_function_runtime: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      last_observed_at: Array[
+                                        {
+                                          end_inclusive: ::Time?,
+                                          start_inclusive: ::Time?
+                                        },
+                                      ]?,
+                                      network_protocol: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      port_range: Array[
+                                        {
+                                          begin_inclusive: ::Integer?,
+                                          end_inclusive: ::Integer?
+                                        },
+                                      ]?,
+                                      related_vulnerabilities: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      resource_id: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      resource_tags: Array[
+                                        {
+                                          comparison: ("EQUALS"),
+                                          key: ::String,
+                                          value: ::String?
+                                        },
+                                      ]?,
+                                      resource_type: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      severity: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      title: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      updated_at: Array[
+                                        {
+                                          end_inclusive: ::Time?,
+                                          start_inclusive: ::Time?
+                                        },
+                                      ]?,
+                                      vendor_severity: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      vulnerability_id: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      vulnerability_source: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      vulnerable_packages: Array[
+                                        {
+                                          architecture: {
+                                            comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                            value: ::String
+                                          }?,
+                                          epoch: {
+                                            lower_inclusive: ::Float?,
+                                            upper_inclusive: ::Float?
+                                          }?,
+                                          name: {
+                                            comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                            value: ::String
+                                          }?,
+                                          release: {
+                                            comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                            value: ::String
+                                          }?,
+                                          source_lambda_layer_arn: {
+                                            comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                            value: ::String
+                                          }?,
+                                          source_layer_hash: {
+                                            comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                            value: ::String
+                                          }?,
+                                          version: {
+                                            comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                            value: ::String
+                                          }?
+                                        },
+                                      ]?
+                                    },
+                                    report_format: ("CSV" | "JSON"),
+                                    s3_destination: {
+                                      bucket_name: ::String,
+                                      key_prefix: ::String?,
+                                      kms_key_arn: ::String
+                                    }
+                                  ) -> _CreateFindingsReportResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFindingsReportResponseSuccess
+
+      interface _CreateSbomExportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSbomExportResponse]
+        def report_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#create_sbom_export-instance_method
+      def create_sbom_export: (
+                                report_format: ("CYCLONEDX_1_4" | "SPDX_2_3"),
+                                ?resource_filter_criteria: {
+                                  account_id: Array[
+                                    {
+                                      comparison: ("EQUALS" | "NOT_EQUALS"),
+                                      value: ::String
+                                    },
+                                  ]?,
+                                  ec2_instance_tags: Array[
+                                    {
+                                      comparison: ("EQUALS"),
+                                      key: ::String,
+                                      value: ::String?
+                                    },
+                                  ]?,
+                                  ecr_image_tags: Array[
+                                    {
+                                      comparison: ("EQUALS" | "NOT_EQUALS"),
+                                      value: ::String
+                                    },
+                                  ]?,
+                                  ecr_repository_name: Array[
+                                    {
+                                      comparison: ("EQUALS" | "NOT_EQUALS"),
+                                      value: ::String
+                                    },
+                                  ]?,
+                                  lambda_function_name: Array[
+                                    {
+                                      comparison: ("EQUALS" | "NOT_EQUALS"),
+                                      value: ::String
+                                    },
+                                  ]?,
+                                  lambda_function_tags: Array[
+                                    {
+                                      comparison: ("EQUALS"),
+                                      key: ::String,
+                                      value: ::String?
+                                    },
+                                  ]?,
+                                  resource_id: Array[
+                                    {
+                                      comparison: ("EQUALS" | "NOT_EQUALS"),
+                                      value: ::String
+                                    },
+                                  ]?,
+                                  resource_type: Array[
+                                    {
+                                      comparison: ("EQUALS" | "NOT_EQUALS"),
+                                      value: ::String
+                                    },
+                                  ]?
+                                },
+                                s3_destination: {
+                                  bucket_name: ::String,
+                                  key_prefix: ::String?,
+                                  kms_key_arn: ::String
+                                }
+                              ) -> _CreateSbomExportResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSbomExportResponseSuccess
+
+      interface _DeleteCisScanConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCisScanConfigurationResponse]
+        def scan_configuration_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#delete_cis_scan_configuration-instance_method
+      def delete_cis_scan_configuration: (
+                                           scan_configuration_arn: ::String
+                                         ) -> _DeleteCisScanConfigurationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCisScanConfigurationResponseSuccess
+
+      interface _DeleteFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFilterResponse]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#delete_filter-instance_method
+      def delete_filter: (
+                           arn: ::String
+                         ) -> _DeleteFilterResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFilterResponseSuccess
+
+      interface _DescribeOrganizationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeOrganizationConfigurationResponse]
+        def auto_enable: () -> Types::AutoEnable
+        def max_account_limit_reached: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#describe_organization_configuration-instance_method
+      def describe_organization_configuration: (
+                                               ) -> _DescribeOrganizationConfigurationResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeOrganizationConfigurationResponseSuccess
+
+      interface _DisableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableResponse]
+        def accounts: () -> ::Array[Types::Account]
+        def failed_accounts: () -> ::Array[Types::FailedAccount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#disable-instance_method
+      def disable: (
+                     ?account_ids: Array[::String],
+                     ?resource_types: Array[("EC2" | "ECR" | "LAMBDA" | "LAMBDA_CODE")]
+                   ) -> _DisableResponseSuccess
+                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableResponseSuccess
+
+      interface _DisableDelegatedAdminAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableDelegatedAdminAccountResponse]
+        def delegated_admin_account_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#disable_delegated_admin_account-instance_method
+      def disable_delegated_admin_account: (
+                                             delegated_admin_account_id: ::String
+                                           ) -> _DisableDelegatedAdminAccountResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableDelegatedAdminAccountResponseSuccess
+
+      interface _DisassociateMemberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateMemberResponse]
+        def account_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#disassociate_member-instance_method
+      def disassociate_member: (
+                                 account_id: ::String
+                               ) -> _DisassociateMemberResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateMemberResponseSuccess
+
+      interface _EnableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableResponse]
+        def accounts: () -> ::Array[Types::Account]
+        def failed_accounts: () -> ::Array[Types::FailedAccount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#enable-instance_method
+      def enable: (
+                    ?account_ids: Array[::String],
+                    ?client_token: ::String,
+                    resource_types: Array[("EC2" | "ECR" | "LAMBDA" | "LAMBDA_CODE")]
+                  ) -> _EnableResponseSuccess
+                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableResponseSuccess
+
+      interface _EnableDelegatedAdminAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableDelegatedAdminAccountResponse]
+        def delegated_admin_account_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#enable_delegated_admin_account-instance_method
+      def enable_delegated_admin_account: (
+                                            ?client_token: ::String,
+                                            delegated_admin_account_id: ::String
+                                          ) -> _EnableDelegatedAdminAccountResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableDelegatedAdminAccountResponseSuccess
+
+      interface _GetCisScanReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCisScanReportResponse]
+        def status: () -> ("SUCCEEDED" | "FAILED" | "IN_PROGRESS")
+        def url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_cis_scan_report-instance_method
+      def get_cis_scan_report: (
+                                 scan_arn: ::String,
+                                 ?target_accounts: Array[::String]
+                               ) -> _GetCisScanReportResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCisScanReportResponseSuccess
+
+      interface _GetCisScanResultDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCisScanResultDetailsResponse]
+        def next_token: () -> ::String
+        def scan_result_details: () -> ::Array[Types::CisScanResultDetails]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_cis_scan_result_details-instance_method
+      def get_cis_scan_result_details: (
+                                         account_id: ::String,
+                                         ?filter_criteria: {
+                                           check_id_filters: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           finding_arn_filters: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           finding_status_filters: Array[
+                                             {
+                                               comparison: ("EQUALS"),
+                                               value: ("PASSED" | "FAILED" | "SKIPPED")
+                                             },
+                                           ]?,
+                                           security_level_filters: Array[
+                                             {
+                                               comparison: ("EQUALS"),
+                                               value: ("LEVEL_1" | "LEVEL_2")
+                                             },
+                                           ]?,
+                                           title_filters: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?
+                                         },
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String,
+                                         scan_arn: ::String,
+                                         ?sort_by: ("CHECK_ID" | "STATUS"),
+                                         ?sort_order: ("ASC" | "DESC"),
+                                         target_resource_id: ::String
+                                       ) -> _GetCisScanResultDetailsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCisScanResultDetailsResponseSuccess
+
+      interface _GetConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConfigurationResponse]
+        def ecr_configuration: () -> Types::EcrConfigurationState
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_configuration-instance_method
+      def get_configuration: (
+                             ) -> _GetConfigurationResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfigurationResponseSuccess
+
+      interface _GetDelegatedAdminAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDelegatedAdminAccountResponse]
+        def delegated_admin: () -> Types::DelegatedAdmin
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_delegated_admin_account-instance_method
+      def get_delegated_admin_account: (
+                                       ) -> _GetDelegatedAdminAccountResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDelegatedAdminAccountResponseSuccess
+
+      interface _GetEc2DeepInspectionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEc2DeepInspectionConfigurationResponse]
+        def error_message: () -> ::String
+        def org_package_paths: () -> ::Array[::String]
+        def package_paths: () -> ::Array[::String]
+        def status: () -> ("ACTIVATED" | "DEACTIVATED" | "PENDING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_ec2_deep_inspection_configuration-instance_method
+      def get_ec2_deep_inspection_configuration: (
+                                                 ) -> _GetEc2DeepInspectionConfigurationResponseSuccess
+                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEc2DeepInspectionConfigurationResponseSuccess
+
+      interface _GetEncryptionKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEncryptionKeyResponse]
+        def kms_key_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_encryption_key-instance_method
+      def get_encryption_key: (
+                                resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION"),
+                                scan_type: ("NETWORK" | "PACKAGE" | "CODE")
+                              ) -> _GetEncryptionKeyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEncryptionKeyResponseSuccess
+
+      interface _GetFindingsReportStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFindingsReportStatusResponse]
+        def destination: () -> Types::Destination
+        def error_code: () -> ("INTERNAL_ERROR" | "INVALID_PERMISSIONS" | "NO_FINDINGS_FOUND" | "BUCKET_NOT_FOUND" | "INCOMPATIBLE_BUCKET_REGION" | "MALFORMED_KMS_KEY")
+        def error_message: () -> ::String
+        def filter_criteria: () -> Types::FilterCriteria
+        def report_id: () -> ::String
+        def status: () -> ("SUCCEEDED" | "IN_PROGRESS" | "CANCELLED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_findings_report_status-instance_method
+      def get_findings_report_status: (
+                                        ?report_id: ::String
+                                      ) -> _GetFindingsReportStatusResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFindingsReportStatusResponseSuccess
+
+      interface _GetMemberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMemberResponse]
+        def member: () -> Types::Member
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_member-instance_method
+      def get_member: (
+                        account_id: ::String
+                      ) -> _GetMemberResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMemberResponseSuccess
+
+      interface _GetSbomExportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSbomExportResponse]
+        def error_code: () -> ("INTERNAL_ERROR" | "INVALID_PERMISSIONS" | "NO_FINDINGS_FOUND" | "BUCKET_NOT_FOUND" | "INCOMPATIBLE_BUCKET_REGION" | "MALFORMED_KMS_KEY")
+        def error_message: () -> ::String
+        def filter_criteria: () -> Types::ResourceFilterCriteria
+        def format: () -> ("CYCLONEDX_1_4" | "SPDX_2_3")
+        def report_id: () -> ::String
+        def s3_destination: () -> Types::Destination
+        def status: () -> ("SUCCEEDED" | "IN_PROGRESS" | "CANCELLED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_sbom_export-instance_method
+      def get_sbom_export: (
+                             report_id: ::String
+                           ) -> _GetSbomExportResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSbomExportResponseSuccess
+
+      interface _ListAccountPermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccountPermissionsResponse]
+        def next_token: () -> ::String
+        def permissions: () -> ::Array[Types::Permission]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#list_account_permissions-instance_method
+      def list_account_permissions: (
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String,
+                                      ?service: ("EC2" | "ECR" | "LAMBDA")
+                                    ) -> _ListAccountPermissionsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccountPermissionsResponseSuccess
+
+      interface _ListCisScanConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCisScanConfigurationsResponse]
+        def next_token: () -> ::String
+        def scan_configurations: () -> ::Array[Types::CisScanConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#list_cis_scan_configurations-instance_method
+      def list_cis_scan_configurations: (
+                                          ?filter_criteria: {
+                                            scan_configuration_arn_filters: Array[
+                                              {
+                                                comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                                value: ::String
+                                              },
+                                            ]?,
+                                            scan_name_filters: Array[
+                                              {
+                                                comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                                value: ::String
+                                              },
+                                            ]?,
+                                            target_resource_tag_filters: Array[
+                                              {
+                                                comparison: ("EQUALS"),
+                                                key: ::String,
+                                                value: ::String
+                                              },
+                                            ]?
+                                          },
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String,
+                                          ?sort_by: ("SCAN_NAME" | "SCAN_CONFIGURATION_ARN"),
+                                          ?sort_order: ("ASC" | "DESC")
+                                        ) -> _ListCisScanConfigurationsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCisScanConfigurationsResponseSuccess
+
+      interface _ListCisScanResultsAggregatedByChecksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCisScanResultsAggregatedByChecksResponse]
+        def check_aggregations: () -> ::Array[Types::CisCheckAggregation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#list_cis_scan_results_aggregated_by_checks-instance_method
+      def list_cis_scan_results_aggregated_by_checks: (
+                                                        ?filter_criteria: {
+                                                          account_id_filters: Array[
+                                                            {
+                                                              comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                                              value: ::String
+                                                            },
+                                                          ]?,
+                                                          check_id_filters: Array[
+                                                            {
+                                                              comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                                              value: ::String
+                                                            },
+                                                          ]?,
+                                                          failed_resources_filters: Array[
+                                                            {
+                                                              lower_inclusive: ::Integer?,
+                                                              upper_inclusive: ::Integer?
+                                                            },
+                                                          ]?,
+                                                          platform_filters: Array[
+                                                            {
+                                                              comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                                              value: ::String
+                                                            },
+                                                          ]?,
+                                                          security_level_filters: Array[
+                                                            {
+                                                              comparison: ("EQUALS"),
+                                                              value: ("LEVEL_1" | "LEVEL_2")
+                                                            },
+                                                          ]?,
+                                                          title_filters: Array[
+                                                            {
+                                                              comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                                              value: ::String
+                                                            },
+                                                          ]?
+                                                        },
+                                                        ?max_results: ::Integer,
+                                                        ?next_token: ::String,
+                                                        scan_arn: ::String,
+                                                        ?sort_by: ("CHECK_ID" | "TITLE" | "PLATFORM" | "FAILED_COUNTS" | "SECURITY_LEVEL"),
+                                                        ?sort_order: ("ASC" | "DESC")
+                                                      ) -> _ListCisScanResultsAggregatedByChecksResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCisScanResultsAggregatedByChecksResponseSuccess
+
+      interface _ListCisScanResultsAggregatedByTargetResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCisScanResultsAggregatedByTargetResourceResponse]
+        def next_token: () -> ::String
+        def target_resource_aggregations: () -> ::Array[Types::CisTargetResourceAggregation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#list_cis_scan_results_aggregated_by_target_resource-instance_method
+      def list_cis_scan_results_aggregated_by_target_resource: (
+                                                                 ?filter_criteria: {
+                                                                   account_id_filters: Array[
+                                                                     {
+                                                                       comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                                                       value: ::String
+                                                                     },
+                                                                   ]?,
+                                                                   check_id_filters: Array[
+                                                                     {
+                                                                       comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                                                       value: ::String
+                                                                     },
+                                                                   ]?,
+                                                                   failed_checks_filters: Array[
+                                                                     {
+                                                                       lower_inclusive: ::Integer?,
+                                                                       upper_inclusive: ::Integer?
+                                                                     },
+                                                                   ]?,
+                                                                   platform_filters: Array[
+                                                                     {
+                                                                       comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                                                       value: ::String
+                                                                     },
+                                                                   ]?,
+                                                                   status_filters: Array[
+                                                                     {
+                                                                       comparison: ("EQUALS"),
+                                                                       value: ("PASSED" | "FAILED" | "SKIPPED")
+                                                                     },
+                                                                   ]?,
+                                                                   target_resource_id_filters: Array[
+                                                                     {
+                                                                       comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                                                       value: ::String
+                                                                     },
+                                                                   ]?,
+                                                                   target_resource_tag_filters: Array[
+                                                                     {
+                                                                       comparison: ("EQUALS"),
+                                                                       key: ::String,
+                                                                       value: ::String
+                                                                     },
+                                                                   ]?,
+                                                                   target_status_filters: Array[
+                                                                     {
+                                                                       comparison: ("EQUALS"),
+                                                                       value: ("TIMED_OUT" | "CANCELLED" | "COMPLETED")
+                                                                     },
+                                                                   ]?,
+                                                                   target_status_reason_filters: Array[
+                                                                     {
+                                                                       comparison: ("EQUALS"),
+                                                                       value: ("SCAN_IN_PROGRESS" | "UNSUPPORTED_OS" | "SSM_UNMANAGED")
+                                                                     },
+                                                                   ]?
+                                                                 },
+                                                                 ?max_results: ::Integer,
+                                                                 ?next_token: ::String,
+                                                                 scan_arn: ::String,
+                                                                 ?sort_by: ("RESOURCE_ID" | "FAILED_COUNTS" | "ACCOUNT_ID" | "PLATFORM" | "TARGET_STATUS" | "TARGET_STATUS_REASON"),
+                                                                 ?sort_order: ("ASC" | "DESC")
+                                                               ) -> _ListCisScanResultsAggregatedByTargetResourceResponseSuccess
+                                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCisScanResultsAggregatedByTargetResourceResponseSuccess
+
+      interface _ListCisScansResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCisScansResponse]
+        def next_token: () -> ::String
+        def scans: () -> ::Array[Types::CisScan]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#list_cis_scans-instance_method
+      def list_cis_scans: (
+                            ?detail_level: ("ORGANIZATION" | "MEMBER"),
+                            ?filter_criteria: {
+                              failed_checks_filters: Array[
+                                {
+                                  lower_inclusive: ::Integer?,
+                                  upper_inclusive: ::Integer?
+                                },
+                              ]?,
+                              scan_arn_filters: Array[
+                                {
+                                  comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                  value: ::String
+                                },
+                              ]?,
+                              scan_at_filters: Array[
+                                {
+                                  earliest_scan_start_time: ::Time?,
+                                  latest_scan_start_time: ::Time?
+                                },
+                              ]?,
+                              scan_configuration_arn_filters: Array[
+                                {
+                                  comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                  value: ::String
+                                },
+                              ]?,
+                              scan_name_filters: Array[
+                                {
+                                  comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                  value: ::String
+                                },
+                              ]?,
+                              scan_status_filters: Array[
+                                {
+                                  comparison: ("EQUALS"),
+                                  value: ("FAILED" | "COMPLETED" | "CANCELLED" | "IN_PROGRESS")
+                                },
+                              ]?,
+                              scheduled_by_filters: Array[
+                                {
+                                  comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                  value: ::String
+                                },
+                              ]?,
+                              target_account_id_filters: Array[
+                                {
+                                  comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                  value: ::String
+                                },
+                              ]?,
+                              target_resource_id_filters: Array[
+                                {
+                                  comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                  value: ::String
+                                },
+                              ]?,
+                              target_resource_tag_filters: Array[
+                                {
+                                  comparison: ("EQUALS"),
+                                  key: ::String,
+                                  value: ::String
+                                },
+                              ]?
+                            },
+                            ?max_results: ::Integer,
+                            ?next_token: ::String,
+                            ?sort_by: ("STATUS" | "SCHEDULED_BY" | "SCAN_START_DATE" | "FAILED_CHECKS"),
+                            ?sort_order: ("ASC" | "DESC")
+                          ) -> _ListCisScansResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCisScansResponseSuccess
+
+      interface _ListCoverageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCoverageResponse]
+        def covered_resources: () -> ::Array[Types::CoveredResource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#list_coverage-instance_method
+      def list_coverage: (
+                           ?filter_criteria: {
+                             account_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ec2_instance_tags: Array[
+                               {
+                                 comparison: ("EQUALS"),
+                                 key: ::String,
+                                 value: ::String?
+                               },
+                             ]?,
+                             ecr_image_tags: Array[
+                               {
+                                 comparison: ("EQUALS" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ecr_repository_name: Array[
+                               {
+                                 comparison: ("EQUALS" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             image_pulled_at: Array[
+                               {
+                                 end_inclusive: ::Time?,
+                                 start_inclusive: ::Time?
+                               },
+                             ]?,
+                             lambda_function_name: Array[
+                               {
+                                 comparison: ("EQUALS" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             lambda_function_runtime: Array[
+                               {
+                                 comparison: ("EQUALS" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             lambda_function_tags: Array[
+                               {
+                                 comparison: ("EQUALS"),
+                                 key: ::String,
+                                 value: ::String?
+                               },
+                             ]?,
+                             last_scanned_at: Array[
+                               {
+                                 end_inclusive: ::Time?,
+                                 start_inclusive: ::Time?
+                               },
+                             ]?,
+                             resource_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             resource_type: Array[
+                               {
+                                 comparison: ("EQUALS" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             scan_status_code: Array[
+                               {
+                                 comparison: ("EQUALS" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             scan_status_reason: Array[
+                               {
+                                 comparison: ("EQUALS" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             scan_type: Array[
+                               {
+                                 comparison: ("EQUALS" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?
+                           },
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListCoverageResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCoverageResponseSuccess
+
+      interface _ListCoverageStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCoverageStatisticsResponse]
+        def counts_by_group: () -> ::Array[Types::Counts]
+        def next_token: () -> ::String
+        def total_counts: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#list_coverage_statistics-instance_method
+      def list_coverage_statistics: (
+                                      ?filter_criteria: {
+                                        account_id: Array[
+                                          {
+                                            comparison: ("EQUALS" | "NOT_EQUALS"),
+                                            value: ::String
+                                          },
+                                        ]?,
+                                        ec2_instance_tags: Array[
+                                          {
+                                            comparison: ("EQUALS"),
+                                            key: ::String,
+                                            value: ::String?
+                                          },
+                                        ]?,
+                                        ecr_image_tags: Array[
+                                          {
+                                            comparison: ("EQUALS" | "NOT_EQUALS"),
+                                            value: ::String
+                                          },
+                                        ]?,
+                                        ecr_repository_name: Array[
+                                          {
+                                            comparison: ("EQUALS" | "NOT_EQUALS"),
+                                            value: ::String
+                                          },
+                                        ]?,
+                                        image_pulled_at: Array[
+                                          {
+                                            end_inclusive: ::Time?,
+                                            start_inclusive: ::Time?
+                                          },
+                                        ]?,
+                                        lambda_function_name: Array[
+                                          {
+                                            comparison: ("EQUALS" | "NOT_EQUALS"),
+                                            value: ::String
+                                          },
+                                        ]?,
+                                        lambda_function_runtime: Array[
+                                          {
+                                            comparison: ("EQUALS" | "NOT_EQUALS"),
+                                            value: ::String
+                                          },
+                                        ]?,
+                                        lambda_function_tags: Array[
+                                          {
+                                            comparison: ("EQUALS"),
+                                            key: ::String,
+                                            value: ::String?
+                                          },
+                                        ]?,
+                                        last_scanned_at: Array[
+                                          {
+                                            end_inclusive: ::Time?,
+                                            start_inclusive: ::Time?
+                                          },
+                                        ]?,
+                                        resource_id: Array[
+                                          {
+                                            comparison: ("EQUALS" | "NOT_EQUALS"),
+                                            value: ::String
+                                          },
+                                        ]?,
+                                        resource_type: Array[
+                                          {
+                                            comparison: ("EQUALS" | "NOT_EQUALS"),
+                                            value: ::String
+                                          },
+                                        ]?,
+                                        scan_status_code: Array[
+                                          {
+                                            comparison: ("EQUALS" | "NOT_EQUALS"),
+                                            value: ::String
+                                          },
+                                        ]?,
+                                        scan_status_reason: Array[
+                                          {
+                                            comparison: ("EQUALS" | "NOT_EQUALS"),
+                                            value: ::String
+                                          },
+                                        ]?,
+                                        scan_type: Array[
+                                          {
+                                            comparison: ("EQUALS" | "NOT_EQUALS"),
+                                            value: ::String
+                                          },
+                                        ]?
+                                      },
+                                      ?group_by: ("SCAN_STATUS_CODE" | "SCAN_STATUS_REASON" | "ACCOUNT_ID" | "RESOURCE_TYPE" | "ECR_REPOSITORY_NAME"),
+                                      ?next_token: ::String
+                                    ) -> _ListCoverageStatisticsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCoverageStatisticsResponseSuccess
+
+      interface _ListDelegatedAdminAccountsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDelegatedAdminAccountsResponse]
+        def delegated_admin_accounts: () -> ::Array[Types::DelegatedAdminAccount]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#list_delegated_admin_accounts-instance_method
+      def list_delegated_admin_accounts: (
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String
+                                         ) -> _ListDelegatedAdminAccountsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDelegatedAdminAccountsResponseSuccess
+
+      interface _ListFiltersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFiltersResponse]
+        def filters: () -> ::Array[Types::Filter]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#list_filters-instance_method
+      def list_filters: (
+                          ?action: ("NONE" | "SUPPRESS"),
+                          ?arns: Array[::String],
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListFiltersResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFiltersResponseSuccess
+
+      interface _ListFindingAggregationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFindingAggregationsResponse]
+        def aggregation_type: () -> ("FINDING_TYPE" | "PACKAGE" | "TITLE" | "REPOSITORY" | "AMI" | "AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER" | "IMAGE_LAYER" | "ACCOUNT" | "AWS_LAMBDA_FUNCTION" | "LAMBDA_LAYER")
+        def next_token: () -> ::String
+        def responses: () -> ::Array[Types::AggregationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#list_finding_aggregations-instance_method
+      def list_finding_aggregations: (
+                                       ?account_ids: Array[
+                                         {
+                                           comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                           value: ::String
+                                         },
+                                       ],
+                                       ?aggregation_request: {
+                                         account_aggregation: {
+                                           finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")?,
+                                           resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION")?,
+                                           sort_by: ("CRITICAL" | "HIGH" | "ALL")?,
+                                           sort_order: ("ASC" | "DESC")?
+                                         }?,
+                                         ami_aggregation: {
+                                           amis: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           sort_by: ("CRITICAL" | "HIGH" | "ALL" | "AFFECTED_INSTANCES")?,
+                                           sort_order: ("ASC" | "DESC")?
+                                         }?,
+                                         aws_ecr_container_aggregation: {
+                                           architectures: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           image_shas: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           image_tags: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           repositories: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           resource_ids: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           sort_by: ("CRITICAL" | "HIGH" | "ALL")?,
+                                           sort_order: ("ASC" | "DESC")?
+                                         }?,
+                                         ec2_instance_aggregation: {
+                                           amis: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           instance_ids: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           instance_tags: Array[
+                                             {
+                                               comparison: ("EQUALS"),
+                                               key: ::String,
+                                               value: ::String?
+                                             },
+                                           ]?,
+                                           operating_systems: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           sort_by: ("NETWORK_FINDINGS" | "CRITICAL" | "HIGH" | "ALL")?,
+                                           sort_order: ("ASC" | "DESC")?
+                                         }?,
+                                         finding_type_aggregation: {
+                                           finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")?,
+                                           resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION")?,
+                                           sort_by: ("CRITICAL" | "HIGH" | "ALL")?,
+                                           sort_order: ("ASC" | "DESC")?
+                                         }?,
+                                         image_layer_aggregation: {
+                                           layer_hashes: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           repositories: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           resource_ids: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           sort_by: ("CRITICAL" | "HIGH" | "ALL")?,
+                                           sort_order: ("ASC" | "DESC")?
+                                         }?,
+                                         lambda_function_aggregation: {
+                                           function_names: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           function_tags: Array[
+                                             {
+                                               comparison: ("EQUALS"),
+                                               key: ::String,
+                                               value: ::String?
+                                             },
+                                           ]?,
+                                           resource_ids: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           runtimes: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           sort_by: ("CRITICAL" | "HIGH" | "ALL")?,
+                                           sort_order: ("ASC" | "DESC")?
+                                         }?,
+                                         lambda_layer_aggregation: {
+                                           function_names: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           layer_arns: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           resource_ids: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           sort_by: ("CRITICAL" | "HIGH" | "ALL")?,
+                                           sort_order: ("ASC" | "DESC")?
+                                         }?,
+                                         package_aggregation: {
+                                           package_names: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           sort_by: ("CRITICAL" | "HIGH" | "ALL")?,
+                                           sort_order: ("ASC" | "DESC")?
+                                         }?,
+                                         repository_aggregation: {
+                                           repositories: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           sort_by: ("CRITICAL" | "HIGH" | "ALL" | "AFFECTED_IMAGES")?,
+                                           sort_order: ("ASC" | "DESC")?
+                                         }?,
+                                         title_aggregation: {
+                                           finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")?,
+                                           resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION")?,
+                                           sort_by: ("CRITICAL" | "HIGH" | "ALL")?,
+                                           sort_order: ("ASC" | "DESC")?,
+                                           titles: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           vulnerability_ids: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?
+                                         }?
+                                       },
+                                       aggregation_type: ("FINDING_TYPE" | "PACKAGE" | "TITLE" | "REPOSITORY" | "AMI" | "AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER" | "IMAGE_LAYER" | "ACCOUNT" | "AWS_LAMBDA_FUNCTION" | "LAMBDA_LAYER"),
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListFindingAggregationsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFindingAggregationsResponseSuccess
+
+      interface _ListFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFindingsResponse]
+        def findings: () -> ::Array[Types::Finding]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#list_findings-instance_method
+      def list_findings: (
+                           ?filter_criteria: {
+                             aws_account_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             code_vulnerability_detector_name: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             code_vulnerability_detector_tags: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             code_vulnerability_file_path: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             component_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             component_type: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ec2_instance_image_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ec2_instance_subnet_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ec2_instance_vpc_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ecr_image_architecture: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ecr_image_hash: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ecr_image_pushed_at: Array[
+                               {
+                                 end_inclusive: ::Time?,
+                                 start_inclusive: ::Time?
+                               },
+                             ]?,
+                             ecr_image_registry: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ecr_image_repository_name: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ecr_image_tags: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             epss_score: Array[
+                               {
+                                 lower_inclusive: ::Float?,
+                                 upper_inclusive: ::Float?
+                               },
+                             ]?,
+                             exploit_available: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             finding_arn: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             finding_status: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             finding_type: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             first_observed_at: Array[
+                               {
+                                 end_inclusive: ::Time?,
+                                 start_inclusive: ::Time?
+                               },
+                             ]?,
+                             fix_available: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             inspector_score: Array[
+                               {
+                                 lower_inclusive: ::Float?,
+                                 upper_inclusive: ::Float?
+                               },
+                             ]?,
+                             lambda_function_execution_role_arn: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             lambda_function_last_modified_at: Array[
+                               {
+                                 end_inclusive: ::Time?,
+                                 start_inclusive: ::Time?
+                               },
+                             ]?,
+                             lambda_function_layers: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             lambda_function_name: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             lambda_function_runtime: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             last_observed_at: Array[
+                               {
+                                 end_inclusive: ::Time?,
+                                 start_inclusive: ::Time?
+                               },
+                             ]?,
+                             network_protocol: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             port_range: Array[
+                               {
+                                 begin_inclusive: ::Integer?,
+                                 end_inclusive: ::Integer?
+                               },
+                             ]?,
+                             related_vulnerabilities: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             resource_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             resource_tags: Array[
+                               {
+                                 comparison: ("EQUALS"),
+                                 key: ::String,
+                                 value: ::String?
+                               },
+                             ]?,
+                             resource_type: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             severity: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             title: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             updated_at: Array[
+                               {
+                                 end_inclusive: ::Time?,
+                                 start_inclusive: ::Time?
+                               },
+                             ]?,
+                             vendor_severity: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             vulnerability_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             vulnerability_source: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             vulnerable_packages: Array[
+                               {
+                                 architecture: {
+                                   comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                   value: ::String
+                                 }?,
+                                 epoch: {
+                                   lower_inclusive: ::Float?,
+                                   upper_inclusive: ::Float?
+                                 }?,
+                                 name: {
+                                   comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                   value: ::String
+                                 }?,
+                                 release: {
+                                   comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                   value: ::String
+                                 }?,
+                                 source_lambda_layer_arn: {
+                                   comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                   value: ::String
+                                 }?,
+                                 source_layer_hash: {
+                                   comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                   value: ::String
+                                 }?,
+                                 version: {
+                                   comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                   value: ::String
+                                 }?
+                               },
+                             ]?
+                           },
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           ?sort_criteria: {
+                             field: ("AWS_ACCOUNT_ID" | "FINDING_TYPE" | "SEVERITY" | "FIRST_OBSERVED_AT" | "LAST_OBSERVED_AT" | "FINDING_STATUS" | "RESOURCE_TYPE" | "ECR_IMAGE_PUSHED_AT" | "ECR_IMAGE_REPOSITORY_NAME" | "ECR_IMAGE_REGISTRY" | "NETWORK_PROTOCOL" | "COMPONENT_TYPE" | "VULNERABILITY_ID" | "VULNERABILITY_SOURCE" | "INSPECTOR_SCORE" | "VENDOR_SEVERITY" | "EPSS_SCORE"),
+                             sort_order: ("ASC" | "DESC")
+                           }
+                         ) -> _ListFindingsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFindingsResponseSuccess
+
+      interface _ListMembersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMembersResponse]
+        def members: () -> ::Array[Types::Member]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#list_members-instance_method
+      def list_members: (
+                          ?max_results: ::Integer,
+                          ?next_token: ::String,
+                          ?only_associated: bool
+                        ) -> _ListMembersResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMembersResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListUsageTotalsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUsageTotalsResponse]
+        def next_token: () -> ::String
+        def totals: () -> ::Array[Types::UsageTotal]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#list_usage_totals-instance_method
+      def list_usage_totals: (
+                               ?account_ids: Array[::String],
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListUsageTotalsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUsageTotalsResponseSuccess
+
+      interface _ResetEncryptionKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResetEncryptionKeyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#reset_encryption_key-instance_method
+      def reset_encryption_key: (
+                                  resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION"),
+                                  scan_type: ("NETWORK" | "PACKAGE" | "CODE")
+                                ) -> _ResetEncryptionKeyResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetEncryptionKeyResponseSuccess
+
+      interface _SearchVulnerabilitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchVulnerabilitiesResponse]
+        def next_token: () -> ::String
+        def vulnerabilities: () -> ::Array[Types::Vulnerability]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#search_vulnerabilities-instance_method
+      def search_vulnerabilities: (
+                                    filter_criteria: {
+                                      vulnerability_ids: Array[::String]
+                                    },
+                                    ?next_token: ::String
+                                  ) -> _SearchVulnerabilitiesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchVulnerabilitiesResponseSuccess
+
+      interface _SendCisSessionHealthResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendCisSessionHealthResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#send_cis_session_health-instance_method
+      def send_cis_session_health: (
+                                     scan_job_id: ::String,
+                                     session_token: ::String
+                                   ) -> _SendCisSessionHealthResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendCisSessionHealthResponseSuccess
+
+      interface _SendCisSessionTelemetryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendCisSessionTelemetryResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#send_cis_session_telemetry-instance_method
+      def send_cis_session_telemetry: (
+                                        messages: Array[
+                                          {
+                                            cis_rule_details: ::String,
+                                            rule_id: ::String,
+                                            status: ("FAILED" | "PASSED" | "NOT_EVALUATED" | "INFORMATIONAL" | "UNKNOWN" | "NOT_APPLICABLE" | "ERROR")
+                                          },
+                                        ],
+                                        scan_job_id: ::String,
+                                        session_token: ::String
+                                      ) -> _SendCisSessionTelemetryResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendCisSessionTelemetryResponseSuccess
+
+      interface _StartCisSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartCisSessionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#start_cis_session-instance_method
+      def start_cis_session: (
+                               message: {
+                                 session_token: ::String
+                               },
+                               scan_job_id: ::String
+                             ) -> _StartCisSessionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCisSessionResponseSuccess
+
+      interface _StopCisSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopCisSessionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#stop_cis_session-instance_method
+      def stop_cis_session: (
+                              message: {
+                                benchmark_profile: ::String?,
+                                benchmark_version: ::String?,
+                                compute_platform: {
+                                  product: ::String?,
+                                  vendor: ::String?,
+                                  version: ::String?
+                                }?,
+                                progress: {
+                                  error_checks: ::Integer?,
+                                  failed_checks: ::Integer?,
+                                  informational_checks: ::Integer?,
+                                  not_applicable_checks: ::Integer?,
+                                  not_evaluated_checks: ::Integer?,
+                                  successful_checks: ::Integer?,
+                                  total_checks: ::Integer?,
+                                  unknown_checks: ::Integer?
+                                },
+                                reason: ::String?,
+                                status: ("SUCCESS" | "FAILED" | "INTERRUPTED" | "UNSUPPORTED_OS")
+                              },
+                              scan_job_id: ::String,
+                              session_token: ::String
+                            ) -> _StopCisSessionResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopCisSessionResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateCisScanConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCisScanConfigurationResponse]
+        def scan_configuration_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#update_cis_scan_configuration-instance_method
+      def update_cis_scan_configuration: (
+                                           scan_configuration_arn: ::String,
+                                           ?scan_name: ::String,
+                                           ?schedule: {
+                                             daily: {
+                                               start_time: {
+                                                 time_of_day: ::String,
+                                                 timezone: ::String
+                                               }
+                                             }?,
+                                             monthly: {
+                                               day: ("SUN" | "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT"),
+                                               start_time: {
+                                                 time_of_day: ::String,
+                                                 timezone: ::String
+                                               }
+                                             }?,
+                                             one_time: {
+                                             }?,
+                                             weekly: {
+                                               days: Array[("SUN" | "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT")],
+                                               start_time: {
+                                                 time_of_day: ::String,
+                                                 timezone: ::String
+                                               }
+                                             }?
+                                           },
+                                           ?security_level: ("LEVEL_1" | "LEVEL_2"),
+                                           ?targets: {
+                                             account_ids: Array[::String]?,
+                                             target_resource_tags: Hash[::String, Array[::String]]?
+                                           }
+                                         ) -> _UpdateCisScanConfigurationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCisScanConfigurationResponseSuccess
+
+      interface _UpdateConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#update_configuration-instance_method
+      def update_configuration: (
+                                  ecr_configuration: {
+                                    pull_date_rescan_duration: ("DAYS_14" | "DAYS_30" | "DAYS_60" | "DAYS_90" | "DAYS_180")?,
+                                    rescan_duration: ("LIFETIME" | "DAYS_30" | "DAYS_180" | "DAYS_14" | "DAYS_60" | "DAYS_90")
+                                  }
+                                ) -> _UpdateConfigurationResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationResponseSuccess
+
+      interface _UpdateEc2DeepInspectionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEc2DeepInspectionConfigurationResponse]
+        def error_message: () -> ::String
+        def org_package_paths: () -> ::Array[::String]
+        def package_paths: () -> ::Array[::String]
+        def status: () -> ("ACTIVATED" | "DEACTIVATED" | "PENDING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#update_ec2_deep_inspection_configuration-instance_method
+      def update_ec2_deep_inspection_configuration: (
+                                                      ?activate_deep_inspection: bool,
+                                                      ?package_paths: Array[::String]
+                                                    ) -> _UpdateEc2DeepInspectionConfigurationResponseSuccess
+                                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEc2DeepInspectionConfigurationResponseSuccess
+
+      interface _UpdateEncryptionKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEncryptionKeyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#update_encryption_key-instance_method
+      def update_encryption_key: (
+                                   kms_key_id: ::String,
+                                   resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION"),
+                                   scan_type: ("NETWORK" | "PACKAGE" | "CODE")
+                                 ) -> _UpdateEncryptionKeyResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEncryptionKeyResponseSuccess
+
+      interface _UpdateFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFilterResponse]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#update_filter-instance_method
+      def update_filter: (
+                           ?action: ("NONE" | "SUPPRESS"),
+                           ?description: ::String,
+                           filter_arn: ::String,
+                           ?filter_criteria: {
+                             aws_account_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             code_vulnerability_detector_name: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             code_vulnerability_detector_tags: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             code_vulnerability_file_path: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             component_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             component_type: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ec2_instance_image_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ec2_instance_subnet_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ec2_instance_vpc_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ecr_image_architecture: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ecr_image_hash: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ecr_image_pushed_at: Array[
+                               {
+                                 end_inclusive: ::Time?,
+                                 start_inclusive: ::Time?
+                               },
+                             ]?,
+                             ecr_image_registry: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ecr_image_repository_name: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             ecr_image_tags: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             epss_score: Array[
+                               {
+                                 lower_inclusive: ::Float?,
+                                 upper_inclusive: ::Float?
+                               },
+                             ]?,
+                             exploit_available: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             finding_arn: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             finding_status: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             finding_type: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             first_observed_at: Array[
+                               {
+                                 end_inclusive: ::Time?,
+                                 start_inclusive: ::Time?
+                               },
+                             ]?,
+                             fix_available: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             inspector_score: Array[
+                               {
+                                 lower_inclusive: ::Float?,
+                                 upper_inclusive: ::Float?
+                               },
+                             ]?,
+                             lambda_function_execution_role_arn: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             lambda_function_last_modified_at: Array[
+                               {
+                                 end_inclusive: ::Time?,
+                                 start_inclusive: ::Time?
+                               },
+                             ]?,
+                             lambda_function_layers: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             lambda_function_name: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             lambda_function_runtime: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             last_observed_at: Array[
+                               {
+                                 end_inclusive: ::Time?,
+                                 start_inclusive: ::Time?
+                               },
+                             ]?,
+                             network_protocol: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             port_range: Array[
+                               {
+                                 begin_inclusive: ::Integer?,
+                                 end_inclusive: ::Integer?
+                               },
+                             ]?,
+                             related_vulnerabilities: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             resource_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             resource_tags: Array[
+                               {
+                                 comparison: ("EQUALS"),
+                                 key: ::String,
+                                 value: ::String?
+                               },
+                             ]?,
+                             resource_type: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             severity: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             title: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             updated_at: Array[
+                               {
+                                 end_inclusive: ::Time?,
+                                 start_inclusive: ::Time?
+                               },
+                             ]?,
+                             vendor_severity: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             vulnerability_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             vulnerability_source: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             vulnerable_packages: Array[
+                               {
+                                 architecture: {
+                                   comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                   value: ::String
+                                 }?,
+                                 epoch: {
+                                   lower_inclusive: ::Float?,
+                                   upper_inclusive: ::Float?
+                                 }?,
+                                 name: {
+                                   comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                   value: ::String
+                                 }?,
+                                 release: {
+                                   comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                   value: ::String
+                                 }?,
+                                 source_lambda_layer_arn: {
+                                   comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                   value: ::String
+                                 }?,
+                                 source_layer_hash: {
+                                   comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                   value: ::String
+                                 }?,
+                                 version: {
+                                   comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                   value: ::String
+                                 }?
+                               },
+                             ]?
+                           },
+                           ?name: ::String,
+                           ?reason: ::String
+                         ) -> _UpdateFilterResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFilterResponseSuccess
+
+      interface _UpdateOrgEc2DeepInspectionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateOrgEc2DeepInspectionConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#update_org_ec2_deep_inspection_configuration-instance_method
+      def update_org_ec2_deep_inspection_configuration: (
+                                                          org_package_paths: Array[::String]
+                                                        ) -> _UpdateOrgEc2DeepInspectionConfigurationResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOrgEc2DeepInspectionConfigurationResponseSuccess
+
+      interface _UpdateOrganizationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateOrganizationConfigurationResponse]
+        def auto_enable: () -> Types::AutoEnable
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#update_organization_configuration-instance_method
+      def update_organization_configuration: (
+                                               auto_enable: {
+                                                 ec2: bool,
+                                                 ecr: bool,
+                                                 lambda: bool?,
+                                                 lambda_code: bool?
+                                               }
+                                             ) -> _UpdateOrganizationConfigurationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOrganizationConfigurationResponseSuccess
+    end
+  end
+end
+

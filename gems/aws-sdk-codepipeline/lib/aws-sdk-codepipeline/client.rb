@@ -683,7 +683,15 @@ module Aws::CodePipeline
     #         },
     #       ],
     #       version: 1,
+    #       execution_mode: "QUEUED", # accepts QUEUED, SUPERSEDED, PARALLEL
     #       pipeline_type: "V1", # accepts V1, V2
+    #       variables: [
+    #         {
+    #           name: "PipelineVariableName", # required
+    #           default_value: "PipelineVariableValue",
+    #           description: "PipelineVariableDescription",
+    #         },
+    #       ],
     #       triggers: [
     #         {
     #           provider_type: "CodeStarSourceConnection", # required, accepts CodeStarSourceConnection
@@ -695,16 +703,30 @@ module Aws::CodePipeline
     #                   includes: ["GitTagNamePattern"],
     #                   excludes: ["GitTagNamePattern"],
     #                 },
+    #                 branches: {
+    #                   includes: ["GitBranchNamePattern"],
+    #                   excludes: ["GitBranchNamePattern"],
+    #                 },
+    #                 file_paths: {
+    #                   includes: ["GitFilePathPattern"],
+    #                   excludes: ["GitFilePathPattern"],
+    #                 },
+    #               },
+    #             ],
+    #             pull_request: [
+    #               {
+    #                 events: ["OPEN"], # accepts OPEN, UPDATED, CLOSED
+    #                 branches: {
+    #                   includes: ["GitBranchNamePattern"],
+    #                   excludes: ["GitBranchNamePattern"],
+    #                 },
+    #                 file_paths: {
+    #                   includes: ["GitFilePathPattern"],
+    #                   excludes: ["GitFilePathPattern"],
+    #                 },
     #               },
     #             ],
     #           },
-    #         },
-    #       ],
-    #       variables: [
-    #         {
-    #           name: "PipelineVariableName", # required
-    #           default_value: "PipelineVariableValue",
-    #           description: "PipelineVariableDescription",
     #         },
     #       ],
     #     },
@@ -751,7 +773,12 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
     #   resp.pipeline.version #=> Integer
+    #   resp.pipeline.execution_mode #=> String, one of "QUEUED", "SUPERSEDED", "PARALLEL"
     #   resp.pipeline.pipeline_type #=> String, one of "V1", "V2"
+    #   resp.pipeline.variables #=> Array
+    #   resp.pipeline.variables[0].name #=> String
+    #   resp.pipeline.variables[0].default_value #=> String
+    #   resp.pipeline.variables[0].description #=> String
     #   resp.pipeline.triggers #=> Array
     #   resp.pipeline.triggers[0].provider_type #=> String, one of "CodeStarSourceConnection"
     #   resp.pipeline.triggers[0].git_configuration.source_action_name #=> String
@@ -760,10 +787,25 @@ module Aws::CodePipeline
     #   resp.pipeline.triggers[0].git_configuration.push[0].tags.includes[0] #=> String
     #   resp.pipeline.triggers[0].git_configuration.push[0].tags.excludes #=> Array
     #   resp.pipeline.triggers[0].git_configuration.push[0].tags.excludes[0] #=> String
-    #   resp.pipeline.variables #=> Array
-    #   resp.pipeline.variables[0].name #=> String
-    #   resp.pipeline.variables[0].default_value #=> String
-    #   resp.pipeline.variables[0].description #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.excludes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.excludes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].events #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].events[0] #=> String, one of "OPEN", "UPDATED", "CLOSED"
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.excludes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.excludes[0] #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -1181,7 +1223,12 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
     #   resp.pipeline.version #=> Integer
+    #   resp.pipeline.execution_mode #=> String, one of "QUEUED", "SUPERSEDED", "PARALLEL"
     #   resp.pipeline.pipeline_type #=> String, one of "V1", "V2"
+    #   resp.pipeline.variables #=> Array
+    #   resp.pipeline.variables[0].name #=> String
+    #   resp.pipeline.variables[0].default_value #=> String
+    #   resp.pipeline.variables[0].description #=> String
     #   resp.pipeline.triggers #=> Array
     #   resp.pipeline.triggers[0].provider_type #=> String, one of "CodeStarSourceConnection"
     #   resp.pipeline.triggers[0].git_configuration.source_action_name #=> String
@@ -1190,10 +1237,25 @@ module Aws::CodePipeline
     #   resp.pipeline.triggers[0].git_configuration.push[0].tags.includes[0] #=> String
     #   resp.pipeline.triggers[0].git_configuration.push[0].tags.excludes #=> Array
     #   resp.pipeline.triggers[0].git_configuration.push[0].tags.excludes[0] #=> String
-    #   resp.pipeline.variables #=> Array
-    #   resp.pipeline.variables[0].name #=> String
-    #   resp.pipeline.variables[0].default_value #=> String
-    #   resp.pipeline.variables[0].description #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.excludes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.excludes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].events #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].events[0] #=> String, one of "OPEN", "UPDATED", "CLOSED"
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.excludes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.excludes[0] #=> String
     #   resp.metadata.pipeline_arn #=> String
     #   resp.metadata.created #=> Time
     #   resp.metadata.updated #=> Time
@@ -1245,11 +1307,12 @@ module Aws::CodePipeline
     #   resp.pipeline_execution.artifact_revisions[0].revision_summary #=> String
     #   resp.pipeline_execution.artifact_revisions[0].created #=> Time
     #   resp.pipeline_execution.artifact_revisions[0].revision_url #=> String
-    #   resp.pipeline_execution.trigger.trigger_type #=> String, one of "CreatePipeline", "StartPipelineExecution", "PollForSourceChanges", "Webhook", "CloudWatchEvent", "PutActionRevision", "WebhookV2"
-    #   resp.pipeline_execution.trigger.trigger_detail #=> String
     #   resp.pipeline_execution.variables #=> Array
     #   resp.pipeline_execution.variables[0].name #=> String
     #   resp.pipeline_execution.variables[0].resolved_value #=> String
+    #   resp.pipeline_execution.trigger.trigger_type #=> String, one of "CreatePipeline", "StartPipelineExecution", "PollForSourceChanges", "Webhook", "CloudWatchEvent", "PutActionRevision", "WebhookV2"
+    #   resp.pipeline_execution.trigger.trigger_detail #=> String
+    #   resp.pipeline_execution.execution_mode #=> String, one of "QUEUED", "SUPERSEDED", "PARALLEL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipelineExecution AWS API Documentation
     #
@@ -1294,6 +1357,9 @@ module Aws::CodePipeline
     #   resp.stage_states[0].stage_name #=> String
     #   resp.stage_states[0].inbound_execution.pipeline_execution_id #=> String
     #   resp.stage_states[0].inbound_execution.status #=> String, one of "Cancelled", "InProgress", "Failed", "Stopped", "Stopping", "Succeeded"
+    #   resp.stage_states[0].inbound_executions #=> Array
+    #   resp.stage_states[0].inbound_executions[0].pipeline_execution_id #=> String
+    #   resp.stage_states[0].inbound_executions[0].status #=> String, one of "Cancelled", "InProgress", "Failed", "Stopped", "Stopping", "Succeeded"
     #   resp.stage_states[0].inbound_transition_state.enabled #=> Boolean
     #   resp.stage_states[0].inbound_transition_state.last_changed_by #=> String
     #   resp.stage_states[0].inbound_transition_state.last_changed_at #=> Time
@@ -1440,6 +1506,10 @@ module Aws::CodePipeline
     #     pipeline_name: "PipelineName", # required
     #     filter: {
     #       pipeline_execution_id: "PipelineExecutionId",
+    #       latest_in_pipeline_execution: {
+    #         pipeline_execution_id: "PipelineExecutionId", # required
+    #         start_time_range: "Latest", # required, accepts Latest, All
+    #       },
     #     },
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -1455,6 +1525,7 @@ module Aws::CodePipeline
     #   resp.action_execution_details[0].action_name #=> String
     #   resp.action_execution_details[0].start_time #=> Time
     #   resp.action_execution_details[0].last_update_time #=> Time
+    #   resp.action_execution_details[0].updated_by #=> String
     #   resp.action_execution_details[0].status #=> String, one of "InProgress", "Abandoned", "Succeeded", "Failed"
     #   resp.action_execution_details[0].input.action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
     #   resp.action_execution_details[0].input.action_type_id.owner #=> String, one of "AWS", "ThirdParty", "Custom"
@@ -1478,6 +1549,8 @@ module Aws::CodePipeline
     #   resp.action_execution_details[0].output.execution_result.external_execution_id #=> String
     #   resp.action_execution_details[0].output.execution_result.external_execution_summary #=> String
     #   resp.action_execution_details[0].output.execution_result.external_execution_url #=> String
+    #   resp.action_execution_details[0].output.execution_result.error_details.code #=> String
+    #   resp.action_execution_details[0].output.execution_result.error_details.message #=> String
     #   resp.action_execution_details[0].output.output_variables #=> Hash
     #   resp.action_execution_details[0].output.output_variables["OutputVariablesKey"] #=> String
     #   resp.next_token #=> String
@@ -1602,6 +1675,7 @@ module Aws::CodePipeline
     #   resp.pipeline_execution_summaries[0].trigger.trigger_type #=> String, one of "CreatePipeline", "StartPipelineExecution", "PollForSourceChanges", "Webhook", "CloudWatchEvent", "PutActionRevision", "WebhookV2"
     #   resp.pipeline_execution_summaries[0].trigger.trigger_detail #=> String
     #   resp.pipeline_execution_summaries[0].stop_trigger.reason #=> String
+    #   resp.pipeline_execution_summaries[0].execution_mode #=> String, one of "QUEUED", "SUPERSEDED", "PARALLEL"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListPipelineExecutions AWS API Documentation
@@ -1645,6 +1719,7 @@ module Aws::CodePipeline
     #   resp.pipelines[0].name #=> String
     #   resp.pipelines[0].version #=> Integer
     #   resp.pipelines[0].pipeline_type #=> String, one of "V1", "V2"
+    #   resp.pipelines[0].execution_mode #=> String, one of "QUEUED", "SUPERSEDED", "PARALLEL"
     #   resp.pipelines[0].created #=> Time
     #   resp.pipelines[0].updated #=> Time
     #   resp.next_token #=> String
@@ -2659,7 +2734,15 @@ module Aws::CodePipeline
     #         },
     #       ],
     #       version: 1,
+    #       execution_mode: "QUEUED", # accepts QUEUED, SUPERSEDED, PARALLEL
     #       pipeline_type: "V1", # accepts V1, V2
+    #       variables: [
+    #         {
+    #           name: "PipelineVariableName", # required
+    #           default_value: "PipelineVariableValue",
+    #           description: "PipelineVariableDescription",
+    #         },
+    #       ],
     #       triggers: [
     #         {
     #           provider_type: "CodeStarSourceConnection", # required, accepts CodeStarSourceConnection
@@ -2671,16 +2754,30 @@ module Aws::CodePipeline
     #                   includes: ["GitTagNamePattern"],
     #                   excludes: ["GitTagNamePattern"],
     #                 },
+    #                 branches: {
+    #                   includes: ["GitBranchNamePattern"],
+    #                   excludes: ["GitBranchNamePattern"],
+    #                 },
+    #                 file_paths: {
+    #                   includes: ["GitFilePathPattern"],
+    #                   excludes: ["GitFilePathPattern"],
+    #                 },
+    #               },
+    #             ],
+    #             pull_request: [
+    #               {
+    #                 events: ["OPEN"], # accepts OPEN, UPDATED, CLOSED
+    #                 branches: {
+    #                   includes: ["GitBranchNamePattern"],
+    #                   excludes: ["GitBranchNamePattern"],
+    #                 },
+    #                 file_paths: {
+    #                   includes: ["GitFilePathPattern"],
+    #                   excludes: ["GitFilePathPattern"],
+    #                 },
     #               },
     #             ],
     #           },
-    #         },
-    #       ],
-    #       variables: [
-    #         {
-    #           name: "PipelineVariableName", # required
-    #           default_value: "PipelineVariableValue",
-    #           description: "PipelineVariableDescription",
     #         },
     #       ],
     #     },
@@ -2721,7 +2818,12 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
     #   resp.pipeline.version #=> Integer
+    #   resp.pipeline.execution_mode #=> String, one of "QUEUED", "SUPERSEDED", "PARALLEL"
     #   resp.pipeline.pipeline_type #=> String, one of "V1", "V2"
+    #   resp.pipeline.variables #=> Array
+    #   resp.pipeline.variables[0].name #=> String
+    #   resp.pipeline.variables[0].default_value #=> String
+    #   resp.pipeline.variables[0].description #=> String
     #   resp.pipeline.triggers #=> Array
     #   resp.pipeline.triggers[0].provider_type #=> String, one of "CodeStarSourceConnection"
     #   resp.pipeline.triggers[0].git_configuration.source_action_name #=> String
@@ -2730,10 +2832,25 @@ module Aws::CodePipeline
     #   resp.pipeline.triggers[0].git_configuration.push[0].tags.includes[0] #=> String
     #   resp.pipeline.triggers[0].git_configuration.push[0].tags.excludes #=> Array
     #   resp.pipeline.triggers[0].git_configuration.push[0].tags.excludes[0] #=> String
-    #   resp.pipeline.variables #=> Array
-    #   resp.pipeline.variables[0].name #=> String
-    #   resp.pipeline.variables[0].default_value #=> String
-    #   resp.pipeline.variables[0].description #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.excludes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.excludes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].events #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].events[0] #=> String, one of "OPEN", "UPDATED", "CLOSED"
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.excludes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.excludes[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UpdatePipeline AWS API Documentation
     #
@@ -2757,7 +2874,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

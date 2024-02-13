@@ -1,0 +1,563 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::IVSRealTime
+  module Types
+
+    class AccessDeniedException
+      attr_accessor exception_message: ::String
+      SENSITIVE: []
+    end
+
+    class ChannelDestinationConfiguration
+      attr_accessor channel_arn: ::String
+      attr_accessor encoder_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Composition
+      attr_accessor arn: ::String
+      attr_accessor destinations: ::Array[Types::Destination]
+      attr_accessor end_time: ::Time
+      attr_accessor layout: Types::LayoutConfiguration
+      attr_accessor stage_arn: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor state: ("STARTING" | "ACTIVE" | "STOPPING" | "FAILED" | "STOPPED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CompositionSummary
+      attr_accessor arn: ::String
+      attr_accessor destinations: ::Array[Types::DestinationSummary]
+      attr_accessor end_time: ::Time
+      attr_accessor stage_arn: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor state: ("STARTING" | "ACTIVE" | "STOPPING" | "FAILED" | "STOPPED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor exception_message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEncoderConfigurationRequest
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor video: Types::Video
+      SENSITIVE: []
+    end
+
+    class CreateEncoderConfigurationResponse
+      attr_accessor encoder_configuration: Types::EncoderConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateParticipantTokenRequest
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor capabilities: ::Array[("PUBLISH" | "SUBSCRIBE")]
+      attr_accessor duration: ::Integer
+      attr_accessor stage_arn: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateParticipantTokenResponse
+      attr_accessor participant_token: Types::ParticipantToken
+      SENSITIVE: []
+    end
+
+    class CreateStageRequest
+      attr_accessor name: ::String
+      attr_accessor participant_token_configurations: ::Array[Types::ParticipantTokenConfiguration]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateStageResponse
+      attr_accessor participant_tokens: ::Array[Types::ParticipantToken]
+      attr_accessor stage: Types::Stage
+      SENSITIVE: []
+    end
+
+    class CreateStorageConfigurationRequest
+      attr_accessor name: ::String
+      attr_accessor s3: Types::S3StorageConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateStorageConfigurationResponse
+      attr_accessor storage_configuration: Types::StorageConfiguration
+      SENSITIVE: []
+    end
+
+    class DeleteEncoderConfigurationRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEncoderConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteStageRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStageResponse < Aws::EmptyStructure
+    end
+
+    class DeleteStorageConfigurationRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStorageConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class Destination
+      attr_accessor configuration: Types::DestinationConfiguration
+      attr_accessor detail: Types::DestinationDetail
+      attr_accessor end_time: ::Time
+      attr_accessor id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor state: ("STARTING" | "ACTIVE" | "STOPPING" | "RECONNECTING" | "FAILED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class DestinationConfiguration
+      attr_accessor channel: Types::ChannelDestinationConfiguration
+      attr_accessor name: ::String
+      attr_accessor s3: Types::S3DestinationConfiguration
+      SENSITIVE: []
+    end
+
+    class DestinationDetail
+      attr_accessor s3: Types::S3Detail
+      SENSITIVE: []
+    end
+
+    class DestinationSummary
+      attr_accessor end_time: ::Time
+      attr_accessor id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor state: ("STARTING" | "ACTIVE" | "STOPPING" | "RECONNECTING" | "FAILED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class DisconnectParticipantRequest
+      attr_accessor participant_id: ::String
+      attr_accessor reason: ::String
+      attr_accessor stage_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisconnectParticipantResponse < Aws::EmptyStructure
+    end
+
+    class EncoderConfiguration
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor video: Types::Video
+      SENSITIVE: []
+    end
+
+    class EncoderConfigurationSummary
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Event
+      attr_accessor error_code: ("INSUFFICIENT_CAPABILITIES" | "QUOTA_EXCEEDED" | "PUBLISHER_NOT_FOUND")
+      attr_accessor event_time: ::Time
+      attr_accessor name: ("JOINED" | "LEFT" | "PUBLISH_STARTED" | "PUBLISH_STOPPED" | "SUBSCRIBE_STARTED" | "SUBSCRIBE_STOPPED" | "PUBLISH_ERROR" | "SUBSCRIBE_ERROR" | "JOIN_ERROR")
+      attr_accessor participant_id: ::String
+      attr_accessor remote_participant_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCompositionRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetCompositionResponse
+      attr_accessor composition: Types::Composition
+      SENSITIVE: []
+    end
+
+    class GetEncoderConfigurationRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetEncoderConfigurationResponse
+      attr_accessor encoder_configuration: Types::EncoderConfiguration
+      SENSITIVE: []
+    end
+
+    class GetParticipantRequest
+      attr_accessor participant_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor stage_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetParticipantResponse
+      attr_accessor participant: Types::Participant
+      SENSITIVE: []
+    end
+
+    class GetStageRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetStageResponse
+      attr_accessor stage: Types::Stage
+      SENSITIVE: []
+    end
+
+    class GetStageSessionRequest
+      attr_accessor session_id: ::String
+      attr_accessor stage_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetStageSessionResponse
+      attr_accessor stage_session: Types::StageSession
+      SENSITIVE: []
+    end
+
+    class GetStorageConfigurationRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetStorageConfigurationResponse
+      attr_accessor storage_configuration: Types::StorageConfiguration
+      SENSITIVE: []
+    end
+
+    class GridConfiguration
+      attr_accessor featured_participant_attribute: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor exception_message: ::String
+      SENSITIVE: []
+    end
+
+    class LayoutConfiguration
+      attr_accessor grid: Types::GridConfiguration
+      SENSITIVE: []
+    end
+
+    class ListCompositionsRequest
+      attr_accessor filter_by_encoder_configuration_arn: ::String
+      attr_accessor filter_by_stage_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCompositionsResponse
+      attr_accessor compositions: ::Array[Types::CompositionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEncoderConfigurationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEncoderConfigurationsResponse
+      attr_accessor encoder_configurations: ::Array[Types::EncoderConfigurationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListParticipantEventsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor participant_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor stage_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListParticipantEventsResponse
+      attr_accessor events: ::Array[Types::Event]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListParticipantsRequest
+      attr_accessor filter_by_published: bool
+      attr_accessor filter_by_state: ("CONNECTED" | "DISCONNECTED")
+      attr_accessor filter_by_user_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor session_id: ::String
+      attr_accessor stage_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListParticipantsResponse
+      attr_accessor next_token: ::String
+      attr_accessor participants: ::Array[Types::ParticipantSummary]
+      SENSITIVE: []
+    end
+
+    class ListStageSessionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor stage_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListStageSessionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor stage_sessions: ::Array[Types::StageSessionSummary]
+      SENSITIVE: []
+    end
+
+    class ListStagesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStagesResponse
+      attr_accessor next_token: ::String
+      attr_accessor stages: ::Array[Types::StageSummary]
+      SENSITIVE: []
+    end
+
+    class ListStorageConfigurationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStorageConfigurationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor storage_configurations: ::Array[Types::StorageConfigurationSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Participant
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor browser_name: ::String
+      attr_accessor browser_version: ::String
+      attr_accessor first_join_time: ::Time
+      attr_accessor isp_name: ::String
+      attr_accessor os_name: ::String
+      attr_accessor os_version: ::String
+      attr_accessor participant_id: ::String
+      attr_accessor published: bool
+      attr_accessor sdk_version: ::String
+      attr_accessor state: ("CONNECTED" | "DISCONNECTED")
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class ParticipantSummary
+      attr_accessor first_join_time: ::Time
+      attr_accessor participant_id: ::String
+      attr_accessor published: bool
+      attr_accessor state: ("CONNECTED" | "DISCONNECTED")
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class ParticipantToken
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor capabilities: ::Array[("PUBLISH" | "SUBSCRIBE")]
+      attr_accessor duration: ::Integer
+      attr_accessor expiration_time: ::Time
+      attr_accessor participant_id: ::String
+      attr_accessor token: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: [:token]
+    end
+
+    class ParticipantTokenConfiguration
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor capabilities: ::Array[("PUBLISH" | "SUBSCRIBE")]
+      attr_accessor duration: ::Integer
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class PendingVerification
+      attr_accessor exception_message: ::String
+      SENSITIVE: []
+    end
+
+    class RecordingConfiguration
+      attr_accessor format: ("HLS")
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor exception_message: ::String
+      SENSITIVE: []
+    end
+
+    class S3DestinationConfiguration
+      attr_accessor encoder_configuration_arns: ::Array[::String]
+      attr_accessor recording_configuration: Types::RecordingConfiguration
+      attr_accessor storage_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class S3Detail
+      attr_accessor recording_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class S3StorageConfiguration
+      attr_accessor bucket_name: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor exception_message: ::String
+      SENSITIVE: []
+    end
+
+    class Stage
+      attr_accessor active_session_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StageSession
+      attr_accessor end_time: ::Time
+      attr_accessor session_id: ::String
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class StageSessionSummary
+      attr_accessor end_time: ::Time
+      attr_accessor session_id: ::String
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class StageSummary
+      attr_accessor active_session_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartCompositionRequest
+      attr_accessor destinations: ::Array[Types::DestinationConfiguration]
+      attr_accessor idempotency_token: ::String
+      attr_accessor layout: Types::LayoutConfiguration
+      attr_accessor stage_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartCompositionResponse
+      attr_accessor composition: Types::Composition
+      SENSITIVE: []
+    end
+
+    class StopCompositionRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopCompositionResponse < Aws::EmptyStructure
+    end
+
+    class StorageConfiguration
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor s3: Types::S3StorageConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StorageConfigurationSummary
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor s3: Types::S3StorageConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateStageRequest
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateStageResponse
+      attr_accessor stage: Types::Stage
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor exception_message: ::String
+      SENSITIVE: []
+    end
+
+    class Video
+      attr_accessor bitrate: ::Integer
+      attr_accessor framerate: ::Float
+      attr_accessor height: ::Integer
+      attr_accessor width: ::Integer
+      SENSITIVE: []
+    end
+  end
+end

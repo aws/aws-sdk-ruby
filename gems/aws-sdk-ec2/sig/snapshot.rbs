@@ -1,0 +1,188 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EC2
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html
+    class Snapshot
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#initialize-instance_method
+      def initialize: (String id, Hash[Symbol, untyped] options) -> void
+                    | (id: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#id-instance_method
+      def id: () -> String
+      alias snapshot_id id
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#data_encryption_key_id-instance_method
+      def data_encryption_key_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#description-instance_method
+      def description: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#encrypted-instance_method
+      def encrypted: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#kms_key_id-instance_method
+      def kms_key_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#owner_id-instance_method
+      def owner_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#progress-instance_method
+      def progress: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#start_time-instance_method
+      def start_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#state-instance_method
+      def state: () -> ("pending" | "completed" | "error" | "recoverable" | "recovering")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#state_message-instance_method
+      def state_message: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#volume_id-instance_method
+      def volume_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#volume_size-instance_method
+      def volume_size: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#owner_alias-instance_method
+      def owner_alias: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#outpost_arn-instance_method
+      def outpost_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#tags-instance_method
+      def tags: () -> ::Array[Types::Tag]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#storage_tier-instance_method
+      def storage_tier: () -> ("archive" | "standard")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#restore_expiry_time-instance_method
+      def restore_expiry_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#sse_type-instance_method
+      def sse_type: () -> ("sse-ebs" | "sse-kms" | "none")
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#data-instance_method
+      def data: () -> Types::Snapshot
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#wait_until_completed-instance_method
+      def wait_until_completed: (?max_attempts: Integer, ?delay: Numeric, ?before_attempt: (^(Integer attempts) -> void), ?before_wait: (^(Integer attempts, untyped response) -> void)) ?{ (untyped waiter) -> void } -> Snapshot
+                              | (?Hash[Symbol, untyped]) ?{ (untyped waiter) -> void } -> Snapshot
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#copy-instance_method
+      def copy: (
+                  ?description: ::String,
+                  ?destination_outpost_arn: ::String,
+                  ?destination_region: ::String,
+                  ?encrypted: bool,
+                  ?kms_key_id: ::String,
+                  ?presigned_url: ::String,
+                  source_region: ::String,
+                  ?tag_specifications: Array[
+                    {
+                      resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint")?,
+                      tags: Array[
+                        {
+                          key: ::String?,
+                          value: ::String?
+                        },
+                      ]?
+                    },
+                  ],
+                  ?dry_run: bool
+                ) -> Types::CopySnapshotResult
+              | (?Hash[Symbol, untyped]) -> Types::CopySnapshotResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#create_tags-instance_method
+      def create_tags: (
+                         ?dry_run: bool,
+                         tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]
+                       ) -> Tag::Collection
+                     | (?Hash[Symbol, untyped]) -> Tag::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#delete_tags-instance_method
+      def delete_tags: (
+                         ?dry_run: bool,
+                         ?tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]
+                       ) -> Tag::Collection
+                     | (?Hash[Symbol, untyped]) -> Tag::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#delete-instance_method
+      def delete: (
+                    ?dry_run: bool
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#describe_attribute-instance_method
+      def describe_attribute: (
+                                attribute: ("productCodes" | "createVolumePermission"),
+                                ?dry_run: bool
+                              ) -> Types::DescribeSnapshotAttributeResult
+                            | (?Hash[Symbol, untyped]) -> Types::DescribeSnapshotAttributeResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#modify_attribute-instance_method
+      def modify_attribute: (
+                              ?attribute: ("productCodes" | "createVolumePermission"),
+                              ?create_volume_permission: {
+                                add: Array[
+                                  {
+                                    group: ("all")?,
+                                    user_id: ::String?
+                                  },
+                                ]?,
+                                remove: Array[
+                                  {
+                                    group: ("all")?,
+                                    user_id: ::String?
+                                  },
+                                ]?
+                              },
+                              ?group_names: Array[::String],
+                              ?operation_type: ("add" | "remove"),
+                              ?user_ids: Array[::String],
+                              ?dry_run: bool
+                            ) -> ::Aws::EmptyStructure
+                          | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#reset_attribute-instance_method
+      def reset_attribute: (
+                             attribute: ("productCodes" | "createVolumePermission"),
+                             ?dry_run: bool
+                           ) -> ::Aws::EmptyStructure
+                         | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#volume-instance_method
+      def volume: () -> Volume?
+
+      class Collection < ::Aws::Resources::Collection[Snapshot]
+      end
+    end
+  end
+end

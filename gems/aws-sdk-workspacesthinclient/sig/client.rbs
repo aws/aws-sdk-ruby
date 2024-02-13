@@ -1,0 +1,280 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module WorkSpacesThinClient
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesThinClient/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEnvironmentResponse]
+        def environment: () -> Types::EnvironmentSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesThinClient/Client.html#create_environment-instance_method
+      def create_environment: (
+                                ?name: ::String,
+                                desktop_arn: ::String,
+                                ?desktop_endpoint: ::String,
+                                ?software_set_update_schedule: ("USE_MAINTENANCE_WINDOW" | "APPLY_IMMEDIATELY"),
+                                ?maintenance_window: {
+                                  type: ("SYSTEM" | "CUSTOM")?,
+                                  start_time_hour: ::Integer?,
+                                  start_time_minute: ::Integer?,
+                                  end_time_hour: ::Integer?,
+                                  end_time_minute: ::Integer?,
+                                  days_of_the_week: Array[("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")]?,
+                                  apply_time_of: ("UTC" | "DEVICE")?
+                                },
+                                ?software_set_update_mode: ("USE_LATEST" | "USE_DESIRED"),
+                                ?desired_software_set_id: ::String,
+                                ?kms_key_arn: ::String,
+                                ?client_token: ::String,
+                                ?tags: Hash[::String, ::String]
+                              ) -> _CreateEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentResponseSuccess
+
+      interface _DeleteDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDeviceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesThinClient/Client.html#delete_device-instance_method
+      def delete_device: (
+                           id: ::String,
+                           ?client_token: ::String
+                         ) -> _DeleteDeviceResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDeviceResponseSuccess
+
+      interface _DeleteEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEnvironmentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesThinClient/Client.html#delete_environment-instance_method
+      def delete_environment: (
+                                id: ::String,
+                                ?client_token: ::String
+                              ) -> _DeleteEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEnvironmentResponseSuccess
+
+      interface _DeregisterDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterDeviceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesThinClient/Client.html#deregister_device-instance_method
+      def deregister_device: (
+                               id: ::String,
+                               ?target_device_status: ("DEREGISTERED" | "ARCHIVED"),
+                               ?client_token: ::String
+                             ) -> _DeregisterDeviceResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterDeviceResponseSuccess
+
+      interface _GetDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeviceResponse]
+        def device: () -> Types::Device
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesThinClient/Client.html#get_device-instance_method
+      def get_device: (
+                        id: ::String
+                      ) -> _GetDeviceResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeviceResponseSuccess
+
+      interface _GetEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnvironmentResponse]
+        def environment: () -> Types::Environment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesThinClient/Client.html#get_environment-instance_method
+      def get_environment: (
+                             id: ::String
+                           ) -> _GetEnvironmentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentResponseSuccess
+
+      interface _GetSoftwareSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSoftwareSetResponse]
+        def software_set: () -> Types::SoftwareSet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesThinClient/Client.html#get_software_set-instance_method
+      def get_software_set: (
+                              id: ::String
+                            ) -> _GetSoftwareSetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSoftwareSetResponseSuccess
+
+      interface _ListDevicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDevicesResponse]
+        def devices: () -> ::Array[Types::DeviceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesThinClient/Client.html#list_devices-instance_method
+      def list_devices: (
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
+                        ) -> _ListDevicesResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDevicesResponseSuccess
+
+      interface _ListEnvironmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnvironmentsResponse]
+        def environments: () -> ::Array[Types::EnvironmentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesThinClient/Client.html#list_environments-instance_method
+      def list_environments: (
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListEnvironmentsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentsResponseSuccess
+
+      interface _ListSoftwareSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSoftwareSetsResponse]
+        def software_sets: () -> ::Array[Types::SoftwareSetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesThinClient/Client.html#list_software_sets-instance_method
+      def list_software_sets: (
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListSoftwareSetsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSoftwareSetsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesThinClient/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesThinClient/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesThinClient/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDeviceResponse]
+        def device: () -> Types::DeviceSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesThinClient/Client.html#update_device-instance_method
+      def update_device: (
+                           id: ::String,
+                           ?name: ::String,
+                           ?desired_software_set_id: ::String,
+                           ?software_set_update_schedule: ("USE_MAINTENANCE_WINDOW" | "APPLY_IMMEDIATELY"),
+                           ?kms_key_arn: ::String
+                         ) -> _UpdateDeviceResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDeviceResponseSuccess
+
+      interface _UpdateEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEnvironmentResponse]
+        def environment: () -> Types::EnvironmentSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesThinClient/Client.html#update_environment-instance_method
+      def update_environment: (
+                                id: ::String,
+                                ?name: ::String,
+                                ?desktop_arn: ::String,
+                                ?desktop_endpoint: ::String,
+                                ?software_set_update_schedule: ("USE_MAINTENANCE_WINDOW" | "APPLY_IMMEDIATELY"),
+                                ?maintenance_window: {
+                                  type: ("SYSTEM" | "CUSTOM")?,
+                                  start_time_hour: ::Integer?,
+                                  start_time_minute: ::Integer?,
+                                  end_time_hour: ::Integer?,
+                                  end_time_minute: ::Integer?,
+                                  days_of_the_week: Array[("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")]?,
+                                  apply_time_of: ("UTC" | "DEVICE")?
+                                },
+                                ?software_set_update_mode: ("USE_LATEST" | "USE_DESIRED"),
+                                ?desired_software_set_id: ::String
+                              ) -> _UpdateEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentResponseSuccess
+
+      interface _UpdateSoftwareSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSoftwareSetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpacesThinClient/Client.html#update_software_set-instance_method
+      def update_software_set: (
+                                 id: ::String,
+                                 validation_status: ("VALIDATED" | "NOT_VALIDATED")
+                               ) -> _UpdateSoftwareSetResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSoftwareSetResponseSuccess
+    end
+  end
+end
+

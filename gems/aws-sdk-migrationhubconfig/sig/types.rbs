@@ -1,0 +1,99 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MigrationHubConfig
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateHomeRegionControlRequest
+      attr_accessor home_region: ::String
+      attr_accessor target: Types::Target
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class CreateHomeRegionControlResult
+      attr_accessor home_region_control: Types::HomeRegionControl
+      SENSITIVE: []
+    end
+
+    class DeleteHomeRegionControlRequest
+      attr_accessor control_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteHomeRegionControlResult < Aws::EmptyStructure
+    end
+
+    class DescribeHomeRegionControlsRequest
+      attr_accessor control_id: ::String
+      attr_accessor home_region: ::String
+      attr_accessor target: Types::Target
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeHomeRegionControlsResult
+      attr_accessor home_region_controls: ::Array[Types::HomeRegionControl]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DryRunOperation
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetHomeRegionRequest < Aws::EmptyStructure
+    end
+
+    class GetHomeRegionResult
+      attr_accessor home_region: ::String
+      SENSITIVE: []
+    end
+
+    class HomeRegionControl
+      attr_accessor control_id: ::String
+      attr_accessor home_region: ::String
+      attr_accessor target: Types::Target
+      attr_accessor requested_time: ::Time
+      SENSITIVE: []
+    end
+
+    class InternalServerError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidInputException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Target
+      attr_accessor type: ("ACCOUNT")
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+  end
+end

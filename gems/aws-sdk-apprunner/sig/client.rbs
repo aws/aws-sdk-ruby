@@ -1,0 +1,686 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AppRunner
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateCustomDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateCustomDomainResponse]
+        def dns_target: () -> ::String
+        def service_arn: () -> ::String
+        def custom_domain: () -> Types::CustomDomain
+        def vpc_dns_targets: () -> ::Array[Types::VpcDNSTarget]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#associate_custom_domain-instance_method
+      def associate_custom_domain: (
+                                     service_arn: ::String,
+                                     domain_name: ::String,
+                                     ?enable_www_subdomain: bool
+                                   ) -> _AssociateCustomDomainResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateCustomDomainResponseSuccess
+
+      interface _CreateAutoScalingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAutoScalingConfigurationResponse]
+        def auto_scaling_configuration: () -> Types::AutoScalingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#create_auto_scaling_configuration-instance_method
+      def create_auto_scaling_configuration: (
+                                               auto_scaling_configuration_name: ::String,
+                                               ?max_concurrency: ::Integer,
+                                               ?min_size: ::Integer,
+                                               ?max_size: ::Integer,
+                                               ?tags: Array[
+                                                 {
+                                                   key: ::String?,
+                                                   value: ::String?
+                                                 },
+                                               ]
+                                             ) -> _CreateAutoScalingConfigurationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAutoScalingConfigurationResponseSuccess
+
+      interface _CreateConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectionResponse]
+        def connection: () -> Types::Connection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#create_connection-instance_method
+      def create_connection: (
+                               connection_name: ::String,
+                               provider_type: ("GITHUB" | "BITBUCKET"),
+                               ?tags: Array[
+                                 {
+                                   key: ::String?,
+                                   value: ::String?
+                                 },
+                               ]
+                             ) -> _CreateConnectionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectionResponseSuccess
+
+      interface _CreateObservabilityConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateObservabilityConfigurationResponse]
+        def observability_configuration: () -> Types::ObservabilityConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#create_observability_configuration-instance_method
+      def create_observability_configuration: (
+                                                observability_configuration_name: ::String,
+                                                ?trace_configuration: {
+                                                  vendor: ("AWSXRAY")
+                                                },
+                                                ?tags: Array[
+                                                  {
+                                                    key: ::String?,
+                                                    value: ::String?
+                                                  },
+                                                ]
+                                              ) -> _CreateObservabilityConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateObservabilityConfigurationResponseSuccess
+
+      interface _CreateServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateServiceResponse]
+        def service: () -> Types::Service
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#create_service-instance_method
+      def create_service: (
+                            service_name: ::String,
+                            source_configuration: {
+                              code_repository: {
+                                repository_url: ::String,
+                                source_code_version: {
+                                  type: ("BRANCH"),
+                                  value: ::String
+                                },
+                                code_configuration: {
+                                  configuration_source: ("REPOSITORY" | "API"),
+                                  code_configuration_values: {
+                                    runtime: ("PYTHON_3" | "NODEJS_12" | "NODEJS_14" | "CORRETTO_8" | "CORRETTO_11" | "NODEJS_16" | "GO_1" | "DOTNET_6" | "PHP_81" | "RUBY_31" | "PYTHON_311" | "NODEJS_18"),
+                                    build_command: ::String?,
+                                    start_command: ::String?,
+                                    port: ::String?,
+                                    runtime_environment_variables: Hash[::String, ::String]?,
+                                    runtime_environment_secrets: Hash[::String, ::String]?
+                                  }?
+                                }?,
+                                source_directory: ::String?
+                              }?,
+                              image_repository: {
+                                image_identifier: ::String,
+                                image_configuration: {
+                                  runtime_environment_variables: Hash[::String, ::String]?,
+                                  start_command: ::String?,
+                                  port: ::String?,
+                                  runtime_environment_secrets: Hash[::String, ::String]?
+                                }?,
+                                image_repository_type: ("ECR" | "ECR_PUBLIC")
+                              }?,
+                              auto_deployments_enabled: bool?,
+                              authentication_configuration: {
+                                connection_arn: ::String?,
+                                access_role_arn: ::String?
+                              }?
+                            },
+                            ?instance_configuration: {
+                              cpu: ::String?,
+                              memory: ::String?,
+                              instance_role_arn: ::String?
+                            },
+                            ?tags: Array[
+                              {
+                                key: ::String?,
+                                value: ::String?
+                              },
+                            ],
+                            ?encryption_configuration: {
+                              kms_key: ::String
+                            },
+                            ?health_check_configuration: {
+                              protocol: ("TCP" | "HTTP")?,
+                              path: ::String?,
+                              interval: ::Integer?,
+                              timeout: ::Integer?,
+                              healthy_threshold: ::Integer?,
+                              unhealthy_threshold: ::Integer?
+                            },
+                            ?auto_scaling_configuration_arn: ::String,
+                            ?network_configuration: {
+                              egress_configuration: {
+                                egress_type: ("DEFAULT" | "VPC")?,
+                                vpc_connector_arn: ::String?
+                              }?,
+                              ingress_configuration: {
+                                is_publicly_accessible: bool?
+                              }?,
+                              ip_address_type: ("IPV4" | "DUAL_STACK")?
+                            },
+                            ?observability_configuration: {
+                              observability_enabled: bool,
+                              observability_configuration_arn: ::String?
+                            }
+                          ) -> _CreateServiceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceResponseSuccess
+
+      interface _CreateVpcConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVpcConnectorResponse]
+        def vpc_connector: () -> Types::VpcConnector
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#create_vpc_connector-instance_method
+      def create_vpc_connector: (
+                                  vpc_connector_name: ::String,
+                                  subnets: Array[::String],
+                                  ?security_groups: Array[::String],
+                                  ?tags: Array[
+                                    {
+                                      key: ::String?,
+                                      value: ::String?
+                                    },
+                                  ]
+                                ) -> _CreateVpcConnectorResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVpcConnectorResponseSuccess
+
+      interface _CreateVpcIngressConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVpcIngressConnectionResponse]
+        def vpc_ingress_connection: () -> Types::VpcIngressConnection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#create_vpc_ingress_connection-instance_method
+      def create_vpc_ingress_connection: (
+                                           service_arn: ::String,
+                                           vpc_ingress_connection_name: ::String,
+                                           ingress_vpc_configuration: {
+                                             vpc_id: ::String?,
+                                             vpc_endpoint_id: ::String?
+                                           },
+                                           ?tags: Array[
+                                             {
+                                               key: ::String?,
+                                               value: ::String?
+                                             },
+                                           ]
+                                         ) -> _CreateVpcIngressConnectionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVpcIngressConnectionResponseSuccess
+
+      interface _DeleteAutoScalingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAutoScalingConfigurationResponse]
+        def auto_scaling_configuration: () -> Types::AutoScalingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#delete_auto_scaling_configuration-instance_method
+      def delete_auto_scaling_configuration: (
+                                               auto_scaling_configuration_arn: ::String,
+                                               ?delete_all_revisions: bool
+                                             ) -> _DeleteAutoScalingConfigurationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAutoScalingConfigurationResponseSuccess
+
+      interface _DeleteConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConnectionResponse]
+        def connection: () -> Types::Connection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#delete_connection-instance_method
+      def delete_connection: (
+                               connection_arn: ::String
+                             ) -> _DeleteConnectionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConnectionResponseSuccess
+
+      interface _DeleteObservabilityConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteObservabilityConfigurationResponse]
+        def observability_configuration: () -> Types::ObservabilityConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#delete_observability_configuration-instance_method
+      def delete_observability_configuration: (
+                                                observability_configuration_arn: ::String
+                                              ) -> _DeleteObservabilityConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteObservabilityConfigurationResponseSuccess
+
+      interface _DeleteServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteServiceResponse]
+        def service: () -> Types::Service
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#delete_service-instance_method
+      def delete_service: (
+                            service_arn: ::String
+                          ) -> _DeleteServiceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteServiceResponseSuccess
+
+      interface _DeleteVpcConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVpcConnectorResponse]
+        def vpc_connector: () -> Types::VpcConnector
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#delete_vpc_connector-instance_method
+      def delete_vpc_connector: (
+                                  vpc_connector_arn: ::String
+                                ) -> _DeleteVpcConnectorResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVpcConnectorResponseSuccess
+
+      interface _DeleteVpcIngressConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVpcIngressConnectionResponse]
+        def vpc_ingress_connection: () -> Types::VpcIngressConnection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#delete_vpc_ingress_connection-instance_method
+      def delete_vpc_ingress_connection: (
+                                           vpc_ingress_connection_arn: ::String
+                                         ) -> _DeleteVpcIngressConnectionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVpcIngressConnectionResponseSuccess
+
+      interface _DescribeAutoScalingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAutoScalingConfigurationResponse]
+        def auto_scaling_configuration: () -> Types::AutoScalingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#describe_auto_scaling_configuration-instance_method
+      def describe_auto_scaling_configuration: (
+                                                 auto_scaling_configuration_arn: ::String
+                                               ) -> _DescribeAutoScalingConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAutoScalingConfigurationResponseSuccess
+
+      interface _DescribeCustomDomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCustomDomainsResponse]
+        def dns_target: () -> ::String
+        def service_arn: () -> ::String
+        def custom_domains: () -> ::Array[Types::CustomDomain]
+        def vpc_dns_targets: () -> ::Array[Types::VpcDNSTarget]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#describe_custom_domains-instance_method
+      def describe_custom_domains: (
+                                     service_arn: ::String,
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _DescribeCustomDomainsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCustomDomainsResponseSuccess
+
+      interface _DescribeObservabilityConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeObservabilityConfigurationResponse]
+        def observability_configuration: () -> Types::ObservabilityConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#describe_observability_configuration-instance_method
+      def describe_observability_configuration: (
+                                                  observability_configuration_arn: ::String
+                                                ) -> _DescribeObservabilityConfigurationResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeObservabilityConfigurationResponseSuccess
+
+      interface _DescribeServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeServiceResponse]
+        def service: () -> Types::Service
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#describe_service-instance_method
+      def describe_service: (
+                              service_arn: ::String
+                            ) -> _DescribeServiceResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeServiceResponseSuccess
+
+      interface _DescribeVpcConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVpcConnectorResponse]
+        def vpc_connector: () -> Types::VpcConnector
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#describe_vpc_connector-instance_method
+      def describe_vpc_connector: (
+                                    vpc_connector_arn: ::String
+                                  ) -> _DescribeVpcConnectorResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVpcConnectorResponseSuccess
+
+      interface _DescribeVpcIngressConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVpcIngressConnectionResponse]
+        def vpc_ingress_connection: () -> Types::VpcIngressConnection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#describe_vpc_ingress_connection-instance_method
+      def describe_vpc_ingress_connection: (
+                                             vpc_ingress_connection_arn: ::String
+                                           ) -> _DescribeVpcIngressConnectionResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVpcIngressConnectionResponseSuccess
+
+      interface _DisassociateCustomDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateCustomDomainResponse]
+        def dns_target: () -> ::String
+        def service_arn: () -> ::String
+        def custom_domain: () -> Types::CustomDomain
+        def vpc_dns_targets: () -> ::Array[Types::VpcDNSTarget]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#disassociate_custom_domain-instance_method
+      def disassociate_custom_domain: (
+                                        service_arn: ::String,
+                                        domain_name: ::String
+                                      ) -> _DisassociateCustomDomainResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateCustomDomainResponseSuccess
+
+      interface _ListAutoScalingConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAutoScalingConfigurationsResponse]
+        def auto_scaling_configuration_summary_list: () -> ::Array[Types::AutoScalingConfigurationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#list_auto_scaling_configurations-instance_method
+      def list_auto_scaling_configurations: (
+                                              ?auto_scaling_configuration_name: ::String,
+                                              ?latest_only: bool,
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _ListAutoScalingConfigurationsResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAutoScalingConfigurationsResponseSuccess
+
+      interface _ListConnectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConnectionsResponse]
+        def connection_summary_list: () -> ::Array[Types::ConnectionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#list_connections-instance_method
+      def list_connections: (
+                              ?connection_name: ::String,
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListConnectionsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectionsResponseSuccess
+
+      interface _ListObservabilityConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListObservabilityConfigurationsResponse]
+        def observability_configuration_summary_list: () -> ::Array[Types::ObservabilityConfigurationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#list_observability_configurations-instance_method
+      def list_observability_configurations: (
+                                               ?observability_configuration_name: ::String,
+                                               ?latest_only: bool,
+                                               ?max_results: ::Integer,
+                                               ?next_token: ::String
+                                             ) -> _ListObservabilityConfigurationsResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListObservabilityConfigurationsResponseSuccess
+
+      interface _ListOperationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOperationsResponse]
+        def operation_summary_list: () -> ::Array[Types::OperationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#list_operations-instance_method
+      def list_operations: (
+                             service_arn: ::String,
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _ListOperationsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOperationsResponseSuccess
+
+      interface _ListServicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServicesResponse]
+        def service_summary_list: () -> ::Array[Types::ServiceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#list_services-instance_method
+      def list_services: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListServicesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServicesResponseSuccess
+
+      interface _ListServicesForAutoScalingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServicesForAutoScalingConfigurationResponse]
+        def service_arn_list: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#list_services_for_auto_scaling_configuration-instance_method
+      def list_services_for_auto_scaling_configuration: (
+                                                          auto_scaling_configuration_arn: ::String,
+                                                          ?max_results: ::Integer,
+                                                          ?next_token: ::String
+                                                        ) -> _ListServicesForAutoScalingConfigurationResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServicesForAutoScalingConfigurationResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListVpcConnectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVpcConnectorsResponse]
+        def vpc_connectors: () -> ::Array[Types::VpcConnector]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#list_vpc_connectors-instance_method
+      def list_vpc_connectors: (
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListVpcConnectorsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVpcConnectorsResponseSuccess
+
+      interface _ListVpcIngressConnectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVpcIngressConnectionsResponse]
+        def vpc_ingress_connection_summary_list: () -> ::Array[Types::VpcIngressConnectionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#list_vpc_ingress_connections-instance_method
+      def list_vpc_ingress_connections: (
+                                          ?filter: {
+                                            service_arn: ::String?,
+                                            vpc_endpoint_id: ::String?
+                                          },
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListVpcIngressConnectionsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVpcIngressConnectionsResponseSuccess
+
+      interface _PauseServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PauseServiceResponse]
+        def service: () -> Types::Service
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#pause_service-instance_method
+      def pause_service: (
+                           service_arn: ::String
+                         ) -> _PauseServiceResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PauseServiceResponseSuccess
+
+      interface _ResumeServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResumeServiceResponse]
+        def service: () -> Types::Service
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#resume_service-instance_method
+      def resume_service: (
+                            service_arn: ::String
+                          ) -> _ResumeServiceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResumeServiceResponseSuccess
+
+      interface _StartDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDeploymentResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#start_deployment-instance_method
+      def start_deployment: (
+                              service_arn: ::String
+                            ) -> _StartDeploymentResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDeploymentResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String?,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateDefaultAutoScalingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDefaultAutoScalingConfigurationResponse]
+        def auto_scaling_configuration: () -> Types::AutoScalingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#update_default_auto_scaling_configuration-instance_method
+      def update_default_auto_scaling_configuration: (
+                                                       auto_scaling_configuration_arn: ::String
+                                                     ) -> _UpdateDefaultAutoScalingConfigurationResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDefaultAutoScalingConfigurationResponseSuccess
+
+      interface _UpdateServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateServiceResponse]
+        def service: () -> Types::Service
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#update_service-instance_method
+      def update_service: (
+                            service_arn: ::String,
+                            ?source_configuration: {
+                              code_repository: {
+                                repository_url: ::String,
+                                source_code_version: {
+                                  type: ("BRANCH"),
+                                  value: ::String
+                                },
+                                code_configuration: {
+                                  configuration_source: ("REPOSITORY" | "API"),
+                                  code_configuration_values: {
+                                    runtime: ("PYTHON_3" | "NODEJS_12" | "NODEJS_14" | "CORRETTO_8" | "CORRETTO_11" | "NODEJS_16" | "GO_1" | "DOTNET_6" | "PHP_81" | "RUBY_31" | "PYTHON_311" | "NODEJS_18"),
+                                    build_command: ::String?,
+                                    start_command: ::String?,
+                                    port: ::String?,
+                                    runtime_environment_variables: Hash[::String, ::String]?,
+                                    runtime_environment_secrets: Hash[::String, ::String]?
+                                  }?
+                                }?,
+                                source_directory: ::String?
+                              }?,
+                              image_repository: {
+                                image_identifier: ::String,
+                                image_configuration: {
+                                  runtime_environment_variables: Hash[::String, ::String]?,
+                                  start_command: ::String?,
+                                  port: ::String?,
+                                  runtime_environment_secrets: Hash[::String, ::String]?
+                                }?,
+                                image_repository_type: ("ECR" | "ECR_PUBLIC")
+                              }?,
+                              auto_deployments_enabled: bool?,
+                              authentication_configuration: {
+                                connection_arn: ::String?,
+                                access_role_arn: ::String?
+                              }?
+                            },
+                            ?instance_configuration: {
+                              cpu: ::String?,
+                              memory: ::String?,
+                              instance_role_arn: ::String?
+                            },
+                            ?auto_scaling_configuration_arn: ::String,
+                            ?health_check_configuration: {
+                              protocol: ("TCP" | "HTTP")?,
+                              path: ::String?,
+                              interval: ::Integer?,
+                              timeout: ::Integer?,
+                              healthy_threshold: ::Integer?,
+                              unhealthy_threshold: ::Integer?
+                            },
+                            ?network_configuration: {
+                              egress_configuration: {
+                                egress_type: ("DEFAULT" | "VPC")?,
+                                vpc_connector_arn: ::String?
+                              }?,
+                              ingress_configuration: {
+                                is_publicly_accessible: bool?
+                              }?,
+                              ip_address_type: ("IPV4" | "DUAL_STACK")?
+                            },
+                            ?observability_configuration: {
+                              observability_enabled: bool,
+                              observability_configuration_arn: ::String?
+                            }
+                          ) -> _UpdateServiceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceResponseSuccess
+
+      interface _UpdateVpcIngressConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateVpcIngressConnectionResponse]
+        def vpc_ingress_connection: () -> Types::VpcIngressConnection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#update_vpc_ingress_connection-instance_method
+      def update_vpc_ingress_connection: (
+                                           vpc_ingress_connection_arn: ::String,
+                                           ingress_vpc_configuration: {
+                                             vpc_id: ::String?,
+                                             vpc_endpoint_id: ::String?
+                                           }
+                                         ) -> _UpdateVpcIngressConnectionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVpcIngressConnectionResponseSuccess
+    end
+  end
+end
+

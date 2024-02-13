@@ -1,0 +1,110 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MarketplaceCommerceAnalytics
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceCommerceAnalytics/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _GenerateDataSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GenerateDataSetResult]
+        def data_set_request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceCommerceAnalytics/Client.html#generate_data_set-instance_method
+      def generate_data_set: (
+                               data_set_type: ("customer_subscriber_hourly_monthly_subscriptions" | "customer_subscriber_annual_subscriptions" | "daily_business_usage_by_instance_type" | "daily_business_fees" | "daily_business_free_trial_conversions" | "daily_business_new_instances" | "daily_business_new_product_subscribers" | "daily_business_canceled_product_subscribers" | "monthly_revenue_billing_and_revenue_data" | "monthly_revenue_annual_subscriptions" | "monthly_revenue_field_demonstration_usage" | "monthly_revenue_flexible_payment_schedule" | "disbursed_amount_by_product" | "disbursed_amount_by_product_with_uncollected_funds" | "disbursed_amount_by_instance_hours" | "disbursed_amount_by_customer_geo" | "disbursed_amount_by_age_of_uncollected_funds" | "disbursed_amount_by_age_of_disbursed_funds" | "disbursed_amount_by_age_of_past_due_funds" | "disbursed_amount_by_uncollected_funds_breakdown" | "customer_profile_by_industry" | "customer_profile_by_revenue" | "customer_profile_by_geography" | "sales_compensation_billed_revenue" | "us_sales_and_use_tax_records"),
+                               data_set_publication_date: ::Time,
+                               role_name_arn: ::String,
+                               destination_s3_bucket_name: ::String,
+                               ?destination_s3_prefix: ::String,
+                               sns_topic_arn: ::String,
+                               ?customer_defined_values: Hash[::String, ::String]
+                             ) -> _GenerateDataSetResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GenerateDataSetResponseSuccess
+
+      interface _StartSupportDataExportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartSupportDataExportResult]
+        def data_set_request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceCommerceAnalytics/Client.html#start_support_data_export-instance_method
+      def start_support_data_export: (
+                                       data_set_type: ("customer_support_contacts_data" | "test_customer_support_contacts_data"),
+                                       from_date: ::Time,
+                                       role_name_arn: ::String,
+                                       destination_s3_bucket_name: ::String,
+                                       ?destination_s3_prefix: ::String,
+                                       sns_topic_arn: ::String,
+                                       ?customer_defined_values: Hash[::String, ::String]
+                                     ) -> _StartSupportDataExportResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSupportDataExportResponseSuccess
+    end
+  end
+end
+

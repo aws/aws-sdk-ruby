@@ -1,0 +1,554 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MediaPackageV2
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ChannelGroupListConfiguration
+      attr_accessor channel_group_name: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ChannelListConfiguration
+      attr_accessor arn: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor channel_group_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor conflict_exception_type: ("RESOURCE_IN_USE" | "RESOURCE_ALREADY_EXISTS" | "IDEMPOTENT_PARAMETER_MISMATCH" | "CONFLICTING_OPERATION")
+      SENSITIVE: []
+    end
+
+    class CreateChannelGroupRequest
+      attr_accessor channel_group_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateChannelGroupResponse
+      attr_accessor channel_group_name: ::String
+      attr_accessor arn: ::String
+      attr_accessor egress_domain: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateChannelRequest
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateChannelResponse
+      attr_accessor arn: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor channel_group_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor ingest_endpoints: ::Array[Types::IngestEndpoint]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateHlsManifestConfiguration
+      attr_accessor manifest_name: ::String
+      attr_accessor child_manifest_name: ::String
+      attr_accessor scte_hls: Types::ScteHls
+      attr_accessor manifest_window_seconds: ::Integer
+      attr_accessor program_date_time_interval_seconds: ::Integer
+      attr_accessor filter_configuration: Types::FilterConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateLowLatencyHlsManifestConfiguration
+      attr_accessor manifest_name: ::String
+      attr_accessor child_manifest_name: ::String
+      attr_accessor scte_hls: Types::ScteHls
+      attr_accessor manifest_window_seconds: ::Integer
+      attr_accessor program_date_time_interval_seconds: ::Integer
+      attr_accessor filter_configuration: Types::FilterConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateOriginEndpointRequest
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor origin_endpoint_name: ::String
+      attr_accessor container_type: ("TS" | "CMAF")
+      attr_accessor segment: Types::Segment
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor startover_window_seconds: ::Integer
+      attr_accessor hls_manifests: ::Array[Types::CreateHlsManifestConfiguration]
+      attr_accessor low_latency_hls_manifests: ::Array[Types::CreateLowLatencyHlsManifestConfiguration]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateOriginEndpointResponse
+      attr_accessor arn: ::String
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor origin_endpoint_name: ::String
+      attr_accessor container_type: ("TS" | "CMAF")
+      attr_accessor segment: Types::Segment
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor startover_window_seconds: ::Integer
+      attr_accessor hls_manifests: ::Array[Types::GetHlsManifestConfiguration]
+      attr_accessor low_latency_hls_manifests: ::Array[Types::GetLowLatencyHlsManifestConfiguration]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DeleteChannelGroupRequest
+      attr_accessor channel_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelGroupResponse < Aws::EmptyStructure
+    end
+
+    class DeleteChannelPolicyRequest
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelPolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteChannelRequest
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelResponse < Aws::EmptyStructure
+    end
+
+    class DeleteOriginEndpointPolicyRequest
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor origin_endpoint_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteOriginEndpointPolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteOriginEndpointRequest
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor origin_endpoint_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteOriginEndpointResponse < Aws::EmptyStructure
+    end
+
+    class Encryption
+      attr_accessor constant_initialization_vector: ::String
+      attr_accessor encryption_method: Types::EncryptionMethod
+      attr_accessor key_rotation_interval_seconds: ::Integer
+      attr_accessor speke_key_provider: Types::SpekeKeyProvider
+      SENSITIVE: []
+    end
+
+    class EncryptionContractConfiguration
+      attr_accessor preset_speke_20_audio: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")
+      attr_accessor preset_speke_20_video: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")
+      SENSITIVE: []
+    end
+
+    class EncryptionMethod
+      attr_accessor ts_encryption_method: ("AES_128" | "SAMPLE_AES")
+      attr_accessor cmaf_encryption_method: ("CENC" | "CBCS")
+      SENSITIVE: []
+    end
+
+    class FilterConfiguration
+      attr_accessor manifest_filter: ::String
+      attr_accessor start: ::Time
+      attr_accessor end: ::Time
+      attr_accessor time_delay_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetChannelGroupRequest
+      attr_accessor channel_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetChannelGroupResponse
+      attr_accessor channel_group_name: ::String
+      attr_accessor arn: ::String
+      attr_accessor egress_domain: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetChannelPolicyRequest
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetChannelPolicyResponse
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetChannelRequest
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetChannelResponse
+      attr_accessor arn: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor channel_group_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor ingest_endpoints: ::Array[Types::IngestEndpoint]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetHlsManifestConfiguration
+      attr_accessor manifest_name: ::String
+      attr_accessor url: ::String
+      attr_accessor child_manifest_name: ::String
+      attr_accessor manifest_window_seconds: ::Integer
+      attr_accessor program_date_time_interval_seconds: ::Integer
+      attr_accessor scte_hls: Types::ScteHls
+      attr_accessor filter_configuration: Types::FilterConfiguration
+      SENSITIVE: []
+    end
+
+    class GetLowLatencyHlsManifestConfiguration
+      attr_accessor manifest_name: ::String
+      attr_accessor url: ::String
+      attr_accessor child_manifest_name: ::String
+      attr_accessor manifest_window_seconds: ::Integer
+      attr_accessor program_date_time_interval_seconds: ::Integer
+      attr_accessor scte_hls: Types::ScteHls
+      attr_accessor filter_configuration: Types::FilterConfiguration
+      SENSITIVE: []
+    end
+
+    class GetOriginEndpointPolicyRequest
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor origin_endpoint_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetOriginEndpointPolicyResponse
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor origin_endpoint_name: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetOriginEndpointRequest
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor origin_endpoint_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetOriginEndpointResponse
+      attr_accessor arn: ::String
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor origin_endpoint_name: ::String
+      attr_accessor container_type: ("TS" | "CMAF")
+      attr_accessor segment: Types::Segment
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor startover_window_seconds: ::Integer
+      attr_accessor hls_manifests: ::Array[Types::GetHlsManifestConfiguration]
+      attr_accessor low_latency_hls_manifests: ::Array[Types::GetLowLatencyHlsManifestConfiguration]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class IngestEndpoint
+      attr_accessor id: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelGroupsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelGroupsResponse
+      attr_accessor items: ::Array[Types::ChannelGroupListConfiguration]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelsRequest
+      attr_accessor channel_group_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelsResponse
+      attr_accessor items: ::Array[Types::ChannelListConfiguration]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListHlsManifestConfiguration
+      attr_accessor manifest_name: ::String
+      attr_accessor child_manifest_name: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class ListLowLatencyHlsManifestConfiguration
+      attr_accessor manifest_name: ::String
+      attr_accessor child_manifest_name: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class ListOriginEndpointsRequest
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOriginEndpointsResponse
+      attr_accessor items: ::Array[Types::OriginEndpointListConfiguration]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class OriginEndpointListConfiguration
+      attr_accessor arn: ::String
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor origin_endpoint_name: ::String
+      attr_accessor container_type: ("TS" | "CMAF")
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor hls_manifests: ::Array[Types::ListHlsManifestConfiguration]
+      attr_accessor low_latency_hls_manifests: ::Array[Types::ListLowLatencyHlsManifestConfiguration]
+      SENSITIVE: []
+    end
+
+    class PutChannelPolicyRequest
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutChannelPolicyResponse < Aws::EmptyStructure
+    end
+
+    class PutOriginEndpointPolicyRequest
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor origin_endpoint_name: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutOriginEndpointPolicyResponse < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_type_not_found: ("CHANNEL_GROUP" | "CHANNEL" | "ORIGIN_ENDPOINT")
+      SENSITIVE: []
+    end
+
+    class Scte
+      attr_accessor scte_filter: ::Array[("SPLICE_INSERT" | "BREAK" | "PROVIDER_ADVERTISEMENT" | "DISTRIBUTOR_ADVERTISEMENT" | "PROVIDER_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_PLACEMENT_OPPORTUNITY" | "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY" | "PROGRAM")]
+      SENSITIVE: []
+    end
+
+    class ScteHls
+      attr_accessor ad_marker_hls: ("DATERANGE")
+      SENSITIVE: []
+    end
+
+    class Segment
+      attr_accessor segment_duration_seconds: ::Integer
+      attr_accessor segment_name: ::String
+      attr_accessor ts_use_audio_rendition_group: bool
+      attr_accessor include_iframe_only_streams: bool
+      attr_accessor ts_include_dvb_subtitles: bool
+      attr_accessor scte: Types::Scte
+      attr_accessor encryption: Types::Encryption
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SpekeKeyProvider
+      attr_accessor encryption_contract_configuration: Types::EncryptionContractConfiguration
+      attr_accessor resource_id: ::String
+      attr_accessor drm_systems: ::Array[("CLEAR_KEY_AES_128" | "FAIRPLAY" | "PLAYREADY" | "WIDEVINE")]
+      attr_accessor role_arn: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateChannelGroupRequest
+      attr_accessor channel_group_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateChannelGroupResponse
+      attr_accessor channel_group_name: ::String
+      attr_accessor arn: ::String
+      attr_accessor egress_domain: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateChannelRequest
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateChannelResponse
+      attr_accessor arn: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor channel_group_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor ingest_endpoints: ::Array[Types::IngestEndpoint]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateOriginEndpointRequest
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor origin_endpoint_name: ::String
+      attr_accessor container_type: ("TS" | "CMAF")
+      attr_accessor segment: Types::Segment
+      attr_accessor description: ::String
+      attr_accessor startover_window_seconds: ::Integer
+      attr_accessor hls_manifests: ::Array[Types::CreateHlsManifestConfiguration]
+      attr_accessor low_latency_hls_manifests: ::Array[Types::CreateLowLatencyHlsManifestConfiguration]
+      SENSITIVE: []
+    end
+
+    class UpdateOriginEndpointResponse
+      attr_accessor arn: ::String
+      attr_accessor channel_group_name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor origin_endpoint_name: ::String
+      attr_accessor container_type: ("TS" | "CMAF")
+      attr_accessor segment: Types::Segment
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor startover_window_seconds: ::Integer
+      attr_accessor hls_manifests: ::Array[Types::GetHlsManifestConfiguration]
+      attr_accessor low_latency_hls_manifests: ::Array[Types::GetLowLatencyHlsManifestConfiguration]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor validation_exception_type: ("CONTAINER_TYPE_IMMUTABLE" | "INVALID_PAGINATION_TOKEN" | "INVALID_PAGINATION_MAX_RESULTS" | "INVALID_POLICY" | "INVALID_ROLE_ARN" | "MANIFEST_NAME_COLLISION" | "ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH" | "CENC_IV_INCOMPATIBLE" | "ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE" | "ENCRYPTION_CONTRACT_UNENCRYPTED" | "ENCRYPTION_CONTRACT_SHARED" | "NUM_MANIFESTS_LOW" | "NUM_MANIFESTS_HIGH" | "DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE" | "ROLE_ARN_NOT_ASSUMABLE" | "ROLE_ARN_LENGTH_OUT_OF_RANGE" | "ROLE_ARN_INVALID_FORMAT" | "URL_INVALID" | "URL_SCHEME" | "URL_USER_INFO" | "URL_PORT" | "URL_UNKNOWN_HOST" | "URL_LOCAL_ADDRESS" | "URL_LOOPBACK_ADDRESS" | "URL_LINK_LOCAL_ADDRESS" | "URL_MULTICAST_ADDRESS" | "MEMBER_INVALID" | "MEMBER_MISSING" | "MEMBER_MIN_VALUE" | "MEMBER_MAX_VALUE" | "MEMBER_MIN_LENGTH" | "MEMBER_MAX_LENGTH" | "MEMBER_INVALID_ENUM_VALUE" | "MEMBER_DOES_NOT_MATCH_PATTERN" | "INVALID_MANIFEST_FILTER" | "INVALID_TIME_DELAY_SECONDS" | "END_TIME_EARLIER_THAN_START_TIME")
+      SENSITIVE: []
+    end
+  end
+end

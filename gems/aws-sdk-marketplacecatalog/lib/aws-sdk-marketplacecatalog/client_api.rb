@@ -110,6 +110,7 @@ module Aws::MarketplaceCatalog
     GetResourcePolicyRequest = Shapes::StructureShape.new(name: 'GetResourcePolicyRequest')
     GetResourcePolicyResponse = Shapes::StructureShape.new(name: 'GetResourcePolicyResponse')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
+    Intent = Shapes::StringShape.new(name: 'Intent')
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     Json = Shapes::StringShape.new(name: 'Json')
     JsonDocumentType = Shapes::DocumentShape.new(name: 'JsonDocumentType', document: true)
@@ -422,6 +423,7 @@ module Aws::MarketplaceCatalog
     DescribeChangeSetResponse.add_member(:change_set_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ChangeSetId"))
     DescribeChangeSetResponse.add_member(:change_set_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ChangeSetArn"))
     DescribeChangeSetResponse.add_member(:change_set_name, Shapes::ShapeRef.new(shape: ChangeSetName, location_name: "ChangeSetName"))
+    DescribeChangeSetResponse.add_member(:intent, Shapes::ShapeRef.new(shape: Intent, location_name: "Intent"))
     DescribeChangeSetResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "StartTime"))
     DescribeChangeSetResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "EndTime"))
     DescribeChangeSetResponse.add_member(:status, Shapes::ShapeRef.new(shape: ChangeStatus, location_name: "Status"))
@@ -829,6 +831,7 @@ module Aws::MarketplaceCatalog
     StartChangeSetRequest.add_member(:change_set_name, Shapes::ShapeRef.new(shape: ChangeSetName, location_name: "ChangeSetName"))
     StartChangeSetRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     StartChangeSetRequest.add_member(:change_set_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "ChangeSetTags"))
+    StartChangeSetRequest.add_member(:intent, Shapes::ShapeRef.new(shape: Intent, location_name: "Intent"))
     StartChangeSetRequest.struct_class = Types::StartChangeSetRequest
 
     StartChangeSetResponse.add_member(:change_set_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ChangeSetId"))

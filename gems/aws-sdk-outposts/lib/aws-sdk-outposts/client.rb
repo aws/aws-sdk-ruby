@@ -1388,7 +1388,7 @@ module Aws::Outposts
     # [1]: https://docs.aws.amazon.com/outposts/latest/userguide/security-iam-awsmanpol.html
     # [2]: https://docs.aws.amazon.com/outposts/latest/userguide/logging-using-cloudtrail.html
     #
-    # @option params [required, String] :device_serial_number
+    # @option params [String] :device_serial_number
     #   The serial number of the dongle.
     #
     # @option params [required, String] :asset_id
@@ -1408,7 +1408,7 @@ module Aws::Outposts
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_connection({
-    #     device_serial_number: "DeviceSerialNumber", # required
+    #     device_serial_number: "DeviceSerialNumber",
     #     asset_id: "AssetId", # required
     #     client_public_key: "WireGuardPublicKey", # required
     #     network_interface_device_index: 1, # required
@@ -1833,7 +1833,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

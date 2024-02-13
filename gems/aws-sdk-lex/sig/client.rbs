@@ -1,0 +1,237 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Lex
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lex/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _DeleteSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSessionResponse]
+        def bot_name: () -> ::String
+        def bot_alias: () -> ::String
+        def user_id: () -> ::String
+        def session_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lex/Client.html#delete_session-instance_method
+      def delete_session: (
+                            bot_name: ::String,
+                            bot_alias: ::String,
+                            user_id: ::String
+                          ) -> _DeleteSessionResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSessionResponseSuccess
+
+      interface _GetSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSessionResponse]
+        def recent_intent_summary_view: () -> ::Array[Types::IntentSummary]
+        def session_attributes: () -> ::Hash[::String, ::String]
+        def session_id: () -> ::String
+        def dialog_action: () -> Types::DialogAction
+        def active_contexts: () -> ::Array[Types::ActiveContext]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lex/Client.html#get_session-instance_method
+      def get_session: (
+                         bot_name: ::String,
+                         bot_alias: ::String,
+                         user_id: ::String,
+                         ?checkpoint_label_filter: ::String
+                       ) -> _GetSessionResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSessionResponseSuccess
+
+      interface _PostContentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PostContentResponse]
+        def content_type: () -> ::String
+        def intent_name: () -> ::String
+        def nlu_intent_confidence: () -> ::String
+        def alternative_intents: () -> ::String
+        def slots: () -> ::String
+        def session_attributes: () -> ::String
+        def sentiment_response: () -> ::String
+        def message: () -> ::String
+        def encoded_message: () -> ::String
+        def message_format: () -> ("PlainText" | "CustomPayload" | "SSML" | "Composite")
+        def dialog_state: () -> ("ElicitIntent" | "ConfirmIntent" | "ElicitSlot" | "Fulfilled" | "ReadyForFulfillment" | "Failed")
+        def slot_to_elicit: () -> ::String
+        def input_transcript: () -> ::String
+        def encoded_input_transcript: () -> ::String
+        def audio_stream: () -> ::IO
+        def bot_version: () -> ::String
+        def session_id: () -> ::String
+        def active_contexts: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lex/Client.html#post_content-instance_method
+      def post_content: (
+                          bot_name: ::String,
+                          bot_alias: ::String,
+                          user_id: ::String,
+                          ?session_attributes: ::String,
+                          ?request_attributes: ::String,
+                          content_type: ::String,
+                          ?accept: ::String,
+                          input_stream: ::String,
+                          ?active_contexts: ::String
+                        ) ?{ (*untyped) -> void } -> _PostContentResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _PostContentResponseSuccess
+
+      interface _PostTextResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PostTextResponse]
+        def intent_name: () -> ::String
+        def nlu_intent_confidence: () -> Types::IntentConfidence
+        def alternative_intents: () -> ::Array[Types::PredictedIntent]
+        def slots: () -> ::Hash[::String, ::String]
+        def session_attributes: () -> ::Hash[::String, ::String]
+        def message: () -> ::String
+        def sentiment_response: () -> Types::SentimentResponse
+        def message_format: () -> ("PlainText" | "CustomPayload" | "SSML" | "Composite")
+        def dialog_state: () -> ("ElicitIntent" | "ConfirmIntent" | "ElicitSlot" | "Fulfilled" | "ReadyForFulfillment" | "Failed")
+        def slot_to_elicit: () -> ::String
+        def response_card: () -> Types::ResponseCard
+        def session_id: () -> ::String
+        def bot_version: () -> ::String
+        def active_contexts: () -> ::Array[Types::ActiveContext]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lex/Client.html#post_text-instance_method
+      def post_text: (
+                       bot_name: ::String,
+                       bot_alias: ::String,
+                       user_id: ::String,
+                       ?session_attributes: Hash[::String, ::String],
+                       ?request_attributes: Hash[::String, ::String],
+                       input_text: ::String,
+                       ?active_contexts: Array[
+                         {
+                           name: ::String,
+                           time_to_live: {
+                             time_to_live_in_seconds: ::Integer?,
+                             turns_to_live: ::Integer?
+                           },
+                           parameters: Hash[::String, ::String]
+                         },
+                       ]
+                     ) -> _PostTextResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PostTextResponseSuccess
+
+      interface _PutSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutSessionResponse]
+        def content_type: () -> ::String
+        def intent_name: () -> ::String
+        def slots: () -> ::String
+        def session_attributes: () -> ::String
+        def message: () -> ::String
+        def encoded_message: () -> ::String
+        def message_format: () -> ("PlainText" | "CustomPayload" | "SSML" | "Composite")
+        def dialog_state: () -> ("ElicitIntent" | "ConfirmIntent" | "ElicitSlot" | "Fulfilled" | "ReadyForFulfillment" | "Failed")
+        def slot_to_elicit: () -> ::String
+        def audio_stream: () -> ::IO
+        def session_id: () -> ::String
+        def active_contexts: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lex/Client.html#put_session-instance_method
+      def put_session: (
+                         bot_name: ::String,
+                         bot_alias: ::String,
+                         user_id: ::String,
+                         ?session_attributes: Hash[::String, ::String],
+                         ?dialog_action: {
+                           type: ("ElicitIntent" | "ConfirmIntent" | "ElicitSlot" | "Close" | "Delegate"),
+                           intent_name: ::String?,
+                           slots: Hash[::String, ::String]?,
+                           slot_to_elicit: ::String?,
+                           fulfillment_state: ("Fulfilled" | "Failed" | "ReadyForFulfillment")?,
+                           message: ::String?,
+                           message_format: ("PlainText" | "CustomPayload" | "SSML" | "Composite")?
+                         },
+                         ?recent_intent_summary_view: Array[
+                           {
+                             intent_name: ::String?,
+                             checkpoint_label: ::String?,
+                             slots: Hash[::String, ::String]?,
+                             confirmation_status: ("None" | "Confirmed" | "Denied")?,
+                             dialog_action_type: ("ElicitIntent" | "ConfirmIntent" | "ElicitSlot" | "Close" | "Delegate"),
+                             fulfillment_state: ("Fulfilled" | "Failed" | "ReadyForFulfillment")?,
+                             slot_to_elicit: ::String?
+                           },
+                         ],
+                         ?accept: ::String,
+                         ?active_contexts: Array[
+                           {
+                             name: ::String,
+                             time_to_live: {
+                               time_to_live_in_seconds: ::Integer?,
+                               turns_to_live: ::Integer?
+                             },
+                             parameters: Hash[::String, ::String]
+                           },
+                         ]
+                       ) ?{ (*untyped) -> void } -> _PutSessionResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _PutSessionResponseSuccess
+    end
+  end
+end
+

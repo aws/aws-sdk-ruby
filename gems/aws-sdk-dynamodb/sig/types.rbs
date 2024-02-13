@@ -1,0 +1,1742 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::DynamoDB
+  module Types
+
+    class ArchivalSummary
+      attr_accessor archival_date_time: ::Time
+      attr_accessor archival_reason: ::String
+      attr_accessor archival_backup_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AttributeDefinition
+      attr_accessor attribute_name: ::String
+      attr_accessor attribute_type: ("S" | "N" | "B")
+      SENSITIVE: []
+    end
+
+    class AttributeValue
+      attr_accessor s: ::String
+      attr_accessor n: ::String
+      attr_accessor b: ::String
+      attr_accessor ss: ::Array[::String]
+      attr_accessor ns: ::Array[::String]
+      attr_accessor bs: ::Array[::String]
+      attr_accessor m: ::Hash[::String, Types::AttributeValue]
+      attr_accessor l: ::Array[Types::AttributeValue]
+      attr_accessor null: bool
+      attr_accessor bool: bool
+      SENSITIVE: []
+    end
+
+    class AttributeValueUpdate
+      attr_accessor value: Types::AttributeValue
+      attr_accessor action: ("ADD" | "PUT" | "DELETE")
+      SENSITIVE: []
+    end
+
+    class AutoScalingPolicyDescription
+      attr_accessor policy_name: ::String
+      attr_accessor target_tracking_scaling_policy_configuration: Types::AutoScalingTargetTrackingScalingPolicyConfigurationDescription
+      SENSITIVE: []
+    end
+
+    class AutoScalingPolicyUpdate
+      attr_accessor policy_name: ::String
+      attr_accessor target_tracking_scaling_policy_configuration: Types::AutoScalingTargetTrackingScalingPolicyConfigurationUpdate
+      SENSITIVE: []
+    end
+
+    class AutoScalingSettingsDescription
+      attr_accessor minimum_units: ::Integer
+      attr_accessor maximum_units: ::Integer
+      attr_accessor auto_scaling_disabled: bool
+      attr_accessor auto_scaling_role_arn: ::String
+      attr_accessor scaling_policies: ::Array[Types::AutoScalingPolicyDescription]
+      SENSITIVE: []
+    end
+
+    class AutoScalingSettingsUpdate
+      attr_accessor minimum_units: ::Integer
+      attr_accessor maximum_units: ::Integer
+      attr_accessor auto_scaling_disabled: bool
+      attr_accessor auto_scaling_role_arn: ::String
+      attr_accessor scaling_policy_update: Types::AutoScalingPolicyUpdate
+      SENSITIVE: []
+    end
+
+    class AutoScalingTargetTrackingScalingPolicyConfigurationDescription
+      attr_accessor disable_scale_in: bool
+      attr_accessor scale_in_cooldown: ::Integer
+      attr_accessor scale_out_cooldown: ::Integer
+      attr_accessor target_value: ::Float
+      SENSITIVE: []
+    end
+
+    class AutoScalingTargetTrackingScalingPolicyConfigurationUpdate
+      attr_accessor disable_scale_in: bool
+      attr_accessor scale_in_cooldown: ::Integer
+      attr_accessor scale_out_cooldown: ::Integer
+      attr_accessor target_value: ::Float
+      SENSITIVE: []
+    end
+
+    class BackupDescription
+      attr_accessor backup_details: Types::BackupDetails
+      attr_accessor source_table_details: Types::SourceTableDetails
+      attr_accessor source_table_feature_details: Types::SourceTableFeatureDetails
+      SENSITIVE: []
+    end
+
+    class BackupDetails
+      attr_accessor backup_arn: ::String
+      attr_accessor backup_name: ::String
+      attr_accessor backup_size_bytes: ::Integer
+      attr_accessor backup_status: ("CREATING" | "DELETED" | "AVAILABLE")
+      attr_accessor backup_type: ("USER" | "SYSTEM" | "AWS_BACKUP")
+      attr_accessor backup_creation_date_time: ::Time
+      attr_accessor backup_expiry_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class BackupInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BackupNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BackupSummary
+      attr_accessor table_name: ::String
+      attr_accessor table_id: ::String
+      attr_accessor table_arn: ::String
+      attr_accessor backup_arn: ::String
+      attr_accessor backup_name: ::String
+      attr_accessor backup_creation_date_time: ::Time
+      attr_accessor backup_expiry_date_time: ::Time
+      attr_accessor backup_status: ("CREATING" | "DELETED" | "AVAILABLE")
+      attr_accessor backup_type: ("USER" | "SYSTEM" | "AWS_BACKUP")
+      attr_accessor backup_size_bytes: ::Integer
+      SENSITIVE: []
+    end
+
+    class BatchExecuteStatementInput
+      attr_accessor statements: ::Array[Types::BatchStatementRequest]
+      attr_accessor return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE")
+      SENSITIVE: []
+    end
+
+    class BatchExecuteStatementOutput
+      attr_accessor responses: ::Array[Types::BatchStatementResponse]
+      attr_accessor consumed_capacity: ::Array[Types::ConsumedCapacity]
+      SENSITIVE: []
+    end
+
+    class BatchGetItemInput
+      attr_accessor request_items: ::Hash[::String, Types::KeysAndAttributes]
+      attr_accessor return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE")
+      SENSITIVE: []
+    end
+
+    class BatchGetItemOutput
+      attr_accessor responses: ::Hash[::String, ::Array[::Hash[::String, Types::AttributeValue]]]
+      attr_accessor unprocessed_keys: ::Hash[::String, Types::KeysAndAttributes]
+      attr_accessor consumed_capacity: ::Array[Types::ConsumedCapacity]
+      SENSITIVE: []
+    end
+
+    class BatchStatementError
+      attr_accessor code: ("ConditionalCheckFailed" | "ItemCollectionSizeLimitExceeded" | "RequestLimitExceeded" | "ValidationError" | "ProvisionedThroughputExceeded" | "TransactionConflict" | "ThrottlingError" | "InternalServerError" | "ResourceNotFound" | "AccessDenied" | "DuplicateItem")
+      attr_accessor message: ::String
+      attr_accessor item: ::Hash[::String, Types::AttributeValue]
+      SENSITIVE: []
+    end
+
+    class BatchStatementRequest
+      attr_accessor statement: ::String
+      attr_accessor parameters: ::Array[Types::AttributeValue]
+      attr_accessor consistent_read: bool
+      attr_accessor return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")
+      SENSITIVE: []
+    end
+
+    class BatchStatementResponse
+      attr_accessor error: Types::BatchStatementError
+      attr_accessor table_name: ::String
+      attr_accessor item: ::Hash[::String, Types::AttributeValue]
+      SENSITIVE: []
+    end
+
+    class BatchWriteItemInput
+      attr_accessor request_items: ::Hash[::String, ::Array[Types::WriteRequest]]
+      attr_accessor return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE")
+      attr_accessor return_item_collection_metrics: ("SIZE" | "NONE")
+      SENSITIVE: []
+    end
+
+    class BatchWriteItemOutput
+      attr_accessor unprocessed_items: ::Hash[::String, ::Array[Types::WriteRequest]]
+      attr_accessor item_collection_metrics: ::Hash[::String, ::Array[Types::ItemCollectionMetrics]]
+      attr_accessor consumed_capacity: ::Array[Types::ConsumedCapacity]
+      SENSITIVE: []
+    end
+
+    class BillingModeSummary
+      attr_accessor billing_mode: ("PROVISIONED" | "PAY_PER_REQUEST")
+      attr_accessor last_update_to_pay_per_request_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CancellationReason
+      attr_accessor item: ::Hash[::String, Types::AttributeValue]
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Capacity
+      attr_accessor read_capacity_units: ::Float
+      attr_accessor write_capacity_units: ::Float
+      attr_accessor capacity_units: ::Float
+      SENSITIVE: []
+    end
+
+    class Condition
+      attr_accessor attribute_value_list: ::Array[Types::AttributeValue]
+      attr_accessor comparison_operator: ("EQ" | "NE" | "IN" | "LE" | "LT" | "GE" | "GT" | "BETWEEN" | "NOT_NULL" | "NULL" | "CONTAINS" | "NOT_CONTAINS" | "BEGINS_WITH")
+      SENSITIVE: []
+    end
+
+    class ConditionCheck
+      attr_accessor key: ::Hash[::String, Types::AttributeValue]
+      attr_accessor table_name: ::String
+      attr_accessor condition_expression: ::String
+      attr_accessor expression_attribute_names: ::Hash[::String, ::String]
+      attr_accessor expression_attribute_values: ::Hash[::String, Types::AttributeValue]
+      attr_accessor return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")
+      SENSITIVE: []
+    end
+
+    class ConditionalCheckFailedException
+      attr_accessor message: ::String
+      attr_accessor item: ::Hash[::String, Types::AttributeValue]
+      SENSITIVE: []
+    end
+
+    class ConsumedCapacity
+      attr_accessor table_name: ::String
+      attr_accessor capacity_units: ::Float
+      attr_accessor read_capacity_units: ::Float
+      attr_accessor write_capacity_units: ::Float
+      attr_accessor table: Types::Capacity
+      attr_accessor local_secondary_indexes: ::Hash[::String, Types::Capacity]
+      attr_accessor global_secondary_indexes: ::Hash[::String, Types::Capacity]
+      SENSITIVE: []
+    end
+
+    class ContinuousBackupsDescription
+      attr_accessor continuous_backups_status: ("ENABLED" | "DISABLED")
+      attr_accessor point_in_time_recovery_description: Types::PointInTimeRecoveryDescription
+      SENSITIVE: []
+    end
+
+    class ContinuousBackupsUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ContributorInsightsSummary
+      attr_accessor table_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor contributor_insights_status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class CreateBackupInput
+      attr_accessor table_name: ::String
+      attr_accessor backup_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBackupOutput
+      attr_accessor backup_details: Types::BackupDetails
+      SENSITIVE: []
+    end
+
+    class CreateGlobalSecondaryIndexAction
+      attr_accessor index_name: ::String
+      attr_accessor key_schema: ::Array[Types::KeySchemaElement]
+      attr_accessor projection: Types::Projection
+      attr_accessor provisioned_throughput: Types::ProvisionedThroughput
+      SENSITIVE: []
+    end
+
+    class CreateGlobalTableInput
+      attr_accessor global_table_name: ::String
+      attr_accessor replication_group: ::Array[Types::Replica]
+      SENSITIVE: []
+    end
+
+    class CreateGlobalTableOutput
+      attr_accessor global_table_description: Types::GlobalTableDescription
+      SENSITIVE: []
+    end
+
+    class CreateReplicaAction
+      attr_accessor region_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateReplicationGroupMemberAction
+      attr_accessor region_name: ::String
+      attr_accessor kms_master_key_id: ::String
+      attr_accessor provisioned_throughput_override: Types::ProvisionedThroughputOverride
+      attr_accessor global_secondary_indexes: ::Array[Types::ReplicaGlobalSecondaryIndex]
+      attr_accessor table_class_override: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS")
+      SENSITIVE: []
+    end
+
+    class CreateTableInput
+      attr_accessor attribute_definitions: ::Array[Types::AttributeDefinition]
+      attr_accessor table_name: ::String
+      attr_accessor key_schema: ::Array[Types::KeySchemaElement]
+      attr_accessor local_secondary_indexes: ::Array[Types::LocalSecondaryIndex]
+      attr_accessor global_secondary_indexes: ::Array[Types::GlobalSecondaryIndex]
+      attr_accessor billing_mode: ("PROVISIONED" | "PAY_PER_REQUEST")
+      attr_accessor provisioned_throughput: Types::ProvisionedThroughput
+      attr_accessor stream_specification: Types::StreamSpecification
+      attr_accessor sse_specification: Types::SSESpecification
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor table_class: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS")
+      attr_accessor deletion_protection_enabled: bool
+      SENSITIVE: []
+    end
+
+    class CreateTableOutput
+      attr_accessor table_description: Types::TableDescription
+      SENSITIVE: []
+    end
+
+    class CsvOptions
+      attr_accessor delimiter: ::String
+      attr_accessor header_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Delete
+      attr_accessor key: ::Hash[::String, Types::AttributeValue]
+      attr_accessor table_name: ::String
+      attr_accessor condition_expression: ::String
+      attr_accessor expression_attribute_names: ::Hash[::String, ::String]
+      attr_accessor expression_attribute_values: ::Hash[::String, Types::AttributeValue]
+      attr_accessor return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")
+      SENSITIVE: []
+    end
+
+    class DeleteBackupInput
+      attr_accessor backup_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBackupOutput
+      attr_accessor backup_description: Types::BackupDescription
+      SENSITIVE: []
+    end
+
+    class DeleteGlobalSecondaryIndexAction
+      attr_accessor index_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteItemInput
+      attr_accessor table_name: ::String
+      attr_accessor key: ::Hash[::String, Types::AttributeValue]
+      attr_accessor expected: ::Hash[::String, Types::ExpectedAttributeValue]
+      attr_accessor conditional_operator: ("AND" | "OR")
+      attr_accessor return_values: ("NONE" | "ALL_OLD" | "UPDATED_OLD" | "ALL_NEW" | "UPDATED_NEW")
+      attr_accessor return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE")
+      attr_accessor return_item_collection_metrics: ("SIZE" | "NONE")
+      attr_accessor condition_expression: ::String
+      attr_accessor expression_attribute_names: ::Hash[::String, ::String]
+      attr_accessor expression_attribute_values: ::Hash[::String, Types::AttributeValue]
+      attr_accessor return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")
+      SENSITIVE: []
+    end
+
+    class DeleteItemOutput
+      attr_accessor attributes: ::Hash[::String, Types::AttributeValue]
+      attr_accessor consumed_capacity: Types::ConsumedCapacity
+      attr_accessor item_collection_metrics: Types::ItemCollectionMetrics
+      SENSITIVE: []
+    end
+
+    class DeleteReplicaAction
+      attr_accessor region_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReplicationGroupMemberAction
+      attr_accessor region_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRequest
+      attr_accessor key: ::Hash[::String, Types::AttributeValue]
+      SENSITIVE: []
+    end
+
+    class DeleteTableInput
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTableOutput
+      attr_accessor table_description: Types::TableDescription
+      SENSITIVE: []
+    end
+
+    class DescribeBackupInput
+      attr_accessor backup_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBackupOutput
+      attr_accessor backup_description: Types::BackupDescription
+      SENSITIVE: []
+    end
+
+    class DescribeContinuousBackupsInput
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeContinuousBackupsOutput
+      attr_accessor continuous_backups_description: Types::ContinuousBackupsDescription
+      SENSITIVE: []
+    end
+
+    class DescribeContributorInsightsInput
+      attr_accessor table_name: ::String
+      attr_accessor index_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeContributorInsightsOutput
+      attr_accessor table_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor contributor_insights_rule_list: ::Array[::String]
+      attr_accessor contributor_insights_status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "FAILED")
+      attr_accessor last_update_date_time: ::Time
+      attr_accessor failure_exception: Types::FailureException
+      SENSITIVE: []
+    end
+
+    class DescribeEndpointsRequest < Aws::EmptyStructure
+    end
+
+    class DescribeEndpointsResponse
+      attr_accessor endpoints: ::Array[Types::Endpoint]
+      SENSITIVE: []
+    end
+
+    class DescribeExportInput
+      attr_accessor export_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeExportOutput
+      attr_accessor export_description: Types::ExportDescription
+      SENSITIVE: []
+    end
+
+    class DescribeGlobalTableInput
+      attr_accessor global_table_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeGlobalTableOutput
+      attr_accessor global_table_description: Types::GlobalTableDescription
+      SENSITIVE: []
+    end
+
+    class DescribeGlobalTableSettingsInput
+      attr_accessor global_table_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeGlobalTableSettingsOutput
+      attr_accessor global_table_name: ::String
+      attr_accessor replica_settings: ::Array[Types::ReplicaSettingsDescription]
+      SENSITIVE: []
+    end
+
+    class DescribeImportInput
+      attr_accessor import_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeImportOutput
+      attr_accessor import_table_description: Types::ImportTableDescription
+      SENSITIVE: []
+    end
+
+    class DescribeKinesisStreamingDestinationInput
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeKinesisStreamingDestinationOutput
+      attr_accessor table_name: ::String
+      attr_accessor kinesis_data_stream_destinations: ::Array[Types::KinesisDataStreamDestination]
+      SENSITIVE: []
+    end
+
+    class DescribeLimitsInput < Aws::EmptyStructure
+    end
+
+    class DescribeLimitsOutput
+      attr_accessor account_max_read_capacity_units: ::Integer
+      attr_accessor account_max_write_capacity_units: ::Integer
+      attr_accessor table_max_read_capacity_units: ::Integer
+      attr_accessor table_max_write_capacity_units: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeTableInput
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTableOutput
+      attr_accessor table: Types::TableDescription
+      SENSITIVE: []
+    end
+
+    class DescribeTableReplicaAutoScalingInput
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTableReplicaAutoScalingOutput
+      attr_accessor table_auto_scaling_description: Types::TableAutoScalingDescription
+      SENSITIVE: []
+    end
+
+    class DescribeTimeToLiveInput
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTimeToLiveOutput
+      attr_accessor time_to_live_description: Types::TimeToLiveDescription
+      SENSITIVE: []
+    end
+
+    class DuplicateItemException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EnableKinesisStreamingConfiguration
+      attr_accessor approximate_creation_date_time_precision: ("MILLISECOND" | "MICROSECOND")
+      SENSITIVE: []
+    end
+
+    class Endpoint
+      attr_accessor address: ::String
+      attr_accessor cache_period_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExecuteStatementInput
+      attr_accessor statement: ::String
+      attr_accessor parameters: ::Array[Types::AttributeValue]
+      attr_accessor consistent_read: bool
+      attr_accessor next_token: ::String
+      attr_accessor return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE")
+      attr_accessor limit: ::Integer
+      attr_accessor return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")
+      SENSITIVE: []
+    end
+
+    class ExecuteStatementOutput
+      attr_accessor items: ::Array[::Hash[::String, Types::AttributeValue]]
+      attr_accessor next_token: ::String
+      attr_accessor consumed_capacity: Types::ConsumedCapacity
+      attr_accessor last_evaluated_key: ::Hash[::String, Types::AttributeValue]
+      SENSITIVE: []
+    end
+
+    class ExecuteTransactionInput
+      attr_accessor transact_statements: ::Array[Types::ParameterizedStatement]
+      attr_accessor client_request_token: ::String
+      attr_accessor return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE")
+      SENSITIVE: []
+    end
+
+    class ExecuteTransactionOutput
+      attr_accessor responses: ::Array[Types::ItemResponse]
+      attr_accessor consumed_capacity: ::Array[Types::ConsumedCapacity]
+      SENSITIVE: []
+    end
+
+    class ExpectedAttributeValue
+      attr_accessor value: Types::AttributeValue
+      attr_accessor exists: bool
+      attr_accessor comparison_operator: ("EQ" | "NE" | "IN" | "LE" | "LT" | "GE" | "GT" | "BETWEEN" | "NOT_NULL" | "NULL" | "CONTAINS" | "NOT_CONTAINS" | "BEGINS_WITH")
+      attr_accessor attribute_value_list: ::Array[Types::AttributeValue]
+      SENSITIVE: []
+    end
+
+    class ExportConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ExportDescription
+      attr_accessor export_arn: ::String
+      attr_accessor export_status: ("IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor export_manifest: ::String
+      attr_accessor table_arn: ::String
+      attr_accessor table_id: ::String
+      attr_accessor export_time: ::Time
+      attr_accessor client_token: ::String
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_bucket_owner: ::String
+      attr_accessor s3_prefix: ::String
+      attr_accessor s3_sse_algorithm: ("AES256" | "KMS")
+      attr_accessor s3_sse_kms_key_id: ::String
+      attr_accessor failure_code: ::String
+      attr_accessor failure_message: ::String
+      attr_accessor export_format: ("DYNAMODB_JSON" | "ION")
+      attr_accessor billed_size_bytes: ::Integer
+      attr_accessor item_count: ::Integer
+      attr_accessor export_type: ("FULL_EXPORT" | "INCREMENTAL_EXPORT")
+      attr_accessor incremental_export_specification: Types::IncrementalExportSpecification
+      SENSITIVE: []
+    end
+
+    class ExportNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ExportSummary
+      attr_accessor export_arn: ::String
+      attr_accessor export_status: ("IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor export_type: ("FULL_EXPORT" | "INCREMENTAL_EXPORT")
+      SENSITIVE: []
+    end
+
+    class ExportTableToPointInTimeInput
+      attr_accessor table_arn: ::String
+      attr_accessor export_time: ::Time
+      attr_accessor client_token: ::String
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_bucket_owner: ::String
+      attr_accessor s3_prefix: ::String
+      attr_accessor s3_sse_algorithm: ("AES256" | "KMS")
+      attr_accessor s3_sse_kms_key_id: ::String
+      attr_accessor export_format: ("DYNAMODB_JSON" | "ION")
+      attr_accessor export_type: ("FULL_EXPORT" | "INCREMENTAL_EXPORT")
+      attr_accessor incremental_export_specification: Types::IncrementalExportSpecification
+      SENSITIVE: []
+    end
+
+    class ExportTableToPointInTimeOutput
+      attr_accessor export_description: Types::ExportDescription
+      SENSITIVE: []
+    end
+
+    class FailureException
+      attr_accessor exception_name: ::String
+      attr_accessor exception_description: ::String
+      SENSITIVE: []
+    end
+
+    class Get
+      attr_accessor key: ::Hash[::String, Types::AttributeValue]
+      attr_accessor table_name: ::String
+      attr_accessor projection_expression: ::String
+      attr_accessor expression_attribute_names: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetItemInput
+      attr_accessor table_name: ::String
+      attr_accessor key: ::Hash[::String, Types::AttributeValue]
+      attr_accessor attributes_to_get: ::Array[::String]
+      attr_accessor consistent_read: bool
+      attr_accessor return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE")
+      attr_accessor projection_expression: ::String
+      attr_accessor expression_attribute_names: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetItemOutput
+      attr_accessor item: ::Hash[::String, Types::AttributeValue]
+      attr_accessor consumed_capacity: Types::ConsumedCapacity
+      SENSITIVE: []
+    end
+
+    class GlobalSecondaryIndex
+      attr_accessor index_name: ::String
+      attr_accessor key_schema: ::Array[Types::KeySchemaElement]
+      attr_accessor projection: Types::Projection
+      attr_accessor provisioned_throughput: Types::ProvisionedThroughput
+      SENSITIVE: []
+    end
+
+    class GlobalSecondaryIndexAutoScalingUpdate
+      attr_accessor index_name: ::String
+      attr_accessor provisioned_write_capacity_auto_scaling_update: Types::AutoScalingSettingsUpdate
+      SENSITIVE: []
+    end
+
+    class GlobalSecondaryIndexDescription
+      attr_accessor index_name: ::String
+      attr_accessor key_schema: ::Array[Types::KeySchemaElement]
+      attr_accessor projection: Types::Projection
+      attr_accessor index_status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE")
+      attr_accessor backfilling: bool
+      attr_accessor provisioned_throughput: Types::ProvisionedThroughputDescription
+      attr_accessor index_size_bytes: ::Integer
+      attr_accessor item_count: ::Integer
+      attr_accessor index_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GlobalSecondaryIndexInfo
+      attr_accessor index_name: ::String
+      attr_accessor key_schema: ::Array[Types::KeySchemaElement]
+      attr_accessor projection: Types::Projection
+      attr_accessor provisioned_throughput: Types::ProvisionedThroughput
+      SENSITIVE: []
+    end
+
+    class GlobalSecondaryIndexUpdate
+      attr_accessor update: Types::UpdateGlobalSecondaryIndexAction
+      attr_accessor create: Types::CreateGlobalSecondaryIndexAction
+      attr_accessor delete: Types::DeleteGlobalSecondaryIndexAction
+      SENSITIVE: []
+    end
+
+    class GlobalTable
+      attr_accessor global_table_name: ::String
+      attr_accessor replication_group: ::Array[Types::Replica]
+      SENSITIVE: []
+    end
+
+    class GlobalTableAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GlobalTableDescription
+      attr_accessor replication_group: ::Array[Types::ReplicaDescription]
+      attr_accessor global_table_arn: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor global_table_status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING")
+      attr_accessor global_table_name: ::String
+      SENSITIVE: []
+    end
+
+    class GlobalTableGlobalSecondaryIndexSettingsUpdate
+      attr_accessor index_name: ::String
+      attr_accessor provisioned_write_capacity_units: ::Integer
+      attr_accessor provisioned_write_capacity_auto_scaling_settings_update: Types::AutoScalingSettingsUpdate
+      SENSITIVE: []
+    end
+
+    class GlobalTableNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IdempotentParameterMismatchException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ImportConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ImportNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ImportSummary
+      attr_accessor import_arn: ::String
+      attr_accessor import_status: ("IN_PROGRESS" | "COMPLETED" | "CANCELLING" | "CANCELLED" | "FAILED")
+      attr_accessor table_arn: ::String
+      attr_accessor s3_bucket_source: Types::S3BucketSource
+      attr_accessor cloud_watch_log_group_arn: ::String
+      attr_accessor input_format: ("DYNAMODB_JSON" | "ION" | "CSV")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ImportTableDescription
+      attr_accessor import_arn: ::String
+      attr_accessor import_status: ("IN_PROGRESS" | "COMPLETED" | "CANCELLING" | "CANCELLED" | "FAILED")
+      attr_accessor table_arn: ::String
+      attr_accessor table_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor s3_bucket_source: Types::S3BucketSource
+      attr_accessor error_count: ::Integer
+      attr_accessor cloud_watch_log_group_arn: ::String
+      attr_accessor input_format: ("DYNAMODB_JSON" | "ION" | "CSV")
+      attr_accessor input_format_options: Types::InputFormatOptions
+      attr_accessor input_compression_type: ("GZIP" | "ZSTD" | "NONE")
+      attr_accessor table_creation_parameters: Types::TableCreationParameters
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor processed_size_bytes: ::Integer
+      attr_accessor processed_item_count: ::Integer
+      attr_accessor imported_item_count: ::Integer
+      attr_accessor failure_code: ::String
+      attr_accessor failure_message: ::String
+      SENSITIVE: []
+    end
+
+    class ImportTableInput
+      attr_accessor client_token: ::String
+      attr_accessor s3_bucket_source: Types::S3BucketSource
+      attr_accessor input_format: ("DYNAMODB_JSON" | "ION" | "CSV")
+      attr_accessor input_format_options: Types::InputFormatOptions
+      attr_accessor input_compression_type: ("GZIP" | "ZSTD" | "NONE")
+      attr_accessor table_creation_parameters: Types::TableCreationParameters
+      SENSITIVE: []
+    end
+
+    class ImportTableOutput
+      attr_accessor import_table_description: Types::ImportTableDescription
+      SENSITIVE: []
+    end
+
+    class IncrementalExportSpecification
+      attr_accessor export_from_time: ::Time
+      attr_accessor export_to_time: ::Time
+      attr_accessor export_view_type: ("NEW_IMAGE" | "NEW_AND_OLD_IMAGES")
+      SENSITIVE: []
+    end
+
+    class IndexNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InputFormatOptions
+      attr_accessor csv: Types::CsvOptions
+      SENSITIVE: []
+    end
+
+    class InternalServerError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidExportTimeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRestoreTimeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ItemCollectionMetrics
+      attr_accessor item_collection_key: ::Hash[::String, Types::AttributeValue]
+      attr_accessor size_estimate_range_gb: ::Array[::Float]
+      SENSITIVE: []
+    end
+
+    class ItemCollectionSizeLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ItemResponse
+      attr_accessor item: ::Hash[::String, Types::AttributeValue]
+      SENSITIVE: []
+    end
+
+    class KeySchemaElement
+      attr_accessor attribute_name: ::String
+      attr_accessor key_type: ("HASH" | "RANGE")
+      SENSITIVE: []
+    end
+
+    class KeysAndAttributes
+      attr_accessor keys: ::Array[::Hash[::String, Types::AttributeValue]]
+      attr_accessor attributes_to_get: ::Array[::String]
+      attr_accessor consistent_read: bool
+      attr_accessor projection_expression: ::String
+      attr_accessor expression_attribute_names: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class KinesisDataStreamDestination
+      attr_accessor stream_arn: ::String
+      attr_accessor destination_status: ("ENABLING" | "ACTIVE" | "DISABLING" | "DISABLED" | "ENABLE_FAILED" | "UPDATING")
+      attr_accessor destination_status_description: ::String
+      attr_accessor approximate_creation_date_time_precision: ("MILLISECOND" | "MICROSECOND")
+      SENSITIVE: []
+    end
+
+    class KinesisStreamingDestinationInput
+      attr_accessor table_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor enable_kinesis_streaming_configuration: Types::EnableKinesisStreamingConfiguration
+      SENSITIVE: []
+    end
+
+    class KinesisStreamingDestinationOutput
+      attr_accessor table_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor destination_status: ("ENABLING" | "ACTIVE" | "DISABLING" | "DISABLED" | "ENABLE_FAILED" | "UPDATING")
+      attr_accessor enable_kinesis_streaming_configuration: Types::EnableKinesisStreamingConfiguration
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListBackupsInput
+      attr_accessor table_name: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor time_range_lower_bound: ::Time
+      attr_accessor time_range_upper_bound: ::Time
+      attr_accessor exclusive_start_backup_arn: ::String
+      attr_accessor backup_type: ("USER" | "SYSTEM" | "AWS_BACKUP" | "ALL")
+      SENSITIVE: []
+    end
+
+    class ListBackupsOutput
+      attr_accessor backup_summaries: ::Array[Types::BackupSummary]
+      attr_accessor last_evaluated_backup_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListContributorInsightsInput
+      attr_accessor table_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListContributorInsightsOutput
+      attr_accessor contributor_insights_summaries: ::Array[Types::ContributorInsightsSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExportsInput
+      attr_accessor table_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExportsOutput
+      attr_accessor export_summaries: ::Array[Types::ExportSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGlobalTablesInput
+      attr_accessor exclusive_start_global_table_name: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor region_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListGlobalTablesOutput
+      attr_accessor global_tables: ::Array[Types::GlobalTable]
+      attr_accessor last_evaluated_global_table_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListImportsInput
+      attr_accessor table_arn: ::String
+      attr_accessor page_size: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImportsOutput
+      attr_accessor import_summary_list: ::Array[Types::ImportSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTablesInput
+      attr_accessor exclusive_start_table_name: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTablesOutput
+      attr_accessor table_names: ::Array[::String]
+      attr_accessor last_evaluated_table_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsOfResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsOfResourceOutput
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LocalSecondaryIndex
+      attr_accessor index_name: ::String
+      attr_accessor key_schema: ::Array[Types::KeySchemaElement]
+      attr_accessor projection: Types::Projection
+      SENSITIVE: []
+    end
+
+    class LocalSecondaryIndexDescription
+      attr_accessor index_name: ::String
+      attr_accessor key_schema: ::Array[Types::KeySchemaElement]
+      attr_accessor projection: Types::Projection
+      attr_accessor index_size_bytes: ::Integer
+      attr_accessor item_count: ::Integer
+      attr_accessor index_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LocalSecondaryIndexInfo
+      attr_accessor index_name: ::String
+      attr_accessor key_schema: ::Array[Types::KeySchemaElement]
+      attr_accessor projection: Types::Projection
+      SENSITIVE: []
+    end
+
+    class ParameterizedStatement
+      attr_accessor statement: ::String
+      attr_accessor parameters: ::Array[Types::AttributeValue]
+      attr_accessor return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")
+      SENSITIVE: []
+    end
+
+    class PointInTimeRecoveryDescription
+      attr_accessor point_in_time_recovery_status: ("ENABLED" | "DISABLED")
+      attr_accessor earliest_restorable_date_time: ::Time
+      attr_accessor latest_restorable_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class PointInTimeRecoverySpecification
+      attr_accessor point_in_time_recovery_enabled: bool
+      SENSITIVE: []
+    end
+
+    class PointInTimeRecoveryUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Projection
+      attr_accessor projection_type: ("ALL" | "KEYS_ONLY" | "INCLUDE")
+      attr_accessor non_key_attributes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ProvisionedThroughput
+      attr_accessor read_capacity_units: ::Integer
+      attr_accessor write_capacity_units: ::Integer
+      SENSITIVE: []
+    end
+
+    class ProvisionedThroughputDescription
+      attr_accessor last_increase_date_time: ::Time
+      attr_accessor last_decrease_date_time: ::Time
+      attr_accessor number_of_decreases_today: ::Integer
+      attr_accessor read_capacity_units: ::Integer
+      attr_accessor write_capacity_units: ::Integer
+      SENSITIVE: []
+    end
+
+    class ProvisionedThroughputExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ProvisionedThroughputOverride
+      attr_accessor read_capacity_units: ::Integer
+      SENSITIVE: []
+    end
+
+    class Put
+      attr_accessor item: ::Hash[::String, Types::AttributeValue]
+      attr_accessor table_name: ::String
+      attr_accessor condition_expression: ::String
+      attr_accessor expression_attribute_names: ::Hash[::String, ::String]
+      attr_accessor expression_attribute_values: ::Hash[::String, Types::AttributeValue]
+      attr_accessor return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")
+      SENSITIVE: []
+    end
+
+    class PutItemInput
+      attr_accessor table_name: ::String
+      attr_accessor item: ::Hash[::String, Types::AttributeValue]
+      attr_accessor expected: ::Hash[::String, Types::ExpectedAttributeValue]
+      attr_accessor return_values: ("NONE" | "ALL_OLD" | "UPDATED_OLD" | "ALL_NEW" | "UPDATED_NEW")
+      attr_accessor return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE")
+      attr_accessor return_item_collection_metrics: ("SIZE" | "NONE")
+      attr_accessor conditional_operator: ("AND" | "OR")
+      attr_accessor condition_expression: ::String
+      attr_accessor expression_attribute_names: ::Hash[::String, ::String]
+      attr_accessor expression_attribute_values: ::Hash[::String, Types::AttributeValue]
+      attr_accessor return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")
+      SENSITIVE: []
+    end
+
+    class PutItemOutput
+      attr_accessor attributes: ::Hash[::String, Types::AttributeValue]
+      attr_accessor consumed_capacity: Types::ConsumedCapacity
+      attr_accessor item_collection_metrics: Types::ItemCollectionMetrics
+      SENSITIVE: []
+    end
+
+    class PutRequest
+      attr_accessor item: ::Hash[::String, Types::AttributeValue]
+      SENSITIVE: []
+    end
+
+    class QueryInput
+      attr_accessor table_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor select: ("ALL_ATTRIBUTES" | "ALL_PROJECTED_ATTRIBUTES" | "SPECIFIC_ATTRIBUTES" | "COUNT")
+      attr_accessor attributes_to_get: ::Array[::String]
+      attr_accessor limit: ::Integer
+      attr_accessor consistent_read: bool
+      attr_accessor key_conditions: ::Hash[::String, Types::Condition]
+      attr_accessor query_filter: ::Hash[::String, Types::Condition]
+      attr_accessor conditional_operator: ("AND" | "OR")
+      attr_accessor scan_index_forward: bool
+      attr_accessor exclusive_start_key: ::Hash[::String, Types::AttributeValue]
+      attr_accessor return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE")
+      attr_accessor projection_expression: ::String
+      attr_accessor filter_expression: ::String
+      attr_accessor key_condition_expression: ::String
+      attr_accessor expression_attribute_names: ::Hash[::String, ::String]
+      attr_accessor expression_attribute_values: ::Hash[::String, Types::AttributeValue]
+      SENSITIVE: []
+    end
+
+    class QueryOutput
+      attr_accessor items: ::Array[::Hash[::String, Types::AttributeValue]]
+      attr_accessor count: ::Integer
+      attr_accessor scanned_count: ::Integer
+      attr_accessor last_evaluated_key: ::Hash[::String, Types::AttributeValue]
+      attr_accessor consumed_capacity: Types::ConsumedCapacity
+      SENSITIVE: []
+    end
+
+    class Replica
+      attr_accessor region_name: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicaAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicaAutoScalingDescription
+      attr_accessor region_name: ::String
+      attr_accessor global_secondary_indexes: ::Array[Types::ReplicaGlobalSecondaryIndexAutoScalingDescription]
+      attr_accessor replica_provisioned_read_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription
+      attr_accessor replica_provisioned_write_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription
+      attr_accessor replica_status: ("CREATING" | "CREATION_FAILED" | "UPDATING" | "DELETING" | "ACTIVE" | "REGION_DISABLED" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS")
+      SENSITIVE: []
+    end
+
+    class ReplicaAutoScalingUpdate
+      attr_accessor region_name: ::String
+      attr_accessor replica_global_secondary_index_updates: ::Array[Types::ReplicaGlobalSecondaryIndexAutoScalingUpdate]
+      attr_accessor replica_provisioned_read_capacity_auto_scaling_update: Types::AutoScalingSettingsUpdate
+      SENSITIVE: []
+    end
+
+    class ReplicaDescription
+      attr_accessor region_name: ::String
+      attr_accessor replica_status: ("CREATING" | "CREATION_FAILED" | "UPDATING" | "DELETING" | "ACTIVE" | "REGION_DISABLED" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS")
+      attr_accessor replica_status_description: ::String
+      attr_accessor replica_status_percent_progress: ::String
+      attr_accessor kms_master_key_id: ::String
+      attr_accessor provisioned_throughput_override: Types::ProvisionedThroughputOverride
+      attr_accessor global_secondary_indexes: ::Array[Types::ReplicaGlobalSecondaryIndexDescription]
+      attr_accessor replica_inaccessible_date_time: ::Time
+      attr_accessor replica_table_class_summary: Types::TableClassSummary
+      SENSITIVE: []
+    end
+
+    class ReplicaGlobalSecondaryIndex
+      attr_accessor index_name: ::String
+      attr_accessor provisioned_throughput_override: Types::ProvisionedThroughputOverride
+      SENSITIVE: []
+    end
+
+    class ReplicaGlobalSecondaryIndexAutoScalingDescription
+      attr_accessor index_name: ::String
+      attr_accessor index_status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE")
+      attr_accessor provisioned_read_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription
+      attr_accessor provisioned_write_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription
+      SENSITIVE: []
+    end
+
+    class ReplicaGlobalSecondaryIndexAutoScalingUpdate
+      attr_accessor index_name: ::String
+      attr_accessor provisioned_read_capacity_auto_scaling_update: Types::AutoScalingSettingsUpdate
+      SENSITIVE: []
+    end
+
+    class ReplicaGlobalSecondaryIndexDescription
+      attr_accessor index_name: ::String
+      attr_accessor provisioned_throughput_override: Types::ProvisionedThroughputOverride
+      SENSITIVE: []
+    end
+
+    class ReplicaGlobalSecondaryIndexSettingsDescription
+      attr_accessor index_name: ::String
+      attr_accessor index_status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE")
+      attr_accessor provisioned_read_capacity_units: ::Integer
+      attr_accessor provisioned_read_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription
+      attr_accessor provisioned_write_capacity_units: ::Integer
+      attr_accessor provisioned_write_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription
+      SENSITIVE: []
+    end
+
+    class ReplicaGlobalSecondaryIndexSettingsUpdate
+      attr_accessor index_name: ::String
+      attr_accessor provisioned_read_capacity_units: ::Integer
+      attr_accessor provisioned_read_capacity_auto_scaling_settings_update: Types::AutoScalingSettingsUpdate
+      SENSITIVE: []
+    end
+
+    class ReplicaNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicaSettingsDescription
+      attr_accessor region_name: ::String
+      attr_accessor replica_status: ("CREATING" | "CREATION_FAILED" | "UPDATING" | "DELETING" | "ACTIVE" | "REGION_DISABLED" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS")
+      attr_accessor replica_billing_mode_summary: Types::BillingModeSummary
+      attr_accessor replica_provisioned_read_capacity_units: ::Integer
+      attr_accessor replica_provisioned_read_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription
+      attr_accessor replica_provisioned_write_capacity_units: ::Integer
+      attr_accessor replica_provisioned_write_capacity_auto_scaling_settings: Types::AutoScalingSettingsDescription
+      attr_accessor replica_global_secondary_index_settings: ::Array[Types::ReplicaGlobalSecondaryIndexSettingsDescription]
+      attr_accessor replica_table_class_summary: Types::TableClassSummary
+      SENSITIVE: []
+    end
+
+    class ReplicaSettingsUpdate
+      attr_accessor region_name: ::String
+      attr_accessor replica_provisioned_read_capacity_units: ::Integer
+      attr_accessor replica_provisioned_read_capacity_auto_scaling_settings_update: Types::AutoScalingSettingsUpdate
+      attr_accessor replica_global_secondary_index_settings_update: ::Array[Types::ReplicaGlobalSecondaryIndexSettingsUpdate]
+      attr_accessor replica_table_class: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS")
+      SENSITIVE: []
+    end
+
+    class ReplicaUpdate
+      attr_accessor create: Types::CreateReplicaAction
+      attr_accessor delete: Types::DeleteReplicaAction
+      SENSITIVE: []
+    end
+
+    class ReplicationGroupUpdate
+      attr_accessor create: Types::CreateReplicationGroupMemberAction
+      attr_accessor update: Types::UpdateReplicationGroupMemberAction
+      attr_accessor delete: Types::DeleteReplicationGroupMemberAction
+      SENSITIVE: []
+    end
+
+    class RequestLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreSummary
+      attr_accessor source_backup_arn: ::String
+      attr_accessor source_table_arn: ::String
+      attr_accessor restore_date_time: ::Time
+      attr_accessor restore_in_progress: bool
+      SENSITIVE: []
+    end
+
+    class RestoreTableFromBackupInput
+      attr_accessor target_table_name: ::String
+      attr_accessor backup_arn: ::String
+      attr_accessor billing_mode_override: ("PROVISIONED" | "PAY_PER_REQUEST")
+      attr_accessor global_secondary_index_override: ::Array[Types::GlobalSecondaryIndex]
+      attr_accessor local_secondary_index_override: ::Array[Types::LocalSecondaryIndex]
+      attr_accessor provisioned_throughput_override: Types::ProvisionedThroughput
+      attr_accessor sse_specification_override: Types::SSESpecification
+      SENSITIVE: []
+    end
+
+    class RestoreTableFromBackupOutput
+      attr_accessor table_description: Types::TableDescription
+      SENSITIVE: []
+    end
+
+    class RestoreTableToPointInTimeInput
+      attr_accessor source_table_arn: ::String
+      attr_accessor source_table_name: ::String
+      attr_accessor target_table_name: ::String
+      attr_accessor use_latest_restorable_time: bool
+      attr_accessor restore_date_time: ::Time
+      attr_accessor billing_mode_override: ("PROVISIONED" | "PAY_PER_REQUEST")
+      attr_accessor global_secondary_index_override: ::Array[Types::GlobalSecondaryIndex]
+      attr_accessor local_secondary_index_override: ::Array[Types::LocalSecondaryIndex]
+      attr_accessor provisioned_throughput_override: Types::ProvisionedThroughput
+      attr_accessor sse_specification_override: Types::SSESpecification
+      SENSITIVE: []
+    end
+
+    class RestoreTableToPointInTimeOutput
+      attr_accessor table_description: Types::TableDescription
+      SENSITIVE: []
+    end
+
+    class S3BucketSource
+      attr_accessor s3_bucket_owner: ::String
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_key_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class SSEDescription
+      attr_accessor status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "UPDATING")
+      attr_accessor sse_type: ("AES256" | "KMS")
+      attr_accessor kms_master_key_arn: ::String
+      attr_accessor inaccessible_encryption_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class SSESpecification
+      attr_accessor enabled: bool
+      attr_accessor sse_type: ("AES256" | "KMS")
+      attr_accessor kms_master_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class ScanInput
+      attr_accessor table_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor attributes_to_get: ::Array[::String]
+      attr_accessor limit: ::Integer
+      attr_accessor select: ("ALL_ATTRIBUTES" | "ALL_PROJECTED_ATTRIBUTES" | "SPECIFIC_ATTRIBUTES" | "COUNT")
+      attr_accessor scan_filter: ::Hash[::String, Types::Condition]
+      attr_accessor conditional_operator: ("AND" | "OR")
+      attr_accessor exclusive_start_key: ::Hash[::String, Types::AttributeValue]
+      attr_accessor return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE")
+      attr_accessor total_segments: ::Integer
+      attr_accessor segment: ::Integer
+      attr_accessor projection_expression: ::String
+      attr_accessor filter_expression: ::String
+      attr_accessor expression_attribute_names: ::Hash[::String, ::String]
+      attr_accessor expression_attribute_values: ::Hash[::String, Types::AttributeValue]
+      attr_accessor consistent_read: bool
+      SENSITIVE: []
+    end
+
+    class ScanOutput
+      attr_accessor items: ::Array[::Hash[::String, Types::AttributeValue]]
+      attr_accessor count: ::Integer
+      attr_accessor scanned_count: ::Integer
+      attr_accessor last_evaluated_key: ::Hash[::String, Types::AttributeValue]
+      attr_accessor consumed_capacity: Types::ConsumedCapacity
+      SENSITIVE: []
+    end
+
+    class SourceTableDetails
+      attr_accessor table_name: ::String
+      attr_accessor table_id: ::String
+      attr_accessor table_arn: ::String
+      attr_accessor table_size_bytes: ::Integer
+      attr_accessor key_schema: ::Array[Types::KeySchemaElement]
+      attr_accessor table_creation_date_time: ::Time
+      attr_accessor provisioned_throughput: Types::ProvisionedThroughput
+      attr_accessor item_count: ::Integer
+      attr_accessor billing_mode: ("PROVISIONED" | "PAY_PER_REQUEST")
+      SENSITIVE: []
+    end
+
+    class SourceTableFeatureDetails
+      attr_accessor local_secondary_indexes: ::Array[Types::LocalSecondaryIndexInfo]
+      attr_accessor global_secondary_indexes: ::Array[Types::GlobalSecondaryIndexInfo]
+      attr_accessor stream_description: Types::StreamSpecification
+      attr_accessor time_to_live_description: Types::TimeToLiveDescription
+      attr_accessor sse_description: Types::SSEDescription
+      SENSITIVE: []
+    end
+
+    class StreamSpecification
+      attr_accessor stream_enabled: bool
+      attr_accessor stream_view_type: ("NEW_IMAGE" | "OLD_IMAGE" | "NEW_AND_OLD_IMAGES" | "KEYS_ONLY")
+      SENSITIVE: []
+    end
+
+    class TableAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TableAutoScalingDescription
+      attr_accessor table_name: ::String
+      attr_accessor table_status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS" | "ARCHIVING" | "ARCHIVED")
+      attr_accessor replicas: ::Array[Types::ReplicaAutoScalingDescription]
+      SENSITIVE: []
+    end
+
+    class TableClassSummary
+      attr_accessor table_class: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS")
+      attr_accessor last_update_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class TableCreationParameters
+      attr_accessor table_name: ::String
+      attr_accessor attribute_definitions: ::Array[Types::AttributeDefinition]
+      attr_accessor key_schema: ::Array[Types::KeySchemaElement]
+      attr_accessor billing_mode: ("PROVISIONED" | "PAY_PER_REQUEST")
+      attr_accessor provisioned_throughput: Types::ProvisionedThroughput
+      attr_accessor sse_specification: Types::SSESpecification
+      attr_accessor global_secondary_indexes: ::Array[Types::GlobalSecondaryIndex]
+      SENSITIVE: []
+    end
+
+    class TableDescription
+      attr_accessor attribute_definitions: ::Array[Types::AttributeDefinition]
+      attr_accessor table_name: ::String
+      attr_accessor key_schema: ::Array[Types::KeySchemaElement]
+      attr_accessor table_status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS" | "ARCHIVING" | "ARCHIVED")
+      attr_accessor creation_date_time: ::Time
+      attr_accessor provisioned_throughput: Types::ProvisionedThroughputDescription
+      attr_accessor table_size_bytes: ::Integer
+      attr_accessor item_count: ::Integer
+      attr_accessor table_arn: ::String
+      attr_accessor table_id: ::String
+      attr_accessor billing_mode_summary: Types::BillingModeSummary
+      attr_accessor local_secondary_indexes: ::Array[Types::LocalSecondaryIndexDescription]
+      attr_accessor global_secondary_indexes: ::Array[Types::GlobalSecondaryIndexDescription]
+      attr_accessor stream_specification: Types::StreamSpecification
+      attr_accessor latest_stream_label: ::String
+      attr_accessor latest_stream_arn: ::String
+      attr_accessor global_table_version: ::String
+      attr_accessor replicas: ::Array[Types::ReplicaDescription]
+      attr_accessor restore_summary: Types::RestoreSummary
+      attr_accessor sse_description: Types::SSEDescription
+      attr_accessor archival_summary: Types::ArchivalSummary
+      attr_accessor table_class_summary: Types::TableClassSummary
+      attr_accessor deletion_protection_enabled: bool
+      SENSITIVE: []
+    end
+
+    class TableInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TableNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TimeToLiveDescription
+      attr_accessor time_to_live_status: ("ENABLING" | "DISABLING" | "ENABLED" | "DISABLED")
+      attr_accessor attribute_name: ::String
+      SENSITIVE: []
+    end
+
+    class TimeToLiveSpecification
+      attr_accessor enabled: bool
+      attr_accessor attribute_name: ::String
+      SENSITIVE: []
+    end
+
+    class TransactGetItem
+      attr_accessor get: Types::Get
+      SENSITIVE: []
+    end
+
+    class TransactGetItemsInput
+      attr_accessor transact_items: ::Array[Types::TransactGetItem]
+      attr_accessor return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE")
+      SENSITIVE: []
+    end
+
+    class TransactGetItemsOutput
+      attr_accessor consumed_capacity: ::Array[Types::ConsumedCapacity]
+      attr_accessor responses: ::Array[Types::ItemResponse]
+      SENSITIVE: []
+    end
+
+    class TransactWriteItem
+      attr_accessor condition_check: Types::ConditionCheck
+      attr_accessor put: Types::Put
+      attr_accessor delete: Types::Delete
+      attr_accessor update: Types::Update
+      SENSITIVE: []
+    end
+
+    class TransactWriteItemsInput
+      attr_accessor transact_items: ::Array[Types::TransactWriteItem]
+      attr_accessor return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE")
+      attr_accessor return_item_collection_metrics: ("SIZE" | "NONE")
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class TransactWriteItemsOutput
+      attr_accessor consumed_capacity: ::Array[Types::ConsumedCapacity]
+      attr_accessor item_collection_metrics: ::Hash[::String, ::Array[Types::ItemCollectionMetrics]]
+      SENSITIVE: []
+    end
+
+    class TransactionCanceledException
+      attr_accessor message: ::String
+      attr_accessor cancellation_reasons: ::Array[Types::CancellationReason]
+      SENSITIVE: []
+    end
+
+    class TransactionConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TransactionInProgressException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Update
+      attr_accessor key: ::Hash[::String, Types::AttributeValue]
+      attr_accessor update_expression: ::String
+      attr_accessor table_name: ::String
+      attr_accessor condition_expression: ::String
+      attr_accessor expression_attribute_names: ::Hash[::String, ::String]
+      attr_accessor expression_attribute_values: ::Hash[::String, Types::AttributeValue]
+      attr_accessor return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")
+      SENSITIVE: []
+    end
+
+    class UpdateContinuousBackupsInput
+      attr_accessor table_name: ::String
+      attr_accessor point_in_time_recovery_specification: Types::PointInTimeRecoverySpecification
+      SENSITIVE: []
+    end
+
+    class UpdateContinuousBackupsOutput
+      attr_accessor continuous_backups_description: Types::ContinuousBackupsDescription
+      SENSITIVE: []
+    end
+
+    class UpdateContributorInsightsInput
+      attr_accessor table_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor contributor_insights_action: ("ENABLE" | "DISABLE")
+      SENSITIVE: []
+    end
+
+    class UpdateContributorInsightsOutput
+      attr_accessor table_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor contributor_insights_status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class UpdateGlobalSecondaryIndexAction
+      attr_accessor index_name: ::String
+      attr_accessor provisioned_throughput: Types::ProvisionedThroughput
+      SENSITIVE: []
+    end
+
+    class UpdateGlobalTableInput
+      attr_accessor global_table_name: ::String
+      attr_accessor replica_updates: ::Array[Types::ReplicaUpdate]
+      SENSITIVE: []
+    end
+
+    class UpdateGlobalTableOutput
+      attr_accessor global_table_description: Types::GlobalTableDescription
+      SENSITIVE: []
+    end
+
+    class UpdateGlobalTableSettingsInput
+      attr_accessor global_table_name: ::String
+      attr_accessor global_table_billing_mode: ("PROVISIONED" | "PAY_PER_REQUEST")
+      attr_accessor global_table_provisioned_write_capacity_units: ::Integer
+      attr_accessor global_table_provisioned_write_capacity_auto_scaling_settings_update: Types::AutoScalingSettingsUpdate
+      attr_accessor global_table_global_secondary_index_settings_update: ::Array[Types::GlobalTableGlobalSecondaryIndexSettingsUpdate]
+      attr_accessor replica_settings_update: ::Array[Types::ReplicaSettingsUpdate]
+      SENSITIVE: []
+    end
+
+    class UpdateGlobalTableSettingsOutput
+      attr_accessor global_table_name: ::String
+      attr_accessor replica_settings: ::Array[Types::ReplicaSettingsDescription]
+      SENSITIVE: []
+    end
+
+    class UpdateItemInput
+      attr_accessor table_name: ::String
+      attr_accessor key: ::Hash[::String, Types::AttributeValue]
+      attr_accessor attribute_updates: ::Hash[::String, Types::AttributeValueUpdate]
+      attr_accessor expected: ::Hash[::String, Types::ExpectedAttributeValue]
+      attr_accessor conditional_operator: ("AND" | "OR")
+      attr_accessor return_values: ("NONE" | "ALL_OLD" | "UPDATED_OLD" | "ALL_NEW" | "UPDATED_NEW")
+      attr_accessor return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE")
+      attr_accessor return_item_collection_metrics: ("SIZE" | "NONE")
+      attr_accessor update_expression: ::String
+      attr_accessor condition_expression: ::String
+      attr_accessor expression_attribute_names: ::Hash[::String, ::String]
+      attr_accessor expression_attribute_values: ::Hash[::String, Types::AttributeValue]
+      attr_accessor return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")
+      SENSITIVE: []
+    end
+
+    class UpdateItemOutput
+      attr_accessor attributes: ::Hash[::String, Types::AttributeValue]
+      attr_accessor consumed_capacity: Types::ConsumedCapacity
+      attr_accessor item_collection_metrics: Types::ItemCollectionMetrics
+      SENSITIVE: []
+    end
+
+    class UpdateKinesisStreamingConfiguration
+      attr_accessor approximate_creation_date_time_precision: ("MILLISECOND" | "MICROSECOND")
+      SENSITIVE: []
+    end
+
+    class UpdateKinesisStreamingDestinationInput
+      attr_accessor table_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor update_kinesis_streaming_configuration: Types::UpdateKinesisStreamingConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateKinesisStreamingDestinationOutput
+      attr_accessor table_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor destination_status: ("ENABLING" | "ACTIVE" | "DISABLING" | "DISABLED" | "ENABLE_FAILED" | "UPDATING")
+      attr_accessor update_kinesis_streaming_configuration: Types::UpdateKinesisStreamingConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateReplicationGroupMemberAction
+      attr_accessor region_name: ::String
+      attr_accessor kms_master_key_id: ::String
+      attr_accessor provisioned_throughput_override: Types::ProvisionedThroughputOverride
+      attr_accessor global_secondary_indexes: ::Array[Types::ReplicaGlobalSecondaryIndex]
+      attr_accessor table_class_override: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS")
+      SENSITIVE: []
+    end
+
+    class UpdateTableInput
+      attr_accessor attribute_definitions: ::Array[Types::AttributeDefinition]
+      attr_accessor table_name: ::String
+      attr_accessor billing_mode: ("PROVISIONED" | "PAY_PER_REQUEST")
+      attr_accessor provisioned_throughput: Types::ProvisionedThroughput
+      attr_accessor global_secondary_index_updates: ::Array[Types::GlobalSecondaryIndexUpdate]
+      attr_accessor stream_specification: Types::StreamSpecification
+      attr_accessor sse_specification: Types::SSESpecification
+      attr_accessor replica_updates: ::Array[Types::ReplicationGroupUpdate]
+      attr_accessor table_class: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS")
+      attr_accessor deletion_protection_enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateTableOutput
+      attr_accessor table_description: Types::TableDescription
+      SENSITIVE: []
+    end
+
+    class UpdateTableReplicaAutoScalingInput
+      attr_accessor global_secondary_index_updates: ::Array[Types::GlobalSecondaryIndexAutoScalingUpdate]
+      attr_accessor table_name: ::String
+      attr_accessor provisioned_write_capacity_auto_scaling_update: Types::AutoScalingSettingsUpdate
+      attr_accessor replica_updates: ::Array[Types::ReplicaAutoScalingUpdate]
+      SENSITIVE: []
+    end
+
+    class UpdateTableReplicaAutoScalingOutput
+      attr_accessor table_auto_scaling_description: Types::TableAutoScalingDescription
+      SENSITIVE: []
+    end
+
+    class UpdateTimeToLiveInput
+      attr_accessor table_name: ::String
+      attr_accessor time_to_live_specification: Types::TimeToLiveSpecification
+      SENSITIVE: []
+    end
+
+    class UpdateTimeToLiveOutput
+      attr_accessor time_to_live_specification: Types::TimeToLiveSpecification
+      SENSITIVE: []
+    end
+
+    class WriteRequest
+      attr_accessor put_request: Types::PutRequest
+      attr_accessor delete_request: Types::DeleteRequest
+      SENSITIVE: []
+    end
+  end
+end

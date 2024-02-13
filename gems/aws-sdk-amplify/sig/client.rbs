@@ -1,0 +1,639 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Amplify
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateAppResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAppResult]
+        def app: () -> Types::App
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#create_app-instance_method
+      def create_app: (
+                        name: ::String,
+                        ?description: ::String,
+                        ?repository: ::String,
+                        ?platform: ("WEB" | "WEB_DYNAMIC" | "WEB_COMPUTE"),
+                        ?iam_service_role_arn: ::String,
+                        ?oauth_token: ::String,
+                        ?access_token: ::String,
+                        ?environment_variables: Hash[::String, ::String],
+                        ?enable_branch_auto_build: bool,
+                        ?enable_branch_auto_deletion: bool,
+                        ?enable_basic_auth: bool,
+                        ?basic_auth_credentials: ::String,
+                        ?custom_rules: Array[
+                          {
+                            source: ::String,
+                            target: ::String,
+                            status: ::String?,
+                            condition: ::String?
+                          },
+                        ],
+                        ?tags: Hash[::String, ::String],
+                        ?build_spec: ::String,
+                        ?custom_headers: ::String,
+                        ?enable_auto_branch_creation: bool,
+                        ?auto_branch_creation_patterns: Array[::String],
+                        ?auto_branch_creation_config: {
+                          stage: ("PRODUCTION" | "BETA" | "DEVELOPMENT" | "EXPERIMENTAL" | "PULL_REQUEST")?,
+                          framework: ::String?,
+                          enable_auto_build: bool?,
+                          environment_variables: Hash[::String, ::String]?,
+                          basic_auth_credentials: ::String?,
+                          enable_basic_auth: bool?,
+                          enable_performance_mode: bool?,
+                          build_spec: ::String?,
+                          enable_pull_request_preview: bool?,
+                          pull_request_environment_name: ::String?
+                        }
+                      ) -> _CreateAppResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppResponseSuccess
+
+      interface _CreateBackendEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBackendEnvironmentResult]
+        def backend_environment: () -> Types::BackendEnvironment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#create_backend_environment-instance_method
+      def create_backend_environment: (
+                                        app_id: ::String,
+                                        environment_name: ::String,
+                                        ?stack_name: ::String,
+                                        ?deployment_artifacts: ::String
+                                      ) -> _CreateBackendEnvironmentResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBackendEnvironmentResponseSuccess
+
+      interface _CreateBranchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBranchResult]
+        def branch: () -> Types::Branch
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#create_branch-instance_method
+      def create_branch: (
+                           app_id: ::String,
+                           branch_name: ::String,
+                           ?description: ::String,
+                           ?stage: ("PRODUCTION" | "BETA" | "DEVELOPMENT" | "EXPERIMENTAL" | "PULL_REQUEST"),
+                           ?framework: ::String,
+                           ?enable_notification: bool,
+                           ?enable_auto_build: bool,
+                           ?environment_variables: Hash[::String, ::String],
+                           ?basic_auth_credentials: ::String,
+                           ?enable_basic_auth: bool,
+                           ?enable_performance_mode: bool,
+                           ?tags: Hash[::String, ::String],
+                           ?build_spec: ::String,
+                           ?ttl: ::String,
+                           ?display_name: ::String,
+                           ?enable_pull_request_preview: bool,
+                           ?pull_request_environment_name: ::String,
+                           ?backend_environment_arn: ::String,
+                           ?backend: {
+                             stack_arn: ::String?
+                           }
+                         ) -> _CreateBranchResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBranchResponseSuccess
+
+      interface _CreateDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDeploymentResult]
+        def job_id: () -> ::String
+        def file_upload_urls: () -> ::Hash[::String, ::String]
+        def zip_upload_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#create_deployment-instance_method
+      def create_deployment: (
+                               app_id: ::String,
+                               branch_name: ::String,
+                               ?file_map: Hash[::String, ::String]
+                             ) -> _CreateDeploymentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeploymentResponseSuccess
+
+      interface _CreateDomainAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDomainAssociationResult]
+        def domain_association: () -> Types::DomainAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#create_domain_association-instance_method
+      def create_domain_association: (
+                                       app_id: ::String,
+                                       domain_name: ::String,
+                                       ?enable_auto_sub_domain: bool,
+                                       sub_domain_settings: Array[
+                                         {
+                                           prefix: ::String,
+                                           branch_name: ::String
+                                         },
+                                       ],
+                                       ?auto_sub_domain_creation_patterns: Array[::String],
+                                       ?auto_sub_domain_iam_role: ::String
+                                     ) -> _CreateDomainAssociationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainAssociationResponseSuccess
+
+      interface _CreateWebhookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWebhookResult]
+        def webhook: () -> Types::Webhook
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#create_webhook-instance_method
+      def create_webhook: (
+                            app_id: ::String,
+                            branch_name: ::String,
+                            ?description: ::String
+                          ) -> _CreateWebhookResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWebhookResponseSuccess
+
+      interface _DeleteAppResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAppResult]
+        def app: () -> Types::App
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#delete_app-instance_method
+      def delete_app: (
+                        app_id: ::String
+                      ) -> _DeleteAppResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAppResponseSuccess
+
+      interface _DeleteBackendEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBackendEnvironmentResult]
+        def backend_environment: () -> Types::BackendEnvironment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#delete_backend_environment-instance_method
+      def delete_backend_environment: (
+                                        app_id: ::String,
+                                        environment_name: ::String
+                                      ) -> _DeleteBackendEnvironmentResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBackendEnvironmentResponseSuccess
+
+      interface _DeleteBranchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBranchResult]
+        def branch: () -> Types::Branch
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#delete_branch-instance_method
+      def delete_branch: (
+                           app_id: ::String,
+                           branch_name: ::String
+                         ) -> _DeleteBranchResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBranchResponseSuccess
+
+      interface _DeleteDomainAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDomainAssociationResult]
+        def domain_association: () -> Types::DomainAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#delete_domain_association-instance_method
+      def delete_domain_association: (
+                                       app_id: ::String,
+                                       domain_name: ::String
+                                     ) -> _DeleteDomainAssociationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainAssociationResponseSuccess
+
+      interface _DeleteJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteJobResult]
+        def job_summary: () -> Types::JobSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#delete_job-instance_method
+      def delete_job: (
+                        app_id: ::String,
+                        branch_name: ::String,
+                        job_id: ::String
+                      ) -> _DeleteJobResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteJobResponseSuccess
+
+      interface _DeleteWebhookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWebhookResult]
+        def webhook: () -> Types::Webhook
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#delete_webhook-instance_method
+      def delete_webhook: (
+                            webhook_id: ::String
+                          ) -> _DeleteWebhookResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWebhookResponseSuccess
+
+      interface _GenerateAccessLogsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GenerateAccessLogsResult]
+        def log_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#generate_access_logs-instance_method
+      def generate_access_logs: (
+                                  ?start_time: ::Time,
+                                  ?end_time: ::Time,
+                                  domain_name: ::String,
+                                  app_id: ::String
+                                ) -> _GenerateAccessLogsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GenerateAccessLogsResponseSuccess
+
+      interface _GetAppResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAppResult]
+        def app: () -> Types::App
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#get_app-instance_method
+      def get_app: (
+                     app_id: ::String
+                   ) -> _GetAppResponseSuccess
+                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAppResponseSuccess
+
+      interface _GetArtifactUrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetArtifactUrlResult]
+        def artifact_id: () -> ::String
+        def artifact_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#get_artifact_url-instance_method
+      def get_artifact_url: (
+                              artifact_id: ::String
+                            ) -> _GetArtifactUrlResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetArtifactUrlResponseSuccess
+
+      interface _GetBackendEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBackendEnvironmentResult]
+        def backend_environment: () -> Types::BackendEnvironment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#get_backend_environment-instance_method
+      def get_backend_environment: (
+                                     app_id: ::String,
+                                     environment_name: ::String
+                                   ) -> _GetBackendEnvironmentResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBackendEnvironmentResponseSuccess
+
+      interface _GetBranchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBranchResult]
+        def branch: () -> Types::Branch
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#get_branch-instance_method
+      def get_branch: (
+                        app_id: ::String,
+                        branch_name: ::String
+                      ) -> _GetBranchResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBranchResponseSuccess
+
+      interface _GetDomainAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainAssociationResult]
+        def domain_association: () -> Types::DomainAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#get_domain_association-instance_method
+      def get_domain_association: (
+                                    app_id: ::String,
+                                    domain_name: ::String
+                                  ) -> _GetDomainAssociationResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainAssociationResponseSuccess
+
+      interface _GetJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetJobResult]
+        def job: () -> Types::Job
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#get_job-instance_method
+      def get_job: (
+                     app_id: ::String,
+                     branch_name: ::String,
+                     job_id: ::String
+                   ) -> _GetJobResponseSuccess
+                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetJobResponseSuccess
+
+      interface _GetWebhookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWebhookResult]
+        def webhook: () -> Types::Webhook
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#get_webhook-instance_method
+      def get_webhook: (
+                         webhook_id: ::String
+                       ) -> _GetWebhookResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWebhookResponseSuccess
+
+      interface _ListAppsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppsResult]
+        def apps: () -> ::Array[Types::App]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#list_apps-instance_method
+      def list_apps: (
+                       ?next_token: ::String,
+                       ?max_results: ::Integer
+                     ) -> _ListAppsResponseSuccess
+                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppsResponseSuccess
+
+      interface _ListArtifactsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListArtifactsResult]
+        def artifacts: () -> ::Array[Types::Artifact]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#list_artifacts-instance_method
+      def list_artifacts: (
+                            app_id: ::String,
+                            branch_name: ::String,
+                            job_id: ::String,
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListArtifactsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListArtifactsResponseSuccess
+
+      interface _ListBackendEnvironmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBackendEnvironmentsResult]
+        def backend_environments: () -> ::Array[Types::BackendEnvironment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#list_backend_environments-instance_method
+      def list_backend_environments: (
+                                       app_id: ::String,
+                                       ?environment_name: ::String,
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListBackendEnvironmentsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBackendEnvironmentsResponseSuccess
+
+      interface _ListBranchesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBranchesResult]
+        def branches: () -> ::Array[Types::Branch]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#list_branches-instance_method
+      def list_branches: (
+                           app_id: ::String,
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListBranchesResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBranchesResponseSuccess
+
+      interface _ListDomainAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainAssociationsResult]
+        def domain_associations: () -> ::Array[Types::DomainAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#list_domain_associations-instance_method
+      def list_domain_associations: (
+                                      app_id: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListDomainAssociationsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainAssociationsResponseSuccess
+
+      interface _ListJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListJobsResult]
+        def job_summaries: () -> ::Array[Types::JobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#list_jobs-instance_method
+      def list_jobs: (
+                       app_id: ::String,
+                       branch_name: ::String,
+                       ?next_token: ::String,
+                       ?max_results: ::Integer
+                     ) -> _ListJobsResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListWebhooksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWebhooksResult]
+        def webhooks: () -> ::Array[Types::Webhook]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#list_webhooks-instance_method
+      def list_webhooks: (
+                           app_id: ::String,
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListWebhooksResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWebhooksResponseSuccess
+
+      interface _StartDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDeploymentResult]
+        def job_summary: () -> Types::JobSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#start_deployment-instance_method
+      def start_deployment: (
+                              app_id: ::String,
+                              branch_name: ::String,
+                              ?job_id: ::String,
+                              ?source_url: ::String
+                            ) -> _StartDeploymentResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDeploymentResponseSuccess
+
+      interface _StartJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartJobResult]
+        def job_summary: () -> Types::JobSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#start_job-instance_method
+      def start_job: (
+                       app_id: ::String,
+                       branch_name: ::String,
+                       ?job_id: ::String,
+                       job_type: ("RELEASE" | "RETRY" | "MANUAL" | "WEB_HOOK"),
+                       ?job_reason: ::String,
+                       ?commit_id: ::String,
+                       ?commit_message: ::String,
+                       ?commit_time: ::Time
+                     ) -> _StartJobResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartJobResponseSuccess
+
+      interface _StopJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopJobResult]
+        def job_summary: () -> Types::JobSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#stop_job-instance_method
+      def stop_job: (
+                      app_id: ::String,
+                      branch_name: ::String,
+                      job_id: ::String
+                    ) -> _StopJobResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopJobResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAppResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAppResult]
+        def app: () -> Types::App
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#update_app-instance_method
+      def update_app: (
+                        app_id: ::String,
+                        ?name: ::String,
+                        ?description: ::String,
+                        ?platform: ("WEB" | "WEB_DYNAMIC" | "WEB_COMPUTE"),
+                        ?iam_service_role_arn: ::String,
+                        ?environment_variables: Hash[::String, ::String],
+                        ?enable_branch_auto_build: bool,
+                        ?enable_branch_auto_deletion: bool,
+                        ?enable_basic_auth: bool,
+                        ?basic_auth_credentials: ::String,
+                        ?custom_rules: Array[
+                          {
+                            source: ::String,
+                            target: ::String,
+                            status: ::String?,
+                            condition: ::String?
+                          },
+                        ],
+                        ?build_spec: ::String,
+                        ?custom_headers: ::String,
+                        ?enable_auto_branch_creation: bool,
+                        ?auto_branch_creation_patterns: Array[::String],
+                        ?auto_branch_creation_config: {
+                          stage: ("PRODUCTION" | "BETA" | "DEVELOPMENT" | "EXPERIMENTAL" | "PULL_REQUEST")?,
+                          framework: ::String?,
+                          enable_auto_build: bool?,
+                          environment_variables: Hash[::String, ::String]?,
+                          basic_auth_credentials: ::String?,
+                          enable_basic_auth: bool?,
+                          enable_performance_mode: bool?,
+                          build_spec: ::String?,
+                          enable_pull_request_preview: bool?,
+                          pull_request_environment_name: ::String?
+                        },
+                        ?repository: ::String,
+                        ?oauth_token: ::String,
+                        ?access_token: ::String
+                      ) -> _UpdateAppResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAppResponseSuccess
+
+      interface _UpdateBranchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBranchResult]
+        def branch: () -> Types::Branch
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#update_branch-instance_method
+      def update_branch: (
+                           app_id: ::String,
+                           branch_name: ::String,
+                           ?description: ::String,
+                           ?framework: ::String,
+                           ?stage: ("PRODUCTION" | "BETA" | "DEVELOPMENT" | "EXPERIMENTAL" | "PULL_REQUEST"),
+                           ?enable_notification: bool,
+                           ?enable_auto_build: bool,
+                           ?environment_variables: Hash[::String, ::String],
+                           ?basic_auth_credentials: ::String,
+                           ?enable_basic_auth: bool,
+                           ?enable_performance_mode: bool,
+                           ?build_spec: ::String,
+                           ?ttl: ::String,
+                           ?display_name: ::String,
+                           ?enable_pull_request_preview: bool,
+                           ?pull_request_environment_name: ::String,
+                           ?backend_environment_arn: ::String,
+                           ?backend: {
+                             stack_arn: ::String?
+                           }
+                         ) -> _UpdateBranchResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBranchResponseSuccess
+
+      interface _UpdateDomainAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDomainAssociationResult]
+        def domain_association: () -> Types::DomainAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#update_domain_association-instance_method
+      def update_domain_association: (
+                                       app_id: ::String,
+                                       domain_name: ::String,
+                                       ?enable_auto_sub_domain: bool,
+                                       ?sub_domain_settings: Array[
+                                         {
+                                           prefix: ::String,
+                                           branch_name: ::String
+                                         },
+                                       ],
+                                       ?auto_sub_domain_creation_patterns: Array[::String],
+                                       ?auto_sub_domain_iam_role: ::String
+                                     ) -> _UpdateDomainAssociationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainAssociationResponseSuccess
+
+      interface _UpdateWebhookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWebhookResult]
+        def webhook: () -> Types::Webhook
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Amplify/Client.html#update_webhook-instance_method
+      def update_webhook: (
+                            webhook_id: ::String,
+                            ?branch_name: ::String,
+                            ?description: ::String
+                          ) -> _UpdateWebhookResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWebhookResponseSuccess
+    end
+  end
+end
+

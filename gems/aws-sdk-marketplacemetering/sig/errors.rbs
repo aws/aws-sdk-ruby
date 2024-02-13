@@ -1,0 +1,67 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MarketplaceMetering
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class CustomerNotEntitledException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DisabledApiException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DuplicateRequestException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ExpiredTokenException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InternalServiceErrorException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidCustomerIdentifierException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidEndpointRegionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidProductCodeException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidPublicKeyVersionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidRegionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidTagException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidTokenException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidUsageAllocationsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidUsageDimensionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PlatformNotSupportedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ThrottlingException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TimestampOutOfBoundsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

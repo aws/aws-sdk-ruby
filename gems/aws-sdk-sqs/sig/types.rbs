@@ -1,0 +1,471 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SQS
+  module Types
+
+    class AddPermissionRequest
+      attr_accessor queue_url: ::String
+      attr_accessor label: ::String
+      attr_accessor aws_account_ids: ::Array[::String]
+      attr_accessor actions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchEntryIdsNotDistinct
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchRequestTooLong
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchResultErrorEntry
+      attr_accessor id: ::String
+      attr_accessor sender_fault: bool
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CancelMessageMoveTaskRequest
+      attr_accessor task_handle: ::String
+      SENSITIVE: []
+    end
+
+    class CancelMessageMoveTaskResult
+      attr_accessor approximate_number_of_messages_moved: ::Integer
+      SENSITIVE: []
+    end
+
+    class ChangeMessageVisibilityBatchRequest
+      attr_accessor queue_url: ::String
+      attr_accessor entries: ::Array[Types::ChangeMessageVisibilityBatchRequestEntry]
+      SENSITIVE: []
+    end
+
+    class ChangeMessageVisibilityBatchRequestEntry
+      attr_accessor id: ::String
+      attr_accessor receipt_handle: ::String
+      attr_accessor visibility_timeout: ::Integer
+      SENSITIVE: []
+    end
+
+    class ChangeMessageVisibilityBatchResult
+      attr_accessor successful: ::Array[Types::ChangeMessageVisibilityBatchResultEntry]
+      attr_accessor failed: ::Array[Types::BatchResultErrorEntry]
+      SENSITIVE: []
+    end
+
+    class ChangeMessageVisibilityBatchResultEntry
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class ChangeMessageVisibilityRequest
+      attr_accessor queue_url: ::String
+      attr_accessor receipt_handle: ::String
+      attr_accessor visibility_timeout: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateQueueRequest
+      attr_accessor queue_name: ::String
+      attr_accessor attributes: ::Hash[("All" | "Policy" | "VisibilityTimeout" | "MaximumMessageSize" | "MessageRetentionPeriod" | "ApproximateNumberOfMessages" | "ApproximateNumberOfMessagesNotVisible" | "CreatedTimestamp" | "LastModifiedTimestamp" | "QueueArn" | "ApproximateNumberOfMessagesDelayed" | "DelaySeconds" | "ReceiveMessageWaitTimeSeconds" | "RedrivePolicy" | "FifoQueue" | "ContentBasedDeduplication" | "KmsMasterKeyId" | "KmsDataKeyReusePeriodSeconds" | "DeduplicationScope" | "FifoThroughputLimit" | "RedriveAllowPolicy" | "SqsManagedSseEnabled"), ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateQueueResult
+      attr_accessor queue_url: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMessageBatchRequest
+      attr_accessor queue_url: ::String
+      attr_accessor entries: ::Array[Types::DeleteMessageBatchRequestEntry]
+      SENSITIVE: []
+    end
+
+    class DeleteMessageBatchRequestEntry
+      attr_accessor id: ::String
+      attr_accessor receipt_handle: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMessageBatchResult
+      attr_accessor successful: ::Array[Types::DeleteMessageBatchResultEntry]
+      attr_accessor failed: ::Array[Types::BatchResultErrorEntry]
+      SENSITIVE: []
+    end
+
+    class DeleteMessageBatchResultEntry
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMessageRequest
+      attr_accessor queue_url: ::String
+      attr_accessor receipt_handle: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteQueueRequest
+      attr_accessor queue_url: ::String
+      SENSITIVE: []
+    end
+
+    class EmptyBatchRequest
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetQueueAttributesRequest
+      attr_accessor queue_url: ::String
+      attr_accessor attribute_names: ::Array[("All" | "Policy" | "VisibilityTimeout" | "MaximumMessageSize" | "MessageRetentionPeriod" | "ApproximateNumberOfMessages" | "ApproximateNumberOfMessagesNotVisible" | "CreatedTimestamp" | "LastModifiedTimestamp" | "QueueArn" | "ApproximateNumberOfMessagesDelayed" | "DelaySeconds" | "ReceiveMessageWaitTimeSeconds" | "RedrivePolicy" | "FifoQueue" | "ContentBasedDeduplication" | "KmsMasterKeyId" | "KmsDataKeyReusePeriodSeconds" | "DeduplicationScope" | "FifoThroughputLimit" | "RedriveAllowPolicy" | "SqsManagedSseEnabled")]
+      SENSITIVE: []
+    end
+
+    class GetQueueAttributesResult
+      attr_accessor attributes: ::Hash[("All" | "Policy" | "VisibilityTimeout" | "MaximumMessageSize" | "MessageRetentionPeriod" | "ApproximateNumberOfMessages" | "ApproximateNumberOfMessagesNotVisible" | "CreatedTimestamp" | "LastModifiedTimestamp" | "QueueArn" | "ApproximateNumberOfMessagesDelayed" | "DelaySeconds" | "ReceiveMessageWaitTimeSeconds" | "RedrivePolicy" | "FifoQueue" | "ContentBasedDeduplication" | "KmsMasterKeyId" | "KmsDataKeyReusePeriodSeconds" | "DeduplicationScope" | "FifoThroughputLimit" | "RedriveAllowPolicy" | "SqsManagedSseEnabled"), ::String]
+      SENSITIVE: []
+    end
+
+    class GetQueueUrlRequest
+      attr_accessor queue_name: ::String
+      attr_accessor queue_owner_aws_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetQueueUrlResult
+      attr_accessor queue_url: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidAddress
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidAttributeName
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidAttributeValue
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidBatchEntryId
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidIdFormat < Aws::EmptyStructure
+    end
+
+    class InvalidMessageContents
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSecurity
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KmsAccessDenied
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KmsDisabled
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KmsInvalidKeyUsage
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KmsInvalidState
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KmsNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KmsOptInRequired
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KmsThrottled
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeadLetterSourceQueuesRequest
+      attr_accessor queue_url: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDeadLetterSourceQueuesResult
+      attr_accessor queue_urls: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMessageMoveTasksRequest
+      attr_accessor source_arn: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMessageMoveTasksResult
+      attr_accessor results: ::Array[Types::ListMessageMoveTasksResultEntry]
+      SENSITIVE: []
+    end
+
+    class ListMessageMoveTasksResultEntry
+      attr_accessor task_handle: ::String
+      attr_accessor status: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor destination_arn: ::String
+      attr_accessor max_number_of_messages_per_second: ::Integer
+      attr_accessor approximate_number_of_messages_moved: ::Integer
+      attr_accessor approximate_number_of_messages_to_move: ::Integer
+      attr_accessor failure_reason: ::String
+      attr_accessor started_timestamp: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListQueueTagsRequest
+      attr_accessor queue_url: ::String
+      SENSITIVE: []
+    end
+
+    class ListQueueTagsResult
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListQueuesRequest
+      attr_accessor queue_name_prefix: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListQueuesResult
+      attr_accessor queue_urls: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Message
+      attr_accessor message_id: ::String
+      attr_accessor receipt_handle: ::String
+      attr_accessor md5_of_body: ::String
+      attr_accessor body: ::String
+      attr_accessor attributes: ::Hash[("SenderId" | "SentTimestamp" | "ApproximateReceiveCount" | "ApproximateFirstReceiveTimestamp" | "SequenceNumber" | "MessageDeduplicationId" | "MessageGroupId" | "AWSTraceHeader" | "DeadLetterQueueSourceArn"), ::String]
+      attr_accessor md5_of_message_attributes: ::String
+      attr_accessor message_attributes: ::Hash[::String, Types::MessageAttributeValue]
+      SENSITIVE: []
+    end
+
+    class MessageAttributeValue
+      attr_accessor string_value: ::String
+      attr_accessor binary_value: ::String
+      attr_accessor string_list_values: ::Array[::String]
+      attr_accessor binary_list_values: ::Array[::String]
+      attr_accessor data_type: ::String
+      SENSITIVE: []
+    end
+
+    class MessageNotInflight < Aws::EmptyStructure
+    end
+
+    class MessageSystemAttributeValue
+      attr_accessor string_value: ::String
+      attr_accessor binary_value: ::String
+      attr_accessor string_list_values: ::Array[::String]
+      attr_accessor binary_list_values: ::Array[::String]
+      attr_accessor data_type: ::String
+      SENSITIVE: []
+    end
+
+    class OverLimit
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PurgeQueueInProgress
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PurgeQueueRequest
+      attr_accessor queue_url: ::String
+      SENSITIVE: []
+    end
+
+    class QueueDeletedRecently
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class QueueDoesNotExist
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class QueueNameExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ReceiptHandleIsInvalid
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ReceiveMessageRequest
+      attr_accessor queue_url: ::String
+      attr_accessor attribute_names: ::Array[("All" | "Policy" | "VisibilityTimeout" | "MaximumMessageSize" | "MessageRetentionPeriod" | "ApproximateNumberOfMessages" | "ApproximateNumberOfMessagesNotVisible" | "CreatedTimestamp" | "LastModifiedTimestamp" | "QueueArn" | "ApproximateNumberOfMessagesDelayed" | "DelaySeconds" | "ReceiveMessageWaitTimeSeconds" | "RedrivePolicy" | "FifoQueue" | "ContentBasedDeduplication" | "KmsMasterKeyId" | "KmsDataKeyReusePeriodSeconds" | "DeduplicationScope" | "FifoThroughputLimit" | "RedriveAllowPolicy" | "SqsManagedSseEnabled")]
+      attr_accessor message_attribute_names: ::Array[::String]
+      attr_accessor max_number_of_messages: ::Integer
+      attr_accessor visibility_timeout: ::Integer
+      attr_accessor wait_time_seconds: ::Integer
+      attr_accessor receive_request_attempt_id: ::String
+      SENSITIVE: []
+    end
+
+    class ReceiveMessageResult
+      attr_accessor messages: ::Array[Types::Message]
+      SENSITIVE: []
+    end
+
+    class RemovePermissionRequest
+      attr_accessor queue_url: ::String
+      attr_accessor label: ::String
+      SENSITIVE: []
+    end
+
+    class RequestThrottled
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SendMessageBatchRequest
+      attr_accessor queue_url: ::String
+      attr_accessor entries: ::Array[Types::SendMessageBatchRequestEntry]
+      SENSITIVE: []
+    end
+
+    class SendMessageBatchRequestEntry
+      attr_accessor id: ::String
+      attr_accessor message_body: ::String
+      attr_accessor delay_seconds: ::Integer
+      attr_accessor message_attributes: ::Hash[::String, Types::MessageAttributeValue]
+      attr_accessor message_system_attributes: ::Hash[("AWSTraceHeader"), Types::MessageSystemAttributeValue]
+      attr_accessor message_deduplication_id: ::String
+      attr_accessor message_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class SendMessageBatchResult
+      attr_accessor successful: ::Array[Types::SendMessageBatchResultEntry]
+      attr_accessor failed: ::Array[Types::BatchResultErrorEntry]
+      SENSITIVE: []
+    end
+
+    class SendMessageBatchResultEntry
+      attr_accessor id: ::String
+      attr_accessor message_id: ::String
+      attr_accessor md5_of_message_body: ::String
+      attr_accessor md5_of_message_attributes: ::String
+      attr_accessor md5_of_message_system_attributes: ::String
+      attr_accessor sequence_number: ::String
+      SENSITIVE: []
+    end
+
+    class SendMessageRequest
+      attr_accessor queue_url: ::String
+      attr_accessor message_body: ::String
+      attr_accessor delay_seconds: ::Integer
+      attr_accessor message_attributes: ::Hash[::String, Types::MessageAttributeValue]
+      attr_accessor message_system_attributes: ::Hash[("AWSTraceHeader"), Types::MessageSystemAttributeValue]
+      attr_accessor message_deduplication_id: ::String
+      attr_accessor message_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class SendMessageResult
+      attr_accessor md5_of_message_body: ::String
+      attr_accessor md5_of_message_attributes: ::String
+      attr_accessor md5_of_message_system_attributes: ::String
+      attr_accessor message_id: ::String
+      attr_accessor sequence_number: ::String
+      SENSITIVE: []
+    end
+
+    class SetQueueAttributesRequest
+      attr_accessor queue_url: ::String
+      attr_accessor attributes: ::Hash[("All" | "Policy" | "VisibilityTimeout" | "MaximumMessageSize" | "MessageRetentionPeriod" | "ApproximateNumberOfMessages" | "ApproximateNumberOfMessagesNotVisible" | "CreatedTimestamp" | "LastModifiedTimestamp" | "QueueArn" | "ApproximateNumberOfMessagesDelayed" | "DelaySeconds" | "ReceiveMessageWaitTimeSeconds" | "RedrivePolicy" | "FifoQueue" | "ContentBasedDeduplication" | "KmsMasterKeyId" | "KmsDataKeyReusePeriodSeconds" | "DeduplicationScope" | "FifoThroughputLimit" | "RedriveAllowPolicy" | "SqsManagedSseEnabled"), ::String]
+      SENSITIVE: []
+    end
+
+    class StartMessageMoveTaskRequest
+      attr_accessor source_arn: ::String
+      attr_accessor destination_arn: ::String
+      attr_accessor max_number_of_messages_per_second: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartMessageMoveTaskResult
+      attr_accessor task_handle: ::String
+      SENSITIVE: []
+    end
+
+    class TagQueueRequest
+      attr_accessor queue_url: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TooManyEntriesInBatchRequest
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedOperation
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagQueueRequest
+      attr_accessor queue_url: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+  end
+end

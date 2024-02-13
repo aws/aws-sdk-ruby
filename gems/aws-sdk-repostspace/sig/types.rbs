@@ -1,0 +1,204 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Repostspace
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSpaceInput
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor subdomain: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor tier: ("BASIC" | "STANDARD")
+      attr_accessor user_kms_key: ::String
+      SENSITIVE: [:description, :name, :tags]
+    end
+
+    class CreateSpaceOutput
+      attr_accessor space_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSpaceInput
+      attr_accessor space_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterAdminInput
+      attr_accessor admin_id: ::String
+      attr_accessor space_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSpaceInput
+      attr_accessor space_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSpaceOutput
+      attr_accessor arn: ::String
+      attr_accessor client_id: ::String
+      attr_accessor configuration_status: ("CONFIGURED" | "UNCONFIGURED")
+      attr_accessor content_size: ::Integer
+      attr_accessor create_date_time: ::Time
+      attr_accessor customer_role_arn: ::String
+      attr_accessor delete_date_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor group_admins: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor random_domain: ::String
+      attr_accessor space_id: ::String
+      attr_accessor status: ::String
+      attr_accessor storage_limit: ::Integer
+      attr_accessor tier: ("BASIC" | "STANDARD")
+      attr_accessor user_admins: ::Array[::String]
+      attr_accessor user_count: ::Integer
+      attr_accessor user_kms_key: ::String
+      attr_accessor vanity_domain: ::String
+      attr_accessor vanity_domain_status: ("PENDING" | "APPROVED" | "UNAPPROVED")
+      SENSITIVE: [:description, :name]
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSpacesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSpacesOutput
+      attr_accessor next_token: ::String
+      attr_accessor spaces: ::Array[Types::SpaceData]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class RegisterAdminInput
+      attr_accessor admin_id: ::String
+      attr_accessor space_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class SendInvitesInput
+      attr_accessor accessor_ids: ::Array[::String]
+      attr_accessor body: ::String
+      attr_accessor space_id: ::String
+      attr_accessor title: ::String
+      SENSITIVE: [:body, :title]
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class SpaceData
+      attr_accessor arn: ::String
+      attr_accessor configuration_status: ("CONFIGURED" | "UNCONFIGURED")
+      attr_accessor content_size: ::Integer
+      attr_accessor create_date_time: ::Time
+      attr_accessor delete_date_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor random_domain: ::String
+      attr_accessor space_id: ::String
+      attr_accessor status: ::String
+      attr_accessor storage_limit: ::Integer
+      attr_accessor tier: ("BASIC" | "STANDARD")
+      attr_accessor user_count: ::Integer
+      attr_accessor user_kms_key: ::String
+      attr_accessor vanity_domain: ::String
+      attr_accessor vanity_domain_status: ("PENDING" | "APPROVED" | "UNAPPROVED")
+      SENSITIVE: [:description, :name]
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateSpaceInput
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor space_id: ::String
+      attr_accessor tier: ("BASIC" | "STANDARD")
+      SENSITIVE: [:description]
+    end
+
+    class ValidationException
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      attr_accessor message: ::String
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor message: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+  end
+end

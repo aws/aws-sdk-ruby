@@ -7608,7 +7608,7 @@ module Aws::EC2
 
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency of the request. For more information, see [Ensuring
     #   idempotency][1].
     #
     #
@@ -9334,7 +9334,7 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency of the request. For more information, see [Ensuring
     #   idempotency][1].
     #
     #   Constraint: Maximum 64 ASCII characters.
@@ -9534,12 +9534,26 @@ module Aws::EC2
     #   The tags to assign to the network ACL.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAclRequest AWS API Documentation
     #
     class CreateNetworkAclRequest < Struct.new(
       :dry_run,
       :vpc_id,
-      :tag_specifications)
+      :tag_specifications,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9548,10 +9562,17 @@ module Aws::EC2
     #   Information about the network ACL.
     #   @return [Types::NetworkAcl]
     #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier to ensure the idempotency of the
+    #   request. Only returned if a client token was provided in the
+    #   request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAclResult AWS API Documentation
     #
     class CreateNetworkAclResult < Struct.new(
-      :network_acl)
+      :network_acl,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10369,12 +10390,26 @@ module Aws::EC2
     #   The tags to assign to the route table.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRouteTableRequest AWS API Documentation
     #
     class CreateRouteTableRequest < Struct.new(
       :dry_run,
       :vpc_id,
-      :tag_specifications)
+      :tag_specifications,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10383,10 +10418,17 @@ module Aws::EC2
     #   Information about the route table.
     #   @return [Types::RouteTable]
     #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier to ensure the idempotency of the
+    #   request. Only returned if a client token was provided in the
+    #   request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRouteTableResult AWS API Documentation
     #
     class CreateRouteTableResult < Struct.new(
-      :route_table)
+      :route_table,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16477,11 +16519,11 @@ module Aws::EC2
     #   * `opt-in-status` - The opt-in status (`opted-in` \| `not-opted-in`
     #     \| `opt-in-not-required`).
     #
-    #   * `parent-zoneID` - The ID of the zone that handles some of the
+    #   * `parent-zone-id` - The ID of the zone that handles some of the
     #     Local Zone and Wavelength Zone control plane operations, such as
     #     API calls.
     #
-    #   * `parent-zoneName` - The ID of the zone that handles some of the
+    #   * `parent-zone-name` - The ID of the zone that handles some of the
     #     Local Zone and Wavelength Zone control plane operations, such as
     #     API calls.
     #
@@ -16744,11 +16786,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive
-    #   an error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityBlockOfferingsRequest AWS API Documentation
@@ -16793,11 +16837,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive
-    #   an error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] filters
@@ -16862,11 +16908,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive
-    #   an error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] filters
@@ -23736,6 +23784,9 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   The filters.
     #
+    #   * `association.gateway-id` - The ID of the gateway involved in the
+    #     association.
+    #
     #   * `association.route-table-association-id` - The ID of an
     #     association ID for the route table.
     #
@@ -30065,13 +30116,27 @@ module Aws::EC2
     #   The ID of the EBS volume.
     #   @return [String]
     #
+    # @!attribute [rw] associated_resource
+    #   The ARN of the Amazon ECS or Fargate task to which the volume is
+    #   attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_owner_id
+    #   The ID of the Amazon Web Services account that owns the volume.
+    #
+    #   This parameter is returned only for volumes that are attached to
+    #   Fargate tasks.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsInstanceBlockDevice AWS API Documentation
     #
     class EbsInstanceBlockDevice < Struct.new(
       :attach_time,
       :delete_on_termination,
       :status,
-      :volume_id)
+      :volume_id,
+      :associated_resource,
+      :volume_owner_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30281,6 +30346,12 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    # workloads that require graphics acceleration, we recommend that you
+    # use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #  </note>
+    #
     # Describes the association between an instance and an Elastic Graphics
     # accelerator.
     #
@@ -30313,6 +30384,12 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    # workloads that require graphics acceleration, we recommend that you
+    # use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #  </note>
+    #
     # Describes the status of an Elastic Graphics accelerator.
     #
     # @!attribute [rw] status
@@ -30327,6 +30404,12 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    # workloads that require graphics acceleration, we recommend that you
+    # use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #  </note>
+    #
     # A specification for an Elastic Graphics accelerator.
     #
     # @!attribute [rw] type
@@ -30348,10 +30431,22 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes an elastic GPU.
+    # Deprecated.
+    #
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    # workloads that require graphics acceleration, we recommend that you
+    # use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #  </note>
     #
     # @!attribute [rw] type
-    #   The elastic GPU type.
+    #   Deprecated.
+    #
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    #   workloads that require graphics acceleration, we recommend that you
+    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpuSpecificationResponse AWS API Documentation
@@ -30362,6 +30457,12 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    # workloads that require graphics acceleration, we recommend that you
+    # use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #  </note>
+    #
     # Describes an Elastic Graphics accelerator.
     #
     # @!attribute [rw] elastic_gpu_id
@@ -30594,13 +30695,17 @@ module Aws::EC2
     end
 
     # @!attribute [rw] source
-    #   The source Region or Availability Zone that the metric subscription
-    #   is enabled for. For example, `us-east-1`.
+    #   The source Region (like `us-east-1`) or Availability Zone ID (like
+    #   `use1-az1`) that the metric subscription is enabled for. If you use
+    #   Availability Zone IDs, the Source and Destination Availability Zones
+    #   must be in the same Region.
     #   @return [String]
     #
     # @!attribute [rw] destination
-    #   The target Region or Availability Zone that the metric subscription
-    #   is enabled for. For example, `eu-west-1`.
+    #   The target Region (like `us-east-2`) or Availability Zone ID (like
+    #   `use2-az2`) that the metric subscription is enabled for. If you use
+    #   Availability Zone IDs, the Source and Destination Availability Zones
+    #   must be in the same Region.
     #   @return [String]
     #
     # @!attribute [rw] metric
@@ -31187,6 +31292,9 @@ module Aws::EC2
     #     snapshots in the Region. Users in the account will no longer be
     #     able to request new public sharing. However, snapshots that are
     #     already publicly shared, remain publicly available.
+    #
+    #   `unblocked` is not a valid value for
+    #   **EnableSnapshotBlockPublicAccess**.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -33767,13 +33875,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive
-    #   an error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
     #
-    #   Valid range: Minimum value of 1. Maximum value of 1000.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run
@@ -34174,11 +34282,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive
-    #   an error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run
@@ -35386,8 +35496,6 @@ module Aws::EC2
     #
     # @!attribute [rw] target_capacity_unit_type
     #   The unit for the target capacity.
-    #
-    #   Default: `units` (translates to number of instances)
     #   @return [String]
     #
     # @!attribute [rw] single_availability_zone
@@ -38453,7 +38561,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] elastic_gpu_associations
-    #   The Elastic GPU associated with the instance.
+    #   Deprecated.
+    #
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    #   workloads that require graphics acceleration, we recommend that you
+    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #    </note>
     #   @return [Array<Types::ElasticGpuAssociation>]
     #
     # @!attribute [rw] elastic_inference_accelerator_associations
@@ -39348,23 +39462,22 @@ module Aws::EC2
     # The metadata options for the instance.
     #
     # @!attribute [rw] http_tokens
-    #   IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to
-    #   `optional` (in other words, set the use of IMDSv2 to `optional`) or
-    #   `required` (in other words, set the use of IMDSv2 to `required`).
+    #   Indicates whether IMDSv2 is required.
     #
-    #   * `optional` - When IMDSv2 is optional, you can choose to retrieve
-    #     instance metadata with or without a session token in your request.
-    #     If you retrieve the IAM role credentials without a token, the
-    #     IMDSv1 role credentials are returned. If you retrieve the IAM role
-    #     credentials using a valid session token, the IMDSv2 role
-    #     credentials are returned.
+    #   * `optional` - IMDSv2 is optional. You can choose whether to send a
+    #     session token in your instance metadata retrieval requests. If you
+    #     retrieve IAM role credentials without a session token, you receive
+    #     the IMDSv1 role credentials. If you retrieve IAM role credentials
+    #     using a valid session token, you receive the IMDSv2 role
+    #     credentials.
     #
-    #   * `required` - When IMDSv2 is required, you must send a session
-    #     token with any instance metadata retrieval requests. In this
-    #     state, retrieving the IAM role credentials always returns IMDSv2
+    #   * `required` - IMDSv2 is required. You must send a session token in
+    #     your instance metadata retrieval requests. With this option,
+    #     retrieving the IAM role credentials always returns IMDSv2
     #     credentials; IMDSv1 credentials are not available.
     #
-    #   Default: `optional`
+    #   Default: If the value of `ImdsSupport` for the Amazon Machine Image
+    #   (AMI) for your instance is `v2.0`, the default is `required`.
     #   @return [String]
     #
     # @!attribute [rw] http_put_response_hop_limit
@@ -39429,24 +39542,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] http_tokens
-    #   IMDSv2 uses token-backed sessions. Indicates whether the use of HTTP
-    #   tokens is `optional` (in other words, indicates whether the use of
-    #   IMDSv2 is `optional`) or `required` (in other words, indicates
-    #   whether the use of IMDSv2 is `required`).
+    #   Indicates whether IMDSv2 is required.
     #
-    #   * `optional` - When IMDSv2 is optional, you can choose to retrieve
-    #     instance metadata with or without a session token in your request.
-    #     If you retrieve the IAM role credentials without a token, the
-    #     IMDSv1 role credentials are returned. If you retrieve the IAM role
-    #     credentials using a valid session token, the IMDSv2 role
-    #     credentials are returned.
+    #   * `optional` - IMDSv2 is optional. You can choose whether to send a
+    #     session token in your instance metadata retrieval requests. If you
+    #     retrieve IAM role credentials without a session token, you receive
+    #     the IMDSv1 role credentials. If you retrieve IAM role credentials
+    #     using a valid session token, you receive the IMDSv2 role
+    #     credentials.
     #
-    #   * `required` - When IMDSv2 is required, you must send a session
-    #     token with any instance metadata retrieval requests. In this
-    #     state, retrieving the IAM role credentials always returns IMDSv2
+    #   * `required` - IMDSv2 is required. You must send a session token in
+    #     your instance metadata retrieval requests. With this option,
+    #     retrieving the IAM role credentials always returns IMDSv2
     #     credentials; IMDSv1 credentials are not available.
-    #
-    #   Default: `optional`
     #   @return [String]
     #
     # @!attribute [rw] http_put_response_hop_limit
@@ -40089,25 +40197,36 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] spot_max_price_percentage_over_lowest_price
-    #   The price protection threshold for Spot Instances. This is the
-    #   maximum you’ll pay for a Spot Instance, expressed as a percentage
-    #   above the least expensive current generation M, C, or R instance
-    #   type with your specified attributes. When Amazon EC2 selects
-    #   instance types with your attributes, it excludes instance types
-    #   priced above your threshold.
+    #   \[Price protection\] The price protection threshold for Spot
+    #   Instances, as a percentage higher than an identified Spot price. The
+    #   identified Spot price is the Spot price of the lowest priced current
+    #   generation C, M, or R instance type with your specified attributes.
+    #   If no current generation C, M, or R instance type matches your
+    #   attributes, then the identified Spot price is from the lowest priced
+    #   current generation instance types, and failing that, from the lowest
+    #   priced previous generation instance types that match your
+    #   attributes. When Amazon EC2 selects instance types with your
+    #   attributes, it will exclude instance types whose Spot price exceeds
+    #   your specified threshold.
     #
     #   The parameter accepts an integer, which Amazon EC2 interprets as a
     #   percentage.
     #
-    #   To turn off price protection, specify a high value, such as
-    #   `999999`.
+    #   To indicate no price protection threshold, specify a high value,
+    #   such as `999999`.
+    #
+    #   If you set `TargetCapacityUnitType` to `vcpu` or `memory-mib`, the
+    #   price protection threshold is applied based on the per-vCPU or
+    #   per-memory price instead of the per-instance price.
     #
     #   This parameter is not supported for [GetSpotPlacementScores][1] and
     #   [GetInstanceTypesFromInstanceRequirements][2].
     #
-    #   <note markdown="1"> If you set `TargetCapacityUnitType` to `vcpu` or `memory-mib`, the
-    #   price protection threshold is applied based on the per-vCPU or
-    #   per-memory price instead of the per-instance price.
+    #   <note markdown="1"> Only one of `SpotMaxPricePercentageOverLowestPrice` or
+    #   `MaxSpotPriceAsPercentageOfOptimalOnDemandPrice` can be specified.
+    #   If you don't specify either, then
+    #   `SpotMaxPricePercentageOverLowestPrice` is used and the value for
+    #   that parameter defaults to `100`.
     #
     #    </note>
     #
@@ -40120,12 +40239,13 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] on_demand_max_price_percentage_over_lowest_price
-    #   The price protection threshold for On-Demand Instances. This is the
-    #   maximum you’ll pay for an On-Demand Instance, expressed as a
-    #   percentage above the least expensive current generation M, C, or R
-    #   instance type with your specified attributes. When Amazon EC2
-    #   selects instance types with your attributes, it excludes instance
-    #   types priced above your threshold.
+    #   \[Price protection\] The price protection threshold for On-Demand
+    #   Instances, as a percentage higher than an identified On-Demand
+    #   price. The identified On-Demand price is the price of the lowest
+    #   priced current generation C, M, or R instance type with your
+    #   specified attributes. When Amazon EC2 selects instance types with
+    #   your attributes, it will exclude instance types whose price exceeds
+    #   your specified threshold.
     #
     #   The parameter accepts an integer, which Amazon EC2 interprets as a
     #   percentage.
@@ -40361,6 +40481,38 @@ module Aws::EC2
     #   Default: All instance types
     #   @return [Array<String>]
     #
+    # @!attribute [rw] max_spot_price_as_percentage_of_optimal_on_demand_price
+    #   \[Price protection\] The price protection threshold for Spot
+    #   Instances, as a percentage of an identified On-Demand price. The
+    #   identified On-Demand price is the price of the lowest priced current
+    #   generation C, M, or R instance type with your specified attributes.
+    #   If no current generation C, M, or R instance type matches your
+    #   attributes, then the identified price is from the lowest priced
+    #   current generation instance types, and failing that, from the lowest
+    #   priced previous generation instance types that match your
+    #   attributes. When Amazon EC2 selects instance types with your
+    #   attributes, it will exclude instance types whose price exceeds your
+    #   specified threshold.
+    #
+    #   The parameter accepts an integer, which Amazon EC2 interprets as a
+    #   percentage.
+    #
+    #   To indicate no price protection threshold, specify a high value,
+    #   such as `999999`.
+    #
+    #   If you set `DesiredCapacityType` to `vcpu` or `memory-mib`, the
+    #   price protection threshold is based on the per vCPU or per memory
+    #   price instead of the per instance price.
+    #
+    #   <note markdown="1"> Only one of `SpotMaxPricePercentageOverLowestPrice` or
+    #   `MaxSpotPriceAsPercentageOfOptimalOnDemandPrice` can be specified.
+    #   If you don't specify either, then
+    #   `SpotMaxPricePercentageOverLowestPrice` is used and the value for
+    #   that parameter defaults to `100`.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceRequirements AWS API Documentation
     #
     class InstanceRequirements < Struct.new(
@@ -40386,7 +40538,8 @@ module Aws::EC2
       :accelerator_names,
       :accelerator_total_memory_mi_b,
       :network_bandwidth_gbps,
-      :allowed_instance_types)
+      :allowed_instance_types,
+      :max_spot_price_as_percentage_of_optimal_on_demand_price)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40514,25 +40667,36 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] spot_max_price_percentage_over_lowest_price
-    #   The price protection threshold for Spot Instance. This is the
-    #   maximum you’ll pay for an Spot Instance, expressed as a percentage
-    #   above the least expensive current generation M, C, or R instance
-    #   type with your specified attributes. When Amazon EC2 selects
-    #   instance types with your attributes, it excludes instance types
-    #   priced above your threshold.
+    #   \[Price protection\] The price protection threshold for Spot
+    #   Instances, as a percentage higher than an identified Spot price. The
+    #   identified Spot price is the Spot price of the lowest priced current
+    #   generation C, M, or R instance type with your specified attributes.
+    #   If no current generation C, M, or R instance type matches your
+    #   attributes, then the identified Spot price is from the lowest priced
+    #   current generation instance types, and failing that, from the lowest
+    #   priced previous generation instance types that match your
+    #   attributes. When Amazon EC2 selects instance types with your
+    #   attributes, it will exclude instance types whose Spot price exceeds
+    #   your specified threshold.
     #
     #   The parameter accepts an integer, which Amazon EC2 interprets as a
     #   percentage.
     #
-    #   To turn off price protection, specify a high value, such as
-    #   `999999`.
+    #   To indicate no price protection threshold, specify a high value,
+    #   such as `999999`.
+    #
+    #   If you set `TargetCapacityUnitType` to `vcpu` or `memory-mib`, the
+    #   price protection threshold is applied based on the per-vCPU or
+    #   per-memory price instead of the per-instance price.
     #
     #   This parameter is not supported for [GetSpotPlacementScores][1] and
     #   [GetInstanceTypesFromInstanceRequirements][2].
     #
-    #   <note markdown="1"> If you set `TargetCapacityUnitType` to `vcpu` or `memory-mib`, the
-    #   price protection threshold is applied based on the per-vCPU or
-    #   per-memory price instead of the per-instance price.
+    #   <note markdown="1"> Only one of `SpotMaxPricePercentageOverLowestPrice` or
+    #   `MaxSpotPriceAsPercentageOfOptimalOnDemandPrice` can be specified.
+    #   If you don't specify either, then
+    #   `SpotMaxPricePercentageOverLowestPrice` is used and the value for
+    #   that parameter defaults to `100`.
     #
     #    </note>
     #
@@ -40545,18 +40709,19 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] on_demand_max_price_percentage_over_lowest_price
-    #   The price protection threshold for On-Demand Instances. This is the
-    #   maximum you’ll pay for an On-Demand Instance, expressed as a
-    #   percentage above the least expensive current generation M, C, or R
-    #   instance type with your specified attributes. When Amazon EC2
-    #   selects instance types with your attributes, it excludes instance
-    #   types priced above your threshold.
+    #   \[Price protection\] The price protection threshold for On-Demand
+    #   Instances, as a percentage higher than an identified On-Demand
+    #   price. The identified On-Demand price is the price of the lowest
+    #   priced current generation C, M, or R instance type with your
+    #   specified attributes. When Amazon EC2 selects instance types with
+    #   your attributes, it will exclude instance types whose price exceeds
+    #   your specified threshold.
     #
     #   The parameter accepts an integer, which Amazon EC2 interprets as a
     #   percentage.
     #
-    #   To turn off price protection, specify a high value, such as
-    #   `999999`.
+    #   To indicate no price protection threshold, specify a high value,
+    #   such as `999999`.
     #
     #   This parameter is not supported for [GetSpotPlacementScores][1] and
     #   [GetInstanceTypesFromInstanceRequirements][2].
@@ -40791,6 +40956,38 @@ module Aws::EC2
     #   Default: All instance types
     #   @return [Array<String>]
     #
+    # @!attribute [rw] max_spot_price_as_percentage_of_optimal_on_demand_price
+    #   \[Price protection\] The price protection threshold for Spot
+    #   Instances, as a percentage of an identified On-Demand price. The
+    #   identified On-Demand price is the price of the lowest priced current
+    #   generation C, M, or R instance type with your specified attributes.
+    #   If no current generation C, M, or R instance type matches your
+    #   attributes, then the identified price is from the lowest priced
+    #   current generation instance types, and failing that, from the lowest
+    #   priced previous generation instance types that match your
+    #   attributes. When Amazon EC2 selects instance types with your
+    #   attributes, it will exclude instance types whose price exceeds your
+    #   specified threshold.
+    #
+    #   The parameter accepts an integer, which Amazon EC2 interprets as a
+    #   percentage.
+    #
+    #   To indicate no price protection threshold, specify a high value,
+    #   such as `999999`.
+    #
+    #   If you set `DesiredCapacityType` to `vcpu` or `memory-mib`, the
+    #   price protection threshold is based on the per vCPU or per memory
+    #   price instead of the per instance price.
+    #
+    #   <note markdown="1"> Only one of `SpotMaxPricePercentageOverLowestPrice` or
+    #   `MaxSpotPriceAsPercentageOfOptimalOnDemandPrice` can be specified.
+    #   If you don't specify either, then
+    #   `SpotMaxPricePercentageOverLowestPrice` is used and the value for
+    #   that parameter defaults to `100`.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceRequirementsRequest AWS API Documentation
     #
     class InstanceRequirementsRequest < Struct.new(
@@ -40816,7 +41013,8 @@ module Aws::EC2
       :accelerator_names,
       :accelerator_total_memory_mi_b,
       :network_bandwidth_gbps,
-      :allowed_instance_types)
+      :allowed_instance_types,
+      :max_spot_price_as_percentage_of_optimal_on_demand_price)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -45047,10 +45245,9 @@ module Aws::EC2
     #   Valid Values lists all resource types for Amazon EC2 that can be
     #   tagged. When you create a launch template, you can specify tags for
     #   the following resource types only: `instance` \| `volume` \|
-    #   `elastic-gpu` \| `network-interface` \| `spot-instances-request`. If
-    #   the instance does not include the resource type that you specify,
-    #   the instance launch fails. For example, not all instance types
-    #   include an Elastic GPU.
+    #   `network-interface` \| `spot-instances-request`. If the instance
+    #   does not include the resource type that you specify, the instance
+    #   launch fails. For example, not all instance types include a volume.
     #
     #   To tag a resource after it has been created, see [CreateTags][1].
     #
@@ -47051,7 +47248,9 @@ module Aws::EC2
     #   Modifies the `DeleteOnTermination` attribute for volumes that are
     #   currently attached. The volume must be owned by the caller. If no
     #   value is specified for `DeleteOnTermination`, the default is `true`
-    #   and the volume is deleted when the instance is terminated.
+    #   and the volume is deleted when the instance is terminated. You
+    #   can't modify the `DeleteOnTermination` attribute for volumes that
+    #   are attached to Fargate tasks.
     #
     #   To add instance store volumes to an Amazon EBS-backed instance, you
     #   must add them when you launch the instance. For more information,
@@ -47451,23 +47650,22 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] http_tokens
-    #   IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to
-    #   `optional` (in other words, set the use of IMDSv2 to `optional`) or
-    #   `required` (in other words, set the use of IMDSv2 to `required`).
+    #   Indicates whether IMDSv2 is required.
     #
-    #   * `optional` - When IMDSv2 is optional, you can choose to retrieve
-    #     instance metadata with or without a session token in your request.
-    #     If you retrieve the IAM role credentials without a token, the
-    #     IMDSv1 role credentials are returned. If you retrieve the IAM role
-    #     credentials using a valid session token, the IMDSv2 role
-    #     credentials are returned.
+    #   * `optional` - IMDSv2 is optional. You can choose whether to send a
+    #     session token in your instance metadata retrieval requests. If you
+    #     retrieve IAM role credentials without a session token, you receive
+    #     the IMDSv1 role credentials. If you retrieve IAM role credentials
+    #     using a valid session token, you receive the IMDSv2 role
+    #     credentials.
     #
-    #   * `required` - When IMDSv2 is required, you must send a session
-    #     token with any instance metadata retrieval requests. In this
-    #     state, retrieving the IAM role credentials always returns IMDSv2
+    #   * `required` - IMDSv2 is required. You must send a session token in
+    #     your instance metadata retrieval requests. With this option,
+    #     retrieving the IAM role credentials always returns IMDSv2
     #     credentials; IMDSv1 credentials are not available.
     #
-    #   Default: `optional`
+    #   Default: If the value of `ImdsSupport` for the Amazon Machine Image
+    #   (AMI) for your instance is `v2.0`, the default is `required`.
     #   @return [String]
     #
     # @!attribute [rw] http_put_response_hop_limit
@@ -48499,6 +48697,16 @@ module Aws::EC2
     #   Specify `true` to indicate that network interfaces attached to
     #   instances created in the specified subnet should be assigned a
     #   public IPv4 address.
+    #
+    #   Starting on February 1, 2024, Amazon Web Services will charge for
+    #   all public IPv4 addresses, including public IPv4 addresses
+    #   associated with running instances and Elastic IP addresses. For more
+    #   information, see the *Public IPv4 Address* tab on the [Amazon VPC
+    #   pricing page][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] subnet_id
@@ -50471,7 +50679,7 @@ module Aws::EC2
     #
     #   Constraints: A value between 60 and half of `Phase2LifetimeSeconds`.
     #
-    #   Default: `540`
+    #   Default: `270`
     #   @return [Integer]
     #
     # @!attribute [rw] rekey_fuzz_percentage
@@ -55680,7 +55888,13 @@ module Aws::EC2
     #   @return [Array<Types::LaunchTemplateTagSpecificationRequest>]
     #
     # @!attribute [rw] elastic_gpu_specifications
-    #   An elastic GPU to associate with the instance.
+    #   Deprecated.
+    #
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    #   workloads that require graphics acceleration, we recommend that you
+    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #    </note>
     #   @return [Array<Types::ElasticGpuSpecification>]
     #
     # @!attribute [rw] elastic_inference_accelerators
@@ -57132,7 +57346,13 @@ module Aws::EC2
     #   @return [Array<Types::LaunchTemplateTagSpecification>]
     #
     # @!attribute [rw] elastic_gpu_specifications
-    #   The elastic GPU specification.
+    #   Deprecated.
+    #
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    #   workloads that require graphics acceleration, we recommend that you
+    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #    </note>
     #   @return [Array<Types::ElasticGpuSpecificationResponse>]
     #
     # @!attribute [rw] elastic_inference_accelerators
@@ -58324,15 +58544,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] elastic_gpu_specification
-    #   An elastic GPU to associate with the instance. An Elastic GPU is a
-    #   GPU resource that you can attach to your Windows instance to
-    #   accelerate the graphics performance of your applications. For more
-    #   information, see [Amazon EC2 Elastic GPUs][1] in the *Amazon EC2
-    #   User Guide*.
+    #   Deprecated.
     #
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    #   workloads that require graphics acceleration, we recommend that you
+    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
     #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html
+    #    </note>
     #   @return [Array<Types::ElasticGpuSpecification>]
     #
     # @!attribute [rw] elastic_inference_accelerators
@@ -58366,8 +58584,6 @@ module Aws::EC2
     #   * Instances
     #
     #   * Volumes
-    #
-    #   * Elastic graphics
     #
     #   * Spot Instance requests
     #
@@ -59171,6 +59387,16 @@ module Aws::EC2
     #   network interface, not an existing one. You cannot specify more than
     #   one network interface in the request. If launching into a default
     #   subnet, the default value is `true`.
+    #
+    #   Starting on February 1, 2024, Amazon Web Services will charge for
+    #   all public IPv4 addresses, including public IPv4 addresses
+    #   associated with running instances and Elastic IP addresses. For more
+    #   information, see the *Public IPv4 Address* tab on the [Amazon VPC
+    #   pricing page][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
     #   @return [Boolean]
     #
     # @!attribute [rw] delete_on_termination
@@ -61201,10 +61427,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] target_capacity_unit_type
-    #   The unit for the target capacity. `TargetCapacityUnitType` can only
-    #   be specified when `InstanceRequirements` is specified.
+    #   The unit for the target capacity. You can specify this parameter
+    #   only when using attribute-based instance type selection.
     #
-    #   Default: `units` (translates to number of instances)
+    #   Default: `units` (the number of instances)
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
@@ -62273,7 +62499,7 @@ module Aws::EC2
     #     because of an increase in the Spot price.
     #
     #   * `Client.InstanceInitiatedShutdown`: The instance was shut down
-    #     using the `shutdown -h` command from the instance.
+    #     from the operating system of the instance.
     #
     #   * `Client.InstanceTerminated`: The instance was terminated or
     #     rebooted during AMI creation.
@@ -62474,6 +62700,16 @@ module Aws::EC2
     # @!attribute [rw] map_public_ip_on_launch
     #   Indicates whether instances launched in this subnet receive a public
     #   IPv4 address.
+    #
+    #   Starting on February 1, 2024, Amazon Web Services will charge for
+    #   all public IPv4 addresses, including public IPv4 addresses
+    #   associated with running instances and Elastic IP addresses. For more
+    #   information, see the *Public IPv4 Address* tab on the [Amazon VPC
+    #   pricing page][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
     #   @return [Boolean]
     #
     # @!attribute [rw] map_customer_owned_ip_on_launch
@@ -62883,8 +63119,8 @@ module Aws::EC2
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotOptions
     #
     # @!attribute [rw] total_target_capacity
-    #   The number of units to request, filled using
-    #   `DefaultTargetCapacityType`.
+    #   The number of units to request, filled the default target capacity
+    #   type.
     #   @return [Integer]
     #
     # @!attribute [rw] on_demand_target_capacity
@@ -62900,15 +63136,11 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] default_target_capacity_type
-    #   The default `TotalTargetCapacity`, which is either `Spot` or
-    #   `On-Demand`.
+    #   The default target capacity type.
     #   @return [String]
     #
     # @!attribute [rw] target_capacity_unit_type
-    #   The unit for the target capacity. `TargetCapacityUnitType` can only
-    #   be specified when `InstanceRequirements` is specified.
-    #
-    #   Default: `units` (translates to number of instances)
+    #   The unit for the target capacity.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetCapacitySpecification AWS API Documentation
@@ -62937,7 +63169,7 @@ module Aws::EC2
     # request, EC2 Fleet will launch instances until it reaches the maximum
     # amount that you're willing to pay. When the maximum amount you're
     # willing to pay is reached, the fleet stops launching instances even if
-    # it hasn’t met the target capacity. The `MaxTotalPrice` parameters are
+    # it hasn't met the target capacity. The `MaxTotalPrice` parameters are
     # located in [OnDemandOptionsRequest][1] and [SpotOptionsRequest][2].
     #
     #
@@ -62946,8 +63178,8 @@ module Aws::EC2
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotOptionsRequest
     #
     # @!attribute [rw] total_target_capacity
-    #   The number of units to request, filled using
-    #   `DefaultTargetCapacityType`.
+    #   The number of units to request, filled using the default target
+    #   capacity type.
     #   @return [Integer]
     #
     # @!attribute [rw] on_demand_target_capacity
@@ -62959,15 +63191,14 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] default_target_capacity_type
-    #   The default `TotalTargetCapacity`, which is either `Spot` or
-    #   `On-Demand`.
+    #   The default target capacity type.
     #   @return [String]
     #
     # @!attribute [rw] target_capacity_unit_type
-    #   The unit for the target capacity. `TargetCapacityUnitType` can only
-    #   be specified when `InstanceRequirements` is specified.
+    #   The unit for the target capacity. You can specify this parameter
+    #   only when using attributed-based instance type selection.
     #
-    #   Default: `units` (translates to number of instances)
+    #   Default: `units` (the number of instances)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetCapacitySpecificationRequest AWS API Documentation
@@ -66756,10 +66987,16 @@ module Aws::EC2
     #
     # @!attribute [rw] device
     #   The device name.
+    #
+    #   If the volume is attached to a Fargate task, this parameter returns
+    #   `null`.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
     #   The ID of the instance.
+    #
+    #   If the volume is attached to a Fargate task, this parameter returns
+    #   `null`.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -66774,6 +67011,19 @@ module Aws::EC2
     #   Indicates whether the EBS volume is deleted on instance termination.
     #   @return [Boolean]
     #
+    # @!attribute [rw] associated_resource
+    #   The ARN of the Amazon ECS or Fargate task to which the volume is
+    #   attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_owning_service
+    #   The service principal of Amazon Web Services service that owns the
+    #   underlying instance to which the volume is attached.
+    #
+    #   This parameter is returned only for volumes that are attached to
+    #   Fargate tasks.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeAttachment AWS API Documentation
     #
     class VolumeAttachment < Struct.new(
@@ -66782,7 +67032,9 @@ module Aws::EC2
       :instance_id,
       :state,
       :volume_id,
-      :delete_on_termination)
+      :delete_on_termination,
+      :associated_resource,
+      :instance_owning_service)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -67999,7 +68251,7 @@ module Aws::EC2
     #
     #   Constraints: A value between 60 and half of `Phase2LifetimeSeconds`.
     #
-    #   Default: `540`
+    #   Default: `270`
     #   @return [Integer]
     #
     # @!attribute [rw] rekey_fuzz_percentage

@@ -60,8 +60,12 @@ module Aws::OpenSearchService
     BackendRole = Shapes::StringShape.new(name: 'BackendRole')
     BaseException = Shapes::StructureShape.new(name: 'BaseException')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CancelDomainConfigChangeRequest = Shapes::StructureShape.new(name: 'CancelDomainConfigChangeRequest')
+    CancelDomainConfigChangeResponse = Shapes::StructureShape.new(name: 'CancelDomainConfigChangeResponse')
     CancelServiceSoftwareUpdateRequest = Shapes::StructureShape.new(name: 'CancelServiceSoftwareUpdateRequest')
     CancelServiceSoftwareUpdateResponse = Shapes::StructureShape.new(name: 'CancelServiceSoftwareUpdateResponse')
+    CancelledChangeProperty = Shapes::StructureShape.new(name: 'CancelledChangeProperty')
+    CancelledChangePropertyList = Shapes::ListShape.new(name: 'CancelledChangePropertyList')
     ChangeProgressDetails = Shapes::StructureShape.new(name: 'ChangeProgressDetails')
     ChangeProgressStage = Shapes::StructureShape.new(name: 'ChangeProgressStage')
     ChangeProgressStageList = Shapes::ListShape.new(name: 'ChangeProgressStageList')
@@ -78,6 +82,7 @@ module Aws::OpenSearchService
     CommitMessage = Shapes::StringShape.new(name: 'CommitMessage')
     CompatibleVersionsList = Shapes::ListShape.new(name: 'CompatibleVersionsList')
     CompatibleVersionsMap = Shapes::StructureShape.new(name: 'CompatibleVersionsMap')
+    ConfigChangeStatus = Shapes::StringShape.new(name: 'ConfigChangeStatus')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectionAlias = Shapes::StringShape.new(name: 'ConnectionAlias')
     ConnectionId = Shapes::StringShape.new(name: 'ConnectionId')
@@ -174,6 +179,7 @@ module Aws::OpenSearchService
     DomainPackageDetails = Shapes::StructureShape.new(name: 'DomainPackageDetails')
     DomainPackageDetailsList = Shapes::ListShape.new(name: 'DomainPackageDetailsList')
     DomainPackageStatus = Shapes::StringShape.new(name: 'DomainPackageStatus')
+    DomainProcessingStatusType = Shapes::StringShape.new(name: 'DomainProcessingStatusType')
     DomainState = Shapes::StringShape.new(name: 'DomainState')
     DomainStatus = Shapes::StructureShape.new(name: 'DomainStatus')
     DomainStatusList = Shapes::ListShape.new(name: 'DomainStatusList')
@@ -200,6 +206,7 @@ module Aws::OpenSearchService
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     GUID = Shapes::StringShape.new(name: 'GUID')
+    GUIDList = Shapes::ListShape.new(name: 'GUIDList')
     GetCompatibleVersionsRequest = Shapes::StructureShape.new(name: 'GetCompatibleVersionsRequest')
     GetCompatibleVersionsResponse = Shapes::StructureShape.new(name: 'GetCompatibleVersionsResponse')
     GetDataSourceRequest = Shapes::StructureShape.new(name: 'GetDataSourceRequest')
@@ -219,6 +226,7 @@ module Aws::OpenSearchService
     InboundConnectionStatus = Shapes::StructureShape.new(name: 'InboundConnectionStatus')
     InboundConnectionStatusCode = Shapes::StringShape.new(name: 'InboundConnectionStatusCode')
     InboundConnections = Shapes::ListShape.new(name: 'InboundConnections')
+    InitiatedBy = Shapes::StringShape.new(name: 'InitiatedBy')
     InstanceCount = Shapes::IntegerShape.new(name: 'InstanceCount')
     InstanceCountLimits = Shapes::StructureShape.new(name: 'InstanceCountLimits')
     InstanceLimits = Shapes::StructureShape.new(name: 'InstanceLimits')
@@ -280,6 +288,8 @@ module Aws::OpenSearchService
     MaximumInstanceCount = Shapes::IntegerShape.new(name: 'MaximumInstanceCount')
     Message = Shapes::StringShape.new(name: 'Message')
     MinimumInstanceCount = Shapes::IntegerShape.new(name: 'MinimumInstanceCount')
+    ModifyingProperties = Shapes::StructureShape.new(name: 'ModifyingProperties')
+    ModifyingPropertiesList = Shapes::ListShape.new(name: 'ModifyingPropertiesList')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NodeId = Shapes::StringShape.new(name: 'NodeId')
     NodeStatus = Shapes::StringShape.new(name: 'NodeStatus')
@@ -322,6 +332,7 @@ module Aws::OpenSearchService
     PluginVersion = Shapes::StringShape.new(name: 'PluginVersion')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
     PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
+    PropertyValueType = Shapes::StringShape.new(name: 'PropertyValueType')
     PurchaseReservedInstanceOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseReservedInstanceOfferingRequest')
     PurchaseReservedInstanceOfferingResponse = Shapes::StructureShape.new(name: 'PurchaseReservedInstanceOfferingResponse')
     RecurringCharge = Shapes::StructureShape.new(name: 'RecurringCharge')
@@ -582,14 +593,34 @@ module Aws::OpenSearchService
     BaseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     BaseException.struct_class = Types::BaseException
 
+    CancelDomainConfigChangeRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    CancelDomainConfigChangeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun"))
+    CancelDomainConfigChangeRequest.struct_class = Types::CancelDomainConfigChangeRequest
+
+    CancelDomainConfigChangeResponse.add_member(:cancelled_change_ids, Shapes::ShapeRef.new(shape: GUIDList, location_name: "CancelledChangeIds"))
+    CancelDomainConfigChangeResponse.add_member(:cancelled_change_properties, Shapes::ShapeRef.new(shape: CancelledChangePropertyList, location_name: "CancelledChangeProperties"))
+    CancelDomainConfigChangeResponse.add_member(:dry_run, Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun"))
+    CancelDomainConfigChangeResponse.struct_class = Types::CancelDomainConfigChangeResponse
+
     CancelServiceSoftwareUpdateRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     CancelServiceSoftwareUpdateRequest.struct_class = Types::CancelServiceSoftwareUpdateRequest
 
     CancelServiceSoftwareUpdateResponse.add_member(:service_software_options, Shapes::ShapeRef.new(shape: ServiceSoftwareOptions, location_name: "ServiceSoftwareOptions"))
     CancelServiceSoftwareUpdateResponse.struct_class = Types::CancelServiceSoftwareUpdateResponse
 
+    CancelledChangeProperty.add_member(:property_name, Shapes::ShapeRef.new(shape: String, location_name: "PropertyName"))
+    CancelledChangeProperty.add_member(:cancelled_value, Shapes::ShapeRef.new(shape: String, location_name: "CancelledValue"))
+    CancelledChangeProperty.add_member(:active_value, Shapes::ShapeRef.new(shape: String, location_name: "ActiveValue"))
+    CancelledChangeProperty.struct_class = Types::CancelledChangeProperty
+
+    CancelledChangePropertyList.member = Shapes::ShapeRef.new(shape: CancelledChangeProperty)
+
     ChangeProgressDetails.add_member(:change_id, Shapes::ShapeRef.new(shape: GUID, location_name: "ChangeId"))
     ChangeProgressDetails.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ChangeProgressDetails.add_member(:config_change_status, Shapes::ShapeRef.new(shape: ConfigChangeStatus, location_name: "ConfigChangeStatus"))
+    ChangeProgressDetails.add_member(:initiated_by, Shapes::ShapeRef.new(shape: InitiatedBy, location_name: "InitiatedBy"))
+    ChangeProgressDetails.add_member(:start_time, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "StartTime"))
+    ChangeProgressDetails.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "LastUpdatedTime"))
     ChangeProgressDetails.struct_class = Types::ChangeProgressDetails
 
     ChangeProgressStage.add_member(:name, Shapes::ShapeRef.new(shape: ChangeProgressStageName, location_name: "Name"))
@@ -607,6 +638,9 @@ module Aws::OpenSearchService
     ChangeProgressStatusDetails.add_member(:completed_properties, Shapes::ShapeRef.new(shape: StringList, location_name: "CompletedProperties"))
     ChangeProgressStatusDetails.add_member(:total_number_of_stages, Shapes::ShapeRef.new(shape: TotalNumberOfStages, location_name: "TotalNumberOfStages"))
     ChangeProgressStatusDetails.add_member(:change_progress_stages, Shapes::ShapeRef.new(shape: ChangeProgressStageList, location_name: "ChangeProgressStages"))
+    ChangeProgressStatusDetails.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "LastUpdatedTime"))
+    ChangeProgressStatusDetails.add_member(:config_change_status, Shapes::ShapeRef.new(shape: ConfigChangeStatus, location_name: "ConfigChangeStatus"))
+    ChangeProgressStatusDetails.add_member(:initiated_by, Shapes::ShapeRef.new(shape: InitiatedBy, location_name: "InitiatedBy"))
     ChangeProgressStatusDetails.struct_class = Types::ChangeProgressStatusDetails
 
     ClusterConfig.add_member(:instance_type, Shapes::ShapeRef.new(shape: OpenSearchPartitionInstanceType, location_name: "InstanceType"))
@@ -927,6 +961,7 @@ module Aws::OpenSearchService
     DomainConfig.add_member(:change_progress_details, Shapes::ShapeRef.new(shape: ChangeProgressDetails, location_name: "ChangeProgressDetails"))
     DomainConfig.add_member(:off_peak_window_options, Shapes::ShapeRef.new(shape: OffPeakWindowOptionsStatus, location_name: "OffPeakWindowOptions"))
     DomainConfig.add_member(:software_update_options, Shapes::ShapeRef.new(shape: SoftwareUpdateOptionsStatus, location_name: "SoftwareUpdateOptions"))
+    DomainConfig.add_member(:modifying_properties, Shapes::ShapeRef.new(shape: ModifyingPropertiesList, location_name: "ModifyingProperties"))
     DomainConfig.struct_class = Types::DomainConfig
 
     DomainEndpointOptions.add_member(:enforce_https, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnforceHTTPS"))
@@ -1017,6 +1052,8 @@ module Aws::OpenSearchService
     DomainStatus.add_member(:change_progress_details, Shapes::ShapeRef.new(shape: ChangeProgressDetails, location_name: "ChangeProgressDetails"))
     DomainStatus.add_member(:off_peak_window_options, Shapes::ShapeRef.new(shape: OffPeakWindowOptions, location_name: "OffPeakWindowOptions"))
     DomainStatus.add_member(:software_update_options, Shapes::ShapeRef.new(shape: SoftwareUpdateOptions, location_name: "SoftwareUpdateOptions"))
+    DomainStatus.add_member(:domain_processing_status, Shapes::ShapeRef.new(shape: DomainProcessingStatusType, location_name: "DomainProcessingStatus"))
+    DomainStatus.add_member(:modifying_properties, Shapes::ShapeRef.new(shape: ModifyingPropertiesList, location_name: "ModifyingProperties"))
     DomainStatus.struct_class = Types::DomainStatus
 
     DomainStatusList.member = Shapes::ShapeRef.new(shape: DomainStatus)
@@ -1072,6 +1109,8 @@ module Aws::OpenSearchService
     Filter.struct_class = Types::Filter
 
     FilterList.member = Shapes::ShapeRef.new(shape: Filter)
+
+    GUIDList.member = Shapes::ShapeRef.new(shape: GUID)
 
     GetCompatibleVersionsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location: "querystring", location_name: "domainName"))
     GetCompatibleVersionsRequest.struct_class = Types::GetCompatibleVersionsRequest
@@ -1299,6 +1338,14 @@ module Aws::OpenSearchService
     MasterUserOptions.add_member(:master_user_name, Shapes::ShapeRef.new(shape: Username, location_name: "MasterUserName"))
     MasterUserOptions.add_member(:master_user_password, Shapes::ShapeRef.new(shape: Password, location_name: "MasterUserPassword"))
     MasterUserOptions.struct_class = Types::MasterUserOptions
+
+    ModifyingProperties.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    ModifyingProperties.add_member(:active_value, Shapes::ShapeRef.new(shape: String, location_name: "ActiveValue"))
+    ModifyingProperties.add_member(:pending_value, Shapes::ShapeRef.new(shape: String, location_name: "PendingValue"))
+    ModifyingProperties.add_member(:value_type, Shapes::ShapeRef.new(shape: PropertyValueType, location_name: "ValueType"))
+    ModifyingProperties.struct_class = Types::ModifyingProperties
+
+    ModifyingPropertiesList.member = Shapes::ShapeRef.new(shape: ModifyingProperties)
 
     NodeToNodeEncryptionOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     NodeToNodeEncryptionOptions.struct_class = Types::NodeToNodeEncryptionOptions
@@ -1782,6 +1829,19 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: BaseException)
+      end)
+
+      api.add_operation(:cancel_domain_config_change, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelDomainConfigChange"
+        o.http_method = "POST"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/config/cancel"
+        o.input = Shapes::ShapeRef.new(shape: CancelDomainConfigChangeRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelDomainConfigChangeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
       end)
 
       api.add_operation(:cancel_service_software_update, Seahorse::Model::Operation.new.tap do |o|

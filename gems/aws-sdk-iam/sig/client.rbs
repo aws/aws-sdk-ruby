@@ -1,0 +1,1826 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IAM
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#add_client_id_to_open_id_connect_provider-instance_method
+      def add_client_id_to_open_id_connect_provider: (
+                                                       open_id_connect_provider_arn: ::String,
+                                                       client_id: ::String
+                                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#add_role_to_instance_profile-instance_method
+      def add_role_to_instance_profile: (
+                                          instance_profile_name: ::String,
+                                          role_name: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#add_user_to_group-instance_method
+      def add_user_to_group: (
+                               group_name: ::String,
+                               user_name: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#attach_group_policy-instance_method
+      def attach_group_policy: (
+                                 group_name: ::String,
+                                 policy_arn: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#attach_role_policy-instance_method
+      def attach_role_policy: (
+                                role_name: ::String,
+                                policy_arn: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#attach_user_policy-instance_method
+      def attach_user_policy: (
+                                user_name: ::String,
+                                policy_arn: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#change_password-instance_method
+      def change_password: (
+                             old_password: ::String,
+                             new_password: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CreateAccessKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessKeyResponse]
+        def access_key: () -> Types::AccessKey
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#create_access_key-instance_method
+      def create_access_key: (
+                               ?user_name: ::String
+                             ) -> _CreateAccessKeyResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessKeyResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#create_account_alias-instance_method
+      def create_account_alias: (
+                                  account_alias: ::String
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CreateGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGroupResponse]
+        def group: () -> Types::Group
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#create_group-instance_method
+      def create_group: (
+                          ?path: ::String,
+                          group_name: ::String
+                        ) -> _CreateGroupResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGroupResponseSuccess
+
+      interface _CreateInstanceProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateInstanceProfileResponse]
+        def instance_profile: () -> Types::InstanceProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#create_instance_profile-instance_method
+      def create_instance_profile: (
+                                     instance_profile_name: ::String,
+                                     ?path: ::String,
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       },
+                                     ]
+                                   ) -> _CreateInstanceProfileResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInstanceProfileResponseSuccess
+
+      interface _CreateLoginProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLoginProfileResponse]
+        def login_profile: () -> Types::LoginProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#create_login_profile-instance_method
+      def create_login_profile: (
+                                  user_name: ::String,
+                                  password: ::String,
+                                  ?password_reset_required: bool
+                                ) -> _CreateLoginProfileResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLoginProfileResponseSuccess
+
+      interface _CreateOpenIDConnectProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateOpenIDConnectProviderResponse]
+        def open_id_connect_provider_arn: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#create_open_id_connect_provider-instance_method
+      def create_open_id_connect_provider: (
+                                             url: ::String,
+                                             ?client_id_list: Array[::String],
+                                             thumbprint_list: Array[::String],
+                                             ?tags: Array[
+                                               {
+                                                 key: ::String,
+                                                 value: ::String
+                                               },
+                                             ]
+                                           ) -> _CreateOpenIDConnectProviderResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOpenIDConnectProviderResponseSuccess
+
+      interface _CreatePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePolicyResponse]
+        def policy: () -> Types::Policy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#create_policy-instance_method
+      def create_policy: (
+                           policy_name: ::String,
+                           ?path: ::String,
+                           policy_document: ::String,
+                           ?description: ::String,
+                           ?tags: Array[
+                             {
+                               key: ::String,
+                               value: ::String
+                             },
+                           ]
+                         ) -> _CreatePolicyResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePolicyResponseSuccess
+
+      interface _CreatePolicyVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePolicyVersionResponse]
+        def policy_version: () -> Types::PolicyVersion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#create_policy_version-instance_method
+      def create_policy_version: (
+                                   policy_arn: ::String,
+                                   policy_document: ::String,
+                                   ?set_as_default: bool
+                                 ) -> _CreatePolicyVersionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePolicyVersionResponseSuccess
+
+      interface _CreateRoleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRoleResponse]
+        def role: () -> Types::Role
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#create_role-instance_method
+      def create_role: (
+                         ?path: ::String,
+                         role_name: ::String,
+                         assume_role_policy_document: ::String,
+                         ?description: ::String,
+                         ?max_session_duration: ::Integer,
+                         ?permissions_boundary: ::String,
+                         ?tags: Array[
+                           {
+                             key: ::String,
+                             value: ::String
+                           },
+                         ]
+                       ) -> _CreateRoleResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRoleResponseSuccess
+
+      interface _CreateSAMLProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSAMLProviderResponse]
+        def saml_provider_arn: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#create_saml_provider-instance_method
+      def create_saml_provider: (
+                                  saml_metadata_document: ::String,
+                                  name: ::String,
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ]
+                                ) -> _CreateSAMLProviderResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSAMLProviderResponseSuccess
+
+      interface _CreateServiceLinkedRoleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateServiceLinkedRoleResponse]
+        def role: () -> Types::Role
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#create_service_linked_role-instance_method
+      def create_service_linked_role: (
+                                        aws_service_name: ::String,
+                                        ?description: ::String,
+                                        ?custom_suffix: ::String
+                                      ) -> _CreateServiceLinkedRoleResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceLinkedRoleResponseSuccess
+
+      interface _CreateServiceSpecificCredentialResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateServiceSpecificCredentialResponse]
+        def service_specific_credential: () -> Types::ServiceSpecificCredential
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#create_service_specific_credential-instance_method
+      def create_service_specific_credential: (
+                                                user_name: ::String,
+                                                service_name: ::String
+                                              ) -> _CreateServiceSpecificCredentialResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceSpecificCredentialResponseSuccess
+
+      interface _CreateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateUserResponse]
+        def user: () -> Types::User
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#create_user-instance_method
+      def create_user: (
+                         ?path: ::String,
+                         user_name: ::String,
+                         ?permissions_boundary: ::String,
+                         ?tags: Array[
+                           {
+                             key: ::String,
+                             value: ::String
+                           },
+                         ]
+                       ) -> _CreateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserResponseSuccess
+
+      interface _CreateVirtualMFADeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVirtualMFADeviceResponse]
+        def virtual_mfa_device: () -> Types::VirtualMFADevice
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#create_virtual_mfa_device-instance_method
+      def create_virtual_mfa_device: (
+                                       ?path: ::String,
+                                       virtual_mfa_device_name: ::String,
+                                       ?tags: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String
+                                         },
+                                       ]
+                                     ) -> _CreateVirtualMFADeviceResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVirtualMFADeviceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#deactivate_mfa_device-instance_method
+      def deactivate_mfa_device: (
+                                   user_name: ::String,
+                                   serial_number: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_access_key-instance_method
+      def delete_access_key: (
+                               ?user_name: ::String,
+                               access_key_id: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_account_alias-instance_method
+      def delete_account_alias: (
+                                  account_alias: ::String
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_account_password_policy-instance_method
+      def delete_account_password_policy: () -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_group-instance_method
+      def delete_group: (
+                          group_name: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_group_policy-instance_method
+      def delete_group_policy: (
+                                 group_name: ::String,
+                                 policy_name: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_instance_profile-instance_method
+      def delete_instance_profile: (
+                                     instance_profile_name: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_login_profile-instance_method
+      def delete_login_profile: (
+                                  user_name: ::String
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_open_id_connect_provider-instance_method
+      def delete_open_id_connect_provider: (
+                                             open_id_connect_provider_arn: ::String
+                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_policy-instance_method
+      def delete_policy: (
+                           policy_arn: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_policy_version-instance_method
+      def delete_policy_version: (
+                                   policy_arn: ::String,
+                                   version_id: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_role-instance_method
+      def delete_role: (
+                         role_name: ::String
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_role_permissions_boundary-instance_method
+      def delete_role_permissions_boundary: (
+                                              role_name: ::String
+                                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_role_policy-instance_method
+      def delete_role_policy: (
+                                role_name: ::String,
+                                policy_name: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_saml_provider-instance_method
+      def delete_saml_provider: (
+                                  saml_provider_arn: ::String
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_ssh_public_key-instance_method
+      def delete_ssh_public_key: (
+                                   user_name: ::String,
+                                   ssh_public_key_id: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_server_certificate-instance_method
+      def delete_server_certificate: (
+                                       server_certificate_name: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteServiceLinkedRoleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteServiceLinkedRoleResponse]
+        def deletion_task_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_service_linked_role-instance_method
+      def delete_service_linked_role: (
+                                        role_name: ::String
+                                      ) -> _DeleteServiceLinkedRoleResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteServiceLinkedRoleResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_service_specific_credential-instance_method
+      def delete_service_specific_credential: (
+                                                ?user_name: ::String,
+                                                service_specific_credential_id: ::String
+                                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_signing_certificate-instance_method
+      def delete_signing_certificate: (
+                                        ?user_name: ::String,
+                                        certificate_id: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_user-instance_method
+      def delete_user: (
+                         user_name: ::String
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_user_permissions_boundary-instance_method
+      def delete_user_permissions_boundary: (
+                                              user_name: ::String
+                                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_user_policy-instance_method
+      def delete_user_policy: (
+                                user_name: ::String,
+                                policy_name: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#delete_virtual_mfa_device-instance_method
+      def delete_virtual_mfa_device: (
+                                       serial_number: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#detach_group_policy-instance_method
+      def detach_group_policy: (
+                                 group_name: ::String,
+                                 policy_arn: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#detach_role_policy-instance_method
+      def detach_role_policy: (
+                                role_name: ::String,
+                                policy_arn: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#detach_user_policy-instance_method
+      def detach_user_policy: (
+                                user_name: ::String,
+                                policy_arn: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#enable_mfa_device-instance_method
+      def enable_mfa_device: (
+                               user_name: ::String,
+                               serial_number: ::String,
+                               authentication_code_1: ::String,
+                               authentication_code_2: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GenerateCredentialReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GenerateCredentialReportResponse]
+        def state: () -> ("STARTED" | "INPROGRESS" | "COMPLETE")
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#generate_credential_report-instance_method
+      def generate_credential_report: () -> _GenerateCredentialReportResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GenerateCredentialReportResponseSuccess
+
+      interface _GenerateOrganizationsAccessReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GenerateOrganizationsAccessReportResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#generate_organizations_access_report-instance_method
+      def generate_organizations_access_report: (
+                                                  entity_path: ::String,
+                                                  ?organizations_policy_id: ::String
+                                                ) -> _GenerateOrganizationsAccessReportResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GenerateOrganizationsAccessReportResponseSuccess
+
+      interface _GenerateServiceLastAccessedDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GenerateServiceLastAccessedDetailsResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#generate_service_last_accessed_details-instance_method
+      def generate_service_last_accessed_details: (
+                                                    arn: ::String,
+                                                    ?granularity: ("SERVICE_LEVEL" | "ACTION_LEVEL")
+                                                  ) -> _GenerateServiceLastAccessedDetailsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GenerateServiceLastAccessedDetailsResponseSuccess
+
+      interface _GetAccessKeyLastUsedResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessKeyLastUsedResponse]
+        def user_name: () -> ::String
+        def access_key_last_used: () -> Types::AccessKeyLastUsed
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_access_key_last_used-instance_method
+      def get_access_key_last_used: (
+                                      access_key_id: ::String
+                                    ) -> _GetAccessKeyLastUsedResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessKeyLastUsedResponseSuccess
+
+      interface _GetAccountAuthorizationDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountAuthorizationDetailsResponse]
+        def user_detail_list: () -> ::Array[Types::UserDetail]
+        def group_detail_list: () -> ::Array[Types::GroupDetail]
+        def role_detail_list: () -> ::Array[Types::RoleDetail]
+        def policies: () -> ::Array[Types::ManagedPolicyDetail]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_account_authorization_details-instance_method
+      def get_account_authorization_details: (
+                                               ?filter: Array[("User" | "Role" | "Group" | "LocalManagedPolicy" | "AWSManagedPolicy")],
+                                               ?max_items: ::Integer,
+                                               ?marker: ::String
+                                             ) -> _GetAccountAuthorizationDetailsResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountAuthorizationDetailsResponseSuccess
+
+      interface _GetAccountPasswordPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountPasswordPolicyResponse]
+        def password_policy: () -> Types::PasswordPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_account_password_policy-instance_method
+      def get_account_password_policy: () -> _GetAccountPasswordPolicyResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountPasswordPolicyResponseSuccess
+
+      interface _GetAccountSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountSummaryResponse]
+        def summary_map: () -> ::Hash[("Users" | "UsersQuota" | "Groups" | "GroupsQuota" | "ServerCertificates" | "ServerCertificatesQuota" | "UserPolicySizeQuota" | "GroupPolicySizeQuota" | "GroupsPerUserQuota" | "SigningCertificatesPerUserQuota" | "AccessKeysPerUserQuota" | "MFADevices" | "MFADevicesInUse" | "AccountMFAEnabled" | "AccountAccessKeysPresent" | "AccountSigningCertificatesPresent" | "AttachedPoliciesPerGroupQuota" | "AttachedPoliciesPerRoleQuota" | "AttachedPoliciesPerUserQuota" | "Policies" | "PoliciesQuota" | "PolicySizeQuota" | "PolicyVersionsInUse" | "PolicyVersionsInUseQuota" | "VersionsPerPolicyQuota" | "GlobalEndpointTokenVersion"), ::Integer]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_account_summary-instance_method
+      def get_account_summary: () -> _GetAccountSummaryResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountSummaryResponseSuccess
+
+      interface _GetContextKeysForCustomPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContextKeysForPolicyResponse]
+        def context_key_names: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_context_keys_for_custom_policy-instance_method
+      def get_context_keys_for_custom_policy: (
+                                                policy_input_list: Array[::String]
+                                              ) -> _GetContextKeysForCustomPolicyResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContextKeysForCustomPolicyResponseSuccess
+
+      interface _GetContextKeysForPrincipalPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContextKeysForPolicyResponse]
+        def context_key_names: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_context_keys_for_principal_policy-instance_method
+      def get_context_keys_for_principal_policy: (
+                                                   policy_source_arn: ::String,
+                                                   ?policy_input_list: Array[::String]
+                                                 ) -> _GetContextKeysForPrincipalPolicyResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContextKeysForPrincipalPolicyResponseSuccess
+
+      interface _GetCredentialReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCredentialReportResponse]
+        def content: () -> ::String
+        def report_format: () -> ("text/csv")
+        def generated_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_credential_report-instance_method
+      def get_credential_report: () -> _GetCredentialReportResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCredentialReportResponseSuccess
+
+      interface _GetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGroupResponse]
+        def group: () -> Types::Group
+        def users: () -> ::Array[Types::User]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_group-instance_method
+      def get_group: (
+                       group_name: ::String,
+                       ?marker: ::String,
+                       ?max_items: ::Integer
+                     ) -> _GetGroupResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGroupResponseSuccess
+
+      interface _GetGroupPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGroupPolicyResponse]
+        def group_name: () -> ::String
+        def policy_name: () -> ::String
+        def policy_document: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_group_policy-instance_method
+      def get_group_policy: (
+                              group_name: ::String,
+                              policy_name: ::String
+                            ) -> _GetGroupPolicyResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGroupPolicyResponseSuccess
+
+      interface _GetInstanceProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceProfileResponse]
+        def instance_profile: () -> Types::InstanceProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_instance_profile-instance_method
+      def get_instance_profile: (
+                                  instance_profile_name: ::String
+                                ) -> _GetInstanceProfileResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInstanceProfileResponseSuccess
+
+      interface _GetLoginProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLoginProfileResponse]
+        def login_profile: () -> Types::LoginProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_login_profile-instance_method
+      def get_login_profile: (
+                               user_name: ::String
+                             ) -> _GetLoginProfileResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLoginProfileResponseSuccess
+
+      interface _GetMFADeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMFADeviceResponse]
+        def user_name: () -> ::String
+        def serial_number: () -> ::String
+        def enable_date: () -> ::Time
+        def certifications: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_mfa_device-instance_method
+      def get_mfa_device: (
+                            serial_number: ::String,
+                            ?user_name: ::String
+                          ) -> _GetMFADeviceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMFADeviceResponseSuccess
+
+      interface _GetOpenIDConnectProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOpenIDConnectProviderResponse]
+        def url: () -> ::String
+        def client_id_list: () -> ::Array[::String]
+        def thumbprint_list: () -> ::Array[::String]
+        def create_date: () -> ::Time
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_open_id_connect_provider-instance_method
+      def get_open_id_connect_provider: (
+                                          open_id_connect_provider_arn: ::String
+                                        ) -> _GetOpenIDConnectProviderResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOpenIDConnectProviderResponseSuccess
+
+      interface _GetOrganizationsAccessReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOrganizationsAccessReportResponse]
+        def job_status: () -> ("IN_PROGRESS" | "COMPLETED" | "FAILED")
+        def job_creation_date: () -> ::Time
+        def job_completion_date: () -> ::Time
+        def number_of_services_accessible: () -> ::Integer
+        def number_of_services_not_accessed: () -> ::Integer
+        def access_details: () -> ::Array[Types::AccessDetail]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+        def error_details: () -> Types::ErrorDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_organizations_access_report-instance_method
+      def get_organizations_access_report: (
+                                             job_id: ::String,
+                                             ?max_items: ::Integer,
+                                             ?marker: ::String,
+                                             ?sort_key: ("SERVICE_NAMESPACE_ASCENDING" | "SERVICE_NAMESPACE_DESCENDING" | "LAST_AUTHENTICATED_TIME_ASCENDING" | "LAST_AUTHENTICATED_TIME_DESCENDING")
+                                           ) -> _GetOrganizationsAccessReportResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOrganizationsAccessReportResponseSuccess
+
+      interface _GetPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPolicyResponse]
+        def policy: () -> Types::Policy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_policy-instance_method
+      def get_policy: (
+                        policy_arn: ::String
+                      ) -> _GetPolicyResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPolicyResponseSuccess
+
+      interface _GetPolicyVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPolicyVersionResponse]
+        def policy_version: () -> Types::PolicyVersion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_policy_version-instance_method
+      def get_policy_version: (
+                                policy_arn: ::String,
+                                version_id: ::String
+                              ) -> _GetPolicyVersionResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPolicyVersionResponseSuccess
+
+      interface _GetRoleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRoleResponse]
+        def role: () -> Types::Role
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_role-instance_method
+      def get_role: (
+                      role_name: ::String
+                    ) -> _GetRoleResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRoleResponseSuccess
+
+      interface _GetRolePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRolePolicyResponse]
+        def role_name: () -> ::String
+        def policy_name: () -> ::String
+        def policy_document: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_role_policy-instance_method
+      def get_role_policy: (
+                             role_name: ::String,
+                             policy_name: ::String
+                           ) -> _GetRolePolicyResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRolePolicyResponseSuccess
+
+      interface _GetSAMLProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSAMLProviderResponse]
+        def saml_metadata_document: () -> ::String
+        def create_date: () -> ::Time
+        def valid_until: () -> ::Time
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_saml_provider-instance_method
+      def get_saml_provider: (
+                               saml_provider_arn: ::String
+                             ) -> _GetSAMLProviderResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSAMLProviderResponseSuccess
+
+      interface _GetSSHPublicKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSSHPublicKeyResponse]
+        def ssh_public_key: () -> Types::SSHPublicKey
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_ssh_public_key-instance_method
+      def get_ssh_public_key: (
+                                user_name: ::String,
+                                ssh_public_key_id: ::String,
+                                encoding: ("SSH" | "PEM")
+                              ) -> _GetSSHPublicKeyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSSHPublicKeyResponseSuccess
+
+      interface _GetServerCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServerCertificateResponse]
+        def server_certificate: () -> Types::ServerCertificate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_server_certificate-instance_method
+      def get_server_certificate: (
+                                    server_certificate_name: ::String
+                                  ) -> _GetServerCertificateResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServerCertificateResponseSuccess
+
+      interface _GetServiceLastAccessedDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceLastAccessedDetailsResponse]
+        def job_status: () -> ("IN_PROGRESS" | "COMPLETED" | "FAILED")
+        def job_type: () -> ("SERVICE_LEVEL" | "ACTION_LEVEL")
+        def job_creation_date: () -> ::Time
+        def services_last_accessed: () -> ::Array[Types::ServiceLastAccessed]
+        def job_completion_date: () -> ::Time
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_service_last_accessed_details-instance_method
+      def get_service_last_accessed_details: (
+                                               job_id: ::String,
+                                               ?max_items: ::Integer,
+                                               ?marker: ::String
+                                             ) -> _GetServiceLastAccessedDetailsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceLastAccessedDetailsResponseSuccess
+
+      interface _GetServiceLastAccessedDetailsWithEntitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceLastAccessedDetailsWithEntitiesResponse]
+        def job_status: () -> ("IN_PROGRESS" | "COMPLETED" | "FAILED")
+        def job_creation_date: () -> ::Time
+        def job_completion_date: () -> ::Time
+        def entity_details_list: () -> ::Array[Types::EntityDetails]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_service_last_accessed_details_with_entities-instance_method
+      def get_service_last_accessed_details_with_entities: (
+                                                             job_id: ::String,
+                                                             service_namespace: ::String,
+                                                             ?max_items: ::Integer,
+                                                             ?marker: ::String
+                                                           ) -> _GetServiceLastAccessedDetailsWithEntitiesResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceLastAccessedDetailsWithEntitiesResponseSuccess
+
+      interface _GetServiceLinkedRoleDeletionStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceLinkedRoleDeletionStatusResponse]
+        def status: () -> ("SUCCEEDED" | "IN_PROGRESS" | "FAILED" | "NOT_STARTED")
+        def reason: () -> Types::DeletionTaskFailureReasonType
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_service_linked_role_deletion_status-instance_method
+      def get_service_linked_role_deletion_status: (
+                                                     deletion_task_id: ::String
+                                                   ) -> _GetServiceLinkedRoleDeletionStatusResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceLinkedRoleDeletionStatusResponseSuccess
+
+      interface _GetUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUserResponse]
+        def user: () -> Types::User
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_user-instance_method
+      def get_user: (
+                      ?user_name: ::String
+                    ) -> _GetUserResponseSuccess
+                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUserResponseSuccess
+
+      interface _GetUserPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUserPolicyResponse]
+        def user_name: () -> ::String
+        def policy_name: () -> ::String
+        def policy_document: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_user_policy-instance_method
+      def get_user_policy: (
+                             user_name: ::String,
+                             policy_name: ::String
+                           ) -> _GetUserPolicyResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUserPolicyResponseSuccess
+
+      interface _ListAccessKeysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessKeysResponse]
+        def access_key_metadata: () -> ::Array[Types::AccessKeyMetadata]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_access_keys-instance_method
+      def list_access_keys: (
+                              ?user_name: ::String,
+                              ?marker: ::String,
+                              ?max_items: ::Integer
+                            ) -> _ListAccessKeysResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessKeysResponseSuccess
+
+      interface _ListAccountAliasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccountAliasesResponse]
+        def account_aliases: () -> ::Array[::String]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_account_aliases-instance_method
+      def list_account_aliases: (
+                                  ?marker: ::String,
+                                  ?max_items: ::Integer
+                                ) -> _ListAccountAliasesResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccountAliasesResponseSuccess
+
+      interface _ListAttachedGroupPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAttachedGroupPoliciesResponse]
+        def attached_policies: () -> ::Array[Types::AttachedPolicy]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_attached_group_policies-instance_method
+      def list_attached_group_policies: (
+                                          group_name: ::String,
+                                          ?path_prefix: ::String,
+                                          ?marker: ::String,
+                                          ?max_items: ::Integer
+                                        ) -> _ListAttachedGroupPoliciesResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAttachedGroupPoliciesResponseSuccess
+
+      interface _ListAttachedRolePoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAttachedRolePoliciesResponse]
+        def attached_policies: () -> ::Array[Types::AttachedPolicy]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_attached_role_policies-instance_method
+      def list_attached_role_policies: (
+                                         role_name: ::String,
+                                         ?path_prefix: ::String,
+                                         ?marker: ::String,
+                                         ?max_items: ::Integer
+                                       ) -> _ListAttachedRolePoliciesResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAttachedRolePoliciesResponseSuccess
+
+      interface _ListAttachedUserPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAttachedUserPoliciesResponse]
+        def attached_policies: () -> ::Array[Types::AttachedPolicy]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_attached_user_policies-instance_method
+      def list_attached_user_policies: (
+                                         user_name: ::String,
+                                         ?path_prefix: ::String,
+                                         ?marker: ::String,
+                                         ?max_items: ::Integer
+                                       ) -> _ListAttachedUserPoliciesResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAttachedUserPoliciesResponseSuccess
+
+      interface _ListEntitiesForPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEntitiesForPolicyResponse]
+        def policy_groups: () -> ::Array[Types::PolicyGroup]
+        def policy_users: () -> ::Array[Types::PolicyUser]
+        def policy_roles: () -> ::Array[Types::PolicyRole]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_entities_for_policy-instance_method
+      def list_entities_for_policy: (
+                                      policy_arn: ::String,
+                                      ?entity_filter: ("User" | "Role" | "Group" | "LocalManagedPolicy" | "AWSManagedPolicy"),
+                                      ?path_prefix: ::String,
+                                      ?policy_usage_filter: ("PermissionsPolicy" | "PermissionsBoundary"),
+                                      ?marker: ::String,
+                                      ?max_items: ::Integer
+                                    ) -> _ListEntitiesForPolicyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEntitiesForPolicyResponseSuccess
+
+      interface _ListGroupPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGroupPoliciesResponse]
+        def policy_names: () -> ::Array[::String]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_group_policies-instance_method
+      def list_group_policies: (
+                                 group_name: ::String,
+                                 ?marker: ::String,
+                                 ?max_items: ::Integer
+                               ) -> _ListGroupPoliciesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupPoliciesResponseSuccess
+
+      interface _ListGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGroupsResponse]
+        def groups: () -> ::Array[Types::Group]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_groups-instance_method
+      def list_groups: (
+                         ?path_prefix: ::String,
+                         ?marker: ::String,
+                         ?max_items: ::Integer
+                       ) -> _ListGroupsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupsResponseSuccess
+
+      interface _ListGroupsForUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGroupsForUserResponse]
+        def groups: () -> ::Array[Types::Group]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_groups_for_user-instance_method
+      def list_groups_for_user: (
+                                  user_name: ::String,
+                                  ?marker: ::String,
+                                  ?max_items: ::Integer
+                                ) -> _ListGroupsForUserResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupsForUserResponseSuccess
+
+      interface _ListInstanceProfileTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInstanceProfileTagsResponse]
+        def tags: () -> ::Array[Types::Tag]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_instance_profile_tags-instance_method
+      def list_instance_profile_tags: (
+                                        instance_profile_name: ::String,
+                                        ?marker: ::String,
+                                        ?max_items: ::Integer
+                                      ) -> _ListInstanceProfileTagsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInstanceProfileTagsResponseSuccess
+
+      interface _ListInstanceProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInstanceProfilesResponse]
+        def instance_profiles: () -> ::Array[Types::InstanceProfile]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_instance_profiles-instance_method
+      def list_instance_profiles: (
+                                    ?path_prefix: ::String,
+                                    ?marker: ::String,
+                                    ?max_items: ::Integer
+                                  ) -> _ListInstanceProfilesResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInstanceProfilesResponseSuccess
+
+      interface _ListInstanceProfilesForRoleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInstanceProfilesForRoleResponse]
+        def instance_profiles: () -> ::Array[Types::InstanceProfile]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_instance_profiles_for_role-instance_method
+      def list_instance_profiles_for_role: (
+                                             role_name: ::String,
+                                             ?marker: ::String,
+                                             ?max_items: ::Integer
+                                           ) -> _ListInstanceProfilesForRoleResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInstanceProfilesForRoleResponseSuccess
+
+      interface _ListMFADeviceTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMFADeviceTagsResponse]
+        def tags: () -> ::Array[Types::Tag]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_mfa_device_tags-instance_method
+      def list_mfa_device_tags: (
+                                  serial_number: ::String,
+                                  ?marker: ::String,
+                                  ?max_items: ::Integer
+                                ) -> _ListMFADeviceTagsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMFADeviceTagsResponseSuccess
+
+      interface _ListMFADevicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMFADevicesResponse]
+        def mfa_devices: () -> ::Array[Types::MFADevice]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_mfa_devices-instance_method
+      def list_mfa_devices: (
+                              ?user_name: ::String,
+                              ?marker: ::String,
+                              ?max_items: ::Integer
+                            ) -> _ListMFADevicesResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMFADevicesResponseSuccess
+
+      interface _ListOpenIDConnectProviderTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOpenIDConnectProviderTagsResponse]
+        def tags: () -> ::Array[Types::Tag]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_open_id_connect_provider_tags-instance_method
+      def list_open_id_connect_provider_tags: (
+                                                open_id_connect_provider_arn: ::String,
+                                                ?marker: ::String,
+                                                ?max_items: ::Integer
+                                              ) -> _ListOpenIDConnectProviderTagsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOpenIDConnectProviderTagsResponseSuccess
+
+      interface _ListOpenIDConnectProvidersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOpenIDConnectProvidersResponse]
+        def open_id_connect_provider_list: () -> ::Array[Types::OpenIDConnectProviderListEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_open_id_connect_providers-instance_method
+      def list_open_id_connect_providers: (
+                                          ) -> _ListOpenIDConnectProvidersResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOpenIDConnectProvidersResponseSuccess
+
+      interface _ListPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPoliciesResponse]
+        def policies: () -> ::Array[Types::Policy]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_policies-instance_method
+      def list_policies: (
+                           ?scope: ("All" | "AWS" | "Local"),
+                           ?only_attached: bool,
+                           ?path_prefix: ::String,
+                           ?policy_usage_filter: ("PermissionsPolicy" | "PermissionsBoundary"),
+                           ?marker: ::String,
+                           ?max_items: ::Integer
+                         ) -> _ListPoliciesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPoliciesResponseSuccess
+
+      interface _ListPoliciesGrantingServiceAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPoliciesGrantingServiceAccessResponse]
+        def policies_granting_service_access: () -> ::Array[Types::ListPoliciesGrantingServiceAccessEntry]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_policies_granting_service_access-instance_method
+      def list_policies_granting_service_access: (
+                                                   ?marker: ::String,
+                                                   arn: ::String,
+                                                   service_namespaces: Array[::String]
+                                                 ) -> _ListPoliciesGrantingServiceAccessResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPoliciesGrantingServiceAccessResponseSuccess
+
+      interface _ListPolicyTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPolicyTagsResponse]
+        def tags: () -> ::Array[Types::Tag]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_policy_tags-instance_method
+      def list_policy_tags: (
+                              policy_arn: ::String,
+                              ?marker: ::String,
+                              ?max_items: ::Integer
+                            ) -> _ListPolicyTagsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPolicyTagsResponseSuccess
+
+      interface _ListPolicyVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPolicyVersionsResponse]
+        def versions: () -> ::Array[Types::PolicyVersion]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_policy_versions-instance_method
+      def list_policy_versions: (
+                                  policy_arn: ::String,
+                                  ?marker: ::String,
+                                  ?max_items: ::Integer
+                                ) -> _ListPolicyVersionsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPolicyVersionsResponseSuccess
+
+      interface _ListRolePoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRolePoliciesResponse]
+        def policy_names: () -> ::Array[::String]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_role_policies-instance_method
+      def list_role_policies: (
+                                role_name: ::String,
+                                ?marker: ::String,
+                                ?max_items: ::Integer
+                              ) -> _ListRolePoliciesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRolePoliciesResponseSuccess
+
+      interface _ListRoleTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRoleTagsResponse]
+        def tags: () -> ::Array[Types::Tag]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_role_tags-instance_method
+      def list_role_tags: (
+                            role_name: ::String,
+                            ?marker: ::String,
+                            ?max_items: ::Integer
+                          ) -> _ListRoleTagsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRoleTagsResponseSuccess
+
+      interface _ListRolesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRolesResponse]
+        def roles: () -> ::Array[Types::Role]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_roles-instance_method
+      def list_roles: (
+                        ?path_prefix: ::String,
+                        ?marker: ::String,
+                        ?max_items: ::Integer
+                      ) -> _ListRolesResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRolesResponseSuccess
+
+      interface _ListSAMLProviderTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSAMLProviderTagsResponse]
+        def tags: () -> ::Array[Types::Tag]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_saml_provider_tags-instance_method
+      def list_saml_provider_tags: (
+                                     saml_provider_arn: ::String,
+                                     ?marker: ::String,
+                                     ?max_items: ::Integer
+                                   ) -> _ListSAMLProviderTagsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSAMLProviderTagsResponseSuccess
+
+      interface _ListSAMLProvidersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSAMLProvidersResponse]
+        def saml_provider_list: () -> ::Array[Types::SAMLProviderListEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_saml_providers-instance_method
+      def list_saml_providers: (
+                               ) -> _ListSAMLProvidersResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSAMLProvidersResponseSuccess
+
+      interface _ListSSHPublicKeysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSSHPublicKeysResponse]
+        def ssh_public_keys: () -> ::Array[Types::SSHPublicKeyMetadata]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_ssh_public_keys-instance_method
+      def list_ssh_public_keys: (
+                                  ?user_name: ::String,
+                                  ?marker: ::String,
+                                  ?max_items: ::Integer
+                                ) -> _ListSSHPublicKeysResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSSHPublicKeysResponseSuccess
+
+      interface _ListServerCertificateTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServerCertificateTagsResponse]
+        def tags: () -> ::Array[Types::Tag]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_server_certificate_tags-instance_method
+      def list_server_certificate_tags: (
+                                          server_certificate_name: ::String,
+                                          ?marker: ::String,
+                                          ?max_items: ::Integer
+                                        ) -> _ListServerCertificateTagsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServerCertificateTagsResponseSuccess
+
+      interface _ListServerCertificatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServerCertificatesResponse]
+        def server_certificate_metadata_list: () -> ::Array[Types::ServerCertificateMetadata]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_server_certificates-instance_method
+      def list_server_certificates: (
+                                      ?path_prefix: ::String,
+                                      ?marker: ::String,
+                                      ?max_items: ::Integer
+                                    ) -> _ListServerCertificatesResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServerCertificatesResponseSuccess
+
+      interface _ListServiceSpecificCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceSpecificCredentialsResponse]
+        def service_specific_credentials: () -> ::Array[Types::ServiceSpecificCredentialMetadata]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_service_specific_credentials-instance_method
+      def list_service_specific_credentials: (
+                                               ?user_name: ::String,
+                                               ?service_name: ::String
+                                             ) -> _ListServiceSpecificCredentialsResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceSpecificCredentialsResponseSuccess
+
+      interface _ListSigningCertificatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSigningCertificatesResponse]
+        def certificates: () -> ::Array[Types::SigningCertificate]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_signing_certificates-instance_method
+      def list_signing_certificates: (
+                                       ?user_name: ::String,
+                                       ?marker: ::String,
+                                       ?max_items: ::Integer
+                                     ) -> _ListSigningCertificatesResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSigningCertificatesResponseSuccess
+
+      interface _ListUserPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUserPoliciesResponse]
+        def policy_names: () -> ::Array[::String]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_user_policies-instance_method
+      def list_user_policies: (
+                                user_name: ::String,
+                                ?marker: ::String,
+                                ?max_items: ::Integer
+                              ) -> _ListUserPoliciesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUserPoliciesResponseSuccess
+
+      interface _ListUserTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUserTagsResponse]
+        def tags: () -> ::Array[Types::Tag]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_user_tags-instance_method
+      def list_user_tags: (
+                            user_name: ::String,
+                            ?marker: ::String,
+                            ?max_items: ::Integer
+                          ) -> _ListUserTagsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUserTagsResponseSuccess
+
+      interface _ListUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUsersResponse]
+        def users: () -> ::Array[Types::User]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_users-instance_method
+      def list_users: (
+                        ?path_prefix: ::String,
+                        ?marker: ::String,
+                        ?max_items: ::Integer
+                      ) -> _ListUsersResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUsersResponseSuccess
+
+      interface _ListVirtualMFADevicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVirtualMFADevicesResponse]
+        def virtual_mfa_devices: () -> ::Array[Types::VirtualMFADevice]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#list_virtual_mfa_devices-instance_method
+      def list_virtual_mfa_devices: (
+                                      ?assignment_status: ("Assigned" | "Unassigned" | "Any"),
+                                      ?marker: ::String,
+                                      ?max_items: ::Integer
+                                    ) -> _ListVirtualMFADevicesResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVirtualMFADevicesResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#put_group_policy-instance_method
+      def put_group_policy: (
+                              group_name: ::String,
+                              policy_name: ::String,
+                              policy_document: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#put_role_permissions_boundary-instance_method
+      def put_role_permissions_boundary: (
+                                           role_name: ::String,
+                                           permissions_boundary: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#put_role_policy-instance_method
+      def put_role_policy: (
+                             role_name: ::String,
+                             policy_name: ::String,
+                             policy_document: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#put_user_permissions_boundary-instance_method
+      def put_user_permissions_boundary: (
+                                           user_name: ::String,
+                                           permissions_boundary: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#put_user_policy-instance_method
+      def put_user_policy: (
+                             user_name: ::String,
+                             policy_name: ::String,
+                             policy_document: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#remove_client_id_from_open_id_connect_provider-instance_method
+      def remove_client_id_from_open_id_connect_provider: (
+                                                            open_id_connect_provider_arn: ::String,
+                                                            client_id: ::String
+                                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#remove_role_from_instance_profile-instance_method
+      def remove_role_from_instance_profile: (
+                                               instance_profile_name: ::String,
+                                               role_name: ::String
+                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#remove_user_from_group-instance_method
+      def remove_user_from_group: (
+                                    group_name: ::String,
+                                    user_name: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _ResetServiceSpecificCredentialResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResetServiceSpecificCredentialResponse]
+        def service_specific_credential: () -> Types::ServiceSpecificCredential
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#reset_service_specific_credential-instance_method
+      def reset_service_specific_credential: (
+                                               ?user_name: ::String,
+                                               service_specific_credential_id: ::String
+                                             ) -> _ResetServiceSpecificCredentialResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetServiceSpecificCredentialResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#resync_mfa_device-instance_method
+      def resync_mfa_device: (
+                               user_name: ::String,
+                               serial_number: ::String,
+                               authentication_code_1: ::String,
+                               authentication_code_2: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#set_default_policy_version-instance_method
+      def set_default_policy_version: (
+                                        policy_arn: ::String,
+                                        version_id: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#set_security_token_service_preferences-instance_method
+      def set_security_token_service_preferences: (
+                                                    global_endpoint_token_version: ("v1Token" | "v2Token")
+                                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _SimulateCustomPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SimulatePolicyResponse]
+        def evaluation_results: () -> ::Array[Types::EvaluationResult]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#simulate_custom_policy-instance_method
+      def simulate_custom_policy: (
+                                    policy_input_list: Array[::String],
+                                    ?permissions_boundary_policy_input_list: Array[::String],
+                                    action_names: Array[::String],
+                                    ?resource_arns: Array[::String],
+                                    ?resource_policy: ::String,
+                                    ?resource_owner: ::String,
+                                    ?caller_arn: ::String,
+                                    ?context_entries: Array[
+                                      {
+                                        context_key_name: ::String?,
+                                        context_key_values: Array[::String]?,
+                                        context_key_type: ("string" | "stringList" | "numeric" | "numericList" | "boolean" | "booleanList" | "ip" | "ipList" | "binary" | "binaryList" | "date" | "dateList")?
+                                      },
+                                    ],
+                                    ?resource_handling_option: ::String,
+                                    ?max_items: ::Integer,
+                                    ?marker: ::String
+                                  ) -> _SimulateCustomPolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SimulateCustomPolicyResponseSuccess
+
+      interface _SimulatePrincipalPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SimulatePolicyResponse]
+        def evaluation_results: () -> ::Array[Types::EvaluationResult]
+        def is_truncated: () -> bool
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#simulate_principal_policy-instance_method
+      def simulate_principal_policy: (
+                                       policy_source_arn: ::String,
+                                       ?policy_input_list: Array[::String],
+                                       ?permissions_boundary_policy_input_list: Array[::String],
+                                       action_names: Array[::String],
+                                       ?resource_arns: Array[::String],
+                                       ?resource_policy: ::String,
+                                       ?resource_owner: ::String,
+                                       ?caller_arn: ::String,
+                                       ?context_entries: Array[
+                                         {
+                                           context_key_name: ::String?,
+                                           context_key_values: Array[::String]?,
+                                           context_key_type: ("string" | "stringList" | "numeric" | "numericList" | "boolean" | "booleanList" | "ip" | "ipList" | "binary" | "binaryList" | "date" | "dateList")?
+                                         },
+                                       ],
+                                       ?resource_handling_option: ::String,
+                                       ?max_items: ::Integer,
+                                       ?marker: ::String
+                                     ) -> _SimulatePrincipalPolicyResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SimulatePrincipalPolicyResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#tag_instance_profile-instance_method
+      def tag_instance_profile: (
+                                  instance_profile_name: ::String,
+                                  tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ]
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#tag_mfa_device-instance_method
+      def tag_mfa_device: (
+                            serial_number: ::String,
+                            tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#tag_open_id_connect_provider-instance_method
+      def tag_open_id_connect_provider: (
+                                          open_id_connect_provider_arn: ::String,
+                                          tags: Array[
+                                            {
+                                              key: ::String,
+                                              value: ::String
+                                            },
+                                          ]
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#tag_policy-instance_method
+      def tag_policy: (
+                        policy_arn: ::String,
+                        tags: Array[
+                          {
+                            key: ::String,
+                            value: ::String
+                          },
+                        ]
+                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#tag_role-instance_method
+      def tag_role: (
+                      role_name: ::String,
+                      tags: Array[
+                        {
+                          key: ::String,
+                          value: ::String
+                        },
+                      ]
+                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#tag_saml_provider-instance_method
+      def tag_saml_provider: (
+                               saml_provider_arn: ::String,
+                               tags: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String
+                                 },
+                               ]
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#tag_server_certificate-instance_method
+      def tag_server_certificate: (
+                                    server_certificate_name: ::String,
+                                    tags: Array[
+                                      {
+                                        key: ::String,
+                                        value: ::String
+                                      },
+                                    ]
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#tag_user-instance_method
+      def tag_user: (
+                      user_name: ::String,
+                      tags: Array[
+                        {
+                          key: ::String,
+                          value: ::String
+                        },
+                      ]
+                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#untag_instance_profile-instance_method
+      def untag_instance_profile: (
+                                    instance_profile_name: ::String,
+                                    tag_keys: Array[::String]
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#untag_mfa_device-instance_method
+      def untag_mfa_device: (
+                              serial_number: ::String,
+                              tag_keys: Array[::String]
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#untag_open_id_connect_provider-instance_method
+      def untag_open_id_connect_provider: (
+                                            open_id_connect_provider_arn: ::String,
+                                            tag_keys: Array[::String]
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#untag_policy-instance_method
+      def untag_policy: (
+                          policy_arn: ::String,
+                          tag_keys: Array[::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#untag_role-instance_method
+      def untag_role: (
+                        role_name: ::String,
+                        tag_keys: Array[::String]
+                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#untag_saml_provider-instance_method
+      def untag_saml_provider: (
+                                 saml_provider_arn: ::String,
+                                 tag_keys: Array[::String]
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#untag_server_certificate-instance_method
+      def untag_server_certificate: (
+                                      server_certificate_name: ::String,
+                                      tag_keys: Array[::String]
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#untag_user-instance_method
+      def untag_user: (
+                        user_name: ::String,
+                        tag_keys: Array[::String]
+                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#update_access_key-instance_method
+      def update_access_key: (
+                               ?user_name: ::String,
+                               access_key_id: ::String,
+                               status: ("Active" | "Inactive")
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#update_account_password_policy-instance_method
+      def update_account_password_policy: (
+                                            ?minimum_password_length: ::Integer,
+                                            ?require_symbols: bool,
+                                            ?require_numbers: bool,
+                                            ?require_uppercase_characters: bool,
+                                            ?require_lowercase_characters: bool,
+                                            ?allow_users_to_change_password: bool,
+                                            ?max_password_age: ::Integer,
+                                            ?password_reuse_prevention: ::Integer,
+                                            ?hard_expiry: bool
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#update_assume_role_policy-instance_method
+      def update_assume_role_policy: (
+                                       role_name: ::String,
+                                       policy_document: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#update_group-instance_method
+      def update_group: (
+                          group_name: ::String,
+                          ?new_path: ::String,
+                          ?new_group_name: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#update_login_profile-instance_method
+      def update_login_profile: (
+                                  user_name: ::String,
+                                  ?password: ::String,
+                                  ?password_reset_required: bool
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#update_open_id_connect_provider_thumbprint-instance_method
+      def update_open_id_connect_provider_thumbprint: (
+                                                        open_id_connect_provider_arn: ::String,
+                                                        thumbprint_list: Array[::String]
+                                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateRoleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRoleResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#update_role-instance_method
+      def update_role: (
+                         role_name: ::String,
+                         ?description: ::String,
+                         ?max_session_duration: ::Integer
+                       ) -> _UpdateRoleResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRoleResponseSuccess
+
+      interface _UpdateRoleDescriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRoleDescriptionResponse]
+        def role: () -> Types::Role
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#update_role_description-instance_method
+      def update_role_description: (
+                                     role_name: ::String,
+                                     description: ::String
+                                   ) -> _UpdateRoleDescriptionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRoleDescriptionResponseSuccess
+
+      interface _UpdateSAMLProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSAMLProviderResponse]
+        def saml_provider_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#update_saml_provider-instance_method
+      def update_saml_provider: (
+                                  saml_metadata_document: ::String,
+                                  saml_provider_arn: ::String
+                                ) -> _UpdateSAMLProviderResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSAMLProviderResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#update_ssh_public_key-instance_method
+      def update_ssh_public_key: (
+                                   user_name: ::String,
+                                   ssh_public_key_id: ::String,
+                                   status: ("Active" | "Inactive")
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#update_server_certificate-instance_method
+      def update_server_certificate: (
+                                       server_certificate_name: ::String,
+                                       ?new_path: ::String,
+                                       ?new_server_certificate_name: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#update_service_specific_credential-instance_method
+      def update_service_specific_credential: (
+                                                ?user_name: ::String,
+                                                service_specific_credential_id: ::String,
+                                                status: ("Active" | "Inactive")
+                                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#update_signing_certificate-instance_method
+      def update_signing_certificate: (
+                                        ?user_name: ::String,
+                                        certificate_id: ::String,
+                                        status: ("Active" | "Inactive")
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#update_user-instance_method
+      def update_user: (
+                         user_name: ::String,
+                         ?new_path: ::String,
+                         ?new_user_name: ::String
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UploadSSHPublicKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UploadSSHPublicKeyResponse]
+        def ssh_public_key: () -> Types::SSHPublicKey
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#upload_ssh_public_key-instance_method
+      def upload_ssh_public_key: (
+                                   user_name: ::String,
+                                   ssh_public_key_body: ::String
+                                 ) -> _UploadSSHPublicKeyResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UploadSSHPublicKeyResponseSuccess
+
+      interface _UploadServerCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UploadServerCertificateResponse]
+        def server_certificate_metadata: () -> Types::ServerCertificateMetadata
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#upload_server_certificate-instance_method
+      def upload_server_certificate: (
+                                       ?path: ::String,
+                                       server_certificate_name: ::String,
+                                       certificate_body: ::String,
+                                       private_key: ::String,
+                                       ?certificate_chain: ::String,
+                                       ?tags: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String
+                                         },
+                                       ]
+                                     ) -> _UploadServerCertificateResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UploadServerCertificateResponseSuccess
+
+      interface _UploadSigningCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UploadSigningCertificateResponse]
+        def certificate: () -> Types::SigningCertificate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#upload_signing_certificate-instance_method
+      def upload_signing_certificate: (
+                                        ?user_name: ::String,
+                                        certificate_body: ::String
+                                      ) -> _UploadSigningCertificateResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UploadSigningCertificateResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#wait_until-instance_method
+      def wait_until: (:instance_profile_exists waiter_name, 
+                    instance_profile_name: ::String
+                  ) -> Client::_GetInstanceProfileResponseSuccess
+                    | (:instance_profile_exists waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetInstanceProfileResponseSuccess
+                    | (:policy_exists waiter_name, 
+                    policy_arn: ::String
+                  ) -> Client::_GetPolicyResponseSuccess
+                    | (:policy_exists waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetPolicyResponseSuccess
+                    | (:role_exists waiter_name, 
+                    role_name: ::String
+                  ) -> Client::_GetRoleResponseSuccess
+                    | (:role_exists waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetRoleResponseSuccess
+                    | (:user_exists waiter_name, 
+                    ?user_name: ::String
+                  ) -> Client::_GetUserResponseSuccess
+                    | (:user_exists waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetUserResponseSuccess
+    end
+  end
+end
+

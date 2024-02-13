@@ -401,6 +401,7 @@ module Aws::WorkSpaces
     WorkspaceImageRequiredTenancy = Shapes::StringShape.new(name: 'WorkspaceImageRequiredTenancy')
     WorkspaceImageState = Shapes::StringShape.new(name: 'WorkspaceImageState')
     WorkspaceList = Shapes::ListShape.new(name: 'WorkspaceList')
+    WorkspaceName = Shapes::StringShape.new(name: 'WorkspaceName')
     WorkspaceProperties = Shapes::StructureShape.new(name: 'WorkspaceProperties')
     WorkspaceRequest = Shapes::StructureShape.new(name: 'WorkspaceRequest')
     WorkspaceRequestList = Shapes::ListShape.new(name: 'WorkspaceRequestList')
@@ -895,6 +896,7 @@ module Aws::WorkSpaces
     DescribeWorkspacesRequest.add_member(:bundle_id, Shapes::ShapeRef.new(shape: BundleId, location_name: "BundleId"))
     DescribeWorkspacesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
     DescribeWorkspacesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    DescribeWorkspacesRequest.add_member(:workspace_name, Shapes::ShapeRef.new(shape: WorkspaceName, location_name: "WorkspaceName"))
     DescribeWorkspacesRequest.struct_class = Types::DescribeWorkspacesRequest
 
     DescribeWorkspacesResult.add_member(:workspaces, Shapes::ShapeRef.new(shape: WorkspaceList, location_name: "Workspaces"))
@@ -1384,6 +1386,7 @@ module Aws::WorkSpaces
     Workspace.add_member(:volume_encryption_key, Shapes::ShapeRef.new(shape: VolumeEncryptionKey, location_name: "VolumeEncryptionKey"))
     Workspace.add_member(:user_volume_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "UserVolumeEncryptionEnabled"))
     Workspace.add_member(:root_volume_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "RootVolumeEncryptionEnabled"))
+    Workspace.add_member(:workspace_name, Shapes::ShapeRef.new(shape: WorkspaceName, location_name: "WorkspaceName"))
     Workspace.add_member(:workspace_properties, Shapes::ShapeRef.new(shape: WorkspaceProperties, location_name: "WorkspaceProperties"))
     Workspace.add_member(:modification_states, Shapes::ShapeRef.new(shape: ModificationStateList, location_name: "ModificationStates"))
     Workspace.add_member(:related_workspaces, Shapes::ShapeRef.new(shape: RelatedWorkspaces, location_name: "RelatedWorkspaces"))
@@ -1490,6 +1493,7 @@ module Aws::WorkSpaces
     WorkspaceRequest.add_member(:root_volume_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "RootVolumeEncryptionEnabled"))
     WorkspaceRequest.add_member(:workspace_properties, Shapes::ShapeRef.new(shape: WorkspaceProperties, location_name: "WorkspaceProperties"))
     WorkspaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    WorkspaceRequest.add_member(:workspace_name, Shapes::ShapeRef.new(shape: WorkspaceName, location_name: "WorkspaceName"))
     WorkspaceRequest.struct_class = Types::WorkspaceRequest
 
     WorkspaceRequestList.member = Shapes::ShapeRef.new(shape: WorkspaceRequest)

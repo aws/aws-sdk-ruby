@@ -1,0 +1,519 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::EMRContainers
+  module Types
+
+    class CancelJobRunRequest
+      attr_accessor id: ::String
+      attr_accessor virtual_cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelJobRunResponse
+      attr_accessor id: ::String
+      attr_accessor virtual_cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class Certificate
+      attr_accessor certificate_arn: ::String
+      attr_accessor certificate_data: ::String
+      SENSITIVE: []
+    end
+
+    class CloudWatchMonitoringConfiguration
+      attr_accessor log_group_name: ::String
+      attr_accessor log_stream_name_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class Configuration
+      attr_accessor classification: ::String
+      attr_accessor properties: ::Hash[::String, ::String]
+      attr_accessor configurations: ::Array[Types::Configuration]
+      SENSITIVE: [:properties]
+    end
+
+    class ConfigurationOverrides
+      attr_accessor application_configuration: ::Array[Types::Configuration]
+      attr_accessor monitoring_configuration: Types::MonitoringConfiguration
+      SENSITIVE: []
+    end
+
+    class ContainerInfo
+      attr_accessor eks_info: Types::EksInfo
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class EksInfo < ContainerInfo
+      end
+      class Unknown < ContainerInfo
+      end
+    end
+
+    class ContainerLogRotationConfiguration
+      attr_accessor rotation_size: ::String
+      attr_accessor max_files_to_keep: ::Integer
+      SENSITIVE: []
+    end
+
+    class ContainerProvider
+      attr_accessor type: ("EKS")
+      attr_accessor id: ::String
+      attr_accessor info: Types::ContainerInfo
+      SENSITIVE: []
+    end
+
+    class CreateJobTemplateRequest
+      attr_accessor name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor job_template_data: Types::JobTemplateData
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateJobTemplateResponse
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateManagedEndpointRequest
+      attr_accessor name: ::String
+      attr_accessor virtual_cluster_id: ::String
+      attr_accessor type: ::String
+      attr_accessor release_label: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor certificate_arn: ::String
+      attr_accessor configuration_overrides: Types::ConfigurationOverrides
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateManagedEndpointResponse
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor virtual_cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVirtualClusterRequest
+      attr_accessor name: ::String
+      attr_accessor container_provider: Types::ContainerProvider
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateVirtualClusterResponse
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class Credentials
+      attr_accessor token: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: [:token]
+
+      class Token < Credentials
+      end
+      class Unknown < Credentials
+      end
+    end
+
+    class DeleteJobTemplateRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteJobTemplateResponse
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteManagedEndpointRequest
+      attr_accessor id: ::String
+      attr_accessor virtual_cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteManagedEndpointResponse
+      attr_accessor id: ::String
+      attr_accessor virtual_cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVirtualClusterRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVirtualClusterResponse
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJobRunRequest
+      attr_accessor id: ::String
+      attr_accessor virtual_cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJobRunResponse
+      attr_accessor job_run: Types::JobRun
+      SENSITIVE: []
+    end
+
+    class DescribeJobTemplateRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJobTemplateResponse
+      attr_accessor job_template: Types::JobTemplate
+      SENSITIVE: []
+    end
+
+    class DescribeManagedEndpointRequest
+      attr_accessor id: ::String
+      attr_accessor virtual_cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeManagedEndpointResponse
+      attr_accessor endpoint: Types::Endpoint
+      SENSITIVE: []
+    end
+
+    class DescribeVirtualClusterRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeVirtualClusterResponse
+      attr_accessor virtual_cluster: Types::VirtualCluster
+      SENSITIVE: []
+    end
+
+    class EksInfo
+      attr_accessor namespace: ::String
+      SENSITIVE: []
+    end
+
+    class Endpoint
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor virtual_cluster_id: ::String
+      attr_accessor type: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "TERMINATING" | "TERMINATED" | "TERMINATED_WITH_ERRORS")
+      attr_accessor release_label: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor certificate_arn: ::String
+      attr_accessor certificate_authority: Types::Certificate
+      attr_accessor configuration_overrides: Types::ConfigurationOverrides
+      attr_accessor server_url: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor security_group: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor state_details: ::String
+      attr_accessor failure_reason: ("INTERNAL_ERROR" | "USER_ERROR" | "VALIDATION_ERROR" | "CLUSTER_UNAVAILABLE")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetManagedEndpointSessionCredentialsRequest
+      attr_accessor endpoint_identifier: ::String
+      attr_accessor virtual_cluster_identifier: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor credential_type: ::String
+      attr_accessor duration_in_seconds: ::Integer
+      attr_accessor log_context: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetManagedEndpointSessionCredentialsResponse
+      attr_accessor id: ::String
+      attr_accessor credentials: Types::Credentials
+      attr_accessor expires_at: ::Time
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JobDriver
+      attr_accessor spark_submit_job_driver: Types::SparkSubmitJobDriver
+      attr_accessor spark_sql_job_driver: Types::SparkSqlJobDriver
+      SENSITIVE: []
+    end
+
+    class JobRun
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor virtual_cluster_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor state: ("PENDING" | "SUBMITTED" | "RUNNING" | "FAILED" | "CANCELLED" | "CANCEL_PENDING" | "COMPLETED")
+      attr_accessor client_token: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor release_label: ::String
+      attr_accessor configuration_overrides: Types::ConfigurationOverrides
+      attr_accessor job_driver: Types::JobDriver
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor finished_at: ::Time
+      attr_accessor state_details: ::String
+      attr_accessor failure_reason: ("INTERNAL_ERROR" | "USER_ERROR" | "VALIDATION_ERROR" | "CLUSTER_UNAVAILABLE")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor retry_policy_configuration: Types::RetryPolicyConfiguration
+      attr_accessor retry_policy_execution: Types::RetryPolicyExecution
+      SENSITIVE: []
+    end
+
+    class JobTemplate
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor job_template_data: Types::JobTemplateData
+      attr_accessor kms_key_arn: ::String
+      attr_accessor decryption_error: ::String
+      SENSITIVE: []
+    end
+
+    class JobTemplateData
+      attr_accessor execution_role_arn: ::String
+      attr_accessor release_label: ::String
+      attr_accessor configuration_overrides: Types::ParametricConfigurationOverrides
+      attr_accessor job_driver: Types::JobDriver
+      attr_accessor parameter_configuration: ::Hash[::String, Types::TemplateParameterConfiguration]
+      attr_accessor job_tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListJobRunsRequest
+      attr_accessor virtual_cluster_id: ::String
+      attr_accessor created_before: ::Time
+      attr_accessor created_after: ::Time
+      attr_accessor name: ::String
+      attr_accessor states: ::Array[("PENDING" | "SUBMITTED" | "RUNNING" | "FAILED" | "CANCELLED" | "CANCEL_PENDING" | "COMPLETED")]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobRunsResponse
+      attr_accessor job_runs: ::Array[Types::JobRun]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobTemplatesRequest
+      attr_accessor created_after: ::Time
+      attr_accessor created_before: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobTemplatesResponse
+      attr_accessor templates: ::Array[Types::JobTemplate]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedEndpointsRequest
+      attr_accessor virtual_cluster_id: ::String
+      attr_accessor created_before: ::Time
+      attr_accessor created_after: ::Time
+      attr_accessor types: ::Array[::String]
+      attr_accessor states: ::Array[("CREATING" | "ACTIVE" | "TERMINATING" | "TERMINATED" | "TERMINATED_WITH_ERRORS")]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedEndpointsResponse
+      attr_accessor endpoints: ::Array[Types::Endpoint]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListVirtualClustersRequest
+      attr_accessor container_provider_id: ::String
+      attr_accessor container_provider_type: ("EKS")
+      attr_accessor created_after: ::Time
+      attr_accessor created_before: ::Time
+      attr_accessor states: ::Array[("RUNNING" | "TERMINATING" | "TERMINATED" | "ARRESTED")]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVirtualClustersResponse
+      attr_accessor virtual_clusters: ::Array[Types::VirtualCluster]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MonitoringConfiguration
+      attr_accessor persistent_app_ui: ("ENABLED" | "DISABLED")
+      attr_accessor cloud_watch_monitoring_configuration: Types::CloudWatchMonitoringConfiguration
+      attr_accessor s3_monitoring_configuration: Types::S3MonitoringConfiguration
+      attr_accessor container_log_rotation_configuration: Types::ContainerLogRotationConfiguration
+      SENSITIVE: []
+    end
+
+    class ParametricCloudWatchMonitoringConfiguration
+      attr_accessor log_group_name: ::String
+      attr_accessor log_stream_name_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ParametricConfigurationOverrides
+      attr_accessor application_configuration: ::Array[Types::Configuration]
+      attr_accessor monitoring_configuration: Types::ParametricMonitoringConfiguration
+      SENSITIVE: []
+    end
+
+    class ParametricMonitoringConfiguration
+      attr_accessor persistent_app_ui: ::String
+      attr_accessor cloud_watch_monitoring_configuration: Types::ParametricCloudWatchMonitoringConfiguration
+      attr_accessor s3_monitoring_configuration: Types::ParametricS3MonitoringConfiguration
+      SENSITIVE: []
+    end
+
+    class ParametricS3MonitoringConfiguration
+      attr_accessor log_uri: ::String
+      SENSITIVE: []
+    end
+
+    class RequestThrottledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RetryPolicyConfiguration
+      attr_accessor max_attempts: ::Integer
+      SENSITIVE: []
+    end
+
+    class RetryPolicyExecution
+      attr_accessor current_attempt_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class S3MonitoringConfiguration
+      attr_accessor log_uri: ::String
+      SENSITIVE: []
+    end
+
+    class SparkSqlJobDriver
+      attr_accessor entry_point: ::String
+      attr_accessor spark_sql_parameters: ::String
+      SENSITIVE: [:entry_point, :spark_sql_parameters]
+    end
+
+    class SparkSubmitJobDriver
+      attr_accessor entry_point: ::String
+      attr_accessor entry_point_arguments: ::Array[::String]
+      attr_accessor spark_submit_parameters: ::String
+      SENSITIVE: [:entry_point, :spark_submit_parameters]
+    end
+
+    class StartJobRunRequest
+      attr_accessor name: ::String
+      attr_accessor virtual_cluster_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor release_label: ::String
+      attr_accessor job_driver: Types::JobDriver
+      attr_accessor configuration_overrides: Types::ConfigurationOverrides
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor job_template_id: ::String
+      attr_accessor job_template_parameters: ::Hash[::String, ::String]
+      attr_accessor retry_policy_configuration: Types::RetryPolicyConfiguration
+      SENSITIVE: []
+    end
+
+    class StartJobRunResponse
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor virtual_cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TemplateParameterConfiguration
+      attr_accessor type: ("NUMBER" | "STRING")
+      attr_accessor default_value: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VirtualCluster
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor state: ("RUNNING" | "TERMINATING" | "TERMINATED" | "ARRESTED")
+      attr_accessor container_provider: Types::ContainerProvider
+      attr_accessor created_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+  end
+end

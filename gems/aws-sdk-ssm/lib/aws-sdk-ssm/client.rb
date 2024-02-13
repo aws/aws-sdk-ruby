@@ -937,6 +937,24 @@ module Aws::SSM
     #
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html
     #
+    # @option params [Integer] :duration
+    #   The number of hours the association can run before it is canceled.
+    #   Duration applies to associations that are currently running, and any
+    #   pending and in progress commands on all targets. If a target was taken
+    #   offline for the association to run, it is made available again
+    #   immediately, without a reboot.
+    #
+    #   The `Duration` parameter applies only when both these conditions are
+    #   true:
+    #
+    #   * The association for which you specify a duration is cancelable
+    #     according to the parameters of the SSM command document or
+    #     Automation runbook associated with this execution.
+    #
+    #   * The command specifies the ` ApplyOnlyAtCronInterval ` parameter,
+    #     which means that the association doesn't run immediately after it
+    #     is created, but only according to the specified schedule.
+    #
     # @option params [Array<Hash>] :target_maps
     #   A key-value mapping of document parameters to target resources. Both
     #   Targets and TargetMaps can't be specified together.
@@ -1005,6 +1023,7 @@ module Aws::SSM
     #       },
     #     ],
     #     schedule_offset: 1,
+    #     duration: 1,
     #     target_maps: [
     #       {
     #         "TargetMapKey" => ["TargetMapValue"],
@@ -1077,6 +1096,7 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.association_description.schedule_offset #=> Integer
+    #   resp.association_description.duration #=> Integer
     #   resp.association_description.target_maps #=> Array
     #   resp.association_description.target_maps[0] #=> Hash
     #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
@@ -1168,6 +1188,7 @@ module Aws::SSM
     #           },
     #         ],
     #         schedule_offset: 1,
+    #         duration: 1,
     #         target_maps: [
     #           {
     #             "TargetMapKey" => ["TargetMapValue"],
@@ -1237,6 +1258,7 @@ module Aws::SSM
     #   resp.successful[0].target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.successful[0].target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.successful[0].schedule_offset #=> Integer
+    #   resp.successful[0].duration #=> Integer
     #   resp.successful[0].target_maps #=> Array
     #   resp.successful[0].target_maps[0] #=> Hash
     #   resp.successful[0].target_maps[0]["TargetMapKey"] #=> Array
@@ -1283,6 +1305,7 @@ module Aws::SSM
     #   resp.failed[0].entry.target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.failed[0].entry.target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.failed[0].entry.schedule_offset #=> Integer
+    #   resp.failed[0].entry.duration #=> Integer
     #   resp.failed[0].entry.target_maps #=> Array
     #   resp.failed[0].entry.target_maps[0] #=> Hash
     #   resp.failed[0].entry.target_maps[0]["TargetMapKey"] #=> Array
@@ -2905,6 +2928,7 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.association_description.schedule_offset #=> Integer
+    #   resp.association_description.duration #=> Integer
     #   resp.association_description.target_maps #=> Array
     #   resp.association_description.target_maps[0] #=> Hash
     #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
@@ -3309,6 +3333,11 @@ module Aws::SSM
 
     # Lists all patches eligible to be included in a patch baseline.
     #
+    # <note markdown="1"> Currently, `DescribeAvailablePatches` supports only the Amazon Linux
+    # 1, Amazon Linux 2, and Windows Server operating systems.
+    #
+    #  </note>
+    #
     # @option params [Array<Types::PatchOrchestratorFilter>] :filters
     #   Each element in the array is a structure containing a key-value pair.
     #
@@ -3482,8 +3511,8 @@ module Aws::SSM
     #
     # @option params [String] :version_name
     #   An optional field specifying the version of the artifact associated
-    #   with the document. For example, "Release 12, Update 6". This value
-    #   is unique across all versions of a document, and can't be changed.
+    #   with the document. For example, 12.6. This value is unique across all
+    #   versions of a document, and can't be changed.
     #
     # @return [Types::DescribeDocumentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5851,8 +5880,8 @@ module Aws::SSM
     #
     # @option params [String] :version_name
     #   An optional field specifying the version of the artifact associated
-    #   with the document. For example, "Release 12, Update 6". This value
-    #   is unique across all versions of a document and can't be changed.
+    #   with the document. For example, 12.6. This value is unique across all
+    #   versions of a document and can't be changed.
     #
     # @option params [String] :document_version
     #   The document version for which you want information.
@@ -7273,6 +7302,7 @@ module Aws::SSM
     #   resp.association_versions[0].target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.association_versions[0].target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.association_versions[0].schedule_offset #=> Integer
+    #   resp.association_versions[0].duration #=> Integer
     #   resp.association_versions[0].target_maps #=> Array
     #   resp.association_versions[0].target_maps[0] #=> Hash
     #   resp.association_versions[0].target_maps[0]["TargetMapKey"] #=> Array
@@ -7354,6 +7384,7 @@ module Aws::SSM
     #   resp.associations[0].schedule_expression #=> String
     #   resp.associations[0].association_name #=> String
     #   resp.associations[0].schedule_offset #=> Integer
+    #   resp.associations[0].duration #=> Integer
     #   resp.associations[0].target_maps #=> Array
     #   resp.associations[0].target_maps[0] #=> Hash
     #   resp.associations[0].target_maps[0]["TargetMapKey"] #=> Array
@@ -10597,6 +10628,24 @@ module Aws::SSM
     #
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html
     #
+    # @option params [Integer] :duration
+    #   The number of hours the association can run before it is canceled.
+    #   Duration applies to associations that are currently running, and any
+    #   pending and in progress commands on all targets. If a target was taken
+    #   offline for the association to run, it is made available again
+    #   immediately, without a reboot.
+    #
+    #   The `Duration` parameter applies only when both these conditions are
+    #   true:
+    #
+    #   * The association for which you specify a duration is cancelable
+    #     according to the parameters of the SSM command document or
+    #     Automation runbook associated with this execution.
+    #
+    #   * The command specifies the ` ApplyOnlyAtCronInterval ` parameter,
+    #     which means that the association doesn't run immediately after it
+    #     is updated, but only according to the specified schedule.
+    #
     # @option params [Array<Hash>] :target_maps
     #   A key-value mapping of document parameters to target resources. Both
     #   Targets and TargetMaps can't be specified together.
@@ -10659,6 +10708,7 @@ module Aws::SSM
     #       },
     #     ],
     #     schedule_offset: 1,
+    #     duration: 1,
     #     target_maps: [
     #       {
     #         "TargetMapKey" => ["TargetMapValue"],
@@ -10725,6 +10775,7 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.association_description.schedule_offset #=> Integer
+    #   resp.association_description.duration #=> Integer
     #   resp.association_description.target_maps #=> Array
     #   resp.association_description.target_maps[0] #=> Hash
     #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
@@ -10830,6 +10881,7 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.association_description.schedule_offset #=> Integer
+    #   resp.association_description.duration #=> Integer
     #   resp.association_description.target_maps #=> Array
     #   resp.association_description.target_maps[0] #=> Hash
     #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
@@ -10870,9 +10922,8 @@ module Aws::SSM
     #
     # @option params [String] :version_name
     #   An optional field specifying the version of the artifact you are
-    #   updating with the document. For example, "Release 12, Update 6".
-    #   This value is unique across all versions of a document, and can't be
-    #   changed.
+    #   updating with the document. For example, 12.6. This value is unique
+    #   across all versions of a document, and can't be changed.
     #
     # @option params [String] :document_version
     #   The version of the document that you want to update. Currently,
@@ -12257,7 +12308,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.162.0'
+      context[:gem_version] = '1.164.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

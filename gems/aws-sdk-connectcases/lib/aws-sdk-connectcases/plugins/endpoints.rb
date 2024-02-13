@@ -14,6 +14,7 @@ module Aws::ConnectCases
       option(
         :endpoint_provider,
         doc_type: 'Aws::ConnectCases::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -77,6 +78,8 @@ module Aws::ConnectCases
             Aws::ConnectCases::Endpoints::DeleteDomain.build(context)
           when :get_case
             Aws::ConnectCases::Endpoints::GetCase.build(context)
+          when :get_case_audit_events
+            Aws::ConnectCases::Endpoints::GetCaseAuditEvents.build(context)
           when :get_case_event_configuration
             Aws::ConnectCases::Endpoints::GetCaseEventConfiguration.build(context)
           when :get_domain

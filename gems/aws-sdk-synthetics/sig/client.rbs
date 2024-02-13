@@ -1,0 +1,377 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Synthetics
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#associate_resource-instance_method
+      def associate_resource: (
+                                group_identifier: ::String,
+                                resource_arn: ::String
+                              ) -> _AssociateResourceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateResourceResponseSuccess
+
+      interface _CreateCanaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCanaryResponse]
+        def canary: () -> Types::Canary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#create_canary-instance_method
+      def create_canary: (
+                           name: ::String,
+                           code: {
+                             s3_bucket: ::String?,
+                             s3_key: ::String?,
+                             s3_version: ::String?,
+                             zip_file: ::String?,
+                             handler: ::String
+                           },
+                           artifact_s3_location: ::String,
+                           execution_role_arn: ::String,
+                           schedule: {
+                             expression: ::String,
+                             duration_in_seconds: ::Integer?
+                           },
+                           ?run_config: {
+                             timeout_in_seconds: ::Integer?,
+                             memory_in_mb: ::Integer?,
+                             active_tracing: bool?,
+                             environment_variables: Hash[::String, ::String]?
+                           },
+                           ?success_retention_period_in_days: ::Integer,
+                           ?failure_retention_period_in_days: ::Integer,
+                           runtime_version: ::String,
+                           ?vpc_config: {
+                             subnet_ids: Array[::String]?,
+                             security_group_ids: Array[::String]?
+                           },
+                           ?tags: Hash[::String, ::String],
+                           ?artifact_config: {
+                             s3_encryption: {
+                               encryption_mode: ("SSE_S3" | "SSE_KMS")?,
+                               kms_key_arn: ::String?
+                             }?
+                           }
+                         ) -> _CreateCanaryResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCanaryResponseSuccess
+
+      interface _CreateGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGroupResponse]
+        def group: () -> Types::Group
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#create_group-instance_method
+      def create_group: (
+                          name: ::String,
+                          ?tags: Hash[::String, ::String]
+                        ) -> _CreateGroupResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGroupResponseSuccess
+
+      interface _DeleteCanaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCanaryResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#delete_canary-instance_method
+      def delete_canary: (
+                           name: ::String,
+                           ?delete_lambda: bool
+                         ) -> _DeleteCanaryResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCanaryResponseSuccess
+
+      interface _DeleteGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#delete_group-instance_method
+      def delete_group: (
+                          group_identifier: ::String
+                        ) -> _DeleteGroupResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGroupResponseSuccess
+
+      interface _DescribeCanariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCanariesResponse]
+        def canaries: () -> ::Array[Types::Canary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#describe_canaries-instance_method
+      def describe_canaries: (
+                               ?next_token: ::String,
+                               ?max_results: ::Integer,
+                               ?names: Array[::String]
+                             ) -> _DescribeCanariesResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCanariesResponseSuccess
+
+      interface _DescribeCanariesLastRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCanariesLastRunResponse]
+        def canaries_last_run: () -> ::Array[Types::CanaryLastRun]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#describe_canaries_last_run-instance_method
+      def describe_canaries_last_run: (
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer,
+                                        ?names: Array[::String]
+                                      ) -> _DescribeCanariesLastRunResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCanariesLastRunResponseSuccess
+
+      interface _DescribeRuntimeVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRuntimeVersionsResponse]
+        def runtime_versions: () -> ::Array[Types::RuntimeVersion]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#describe_runtime_versions-instance_method
+      def describe_runtime_versions: (
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _DescribeRuntimeVersionsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRuntimeVersionsResponseSuccess
+
+      interface _DisassociateResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#disassociate_resource-instance_method
+      def disassociate_resource: (
+                                   group_identifier: ::String,
+                                   resource_arn: ::String
+                                 ) -> _DisassociateResourceResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateResourceResponseSuccess
+
+      interface _GetCanaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCanaryResponse]
+        def canary: () -> Types::Canary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#get_canary-instance_method
+      def get_canary: (
+                        name: ::String
+                      ) -> _GetCanaryResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCanaryResponseSuccess
+
+      interface _GetCanaryRunsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCanaryRunsResponse]
+        def canary_runs: () -> ::Array[Types::CanaryRun]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#get_canary_runs-instance_method
+      def get_canary_runs: (
+                             name: ::String,
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _GetCanaryRunsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCanaryRunsResponseSuccess
+
+      interface _GetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGroupResponse]
+        def group: () -> Types::Group
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#get_group-instance_method
+      def get_group: (
+                       group_identifier: ::String
+                     ) -> _GetGroupResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGroupResponseSuccess
+
+      interface _ListAssociatedGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssociatedGroupsResponse]
+        def groups: () -> ::Array[Types::GroupSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#list_associated_groups-instance_method
+      def list_associated_groups: (
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer,
+                                    resource_arn: ::String
+                                  ) -> _ListAssociatedGroupsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssociatedGroupsResponseSuccess
+
+      interface _ListGroupResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGroupResourcesResponse]
+        def resources: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#list_group_resources-instance_method
+      def list_group_resources: (
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer,
+                                  group_identifier: ::String
+                                ) -> _ListGroupResourcesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupResourcesResponseSuccess
+
+      interface _ListGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGroupsResponse]
+        def groups: () -> ::Array[Types::GroupSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#list_groups-instance_method
+      def list_groups: (
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
+                       ) -> _ListGroupsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartCanaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartCanaryResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#start_canary-instance_method
+      def start_canary: (
+                          name: ::String
+                        ) -> _StartCanaryResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCanaryResponseSuccess
+
+      interface _StopCanaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopCanaryResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#stop_canary-instance_method
+      def stop_canary: (
+                         name: ::String
+                       ) -> _StopCanaryResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopCanaryResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateCanaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCanaryResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#update_canary-instance_method
+      def update_canary: (
+                           name: ::String,
+                           ?code: {
+                             s3_bucket: ::String?,
+                             s3_key: ::String?,
+                             s3_version: ::String?,
+                             zip_file: ::String?,
+                             handler: ::String
+                           },
+                           ?execution_role_arn: ::String,
+                           ?runtime_version: ::String,
+                           ?schedule: {
+                             expression: ::String,
+                             duration_in_seconds: ::Integer?
+                           },
+                           ?run_config: {
+                             timeout_in_seconds: ::Integer?,
+                             memory_in_mb: ::Integer?,
+                             active_tracing: bool?,
+                             environment_variables: Hash[::String, ::String]?
+                           },
+                           ?success_retention_period_in_days: ::Integer,
+                           ?failure_retention_period_in_days: ::Integer,
+                           ?vpc_config: {
+                             subnet_ids: Array[::String]?,
+                             security_group_ids: Array[::String]?
+                           },
+                           ?visual_reference: {
+                             base_screenshots: Array[
+                               {
+                                 screenshot_name: ::String,
+                                 ignore_coordinates: Array[::String]?
+                               },
+                             ]?,
+                             base_canary_run_id: ::String
+                           },
+                           ?artifact_s3_location: ::String,
+                           ?artifact_config: {
+                             s3_encryption: {
+                               encryption_mode: ("SSE_S3" | "SSE_KMS")?,
+                               kms_key_arn: ::String?
+                             }?
+                           }
+                         ) -> _UpdateCanaryResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCanaryResponseSuccess
+    end
+  end
+end
+

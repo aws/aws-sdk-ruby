@@ -1368,6 +1368,11 @@ module Aws::Lightsail
     #   This parameter only applies to Lightsail for Research resources.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] public_ipv_4_address_count
+    #   An integer that indicates the public ipv4 address count included in
+    #   the bundle, the value is either 0 or 1.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Bundle AWS API Documentation
     #
     class Bundle < Struct.new(
@@ -1382,7 +1387,8 @@ module Aws::Lightsail
       :ram_size_in_gb,
       :transfer_per_month_in_gb,
       :supported_platforms,
-      :supported_app_categories)
+      :supported_app_categories,
+      :public_ipv_4_address_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9957,6 +9963,10 @@ module Aws::Lightsail
     #   The public IP address of the Amazon Lightsail instance.
     #   @return [String]
     #
+    # @!attribute [rw] ipv6_addresses
+    #   The IPv6 address of the Amazon Lightsail instance.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] password
     #   For RDP access, the password for your Amazon Lightsail instance.
     #   Password will be an empty string if the password for your new
@@ -10011,6 +10021,7 @@ module Aws::Lightsail
       :cert_key,
       :expires_at,
       :ip_address,
+      :ipv6_addresses,
       :password,
       :password_data,
       :private_key,
@@ -14918,6 +14929,19 @@ module Aws::Lightsail
     #   database.
     #   @return [String]
     #
+    # @!attribute [rw] relational_database_blueprint_id
+    #   This parameter is used to update the major version of the database.
+    #   Enter the `blueprintId` for the major version that you want to
+    #   update to.
+    #
+    #   Use the [GetRelationalDatabaseBlueprints][1] action to get a list of
+    #   available blueprint IDs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRelationalDatabaseBlueprints.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateRelationalDatabaseRequest AWS API Documentation
     #
     class UpdateRelationalDatabaseRequest < Struct.new(
@@ -14930,7 +14954,8 @@ module Aws::Lightsail
       :disable_backup_retention,
       :publicly_accessible,
       :apply_immediately,
-      :ca_certificate_identifier)
+      :ca_certificate_identifier,
+      :relational_database_blueprint_id)
       SENSITIVE = [:master_user_password]
       include Aws::Structure
     end

@@ -1,0 +1,647 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Panorama
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateApplicationInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApplicationInstanceResponse]
+        def application_instance_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#create_application_instance-instance_method
+      def create_application_instance: (
+                                         ?application_instance_id_to_replace: ::String,
+                                         default_runtime_context_device: ::String,
+                                         ?description: ::String,
+                                         ?manifest_overrides_payload: {
+                                           payload_data: ::String?
+                                         },
+                                         manifest_payload: {
+                                           payload_data: ::String?
+                                         },
+                                         ?name: ::String,
+                                         ?runtime_role_arn: ::String,
+                                         ?tags: Hash[::String, ::String]
+                                       ) -> _CreateApplicationInstanceResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationInstanceResponseSuccess
+
+      interface _CreateJobForDevicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateJobForDevicesResponse]
+        def jobs: () -> ::Array[Types::Job]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#create_job_for_devices-instance_method
+      def create_job_for_devices: (
+                                    device_ids: Array[::String],
+                                    ?device_job_config: {
+                                      ota_job_config: {
+                                        allow_major_version_update: bool?,
+                                        image_version: ::String
+                                      }?
+                                    },
+                                    job_type: ("OTA" | "REBOOT")
+                                  ) -> _CreateJobForDevicesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateJobForDevicesResponseSuccess
+
+      interface _CreateNodeFromTemplateJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNodeFromTemplateJobResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#create_node_from_template_job-instance_method
+      def create_node_from_template_job: (
+                                           ?job_tags: Array[
+                                             {
+                                               resource_type: ("PACKAGE"),
+                                               tags: Hash[::String, ::String]
+                                             },
+                                           ],
+                                           ?node_description: ::String,
+                                           node_name: ::String,
+                                           output_package_name: ::String,
+                                           output_package_version: ::String,
+                                           template_parameters: Hash[::String, ::String],
+                                           template_type: ("RTSP_CAMERA_STREAM")
+                                         ) -> _CreateNodeFromTemplateJobResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNodeFromTemplateJobResponseSuccess
+
+      interface _CreatePackageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePackageResponse]
+        def arn: () -> ::String
+        def package_id: () -> ::String
+        def storage_location: () -> Types::StorageLocation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#create_package-instance_method
+      def create_package: (
+                            package_name: ::String,
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreatePackageResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePackageResponseSuccess
+
+      interface _CreatePackageImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePackageImportJobResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#create_package_import_job-instance_method
+      def create_package_import_job: (
+                                       client_token: ::String,
+                                       input_config: {
+                                         package_version_input_config: {
+                                           s3_location: {
+                                             bucket_name: ::String,
+                                             object_key: ::String,
+                                             region: ::String?
+                                           }
+                                         }?
+                                       },
+                                       ?job_tags: Array[
+                                         {
+                                           resource_type: ("PACKAGE"),
+                                           tags: Hash[::String, ::String]
+                                         },
+                                       ],
+                                       job_type: ("NODE_PACKAGE_VERSION" | "MARKETPLACE_NODE_PACKAGE_VERSION"),
+                                       output_config: {
+                                         package_version_output_config: {
+                                           mark_latest: bool?,
+                                           package_name: ::String,
+                                           package_version: ::String
+                                         }?
+                                       }
+                                     ) -> _CreatePackageImportJobResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePackageImportJobResponseSuccess
+
+      interface _DeleteDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDeviceResponse]
+        def device_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#delete_device-instance_method
+      def delete_device: (
+                           device_id: ::String
+                         ) -> _DeleteDeviceResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDeviceResponseSuccess
+
+      interface _DeletePackageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePackageResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#delete_package-instance_method
+      def delete_package: (
+                            ?force_delete: bool,
+                            package_id: ::String
+                          ) -> _DeletePackageResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePackageResponseSuccess
+
+      interface _DeregisterPackageVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterPackageVersionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#deregister_package_version-instance_method
+      def deregister_package_version: (
+                                        ?owner_account: ::String,
+                                        package_id: ::String,
+                                        package_version: ::String,
+                                        patch_version: ::String,
+                                        ?updated_latest_patch_version: ::String
+                                      ) -> _DeregisterPackageVersionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterPackageVersionResponseSuccess
+
+      interface _DescribeApplicationInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeApplicationInstanceResponse]
+        def application_instance_id: () -> ::String
+        def application_instance_id_to_replace: () -> ::String
+        def arn: () -> ::String
+        def created_time: () -> ::Time
+        def default_runtime_context_device: () -> ::String
+        def default_runtime_context_device_name: () -> ::String
+        def description: () -> ::String
+        def health_status: () -> ("RUNNING" | "ERROR" | "NOT_AVAILABLE")
+        def last_updated_time: () -> ::Time
+        def name: () -> ::String
+        def runtime_context_states: () -> ::Array[Types::ReportedRuntimeContextState]
+        def runtime_role_arn: () -> ::String
+        def status: () -> ("DEPLOYMENT_PENDING" | "DEPLOYMENT_REQUESTED" | "DEPLOYMENT_IN_PROGRESS" | "DEPLOYMENT_ERROR" | "DEPLOYMENT_SUCCEEDED" | "REMOVAL_PENDING" | "REMOVAL_REQUESTED" | "REMOVAL_IN_PROGRESS" | "REMOVAL_FAILED" | "REMOVAL_SUCCEEDED" | "DEPLOYMENT_FAILED")
+        def status_description: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#describe_application_instance-instance_method
+      def describe_application_instance: (
+                                           application_instance_id: ::String
+                                         ) -> _DescribeApplicationInstanceResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeApplicationInstanceResponseSuccess
+
+      interface _DescribeApplicationInstanceDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeApplicationInstanceDetailsResponse]
+        def application_instance_id: () -> ::String
+        def application_instance_id_to_replace: () -> ::String
+        def created_time: () -> ::Time
+        def default_runtime_context_device: () -> ::String
+        def description: () -> ::String
+        def manifest_overrides_payload: () -> Types::ManifestOverridesPayload
+        def manifest_payload: () -> Types::ManifestPayload
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#describe_application_instance_details-instance_method
+      def describe_application_instance_details: (
+                                                   application_instance_id: ::String
+                                                 ) -> _DescribeApplicationInstanceDetailsResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeApplicationInstanceDetailsResponseSuccess
+
+      interface _DescribeDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDeviceResponse]
+        def alternate_softwares: () -> ::Array[Types::AlternateSoftwareMetadata]
+        def arn: () -> ::String
+        def brand: () -> ("AWS_PANORAMA" | "LENOVO")
+        def created_time: () -> ::Time
+        def current_networking_status: () -> Types::NetworkStatus
+        def current_software: () -> ::String
+        def description: () -> ::String
+        def device_aggregated_status: () -> ("ERROR" | "AWAITING_PROVISIONING" | "PENDING" | "FAILED" | "DELETING" | "ONLINE" | "OFFLINE" | "LEASE_EXPIRED" | "UPDATE_NEEDED" | "REBOOTING")
+        def device_connection_status: () -> ("ONLINE" | "OFFLINE" | "AWAITING_CREDENTIALS" | "NOT_AVAILABLE" | "ERROR")
+        def device_id: () -> ::String
+        def latest_alternate_software: () -> ::String
+        def latest_device_job: () -> Types::LatestDeviceJob
+        def latest_software: () -> ::String
+        def lease_expiration_time: () -> ::Time
+        def name: () -> ::String
+        def networking_configuration: () -> Types::NetworkPayload
+        def provisioning_status: () -> ("AWAITING_PROVISIONING" | "PENDING" | "SUCCEEDED" | "FAILED" | "ERROR" | "DELETING")
+        def serial_number: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def type: () -> ("PANORAMA_APPLIANCE_DEVELOPER_KIT" | "PANORAMA_APPLIANCE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#describe_device-instance_method
+      def describe_device: (
+                             device_id: ::String
+                           ) -> _DescribeDeviceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDeviceResponseSuccess
+
+      interface _DescribeDeviceJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDeviceJobResponse]
+        def created_time: () -> ::Time
+        def device_arn: () -> ::String
+        def device_id: () -> ::String
+        def device_name: () -> ::String
+        def device_type: () -> ("PANORAMA_APPLIANCE_DEVELOPER_KIT" | "PANORAMA_APPLIANCE")
+        def image_version: () -> ::String
+        def job_id: () -> ::String
+        def job_type: () -> ("OTA" | "REBOOT")
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "VERIFYING" | "REBOOTING" | "DOWNLOADING" | "COMPLETED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#describe_device_job-instance_method
+      def describe_device_job: (
+                                 job_id: ::String
+                               ) -> _DescribeDeviceJobResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDeviceJobResponseSuccess
+
+      interface _DescribeNodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeNodeResponse]
+        def asset_name: () -> ::String
+        def category: () -> ("BUSINESS_LOGIC" | "ML_MODEL" | "MEDIA_SOURCE" | "MEDIA_SINK")
+        def created_time: () -> ::Time
+        def description: () -> ::String
+        def last_updated_time: () -> ::Time
+        def name: () -> ::String
+        def node_id: () -> ::String
+        def node_interface: () -> Types::NodeInterface
+        def owner_account: () -> ::String
+        def package_arn: () -> ::String
+        def package_id: () -> ::String
+        def package_name: () -> ::String
+        def package_version: () -> ::String
+        def patch_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#describe_node-instance_method
+      def describe_node: (
+                           node_id: ::String,
+                           ?owner_account: ::String
+                         ) -> _DescribeNodeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeNodeResponseSuccess
+
+      interface _DescribeNodeFromTemplateJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeNodeFromTemplateJobResponse]
+        def created_time: () -> ::Time
+        def job_id: () -> ::String
+        def job_tags: () -> ::Array[Types::JobResourceTags]
+        def last_updated_time: () -> ::Time
+        def node_description: () -> ::String
+        def node_name: () -> ::String
+        def output_package_name: () -> ::String
+        def output_package_version: () -> ::String
+        def status: () -> ("PENDING" | "SUCCEEDED" | "FAILED")
+        def status_message: () -> ::String
+        def template_parameters: () -> ::Hash[::String, ::String]
+        def template_type: () -> ("RTSP_CAMERA_STREAM")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#describe_node_from_template_job-instance_method
+      def describe_node_from_template_job: (
+                                             job_id: ::String
+                                           ) -> _DescribeNodeFromTemplateJobResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeNodeFromTemplateJobResponseSuccess
+
+      interface _DescribePackageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePackageResponse]
+        def arn: () -> ::String
+        def created_time: () -> ::Time
+        def package_id: () -> ::String
+        def package_name: () -> ::String
+        def read_access_principal_arns: () -> ::Array[::String]
+        def storage_location: () -> Types::StorageLocation
+        def tags: () -> ::Hash[::String, ::String]
+        def write_access_principal_arns: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#describe_package-instance_method
+      def describe_package: (
+                              package_id: ::String
+                            ) -> _DescribePackageResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePackageResponseSuccess
+
+      interface _DescribePackageImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePackageImportJobResponse]
+        def client_token: () -> ::String
+        def created_time: () -> ::Time
+        def input_config: () -> Types::PackageImportJobInputConfig
+        def job_id: () -> ::String
+        def job_tags: () -> ::Array[Types::JobResourceTags]
+        def job_type: () -> ("NODE_PACKAGE_VERSION" | "MARKETPLACE_NODE_PACKAGE_VERSION")
+        def last_updated_time: () -> ::Time
+        def output: () -> Types::PackageImportJobOutput
+        def output_config: () -> Types::PackageImportJobOutputConfig
+        def status: () -> ("PENDING" | "SUCCEEDED" | "FAILED")
+        def status_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#describe_package_import_job-instance_method
+      def describe_package_import_job: (
+                                         job_id: ::String
+                                       ) -> _DescribePackageImportJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePackageImportJobResponseSuccess
+
+      interface _DescribePackageVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePackageVersionResponse]
+        def is_latest_patch: () -> bool
+        def owner_account: () -> ::String
+        def package_arn: () -> ::String
+        def package_id: () -> ::String
+        def package_name: () -> ::String
+        def package_version: () -> ::String
+        def patch_version: () -> ::String
+        def registered_time: () -> ::Time
+        def status: () -> ("REGISTER_PENDING" | "REGISTER_COMPLETED" | "FAILED" | "DELETING")
+        def status_description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#describe_package_version-instance_method
+      def describe_package_version: (
+                                      ?owner_account: ::String,
+                                      package_id: ::String,
+                                      package_version: ::String,
+                                      ?patch_version: ::String
+                                    ) -> _DescribePackageVersionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePackageVersionResponseSuccess
+
+      interface _ListApplicationInstanceDependenciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationInstanceDependenciesResponse]
+        def next_token: () -> ::String
+        def package_objects: () -> ::Array[Types::PackageObject]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#list_application_instance_dependencies-instance_method
+      def list_application_instance_dependencies: (
+                                                    application_instance_id: ::String,
+                                                    ?max_results: ::Integer,
+                                                    ?next_token: ::String
+                                                  ) -> _ListApplicationInstanceDependenciesResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationInstanceDependenciesResponseSuccess
+
+      interface _ListApplicationInstanceNodeInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationInstanceNodeInstancesResponse]
+        def next_token: () -> ::String
+        def node_instances: () -> ::Array[Types::NodeInstance]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#list_application_instance_node_instances-instance_method
+      def list_application_instance_node_instances: (
+                                                      application_instance_id: ::String,
+                                                      ?max_results: ::Integer,
+                                                      ?next_token: ::String
+                                                    ) -> _ListApplicationInstanceNodeInstancesResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationInstanceNodeInstancesResponseSuccess
+
+      interface _ListApplicationInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationInstancesResponse]
+        def application_instances: () -> ::Array[Types::ApplicationInstance]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#list_application_instances-instance_method
+      def list_application_instances: (
+                                        ?device_id: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String,
+                                        ?status_filter: ("DEPLOYMENT_SUCCEEDED" | "DEPLOYMENT_ERROR" | "REMOVAL_SUCCEEDED" | "REMOVAL_FAILED" | "PROCESSING_DEPLOYMENT" | "PROCESSING_REMOVAL" | "DEPLOYMENT_FAILED")
+                                      ) -> _ListApplicationInstancesResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationInstancesResponseSuccess
+
+      interface _ListDevicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDevicesResponse]
+        def devices: () -> ::Array[Types::Device]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#list_devices-instance_method
+      def list_devices: (
+                          ?device_aggregated_status_filter: ("ERROR" | "AWAITING_PROVISIONING" | "PENDING" | "FAILED" | "DELETING" | "ONLINE" | "OFFLINE" | "LEASE_EXPIRED" | "UPDATE_NEEDED" | "REBOOTING"),
+                          ?max_results: ::Integer,
+                          ?name_filter: ::String,
+                          ?next_token: ::String,
+                          ?sort_by: ("DEVICE_ID" | "CREATED_TIME" | "NAME" | "DEVICE_AGGREGATED_STATUS"),
+                          ?sort_order: ("ASCENDING" | "DESCENDING")
+                        ) -> _ListDevicesResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDevicesResponseSuccess
+
+      interface _ListDevicesJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDevicesJobsResponse]
+        def device_jobs: () -> ::Array[Types::DeviceJob]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#list_devices_jobs-instance_method
+      def list_devices_jobs: (
+                               ?device_id: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListDevicesJobsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDevicesJobsResponseSuccess
+
+      interface _ListNodeFromTemplateJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNodeFromTemplateJobsResponse]
+        def next_token: () -> ::String
+        def node_from_template_jobs: () -> ::Array[Types::NodeFromTemplateJob]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#list_node_from_template_jobs-instance_method
+      def list_node_from_template_jobs: (
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListNodeFromTemplateJobsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNodeFromTemplateJobsResponseSuccess
+
+      interface _ListNodesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNodesResponse]
+        def next_token: () -> ::String
+        def nodes: () -> ::Array[Types::Node]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#list_nodes-instance_method
+      def list_nodes: (
+                        ?category: ("BUSINESS_LOGIC" | "ML_MODEL" | "MEDIA_SOURCE" | "MEDIA_SINK"),
+                        ?max_results: ::Integer,
+                        ?next_token: ::String,
+                        ?owner_account: ::String,
+                        ?package_name: ::String,
+                        ?package_version: ::String,
+                        ?patch_version: ::String
+                      ) -> _ListNodesResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNodesResponseSuccess
+
+      interface _ListPackageImportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPackageImportJobsResponse]
+        def next_token: () -> ::String
+        def package_import_jobs: () -> ::Array[Types::PackageImportJob]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#list_package_import_jobs-instance_method
+      def list_package_import_jobs: (
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListPackageImportJobsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPackageImportJobsResponseSuccess
+
+      interface _ListPackagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPackagesResponse]
+        def next_token: () -> ::String
+        def packages: () -> ::Array[Types::PackageListItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#list_packages-instance_method
+      def list_packages: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListPackagesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPackagesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ProvisionDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ProvisionDeviceResponse]
+        def arn: () -> ::String
+        def certificates: () -> ::String
+        def device_id: () -> ::String
+        def iot_thing_name: () -> ::String
+        def status: () -> ("AWAITING_PROVISIONING" | "PENDING" | "SUCCEEDED" | "FAILED" | "ERROR" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#provision_device-instance_method
+      def provision_device: (
+                              ?description: ::String,
+                              name: ::String,
+                              ?networking_configuration: {
+                                ethernet_0: {
+                                  connection_type: ("STATIC_IP" | "DHCP"),
+                                  static_ip_connection_info: {
+                                    default_gateway: ::String,
+                                    dns: Array[::String],
+                                    ip_address: ::String,
+                                    mask: ::String
+                                  }?
+                                }?,
+                                ethernet_1: {
+                                  connection_type: ("STATIC_IP" | "DHCP"),
+                                  static_ip_connection_info: {
+                                    default_gateway: ::String,
+                                    dns: Array[::String],
+                                    ip_address: ::String,
+                                    mask: ::String
+                                  }?
+                                }?,
+                                ntp: {
+                                  ntp_servers: Array[::String]
+                                }?
+                              },
+                              ?tags: Hash[::String, ::String]
+                            ) -> _ProvisionDeviceResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ProvisionDeviceResponseSuccess
+
+      interface _RegisterPackageVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterPackageVersionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#register_package_version-instance_method
+      def register_package_version: (
+                                      ?mark_latest: bool,
+                                      ?owner_account: ::String,
+                                      package_id: ::String,
+                                      package_version: ::String,
+                                      patch_version: ::String
+                                    ) -> _RegisterPackageVersionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterPackageVersionResponseSuccess
+
+      interface _RemoveApplicationInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveApplicationInstanceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#remove_application_instance-instance_method
+      def remove_application_instance: (
+                                         application_instance_id: ::String
+                                       ) -> _RemoveApplicationInstanceResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveApplicationInstanceResponseSuccess
+
+      interface _SignalApplicationInstanceNodeInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SignalApplicationInstanceNodeInstancesResponse]
+        def application_instance_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#signal_application_instance_node_instances-instance_method
+      def signal_application_instance_node_instances: (
+                                                        application_instance_id: ::String,
+                                                        node_signals: Array[
+                                                          {
+                                                            node_instance_id: ::String,
+                                                            signal: ("PAUSE" | "RESUME")
+                                                          },
+                                                        ]
+                                                      ) -> _SignalApplicationInstanceNodeInstancesResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SignalApplicationInstanceNodeInstancesResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateDeviceMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDeviceMetadataResponse]
+        def device_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Panorama/Client.html#update_device_metadata-instance_method
+      def update_device_metadata: (
+                                    ?description: ::String,
+                                    device_id: ::String
+                                  ) -> _UpdateDeviceMetadataResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDeviceMetadataResponseSuccess
+    end
+  end
+end
+

@@ -508,5 +508,18 @@ module Aws::Pricing
       include Aws::Structure
     end
 
+    # You've made too many requests exceeding service quotas.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
   end
 end

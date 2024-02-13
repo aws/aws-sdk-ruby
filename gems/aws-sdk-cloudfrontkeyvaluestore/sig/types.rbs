@@ -1,0 +1,146 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CloudFrontKeyValueStore
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKeyRequest
+      attr_accessor kvs_arn: ::String
+      attr_accessor key: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKeyRequestListItem
+      attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKeyResponse
+      attr_accessor item_count: ::Integer
+      attr_accessor total_size_in_bytes: ::Integer
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeKeyValueStoreRequest
+      attr_accessor kvs_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeKeyValueStoreResponse
+      attr_accessor item_count: ::Integer
+      attr_accessor total_size_in_bytes: ::Integer
+      attr_accessor kvs_arn: ::String
+      attr_accessor created: ::Time
+      attr_accessor etag: ::String
+      attr_accessor last_modified: ::Time
+      attr_accessor status: ::String
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class GetKeyRequest
+      attr_accessor kvs_arn: ::String
+      attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class GetKeyResponse
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor item_count: ::Integer
+      attr_accessor total_size_in_bytes: ::Integer
+      SENSITIVE: [:value]
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListKeysRequest
+      attr_accessor kvs_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListKeysResponse
+      attr_accessor next_token: ::String
+      attr_accessor items: ::Array[Types::ListKeysResponseListItem]
+      SENSITIVE: []
+    end
+
+    class ListKeysResponseListItem
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: [:value]
+    end
+
+    class PutKeyRequest
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor kvs_arn: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: [:value]
+    end
+
+    class PutKeyRequestListItem
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: [:value]
+    end
+
+    class PutKeyResponse
+      attr_accessor item_count: ::Integer
+      attr_accessor total_size_in_bytes: ::Integer
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateKeysRequest
+      attr_accessor kvs_arn: ::String
+      attr_accessor if_match: ::String
+      attr_accessor puts: ::Array[Types::PutKeyRequestListItem]
+      attr_accessor deletes: ::Array[Types::DeleteKeyRequestListItem]
+      SENSITIVE: []
+    end
+
+    class UpdateKeysResponse
+      attr_accessor item_count: ::Integer
+      attr_accessor total_size_in_bytes: ::Integer
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

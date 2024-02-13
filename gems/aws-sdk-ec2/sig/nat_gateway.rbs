@@ -1,0 +1,107 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EC2
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html
+    class NatGateway
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#initialize-instance_method
+      def initialize: (String id, Hash[Symbol, untyped] options) -> void
+                    | (id: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#id-instance_method
+      def id: () -> String
+      alias nat_gateway_id id
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#create_time-instance_method
+      def create_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#delete_time-instance_method
+      def delete_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#failure_code-instance_method
+      def failure_code: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#failure_message-instance_method
+      def failure_message: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#nat_gateway_addresses-instance_method
+      def nat_gateway_addresses: () -> ::Array[Types::NatGatewayAddress]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#provisioned_bandwidth-instance_method
+      def provisioned_bandwidth: () -> Types::ProvisionedBandwidth
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#state-instance_method
+      def state: () -> ("pending" | "failed" | "available" | "deleting" | "deleted")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#subnet_id-instance_method
+      def subnet_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#vpc_id-instance_method
+      def vpc_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#tags-instance_method
+      def tags: () -> ::Array[Types::Tag]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#connectivity_type-instance_method
+      def connectivity_type: () -> ("private" | "public")
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#data-instance_method
+      def data: () -> Types::NatGateway
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#create_tags-instance_method
+      def create_tags: (
+                         ?dry_run: bool,
+                         tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]
+                       ) -> Tag::Collection
+                     | (?Hash[Symbol, untyped]) -> Tag::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#delete_tags-instance_method
+      def delete_tags: (
+                         ?dry_run: bool,
+                         ?tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]
+                       ) -> Tag::Collection
+                     | (?Hash[Symbol, untyped]) -> Tag::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#delete-instance_method
+      def delete: (
+                    ?dry_run: bool
+                  ) -> Types::DeleteNatGatewayResult
+                | (?Hash[Symbol, untyped]) -> Types::DeleteNatGatewayResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#address-instance_method
+      def address: () -> VpcAddress?
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NatGateway.html#subnet-instance_method
+      def subnet: () -> Subnet?
+
+      class Collection < ::Aws::Resources::Collection[NatGateway]
+      end
+    end
+  end
+end

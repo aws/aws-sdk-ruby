@@ -1,0 +1,2261 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AmplifyUIBuilder
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateComponentResponse]
+        def entity: () -> Types::Component
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#create_component-instance_method
+      def create_component: (
+                              app_id: ::String,
+                              environment_name: ::String,
+                              ?client_token: ::String,
+                              component_to_create: {
+                                name: ::String,
+                                source_id: ::String?,
+                                component_type: ::String,
+                                properties: Hash[::String, {
+                                    value: ::String?,
+                                    binding_properties: {
+                                      property: ::String,
+                                      field: ::String?
+                                    }?,
+                                    collection_binding_properties: {
+                                      property: ::String,
+                                      field: ::String?
+                                    }?,
+                                    default_value: ::String?,
+                                    model: ::String?,
+                                    bindings: Hash[::String, {
+                                        element: ::String,
+                                        property: ::String
+                                      }]?,
+                                    event: ::String?,
+                                    user_attribute: ::String?,
+                                    concat: Array[
+                                      untyped,
+                                    ]?,
+                                    condition: {
+                                      property: ::String?,
+                                      field: ::String?,
+                                      operator: ::String?,
+                                      operand: ::String?,
+                                      then: untyped?,
+                                      else: untyped?,
+                                      operand_type: ::String?
+                                    }?,
+                                    configured: bool?,
+                                    type: ::String?,
+                                    imported_value: ::String?,
+                                    component_name: ::String?,
+                                    property: ::String?
+                                  }],
+                                children: Array[
+                                  {
+                                    component_type: ::String,
+                                    name: ::String,
+                                    properties: Hash[::String, {
+                                        value: ::String?,
+                                        binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        collection_binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        default_value: ::String?,
+                                        model: ::String?,
+                                        bindings: Hash[::String, {
+                                            element: ::String,
+                                            property: ::String
+                                          }]?,
+                                        event: ::String?,
+                                        user_attribute: ::String?,
+                                        concat: Array[
+                                          untyped,
+                                        ]?,
+                                        condition: {
+                                          property: ::String?,
+                                          field: ::String?,
+                                          operator: ::String?,
+                                          operand: ::String?,
+                                          then: untyped?,
+                                          else: untyped?,
+                                          operand_type: ::String?
+                                        }?,
+                                        configured: bool?,
+                                        type: ::String?,
+                                        imported_value: ::String?,
+                                        component_name: ::String?,
+                                        property: ::String?
+                                      }],
+                                    children: untyped?,
+                                    events: Hash[::String, {
+                                        action: ::String?,
+                                        parameters: {
+                                          type: {
+                                            value: ::String?,
+                                            binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            collection_binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            default_value: ::String?,
+                                            model: ::String?,
+                                            bindings: Hash[::String, {
+                                                element: ::String,
+                                                property: ::String
+                                              }]?,
+                                            event: ::String?,
+                                            user_attribute: ::String?,
+                                            concat: Array[
+                                              untyped,
+                                            ]?,
+                                            condition: {
+                                              property: ::String?,
+                                              field: ::String?,
+                                              operator: ::String?,
+                                              operand: ::String?,
+                                              then: untyped?,
+                                              else: untyped?,
+                                              operand_type: ::String?
+                                            }?,
+                                            configured: bool?,
+                                            type: ::String?,
+                                            imported_value: ::String?,
+                                            component_name: ::String?,
+                                            property: ::String?
+                                          }?,
+                                          url: {
+                                            value: ::String?,
+                                            binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            collection_binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            default_value: ::String?,
+                                            model: ::String?,
+                                            bindings: Hash[::String, {
+                                                element: ::String,
+                                                property: ::String
+                                              }]?,
+                                            event: ::String?,
+                                            user_attribute: ::String?,
+                                            concat: Array[
+                                              untyped,
+                                            ]?,
+                                            condition: {
+                                              property: ::String?,
+                                              field: ::String?,
+                                              operator: ::String?,
+                                              operand: ::String?,
+                                              then: untyped?,
+                                              else: untyped?,
+                                              operand_type: ::String?
+                                            }?,
+                                            configured: bool?,
+                                            type: ::String?,
+                                            imported_value: ::String?,
+                                            component_name: ::String?,
+                                            property: ::String?
+                                          }?,
+                                          anchor: {
+                                            value: ::String?,
+                                            binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            collection_binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            default_value: ::String?,
+                                            model: ::String?,
+                                            bindings: Hash[::String, {
+                                                element: ::String,
+                                                property: ::String
+                                              }]?,
+                                            event: ::String?,
+                                            user_attribute: ::String?,
+                                            concat: Array[
+                                              untyped,
+                                            ]?,
+                                            condition: {
+                                              property: ::String?,
+                                              field: ::String?,
+                                              operator: ::String?,
+                                              operand: ::String?,
+                                              then: untyped?,
+                                              else: untyped?,
+                                              operand_type: ::String?
+                                            }?,
+                                            configured: bool?,
+                                            type: ::String?,
+                                            imported_value: ::String?,
+                                            component_name: ::String?,
+                                            property: ::String?
+                                          }?,
+                                          target: {
+                                            value: ::String?,
+                                            binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            collection_binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            default_value: ::String?,
+                                            model: ::String?,
+                                            bindings: Hash[::String, {
+                                                element: ::String,
+                                                property: ::String
+                                              }]?,
+                                            event: ::String?,
+                                            user_attribute: ::String?,
+                                            concat: Array[
+                                              untyped,
+                                            ]?,
+                                            condition: {
+                                              property: ::String?,
+                                              field: ::String?,
+                                              operator: ::String?,
+                                              operand: ::String?,
+                                              then: untyped?,
+                                              else: untyped?,
+                                              operand_type: ::String?
+                                            }?,
+                                            configured: bool?,
+                                            type: ::String?,
+                                            imported_value: ::String?,
+                                            component_name: ::String?,
+                                            property: ::String?
+                                          }?,
+                                          global: {
+                                            value: ::String?,
+                                            binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            collection_binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            default_value: ::String?,
+                                            model: ::String?,
+                                            bindings: Hash[::String, {
+                                                element: ::String,
+                                                property: ::String
+                                              }]?,
+                                            event: ::String?,
+                                            user_attribute: ::String?,
+                                            concat: Array[
+                                              untyped,
+                                            ]?,
+                                            condition: {
+                                              property: ::String?,
+                                              field: ::String?,
+                                              operator: ::String?,
+                                              operand: ::String?,
+                                              then: untyped?,
+                                              else: untyped?,
+                                              operand_type: ::String?
+                                            }?,
+                                            configured: bool?,
+                                            type: ::String?,
+                                            imported_value: ::String?,
+                                            component_name: ::String?,
+                                            property: ::String?
+                                          }?,
+                                          model: ::String?,
+                                          id: {
+                                            value: ::String?,
+                                            binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            collection_binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            default_value: ::String?,
+                                            model: ::String?,
+                                            bindings: Hash[::String, {
+                                                element: ::String,
+                                                property: ::String
+                                              }]?,
+                                            event: ::String?,
+                                            user_attribute: ::String?,
+                                            concat: Array[
+                                              untyped,
+                                            ]?,
+                                            condition: {
+                                              property: ::String?,
+                                              field: ::String?,
+                                              operator: ::String?,
+                                              operand: ::String?,
+                                              then: untyped?,
+                                              else: untyped?,
+                                              operand_type: ::String?
+                                            }?,
+                                            configured: bool?,
+                                            type: ::String?,
+                                            imported_value: ::String?,
+                                            component_name: ::String?,
+                                            property: ::String?
+                                          }?,
+                                          fields: Hash[::String, {
+                                              value: ::String?,
+                                              binding_properties: {
+                                                property: ::String,
+                                                field: ::String?
+                                              }?,
+                                              collection_binding_properties: {
+                                                property: ::String,
+                                                field: ::String?
+                                              }?,
+                                              default_value: ::String?,
+                                              model: ::String?,
+                                              bindings: Hash[::String, {
+                                                  element: ::String,
+                                                  property: ::String
+                                                }]?,
+                                              event: ::String?,
+                                              user_attribute: ::String?,
+                                              concat: Array[
+                                                untyped,
+                                              ]?,
+                                              condition: {
+                                                property: ::String?,
+                                                field: ::String?,
+                                                operator: ::String?,
+                                                operand: ::String?,
+                                                then: untyped?,
+                                                else: untyped?,
+                                                operand_type: ::String?
+                                              }?,
+                                              configured: bool?,
+                                              type: ::String?,
+                                              imported_value: ::String?,
+                                              component_name: ::String?,
+                                              property: ::String?
+                                            }]?,
+                                          state: {
+                                            component_name: ::String,
+                                            property: ::String,
+                                            set: {
+                                              value: ::String?,
+                                              binding_properties: {
+                                                property: ::String,
+                                                field: ::String?
+                                              }?,
+                                              collection_binding_properties: {
+                                                property: ::String,
+                                                field: ::String?
+                                              }?,
+                                              default_value: ::String?,
+                                              model: ::String?,
+                                              bindings: Hash[::String, {
+                                                  element: ::String,
+                                                  property: ::String
+                                                }]?,
+                                              event: ::String?,
+                                              user_attribute: ::String?,
+                                              concat: Array[
+                                                untyped,
+                                              ]?,
+                                              condition: {
+                                                property: ::String?,
+                                                field: ::String?,
+                                                operator: ::String?,
+                                                operand: ::String?,
+                                                then: untyped?,
+                                                else: untyped?,
+                                                operand_type: ::String?
+                                              }?,
+                                              configured: bool?,
+                                              type: ::String?,
+                                              imported_value: ::String?,
+                                              component_name: ::String?,
+                                              property: ::String?
+                                            }
+                                          }?
+                                        }?,
+                                        binding_event: ::String?
+                                      }]?,
+                                    source_id: ::String?
+                                  },
+                                ]?,
+                                variants: Array[
+                                  {
+                                    variant_values: Hash[::String, ::String]?,
+                                    overrides: Hash[::String, Hash[::String, ::String]]?
+                                  },
+                                ],
+                                overrides: Hash[::String, Hash[::String, ::String]],
+                                binding_properties: Hash[::String, {
+                                    type: ::String?,
+                                    binding_properties: {
+                                      model: ::String?,
+                                      field: ::String?,
+                                      predicates: Array[
+                                        {
+                                          or: untyped?,
+                                          and: untyped?,
+                                          field: ::String?,
+                                          operator: ::String?,
+                                          operand: ::String?,
+                                          operand_type: ::String?
+                                        },
+                                      ]?,
+                                      user_attribute: ::String?,
+                                      bucket: ::String?,
+                                      key: ::String?,
+                                      default_value: ::String?,
+                                      slot_name: ::String?
+                                    }?,
+                                    default_value: ::String?
+                                  }],
+                                collection_properties: Hash[::String, {
+                                    model: ::String,
+                                    sort: Array[
+                                      {
+                                        field: ::String,
+                                        direction: ("ASC" | "DESC")
+                                      },
+                                    ]?,
+                                    predicate: {
+                                      or: Array[
+                                        untyped,
+                                      ]?,
+                                      and: Array[
+                                        untyped,
+                                      ]?,
+                                      field: ::String?,
+                                      operator: ::String?,
+                                      operand: ::String?,
+                                      operand_type: ::String?
+                                    }?,
+                                    identifiers: Array[::String]?
+                                  }]?,
+                                tags: Hash[::String, ::String]?,
+                                events: Hash[::String, {
+                                    action: ::String?,
+                                    parameters: {
+                                      type: {
+                                        value: ::String?,
+                                        binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        collection_binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        default_value: ::String?,
+                                        model: ::String?,
+                                        bindings: Hash[::String, {
+                                            element: ::String,
+                                            property: ::String
+                                          }]?,
+                                        event: ::String?,
+                                        user_attribute: ::String?,
+                                        concat: Array[
+                                          untyped,
+                                        ]?,
+                                        condition: {
+                                          property: ::String?,
+                                          field: ::String?,
+                                          operator: ::String?,
+                                          operand: ::String?,
+                                          then: untyped?,
+                                          else: untyped?,
+                                          operand_type: ::String?
+                                        }?,
+                                        configured: bool?,
+                                        type: ::String?,
+                                        imported_value: ::String?,
+                                        component_name: ::String?,
+                                        property: ::String?
+                                      }?,
+                                      url: {
+                                        value: ::String?,
+                                        binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        collection_binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        default_value: ::String?,
+                                        model: ::String?,
+                                        bindings: Hash[::String, {
+                                            element: ::String,
+                                            property: ::String
+                                          }]?,
+                                        event: ::String?,
+                                        user_attribute: ::String?,
+                                        concat: Array[
+                                          untyped,
+                                        ]?,
+                                        condition: {
+                                          property: ::String?,
+                                          field: ::String?,
+                                          operator: ::String?,
+                                          operand: ::String?,
+                                          then: untyped?,
+                                          else: untyped?,
+                                          operand_type: ::String?
+                                        }?,
+                                        configured: bool?,
+                                        type: ::String?,
+                                        imported_value: ::String?,
+                                        component_name: ::String?,
+                                        property: ::String?
+                                      }?,
+                                      anchor: {
+                                        value: ::String?,
+                                        binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        collection_binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        default_value: ::String?,
+                                        model: ::String?,
+                                        bindings: Hash[::String, {
+                                            element: ::String,
+                                            property: ::String
+                                          }]?,
+                                        event: ::String?,
+                                        user_attribute: ::String?,
+                                        concat: Array[
+                                          untyped,
+                                        ]?,
+                                        condition: {
+                                          property: ::String?,
+                                          field: ::String?,
+                                          operator: ::String?,
+                                          operand: ::String?,
+                                          then: untyped?,
+                                          else: untyped?,
+                                          operand_type: ::String?
+                                        }?,
+                                        configured: bool?,
+                                        type: ::String?,
+                                        imported_value: ::String?,
+                                        component_name: ::String?,
+                                        property: ::String?
+                                      }?,
+                                      target: {
+                                        value: ::String?,
+                                        binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        collection_binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        default_value: ::String?,
+                                        model: ::String?,
+                                        bindings: Hash[::String, {
+                                            element: ::String,
+                                            property: ::String
+                                          }]?,
+                                        event: ::String?,
+                                        user_attribute: ::String?,
+                                        concat: Array[
+                                          untyped,
+                                        ]?,
+                                        condition: {
+                                          property: ::String?,
+                                          field: ::String?,
+                                          operator: ::String?,
+                                          operand: ::String?,
+                                          then: untyped?,
+                                          else: untyped?,
+                                          operand_type: ::String?
+                                        }?,
+                                        configured: bool?,
+                                        type: ::String?,
+                                        imported_value: ::String?,
+                                        component_name: ::String?,
+                                        property: ::String?
+                                      }?,
+                                      global: {
+                                        value: ::String?,
+                                        binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        collection_binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        default_value: ::String?,
+                                        model: ::String?,
+                                        bindings: Hash[::String, {
+                                            element: ::String,
+                                            property: ::String
+                                          }]?,
+                                        event: ::String?,
+                                        user_attribute: ::String?,
+                                        concat: Array[
+                                          untyped,
+                                        ]?,
+                                        condition: {
+                                          property: ::String?,
+                                          field: ::String?,
+                                          operator: ::String?,
+                                          operand: ::String?,
+                                          then: untyped?,
+                                          else: untyped?,
+                                          operand_type: ::String?
+                                        }?,
+                                        configured: bool?,
+                                        type: ::String?,
+                                        imported_value: ::String?,
+                                        component_name: ::String?,
+                                        property: ::String?
+                                      }?,
+                                      model: ::String?,
+                                      id: {
+                                        value: ::String?,
+                                        binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        collection_binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        default_value: ::String?,
+                                        model: ::String?,
+                                        bindings: Hash[::String, {
+                                            element: ::String,
+                                            property: ::String
+                                          }]?,
+                                        event: ::String?,
+                                        user_attribute: ::String?,
+                                        concat: Array[
+                                          untyped,
+                                        ]?,
+                                        condition: {
+                                          property: ::String?,
+                                          field: ::String?,
+                                          operator: ::String?,
+                                          operand: ::String?,
+                                          then: untyped?,
+                                          else: untyped?,
+                                          operand_type: ::String?
+                                        }?,
+                                        configured: bool?,
+                                        type: ::String?,
+                                        imported_value: ::String?,
+                                        component_name: ::String?,
+                                        property: ::String?
+                                      }?,
+                                      fields: Hash[::String, {
+                                          value: ::String?,
+                                          binding_properties: {
+                                            property: ::String,
+                                            field: ::String?
+                                          }?,
+                                          collection_binding_properties: {
+                                            property: ::String,
+                                            field: ::String?
+                                          }?,
+                                          default_value: ::String?,
+                                          model: ::String?,
+                                          bindings: Hash[::String, {
+                                              element: ::String,
+                                              property: ::String
+                                            }]?,
+                                          event: ::String?,
+                                          user_attribute: ::String?,
+                                          concat: Array[
+                                            untyped,
+                                          ]?,
+                                          condition: {
+                                            property: ::String?,
+                                            field: ::String?,
+                                            operator: ::String?,
+                                            operand: ::String?,
+                                            then: untyped?,
+                                            else: untyped?,
+                                            operand_type: ::String?
+                                          }?,
+                                          configured: bool?,
+                                          type: ::String?,
+                                          imported_value: ::String?,
+                                          component_name: ::String?,
+                                          property: ::String?
+                                        }]?,
+                                      state: {
+                                        component_name: ::String,
+                                        property: ::String,
+                                        set: {
+                                          value: ::String?,
+                                          binding_properties: {
+                                            property: ::String,
+                                            field: ::String?
+                                          }?,
+                                          collection_binding_properties: {
+                                            property: ::String,
+                                            field: ::String?
+                                          }?,
+                                          default_value: ::String?,
+                                          model: ::String?,
+                                          bindings: Hash[::String, {
+                                              element: ::String,
+                                              property: ::String
+                                            }]?,
+                                          event: ::String?,
+                                          user_attribute: ::String?,
+                                          concat: Array[
+                                            untyped,
+                                          ]?,
+                                          condition: {
+                                            property: ::String?,
+                                            field: ::String?,
+                                            operator: ::String?,
+                                            operand: ::String?,
+                                            then: untyped?,
+                                            else: untyped?,
+                                            operand_type: ::String?
+                                          }?,
+                                          configured: bool?,
+                                          type: ::String?,
+                                          imported_value: ::String?,
+                                          component_name: ::String?,
+                                          property: ::String?
+                                        }
+                                      }?
+                                    }?,
+                                    binding_event: ::String?
+                                  }]?,
+                                schema_version: ::String?
+                              }
+                            ) -> _CreateComponentResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateComponentResponseSuccess
+
+      interface _CreateFormResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFormResponse]
+        def entity: () -> Types::Form
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#create_form-instance_method
+      def create_form: (
+                         app_id: ::String,
+                         environment_name: ::String,
+                         ?client_token: ::String,
+                         form_to_create: {
+                           name: ::String,
+                           data_type: {
+                             data_source_type: ("DataStore" | "Custom"),
+                             data_type_name: ::String
+                           },
+                           form_action_type: ("create" | "update"),
+                           fields: Hash[::String, {
+                               label: ::String?,
+                               position: {
+                                 fixed: ("first")?,
+                                 right_of: ::String?,
+                                 below: ::String?
+                               }?,
+                               excluded: bool?,
+                               input_type: {
+                                 type: ::String,
+                                 required: bool?,
+                                 read_only: bool?,
+                                 placeholder: ::String?,
+                                 default_value: ::String?,
+                                 descriptive_text: ::String?,
+                                 default_checked: bool?,
+                                 default_country_code: ::String?,
+                                 value_mappings: {
+                                   values: Array[
+                                     {
+                                       display_value: {
+                                         value: ::String?,
+                                         binding_properties: {
+                                           property: ::String,
+                                           field: ::String?
+                                         }?,
+                                         concat: Array[
+                                           untyped,
+                                         ]?
+                                       }?,
+                                       value: {
+                                         value: ::String?,
+                                         binding_properties: {
+                                           property: ::String,
+                                           field: ::String?
+                                         }?,
+                                         concat: Array[
+                                           untyped,
+                                         ]?
+                                       }
+                                     },
+                                   ],
+                                   binding_properties: Hash[::String, {
+                                       type: ::String?,
+                                       binding_properties: {
+                                         model: ::String?
+                                       }?
+                                     }]?
+                                 }?,
+                                 name: ::String?,
+                                 min_value: ::Float?,
+                                 max_value: ::Float?,
+                                 step: ::Float?,
+                                 value: ::String?,
+                                 is_array: bool?,
+                                 file_uploader_config: {
+                                   access_level: ("public" | "protected" | "private"),
+                                   accepted_file_types: Array[::String],
+                                   show_thumbnails: bool?,
+                                   is_resumable: bool?,
+                                   max_file_count: ::Integer?,
+                                   max_size: ::Integer?
+                                 }?
+                               }?,
+                               validations: Array[
+                                 {
+                                   type: ::String,
+                                   str_values: Array[::String]?,
+                                   num_values: Array[::Integer]?,
+                                   validation_message: ::String?
+                                 },
+                               ]?
+                             }],
+                           style: {
+                             horizontal_gap: {
+                               token_reference: ::String?,
+                               value: ::String?
+                             }?,
+                             vertical_gap: {
+                               token_reference: ::String?,
+                               value: ::String?
+                             }?,
+                             outer_padding: {
+                               token_reference: ::String?,
+                               value: ::String?
+                             }?
+                           },
+                           sectional_elements: Hash[::String, {
+                               type: ::String,
+                               position: {
+                                 fixed: ("first")?,
+                                 right_of: ::String?,
+                                 below: ::String?
+                               }?,
+                               text: ::String?,
+                               level: ::Integer?,
+                               orientation: ::String?,
+                               excluded: bool?
+                             }],
+                           schema_version: ::String,
+                           cta: {
+                             position: ("top" | "bottom" | "top_and_bottom")?,
+                             clear: {
+                               excluded: bool?,
+                               children: ::String?,
+                               position: {
+                                 fixed: ("first")?,
+                                 right_of: ::String?,
+                                 below: ::String?
+                               }?
+                             }?,
+                             cancel: {
+                               excluded: bool?,
+                               children: ::String?,
+                               position: {
+                                 fixed: ("first")?,
+                                 right_of: ::String?,
+                                 below: ::String?
+                               }?
+                             }?,
+                             submit: {
+                               excluded: bool?,
+                               children: ::String?,
+                               position: {
+                                 fixed: ("first")?,
+                                 right_of: ::String?,
+                                 below: ::String?
+                               }?
+                             }?
+                           }?,
+                           tags: Hash[::String, ::String]?,
+                           label_decorator: ("required" | "optional" | "none")?
+                         }
+                       ) -> _CreateFormResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFormResponseSuccess
+
+      interface _CreateThemeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateThemeResponse]
+        def entity: () -> Types::Theme
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#create_theme-instance_method
+      def create_theme: (
+                          app_id: ::String,
+                          environment_name: ::String,
+                          ?client_token: ::String,
+                          theme_to_create: {
+                            name: ::String,
+                            values: Array[
+                              {
+                                key: ::String?,
+                                value: {
+                                  value: ::String?,
+                                  children: untyped?
+                                }?
+                              },
+                            ],
+                            overrides: Array[
+                              {
+                                key: ::String?,
+                                value: {
+                                  value: ::String?,
+                                  children: untyped?
+                                }?
+                              },
+                            ]?,
+                            tags: Hash[::String, ::String]?
+                          }
+                        ) -> _CreateThemeResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateThemeResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#delete_component-instance_method
+      def delete_component: (
+                              app_id: ::String,
+                              environment_name: ::String,
+                              id: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#delete_form-instance_method
+      def delete_form: (
+                         app_id: ::String,
+                         environment_name: ::String,
+                         id: ::String
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#delete_theme-instance_method
+      def delete_theme: (
+                          app_id: ::String,
+                          environment_name: ::String,
+                          id: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _ExchangeCodeForTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExchangeCodeForTokenResponse]
+        def access_token: () -> ::String
+        def expires_in: () -> ::Integer
+        def refresh_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#exchange_code_for_token-instance_method
+      def exchange_code_for_token: (
+                                     provider: ("figma"),
+                                     request: {
+                                       code: ::String,
+                                       redirect_uri: ::String,
+                                       client_id: ::String?
+                                     }
+                                   ) -> _ExchangeCodeForTokenResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExchangeCodeForTokenResponseSuccess
+
+      interface _ExportComponentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportComponentsResponse]
+        def entities: () -> ::Array[Types::Component]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#export_components-instance_method
+      def export_components: (
+                               app_id: ::String,
+                               environment_name: ::String,
+                               ?next_token: ::String
+                             ) -> _ExportComponentsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportComponentsResponseSuccess
+
+      interface _ExportFormsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportFormsResponse]
+        def entities: () -> ::Array[Types::Form]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#export_forms-instance_method
+      def export_forms: (
+                          app_id: ::String,
+                          environment_name: ::String,
+                          ?next_token: ::String
+                        ) -> _ExportFormsResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportFormsResponseSuccess
+
+      interface _ExportThemesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportThemesResponse]
+        def entities: () -> ::Array[Types::Theme]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#export_themes-instance_method
+      def export_themes: (
+                           app_id: ::String,
+                           environment_name: ::String,
+                           ?next_token: ::String
+                         ) -> _ExportThemesResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportThemesResponseSuccess
+
+      interface _GetCodegenJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCodegenJobResponse]
+        def job: () -> Types::CodegenJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#get_codegen_job-instance_method
+      def get_codegen_job: (
+                             app_id: ::String,
+                             environment_name: ::String,
+                             id: ::String
+                           ) -> _GetCodegenJobResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCodegenJobResponseSuccess
+
+      interface _GetComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetComponentResponse]
+        def component: () -> Types::Component
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#get_component-instance_method
+      def get_component: (
+                           app_id: ::String,
+                           environment_name: ::String,
+                           id: ::String
+                         ) -> _GetComponentResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetComponentResponseSuccess
+
+      interface _GetFormResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFormResponse]
+        def form: () -> Types::Form
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#get_form-instance_method
+      def get_form: (
+                      app_id: ::String,
+                      environment_name: ::String,
+                      id: ::String
+                    ) -> _GetFormResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFormResponseSuccess
+
+      interface _GetMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMetadataResponse]
+        def features: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#get_metadata-instance_method
+      def get_metadata: (
+                          app_id: ::String,
+                          environment_name: ::String
+                        ) -> _GetMetadataResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMetadataResponseSuccess
+
+      interface _GetThemeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetThemeResponse]
+        def theme: () -> Types::Theme
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#get_theme-instance_method
+      def get_theme: (
+                       app_id: ::String,
+                       environment_name: ::String,
+                       id: ::String
+                     ) -> _GetThemeResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetThemeResponseSuccess
+
+      interface _ListCodegenJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCodegenJobsResponse]
+        def entities: () -> ::Array[Types::CodegenJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#list_codegen_jobs-instance_method
+      def list_codegen_jobs: (
+                               app_id: ::String,
+                               environment_name: ::String,
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListCodegenJobsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCodegenJobsResponseSuccess
+
+      interface _ListComponentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListComponentsResponse]
+        def entities: () -> ::Array[Types::ComponentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#list_components-instance_method
+      def list_components: (
+                             app_id: ::String,
+                             environment_name: ::String,
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _ListComponentsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComponentsResponseSuccess
+
+      interface _ListFormsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFormsResponse]
+        def entities: () -> ::Array[Types::FormSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#list_forms-instance_method
+      def list_forms: (
+                        app_id: ::String,
+                        environment_name: ::String,
+                        ?next_token: ::String,
+                        ?max_results: ::Integer
+                      ) -> _ListFormsResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFormsResponseSuccess
+
+      interface _ListThemesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListThemesResponse]
+        def entities: () -> ::Array[Types::ThemeSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#list_themes-instance_method
+      def list_themes: (
+                         app_id: ::String,
+                         environment_name: ::String,
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
+                       ) -> _ListThemesResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListThemesResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#put_metadata_flag-instance_method
+      def put_metadata_flag: (
+                               app_id: ::String,
+                               environment_name: ::String,
+                               feature_name: ::String,
+                               body: {
+                                 new_value: ::String
+                               }
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _RefreshTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RefreshTokenResponse]
+        def access_token: () -> ::String
+        def expires_in: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#refresh_token-instance_method
+      def refresh_token: (
+                           provider: ("figma"),
+                           refresh_token_body: {
+                             token: ::String,
+                             client_id: ::String?
+                           }
+                         ) -> _RefreshTokenResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RefreshTokenResponseSuccess
+
+      interface _StartCodegenJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartCodegenJobResponse]
+        def entity: () -> Types::CodegenJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#start_codegen_job-instance_method
+      def start_codegen_job: (
+                               app_id: ::String,
+                               environment_name: ::String,
+                               ?client_token: ::String,
+                               codegen_job_to_create: {
+                                 render_config: {
+                                   react: {
+                                     module: ("es2020" | "esnext")?,
+                                     target: ("es2015" | "es2020")?,
+                                     script: ("jsx" | "tsx" | "js")?,
+                                     render_type_declarations: bool?,
+                                     inline_source_map: bool?,
+                                     api_configuration: {
+                                       graph_ql_config: {
+                                         types_file_path: ::String,
+                                         queries_file_path: ::String,
+                                         mutations_file_path: ::String,
+                                         subscriptions_file_path: ::String,
+                                         fragments_file_path: ::String
+                                       }?,
+                                       data_store_config: {
+                                       }?,
+                                       no_api_config: {
+                                       }?
+                                     }?,
+                                     dependencies: Hash[::String, ::String]?
+                                   }?
+                                 },
+                                 generic_data_schema: {
+                                   data_source_type: ("DataStore"),
+                                   models: Hash[::String, {
+                                       fields: Hash[::String, {
+                                           data_type: ("ID" | "String" | "Int" | "Float" | "AWSDate" | "AWSTime" | "AWSDateTime" | "AWSTimestamp" | "AWSEmail" | "AWSURL" | "AWSIPAddress" | "Boolean" | "AWSJSON" | "AWSPhone" | "Enum" | "Model" | "NonModel"),
+                                           data_type_value: ::String,
+                                           required: bool,
+                                           read_only: bool,
+                                           is_array: bool,
+                                           relationship: {
+                                             type: ("HAS_MANY" | "HAS_ONE" | "BELONGS_TO"),
+                                             related_model_name: ::String,
+                                             related_model_fields: Array[::String]?,
+                                             can_unlink_associated_model: bool?,
+                                             related_join_field_name: ::String?,
+                                             related_join_table_name: ::String?,
+                                             belongs_to_field_on_related_model: ::String?,
+                                             associated_fields: Array[::String]?,
+                                             is_has_many_index: bool?
+                                           }?
+                                         }],
+                                       is_join_table: bool?,
+                                       primary_keys: Array[::String]
+                                     }],
+                                   enums: Hash[::String, {
+                                       values: Array[::String]
+                                     }],
+                                   non_models: Hash[::String, {
+                                       fields: Hash[::String, {
+                                           data_type: ("ID" | "String" | "Int" | "Float" | "AWSDate" | "AWSTime" | "AWSDateTime" | "AWSTimestamp" | "AWSEmail" | "AWSURL" | "AWSIPAddress" | "Boolean" | "AWSJSON" | "AWSPhone" | "Enum" | "Model" | "NonModel"),
+                                           data_type_value: ::String,
+                                           required: bool,
+                                           read_only: bool,
+                                           is_array: bool,
+                                           relationship: {
+                                             type: ("HAS_MANY" | "HAS_ONE" | "BELONGS_TO"),
+                                             related_model_name: ::String,
+                                             related_model_fields: Array[::String]?,
+                                             can_unlink_associated_model: bool?,
+                                             related_join_field_name: ::String?,
+                                             related_join_table_name: ::String?,
+                                             belongs_to_field_on_related_model: ::String?,
+                                             associated_fields: Array[::String]?,
+                                             is_has_many_index: bool?
+                                           }?
+                                         }]
+                                     }]
+                                 }?,
+                                 auto_generate_forms: bool?,
+                                 features: {
+                                   is_relationship_supported: bool?,
+                                   is_non_model_supported: bool?
+                                 }?,
+                                 tags: Hash[::String, ::String]?
+                               }
+                             ) -> _StartCodegenJobResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCodegenJobResponseSuccess
+
+      interface _UpdateComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateComponentResponse]
+        def entity: () -> Types::Component
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#update_component-instance_method
+      def update_component: (
+                              app_id: ::String,
+                              environment_name: ::String,
+                              id: ::String,
+                              ?client_token: ::String,
+                              updated_component: {
+                                id: ::String?,
+                                name: ::String?,
+                                source_id: ::String?,
+                                component_type: ::String?,
+                                properties: Hash[::String, {
+                                    value: ::String?,
+                                    binding_properties: {
+                                      property: ::String,
+                                      field: ::String?
+                                    }?,
+                                    collection_binding_properties: {
+                                      property: ::String,
+                                      field: ::String?
+                                    }?,
+                                    default_value: ::String?,
+                                    model: ::String?,
+                                    bindings: Hash[::String, {
+                                        element: ::String,
+                                        property: ::String
+                                      }]?,
+                                    event: ::String?,
+                                    user_attribute: ::String?,
+                                    concat: Array[
+                                      untyped,
+                                    ]?,
+                                    condition: {
+                                      property: ::String?,
+                                      field: ::String?,
+                                      operator: ::String?,
+                                      operand: ::String?,
+                                      then: untyped?,
+                                      else: untyped?,
+                                      operand_type: ::String?
+                                    }?,
+                                    configured: bool?,
+                                    type: ::String?,
+                                    imported_value: ::String?,
+                                    component_name: ::String?,
+                                    property: ::String?
+                                  }]?,
+                                children: Array[
+                                  {
+                                    component_type: ::String,
+                                    name: ::String,
+                                    properties: Hash[::String, {
+                                        value: ::String?,
+                                        binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        collection_binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        default_value: ::String?,
+                                        model: ::String?,
+                                        bindings: Hash[::String, {
+                                            element: ::String,
+                                            property: ::String
+                                          }]?,
+                                        event: ::String?,
+                                        user_attribute: ::String?,
+                                        concat: Array[
+                                          untyped,
+                                        ]?,
+                                        condition: {
+                                          property: ::String?,
+                                          field: ::String?,
+                                          operator: ::String?,
+                                          operand: ::String?,
+                                          then: untyped?,
+                                          else: untyped?,
+                                          operand_type: ::String?
+                                        }?,
+                                        configured: bool?,
+                                        type: ::String?,
+                                        imported_value: ::String?,
+                                        component_name: ::String?,
+                                        property: ::String?
+                                      }],
+                                    children: untyped?,
+                                    events: Hash[::String, {
+                                        action: ::String?,
+                                        parameters: {
+                                          type: {
+                                            value: ::String?,
+                                            binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            collection_binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            default_value: ::String?,
+                                            model: ::String?,
+                                            bindings: Hash[::String, {
+                                                element: ::String,
+                                                property: ::String
+                                              }]?,
+                                            event: ::String?,
+                                            user_attribute: ::String?,
+                                            concat: Array[
+                                              untyped,
+                                            ]?,
+                                            condition: {
+                                              property: ::String?,
+                                              field: ::String?,
+                                              operator: ::String?,
+                                              operand: ::String?,
+                                              then: untyped?,
+                                              else: untyped?,
+                                              operand_type: ::String?
+                                            }?,
+                                            configured: bool?,
+                                            type: ::String?,
+                                            imported_value: ::String?,
+                                            component_name: ::String?,
+                                            property: ::String?
+                                          }?,
+                                          url: {
+                                            value: ::String?,
+                                            binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            collection_binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            default_value: ::String?,
+                                            model: ::String?,
+                                            bindings: Hash[::String, {
+                                                element: ::String,
+                                                property: ::String
+                                              }]?,
+                                            event: ::String?,
+                                            user_attribute: ::String?,
+                                            concat: Array[
+                                              untyped,
+                                            ]?,
+                                            condition: {
+                                              property: ::String?,
+                                              field: ::String?,
+                                              operator: ::String?,
+                                              operand: ::String?,
+                                              then: untyped?,
+                                              else: untyped?,
+                                              operand_type: ::String?
+                                            }?,
+                                            configured: bool?,
+                                            type: ::String?,
+                                            imported_value: ::String?,
+                                            component_name: ::String?,
+                                            property: ::String?
+                                          }?,
+                                          anchor: {
+                                            value: ::String?,
+                                            binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            collection_binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            default_value: ::String?,
+                                            model: ::String?,
+                                            bindings: Hash[::String, {
+                                                element: ::String,
+                                                property: ::String
+                                              }]?,
+                                            event: ::String?,
+                                            user_attribute: ::String?,
+                                            concat: Array[
+                                              untyped,
+                                            ]?,
+                                            condition: {
+                                              property: ::String?,
+                                              field: ::String?,
+                                              operator: ::String?,
+                                              operand: ::String?,
+                                              then: untyped?,
+                                              else: untyped?,
+                                              operand_type: ::String?
+                                            }?,
+                                            configured: bool?,
+                                            type: ::String?,
+                                            imported_value: ::String?,
+                                            component_name: ::String?,
+                                            property: ::String?
+                                          }?,
+                                          target: {
+                                            value: ::String?,
+                                            binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            collection_binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            default_value: ::String?,
+                                            model: ::String?,
+                                            bindings: Hash[::String, {
+                                                element: ::String,
+                                                property: ::String
+                                              }]?,
+                                            event: ::String?,
+                                            user_attribute: ::String?,
+                                            concat: Array[
+                                              untyped,
+                                            ]?,
+                                            condition: {
+                                              property: ::String?,
+                                              field: ::String?,
+                                              operator: ::String?,
+                                              operand: ::String?,
+                                              then: untyped?,
+                                              else: untyped?,
+                                              operand_type: ::String?
+                                            }?,
+                                            configured: bool?,
+                                            type: ::String?,
+                                            imported_value: ::String?,
+                                            component_name: ::String?,
+                                            property: ::String?
+                                          }?,
+                                          global: {
+                                            value: ::String?,
+                                            binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            collection_binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            default_value: ::String?,
+                                            model: ::String?,
+                                            bindings: Hash[::String, {
+                                                element: ::String,
+                                                property: ::String
+                                              }]?,
+                                            event: ::String?,
+                                            user_attribute: ::String?,
+                                            concat: Array[
+                                              untyped,
+                                            ]?,
+                                            condition: {
+                                              property: ::String?,
+                                              field: ::String?,
+                                              operator: ::String?,
+                                              operand: ::String?,
+                                              then: untyped?,
+                                              else: untyped?,
+                                              operand_type: ::String?
+                                            }?,
+                                            configured: bool?,
+                                            type: ::String?,
+                                            imported_value: ::String?,
+                                            component_name: ::String?,
+                                            property: ::String?
+                                          }?,
+                                          model: ::String?,
+                                          id: {
+                                            value: ::String?,
+                                            binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            collection_binding_properties: {
+                                              property: ::String,
+                                              field: ::String?
+                                            }?,
+                                            default_value: ::String?,
+                                            model: ::String?,
+                                            bindings: Hash[::String, {
+                                                element: ::String,
+                                                property: ::String
+                                              }]?,
+                                            event: ::String?,
+                                            user_attribute: ::String?,
+                                            concat: Array[
+                                              untyped,
+                                            ]?,
+                                            condition: {
+                                              property: ::String?,
+                                              field: ::String?,
+                                              operator: ::String?,
+                                              operand: ::String?,
+                                              then: untyped?,
+                                              else: untyped?,
+                                              operand_type: ::String?
+                                            }?,
+                                            configured: bool?,
+                                            type: ::String?,
+                                            imported_value: ::String?,
+                                            component_name: ::String?,
+                                            property: ::String?
+                                          }?,
+                                          fields: Hash[::String, {
+                                              value: ::String?,
+                                              binding_properties: {
+                                                property: ::String,
+                                                field: ::String?
+                                              }?,
+                                              collection_binding_properties: {
+                                                property: ::String,
+                                                field: ::String?
+                                              }?,
+                                              default_value: ::String?,
+                                              model: ::String?,
+                                              bindings: Hash[::String, {
+                                                  element: ::String,
+                                                  property: ::String
+                                                }]?,
+                                              event: ::String?,
+                                              user_attribute: ::String?,
+                                              concat: Array[
+                                                untyped,
+                                              ]?,
+                                              condition: {
+                                                property: ::String?,
+                                                field: ::String?,
+                                                operator: ::String?,
+                                                operand: ::String?,
+                                                then: untyped?,
+                                                else: untyped?,
+                                                operand_type: ::String?
+                                              }?,
+                                              configured: bool?,
+                                              type: ::String?,
+                                              imported_value: ::String?,
+                                              component_name: ::String?,
+                                              property: ::String?
+                                            }]?,
+                                          state: {
+                                            component_name: ::String,
+                                            property: ::String,
+                                            set: {
+                                              value: ::String?,
+                                              binding_properties: {
+                                                property: ::String,
+                                                field: ::String?
+                                              }?,
+                                              collection_binding_properties: {
+                                                property: ::String,
+                                                field: ::String?
+                                              }?,
+                                              default_value: ::String?,
+                                              model: ::String?,
+                                              bindings: Hash[::String, {
+                                                  element: ::String,
+                                                  property: ::String
+                                                }]?,
+                                              event: ::String?,
+                                              user_attribute: ::String?,
+                                              concat: Array[
+                                                untyped,
+                                              ]?,
+                                              condition: {
+                                                property: ::String?,
+                                                field: ::String?,
+                                                operator: ::String?,
+                                                operand: ::String?,
+                                                then: untyped?,
+                                                else: untyped?,
+                                                operand_type: ::String?
+                                              }?,
+                                              configured: bool?,
+                                              type: ::String?,
+                                              imported_value: ::String?,
+                                              component_name: ::String?,
+                                              property: ::String?
+                                            }
+                                          }?
+                                        }?,
+                                        binding_event: ::String?
+                                      }]?,
+                                    source_id: ::String?
+                                  },
+                                ]?,
+                                variants: Array[
+                                  {
+                                    variant_values: Hash[::String, ::String]?,
+                                    overrides: Hash[::String, Hash[::String, ::String]]?
+                                  },
+                                ]?,
+                                overrides: Hash[::String, Hash[::String, ::String]]?,
+                                binding_properties: Hash[::String, {
+                                    type: ::String?,
+                                    binding_properties: {
+                                      model: ::String?,
+                                      field: ::String?,
+                                      predicates: Array[
+                                        {
+                                          or: untyped?,
+                                          and: untyped?,
+                                          field: ::String?,
+                                          operator: ::String?,
+                                          operand: ::String?,
+                                          operand_type: ::String?
+                                        },
+                                      ]?,
+                                      user_attribute: ::String?,
+                                      bucket: ::String?,
+                                      key: ::String?,
+                                      default_value: ::String?,
+                                      slot_name: ::String?
+                                    }?,
+                                    default_value: ::String?
+                                  }]?,
+                                collection_properties: Hash[::String, {
+                                    model: ::String,
+                                    sort: Array[
+                                      {
+                                        field: ::String,
+                                        direction: ("ASC" | "DESC")
+                                      },
+                                    ]?,
+                                    predicate: {
+                                      or: Array[
+                                        untyped,
+                                      ]?,
+                                      and: Array[
+                                        untyped,
+                                      ]?,
+                                      field: ::String?,
+                                      operator: ::String?,
+                                      operand: ::String?,
+                                      operand_type: ::String?
+                                    }?,
+                                    identifiers: Array[::String]?
+                                  }]?,
+                                events: Hash[::String, {
+                                    action: ::String?,
+                                    parameters: {
+                                      type: {
+                                        value: ::String?,
+                                        binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        collection_binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        default_value: ::String?,
+                                        model: ::String?,
+                                        bindings: Hash[::String, {
+                                            element: ::String,
+                                            property: ::String
+                                          }]?,
+                                        event: ::String?,
+                                        user_attribute: ::String?,
+                                        concat: Array[
+                                          untyped,
+                                        ]?,
+                                        condition: {
+                                          property: ::String?,
+                                          field: ::String?,
+                                          operator: ::String?,
+                                          operand: ::String?,
+                                          then: untyped?,
+                                          else: untyped?,
+                                          operand_type: ::String?
+                                        }?,
+                                        configured: bool?,
+                                        type: ::String?,
+                                        imported_value: ::String?,
+                                        component_name: ::String?,
+                                        property: ::String?
+                                      }?,
+                                      url: {
+                                        value: ::String?,
+                                        binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        collection_binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        default_value: ::String?,
+                                        model: ::String?,
+                                        bindings: Hash[::String, {
+                                            element: ::String,
+                                            property: ::String
+                                          }]?,
+                                        event: ::String?,
+                                        user_attribute: ::String?,
+                                        concat: Array[
+                                          untyped,
+                                        ]?,
+                                        condition: {
+                                          property: ::String?,
+                                          field: ::String?,
+                                          operator: ::String?,
+                                          operand: ::String?,
+                                          then: untyped?,
+                                          else: untyped?,
+                                          operand_type: ::String?
+                                        }?,
+                                        configured: bool?,
+                                        type: ::String?,
+                                        imported_value: ::String?,
+                                        component_name: ::String?,
+                                        property: ::String?
+                                      }?,
+                                      anchor: {
+                                        value: ::String?,
+                                        binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        collection_binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        default_value: ::String?,
+                                        model: ::String?,
+                                        bindings: Hash[::String, {
+                                            element: ::String,
+                                            property: ::String
+                                          }]?,
+                                        event: ::String?,
+                                        user_attribute: ::String?,
+                                        concat: Array[
+                                          untyped,
+                                        ]?,
+                                        condition: {
+                                          property: ::String?,
+                                          field: ::String?,
+                                          operator: ::String?,
+                                          operand: ::String?,
+                                          then: untyped?,
+                                          else: untyped?,
+                                          operand_type: ::String?
+                                        }?,
+                                        configured: bool?,
+                                        type: ::String?,
+                                        imported_value: ::String?,
+                                        component_name: ::String?,
+                                        property: ::String?
+                                      }?,
+                                      target: {
+                                        value: ::String?,
+                                        binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        collection_binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        default_value: ::String?,
+                                        model: ::String?,
+                                        bindings: Hash[::String, {
+                                            element: ::String,
+                                            property: ::String
+                                          }]?,
+                                        event: ::String?,
+                                        user_attribute: ::String?,
+                                        concat: Array[
+                                          untyped,
+                                        ]?,
+                                        condition: {
+                                          property: ::String?,
+                                          field: ::String?,
+                                          operator: ::String?,
+                                          operand: ::String?,
+                                          then: untyped?,
+                                          else: untyped?,
+                                          operand_type: ::String?
+                                        }?,
+                                        configured: bool?,
+                                        type: ::String?,
+                                        imported_value: ::String?,
+                                        component_name: ::String?,
+                                        property: ::String?
+                                      }?,
+                                      global: {
+                                        value: ::String?,
+                                        binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        collection_binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        default_value: ::String?,
+                                        model: ::String?,
+                                        bindings: Hash[::String, {
+                                            element: ::String,
+                                            property: ::String
+                                          }]?,
+                                        event: ::String?,
+                                        user_attribute: ::String?,
+                                        concat: Array[
+                                          untyped,
+                                        ]?,
+                                        condition: {
+                                          property: ::String?,
+                                          field: ::String?,
+                                          operator: ::String?,
+                                          operand: ::String?,
+                                          then: untyped?,
+                                          else: untyped?,
+                                          operand_type: ::String?
+                                        }?,
+                                        configured: bool?,
+                                        type: ::String?,
+                                        imported_value: ::String?,
+                                        component_name: ::String?,
+                                        property: ::String?
+                                      }?,
+                                      model: ::String?,
+                                      id: {
+                                        value: ::String?,
+                                        binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        collection_binding_properties: {
+                                          property: ::String,
+                                          field: ::String?
+                                        }?,
+                                        default_value: ::String?,
+                                        model: ::String?,
+                                        bindings: Hash[::String, {
+                                            element: ::String,
+                                            property: ::String
+                                          }]?,
+                                        event: ::String?,
+                                        user_attribute: ::String?,
+                                        concat: Array[
+                                          untyped,
+                                        ]?,
+                                        condition: {
+                                          property: ::String?,
+                                          field: ::String?,
+                                          operator: ::String?,
+                                          operand: ::String?,
+                                          then: untyped?,
+                                          else: untyped?,
+                                          operand_type: ::String?
+                                        }?,
+                                        configured: bool?,
+                                        type: ::String?,
+                                        imported_value: ::String?,
+                                        component_name: ::String?,
+                                        property: ::String?
+                                      }?,
+                                      fields: Hash[::String, {
+                                          value: ::String?,
+                                          binding_properties: {
+                                            property: ::String,
+                                            field: ::String?
+                                          }?,
+                                          collection_binding_properties: {
+                                            property: ::String,
+                                            field: ::String?
+                                          }?,
+                                          default_value: ::String?,
+                                          model: ::String?,
+                                          bindings: Hash[::String, {
+                                              element: ::String,
+                                              property: ::String
+                                            }]?,
+                                          event: ::String?,
+                                          user_attribute: ::String?,
+                                          concat: Array[
+                                            untyped,
+                                          ]?,
+                                          condition: {
+                                            property: ::String?,
+                                            field: ::String?,
+                                            operator: ::String?,
+                                            operand: ::String?,
+                                            then: untyped?,
+                                            else: untyped?,
+                                            operand_type: ::String?
+                                          }?,
+                                          configured: bool?,
+                                          type: ::String?,
+                                          imported_value: ::String?,
+                                          component_name: ::String?,
+                                          property: ::String?
+                                        }]?,
+                                      state: {
+                                        component_name: ::String,
+                                        property: ::String,
+                                        set: {
+                                          value: ::String?,
+                                          binding_properties: {
+                                            property: ::String,
+                                            field: ::String?
+                                          }?,
+                                          collection_binding_properties: {
+                                            property: ::String,
+                                            field: ::String?
+                                          }?,
+                                          default_value: ::String?,
+                                          model: ::String?,
+                                          bindings: Hash[::String, {
+                                              element: ::String,
+                                              property: ::String
+                                            }]?,
+                                          event: ::String?,
+                                          user_attribute: ::String?,
+                                          concat: Array[
+                                            untyped,
+                                          ]?,
+                                          condition: {
+                                            property: ::String?,
+                                            field: ::String?,
+                                            operator: ::String?,
+                                            operand: ::String?,
+                                            then: untyped?,
+                                            else: untyped?,
+                                            operand_type: ::String?
+                                          }?,
+                                          configured: bool?,
+                                          type: ::String?,
+                                          imported_value: ::String?,
+                                          component_name: ::String?,
+                                          property: ::String?
+                                        }
+                                      }?
+                                    }?,
+                                    binding_event: ::String?
+                                  }]?,
+                                schema_version: ::String?
+                              }
+                            ) -> _UpdateComponentResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateComponentResponseSuccess
+
+      interface _UpdateFormResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFormResponse]
+        def entity: () -> Types::Form
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#update_form-instance_method
+      def update_form: (
+                         app_id: ::String,
+                         environment_name: ::String,
+                         id: ::String,
+                         ?client_token: ::String,
+                         updated_form: {
+                           name: ::String?,
+                           data_type: {
+                             data_source_type: ("DataStore" | "Custom"),
+                             data_type_name: ::String
+                           }?,
+                           form_action_type: ("create" | "update")?,
+                           fields: Hash[::String, {
+                               label: ::String?,
+                               position: {
+                                 fixed: ("first")?,
+                                 right_of: ::String?,
+                                 below: ::String?
+                               }?,
+                               excluded: bool?,
+                               input_type: {
+                                 type: ::String,
+                                 required: bool?,
+                                 read_only: bool?,
+                                 placeholder: ::String?,
+                                 default_value: ::String?,
+                                 descriptive_text: ::String?,
+                                 default_checked: bool?,
+                                 default_country_code: ::String?,
+                                 value_mappings: {
+                                   values: Array[
+                                     {
+                                       display_value: {
+                                         value: ::String?,
+                                         binding_properties: {
+                                           property: ::String,
+                                           field: ::String?
+                                         }?,
+                                         concat: Array[
+                                           untyped,
+                                         ]?
+                                       }?,
+                                       value: {
+                                         value: ::String?,
+                                         binding_properties: {
+                                           property: ::String,
+                                           field: ::String?
+                                         }?,
+                                         concat: Array[
+                                           untyped,
+                                         ]?
+                                       }
+                                     },
+                                   ],
+                                   binding_properties: Hash[::String, {
+                                       type: ::String?,
+                                       binding_properties: {
+                                         model: ::String?
+                                       }?
+                                     }]?
+                                 }?,
+                                 name: ::String?,
+                                 min_value: ::Float?,
+                                 max_value: ::Float?,
+                                 step: ::Float?,
+                                 value: ::String?,
+                                 is_array: bool?,
+                                 file_uploader_config: {
+                                   access_level: ("public" | "protected" | "private"),
+                                   accepted_file_types: Array[::String],
+                                   show_thumbnails: bool?,
+                                   is_resumable: bool?,
+                                   max_file_count: ::Integer?,
+                                   max_size: ::Integer?
+                                 }?
+                               }?,
+                               validations: Array[
+                                 {
+                                   type: ::String,
+                                   str_values: Array[::String]?,
+                                   num_values: Array[::Integer]?,
+                                   validation_message: ::String?
+                                 },
+                               ]?
+                             }]?,
+                           style: {
+                             horizontal_gap: {
+                               token_reference: ::String?,
+                               value: ::String?
+                             }?,
+                             vertical_gap: {
+                               token_reference: ::String?,
+                               value: ::String?
+                             }?,
+                             outer_padding: {
+                               token_reference: ::String?,
+                               value: ::String?
+                             }?
+                           }?,
+                           sectional_elements: Hash[::String, {
+                               type: ::String,
+                               position: {
+                                 fixed: ("first")?,
+                                 right_of: ::String?,
+                                 below: ::String?
+                               }?,
+                               text: ::String?,
+                               level: ::Integer?,
+                               orientation: ::String?,
+                               excluded: bool?
+                             }]?,
+                           schema_version: ::String?,
+                           cta: {
+                             position: ("top" | "bottom" | "top_and_bottom")?,
+                             clear: {
+                               excluded: bool?,
+                               children: ::String?,
+                               position: {
+                                 fixed: ("first")?,
+                                 right_of: ::String?,
+                                 below: ::String?
+                               }?
+                             }?,
+                             cancel: {
+                               excluded: bool?,
+                               children: ::String?,
+                               position: {
+                                 fixed: ("first")?,
+                                 right_of: ::String?,
+                                 below: ::String?
+                               }?
+                             }?,
+                             submit: {
+                               excluded: bool?,
+                               children: ::String?,
+                               position: {
+                                 fixed: ("first")?,
+                                 right_of: ::String?,
+                                 below: ::String?
+                               }?
+                             }?
+                           }?,
+                           label_decorator: ("required" | "optional" | "none")?
+                         }
+                       ) -> _UpdateFormResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFormResponseSuccess
+
+      interface _UpdateThemeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateThemeResponse]
+        def entity: () -> Types::Theme
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AmplifyUIBuilder/Client.html#update_theme-instance_method
+      def update_theme: (
+                          app_id: ::String,
+                          environment_name: ::String,
+                          id: ::String,
+                          ?client_token: ::String,
+                          updated_theme: {
+                            id: ::String?,
+                            name: ::String?,
+                            values: Array[
+                              {
+                                key: ::String?,
+                                value: {
+                                  value: ::String?,
+                                  children: untyped?
+                                }?
+                              },
+                            ],
+                            overrides: Array[
+                              {
+                                key: ::String?,
+                                value: {
+                                  value: ::String?,
+                                  children: untyped?
+                                }?
+                              },
+                            ]?
+                          }
+                        ) -> _UpdateThemeResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateThemeResponseSuccess
+    end
+  end
+end
+

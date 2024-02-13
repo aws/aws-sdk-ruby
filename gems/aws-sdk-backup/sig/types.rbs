@@ -1,0 +1,1809 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Backup
+  module Types
+
+    class AdvancedBackupSetting
+      attr_accessor resource_type: ::String
+      attr_accessor backup_options: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class AlreadyExistsException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor creator_request_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor type: ::String
+      attr_accessor context: ::String
+      SENSITIVE: []
+    end
+
+    class BackupJob
+      attr_accessor account_id: ::String
+      attr_accessor backup_job_id: ::String
+      attr_accessor backup_vault_name: ::String
+      attr_accessor backup_vault_arn: ::String
+      attr_accessor recovery_point_arn: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor completion_date: ::Time
+      attr_accessor state: ("CREATED" | "PENDING" | "RUNNING" | "ABORTING" | "ABORTED" | "COMPLETED" | "FAILED" | "EXPIRED" | "PARTIAL")
+      attr_accessor status_message: ::String
+      attr_accessor percent_done: ::String
+      attr_accessor backup_size_in_bytes: ::Integer
+      attr_accessor iam_role_arn: ::String
+      attr_accessor created_by: Types::RecoveryPointCreator
+      attr_accessor expected_completion_date: ::Time
+      attr_accessor start_by: ::Time
+      attr_accessor resource_type: ::String
+      attr_accessor bytes_transferred: ::Integer
+      attr_accessor backup_options: ::Hash[::String, ::String]
+      attr_accessor backup_type: ::String
+      attr_accessor parent_job_id: ::String
+      attr_accessor is_parent: bool
+      attr_accessor resource_name: ::String
+      attr_accessor initiation_date: ::Time
+      attr_accessor message_category: ::String
+      SENSITIVE: []
+    end
+
+    class BackupJobSummary
+      attr_accessor region: ::String
+      attr_accessor account_id: ::String
+      attr_accessor state: ("CREATED" | "PENDING" | "RUNNING" | "ABORTING" | "ABORTED" | "COMPLETED" | "FAILED" | "EXPIRED" | "PARTIAL" | "AGGREGATE_ALL" | "ANY")
+      attr_accessor resource_type: ::String
+      attr_accessor message_category: ::String
+      attr_accessor count: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class BackupPlan
+      attr_accessor backup_plan_name: ::String
+      attr_accessor rules: ::Array[Types::BackupRule]
+      attr_accessor advanced_backup_settings: ::Array[Types::AdvancedBackupSetting]
+      SENSITIVE: []
+    end
+
+    class BackupPlanInput
+      attr_accessor backup_plan_name: ::String
+      attr_accessor rules: ::Array[Types::BackupRuleInput]
+      attr_accessor advanced_backup_settings: ::Array[Types::AdvancedBackupSetting]
+      SENSITIVE: []
+    end
+
+    class BackupPlanTemplatesListMember
+      attr_accessor backup_plan_template_id: ::String
+      attr_accessor backup_plan_template_name: ::String
+      SENSITIVE: []
+    end
+
+    class BackupPlansListMember
+      attr_accessor backup_plan_arn: ::String
+      attr_accessor backup_plan_id: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor deletion_date: ::Time
+      attr_accessor version_id: ::String
+      attr_accessor backup_plan_name: ::String
+      attr_accessor creator_request_id: ::String
+      attr_accessor last_execution_date: ::Time
+      attr_accessor advanced_backup_settings: ::Array[Types::AdvancedBackupSetting]
+      SENSITIVE: []
+    end
+
+    class BackupRule
+      attr_accessor rule_name: ::String
+      attr_accessor target_backup_vault_name: ::String
+      attr_accessor schedule_expression: ::String
+      attr_accessor start_window_minutes: ::Integer
+      attr_accessor completion_window_minutes: ::Integer
+      attr_accessor lifecycle: Types::Lifecycle
+      attr_accessor recovery_point_tags: ::Hash[::String, ::String]
+      attr_accessor rule_id: ::String
+      attr_accessor copy_actions: ::Array[Types::CopyAction]
+      attr_accessor enable_continuous_backup: bool
+      attr_accessor schedule_expression_timezone: ::String
+      SENSITIVE: [:recovery_point_tags]
+    end
+
+    class BackupRuleInput
+      attr_accessor rule_name: ::String
+      attr_accessor target_backup_vault_name: ::String
+      attr_accessor schedule_expression: ::String
+      attr_accessor start_window_minutes: ::Integer
+      attr_accessor completion_window_minutes: ::Integer
+      attr_accessor lifecycle: Types::Lifecycle
+      attr_accessor recovery_point_tags: ::Hash[::String, ::String]
+      attr_accessor copy_actions: ::Array[Types::CopyAction]
+      attr_accessor enable_continuous_backup: bool
+      attr_accessor schedule_expression_timezone: ::String
+      SENSITIVE: [:recovery_point_tags]
+    end
+
+    class BackupSelection
+      attr_accessor selection_name: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor resources: ::Array[::String]
+      attr_accessor list_of_tags: ::Array[Types::Condition]
+      attr_accessor not_resources: ::Array[::String]
+      attr_accessor conditions: Types::Conditions
+      SENSITIVE: []
+    end
+
+    class BackupSelectionsListMember
+      attr_accessor selection_id: ::String
+      attr_accessor selection_name: ::String
+      attr_accessor backup_plan_id: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor creator_request_id: ::String
+      attr_accessor iam_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class BackupVaultListMember
+      attr_accessor backup_vault_name: ::String
+      attr_accessor backup_vault_arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor creator_request_id: ::String
+      attr_accessor number_of_recovery_points: ::Integer
+      attr_accessor locked: bool
+      attr_accessor min_retention_days: ::Integer
+      attr_accessor max_retention_days: ::Integer
+      attr_accessor lock_date: ::Time
+      SENSITIVE: []
+    end
+
+    class CalculatedLifecycle
+      attr_accessor move_to_cold_storage_at: ::Time
+      attr_accessor delete_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CancelLegalHoldInput
+      attr_accessor legal_hold_id: ::String
+      attr_accessor cancel_description: ::String
+      attr_accessor retain_record_in_days: ::Integer
+      SENSITIVE: []
+    end
+
+    class CancelLegalHoldOutput < Aws::EmptyStructure
+    end
+
+    class Condition
+      attr_accessor condition_type: ("STRINGEQUALS")
+      attr_accessor condition_key: ::String
+      attr_accessor condition_value: ::String
+      SENSITIVE: []
+    end
+
+    class ConditionParameter
+      attr_accessor condition_key: ::String
+      attr_accessor condition_value: ::String
+      SENSITIVE: []
+    end
+
+    class Conditions
+      attr_accessor string_equals: ::Array[Types::ConditionParameter]
+      attr_accessor string_not_equals: ::Array[Types::ConditionParameter]
+      attr_accessor string_like: ::Array[Types::ConditionParameter]
+      attr_accessor string_not_like: ::Array[Types::ConditionParameter]
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor type: ::String
+      attr_accessor context: ::String
+      SENSITIVE: []
+    end
+
+    class ControlInputParameter
+      attr_accessor parameter_name: ::String
+      attr_accessor parameter_value: ::String
+      SENSITIVE: []
+    end
+
+    class ControlScope
+      attr_accessor compliance_resource_ids: ::Array[::String]
+      attr_accessor compliance_resource_types: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CopyAction
+      attr_accessor lifecycle: Types::Lifecycle
+      attr_accessor destination_backup_vault_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CopyJob
+      attr_accessor account_id: ::String
+      attr_accessor copy_job_id: ::String
+      attr_accessor source_backup_vault_arn: ::String
+      attr_accessor source_recovery_point_arn: ::String
+      attr_accessor destination_backup_vault_arn: ::String
+      attr_accessor destination_recovery_point_arn: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor completion_date: ::Time
+      attr_accessor state: ("CREATED" | "RUNNING" | "COMPLETED" | "FAILED" | "PARTIAL")
+      attr_accessor status_message: ::String
+      attr_accessor backup_size_in_bytes: ::Integer
+      attr_accessor iam_role_arn: ::String
+      attr_accessor created_by: Types::RecoveryPointCreator
+      attr_accessor resource_type: ::String
+      attr_accessor parent_job_id: ::String
+      attr_accessor is_parent: bool
+      attr_accessor composite_member_identifier: ::String
+      attr_accessor number_of_child_jobs: ::Integer
+      attr_accessor child_jobs_in_state: ::Hash[("CREATED" | "RUNNING" | "COMPLETED" | "FAILED" | "PARTIAL"), ::Integer]
+      attr_accessor resource_name: ::String
+      attr_accessor message_category: ::String
+      SENSITIVE: []
+    end
+
+    class CopyJobSummary
+      attr_accessor region: ::String
+      attr_accessor account_id: ::String
+      attr_accessor state: ("CREATED" | "RUNNING" | "ABORTING" | "ABORTED" | "COMPLETING" | "COMPLETED" | "FAILING" | "FAILED" | "PARTIAL" | "AGGREGATE_ALL" | "ANY")
+      attr_accessor resource_type: ::String
+      attr_accessor message_category: ::String
+      attr_accessor count: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateBackupPlanInput
+      attr_accessor backup_plan: Types::BackupPlanInput
+      attr_accessor backup_plan_tags: ::Hash[::String, ::String]
+      attr_accessor creator_request_id: ::String
+      SENSITIVE: [:backup_plan_tags]
+    end
+
+    class CreateBackupPlanOutput
+      attr_accessor backup_plan_id: ::String
+      attr_accessor backup_plan_arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor version_id: ::String
+      attr_accessor advanced_backup_settings: ::Array[Types::AdvancedBackupSetting]
+      SENSITIVE: []
+    end
+
+    class CreateBackupSelectionInput
+      attr_accessor backup_plan_id: ::String
+      attr_accessor backup_selection: Types::BackupSelection
+      attr_accessor creator_request_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBackupSelectionOutput
+      attr_accessor selection_id: ::String
+      attr_accessor backup_plan_id: ::String
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateBackupVaultInput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor backup_vault_tags: ::Hash[::String, ::String]
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor creator_request_id: ::String
+      SENSITIVE: [:backup_vault_tags]
+    end
+
+    class CreateBackupVaultOutput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor backup_vault_arn: ::String
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateFrameworkInput
+      attr_accessor framework_name: ::String
+      attr_accessor framework_description: ::String
+      attr_accessor framework_controls: ::Array[Types::FrameworkControl]
+      attr_accessor idempotency_token: ::String
+      attr_accessor framework_tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateFrameworkOutput
+      attr_accessor framework_name: ::String
+      attr_accessor framework_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLegalHoldInput
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor idempotency_token: ::String
+      attr_accessor recovery_point_selection: Types::RecoveryPointSelection
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class CreateLegalHoldOutput
+      attr_accessor title: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "CANCELING" | "CANCELED")
+      attr_accessor description: ::String
+      attr_accessor legal_hold_id: ::String
+      attr_accessor legal_hold_arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor recovery_point_selection: Types::RecoveryPointSelection
+      SENSITIVE: []
+    end
+
+    class CreateLogicallyAirGappedBackupVaultInput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor backup_vault_tags: ::Hash[::String, ::String]
+      attr_accessor creator_request_id: ::String
+      attr_accessor min_retention_days: ::Integer
+      attr_accessor max_retention_days: ::Integer
+      SENSITIVE: [:backup_vault_tags]
+    end
+
+    class CreateLogicallyAirGappedBackupVaultOutput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor backup_vault_arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor vault_state: ("CREATING" | "AVAILABLE" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class CreateReportPlanInput
+      attr_accessor report_plan_name: ::String
+      attr_accessor report_plan_description: ::String
+      attr_accessor report_delivery_channel: Types::ReportDeliveryChannel
+      attr_accessor report_setting: Types::ReportSetting
+      attr_accessor report_plan_tags: ::Hash[::String, ::String]
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateReportPlanOutput
+      attr_accessor report_plan_name: ::String
+      attr_accessor report_plan_arn: ::String
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateRestoreTestingPlanInput
+      attr_accessor creator_request_id: ::String
+      attr_accessor restore_testing_plan: Types::RestoreTestingPlanForCreate
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class CreateRestoreTestingPlanOutput
+      attr_accessor creation_time: ::Time
+      attr_accessor restore_testing_plan_arn: ::String
+      attr_accessor restore_testing_plan_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRestoreTestingSelectionInput
+      attr_accessor creator_request_id: ::String
+      attr_accessor restore_testing_plan_name: ::String
+      attr_accessor restore_testing_selection: Types::RestoreTestingSelectionForCreate
+      SENSITIVE: []
+    end
+
+    class CreateRestoreTestingSelectionOutput
+      attr_accessor creation_time: ::Time
+      attr_accessor restore_testing_plan_arn: ::String
+      attr_accessor restore_testing_plan_name: ::String
+      attr_accessor restore_testing_selection_name: ::String
+      SENSITIVE: []
+    end
+
+    class DateRange
+      attr_accessor from_date: ::Time
+      attr_accessor to_date: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteBackupPlanInput
+      attr_accessor backup_plan_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBackupPlanOutput
+      attr_accessor backup_plan_id: ::String
+      attr_accessor backup_plan_arn: ::String
+      attr_accessor deletion_date: ::Time
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBackupSelectionInput
+      attr_accessor backup_plan_id: ::String
+      attr_accessor selection_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBackupVaultAccessPolicyInput
+      attr_accessor backup_vault_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBackupVaultInput
+      attr_accessor backup_vault_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBackupVaultLockConfigurationInput
+      attr_accessor backup_vault_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBackupVaultNotificationsInput
+      attr_accessor backup_vault_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFrameworkInput
+      attr_accessor framework_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRecoveryPointInput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor recovery_point_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReportPlanInput
+      attr_accessor report_plan_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRestoreTestingPlanInput
+      attr_accessor restore_testing_plan_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRestoreTestingSelectionInput
+      attr_accessor restore_testing_plan_name: ::String
+      attr_accessor restore_testing_selection_name: ::String
+      SENSITIVE: []
+    end
+
+    class DependencyFailureException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor type: ::String
+      attr_accessor context: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBackupJobInput
+      attr_accessor backup_job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBackupJobOutput
+      attr_accessor account_id: ::String
+      attr_accessor backup_job_id: ::String
+      attr_accessor backup_vault_name: ::String
+      attr_accessor backup_vault_arn: ::String
+      attr_accessor recovery_point_arn: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor completion_date: ::Time
+      attr_accessor state: ("CREATED" | "PENDING" | "RUNNING" | "ABORTING" | "ABORTED" | "COMPLETED" | "FAILED" | "EXPIRED" | "PARTIAL")
+      attr_accessor status_message: ::String
+      attr_accessor percent_done: ::String
+      attr_accessor backup_size_in_bytes: ::Integer
+      attr_accessor iam_role_arn: ::String
+      attr_accessor created_by: Types::RecoveryPointCreator
+      attr_accessor resource_type: ::String
+      attr_accessor bytes_transferred: ::Integer
+      attr_accessor expected_completion_date: ::Time
+      attr_accessor start_by: ::Time
+      attr_accessor backup_options: ::Hash[::String, ::String]
+      attr_accessor backup_type: ::String
+      attr_accessor parent_job_id: ::String
+      attr_accessor is_parent: bool
+      attr_accessor number_of_child_jobs: ::Integer
+      attr_accessor child_jobs_in_state: ::Hash[("CREATED" | "PENDING" | "RUNNING" | "ABORTING" | "ABORTED" | "COMPLETED" | "FAILED" | "EXPIRED" | "PARTIAL"), ::Integer]
+      attr_accessor resource_name: ::String
+      attr_accessor initiation_date: ::Time
+      attr_accessor message_category: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBackupVaultInput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor backup_vault_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBackupVaultOutput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor backup_vault_arn: ::String
+      attr_accessor vault_type: ("BACKUP_VAULT" | "LOGICALLY_AIR_GAPPED_BACKUP_VAULT")
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor creator_request_id: ::String
+      attr_accessor number_of_recovery_points: ::Integer
+      attr_accessor locked: bool
+      attr_accessor min_retention_days: ::Integer
+      attr_accessor max_retention_days: ::Integer
+      attr_accessor lock_date: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeCopyJobInput
+      attr_accessor copy_job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCopyJobOutput
+      attr_accessor copy_job: Types::CopyJob
+      SENSITIVE: []
+    end
+
+    class DescribeFrameworkInput
+      attr_accessor framework_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFrameworkOutput
+      attr_accessor framework_name: ::String
+      attr_accessor framework_arn: ::String
+      attr_accessor framework_description: ::String
+      attr_accessor framework_controls: ::Array[Types::FrameworkControl]
+      attr_accessor creation_time: ::Time
+      attr_accessor deployment_status: ::String
+      attr_accessor framework_status: ::String
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeGlobalSettingsInput < Aws::EmptyStructure
+    end
+
+    class DescribeGlobalSettingsOutput
+      attr_accessor global_settings: ::Hash[::String, ::String]
+      attr_accessor last_update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeProtectedResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProtectedResourceOutput
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor last_backup_time: ::Time
+      attr_accessor resource_name: ::String
+      attr_accessor last_backup_vault_arn: ::String
+      attr_accessor last_recovery_point_arn: ::String
+      attr_accessor latest_restore_execution_time_minutes: ::Integer
+      attr_accessor latest_restore_job_creation_date: ::Time
+      attr_accessor latest_restore_recovery_point_creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeRecoveryPointInput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor recovery_point_arn: ::String
+      attr_accessor backup_vault_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRecoveryPointOutput
+      attr_accessor recovery_point_arn: ::String
+      attr_accessor backup_vault_name: ::String
+      attr_accessor backup_vault_arn: ::String
+      attr_accessor source_backup_vault_arn: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor created_by: Types::RecoveryPointCreator
+      attr_accessor iam_role_arn: ::String
+      attr_accessor status: ("COMPLETED" | "PARTIAL" | "DELETING" | "EXPIRED")
+      attr_accessor status_message: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor completion_date: ::Time
+      attr_accessor backup_size_in_bytes: ::Integer
+      attr_accessor calculated_lifecycle: Types::CalculatedLifecycle
+      attr_accessor lifecycle: Types::Lifecycle
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor is_encrypted: bool
+      attr_accessor storage_class: ("WARM" | "COLD" | "DELETED")
+      attr_accessor last_restore_time: ::Time
+      attr_accessor parent_recovery_point_arn: ::String
+      attr_accessor composite_member_identifier: ::String
+      attr_accessor is_parent: bool
+      attr_accessor resource_name: ::String
+      attr_accessor vault_type: ("BACKUP_VAULT" | "LOGICALLY_AIR_GAPPED_BACKUP_VAULT")
+      SENSITIVE: []
+    end
+
+    class DescribeRegionSettingsInput < Aws::EmptyStructure
+    end
+
+    class DescribeRegionSettingsOutput
+      attr_accessor resource_type_opt_in_preference: ::Hash[::String, bool]
+      attr_accessor resource_type_management_preference: ::Hash[::String, bool]
+      SENSITIVE: []
+    end
+
+    class DescribeReportJobInput
+      attr_accessor report_job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReportJobOutput
+      attr_accessor report_job: Types::ReportJob
+      SENSITIVE: []
+    end
+
+    class DescribeReportPlanInput
+      attr_accessor report_plan_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReportPlanOutput
+      attr_accessor report_plan: Types::ReportPlan
+      SENSITIVE: []
+    end
+
+    class DescribeRestoreJobInput
+      attr_accessor restore_job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRestoreJobOutput
+      attr_accessor account_id: ::String
+      attr_accessor restore_job_id: ::String
+      attr_accessor recovery_point_arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor completion_date: ::Time
+      attr_accessor status: ("PENDING" | "RUNNING" | "COMPLETED" | "ABORTED" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor percent_done: ::String
+      attr_accessor backup_size_in_bytes: ::Integer
+      attr_accessor iam_role_arn: ::String
+      attr_accessor expected_completion_time_minutes: ::Integer
+      attr_accessor created_resource_arn: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor recovery_point_creation_date: ::Time
+      attr_accessor created_by: Types::RestoreJobCreator
+      attr_accessor validation_status: ("FAILED" | "SUCCESSFUL" | "TIMED_OUT" | "VALIDATING")
+      attr_accessor validation_status_message: ::String
+      attr_accessor deletion_status: ("DELETING" | "FAILED" | "SUCCESSFUL")
+      attr_accessor deletion_status_message: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateRecoveryPointFromParentInput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor recovery_point_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateRecoveryPointInput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor recovery_point_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ExportBackupPlanTemplateInput
+      attr_accessor backup_plan_id: ::String
+      SENSITIVE: []
+    end
+
+    class ExportBackupPlanTemplateOutput
+      attr_accessor backup_plan_template_json: ::String
+      SENSITIVE: []
+    end
+
+    class Framework
+      attr_accessor framework_name: ::String
+      attr_accessor framework_arn: ::String
+      attr_accessor framework_description: ::String
+      attr_accessor number_of_controls: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor deployment_status: ::String
+      SENSITIVE: []
+    end
+
+    class FrameworkControl
+      attr_accessor control_name: ::String
+      attr_accessor control_input_parameters: ::Array[Types::ControlInputParameter]
+      attr_accessor control_scope: Types::ControlScope
+      SENSITIVE: []
+    end
+
+    class GetBackupPlanFromJSONInput
+      attr_accessor backup_plan_template_json: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackupPlanFromJSONOutput
+      attr_accessor backup_plan: Types::BackupPlan
+      SENSITIVE: []
+    end
+
+    class GetBackupPlanFromTemplateInput
+      attr_accessor backup_plan_template_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackupPlanFromTemplateOutput
+      attr_accessor backup_plan_document: Types::BackupPlan
+      SENSITIVE: []
+    end
+
+    class GetBackupPlanInput
+      attr_accessor backup_plan_id: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackupPlanOutput
+      attr_accessor backup_plan: Types::BackupPlan
+      attr_accessor backup_plan_id: ::String
+      attr_accessor backup_plan_arn: ::String
+      attr_accessor version_id: ::String
+      attr_accessor creator_request_id: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor deletion_date: ::Time
+      attr_accessor last_execution_date: ::Time
+      attr_accessor advanced_backup_settings: ::Array[Types::AdvancedBackupSetting]
+      SENSITIVE: []
+    end
+
+    class GetBackupSelectionInput
+      attr_accessor backup_plan_id: ::String
+      attr_accessor selection_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackupSelectionOutput
+      attr_accessor backup_selection: Types::BackupSelection
+      attr_accessor selection_id: ::String
+      attr_accessor backup_plan_id: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor creator_request_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackupVaultAccessPolicyInput
+      attr_accessor backup_vault_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackupVaultAccessPolicyOutput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor backup_vault_arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackupVaultNotificationsInput
+      attr_accessor backup_vault_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackupVaultNotificationsOutput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor backup_vault_arn: ::String
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor backup_vault_events: ::Array[("BACKUP_JOB_STARTED" | "BACKUP_JOB_COMPLETED" | "BACKUP_JOB_SUCCESSFUL" | "BACKUP_JOB_FAILED" | "BACKUP_JOB_EXPIRED" | "RESTORE_JOB_STARTED" | "RESTORE_JOB_COMPLETED" | "RESTORE_JOB_SUCCESSFUL" | "RESTORE_JOB_FAILED" | "COPY_JOB_STARTED" | "COPY_JOB_SUCCESSFUL" | "COPY_JOB_FAILED" | "RECOVERY_POINT_MODIFIED" | "BACKUP_PLAN_CREATED" | "BACKUP_PLAN_MODIFIED" | "S3_BACKUP_OBJECT_FAILED" | "S3_RESTORE_OBJECT_FAILED")]
+      SENSITIVE: []
+    end
+
+    class GetLegalHoldInput
+      attr_accessor legal_hold_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetLegalHoldOutput
+      attr_accessor title: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "CANCELING" | "CANCELED")
+      attr_accessor description: ::String
+      attr_accessor cancel_description: ::String
+      attr_accessor legal_hold_id: ::String
+      attr_accessor legal_hold_arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor cancellation_date: ::Time
+      attr_accessor retain_record_until: ::Time
+      attr_accessor recovery_point_selection: Types::RecoveryPointSelection
+      SENSITIVE: []
+    end
+
+    class GetRecoveryPointRestoreMetadataInput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor recovery_point_arn: ::String
+      attr_accessor backup_vault_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRecoveryPointRestoreMetadataOutput
+      attr_accessor backup_vault_arn: ::String
+      attr_accessor recovery_point_arn: ::String
+      attr_accessor restore_metadata: ::Hash[::String, ::String]
+      attr_accessor resource_type: ::String
+      SENSITIVE: [:restore_metadata]
+    end
+
+    class GetRestoreJobMetadataInput
+      attr_accessor restore_job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRestoreJobMetadataOutput
+      attr_accessor restore_job_id: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      SENSITIVE: [:metadata]
+    end
+
+    class GetRestoreTestingInferredMetadataInput
+      attr_accessor backup_vault_account_id: ::String
+      attr_accessor backup_vault_name: ::String
+      attr_accessor recovery_point_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetRestoreTestingInferredMetadataOutput
+      attr_accessor inferred_metadata: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetRestoreTestingPlanInput
+      attr_accessor restore_testing_plan_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetRestoreTestingPlanOutput
+      attr_accessor restore_testing_plan: Types::RestoreTestingPlanForGet
+      SENSITIVE: []
+    end
+
+    class GetRestoreTestingSelectionInput
+      attr_accessor restore_testing_plan_name: ::String
+      attr_accessor restore_testing_selection_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetRestoreTestingSelectionOutput
+      attr_accessor restore_testing_selection: Types::RestoreTestingSelectionForGet
+      SENSITIVE: []
+    end
+
+    class GetSupportedResourceTypesOutput
+      attr_accessor resource_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InvalidParameterValueException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor type: ::String
+      attr_accessor context: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor type: ::String
+      attr_accessor context: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidResourceStateException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor type: ::String
+      attr_accessor context: ::String
+      SENSITIVE: []
+    end
+
+    class KeyValue
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class LegalHold
+      attr_accessor title: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "CANCELING" | "CANCELED")
+      attr_accessor description: ::String
+      attr_accessor legal_hold_id: ::String
+      attr_accessor legal_hold_arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor cancellation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class Lifecycle
+      attr_accessor move_to_cold_storage_after_days: ::Integer
+      attr_accessor delete_after_days: ::Integer
+      attr_accessor opt_in_to_archive_for_supported_resources: bool
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor type: ::String
+      attr_accessor context: ::String
+      SENSITIVE: []
+    end
+
+    class ListBackupJobSummariesInput
+      attr_accessor account_id: ::String
+      attr_accessor state: ("CREATED" | "PENDING" | "RUNNING" | "ABORTING" | "ABORTED" | "COMPLETED" | "FAILED" | "EXPIRED" | "PARTIAL" | "AGGREGATE_ALL" | "ANY")
+      attr_accessor resource_type: ::String
+      attr_accessor message_category: ::String
+      attr_accessor aggregation_period: ("ONE_DAY" | "SEVEN_DAYS" | "FOURTEEN_DAYS")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBackupJobSummariesOutput
+      attr_accessor backup_job_summaries: ::Array[Types::BackupJobSummary]
+      attr_accessor aggregation_period: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBackupJobsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor by_resource_arn: ::String
+      attr_accessor by_state: ("CREATED" | "PENDING" | "RUNNING" | "ABORTING" | "ABORTED" | "COMPLETED" | "FAILED" | "EXPIRED" | "PARTIAL")
+      attr_accessor by_backup_vault_name: ::String
+      attr_accessor by_created_before: ::Time
+      attr_accessor by_created_after: ::Time
+      attr_accessor by_resource_type: ::String
+      attr_accessor by_account_id: ::String
+      attr_accessor by_complete_after: ::Time
+      attr_accessor by_complete_before: ::Time
+      attr_accessor by_parent_job_id: ::String
+      attr_accessor by_message_category: ::String
+      SENSITIVE: []
+    end
+
+    class ListBackupJobsOutput
+      attr_accessor backup_jobs: ::Array[Types::BackupJob]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBackupPlanTemplatesInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListBackupPlanTemplatesOutput
+      attr_accessor next_token: ::String
+      attr_accessor backup_plan_templates_list: ::Array[Types::BackupPlanTemplatesListMember]
+      SENSITIVE: []
+    end
+
+    class ListBackupPlanVersionsInput
+      attr_accessor backup_plan_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListBackupPlanVersionsOutput
+      attr_accessor next_token: ::String
+      attr_accessor backup_plan_versions_list: ::Array[Types::BackupPlansListMember]
+      SENSITIVE: []
+    end
+
+    class ListBackupPlansInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor include_deleted: bool
+      SENSITIVE: []
+    end
+
+    class ListBackupPlansOutput
+      attr_accessor next_token: ::String
+      attr_accessor backup_plans_list: ::Array[Types::BackupPlansListMember]
+      SENSITIVE: []
+    end
+
+    class ListBackupSelectionsInput
+      attr_accessor backup_plan_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListBackupSelectionsOutput
+      attr_accessor next_token: ::String
+      attr_accessor backup_selections_list: ::Array[Types::BackupSelectionsListMember]
+      SENSITIVE: []
+    end
+
+    class ListBackupVaultsInput
+      attr_accessor by_vault_type: ("BACKUP_VAULT" | "LOGICALLY_AIR_GAPPED_BACKUP_VAULT")
+      attr_accessor by_shared: bool
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListBackupVaultsOutput
+      attr_accessor backup_vault_list: ::Array[Types::BackupVaultListMember]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCopyJobSummariesInput
+      attr_accessor account_id: ::String
+      attr_accessor state: ("CREATED" | "RUNNING" | "ABORTING" | "ABORTED" | "COMPLETING" | "COMPLETED" | "FAILING" | "FAILED" | "PARTIAL" | "AGGREGATE_ALL" | "ANY")
+      attr_accessor resource_type: ::String
+      attr_accessor message_category: ::String
+      attr_accessor aggregation_period: ("ONE_DAY" | "SEVEN_DAYS" | "FOURTEEN_DAYS")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCopyJobSummariesOutput
+      attr_accessor copy_job_summaries: ::Array[Types::CopyJobSummary]
+      attr_accessor aggregation_period: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCopyJobsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor by_resource_arn: ::String
+      attr_accessor by_state: ("CREATED" | "RUNNING" | "COMPLETED" | "FAILED" | "PARTIAL")
+      attr_accessor by_created_before: ::Time
+      attr_accessor by_created_after: ::Time
+      attr_accessor by_resource_type: ::String
+      attr_accessor by_destination_vault_arn: ::String
+      attr_accessor by_account_id: ::String
+      attr_accessor by_complete_before: ::Time
+      attr_accessor by_complete_after: ::Time
+      attr_accessor by_parent_job_id: ::String
+      attr_accessor by_message_category: ::String
+      SENSITIVE: []
+    end
+
+    class ListCopyJobsOutput
+      attr_accessor copy_jobs: ::Array[Types::CopyJob]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFrameworksInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFrameworksOutput
+      attr_accessor frameworks: ::Array[Types::Framework]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLegalHoldsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListLegalHoldsOutput
+      attr_accessor next_token: ::String
+      attr_accessor legal_holds: ::Array[Types::LegalHold]
+      SENSITIVE: []
+    end
+
+    class ListProtectedResourcesByBackupVaultInput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor backup_vault_account_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProtectedResourcesByBackupVaultOutput
+      attr_accessor results: ::Array[Types::ProtectedResource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProtectedResourcesInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProtectedResourcesOutput
+      attr_accessor results: ::Array[Types::ProtectedResource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecoveryPointsByBackupVaultInput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor backup_vault_account_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor by_resource_arn: ::String
+      attr_accessor by_resource_type: ::String
+      attr_accessor by_backup_plan_id: ::String
+      attr_accessor by_created_before: ::Time
+      attr_accessor by_created_after: ::Time
+      attr_accessor by_parent_recovery_point_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecoveryPointsByBackupVaultOutput
+      attr_accessor next_token: ::String
+      attr_accessor recovery_points: ::Array[Types::RecoveryPointByBackupVault]
+      SENSITIVE: []
+    end
+
+    class ListRecoveryPointsByLegalHoldInput
+      attr_accessor legal_hold_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRecoveryPointsByLegalHoldOutput
+      attr_accessor recovery_points: ::Array[Types::RecoveryPointMember]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecoveryPointsByResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRecoveryPointsByResourceOutput
+      attr_accessor next_token: ::String
+      attr_accessor recovery_points: ::Array[Types::RecoveryPointByResource]
+      SENSITIVE: []
+    end
+
+    class ListReportJobsInput
+      attr_accessor by_report_plan_name: ::String
+      attr_accessor by_creation_before: ::Time
+      attr_accessor by_creation_after: ::Time
+      attr_accessor by_status: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReportJobsOutput
+      attr_accessor report_jobs: ::Array[Types::ReportJob]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReportPlansInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReportPlansOutput
+      attr_accessor report_plans: ::Array[Types::ReportPlan]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRestoreJobSummariesInput
+      attr_accessor account_id: ::String
+      attr_accessor state: ("CREATED" | "PENDING" | "RUNNING" | "ABORTED" | "COMPLETED" | "FAILED" | "AGGREGATE_ALL" | "ANY")
+      attr_accessor resource_type: ::String
+      attr_accessor aggregation_period: ("ONE_DAY" | "SEVEN_DAYS" | "FOURTEEN_DAYS")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRestoreJobSummariesOutput
+      attr_accessor restore_job_summaries: ::Array[Types::RestoreJobSummary]
+      attr_accessor aggregation_period: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRestoreJobsByProtectedResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor by_status: ("PENDING" | "RUNNING" | "COMPLETED" | "ABORTED" | "FAILED")
+      attr_accessor by_recovery_point_creation_date_after: ::Time
+      attr_accessor by_recovery_point_creation_date_before: ::Time
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRestoreJobsByProtectedResourceOutput
+      attr_accessor restore_jobs: ::Array[Types::RestoreJobsListMember]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRestoreJobsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor by_account_id: ::String
+      attr_accessor by_resource_type: ::String
+      attr_accessor by_created_before: ::Time
+      attr_accessor by_created_after: ::Time
+      attr_accessor by_status: ("PENDING" | "RUNNING" | "COMPLETED" | "ABORTED" | "FAILED")
+      attr_accessor by_complete_before: ::Time
+      attr_accessor by_complete_after: ::Time
+      attr_accessor by_restore_testing_plan_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListRestoreJobsOutput
+      attr_accessor restore_jobs: ::Array[Types::RestoreJobsListMember]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRestoreTestingPlansInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRestoreTestingPlansOutput
+      attr_accessor next_token: ::String
+      attr_accessor restore_testing_plans: ::Array[Types::RestoreTestingPlanForList]
+      SENSITIVE: []
+    end
+
+    class ListRestoreTestingSelectionsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor restore_testing_plan_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListRestoreTestingSelectionsOutput
+      attr_accessor next_token: ::String
+      attr_accessor restore_testing_selections: ::Array[Types::RestoreTestingSelectionForList]
+      SENSITIVE: []
+    end
+
+    class ListTagsInput
+      attr_accessor resource_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTagsOutput
+      attr_accessor next_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class MissingParameterValueException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor type: ::String
+      attr_accessor context: ::String
+      SENSITIVE: []
+    end
+
+    class ProtectedResource
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor last_backup_time: ::Time
+      attr_accessor resource_name: ::String
+      attr_accessor last_backup_vault_arn: ::String
+      attr_accessor last_recovery_point_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ProtectedResourceConditions
+      attr_accessor string_equals: ::Array[Types::KeyValue]
+      attr_accessor string_not_equals: ::Array[Types::KeyValue]
+      SENSITIVE: []
+    end
+
+    class PutBackupVaultAccessPolicyInput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutBackupVaultLockConfigurationInput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor min_retention_days: ::Integer
+      attr_accessor max_retention_days: ::Integer
+      attr_accessor changeable_for_days: ::Integer
+      SENSITIVE: []
+    end
+
+    class PutBackupVaultNotificationsInput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor backup_vault_events: ::Array[("BACKUP_JOB_STARTED" | "BACKUP_JOB_COMPLETED" | "BACKUP_JOB_SUCCESSFUL" | "BACKUP_JOB_FAILED" | "BACKUP_JOB_EXPIRED" | "RESTORE_JOB_STARTED" | "RESTORE_JOB_COMPLETED" | "RESTORE_JOB_SUCCESSFUL" | "RESTORE_JOB_FAILED" | "COPY_JOB_STARTED" | "COPY_JOB_SUCCESSFUL" | "COPY_JOB_FAILED" | "RECOVERY_POINT_MODIFIED" | "BACKUP_PLAN_CREATED" | "BACKUP_PLAN_MODIFIED" | "S3_BACKUP_OBJECT_FAILED" | "S3_RESTORE_OBJECT_FAILED")]
+      SENSITIVE: []
+    end
+
+    class PutRestoreValidationResultInput
+      attr_accessor restore_job_id: ::String
+      attr_accessor validation_status: ("FAILED" | "SUCCESSFUL" | "TIMED_OUT" | "VALIDATING")
+      attr_accessor validation_status_message: ::String
+      SENSITIVE: []
+    end
+
+    class RecoveryPointByBackupVault
+      attr_accessor recovery_point_arn: ::String
+      attr_accessor backup_vault_name: ::String
+      attr_accessor backup_vault_arn: ::String
+      attr_accessor source_backup_vault_arn: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor created_by: Types::RecoveryPointCreator
+      attr_accessor iam_role_arn: ::String
+      attr_accessor status: ("COMPLETED" | "PARTIAL" | "DELETING" | "EXPIRED")
+      attr_accessor status_message: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor completion_date: ::Time
+      attr_accessor backup_size_in_bytes: ::Integer
+      attr_accessor calculated_lifecycle: Types::CalculatedLifecycle
+      attr_accessor lifecycle: Types::Lifecycle
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor is_encrypted: bool
+      attr_accessor last_restore_time: ::Time
+      attr_accessor parent_recovery_point_arn: ::String
+      attr_accessor composite_member_identifier: ::String
+      attr_accessor is_parent: bool
+      attr_accessor resource_name: ::String
+      attr_accessor vault_type: ("BACKUP_VAULT" | "LOGICALLY_AIR_GAPPED_BACKUP_VAULT")
+      SENSITIVE: []
+    end
+
+    class RecoveryPointByResource
+      attr_accessor recovery_point_arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor status: ("COMPLETED" | "PARTIAL" | "DELETING" | "EXPIRED")
+      attr_accessor status_message: ::String
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor backup_size_bytes: ::Integer
+      attr_accessor backup_vault_name: ::String
+      attr_accessor is_parent: bool
+      attr_accessor parent_recovery_point_arn: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class RecoveryPointCreator
+      attr_accessor backup_plan_id: ::String
+      attr_accessor backup_plan_arn: ::String
+      attr_accessor backup_plan_version: ::String
+      attr_accessor backup_rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class RecoveryPointMember
+      attr_accessor recovery_point_arn: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor backup_vault_name: ::String
+      SENSITIVE: []
+    end
+
+    class RecoveryPointSelection
+      attr_accessor vault_names: ::Array[::String]
+      attr_accessor resource_identifiers: ::Array[::String]
+      attr_accessor date_range: Types::DateRange
+      SENSITIVE: []
+    end
+
+    class ReportDeliveryChannel
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_key_prefix: ::String
+      attr_accessor formats: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ReportDestination
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ReportJob
+      attr_accessor report_job_id: ::String
+      attr_accessor report_plan_arn: ::String
+      attr_accessor report_template: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor completion_time: ::Time
+      attr_accessor status: ::String
+      attr_accessor status_message: ::String
+      attr_accessor report_destination: Types::ReportDestination
+      SENSITIVE: []
+    end
+
+    class ReportPlan
+      attr_accessor report_plan_arn: ::String
+      attr_accessor report_plan_name: ::String
+      attr_accessor report_plan_description: ::String
+      attr_accessor report_setting: Types::ReportSetting
+      attr_accessor report_delivery_channel: Types::ReportDeliveryChannel
+      attr_accessor deployment_status: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_attempted_execution_time: ::Time
+      attr_accessor last_successful_execution_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ReportSetting
+      attr_accessor report_template: ::String
+      attr_accessor framework_arns: ::Array[::String]
+      attr_accessor number_of_frameworks: ::Integer
+      attr_accessor accounts: ::Array[::String]
+      attr_accessor organization_units: ::Array[::String]
+      attr_accessor regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor type: ::String
+      attr_accessor context: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreJobCreator
+      attr_accessor restore_testing_plan_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreJobSummary
+      attr_accessor region: ::String
+      attr_accessor account_id: ::String
+      attr_accessor state: ("CREATED" | "PENDING" | "RUNNING" | "ABORTED" | "COMPLETED" | "FAILED" | "AGGREGATE_ALL" | "ANY")
+      attr_accessor resource_type: ::String
+      attr_accessor count: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class RestoreJobsListMember
+      attr_accessor account_id: ::String
+      attr_accessor restore_job_id: ::String
+      attr_accessor recovery_point_arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor completion_date: ::Time
+      attr_accessor status: ("PENDING" | "RUNNING" | "COMPLETED" | "ABORTED" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor percent_done: ::String
+      attr_accessor backup_size_in_bytes: ::Integer
+      attr_accessor iam_role_arn: ::String
+      attr_accessor expected_completion_time_minutes: ::Integer
+      attr_accessor created_resource_arn: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor recovery_point_creation_date: ::Time
+      attr_accessor created_by: Types::RestoreJobCreator
+      attr_accessor validation_status: ("FAILED" | "SUCCESSFUL" | "TIMED_OUT" | "VALIDATING")
+      attr_accessor validation_status_message: ::String
+      attr_accessor deletion_status: ("DELETING" | "FAILED" | "SUCCESSFUL")
+      attr_accessor deletion_status_message: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreTestingPlanForCreate
+      attr_accessor recovery_point_selection: Types::RestoreTestingRecoveryPointSelection
+      attr_accessor restore_testing_plan_name: ::String
+      attr_accessor schedule_expression: ::String
+      attr_accessor schedule_expression_timezone: ::String
+      attr_accessor start_window_hours: ::Integer
+      SENSITIVE: []
+    end
+
+    class RestoreTestingPlanForGet
+      attr_accessor creation_time: ::Time
+      attr_accessor creator_request_id: ::String
+      attr_accessor last_execution_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor recovery_point_selection: Types::RestoreTestingRecoveryPointSelection
+      attr_accessor restore_testing_plan_arn: ::String
+      attr_accessor restore_testing_plan_name: ::String
+      attr_accessor schedule_expression: ::String
+      attr_accessor schedule_expression_timezone: ::String
+      attr_accessor start_window_hours: ::Integer
+      SENSITIVE: []
+    end
+
+    class RestoreTestingPlanForList
+      attr_accessor creation_time: ::Time
+      attr_accessor last_execution_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor restore_testing_plan_arn: ::String
+      attr_accessor restore_testing_plan_name: ::String
+      attr_accessor schedule_expression: ::String
+      attr_accessor schedule_expression_timezone: ::String
+      attr_accessor start_window_hours: ::Integer
+      SENSITIVE: []
+    end
+
+    class RestoreTestingPlanForUpdate
+      attr_accessor recovery_point_selection: Types::RestoreTestingRecoveryPointSelection
+      attr_accessor schedule_expression: ::String
+      attr_accessor schedule_expression_timezone: ::String
+      attr_accessor start_window_hours: ::Integer
+      SENSITIVE: []
+    end
+
+    class RestoreTestingRecoveryPointSelection
+      attr_accessor algorithm: ("LATEST_WITHIN_WINDOW" | "RANDOM_WITHIN_WINDOW")
+      attr_accessor exclude_vaults: ::Array[::String]
+      attr_accessor include_vaults: ::Array[::String]
+      attr_accessor recovery_point_types: ::Array[("CONTINUOUS" | "SNAPSHOT")]
+      attr_accessor selection_window_days: ::Integer
+      SENSITIVE: []
+    end
+
+    class RestoreTestingSelectionForCreate
+      attr_accessor iam_role_arn: ::String
+      attr_accessor protected_resource_arns: ::Array[::String]
+      attr_accessor protected_resource_conditions: Types::ProtectedResourceConditions
+      attr_accessor protected_resource_type: ::String
+      attr_accessor restore_metadata_overrides: ::Hash[::String, ::String]
+      attr_accessor restore_testing_selection_name: ::String
+      attr_accessor validation_window_hours: ::Integer
+      SENSITIVE: [:restore_metadata_overrides]
+    end
+
+    class RestoreTestingSelectionForGet
+      attr_accessor creation_time: ::Time
+      attr_accessor creator_request_id: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor protected_resource_arns: ::Array[::String]
+      attr_accessor protected_resource_conditions: Types::ProtectedResourceConditions
+      attr_accessor protected_resource_type: ::String
+      attr_accessor restore_metadata_overrides: ::Hash[::String, ::String]
+      attr_accessor restore_testing_plan_name: ::String
+      attr_accessor restore_testing_selection_name: ::String
+      attr_accessor validation_window_hours: ::Integer
+      SENSITIVE: [:restore_metadata_overrides]
+    end
+
+    class RestoreTestingSelectionForList
+      attr_accessor creation_time: ::Time
+      attr_accessor iam_role_arn: ::String
+      attr_accessor protected_resource_type: ::String
+      attr_accessor restore_testing_plan_name: ::String
+      attr_accessor restore_testing_selection_name: ::String
+      attr_accessor validation_window_hours: ::Integer
+      SENSITIVE: []
+    end
+
+    class RestoreTestingSelectionForUpdate
+      attr_accessor iam_role_arn: ::String
+      attr_accessor protected_resource_arns: ::Array[::String]
+      attr_accessor protected_resource_conditions: Types::ProtectedResourceConditions
+      attr_accessor restore_metadata_overrides: ::Hash[::String, ::String]
+      attr_accessor validation_window_hours: ::Integer
+      SENSITIVE: [:restore_metadata_overrides]
+    end
+
+    class ServiceUnavailableException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor type: ::String
+      attr_accessor context: ::String
+      SENSITIVE: []
+    end
+
+    class StartBackupJobInput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor idempotency_token: ::String
+      attr_accessor start_window_minutes: ::Integer
+      attr_accessor complete_window_minutes: ::Integer
+      attr_accessor lifecycle: Types::Lifecycle
+      attr_accessor recovery_point_tags: ::Hash[::String, ::String]
+      attr_accessor backup_options: ::Hash[::String, ::String]
+      SENSITIVE: [:recovery_point_tags]
+    end
+
+    class StartBackupJobOutput
+      attr_accessor backup_job_id: ::String
+      attr_accessor recovery_point_arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor is_parent: bool
+      SENSITIVE: []
+    end
+
+    class StartCopyJobInput
+      attr_accessor recovery_point_arn: ::String
+      attr_accessor source_backup_vault_name: ::String
+      attr_accessor destination_backup_vault_arn: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor idempotency_token: ::String
+      attr_accessor lifecycle: Types::Lifecycle
+      SENSITIVE: []
+    end
+
+    class StartCopyJobOutput
+      attr_accessor copy_job_id: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor is_parent: bool
+      SENSITIVE: []
+    end
+
+    class StartReportJobInput
+      attr_accessor report_plan_name: ::String
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartReportJobOutput
+      attr_accessor report_job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartRestoreJobInput
+      attr_accessor recovery_point_arn: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor iam_role_arn: ::String
+      attr_accessor idempotency_token: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor copy_source_tags_to_restored_resource: bool
+      SENSITIVE: [:metadata]
+    end
+
+    class StartRestoreJobOutput
+      attr_accessor restore_job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopBackupJobInput
+      attr_accessor backup_job_id: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_key_list: ::Array[::String]
+      SENSITIVE: [:tag_key_list]
+    end
+
+    class UpdateBackupPlanInput
+      attr_accessor backup_plan_id: ::String
+      attr_accessor backup_plan: Types::BackupPlanInput
+      SENSITIVE: []
+    end
+
+    class UpdateBackupPlanOutput
+      attr_accessor backup_plan_id: ::String
+      attr_accessor backup_plan_arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor version_id: ::String
+      attr_accessor advanced_backup_settings: ::Array[Types::AdvancedBackupSetting]
+      SENSITIVE: []
+    end
+
+    class UpdateFrameworkInput
+      attr_accessor framework_name: ::String
+      attr_accessor framework_description: ::String
+      attr_accessor framework_controls: ::Array[Types::FrameworkControl]
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFrameworkOutput
+      attr_accessor framework_name: ::String
+      attr_accessor framework_arn: ::String
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateGlobalSettingsInput
+      attr_accessor global_settings: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateRecoveryPointLifecycleInput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor recovery_point_arn: ::String
+      attr_accessor lifecycle: Types::Lifecycle
+      SENSITIVE: []
+    end
+
+    class UpdateRecoveryPointLifecycleOutput
+      attr_accessor backup_vault_arn: ::String
+      attr_accessor recovery_point_arn: ::String
+      attr_accessor lifecycle: Types::Lifecycle
+      attr_accessor calculated_lifecycle: Types::CalculatedLifecycle
+      SENSITIVE: []
+    end
+
+    class UpdateRegionSettingsInput
+      attr_accessor resource_type_opt_in_preference: ::Hash[::String, bool]
+      attr_accessor resource_type_management_preference: ::Hash[::String, bool]
+      SENSITIVE: []
+    end
+
+    class UpdateReportPlanInput
+      attr_accessor report_plan_name: ::String
+      attr_accessor report_plan_description: ::String
+      attr_accessor report_delivery_channel: Types::ReportDeliveryChannel
+      attr_accessor report_setting: Types::ReportSetting
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateReportPlanOutput
+      attr_accessor report_plan_name: ::String
+      attr_accessor report_plan_arn: ::String
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateRestoreTestingPlanInput
+      attr_accessor restore_testing_plan: Types::RestoreTestingPlanForUpdate
+      attr_accessor restore_testing_plan_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRestoreTestingPlanOutput
+      attr_accessor creation_time: ::Time
+      attr_accessor restore_testing_plan_arn: ::String
+      attr_accessor restore_testing_plan_name: ::String
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateRestoreTestingSelectionInput
+      attr_accessor restore_testing_plan_name: ::String
+      attr_accessor restore_testing_selection: Types::RestoreTestingSelectionForUpdate
+      attr_accessor restore_testing_selection_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRestoreTestingSelectionOutput
+      attr_accessor creation_time: ::Time
+      attr_accessor restore_testing_plan_arn: ::String
+      attr_accessor restore_testing_plan_name: ::String
+      attr_accessor restore_testing_selection_name: ::String
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+  end
+end

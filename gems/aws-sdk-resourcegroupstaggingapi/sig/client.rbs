@@ -1,0 +1,183 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ResourceGroupsTaggingAPI
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroupsTaggingAPI/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _DescribeReportCreationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReportCreationOutput]
+        def status: () -> ::String
+        def s3_location: () -> ::String
+        def error_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroupsTaggingAPI/Client.html#describe_report_creation-instance_method
+      def describe_report_creation: (
+                                    ) -> _DescribeReportCreationResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReportCreationResponseSuccess
+
+      interface _GetComplianceSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetComplianceSummaryOutput]
+        def summary_list: () -> ::Array[Types::Summary]
+        def pagination_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroupsTaggingAPI/Client.html#get_compliance_summary-instance_method
+      def get_compliance_summary: (
+                                    ?target_id_filters: Array[::String],
+                                    ?region_filters: Array[::String],
+                                    ?resource_type_filters: Array[::String],
+                                    ?tag_key_filters: Array[::String],
+                                    ?group_by: Array[("TARGET_ID" | "REGION" | "RESOURCE_TYPE")],
+                                    ?max_results: ::Integer,
+                                    ?pagination_token: ::String
+                                  ) -> _GetComplianceSummaryResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetComplianceSummaryResponseSuccess
+
+      interface _GetResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcesOutput]
+        def pagination_token: () -> ::String
+        def resource_tag_mapping_list: () -> ::Array[Types::ResourceTagMapping]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroupsTaggingAPI/Client.html#get_resources-instance_method
+      def get_resources: (
+                           ?pagination_token: ::String,
+                           ?tag_filters: Array[
+                             {
+                               key: ::String?,
+                               values: Array[::String]?
+                             },
+                           ],
+                           ?resources_per_page: ::Integer,
+                           ?tags_per_page: ::Integer,
+                           ?resource_type_filters: Array[::String],
+                           ?include_compliance_details: bool,
+                           ?exclude_compliant_resources: bool,
+                           ?resource_arn_list: Array[::String]
+                         ) -> _GetResourcesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcesResponseSuccess
+
+      interface _GetTagKeysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTagKeysOutput]
+        def pagination_token: () -> ::String
+        def tag_keys: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroupsTaggingAPI/Client.html#get_tag_keys-instance_method
+      def get_tag_keys: (
+                          ?pagination_token: ::String
+                        ) -> _GetTagKeysResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTagKeysResponseSuccess
+
+      interface _GetTagValuesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTagValuesOutput]
+        def pagination_token: () -> ::String
+        def tag_values: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroupsTaggingAPI/Client.html#get_tag_values-instance_method
+      def get_tag_values: (
+                            ?pagination_token: ::String,
+                            key: ::String
+                          ) -> _GetTagValuesResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTagValuesResponseSuccess
+
+      interface _StartReportCreationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartReportCreationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroupsTaggingAPI/Client.html#start_report_creation-instance_method
+      def start_report_creation: (
+                                   s3_bucket: ::String
+                                 ) -> _StartReportCreationResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartReportCreationResponseSuccess
+
+      interface _TagResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourcesOutput]
+        def failed_resources_map: () -> ::Hash[::String, Types::FailureInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroupsTaggingAPI/Client.html#tag_resources-instance_method
+      def tag_resources: (
+                           resource_arn_list: Array[::String],
+                           tags: Hash[::String, ::String]
+                         ) -> _TagResourcesResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourcesResponseSuccess
+
+      interface _UntagResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourcesOutput]
+        def failed_resources_map: () -> ::Hash[::String, Types::FailureInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroupsTaggingAPI/Client.html#untag_resources-instance_method
+      def untag_resources: (
+                             resource_arn_list: Array[::String],
+                             tag_keys: Array[::String]
+                           ) -> _UntagResourcesResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourcesResponseSuccess
+    end
+  end
+end
+

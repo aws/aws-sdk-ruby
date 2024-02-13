@@ -23,6 +23,7 @@ at HOME/.aws/credentials.  When not specified, 'default' is used.
       option(:credentials,
         required: true,
         doc_type: 'Aws::CredentialProvider',
+        rbs_type: 'untyped',
         docstring: <<-DOCS
 Your AWS credentials. This can be an instance of any one of the
 following classes:
@@ -79,6 +80,7 @@ locations will be searched for credentials:
       option(:token_provider,
              required: false,
              doc_type: 'Aws::TokenProvider',
+             rbs_type: 'untyped',
              docstring: <<-DOCS
 A Bearer Token Provider. This can be an instance of any one of the
 following classes:

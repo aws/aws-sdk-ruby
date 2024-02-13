@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2024-01-29)
+------------------
+
+* Feature - Modified description of createaddress to include direction to add path when providing a JSON file.
+
+1.64.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.63.0 (2023-11-28)
 ------------------
 

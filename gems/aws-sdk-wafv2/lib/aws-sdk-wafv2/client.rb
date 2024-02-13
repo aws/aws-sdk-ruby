@@ -1412,7 +1412,7 @@ module Aws::WAFV2
     #
     #   Example JSON: `"TokenDomains": ["abc.com", "store.abc.com"]`
     #
-    #   Public suffixes aren't allowed. For example, you can't use `usa.gov`
+    #   Public suffixes aren't allowed. For example, you can't use `gov.au`
     #   or `co.uk` as token domains.
     #
     # @return [Types::CreateAPIKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2671,7 +2671,7 @@ module Aws::WAFV2
     #   Example JSON: `"TokenDomains": \{ "mywebsite.com",
     #   "myotherwebsite.com" \}`
     #
-    #   Public suffixes aren't allowed. For example, you can't use `usa.gov`
+    #   Public suffixes aren't allowed. For example, you can't use `gov.au`
     #   or `co.uk` as token domains.
     #
     # @option params [Types::AssociationConfig] :association_config
@@ -3598,6 +3598,47 @@ module Aws::WAFV2
     # @param [Hash] params ({})
     def create_web_acl(params = {}, options = {})
       req = build_request(:create_web_acl, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified API key.
+    #
+    # After you delete a key, it can take up to 24 hours for WAF to disallow
+    # use of the key in all regions.
+    #
+    # @option params [required, String] :scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or for
+    #   a regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
+    #
+    #   To work with CloudFront, you must also specify the Region US East (N.
+    #   Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #
+    # @option params [required, String] :api_key
+    #   The encrypted API key that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_api_key({
+    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #     api_key: "APIKey", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DeleteAPIKey AWS API Documentation
+    #
+    # @overload delete_api_key(params = {})
+    # @param [Hash] params ({})
+    def delete_api_key(params = {}, options = {})
+      req = build_request(:delete_api_key, params)
       req.send_request(options)
     end
 
@@ -8091,7 +8132,7 @@ module Aws::WAFV2
     #   Example JSON: `"TokenDomains": \{ "mywebsite.com",
     #   "myotherwebsite.com" \}`
     #
-    #   Public suffixes aren't allowed. For example, you can't use `usa.gov`
+    #   Public suffixes aren't allowed. For example, you can't use `gov.au`
     #   or `co.uk` as token domains.
     #
     # @option params [Types::AssociationConfig] :association_config
@@ -9026,7 +9067,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

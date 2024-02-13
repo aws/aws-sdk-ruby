@@ -1,0 +1,466 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CodeGuruProfiler
+  module Types
+
+    class AddNotificationChannelsRequest
+      attr_accessor channels: ::Array[Types::Channel]
+      attr_accessor profiling_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class AddNotificationChannelsResponse
+      attr_accessor notification_configuration: Types::NotificationConfiguration
+      SENSITIVE: []
+    end
+
+    class AgentConfiguration
+      attr_accessor agent_parameters: ::Hash[("SamplingIntervalInMilliseconds" | "ReportingIntervalInMilliseconds" | "MinimumTimeForReportingInMilliseconds" | "MemoryUsageLimitPercent" | "MaxStackDepth"), ::String]
+      attr_accessor period_in_seconds: ::Integer
+      attr_accessor should_profile: bool
+      SENSITIVE: []
+    end
+
+    class AgentOrchestrationConfig
+      attr_accessor profiling_enabled: bool
+      SENSITIVE: []
+    end
+
+    class AggregatedProfileTime
+      attr_accessor period: ("PT5M" | "PT1H" | "P1D")
+      attr_accessor start: ::Time
+      SENSITIVE: []
+    end
+
+    class Anomaly
+      attr_accessor instances: ::Array[Types::AnomalyInstance]
+      attr_accessor metric: Types::Metric
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class AnomalyInstance
+      attr_accessor end_time: ::Time
+      attr_accessor id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor user_feedback: Types::UserFeedback
+      SENSITIVE: []
+    end
+
+    class BatchGetFrameMetricDataRequest
+      attr_accessor end_time: ::Time
+      attr_accessor frame_metrics: ::Array[Types::FrameMetric]
+      attr_accessor period: ::String
+      attr_accessor profiling_group_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor target_resolution: ("PT5M" | "PT1H" | "P1D")
+      SENSITIVE: []
+    end
+
+    class BatchGetFrameMetricDataResponse
+      attr_accessor end_time: ::Time
+      attr_accessor end_times: ::Array[Types::TimestampStructure]
+      attr_accessor frame_metric_data: ::Array[Types::FrameMetricDatum]
+      attr_accessor resolution: ("PT5M" | "PT1H" | "P1D")
+      attr_accessor start_time: ::Time
+      attr_accessor unprocessed_end_times: ::Hash[::String, ::Array[Types::TimestampStructure]]
+      SENSITIVE: []
+    end
+
+    class Channel
+      attr_accessor event_publishers: ::Array[("AnomalyDetection")]
+      attr_accessor id: ::String
+      attr_accessor uri: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigureAgentRequest
+      attr_accessor fleet_instance_id: ::String
+      attr_accessor metadata: ::Hash[("ComputePlatform" | "AgentId" | "AwsRequestId" | "ExecutionEnvironment" | "LambdaFunctionArn" | "LambdaMemoryLimitInMB" | "LambdaRemainingTimeInMilliseconds" | "LambdaTimeGapBetweenInvokesInMilliseconds" | "LambdaPreviousExecutionTimeInMilliseconds"), ::String]
+      attr_accessor profiling_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigureAgentResponse
+      attr_accessor configuration: Types::AgentConfiguration
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProfilingGroupRequest
+      attr_accessor agent_orchestration_config: Types::AgentOrchestrationConfig
+      attr_accessor client_token: ::String
+      attr_accessor compute_platform: ("Default" | "AWSLambda")
+      attr_accessor profiling_group_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateProfilingGroupResponse
+      attr_accessor profiling_group: Types::ProfilingGroupDescription
+      SENSITIVE: []
+    end
+
+    class DeleteProfilingGroupRequest
+      attr_accessor profiling_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProfilingGroupResponse < Aws::EmptyStructure
+    end
+
+    class DescribeProfilingGroupRequest
+      attr_accessor profiling_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProfilingGroupResponse
+      attr_accessor profiling_group: Types::ProfilingGroupDescription
+      SENSITIVE: []
+    end
+
+    class FindingsReportSummary
+      attr_accessor id: ::String
+      attr_accessor profile_end_time: ::Time
+      attr_accessor profile_start_time: ::Time
+      attr_accessor profiling_group_name: ::String
+      attr_accessor total_number_of_findings: ::Integer
+      SENSITIVE: []
+    end
+
+    class FrameMetric
+      attr_accessor frame_name: ::String
+      attr_accessor thread_states: ::Array[::String]
+      attr_accessor type: ("AggregatedRelativeTotalTime")
+      SENSITIVE: []
+    end
+
+    class FrameMetricDatum
+      attr_accessor frame_metric: Types::FrameMetric
+      attr_accessor values: ::Array[::Float]
+      SENSITIVE: []
+    end
+
+    class GetFindingsReportAccountSummaryRequest
+      attr_accessor daily_reports_only: bool
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetFindingsReportAccountSummaryResponse
+      attr_accessor next_token: ::String
+      attr_accessor report_summaries: ::Array[Types::FindingsReportSummary]
+      SENSITIVE: []
+    end
+
+    class GetNotificationConfigurationRequest
+      attr_accessor profiling_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetNotificationConfigurationResponse
+      attr_accessor notification_configuration: Types::NotificationConfiguration
+      SENSITIVE: []
+    end
+
+    class GetPolicyRequest
+      attr_accessor profiling_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicyResponse
+      attr_accessor policy: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetProfileRequest
+      attr_accessor accept: ::String
+      attr_accessor end_time: ::Time
+      attr_accessor max_depth: ::Integer
+      attr_accessor period: ::String
+      attr_accessor profiling_group_name: ::String
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetProfileResponse
+      attr_accessor content_encoding: ::String
+      attr_accessor content_type: ::String
+      attr_accessor profile: ::String
+      SENSITIVE: []
+    end
+
+    class GetRecommendationsRequest
+      attr_accessor end_time: ::Time
+      attr_accessor locale: ::String
+      attr_accessor profiling_group_name: ::String
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetRecommendationsResponse
+      attr_accessor anomalies: ::Array[Types::Anomaly]
+      attr_accessor profile_end_time: ::Time
+      attr_accessor profile_start_time: ::Time
+      attr_accessor profiling_group_name: ::String
+      attr_accessor recommendations: ::Array[Types::Recommendation]
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListFindingsReportsRequest
+      attr_accessor daily_reports_only: bool
+      attr_accessor end_time: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor profiling_group_name: ::String
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ListFindingsReportsResponse
+      attr_accessor findings_report_summaries: ::Array[Types::FindingsReportSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProfileTimesRequest
+      attr_accessor end_time: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor order_by: ("TimestampDescending" | "TimestampAscending")
+      attr_accessor period: ("PT5M" | "PT1H" | "P1D")
+      attr_accessor profiling_group_name: ::String
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ListProfileTimesResponse
+      attr_accessor next_token: ::String
+      attr_accessor profile_times: ::Array[Types::ProfileTime]
+      SENSITIVE: []
+    end
+
+    class ListProfilingGroupsRequest
+      attr_accessor include_description: bool
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProfilingGroupsResponse
+      attr_accessor next_token: ::String
+      attr_accessor profiling_group_names: ::Array[::String]
+      attr_accessor profiling_groups: ::Array[Types::ProfilingGroupDescription]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Match
+      attr_accessor frame_address: ::String
+      attr_accessor target_frames_index: ::Integer
+      attr_accessor threshold_breach_value: ::Float
+      SENSITIVE: []
+    end
+
+    class Metric
+      attr_accessor frame_name: ::String
+      attr_accessor thread_states: ::Array[::String]
+      attr_accessor type: ("AggregatedRelativeTotalTime")
+      SENSITIVE: []
+    end
+
+    class NotificationConfiguration
+      attr_accessor channels: ::Array[Types::Channel]
+      SENSITIVE: []
+    end
+
+    class Pattern
+      attr_accessor counters_to_aggregate: ::Array[::String]
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor resolution_steps: ::String
+      attr_accessor target_frames: ::Array[::Array[::String]]
+      attr_accessor threshold_percent: ::Float
+      SENSITIVE: []
+    end
+
+    class PostAgentProfileRequest
+      attr_accessor agent_profile: ::String
+      attr_accessor content_type: ::String
+      attr_accessor profile_token: ::String
+      attr_accessor profiling_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class PostAgentProfileResponse < Aws::EmptyStructure
+    end
+
+    class ProfileTime
+      attr_accessor start: ::Time
+      SENSITIVE: []
+    end
+
+    class ProfilingGroupDescription
+      attr_accessor agent_orchestration_config: Types::AgentOrchestrationConfig
+      attr_accessor arn: ::String
+      attr_accessor compute_platform: ("Default" | "AWSLambda")
+      attr_accessor created_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor profiling_status: Types::ProfilingStatus
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ProfilingStatus
+      attr_accessor latest_agent_orchestrated_at: ::Time
+      attr_accessor latest_agent_profile_reported_at: ::Time
+      attr_accessor latest_aggregated_profile: Types::AggregatedProfileTime
+      SENSITIVE: []
+    end
+
+    class PutPermissionRequest
+      attr_accessor action_group: ("agentPermissions")
+      attr_accessor principals: ::Array[::String]
+      attr_accessor profiling_group_name: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutPermissionResponse
+      attr_accessor policy: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class Recommendation
+      attr_accessor all_matches_count: ::Integer
+      attr_accessor all_matches_sum: ::Float
+      attr_accessor end_time: ::Time
+      attr_accessor pattern: Types::Pattern
+      attr_accessor start_time: ::Time
+      attr_accessor top_matches: ::Array[Types::Match]
+      SENSITIVE: []
+    end
+
+    class RemoveNotificationChannelRequest
+      attr_accessor channel_id: ::String
+      attr_accessor profiling_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveNotificationChannelResponse
+      attr_accessor notification_configuration: Types::NotificationConfiguration
+      SENSITIVE: []
+    end
+
+    class RemovePermissionRequest
+      attr_accessor action_group: ("agentPermissions")
+      attr_accessor profiling_group_name: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class RemovePermissionResponse
+      attr_accessor policy: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SubmitFeedbackRequest
+      attr_accessor anomaly_instance_id: ::String
+      attr_accessor comment: ::String
+      attr_accessor profiling_group_name: ::String
+      attr_accessor type: ("Positive" | "Negative")
+      SENSITIVE: []
+    end
+
+    class SubmitFeedbackResponse < Aws::EmptyStructure
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TimestampStructure
+      attr_accessor value: ::Time
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateProfilingGroupRequest
+      attr_accessor agent_orchestration_config: Types::AgentOrchestrationConfig
+      attr_accessor profiling_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProfilingGroupResponse
+      attr_accessor profiling_group: Types::ProfilingGroupDescription
+      SENSITIVE: []
+    end
+
+    class UserFeedback
+      attr_accessor type: ("Positive" | "Negative")
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

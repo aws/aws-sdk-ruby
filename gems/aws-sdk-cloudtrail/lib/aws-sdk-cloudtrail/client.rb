@@ -862,11 +862,6 @@ module Aws::CloudTrail
     #
     #   Not required unless you specify `CloudWatchLogsRoleArn`.
     #
-    #   <note markdown="1"> Only the management account can configure a CloudWatch Logs log group
-    #   for an organization trail.
-    #
-    #    </note>
-    #
     # @option params [String] :cloud_watch_logs_role_arn
     #   Specifies the role for the CloudWatch Logs endpoint to assume to write
     #   to a user's log group. You must use a role that exists in your
@@ -1240,11 +1235,12 @@ module Aws::CloudTrail
     end
 
     # Disables Lake query federation on the specified event data store. When
-    # you disable federation, CloudTrail removes the metadata associated
-    # with the federated event data store in the Glue Data Catalog and
-    # removes registration for the federation role ARN and event data store
-    # in Lake Formation. No CloudTrail Lake data is deleted when you disable
-    # federation.
+    # you disable federation, CloudTrail disables the integration with Glue,
+    # Lake Formation, and Amazon Athena. After disabling Lake query
+    # federation, you can no longer query your event data in Amazon Athena.
+    #
+    # No CloudTrail Lake data is deleted when you disable federation and you
+    # can continue to run queries in CloudTrail Lake.
     #
     # @option params [required, String] :event_data_store
     #   The ARN (or ID suffix of the ARN) of the event data store for which
@@ -1282,13 +1278,13 @@ module Aws::CloudTrail
     # metadata stored in the Glue Data Catalog lets the Athena query engine
     # know how to find, read, and process the data that you want to query.
     #
-    # When you enable Lake query federation, CloudTrail creates a federated
+    # When you enable Lake query federation, CloudTrail creates a managed
     # database named `aws:cloudtrail` (if the database doesn't already
-    # exist) and a federated table in the Glue Data Catalog. The event data
-    # store ID is used for the table name. CloudTrail registers the role ARN
-    # and event data store in [Lake Formation][2], the service responsible
-    # for revoking or granting permissions to the federated resources in the
-    # Glue Data Catalog.
+    # exist) and a managed federated table in the Glue Data Catalog. The
+    # event data store ID is used for the table name. CloudTrail registers
+    # the role ARN and event data store in [Lake Formation][2], the service
+    # responsible for allowing fine-grained access control of the federated
+    # resources in the Glue Data Catalog.
     #
     # For more information about Lake query federation, see [Federate an
     # event data store][3].
@@ -1296,7 +1292,7 @@ module Aws::CloudTrail
     #
     #
     # [1]: https://docs.aws.amazon.com/glue/latest/dg/components-overview.html#data-catalog-intro
-    # [2]: https://docs.aws.amazon.com/lake-formation/latest/dg/how-it-works.html
+    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation-lake-formation.html
     # [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html
     #
     # @option params [required, String] :event_data_store
@@ -2099,6 +2095,134 @@ module Aws::CloudTrail
     # @param [Hash] params ({})
     def list_imports(params = {}, options = {})
       req = build_request(:list_imports, params)
+      req.send_request(options)
+    end
+
+    # Returns Insights metrics data for trails that have enabled Insights.
+    # The request must include the `EventSource`, `EventName`, and
+    # `InsightType` parameters.
+    #
+    # If the `InsightType` is set to `ApiErrorRateInsight`, the request must
+    # also include the `ErrorCode` parameter.
+    #
+    # The following are the available time periods for
+    # `ListInsightsMetricData`. Each cutoff is inclusive.
+    #
+    # * Data points with a period of 60 seconds (1-minute) are available for
+    #   15 days.
+    #
+    # * Data points with a period of 300 seconds (5-minute) are available
+    #   for 63 days.
+    #
+    # * Data points with a period of 3600 seconds (1 hour) are available for
+    #   90 days.
+    #
+    # Access to the `ListInsightsMetricData` API operation is linked to the
+    # `cloudtrail:LookupEvents` action. To use this operation, you must have
+    # permissions to perform the `cloudtrail:LookupEvents` action.
+    #
+    # @option params [required, String] :event_source
+    #   The Amazon Web Services service to which the request was made, such as
+    #   `iam.amazonaws.com` or `s3.amazonaws.com`.
+    #
+    # @option params [required, String] :event_name
+    #   The name of the event, typically the Amazon Web Services API on which
+    #   unusual levels of activity were recorded.
+    #
+    # @option params [required, String] :insight_type
+    #   The type of CloudTrail Insights event, which is either
+    #   `ApiCallRateInsight` or `ApiErrorRateInsight`. The
+    #   `ApiCallRateInsight` Insights type analyzes write-only management API
+    #   calls that are aggregated per minute against a baseline API call
+    #   volume. The `ApiErrorRateInsight` Insights type analyzes management
+    #   API calls that result in error codes.
+    #
+    # @option params [String] :error_code
+    #   Conditionally required if the `InsightType` parameter is set to
+    #   `ApiErrorRateInsight`.
+    #
+    #   If returning metrics for the `ApiErrorRateInsight` Insights type, this
+    #   is the error to retrieve data for. For example, `AccessDenied`.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   Specifies, in UTC, the start time for time-series data. The value
+    #   specified is inclusive; results include data points with the specified
+    #   time stamp.
+    #
+    #   The default is 90 days before the time of request.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   Specifies, in UTC, the end time for time-series data. The value
+    #   specified is exclusive; results include data points up to the
+    #   specified time stamp.
+    #
+    #   The default is the time of request.
+    #
+    # @option params [Integer] :period
+    #   Granularity of data to retrieve, in seconds. Valid values are `60`,
+    #   `300`, and `3600`. If you specify any other value, you will get an
+    #   error. The default is 3600 seconds.
+    #
+    # @option params [String] :data_type
+    #   Type of datapoints to return. Valid values are `NonZeroData` and
+    #   `FillWithZeros`. The default is `NonZeroData`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of datapoints to return. Valid values are integers
+    #   from 1 to 21600. The default value is 21600.
+    #
+    # @option params [String] :next_token
+    #   Returned if all datapoints can't be returned in a single call. For
+    #   example, due to reaching `MaxResults`.
+    #
+    #   Add this parameter to the request to continue retrieving results
+    #   starting from the last evaluated point.
+    #
+    # @return [Types::ListInsightsMetricDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInsightsMetricDataResponse#event_source #event_source} => String
+    #   * {Types::ListInsightsMetricDataResponse#event_name #event_name} => String
+    #   * {Types::ListInsightsMetricDataResponse#insight_type #insight_type} => String
+    #   * {Types::ListInsightsMetricDataResponse#error_code #error_code} => String
+    #   * {Types::ListInsightsMetricDataResponse#timestamps #timestamps} => Array&lt;Time&gt;
+    #   * {Types::ListInsightsMetricDataResponse#values #values} => Array&lt;Float&gt;
+    #   * {Types::ListInsightsMetricDataResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_insights_metric_data({
+    #     event_source: "EventSource", # required
+    #     event_name: "EventName", # required
+    #     insight_type: "ApiCallRateInsight", # required, accepts ApiCallRateInsight, ApiErrorRateInsight
+    #     error_code: "ErrorCode",
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     period: 1,
+    #     data_type: "FillWithZeros", # accepts FillWithZeros, NonZeroData
+    #     max_results: 1,
+    #     next_token: "InsightsMetricNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_source #=> String
+    #   resp.event_name #=> String
+    #   resp.insight_type #=> String, one of "ApiCallRateInsight", "ApiErrorRateInsight"
+    #   resp.error_code #=> String
+    #   resp.timestamps #=> Array
+    #   resp.timestamps[0] #=> Time
+    #   resp.values #=> Array
+    #   resp.values[0] #=> Float
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListInsightsMetricData AWS API Documentation
+    #
+    # @overload list_insights_metric_data(params = {})
+    # @param [Hash] params ({})
+    def list_insights_metric_data(params = {}, options = {})
+      req = build_request(:list_insights_metric_data, params)
       req.send_request(options)
     end
 
@@ -3305,13 +3429,14 @@ module Aws::CloudTrail
     # `TerminationProtection` is enabled.
     #
     # For event data stores for CloudTrail events, `AdvancedEventSelectors`
-    # includes or excludes management, data, or Insights events in your
-    # event data store. For more information about `AdvancedEventSelectors`,
-    # see [AdvancedEventSelectors][1].
+    # includes or excludes management or data events in your event data
+    # store. For more information about `AdvancedEventSelectors`, see
+    # [AdvancedEventSelectors][1].
     #
-    # For event data stores for Config configuration items, Audit Manager
-    # evidence, or non-Amazon Web Services events, `AdvancedEventSelectors`
-    # includes events of that type in your event data store.
+    # For event data stores for CloudTrail Insights events, Config
+    # configuration items, Audit Manager evidence, or non-Amazon Web
+    # Services events, `AdvancedEventSelectors` includes events of that type
+    # in your event data store.
     #
     #
     #
@@ -3609,11 +3734,6 @@ module Aws::CloudTrail
     #
     #   Not required unless you specify `CloudWatchLogsRoleArn`.
     #
-    #   <note markdown="1"> Only the management account can configure a CloudWatch Logs log group
-    #   for an organization trail.
-    #
-    #    </note>
-    #
     # @option params [String] :cloud_watch_logs_role_arn
     #   Specifies the role for the CloudWatch Logs endpoint to assume to write
     #   to a user's log group. You must use a role that exists in your
@@ -3731,7 +3851,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -14,6 +14,7 @@ module Aws::SESV2
       option(
         :endpoint_provider,
         doc_type: 'Aws::SESV2::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\

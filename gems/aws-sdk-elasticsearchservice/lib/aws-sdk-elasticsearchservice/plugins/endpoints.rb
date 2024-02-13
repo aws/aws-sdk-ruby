@@ -14,6 +14,7 @@ module Aws::ElasticsearchService
       option(
         :endpoint_provider,
         doc_type: 'Aws::ElasticsearchService::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -65,6 +66,8 @@ module Aws::ElasticsearchService
             Aws::ElasticsearchService::Endpoints::AssociatePackage.build(context)
           when :authorize_vpc_endpoint_access
             Aws::ElasticsearchService::Endpoints::AuthorizeVpcEndpointAccess.build(context)
+          when :cancel_domain_config_change
+            Aws::ElasticsearchService::Endpoints::CancelDomainConfigChange.build(context)
           when :cancel_elasticsearch_service_software_update
             Aws::ElasticsearchService::Endpoints::CancelElasticsearchServiceSoftwareUpdate.build(context)
           when :create_elasticsearch_domain

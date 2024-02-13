@@ -7513,6 +7513,73 @@ module Aws::Redshift
     #
     class LimitExceededFault < Aws::EmptyStructure; end
 
+    # @!attribute [rw] cluster_identifier
+    #   The unique identifier of the Amazon Redshift cluster for which the
+    #   list of Advisor recommendations is returned. If the neither the
+    #   cluster identifier and the cluster namespace ARN parameters are
+    #   specified, then recommendations for all clusters in the account are
+    #   returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace_arn
+    #   The Amazon Redshift cluster namespace Amazon Resource Name (ARN) for
+    #   which the list of Advisor recommendations is returned. If the
+    #   neither the cluster identifier and the cluster namespace ARN
+    #   parameters are specified, then recommendations for all clusters in
+    #   the account are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of response records to return in each call. If
+    #   the number of remaining response records exceeds the specified
+    #   MaxRecords value, a value is returned in a marker field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   A value that indicates the starting point for the next set of
+    #   response records in a subsequent request. If a value is returned in
+    #   a response, you can retrieve the next set of records by providing
+    #   this returned marker value in the Marker parameter and retrying the
+    #   command. If the Marker field is empty, all response records have
+    #   been retrieved for the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ListRecommendationsMessage AWS API Documentation
+    #
+    class ListRecommendationsMessage < Struct.new(
+      :cluster_identifier,
+      :namespace_arn,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recommendations
+    #   The Advisor recommendations for action on the Amazon Redshift
+    #   cluster.
+    #   @return [Array<Types::Recommendation>]
+    #
+    # @!attribute [rw] marker
+    #   A value that indicates the starting point for the next set of
+    #   response records in a subsequent request. If a value is returned in
+    #   a response, you can retrieve the next set of records by providing
+    #   this returned marker value in the Marker parameter and retrying the
+    #   command. If the Marker field is empty, all response records have
+    #   been retrieved for the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ListRecommendationsResult AWS API Documentation
+    #
+    class ListRecommendationsResult < Struct.new(
+      :recommendations,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the status of logging for a cluster.
     #
     # @!attribute [rw] logging_enabled
@@ -9204,6 +9271,111 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # An Amazon Redshift Advisor recommended action on the Amazon Redshift
+    # cluster.
+    #
+    # @!attribute [rw] id
+    #   A unique identifier of the Advisor recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The unique identifier of the cluster for which the recommendation is
+    #   returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace_arn
+    #   The Amazon Redshift cluster namespace ARN for which the
+    #   recommendations is returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time (UTC) that the recommendation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] recommendation_type
+    #   The type of Advisor recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] observation
+    #   The description of what was observed about your cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] impact_ranking
+    #   The scale of the impact that the Advisor recommendation has to the
+    #   performance and cost of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendation_text
+    #   The description of the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommended_actions
+    #   List of Amazon Redshift recommended actions.
+    #   @return [Array<Types::RecommendedAction>]
+    #
+    # @!attribute [rw] reference_links
+    #   List of helpful links for more information about the Advisor
+    #   recommendation.
+    #   @return [Array<Types::ReferenceLink>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Recommendation AWS API Documentation
+    #
+    class Recommendation < Struct.new(
+      :id,
+      :cluster_identifier,
+      :namespace_arn,
+      :created_at,
+      :recommendation_type,
+      :title,
+      :description,
+      :observation,
+      :impact_ranking,
+      :recommendation_text,
+      :recommended_actions,
+      :reference_links)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The recommended action from the Amazon Redshift Advisor
+    # recommendation.
+    #
+    # @!attribute [rw] text
+    #   The specific instruction about the command.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The database name to perform the action on. Only applicable if the
+    #   type of command is SQL.
+    #   @return [String]
+    #
+    # @!attribute [rw] command
+    #   The command to run.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of command.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RecommendedAction AWS API Documentation
+    #
+    class RecommendedAction < Struct.new(
+      :text,
+      :database,
+      :command,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a recurring charge.
     #
     # @!attribute [rw] recurring_charge_amount
@@ -9311,6 +9483,26 @@ module Aws::Redshift
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RedshiftIdcApplicationQuotaExceededFault AWS API Documentation
     #
     class RedshiftIdcApplicationQuotaExceededFault < Aws::EmptyStructure; end
+
+    # A link to an Amazon Redshift Advisor reference for more information
+    # about a recommendation.
+    #
+    # @!attribute [rw] text
+    #   The hyperlink text that describes the link to more information.
+    #   @return [String]
+    #
+    # @!attribute [rw] link
+    #   The URL address to find more information.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ReferenceLink AWS API Documentation
+    #
+    class ReferenceLink < Struct.new(
+      :text,
+      :link)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] data_share_arn
     #   The Amazon Resource Name (ARN) of the datashare to reject.

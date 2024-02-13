@@ -1,0 +1,111 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DynamoDB
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class BackupInUseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class BackupNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ConditionalCheckFailedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def item: () -> ::String
+      end
+      class ContinuousBackupsUnavailableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DuplicateItemException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ExportConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ExportNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class GlobalTableAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class GlobalTableNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class IdempotentParameterMismatchException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ImportConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ImportNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class IndexNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InternalServerError < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidExportTimeException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidRestoreTimeException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ItemCollectionSizeLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PointInTimeRecoveryUnavailableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ProvisionedThroughputExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ReplicaAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ReplicaNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RequestLimitExceeded < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceInUseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TableAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TableInUseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TableNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TransactionCanceledException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def cancellation_reasons: () -> ::String
+      end
+      class TransactionConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TransactionInProgressException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

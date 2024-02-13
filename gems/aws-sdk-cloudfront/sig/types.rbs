@@ -1,0 +1,3180 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CloudFront
+  module Types
+
+    class AccessDenied
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ActiveTrustedKeyGroups
+      attr_accessor enabled: bool
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::KGKeyPairIds]
+      SENSITIVE: []
+    end
+
+    class ActiveTrustedSigners
+      attr_accessor enabled: bool
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::Signer]
+      SENSITIVE: []
+    end
+
+    class AliasICPRecordal
+      attr_accessor cname: ::String
+      attr_accessor icp_recordal_status: ("APPROVED" | "SUSPENDED" | "PENDING")
+      SENSITIVE: []
+    end
+
+    class Aliases
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AllowedMethods
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[("GET" | "HEAD" | "POST" | "PUT" | "PATCH" | "OPTIONS" | "DELETE")]
+      attr_accessor cached_methods: Types::CachedMethods
+      SENSITIVE: []
+    end
+
+    class AssociateAliasRequest
+      attr_accessor target_distribution_id: ::String
+      attr_accessor alias: ::String
+      SENSITIVE: []
+    end
+
+    class BatchTooLarge
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CNAMEAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CacheBehavior
+      attr_accessor path_pattern: ::String
+      attr_accessor target_origin_id: ::String
+      attr_accessor trusted_signers: Types::TrustedSigners
+      attr_accessor trusted_key_groups: Types::TrustedKeyGroups
+      attr_accessor viewer_protocol_policy: ("allow-all" | "https-only" | "redirect-to-https")
+      attr_accessor allowed_methods: Types::AllowedMethods
+      attr_accessor smooth_streaming: bool
+      attr_accessor compress: bool
+      attr_accessor lambda_function_associations: Types::LambdaFunctionAssociations
+      attr_accessor function_associations: Types::FunctionAssociations
+      attr_accessor field_level_encryption_id: ::String
+      attr_accessor realtime_log_config_arn: ::String
+      attr_accessor cache_policy_id: ::String
+      attr_accessor origin_request_policy_id: ::String
+      attr_accessor response_headers_policy_id: ::String
+      attr_accessor forwarded_values: Types::ForwardedValues
+      attr_accessor min_ttl: ::Integer
+      attr_accessor default_ttl: ::Integer
+      attr_accessor max_ttl: ::Integer
+      SENSITIVE: []
+    end
+
+    class CacheBehaviors
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::CacheBehavior]
+      SENSITIVE: []
+    end
+
+    class CachePolicy
+      attr_accessor id: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor cache_policy_config: Types::CachePolicyConfig
+      SENSITIVE: []
+    end
+
+    class CachePolicyAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CachePolicyConfig
+      attr_accessor comment: ::String
+      attr_accessor name: ::String
+      attr_accessor default_ttl: ::Integer
+      attr_accessor max_ttl: ::Integer
+      attr_accessor min_ttl: ::Integer
+      attr_accessor parameters_in_cache_key_and_forwarded_to_origin: Types::ParametersInCacheKeyAndForwardedToOrigin
+      SENSITIVE: []
+    end
+
+    class CachePolicyCookiesConfig
+      attr_accessor cookie_behavior: ("none" | "whitelist" | "allExcept" | "all")
+      attr_accessor cookies: Types::CookieNames
+      SENSITIVE: []
+    end
+
+    class CachePolicyHeadersConfig
+      attr_accessor header_behavior: ("none" | "whitelist")
+      attr_accessor headers: Types::Headers
+      SENSITIVE: []
+    end
+
+    class CachePolicyInUse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CachePolicyList
+      attr_accessor next_marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::CachePolicySummary]
+      SENSITIVE: []
+    end
+
+    class CachePolicyQueryStringsConfig
+      attr_accessor query_string_behavior: ("none" | "whitelist" | "allExcept" | "all")
+      attr_accessor query_strings: Types::QueryStringNames
+      SENSITIVE: []
+    end
+
+    class CachePolicySummary
+      attr_accessor type: ("managed" | "custom")
+      attr_accessor cache_policy: Types::CachePolicy
+      SENSITIVE: []
+    end
+
+    class CachedMethods
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[("GET" | "HEAD" | "POST" | "PUT" | "PATCH" | "OPTIONS" | "DELETE")]
+      SENSITIVE: []
+    end
+
+    class CannotChangeImmutablePublicKeyFields
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CannotDeleteEntityWhileInUse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CloudFrontOriginAccessIdentity
+      attr_accessor id: ::String
+      attr_accessor s3_canonical_user_id: ::String
+      attr_accessor cloud_front_origin_access_identity_config: Types::CloudFrontOriginAccessIdentityConfig
+      SENSITIVE: []
+    end
+
+    class CloudFrontOriginAccessIdentityAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CloudFrontOriginAccessIdentityConfig
+      attr_accessor caller_reference: ::String
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class CloudFrontOriginAccessIdentityInUse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CloudFrontOriginAccessIdentityList
+      attr_accessor marker: ::String
+      attr_accessor next_marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor is_truncated: bool
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::CloudFrontOriginAccessIdentitySummary]
+      SENSITIVE: []
+    end
+
+    class CloudFrontOriginAccessIdentitySummary
+      attr_accessor id: ::String
+      attr_accessor s3_canonical_user_id: ::String
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictingAlias
+      attr_accessor alias: ::String
+      attr_accessor distribution_id: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictingAliasesList
+      attr_accessor next_marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::ConflictingAlias]
+      SENSITIVE: []
+    end
+
+    class ContentTypeProfile
+      attr_accessor format: ("URLEncoded")
+      attr_accessor profile_id: ::String
+      attr_accessor content_type: ::String
+      SENSITIVE: []
+    end
+
+    class ContentTypeProfileConfig
+      attr_accessor forward_when_content_type_is_unknown: bool
+      attr_accessor content_type_profiles: Types::ContentTypeProfiles
+      SENSITIVE: []
+    end
+
+    class ContentTypeProfiles
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::ContentTypeProfile]
+      SENSITIVE: []
+    end
+
+    class ContinuousDeploymentPolicy
+      attr_accessor id: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor continuous_deployment_policy_config: Types::ContinuousDeploymentPolicyConfig
+      SENSITIVE: []
+    end
+
+    class ContinuousDeploymentPolicyAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ContinuousDeploymentPolicyConfig
+      attr_accessor staging_distribution_dns_names: Types::StagingDistributionDnsNames
+      attr_accessor enabled: bool
+      attr_accessor traffic_config: Types::TrafficConfig
+      SENSITIVE: []
+    end
+
+    class ContinuousDeploymentPolicyInUse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ContinuousDeploymentPolicyList
+      attr_accessor next_marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::ContinuousDeploymentPolicySummary]
+      SENSITIVE: []
+    end
+
+    class ContinuousDeploymentPolicySummary
+      attr_accessor continuous_deployment_policy: Types::ContinuousDeploymentPolicy
+      SENSITIVE: []
+    end
+
+    class ContinuousDeploymentSingleHeaderConfig
+      attr_accessor header: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ContinuousDeploymentSingleWeightConfig
+      attr_accessor weight: ::Float
+      attr_accessor session_stickiness_config: Types::SessionStickinessConfig
+      SENSITIVE: []
+    end
+
+    class CookieNames
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CookiePreference
+      attr_accessor forward: ("none" | "whitelist" | "all")
+      attr_accessor whitelisted_names: Types::CookieNames
+      SENSITIVE: []
+    end
+
+    class CopyDistributionRequest
+      attr_accessor primary_distribution_id: ::String
+      attr_accessor staging: bool
+      attr_accessor if_match: ::String
+      attr_accessor caller_reference: ::String
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class CopyDistributionResult
+      attr_accessor distribution: Types::Distribution
+      attr_accessor location: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCachePolicyRequest
+      attr_accessor cache_policy_config: Types::CachePolicyConfig
+      SENSITIVE: []
+    end
+
+    class CreateCachePolicyResult
+      attr_accessor cache_policy: Types::CachePolicy
+      attr_accessor location: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCloudFrontOriginAccessIdentityRequest
+      attr_accessor cloud_front_origin_access_identity_config: Types::CloudFrontOriginAccessIdentityConfig
+      SENSITIVE: []
+    end
+
+    class CreateCloudFrontOriginAccessIdentityResult
+      attr_accessor cloud_front_origin_access_identity: Types::CloudFrontOriginAccessIdentity
+      attr_accessor location: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class CreateContinuousDeploymentPolicyRequest
+      attr_accessor continuous_deployment_policy_config: Types::ContinuousDeploymentPolicyConfig
+      SENSITIVE: []
+    end
+
+    class CreateContinuousDeploymentPolicyResult
+      attr_accessor continuous_deployment_policy: Types::ContinuousDeploymentPolicy
+      attr_accessor location: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDistributionRequest
+      attr_accessor distribution_config: Types::DistributionConfig
+      SENSITIVE: []
+    end
+
+    class CreateDistributionResult
+      attr_accessor distribution: Types::Distribution
+      attr_accessor location: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDistributionWithTagsRequest
+      attr_accessor distribution_config_with_tags: Types::DistributionConfigWithTags
+      SENSITIVE: []
+    end
+
+    class CreateDistributionWithTagsResult
+      attr_accessor distribution: Types::Distribution
+      attr_accessor location: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFieldLevelEncryptionConfigRequest
+      attr_accessor field_level_encryption_config: Types::FieldLevelEncryptionConfig
+      SENSITIVE: []
+    end
+
+    class CreateFieldLevelEncryptionConfigResult
+      attr_accessor field_level_encryption: Types::FieldLevelEncryption
+      attr_accessor location: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFieldLevelEncryptionProfileRequest
+      attr_accessor field_level_encryption_profile_config: Types::FieldLevelEncryptionProfileConfig
+      SENSITIVE: []
+    end
+
+    class CreateFieldLevelEncryptionProfileResult
+      attr_accessor field_level_encryption_profile: Types::FieldLevelEncryptionProfile
+      attr_accessor location: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFunctionRequest
+      attr_accessor name: ::String
+      attr_accessor function_config: Types::FunctionConfig
+      attr_accessor function_code: ::String
+      SENSITIVE: [:function_code]
+    end
+
+    class CreateFunctionResult
+      attr_accessor function_summary: Types::FunctionSummary
+      attr_accessor location: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class CreateInvalidationRequest
+      attr_accessor distribution_id: ::String
+      attr_accessor invalidation_batch: Types::InvalidationBatch
+      SENSITIVE: []
+    end
+
+    class CreateInvalidationResult
+      attr_accessor location: ::String
+      attr_accessor invalidation: Types::Invalidation
+      SENSITIVE: []
+    end
+
+    class CreateKeyGroupRequest
+      attr_accessor key_group_config: Types::KeyGroupConfig
+      SENSITIVE: []
+    end
+
+    class CreateKeyGroupResult
+      attr_accessor key_group: Types::KeyGroup
+      attr_accessor location: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class CreateKeyValueStoreRequest
+      attr_accessor name: ::String
+      attr_accessor comment: ::String
+      attr_accessor import_source: Types::ImportSource
+      SENSITIVE: []
+    end
+
+    class CreateKeyValueStoreResult
+      attr_accessor key_value_store: Types::KeyValueStore
+      attr_accessor etag: ::String
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMonitoringSubscriptionRequest
+      attr_accessor distribution_id: ::String
+      attr_accessor monitoring_subscription: Types::MonitoringSubscription
+      SENSITIVE: []
+    end
+
+    class CreateMonitoringSubscriptionResult
+      attr_accessor monitoring_subscription: Types::MonitoringSubscription
+      SENSITIVE: []
+    end
+
+    class CreateOriginAccessControlRequest
+      attr_accessor origin_access_control_config: Types::OriginAccessControlConfig
+      SENSITIVE: []
+    end
+
+    class CreateOriginAccessControlResult
+      attr_accessor origin_access_control: Types::OriginAccessControl
+      attr_accessor location: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class CreateOriginRequestPolicyRequest
+      attr_accessor origin_request_policy_config: Types::OriginRequestPolicyConfig
+      SENSITIVE: []
+    end
+
+    class CreateOriginRequestPolicyResult
+      attr_accessor origin_request_policy: Types::OriginRequestPolicy
+      attr_accessor location: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePublicKeyRequest
+      attr_accessor public_key_config: Types::PublicKeyConfig
+      SENSITIVE: []
+    end
+
+    class CreatePublicKeyResult
+      attr_accessor public_key: Types::PublicKey
+      attr_accessor location: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRealtimeLogConfigRequest
+      attr_accessor end_points: ::Array[Types::EndPoint]
+      attr_accessor fields: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor sampling_rate: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateRealtimeLogConfigResult
+      attr_accessor realtime_log_config: Types::RealtimeLogConfig
+      SENSITIVE: []
+    end
+
+    class CreateResponseHeadersPolicyRequest
+      attr_accessor response_headers_policy_config: Types::ResponseHeadersPolicyConfig
+      SENSITIVE: []
+    end
+
+    class CreateResponseHeadersPolicyResult
+      attr_accessor response_headers_policy: Types::ResponseHeadersPolicy
+      attr_accessor location: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class CreateStreamingDistributionRequest
+      attr_accessor streaming_distribution_config: Types::StreamingDistributionConfig
+      SENSITIVE: []
+    end
+
+    class CreateStreamingDistributionResult
+      attr_accessor streaming_distribution: Types::StreamingDistribution
+      attr_accessor location: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class CreateStreamingDistributionWithTagsRequest
+      attr_accessor streaming_distribution_config_with_tags: Types::StreamingDistributionConfigWithTags
+      SENSITIVE: []
+    end
+
+    class CreateStreamingDistributionWithTagsResult
+      attr_accessor streaming_distribution: Types::StreamingDistribution
+      attr_accessor location: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class CustomErrorResponse
+      attr_accessor error_code: ::Integer
+      attr_accessor response_page_path: ::String
+      attr_accessor response_code: ::String
+      attr_accessor error_caching_min_ttl: ::Integer
+      SENSITIVE: []
+    end
+
+    class CustomErrorResponses
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::CustomErrorResponse]
+      SENSITIVE: []
+    end
+
+    class CustomHeaders
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::OriginCustomHeader]
+      SENSITIVE: []
+    end
+
+    class CustomOriginConfig
+      attr_accessor http_port: ::Integer
+      attr_accessor https_port: ::Integer
+      attr_accessor origin_protocol_policy: ("http-only" | "match-viewer" | "https-only")
+      attr_accessor origin_ssl_protocols: Types::OriginSslProtocols
+      attr_accessor origin_read_timeout: ::Integer
+      attr_accessor origin_keepalive_timeout: ::Integer
+      SENSITIVE: []
+    end
+
+    class DefaultCacheBehavior
+      attr_accessor target_origin_id: ::String
+      attr_accessor trusted_signers: Types::TrustedSigners
+      attr_accessor trusted_key_groups: Types::TrustedKeyGroups
+      attr_accessor viewer_protocol_policy: ("allow-all" | "https-only" | "redirect-to-https")
+      attr_accessor allowed_methods: Types::AllowedMethods
+      attr_accessor smooth_streaming: bool
+      attr_accessor compress: bool
+      attr_accessor lambda_function_associations: Types::LambdaFunctionAssociations
+      attr_accessor function_associations: Types::FunctionAssociations
+      attr_accessor field_level_encryption_id: ::String
+      attr_accessor realtime_log_config_arn: ::String
+      attr_accessor cache_policy_id: ::String
+      attr_accessor origin_request_policy_id: ::String
+      attr_accessor response_headers_policy_id: ::String
+      attr_accessor forwarded_values: Types::ForwardedValues
+      attr_accessor min_ttl: ::Integer
+      attr_accessor default_ttl: ::Integer
+      attr_accessor max_ttl: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteCachePolicyRequest
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCloudFrontOriginAccessIdentityRequest
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteContinuousDeploymentPolicyRequest
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDistributionRequest
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFieldLevelEncryptionConfigRequest
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFieldLevelEncryptionProfileRequest
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFunctionRequest
+      attr_accessor name: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKeyGroupRequest
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKeyValueStoreRequest
+      attr_accessor name: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMonitoringSubscriptionRequest
+      attr_accessor distribution_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMonitoringSubscriptionResult < Aws::EmptyStructure
+    end
+
+    class DeleteOriginAccessControlRequest
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteOriginRequestPolicyRequest
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePublicKeyRequest
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRealtimeLogConfigRequest
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResponseHeadersPolicyRequest
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStreamingDistributionRequest
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFunctionRequest
+      attr_accessor name: ::String
+      attr_accessor stage: ("DEVELOPMENT" | "LIVE")
+      SENSITIVE: []
+    end
+
+    class DescribeFunctionResult
+      attr_accessor function_summary: Types::FunctionSummary
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeKeyValueStoreRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeKeyValueStoreResult
+      attr_accessor key_value_store: Types::KeyValueStore
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class Distribution
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor in_progress_invalidation_batches: ::Integer
+      attr_accessor domain_name: ::String
+      attr_accessor active_trusted_signers: Types::ActiveTrustedSigners
+      attr_accessor active_trusted_key_groups: Types::ActiveTrustedKeyGroups
+      attr_accessor distribution_config: Types::DistributionConfig
+      attr_accessor alias_icp_recordals: ::Array[Types::AliasICPRecordal]
+      SENSITIVE: []
+    end
+
+    class DistributionAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DistributionConfig
+      attr_accessor caller_reference: ::String
+      attr_accessor aliases: Types::Aliases
+      attr_accessor default_root_object: ::String
+      attr_accessor origins: Types::Origins
+      attr_accessor origin_groups: Types::OriginGroups
+      attr_accessor default_cache_behavior: Types::DefaultCacheBehavior
+      attr_accessor cache_behaviors: Types::CacheBehaviors
+      attr_accessor custom_error_responses: Types::CustomErrorResponses
+      attr_accessor comment: ::String
+      attr_accessor logging: Types::LoggingConfig
+      attr_accessor price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All")
+      attr_accessor enabled: bool
+      attr_accessor viewer_certificate: Types::ViewerCertificate
+      attr_accessor restrictions: Types::Restrictions
+      attr_accessor web_acl_id: ::String
+      attr_accessor http_version: ("http1.1" | "http2" | "http3" | "http2and3")
+      attr_accessor is_ipv6_enabled: bool
+      attr_accessor continuous_deployment_policy_id: ::String
+      attr_accessor staging: bool
+      SENSITIVE: [:comment]
+    end
+
+    class DistributionConfigWithTags
+      attr_accessor distribution_config: Types::DistributionConfig
+      attr_accessor tags: Types::Tags
+      SENSITIVE: []
+    end
+
+    class DistributionIdList
+      attr_accessor marker: ::String
+      attr_accessor next_marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor is_truncated: bool
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DistributionList
+      attr_accessor marker: ::String
+      attr_accessor next_marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor is_truncated: bool
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::DistributionSummary]
+      SENSITIVE: []
+    end
+
+    class DistributionNotDisabled
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DistributionSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor domain_name: ::String
+      attr_accessor aliases: Types::Aliases
+      attr_accessor origins: Types::Origins
+      attr_accessor origin_groups: Types::OriginGroups
+      attr_accessor default_cache_behavior: Types::DefaultCacheBehavior
+      attr_accessor cache_behaviors: Types::CacheBehaviors
+      attr_accessor custom_error_responses: Types::CustomErrorResponses
+      attr_accessor comment: ::String
+      attr_accessor price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All")
+      attr_accessor enabled: bool
+      attr_accessor viewer_certificate: Types::ViewerCertificate
+      attr_accessor restrictions: Types::Restrictions
+      attr_accessor web_acl_id: ::String
+      attr_accessor http_version: ("http1.1" | "http2" | "http3" | "http2and3")
+      attr_accessor is_ipv6_enabled: bool
+      attr_accessor alias_icp_recordals: ::Array[Types::AliasICPRecordal]
+      attr_accessor staging: bool
+      SENSITIVE: []
+    end
+
+    class EncryptionEntities
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::EncryptionEntity]
+      SENSITIVE: []
+    end
+
+    class EncryptionEntity
+      attr_accessor public_key_id: ::String
+      attr_accessor provider_id: ::String
+      attr_accessor field_patterns: Types::FieldPatterns
+      SENSITIVE: []
+    end
+
+    class EndPoint
+      attr_accessor stream_type: ::String
+      attr_accessor kinesis_stream_config: Types::KinesisStreamConfig
+      SENSITIVE: []
+    end
+
+    class EntityAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EntityLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EntityNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EntitySizeLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FieldLevelEncryption
+      attr_accessor id: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor field_level_encryption_config: Types::FieldLevelEncryptionConfig
+      SENSITIVE: []
+    end
+
+    class FieldLevelEncryptionConfig
+      attr_accessor caller_reference: ::String
+      attr_accessor comment: ::String
+      attr_accessor query_arg_profile_config: Types::QueryArgProfileConfig
+      attr_accessor content_type_profile_config: Types::ContentTypeProfileConfig
+      SENSITIVE: []
+    end
+
+    class FieldLevelEncryptionConfigAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FieldLevelEncryptionConfigInUse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FieldLevelEncryptionList
+      attr_accessor next_marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::FieldLevelEncryptionSummary]
+      SENSITIVE: []
+    end
+
+    class FieldLevelEncryptionProfile
+      attr_accessor id: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor field_level_encryption_profile_config: Types::FieldLevelEncryptionProfileConfig
+      SENSITIVE: []
+    end
+
+    class FieldLevelEncryptionProfileAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FieldLevelEncryptionProfileConfig
+      attr_accessor name: ::String
+      attr_accessor caller_reference: ::String
+      attr_accessor comment: ::String
+      attr_accessor encryption_entities: Types::EncryptionEntities
+      SENSITIVE: []
+    end
+
+    class FieldLevelEncryptionProfileInUse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FieldLevelEncryptionProfileList
+      attr_accessor next_marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::FieldLevelEncryptionProfileSummary]
+      SENSITIVE: []
+    end
+
+    class FieldLevelEncryptionProfileSizeExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FieldLevelEncryptionProfileSummary
+      attr_accessor id: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor encryption_entities: Types::EncryptionEntities
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class FieldLevelEncryptionSummary
+      attr_accessor id: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor comment: ::String
+      attr_accessor query_arg_profile_config: Types::QueryArgProfileConfig
+      attr_accessor content_type_profile_config: Types::ContentTypeProfileConfig
+      SENSITIVE: []
+    end
+
+    class FieldPatterns
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ForwardedValues
+      attr_accessor query_string: bool
+      attr_accessor cookies: Types::CookiePreference
+      attr_accessor headers: Types::Headers
+      attr_accessor query_string_cache_keys: Types::QueryStringCacheKeys
+      SENSITIVE: []
+    end
+
+    class FunctionAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FunctionAssociation
+      attr_accessor function_arn: ::String
+      attr_accessor event_type: ("viewer-request" | "viewer-response" | "origin-request" | "origin-response")
+      SENSITIVE: []
+    end
+
+    class FunctionAssociations
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::FunctionAssociation]
+      SENSITIVE: []
+    end
+
+    class FunctionConfig
+      attr_accessor comment: ::String
+      attr_accessor runtime: ("cloudfront-js-1.0" | "cloudfront-js-2.0")
+      attr_accessor key_value_store_associations: Types::KeyValueStoreAssociations
+      SENSITIVE: []
+    end
+
+    class FunctionInUse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FunctionList
+      attr_accessor next_marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::FunctionSummary]
+      SENSITIVE: []
+    end
+
+    class FunctionMetadata
+      attr_accessor function_arn: ::String
+      attr_accessor stage: ("DEVELOPMENT" | "LIVE")
+      attr_accessor created_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class FunctionSizeLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FunctionSummary
+      attr_accessor name: ::String
+      attr_accessor status: ::String
+      attr_accessor function_config: Types::FunctionConfig
+      attr_accessor function_metadata: Types::FunctionMetadata
+      SENSITIVE: []
+    end
+
+    class GeoRestriction
+      attr_accessor restriction_type: ("blacklist" | "whitelist" | "none")
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetCachePolicyConfigRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCachePolicyConfigResult
+      attr_accessor cache_policy_config: Types::CachePolicyConfig
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetCachePolicyRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCachePolicyResult
+      attr_accessor cache_policy: Types::CachePolicy
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetCloudFrontOriginAccessIdentityConfigRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCloudFrontOriginAccessIdentityConfigResult
+      attr_accessor cloud_front_origin_access_identity_config: Types::CloudFrontOriginAccessIdentityConfig
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetCloudFrontOriginAccessIdentityRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCloudFrontOriginAccessIdentityResult
+      attr_accessor cloud_front_origin_access_identity: Types::CloudFrontOriginAccessIdentity
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetContinuousDeploymentPolicyConfigRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetContinuousDeploymentPolicyConfigResult
+      attr_accessor continuous_deployment_policy_config: Types::ContinuousDeploymentPolicyConfig
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetContinuousDeploymentPolicyRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetContinuousDeploymentPolicyResult
+      attr_accessor continuous_deployment_policy: Types::ContinuousDeploymentPolicy
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetDistributionConfigRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDistributionConfigResult
+      attr_accessor distribution_config: Types::DistributionConfig
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetDistributionRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDistributionResult
+      attr_accessor distribution: Types::Distribution
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetFieldLevelEncryptionConfigRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFieldLevelEncryptionConfigResult
+      attr_accessor field_level_encryption_config: Types::FieldLevelEncryptionConfig
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetFieldLevelEncryptionProfileConfigRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFieldLevelEncryptionProfileConfigResult
+      attr_accessor field_level_encryption_profile_config: Types::FieldLevelEncryptionProfileConfig
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetFieldLevelEncryptionProfileRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFieldLevelEncryptionProfileResult
+      attr_accessor field_level_encryption_profile: Types::FieldLevelEncryptionProfile
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetFieldLevelEncryptionRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFieldLevelEncryptionResult
+      attr_accessor field_level_encryption: Types::FieldLevelEncryption
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetFunctionRequest
+      attr_accessor name: ::String
+      attr_accessor stage: ("DEVELOPMENT" | "LIVE")
+      SENSITIVE: []
+    end
+
+    class GetFunctionResult
+      attr_accessor function_code: ::String
+      attr_accessor etag: ::String
+      attr_accessor content_type: ::String
+      SENSITIVE: [:function_code]
+    end
+
+    class GetInvalidationRequest
+      attr_accessor distribution_id: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetInvalidationResult
+      attr_accessor invalidation: Types::Invalidation
+      SENSITIVE: []
+    end
+
+    class GetKeyGroupConfigRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetKeyGroupConfigResult
+      attr_accessor key_group_config: Types::KeyGroupConfig
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetKeyGroupRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetKeyGroupResult
+      attr_accessor key_group: Types::KeyGroup
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetMonitoringSubscriptionRequest
+      attr_accessor distribution_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMonitoringSubscriptionResult
+      attr_accessor monitoring_subscription: Types::MonitoringSubscription
+      SENSITIVE: []
+    end
+
+    class GetOriginAccessControlConfigRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetOriginAccessControlConfigResult
+      attr_accessor origin_access_control_config: Types::OriginAccessControlConfig
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetOriginAccessControlRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetOriginAccessControlResult
+      attr_accessor origin_access_control: Types::OriginAccessControl
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetOriginRequestPolicyConfigRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetOriginRequestPolicyConfigResult
+      attr_accessor origin_request_policy_config: Types::OriginRequestPolicyConfig
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetOriginRequestPolicyRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetOriginRequestPolicyResult
+      attr_accessor origin_request_policy: Types::OriginRequestPolicy
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetPublicKeyConfigRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPublicKeyConfigResult
+      attr_accessor public_key_config: Types::PublicKeyConfig
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetPublicKeyRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPublicKeyResult
+      attr_accessor public_key: Types::PublicKey
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetRealtimeLogConfigRequest
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetRealtimeLogConfigResult
+      attr_accessor realtime_log_config: Types::RealtimeLogConfig
+      SENSITIVE: []
+    end
+
+    class GetResponseHeadersPolicyConfigRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetResponseHeadersPolicyConfigResult
+      attr_accessor response_headers_policy_config: Types::ResponseHeadersPolicyConfig
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetResponseHeadersPolicyRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetResponseHeadersPolicyResult
+      attr_accessor response_headers_policy: Types::ResponseHeadersPolicy
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetStreamingDistributionConfigRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetStreamingDistributionConfigResult
+      attr_accessor streaming_distribution_config: Types::StreamingDistributionConfig
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class GetStreamingDistributionRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetStreamingDistributionResult
+      attr_accessor streaming_distribution: Types::StreamingDistribution
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class Headers
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class IllegalDelete
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IllegalOriginAccessConfiguration
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IllegalUpdate
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ImportSource
+      attr_accessor source_type: ("S3")
+      attr_accessor source_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InconsistentQuantities
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidArgument
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidDefaultRootObject
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidDomainNameForOriginAccessControl
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidErrorCode
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidForwardCookies
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidFunctionAssociation
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidGeoRestrictionParameter
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidHeadersForS3Origin
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidIfMatchVersion
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidLambdaFunctionAssociation
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidLocationCode
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidMinimumProtocolVersion
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidOrigin
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidOriginAccessControl
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidOriginAccessIdentity
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidOriginKeepaliveTimeout
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidOriginReadTimeout
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidProtocolSettings
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidQueryStringParameters
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRelativePath
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequiredProtocol
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidResponseCode
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTTLOrder
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTagging
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidViewerCertificate
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidWebACLId
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Invalidation
+      attr_accessor id: ::String
+      attr_accessor status: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor invalidation_batch: Types::InvalidationBatch
+      SENSITIVE: []
+    end
+
+    class InvalidationBatch
+      attr_accessor paths: Types::Paths
+      attr_accessor caller_reference: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidationList
+      attr_accessor marker: ::String
+      attr_accessor next_marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor is_truncated: bool
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::InvalidationSummary]
+      SENSITIVE: []
+    end
+
+    class InvalidationSummary
+      attr_accessor id: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class KGKeyPairIds
+      attr_accessor key_group_id: ::String
+      attr_accessor key_pair_ids: Types::KeyPairIds
+      SENSITIVE: []
+    end
+
+    class KeyGroup
+      attr_accessor id: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor key_group_config: Types::KeyGroupConfig
+      SENSITIVE: []
+    end
+
+    class KeyGroupAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KeyGroupConfig
+      attr_accessor name: ::String
+      attr_accessor items: ::Array[::String]
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class KeyGroupList
+      attr_accessor next_marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::KeyGroupSummary]
+      SENSITIVE: []
+    end
+
+    class KeyGroupSummary
+      attr_accessor key_group: Types::KeyGroup
+      SENSITIVE: []
+    end
+
+    class KeyPairIds
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class KeyValueStore
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor comment: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ::String
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class KeyValueStoreAssociation
+      attr_accessor key_value_store_arn: ::String
+      SENSITIVE: []
+    end
+
+    class KeyValueStoreAssociations
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::KeyValueStoreAssociation]
+      SENSITIVE: []
+    end
+
+    class KeyValueStoreList
+      attr_accessor next_marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::KeyValueStore]
+      SENSITIVE: []
+    end
+
+    class KinesisStreamConfig
+      attr_accessor role_arn: ::String
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaFunctionAssociation
+      attr_accessor lambda_function_arn: ::String
+      attr_accessor event_type: ("viewer-request" | "viewer-response" | "origin-request" | "origin-response")
+      attr_accessor include_body: bool
+      SENSITIVE: []
+    end
+
+    class LambdaFunctionAssociations
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::LambdaFunctionAssociation]
+      SENSITIVE: []
+    end
+
+    class ListCachePoliciesRequest
+      attr_accessor type: ("managed" | "custom")
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCachePoliciesResult
+      attr_accessor cache_policy_list: Types::CachePolicyList
+      SENSITIVE: []
+    end
+
+    class ListCloudFrontOriginAccessIdentitiesRequest
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCloudFrontOriginAccessIdentitiesResult
+      attr_accessor cloud_front_origin_access_identity_list: Types::CloudFrontOriginAccessIdentityList
+      SENSITIVE: []
+    end
+
+    class ListConflictingAliasesRequest
+      attr_accessor distribution_id: ::String
+      attr_accessor alias: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListConflictingAliasesResult
+      attr_accessor conflicting_aliases_list: Types::ConflictingAliasesList
+      SENSITIVE: []
+    end
+
+    class ListContinuousDeploymentPoliciesRequest
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListContinuousDeploymentPoliciesResult
+      attr_accessor continuous_deployment_policy_list: Types::ContinuousDeploymentPolicyList
+      SENSITIVE: []
+    end
+
+    class ListDistributionsByCachePolicyIdRequest
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor cache_policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListDistributionsByCachePolicyIdResult
+      attr_accessor distribution_id_list: Types::DistributionIdList
+      SENSITIVE: []
+    end
+
+    class ListDistributionsByKeyGroupRequest
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor key_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListDistributionsByKeyGroupResult
+      attr_accessor distribution_id_list: Types::DistributionIdList
+      SENSITIVE: []
+    end
+
+    class ListDistributionsByOriginRequestPolicyIdRequest
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor origin_request_policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListDistributionsByOriginRequestPolicyIdResult
+      attr_accessor distribution_id_list: Types::DistributionIdList
+      SENSITIVE: []
+    end
+
+    class ListDistributionsByRealtimeLogConfigRequest
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor realtime_log_config_name: ::String
+      attr_accessor realtime_log_config_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListDistributionsByRealtimeLogConfigResult
+      attr_accessor distribution_list: Types::DistributionList
+      SENSITIVE: []
+    end
+
+    class ListDistributionsByResponseHeadersPolicyIdRequest
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor response_headers_policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListDistributionsByResponseHeadersPolicyIdResult
+      attr_accessor distribution_id_list: Types::DistributionIdList
+      SENSITIVE: []
+    end
+
+    class ListDistributionsByWebACLIdRequest
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor web_acl_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListDistributionsByWebACLIdResult
+      attr_accessor distribution_list: Types::DistributionList
+      SENSITIVE: []
+    end
+
+    class ListDistributionsRequest
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDistributionsResult
+      attr_accessor distribution_list: Types::DistributionList
+      SENSITIVE: []
+    end
+
+    class ListFieldLevelEncryptionConfigsRequest
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFieldLevelEncryptionConfigsResult
+      attr_accessor field_level_encryption_list: Types::FieldLevelEncryptionList
+      SENSITIVE: []
+    end
+
+    class ListFieldLevelEncryptionProfilesRequest
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFieldLevelEncryptionProfilesResult
+      attr_accessor field_level_encryption_profile_list: Types::FieldLevelEncryptionProfileList
+      SENSITIVE: []
+    end
+
+    class ListFunctionsRequest
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor stage: ("DEVELOPMENT" | "LIVE")
+      SENSITIVE: []
+    end
+
+    class ListFunctionsResult
+      attr_accessor function_list: Types::FunctionList
+      SENSITIVE: []
+    end
+
+    class ListInvalidationsRequest
+      attr_accessor distribution_id: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListInvalidationsResult
+      attr_accessor invalidation_list: Types::InvalidationList
+      SENSITIVE: []
+    end
+
+    class ListKeyGroupsRequest
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListKeyGroupsResult
+      attr_accessor key_group_list: Types::KeyGroupList
+      SENSITIVE: []
+    end
+
+    class ListKeyValueStoresRequest
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class ListKeyValueStoresResult
+      attr_accessor key_value_store_list: Types::KeyValueStoreList
+      SENSITIVE: []
+    end
+
+    class ListOriginAccessControlsRequest
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListOriginAccessControlsResult
+      attr_accessor origin_access_control_list: Types::OriginAccessControlList
+      SENSITIVE: []
+    end
+
+    class ListOriginRequestPoliciesRequest
+      attr_accessor type: ("managed" | "custom")
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListOriginRequestPoliciesResult
+      attr_accessor origin_request_policy_list: Types::OriginRequestPolicyList
+      SENSITIVE: []
+    end
+
+    class ListPublicKeysRequest
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPublicKeysResult
+      attr_accessor public_key_list: Types::PublicKeyList
+      SENSITIVE: []
+    end
+
+    class ListRealtimeLogConfigsRequest
+      attr_accessor max_items: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListRealtimeLogConfigsResult
+      attr_accessor realtime_log_configs: Types::RealtimeLogConfigs
+      SENSITIVE: []
+    end
+
+    class ListResponseHeadersPoliciesRequest
+      attr_accessor type: ("managed" | "custom")
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListResponseHeadersPoliciesResult
+      attr_accessor response_headers_policy_list: Types::ResponseHeadersPolicyList
+      SENSITIVE: []
+    end
+
+    class ListStreamingDistributionsRequest
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListStreamingDistributionsResult
+      attr_accessor streaming_distribution_list: Types::StreamingDistributionList
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResult
+      attr_accessor tags: Types::Tags
+      SENSITIVE: []
+    end
+
+    class LoggingConfig
+      attr_accessor enabled: bool
+      attr_accessor include_cookies: bool
+      attr_accessor bucket: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class MissingBody
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MonitoringSubscription
+      attr_accessor realtime_metrics_subscription_config: Types::RealtimeMetricsSubscriptionConfig
+      SENSITIVE: []
+    end
+
+    class MonitoringSubscriptionAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchCachePolicy
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchCloudFrontOriginAccessIdentity
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchContinuousDeploymentPolicy
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchDistribution
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchFieldLevelEncryptionConfig
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchFieldLevelEncryptionProfile
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchFunctionExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchInvalidation
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchMonitoringSubscription
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchOrigin
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchOriginAccessControl
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchOriginRequestPolicy
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchPublicKey
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchRealtimeLogConfig
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchResource
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchResponseHeadersPolicy
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchStreamingDistribution
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Origin
+      attr_accessor id: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor origin_path: ::String
+      attr_accessor custom_headers: Types::CustomHeaders
+      attr_accessor s3_origin_config: Types::S3OriginConfig
+      attr_accessor custom_origin_config: Types::CustomOriginConfig
+      attr_accessor connection_attempts: ::Integer
+      attr_accessor connection_timeout: ::Integer
+      attr_accessor origin_shield: Types::OriginShield
+      attr_accessor origin_access_control_id: ::String
+      SENSITIVE: []
+    end
+
+    class OriginAccessControl
+      attr_accessor id: ::String
+      attr_accessor origin_access_control_config: Types::OriginAccessControlConfig
+      SENSITIVE: []
+    end
+
+    class OriginAccessControlAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OriginAccessControlConfig
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor signing_protocol: ("sigv4")
+      attr_accessor signing_behavior: ("never" | "always" | "no-override")
+      attr_accessor origin_access_control_origin_type: ("s3" | "mediastore")
+      SENSITIVE: []
+    end
+
+    class OriginAccessControlInUse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OriginAccessControlList
+      attr_accessor marker: ::String
+      attr_accessor next_marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor is_truncated: bool
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::OriginAccessControlSummary]
+      SENSITIVE: []
+    end
+
+    class OriginAccessControlSummary
+      attr_accessor id: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor signing_protocol: ("sigv4")
+      attr_accessor signing_behavior: ("never" | "always" | "no-override")
+      attr_accessor origin_access_control_origin_type: ("s3" | "mediastore")
+      SENSITIVE: []
+    end
+
+    class OriginCustomHeader
+      attr_accessor header_name: ::String
+      attr_accessor header_value: ::String
+      SENSITIVE: [:header_value]
+    end
+
+    class OriginGroup
+      attr_accessor id: ::String
+      attr_accessor failover_criteria: Types::OriginGroupFailoverCriteria
+      attr_accessor members: Types::OriginGroupMembers
+      SENSITIVE: []
+    end
+
+    class OriginGroupFailoverCriteria
+      attr_accessor status_codes: Types::StatusCodes
+      SENSITIVE: []
+    end
+
+    class OriginGroupMember
+      attr_accessor origin_id: ::String
+      SENSITIVE: []
+    end
+
+    class OriginGroupMembers
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::OriginGroupMember]
+      SENSITIVE: []
+    end
+
+    class OriginGroups
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::OriginGroup]
+      SENSITIVE: []
+    end
+
+    class OriginRequestPolicy
+      attr_accessor id: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor origin_request_policy_config: Types::OriginRequestPolicyConfig
+      SENSITIVE: []
+    end
+
+    class OriginRequestPolicyAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OriginRequestPolicyConfig
+      attr_accessor comment: ::String
+      attr_accessor name: ::String
+      attr_accessor headers_config: Types::OriginRequestPolicyHeadersConfig
+      attr_accessor cookies_config: Types::OriginRequestPolicyCookiesConfig
+      attr_accessor query_strings_config: Types::OriginRequestPolicyQueryStringsConfig
+      SENSITIVE: []
+    end
+
+    class OriginRequestPolicyCookiesConfig
+      attr_accessor cookie_behavior: ("none" | "whitelist" | "all" | "allExcept")
+      attr_accessor cookies: Types::CookieNames
+      SENSITIVE: []
+    end
+
+    class OriginRequestPolicyHeadersConfig
+      attr_accessor header_behavior: ("none" | "whitelist" | "allViewer" | "allViewerAndWhitelistCloudFront" | "allExcept")
+      attr_accessor headers: Types::Headers
+      SENSITIVE: []
+    end
+
+    class OriginRequestPolicyInUse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OriginRequestPolicyList
+      attr_accessor next_marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::OriginRequestPolicySummary]
+      SENSITIVE: []
+    end
+
+    class OriginRequestPolicyQueryStringsConfig
+      attr_accessor query_string_behavior: ("none" | "whitelist" | "all" | "allExcept")
+      attr_accessor query_strings: Types::QueryStringNames
+      SENSITIVE: []
+    end
+
+    class OriginRequestPolicySummary
+      attr_accessor type: ("managed" | "custom")
+      attr_accessor origin_request_policy: Types::OriginRequestPolicy
+      SENSITIVE: []
+    end
+
+    class OriginShield
+      attr_accessor enabled: bool
+      attr_accessor origin_shield_region: ::String
+      SENSITIVE: []
+    end
+
+    class OriginSslProtocols
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[("SSLv3" | "TLSv1" | "TLSv1.1" | "TLSv1.2")]
+      SENSITIVE: []
+    end
+
+    class Origins
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::Origin]
+      SENSITIVE: []
+    end
+
+    class ParametersInCacheKeyAndForwardedToOrigin
+      attr_accessor enable_accept_encoding_gzip: bool
+      attr_accessor enable_accept_encoding_brotli: bool
+      attr_accessor headers_config: Types::CachePolicyHeadersConfig
+      attr_accessor cookies_config: Types::CachePolicyCookiesConfig
+      attr_accessor query_strings_config: Types::CachePolicyQueryStringsConfig
+      SENSITIVE: []
+    end
+
+    class Paths
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PreconditionFailed
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PublicKey
+      attr_accessor id: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor public_key_config: Types::PublicKeyConfig
+      SENSITIVE: []
+    end
+
+    class PublicKeyAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PublicKeyConfig
+      attr_accessor caller_reference: ::String
+      attr_accessor name: ::String
+      attr_accessor encoded_key: ::String
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class PublicKeyInUse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PublicKeyList
+      attr_accessor next_marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::PublicKeySummary]
+      SENSITIVE: []
+    end
+
+    class PublicKeySummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor encoded_key: ::String
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class PublishFunctionRequest
+      attr_accessor name: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class PublishFunctionResult
+      attr_accessor function_summary: Types::FunctionSummary
+      SENSITIVE: []
+    end
+
+    class QueryArgProfile
+      attr_accessor query_arg: ::String
+      attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class QueryArgProfileConfig
+      attr_accessor forward_when_query_arg_profile_is_unknown: bool
+      attr_accessor query_arg_profiles: Types::QueryArgProfiles
+      SENSITIVE: []
+    end
+
+    class QueryArgProfileEmpty
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class QueryArgProfiles
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::QueryArgProfile]
+      SENSITIVE: []
+    end
+
+    class QueryStringCacheKeys
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class QueryStringNames
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RealtimeLogConfig
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor sampling_rate: ::Integer
+      attr_accessor end_points: ::Array[Types::EndPoint]
+      attr_accessor fields: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RealtimeLogConfigAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RealtimeLogConfigInUse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RealtimeLogConfigOwnerMismatch
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RealtimeLogConfigs
+      attr_accessor max_items: ::Integer
+      attr_accessor items: ::Array[Types::RealtimeLogConfig]
+      attr_accessor is_truncated: bool
+      attr_accessor marker: ::String
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class RealtimeMetricsSubscriptionConfig
+      attr_accessor realtime_metrics_subscription_status: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class ResourceInUse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResponseHeadersPolicy
+      attr_accessor id: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor response_headers_policy_config: Types::ResponseHeadersPolicyConfig
+      SENSITIVE: []
+    end
+
+    class ResponseHeadersPolicyAccessControlAllowHeaders
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResponseHeadersPolicyAccessControlAllowMethods
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[("GET" | "POST" | "OPTIONS" | "PUT" | "DELETE" | "PATCH" | "HEAD" | "ALL")]
+      SENSITIVE: []
+    end
+
+    class ResponseHeadersPolicyAccessControlAllowOrigins
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResponseHeadersPolicyAccessControlExposeHeaders
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResponseHeadersPolicyAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResponseHeadersPolicyConfig
+      attr_accessor comment: ::String
+      attr_accessor name: ::String
+      attr_accessor cors_config: Types::ResponseHeadersPolicyCorsConfig
+      attr_accessor security_headers_config: Types::ResponseHeadersPolicySecurityHeadersConfig
+      attr_accessor server_timing_headers_config: Types::ResponseHeadersPolicyServerTimingHeadersConfig
+      attr_accessor custom_headers_config: Types::ResponseHeadersPolicyCustomHeadersConfig
+      attr_accessor remove_headers_config: Types::ResponseHeadersPolicyRemoveHeadersConfig
+      SENSITIVE: []
+    end
+
+    class ResponseHeadersPolicyContentSecurityPolicy
+      attr_accessor override: bool
+      attr_accessor content_security_policy: ::String
+      SENSITIVE: []
+    end
+
+    class ResponseHeadersPolicyContentTypeOptions
+      attr_accessor override: bool
+      SENSITIVE: []
+    end
+
+    class ResponseHeadersPolicyCorsConfig
+      attr_accessor access_control_allow_origins: Types::ResponseHeadersPolicyAccessControlAllowOrigins
+      attr_accessor access_control_allow_headers: Types::ResponseHeadersPolicyAccessControlAllowHeaders
+      attr_accessor access_control_allow_methods: Types::ResponseHeadersPolicyAccessControlAllowMethods
+      attr_accessor access_control_allow_credentials: bool
+      attr_accessor access_control_expose_headers: Types::ResponseHeadersPolicyAccessControlExposeHeaders
+      attr_accessor access_control_max_age_sec: ::Integer
+      attr_accessor origin_override: bool
+      SENSITIVE: []
+    end
+
+    class ResponseHeadersPolicyCustomHeader
+      attr_accessor header: ::String
+      attr_accessor value: ::String
+      attr_accessor override: bool
+      SENSITIVE: []
+    end
+
+    class ResponseHeadersPolicyCustomHeadersConfig
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::ResponseHeadersPolicyCustomHeader]
+      SENSITIVE: []
+    end
+
+    class ResponseHeadersPolicyFrameOptions
+      attr_accessor override: bool
+      attr_accessor frame_option: ("DENY" | "SAMEORIGIN")
+      SENSITIVE: []
+    end
+
+    class ResponseHeadersPolicyInUse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResponseHeadersPolicyList
+      attr_accessor next_marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::ResponseHeadersPolicySummary]
+      SENSITIVE: []
+    end
+
+    class ResponseHeadersPolicyReferrerPolicy
+      attr_accessor override: bool
+      attr_accessor referrer_policy: ("no-referrer" | "no-referrer-when-downgrade" | "origin" | "origin-when-cross-origin" | "same-origin" | "strict-origin" | "strict-origin-when-cross-origin" | "unsafe-url")
+      SENSITIVE: []
+    end
+
+    class ResponseHeadersPolicyRemoveHeader
+      attr_accessor header: ::String
+      SENSITIVE: []
+    end
+
+    class ResponseHeadersPolicyRemoveHeadersConfig
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::ResponseHeadersPolicyRemoveHeader]
+      SENSITIVE: []
+    end
+
+    class ResponseHeadersPolicySecurityHeadersConfig
+      attr_accessor xss_protection: Types::ResponseHeadersPolicyXSSProtection
+      attr_accessor frame_options: Types::ResponseHeadersPolicyFrameOptions
+      attr_accessor referrer_policy: Types::ResponseHeadersPolicyReferrerPolicy
+      attr_accessor content_security_policy: Types::ResponseHeadersPolicyContentSecurityPolicy
+      attr_accessor content_type_options: Types::ResponseHeadersPolicyContentTypeOptions
+      attr_accessor strict_transport_security: Types::ResponseHeadersPolicyStrictTransportSecurity
+      SENSITIVE: []
+    end
+
+    class ResponseHeadersPolicyServerTimingHeadersConfig
+      attr_accessor enabled: bool
+      attr_accessor sampling_rate: ::Float
+      SENSITIVE: []
+    end
+
+    class ResponseHeadersPolicyStrictTransportSecurity
+      attr_accessor override: bool
+      attr_accessor include_subdomains: bool
+      attr_accessor preload: bool
+      attr_accessor access_control_max_age_sec: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResponseHeadersPolicySummary
+      attr_accessor type: ("managed" | "custom")
+      attr_accessor response_headers_policy: Types::ResponseHeadersPolicy
+      SENSITIVE: []
+    end
+
+    class ResponseHeadersPolicyXSSProtection
+      attr_accessor override: bool
+      attr_accessor protection: bool
+      attr_accessor mode_block: bool
+      attr_accessor report_uri: ::String
+      SENSITIVE: []
+    end
+
+    class Restrictions
+      attr_accessor geo_restriction: Types::GeoRestriction
+      SENSITIVE: []
+    end
+
+    class S3Origin
+      attr_accessor domain_name: ::String
+      attr_accessor origin_access_identity: ::String
+      SENSITIVE: []
+    end
+
+    class S3OriginConfig
+      attr_accessor origin_access_identity: ::String
+      SENSITIVE: []
+    end
+
+    class SessionStickinessConfig
+      attr_accessor idle_ttl: ::Integer
+      attr_accessor maximum_ttl: ::Integer
+      SENSITIVE: []
+    end
+
+    class Signer
+      attr_accessor aws_account_number: ::String
+      attr_accessor key_pair_ids: Types::KeyPairIds
+      SENSITIVE: []
+    end
+
+    class StagingDistributionDnsNames
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StagingDistributionInUse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StatusCodes
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class StreamingDistribution
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor domain_name: ::String
+      attr_accessor active_trusted_signers: Types::ActiveTrustedSigners
+      attr_accessor streaming_distribution_config: Types::StreamingDistributionConfig
+      SENSITIVE: []
+    end
+
+    class StreamingDistributionAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StreamingDistributionConfig
+      attr_accessor caller_reference: ::String
+      attr_accessor s3_origin: Types::S3Origin
+      attr_accessor aliases: Types::Aliases
+      attr_accessor comment: ::String
+      attr_accessor logging: Types::StreamingLoggingConfig
+      attr_accessor trusted_signers: Types::TrustedSigners
+      attr_accessor price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All")
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class StreamingDistributionConfigWithTags
+      attr_accessor streaming_distribution_config: Types::StreamingDistributionConfig
+      attr_accessor tags: Types::Tags
+      SENSITIVE: []
+    end
+
+    class StreamingDistributionList
+      attr_accessor marker: ::String
+      attr_accessor next_marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor is_truncated: bool
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[Types::StreamingDistributionSummary]
+      SENSITIVE: []
+    end
+
+    class StreamingDistributionNotDisabled
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StreamingDistributionSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor domain_name: ::String
+      attr_accessor s3_origin: Types::S3Origin
+      attr_accessor aliases: Types::Aliases
+      attr_accessor trusted_signers: Types::TrustedSigners
+      attr_accessor comment: ::String
+      attr_accessor price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All")
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class StreamingLoggingConfig
+      attr_accessor enabled: bool
+      attr_accessor bucket: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagKeys
+      attr_accessor items: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource: ::String
+      attr_accessor tags: Types::Tags
+      SENSITIVE: []
+    end
+
+    class Tags
+      attr_accessor items: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TestFunctionFailed
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TestFunctionRequest
+      attr_accessor name: ::String
+      attr_accessor if_match: ::String
+      attr_accessor stage: ("DEVELOPMENT" | "LIVE")
+      attr_accessor event_object: ::String
+      SENSITIVE: [:event_object]
+    end
+
+    class TestFunctionResult
+      attr_accessor test_result: Types::TestResult
+      SENSITIVE: []
+    end
+
+    class TestResult
+      attr_accessor function_summary: Types::FunctionSummary
+      attr_accessor compute_utilization: ::String
+      attr_accessor function_execution_logs: ::Array[::String]
+      attr_accessor function_error_message: ::String
+      attr_accessor function_output: ::String
+      SENSITIVE: [:function_execution_logs, :function_error_message, :function_output]
+    end
+
+    class TooLongCSPInResponseHeadersPolicy
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyCacheBehaviors
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyCachePolicies
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyCertificates
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyCloudFrontOriginAccessIdentities
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyContinuousDeploymentPolicies
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyCookieNamesInWhiteList
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyCookiesInCachePolicy
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyCookiesInOriginRequestPolicy
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyCustomHeadersInResponseHeadersPolicy
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyDistributionCNAMEs
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyDistributions
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyDistributionsAssociatedToCachePolicy
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyDistributionsAssociatedToFieldLevelEncryptionConfig
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyDistributionsAssociatedToKeyGroup
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyDistributionsAssociatedToOriginAccessControl
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyDistributionsAssociatedToOriginRequestPolicy
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyDistributionsAssociatedToResponseHeadersPolicy
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyDistributionsWithFunctionAssociations
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyDistributionsWithLambdaAssociations
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyDistributionsWithSingleFunctionARN
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyFieldLevelEncryptionConfigs
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyFieldLevelEncryptionContentTypeProfiles
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyFieldLevelEncryptionEncryptionEntities
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyFieldLevelEncryptionFieldPatterns
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyFieldLevelEncryptionProfiles
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyFieldLevelEncryptionQueryArgProfiles
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyFunctionAssociations
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyFunctions
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyHeadersInCachePolicy
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyHeadersInForwardedValues
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyHeadersInOriginRequestPolicy
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyInvalidationsInProgress
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyKeyGroups
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyKeyGroupsAssociatedToDistribution
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyLambdaFunctionAssociations
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyOriginAccessControls
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyOriginCustomHeaders
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyOriginGroupsPerDistribution
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyOriginRequestPolicies
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyOrigins
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyPublicKeys
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyPublicKeysInKeyGroup
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyQueryStringParameters
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyQueryStringsInCachePolicy
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyQueryStringsInOriginRequestPolicy
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRealtimeLogConfigs
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRemoveHeadersInResponseHeadersPolicy
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyResponseHeadersPolicies
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyStreamingDistributionCNAMEs
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyStreamingDistributions
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTrustedSigners
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TrafficConfig
+      attr_accessor single_weight_config: Types::ContinuousDeploymentSingleWeightConfig
+      attr_accessor single_header_config: Types::ContinuousDeploymentSingleHeaderConfig
+      attr_accessor type: ("SingleWeight" | "SingleHeader")
+      SENSITIVE: []
+    end
+
+    class TrustedKeyGroupDoesNotExist
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TrustedKeyGroups
+      attr_accessor enabled: bool
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TrustedSignerDoesNotExist
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TrustedSigners
+      attr_accessor enabled: bool
+      attr_accessor quantity: ::Integer
+      attr_accessor items: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UnsupportedOperation
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource: ::String
+      attr_accessor tag_keys: Types::TagKeys
+      SENSITIVE: []
+    end
+
+    class UpdateCachePolicyRequest
+      attr_accessor cache_policy_config: Types::CachePolicyConfig
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCachePolicyResult
+      attr_accessor cache_policy: Types::CachePolicy
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCloudFrontOriginAccessIdentityRequest
+      attr_accessor cloud_front_origin_access_identity_config: Types::CloudFrontOriginAccessIdentityConfig
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCloudFrontOriginAccessIdentityResult
+      attr_accessor cloud_front_origin_access_identity: Types::CloudFrontOriginAccessIdentity
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateContinuousDeploymentPolicyRequest
+      attr_accessor continuous_deployment_policy_config: Types::ContinuousDeploymentPolicyConfig
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateContinuousDeploymentPolicyResult
+      attr_accessor continuous_deployment_policy: Types::ContinuousDeploymentPolicy
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDistributionRequest
+      attr_accessor distribution_config: Types::DistributionConfig
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDistributionResult
+      attr_accessor distribution: Types::Distribution
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDistributionWithStagingConfigRequest
+      attr_accessor id: ::String
+      attr_accessor staging_distribution_id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDistributionWithStagingConfigResult
+      attr_accessor distribution: Types::Distribution
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFieldLevelEncryptionConfigRequest
+      attr_accessor field_level_encryption_config: Types::FieldLevelEncryptionConfig
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFieldLevelEncryptionConfigResult
+      attr_accessor field_level_encryption: Types::FieldLevelEncryption
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFieldLevelEncryptionProfileRequest
+      attr_accessor field_level_encryption_profile_config: Types::FieldLevelEncryptionProfileConfig
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFieldLevelEncryptionProfileResult
+      attr_accessor field_level_encryption_profile: Types::FieldLevelEncryptionProfile
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFunctionRequest
+      attr_accessor name: ::String
+      attr_accessor if_match: ::String
+      attr_accessor function_config: Types::FunctionConfig
+      attr_accessor function_code: ::String
+      SENSITIVE: [:function_code]
+    end
+
+    class UpdateFunctionResult
+      attr_accessor function_summary: Types::FunctionSummary
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateKeyGroupRequest
+      attr_accessor key_group_config: Types::KeyGroupConfig
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateKeyGroupResult
+      attr_accessor key_group: Types::KeyGroup
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateKeyValueStoreRequest
+      attr_accessor name: ::String
+      attr_accessor comment: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateKeyValueStoreResult
+      attr_accessor key_value_store: Types::KeyValueStore
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateOriginAccessControlRequest
+      attr_accessor origin_access_control_config: Types::OriginAccessControlConfig
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateOriginAccessControlResult
+      attr_accessor origin_access_control: Types::OriginAccessControl
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateOriginRequestPolicyRequest
+      attr_accessor origin_request_policy_config: Types::OriginRequestPolicyConfig
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateOriginRequestPolicyResult
+      attr_accessor origin_request_policy: Types::OriginRequestPolicy
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePublicKeyRequest
+      attr_accessor public_key_config: Types::PublicKeyConfig
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePublicKeyResult
+      attr_accessor public_key: Types::PublicKey
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRealtimeLogConfigRequest
+      attr_accessor end_points: ::Array[Types::EndPoint]
+      attr_accessor fields: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor sampling_rate: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateRealtimeLogConfigResult
+      attr_accessor realtime_log_config: Types::RealtimeLogConfig
+      SENSITIVE: []
+    end
+
+    class UpdateResponseHeadersPolicyRequest
+      attr_accessor response_headers_policy_config: Types::ResponseHeadersPolicyConfig
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateResponseHeadersPolicyResult
+      attr_accessor response_headers_policy: Types::ResponseHeadersPolicy
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateStreamingDistributionRequest
+      attr_accessor streaming_distribution_config: Types::StreamingDistributionConfig
+      attr_accessor id: ::String
+      attr_accessor if_match: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateStreamingDistributionResult
+      attr_accessor streaming_distribution: Types::StreamingDistribution
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class ViewerCertificate
+      attr_accessor cloud_front_default_certificate: bool
+      attr_accessor iam_certificate_id: ::String
+      attr_accessor acm_certificate_arn: ::String
+      attr_accessor ssl_support_method: ("sni-only" | "vip" | "static-ip")
+      attr_accessor minimum_protocol_version: ("SSLv3" | "TLSv1" | "TLSv1_2016" | "TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021")
+      attr_accessor certificate: ::String
+      attr_accessor certificate_source: ("cloudfront" | "iam" | "acm")
+      SENSITIVE: []
+    end
+  end
+end

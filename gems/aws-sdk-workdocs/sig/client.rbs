@@ -1,0 +1,671 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module WorkDocs
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#abort_document_version_upload-instance_method
+      def abort_document_version_upload: (
+                                           ?authentication_token: ::String,
+                                           document_id: ::String,
+                                           version_id: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _ActivateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ActivateUserResponse]
+        def user: () -> Types::User
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#activate_user-instance_method
+      def activate_user: (
+                           user_id: ::String,
+                           ?authentication_token: ::String
+                         ) -> _ActivateUserResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ActivateUserResponseSuccess
+
+      interface _AddResourcePermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddResourcePermissionsResponse]
+        def share_results: () -> ::Array[Types::ShareResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#add_resource_permissions-instance_method
+      def add_resource_permissions: (
+                                      ?authentication_token: ::String,
+                                      resource_id: ::String,
+                                      principals: Array[
+                                        {
+                                          id: ::String,
+                                          type: ("USER" | "GROUP" | "INVITE" | "ANONYMOUS" | "ORGANIZATION"),
+                                          role: ("VIEWER" | "CONTRIBUTOR" | "OWNER" | "COOWNER")
+                                        },
+                                      ],
+                                      ?notification_options: {
+                                        send_email: bool?,
+                                        email_message: ::String?
+                                      }
+                                    ) -> _AddResourcePermissionsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddResourcePermissionsResponseSuccess
+
+      interface _CreateCommentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCommentResponse]
+        def comment: () -> Types::Comment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#create_comment-instance_method
+      def create_comment: (
+                            ?authentication_token: ::String,
+                            document_id: ::String,
+                            version_id: ::String,
+                            ?parent_id: ::String,
+                            ?thread_id: ::String,
+                            text: ::String,
+                            ?visibility: ("PUBLIC" | "PRIVATE"),
+                            ?notify_collaborators: bool
+                          ) -> _CreateCommentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCommentResponseSuccess
+
+      interface _CreateCustomMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCustomMetadataResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#create_custom_metadata-instance_method
+      def create_custom_metadata: (
+                                    ?authentication_token: ::String,
+                                    resource_id: ::String,
+                                    ?version_id: ::String,
+                                    custom_metadata: Hash[::String, ::String]
+                                  ) -> _CreateCustomMetadataResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomMetadataResponseSuccess
+
+      interface _CreateFolderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFolderResponse]
+        def metadata: () -> Types::FolderMetadata
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#create_folder-instance_method
+      def create_folder: (
+                           ?authentication_token: ::String,
+                           ?name: ::String,
+                           parent_folder_id: ::String
+                         ) -> _CreateFolderResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFolderResponseSuccess
+
+      interface _CreateLabelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLabelsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#create_labels-instance_method
+      def create_labels: (
+                           resource_id: ::String,
+                           labels: Array[::String],
+                           ?authentication_token: ::String
+                         ) -> _CreateLabelsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLabelsResponseSuccess
+
+      interface _CreateNotificationSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNotificationSubscriptionResponse]
+        def subscription: () -> Types::Subscription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#create_notification_subscription-instance_method
+      def create_notification_subscription: (
+                                              organization_id: ::String,
+                                              endpoint: ::String,
+                                              protocol: ("HTTPS" | "SQS"),
+                                              subscription_type: ("ALL")
+                                            ) -> _CreateNotificationSubscriptionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNotificationSubscriptionResponseSuccess
+
+      interface _CreateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateUserResponse]
+        def user: () -> Types::User
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#create_user-instance_method
+      def create_user: (
+                         ?organization_id: ::String,
+                         username: ::String,
+                         ?email_address: ::String,
+                         given_name: ::String,
+                         surname: ::String,
+                         password: ::String,
+                         ?time_zone_id: ::String,
+                         ?storage_rule: {
+                           storage_allocated_in_bytes: ::Integer?,
+                           storage_type: ("UNLIMITED" | "QUOTA")?
+                         },
+                         ?authentication_token: ::String
+                       ) -> _CreateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#deactivate_user-instance_method
+      def deactivate_user: (
+                             user_id: ::String,
+                             ?authentication_token: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#delete_comment-instance_method
+      def delete_comment: (
+                            ?authentication_token: ::String,
+                            document_id: ::String,
+                            version_id: ::String,
+                            comment_id: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteCustomMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCustomMetadataResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#delete_custom_metadata-instance_method
+      def delete_custom_metadata: (
+                                    ?authentication_token: ::String,
+                                    resource_id: ::String,
+                                    ?version_id: ::String,
+                                    ?keys: Array[::String],
+                                    ?delete_all: bool
+                                  ) -> _DeleteCustomMetadataResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCustomMetadataResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#delete_document-instance_method
+      def delete_document: (
+                             ?authentication_token: ::String,
+                             document_id: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#delete_document_version-instance_method
+      def delete_document_version: (
+                                     ?authentication_token: ::String,
+                                     document_id: ::String,
+                                     version_id: ::String,
+                                     delete_prior_versions: bool
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#delete_folder-instance_method
+      def delete_folder: (
+                           ?authentication_token: ::String,
+                           folder_id: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#delete_folder_contents-instance_method
+      def delete_folder_contents: (
+                                    ?authentication_token: ::String,
+                                    folder_id: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteLabelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLabelsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#delete_labels-instance_method
+      def delete_labels: (
+                           resource_id: ::String,
+                           ?authentication_token: ::String,
+                           ?labels: Array[::String],
+                           ?delete_all: bool
+                         ) -> _DeleteLabelsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLabelsResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#delete_notification_subscription-instance_method
+      def delete_notification_subscription: (
+                                              subscription_id: ::String,
+                                              organization_id: ::String
+                                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#delete_user-instance_method
+      def delete_user: (
+                         ?authentication_token: ::String,
+                         user_id: ::String
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeActivitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeActivitiesResponse]
+        def user_activities: () -> ::Array[Types::Activity]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#describe_activities-instance_method
+      def describe_activities: (
+                                 ?authentication_token: ::String,
+                                 ?start_time: ::Time,
+                                 ?end_time: ::Time,
+                                 ?organization_id: ::String,
+                                 ?activity_types: ::String,
+                                 ?resource_id: ::String,
+                                 ?user_id: ::String,
+                                 ?include_indirect_activities: bool,
+                                 ?limit: ::Integer,
+                                 ?marker: ::String
+                               ) -> _DescribeActivitiesResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeActivitiesResponseSuccess
+
+      interface _DescribeCommentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCommentsResponse]
+        def comments: () -> ::Array[Types::Comment]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#describe_comments-instance_method
+      def describe_comments: (
+                               ?authentication_token: ::String,
+                               document_id: ::String,
+                               version_id: ::String,
+                               ?limit: ::Integer,
+                               ?marker: ::String
+                             ) -> _DescribeCommentsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCommentsResponseSuccess
+
+      interface _DescribeDocumentVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDocumentVersionsResponse]
+        def document_versions: () -> ::Array[Types::DocumentVersionMetadata]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#describe_document_versions-instance_method
+      def describe_document_versions: (
+                                        ?authentication_token: ::String,
+                                        document_id: ::String,
+                                        ?marker: ::String,
+                                        ?limit: ::Integer,
+                                        ?include: ::String,
+                                        ?fields: ::String
+                                      ) -> _DescribeDocumentVersionsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDocumentVersionsResponseSuccess
+
+      interface _DescribeFolderContentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFolderContentsResponse]
+        def folders: () -> ::Array[Types::FolderMetadata]
+        def documents: () -> ::Array[Types::DocumentMetadata]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#describe_folder_contents-instance_method
+      def describe_folder_contents: (
+                                      ?authentication_token: ::String,
+                                      folder_id: ::String,
+                                      ?sort: ("DATE" | "NAME"),
+                                      ?order: ("ASCENDING" | "DESCENDING"),
+                                      ?limit: ::Integer,
+                                      ?marker: ::String,
+                                      ?type: ("ALL" | "DOCUMENT" | "FOLDER"),
+                                      ?include: ::String
+                                    ) -> _DescribeFolderContentsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFolderContentsResponseSuccess
+
+      interface _DescribeGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGroupsResponse]
+        def groups: () -> ::Array[Types::GroupMetadata]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#describe_groups-instance_method
+      def describe_groups: (
+                             ?authentication_token: ::String,
+                             search_query: ::String,
+                             ?organization_id: ::String,
+                             ?marker: ::String,
+                             ?limit: ::Integer
+                           ) -> _DescribeGroupsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGroupsResponseSuccess
+
+      interface _DescribeNotificationSubscriptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeNotificationSubscriptionsResponse]
+        def subscriptions: () -> ::Array[Types::Subscription]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#describe_notification_subscriptions-instance_method
+      def describe_notification_subscriptions: (
+                                                 organization_id: ::String,
+                                                 ?marker: ::String,
+                                                 ?limit: ::Integer
+                                               ) -> _DescribeNotificationSubscriptionsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeNotificationSubscriptionsResponseSuccess
+
+      interface _DescribeResourcePermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeResourcePermissionsResponse]
+        def principals: () -> ::Array[Types::Principal]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#describe_resource_permissions-instance_method
+      def describe_resource_permissions: (
+                                           ?authentication_token: ::String,
+                                           resource_id: ::String,
+                                           ?principal_id: ::String,
+                                           ?limit: ::Integer,
+                                           ?marker: ::String
+                                         ) -> _DescribeResourcePermissionsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeResourcePermissionsResponseSuccess
+
+      interface _DescribeRootFoldersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRootFoldersResponse]
+        def folders: () -> ::Array[Types::FolderMetadata]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#describe_root_folders-instance_method
+      def describe_root_folders: (
+                                   authentication_token: ::String,
+                                   ?limit: ::Integer,
+                                   ?marker: ::String
+                                 ) -> _DescribeRootFoldersResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRootFoldersResponseSuccess
+
+      interface _DescribeUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeUsersResponse]
+        def users: () -> ::Array[Types::User]
+        def total_number_of_users: () -> ::Integer
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#describe_users-instance_method
+      def describe_users: (
+                            ?authentication_token: ::String,
+                            ?organization_id: ::String,
+                            ?user_ids: ::String,
+                            ?query: ::String,
+                            ?include: ("ALL" | "ACTIVE_PENDING"),
+                            ?order: ("ASCENDING" | "DESCENDING"),
+                            ?sort: ("USER_NAME" | "FULL_NAME" | "STORAGE_LIMIT" | "USER_STATUS" | "STORAGE_USED"),
+                            ?marker: ::String,
+                            ?limit: ::Integer,
+                            ?fields: ::String
+                          ) -> _DescribeUsersResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeUsersResponseSuccess
+
+      interface _GetCurrentUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCurrentUserResponse]
+        def user: () -> Types::User
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#get_current_user-instance_method
+      def get_current_user: (
+                              authentication_token: ::String
+                            ) -> _GetCurrentUserResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCurrentUserResponseSuccess
+
+      interface _GetDocumentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDocumentResponse]
+        def metadata: () -> Types::DocumentMetadata
+        def custom_metadata: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#get_document-instance_method
+      def get_document: (
+                          ?authentication_token: ::String,
+                          document_id: ::String,
+                          ?include_custom_metadata: bool
+                        ) -> _GetDocumentResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDocumentResponseSuccess
+
+      interface _GetDocumentPathResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDocumentPathResponse]
+        def path: () -> Types::ResourcePath
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#get_document_path-instance_method
+      def get_document_path: (
+                               ?authentication_token: ::String,
+                               document_id: ::String,
+                               ?limit: ::Integer,
+                               ?fields: ::String,
+                               ?marker: ::String
+                             ) -> _GetDocumentPathResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDocumentPathResponseSuccess
+
+      interface _GetDocumentVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDocumentVersionResponse]
+        def metadata: () -> Types::DocumentVersionMetadata
+        def custom_metadata: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#get_document_version-instance_method
+      def get_document_version: (
+                                  ?authentication_token: ::String,
+                                  document_id: ::String,
+                                  version_id: ::String,
+                                  ?fields: ::String,
+                                  ?include_custom_metadata: bool
+                                ) -> _GetDocumentVersionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDocumentVersionResponseSuccess
+
+      interface _GetFolderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFolderResponse]
+        def metadata: () -> Types::FolderMetadata
+        def custom_metadata: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#get_folder-instance_method
+      def get_folder: (
+                        ?authentication_token: ::String,
+                        folder_id: ::String,
+                        ?include_custom_metadata: bool
+                      ) -> _GetFolderResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFolderResponseSuccess
+
+      interface _GetFolderPathResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFolderPathResponse]
+        def path: () -> Types::ResourcePath
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#get_folder_path-instance_method
+      def get_folder_path: (
+                             ?authentication_token: ::String,
+                             folder_id: ::String,
+                             ?limit: ::Integer,
+                             ?fields: ::String,
+                             ?marker: ::String
+                           ) -> _GetFolderPathResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFolderPathResponseSuccess
+
+      interface _GetResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcesResponse]
+        def folders: () -> ::Array[Types::FolderMetadata]
+        def documents: () -> ::Array[Types::DocumentMetadata]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#get_resources-instance_method
+      def get_resources: (
+                           ?authentication_token: ::String,
+                           ?user_id: ::String,
+                           ?collection_type: ("SHARED_WITH_ME"),
+                           ?limit: ::Integer,
+                           ?marker: ::String
+                         ) -> _GetResourcesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcesResponseSuccess
+
+      interface _InitiateDocumentVersionUploadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InitiateDocumentVersionUploadResponse]
+        def metadata: () -> Types::DocumentMetadata
+        def upload_metadata: () -> Types::UploadMetadata
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#initiate_document_version_upload-instance_method
+      def initiate_document_version_upload: (
+                                              ?authentication_token: ::String,
+                                              ?id: ::String,
+                                              ?name: ::String,
+                                              ?content_created_timestamp: ::Time,
+                                              ?content_modified_timestamp: ::Time,
+                                              ?content_type: ::String,
+                                              ?document_size_in_bytes: ::Integer,
+                                              ?parent_folder_id: ::String
+                                            ) -> _InitiateDocumentVersionUploadResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InitiateDocumentVersionUploadResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#remove_all_resource_permissions-instance_method
+      def remove_all_resource_permissions: (
+                                             ?authentication_token: ::String,
+                                             resource_id: ::String
+                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#remove_resource_permission-instance_method
+      def remove_resource_permission: (
+                                        ?authentication_token: ::String,
+                                        resource_id: ::String,
+                                        principal_id: ::String,
+                                        ?principal_type: ("USER" | "GROUP" | "INVITE" | "ANONYMOUS" | "ORGANIZATION")
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#restore_document_versions-instance_method
+      def restore_document_versions: (
+                                       ?authentication_token: ::String,
+                                       document_id: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _SearchResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchResourcesResponse]
+        def items: () -> ::Array[Types::ResponseItem]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#search_resources-instance_method
+      def search_resources: (
+                              ?authentication_token: ::String,
+                              ?query_text: ::String,
+                              ?query_scopes: Array[("NAME" | "CONTENT")],
+                              ?organization_id: ::String,
+                              ?additional_response_fields: Array[("WEBURL")],
+                              ?filters: {
+                                text_locales: Array[("AR" | "BG" | "BN" | "DA" | "DE" | "CS" | "EL" | "EN" | "ES" | "FA" | "FI" | "FR" | "HI" | "HU" | "ID" | "IT" | "JA" | "KO" | "LT" | "LV" | "NL" | "NO" | "PT" | "RO" | "RU" | "SV" | "SW" | "TH" | "TR" | "ZH" | "DEFAULT")]?,
+                                content_categories: Array[("IMAGE" | "DOCUMENT" | "PDF" | "SPREADSHEET" | "PRESENTATION" | "AUDIO" | "VIDEO" | "SOURCE_CODE" | "OTHER")]?,
+                                resource_types: Array[("FOLDER" | "DOCUMENT" | "COMMENT" | "DOCUMENT_VERSION")]?,
+                                labels: Array[::String]?,
+                                principals: Array[
+                                  {
+                                    id: ::String,
+                                    roles: Array[("VIEWER" | "CONTRIBUTOR" | "OWNER" | "COOWNER")]?
+                                  },
+                                ]?,
+                                ancestor_ids: Array[::String]?,
+                                search_collection_types: Array[("OWNED" | "SHARED_WITH_ME")]?,
+                                size_range: {
+                                  start_value: ::Integer?,
+                                  end_value: ::Integer?
+                                }?,
+                                created_range: {
+                                  start_value: ::Time?,
+                                  end_value: ::Time?
+                                }?,
+                                modified_range: {
+                                  start_value: ::Time?,
+                                  end_value: ::Time?
+                                }?
+                              },
+                              ?order_by: Array[
+                                {
+                                  field: ("RELEVANCE" | "NAME" | "SIZE" | "CREATED_TIMESTAMP" | "MODIFIED_TIMESTAMP")?,
+                                  order: ("ASC" | "DESC")?
+                                },
+                              ],
+                              ?limit: ::Integer,
+                              ?marker: ::String
+                            ) -> _SearchResourcesResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchResourcesResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#update_document-instance_method
+      def update_document: (
+                             ?authentication_token: ::String,
+                             document_id: ::String,
+                             ?name: ::String,
+                             ?parent_folder_id: ::String,
+                             ?resource_state: ("ACTIVE" | "RESTORING" | "RECYCLING" | "RECYCLED")
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#update_document_version-instance_method
+      def update_document_version: (
+                                     ?authentication_token: ::String,
+                                     document_id: ::String,
+                                     version_id: ::String,
+                                     ?version_status: ("ACTIVE")
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#update_folder-instance_method
+      def update_folder: (
+                           ?authentication_token: ::String,
+                           folder_id: ::String,
+                           ?name: ::String,
+                           ?parent_folder_id: ::String,
+                           ?resource_state: ("ACTIVE" | "RESTORING" | "RECYCLING" | "RECYCLED")
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateUserResponse]
+        def user: () -> Types::User
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkDocs/Client.html#update_user-instance_method
+      def update_user: (
+                         ?authentication_token: ::String,
+                         user_id: ::String,
+                         ?given_name: ::String,
+                         ?surname: ::String,
+                         ?type: ("USER" | "ADMIN" | "POWERUSER" | "MINIMALUSER" | "WORKSPACESUSER"),
+                         ?storage_rule: {
+                           storage_allocated_in_bytes: ::Integer?,
+                           storage_type: ("UNLIMITED" | "QUOTA")?
+                         },
+                         ?time_zone_id: ::String,
+                         ?locale: ("en" | "fr" | "ko" | "de" | "es" | "ja" | "ru" | "zh_CN" | "zh_TW" | "pt_BR" | "default"),
+                         ?grant_poweruser_privileges: ("TRUE" | "FALSE")
+                       ) -> _UpdateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserResponseSuccess
+    end
+  end
+end
+

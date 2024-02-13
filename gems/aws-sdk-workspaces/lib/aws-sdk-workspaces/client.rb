@@ -1092,17 +1092,11 @@ module Aws::WorkSpaces
     # * You don't need to specify the `PCOIP` protocol for Linux bundles
     #   because `WSP` is the default protocol for those bundles.
     #
-    # * Ensure you review your running mode to ensure you are using a
-    #   running mode that is optimal for your needs and budget. For more
-    #   information on switching running modes, see [ Can I switch between
-    #   hourly and monthly billing?][2]
-    #
     #  </note>
     #
     #
     #
     # [1]: http://aws.amazon.com/workspaces/core/
-    # [2]: https://aws.amazon.com/workspaces/faqs/#:~:text=Q%3A%20Can%20I%20switch%20between%20hourly%20and%20monthly%20billing%3F
     #
     # @option params [required, Array<Types::WorkspaceRequest>] :workspaces
     #   The WorkSpaces to create. You can specify up to 25 WorkSpaces.
@@ -1138,6 +1132,7 @@ module Aws::WorkSpaces
     #             value: "TagValue",
     #           },
     #         ],
+    #         workspace_name: "WorkspaceName",
     #       },
     #     ],
     #   })
@@ -1162,6 +1157,7 @@ module Aws::WorkSpaces
     #   resp.failed_requests[0].workspace_request.tags #=> Array
     #   resp.failed_requests[0].workspace_request.tags[0].key #=> String
     #   resp.failed_requests[0].workspace_request.tags[0].value #=> String
+    #   resp.failed_requests[0].workspace_request.workspace_name #=> String
     #   resp.failed_requests[0].error_code #=> String
     #   resp.failed_requests[0].error_message #=> String
     #   resp.pending_requests #=> Array
@@ -1178,6 +1174,7 @@ module Aws::WorkSpaces
     #   resp.pending_requests[0].volume_encryption_key #=> String
     #   resp.pending_requests[0].user_volume_encryption_enabled #=> Boolean
     #   resp.pending_requests[0].root_volume_encryption_enabled #=> Boolean
+    #   resp.pending_requests[0].workspace_name #=> String
     #   resp.pending_requests[0].workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON", "MANUAL"
     #   resp.pending_requests[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
     #   resp.pending_requests[0].workspace_properties.root_volume_size_gib #=> Integer
@@ -2469,6 +2466,9 @@ module Aws::WorkSpaces
     #   If you received a `NextToken` from a previous call that was paginated,
     #   provide this token to receive the next set of results.
     #
+    # @option params [String] :workspace_name
+    #   The name of the user-decoupled WorkSpace.
+    #
     # @return [Types::DescribeWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeWorkspacesResult#workspaces #workspaces} => Array&lt;Types::Workspace&gt;
@@ -2485,6 +2485,7 @@ module Aws::WorkSpaces
     #     bundle_id: "BundleId",
     #     limit: 1,
     #     next_token: "PaginationToken",
+    #     workspace_name: "WorkspaceName",
     #   })
     #
     # @example Response structure
@@ -2503,6 +2504,7 @@ module Aws::WorkSpaces
     #   resp.workspaces[0].volume_encryption_key #=> String
     #   resp.workspaces[0].user_volume_encryption_enabled #=> Boolean
     #   resp.workspaces[0].root_volume_encryption_enabled #=> Boolean
+    #   resp.workspaces[0].workspace_name #=> String
     #   resp.workspaces[0].workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON", "MANUAL"
     #   resp.workspaces[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
     #   resp.workspaces[0].workspace_properties.root_volume_size_gib #=> Integer
@@ -3993,7 +3995,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.99.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -5918,6 +5918,7 @@ module Aws::Lightsail
     #   resp.bundles[0].supported_platforms[0] #=> String, one of "LINUX_UNIX", "WINDOWS"
     #   resp.bundles[0].supported_app_categories #=> Array
     #   resp.bundles[0].supported_app_categories[0] #=> String, one of "LfR"
+    #   resp.bundles[0].public_ipv_4_address_count #=> Integer
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBundles AWS API Documentation
@@ -7579,6 +7580,8 @@ module Aws::Lightsail
     #   resp.access_details.cert_key #=> String
     #   resp.access_details.expires_at #=> Time
     #   resp.access_details.ip_address #=> String
+    #   resp.access_details.ipv6_addresses #=> Array
+    #   resp.access_details.ipv6_addresses[0] #=> String
     #   resp.access_details.password #=> String
     #   resp.access_details.password_data.ciphertext #=> String
     #   resp.access_details.password_data.key_pair_name #=> String
@@ -12171,6 +12174,18 @@ module Aws::Lightsail
     #   Indicates the certificate that needs to be associated with the
     #   database.
     #
+    # @option params [String] :relational_database_blueprint_id
+    #   This parameter is used to update the major version of the database.
+    #   Enter the `blueprintId` for the major version that you want to update
+    #   to.
+    #
+    #   Use the [GetRelationalDatabaseBlueprints][1] action to get a list of
+    #   available blueprint IDs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRelationalDatabaseBlueprints.html
+    #
     # @return [Types::UpdateRelationalDatabaseResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateRelationalDatabaseResult#operations #operations} => Array&lt;Types::Operation&gt;
@@ -12188,6 +12203,7 @@ module Aws::Lightsail
     #     publicly_accessible: false,
     #     apply_immediately: false,
     #     ca_certificate_identifier: "string",
+    #     relational_database_blueprint_id: "string",
     #   })
     #
     # @example Response structure
@@ -12303,7 +12319,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

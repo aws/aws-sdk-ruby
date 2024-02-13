@@ -1,0 +1,1090 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Transfer
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessResponse]
+        def server_id: () -> ::String
+        def external_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#create_access-instance_method
+      def create_access: (
+                           ?home_directory: ::String,
+                           ?home_directory_type: ("PATH" | "LOGICAL"),
+                           ?home_directory_mappings: Array[
+                             {
+                               entry: ::String,
+                               target: ::String,
+                               type: ("FILE" | "DIRECTORY")?
+                             },
+                           ],
+                           ?policy: ::String,
+                           ?posix_profile: {
+                             uid: ::Integer,
+                             gid: ::Integer,
+                             secondary_gids: Array[::Integer]?
+                           },
+                           role: ::String,
+                           server_id: ::String,
+                           external_id: ::String
+                         ) -> _CreateAccessResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessResponseSuccess
+
+      interface _CreateAgreementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAgreementResponse]
+        def agreement_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#create_agreement-instance_method
+      def create_agreement: (
+                              ?description: ::String,
+                              server_id: ::String,
+                              local_profile_id: ::String,
+                              partner_profile_id: ::String,
+                              base_directory: ::String,
+                              access_role: ::String,
+                              ?status: ("ACTIVE" | "INACTIVE"),
+                              ?tags: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String
+                                },
+                              ]
+                            ) -> _CreateAgreementResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgreementResponseSuccess
+
+      interface _CreateConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectorResponse]
+        def connector_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#create_connector-instance_method
+      def create_connector: (
+                              url: ::String,
+                              ?as_2_config: {
+                                local_profile_id: ::String?,
+                                partner_profile_id: ::String?,
+                                message_subject: ::String?,
+                                compression: ("ZLIB" | "DISABLED")?,
+                                encryption_algorithm: ("AES128_CBC" | "AES192_CBC" | "AES256_CBC" | "NONE")?,
+                                signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE")?,
+                                mdn_signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE" | "DEFAULT")?,
+                                mdn_response: ("SYNC" | "NONE")?,
+                                basic_auth_secret_id: ::String?
+                              },
+                              access_role: ::String,
+                              ?logging_role: ::String,
+                              ?tags: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String
+                                },
+                              ],
+                              ?sftp_config: {
+                                user_secret_id: ::String?,
+                                trusted_host_keys: Array[::String]?
+                              }
+                            ) -> _CreateConnectorResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectorResponseSuccess
+
+      interface _CreateProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProfileResponse]
+        def profile_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#create_profile-instance_method
+      def create_profile: (
+                            as_2_id: ::String,
+                            profile_type: ("LOCAL" | "PARTNER"),
+                            ?certificate_ids: Array[::String],
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ]
+                          ) -> _CreateProfileResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProfileResponseSuccess
+
+      interface _CreateServerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateServerResponse]
+        def server_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#create_server-instance_method
+      def create_server: (
+                           ?certificate: ::String,
+                           ?domain: ("S3" | "EFS"),
+                           ?endpoint_details: {
+                             address_allocation_ids: Array[::String]?,
+                             subnet_ids: Array[::String]?,
+                             vpc_endpoint_id: ::String?,
+                             vpc_id: ::String?,
+                             security_group_ids: Array[::String]?
+                           },
+                           ?endpoint_type: ("PUBLIC" | "VPC" | "VPC_ENDPOINT"),
+                           ?host_key: ::String,
+                           ?identity_provider_details: {
+                             url: ::String?,
+                             invocation_role: ::String?,
+                             directory_id: ::String?,
+                             function: ::String?,
+                             sftp_authentication_methods: ("PASSWORD" | "PUBLIC_KEY" | "PUBLIC_KEY_OR_PASSWORD" | "PUBLIC_KEY_AND_PASSWORD")?
+                           },
+                           ?identity_provider_type: ("SERVICE_MANAGED" | "API_GATEWAY" | "AWS_DIRECTORY_SERVICE" | "AWS_LAMBDA"),
+                           ?logging_role: ::String,
+                           ?post_authentication_login_banner: ::String,
+                           ?pre_authentication_login_banner: ::String,
+                           ?protocols: Array[("SFTP" | "FTP" | "FTPS" | "AS2")],
+                           ?protocol_details: {
+                             passive_ip: ::String?,
+                             tls_session_resumption_mode: ("DISABLED" | "ENABLED" | "ENFORCED")?,
+                             set_stat_option: ("DEFAULT" | "ENABLE_NO_OP")?,
+                             as_2_transports: Array[("HTTP")]?
+                           },
+                           ?security_policy_name: ::String,
+                           ?tags: Array[
+                             {
+                               key: ::String,
+                               value: ::String
+                             },
+                           ],
+                           ?workflow_details: {
+                             on_upload: Array[
+                               {
+                                 workflow_id: ::String,
+                                 execution_role: ::String
+                               },
+                             ]?,
+                             on_partial_upload: Array[
+                               {
+                                 workflow_id: ::String,
+                                 execution_role: ::String
+                               },
+                             ]?
+                           },
+                           ?structured_log_destinations: Array[::String],
+                           ?s3_storage_options: {
+                             directory_listing_optimization: ("ENABLED" | "DISABLED")?
+                           }
+                         ) -> _CreateServerResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServerResponseSuccess
+
+      interface _CreateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateUserResponse]
+        def server_id: () -> ::String
+        def user_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#create_user-instance_method
+      def create_user: (
+                         ?home_directory: ::String,
+                         ?home_directory_type: ("PATH" | "LOGICAL"),
+                         ?home_directory_mappings: Array[
+                           {
+                             entry: ::String,
+                             target: ::String,
+                             type: ("FILE" | "DIRECTORY")?
+                           },
+                         ],
+                         ?policy: ::String,
+                         ?posix_profile: {
+                           uid: ::Integer,
+                           gid: ::Integer,
+                           secondary_gids: Array[::Integer]?
+                         },
+                         role: ::String,
+                         server_id: ::String,
+                         ?ssh_public_key_body: ::String,
+                         ?tags: Array[
+                           {
+                             key: ::String,
+                             value: ::String
+                           },
+                         ],
+                         user_name: ::String
+                       ) -> _CreateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserResponseSuccess
+
+      interface _CreateWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkflowResponse]
+        def workflow_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#create_workflow-instance_method
+      def create_workflow: (
+                             ?description: ::String,
+                             steps: Array[
+                               {
+                                 type: ("COPY" | "CUSTOM" | "TAG" | "DELETE" | "DECRYPT")?,
+                                 copy_step_details: {
+                                   name: ::String?,
+                                   destination_file_location: {
+                                     s3_file_location: {
+                                       bucket: ::String?,
+                                       key: ::String?
+                                     }?,
+                                     efs_file_location: {
+                                       file_system_id: ::String?,
+                                       path: ::String?
+                                     }?
+                                   }?,
+                                   overwrite_existing: ("TRUE" | "FALSE")?,
+                                   source_file_location: ::String?
+                                 }?,
+                                 custom_step_details: {
+                                   name: ::String?,
+                                   target: ::String?,
+                                   timeout_seconds: ::Integer?,
+                                   source_file_location: ::String?
+                                 }?,
+                                 delete_step_details: {
+                                   name: ::String?,
+                                   source_file_location: ::String?
+                                 }?,
+                                 tag_step_details: {
+                                   name: ::String?,
+                                   tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ]?,
+                                   source_file_location: ::String?
+                                 }?,
+                                 decrypt_step_details: {
+                                   name: ::String?,
+                                   type: ("PGP"),
+                                   source_file_location: ::String?,
+                                   overwrite_existing: ("TRUE" | "FALSE")?,
+                                   destination_file_location: {
+                                     s3_file_location: {
+                                       bucket: ::String?,
+                                       key: ::String?
+                                     }?,
+                                     efs_file_location: {
+                                       file_system_id: ::String?,
+                                       path: ::String?
+                                     }?
+                                   }
+                                 }?
+                               },
+                             ],
+                             ?on_exception_steps: Array[
+                               {
+                                 type: ("COPY" | "CUSTOM" | "TAG" | "DELETE" | "DECRYPT")?,
+                                 copy_step_details: {
+                                   name: ::String?,
+                                   destination_file_location: {
+                                     s3_file_location: {
+                                       bucket: ::String?,
+                                       key: ::String?
+                                     }?,
+                                     efs_file_location: {
+                                       file_system_id: ::String?,
+                                       path: ::String?
+                                     }?
+                                   }?,
+                                   overwrite_existing: ("TRUE" | "FALSE")?,
+                                   source_file_location: ::String?
+                                 }?,
+                                 custom_step_details: {
+                                   name: ::String?,
+                                   target: ::String?,
+                                   timeout_seconds: ::Integer?,
+                                   source_file_location: ::String?
+                                 }?,
+                                 delete_step_details: {
+                                   name: ::String?,
+                                   source_file_location: ::String?
+                                 }?,
+                                 tag_step_details: {
+                                   name: ::String?,
+                                   tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ]?,
+                                   source_file_location: ::String?
+                                 }?,
+                                 decrypt_step_details: {
+                                   name: ::String?,
+                                   type: ("PGP"),
+                                   source_file_location: ::String?,
+                                   overwrite_existing: ("TRUE" | "FALSE")?,
+                                   destination_file_location: {
+                                     s3_file_location: {
+                                       bucket: ::String?,
+                                       key: ::String?
+                                     }?,
+                                     efs_file_location: {
+                                       file_system_id: ::String?,
+                                       path: ::String?
+                                     }?
+                                   }
+                                 }?
+                               },
+                             ],
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ]
+                           ) -> _CreateWorkflowResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkflowResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#delete_access-instance_method
+      def delete_access: (
+                           server_id: ::String,
+                           external_id: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#delete_agreement-instance_method
+      def delete_agreement: (
+                              agreement_id: ::String,
+                              server_id: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#delete_certificate-instance_method
+      def delete_certificate: (
+                                certificate_id: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#delete_connector-instance_method
+      def delete_connector: (
+                              connector_id: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#delete_host_key-instance_method
+      def delete_host_key: (
+                             server_id: ::String,
+                             host_key_id: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#delete_profile-instance_method
+      def delete_profile: (
+                            profile_id: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#delete_server-instance_method
+      def delete_server: (
+                           server_id: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#delete_ssh_public_key-instance_method
+      def delete_ssh_public_key: (
+                                   server_id: ::String,
+                                   ssh_public_key_id: ::String,
+                                   user_name: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#delete_user-instance_method
+      def delete_user: (
+                         server_id: ::String,
+                         user_name: ::String
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#delete_workflow-instance_method
+      def delete_workflow: (
+                             workflow_id: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccessResponse]
+        def server_id: () -> ::String
+        def access: () -> Types::DescribedAccess
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#describe_access-instance_method
+      def describe_access: (
+                             server_id: ::String,
+                             external_id: ::String
+                           ) -> _DescribeAccessResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccessResponseSuccess
+
+      interface _DescribeAgreementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAgreementResponse]
+        def agreement: () -> Types::DescribedAgreement
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#describe_agreement-instance_method
+      def describe_agreement: (
+                                agreement_id: ::String,
+                                server_id: ::String
+                              ) -> _DescribeAgreementResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAgreementResponseSuccess
+
+      interface _DescribeCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCertificateResponse]
+        def certificate: () -> Types::DescribedCertificate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#describe_certificate-instance_method
+      def describe_certificate: (
+                                  certificate_id: ::String
+                                ) -> _DescribeCertificateResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCertificateResponseSuccess
+
+      interface _DescribeConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConnectorResponse]
+        def connector: () -> Types::DescribedConnector
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#describe_connector-instance_method
+      def describe_connector: (
+                                connector_id: ::String
+                              ) -> _DescribeConnectorResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConnectorResponseSuccess
+
+      interface _DescribeExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeExecutionResponse]
+        def workflow_id: () -> ::String
+        def execution: () -> Types::DescribedExecution
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#describe_execution-instance_method
+      def describe_execution: (
+                                execution_id: ::String,
+                                workflow_id: ::String
+                              ) -> _DescribeExecutionResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeExecutionResponseSuccess
+
+      interface _DescribeHostKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeHostKeyResponse]
+        def host_key: () -> Types::DescribedHostKey
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#describe_host_key-instance_method
+      def describe_host_key: (
+                               server_id: ::String,
+                               host_key_id: ::String
+                             ) -> _DescribeHostKeyResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeHostKeyResponseSuccess
+
+      interface _DescribeProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProfileResponse]
+        def profile: () -> Types::DescribedProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#describe_profile-instance_method
+      def describe_profile: (
+                              profile_id: ::String
+                            ) -> _DescribeProfileResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProfileResponseSuccess
+
+      interface _DescribeSecurityPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSecurityPolicyResponse]
+        def security_policy: () -> Types::DescribedSecurityPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#describe_security_policy-instance_method
+      def describe_security_policy: (
+                                      security_policy_name: ::String
+                                    ) -> _DescribeSecurityPolicyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSecurityPolicyResponseSuccess
+
+      interface _DescribeServerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeServerResponse]
+        def server: () -> Types::DescribedServer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#describe_server-instance_method
+      def describe_server: (
+                             server_id: ::String
+                           ) -> _DescribeServerResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeServerResponseSuccess
+
+      interface _DescribeUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeUserResponse]
+        def server_id: () -> ::String
+        def user: () -> Types::DescribedUser
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#describe_user-instance_method
+      def describe_user: (
+                           server_id: ::String,
+                           user_name: ::String
+                         ) -> _DescribeUserResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeUserResponseSuccess
+
+      interface _DescribeWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWorkflowResponse]
+        def workflow: () -> Types::DescribedWorkflow
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#describe_workflow-instance_method
+      def describe_workflow: (
+                               workflow_id: ::String
+                             ) -> _DescribeWorkflowResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkflowResponseSuccess
+
+      interface _ImportCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportCertificateResponse]
+        def certificate_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#import_certificate-instance_method
+      def import_certificate: (
+                                usage: ("SIGNING" | "ENCRYPTION"),
+                                certificate: ::String,
+                                ?certificate_chain: ::String,
+                                ?private_key: ::String,
+                                ?active_date: ::Time,
+                                ?inactive_date: ::Time,
+                                ?description: ::String,
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ]
+                              ) -> _ImportCertificateResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportCertificateResponseSuccess
+
+      interface _ImportHostKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportHostKeyResponse]
+        def server_id: () -> ::String
+        def host_key_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#import_host_key-instance_method
+      def import_host_key: (
+                             server_id: ::String,
+                             host_key_body: ::String,
+                             ?description: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ]
+                           ) -> _ImportHostKeyResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportHostKeyResponseSuccess
+
+      interface _ImportSshPublicKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportSshPublicKeyResponse]
+        def server_id: () -> ::String
+        def ssh_public_key_id: () -> ::String
+        def user_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#import_ssh_public_key-instance_method
+      def import_ssh_public_key: (
+                                   server_id: ::String,
+                                   ssh_public_key_body: ::String,
+                                   user_name: ::String
+                                 ) -> _ImportSshPublicKeyResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportSshPublicKeyResponseSuccess
+
+      interface _ListAccessesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessesResponse]
+        def next_token: () -> ::String
+        def server_id: () -> ::String
+        def accesses: () -> ::Array[Types::ListedAccess]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#list_accesses-instance_method
+      def list_accesses: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           server_id: ::String
+                         ) -> _ListAccessesResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessesResponseSuccess
+
+      interface _ListAgreementsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgreementsResponse]
+        def next_token: () -> ::String
+        def agreements: () -> ::Array[Types::ListedAgreement]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#list_agreements-instance_method
+      def list_agreements: (
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             server_id: ::String
+                           ) -> _ListAgreementsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgreementsResponseSuccess
+
+      interface _ListCertificatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCertificatesResponse]
+        def next_token: () -> ::String
+        def certificates: () -> ::Array[Types::ListedCertificate]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#list_certificates-instance_method
+      def list_certificates: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListCertificatesResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCertificatesResponseSuccess
+
+      interface _ListConnectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConnectorsResponse]
+        def next_token: () -> ::String
+        def connectors: () -> ::Array[Types::ListedConnector]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#list_connectors-instance_method
+      def list_connectors: (
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListConnectorsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectorsResponseSuccess
+
+      interface _ListExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListExecutionsResponse]
+        def next_token: () -> ::String
+        def workflow_id: () -> ::String
+        def executions: () -> ::Array[Types::ListedExecution]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#list_executions-instance_method
+      def list_executions: (
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             workflow_id: ::String
+                           ) -> _ListExecutionsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExecutionsResponseSuccess
+
+      interface _ListHostKeysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListHostKeysResponse]
+        def next_token: () -> ::String
+        def server_id: () -> ::String
+        def host_keys: () -> ::Array[Types::ListedHostKey]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#list_host_keys-instance_method
+      def list_host_keys: (
+                            ?max_results: ::Integer,
+                            ?next_token: ::String,
+                            server_id: ::String
+                          ) -> _ListHostKeysResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHostKeysResponseSuccess
+
+      interface _ListProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProfilesResponse]
+        def next_token: () -> ::String
+        def profiles: () -> ::Array[Types::ListedProfile]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#list_profiles-instance_method
+      def list_profiles: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           ?profile_type: ("LOCAL" | "PARTNER")
+                         ) -> _ListProfilesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProfilesResponseSuccess
+
+      interface _ListSecurityPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSecurityPoliciesResponse]
+        def next_token: () -> ::String
+        def security_policy_names: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#list_security_policies-instance_method
+      def list_security_policies: (
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListSecurityPoliciesResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSecurityPoliciesResponseSuccess
+
+      interface _ListServersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServersResponse]
+        def next_token: () -> ::String
+        def servers: () -> ::Array[Types::ListedServer]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#list_servers-instance_method
+      def list_servers: (
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListServersResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServersResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def arn: () -> ::String
+        def next_token: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    arn: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUsersResponse]
+        def next_token: () -> ::String
+        def server_id: () -> ::String
+        def users: () -> ::Array[Types::ListedUser]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#list_users-instance_method
+      def list_users: (
+                        ?max_results: ::Integer,
+                        ?next_token: ::String,
+                        server_id: ::String
+                      ) -> _ListUsersResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUsersResponseSuccess
+
+      interface _ListWorkflowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkflowsResponse]
+        def next_token: () -> ::String
+        def workflows: () -> ::Array[Types::ListedWorkflow]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#list_workflows-instance_method
+      def list_workflows: (
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListWorkflowsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkflowsResponseSuccess
+
+      interface _SendWorkflowStepStateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendWorkflowStepStateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#send_workflow_step_state-instance_method
+      def send_workflow_step_state: (
+                                      workflow_id: ::String,
+                                      execution_id: ::String,
+                                      token: ::String,
+                                      status: ("SUCCESS" | "FAILURE")
+                                    ) -> _SendWorkflowStepStateResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendWorkflowStepStateResponseSuccess
+
+      interface _StartFileTransferResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartFileTransferResponse]
+        def transfer_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#start_file_transfer-instance_method
+      def start_file_transfer: (
+                                 connector_id: ::String,
+                                 ?send_file_paths: Array[::String],
+                                 ?retrieve_file_paths: Array[::String],
+                                 ?local_directory_path: ::String,
+                                 ?remote_directory_path: ::String
+                               ) -> _StartFileTransferResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFileTransferResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#start_server-instance_method
+      def start_server: (
+                          server_id: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#stop_server-instance_method
+      def stop_server: (
+                         server_id: ::String
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _TestConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestConnectionResponse]
+        def connector_id: () -> ::String
+        def status: () -> ::String
+        def status_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#test_connection-instance_method
+      def test_connection: (
+                             connector_id: ::String
+                           ) -> _TestConnectionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestConnectionResponseSuccess
+
+      interface _TestIdentityProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestIdentityProviderResponse]
+        def response: () -> ::String
+        def status_code: () -> ::Integer
+        def message: () -> ::String
+        def url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#test_identity_provider-instance_method
+      def test_identity_provider: (
+                                    server_id: ::String,
+                                    ?server_protocol: ("SFTP" | "FTP" | "FTPS" | "AS2"),
+                                    ?source_ip: ::String,
+                                    user_name: ::String,
+                                    ?user_password: ::String
+                                  ) -> _TestIdentityProviderResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestIdentityProviderResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccessResponse]
+        def server_id: () -> ::String
+        def external_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#update_access-instance_method
+      def update_access: (
+                           ?home_directory: ::String,
+                           ?home_directory_type: ("PATH" | "LOGICAL"),
+                           ?home_directory_mappings: Array[
+                             {
+                               entry: ::String,
+                               target: ::String,
+                               type: ("FILE" | "DIRECTORY")?
+                             },
+                           ],
+                           ?policy: ::String,
+                           ?posix_profile: {
+                             uid: ::Integer,
+                             gid: ::Integer,
+                             secondary_gids: Array[::Integer]?
+                           },
+                           ?role: ::String,
+                           server_id: ::String,
+                           external_id: ::String
+                         ) -> _UpdateAccessResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccessResponseSuccess
+
+      interface _UpdateAgreementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAgreementResponse]
+        def agreement_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#update_agreement-instance_method
+      def update_agreement: (
+                              agreement_id: ::String,
+                              server_id: ::String,
+                              ?description: ::String,
+                              ?status: ("ACTIVE" | "INACTIVE"),
+                              ?local_profile_id: ::String,
+                              ?partner_profile_id: ::String,
+                              ?base_directory: ::String,
+                              ?access_role: ::String
+                            ) -> _UpdateAgreementResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgreementResponseSuccess
+
+      interface _UpdateCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCertificateResponse]
+        def certificate_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#update_certificate-instance_method
+      def update_certificate: (
+                                certificate_id: ::String,
+                                ?active_date: ::Time,
+                                ?inactive_date: ::Time,
+                                ?description: ::String
+                              ) -> _UpdateCertificateResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCertificateResponseSuccess
+
+      interface _UpdateConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectorResponse]
+        def connector_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#update_connector-instance_method
+      def update_connector: (
+                              connector_id: ::String,
+                              ?url: ::String,
+                              ?as_2_config: {
+                                local_profile_id: ::String?,
+                                partner_profile_id: ::String?,
+                                message_subject: ::String?,
+                                compression: ("ZLIB" | "DISABLED")?,
+                                encryption_algorithm: ("AES128_CBC" | "AES192_CBC" | "AES256_CBC" | "NONE")?,
+                                signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE")?,
+                                mdn_signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE" | "DEFAULT")?,
+                                mdn_response: ("SYNC" | "NONE")?,
+                                basic_auth_secret_id: ::String?
+                              },
+                              ?access_role: ::String,
+                              ?logging_role: ::String,
+                              ?sftp_config: {
+                                user_secret_id: ::String?,
+                                trusted_host_keys: Array[::String]?
+                              }
+                            ) -> _UpdateConnectorResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectorResponseSuccess
+
+      interface _UpdateHostKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateHostKeyResponse]
+        def server_id: () -> ::String
+        def host_key_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#update_host_key-instance_method
+      def update_host_key: (
+                             server_id: ::String,
+                             host_key_id: ::String,
+                             description: ::String
+                           ) -> _UpdateHostKeyResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateHostKeyResponseSuccess
+
+      interface _UpdateProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProfileResponse]
+        def profile_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#update_profile-instance_method
+      def update_profile: (
+                            profile_id: ::String,
+                            ?certificate_ids: Array[::String]
+                          ) -> _UpdateProfileResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProfileResponseSuccess
+
+      interface _UpdateServerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateServerResponse]
+        def server_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#update_server-instance_method
+      def update_server: (
+                           ?certificate: ::String,
+                           ?protocol_details: {
+                             passive_ip: ::String?,
+                             tls_session_resumption_mode: ("DISABLED" | "ENABLED" | "ENFORCED")?,
+                             set_stat_option: ("DEFAULT" | "ENABLE_NO_OP")?,
+                             as_2_transports: Array[("HTTP")]?
+                           },
+                           ?endpoint_details: {
+                             address_allocation_ids: Array[::String]?,
+                             subnet_ids: Array[::String]?,
+                             vpc_endpoint_id: ::String?,
+                             vpc_id: ::String?,
+                             security_group_ids: Array[::String]?
+                           },
+                           ?endpoint_type: ("PUBLIC" | "VPC" | "VPC_ENDPOINT"),
+                           ?host_key: ::String,
+                           ?identity_provider_details: {
+                             url: ::String?,
+                             invocation_role: ::String?,
+                             directory_id: ::String?,
+                             function: ::String?,
+                             sftp_authentication_methods: ("PASSWORD" | "PUBLIC_KEY" | "PUBLIC_KEY_OR_PASSWORD" | "PUBLIC_KEY_AND_PASSWORD")?
+                           },
+                           ?logging_role: ::String,
+                           ?post_authentication_login_banner: ::String,
+                           ?pre_authentication_login_banner: ::String,
+                           ?protocols: Array[("SFTP" | "FTP" | "FTPS" | "AS2")],
+                           ?security_policy_name: ::String,
+                           server_id: ::String,
+                           ?workflow_details: {
+                             on_upload: Array[
+                               {
+                                 workflow_id: ::String,
+                                 execution_role: ::String
+                               },
+                             ]?,
+                             on_partial_upload: Array[
+                               {
+                                 workflow_id: ::String,
+                                 execution_role: ::String
+                               },
+                             ]?
+                           },
+                           ?structured_log_destinations: Array[::String],
+                           ?s3_storage_options: {
+                             directory_listing_optimization: ("ENABLED" | "DISABLED")?
+                           }
+                         ) -> _UpdateServerResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServerResponseSuccess
+
+      interface _UpdateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateUserResponse]
+        def server_id: () -> ::String
+        def user_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#update_user-instance_method
+      def update_user: (
+                         ?home_directory: ::String,
+                         ?home_directory_type: ("PATH" | "LOGICAL"),
+                         ?home_directory_mappings: Array[
+                           {
+                             entry: ::String,
+                             target: ::String,
+                             type: ("FILE" | "DIRECTORY")?
+                           },
+                         ],
+                         ?policy: ::String,
+                         ?posix_profile: {
+                           uid: ::Integer,
+                           gid: ::Integer,
+                           secondary_gids: Array[::Integer]?
+                         },
+                         ?role: ::String,
+                         server_id: ::String,
+                         user_name: ::String
+                       ) -> _UpdateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#wait_until-instance_method
+      def wait_until: (:server_offline waiter_name, 
+                    server_id: ::String
+                  ) -> Client::_DescribeServerResponseSuccess
+                    | (:server_offline waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeServerResponseSuccess
+                    | (:server_online waiter_name, 
+                    server_id: ::String
+                  ) -> Client::_DescribeServerResponseSuccess
+                    | (:server_online waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeServerResponseSuccess
+    end
+  end
+end
+

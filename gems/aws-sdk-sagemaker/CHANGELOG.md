@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.231.0 (2024-02-02)
+------------------
+
+* Feature - Amazon SageMaker Canvas adds GenerativeAiSettings support for CanvasAppSettings.
+
+1.230.0 (2024-01-26)
+------------------
+
+* Feature - Amazon SageMaker Automatic Model Tuning now provides an API to programmatically delete tuning jobs.
+
+1.229.0 (2024-01-14)
+------------------
+
+* Feature - This release will have ValidationException thrown if certain invalid app types are provided. The release will also throw ValidationException if more than 10 account ids are provided in VpcOnlyTrustedAccounts.
+
 1.228.0 (2024-01-04)
 ------------------
 

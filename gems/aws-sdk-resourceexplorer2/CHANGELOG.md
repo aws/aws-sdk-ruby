@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2024-02-13)
+------------------
+
+* Feature - Resource Explorer now uses newly supported IPv4 'amazonaws.com' endpoints by default.
+
+1.15.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.14.0 (2023-11-28)
 ------------------
 

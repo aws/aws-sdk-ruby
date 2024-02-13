@@ -1,0 +1,1106 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Finspace
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEnvironmentResponse]
+        def environment_id: () -> ::String
+        def environment_arn: () -> ::String
+        def environment_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#create_environment-instance_method
+      def create_environment: (
+                                name: ::String,
+                                ?description: ::String,
+                                ?kms_key_id: ::String,
+                                ?tags: Hash[::String, ::String],
+                                ?federation_mode: ("FEDERATED" | "LOCAL"),
+                                ?federation_parameters: {
+                                  saml_metadata_document: ::String?,
+                                  saml_metadata_url: ::String?,
+                                  application_call_back_url: ::String?,
+                                  federation_urn: ::String?,
+                                  federation_provider_name: ::String?,
+                                  attribute_map: Hash[::String, ::String]?
+                                },
+                                ?superuser_parameters: {
+                                  email_address: ::String,
+                                  first_name: ::String,
+                                  last_name: ::String
+                                },
+                                ?data_bundles: Array[::String]
+                              ) -> _CreateEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentResponseSuccess
+
+      interface _CreateKxChangesetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateKxChangesetResponse]
+        def changeset_id: () -> ::String
+        def database_name: () -> ::String
+        def environment_id: () -> ::String
+        def change_requests: () -> ::Array[Types::ChangeRequest]
+        def created_timestamp: () -> ::Time
+        def last_modified_timestamp: () -> ::Time
+        def status: () -> ("PENDING" | "PROCESSING" | "FAILED" | "COMPLETED")
+        def error_info: () -> Types::ErrorInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#create_kx_changeset-instance_method
+      def create_kx_changeset: (
+                                 environment_id: ::String,
+                                 database_name: ::String,
+                                 change_requests: Array[
+                                   {
+                                     change_type: ("PUT" | "DELETE"),
+                                     s3_path: ::String?,
+                                     db_path: ::String
+                                   },
+                                 ],
+                                 client_token: ::String
+                               ) -> _CreateKxChangesetResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKxChangesetResponseSuccess
+
+      interface _CreateKxClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateKxClusterResponse]
+        def environment_id: () -> ::String
+        def status: () -> ("PENDING" | "CREATING" | "CREATE_FAILED" | "RUNNING" | "UPDATING" | "DELETING" | "DELETED" | "DELETE_FAILED")
+        def status_reason: () -> ::String
+        def cluster_name: () -> ::String
+        def cluster_type: () -> ("HDB" | "RDB" | "GATEWAY" | "GP" | "TICKERPLANT")
+        def tickerplant_log_configuration: () -> Types::TickerplantLogConfiguration
+        def volumes: () -> ::Array[Types::Volume]
+        def databases: () -> ::Array[Types::KxDatabaseConfiguration]
+        def cache_storage_configurations: () -> ::Array[Types::KxCacheStorageConfiguration]
+        def auto_scaling_configuration: () -> Types::AutoScalingConfiguration
+        def cluster_description: () -> ::String
+        def capacity_configuration: () -> Types::CapacityConfiguration
+        def release_label: () -> ::String
+        def vpc_configuration: () -> Types::VpcConfiguration
+        def initialization_script: () -> ::String
+        def command_line_arguments: () -> ::Array[Types::KxCommandLineArgument]
+        def code: () -> Types::CodeConfiguration
+        def execution_role: () -> ::String
+        def last_modified_timestamp: () -> ::Time
+        def savedown_storage_configuration: () -> Types::KxSavedownStorageConfiguration
+        def az_mode: () -> ("SINGLE" | "MULTI")
+        def availability_zone_id: () -> ::String
+        def created_timestamp: () -> ::Time
+        def scaling_group_configuration: () -> Types::KxScalingGroupConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#create_kx_cluster-instance_method
+      def create_kx_cluster: (
+                               ?client_token: ::String,
+                               environment_id: ::String,
+                               cluster_name: ::String,
+                               cluster_type: ("HDB" | "RDB" | "GATEWAY" | "GP" | "TICKERPLANT"),
+                               ?tickerplant_log_configuration: {
+                                 tickerplant_log_volumes: Array[::String]?
+                               },
+                               ?databases: Array[
+                                 {
+                                   database_name: ::String,
+                                   cache_configurations: Array[
+                                     {
+                                       cache_type: ::String,
+                                       db_paths: Array[::String],
+                                       dataview_name: ::String?
+                                     },
+                                   ]?,
+                                   changeset_id: ::String?,
+                                   dataview_name: ::String?,
+                                   dataview_configuration: {
+                                     dataview_name: ::String?,
+                                     dataview_version_id: ::String?,
+                                     changeset_id: ::String?,
+                                     segment_configurations: Array[
+                                       {
+                                         db_paths: Array[::String],
+                                         volume_name: ::String
+                                       },
+                                     ]?
+                                   }?
+                                 },
+                               ],
+                               ?cache_storage_configurations: Array[
+                                 {
+                                   type: ::String,
+                                   size: ::Integer
+                                 },
+                               ],
+                               ?auto_scaling_configuration: {
+                                 min_node_count: ::Integer?,
+                                 max_node_count: ::Integer?,
+                                 auto_scaling_metric: ("CPU_UTILIZATION_PERCENTAGE")?,
+                                 metric_target: ::Float?,
+                                 scale_in_cooldown_seconds: ::Float?,
+                                 scale_out_cooldown_seconds: ::Float?
+                               },
+                               ?cluster_description: ::String,
+                               ?capacity_configuration: {
+                                 node_type: ::String?,
+                                 node_count: ::Integer?
+                               },
+                               release_label: ::String,
+                               vpc_configuration: {
+                                 vpc_id: ::String?,
+                                 security_group_ids: Array[::String]?,
+                                 subnet_ids: Array[::String]?,
+                                 ip_address_type: ("IP_V4")?
+                               },
+                               ?initialization_script: ::String,
+                               ?command_line_arguments: Array[
+                                 {
+                                   key: ::String?,
+                                   value: ::String?
+                                 },
+                               ],
+                               ?code: {
+                                 s3_bucket: ::String?,
+                                 s3_key: ::String?,
+                                 s3_object_version: ::String?
+                               },
+                               ?execution_role: ::String,
+                               ?savedown_storage_configuration: {
+                                 type: ("SDS01")?,
+                                 size: ::Integer?,
+                                 volume_name: ::String?
+                               },
+                               az_mode: ("SINGLE" | "MULTI"),
+                               ?availability_zone_id: ::String,
+                               ?tags: Hash[::String, ::String],
+                               ?scaling_group_configuration: {
+                                 scaling_group_name: ::String,
+                                 memory_limit: ::Integer?,
+                                 memory_reservation: ::Integer,
+                                 node_count: ::Integer,
+                                 cpu: ::Float?
+                               }
+                             ) -> _CreateKxClusterResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKxClusterResponseSuccess
+
+      interface _CreateKxDatabaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateKxDatabaseResponse]
+        def database_name: () -> ::String
+        def database_arn: () -> ::String
+        def environment_id: () -> ::String
+        def description: () -> ::String
+        def created_timestamp: () -> ::Time
+        def last_modified_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#create_kx_database-instance_method
+      def create_kx_database: (
+                                environment_id: ::String,
+                                database_name: ::String,
+                                ?description: ::String,
+                                ?tags: Hash[::String, ::String],
+                                client_token: ::String
+                              ) -> _CreateKxDatabaseResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKxDatabaseResponseSuccess
+
+      interface _CreateKxDataviewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateKxDataviewResponse]
+        def dataview_name: () -> ::String
+        def database_name: () -> ::String
+        def environment_id: () -> ::String
+        def az_mode: () -> ("SINGLE" | "MULTI")
+        def availability_zone_id: () -> ::String
+        def changeset_id: () -> ::String
+        def segment_configurations: () -> ::Array[Types::KxDataviewSegmentConfiguration]
+        def description: () -> ::String
+        def auto_update: () -> bool
+        def created_timestamp: () -> ::Time
+        def last_modified_timestamp: () -> ::Time
+        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "FAILED" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#create_kx_dataview-instance_method
+      def create_kx_dataview: (
+                                environment_id: ::String,
+                                database_name: ::String,
+                                dataview_name: ::String,
+                                az_mode: ("SINGLE" | "MULTI"),
+                                ?availability_zone_id: ::String,
+                                ?changeset_id: ::String,
+                                ?segment_configurations: Array[
+                                  {
+                                    db_paths: Array[::String],
+                                    volume_name: ::String
+                                  },
+                                ],
+                                ?auto_update: bool,
+                                ?description: ::String,
+                                ?tags: Hash[::String, ::String],
+                                client_token: ::String
+                              ) -> _CreateKxDataviewResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKxDataviewResponseSuccess
+
+      interface _CreateKxEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateKxEnvironmentResponse]
+        def name: () -> ::String
+        def status: () -> ("CREATE_REQUESTED" | "CREATING" | "CREATED" | "DELETE_REQUESTED" | "DELETING" | "DELETED" | "FAILED_CREATION" | "RETRY_DELETION" | "FAILED_DELETION" | "UPDATE_NETWORK_REQUESTED" | "UPDATING_NETWORK" | "FAILED_UPDATING_NETWORK" | "SUSPENDED")
+        def environment_id: () -> ::String
+        def description: () -> ::String
+        def environment_arn: () -> ::String
+        def kms_key_id: () -> ::String
+        def creation_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#create_kx_environment-instance_method
+      def create_kx_environment: (
+                                   name: ::String,
+                                   ?description: ::String,
+                                   kms_key_id: ::String,
+                                   ?tags: Hash[::String, ::String],
+                                   ?client_token: ::String
+                                 ) -> _CreateKxEnvironmentResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKxEnvironmentResponseSuccess
+
+      interface _CreateKxScalingGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateKxScalingGroupResponse]
+        def environment_id: () -> ::String
+        def scaling_group_name: () -> ::String
+        def host_type: () -> ::String
+        def availability_zone_id: () -> ::String
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETED" | "DELETE_FAILED")
+        def last_modified_timestamp: () -> ::Time
+        def created_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#create_kx_scaling_group-instance_method
+      def create_kx_scaling_group: (
+                                     client_token: ::String,
+                                     environment_id: ::String,
+                                     scaling_group_name: ::String,
+                                     host_type: ::String,
+                                     availability_zone_id: ::String,
+                                     ?tags: Hash[::String, ::String]
+                                   ) -> _CreateKxScalingGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKxScalingGroupResponseSuccess
+
+      interface _CreateKxUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateKxUserResponse]
+        def user_name: () -> ::String
+        def user_arn: () -> ::String
+        def environment_id: () -> ::String
+        def iam_role: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#create_kx_user-instance_method
+      def create_kx_user: (
+                            environment_id: ::String,
+                            user_name: ::String,
+                            iam_role: ::String,
+                            ?tags: Hash[::String, ::String],
+                            ?client_token: ::String
+                          ) -> _CreateKxUserResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKxUserResponseSuccess
+
+      interface _CreateKxVolumeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateKxVolumeResponse]
+        def environment_id: () -> ::String
+        def volume_name: () -> ::String
+        def volume_type: () -> ("NAS_1")
+        def volume_arn: () -> ::String
+        def nas1_configuration: () -> Types::KxNAS1Configuration
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED" | "DELETE_FAILED")
+        def status_reason: () -> ::String
+        def az_mode: () -> ("SINGLE" | "MULTI")
+        def description: () -> ::String
+        def availability_zone_ids: () -> ::Array[::String]
+        def created_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#create_kx_volume-instance_method
+      def create_kx_volume: (
+                              ?client_token: ::String,
+                              environment_id: ::String,
+                              volume_type: ("NAS_1"),
+                              volume_name: ::String,
+                              ?description: ::String,
+                              ?nas1_configuration: {
+                                type: ("SSD_1000" | "SSD_250" | "HDD_12")?,
+                                size: ::Integer?
+                              },
+                              az_mode: ("SINGLE" | "MULTI"),
+                              availability_zone_ids: Array[::String],
+                              ?tags: Hash[::String, ::String]
+                            ) -> _CreateKxVolumeResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKxVolumeResponseSuccess
+
+      interface _DeleteEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEnvironmentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#delete_environment-instance_method
+      def delete_environment: (
+                                environment_id: ::String
+                              ) -> _DeleteEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEnvironmentResponseSuccess
+
+      interface _DeleteKxClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteKxClusterResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#delete_kx_cluster-instance_method
+      def delete_kx_cluster: (
+                               environment_id: ::String,
+                               cluster_name: ::String,
+                               ?client_token: ::String
+                             ) -> _DeleteKxClusterResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKxClusterResponseSuccess
+
+      interface _DeleteKxDatabaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteKxDatabaseResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#delete_kx_database-instance_method
+      def delete_kx_database: (
+                                environment_id: ::String,
+                                database_name: ::String,
+                                client_token: ::String
+                              ) -> _DeleteKxDatabaseResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKxDatabaseResponseSuccess
+
+      interface _DeleteKxDataviewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteKxDataviewResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#delete_kx_dataview-instance_method
+      def delete_kx_dataview: (
+                                environment_id: ::String,
+                                database_name: ::String,
+                                dataview_name: ::String,
+                                client_token: ::String
+                              ) -> _DeleteKxDataviewResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKxDataviewResponseSuccess
+
+      interface _DeleteKxEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteKxEnvironmentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#delete_kx_environment-instance_method
+      def delete_kx_environment: (
+                                   environment_id: ::String,
+                                   ?client_token: ::String
+                                 ) -> _DeleteKxEnvironmentResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKxEnvironmentResponseSuccess
+
+      interface _DeleteKxScalingGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteKxScalingGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#delete_kx_scaling_group-instance_method
+      def delete_kx_scaling_group: (
+                                     environment_id: ::String,
+                                     scaling_group_name: ::String,
+                                     ?client_token: ::String
+                                   ) -> _DeleteKxScalingGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKxScalingGroupResponseSuccess
+
+      interface _DeleteKxUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteKxUserResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#delete_kx_user-instance_method
+      def delete_kx_user: (
+                            user_name: ::String,
+                            environment_id: ::String,
+                            ?client_token: ::String
+                          ) -> _DeleteKxUserResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKxUserResponseSuccess
+
+      interface _DeleteKxVolumeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteKxVolumeResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#delete_kx_volume-instance_method
+      def delete_kx_volume: (
+                              environment_id: ::String,
+                              volume_name: ::String,
+                              ?client_token: ::String
+                            ) -> _DeleteKxVolumeResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKxVolumeResponseSuccess
+
+      interface _GetEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnvironmentResponse]
+        def environment: () -> Types::Environment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#get_environment-instance_method
+      def get_environment: (
+                             environment_id: ::String
+                           ) -> _GetEnvironmentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentResponseSuccess
+
+      interface _GetKxChangesetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetKxChangesetResponse]
+        def changeset_id: () -> ::String
+        def database_name: () -> ::String
+        def environment_id: () -> ::String
+        def change_requests: () -> ::Array[Types::ChangeRequest]
+        def created_timestamp: () -> ::Time
+        def active_from_timestamp: () -> ::Time
+        def last_modified_timestamp: () -> ::Time
+        def status: () -> ("PENDING" | "PROCESSING" | "FAILED" | "COMPLETED")
+        def error_info: () -> Types::ErrorInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#get_kx_changeset-instance_method
+      def get_kx_changeset: (
+                              environment_id: ::String,
+                              database_name: ::String,
+                              changeset_id: ::String
+                            ) -> _GetKxChangesetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetKxChangesetResponseSuccess
+
+      interface _GetKxClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetKxClusterResponse]
+        def status: () -> ("PENDING" | "CREATING" | "CREATE_FAILED" | "RUNNING" | "UPDATING" | "DELETING" | "DELETED" | "DELETE_FAILED")
+        def status_reason: () -> ::String
+        def cluster_name: () -> ::String
+        def cluster_type: () -> ("HDB" | "RDB" | "GATEWAY" | "GP" | "TICKERPLANT")
+        def tickerplant_log_configuration: () -> Types::TickerplantLogConfiguration
+        def volumes: () -> ::Array[Types::Volume]
+        def databases: () -> ::Array[Types::KxDatabaseConfiguration]
+        def cache_storage_configurations: () -> ::Array[Types::KxCacheStorageConfiguration]
+        def auto_scaling_configuration: () -> Types::AutoScalingConfiguration
+        def cluster_description: () -> ::String
+        def capacity_configuration: () -> Types::CapacityConfiguration
+        def release_label: () -> ::String
+        def vpc_configuration: () -> Types::VpcConfiguration
+        def initialization_script: () -> ::String
+        def command_line_arguments: () -> ::Array[Types::KxCommandLineArgument]
+        def code: () -> Types::CodeConfiguration
+        def execution_role: () -> ::String
+        def last_modified_timestamp: () -> ::Time
+        def savedown_storage_configuration: () -> Types::KxSavedownStorageConfiguration
+        def az_mode: () -> ("SINGLE" | "MULTI")
+        def availability_zone_id: () -> ::String
+        def created_timestamp: () -> ::Time
+        def scaling_group_configuration: () -> Types::KxScalingGroupConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#get_kx_cluster-instance_method
+      def get_kx_cluster: (
+                            environment_id: ::String,
+                            cluster_name: ::String
+                          ) -> _GetKxClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetKxClusterResponseSuccess
+
+      interface _GetKxConnectionStringResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetKxConnectionStringResponse]
+        def signed_connection_string: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#get_kx_connection_string-instance_method
+      def get_kx_connection_string: (
+                                      user_arn: ::String,
+                                      environment_id: ::String,
+                                      cluster_name: ::String
+                                    ) -> _GetKxConnectionStringResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetKxConnectionStringResponseSuccess
+
+      interface _GetKxDatabaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetKxDatabaseResponse]
+        def database_name: () -> ::String
+        def database_arn: () -> ::String
+        def environment_id: () -> ::String
+        def description: () -> ::String
+        def created_timestamp: () -> ::Time
+        def last_modified_timestamp: () -> ::Time
+        def last_completed_changeset_id: () -> ::String
+        def num_bytes: () -> ::Integer
+        def num_changesets: () -> ::Integer
+        def num_files: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#get_kx_database-instance_method
+      def get_kx_database: (
+                             environment_id: ::String,
+                             database_name: ::String
+                           ) -> _GetKxDatabaseResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetKxDatabaseResponseSuccess
+
+      interface _GetKxDataviewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetKxDataviewResponse]
+        def database_name: () -> ::String
+        def dataview_name: () -> ::String
+        def az_mode: () -> ("SINGLE" | "MULTI")
+        def availability_zone_id: () -> ::String
+        def changeset_id: () -> ::String
+        def segment_configurations: () -> ::Array[Types::KxDataviewSegmentConfiguration]
+        def active_versions: () -> ::Array[Types::KxDataviewActiveVersion]
+        def description: () -> ::String
+        def auto_update: () -> bool
+        def environment_id: () -> ::String
+        def created_timestamp: () -> ::Time
+        def last_modified_timestamp: () -> ::Time
+        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "FAILED" | "DELETING")
+        def status_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#get_kx_dataview-instance_method
+      def get_kx_dataview: (
+                             environment_id: ::String,
+                             database_name: ::String,
+                             dataview_name: ::String
+                           ) -> _GetKxDataviewResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetKxDataviewResponseSuccess
+
+      interface _GetKxEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetKxEnvironmentResponse]
+        def name: () -> ::String
+        def environment_id: () -> ::String
+        def aws_account_id: () -> ::String
+        def status: () -> ("CREATE_REQUESTED" | "CREATING" | "CREATED" | "DELETE_REQUESTED" | "DELETING" | "DELETED" | "FAILED_CREATION" | "RETRY_DELETION" | "FAILED_DELETION" | "UPDATE_NETWORK_REQUESTED" | "UPDATING_NETWORK" | "FAILED_UPDATING_NETWORK" | "SUSPENDED")
+        def tgw_status: () -> ("NONE" | "UPDATE_REQUESTED" | "UPDATING" | "FAILED_UPDATE" | "SUCCESSFULLY_UPDATED")
+        def dns_status: () -> ("NONE" | "UPDATE_REQUESTED" | "UPDATING" | "FAILED_UPDATE" | "SUCCESSFULLY_UPDATED")
+        def error_message: () -> ::String
+        def description: () -> ::String
+        def environment_arn: () -> ::String
+        def kms_key_id: () -> ::String
+        def dedicated_service_account_id: () -> ::String
+        def transit_gateway_configuration: () -> Types::TransitGatewayConfiguration
+        def custom_dns_configuration: () -> ::Array[Types::CustomDNSServer]
+        def creation_timestamp: () -> ::Time
+        def update_timestamp: () -> ::Time
+        def availability_zone_ids: () -> ::Array[::String]
+        def certificate_authority_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#get_kx_environment-instance_method
+      def get_kx_environment: (
+                                environment_id: ::String
+                              ) -> _GetKxEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetKxEnvironmentResponseSuccess
+
+      interface _GetKxScalingGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetKxScalingGroupResponse]
+        def scaling_group_name: () -> ::String
+        def scaling_group_arn: () -> ::String
+        def host_type: () -> ::String
+        def clusters: () -> ::Array[::String]
+        def availability_zone_id: () -> ::String
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETED" | "DELETE_FAILED")
+        def status_reason: () -> ::String
+        def last_modified_timestamp: () -> ::Time
+        def created_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#get_kx_scaling_group-instance_method
+      def get_kx_scaling_group: (
+                                  environment_id: ::String,
+                                  scaling_group_name: ::String
+                                ) -> _GetKxScalingGroupResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetKxScalingGroupResponseSuccess
+
+      interface _GetKxUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetKxUserResponse]
+        def user_name: () -> ::String
+        def user_arn: () -> ::String
+        def environment_id: () -> ::String
+        def iam_role: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#get_kx_user-instance_method
+      def get_kx_user: (
+                         user_name: ::String,
+                         environment_id: ::String
+                       ) -> _GetKxUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetKxUserResponseSuccess
+
+      interface _GetKxVolumeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetKxVolumeResponse]
+        def environment_id: () -> ::String
+        def volume_name: () -> ::String
+        def volume_type: () -> ("NAS_1")
+        def volume_arn: () -> ::String
+        def nas1_configuration: () -> Types::KxNAS1Configuration
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED" | "DELETE_FAILED")
+        def status_reason: () -> ::String
+        def created_timestamp: () -> ::Time
+        def description: () -> ::String
+        def az_mode: () -> ("SINGLE" | "MULTI")
+        def availability_zone_ids: () -> ::Array[::String]
+        def last_modified_timestamp: () -> ::Time
+        def attached_clusters: () -> ::Array[Types::KxAttachedCluster]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#get_kx_volume-instance_method
+      def get_kx_volume: (
+                           environment_id: ::String,
+                           volume_name: ::String
+                         ) -> _GetKxVolumeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetKxVolumeResponseSuccess
+
+      interface _ListEnvironmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnvironmentsResponse]
+        def environments: () -> ::Array[Types::Environment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#list_environments-instance_method
+      def list_environments: (
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListEnvironmentsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentsResponseSuccess
+
+      interface _ListKxChangesetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListKxChangesetsResponse]
+        def kx_changesets: () -> ::Array[Types::KxChangesetListEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#list_kx_changesets-instance_method
+      def list_kx_changesets: (
+                                environment_id: ::String,
+                                database_name: ::String,
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListKxChangesetsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKxChangesetsResponseSuccess
+
+      interface _ListKxClusterNodesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListKxClusterNodesResponse]
+        def nodes: () -> ::Array[Types::KxNode]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#list_kx_cluster_nodes-instance_method
+      def list_kx_cluster_nodes: (
+                                   environment_id: ::String,
+                                   cluster_name: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _ListKxClusterNodesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKxClusterNodesResponseSuccess
+
+      interface _ListKxClustersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListKxClustersResponse]
+        def kx_cluster_summaries: () -> ::Array[Types::KxCluster]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#list_kx_clusters-instance_method
+      def list_kx_clusters: (
+                              environment_id: ::String,
+                              ?cluster_type: ("HDB" | "RDB" | "GATEWAY" | "GP" | "TICKERPLANT"),
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListKxClustersResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKxClustersResponseSuccess
+
+      interface _ListKxDatabasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListKxDatabasesResponse]
+        def kx_databases: () -> ::Array[Types::KxDatabaseListEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#list_kx_databases-instance_method
+      def list_kx_databases: (
+                               environment_id: ::String,
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListKxDatabasesResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKxDatabasesResponseSuccess
+
+      interface _ListKxDataviewsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListKxDataviewsResponse]
+        def kx_dataviews: () -> ::Array[Types::KxDataviewListEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#list_kx_dataviews-instance_method
+      def list_kx_dataviews: (
+                               environment_id: ::String,
+                               database_name: ::String,
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListKxDataviewsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKxDataviewsResponseSuccess
+
+      interface _ListKxEnvironmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListKxEnvironmentsResponse]
+        def environments: () -> ::Array[Types::KxEnvironment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#list_kx_environments-instance_method
+      def list_kx_environments: (
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListKxEnvironmentsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKxEnvironmentsResponseSuccess
+
+      interface _ListKxScalingGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListKxScalingGroupsResponse]
+        def scaling_groups: () -> ::Array[Types::KxScalingGroup]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#list_kx_scaling_groups-instance_method
+      def list_kx_scaling_groups: (
+                                    environment_id: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListKxScalingGroupsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKxScalingGroupsResponseSuccess
+
+      interface _ListKxUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListKxUsersResponse]
+        def users: () -> ::Array[Types::KxUser]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#list_kx_users-instance_method
+      def list_kx_users: (
+                           environment_id: ::String,
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListKxUsersResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKxUsersResponseSuccess
+
+      interface _ListKxVolumesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListKxVolumesResponse]
+        def kx_volume_summaries: () -> ::Array[Types::KxVolume]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#list_kx_volumes-instance_method
+      def list_kx_volumes: (
+                             environment_id: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             ?volume_type: ("NAS_1")
+                           ) -> _ListKxVolumesResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKxVolumesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEnvironmentResponse]
+        def environment: () -> Types::Environment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#update_environment-instance_method
+      def update_environment: (
+                                environment_id: ::String,
+                                ?name: ::String,
+                                ?description: ::String,
+                                ?federation_mode: ("FEDERATED" | "LOCAL"),
+                                ?federation_parameters: {
+                                  saml_metadata_document: ::String?,
+                                  saml_metadata_url: ::String?,
+                                  application_call_back_url: ::String?,
+                                  federation_urn: ::String?,
+                                  federation_provider_name: ::String?,
+                                  attribute_map: Hash[::String, ::String]?
+                                }
+                              ) -> _UpdateEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentResponseSuccess
+
+      interface _UpdateKxClusterCodeConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateKxClusterCodeConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#update_kx_cluster_code_configuration-instance_method
+      def update_kx_cluster_code_configuration: (
+                                                  environment_id: ::String,
+                                                  cluster_name: ::String,
+                                                  ?client_token: ::String,
+                                                  code: {
+                                                    s3_bucket: ::String?,
+                                                    s3_key: ::String?,
+                                                    s3_object_version: ::String?
+                                                  },
+                                                  ?initialization_script: ::String,
+                                                  ?command_line_arguments: Array[
+                                                    {
+                                                      key: ::String?,
+                                                      value: ::String?
+                                                    },
+                                                  ],
+                                                  ?deployment_configuration: {
+                                                    deployment_strategy: ("NO_RESTART" | "ROLLING" | "FORCE")
+                                                  }
+                                                ) -> _UpdateKxClusterCodeConfigurationResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKxClusterCodeConfigurationResponseSuccess
+
+      interface _UpdateKxClusterDatabasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateKxClusterDatabasesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#update_kx_cluster_databases-instance_method
+      def update_kx_cluster_databases: (
+                                         environment_id: ::String,
+                                         cluster_name: ::String,
+                                         ?client_token: ::String,
+                                         databases: Array[
+                                           {
+                                             database_name: ::String,
+                                             cache_configurations: Array[
+                                               {
+                                                 cache_type: ::String,
+                                                 db_paths: Array[::String],
+                                                 dataview_name: ::String?
+                                               },
+                                             ]?,
+                                             changeset_id: ::String?,
+                                             dataview_name: ::String?,
+                                             dataview_configuration: {
+                                               dataview_name: ::String?,
+                                               dataview_version_id: ::String?,
+                                               changeset_id: ::String?,
+                                               segment_configurations: Array[
+                                                 {
+                                                   db_paths: Array[::String],
+                                                   volume_name: ::String
+                                                 },
+                                               ]?
+                                             }?
+                                           },
+                                         ],
+                                         ?deployment_configuration: {
+                                           deployment_strategy: ("NO_RESTART" | "ROLLING")
+                                         }
+                                       ) -> _UpdateKxClusterDatabasesResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKxClusterDatabasesResponseSuccess
+
+      interface _UpdateKxDatabaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateKxDatabaseResponse]
+        def database_name: () -> ::String
+        def environment_id: () -> ::String
+        def description: () -> ::String
+        def last_modified_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#update_kx_database-instance_method
+      def update_kx_database: (
+                                environment_id: ::String,
+                                database_name: ::String,
+                                ?description: ::String,
+                                client_token: ::String
+                              ) -> _UpdateKxDatabaseResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKxDatabaseResponseSuccess
+
+      interface _UpdateKxDataviewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateKxDataviewResponse]
+        def environment_id: () -> ::String
+        def database_name: () -> ::String
+        def dataview_name: () -> ::String
+        def az_mode: () -> ("SINGLE" | "MULTI")
+        def availability_zone_id: () -> ::String
+        def changeset_id: () -> ::String
+        def segment_configurations: () -> ::Array[Types::KxDataviewSegmentConfiguration]
+        def active_versions: () -> ::Array[Types::KxDataviewActiveVersion]
+        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "FAILED" | "DELETING")
+        def auto_update: () -> bool
+        def description: () -> ::String
+        def created_timestamp: () -> ::Time
+        def last_modified_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#update_kx_dataview-instance_method
+      def update_kx_dataview: (
+                                environment_id: ::String,
+                                database_name: ::String,
+                                dataview_name: ::String,
+                                ?description: ::String,
+                                ?changeset_id: ::String,
+                                ?segment_configurations: Array[
+                                  {
+                                    db_paths: Array[::String],
+                                    volume_name: ::String
+                                  },
+                                ],
+                                client_token: ::String
+                              ) -> _UpdateKxDataviewResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKxDataviewResponseSuccess
+
+      interface _UpdateKxEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateKxEnvironmentResponse]
+        def name: () -> ::String
+        def environment_id: () -> ::String
+        def aws_account_id: () -> ::String
+        def status: () -> ("CREATE_REQUESTED" | "CREATING" | "CREATED" | "DELETE_REQUESTED" | "DELETING" | "DELETED" | "FAILED_CREATION" | "RETRY_DELETION" | "FAILED_DELETION" | "UPDATE_NETWORK_REQUESTED" | "UPDATING_NETWORK" | "FAILED_UPDATING_NETWORK" | "SUSPENDED")
+        def tgw_status: () -> ("NONE" | "UPDATE_REQUESTED" | "UPDATING" | "FAILED_UPDATE" | "SUCCESSFULLY_UPDATED")
+        def dns_status: () -> ("NONE" | "UPDATE_REQUESTED" | "UPDATING" | "FAILED_UPDATE" | "SUCCESSFULLY_UPDATED")
+        def error_message: () -> ::String
+        def description: () -> ::String
+        def environment_arn: () -> ::String
+        def kms_key_id: () -> ::String
+        def dedicated_service_account_id: () -> ::String
+        def transit_gateway_configuration: () -> Types::TransitGatewayConfiguration
+        def custom_dns_configuration: () -> ::Array[Types::CustomDNSServer]
+        def creation_timestamp: () -> ::Time
+        def update_timestamp: () -> ::Time
+        def availability_zone_ids: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#update_kx_environment-instance_method
+      def update_kx_environment: (
+                                   environment_id: ::String,
+                                   ?name: ::String,
+                                   ?description: ::String,
+                                   ?client_token: ::String
+                                 ) -> _UpdateKxEnvironmentResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKxEnvironmentResponseSuccess
+
+      interface _UpdateKxEnvironmentNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateKxEnvironmentNetworkResponse]
+        def name: () -> ::String
+        def environment_id: () -> ::String
+        def aws_account_id: () -> ::String
+        def status: () -> ("CREATE_REQUESTED" | "CREATING" | "CREATED" | "DELETE_REQUESTED" | "DELETING" | "DELETED" | "FAILED_CREATION" | "RETRY_DELETION" | "FAILED_DELETION" | "UPDATE_NETWORK_REQUESTED" | "UPDATING_NETWORK" | "FAILED_UPDATING_NETWORK" | "SUSPENDED")
+        def tgw_status: () -> ("NONE" | "UPDATE_REQUESTED" | "UPDATING" | "FAILED_UPDATE" | "SUCCESSFULLY_UPDATED")
+        def dns_status: () -> ("NONE" | "UPDATE_REQUESTED" | "UPDATING" | "FAILED_UPDATE" | "SUCCESSFULLY_UPDATED")
+        def error_message: () -> ::String
+        def description: () -> ::String
+        def environment_arn: () -> ::String
+        def kms_key_id: () -> ::String
+        def dedicated_service_account_id: () -> ::String
+        def transit_gateway_configuration: () -> Types::TransitGatewayConfiguration
+        def custom_dns_configuration: () -> ::Array[Types::CustomDNSServer]
+        def creation_timestamp: () -> ::Time
+        def update_timestamp: () -> ::Time
+        def availability_zone_ids: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#update_kx_environment_network-instance_method
+      def update_kx_environment_network: (
+                                           environment_id: ::String,
+                                           ?transit_gateway_configuration: {
+                                             transit_gateway_id: ::String,
+                                             routable_cidr_space: ::String,
+                                             attachment_network_acl_configuration: Array[
+                                               {
+                                                 rule_number: ::Integer,
+                                                 protocol: ::String,
+                                                 rule_action: ("allow" | "deny"),
+                                                 port_range: {
+                                                   from: ::Integer,
+                                                   to: ::Integer
+                                                 }?,
+                                                 icmp_type_code: {
+                                                   type: ::Integer,
+                                                   code: ::Integer
+                                                 }?,
+                                                 cidr_block: ::String
+                                               },
+                                             ]?
+                                           },
+                                           ?custom_dns_configuration: Array[
+                                             {
+                                               custom_dns_server_name: ::String,
+                                               custom_dns_server_ip: ::String
+                                             },
+                                           ],
+                                           ?client_token: ::String
+                                         ) -> _UpdateKxEnvironmentNetworkResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKxEnvironmentNetworkResponseSuccess
+
+      interface _UpdateKxUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateKxUserResponse]
+        def user_name: () -> ::String
+        def user_arn: () -> ::String
+        def environment_id: () -> ::String
+        def iam_role: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#update_kx_user-instance_method
+      def update_kx_user: (
+                            environment_id: ::String,
+                            user_name: ::String,
+                            iam_role: ::String,
+                            ?client_token: ::String
+                          ) -> _UpdateKxUserResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKxUserResponseSuccess
+
+      interface _UpdateKxVolumeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateKxVolumeResponse]
+        def environment_id: () -> ::String
+        def volume_name: () -> ::String
+        def volume_type: () -> ("NAS_1")
+        def volume_arn: () -> ::String
+        def nas1_configuration: () -> Types::KxNAS1Configuration
+        def status: () -> ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "UPDATING" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED" | "DELETE_FAILED")
+        def description: () -> ::String
+        def status_reason: () -> ::String
+        def created_timestamp: () -> ::Time
+        def az_mode: () -> ("SINGLE" | "MULTI")
+        def availability_zone_ids: () -> ::Array[::String]
+        def last_modified_timestamp: () -> ::Time
+        def attached_clusters: () -> ::Array[Types::KxAttachedCluster]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#update_kx_volume-instance_method
+      def update_kx_volume: (
+                              environment_id: ::String,
+                              volume_name: ::String,
+                              ?description: ::String,
+                              ?client_token: ::String,
+                              ?nas1_configuration: {
+                                type: ("SSD_1000" | "SSD_250" | "HDD_12")?,
+                                size: ::Integer?
+                              }
+                            ) -> _UpdateKxVolumeResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKxVolumeResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,1274 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::IoTTwinMaker
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchPutPropertyError
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      attr_accessor entry: Types::PropertyValueEntry
+      SENSITIVE: []
+    end
+
+    class BatchPutPropertyErrorEntry
+      attr_accessor errors: ::Array[Types::BatchPutPropertyError]
+      SENSITIVE: []
+    end
+
+    class BatchPutPropertyValuesRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor entries: ::Array[Types::PropertyValueEntry]
+      SENSITIVE: []
+    end
+
+    class BatchPutPropertyValuesResponse
+      attr_accessor error_entries: ::Array[Types::BatchPutPropertyErrorEntry]
+      SENSITIVE: []
+    end
+
+    class BundleInformation
+      attr_accessor bundle_names: ::Array[::String]
+      attr_accessor pricing_tier: ("TIER_1" | "TIER_2" | "TIER_3" | "TIER_4")
+      SENSITIVE: []
+    end
+
+    class CancelMetadataTransferJobRequest
+      attr_accessor metadata_transfer_job_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelMetadataTransferJobResponse
+      attr_accessor metadata_transfer_job_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor update_date_time: ::Time
+      attr_accessor status: Types::MetadataTransferJobStatus
+      attr_accessor progress: Types::MetadataTransferJobProgress
+      SENSITIVE: []
+    end
+
+    class ColumnDescription
+      attr_accessor name: ::String
+      attr_accessor type: ("NODE" | "EDGE" | "VALUE")
+      SENSITIVE: []
+    end
+
+    class ComponentPropertyGroupRequest
+      attr_accessor group_type: ("TABULAR")
+      attr_accessor property_names: ::Array[::String]
+      attr_accessor update_type: ("UPDATE" | "DELETE" | "CREATE")
+      SENSITIVE: []
+    end
+
+    class ComponentPropertyGroupResponse
+      attr_accessor group_type: ("TABULAR")
+      attr_accessor property_names: ::Array[::String]
+      attr_accessor is_inherited: bool
+      SENSITIVE: []
+    end
+
+    class ComponentRequest
+      attr_accessor description: ::String
+      attr_accessor component_type_id: ::String
+      attr_accessor properties: ::Hash[::String, Types::PropertyRequest]
+      attr_accessor property_groups: ::Hash[::String, Types::ComponentPropertyGroupRequest]
+      SENSITIVE: []
+    end
+
+    class ComponentResponse
+      attr_accessor component_name: ::String
+      attr_accessor description: ::String
+      attr_accessor component_type_id: ::String
+      attr_accessor status: Types::Status
+      attr_accessor defined_in: ::String
+      attr_accessor properties: ::Hash[::String, Types::PropertyResponse]
+      attr_accessor property_groups: ::Hash[::String, Types::ComponentPropertyGroupResponse]
+      attr_accessor sync_source: ::String
+      attr_accessor are_all_properties_returned: bool
+      attr_accessor composite_components: ::Hash[::String, Types::ComponentSummary]
+      attr_accessor are_all_composite_components_returned: bool
+      SENSITIVE: []
+    end
+
+    class ComponentSummary
+      attr_accessor component_name: ::String
+      attr_accessor component_type_id: ::String
+      attr_accessor defined_in: ::String
+      attr_accessor description: ::String
+      attr_accessor property_groups: ::Hash[::String, Types::ComponentPropertyGroupResponse]
+      attr_accessor status: Types::Status
+      attr_accessor sync_source: ::String
+      attr_accessor component_path: ::String
+      SENSITIVE: []
+    end
+
+    class ComponentTypeSummary
+      attr_accessor arn: ::String
+      attr_accessor component_type_id: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor update_date_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor status: Types::Status
+      attr_accessor component_type_name: ::String
+      SENSITIVE: []
+    end
+
+    class ComponentUpdateRequest
+      attr_accessor update_type: ("CREATE" | "UPDATE" | "DELETE")
+      attr_accessor description: ::String
+      attr_accessor component_type_id: ::String
+      attr_accessor property_updates: ::Hash[::String, Types::PropertyRequest]
+      attr_accessor property_group_updates: ::Hash[::String, Types::ComponentPropertyGroupRequest]
+      SENSITIVE: []
+    end
+
+    class CompositeComponentRequest
+      attr_accessor description: ::String
+      attr_accessor properties: ::Hash[::String, Types::PropertyRequest]
+      attr_accessor property_groups: ::Hash[::String, Types::ComponentPropertyGroupRequest]
+      SENSITIVE: []
+    end
+
+    class CompositeComponentTypeRequest
+      attr_accessor component_type_id: ::String
+      SENSITIVE: []
+    end
+
+    class CompositeComponentTypeResponse
+      attr_accessor component_type_id: ::String
+      attr_accessor is_inherited: bool
+      SENSITIVE: []
+    end
+
+    class CompositeComponentUpdateRequest
+      attr_accessor update_type: ("CREATE" | "UPDATE" | "DELETE")
+      attr_accessor description: ::String
+      attr_accessor property_updates: ::Hash[::String, Types::PropertyRequest]
+      attr_accessor property_group_updates: ::Hash[::String, Types::ComponentPropertyGroupRequest]
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectorFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectorTimeoutException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateComponentTypeRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor is_singleton: bool
+      attr_accessor component_type_id: ::String
+      attr_accessor description: ::String
+      attr_accessor property_definitions: ::Hash[::String, Types::PropertyDefinitionRequest]
+      attr_accessor extends_from: ::Array[::String]
+      attr_accessor functions: ::Hash[::String, Types::FunctionRequest]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor property_groups: ::Hash[::String, Types::PropertyGroupRequest]
+      attr_accessor component_type_name: ::String
+      attr_accessor composite_component_types: ::Hash[::String, Types::CompositeComponentTypeRequest]
+      SENSITIVE: []
+    end
+
+    class CreateComponentTypeResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor state: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class CreateEntityRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor entity_name: ::String
+      attr_accessor description: ::String
+      attr_accessor components: ::Hash[::String, Types::ComponentRequest]
+      attr_accessor composite_components: ::Hash[::String, Types::CompositeComponentRequest]
+      attr_accessor parent_entity_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateEntityResponse
+      attr_accessor entity_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor state: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class CreateMetadataTransferJobRequest
+      attr_accessor metadata_transfer_job_id: ::String
+      attr_accessor description: ::String
+      attr_accessor sources: ::Array[Types::SourceConfiguration]
+      attr_accessor destination: Types::DestinationConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateMetadataTransferJobResponse
+      attr_accessor metadata_transfer_job_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor status: Types::MetadataTransferJobStatus
+      SENSITIVE: []
+    end
+
+    class CreateSceneRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor scene_id: ::String
+      attr_accessor content_location: ::String
+      attr_accessor description: ::String
+      attr_accessor capabilities: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor scene_metadata: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSceneResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateSyncJobRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor sync_source: ::String
+      attr_accessor sync_role: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSyncJobResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor state: ("CREATING" | "INITIALIZING" | "ACTIVE" | "DELETING" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class CreateWorkspaceRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor description: ::String
+      attr_accessor s3_location: ::String
+      attr_accessor role: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateWorkspaceResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DataConnector
+      attr_accessor lambda: Types::LambdaFunction
+      attr_accessor is_native: bool
+      SENSITIVE: []
+    end
+
+    class DataType
+      attr_accessor type: ("RELATIONSHIP" | "STRING" | "LONG" | "BOOLEAN" | "INTEGER" | "DOUBLE" | "LIST" | "MAP")
+      attr_accessor nested_type: Types::DataType
+      attr_accessor allowed_values: ::Array[Types::DataValue]
+      attr_accessor unit_of_measure: ::String
+      attr_accessor relationship: Types::Relationship
+      SENSITIVE: []
+    end
+
+    class DataValue
+      attr_accessor boolean_value: bool
+      attr_accessor double_value: ::Float
+      attr_accessor integer_value: ::Integer
+      attr_accessor long_value: ::Integer
+      attr_accessor string_value: ::String
+      attr_accessor list_value: ::Array[Types::DataValue]
+      attr_accessor map_value: ::Hash[::String, Types::DataValue]
+      attr_accessor relationship_value: Types::RelationshipValue
+      attr_accessor expression: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteComponentTypeRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor component_type_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteComponentTypeResponse
+      attr_accessor state: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class DeleteEntityRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor is_recursive: bool
+      SENSITIVE: []
+    end
+
+    class DeleteEntityResponse
+      attr_accessor state: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class DeleteSceneRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor scene_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSceneResponse < Aws::EmptyStructure
+    end
+
+    class DeleteSyncJobRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor sync_source: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSyncJobResponse
+      attr_accessor state: ("CREATING" | "INITIALIZING" | "ACTIVE" | "DELETING" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class DeleteWorkspaceRequest
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkspaceResponse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DestinationConfiguration
+      attr_accessor type: ("s3" | "iotsitewise" | "iottwinmaker")
+      attr_accessor s3_configuration: Types::S3DestinationConfiguration
+      attr_accessor iot_twin_maker_configuration: Types::IotTwinMakerDestinationConfiguration
+      SENSITIVE: []
+    end
+
+    class EntityPropertyReference
+      attr_accessor component_name: ::String
+      attr_accessor component_path: ::String
+      attr_accessor external_id_property: ::Hash[::String, ::String]
+      attr_accessor entity_id: ::String
+      attr_accessor property_name: ::String
+      SENSITIVE: []
+    end
+
+    class EntitySummary
+      attr_accessor entity_id: ::String
+      attr_accessor entity_name: ::String
+      attr_accessor arn: ::String
+      attr_accessor parent_entity_id: ::String
+      attr_accessor status: Types::Status
+      attr_accessor description: ::String
+      attr_accessor has_child_entities: bool
+      attr_accessor creation_date_time: ::Time
+      attr_accessor update_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ErrorDetails
+      attr_accessor code: ("VALIDATION_ERROR" | "INTERNAL_FAILURE" | "SYNC_INITIALIZING_ERROR" | "SYNC_CREATING_ERROR" | "SYNC_PROCESSING_ERROR" | "SYNC_DELETING_ERROR" | "PROCESSING_ERROR" | "COMPOSITE_COMPONENT_FAILURE")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ExecuteQueryRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor query_statement: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ExecuteQueryResponse
+      attr_accessor column_descriptions: ::Array[Types::ColumnDescription]
+      attr_accessor rows: ::Array[Types::Row]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class FilterByAsset
+      attr_accessor asset_id: ::String
+      attr_accessor asset_external_id: ::String
+      attr_accessor include_offspring: bool
+      attr_accessor include_asset_model: bool
+      SENSITIVE: []
+    end
+
+    class FilterByAssetModel
+      attr_accessor asset_model_id: ::String
+      attr_accessor asset_model_external_id: ::String
+      attr_accessor include_offspring: bool
+      attr_accessor include_assets: bool
+      SENSITIVE: []
+    end
+
+    class FilterByComponentType
+      attr_accessor component_type_id: ::String
+      SENSITIVE: []
+    end
+
+    class FilterByEntity
+      attr_accessor entity_id: ::String
+      SENSITIVE: []
+    end
+
+    class FunctionRequest
+      attr_accessor required_properties: ::Array[::String]
+      attr_accessor scope: ("ENTITY" | "WORKSPACE")
+      attr_accessor implemented_by: Types::DataConnector
+      SENSITIVE: []
+    end
+
+    class FunctionResponse
+      attr_accessor required_properties: ::Array[::String]
+      attr_accessor scope: ("ENTITY" | "WORKSPACE")
+      attr_accessor implemented_by: Types::DataConnector
+      attr_accessor is_inherited: bool
+      SENSITIVE: []
+    end
+
+    class GetComponentTypeRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor component_type_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetComponentTypeResponse
+      attr_accessor workspace_id: ::String
+      attr_accessor is_singleton: bool
+      attr_accessor component_type_id: ::String
+      attr_accessor description: ::String
+      attr_accessor property_definitions: ::Hash[::String, Types::PropertyDefinitionResponse]
+      attr_accessor extends_from: ::Array[::String]
+      attr_accessor functions: ::Hash[::String, Types::FunctionResponse]
+      attr_accessor creation_date_time: ::Time
+      attr_accessor update_date_time: ::Time
+      attr_accessor arn: ::String
+      attr_accessor is_abstract: bool
+      attr_accessor is_schema_initialized: bool
+      attr_accessor status: Types::Status
+      attr_accessor property_groups: ::Hash[::String, Types::PropertyGroupResponse]
+      attr_accessor sync_source: ::String
+      attr_accessor component_type_name: ::String
+      attr_accessor composite_component_types: ::Hash[::String, Types::CompositeComponentTypeResponse]
+      SENSITIVE: []
+    end
+
+    class GetEntityRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor entity_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetEntityResponse
+      attr_accessor entity_id: ::String
+      attr_accessor entity_name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: Types::Status
+      attr_accessor workspace_id: ::String
+      attr_accessor description: ::String
+      attr_accessor components: ::Hash[::String, Types::ComponentResponse]
+      attr_accessor parent_entity_id: ::String
+      attr_accessor has_child_entities: bool
+      attr_accessor creation_date_time: ::Time
+      attr_accessor update_date_time: ::Time
+      attr_accessor sync_source: ::String
+      attr_accessor are_all_components_returned: bool
+      SENSITIVE: []
+    end
+
+    class GetMetadataTransferJobRequest
+      attr_accessor metadata_transfer_job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMetadataTransferJobResponse
+      attr_accessor metadata_transfer_job_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor sources: ::Array[Types::SourceConfiguration]
+      attr_accessor destination: Types::DestinationConfiguration
+      attr_accessor metadata_transfer_job_role: ::String
+      attr_accessor report_url: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor update_date_time: ::Time
+      attr_accessor status: Types::MetadataTransferJobStatus
+      attr_accessor progress: Types::MetadataTransferJobProgress
+      SENSITIVE: []
+    end
+
+    class GetPricingPlanRequest < Aws::EmptyStructure
+    end
+
+    class GetPricingPlanResponse
+      attr_accessor current_pricing_plan: Types::PricingPlan
+      attr_accessor pending_pricing_plan: Types::PricingPlan
+      SENSITIVE: []
+    end
+
+    class GetPropertyValueHistoryRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor component_name: ::String
+      attr_accessor component_path: ::String
+      attr_accessor component_type_id: ::String
+      attr_accessor selected_properties: ::Array[::String]
+      attr_accessor property_filters: ::Array[Types::PropertyFilter]
+      attr_accessor start_date_time: ::Time
+      attr_accessor end_date_time: ::Time
+      attr_accessor interpolation: Types::InterpolationParameters
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor order_by_time: ("ASCENDING" | "DESCENDING")
+      attr_accessor start_time: ::String
+      attr_accessor end_time: ::String
+      SENSITIVE: []
+    end
+
+    class GetPropertyValueHistoryResponse
+      attr_accessor property_values: ::Array[Types::PropertyValueHistory]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetPropertyValueRequest
+      attr_accessor component_name: ::String
+      attr_accessor component_path: ::String
+      attr_accessor component_type_id: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor selected_properties: ::Array[::String]
+      attr_accessor workspace_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor property_group_name: ::String
+      attr_accessor tabular_conditions: Types::TabularConditions
+      SENSITIVE: []
+    end
+
+    class GetPropertyValueResponse
+      attr_accessor property_values: ::Hash[::String, Types::PropertyLatestValue]
+      attr_accessor next_token: ::String
+      attr_accessor tabular_property_values: ::Array[::Array[::Hash[::String, Types::DataValue]]]
+      SENSITIVE: []
+    end
+
+    class GetSceneRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor scene_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSceneResponse
+      attr_accessor workspace_id: ::String
+      attr_accessor scene_id: ::String
+      attr_accessor content_location: ::String
+      attr_accessor arn: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor update_date_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor capabilities: ::Array[::String]
+      attr_accessor scene_metadata: ::Hash[::String, ::String]
+      attr_accessor generated_scene_metadata: ::Hash[::String, ::String]
+      attr_accessor error: Types::SceneError
+      SENSITIVE: []
+    end
+
+    class GetSyncJobRequest
+      attr_accessor sync_source: ::String
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSyncJobResponse
+      attr_accessor arn: ::String
+      attr_accessor workspace_id: ::String
+      attr_accessor sync_source: ::String
+      attr_accessor sync_role: ::String
+      attr_accessor status: Types::SyncJobStatus
+      attr_accessor creation_date_time: ::Time
+      attr_accessor update_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetWorkspaceRequest
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkspaceResponse
+      attr_accessor workspace_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor linked_services: ::Array[::String]
+      attr_accessor s3_location: ::String
+      attr_accessor role: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor update_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InterpolationParameters
+      attr_accessor interpolation_type: ("LINEAR")
+      attr_accessor interval_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class IotSiteWiseSourceConfiguration
+      attr_accessor filters: ::Array[Types::IotSiteWiseSourceConfigurationFilter]
+      SENSITIVE: []
+    end
+
+    class IotSiteWiseSourceConfigurationFilter
+      attr_accessor filter_by_asset_model: Types::FilterByAssetModel
+      attr_accessor filter_by_asset: Types::FilterByAsset
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class FilterByAssetModel < IotSiteWiseSourceConfigurationFilter
+      end
+      class FilterByAsset < IotSiteWiseSourceConfigurationFilter
+      end
+      class Unknown < IotSiteWiseSourceConfigurationFilter
+      end
+    end
+
+    class IotTwinMakerDestinationConfiguration
+      attr_accessor workspace: ::String
+      SENSITIVE: []
+    end
+
+    class IotTwinMakerSourceConfiguration
+      attr_accessor workspace: ::String
+      attr_accessor filters: ::Array[Types::IotTwinMakerSourceConfigurationFilter]
+      SENSITIVE: []
+    end
+
+    class IotTwinMakerSourceConfigurationFilter
+      attr_accessor filter_by_component_type: Types::FilterByComponentType
+      attr_accessor filter_by_entity: Types::FilterByEntity
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class FilterByComponentType < IotTwinMakerSourceConfigurationFilter
+      end
+      class FilterByEntity < IotTwinMakerSourceConfigurationFilter
+      end
+      class Unknown < IotTwinMakerSourceConfigurationFilter
+      end
+    end
+
+    class LambdaFunction
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListComponentTypesFilter
+      attr_accessor extends_from: ::String
+      attr_accessor namespace: ::String
+      attr_accessor is_abstract: bool
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ExtendsFrom < ListComponentTypesFilter
+      end
+      class Namespace < ListComponentTypesFilter
+      end
+      class IsAbstract < ListComponentTypesFilter
+      end
+      class Unknown < ListComponentTypesFilter
+      end
+    end
+
+    class ListComponentTypesRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor filters: ::Array[Types::ListComponentTypesFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListComponentTypesResponse
+      attr_accessor workspace_id: ::String
+      attr_accessor component_type_summaries: ::Array[Types::ComponentTypeSummary]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListComponentsRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor component_path: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListComponentsResponse
+      attr_accessor component_summaries: ::Array[Types::ComponentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEntitiesFilter
+      attr_accessor parent_entity_id: ::String
+      attr_accessor component_type_id: ::String
+      attr_accessor external_id: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ParentEntityId < ListEntitiesFilter
+      end
+      class ComponentTypeId < ListEntitiesFilter
+      end
+      class ExternalId < ListEntitiesFilter
+      end
+      class Unknown < ListEntitiesFilter
+      end
+    end
+
+    class ListEntitiesRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor filters: ::Array[Types::ListEntitiesFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEntitiesResponse
+      attr_accessor entity_summaries: ::Array[Types::EntitySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMetadataTransferJobsFilter
+      attr_accessor workspace_id: ::String
+      attr_accessor state: ("VALIDATING" | "PENDING" | "RUNNING" | "CANCELLING" | "ERROR" | "COMPLETED" | "CANCELLED")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class WorkspaceId < ListMetadataTransferJobsFilter
+      end
+      class State < ListMetadataTransferJobsFilter
+      end
+      class Unknown < ListMetadataTransferJobsFilter
+      end
+    end
+
+    class ListMetadataTransferJobsRequest
+      attr_accessor source_type: ("s3" | "iotsitewise" | "iottwinmaker")
+      attr_accessor destination_type: ("s3" | "iotsitewise" | "iottwinmaker")
+      attr_accessor filters: ::Array[Types::ListMetadataTransferJobsFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMetadataTransferJobsResponse
+      attr_accessor metadata_transfer_job_summaries: ::Array[Types::MetadataTransferJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPropertiesRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor component_name: ::String
+      attr_accessor component_path: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPropertiesResponse
+      attr_accessor property_summaries: ::Array[Types::PropertySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListScenesRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListScenesResponse
+      attr_accessor scene_summaries: ::Array[Types::SceneSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSyncJobsRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSyncJobsResponse
+      attr_accessor sync_job_summaries: ::Array[Types::SyncJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSyncResourcesRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor sync_source: ::String
+      attr_accessor filters: ::Array[Types::SyncResourceFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSyncResourcesResponse
+      attr_accessor sync_resources: ::Array[Types::SyncResourceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkspacesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkspacesResponse
+      attr_accessor workspace_summaries: ::Array[Types::WorkspaceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MetadataTransferJobProgress
+      attr_accessor total_count: ::Integer
+      attr_accessor succeeded_count: ::Integer
+      attr_accessor skipped_count: ::Integer
+      attr_accessor failed_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class MetadataTransferJobStatus
+      attr_accessor state: ("VALIDATING" | "PENDING" | "RUNNING" | "CANCELLING" | "ERROR" | "COMPLETED" | "CANCELLED")
+      attr_accessor error: Types::ErrorDetails
+      attr_accessor queued_position: ::Integer
+      SENSITIVE: []
+    end
+
+    class MetadataTransferJobSummary
+      attr_accessor metadata_transfer_job_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor update_date_time: ::Time
+      attr_accessor status: Types::MetadataTransferJobStatus
+      attr_accessor progress: Types::MetadataTransferJobProgress
+      SENSITIVE: []
+    end
+
+    class OrderBy
+      attr_accessor order: ("ASCENDING" | "DESCENDING")
+      attr_accessor property_name: ::String
+      SENSITIVE: []
+    end
+
+    class ParentEntityUpdateRequest
+      attr_accessor update_type: ("UPDATE" | "DELETE")
+      attr_accessor parent_entity_id: ::String
+      SENSITIVE: []
+    end
+
+    class PricingPlan
+      attr_accessor billable_entity_count: ::Integer
+      attr_accessor bundle_information: Types::BundleInformation
+      attr_accessor effective_date_time: ::Time
+      attr_accessor pricing_mode: ("BASIC" | "STANDARD" | "TIERED_BUNDLE")
+      attr_accessor update_date_time: ::Time
+      attr_accessor update_reason: ("DEFAULT" | "PRICING_TIER_UPDATE" | "ENTITY_COUNT_UPDATE" | "PRICING_MODE_UPDATE" | "OVERWRITTEN")
+      SENSITIVE: []
+    end
+
+    class PropertyDefinitionRequest
+      attr_accessor data_type: Types::DataType
+      attr_accessor is_required_in_entity: bool
+      attr_accessor is_external_id: bool
+      attr_accessor is_stored_externally: bool
+      attr_accessor is_time_series: bool
+      attr_accessor default_value: Types::DataValue
+      attr_accessor configuration: ::Hash[::String, ::String]
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class PropertyDefinitionResponse
+      attr_accessor data_type: Types::DataType
+      attr_accessor is_time_series: bool
+      attr_accessor is_required_in_entity: bool
+      attr_accessor is_external_id: bool
+      attr_accessor is_stored_externally: bool
+      attr_accessor is_imported: bool
+      attr_accessor is_final: bool
+      attr_accessor is_inherited: bool
+      attr_accessor default_value: Types::DataValue
+      attr_accessor configuration: ::Hash[::String, ::String]
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class PropertyFilter
+      attr_accessor property_name: ::String
+      attr_accessor operator: ::String
+      attr_accessor value: Types::DataValue
+      SENSITIVE: []
+    end
+
+    class PropertyGroupRequest
+      attr_accessor group_type: ("TABULAR")
+      attr_accessor property_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PropertyGroupResponse
+      attr_accessor group_type: ("TABULAR")
+      attr_accessor property_names: ::Array[::String]
+      attr_accessor is_inherited: bool
+      SENSITIVE: []
+    end
+
+    class PropertyLatestValue
+      attr_accessor property_reference: Types::EntityPropertyReference
+      attr_accessor property_value: Types::DataValue
+      SENSITIVE: []
+    end
+
+    class PropertyRequest
+      attr_accessor definition: Types::PropertyDefinitionRequest
+      attr_accessor value: Types::DataValue
+      attr_accessor update_type: ("UPDATE" | "DELETE" | "CREATE")
+      SENSITIVE: []
+    end
+
+    class PropertyResponse
+      attr_accessor definition: Types::PropertyDefinitionResponse
+      attr_accessor value: Types::DataValue
+      attr_accessor are_all_property_values_returned: bool
+      SENSITIVE: []
+    end
+
+    class PropertySummary
+      attr_accessor definition: Types::PropertyDefinitionResponse
+      attr_accessor property_name: ::String
+      attr_accessor value: Types::DataValue
+      attr_accessor are_all_property_values_returned: bool
+      SENSITIVE: []
+    end
+
+    class PropertyValue
+      attr_accessor timestamp: ::Time
+      attr_accessor value: Types::DataValue
+      attr_accessor time: ::String
+      SENSITIVE: []
+    end
+
+    class PropertyValueEntry
+      attr_accessor entity_property_reference: Types::EntityPropertyReference
+      attr_accessor property_values: ::Array[Types::PropertyValue]
+      SENSITIVE: []
+    end
+
+    class PropertyValueHistory
+      attr_accessor entity_property_reference: Types::EntityPropertyReference
+      attr_accessor values: ::Array[Types::PropertyValue]
+      SENSITIVE: []
+    end
+
+    class QueryTimeoutException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Relationship
+      attr_accessor target_component_type_id: ::String
+      attr_accessor relationship_type: ::String
+      SENSITIVE: []
+    end
+
+    class RelationshipValue
+      attr_accessor target_entity_id: ::String
+      attr_accessor target_component_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Row
+      attr_accessor row_data: ::Array[untyped]
+      SENSITIVE: []
+    end
+
+    class S3DestinationConfiguration
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class S3SourceConfiguration
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class SceneError
+      attr_accessor code: ("MATTERPORT_ERROR")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SceneSummary
+      attr_accessor scene_id: ::String
+      attr_accessor content_location: ::String
+      attr_accessor arn: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor update_date_time: ::Time
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SourceConfiguration
+      attr_accessor type: ("s3" | "iotsitewise" | "iottwinmaker")
+      attr_accessor s3_configuration: Types::S3SourceConfiguration
+      attr_accessor iot_site_wise_configuration: Types::IotSiteWiseSourceConfiguration
+      attr_accessor iot_twin_maker_configuration: Types::IotTwinMakerSourceConfiguration
+      SENSITIVE: []
+    end
+
+    class Status
+      attr_accessor state: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "ERROR")
+      attr_accessor error: Types::ErrorDetails
+      SENSITIVE: []
+    end
+
+    class SyncJobStatus
+      attr_accessor state: ("CREATING" | "INITIALIZING" | "ACTIVE" | "DELETING" | "ERROR")
+      attr_accessor error: Types::ErrorDetails
+      SENSITIVE: []
+    end
+
+    class SyncJobSummary
+      attr_accessor arn: ::String
+      attr_accessor workspace_id: ::String
+      attr_accessor sync_source: ::String
+      attr_accessor status: Types::SyncJobStatus
+      attr_accessor creation_date_time: ::Time
+      attr_accessor update_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class SyncResourceFilter
+      attr_accessor state: ("INITIALIZING" | "PROCESSING" | "DELETED" | "IN_SYNC" | "ERROR")
+      attr_accessor resource_type: ("ENTITY" | "COMPONENT_TYPE")
+      attr_accessor resource_id: ::String
+      attr_accessor external_id: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class State < SyncResourceFilter
+      end
+      class ResourceType < SyncResourceFilter
+      end
+      class ResourceId < SyncResourceFilter
+      end
+      class ExternalId < SyncResourceFilter
+      end
+      class Unknown < SyncResourceFilter
+      end
+    end
+
+    class SyncResourceStatus
+      attr_accessor state: ("INITIALIZING" | "PROCESSING" | "DELETED" | "IN_SYNC" | "ERROR")
+      attr_accessor error: Types::ErrorDetails
+      SENSITIVE: []
+    end
+
+    class SyncResourceSummary
+      attr_accessor resource_type: ("ENTITY" | "COMPONENT_TYPE")
+      attr_accessor external_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor status: Types::SyncResourceStatus
+      attr_accessor update_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class TabularConditions
+      attr_accessor order_by: ::Array[Types::OrderBy]
+      attr_accessor property_filters: ::Array[Types::PropertyFilter]
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateComponentTypeRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor is_singleton: bool
+      attr_accessor component_type_id: ::String
+      attr_accessor description: ::String
+      attr_accessor property_definitions: ::Hash[::String, Types::PropertyDefinitionRequest]
+      attr_accessor extends_from: ::Array[::String]
+      attr_accessor functions: ::Hash[::String, Types::FunctionRequest]
+      attr_accessor property_groups: ::Hash[::String, Types::PropertyGroupRequest]
+      attr_accessor component_type_name: ::String
+      attr_accessor composite_component_types: ::Hash[::String, Types::CompositeComponentTypeRequest]
+      SENSITIVE: []
+    end
+
+    class UpdateComponentTypeResponse
+      attr_accessor workspace_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor component_type_id: ::String
+      attr_accessor state: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class UpdateEntityRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor entity_name: ::String
+      attr_accessor description: ::String
+      attr_accessor component_updates: ::Hash[::String, Types::ComponentUpdateRequest]
+      attr_accessor composite_component_updates: ::Hash[::String, Types::CompositeComponentUpdateRequest]
+      attr_accessor parent_entity_update: Types::ParentEntityUpdateRequest
+      SENSITIVE: []
+    end
+
+    class UpdateEntityResponse
+      attr_accessor update_date_time: ::Time
+      attr_accessor state: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class UpdatePricingPlanRequest
+      attr_accessor pricing_mode: ("BASIC" | "STANDARD" | "TIERED_BUNDLE")
+      attr_accessor bundle_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdatePricingPlanResponse
+      attr_accessor current_pricing_plan: Types::PricingPlan
+      attr_accessor pending_pricing_plan: Types::PricingPlan
+      SENSITIVE: []
+    end
+
+    class UpdateSceneRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor scene_id: ::String
+      attr_accessor content_location: ::String
+      attr_accessor description: ::String
+      attr_accessor capabilities: ::Array[::String]
+      attr_accessor scene_metadata: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateSceneResponse
+      attr_accessor update_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateWorkspaceRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor description: ::String
+      attr_accessor role: ::String
+      attr_accessor s3_location: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateWorkspaceResponse
+      attr_accessor update_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WorkspaceSummary
+      attr_accessor workspace_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor linked_services: ::Array[::String]
+      attr_accessor creation_date_time: ::Time
+      attr_accessor update_date_time: ::Time
+      SENSITIVE: []
+    end
+  end
+end

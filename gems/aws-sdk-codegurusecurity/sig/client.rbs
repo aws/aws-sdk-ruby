@@ -1,0 +1,245 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CodeGuruSecurity
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruSecurity/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchGetFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetFindingsResponse]
+        def failed_findings: () -> ::Array[Types::BatchGetFindingsError]
+        def findings: () -> ::Array[Types::Finding]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruSecurity/Client.html#batch_get_findings-instance_method
+      def batch_get_findings: (
+                                finding_identifiers: Array[
+                                  {
+                                    finding_id: ::String,
+                                    scan_name: ::String
+                                  },
+                                ]
+                              ) -> _BatchGetFindingsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetFindingsResponseSuccess
+
+      interface _CreateScanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateScanResponse]
+        def resource_id: () -> Types::ResourceId
+        def run_id: () -> ::String
+        def scan_name: () -> ::String
+        def scan_name_arn: () -> ::String
+        def scan_state: () -> ("InProgress" | "Successful" | "Failed")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruSecurity/Client.html#create_scan-instance_method
+      def create_scan: (
+                         ?analysis_type: ("Security" | "All"),
+                         ?client_token: ::String,
+                         resource_id: {
+                           code_artifact_id: ::String?
+                         },
+                         scan_name: ::String,
+                         ?scan_type: ("Standard" | "Express"),
+                         ?tags: Hash[::String, ::String]
+                       ) -> _CreateScanResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateScanResponseSuccess
+
+      interface _CreateUploadUrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateUploadUrlResponse]
+        def code_artifact_id: () -> ::String
+        def request_headers: () -> ::Hash[::String, ::String]
+        def s3_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruSecurity/Client.html#create_upload_url-instance_method
+      def create_upload_url: (
+                               scan_name: ::String
+                             ) -> _CreateUploadUrlResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUploadUrlResponseSuccess
+
+      interface _GetAccountConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountConfigurationResponse]
+        def encryption_config: () -> Types::EncryptionConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruSecurity/Client.html#get_account_configuration-instance_method
+      def get_account_configuration: (
+                                     ) -> _GetAccountConfigurationResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountConfigurationResponseSuccess
+
+      interface _GetFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFindingsResponse]
+        def findings: () -> ::Array[Types::Finding]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruSecurity/Client.html#get_findings-instance_method
+      def get_findings: (
+                          ?max_results: ::Integer,
+                          ?next_token: ::String,
+                          scan_name: ::String,
+                          ?status: ("Closed" | "Open" | "All")
+                        ) -> _GetFindingsResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFindingsResponseSuccess
+
+      interface _GetMetricsSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMetricsSummaryResponse]
+        def metrics_summary: () -> Types::MetricsSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruSecurity/Client.html#get_metrics_summary-instance_method
+      def get_metrics_summary: (
+                                 date: ::Time
+                               ) -> _GetMetricsSummaryResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMetricsSummaryResponseSuccess
+
+      interface _GetScanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetScanResponse]
+        def analysis_type: () -> ("Security" | "All")
+        def created_at: () -> ::Time
+        def number_of_revisions: () -> ::Integer
+        def run_id: () -> ::String
+        def scan_name: () -> ::String
+        def scan_name_arn: () -> ::String
+        def scan_state: () -> ("InProgress" | "Successful" | "Failed")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruSecurity/Client.html#get_scan-instance_method
+      def get_scan: (
+                      ?run_id: ::String,
+                      scan_name: ::String
+                    ) -> _GetScanResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetScanResponseSuccess
+
+      interface _ListFindingsMetricsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFindingsMetricsResponse]
+        def findings_metrics: () -> ::Array[Types::AccountFindingsMetric]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruSecurity/Client.html#list_findings_metrics-instance_method
+      def list_findings_metrics: (
+                                   end_date: ::Time,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String,
+                                   start_date: ::Time
+                                 ) -> _ListFindingsMetricsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFindingsMetricsResponseSuccess
+
+      interface _ListScansResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListScansResponse]
+        def next_token: () -> ::String
+        def summaries: () -> ::Array[Types::ScanSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruSecurity/Client.html#list_scans-instance_method
+      def list_scans: (
+                        ?max_results: ::Integer,
+                        ?next_token: ::String
+                      ) -> _ListScansResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListScansResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruSecurity/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruSecurity/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruSecurity/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAccountConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccountConfigurationResponse]
+        def encryption_config: () -> Types::EncryptionConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruSecurity/Client.html#update_account_configuration-instance_method
+      def update_account_configuration: (
+                                          encryption_config: {
+                                            kms_key_arn: ::String?
+                                          }
+                                        ) -> _UpdateAccountConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccountConfigurationResponseSuccess
+    end
+  end
+end
+

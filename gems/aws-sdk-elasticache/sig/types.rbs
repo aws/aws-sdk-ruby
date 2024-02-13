@@ -1,0 +1,1952 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ElastiCache
+  module Types
+
+    class APICallRateForCustomerExceededFault < Aws::EmptyStructure
+    end
+
+    class AddTagsToResourceMessage
+      attr_accessor resource_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class AllowedNodeTypeModificationsMessage
+      attr_accessor scale_up_modifications: ::Array[::String]
+      attr_accessor scale_down_modifications: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Authentication
+      attr_accessor type: ("password" | "no-password" | "iam")
+      attr_accessor password_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class AuthenticationMode
+      attr_accessor type: ("password" | "no-password-required" | "iam")
+      attr_accessor passwords: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AuthorizationAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class AuthorizationNotFoundFault < Aws::EmptyStructure
+    end
+
+    class AuthorizeCacheSecurityGroupIngressMessage
+      attr_accessor cache_security_group_name: ::String
+      attr_accessor ec2_security_group_name: ::String
+      attr_accessor ec2_security_group_owner_id: ::String
+      SENSITIVE: []
+    end
+
+    class AuthorizeCacheSecurityGroupIngressResult
+      attr_accessor cache_security_group: Types::CacheSecurityGroup
+      SENSITIVE: []
+    end
+
+    class AvailabilityZone
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class BatchApplyUpdateActionMessage
+      attr_accessor replication_group_ids: ::Array[::String]
+      attr_accessor cache_cluster_ids: ::Array[::String]
+      attr_accessor service_update_name: ::String
+      SENSITIVE: []
+    end
+
+    class BatchStopUpdateActionMessage
+      attr_accessor replication_group_ids: ::Array[::String]
+      attr_accessor cache_cluster_ids: ::Array[::String]
+      attr_accessor service_update_name: ::String
+      SENSITIVE: []
+    end
+
+    class CacheCluster
+      attr_accessor cache_cluster_id: ::String
+      attr_accessor configuration_endpoint: Types::Endpoint
+      attr_accessor client_download_landing_page: ::String
+      attr_accessor cache_node_type: ::String
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor cache_cluster_status: ::String
+      attr_accessor num_cache_nodes: ::Integer
+      attr_accessor preferred_availability_zone: ::String
+      attr_accessor preferred_outpost_arn: ::String
+      attr_accessor cache_cluster_create_time: ::Time
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor pending_modified_values: Types::PendingModifiedValues
+      attr_accessor notification_configuration: Types::NotificationConfiguration
+      attr_accessor cache_security_groups: ::Array[Types::CacheSecurityGroupMembership]
+      attr_accessor cache_parameter_group: Types::CacheParameterGroupStatus
+      attr_accessor cache_subnet_group_name: ::String
+      attr_accessor cache_nodes: ::Array[Types::CacheNode]
+      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor security_groups: ::Array[Types::SecurityGroupMembership]
+      attr_accessor replication_group_id: ::String
+      attr_accessor snapshot_retention_limit: ::Integer
+      attr_accessor snapshot_window: ::String
+      attr_accessor auth_token_enabled: bool
+      attr_accessor auth_token_last_modified_date: ::Time
+      attr_accessor transit_encryption_enabled: bool
+      attr_accessor at_rest_encryption_enabled: bool
+      attr_accessor arn: ::String
+      attr_accessor replication_group_log_delivery_enabled: bool
+      attr_accessor log_delivery_configurations: ::Array[Types::LogDeliveryConfiguration]
+      attr_accessor network_type: ("ipv4" | "ipv6" | "dual_stack")
+      attr_accessor ip_discovery: ("ipv4" | "ipv6")
+      attr_accessor transit_encryption_mode: ("preferred" | "required")
+      SENSITIVE: []
+    end
+
+    class CacheClusterAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class CacheClusterMessage
+      attr_accessor marker: ::String
+      attr_accessor cache_clusters: ::Array[Types::CacheCluster]
+      SENSITIVE: []
+    end
+
+    class CacheClusterNotFoundFault < Aws::EmptyStructure
+    end
+
+    class CacheEngineVersion
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor cache_parameter_group_family: ::String
+      attr_accessor cache_engine_description: ::String
+      attr_accessor cache_engine_version_description: ::String
+      SENSITIVE: []
+    end
+
+    class CacheEngineVersionMessage
+      attr_accessor marker: ::String
+      attr_accessor cache_engine_versions: ::Array[Types::CacheEngineVersion]
+      SENSITIVE: []
+    end
+
+    class CacheNode
+      attr_accessor cache_node_id: ::String
+      attr_accessor cache_node_status: ::String
+      attr_accessor cache_node_create_time: ::Time
+      attr_accessor endpoint: Types::Endpoint
+      attr_accessor parameter_group_status: ::String
+      attr_accessor source_cache_node_id: ::String
+      attr_accessor customer_availability_zone: ::String
+      attr_accessor customer_outpost_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CacheNodeTypeSpecificParameter
+      attr_accessor parameter_name: ::String
+      attr_accessor description: ::String
+      attr_accessor source: ::String
+      attr_accessor data_type: ::String
+      attr_accessor allowed_values: ::String
+      attr_accessor is_modifiable: bool
+      attr_accessor minimum_engine_version: ::String
+      attr_accessor cache_node_type_specific_values: ::Array[Types::CacheNodeTypeSpecificValue]
+      attr_accessor change_type: ("immediate" | "requires-reboot")
+      SENSITIVE: []
+    end
+
+    class CacheNodeTypeSpecificValue
+      attr_accessor cache_node_type: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class CacheNodeUpdateStatus
+      attr_accessor cache_node_id: ::String
+      attr_accessor node_update_status: ("not-applied" | "waiting-to-start" | "in-progress" | "stopping" | "stopped" | "complete")
+      attr_accessor node_deletion_date: ::Time
+      attr_accessor node_update_start_date: ::Time
+      attr_accessor node_update_end_date: ::Time
+      attr_accessor node_update_initiated_by: ("system" | "customer")
+      attr_accessor node_update_initiated_date: ::Time
+      attr_accessor node_update_status_modified_date: ::Time
+      SENSITIVE: []
+    end
+
+    class CacheParameterGroup
+      attr_accessor cache_parameter_group_name: ::String
+      attr_accessor cache_parameter_group_family: ::String
+      attr_accessor description: ::String
+      attr_accessor is_global: bool
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CacheParameterGroupAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class CacheParameterGroupDetails
+      attr_accessor marker: ::String
+      attr_accessor parameters: ::Array[Types::Parameter]
+      attr_accessor cache_node_type_specific_parameters: ::Array[Types::CacheNodeTypeSpecificParameter]
+      SENSITIVE: []
+    end
+
+    class CacheParameterGroupNameMessage
+      attr_accessor cache_parameter_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class CacheParameterGroupNotFoundFault < Aws::EmptyStructure
+    end
+
+    class CacheParameterGroupQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class CacheParameterGroupStatus
+      attr_accessor cache_parameter_group_name: ::String
+      attr_accessor parameter_apply_status: ::String
+      attr_accessor cache_node_ids_to_reboot: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CacheParameterGroupsMessage
+      attr_accessor marker: ::String
+      attr_accessor cache_parameter_groups: ::Array[Types::CacheParameterGroup]
+      SENSITIVE: []
+    end
+
+    class CacheSecurityGroup
+      attr_accessor owner_id: ::String
+      attr_accessor cache_security_group_name: ::String
+      attr_accessor description: ::String
+      attr_accessor ec2_security_groups: ::Array[Types::EC2SecurityGroup]
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CacheSecurityGroupAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class CacheSecurityGroupMembership
+      attr_accessor cache_security_group_name: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class CacheSecurityGroupMessage
+      attr_accessor marker: ::String
+      attr_accessor cache_security_groups: ::Array[Types::CacheSecurityGroup]
+      SENSITIVE: []
+    end
+
+    class CacheSecurityGroupNotFoundFault < Aws::EmptyStructure
+    end
+
+    class CacheSecurityGroupQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class CacheSubnetGroup
+      attr_accessor cache_subnet_group_name: ::String
+      attr_accessor cache_subnet_group_description: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnets: ::Array[Types::Subnet]
+      attr_accessor arn: ::String
+      attr_accessor supported_network_types: ::Array[("ipv4" | "ipv6" | "dual_stack")]
+      SENSITIVE: []
+    end
+
+    class CacheSubnetGroupAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class CacheSubnetGroupInUse < Aws::EmptyStructure
+    end
+
+    class CacheSubnetGroupMessage
+      attr_accessor marker: ::String
+      attr_accessor cache_subnet_groups: ::Array[Types::CacheSubnetGroup]
+      SENSITIVE: []
+    end
+
+    class CacheSubnetGroupNotFoundFault < Aws::EmptyStructure
+    end
+
+    class CacheSubnetGroupQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class CacheSubnetQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class CacheUsageLimits
+      attr_accessor data_storage: Types::DataStorage
+      attr_accessor ecpu_per_second: Types::ECPUPerSecond
+      SENSITIVE: []
+    end
+
+    class CloudWatchLogsDestinationDetails
+      attr_accessor log_group: ::String
+      SENSITIVE: []
+    end
+
+    class ClusterQuotaForCustomerExceededFault < Aws::EmptyStructure
+    end
+
+    class CompleteMigrationMessage
+      attr_accessor replication_group_id: ::String
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class CompleteMigrationResponse
+      attr_accessor replication_group: Types::ReplicationGroup
+      SENSITIVE: []
+    end
+
+    class ConfigureShard
+      attr_accessor node_group_id: ::String
+      attr_accessor new_replica_count: ::Integer
+      attr_accessor preferred_availability_zones: ::Array[::String]
+      attr_accessor preferred_outpost_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CopyServerlessCacheSnapshotRequest
+      attr_accessor source_serverless_cache_snapshot_name: ::String
+      attr_accessor target_serverless_cache_snapshot_name: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CopyServerlessCacheSnapshotResponse
+      attr_accessor serverless_cache_snapshot: Types::ServerlessCacheSnapshot
+      SENSITIVE: []
+    end
+
+    class CopySnapshotMessage
+      attr_accessor source_snapshot_name: ::String
+      attr_accessor target_snapshot_name: ::String
+      attr_accessor target_bucket: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CopySnapshotResult
+      attr_accessor snapshot: Types::Snapshot
+      SENSITIVE: []
+    end
+
+    class CreateCacheClusterMessage
+      attr_accessor cache_cluster_id: ::String
+      attr_accessor replication_group_id: ::String
+      attr_accessor az_mode: ("single-az" | "cross-az")
+      attr_accessor preferred_availability_zone: ::String
+      attr_accessor preferred_availability_zones: ::Array[::String]
+      attr_accessor num_cache_nodes: ::Integer
+      attr_accessor cache_node_type: ::String
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor cache_parameter_group_name: ::String
+      attr_accessor cache_subnet_group_name: ::String
+      attr_accessor cache_security_group_names: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor snapshot_arns: ::Array[::String]
+      attr_accessor snapshot_name: ::String
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor port: ::Integer
+      attr_accessor notification_topic_arn: ::String
+      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor snapshot_retention_limit: ::Integer
+      attr_accessor snapshot_window: ::String
+      attr_accessor auth_token: ::String
+      attr_accessor outpost_mode: ("single-outpost" | "cross-outpost")
+      attr_accessor preferred_outpost_arn: ::String
+      attr_accessor preferred_outpost_arns: ::Array[::String]
+      attr_accessor log_delivery_configurations: ::Array[Types::LogDeliveryConfigurationRequest]
+      attr_accessor transit_encryption_enabled: bool
+      attr_accessor network_type: ("ipv4" | "ipv6" | "dual_stack")
+      attr_accessor ip_discovery: ("ipv4" | "ipv6")
+      SENSITIVE: []
+    end
+
+    class CreateCacheClusterResult
+      attr_accessor cache_cluster: Types::CacheCluster
+      SENSITIVE: []
+    end
+
+    class CreateCacheParameterGroupMessage
+      attr_accessor cache_parameter_group_name: ::String
+      attr_accessor cache_parameter_group_family: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateCacheParameterGroupResult
+      attr_accessor cache_parameter_group: Types::CacheParameterGroup
+      SENSITIVE: []
+    end
+
+    class CreateCacheSecurityGroupMessage
+      attr_accessor cache_security_group_name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateCacheSecurityGroupResult
+      attr_accessor cache_security_group: Types::CacheSecurityGroup
+      SENSITIVE: []
+    end
+
+    class CreateCacheSubnetGroupMessage
+      attr_accessor cache_subnet_group_name: ::String
+      attr_accessor cache_subnet_group_description: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateCacheSubnetGroupResult
+      attr_accessor cache_subnet_group: Types::CacheSubnetGroup
+      SENSITIVE: []
+    end
+
+    class CreateGlobalReplicationGroupMessage
+      attr_accessor global_replication_group_id_suffix: ::String
+      attr_accessor global_replication_group_description: ::String
+      attr_accessor primary_replication_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGlobalReplicationGroupResult
+      attr_accessor global_replication_group: Types::GlobalReplicationGroup
+      SENSITIVE: []
+    end
+
+    class CreateReplicationGroupMessage
+      attr_accessor replication_group_id: ::String
+      attr_accessor replication_group_description: ::String
+      attr_accessor global_replication_group_id: ::String
+      attr_accessor primary_cluster_id: ::String
+      attr_accessor automatic_failover_enabled: bool
+      attr_accessor multi_az_enabled: bool
+      attr_accessor num_cache_clusters: ::Integer
+      attr_accessor preferred_cache_cluster_a_zs: ::Array[::String]
+      attr_accessor num_node_groups: ::Integer
+      attr_accessor replicas_per_node_group: ::Integer
+      attr_accessor node_group_configuration: ::Array[Types::NodeGroupConfiguration]
+      attr_accessor cache_node_type: ::String
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor cache_parameter_group_name: ::String
+      attr_accessor cache_subnet_group_name: ::String
+      attr_accessor cache_security_group_names: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor snapshot_arns: ::Array[::String]
+      attr_accessor snapshot_name: ::String
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor port: ::Integer
+      attr_accessor notification_topic_arn: ::String
+      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor snapshot_retention_limit: ::Integer
+      attr_accessor snapshot_window: ::String
+      attr_accessor auth_token: ::String
+      attr_accessor transit_encryption_enabled: bool
+      attr_accessor at_rest_encryption_enabled: bool
+      attr_accessor kms_key_id: ::String
+      attr_accessor user_group_ids: ::Array[::String]
+      attr_accessor log_delivery_configurations: ::Array[Types::LogDeliveryConfigurationRequest]
+      attr_accessor data_tiering_enabled: bool
+      attr_accessor network_type: ("ipv4" | "ipv6" | "dual_stack")
+      attr_accessor ip_discovery: ("ipv4" | "ipv6")
+      attr_accessor transit_encryption_mode: ("preferred" | "required")
+      attr_accessor cluster_mode: ("enabled" | "disabled" | "compatible")
+      attr_accessor serverless_cache_snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateReplicationGroupResult
+      attr_accessor replication_group: Types::ReplicationGroup
+      SENSITIVE: []
+    end
+
+    class CreateServerlessCacheRequest
+      attr_accessor serverless_cache_name: ::String
+      attr_accessor description: ::String
+      attr_accessor engine: ::String
+      attr_accessor major_engine_version: ::String
+      attr_accessor cache_usage_limits: Types::CacheUsageLimits
+      attr_accessor kms_key_id: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor snapshot_arns_to_restore: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor user_group_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor snapshot_retention_limit: ::Integer
+      attr_accessor daily_snapshot_time: ::String
+      SENSITIVE: []
+    end
+
+    class CreateServerlessCacheResponse
+      attr_accessor serverless_cache: Types::ServerlessCache
+      SENSITIVE: []
+    end
+
+    class CreateServerlessCacheSnapshotRequest
+      attr_accessor serverless_cache_snapshot_name: ::String
+      attr_accessor serverless_cache_name: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateServerlessCacheSnapshotResponse
+      attr_accessor serverless_cache_snapshot: Types::ServerlessCacheSnapshot
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotMessage
+      attr_accessor replication_group_id: ::String
+      attr_accessor cache_cluster_id: ::String
+      attr_accessor snapshot_name: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotResult
+      attr_accessor snapshot: Types::Snapshot
+      SENSITIVE: []
+    end
+
+    class CreateUserGroupMessage
+      attr_accessor user_group_id: ::String
+      attr_accessor engine: ::String
+      attr_accessor user_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateUserMessage
+      attr_accessor user_id: ::String
+      attr_accessor user_name: ::String
+      attr_accessor engine: ::String
+      attr_accessor passwords: ::Array[::String]
+      attr_accessor access_string: ::String
+      attr_accessor no_password_required: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor authentication_mode: Types::AuthenticationMode
+      SENSITIVE: []
+    end
+
+    class CustomerNodeEndpoint
+      attr_accessor address: ::String
+      attr_accessor port: ::Integer
+      SENSITIVE: []
+    end
+
+    class DataStorage
+      attr_accessor maximum: ::Integer
+      attr_accessor unit: ("GB")
+      SENSITIVE: []
+    end
+
+    class DecreaseNodeGroupsInGlobalReplicationGroupMessage
+      attr_accessor global_replication_group_id: ::String
+      attr_accessor node_group_count: ::Integer
+      attr_accessor global_node_groups_to_remove: ::Array[::String]
+      attr_accessor global_node_groups_to_retain: ::Array[::String]
+      attr_accessor apply_immediately: bool
+      SENSITIVE: []
+    end
+
+    class DecreaseNodeGroupsInGlobalReplicationGroupResult
+      attr_accessor global_replication_group: Types::GlobalReplicationGroup
+      SENSITIVE: []
+    end
+
+    class DecreaseReplicaCountMessage
+      attr_accessor replication_group_id: ::String
+      attr_accessor new_replica_count: ::Integer
+      attr_accessor replica_configuration: ::Array[Types::ConfigureShard]
+      attr_accessor replicas_to_remove: ::Array[::String]
+      attr_accessor apply_immediately: bool
+      SENSITIVE: []
+    end
+
+    class DecreaseReplicaCountResult
+      attr_accessor replication_group: Types::ReplicationGroup
+      SENSITIVE: []
+    end
+
+    class DefaultUserAssociatedToUserGroupFault < Aws::EmptyStructure
+    end
+
+    class DefaultUserRequired < Aws::EmptyStructure
+    end
+
+    class DeleteCacheClusterMessage
+      attr_accessor cache_cluster_id: ::String
+      attr_accessor final_snapshot_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCacheClusterResult
+      attr_accessor cache_cluster: Types::CacheCluster
+      SENSITIVE: []
+    end
+
+    class DeleteCacheParameterGroupMessage
+      attr_accessor cache_parameter_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCacheSecurityGroupMessage
+      attr_accessor cache_security_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCacheSubnetGroupMessage
+      attr_accessor cache_subnet_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGlobalReplicationGroupMessage
+      attr_accessor global_replication_group_id: ::String
+      attr_accessor retain_primary_replication_group: bool
+      SENSITIVE: []
+    end
+
+    class DeleteGlobalReplicationGroupResult
+      attr_accessor global_replication_group: Types::GlobalReplicationGroup
+      SENSITIVE: []
+    end
+
+    class DeleteReplicationGroupMessage
+      attr_accessor replication_group_id: ::String
+      attr_accessor retain_primary_cluster: bool
+      attr_accessor final_snapshot_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReplicationGroupResult
+      attr_accessor replication_group: Types::ReplicationGroup
+      SENSITIVE: []
+    end
+
+    class DeleteServerlessCacheRequest
+      attr_accessor serverless_cache_name: ::String
+      attr_accessor final_snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServerlessCacheResponse
+      attr_accessor serverless_cache: Types::ServerlessCache
+      SENSITIVE: []
+    end
+
+    class DeleteServerlessCacheSnapshotRequest
+      attr_accessor serverless_cache_snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServerlessCacheSnapshotResponse
+      attr_accessor serverless_cache_snapshot: Types::ServerlessCacheSnapshot
+      SENSITIVE: []
+    end
+
+    class DeleteSnapshotMessage
+      attr_accessor snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSnapshotResult
+      attr_accessor snapshot: Types::Snapshot
+      SENSITIVE: []
+    end
+
+    class DeleteUserGroupMessage
+      attr_accessor user_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserMessage
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCacheClustersMessage
+      attr_accessor cache_cluster_id: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor show_cache_node_info: bool
+      attr_accessor show_cache_clusters_not_in_replication_groups: bool
+      SENSITIVE: []
+    end
+
+    class DescribeCacheEngineVersionsMessage
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor cache_parameter_group_family: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor default_only: bool
+      SENSITIVE: []
+    end
+
+    class DescribeCacheParameterGroupsMessage
+      attr_accessor cache_parameter_group_name: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCacheParametersMessage
+      attr_accessor cache_parameter_group_name: ::String
+      attr_accessor source: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCacheSecurityGroupsMessage
+      attr_accessor cache_security_group_name: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCacheSubnetGroupsMessage
+      attr_accessor cache_subnet_group_name: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEngineDefaultParametersMessage
+      attr_accessor cache_parameter_group_family: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEngineDefaultParametersResult
+      attr_accessor engine_defaults: Types::EngineDefaults
+      SENSITIVE: []
+    end
+
+    class DescribeEventsMessage
+      attr_accessor source_identifier: ::String
+      attr_accessor source_type: ("cache-cluster" | "cache-parameter-group" | "cache-security-group" | "cache-subnet-group" | "replication-group" | "serverless-cache" | "serverless-cache-snapshot" | "user" | "user-group")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor duration: ::Integer
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeGlobalReplicationGroupsMessage
+      attr_accessor global_replication_group_id: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor show_member_info: bool
+      SENSITIVE: []
+    end
+
+    class DescribeGlobalReplicationGroupsResult
+      attr_accessor marker: ::String
+      attr_accessor global_replication_groups: ::Array[Types::GlobalReplicationGroup]
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationGroupsMessage
+      attr_accessor replication_group_id: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReservedCacheNodesMessage
+      attr_accessor reserved_cache_node_id: ::String
+      attr_accessor reserved_cache_nodes_offering_id: ::String
+      attr_accessor cache_node_type: ::String
+      attr_accessor duration: ::String
+      attr_accessor product_description: ::String
+      attr_accessor offering_type: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReservedCacheNodesOfferingsMessage
+      attr_accessor reserved_cache_nodes_offering_id: ::String
+      attr_accessor cache_node_type: ::String
+      attr_accessor duration: ::String
+      attr_accessor product_description: ::String
+      attr_accessor offering_type: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeServerlessCacheSnapshotsRequest
+      attr_accessor serverless_cache_name: ::String
+      attr_accessor serverless_cache_snapshot_name: ::String
+      attr_accessor snapshot_type: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeServerlessCacheSnapshotsResponse
+      attr_accessor next_token: ::String
+      attr_accessor serverless_cache_snapshots: ::Array[Types::ServerlessCacheSnapshot]
+      SENSITIVE: []
+    end
+
+    class DescribeServerlessCachesRequest
+      attr_accessor serverless_cache_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeServerlessCachesResponse
+      attr_accessor next_token: ::String
+      attr_accessor serverless_caches: ::Array[Types::ServerlessCache]
+      SENSITIVE: []
+    end
+
+    class DescribeServiceUpdatesMessage
+      attr_accessor service_update_name: ::String
+      attr_accessor service_update_status: ::Array[("available" | "cancelled" | "expired")]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSnapshotsListMessage
+      attr_accessor marker: ::String
+      attr_accessor snapshots: ::Array[Types::Snapshot]
+      SENSITIVE: []
+    end
+
+    class DescribeSnapshotsMessage
+      attr_accessor replication_group_id: ::String
+      attr_accessor cache_cluster_id: ::String
+      attr_accessor snapshot_name: ::String
+      attr_accessor snapshot_source: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor show_node_group_config: bool
+      SENSITIVE: []
+    end
+
+    class DescribeUpdateActionsMessage
+      attr_accessor service_update_name: ::String
+      attr_accessor replication_group_ids: ::Array[::String]
+      attr_accessor cache_cluster_ids: ::Array[::String]
+      attr_accessor engine: ::String
+      attr_accessor service_update_status: ::Array[("available" | "cancelled" | "expired")]
+      attr_accessor service_update_time_range: Types::TimeRangeFilter
+      attr_accessor update_action_status: ::Array[("not-applied" | "waiting-to-start" | "in-progress" | "stopping" | "stopped" | "complete" | "scheduling" | "scheduled" | "not-applicable")]
+      attr_accessor show_node_level_update_status: bool
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUserGroupsMessage
+      attr_accessor user_group_id: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUserGroupsResult
+      attr_accessor user_groups: ::Array[Types::UserGroup]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUsersMessage
+      attr_accessor engine: ::String
+      attr_accessor user_id: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUsersResult
+      attr_accessor users: ::Array[Types::User]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DestinationDetails
+      attr_accessor cloud_watch_logs_details: Types::CloudWatchLogsDestinationDetails
+      attr_accessor kinesis_firehose_details: Types::KinesisFirehoseDestinationDetails
+      SENSITIVE: []
+    end
+
+    class DisassociateGlobalReplicationGroupMessage
+      attr_accessor global_replication_group_id: ::String
+      attr_accessor replication_group_id: ::String
+      attr_accessor replication_group_region: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateGlobalReplicationGroupResult
+      attr_accessor global_replication_group: Types::GlobalReplicationGroup
+      SENSITIVE: []
+    end
+
+    class DuplicateUserNameFault < Aws::EmptyStructure
+    end
+
+    class EC2SecurityGroup
+      attr_accessor status: ::String
+      attr_accessor ec2_security_group_name: ::String
+      attr_accessor ec2_security_group_owner_id: ::String
+      SENSITIVE: []
+    end
+
+    class ECPUPerSecond
+      attr_accessor maximum: ::Integer
+      SENSITIVE: []
+    end
+
+    class Endpoint
+      attr_accessor address: ::String
+      attr_accessor port: ::Integer
+      SENSITIVE: []
+    end
+
+    class EngineDefaults
+      attr_accessor cache_parameter_group_family: ::String
+      attr_accessor marker: ::String
+      attr_accessor parameters: ::Array[Types::Parameter]
+      attr_accessor cache_node_type_specific_parameters: ::Array[Types::CacheNodeTypeSpecificParameter]
+      SENSITIVE: []
+    end
+
+    class Event
+      attr_accessor source_identifier: ::String
+      attr_accessor source_type: ("cache-cluster" | "cache-parameter-group" | "cache-security-group" | "cache-subnet-group" | "replication-group" | "serverless-cache" | "serverless-cache-snapshot" | "user" | "user-group")
+      attr_accessor message: ::String
+      attr_accessor date: ::Time
+      SENSITIVE: []
+    end
+
+    class EventsMessage
+      attr_accessor marker: ::String
+      attr_accessor events: ::Array[Types::Event]
+      SENSITIVE: []
+    end
+
+    class ExportServerlessCacheSnapshotRequest
+      attr_accessor serverless_cache_snapshot_name: ::String
+      attr_accessor s3_bucket_name: ::String
+      SENSITIVE: []
+    end
+
+    class ExportServerlessCacheSnapshotResponse
+      attr_accessor serverless_cache_snapshot: Types::ServerlessCacheSnapshot
+      SENSITIVE: []
+    end
+
+    class FailoverGlobalReplicationGroupMessage
+      attr_accessor global_replication_group_id: ::String
+      attr_accessor primary_region: ::String
+      attr_accessor primary_replication_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class FailoverGlobalReplicationGroupResult
+      attr_accessor global_replication_group: Types::GlobalReplicationGroup
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GlobalNodeGroup
+      attr_accessor global_node_group_id: ::String
+      attr_accessor slots: ::String
+      SENSITIVE: []
+    end
+
+    class GlobalReplicationGroup
+      attr_accessor global_replication_group_id: ::String
+      attr_accessor global_replication_group_description: ::String
+      attr_accessor status: ::String
+      attr_accessor cache_node_type: ::String
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor members: ::Array[Types::GlobalReplicationGroupMember]
+      attr_accessor cluster_enabled: bool
+      attr_accessor global_node_groups: ::Array[Types::GlobalNodeGroup]
+      attr_accessor auth_token_enabled: bool
+      attr_accessor transit_encryption_enabled: bool
+      attr_accessor at_rest_encryption_enabled: bool
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GlobalReplicationGroupAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class GlobalReplicationGroupInfo
+      attr_accessor global_replication_group_id: ::String
+      attr_accessor global_replication_group_member_role: ::String
+      SENSITIVE: []
+    end
+
+    class GlobalReplicationGroupMember
+      attr_accessor replication_group_id: ::String
+      attr_accessor replication_group_region: ::String
+      attr_accessor role: ::String
+      attr_accessor automatic_failover: ("enabled" | "disabled" | "enabling" | "disabling")
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class GlobalReplicationGroupNotFoundFault < Aws::EmptyStructure
+    end
+
+    class IncreaseNodeGroupsInGlobalReplicationGroupMessage
+      attr_accessor global_replication_group_id: ::String
+      attr_accessor node_group_count: ::Integer
+      attr_accessor regional_configurations: ::Array[Types::RegionalConfiguration]
+      attr_accessor apply_immediately: bool
+      SENSITIVE: []
+    end
+
+    class IncreaseNodeGroupsInGlobalReplicationGroupResult
+      attr_accessor global_replication_group: Types::GlobalReplicationGroup
+      SENSITIVE: []
+    end
+
+    class IncreaseReplicaCountMessage
+      attr_accessor replication_group_id: ::String
+      attr_accessor new_replica_count: ::Integer
+      attr_accessor replica_configuration: ::Array[Types::ConfigureShard]
+      attr_accessor apply_immediately: bool
+      SENSITIVE: []
+    end
+
+    class IncreaseReplicaCountResult
+      attr_accessor replication_group: Types::ReplicationGroup
+      SENSITIVE: []
+    end
+
+    class InsufficientCacheClusterCapacityFault < Aws::EmptyStructure
+    end
+
+    class InvalidARNFault < Aws::EmptyStructure
+    end
+
+    class InvalidCacheClusterStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidCacheParameterGroupStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidCacheSecurityGroupStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidCredentialsException < Aws::EmptyStructure
+    end
+
+    class InvalidGlobalReplicationGroupStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidKMSKeyFault < Aws::EmptyStructure
+    end
+
+    class InvalidParameterCombinationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterValueException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidReplicationGroupStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidServerlessCacheSnapshotStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidServerlessCacheStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidSnapshotStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidSubnet < Aws::EmptyStructure
+    end
+
+    class InvalidUserGroupStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidUserStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidVPCNetworkStateFault < Aws::EmptyStructure
+    end
+
+    class KinesisFirehoseDestinationDetails
+      attr_accessor delivery_stream: ::String
+      SENSITIVE: []
+    end
+
+    class ListAllowedNodeTypeModificationsMessage
+      attr_accessor cache_cluster_id: ::String
+      attr_accessor replication_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceMessage
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class LogDeliveryConfiguration
+      attr_accessor log_type: ("slow-log" | "engine-log")
+      attr_accessor destination_type: ("cloudwatch-logs" | "kinesis-firehose")
+      attr_accessor destination_details: Types::DestinationDetails
+      attr_accessor log_format: ("text" | "json")
+      attr_accessor status: ("active" | "enabling" | "modifying" | "disabling" | "error")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LogDeliveryConfigurationRequest
+      attr_accessor log_type: ("slow-log" | "engine-log")
+      attr_accessor destination_type: ("cloudwatch-logs" | "kinesis-firehose")
+      attr_accessor destination_details: Types::DestinationDetails
+      attr_accessor log_format: ("text" | "json")
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class ModifyCacheClusterMessage
+      attr_accessor cache_cluster_id: ::String
+      attr_accessor num_cache_nodes: ::Integer
+      attr_accessor cache_node_ids_to_remove: ::Array[::String]
+      attr_accessor az_mode: ("single-az" | "cross-az")
+      attr_accessor new_availability_zones: ::Array[::String]
+      attr_accessor cache_security_group_names: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor notification_topic_arn: ::String
+      attr_accessor cache_parameter_group_name: ::String
+      attr_accessor notification_topic_status: ::String
+      attr_accessor apply_immediately: bool
+      attr_accessor engine_version: ::String
+      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor snapshot_retention_limit: ::Integer
+      attr_accessor snapshot_window: ::String
+      attr_accessor cache_node_type: ::String
+      attr_accessor auth_token: ::String
+      attr_accessor auth_token_update_strategy: ("SET" | "ROTATE" | "DELETE")
+      attr_accessor log_delivery_configurations: ::Array[Types::LogDeliveryConfigurationRequest]
+      attr_accessor ip_discovery: ("ipv4" | "ipv6")
+      SENSITIVE: []
+    end
+
+    class ModifyCacheClusterResult
+      attr_accessor cache_cluster: Types::CacheCluster
+      SENSITIVE: []
+    end
+
+    class ModifyCacheParameterGroupMessage
+      attr_accessor cache_parameter_group_name: ::String
+      attr_accessor parameter_name_values: ::Array[Types::ParameterNameValue]
+      SENSITIVE: []
+    end
+
+    class ModifyCacheSubnetGroupMessage
+      attr_accessor cache_subnet_group_name: ::String
+      attr_accessor cache_subnet_group_description: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ModifyCacheSubnetGroupResult
+      attr_accessor cache_subnet_group: Types::CacheSubnetGroup
+      SENSITIVE: []
+    end
+
+    class ModifyGlobalReplicationGroupMessage
+      attr_accessor global_replication_group_id: ::String
+      attr_accessor apply_immediately: bool
+      attr_accessor cache_node_type: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor cache_parameter_group_name: ::String
+      attr_accessor global_replication_group_description: ::String
+      attr_accessor automatic_failover_enabled: bool
+      SENSITIVE: []
+    end
+
+    class ModifyGlobalReplicationGroupResult
+      attr_accessor global_replication_group: Types::GlobalReplicationGroup
+      SENSITIVE: []
+    end
+
+    class ModifyReplicationGroupMessage
+      attr_accessor replication_group_id: ::String
+      attr_accessor replication_group_description: ::String
+      attr_accessor primary_cluster_id: ::String
+      attr_accessor snapshotting_cluster_id: ::String
+      attr_accessor automatic_failover_enabled: bool
+      attr_accessor multi_az_enabled: bool
+      attr_accessor node_group_id: ::String
+      attr_accessor cache_security_group_names: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor notification_topic_arn: ::String
+      attr_accessor cache_parameter_group_name: ::String
+      attr_accessor notification_topic_status: ::String
+      attr_accessor apply_immediately: bool
+      attr_accessor engine_version: ::String
+      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor snapshot_retention_limit: ::Integer
+      attr_accessor snapshot_window: ::String
+      attr_accessor cache_node_type: ::String
+      attr_accessor auth_token: ::String
+      attr_accessor auth_token_update_strategy: ("SET" | "ROTATE" | "DELETE")
+      attr_accessor user_group_ids_to_add: ::Array[::String]
+      attr_accessor user_group_ids_to_remove: ::Array[::String]
+      attr_accessor remove_user_groups: bool
+      attr_accessor log_delivery_configurations: ::Array[Types::LogDeliveryConfigurationRequest]
+      attr_accessor ip_discovery: ("ipv4" | "ipv6")
+      attr_accessor transit_encryption_enabled: bool
+      attr_accessor transit_encryption_mode: ("preferred" | "required")
+      attr_accessor cluster_mode: ("enabled" | "disabled" | "compatible")
+      SENSITIVE: []
+    end
+
+    class ModifyReplicationGroupResult
+      attr_accessor replication_group: Types::ReplicationGroup
+      SENSITIVE: []
+    end
+
+    class ModifyReplicationGroupShardConfigurationMessage
+      attr_accessor replication_group_id: ::String
+      attr_accessor node_group_count: ::Integer
+      attr_accessor apply_immediately: bool
+      attr_accessor resharding_configuration: ::Array[Types::ReshardingConfiguration]
+      attr_accessor node_groups_to_remove: ::Array[::String]
+      attr_accessor node_groups_to_retain: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ModifyReplicationGroupShardConfigurationResult
+      attr_accessor replication_group: Types::ReplicationGroup
+      SENSITIVE: []
+    end
+
+    class ModifyServerlessCacheRequest
+      attr_accessor serverless_cache_name: ::String
+      attr_accessor description: ::String
+      attr_accessor cache_usage_limits: Types::CacheUsageLimits
+      attr_accessor remove_user_group: bool
+      attr_accessor user_group_id: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor snapshot_retention_limit: ::Integer
+      attr_accessor daily_snapshot_time: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyServerlessCacheResponse
+      attr_accessor serverless_cache: Types::ServerlessCache
+      SENSITIVE: []
+    end
+
+    class ModifyUserGroupMessage
+      attr_accessor user_group_id: ::String
+      attr_accessor user_ids_to_add: ::Array[::String]
+      attr_accessor user_ids_to_remove: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ModifyUserMessage
+      attr_accessor user_id: ::String
+      attr_accessor access_string: ::String
+      attr_accessor append_access_string: ::String
+      attr_accessor passwords: ::Array[::String]
+      attr_accessor no_password_required: bool
+      attr_accessor authentication_mode: Types::AuthenticationMode
+      SENSITIVE: []
+    end
+
+    class NoOperationFault < Aws::EmptyStructure
+    end
+
+    class NodeGroup
+      attr_accessor node_group_id: ::String
+      attr_accessor status: ::String
+      attr_accessor primary_endpoint: Types::Endpoint
+      attr_accessor reader_endpoint: Types::Endpoint
+      attr_accessor slots: ::String
+      attr_accessor node_group_members: ::Array[Types::NodeGroupMember]
+      SENSITIVE: []
+    end
+
+    class NodeGroupConfiguration
+      attr_accessor node_group_id: ::String
+      attr_accessor slots: ::String
+      attr_accessor replica_count: ::Integer
+      attr_accessor primary_availability_zone: ::String
+      attr_accessor replica_availability_zones: ::Array[::String]
+      attr_accessor primary_outpost_arn: ::String
+      attr_accessor replica_outpost_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class NodeGroupMember
+      attr_accessor cache_cluster_id: ::String
+      attr_accessor cache_node_id: ::String
+      attr_accessor read_endpoint: Types::Endpoint
+      attr_accessor preferred_availability_zone: ::String
+      attr_accessor preferred_outpost_arn: ::String
+      attr_accessor current_role: ::String
+      SENSITIVE: []
+    end
+
+    class NodeGroupMemberUpdateStatus
+      attr_accessor cache_cluster_id: ::String
+      attr_accessor cache_node_id: ::String
+      attr_accessor node_update_status: ("not-applied" | "waiting-to-start" | "in-progress" | "stopping" | "stopped" | "complete")
+      attr_accessor node_deletion_date: ::Time
+      attr_accessor node_update_start_date: ::Time
+      attr_accessor node_update_end_date: ::Time
+      attr_accessor node_update_initiated_by: ("system" | "customer")
+      attr_accessor node_update_initiated_date: ::Time
+      attr_accessor node_update_status_modified_date: ::Time
+      SENSITIVE: []
+    end
+
+    class NodeGroupNotFoundFault < Aws::EmptyStructure
+    end
+
+    class NodeGroupUpdateStatus
+      attr_accessor node_group_id: ::String
+      attr_accessor node_group_member_update_status: ::Array[Types::NodeGroupMemberUpdateStatus]
+      SENSITIVE: []
+    end
+
+    class NodeGroupsPerReplicationGroupQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class NodeQuotaForClusterExceededFault < Aws::EmptyStructure
+    end
+
+    class NodeQuotaForCustomerExceededFault < Aws::EmptyStructure
+    end
+
+    class NodeSnapshot
+      attr_accessor cache_cluster_id: ::String
+      attr_accessor node_group_id: ::String
+      attr_accessor cache_node_id: ::String
+      attr_accessor node_group_configuration: Types::NodeGroupConfiguration
+      attr_accessor cache_size: ::String
+      attr_accessor cache_node_create_time: ::Time
+      attr_accessor snapshot_create_time: ::Time
+      SENSITIVE: []
+    end
+
+    class NotificationConfiguration
+      attr_accessor topic_arn: ::String
+      attr_accessor topic_status: ::String
+      SENSITIVE: []
+    end
+
+    class Parameter
+      attr_accessor parameter_name: ::String
+      attr_accessor parameter_value: ::String
+      attr_accessor description: ::String
+      attr_accessor source: ::String
+      attr_accessor data_type: ::String
+      attr_accessor allowed_values: ::String
+      attr_accessor is_modifiable: bool
+      attr_accessor minimum_engine_version: ::String
+      attr_accessor change_type: ("immediate" | "requires-reboot")
+      SENSITIVE: []
+    end
+
+    class ParameterNameValue
+      attr_accessor parameter_name: ::String
+      attr_accessor parameter_value: ::String
+      SENSITIVE: []
+    end
+
+    class PendingLogDeliveryConfiguration
+      attr_accessor log_type: ("slow-log" | "engine-log")
+      attr_accessor destination_type: ("cloudwatch-logs" | "kinesis-firehose")
+      attr_accessor destination_details: Types::DestinationDetails
+      attr_accessor log_format: ("text" | "json")
+      SENSITIVE: []
+    end
+
+    class PendingModifiedValues
+      attr_accessor num_cache_nodes: ::Integer
+      attr_accessor cache_node_ids_to_remove: ::Array[::String]
+      attr_accessor engine_version: ::String
+      attr_accessor cache_node_type: ::String
+      attr_accessor auth_token_status: ("SETTING" | "ROTATING")
+      attr_accessor log_delivery_configurations: ::Array[Types::PendingLogDeliveryConfiguration]
+      attr_accessor transit_encryption_enabled: bool
+      attr_accessor transit_encryption_mode: ("preferred" | "required")
+      SENSITIVE: []
+    end
+
+    class ProcessedUpdateAction
+      attr_accessor replication_group_id: ::String
+      attr_accessor cache_cluster_id: ::String
+      attr_accessor service_update_name: ::String
+      attr_accessor update_action_status: ("not-applied" | "waiting-to-start" | "in-progress" | "stopping" | "stopped" | "complete" | "scheduling" | "scheduled" | "not-applicable")
+      SENSITIVE: []
+    end
+
+    class PurchaseReservedCacheNodesOfferingMessage
+      attr_accessor reserved_cache_nodes_offering_id: ::String
+      attr_accessor reserved_cache_node_id: ::String
+      attr_accessor cache_node_count: ::Integer
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PurchaseReservedCacheNodesOfferingResult
+      attr_accessor reserved_cache_node: Types::ReservedCacheNode
+      SENSITIVE: []
+    end
+
+    class RebalanceSlotsInGlobalReplicationGroupMessage
+      attr_accessor global_replication_group_id: ::String
+      attr_accessor apply_immediately: bool
+      SENSITIVE: []
+    end
+
+    class RebalanceSlotsInGlobalReplicationGroupResult
+      attr_accessor global_replication_group: Types::GlobalReplicationGroup
+      SENSITIVE: []
+    end
+
+    class RebootCacheClusterMessage
+      attr_accessor cache_cluster_id: ::String
+      attr_accessor cache_node_ids_to_reboot: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RebootCacheClusterResult
+      attr_accessor cache_cluster: Types::CacheCluster
+      SENSITIVE: []
+    end
+
+    class RecurringCharge
+      attr_accessor recurring_charge_amount: ::Float
+      attr_accessor recurring_charge_frequency: ::String
+      SENSITIVE: []
+    end
+
+    class RegionalConfiguration
+      attr_accessor replication_group_id: ::String
+      attr_accessor replication_group_region: ::String
+      attr_accessor resharding_configuration: ::Array[Types::ReshardingConfiguration]
+      SENSITIVE: []
+    end
+
+    class RemoveTagsFromResourceMessage
+      attr_accessor resource_name: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ReplicationGroup
+      attr_accessor replication_group_id: ::String
+      attr_accessor description: ::String
+      attr_accessor global_replication_group_info: Types::GlobalReplicationGroupInfo
+      attr_accessor status: ::String
+      attr_accessor pending_modified_values: Types::ReplicationGroupPendingModifiedValues
+      attr_accessor member_clusters: ::Array[::String]
+      attr_accessor node_groups: ::Array[Types::NodeGroup]
+      attr_accessor snapshotting_cluster_id: ::String
+      attr_accessor automatic_failover: ("enabled" | "disabled" | "enabling" | "disabling")
+      attr_accessor multi_az: ("enabled" | "disabled")
+      attr_accessor configuration_endpoint: Types::Endpoint
+      attr_accessor snapshot_retention_limit: ::Integer
+      attr_accessor snapshot_window: ::String
+      attr_accessor cluster_enabled: bool
+      attr_accessor cache_node_type: ::String
+      attr_accessor auth_token_enabled: bool
+      attr_accessor auth_token_last_modified_date: ::Time
+      attr_accessor transit_encryption_enabled: bool
+      attr_accessor at_rest_encryption_enabled: bool
+      attr_accessor member_clusters_outpost_arns: ::Array[::String]
+      attr_accessor kms_key_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor user_group_ids: ::Array[::String]
+      attr_accessor log_delivery_configurations: ::Array[Types::LogDeliveryConfiguration]
+      attr_accessor replication_group_create_time: ::Time
+      attr_accessor data_tiering: ("enabled" | "disabled")
+      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor network_type: ("ipv4" | "ipv6" | "dual_stack")
+      attr_accessor ip_discovery: ("ipv4" | "ipv6")
+      attr_accessor transit_encryption_mode: ("preferred" | "required")
+      attr_accessor cluster_mode: ("enabled" | "disabled" | "compatible")
+      SENSITIVE: []
+    end
+
+    class ReplicationGroupAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class ReplicationGroupAlreadyUnderMigrationFault < Aws::EmptyStructure
+    end
+
+    class ReplicationGroupMessage
+      attr_accessor marker: ::String
+      attr_accessor replication_groups: ::Array[Types::ReplicationGroup]
+      SENSITIVE: []
+    end
+
+    class ReplicationGroupNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ReplicationGroupNotUnderMigrationFault < Aws::EmptyStructure
+    end
+
+    class ReplicationGroupPendingModifiedValues
+      attr_accessor primary_cluster_id: ::String
+      attr_accessor automatic_failover_status: ("enabled" | "disabled")
+      attr_accessor resharding: Types::ReshardingStatus
+      attr_accessor auth_token_status: ("SETTING" | "ROTATING")
+      attr_accessor user_groups: Types::UserGroupsUpdateStatus
+      attr_accessor log_delivery_configurations: ::Array[Types::PendingLogDeliveryConfiguration]
+      attr_accessor transit_encryption_enabled: bool
+      attr_accessor transit_encryption_mode: ("preferred" | "required")
+      attr_accessor cluster_mode: ("enabled" | "disabled" | "compatible")
+      SENSITIVE: []
+    end
+
+    class ReservedCacheNode
+      attr_accessor reserved_cache_node_id: ::String
+      attr_accessor reserved_cache_nodes_offering_id: ::String
+      attr_accessor cache_node_type: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor duration: ::Integer
+      attr_accessor fixed_price: ::Float
+      attr_accessor usage_price: ::Float
+      attr_accessor cache_node_count: ::Integer
+      attr_accessor product_description: ::String
+      attr_accessor offering_type: ::String
+      attr_accessor state: ::String
+      attr_accessor recurring_charges: ::Array[Types::RecurringCharge]
+      attr_accessor reservation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ReservedCacheNodeAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class ReservedCacheNodeMessage
+      attr_accessor marker: ::String
+      attr_accessor reserved_cache_nodes: ::Array[Types::ReservedCacheNode]
+      SENSITIVE: []
+    end
+
+    class ReservedCacheNodeNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ReservedCacheNodeQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class ReservedCacheNodesOffering
+      attr_accessor reserved_cache_nodes_offering_id: ::String
+      attr_accessor cache_node_type: ::String
+      attr_accessor duration: ::Integer
+      attr_accessor fixed_price: ::Float
+      attr_accessor usage_price: ::Float
+      attr_accessor product_description: ::String
+      attr_accessor offering_type: ::String
+      attr_accessor recurring_charges: ::Array[Types::RecurringCharge]
+      SENSITIVE: []
+    end
+
+    class ReservedCacheNodesOfferingMessage
+      attr_accessor marker: ::String
+      attr_accessor reserved_cache_nodes_offerings: ::Array[Types::ReservedCacheNodesOffering]
+      SENSITIVE: []
+    end
+
+    class ReservedCacheNodesOfferingNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ResetCacheParameterGroupMessage
+      attr_accessor cache_parameter_group_name: ::String
+      attr_accessor reset_all_parameters: bool
+      attr_accessor parameter_name_values: ::Array[Types::ParameterNameValue]
+      SENSITIVE: []
+    end
+
+    class ReshardingConfiguration
+      attr_accessor node_group_id: ::String
+      attr_accessor preferred_availability_zones: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ReshardingStatus
+      attr_accessor slot_migration: Types::SlotMigration
+      SENSITIVE: []
+    end
+
+    class RevokeCacheSecurityGroupIngressMessage
+      attr_accessor cache_security_group_name: ::String
+      attr_accessor ec2_security_group_name: ::String
+      attr_accessor ec2_security_group_owner_id: ::String
+      SENSITIVE: []
+    end
+
+    class RevokeCacheSecurityGroupIngressResult
+      attr_accessor cache_security_group: Types::CacheSecurityGroup
+      SENSITIVE: []
+    end
+
+    class SecurityGroupMembership
+      attr_accessor security_group_id: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class ServerlessCache
+      attr_accessor serverless_cache_name: ::String
+      attr_accessor description: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor status: ::String
+      attr_accessor engine: ::String
+      attr_accessor major_engine_version: ::String
+      attr_accessor full_engine_version: ::String
+      attr_accessor cache_usage_limits: Types::CacheUsageLimits
+      attr_accessor kms_key_id: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor endpoint: Types::Endpoint
+      attr_accessor reader_endpoint: Types::Endpoint
+      attr_accessor arn: ::String
+      attr_accessor user_group_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor snapshot_retention_limit: ::Integer
+      attr_accessor daily_snapshot_time: ::String
+      SENSITIVE: []
+    end
+
+    class ServerlessCacheAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class ServerlessCacheConfiguration
+      attr_accessor serverless_cache_name: ::String
+      attr_accessor engine: ::String
+      attr_accessor major_engine_version: ::String
+      SENSITIVE: []
+    end
+
+    class ServerlessCacheNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ServerlessCacheQuotaForCustomerExceededFault < Aws::EmptyStructure
+    end
+
+    class ServerlessCacheSnapshot
+      attr_accessor serverless_cache_snapshot_name: ::String
+      attr_accessor arn: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor snapshot_type: ::String
+      attr_accessor status: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor expiry_time: ::Time
+      attr_accessor bytes_used_for_cache: ::String
+      attr_accessor serverless_cache_configuration: Types::ServerlessCacheConfiguration
+      SENSITIVE: []
+    end
+
+    class ServerlessCacheSnapshotAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class ServerlessCacheSnapshotNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ServerlessCacheSnapshotQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class ServiceLinkedRoleNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ServiceUpdate
+      attr_accessor service_update_name: ::String
+      attr_accessor service_update_release_date: ::Time
+      attr_accessor service_update_end_date: ::Time
+      attr_accessor service_update_severity: ("critical" | "important" | "medium" | "low")
+      attr_accessor service_update_recommended_apply_by_date: ::Time
+      attr_accessor service_update_status: ("available" | "cancelled" | "expired")
+      attr_accessor service_update_description: ::String
+      attr_accessor service_update_type: ("security-update")
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor auto_update_after_recommended_apply_by_date: bool
+      attr_accessor estimated_update_time: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUpdateNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ServiceUpdatesMessage
+      attr_accessor marker: ::String
+      attr_accessor service_updates: ::Array[Types::ServiceUpdate]
+      SENSITIVE: []
+    end
+
+    class SlotMigration
+      attr_accessor progress_percentage: ::Float
+      SENSITIVE: []
+    end
+
+    class Snapshot
+      attr_accessor snapshot_name: ::String
+      attr_accessor replication_group_id: ::String
+      attr_accessor replication_group_description: ::String
+      attr_accessor cache_cluster_id: ::String
+      attr_accessor snapshot_status: ::String
+      attr_accessor snapshot_source: ::String
+      attr_accessor cache_node_type: ::String
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor num_cache_nodes: ::Integer
+      attr_accessor preferred_availability_zone: ::String
+      attr_accessor preferred_outpost_arn: ::String
+      attr_accessor cache_cluster_create_time: ::Time
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor topic_arn: ::String
+      attr_accessor port: ::Integer
+      attr_accessor cache_parameter_group_name: ::String
+      attr_accessor cache_subnet_group_name: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor snapshot_retention_limit: ::Integer
+      attr_accessor snapshot_window: ::String
+      attr_accessor num_node_groups: ::Integer
+      attr_accessor automatic_failover: ("enabled" | "disabled" | "enabling" | "disabling")
+      attr_accessor node_snapshots: ::Array[Types::NodeSnapshot]
+      attr_accessor kms_key_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor data_tiering: ("enabled" | "disabled")
+      SENSITIVE: []
+    end
+
+    class SnapshotAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class SnapshotFeatureNotSupportedFault < Aws::EmptyStructure
+    end
+
+    class SnapshotNotFoundFault < Aws::EmptyStructure
+    end
+
+    class SnapshotQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class StartMigrationMessage
+      attr_accessor replication_group_id: ::String
+      attr_accessor customer_node_endpoint_list: ::Array[Types::CustomerNodeEndpoint]
+      SENSITIVE: []
+    end
+
+    class StartMigrationResponse
+      attr_accessor replication_group: Types::ReplicationGroup
+      SENSITIVE: []
+    end
+
+    class Subnet
+      attr_accessor subnet_identifier: ::String
+      attr_accessor subnet_availability_zone: Types::AvailabilityZone
+      attr_accessor subnet_outpost: Types::SubnetOutpost
+      attr_accessor supported_network_types: ::Array[("ipv4" | "ipv6" | "dual_stack")]
+      SENSITIVE: []
+    end
+
+    class SubnetInUse < Aws::EmptyStructure
+    end
+
+    class SubnetNotAllowedFault < Aws::EmptyStructure
+    end
+
+    class SubnetOutpost
+      attr_accessor subnet_outpost_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagListMessage
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagNotFoundFault < Aws::EmptyStructure
+    end
+
+    class TagQuotaPerResourceExceeded < Aws::EmptyStructure
+    end
+
+    class TestFailoverMessage
+      attr_accessor replication_group_id: ::String
+      attr_accessor node_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class TestFailoverNotAvailableFault < Aws::EmptyStructure
+    end
+
+    class TestFailoverResult
+      attr_accessor replication_group: Types::ReplicationGroup
+      SENSITIVE: []
+    end
+
+    class TestMigrationMessage
+      attr_accessor replication_group_id: ::String
+      attr_accessor customer_node_endpoint_list: ::Array[Types::CustomerNodeEndpoint]
+      SENSITIVE: []
+    end
+
+    class TestMigrationResponse
+      attr_accessor replication_group: Types::ReplicationGroup
+      SENSITIVE: []
+    end
+
+    class TimeRangeFilter
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UnprocessedUpdateAction
+      attr_accessor replication_group_id: ::String
+      attr_accessor cache_cluster_id: ::String
+      attr_accessor service_update_name: ::String
+      attr_accessor error_type: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAction
+      attr_accessor replication_group_id: ::String
+      attr_accessor cache_cluster_id: ::String
+      attr_accessor service_update_name: ::String
+      attr_accessor service_update_release_date: ::Time
+      attr_accessor service_update_severity: ("critical" | "important" | "medium" | "low")
+      attr_accessor service_update_status: ("available" | "cancelled" | "expired")
+      attr_accessor service_update_recommended_apply_by_date: ::Time
+      attr_accessor service_update_type: ("security-update")
+      attr_accessor update_action_available_date: ::Time
+      attr_accessor update_action_status: ("not-applied" | "waiting-to-start" | "in-progress" | "stopping" | "stopped" | "complete" | "scheduling" | "scheduled" | "not-applicable")
+      attr_accessor nodes_updated: ::String
+      attr_accessor update_action_status_modified_date: ::Time
+      attr_accessor sla_met: ("yes" | "no" | "n/a")
+      attr_accessor node_group_update_status: ::Array[Types::NodeGroupUpdateStatus]
+      attr_accessor cache_node_update_status: ::Array[Types::CacheNodeUpdateStatus]
+      attr_accessor estimated_update_time: ::String
+      attr_accessor engine: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateActionResultsMessage
+      attr_accessor processed_update_actions: ::Array[Types::ProcessedUpdateAction]
+      attr_accessor unprocessed_update_actions: ::Array[Types::UnprocessedUpdateAction]
+      SENSITIVE: []
+    end
+
+    class UpdateActionsMessage
+      attr_accessor marker: ::String
+      attr_accessor update_actions: ::Array[Types::UpdateAction]
+      SENSITIVE: []
+    end
+
+    class User
+      attr_accessor user_id: ::String
+      attr_accessor user_name: ::String
+      attr_accessor status: ::String
+      attr_accessor engine: ::String
+      attr_accessor minimum_engine_version: ::String
+      attr_accessor access_string: ::String
+      attr_accessor user_group_ids: ::Array[::String]
+      attr_accessor authentication: Types::Authentication
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class UserAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class UserGroup
+      attr_accessor user_group_id: ::String
+      attr_accessor status: ::String
+      attr_accessor engine: ::String
+      attr_accessor user_ids: ::Array[::String]
+      attr_accessor minimum_engine_version: ::String
+      attr_accessor pending_changes: Types::UserGroupPendingChanges
+      attr_accessor replication_groups: ::Array[::String]
+      attr_accessor serverless_caches: ::Array[::String]
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class UserGroupAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class UserGroupNotFoundFault < Aws::EmptyStructure
+    end
+
+    class UserGroupPendingChanges
+      attr_accessor user_ids_to_remove: ::Array[::String]
+      attr_accessor user_ids_to_add: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UserGroupQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class UserGroupsUpdateStatus
+      attr_accessor user_group_ids_to_add: ::Array[::String]
+      attr_accessor user_group_ids_to_remove: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UserNotFoundFault < Aws::EmptyStructure
+    end
+
+    class UserQuotaExceededFault < Aws::EmptyStructure
+    end
+  end
+end

@@ -1,0 +1,23 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudSearchDomain
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class DocumentServiceException < ::Aws::Errors::ServiceError
+        def status: () -> ::String
+        def message: () -> ::String
+      end
+      class SearchException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

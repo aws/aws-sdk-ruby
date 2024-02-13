@@ -1,0 +1,399 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ServiceQuotas
+  module Types
+
+    class AWSServiceAccessNotEnabledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateServiceQuotaTemplateRequest < Aws::EmptyStructure
+    end
+
+    class AssociateServiceQuotaTemplateResponse < Aws::EmptyStructure
+    end
+
+    class DeleteServiceQuotaIncreaseRequestFromTemplateRequest
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor aws_region: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServiceQuotaIncreaseRequestFromTemplateResponse < Aws::EmptyStructure
+    end
+
+    class DependencyAccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateServiceQuotaTemplateRequest < Aws::EmptyStructure
+    end
+
+    class DisassociateServiceQuotaTemplateResponse < Aws::EmptyStructure
+    end
+
+    class ErrorReason
+      attr_accessor error_code: ("DEPENDENCY_ACCESS_DENIED_ERROR" | "DEPENDENCY_THROTTLING_ERROR" | "DEPENDENCY_SERVICE_ERROR" | "SERVICE_QUOTA_NOT_AVAILABLE_ERROR")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class GetAWSDefaultServiceQuotaRequest
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class GetAWSDefaultServiceQuotaResponse
+      attr_accessor quota: Types::ServiceQuota
+      SENSITIVE: []
+    end
+
+    class GetAssociationForServiceQuotaTemplateRequest < Aws::EmptyStructure
+    end
+
+    class GetAssociationForServiceQuotaTemplateResponse
+      attr_accessor service_quota_template_association_status: ("ASSOCIATED" | "DISASSOCIATED")
+      SENSITIVE: []
+    end
+
+    class GetRequestedServiceQuotaChangeRequest
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRequestedServiceQuotaChangeResponse
+      attr_accessor requested_quota: Types::RequestedServiceQuotaChange
+      SENSITIVE: []
+    end
+
+    class GetServiceQuotaIncreaseRequestFromTemplateRequest
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor aws_region: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceQuotaIncreaseRequestFromTemplateResponse
+      attr_accessor service_quota_increase_request_in_template: Types::ServiceQuotaIncreaseRequestInTemplate
+      SENSITIVE: []
+    end
+
+    class GetServiceQuotaRequest
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor context_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceQuotaResponse
+      attr_accessor quota: Types::ServiceQuota
+      SENSITIVE: []
+    end
+
+    class IllegalArgumentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidPaginationTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidResourceStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAWSDefaultServiceQuotasRequest
+      attr_accessor service_code: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAWSDefaultServiceQuotasResponse
+      attr_accessor next_token: ::String
+      attr_accessor quotas: ::Array[Types::ServiceQuota]
+      SENSITIVE: []
+    end
+
+    class ListRequestedServiceQuotaChangeHistoryByQuotaRequest
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor status: ("PENDING" | "CASE_OPENED" | "APPROVED" | "DENIED" | "CASE_CLOSED" | "NOT_APPROVED" | "INVALID_REQUEST")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor quota_requested_at_level: ("ACCOUNT" | "RESOURCE" | "ALL")
+      SENSITIVE: []
+    end
+
+    class ListRequestedServiceQuotaChangeHistoryByQuotaResponse
+      attr_accessor next_token: ::String
+      attr_accessor requested_quotas: ::Array[Types::RequestedServiceQuotaChange]
+      SENSITIVE: []
+    end
+
+    class ListRequestedServiceQuotaChangeHistoryRequest
+      attr_accessor service_code: ::String
+      attr_accessor status: ("PENDING" | "CASE_OPENED" | "APPROVED" | "DENIED" | "CASE_CLOSED" | "NOT_APPROVED" | "INVALID_REQUEST")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor quota_requested_at_level: ("ACCOUNT" | "RESOURCE" | "ALL")
+      SENSITIVE: []
+    end
+
+    class ListRequestedServiceQuotaChangeHistoryResponse
+      attr_accessor next_token: ::String
+      attr_accessor requested_quotas: ::Array[Types::RequestedServiceQuotaChange]
+      SENSITIVE: []
+    end
+
+    class ListServiceQuotaIncreaseRequestsInTemplateRequest
+      attr_accessor service_code: ::String
+      attr_accessor aws_region: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListServiceQuotaIncreaseRequestsInTemplateResponse
+      attr_accessor service_quota_increase_request_in_template_list: ::Array[Types::ServiceQuotaIncreaseRequestInTemplate]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceQuotasRequest
+      attr_accessor service_code: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor quota_code: ::String
+      attr_accessor quota_applied_at_level: ("ACCOUNT" | "RESOURCE" | "ALL")
+      SENSITIVE: []
+    end
+
+    class ListServiceQuotasResponse
+      attr_accessor next_token: ::String
+      attr_accessor quotas: ::Array[Types::ServiceQuota]
+      SENSITIVE: []
+    end
+
+    class ListServicesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListServicesResponse
+      attr_accessor next_token: ::String
+      attr_accessor services: ::Array[Types::ServiceInfo]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class MetricInfo
+      attr_accessor metric_namespace: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor metric_dimensions: ::Hash[::String, ::String]
+      attr_accessor metric_statistic_recommendation: ::String
+      SENSITIVE: []
+    end
+
+    class NoAvailableOrganizationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchResourceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OrganizationNotInAllFeaturesModeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PutServiceQuotaIncreaseRequestIntoTemplateRequest
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
+      attr_accessor aws_region: ::String
+      attr_accessor desired_value: ::Float
+      SENSITIVE: []
+    end
+
+    class PutServiceQuotaIncreaseRequestIntoTemplateResponse
+      attr_accessor service_quota_increase_request_in_template: Types::ServiceQuotaIncreaseRequestInTemplate
+      SENSITIVE: []
+    end
+
+    class QuotaContextInfo
+      attr_accessor context_scope: ("RESOURCE" | "ACCOUNT")
+      attr_accessor context_scope_type: ::String
+      attr_accessor context_id: ::String
+      SENSITIVE: []
+    end
+
+    class QuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class QuotaPeriod
+      attr_accessor period_value: ::Integer
+      attr_accessor period_unit: ("MICROSECOND" | "MILLISECOND" | "SECOND" | "MINUTE" | "HOUR" | "DAY" | "WEEK")
+      SENSITIVE: []
+    end
+
+    class RequestServiceQuotaIncreaseRequest
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor desired_value: ::Float
+      attr_accessor context_id: ::String
+      SENSITIVE: []
+    end
+
+    class RequestServiceQuotaIncreaseResponse
+      attr_accessor requested_quota: Types::RequestedServiceQuotaChange
+      SENSITIVE: []
+    end
+
+    class RequestedServiceQuotaChange
+      attr_accessor id: ::String
+      attr_accessor case_id: ::String
+      attr_accessor service_code: ::String
+      attr_accessor service_name: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor quota_name: ::String
+      attr_accessor desired_value: ::Float
+      attr_accessor status: ("PENDING" | "CASE_OPENED" | "APPROVED" | "DENIED" | "CASE_CLOSED" | "NOT_APPROVED" | "INVALID_REQUEST")
+      attr_accessor created: ::Time
+      attr_accessor last_updated: ::Time
+      attr_accessor requester: ::String
+      attr_accessor quota_arn: ::String
+      attr_accessor global_quota: bool
+      attr_accessor unit: ::String
+      attr_accessor quota_requested_at_level: ("ACCOUNT" | "RESOURCE" | "ALL")
+      attr_accessor quota_context: Types::QuotaContextInfo
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceInfo
+      attr_accessor service_code: ::String
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuota
+      attr_accessor service_code: ::String
+      attr_accessor service_name: ::String
+      attr_accessor quota_arn: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor quota_name: ::String
+      attr_accessor value: ::Float
+      attr_accessor unit: ::String
+      attr_accessor adjustable: bool
+      attr_accessor global_quota: bool
+      attr_accessor usage_metric: Types::MetricInfo
+      attr_accessor period: Types::QuotaPeriod
+      attr_accessor error_reason: Types::ErrorReason
+      attr_accessor quota_applied_at_level: ("ACCOUNT" | "RESOURCE" | "ALL")
+      attr_accessor quota_context: Types::QuotaContextInfo
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaIncreaseRequestInTemplate
+      attr_accessor service_code: ::String
+      attr_accessor service_name: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor quota_name: ::String
+      attr_accessor desired_value: ::Float
+      attr_accessor aws_region: ::String
+      attr_accessor unit: ::String
+      attr_accessor global_quota: bool
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaTemplateNotInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagPolicyViolationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TemplatesNotAvailableInRegionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+  end
+end

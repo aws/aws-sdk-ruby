@@ -1,0 +1,433 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::IoTRoboRunner
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CartesianCoordinates
+      attr_accessor x: ::Float
+      attr_accessor y: ::Float
+      attr_accessor z: ::Float
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDestinationRequest
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor site: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED" | "DECOMMISSIONED")
+      attr_accessor additional_fixed_properties: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDestinationResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor state: ("ENABLED" | "DISABLED" | "DECOMMISSIONED")
+      SENSITIVE: []
+    end
+
+    class CreateSiteRequest
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor country_code: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSiteResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateWorkerFleetRequest
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor site: ::String
+      attr_accessor additional_fixed_properties: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWorkerFleetResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateWorkerRequest
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor fleet: ::String
+      attr_accessor additional_transient_properties: ::String
+      attr_accessor additional_fixed_properties: ::String
+      attr_accessor vendor_properties: Types::VendorProperties
+      attr_accessor position: Types::PositionCoordinates
+      attr_accessor orientation: Types::Orientation
+      SENSITIVE: []
+    end
+
+    class CreateWorkerResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor site: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDestinationRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDestinationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteSiteRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSiteResponse < Aws::EmptyStructure
+    end
+
+    class DeleteWorkerFleetRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkerFleetResponse < Aws::EmptyStructure
+    end
+
+    class DeleteWorkerRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkerResponse < Aws::EmptyStructure
+    end
+
+    class Destination
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor site: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor state: ("ENABLED" | "DISABLED" | "DECOMMISSIONED")
+      attr_accessor additional_fixed_properties: ::String
+      SENSITIVE: []
+    end
+
+    class GetDestinationRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDestinationResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor site: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor state: ("ENABLED" | "DISABLED" | "DECOMMISSIONED")
+      attr_accessor additional_fixed_properties: ::String
+      SENSITIVE: []
+    end
+
+    class GetSiteRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSiteResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor country_code: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetWorkerFleetRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkerFleetResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor site: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor additional_fixed_properties: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkerRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkerResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor fleet: ::String
+      attr_accessor site: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor additional_transient_properties: ::String
+      attr_accessor additional_fixed_properties: ::String
+      attr_accessor vendor_properties: Types::VendorProperties
+      attr_accessor position: Types::PositionCoordinates
+      attr_accessor orientation: Types::Orientation
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListDestinationsRequest
+      attr_accessor site: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED" | "DECOMMISSIONED")
+      SENSITIVE: []
+    end
+
+    class ListDestinationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor destinations: ::Array[Types::Destination]
+      SENSITIVE: []
+    end
+
+    class ListSitesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSitesResponse
+      attr_accessor next_token: ::String
+      attr_accessor sites: ::Array[Types::Site]
+      SENSITIVE: []
+    end
+
+    class ListWorkerFleetsRequest
+      attr_accessor site: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkerFleetsResponse
+      attr_accessor next_token: ::String
+      attr_accessor worker_fleets: ::Array[Types::WorkerFleet]
+      SENSITIVE: []
+    end
+
+    class ListWorkersRequest
+      attr_accessor site: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor fleet: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkersResponse
+      attr_accessor next_token: ::String
+      attr_accessor workers: ::Array[Types::Worker]
+      SENSITIVE: []
+    end
+
+    class Orientation
+      attr_accessor degrees: ::Float
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Degrees < Orientation
+      end
+      class Unknown < Orientation
+      end
+    end
+
+    class PositionCoordinates
+      attr_accessor cartesian_coordinates: Types::CartesianCoordinates
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CartesianCoordinates < PositionCoordinates
+      end
+      class Unknown < PositionCoordinates
+      end
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Site
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor country_code: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDestinationRequest
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED" | "DECOMMISSIONED")
+      attr_accessor additional_fixed_properties: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDestinationResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor state: ("ENABLED" | "DISABLED" | "DECOMMISSIONED")
+      attr_accessor additional_fixed_properties: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSiteRequest
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor country_code: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSiteResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor country_code: ::String
+      attr_accessor description: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateWorkerFleetRequest
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor additional_fixed_properties: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateWorkerFleetResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor additional_fixed_properties: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateWorkerRequest
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor additional_transient_properties: ::String
+      attr_accessor additional_fixed_properties: ::String
+      attr_accessor vendor_properties: Types::VendorProperties
+      attr_accessor position: Types::PositionCoordinates
+      attr_accessor orientation: Types::Orientation
+      SENSITIVE: []
+    end
+
+    class UpdateWorkerResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor fleet: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor additional_transient_properties: ::String
+      attr_accessor additional_fixed_properties: ::String
+      attr_accessor orientation: Types::Orientation
+      attr_accessor vendor_properties: Types::VendorProperties
+      attr_accessor position: Types::PositionCoordinates
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VendorProperties
+      attr_accessor vendor_worker_id: ::String
+      attr_accessor vendor_worker_ip_address: ::String
+      attr_accessor vendor_additional_transient_properties: ::String
+      attr_accessor vendor_additional_fixed_properties: ::String
+      SENSITIVE: []
+    end
+
+    class Worker
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor fleet: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor site: ::String
+      attr_accessor additional_transient_properties: ::String
+      attr_accessor additional_fixed_properties: ::String
+      attr_accessor vendor_properties: Types::VendorProperties
+      attr_accessor position: Types::PositionCoordinates
+      attr_accessor orientation: Types::Orientation
+      SENSITIVE: []
+    end
+
+    class WorkerFleet
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor site: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor additional_fixed_properties: ::String
+      SENSITIVE: []
+    end
+  end
+end

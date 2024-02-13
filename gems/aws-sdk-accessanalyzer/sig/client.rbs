@@ -1,0 +1,606 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AccessAnalyzer
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#apply_archive_rule-instance_method
+      def apply_archive_rule: (
+                                analyzer_arn: ::String,
+                                rule_name: ::String,
+                                ?client_token: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CancelPolicyGenerationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelPolicyGenerationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#cancel_policy_generation-instance_method
+      def cancel_policy_generation: (
+                                      job_id: ::String
+                                    ) -> _CancelPolicyGenerationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelPolicyGenerationResponseSuccess
+
+      interface _CheckAccessNotGrantedResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CheckAccessNotGrantedResponse]
+        def result: () -> ("PASS" | "FAIL")
+        def message: () -> ::String
+        def reasons: () -> ::Array[Types::ReasonSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#check_access_not_granted-instance_method
+      def check_access_not_granted: (
+                                      policy_document: ::String,
+                                      access: Array[
+                                        {
+                                          actions: Array[::String]
+                                        },
+                                      ],
+                                      policy_type: ("IDENTITY_POLICY" | "RESOURCE_POLICY")
+                                    ) -> _CheckAccessNotGrantedResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CheckAccessNotGrantedResponseSuccess
+
+      interface _CheckNoNewAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CheckNoNewAccessResponse]
+        def result: () -> ("PASS" | "FAIL")
+        def message: () -> ::String
+        def reasons: () -> ::Array[Types::ReasonSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#check_no_new_access-instance_method
+      def check_no_new_access: (
+                                 new_policy_document: ::String,
+                                 existing_policy_document: ::String,
+                                 policy_type: ("IDENTITY_POLICY" | "RESOURCE_POLICY")
+                               ) -> _CheckNoNewAccessResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CheckNoNewAccessResponseSuccess
+
+      interface _CreateAccessPreviewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessPreviewResponse]
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#create_access_preview-instance_method
+      def create_access_preview: (
+                                   analyzer_arn: ::String,
+                                   configurations: Hash[::String, {
+                                       ebs_snapshot: {
+                                         user_ids: Array[::String]?,
+                                         groups: Array[::String]?,
+                                         kms_key_id: ::String?
+                                       }?,
+                                       ecr_repository: {
+                                         repository_policy: ::String?
+                                       }?,
+                                       iam_role: {
+                                         trust_policy: ::String?
+                                       }?,
+                                       efs_file_system: {
+                                         file_system_policy: ::String?
+                                       }?,
+                                       kms_key: {
+                                         key_policies: Hash[::String, ::String]?,
+                                         grants: Array[
+                                           {
+                                             operations: Array[("CreateGrant" | "Decrypt" | "DescribeKey" | "Encrypt" | "GenerateDataKey" | "GenerateDataKeyPair" | "GenerateDataKeyPairWithoutPlaintext" | "GenerateDataKeyWithoutPlaintext" | "GetPublicKey" | "ReEncryptFrom" | "ReEncryptTo" | "RetireGrant" | "Sign" | "Verify")],
+                                             grantee_principal: ::String,
+                                             retiring_principal: ::String?,
+                                             constraints: {
+                                               encryption_context_equals: Hash[::String, ::String]?,
+                                               encryption_context_subset: Hash[::String, ::String]?
+                                             }?,
+                                             issuing_account: ::String
+                                           },
+                                         ]?
+                                       }?,
+                                       rds_db_cluster_snapshot: {
+                                         attributes: Hash[::String, {
+                                             account_ids: Array[::String]?
+                                           }]?,
+                                         kms_key_id: ::String?
+                                       }?,
+                                       rds_db_snapshot: {
+                                         attributes: Hash[::String, {
+                                             account_ids: Array[::String]?
+                                           }]?,
+                                         kms_key_id: ::String?
+                                       }?,
+                                       secrets_manager_secret: {
+                                         kms_key_id: ::String?,
+                                         secret_policy: ::String?
+                                       }?,
+                                       s3_bucket: {
+                                         bucket_policy: ::String?,
+                                         bucket_acl_grants: Array[
+                                           {
+                                             permission: ("READ" | "WRITE" | "READ_ACP" | "WRITE_ACP" | "FULL_CONTROL"),
+                                             grantee: {
+                                               id: ::String?,
+                                               uri: ::String?
+                                             }
+                                           },
+                                         ]?,
+                                         bucket_public_access_block: {
+                                           ignore_public_acls: bool,
+                                           restrict_public_buckets: bool
+                                         }?,
+                                         access_points: Hash[::String, {
+                                             access_point_policy: ::String?,
+                                             public_access_block: {
+                                               ignore_public_acls: bool,
+                                               restrict_public_buckets: bool
+                                             }?,
+                                             network_origin: {
+                                               vpc_configuration: {
+                                                 vpc_id: ::String
+                                               }?,
+                                               internet_configuration: {
+                                               }?
+                                             }?
+                                           }]?
+                                       }?,
+                                       sns_topic: {
+                                         topic_policy: ::String?
+                                       }?,
+                                       sqs_queue: {
+                                         queue_policy: ::String?
+                                       }?,
+                                       s3_express_directory_bucket: {
+                                         bucket_policy: ::String?
+                                       }?
+                                     }],
+                                   ?client_token: ::String
+                                 ) -> _CreateAccessPreviewResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessPreviewResponseSuccess
+
+      interface _CreateAnalyzerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAnalyzerResponse]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#create_analyzer-instance_method
+      def create_analyzer: (
+                             analyzer_name: ::String,
+                             type: ("ACCOUNT" | "ORGANIZATION" | "ACCOUNT_UNUSED_ACCESS" | "ORGANIZATION_UNUSED_ACCESS"),
+                             ?archive_rules: Array[
+                               {
+                                 rule_name: ::String,
+                                 filter: Hash[::String, {
+                                     eq: Array[::String]?,
+                                     neq: Array[::String]?,
+                                     contains: Array[::String]?,
+                                     exists: bool?
+                                   }]
+                               },
+                             ],
+                             ?tags: Hash[::String, ::String],
+                             ?client_token: ::String,
+                             ?configuration: {
+                               unused_access: {
+                                 unused_access_age: ::Integer?
+                               }?
+                             }
+                           ) -> _CreateAnalyzerResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAnalyzerResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#create_archive_rule-instance_method
+      def create_archive_rule: (
+                                 analyzer_name: ::String,
+                                 rule_name: ::String,
+                                 filter: Hash[::String, {
+                                     eq: Array[::String]?,
+                                     neq: Array[::String]?,
+                                     contains: Array[::String]?,
+                                     exists: bool?
+                                   }],
+                                 ?client_token: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#delete_analyzer-instance_method
+      def delete_analyzer: (
+                             analyzer_name: ::String,
+                             ?client_token: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#delete_archive_rule-instance_method
+      def delete_archive_rule: (
+                                 analyzer_name: ::String,
+                                 rule_name: ::String,
+                                 ?client_token: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetAccessPreviewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessPreviewResponse]
+        def access_preview: () -> Types::AccessPreview
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#get_access_preview-instance_method
+      def get_access_preview: (
+                                access_preview_id: ::String,
+                                analyzer_arn: ::String
+                              ) -> _GetAccessPreviewResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessPreviewResponseSuccess
+
+      interface _GetAnalyzedResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAnalyzedResourceResponse]
+        def resource: () -> Types::AnalyzedResource
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#get_analyzed_resource-instance_method
+      def get_analyzed_resource: (
+                                   analyzer_arn: ::String,
+                                   resource_arn: ::String
+                                 ) -> _GetAnalyzedResourceResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAnalyzedResourceResponseSuccess
+
+      interface _GetAnalyzerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAnalyzerResponse]
+        def analyzer: () -> Types::AnalyzerSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#get_analyzer-instance_method
+      def get_analyzer: (
+                          analyzer_name: ::String
+                        ) -> _GetAnalyzerResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAnalyzerResponseSuccess
+
+      interface _GetArchiveRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetArchiveRuleResponse]
+        def archive_rule: () -> Types::ArchiveRuleSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#get_archive_rule-instance_method
+      def get_archive_rule: (
+                              analyzer_name: ::String,
+                              rule_name: ::String
+                            ) -> _GetArchiveRuleResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetArchiveRuleResponseSuccess
+
+      interface _GetFindingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFindingResponse]
+        def finding: () -> Types::Finding
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#get_finding-instance_method
+      def get_finding: (
+                         analyzer_arn: ::String,
+                         id: ::String
+                       ) -> _GetFindingResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFindingResponseSuccess
+
+      interface _GetFindingV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFindingV2Response]
+        def analyzed_at: () -> ::Time
+        def created_at: () -> ::Time
+        def id: () -> ::String
+        def next_token: () -> ::String
+        def resource: () -> ::String
+        def resource_type: () -> ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket")
+        def resource_owner_account: () -> ::String
+        def status: () -> ("ACTIVE" | "ARCHIVED" | "RESOLVED")
+        def updated_at: () -> ::Time
+        def finding_details: () -> ::Array[Types::FindingDetails]
+        def finding_type: () -> ("ExternalAccess" | "UnusedIAMRole" | "UnusedIAMUserAccessKey" | "UnusedIAMUserPassword" | "UnusedPermission")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#get_finding_v2-instance_method
+      def get_finding_v2: (
+                            analyzer_arn: ::String,
+                            id: ::String,
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _GetFindingV2ResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFindingV2ResponseSuccess
+
+      interface _GetGeneratedPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGeneratedPolicyResponse]
+        def job_details: () -> Types::JobDetails
+        def generated_policy_result: () -> Types::GeneratedPolicyResult
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#get_generated_policy-instance_method
+      def get_generated_policy: (
+                                  job_id: ::String,
+                                  ?include_resource_placeholders: bool,
+                                  ?include_service_level_template: bool
+                                ) -> _GetGeneratedPolicyResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGeneratedPolicyResponseSuccess
+
+      interface _ListAccessPreviewFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessPreviewFindingsResponse]
+        def findings: () -> ::Array[Types::AccessPreviewFinding]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#list_access_preview_findings-instance_method
+      def list_access_preview_findings: (
+                                          access_preview_id: ::String,
+                                          analyzer_arn: ::String,
+                                          ?filter: Hash[::String, {
+                                              eq: Array[::String]?,
+                                              neq: Array[::String]?,
+                                              contains: Array[::String]?,
+                                              exists: bool?
+                                            }],
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListAccessPreviewFindingsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessPreviewFindingsResponseSuccess
+
+      interface _ListAccessPreviewsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessPreviewsResponse]
+        def access_previews: () -> ::Array[Types::AccessPreviewSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#list_access_previews-instance_method
+      def list_access_previews: (
+                                  analyzer_arn: ::String,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListAccessPreviewsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessPreviewsResponseSuccess
+
+      interface _ListAnalyzedResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAnalyzedResourcesResponse]
+        def analyzed_resources: () -> ::Array[Types::AnalyzedResourceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#list_analyzed_resources-instance_method
+      def list_analyzed_resources: (
+                                     analyzer_arn: ::String,
+                                     ?resource_type: ("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket"),
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListAnalyzedResourcesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAnalyzedResourcesResponseSuccess
+
+      interface _ListAnalyzersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAnalyzersResponse]
+        def analyzers: () -> ::Array[Types::AnalyzerSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#list_analyzers-instance_method
+      def list_analyzers: (
+                            ?next_token: ::String,
+                            ?max_results: ::Integer,
+                            ?type: ("ACCOUNT" | "ORGANIZATION" | "ACCOUNT_UNUSED_ACCESS" | "ORGANIZATION_UNUSED_ACCESS")
+                          ) -> _ListAnalyzersResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAnalyzersResponseSuccess
+
+      interface _ListArchiveRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListArchiveRulesResponse]
+        def archive_rules: () -> ::Array[Types::ArchiveRuleSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#list_archive_rules-instance_method
+      def list_archive_rules: (
+                                analyzer_name: ::String,
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListArchiveRulesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListArchiveRulesResponseSuccess
+
+      interface _ListFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFindingsResponse]
+        def findings: () -> ::Array[Types::FindingSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#list_findings-instance_method
+      def list_findings: (
+                           analyzer_arn: ::String,
+                           ?filter: Hash[::String, {
+                               eq: Array[::String]?,
+                               neq: Array[::String]?,
+                               contains: Array[::String]?,
+                               exists: bool?
+                             }],
+                           ?sort: {
+                             attribute_name: ::String?,
+                             order_by: ("ASC" | "DESC")?
+                           },
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListFindingsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFindingsResponseSuccess
+
+      interface _ListFindingsV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFindingsV2Response]
+        def findings: () -> ::Array[Types::FindingSummaryV2]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#list_findings_v2-instance_method
+      def list_findings_v2: (
+                              analyzer_arn: ::String,
+                              ?filter: Hash[::String, {
+                                  eq: Array[::String]?,
+                                  neq: Array[::String]?,
+                                  contains: Array[::String]?,
+                                  exists: bool?
+                                }],
+                              ?max_results: ::Integer,
+                              ?next_token: ::String,
+                              ?sort: {
+                                attribute_name: ::String?,
+                                order_by: ("ASC" | "DESC")?
+                              }
+                            ) -> _ListFindingsV2ResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFindingsV2ResponseSuccess
+
+      interface _ListPolicyGenerationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPolicyGenerationsResponse]
+        def policy_generations: () -> ::Array[Types::PolicyGeneration]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#list_policy_generations-instance_method
+      def list_policy_generations: (
+                                     ?principal_arn: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListPolicyGenerationsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPolicyGenerationsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartPolicyGenerationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartPolicyGenerationResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#start_policy_generation-instance_method
+      def start_policy_generation: (
+                                     policy_generation_details: {
+                                       principal_arn: ::String
+                                     },
+                                     ?cloud_trail_details: {
+                                       trails: Array[
+                                         {
+                                           cloud_trail_arn: ::String,
+                                           regions: Array[::String]?,
+                                           all_regions: bool?
+                                         },
+                                       ],
+                                       access_role: ::String,
+                                       start_time: ::Time,
+                                       end_time: ::Time?
+                                     },
+                                     ?client_token: ::String
+                                   ) -> _StartPolicyGenerationResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPolicyGenerationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#start_resource_scan-instance_method
+      def start_resource_scan: (
+                                 analyzer_arn: ::String,
+                                 resource_arn: ::String,
+                                 ?resource_owner_account: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#update_archive_rule-instance_method
+      def update_archive_rule: (
+                                 analyzer_name: ::String,
+                                 rule_name: ::String,
+                                 filter: Hash[::String, {
+                                     eq: Array[::String]?,
+                                     neq: Array[::String]?,
+                                     contains: Array[::String]?,
+                                     exists: bool?
+                                   }],
+                                 ?client_token: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#update_findings-instance_method
+      def update_findings: (
+                             analyzer_arn: ::String,
+                             status: ("ACTIVE" | "ARCHIVED"),
+                             ?ids: Array[::String],
+                             ?resource_arn: ::String,
+                             ?client_token: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _ValidatePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ValidatePolicyResponse]
+        def findings: () -> ::Array[Types::ValidatePolicyFinding]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#validate_policy-instance_method
+      def validate_policy: (
+                             ?locale: ("DE" | "EN" | "ES" | "FR" | "IT" | "JA" | "KO" | "PT_BR" | "ZH_CN" | "ZH_TW"),
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             policy_document: ::String,
+                             policy_type: ("IDENTITY_POLICY" | "RESOURCE_POLICY" | "SERVICE_CONTROL_POLICY"),
+                             ?validate_policy_resource_type: ("AWS::S3::Bucket" | "AWS::S3::AccessPoint" | "AWS::S3::MultiRegionAccessPoint" | "AWS::S3ObjectLambda::AccessPoint" | "AWS::IAM::AssumeRolePolicyDocument")
+                           ) -> _ValidatePolicyResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidatePolicyResponseSuccess
+    end
+  end
+end
+

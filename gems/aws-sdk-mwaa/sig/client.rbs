@@ -1,0 +1,299 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MWAA
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAA/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateCliTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCliTokenResponse]
+        def cli_token: () -> ::String
+        def web_server_hostname: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAA/Client.html#create_cli_token-instance_method
+      def create_cli_token: (
+                              name: ::String
+                            ) -> _CreateCliTokenResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCliTokenResponseSuccess
+
+      interface _CreateEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEnvironmentOutput]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAA/Client.html#create_environment-instance_method
+      def create_environment: (
+                                ?airflow_configuration_options: Hash[::String, ::String],
+                                ?airflow_version: ::String,
+                                dag_s3_path: ::String,
+                                ?endpoint_management: ("CUSTOMER" | "SERVICE"),
+                                ?environment_class: ::String,
+                                execution_role_arn: ::String,
+                                ?kms_key: ::String,
+                                ?logging_configuration: {
+                                  dag_processing_logs: {
+                                    enabled: bool,
+                                    log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
+                                  }?,
+                                  scheduler_logs: {
+                                    enabled: bool,
+                                    log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
+                                  }?,
+                                  task_logs: {
+                                    enabled: bool,
+                                    log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
+                                  }?,
+                                  webserver_logs: {
+                                    enabled: bool,
+                                    log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
+                                  }?,
+                                  worker_logs: {
+                                    enabled: bool,
+                                    log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
+                                  }?
+                                },
+                                ?max_workers: ::Integer,
+                                ?min_workers: ::Integer,
+                                name: ::String,
+                                network_configuration: {
+                                  security_group_ids: Array[::String]?,
+                                  subnet_ids: Array[::String]?
+                                },
+                                ?plugins_s3_object_version: ::String,
+                                ?plugins_s3_path: ::String,
+                                ?requirements_s3_object_version: ::String,
+                                ?requirements_s3_path: ::String,
+                                ?schedulers: ::Integer,
+                                source_bucket_arn: ::String,
+                                ?startup_script_s3_object_version: ::String,
+                                ?startup_script_s3_path: ::String,
+                                ?tags: Hash[::String, ::String],
+                                ?webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY"),
+                                ?weekly_maintenance_window_start: ::String
+                              ) -> _CreateEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentResponseSuccess
+
+      interface _CreateWebLoginTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWebLoginTokenResponse]
+        def airflow_identity: () -> ::String
+        def iam_identity: () -> ::String
+        def web_server_hostname: () -> ::String
+        def web_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAA/Client.html#create_web_login_token-instance_method
+      def create_web_login_token: (
+                                    name: ::String
+                                  ) -> _CreateWebLoginTokenResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWebLoginTokenResponseSuccess
+
+      interface _DeleteEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEnvironmentOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAA/Client.html#delete_environment-instance_method
+      def delete_environment: (
+                                name: ::String
+                              ) -> _DeleteEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEnvironmentResponseSuccess
+
+      interface _GetEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnvironmentOutput]
+        def environment: () -> Types::Environment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAA/Client.html#get_environment-instance_method
+      def get_environment: (
+                             name: ::String
+                           ) -> _GetEnvironmentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentResponseSuccess
+
+      interface _ListEnvironmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnvironmentsOutput]
+        def environments: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAA/Client.html#list_environments-instance_method
+      def list_environments: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListEnvironmentsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAA/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PublishMetricsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PublishMetricsOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAA/Client.html#publish_metrics-instance_method
+      def publish_metrics: (
+                             environment_name: ::String,
+                             metric_data: Array[
+                               {
+                                 dimensions: Array[
+                                   {
+                                     name: ::String,
+                                     value: ::String
+                                   },
+                                 ]?,
+                                 metric_name: ::String,
+                                 statistic_values: {
+                                   maximum: ::Float?,
+                                   minimum: ::Float?,
+                                   sample_count: ::Integer?,
+                                   sum: ::Float?
+                                 }?,
+                                 timestamp: ::Time,
+                                 unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?,
+                                 value: ::Float?
+                               },
+                             ]
+                           ) -> _PublishMetricsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PublishMetricsResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAA/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAA/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEnvironmentOutput]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAA/Client.html#update_environment-instance_method
+      def update_environment: (
+                                ?airflow_configuration_options: Hash[::String, ::String],
+                                ?airflow_version: ::String,
+                                ?dag_s3_path: ::String,
+                                ?environment_class: ::String,
+                                ?execution_role_arn: ::String,
+                                ?logging_configuration: {
+                                  dag_processing_logs: {
+                                    enabled: bool,
+                                    log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
+                                  }?,
+                                  scheduler_logs: {
+                                    enabled: bool,
+                                    log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
+                                  }?,
+                                  task_logs: {
+                                    enabled: bool,
+                                    log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
+                                  }?,
+                                  webserver_logs: {
+                                    enabled: bool,
+                                    log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
+                                  }?,
+                                  worker_logs: {
+                                    enabled: bool,
+                                    log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
+                                  }?
+                                },
+                                ?max_workers: ::Integer,
+                                ?min_workers: ::Integer,
+                                name: ::String,
+                                ?network_configuration: {
+                                  security_group_ids: Array[::String]
+                                },
+                                ?plugins_s3_object_version: ::String,
+                                ?plugins_s3_path: ::String,
+                                ?requirements_s3_object_version: ::String,
+                                ?requirements_s3_path: ::String,
+                                ?schedulers: ::Integer,
+                                ?source_bucket_arn: ::String,
+                                ?startup_script_s3_object_version: ::String,
+                                ?startup_script_s3_path: ::String,
+                                ?webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY"),
+                                ?weekly_maintenance_window_start: ::String
+                              ) -> _UpdateEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentResponseSuccess
+    end
+  end
+end
+

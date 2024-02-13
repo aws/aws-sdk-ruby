@@ -1,0 +1,1223 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EMR
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddInstanceFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddInstanceFleetOutput]
+        def cluster_id: () -> ::String
+        def instance_fleet_id: () -> ::String
+        def cluster_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#add_instance_fleet-instance_method
+      def add_instance_fleet: (
+                                cluster_id: ::String,
+                                instance_fleet: {
+                                  name: ::String?,
+                                  instance_fleet_type: ("MASTER" | "CORE" | "TASK"),
+                                  target_on_demand_capacity: ::Integer?,
+                                  target_spot_capacity: ::Integer?,
+                                  instance_type_configs: Array[
+                                    {
+                                      instance_type: ::String,
+                                      weighted_capacity: ::Integer?,
+                                      bid_price: ::String?,
+                                      bid_price_as_percentage_of_on_demand_price: ::Float?,
+                                      ebs_configuration: {
+                                        ebs_block_device_configs: Array[
+                                          {
+                                            volume_specification: {
+                                              volume_type: ::String,
+                                              iops: ::Integer?,
+                                              size_in_gb: ::Integer,
+                                              throughput: ::Integer?
+                                            },
+                                            volumes_per_instance: ::Integer?
+                                          },
+                                        ]?,
+                                        ebs_optimized: bool?
+                                      }?,
+                                      configurations: Array[
+                                        {
+                                          classification: ::String?,
+                                          configurations: untyped?,
+                                          properties: Hash[::String, ::String]?
+                                        },
+                                      ]?,
+                                      custom_ami_id: ::String?
+                                    },
+                                  ]?,
+                                  launch_specifications: {
+                                    spot_specification: {
+                                      timeout_duration_minutes: ::Integer,
+                                      timeout_action: ("SWITCH_TO_ON_DEMAND" | "TERMINATE_CLUSTER"),
+                                      block_duration_minutes: ::Integer?,
+                                      allocation_strategy: ("capacity-optimized" | "price-capacity-optimized" | "lowest-price" | "diversified")?
+                                    }?,
+                                    on_demand_specification: {
+                                      allocation_strategy: ("lowest-price"),
+                                      capacity_reservation_options: {
+                                        usage_strategy: ("use-capacity-reservations-first")?,
+                                        capacity_reservation_preference: ("open" | "none")?,
+                                        capacity_reservation_resource_group_arn: ::String?
+                                      }?
+                                    }?
+                                  }?,
+                                  resize_specifications: {
+                                    spot_resize_specification: {
+                                      timeout_duration_minutes: ::Integer
+                                    }?,
+                                    on_demand_resize_specification: {
+                                      timeout_duration_minutes: ::Integer
+                                    }?
+                                  }?
+                                }
+                              ) -> _AddInstanceFleetResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddInstanceFleetResponseSuccess
+
+      interface _AddInstanceGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddInstanceGroupsOutput]
+        def job_flow_id: () -> ::String
+        def instance_group_ids: () -> ::Array[::String]
+        def cluster_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#add_instance_groups-instance_method
+      def add_instance_groups: (
+                                 instance_groups: Array[
+                                   {
+                                     name: ::String?,
+                                     market: ("ON_DEMAND" | "SPOT")?,
+                                     instance_role: ("MASTER" | "CORE" | "TASK"),
+                                     bid_price: ::String?,
+                                     instance_type: ::String,
+                                     instance_count: ::Integer,
+                                     configurations: Array[
+                                       {
+                                         classification: ::String?,
+                                         configurations: untyped?,
+                                         properties: Hash[::String, ::String]?
+                                       },
+                                     ]?,
+                                     ebs_configuration: {
+                                       ebs_block_device_configs: Array[
+                                         {
+                                           volume_specification: {
+                                             volume_type: ::String,
+                                             iops: ::Integer?,
+                                             size_in_gb: ::Integer,
+                                             throughput: ::Integer?
+                                           },
+                                           volumes_per_instance: ::Integer?
+                                         },
+                                       ]?,
+                                       ebs_optimized: bool?
+                                     }?,
+                                     auto_scaling_policy: {
+                                       constraints: {
+                                         min_capacity: ::Integer,
+                                         max_capacity: ::Integer
+                                       },
+                                       rules: Array[
+                                         {
+                                           name: ::String,
+                                           description: ::String?,
+                                           action: {
+                                             market: ("ON_DEMAND" | "SPOT")?,
+                                             simple_scaling_policy_configuration: {
+                                               adjustment_type: ("CHANGE_IN_CAPACITY" | "PERCENT_CHANGE_IN_CAPACITY" | "EXACT_CAPACITY")?,
+                                               scaling_adjustment: ::Integer,
+                                               cool_down: ::Integer?
+                                             }
+                                           },
+                                           trigger: {
+                                             cloud_watch_alarm_definition: {
+                                               comparison_operator: ("GREATER_THAN_OR_EQUAL" | "GREATER_THAN" | "LESS_THAN" | "LESS_THAN_OR_EQUAL"),
+                                               evaluation_periods: ::Integer?,
+                                               metric_name: ::String,
+                                               namespace: ::String?,
+                                               period: ::Integer,
+                                               statistic: ("SAMPLE_COUNT" | "AVERAGE" | "SUM" | "MINIMUM" | "MAXIMUM")?,
+                                               threshold: ::Float,
+                                               unit: ("NONE" | "SECONDS" | "MICRO_SECONDS" | "MILLI_SECONDS" | "BYTES" | "KILO_BYTES" | "MEGA_BYTES" | "GIGA_BYTES" | "TERA_BYTES" | "BITS" | "KILO_BITS" | "MEGA_BITS" | "GIGA_BITS" | "TERA_BITS" | "PERCENT" | "COUNT" | "BYTES_PER_SECOND" | "KILO_BYTES_PER_SECOND" | "MEGA_BYTES_PER_SECOND" | "GIGA_BYTES_PER_SECOND" | "TERA_BYTES_PER_SECOND" | "BITS_PER_SECOND" | "KILO_BITS_PER_SECOND" | "MEGA_BITS_PER_SECOND" | "GIGA_BITS_PER_SECOND" | "TERA_BITS_PER_SECOND" | "COUNT_PER_SECOND")?,
+                                               dimensions: Array[
+                                                 {
+                                                   key: ::String?,
+                                                   value: ::String?
+                                                 },
+                                               ]?
+                                             }
+                                           }
+                                         },
+                                       ]
+                                     }?,
+                                     custom_ami_id: ::String?
+                                   },
+                                 ],
+                                 job_flow_id: ::String
+                               ) -> _AddInstanceGroupsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddInstanceGroupsResponseSuccess
+
+      interface _AddJobFlowStepsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddJobFlowStepsOutput]
+        def step_ids: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#add_job_flow_steps-instance_method
+      def add_job_flow_steps: (
+                                job_flow_id: ::String,
+                                steps: Array[
+                                  {
+                                    name: ::String,
+                                    action_on_failure: ("TERMINATE_JOB_FLOW" | "TERMINATE_CLUSTER" | "CANCEL_AND_WAIT" | "CONTINUE")?,
+                                    hadoop_jar_step: {
+                                      properties: Array[
+                                        {
+                                          key: ::String?,
+                                          value: ::String?
+                                        },
+                                      ]?,
+                                      jar: ::String,
+                                      main_class: ::String?,
+                                      args: Array[::String]?
+                                    }
+                                  },
+                                ],
+                                ?execution_role_arn: ::String
+                              ) -> _AddJobFlowStepsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddJobFlowStepsResponseSuccess
+
+      interface _AddTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddTagsOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#add_tags-instance_method
+      def add_tags: (
+                      resource_id: ::String,
+                      tags: Array[
+                        {
+                          key: ::String?,
+                          value: ::String?
+                        },
+                      ]
+                    ) -> _AddTagsResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddTagsResponseSuccess
+
+      interface _CancelStepsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelStepsOutput]
+        def cancel_steps_info_list: () -> ::Array[Types::CancelStepsInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#cancel_steps-instance_method
+      def cancel_steps: (
+                          cluster_id: ::String,
+                          step_ids: Array[::String],
+                          ?step_cancellation_option: ("SEND_INTERRUPT" | "TERMINATE_PROCESS")
+                        ) -> _CancelStepsResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelStepsResponseSuccess
+
+      interface _CreateSecurityConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSecurityConfigurationOutput]
+        def name: () -> ::String
+        def creation_date_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#create_security_configuration-instance_method
+      def create_security_configuration: (
+                                           name: ::String,
+                                           security_configuration: ::String
+                                         ) -> _CreateSecurityConfigurationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSecurityConfigurationResponseSuccess
+
+      interface _CreateStudioResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStudioOutput]
+        def studio_id: () -> ::String
+        def url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#create_studio-instance_method
+      def create_studio: (
+                           name: ::String,
+                           ?description: ::String,
+                           auth_mode: ("SSO" | "IAM"),
+                           vpc_id: ::String,
+                           subnet_ids: Array[::String],
+                           service_role: ::String,
+                           ?user_role: ::String,
+                           workspace_security_group_id: ::String,
+                           engine_security_group_id: ::String,
+                           default_s3_location: ::String,
+                           ?idp_auth_url: ::String,
+                           ?idp_relay_state_parameter_name: ::String,
+                           ?tags: Array[
+                             {
+                               key: ::String?,
+                               value: ::String?
+                             },
+                           ],
+                           ?trusted_identity_propagation_enabled: bool,
+                           ?idc_user_assignment: ("REQUIRED" | "OPTIONAL"),
+                           ?idc_instance_arn: ::String,
+                           ?encryption_key_arn: ::String
+                         ) -> _CreateStudioResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStudioResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#create_studio_session_mapping-instance_method
+      def create_studio_session_mapping: (
+                                           studio_id: ::String,
+                                           ?identity_id: ::String,
+                                           ?identity_name: ::String,
+                                           identity_type: ("USER" | "GROUP"),
+                                           session_policy_arn: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteSecurityConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSecurityConfigurationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#delete_security_configuration-instance_method
+      def delete_security_configuration: (
+                                           name: ::String
+                                         ) -> _DeleteSecurityConfigurationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSecurityConfigurationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#delete_studio-instance_method
+      def delete_studio: (
+                           studio_id: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#delete_studio_session_mapping-instance_method
+      def delete_studio_session_mapping: (
+                                           studio_id: ::String,
+                                           ?identity_id: ::String,
+                                           ?identity_name: ::String,
+                                           identity_type: ("USER" | "GROUP")
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterOutput]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#describe_cluster-instance_method
+      def describe_cluster: (
+                              cluster_id: ::String
+                            ) -> _DescribeClusterResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterResponseSuccess
+
+      interface _DescribeJobFlowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeJobFlowsOutput]
+        def job_flows: () -> ::Array[Types::JobFlowDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#describe_job_flows-instance_method
+      def describe_job_flows: (
+                                ?created_after: ::Time,
+                                ?created_before: ::Time,
+                                ?job_flow_ids: Array[::String],
+                                ?job_flow_states: Array[("STARTING" | "BOOTSTRAPPING" | "RUNNING" | "WAITING" | "SHUTTING_DOWN" | "TERMINATED" | "COMPLETED" | "FAILED")]
+                              ) -> _DescribeJobFlowsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeJobFlowsResponseSuccess
+
+      interface _DescribeNotebookExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeNotebookExecutionOutput]
+        def notebook_execution: () -> Types::NotebookExecution
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#describe_notebook_execution-instance_method
+      def describe_notebook_execution: (
+                                         notebook_execution_id: ::String
+                                       ) -> _DescribeNotebookExecutionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeNotebookExecutionResponseSuccess
+
+      interface _DescribeReleaseLabelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReleaseLabelOutput]
+        def release_label: () -> ::String
+        def applications: () -> ::Array[Types::SimplifiedApplication]
+        def next_token: () -> ::String
+        def available_os_releases: () -> ::Array[Types::OSRelease]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#describe_release_label-instance_method
+      def describe_release_label: (
+                                    ?release_label: ::String,
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _DescribeReleaseLabelResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReleaseLabelResponseSuccess
+
+      interface _DescribeSecurityConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSecurityConfigurationOutput]
+        def name: () -> ::String
+        def security_configuration: () -> ::String
+        def creation_date_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#describe_security_configuration-instance_method
+      def describe_security_configuration: (
+                                             name: ::String
+                                           ) -> _DescribeSecurityConfigurationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSecurityConfigurationResponseSuccess
+
+      interface _DescribeStepResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStepOutput]
+        def step: () -> Types::Step
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#describe_step-instance_method
+      def describe_step: (
+                           cluster_id: ::String,
+                           step_id: ::String
+                         ) -> _DescribeStepResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStepResponseSuccess
+
+      interface _DescribeStudioResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStudioOutput]
+        def studio: () -> Types::Studio
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#describe_studio-instance_method
+      def describe_studio: (
+                             studio_id: ::String
+                           ) -> _DescribeStudioResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStudioResponseSuccess
+
+      interface _GetAutoTerminationPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAutoTerminationPolicyOutput]
+        def auto_termination_policy: () -> Types::AutoTerminationPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#get_auto_termination_policy-instance_method
+      def get_auto_termination_policy: (
+                                         cluster_id: ::String
+                                       ) -> _GetAutoTerminationPolicyResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAutoTerminationPolicyResponseSuccess
+
+      interface _GetBlockPublicAccessConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBlockPublicAccessConfigurationOutput]
+        def block_public_access_configuration: () -> Types::BlockPublicAccessConfiguration
+        def block_public_access_configuration_metadata: () -> Types::BlockPublicAccessConfigurationMetadata
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#get_block_public_access_configuration-instance_method
+      def get_block_public_access_configuration: (
+                                                 ) -> _GetBlockPublicAccessConfigurationResponseSuccess
+                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBlockPublicAccessConfigurationResponseSuccess
+
+      interface _GetClusterSessionCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetClusterSessionCredentialsOutput]
+        def credentials: () -> Types::Credentials
+        def expires_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#get_cluster_session_credentials-instance_method
+      def get_cluster_session_credentials: (
+                                             cluster_id: ::String,
+                                             ?execution_role_arn: ::String
+                                           ) -> _GetClusterSessionCredentialsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetClusterSessionCredentialsResponseSuccess
+
+      interface _GetManagedScalingPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetManagedScalingPolicyOutput]
+        def managed_scaling_policy: () -> Types::ManagedScalingPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#get_managed_scaling_policy-instance_method
+      def get_managed_scaling_policy: (
+                                        cluster_id: ::String
+                                      ) -> _GetManagedScalingPolicyResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetManagedScalingPolicyResponseSuccess
+
+      interface _GetStudioSessionMappingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStudioSessionMappingOutput]
+        def session_mapping: () -> Types::SessionMappingDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#get_studio_session_mapping-instance_method
+      def get_studio_session_mapping: (
+                                        studio_id: ::String,
+                                        ?identity_id: ::String,
+                                        ?identity_name: ::String,
+                                        identity_type: ("USER" | "GROUP")
+                                      ) -> _GetStudioSessionMappingResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStudioSessionMappingResponseSuccess
+
+      interface _ListBootstrapActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBootstrapActionsOutput]
+        def bootstrap_actions: () -> ::Array[Types::Command]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#list_bootstrap_actions-instance_method
+      def list_bootstrap_actions: (
+                                    cluster_id: ::String,
+                                    ?marker: ::String
+                                  ) -> _ListBootstrapActionsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBootstrapActionsResponseSuccess
+
+      interface _ListClustersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClustersOutput]
+        def clusters: () -> ::Array[Types::ClusterSummary]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#list_clusters-instance_method
+      def list_clusters: (
+                           ?created_after: ::Time,
+                           ?created_before: ::Time,
+                           ?cluster_states: Array[("STARTING" | "BOOTSTRAPPING" | "RUNNING" | "WAITING" | "TERMINATING" | "TERMINATED" | "TERMINATED_WITH_ERRORS")],
+                           ?marker: ::String
+                         ) -> _ListClustersResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClustersResponseSuccess
+
+      interface _ListInstanceFleetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInstanceFleetsOutput]
+        def instance_fleets: () -> ::Array[Types::InstanceFleet]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#list_instance_fleets-instance_method
+      def list_instance_fleets: (
+                                  cluster_id: ::String,
+                                  ?marker: ::String
+                                ) -> _ListInstanceFleetsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInstanceFleetsResponseSuccess
+
+      interface _ListInstanceGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInstanceGroupsOutput]
+        def instance_groups: () -> ::Array[Types::InstanceGroup]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#list_instance_groups-instance_method
+      def list_instance_groups: (
+                                  cluster_id: ::String,
+                                  ?marker: ::String
+                                ) -> _ListInstanceGroupsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInstanceGroupsResponseSuccess
+
+      interface _ListInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInstancesOutput]
+        def instances: () -> ::Array[Types::Instance]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#list_instances-instance_method
+      def list_instances: (
+                            cluster_id: ::String,
+                            ?instance_group_id: ::String,
+                            ?instance_group_types: Array[("MASTER" | "CORE" | "TASK")],
+                            ?instance_fleet_id: ::String,
+                            ?instance_fleet_type: ("MASTER" | "CORE" | "TASK"),
+                            ?instance_states: Array[("AWAITING_FULFILLMENT" | "PROVISIONING" | "BOOTSTRAPPING" | "RUNNING" | "TERMINATED")],
+                            ?marker: ::String
+                          ) -> _ListInstancesResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInstancesResponseSuccess
+
+      interface _ListNotebookExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNotebookExecutionsOutput]
+        def notebook_executions: () -> ::Array[Types::NotebookExecutionSummary]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#list_notebook_executions-instance_method
+      def list_notebook_executions: (
+                                      ?editor_id: ::String,
+                                      ?status: ("START_PENDING" | "STARTING" | "RUNNING" | "FINISHING" | "FINISHED" | "FAILING" | "FAILED" | "STOP_PENDING" | "STOPPING" | "STOPPED"),
+                                      ?from: ::Time,
+                                      ?to: ::Time,
+                                      ?marker: ::String,
+                                      ?execution_engine_id: ::String
+                                    ) -> _ListNotebookExecutionsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNotebookExecutionsResponseSuccess
+
+      interface _ListReleaseLabelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReleaseLabelsOutput]
+        def release_labels: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#list_release_labels-instance_method
+      def list_release_labels: (
+                                 ?filters: {
+                                   prefix: ::String?,
+                                   application: ::String?
+                                 },
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _ListReleaseLabelsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReleaseLabelsResponseSuccess
+
+      interface _ListSecurityConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSecurityConfigurationsOutput]
+        def security_configurations: () -> ::Array[Types::SecurityConfigurationSummary]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#list_security_configurations-instance_method
+      def list_security_configurations: (
+                                          ?marker: ::String
+                                        ) -> _ListSecurityConfigurationsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSecurityConfigurationsResponseSuccess
+
+      interface _ListStepsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStepsOutput]
+        def steps: () -> ::Array[Types::StepSummary]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#list_steps-instance_method
+      def list_steps: (
+                        cluster_id: ::String,
+                        ?step_states: Array[("PENDING" | "CANCEL_PENDING" | "RUNNING" | "COMPLETED" | "CANCELLED" | "FAILED" | "INTERRUPTED")],
+                        ?step_ids: Array[::String],
+                        ?marker: ::String
+                      ) -> _ListStepsResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStepsResponseSuccess
+
+      interface _ListStudioSessionMappingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStudioSessionMappingsOutput]
+        def session_mappings: () -> ::Array[Types::SessionMappingSummary]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#list_studio_session_mappings-instance_method
+      def list_studio_session_mappings: (
+                                          ?studio_id: ::String,
+                                          ?identity_type: ("USER" | "GROUP"),
+                                          ?marker: ::String
+                                        ) -> _ListStudioSessionMappingsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStudioSessionMappingsResponseSuccess
+
+      interface _ListStudiosResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStudiosOutput]
+        def studios: () -> ::Array[Types::StudioSummary]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#list_studios-instance_method
+      def list_studios: (
+                          ?marker: ::String
+                        ) -> _ListStudiosResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStudiosResponseSuccess
+
+      interface _ListSupportedInstanceTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSupportedInstanceTypesOutput]
+        def supported_instance_types: () -> ::Array[Types::SupportedInstanceType]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#list_supported_instance_types-instance_method
+      def list_supported_instance_types: (
+                                           release_label: ::String,
+                                           ?marker: ::String
+                                         ) -> _ListSupportedInstanceTypesResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSupportedInstanceTypesResponseSuccess
+
+      interface _ModifyClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyClusterOutput]
+        def step_concurrency_level: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#modify_cluster-instance_method
+      def modify_cluster: (
+                            cluster_id: ::String,
+                            ?step_concurrency_level: ::Integer
+                          ) -> _ModifyClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyClusterResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#modify_instance_fleet-instance_method
+      def modify_instance_fleet: (
+                                   cluster_id: ::String,
+                                   instance_fleet: {
+                                     instance_fleet_id: ::String,
+                                     target_on_demand_capacity: ::Integer?,
+                                     target_spot_capacity: ::Integer?,
+                                     resize_specifications: {
+                                       spot_resize_specification: {
+                                         timeout_duration_minutes: ::Integer
+                                       }?,
+                                       on_demand_resize_specification: {
+                                         timeout_duration_minutes: ::Integer
+                                       }?
+                                     }?
+                                   }
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#modify_instance_groups-instance_method
+      def modify_instance_groups: (
+                                    ?cluster_id: ::String,
+                                    ?instance_groups: Array[
+                                      {
+                                        instance_group_id: ::String,
+                                        instance_count: ::Integer?,
+                                        ec2_instance_ids_to_terminate: Array[::String]?,
+                                        shrink_policy: {
+                                          decommission_timeout: ::Integer?,
+                                          instance_resize_policy: {
+                                            instances_to_terminate: Array[::String]?,
+                                            instances_to_protect: Array[::String]?,
+                                            instance_termination_timeout: ::Integer?
+                                          }?
+                                        }?,
+                                        reconfiguration_type: ("OVERWRITE" | "MERGE")?,
+                                        configurations: Array[
+                                          {
+                                            classification: ::String?,
+                                            configurations: untyped?,
+                                            properties: Hash[::String, ::String]?
+                                          },
+                                        ]?
+                                      },
+                                    ]
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _PutAutoScalingPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAutoScalingPolicyOutput]
+        def cluster_id: () -> ::String
+        def instance_group_id: () -> ::String
+        def auto_scaling_policy: () -> Types::AutoScalingPolicyDescription
+        def cluster_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#put_auto_scaling_policy-instance_method
+      def put_auto_scaling_policy: (
+                                     cluster_id: ::String,
+                                     instance_group_id: ::String,
+                                     auto_scaling_policy: {
+                                       constraints: {
+                                         min_capacity: ::Integer,
+                                         max_capacity: ::Integer
+                                       },
+                                       rules: Array[
+                                         {
+                                           name: ::String,
+                                           description: ::String?,
+                                           action: {
+                                             market: ("ON_DEMAND" | "SPOT")?,
+                                             simple_scaling_policy_configuration: {
+                                               adjustment_type: ("CHANGE_IN_CAPACITY" | "PERCENT_CHANGE_IN_CAPACITY" | "EXACT_CAPACITY")?,
+                                               scaling_adjustment: ::Integer,
+                                               cool_down: ::Integer?
+                                             }
+                                           },
+                                           trigger: {
+                                             cloud_watch_alarm_definition: {
+                                               comparison_operator: ("GREATER_THAN_OR_EQUAL" | "GREATER_THAN" | "LESS_THAN" | "LESS_THAN_OR_EQUAL"),
+                                               evaluation_periods: ::Integer?,
+                                               metric_name: ::String,
+                                               namespace: ::String?,
+                                               period: ::Integer,
+                                               statistic: ("SAMPLE_COUNT" | "AVERAGE" | "SUM" | "MINIMUM" | "MAXIMUM")?,
+                                               threshold: ::Float,
+                                               unit: ("NONE" | "SECONDS" | "MICRO_SECONDS" | "MILLI_SECONDS" | "BYTES" | "KILO_BYTES" | "MEGA_BYTES" | "GIGA_BYTES" | "TERA_BYTES" | "BITS" | "KILO_BITS" | "MEGA_BITS" | "GIGA_BITS" | "TERA_BITS" | "PERCENT" | "COUNT" | "BYTES_PER_SECOND" | "KILO_BYTES_PER_SECOND" | "MEGA_BYTES_PER_SECOND" | "GIGA_BYTES_PER_SECOND" | "TERA_BYTES_PER_SECOND" | "BITS_PER_SECOND" | "KILO_BITS_PER_SECOND" | "MEGA_BITS_PER_SECOND" | "GIGA_BITS_PER_SECOND" | "TERA_BITS_PER_SECOND" | "COUNT_PER_SECOND")?,
+                                               dimensions: Array[
+                                                 {
+                                                   key: ::String?,
+                                                   value: ::String?
+                                                 },
+                                               ]?
+                                             }
+                                           }
+                                         },
+                                       ]
+                                     }
+                                   ) -> _PutAutoScalingPolicyResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAutoScalingPolicyResponseSuccess
+
+      interface _PutAutoTerminationPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAutoTerminationPolicyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#put_auto_termination_policy-instance_method
+      def put_auto_termination_policy: (
+                                         cluster_id: ::String,
+                                         ?auto_termination_policy: {
+                                           idle_timeout: ::Integer?
+                                         }
+                                       ) -> _PutAutoTerminationPolicyResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAutoTerminationPolicyResponseSuccess
+
+      interface _PutBlockPublicAccessConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutBlockPublicAccessConfigurationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#put_block_public_access_configuration-instance_method
+      def put_block_public_access_configuration: (
+                                                   block_public_access_configuration: {
+                                                     block_public_security_group_rules: bool,
+                                                     permitted_public_security_group_rule_ranges: Array[
+                                                       {
+                                                         min_range: ::Integer,
+                                                         max_range: ::Integer?
+                                                       },
+                                                     ]?
+                                                   }
+                                                 ) -> _PutBlockPublicAccessConfigurationResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutBlockPublicAccessConfigurationResponseSuccess
+
+      interface _PutManagedScalingPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutManagedScalingPolicyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#put_managed_scaling_policy-instance_method
+      def put_managed_scaling_policy: (
+                                        cluster_id: ::String,
+                                        managed_scaling_policy: {
+                                          compute_limits: {
+                                            unit_type: ("InstanceFleetUnits" | "Instances" | "VCPU"),
+                                            minimum_capacity_units: ::Integer,
+                                            maximum_capacity_units: ::Integer,
+                                            maximum_on_demand_capacity_units: ::Integer?,
+                                            maximum_core_capacity_units: ::Integer?
+                                          }?
+                                        }
+                                      ) -> _PutManagedScalingPolicyResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutManagedScalingPolicyResponseSuccess
+
+      interface _RemoveAutoScalingPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveAutoScalingPolicyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#remove_auto_scaling_policy-instance_method
+      def remove_auto_scaling_policy: (
+                                        cluster_id: ::String,
+                                        instance_group_id: ::String
+                                      ) -> _RemoveAutoScalingPolicyResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveAutoScalingPolicyResponseSuccess
+
+      interface _RemoveAutoTerminationPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveAutoTerminationPolicyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#remove_auto_termination_policy-instance_method
+      def remove_auto_termination_policy: (
+                                            cluster_id: ::String
+                                          ) -> _RemoveAutoTerminationPolicyResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveAutoTerminationPolicyResponseSuccess
+
+      interface _RemoveManagedScalingPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveManagedScalingPolicyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#remove_managed_scaling_policy-instance_method
+      def remove_managed_scaling_policy: (
+                                           cluster_id: ::String
+                                         ) -> _RemoveManagedScalingPolicyResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveManagedScalingPolicyResponseSuccess
+
+      interface _RemoveTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveTagsOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#remove_tags-instance_method
+      def remove_tags: (
+                         resource_id: ::String,
+                         tag_keys: Array[::String]
+                       ) -> _RemoveTagsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveTagsResponseSuccess
+
+      interface _RunJobFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RunJobFlowOutput]
+        def job_flow_id: () -> ::String
+        def cluster_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#run_job_flow-instance_method
+      def run_job_flow: (
+                          name: ::String,
+                          ?log_uri: ::String,
+                          ?log_encryption_kms_key_id: ::String,
+                          ?additional_info: ::String,
+                          ?ami_version: ::String,
+                          ?release_label: ::String,
+                          instances: {
+                            master_instance_type: ::String?,
+                            slave_instance_type: ::String?,
+                            instance_count: ::Integer?,
+                            instance_groups: Array[
+                              {
+                                name: ::String?,
+                                market: ("ON_DEMAND" | "SPOT")?,
+                                instance_role: ("MASTER" | "CORE" | "TASK"),
+                                bid_price: ::String?,
+                                instance_type: ::String,
+                                instance_count: ::Integer,
+                                configurations: Array[
+                                  {
+                                    classification: ::String?,
+                                    configurations: untyped?,
+                                    properties: Hash[::String, ::String]?
+                                  },
+                                ]?,
+                                ebs_configuration: {
+                                  ebs_block_device_configs: Array[
+                                    {
+                                      volume_specification: {
+                                        volume_type: ::String,
+                                        iops: ::Integer?,
+                                        size_in_gb: ::Integer,
+                                        throughput: ::Integer?
+                                      },
+                                      volumes_per_instance: ::Integer?
+                                    },
+                                  ]?,
+                                  ebs_optimized: bool?
+                                }?,
+                                auto_scaling_policy: {
+                                  constraints: {
+                                    min_capacity: ::Integer,
+                                    max_capacity: ::Integer
+                                  },
+                                  rules: Array[
+                                    {
+                                      name: ::String,
+                                      description: ::String?,
+                                      action: {
+                                        market: ("ON_DEMAND" | "SPOT")?,
+                                        simple_scaling_policy_configuration: {
+                                          adjustment_type: ("CHANGE_IN_CAPACITY" | "PERCENT_CHANGE_IN_CAPACITY" | "EXACT_CAPACITY")?,
+                                          scaling_adjustment: ::Integer,
+                                          cool_down: ::Integer?
+                                        }
+                                      },
+                                      trigger: {
+                                        cloud_watch_alarm_definition: {
+                                          comparison_operator: ("GREATER_THAN_OR_EQUAL" | "GREATER_THAN" | "LESS_THAN" | "LESS_THAN_OR_EQUAL"),
+                                          evaluation_periods: ::Integer?,
+                                          metric_name: ::String,
+                                          namespace: ::String?,
+                                          period: ::Integer,
+                                          statistic: ("SAMPLE_COUNT" | "AVERAGE" | "SUM" | "MINIMUM" | "MAXIMUM")?,
+                                          threshold: ::Float,
+                                          unit: ("NONE" | "SECONDS" | "MICRO_SECONDS" | "MILLI_SECONDS" | "BYTES" | "KILO_BYTES" | "MEGA_BYTES" | "GIGA_BYTES" | "TERA_BYTES" | "BITS" | "KILO_BITS" | "MEGA_BITS" | "GIGA_BITS" | "TERA_BITS" | "PERCENT" | "COUNT" | "BYTES_PER_SECOND" | "KILO_BYTES_PER_SECOND" | "MEGA_BYTES_PER_SECOND" | "GIGA_BYTES_PER_SECOND" | "TERA_BYTES_PER_SECOND" | "BITS_PER_SECOND" | "KILO_BITS_PER_SECOND" | "MEGA_BITS_PER_SECOND" | "GIGA_BITS_PER_SECOND" | "TERA_BITS_PER_SECOND" | "COUNT_PER_SECOND")?,
+                                          dimensions: Array[
+                                            {
+                                              key: ::String?,
+                                              value: ::String?
+                                            },
+                                          ]?
+                                        }
+                                      }
+                                    },
+                                  ]
+                                }?,
+                                custom_ami_id: ::String?
+                              },
+                            ]?,
+                            instance_fleets: Array[
+                              {
+                                name: ::String?,
+                                instance_fleet_type: ("MASTER" | "CORE" | "TASK"),
+                                target_on_demand_capacity: ::Integer?,
+                                target_spot_capacity: ::Integer?,
+                                instance_type_configs: Array[
+                                  {
+                                    instance_type: ::String,
+                                    weighted_capacity: ::Integer?,
+                                    bid_price: ::String?,
+                                    bid_price_as_percentage_of_on_demand_price: ::Float?,
+                                    ebs_configuration: {
+                                      ebs_block_device_configs: Array[
+                                        {
+                                          volume_specification: {
+                                            volume_type: ::String,
+                                            iops: ::Integer?,
+                                            size_in_gb: ::Integer,
+                                            throughput: ::Integer?
+                                          },
+                                          volumes_per_instance: ::Integer?
+                                        },
+                                      ]?,
+                                      ebs_optimized: bool?
+                                    }?,
+                                    configurations: Array[
+                                      {
+                                        classification: ::String?,
+                                        configurations: untyped?,
+                                        properties: Hash[::String, ::String]?
+                                      },
+                                    ]?,
+                                    custom_ami_id: ::String?
+                                  },
+                                ]?,
+                                launch_specifications: {
+                                  spot_specification: {
+                                    timeout_duration_minutes: ::Integer,
+                                    timeout_action: ("SWITCH_TO_ON_DEMAND" | "TERMINATE_CLUSTER"),
+                                    block_duration_minutes: ::Integer?,
+                                    allocation_strategy: ("capacity-optimized" | "price-capacity-optimized" | "lowest-price" | "diversified")?
+                                  }?,
+                                  on_demand_specification: {
+                                    allocation_strategy: ("lowest-price"),
+                                    capacity_reservation_options: {
+                                      usage_strategy: ("use-capacity-reservations-first")?,
+                                      capacity_reservation_preference: ("open" | "none")?,
+                                      capacity_reservation_resource_group_arn: ::String?
+                                    }?
+                                  }?
+                                }?,
+                                resize_specifications: {
+                                  spot_resize_specification: {
+                                    timeout_duration_minutes: ::Integer
+                                  }?,
+                                  on_demand_resize_specification: {
+                                    timeout_duration_minutes: ::Integer
+                                  }?
+                                }?
+                              },
+                            ]?,
+                            ec2_key_name: ::String?,
+                            placement: {
+                              availability_zone: ::String?,
+                              availability_zones: Array[::String]?
+                            }?,
+                            keep_job_flow_alive_when_no_steps: bool?,
+                            termination_protected: bool?,
+                            hadoop_version: ::String?,
+                            ec2_subnet_id: ::String?,
+                            ec2_subnet_ids: Array[::String]?,
+                            emr_managed_master_security_group: ::String?,
+                            emr_managed_slave_security_group: ::String?,
+                            service_access_security_group: ::String?,
+                            additional_master_security_groups: Array[::String]?,
+                            additional_slave_security_groups: Array[::String]?
+                          },
+                          ?steps: Array[
+                            {
+                              name: ::String,
+                              action_on_failure: ("TERMINATE_JOB_FLOW" | "TERMINATE_CLUSTER" | "CANCEL_AND_WAIT" | "CONTINUE")?,
+                              hadoop_jar_step: {
+                                properties: Array[
+                                  {
+                                    key: ::String?,
+                                    value: ::String?
+                                  },
+                                ]?,
+                                jar: ::String,
+                                main_class: ::String?,
+                                args: Array[::String]?
+                              }
+                            },
+                          ],
+                          ?bootstrap_actions: Array[
+                            {
+                              name: ::String,
+                              script_bootstrap_action: {
+                                path: ::String,
+                                args: Array[::String]?
+                              }
+                            },
+                          ],
+                          ?supported_products: Array[::String],
+                          ?new_supported_products: Array[
+                            {
+                              name: ::String?,
+                              args: Array[::String]?
+                            },
+                          ],
+                          ?applications: Array[
+                            {
+                              name: ::String?,
+                              version: ::String?,
+                              args: Array[::String]?,
+                              additional_info: Hash[::String, ::String]?
+                            },
+                          ],
+                          ?configurations: Array[
+                            {
+                              classification: ::String?,
+                              configurations: untyped?,
+                              properties: Hash[::String, ::String]?
+                            },
+                          ],
+                          ?visible_to_all_users: bool,
+                          ?job_flow_role: ::String,
+                          ?service_role: ::String,
+                          ?tags: Array[
+                            {
+                              key: ::String?,
+                              value: ::String?
+                            },
+                          ],
+                          ?security_configuration: ::String,
+                          ?auto_scaling_role: ::String,
+                          ?scale_down_behavior: ("TERMINATE_AT_INSTANCE_HOUR" | "TERMINATE_AT_TASK_COMPLETION"),
+                          ?custom_ami_id: ::String,
+                          ?ebs_root_volume_size: ::Integer,
+                          ?repo_upgrade_on_boot: ("SECURITY" | "NONE"),
+                          ?kerberos_attributes: {
+                            realm: ::String,
+                            kdc_admin_password: ::String,
+                            cross_realm_trust_principal_password: ::String?,
+                            ad_domain_join_user: ::String?,
+                            ad_domain_join_password: ::String?
+                          },
+                          ?step_concurrency_level: ::Integer,
+                          ?managed_scaling_policy: {
+                            compute_limits: {
+                              unit_type: ("InstanceFleetUnits" | "Instances" | "VCPU"),
+                              minimum_capacity_units: ::Integer,
+                              maximum_capacity_units: ::Integer,
+                              maximum_on_demand_capacity_units: ::Integer?,
+                              maximum_core_capacity_units: ::Integer?
+                            }?
+                          },
+                          ?placement_group_configs: Array[
+                            {
+                              instance_role: ("MASTER" | "CORE" | "TASK"),
+                              placement_strategy: ("SPREAD" | "PARTITION" | "CLUSTER" | "NONE")?
+                            },
+                          ],
+                          ?auto_termination_policy: {
+                            idle_timeout: ::Integer?
+                          },
+                          ?os_release_label: ::String,
+                          ?ebs_root_volume_iops: ::Integer,
+                          ?ebs_root_volume_throughput: ::Integer
+                        ) -> _RunJobFlowResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RunJobFlowResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#set_keep_job_flow_alive_when_no_steps-instance_method
+      def set_keep_job_flow_alive_when_no_steps: (
+                                                   job_flow_ids: Array[::String],
+                                                   keep_job_flow_alive_when_no_steps: bool
+                                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#set_termination_protection-instance_method
+      def set_termination_protection: (
+                                        job_flow_ids: Array[::String],
+                                        termination_protected: bool
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#set_visible_to_all_users-instance_method
+      def set_visible_to_all_users: (
+                                      job_flow_ids: Array[::String],
+                                      visible_to_all_users: bool
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _StartNotebookExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartNotebookExecutionOutput]
+        def notebook_execution_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#start_notebook_execution-instance_method
+      def start_notebook_execution: (
+                                      ?editor_id: ::String,
+                                      ?relative_path: ::String,
+                                      ?notebook_execution_name: ::String,
+                                      ?notebook_params: ::String,
+                                      execution_engine: {
+                                        id: ::String,
+                                        type: ("EMR")?,
+                                        master_instance_security_group_id: ::String?,
+                                        execution_role_arn: ::String?
+                                      },
+                                      service_role: ::String,
+                                      ?notebook_instance_security_group_id: ::String,
+                                      ?tags: Array[
+                                        {
+                                          key: ::String?,
+                                          value: ::String?
+                                        },
+                                      ],
+                                      ?notebook_s3_location: {
+                                        bucket: ::String?,
+                                        key: ::String?
+                                      },
+                                      ?output_notebook_s3_location: {
+                                        bucket: ::String?,
+                                        key: ::String?
+                                      },
+                                      ?output_notebook_format: ("HTML"),
+                                      ?environment_variables: Hash[::String, ::String]
+                                    ) -> _StartNotebookExecutionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartNotebookExecutionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#stop_notebook_execution-instance_method
+      def stop_notebook_execution: (
+                                     notebook_execution_id: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#terminate_job_flows-instance_method
+      def terminate_job_flows: (
+                                 job_flow_ids: Array[::String]
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#update_studio-instance_method
+      def update_studio: (
+                           studio_id: ::String,
+                           ?name: ::String,
+                           ?description: ::String,
+                           ?subnet_ids: Array[::String],
+                           ?default_s3_location: ::String,
+                           ?encryption_key_arn: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#update_studio_session_mapping-instance_method
+      def update_studio_session_mapping: (
+                                           studio_id: ::String,
+                                           ?identity_id: ::String,
+                                           ?identity_name: ::String,
+                                           identity_type: ("USER" | "GROUP"),
+                                           session_policy_arn: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#wait_until-instance_method
+      def wait_until: (:cluster_running waiter_name, 
+                    cluster_id: ::String
+                  ) -> Client::_DescribeClusterResponseSuccess
+                    | (:cluster_running waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeClusterResponseSuccess
+                    | (:cluster_terminated waiter_name, 
+                    cluster_id: ::String
+                  ) -> Client::_DescribeClusterResponseSuccess
+                    | (:cluster_terminated waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeClusterResponseSuccess
+                    | (:step_complete waiter_name, 
+                    cluster_id: ::String,
+                    step_id: ::String
+                  ) -> Client::_DescribeStepResponseSuccess
+                    | (:step_complete waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeStepResponseSuccess
+    end
+  end
+end
+

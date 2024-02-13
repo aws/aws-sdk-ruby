@@ -889,6 +889,8 @@ module Aws::CloudWatchLogs
     #   '\_' (underscore), '-' (hyphen), '/' (forward slash), '.'
     #   (period), and '#' (number sign)
     #
+    # * Log group names can't start with the string `aws/`
+    #
     # When you create a log group, by default the log events in the log
     # group do not expire. To set a retention policy so that events expire
     # and are deleted after a specified time, use [PutRetentionPolicy][1].
@@ -1519,6 +1521,22 @@ module Aws::CloudWatchLogs
     # Retrieves a list of the deliveries that have been created in the
     # account.
     #
+    # A *delivery* is a connection between a [ *delivery source* ][1] and a
+    # [ *delivery destination* ][2].
+    #
+    # A delivery source represents an Amazon Web Services resource that
+    # sends logs to an logs delivery destination. The destination can be
+    # CloudWatch Logs, Amazon S3, or Kinesis Data Firehose. Only some Amazon
+    # Web Services services support being configured as a delivery source.
+    # These services are listed in [Enable logging from Amazon Web Services
+    # services.][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html
+    #
     # @option params [String] :next_token
     #   The token for the next set of items to return. The token expires after
     #   24 hours.
@@ -1879,6 +1897,7 @@ module Aws::CloudWatchLogs
     #   resp.log_groups[0].inherited_properties #=> Array
     #   resp.log_groups[0].inherited_properties[0] #=> String, one of "ACCOUNT_DATA_PROTECTION"
     #   resp.log_groups[0].log_group_class #=> String, one of "STANDARD", "INFREQUENT_ACCESS"
+    #   resp.log_groups[0].log_group_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogGroups AWS API Documentation
@@ -2548,17 +2567,27 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Returns complete information about one *delivery*. A delivery is a
-    # connection between a logical *delivery source* and a logical *delivery
-    # destination*
+    # Returns complete information about one logical *delivery*. A delivery
+    # is a connection between a [ *delivery source* ][1] and a [ *delivery
+    # destination* ][2].
+    #
+    # A delivery source represents an Amazon Web Services resource that
+    # sends logs to an logs delivery destination. The destination can be
+    # CloudWatch Logs, Amazon S3, or Kinesis Data Firehose. Only some Amazon
+    # Web Services services support being configured as a delivery source.
+    # These services are listed in [Enable logging from Amazon Web Services
+    # services.][3]
     #
     # You need to specify the delivery `id` in this operation. You can find
     # the IDs of the deliveries in your account with the
-    # [DescribeDeliveries][1] operation.
+    # [DescribeDeliveries][4] operation.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveries.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html
+    # [4]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveries.html
     #
     # @option params [required, String] :id
     #   The ID of the delivery that you want to retrieve.
@@ -3837,8 +3866,8 @@ module Aws::CloudWatchLogs
     #   `arn:aws:workmail:us-east-1:123456789012:organization/m-1234EXAMPLEabcd1234abcd1234abcd1234`
     #
     # @option params [required, String] :log_type
-    #   Defines the type of log that the source is sending. For valid values
-    #   for this parameter, see the documentation for the source service.
+    #   Defines the type of log that the source is sending. For Amazon
+    #   CodeWhisperer, the valid value is `EVENT_LOGS`.
     #
     # @option params [Hash<String,String>] :tags
     #   An optional list of key-value pairs to associate with the resource.
@@ -5320,7 +5349,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

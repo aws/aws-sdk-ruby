@@ -1,0 +1,320 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CodeGuruReviewer
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruReviewer/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateRepositoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateRepositoryResponse]
+        def repository_association: () -> Types::RepositoryAssociation
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruReviewer/Client.html#associate_repository-instance_method
+      def associate_repository: (
+                                  repository: {
+                                    code_commit: {
+                                      name: ::String
+                                    }?,
+                                    bitbucket: {
+                                      name: ::String,
+                                      connection_arn: ::String,
+                                      owner: ::String
+                                    }?,
+                                    git_hub_enterprise_server: {
+                                      name: ::String,
+                                      connection_arn: ::String,
+                                      owner: ::String
+                                    }?,
+                                    s3_bucket: {
+                                      name: ::String,
+                                      bucket_name: ::String
+                                    }?
+                                  },
+                                  ?client_request_token: ::String,
+                                  ?tags: Hash[::String, ::String],
+                                  ?kms_key_details: {
+                                    kms_key_id: ::String?,
+                                    encryption_option: ("AWS_OWNED_CMK" | "CUSTOMER_MANAGED_CMK")?
+                                  }
+                                ) -> _AssociateRepositoryResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateRepositoryResponseSuccess
+
+      interface _CreateCodeReviewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCodeReviewResponse]
+        def code_review: () -> Types::CodeReview
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruReviewer/Client.html#create_code_review-instance_method
+      def create_code_review: (
+                                name: ::String,
+                                repository_association_arn: ::String,
+                                type: {
+                                  repository_analysis: {
+                                    repository_head: {
+                                      branch_name: ::String
+                                    }?,
+                                    source_code_type: {
+                                      commit_diff: {
+                                        source_commit: ::String?,
+                                        destination_commit: ::String?,
+                                        merge_base_commit: ::String?
+                                      }?,
+                                      repository_head: {
+                                        branch_name: ::String
+                                      }?,
+                                      branch_diff: {
+                                        source_branch_name: ::String,
+                                        destination_branch_name: ::String
+                                      }?,
+                                      s3_bucket_repository: {
+                                        name: ::String,
+                                        details: {
+                                          bucket_name: ::String?,
+                                          code_artifacts: {
+                                            source_code_artifacts_object_key: ::String,
+                                            build_artifacts_object_key: ::String?
+                                          }?
+                                        }?
+                                      }?,
+                                      request_metadata: {
+                                        request_id: ::String?,
+                                        requester: ::String?,
+                                        event_info: {
+                                          name: ::String?,
+                                          state: ::String?
+                                        }?,
+                                        vendor_name: ("GitHub" | "GitLab" | "NativeS3")?
+                                      }?
+                                    }?
+                                  },
+                                  analysis_types: Array[("Security" | "CodeQuality")]?
+                                },
+                                ?client_request_token: ::String
+                              ) -> _CreateCodeReviewResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCodeReviewResponseSuccess
+
+      interface _DescribeCodeReviewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCodeReviewResponse]
+        def code_review: () -> Types::CodeReview
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruReviewer/Client.html#describe_code_review-instance_method
+      def describe_code_review: (
+                                  code_review_arn: ::String
+                                ) -> _DescribeCodeReviewResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCodeReviewResponseSuccess
+
+      interface _DescribeRecommendationFeedbackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRecommendationFeedbackResponse]
+        def recommendation_feedback: () -> Types::RecommendationFeedback
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruReviewer/Client.html#describe_recommendation_feedback-instance_method
+      def describe_recommendation_feedback: (
+                                              code_review_arn: ::String,
+                                              recommendation_id: ::String,
+                                              ?user_id: ::String
+                                            ) -> _DescribeRecommendationFeedbackResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRecommendationFeedbackResponseSuccess
+
+      interface _DescribeRepositoryAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRepositoryAssociationResponse]
+        def repository_association: () -> Types::RepositoryAssociation
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruReviewer/Client.html#describe_repository_association-instance_method
+      def describe_repository_association: (
+                                             association_arn: ::String
+                                           ) -> _DescribeRepositoryAssociationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRepositoryAssociationResponseSuccess
+
+      interface _DisassociateRepositoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateRepositoryResponse]
+        def repository_association: () -> Types::RepositoryAssociation
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruReviewer/Client.html#disassociate_repository-instance_method
+      def disassociate_repository: (
+                                     association_arn: ::String
+                                   ) -> _DisassociateRepositoryResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateRepositoryResponseSuccess
+
+      interface _ListCodeReviewsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCodeReviewsResponse]
+        def code_review_summaries: () -> ::Array[Types::CodeReviewSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruReviewer/Client.html#list_code_reviews-instance_method
+      def list_code_reviews: (
+                               ?provider_types: Array[("CodeCommit" | "GitHub" | "Bitbucket" | "GitHubEnterpriseServer" | "S3Bucket")],
+                               ?states: Array[("Completed" | "Pending" | "Failed" | "Deleting")],
+                               ?repository_names: Array[::String],
+                               type: ("PullRequest" | "RepositoryAnalysis"),
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListCodeReviewsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCodeReviewsResponseSuccess
+
+      interface _ListRecommendationFeedbackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecommendationFeedbackResponse]
+        def recommendation_feedback_summaries: () -> ::Array[Types::RecommendationFeedbackSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruReviewer/Client.html#list_recommendation_feedback-instance_method
+      def list_recommendation_feedback: (
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer,
+                                          code_review_arn: ::String,
+                                          ?user_ids: Array[::String],
+                                          ?recommendation_ids: Array[::String]
+                                        ) -> _ListRecommendationFeedbackResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommendationFeedbackResponseSuccess
+
+      interface _ListRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecommendationsResponse]
+        def recommendation_summaries: () -> ::Array[Types::RecommendationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruReviewer/Client.html#list_recommendations-instance_method
+      def list_recommendations: (
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer,
+                                  code_review_arn: ::String
+                                ) -> _ListRecommendationsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommendationsResponseSuccess
+
+      interface _ListRepositoryAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRepositoryAssociationsResponse]
+        def repository_association_summaries: () -> ::Array[Types::RepositoryAssociationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruReviewer/Client.html#list_repository_associations-instance_method
+      def list_repository_associations: (
+                                          ?provider_types: Array[("CodeCommit" | "GitHub" | "Bitbucket" | "GitHubEnterpriseServer" | "S3Bucket")],
+                                          ?states: Array[("Associated" | "Associating" | "Failed" | "Disassociating" | "Disassociated")],
+                                          ?names: Array[::String],
+                                          ?owners: Array[::String],
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListRepositoryAssociationsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRepositoryAssociationsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruReviewer/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutRecommendationFeedbackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutRecommendationFeedbackResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruReviewer/Client.html#put_recommendation_feedback-instance_method
+      def put_recommendation_feedback: (
+                                         code_review_arn: ::String,
+                                         recommendation_id: ::String,
+                                         reactions: Array[("ThumbsUp" | "ThumbsDown")]
+                                       ) -> _PutRecommendationFeedbackResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutRecommendationFeedbackResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruReviewer/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruReviewer/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruReviewer/Client.html#wait_until-instance_method
+      def wait_until: (:code_review_completed waiter_name, 
+                    code_review_arn: ::String
+                  ) -> Client::_DescribeCodeReviewResponseSuccess
+                    | (:code_review_completed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeCodeReviewResponseSuccess
+                    | (:repository_association_succeeded waiter_name, 
+                    association_arn: ::String
+                  ) -> Client::_DescribeRepositoryAssociationResponseSuccess
+                    | (:repository_association_succeeded waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeRepositoryAssociationResponseSuccess
+    end
+  end
+end
+

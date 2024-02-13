@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.125.0 (2024-02-01)
+------------------
+
+* Feature - This release includes support for broadcast-mixed audio description tracks.
+
+1.124.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.123.0 (2024-01-03)
 ------------------
 

@@ -1,0 +1,739 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Amplify
+  module Types
+
+    class App
+      attr_accessor app_id: ::String
+      attr_accessor app_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor description: ::String
+      attr_accessor repository: ::String
+      attr_accessor platform: ("WEB" | "WEB_DYNAMIC" | "WEB_COMPUTE")
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor iam_service_role_arn: ::String
+      attr_accessor environment_variables: ::Hash[::String, ::String]
+      attr_accessor default_domain: ::String
+      attr_accessor enable_branch_auto_build: bool
+      attr_accessor enable_branch_auto_deletion: bool
+      attr_accessor enable_basic_auth: bool
+      attr_accessor basic_auth_credentials: ::String
+      attr_accessor custom_rules: ::Array[Types::CustomRule]
+      attr_accessor production_branch: Types::ProductionBranch
+      attr_accessor build_spec: ::String
+      attr_accessor custom_headers: ::String
+      attr_accessor enable_auto_branch_creation: bool
+      attr_accessor auto_branch_creation_patterns: ::Array[::String]
+      attr_accessor auto_branch_creation_config: Types::AutoBranchCreationConfig
+      attr_accessor repository_clone_method: ("SSH" | "TOKEN" | "SIGV4")
+      SENSITIVE: [:basic_auth_credentials, :build_spec]
+    end
+
+    class Artifact
+      attr_accessor artifact_file_name: ::String
+      attr_accessor artifact_id: ::String
+      SENSITIVE: []
+    end
+
+    class AutoBranchCreationConfig
+      attr_accessor stage: ("PRODUCTION" | "BETA" | "DEVELOPMENT" | "EXPERIMENTAL" | "PULL_REQUEST")
+      attr_accessor framework: ::String
+      attr_accessor enable_auto_build: bool
+      attr_accessor environment_variables: ::Hash[::String, ::String]
+      attr_accessor basic_auth_credentials: ::String
+      attr_accessor enable_basic_auth: bool
+      attr_accessor enable_performance_mode: bool
+      attr_accessor build_spec: ::String
+      attr_accessor enable_pull_request_preview: bool
+      attr_accessor pull_request_environment_name: ::String
+      SENSITIVE: [:basic_auth_credentials, :build_spec]
+    end
+
+    class Backend
+      attr_accessor stack_arn: ::String
+      SENSITIVE: []
+    end
+
+    class BackendEnvironment
+      attr_accessor backend_environment_arn: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor stack_name: ::String
+      attr_accessor deployment_artifacts: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Branch
+      attr_accessor branch_arn: ::String
+      attr_accessor branch_name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor stage: ("PRODUCTION" | "BETA" | "DEVELOPMENT" | "EXPERIMENTAL" | "PULL_REQUEST")
+      attr_accessor display_name: ::String
+      attr_accessor enable_notification: bool
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor environment_variables: ::Hash[::String, ::String]
+      attr_accessor enable_auto_build: bool
+      attr_accessor custom_domains: ::Array[::String]
+      attr_accessor framework: ::String
+      attr_accessor active_job_id: ::String
+      attr_accessor total_number_of_jobs: ::String
+      attr_accessor enable_basic_auth: bool
+      attr_accessor enable_performance_mode: bool
+      attr_accessor thumbnail_url: ::String
+      attr_accessor basic_auth_credentials: ::String
+      attr_accessor build_spec: ::String
+      attr_accessor ttl: ::String
+      attr_accessor associated_resources: ::Array[::String]
+      attr_accessor enable_pull_request_preview: bool
+      attr_accessor pull_request_environment_name: ::String
+      attr_accessor destination_branch: ::String
+      attr_accessor source_branch: ::String
+      attr_accessor backend_environment_arn: ::String
+      attr_accessor backend: Types::Backend
+      SENSITIVE: [:basic_auth_credentials, :build_spec]
+    end
+
+    class CreateAppRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor repository: ::String
+      attr_accessor platform: ("WEB" | "WEB_DYNAMIC" | "WEB_COMPUTE")
+      attr_accessor iam_service_role_arn: ::String
+      attr_accessor oauth_token: ::String
+      attr_accessor access_token: ::String
+      attr_accessor environment_variables: ::Hash[::String, ::String]
+      attr_accessor enable_branch_auto_build: bool
+      attr_accessor enable_branch_auto_deletion: bool
+      attr_accessor enable_basic_auth: bool
+      attr_accessor basic_auth_credentials: ::String
+      attr_accessor custom_rules: ::Array[Types::CustomRule]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor build_spec: ::String
+      attr_accessor custom_headers: ::String
+      attr_accessor enable_auto_branch_creation: bool
+      attr_accessor auto_branch_creation_patterns: ::Array[::String]
+      attr_accessor auto_branch_creation_config: Types::AutoBranchCreationConfig
+      SENSITIVE: [:oauth_token, :access_token, :basic_auth_credentials, :build_spec]
+    end
+
+    class CreateAppResult
+      attr_accessor app: Types::App
+      SENSITIVE: []
+    end
+
+    class CreateBackendEnvironmentRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor stack_name: ::String
+      attr_accessor deployment_artifacts: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBackendEnvironmentResult
+      attr_accessor backend_environment: Types::BackendEnvironment
+      SENSITIVE: []
+    end
+
+    class CreateBranchRequest
+      attr_accessor app_id: ::String
+      attr_accessor branch_name: ::String
+      attr_accessor description: ::String
+      attr_accessor stage: ("PRODUCTION" | "BETA" | "DEVELOPMENT" | "EXPERIMENTAL" | "PULL_REQUEST")
+      attr_accessor framework: ::String
+      attr_accessor enable_notification: bool
+      attr_accessor enable_auto_build: bool
+      attr_accessor environment_variables: ::Hash[::String, ::String]
+      attr_accessor basic_auth_credentials: ::String
+      attr_accessor enable_basic_auth: bool
+      attr_accessor enable_performance_mode: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor build_spec: ::String
+      attr_accessor ttl: ::String
+      attr_accessor display_name: ::String
+      attr_accessor enable_pull_request_preview: bool
+      attr_accessor pull_request_environment_name: ::String
+      attr_accessor backend_environment_arn: ::String
+      attr_accessor backend: Types::Backend
+      SENSITIVE: [:basic_auth_credentials, :build_spec]
+    end
+
+    class CreateBranchResult
+      attr_accessor branch: Types::Branch
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentRequest
+      attr_accessor app_id: ::String
+      attr_accessor branch_name: ::String
+      attr_accessor file_map: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentResult
+      attr_accessor job_id: ::String
+      attr_accessor file_upload_urls: ::Hash[::String, ::String]
+      attr_accessor zip_upload_url: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDomainAssociationRequest
+      attr_accessor app_id: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor enable_auto_sub_domain: bool
+      attr_accessor sub_domain_settings: ::Array[Types::SubDomainSetting]
+      attr_accessor auto_sub_domain_creation_patterns: ::Array[::String]
+      attr_accessor auto_sub_domain_iam_role: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDomainAssociationResult
+      attr_accessor domain_association: Types::DomainAssociation
+      SENSITIVE: []
+    end
+
+    class CreateWebhookRequest
+      attr_accessor app_id: ::String
+      attr_accessor branch_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWebhookResult
+      attr_accessor webhook: Types::Webhook
+      SENSITIVE: []
+    end
+
+    class CustomRule
+      attr_accessor source: ::String
+      attr_accessor target: ::String
+      attr_accessor status: ::String
+      attr_accessor condition: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppRequest
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppResult
+      attr_accessor app: Types::App
+      SENSITIVE: []
+    end
+
+    class DeleteBackendEnvironmentRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBackendEnvironmentResult
+      attr_accessor backend_environment: Types::BackendEnvironment
+      SENSITIVE: []
+    end
+
+    class DeleteBranchRequest
+      attr_accessor app_id: ::String
+      attr_accessor branch_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBranchResult
+      attr_accessor branch: Types::Branch
+      SENSITIVE: []
+    end
+
+    class DeleteDomainAssociationRequest
+      attr_accessor app_id: ::String
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDomainAssociationResult
+      attr_accessor domain_association: Types::DomainAssociation
+      SENSITIVE: []
+    end
+
+    class DeleteJobRequest
+      attr_accessor app_id: ::String
+      attr_accessor branch_name: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteJobResult
+      attr_accessor job_summary: Types::JobSummary
+      SENSITIVE: []
+    end
+
+    class DeleteWebhookRequest
+      attr_accessor webhook_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWebhookResult
+      attr_accessor webhook: Types::Webhook
+      SENSITIVE: []
+    end
+
+    class DependentServiceFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DomainAssociation
+      attr_accessor domain_association_arn: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor enable_auto_sub_domain: bool
+      attr_accessor auto_sub_domain_creation_patterns: ::Array[::String]
+      attr_accessor auto_sub_domain_iam_role: ::String
+      attr_accessor domain_status: ("PENDING_VERIFICATION" | "IN_PROGRESS" | "AVAILABLE" | "PENDING_DEPLOYMENT" | "FAILED" | "CREATING" | "REQUESTING_CERTIFICATE" | "UPDATING")
+      attr_accessor status_reason: ::String
+      attr_accessor certificate_verification_dns_record: ::String
+      attr_accessor sub_domains: ::Array[Types::SubDomain]
+      SENSITIVE: []
+    end
+
+    class GenerateAccessLogsRequest
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor domain_name: ::String
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class GenerateAccessLogsResult
+      attr_accessor log_url: ::String
+      SENSITIVE: []
+    end
+
+    class GetAppRequest
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAppResult
+      attr_accessor app: Types::App
+      SENSITIVE: []
+    end
+
+    class GetArtifactUrlRequest
+      attr_accessor artifact_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetArtifactUrlResult
+      attr_accessor artifact_id: ::String
+      attr_accessor artifact_url: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackendEnvironmentRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackendEnvironmentResult
+      attr_accessor backend_environment: Types::BackendEnvironment
+      SENSITIVE: []
+    end
+
+    class GetBranchRequest
+      attr_accessor app_id: ::String
+      attr_accessor branch_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetBranchResult
+      attr_accessor branch: Types::Branch
+      SENSITIVE: []
+    end
+
+    class GetDomainAssociationRequest
+      attr_accessor app_id: ::String
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainAssociationResult
+      attr_accessor domain_association: Types::DomainAssociation
+      SENSITIVE: []
+    end
+
+    class GetJobRequest
+      attr_accessor app_id: ::String
+      attr_accessor branch_name: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobResult
+      attr_accessor job: Types::Job
+      SENSITIVE: []
+    end
+
+    class GetWebhookRequest
+      attr_accessor webhook_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWebhookResult
+      attr_accessor webhook: Types::Webhook
+      SENSITIVE: []
+    end
+
+    class InternalFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Job
+      attr_accessor summary: Types::JobSummary
+      attr_accessor steps: ::Array[Types::Step]
+      SENSITIVE: []
+    end
+
+    class JobSummary
+      attr_accessor job_arn: ::String
+      attr_accessor job_id: ::String
+      attr_accessor commit_id: ::String
+      attr_accessor commit_message: ::String
+      attr_accessor commit_time: ::Time
+      attr_accessor start_time: ::Time
+      attr_accessor status: ("PENDING" | "PROVISIONING" | "RUNNING" | "FAILED" | "SUCCEED" | "CANCELLING" | "CANCELLED")
+      attr_accessor end_time: ::Time
+      attr_accessor job_type: ("RELEASE" | "RETRY" | "MANUAL" | "WEB_HOOK")
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAppsResult
+      attr_accessor apps: ::Array[Types::App]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListArtifactsRequest
+      attr_accessor app_id: ::String
+      attr_accessor branch_name: ::String
+      attr_accessor job_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListArtifactsResult
+      attr_accessor artifacts: ::Array[Types::Artifact]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBackendEnvironmentsRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListBackendEnvironmentsResult
+      attr_accessor backend_environments: ::Array[Types::BackendEnvironment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBranchesRequest
+      attr_accessor app_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListBranchesResult
+      attr_accessor branches: ::Array[Types::Branch]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDomainAssociationsRequest
+      attr_accessor app_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDomainAssociationsResult
+      attr_accessor domain_associations: ::Array[Types::DomainAssociation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobsRequest
+      attr_accessor app_id: ::String
+      attr_accessor branch_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListJobsResult
+      attr_accessor job_summaries: ::Array[Types::JobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListWebhooksRequest
+      attr_accessor app_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListWebhooksResult
+      attr_accessor webhooks: ::Array[Types::Webhook]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ProductionBranch
+      attr_accessor last_deploy_time: ::Time
+      attr_accessor status: ::String
+      attr_accessor thumbnail_url: ::String
+      attr_accessor branch_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartDeploymentRequest
+      attr_accessor app_id: ::String
+      attr_accessor branch_name: ::String
+      attr_accessor job_id: ::String
+      attr_accessor source_url: ::String
+      SENSITIVE: []
+    end
+
+    class StartDeploymentResult
+      attr_accessor job_summary: Types::JobSummary
+      SENSITIVE: []
+    end
+
+    class StartJobRequest
+      attr_accessor app_id: ::String
+      attr_accessor branch_name: ::String
+      attr_accessor job_id: ::String
+      attr_accessor job_type: ("RELEASE" | "RETRY" | "MANUAL" | "WEB_HOOK")
+      attr_accessor job_reason: ::String
+      attr_accessor commit_id: ::String
+      attr_accessor commit_message: ::String
+      attr_accessor commit_time: ::Time
+      SENSITIVE: []
+    end
+
+    class StartJobResult
+      attr_accessor job_summary: Types::JobSummary
+      SENSITIVE: []
+    end
+
+    class Step
+      attr_accessor step_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor status: ("PENDING" | "PROVISIONING" | "RUNNING" | "FAILED" | "SUCCEED" | "CANCELLING" | "CANCELLED")
+      attr_accessor end_time: ::Time
+      attr_accessor log_url: ::String
+      attr_accessor artifacts_url: ::String
+      attr_accessor test_artifacts_url: ::String
+      attr_accessor test_config_url: ::String
+      attr_accessor screenshots: ::Hash[::String, ::String]
+      attr_accessor status_reason: ::String
+      attr_accessor context: ::String
+      SENSITIVE: []
+    end
+
+    class StopJobRequest
+      attr_accessor app_id: ::String
+      attr_accessor branch_name: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopJobResult
+      attr_accessor job_summary: Types::JobSummary
+      SENSITIVE: []
+    end
+
+    class SubDomain
+      attr_accessor sub_domain_setting: Types::SubDomainSetting
+      attr_accessor verified: bool
+      attr_accessor dns_record: ::String
+      SENSITIVE: []
+    end
+
+    class SubDomainSetting
+      attr_accessor prefix: ::String
+      attr_accessor branch_name: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAppRequest
+      attr_accessor app_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor platform: ("WEB" | "WEB_DYNAMIC" | "WEB_COMPUTE")
+      attr_accessor iam_service_role_arn: ::String
+      attr_accessor environment_variables: ::Hash[::String, ::String]
+      attr_accessor enable_branch_auto_build: bool
+      attr_accessor enable_branch_auto_deletion: bool
+      attr_accessor enable_basic_auth: bool
+      attr_accessor basic_auth_credentials: ::String
+      attr_accessor custom_rules: ::Array[Types::CustomRule]
+      attr_accessor build_spec: ::String
+      attr_accessor custom_headers: ::String
+      attr_accessor enable_auto_branch_creation: bool
+      attr_accessor auto_branch_creation_patterns: ::Array[::String]
+      attr_accessor auto_branch_creation_config: Types::AutoBranchCreationConfig
+      attr_accessor repository: ::String
+      attr_accessor oauth_token: ::String
+      attr_accessor access_token: ::String
+      SENSITIVE: [:basic_auth_credentials, :build_spec, :oauth_token, :access_token]
+    end
+
+    class UpdateAppResult
+      attr_accessor app: Types::App
+      SENSITIVE: []
+    end
+
+    class UpdateBranchRequest
+      attr_accessor app_id: ::String
+      attr_accessor branch_name: ::String
+      attr_accessor description: ::String
+      attr_accessor framework: ::String
+      attr_accessor stage: ("PRODUCTION" | "BETA" | "DEVELOPMENT" | "EXPERIMENTAL" | "PULL_REQUEST")
+      attr_accessor enable_notification: bool
+      attr_accessor enable_auto_build: bool
+      attr_accessor environment_variables: ::Hash[::String, ::String]
+      attr_accessor basic_auth_credentials: ::String
+      attr_accessor enable_basic_auth: bool
+      attr_accessor enable_performance_mode: bool
+      attr_accessor build_spec: ::String
+      attr_accessor ttl: ::String
+      attr_accessor display_name: ::String
+      attr_accessor enable_pull_request_preview: bool
+      attr_accessor pull_request_environment_name: ::String
+      attr_accessor backend_environment_arn: ::String
+      attr_accessor backend: Types::Backend
+      SENSITIVE: [:basic_auth_credentials, :build_spec]
+    end
+
+    class UpdateBranchResult
+      attr_accessor branch: Types::Branch
+      SENSITIVE: []
+    end
+
+    class UpdateDomainAssociationRequest
+      attr_accessor app_id: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor enable_auto_sub_domain: bool
+      attr_accessor sub_domain_settings: ::Array[Types::SubDomainSetting]
+      attr_accessor auto_sub_domain_creation_patterns: ::Array[::String]
+      attr_accessor auto_sub_domain_iam_role: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDomainAssociationResult
+      attr_accessor domain_association: Types::DomainAssociation
+      SENSITIVE: []
+    end
+
+    class UpdateWebhookRequest
+      attr_accessor webhook_id: ::String
+      attr_accessor branch_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateWebhookResult
+      attr_accessor webhook: Types::Webhook
+      SENSITIVE: []
+    end
+
+    class Webhook
+      attr_accessor webhook_arn: ::String
+      attr_accessor webhook_id: ::String
+      attr_accessor webhook_url: ::String
+      attr_accessor branch_name: ::String
+      attr_accessor description: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+  end
+end

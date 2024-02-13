@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2024-02-09)
+------------------
+
+* Feature - Add Throttling Exception to all APIs.
+
+1.54.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.53.0 (2023-11-28)
 ------------------
 

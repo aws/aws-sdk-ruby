@@ -312,6 +312,7 @@ module Aws::Redshift
     IamRoleArnList = Shapes::ListShape.new(name: 'IamRoleArnList')
     IdcDisplayNameString = Shapes::StringShape.new(name: 'IdcDisplayNameString')
     IdentityNamespaceString = Shapes::StringShape.new(name: 'IdentityNamespaceString')
+    ImpactRankingType = Shapes::StringShape.new(name: 'ImpactRankingType')
     ImportTablesCompleted = Shapes::ListShape.new(name: 'ImportTablesCompleted')
     ImportTablesInProgress = Shapes::ListShape.new(name: 'ImportTablesInProgress')
     ImportTablesNotStarted = Shapes::ListShape.new(name: 'ImportTablesNotStarted')
@@ -363,6 +364,8 @@ module Aws::Redshift
     LakeFormationScopeUnion = Shapes::UnionShape.new(name: 'LakeFormationScopeUnion')
     LakeFormationServiceIntegrations = Shapes::ListShape.new(name: 'LakeFormationServiceIntegrations')
     LimitExceededFault = Shapes::StructureShape.new(name: 'LimitExceededFault')
+    ListRecommendationsMessage = Shapes::StructureShape.new(name: 'ListRecommendationsMessage')
+    ListRecommendationsResult = Shapes::StructureShape.new(name: 'ListRecommendationsResult')
     LogDestinationType = Shapes::StringShape.new(name: 'LogDestinationType')
     LogTypeList = Shapes::ListShape.new(name: 'LogTypeList')
     LoggingStatus = Shapes::StructureShape.new(name: 'LoggingStatus')
@@ -439,6 +442,11 @@ module Aws::Redshift
     PutResourcePolicyResult = Shapes::StructureShape.new(name: 'PutResourcePolicyResult')
     RebootClusterMessage = Shapes::StructureShape.new(name: 'RebootClusterMessage')
     RebootClusterResult = Shapes::StructureShape.new(name: 'RebootClusterResult')
+    Recommendation = Shapes::StructureShape.new(name: 'Recommendation')
+    RecommendationList = Shapes::ListShape.new(name: 'RecommendationList')
+    RecommendedAction = Shapes::StructureShape.new(name: 'RecommendedAction')
+    RecommendedActionList = Shapes::ListShape.new(name: 'RecommendedActionList')
+    RecommendedActionType = Shapes::StringShape.new(name: 'RecommendedActionType')
     RecurringCharge = Shapes::StructureShape.new(name: 'RecurringCharge')
     RecurringChargeList = Shapes::ListShape.new(name: 'RecurringChargeList')
     RedshiftIdcApplication = Shapes::StructureShape.new(name: 'RedshiftIdcApplication')
@@ -447,6 +455,8 @@ module Aws::Redshift
     RedshiftIdcApplicationName = Shapes::StringShape.new(name: 'RedshiftIdcApplicationName')
     RedshiftIdcApplicationNotExistsFault = Shapes::StructureShape.new(name: 'RedshiftIdcApplicationNotExistsFault')
     RedshiftIdcApplicationQuotaExceededFault = Shapes::StructureShape.new(name: 'RedshiftIdcApplicationQuotaExceededFault')
+    ReferenceLink = Shapes::StructureShape.new(name: 'ReferenceLink')
+    ReferenceLinkList = Shapes::ListShape.new(name: 'ReferenceLinkList')
     RejectDataShareMessage = Shapes::StructureShape.new(name: 'RejectDataShareMessage')
     ReservedNode = Shapes::StructureShape.new(name: 'ReservedNode')
     ReservedNodeAlreadyExistsFault = Shapes::StructureShape.new(name: 'ReservedNodeAlreadyExistsFault')
@@ -1960,6 +1970,16 @@ module Aws::Redshift
 
     LimitExceededFault.struct_class = Types::LimitExceededFault
 
+    ListRecommendationsMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
+    ListRecommendationsMessage.add_member(:namespace_arn, Shapes::ShapeRef.new(shape: String, location_name: "NamespaceArn"))
+    ListRecommendationsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    ListRecommendationsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    ListRecommendationsMessage.struct_class = Types::ListRecommendationsMessage
+
+    ListRecommendationsResult.add_member(:recommendations, Shapes::ShapeRef.new(shape: RecommendationList, location_name: "Recommendations"))
+    ListRecommendationsResult.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    ListRecommendationsResult.struct_class = Types::ListRecommendationsResult
+
     LogTypeList.member = Shapes::ShapeRef.new(shape: String)
 
     LoggingStatus.add_member(:logging_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "LoggingEnabled"))
@@ -2265,6 +2285,30 @@ module Aws::Redshift
     RebootClusterResult.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
     RebootClusterResult.struct_class = Types::RebootClusterResult
 
+    Recommendation.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
+    Recommendation.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
+    Recommendation.add_member(:namespace_arn, Shapes::ShapeRef.new(shape: String, location_name: "NamespaceArn"))
+    Recommendation.add_member(:created_at, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreatedAt"))
+    Recommendation.add_member(:recommendation_type, Shapes::ShapeRef.new(shape: String, location_name: "RecommendationType"))
+    Recommendation.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "Title"))
+    Recommendation.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    Recommendation.add_member(:observation, Shapes::ShapeRef.new(shape: String, location_name: "Observation"))
+    Recommendation.add_member(:impact_ranking, Shapes::ShapeRef.new(shape: ImpactRankingType, location_name: "ImpactRanking"))
+    Recommendation.add_member(:recommendation_text, Shapes::ShapeRef.new(shape: String, location_name: "RecommendationText"))
+    Recommendation.add_member(:recommended_actions, Shapes::ShapeRef.new(shape: RecommendedActionList, location_name: "RecommendedActions"))
+    Recommendation.add_member(:reference_links, Shapes::ShapeRef.new(shape: ReferenceLinkList, location_name: "ReferenceLinks"))
+    Recommendation.struct_class = Types::Recommendation
+
+    RecommendationList.member = Shapes::ShapeRef.new(shape: Recommendation, location_name: "Recommendation")
+
+    RecommendedAction.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
+    RecommendedAction.add_member(:database, Shapes::ShapeRef.new(shape: String, location_name: "Database"))
+    RecommendedAction.add_member(:command, Shapes::ShapeRef.new(shape: String, location_name: "Command"))
+    RecommendedAction.add_member(:type, Shapes::ShapeRef.new(shape: RecommendedActionType, location_name: "Type"))
+    RecommendedAction.struct_class = Types::RecommendedAction
+
+    RecommendedActionList.member = Shapes::ShapeRef.new(shape: RecommendedAction, location_name: "RecommendedAction")
+
     RecurringCharge.add_member(:recurring_charge_amount, Shapes::ShapeRef.new(shape: Double, location_name: "RecurringChargeAmount"))
     RecurringCharge.add_member(:recurring_charge_frequency, Shapes::ShapeRef.new(shape: String, location_name: "RecurringChargeFrequency"))
     RecurringCharge.struct_class = Types::RecurringCharge
@@ -2290,6 +2334,12 @@ module Aws::Redshift
     RedshiftIdcApplicationNotExistsFault.struct_class = Types::RedshiftIdcApplicationNotExistsFault
 
     RedshiftIdcApplicationQuotaExceededFault.struct_class = Types::RedshiftIdcApplicationQuotaExceededFault
+
+    ReferenceLink.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
+    ReferenceLink.add_member(:link, Shapes::ShapeRef.new(shape: String, location_name: "Link"))
+    ReferenceLink.struct_class = Types::ReferenceLink
+
+    ReferenceLinkList.member = Shapes::ShapeRef.new(shape: ReferenceLink, location_name: "ReferenceLink")
 
     RejectDataShareMessage.add_member(:data_share_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataShareArn"))
     RejectDataShareMessage.struct_class = Types::RejectDataShareMessage
@@ -4192,6 +4242,22 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidPolicyFault)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+      end)
+
+      api.add_operation(:list_recommendations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRecommendations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListRecommendationsMessage)
+        o.output = Shapes::ShapeRef.new(shape: ListRecommendationsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:modify_aqua_configuration, Seahorse::Model::Operation.new.tap do |o|

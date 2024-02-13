@@ -1,0 +1,1293 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CodeBuild
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchDeleteBuildsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteBuildsOutput]
+        def builds_deleted: () -> ::Array[::String]
+        def builds_not_deleted: () -> ::Array[Types::BuildNotDeleted]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#batch_delete_builds-instance_method
+      def batch_delete_builds: (
+                                 ids: Array[::String]
+                               ) -> _BatchDeleteBuildsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteBuildsResponseSuccess
+
+      interface _BatchGetBuildBatchesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetBuildBatchesOutput]
+        def build_batches: () -> ::Array[Types::BuildBatch]
+        def build_batches_not_found: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#batch_get_build_batches-instance_method
+      def batch_get_build_batches: (
+                                     ids: Array[::String]
+                                   ) -> _BatchGetBuildBatchesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetBuildBatchesResponseSuccess
+
+      interface _BatchGetBuildsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetBuildsOutput]
+        def builds: () -> ::Array[Types::Build]
+        def builds_not_found: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#batch_get_builds-instance_method
+      def batch_get_builds: (
+                              ids: Array[::String]
+                            ) -> _BatchGetBuildsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetBuildsResponseSuccess
+
+      interface _BatchGetFleetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetFleetsOutput]
+        def fleets: () -> ::Array[Types::Fleet]
+        def fleets_not_found: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#batch_get_fleets-instance_method
+      def batch_get_fleets: (
+                              names: Array[::String]
+                            ) -> _BatchGetFleetsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetFleetsResponseSuccess
+
+      interface _BatchGetProjectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetProjectsOutput]
+        def projects: () -> ::Array[Types::Project]
+        def projects_not_found: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#batch_get_projects-instance_method
+      def batch_get_projects: (
+                                names: Array[::String]
+                              ) -> _BatchGetProjectsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetProjectsResponseSuccess
+
+      interface _BatchGetReportGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetReportGroupsOutput]
+        def report_groups: () -> ::Array[Types::ReportGroup]
+        def report_groups_not_found: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#batch_get_report_groups-instance_method
+      def batch_get_report_groups: (
+                                     report_group_arns: Array[::String]
+                                   ) -> _BatchGetReportGroupsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetReportGroupsResponseSuccess
+
+      interface _BatchGetReportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetReportsOutput]
+        def reports: () -> ::Array[Types::Report]
+        def reports_not_found: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#batch_get_reports-instance_method
+      def batch_get_reports: (
+                               report_arns: Array[::String]
+                             ) -> _BatchGetReportsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetReportsResponseSuccess
+
+      interface _CreateFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFleetOutput]
+        def fleet: () -> Types::Fleet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#create_fleet-instance_method
+      def create_fleet: (
+                          name: ::String,
+                          base_capacity: ::Integer,
+                          environment_type: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER"),
+                          compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB"),
+                          ?scaling_configuration: {
+                            scaling_type: ("TARGET_TRACKING_SCALING")?,
+                            target_tracking_scaling_configs: Array[
+                              {
+                                metric_type: ("FLEET_UTILIZATION_RATE")?,
+                                target_value: ::Float?
+                              },
+                            ]?,
+                            max_capacity: ::Integer?
+                          },
+                          ?tags: Array[
+                            {
+                              key: ::String?,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _CreateFleetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFleetResponseSuccess
+
+      interface _CreateProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProjectOutput]
+        def project: () -> Types::Project
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#create_project-instance_method
+      def create_project: (
+                            name: ::String,
+                            ?description: ::String,
+                            source: {
+                              type: ("CODECOMMIT" | "CODEPIPELINE" | "GITHUB" | "S3" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "NO_SOURCE"),
+                              location: ::String?,
+                              git_clone_depth: ::Integer?,
+                              git_submodules_config: {
+                                fetch_submodules: bool
+                              }?,
+                              buildspec: ::String?,
+                              auth: {
+                                type: ("OAUTH"),
+                                resource: ::String?
+                              }?,
+                              report_build_status: bool?,
+                              build_status_config: {
+                                context: ::String?,
+                                target_url: ::String?
+                              }?,
+                              insecure_ssl: bool?,
+                              source_identifier: ::String?
+                            },
+                            ?secondary_sources: Array[
+                              {
+                                type: ("CODECOMMIT" | "CODEPIPELINE" | "GITHUB" | "S3" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "NO_SOURCE"),
+                                location: ::String?,
+                                git_clone_depth: ::Integer?,
+                                git_submodules_config: {
+                                  fetch_submodules: bool
+                                }?,
+                                buildspec: ::String?,
+                                auth: {
+                                  type: ("OAUTH"),
+                                  resource: ::String?
+                                }?,
+                                report_build_status: bool?,
+                                build_status_config: {
+                                  context: ::String?,
+                                  target_url: ::String?
+                                }?,
+                                insecure_ssl: bool?,
+                                source_identifier: ::String?
+                              },
+                            ],
+                            ?source_version: ::String,
+                            ?secondary_source_versions: Array[
+                              {
+                                source_identifier: ::String,
+                                source_version: ::String
+                              },
+                            ],
+                            artifacts: {
+                              type: ("CODEPIPELINE" | "S3" | "NO_ARTIFACTS"),
+                              location: ::String?,
+                              path: ::String?,
+                              namespace_type: ("NONE" | "BUILD_ID")?,
+                              name: ::String?,
+                              packaging: ("NONE" | "ZIP")?,
+                              override_artifact_name: bool?,
+                              encryption_disabled: bool?,
+                              artifact_identifier: ::String?,
+                              bucket_owner_access: ("NONE" | "READ_ONLY" | "FULL")?
+                            },
+                            ?secondary_artifacts: Array[
+                              {
+                                type: ("CODEPIPELINE" | "S3" | "NO_ARTIFACTS"),
+                                location: ::String?,
+                                path: ::String?,
+                                namespace_type: ("NONE" | "BUILD_ID")?,
+                                name: ::String?,
+                                packaging: ("NONE" | "ZIP")?,
+                                override_artifact_name: bool?,
+                                encryption_disabled: bool?,
+                                artifact_identifier: ::String?,
+                                bucket_owner_access: ("NONE" | "READ_ONLY" | "FULL")?
+                              },
+                            ],
+                            ?cache: {
+                              type: ("NO_CACHE" | "S3" | "LOCAL"),
+                              location: ::String?,
+                              modes: Array[("LOCAL_DOCKER_LAYER_CACHE" | "LOCAL_SOURCE_CACHE" | "LOCAL_CUSTOM_CACHE")]?
+                            },
+                            environment: {
+                              type: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER"),
+                              image: ::String,
+                              compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB"),
+                              fleet: {
+                                fleet_arn: ::String?
+                              }?,
+                              environment_variables: Array[
+                                {
+                                  name: ::String,
+                                  value: ::String,
+                                  type: ("PLAINTEXT" | "PARAMETER_STORE" | "SECRETS_MANAGER")?
+                                },
+                              ]?,
+                              privileged_mode: bool?,
+                              certificate: ::String?,
+                              registry_credential: {
+                                credential: ::String,
+                                credential_provider: ("SECRETS_MANAGER")
+                              }?,
+                              image_pull_credentials_type: ("CODEBUILD" | "SERVICE_ROLE")?
+                            },
+                            service_role: ::String,
+                            ?timeout_in_minutes: ::Integer,
+                            ?queued_timeout_in_minutes: ::Integer,
+                            ?encryption_key: ::String,
+                            ?tags: Array[
+                              {
+                                key: ::String?,
+                                value: ::String?
+                              },
+                            ],
+                            ?vpc_config: {
+                              vpc_id: ::String?,
+                              subnets: Array[::String]?,
+                              security_group_ids: Array[::String]?
+                            },
+                            ?badge_enabled: bool,
+                            ?logs_config: {
+                              cloud_watch_logs: {
+                                status: ("ENABLED" | "DISABLED"),
+                                group_name: ::String?,
+                                stream_name: ::String?
+                              }?,
+                              s3_logs: {
+                                status: ("ENABLED" | "DISABLED"),
+                                location: ::String?,
+                                encryption_disabled: bool?,
+                                bucket_owner_access: ("NONE" | "READ_ONLY" | "FULL")?
+                              }?
+                            },
+                            ?file_system_locations: Array[
+                              {
+                                type: ("EFS")?,
+                                location: ::String?,
+                                mount_point: ::String?,
+                                identifier: ::String?,
+                                mount_options: ::String?
+                              },
+                            ],
+                            ?build_batch_config: {
+                              service_role: ::String?,
+                              combine_artifacts: bool?,
+                              restrictions: {
+                                maximum_builds_allowed: ::Integer?,
+                                compute_types_allowed: Array[::String]?
+                              }?,
+                              timeout_in_mins: ::Integer?,
+                              batch_report_mode: ("REPORT_INDIVIDUAL_BUILDS" | "REPORT_AGGREGATED_BATCH")?
+                            },
+                            ?concurrent_build_limit: ::Integer
+                          ) -> _CreateProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProjectResponseSuccess
+
+      interface _CreateReportGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateReportGroupOutput]
+        def report_group: () -> Types::ReportGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#create_report_group-instance_method
+      def create_report_group: (
+                                 name: ::String,
+                                 type: ("TEST" | "CODE_COVERAGE"),
+                                 export_config: {
+                                   export_config_type: ("S3" | "NO_EXPORT")?,
+                                   s3_destination: {
+                                     bucket: ::String?,
+                                     bucket_owner: ::String?,
+                                     path: ::String?,
+                                     packaging: ("ZIP" | "NONE")?,
+                                     encryption_key: ::String?,
+                                     encryption_disabled: bool?
+                                   }?
+                                 },
+                                 ?tags: Array[
+                                   {
+                                     key: ::String?,
+                                     value: ::String?
+                                   },
+                                 ]
+                               ) -> _CreateReportGroupResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReportGroupResponseSuccess
+
+      interface _CreateWebhookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWebhookOutput]
+        def webhook: () -> Types::Webhook
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#create_webhook-instance_method
+      def create_webhook: (
+                            project_name: ::String,
+                            ?branch_filter: ::String,
+                            ?filter_groups: Array[
+                              Array[
+                                {
+                                  type: ("EVENT" | "BASE_REF" | "HEAD_REF" | "ACTOR_ACCOUNT_ID" | "FILE_PATH" | "COMMIT_MESSAGE"),
+                                  pattern: ::String,
+                                  exclude_matched_pattern: bool?
+                                },
+                              ],
+                            ],
+                            ?build_type: ("BUILD" | "BUILD_BATCH")
+                          ) -> _CreateWebhookResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWebhookResponseSuccess
+
+      interface _DeleteBuildBatchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBuildBatchOutput]
+        def status_code: () -> ::String
+        def builds_deleted: () -> ::Array[::String]
+        def builds_not_deleted: () -> ::Array[Types::BuildNotDeleted]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#delete_build_batch-instance_method
+      def delete_build_batch: (
+                                id: ::String
+                              ) -> _DeleteBuildBatchResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBuildBatchResponseSuccess
+
+      interface _DeleteFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFleetOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#delete_fleet-instance_method
+      def delete_fleet: (
+                          arn: ::String
+                        ) -> _DeleteFleetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFleetResponseSuccess
+
+      interface _DeleteProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProjectOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#delete_project-instance_method
+      def delete_project: (
+                            name: ::String
+                          ) -> _DeleteProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProjectResponseSuccess
+
+      interface _DeleteReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReportOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#delete_report-instance_method
+      def delete_report: (
+                           arn: ::String
+                         ) -> _DeleteReportResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteReportResponseSuccess
+
+      interface _DeleteReportGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReportGroupOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#delete_report_group-instance_method
+      def delete_report_group: (
+                                 arn: ::String,
+                                 ?delete_reports: bool
+                               ) -> _DeleteReportGroupResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteReportGroupResponseSuccess
+
+      interface _DeleteResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourcePolicyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#delete_resource_policy-instance_method
+      def delete_resource_policy: (
+                                    resource_arn: ::String
+                                  ) -> _DeleteResourcePolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePolicyResponseSuccess
+
+      interface _DeleteSourceCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSourceCredentialsOutput]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#delete_source_credentials-instance_method
+      def delete_source_credentials: (
+                                       arn: ::String
+                                     ) -> _DeleteSourceCredentialsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSourceCredentialsResponseSuccess
+
+      interface _DeleteWebhookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWebhookOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#delete_webhook-instance_method
+      def delete_webhook: (
+                            project_name: ::String
+                          ) -> _DeleteWebhookResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWebhookResponseSuccess
+
+      interface _DescribeCodeCoveragesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCodeCoveragesOutput]
+        def next_token: () -> ::String
+        def code_coverages: () -> ::Array[Types::CodeCoverage]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#describe_code_coverages-instance_method
+      def describe_code_coverages: (
+                                     report_arn: ::String,
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer,
+                                     ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                     ?sort_by: ("LINE_COVERAGE_PERCENTAGE" | "FILE_PATH"),
+                                     ?min_line_coverage_percentage: ::Float,
+                                     ?max_line_coverage_percentage: ::Float
+                                   ) -> _DescribeCodeCoveragesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCodeCoveragesResponseSuccess
+
+      interface _DescribeTestCasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTestCasesOutput]
+        def next_token: () -> ::String
+        def test_cases: () -> ::Array[Types::TestCase]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#describe_test_cases-instance_method
+      def describe_test_cases: (
+                                 report_arn: ::String,
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer,
+                                 ?filter: {
+                                   status: ::String?,
+                                   keyword: ::String?
+                                 }
+                               ) -> _DescribeTestCasesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTestCasesResponseSuccess
+
+      interface _GetReportGroupTrendResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReportGroupTrendOutput]
+        def stats: () -> Types::ReportGroupTrendStats
+        def raw_data: () -> ::Array[Types::ReportWithRawData]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#get_report_group_trend-instance_method
+      def get_report_group_trend: (
+                                    report_group_arn: ::String,
+                                    ?num_of_reports: ::Integer,
+                                    trend_field: ("PASS_RATE" | "DURATION" | "TOTAL" | "LINE_COVERAGE" | "LINES_COVERED" | "LINES_MISSED" | "BRANCH_COVERAGE" | "BRANCHES_COVERED" | "BRANCHES_MISSED")
+                                  ) -> _GetReportGroupTrendResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReportGroupTrendResponseSuccess
+
+      interface _GetResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePolicyOutput]
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#get_resource_policy-instance_method
+      def get_resource_policy: (
+                                 resource_arn: ::String
+                               ) -> _GetResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
+
+      interface _ImportSourceCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportSourceCredentialsOutput]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#import_source_credentials-instance_method
+      def import_source_credentials: (
+                                       ?username: ::String,
+                                       token: ::String,
+                                       server_type: ("GITHUB" | "BITBUCKET" | "GITHUB_ENTERPRISE"),
+                                       auth_type: ("OAUTH" | "BASIC_AUTH" | "PERSONAL_ACCESS_TOKEN"),
+                                       ?should_overwrite: bool
+                                     ) -> _ImportSourceCredentialsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportSourceCredentialsResponseSuccess
+
+      interface _InvalidateProjectCacheResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvalidateProjectCacheOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#invalidate_project_cache-instance_method
+      def invalidate_project_cache: (
+                                      project_name: ::String
+                                    ) -> _InvalidateProjectCacheResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvalidateProjectCacheResponseSuccess
+
+      interface _ListBuildBatchesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBuildBatchesOutput]
+        def ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#list_build_batches-instance_method
+      def list_build_batches: (
+                                ?filter: {
+                                  status: ("SUCCEEDED" | "FAILED" | "FAULT" | "TIMED_OUT" | "IN_PROGRESS" | "STOPPED")?
+                                },
+                                ?max_results: ::Integer,
+                                ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                ?next_token: ::String
+                              ) -> _ListBuildBatchesResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBuildBatchesResponseSuccess
+
+      interface _ListBuildBatchesForProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBuildBatchesForProjectOutput]
+        def ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#list_build_batches_for_project-instance_method
+      def list_build_batches_for_project: (
+                                            ?project_name: ::String,
+                                            ?filter: {
+                                              status: ("SUCCEEDED" | "FAILED" | "FAULT" | "TIMED_OUT" | "IN_PROGRESS" | "STOPPED")?
+                                            },
+                                            ?max_results: ::Integer,
+                                            ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                            ?next_token: ::String
+                                          ) -> _ListBuildBatchesForProjectResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBuildBatchesForProjectResponseSuccess
+
+      interface _ListBuildsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBuildsOutput]
+        def ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#list_builds-instance_method
+      def list_builds: (
+                         ?sort_order: ("ASCENDING" | "DESCENDING"),
+                         ?next_token: ::String
+                       ) -> _ListBuildsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBuildsResponseSuccess
+
+      interface _ListBuildsForProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBuildsForProjectOutput]
+        def ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#list_builds_for_project-instance_method
+      def list_builds_for_project: (
+                                     project_name: ::String,
+                                     ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                     ?next_token: ::String
+                                   ) -> _ListBuildsForProjectResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBuildsForProjectResponseSuccess
+
+      interface _ListCuratedEnvironmentImagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCuratedEnvironmentImagesOutput]
+        def platforms: () -> ::Array[Types::EnvironmentPlatform]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#list_curated_environment_images-instance_method
+      def list_curated_environment_images: (
+                                           ) -> _ListCuratedEnvironmentImagesResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCuratedEnvironmentImagesResponseSuccess
+
+      interface _ListFleetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFleetsOutput]
+        def next_token: () -> ::String
+        def fleets: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#list_fleets-instance_method
+      def list_fleets: (
+                         ?next_token: ::String,
+                         ?max_results: ::Integer,
+                         ?sort_order: ("ASCENDING" | "DESCENDING"),
+                         ?sort_by: ("NAME" | "CREATED_TIME" | "LAST_MODIFIED_TIME")
+                       ) -> _ListFleetsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFleetsResponseSuccess
+
+      interface _ListProjectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProjectsOutput]
+        def next_token: () -> ::String
+        def projects: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#list_projects-instance_method
+      def list_projects: (
+                           ?sort_by: ("NAME" | "CREATED_TIME" | "LAST_MODIFIED_TIME"),
+                           ?sort_order: ("ASCENDING" | "DESCENDING"),
+                           ?next_token: ::String
+                         ) -> _ListProjectsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProjectsResponseSuccess
+
+      interface _ListReportGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReportGroupsOutput]
+        def next_token: () -> ::String
+        def report_groups: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#list_report_groups-instance_method
+      def list_report_groups: (
+                                ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                ?sort_by: ("NAME" | "CREATED_TIME" | "LAST_MODIFIED_TIME"),
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListReportGroupsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReportGroupsResponseSuccess
+
+      interface _ListReportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReportsOutput]
+        def next_token: () -> ::String
+        def reports: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#list_reports-instance_method
+      def list_reports: (
+                          ?sort_order: ("ASCENDING" | "DESCENDING"),
+                          ?next_token: ::String,
+                          ?max_results: ::Integer,
+                          ?filter: {
+                            status: ("GENERATING" | "SUCCEEDED" | "FAILED" | "INCOMPLETE" | "DELETING")?
+                          }
+                        ) -> _ListReportsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReportsResponseSuccess
+
+      interface _ListReportsForReportGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReportsForReportGroupOutput]
+        def next_token: () -> ::String
+        def reports: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#list_reports_for_report_group-instance_method
+      def list_reports_for_report_group: (
+                                           report_group_arn: ::String,
+                                           ?next_token: ::String,
+                                           ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                           ?max_results: ::Integer,
+                                           ?filter: {
+                                             status: ("GENERATING" | "SUCCEEDED" | "FAILED" | "INCOMPLETE" | "DELETING")?
+                                           }
+                                         ) -> _ListReportsForReportGroupResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReportsForReportGroupResponseSuccess
+
+      interface _ListSharedProjectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSharedProjectsOutput]
+        def next_token: () -> ::String
+        def projects: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#list_shared_projects-instance_method
+      def list_shared_projects: (
+                                  ?sort_by: ("ARN" | "MODIFIED_TIME"),
+                                  ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListSharedProjectsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSharedProjectsResponseSuccess
+
+      interface _ListSharedReportGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSharedReportGroupsOutput]
+        def next_token: () -> ::String
+        def report_groups: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#list_shared_report_groups-instance_method
+      def list_shared_report_groups: (
+                                       ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                       ?sort_by: ("ARN" | "MODIFIED_TIME"),
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListSharedReportGroupsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSharedReportGroupsResponseSuccess
+
+      interface _ListSourceCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSourceCredentialsOutput]
+        def source_credentials_infos: () -> ::Array[Types::SourceCredentialsInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#list_source_credentials-instance_method
+      def list_source_credentials: (
+                                   ) -> _ListSourceCredentialsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSourceCredentialsResponseSuccess
+
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyOutput]
+        def resource_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 policy: ::String,
+                                 resource_arn: ::String
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      interface _RetryBuildResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RetryBuildOutput]
+        def build: () -> Types::Build
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#retry_build-instance_method
+      def retry_build: (
+                         ?id: ::String,
+                         ?idempotency_token: ::String
+                       ) -> _RetryBuildResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RetryBuildResponseSuccess
+
+      interface _RetryBuildBatchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RetryBuildBatchOutput]
+        def build_batch: () -> Types::BuildBatch
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#retry_build_batch-instance_method
+      def retry_build_batch: (
+                               ?id: ::String,
+                               ?idempotency_token: ::String,
+                               ?retry_type: ("RETRY_ALL_BUILDS" | "RETRY_FAILED_BUILDS")
+                             ) -> _RetryBuildBatchResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RetryBuildBatchResponseSuccess
+
+      interface _StartBuildResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartBuildOutput]
+        def build: () -> Types::Build
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#start_build-instance_method
+      def start_build: (
+                         project_name: ::String,
+                         ?secondary_sources_override: Array[
+                           {
+                             type: ("CODECOMMIT" | "CODEPIPELINE" | "GITHUB" | "S3" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "NO_SOURCE"),
+                             location: ::String?,
+                             git_clone_depth: ::Integer?,
+                             git_submodules_config: {
+                               fetch_submodules: bool
+                             }?,
+                             buildspec: ::String?,
+                             auth: {
+                               type: ("OAUTH"),
+                               resource: ::String?
+                             }?,
+                             report_build_status: bool?,
+                             build_status_config: {
+                               context: ::String?,
+                               target_url: ::String?
+                             }?,
+                             insecure_ssl: bool?,
+                             source_identifier: ::String?
+                           },
+                         ],
+                         ?secondary_sources_version_override: Array[
+                           {
+                             source_identifier: ::String,
+                             source_version: ::String
+                           },
+                         ],
+                         ?source_version: ::String,
+                         ?artifacts_override: {
+                           type: ("CODEPIPELINE" | "S3" | "NO_ARTIFACTS"),
+                           location: ::String?,
+                           path: ::String?,
+                           namespace_type: ("NONE" | "BUILD_ID")?,
+                           name: ::String?,
+                           packaging: ("NONE" | "ZIP")?,
+                           override_artifact_name: bool?,
+                           encryption_disabled: bool?,
+                           artifact_identifier: ::String?,
+                           bucket_owner_access: ("NONE" | "READ_ONLY" | "FULL")?
+                         },
+                         ?secondary_artifacts_override: Array[
+                           {
+                             type: ("CODEPIPELINE" | "S3" | "NO_ARTIFACTS"),
+                             location: ::String?,
+                             path: ::String?,
+                             namespace_type: ("NONE" | "BUILD_ID")?,
+                             name: ::String?,
+                             packaging: ("NONE" | "ZIP")?,
+                             override_artifact_name: bool?,
+                             encryption_disabled: bool?,
+                             artifact_identifier: ::String?,
+                             bucket_owner_access: ("NONE" | "READ_ONLY" | "FULL")?
+                           },
+                         ],
+                         ?environment_variables_override: Array[
+                           {
+                             name: ::String,
+                             value: ::String,
+                             type: ("PLAINTEXT" | "PARAMETER_STORE" | "SECRETS_MANAGER")?
+                           },
+                         ],
+                         ?source_type_override: ("CODECOMMIT" | "CODEPIPELINE" | "GITHUB" | "S3" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "NO_SOURCE"),
+                         ?source_location_override: ::String,
+                         ?source_auth_override: {
+                           type: ("OAUTH"),
+                           resource: ::String?
+                         },
+                         ?git_clone_depth_override: ::Integer,
+                         ?git_submodules_config_override: {
+                           fetch_submodules: bool
+                         },
+                         ?buildspec_override: ::String,
+                         ?insecure_ssl_override: bool,
+                         ?report_build_status_override: bool,
+                         ?build_status_config_override: {
+                           context: ::String?,
+                           target_url: ::String?
+                         },
+                         ?environment_type_override: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER"),
+                         ?image_override: ::String,
+                         ?compute_type_override: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB"),
+                         ?certificate_override: ::String,
+                         ?cache_override: {
+                           type: ("NO_CACHE" | "S3" | "LOCAL"),
+                           location: ::String?,
+                           modes: Array[("LOCAL_DOCKER_LAYER_CACHE" | "LOCAL_SOURCE_CACHE" | "LOCAL_CUSTOM_CACHE")]?
+                         },
+                         ?service_role_override: ::String,
+                         ?privileged_mode_override: bool,
+                         ?timeout_in_minutes_override: ::Integer,
+                         ?queued_timeout_in_minutes_override: ::Integer,
+                         ?encryption_key_override: ::String,
+                         ?idempotency_token: ::String,
+                         ?logs_config_override: {
+                           cloud_watch_logs: {
+                             status: ("ENABLED" | "DISABLED"),
+                             group_name: ::String?,
+                             stream_name: ::String?
+                           }?,
+                           s3_logs: {
+                             status: ("ENABLED" | "DISABLED"),
+                             location: ::String?,
+                             encryption_disabled: bool?,
+                             bucket_owner_access: ("NONE" | "READ_ONLY" | "FULL")?
+                           }?
+                         },
+                         ?registry_credential_override: {
+                           credential: ::String,
+                           credential_provider: ("SECRETS_MANAGER")
+                         },
+                         ?image_pull_credentials_type_override: ("CODEBUILD" | "SERVICE_ROLE"),
+                         ?debug_session_enabled: bool,
+                         ?fleet_override: {
+                           fleet_arn: ::String?
+                         }
+                       ) -> _StartBuildResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartBuildResponseSuccess
+
+      interface _StartBuildBatchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartBuildBatchOutput]
+        def build_batch: () -> Types::BuildBatch
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#start_build_batch-instance_method
+      def start_build_batch: (
+                               project_name: ::String,
+                               ?secondary_sources_override: Array[
+                                 {
+                                   type: ("CODECOMMIT" | "CODEPIPELINE" | "GITHUB" | "S3" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "NO_SOURCE"),
+                                   location: ::String?,
+                                   git_clone_depth: ::Integer?,
+                                   git_submodules_config: {
+                                     fetch_submodules: bool
+                                   }?,
+                                   buildspec: ::String?,
+                                   auth: {
+                                     type: ("OAUTH"),
+                                     resource: ::String?
+                                   }?,
+                                   report_build_status: bool?,
+                                   build_status_config: {
+                                     context: ::String?,
+                                     target_url: ::String?
+                                   }?,
+                                   insecure_ssl: bool?,
+                                   source_identifier: ::String?
+                                 },
+                               ],
+                               ?secondary_sources_version_override: Array[
+                                 {
+                                   source_identifier: ::String,
+                                   source_version: ::String
+                                 },
+                               ],
+                               ?source_version: ::String,
+                               ?artifacts_override: {
+                                 type: ("CODEPIPELINE" | "S3" | "NO_ARTIFACTS"),
+                                 location: ::String?,
+                                 path: ::String?,
+                                 namespace_type: ("NONE" | "BUILD_ID")?,
+                                 name: ::String?,
+                                 packaging: ("NONE" | "ZIP")?,
+                                 override_artifact_name: bool?,
+                                 encryption_disabled: bool?,
+                                 artifact_identifier: ::String?,
+                                 bucket_owner_access: ("NONE" | "READ_ONLY" | "FULL")?
+                               },
+                               ?secondary_artifacts_override: Array[
+                                 {
+                                   type: ("CODEPIPELINE" | "S3" | "NO_ARTIFACTS"),
+                                   location: ::String?,
+                                   path: ::String?,
+                                   namespace_type: ("NONE" | "BUILD_ID")?,
+                                   name: ::String?,
+                                   packaging: ("NONE" | "ZIP")?,
+                                   override_artifact_name: bool?,
+                                   encryption_disabled: bool?,
+                                   artifact_identifier: ::String?,
+                                   bucket_owner_access: ("NONE" | "READ_ONLY" | "FULL")?
+                                 },
+                               ],
+                               ?environment_variables_override: Array[
+                                 {
+                                   name: ::String,
+                                   value: ::String,
+                                   type: ("PLAINTEXT" | "PARAMETER_STORE" | "SECRETS_MANAGER")?
+                                 },
+                               ],
+                               ?source_type_override: ("CODECOMMIT" | "CODEPIPELINE" | "GITHUB" | "S3" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "NO_SOURCE"),
+                               ?source_location_override: ::String,
+                               ?source_auth_override: {
+                                 type: ("OAUTH"),
+                                 resource: ::String?
+                               },
+                               ?git_clone_depth_override: ::Integer,
+                               ?git_submodules_config_override: {
+                                 fetch_submodules: bool
+                               },
+                               ?buildspec_override: ::String,
+                               ?insecure_ssl_override: bool,
+                               ?report_build_batch_status_override: bool,
+                               ?environment_type_override: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER"),
+                               ?image_override: ::String,
+                               ?compute_type_override: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB"),
+                               ?certificate_override: ::String,
+                               ?cache_override: {
+                                 type: ("NO_CACHE" | "S3" | "LOCAL"),
+                                 location: ::String?,
+                                 modes: Array[("LOCAL_DOCKER_LAYER_CACHE" | "LOCAL_SOURCE_CACHE" | "LOCAL_CUSTOM_CACHE")]?
+                               },
+                               ?service_role_override: ::String,
+                               ?privileged_mode_override: bool,
+                               ?build_timeout_in_minutes_override: ::Integer,
+                               ?queued_timeout_in_minutes_override: ::Integer,
+                               ?encryption_key_override: ::String,
+                               ?idempotency_token: ::String,
+                               ?logs_config_override: {
+                                 cloud_watch_logs: {
+                                   status: ("ENABLED" | "DISABLED"),
+                                   group_name: ::String?,
+                                   stream_name: ::String?
+                                 }?,
+                                 s3_logs: {
+                                   status: ("ENABLED" | "DISABLED"),
+                                   location: ::String?,
+                                   encryption_disabled: bool?,
+                                   bucket_owner_access: ("NONE" | "READ_ONLY" | "FULL")?
+                                 }?
+                               },
+                               ?registry_credential_override: {
+                                 credential: ::String,
+                                 credential_provider: ("SECRETS_MANAGER")
+                               },
+                               ?image_pull_credentials_type_override: ("CODEBUILD" | "SERVICE_ROLE"),
+                               ?build_batch_config_override: {
+                                 service_role: ::String?,
+                                 combine_artifacts: bool?,
+                                 restrictions: {
+                                   maximum_builds_allowed: ::Integer?,
+                                   compute_types_allowed: Array[::String]?
+                                 }?,
+                                 timeout_in_mins: ::Integer?,
+                                 batch_report_mode: ("REPORT_INDIVIDUAL_BUILDS" | "REPORT_AGGREGATED_BATCH")?
+                               },
+                               ?debug_session_enabled: bool
+                             ) -> _StartBuildBatchResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartBuildBatchResponseSuccess
+
+      interface _StopBuildResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopBuildOutput]
+        def build: () -> Types::Build
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#stop_build-instance_method
+      def stop_build: (
+                        id: ::String
+                      ) -> _StopBuildResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopBuildResponseSuccess
+
+      interface _StopBuildBatchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopBuildBatchOutput]
+        def build_batch: () -> Types::BuildBatch
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#stop_build_batch-instance_method
+      def stop_build_batch: (
+                              id: ::String
+                            ) -> _StopBuildBatchResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopBuildBatchResponseSuccess
+
+      interface _UpdateFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFleetOutput]
+        def fleet: () -> Types::Fleet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#update_fleet-instance_method
+      def update_fleet: (
+                          arn: ::String,
+                          ?base_capacity: ::Integer,
+                          ?environment_type: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER"),
+                          ?compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB"),
+                          ?scaling_configuration: {
+                            scaling_type: ("TARGET_TRACKING_SCALING")?,
+                            target_tracking_scaling_configs: Array[
+                              {
+                                metric_type: ("FLEET_UTILIZATION_RATE")?,
+                                target_value: ::Float?
+                              },
+                            ]?,
+                            max_capacity: ::Integer?
+                          },
+                          ?tags: Array[
+                            {
+                              key: ::String?,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _UpdateFleetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFleetResponseSuccess
+
+      interface _UpdateProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProjectOutput]
+        def project: () -> Types::Project
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#update_project-instance_method
+      def update_project: (
+                            name: ::String,
+                            ?description: ::String,
+                            ?source: {
+                              type: ("CODECOMMIT" | "CODEPIPELINE" | "GITHUB" | "S3" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "NO_SOURCE"),
+                              location: ::String?,
+                              git_clone_depth: ::Integer?,
+                              git_submodules_config: {
+                                fetch_submodules: bool
+                              }?,
+                              buildspec: ::String?,
+                              auth: {
+                                type: ("OAUTH"),
+                                resource: ::String?
+                              }?,
+                              report_build_status: bool?,
+                              build_status_config: {
+                                context: ::String?,
+                                target_url: ::String?
+                              }?,
+                              insecure_ssl: bool?,
+                              source_identifier: ::String?
+                            },
+                            ?secondary_sources: Array[
+                              {
+                                type: ("CODECOMMIT" | "CODEPIPELINE" | "GITHUB" | "S3" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "NO_SOURCE"),
+                                location: ::String?,
+                                git_clone_depth: ::Integer?,
+                                git_submodules_config: {
+                                  fetch_submodules: bool
+                                }?,
+                                buildspec: ::String?,
+                                auth: {
+                                  type: ("OAUTH"),
+                                  resource: ::String?
+                                }?,
+                                report_build_status: bool?,
+                                build_status_config: {
+                                  context: ::String?,
+                                  target_url: ::String?
+                                }?,
+                                insecure_ssl: bool?,
+                                source_identifier: ::String?
+                              },
+                            ],
+                            ?source_version: ::String,
+                            ?secondary_source_versions: Array[
+                              {
+                                source_identifier: ::String,
+                                source_version: ::String
+                              },
+                            ],
+                            ?artifacts: {
+                              type: ("CODEPIPELINE" | "S3" | "NO_ARTIFACTS"),
+                              location: ::String?,
+                              path: ::String?,
+                              namespace_type: ("NONE" | "BUILD_ID")?,
+                              name: ::String?,
+                              packaging: ("NONE" | "ZIP")?,
+                              override_artifact_name: bool?,
+                              encryption_disabled: bool?,
+                              artifact_identifier: ::String?,
+                              bucket_owner_access: ("NONE" | "READ_ONLY" | "FULL")?
+                            },
+                            ?secondary_artifacts: Array[
+                              {
+                                type: ("CODEPIPELINE" | "S3" | "NO_ARTIFACTS"),
+                                location: ::String?,
+                                path: ::String?,
+                                namespace_type: ("NONE" | "BUILD_ID")?,
+                                name: ::String?,
+                                packaging: ("NONE" | "ZIP")?,
+                                override_artifact_name: bool?,
+                                encryption_disabled: bool?,
+                                artifact_identifier: ::String?,
+                                bucket_owner_access: ("NONE" | "READ_ONLY" | "FULL")?
+                              },
+                            ],
+                            ?cache: {
+                              type: ("NO_CACHE" | "S3" | "LOCAL"),
+                              location: ::String?,
+                              modes: Array[("LOCAL_DOCKER_LAYER_CACHE" | "LOCAL_SOURCE_CACHE" | "LOCAL_CUSTOM_CACHE")]?
+                            },
+                            ?environment: {
+                              type: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER"),
+                              image: ::String,
+                              compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB"),
+                              fleet: {
+                                fleet_arn: ::String?
+                              }?,
+                              environment_variables: Array[
+                                {
+                                  name: ::String,
+                                  value: ::String,
+                                  type: ("PLAINTEXT" | "PARAMETER_STORE" | "SECRETS_MANAGER")?
+                                },
+                              ]?,
+                              privileged_mode: bool?,
+                              certificate: ::String?,
+                              registry_credential: {
+                                credential: ::String,
+                                credential_provider: ("SECRETS_MANAGER")
+                              }?,
+                              image_pull_credentials_type: ("CODEBUILD" | "SERVICE_ROLE")?
+                            },
+                            ?service_role: ::String,
+                            ?timeout_in_minutes: ::Integer,
+                            ?queued_timeout_in_minutes: ::Integer,
+                            ?encryption_key: ::String,
+                            ?tags: Array[
+                              {
+                                key: ::String?,
+                                value: ::String?
+                              },
+                            ],
+                            ?vpc_config: {
+                              vpc_id: ::String?,
+                              subnets: Array[::String]?,
+                              security_group_ids: Array[::String]?
+                            },
+                            ?badge_enabled: bool,
+                            ?logs_config: {
+                              cloud_watch_logs: {
+                                status: ("ENABLED" | "DISABLED"),
+                                group_name: ::String?,
+                                stream_name: ::String?
+                              }?,
+                              s3_logs: {
+                                status: ("ENABLED" | "DISABLED"),
+                                location: ::String?,
+                                encryption_disabled: bool?,
+                                bucket_owner_access: ("NONE" | "READ_ONLY" | "FULL")?
+                              }?
+                            },
+                            ?file_system_locations: Array[
+                              {
+                                type: ("EFS")?,
+                                location: ::String?,
+                                mount_point: ::String?,
+                                identifier: ::String?,
+                                mount_options: ::String?
+                              },
+                            ],
+                            ?build_batch_config: {
+                              service_role: ::String?,
+                              combine_artifacts: bool?,
+                              restrictions: {
+                                maximum_builds_allowed: ::Integer?,
+                                compute_types_allowed: Array[::String]?
+                              }?,
+                              timeout_in_mins: ::Integer?,
+                              batch_report_mode: ("REPORT_INDIVIDUAL_BUILDS" | "REPORT_AGGREGATED_BATCH")?
+                            },
+                            ?concurrent_build_limit: ::Integer
+                          ) -> _UpdateProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProjectResponseSuccess
+
+      interface _UpdateProjectVisibilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProjectVisibilityOutput]
+        def project_arn: () -> ::String
+        def public_project_alias: () -> ::String
+        def project_visibility: () -> ("PUBLIC_READ" | "PRIVATE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#update_project_visibility-instance_method
+      def update_project_visibility: (
+                                       project_arn: ::String,
+                                       project_visibility: ("PUBLIC_READ" | "PRIVATE"),
+                                       ?resource_access_role: ::String
+                                     ) -> _UpdateProjectVisibilityResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProjectVisibilityResponseSuccess
+
+      interface _UpdateReportGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateReportGroupOutput]
+        def report_group: () -> Types::ReportGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#update_report_group-instance_method
+      def update_report_group: (
+                                 arn: ::String,
+                                 ?export_config: {
+                                   export_config_type: ("S3" | "NO_EXPORT")?,
+                                   s3_destination: {
+                                     bucket: ::String?,
+                                     bucket_owner: ::String?,
+                                     path: ::String?,
+                                     packaging: ("ZIP" | "NONE")?,
+                                     encryption_key: ::String?,
+                                     encryption_disabled: bool?
+                                   }?
+                                 },
+                                 ?tags: Array[
+                                   {
+                                     key: ::String?,
+                                     value: ::String?
+                                   },
+                                 ]
+                               ) -> _UpdateReportGroupResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateReportGroupResponseSuccess
+
+      interface _UpdateWebhookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWebhookOutput]
+        def webhook: () -> Types::Webhook
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeBuild/Client.html#update_webhook-instance_method
+      def update_webhook: (
+                            project_name: ::String,
+                            ?branch_filter: ::String,
+                            ?rotate_secret: bool,
+                            ?filter_groups: Array[
+                              Array[
+                                {
+                                  type: ("EVENT" | "BASE_REF" | "HEAD_REF" | "ACTOR_ACCOUNT_ID" | "FILE_PATH" | "COMMIT_MESSAGE"),
+                                  pattern: ::String,
+                                  exclude_matched_pattern: bool?
+                                },
+                              ],
+                            ],
+                            ?build_type: ("BUILD" | "BUILD_BATCH")
+                          ) -> _UpdateWebhookResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWebhookResponseSuccess
+    end
+  end
+end
+

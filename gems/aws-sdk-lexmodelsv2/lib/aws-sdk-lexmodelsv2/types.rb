@@ -1897,6 +1897,46 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Contains information about all the aliases replication statuses
+    # applicable for global resiliency.
+    #
+    # @!attribute [rw] bot_alias_id
+    #   The bot alias ID for all the alias bot replications.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_alias_replication_status
+    #   The replication statuses for all the alias bot replications.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The bot version for all the alias bot replications.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The creation time and date for all the alias bot replications.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The last time and date updated for all the alias bot replications.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reasons
+    #   The reasons for failure for the aliases bot replications.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BotAliasReplicaSummary AWS API Documentation
+    #
+    class BotAliasReplicaSummary < Struct.new(
+      :bot_alias_id,
+      :bot_alias_replication_status,
+      :bot_version,
+      :creation_date_time,
+      :last_updated_date_time,
+      :failure_reasons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Summary information about bot aliases returned from the
     # [ListBotAliases][1] operation.
     #
@@ -2396,6 +2436,36 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Contains summary information about all the replication statuses
+    # applicable for global resiliency.
+    #
+    # @!attribute [rw] replica_region
+    #   The replica region used in the replication statuses summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The creation time and date for the replicated bots.
+    #   @return [Time]
+    #
+    # @!attribute [rw] bot_replica_status
+    #   The operation status for the replicated bot applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reasons
+    #   The reasons for the failure for the replicated bot.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BotReplicaSummary AWS API Documentation
+    #
+    class BotReplicaSummary < Struct.new(
+      :replica_region,
+      :creation_date_time,
+      :bot_replica_status,
+      :failure_reasons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies attributes for sorting a list of bots.
     #
     # @!attribute [rw] attribute
@@ -2481,6 +2551,57 @@ module Aws::LexModelsV2
     #
     class BotVersionLocaleDetails < Struct.new(
       :source_bot_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The sort category for the version replicated bots.
+    #
+    # @!attribute [rw] attribute
+    #   The attribute of the sort category for the version replicated bots.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   The order of the sort category for the version replicated bots.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BotVersionReplicaSortBy AWS API Documentation
+    #
+    class BotVersionReplicaSortBy < Struct.new(
+      :attribute,
+      :order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information for all the version replication statuses
+    # applicable for Global resiliency.
+    #
+    # @!attribute [rw] bot_version
+    #   The bot version for the summary information for all the version
+    #   replication statuses.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version_replication_status
+    #   The version replication status for all the replicated bots.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The creation date and time of the replication status for all the
+    #   replicated bots.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reasons
+    #   The reasons for replication failure for all the replicated bots.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BotVersionReplicaSummary AWS API Documentation
+    #
+    class BotVersionReplicaSummary < Struct.new(
+      :bot_version,
+      :bot_version_replication_status,
+      :creation_date_time,
+      :failure_reasons)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3375,6 +3496,58 @@ module Aws::LexModelsV2
       :bot_locale_status,
       :creation_date_time,
       :generative_ai_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The request for the unique bot ID of the source bot to be replicated
+    #   in the secondary region.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_region
+    #   The request for the secondary region that will be used in the
+    #   replication of the source bot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateBotReplicaRequest AWS API Documentation
+    #
+    class CreateBotReplicaRequest < Struct.new(
+      :bot_id,
+      :replica_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique bot ID of the replicated bot generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_region
+    #   The region of the replicated bot generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_region
+    #   The source region for the source bot used for the replicated bot
+    #   generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The creation date and time of the replicated bot generated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] bot_replica_status
+    #   The operational status of the replicated bot generated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateBotReplicaResponse AWS API Documentation
+    #
+    class CreateBotReplicaResponse < Struct.new(
+      :bot_id,
+      :replica_region,
+      :source_region,
+      :creation_date_time,
+      :bot_replica_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4769,6 +4942,46 @@ module Aws::LexModelsV2
     end
 
     # @!attribute [rw] bot_id
+    #   The unique ID of the replicated bot to be deleted from the secondary
+    #   region
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_region
+    #   The secondary region of the replicated bot that will be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteBotReplicaRequest AWS API Documentation
+    #
+    class DeleteBotReplicaRequest < Struct.new(
+      :bot_id,
+      :replica_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique bot ID of the replicated bot generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_region
+    #   The region of the replicated bot generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_replica_status
+    #   The operational status of the replicated bot generated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteBotReplicaResponse AWS API Documentation
+    #
+    class DeleteBotReplicaResponse < Struct.new(
+      :bot_id,
+      :replica_region,
+      :bot_replica_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
     #   The identifier of the bot to delete.
     #   @return [String]
     #
@@ -5559,6 +5772,61 @@ module Aws::LexModelsV2
       :transcript_source_setting,
       :encryption_setting,
       :bot_recommendation_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The request for the unique bot ID of the replicated bot being
+    #   monitored.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_region
+    #   The request for the region of the replicated bot being monitored.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotReplicaRequest AWS API Documentation
+    #
+    class DescribeBotReplicaRequest < Struct.new(
+      :bot_id,
+      :replica_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique bot ID of the replicated bot being monitored.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_region
+    #   The region of the replicated bot being monitored.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_region
+    #   The source region of the replicated bot being monitored.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The creation date and time of the replicated bot being monitored.
+    #   @return [Time]
+    #
+    # @!attribute [rw] bot_replica_status
+    #   The operational status of the replicated bot being monitored.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reasons
+    #   The failure reasons the bot being monitored failed to replicate.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotReplicaResponse AWS API Documentation
+    #
+    class DescribeBotReplicaResponse < Struct.new(
+      :bot_id,
+      :replica_region,
+      :source_region,
+      :creation_date_time,
+      :bot_replica_status,
+      :failure_reasons)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8314,6 +8582,74 @@ module Aws::LexModelsV2
     end
 
     # @!attribute [rw] bot_id
+    #   The request for the unique bot ID of the replicated bot created from
+    #   the source bot alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_region
+    #   The request for the secondary region of the replicated bot created
+    #   from the source bot alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The request for maximum results to list the replicated bots created
+    #   from the source bot alias.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The request for the next token for the replicated bot created from
+    #   the source bot alias.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListBotAliasReplicasRequest AWS API Documentation
+    #
+    class ListBotAliasReplicasRequest < Struct.new(
+      :bot_id,
+      :replica_region,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique bot ID of the replicated bot created from the source bot
+    #   alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_region
+    #   The source region of the replicated bot created from the source bot
+    #   alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_region
+    #   The secondary region of the replicated bot created from the source
+    #   bot alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_alias_replica_summaries
+    #   The summary information of the replicated bot created from the
+    #   source bot alias.
+    #   @return [Array<Types::BotAliasReplicaSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The next token for the replicated bots created from the source bot
+    #   alias.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListBotAliasReplicasResponse AWS API Documentation
+    #
+    class ListBotAliasReplicasResponse < Struct.new(
+      :bot_id,
+      :source_region,
+      :replica_region,
+      :bot_alias_replica_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
     #   The identifier of the bot to list aliases for.
     #   @return [String]
     #
@@ -8530,6 +8866,40 @@ module Aws::LexModelsV2
     end
 
     # @!attribute [rw] bot_id
+    #   The request for the unique bot IDs in the list of replicated bots.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListBotReplicasRequest AWS API Documentation
+    #
+    class ListBotReplicasRequest < Struct.new(
+      :bot_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   the unique bot IDs in the list of replicated bots.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_region
+    #   The source region of the source bots in the list of replicated bots.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_replica_summaries
+    #   The summary details for the replicated bots.
+    #   @return [Array<Types::BotReplicaSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListBotReplicasResponse AWS API Documentation
+    #
+    class ListBotReplicasResponse < Struct.new(
+      :bot_id,
+      :source_region,
+      :bot_replica_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
     #   The unique identifier of the bot whose generation requests you want
     #   to view.
     #   @return [String]
@@ -8603,6 +8973,73 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       :generation_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The request for the unique ID in the list of replicated bots.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_region
+    #   The request for the region used in the list of replicated bots.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum results given in the list of replicated bots.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The next token given in the list of replicated bots.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The requested sort category for the list of replicated bots.
+    #   @return [Types::BotVersionReplicaSortBy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListBotVersionReplicasRequest AWS API Documentation
+    #
+    class ListBotVersionReplicasRequest < Struct.new(
+      :bot_id,
+      :replica_region,
+      :max_results,
+      :next_token,
+      :sort_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique ID of the bots in the list of replicated bots.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_region
+    #   The source region used for the bots in the list of replicated bots.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_region
+    #   The region used for the replicated bots in the list of replicated
+    #   bots.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version_replica_summaries
+    #   The information summary used for the replicated bots in the list of
+    #   replicated bots.
+    #   @return [Array<Types::BotVersionReplicaSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The next token used for the replicated bots in the list of
+    #   replicated bots.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListBotVersionReplicasResponse AWS API Documentation
+    #
+    class ListBotVersionReplicasResponse < Struct.new(
+      :bot_id,
+      :source_region,
+      :replica_region,
+      :bot_version_replica_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure

@@ -1,0 +1,2088 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Comprehend
+  module Types
+
+    class AugmentedManifestsListItem
+      attr_accessor s3_uri: ::String
+      attr_accessor split: ("TRAIN" | "TEST")
+      attr_accessor attribute_names: ::Array[::String]
+      attr_accessor annotation_data_s3_uri: ::String
+      attr_accessor source_documents_s3_uri: ::String
+      attr_accessor document_type: ("PLAIN_TEXT_DOCUMENT" | "SEMI_STRUCTURED_DOCUMENT")
+      SENSITIVE: []
+    end
+
+    class BatchDetectDominantLanguageItemResult
+      attr_accessor index: ::Integer
+      attr_accessor languages: ::Array[Types::DominantLanguage]
+      SENSITIVE: []
+    end
+
+    class BatchDetectDominantLanguageRequest
+      attr_accessor text_list: ::Array[::String]
+      SENSITIVE: [:text_list]
+    end
+
+    class BatchDetectDominantLanguageResponse
+      attr_accessor result_list: ::Array[Types::BatchDetectDominantLanguageItemResult]
+      attr_accessor error_list: ::Array[Types::BatchItemError]
+      SENSITIVE: []
+    end
+
+    class BatchDetectEntitiesItemResult
+      attr_accessor index: ::Integer
+      attr_accessor entities: ::Array[Types::Entity]
+      SENSITIVE: []
+    end
+
+    class BatchDetectEntitiesRequest
+      attr_accessor text_list: ::Array[::String]
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      SENSITIVE: [:text_list]
+    end
+
+    class BatchDetectEntitiesResponse
+      attr_accessor result_list: ::Array[Types::BatchDetectEntitiesItemResult]
+      attr_accessor error_list: ::Array[Types::BatchItemError]
+      SENSITIVE: []
+    end
+
+    class BatchDetectKeyPhrasesItemResult
+      attr_accessor index: ::Integer
+      attr_accessor key_phrases: ::Array[Types::KeyPhrase]
+      SENSITIVE: []
+    end
+
+    class BatchDetectKeyPhrasesRequest
+      attr_accessor text_list: ::Array[::String]
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      SENSITIVE: [:text_list]
+    end
+
+    class BatchDetectKeyPhrasesResponse
+      attr_accessor result_list: ::Array[Types::BatchDetectKeyPhrasesItemResult]
+      attr_accessor error_list: ::Array[Types::BatchItemError]
+      SENSITIVE: []
+    end
+
+    class BatchDetectSentimentItemResult
+      attr_accessor index: ::Integer
+      attr_accessor sentiment: ("POSITIVE" | "NEGATIVE" | "NEUTRAL" | "MIXED")
+      attr_accessor sentiment_score: Types::SentimentScore
+      SENSITIVE: []
+    end
+
+    class BatchDetectSentimentRequest
+      attr_accessor text_list: ::Array[::String]
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      SENSITIVE: [:text_list]
+    end
+
+    class BatchDetectSentimentResponse
+      attr_accessor result_list: ::Array[Types::BatchDetectSentimentItemResult]
+      attr_accessor error_list: ::Array[Types::BatchItemError]
+      SENSITIVE: []
+    end
+
+    class BatchDetectSyntaxItemResult
+      attr_accessor index: ::Integer
+      attr_accessor syntax_tokens: ::Array[Types::SyntaxToken]
+      SENSITIVE: []
+    end
+
+    class BatchDetectSyntaxRequest
+      attr_accessor text_list: ::Array[::String]
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt")
+      SENSITIVE: [:text_list]
+    end
+
+    class BatchDetectSyntaxResponse
+      attr_accessor result_list: ::Array[Types::BatchDetectSyntaxItemResult]
+      attr_accessor error_list: ::Array[Types::BatchItemError]
+      SENSITIVE: []
+    end
+
+    class BatchDetectTargetedSentimentItemResult
+      attr_accessor index: ::Integer
+      attr_accessor entities: ::Array[Types::TargetedSentimentEntity]
+      SENSITIVE: []
+    end
+
+    class BatchDetectTargetedSentimentRequest
+      attr_accessor text_list: ::Array[::String]
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      SENSITIVE: [:text_list]
+    end
+
+    class BatchDetectTargetedSentimentResponse
+      attr_accessor result_list: ::Array[Types::BatchDetectTargetedSentimentItemResult]
+      attr_accessor error_list: ::Array[Types::BatchItemError]
+      SENSITIVE: []
+    end
+
+    class BatchItemError
+      attr_accessor index: ::Integer
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchSizeLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Block
+      attr_accessor id: ::String
+      attr_accessor block_type: ("LINE" | "WORD")
+      attr_accessor text: ::String
+      attr_accessor page: ::Integer
+      attr_accessor geometry: Types::Geometry
+      attr_accessor relationships: ::Array[Types::RelationshipsListItem]
+      SENSITIVE: []
+    end
+
+    class BlockReference
+      attr_accessor block_id: ::String
+      attr_accessor begin_offset: ::Integer
+      attr_accessor end_offset: ::Integer
+      attr_accessor child_blocks: ::Array[Types::ChildBlock]
+      SENSITIVE: []
+    end
+
+    class BoundingBox
+      attr_accessor height: ::Float
+      attr_accessor left: ::Float
+      attr_accessor top: ::Float
+      attr_accessor width: ::Float
+      SENSITIVE: []
+    end
+
+    class ChildBlock
+      attr_accessor child_block_id: ::String
+      attr_accessor begin_offset: ::Integer
+      attr_accessor end_offset: ::Integer
+      SENSITIVE: []
+    end
+
+    class ClassifierEvaluationMetrics
+      attr_accessor accuracy: ::Float
+      attr_accessor precision: ::Float
+      attr_accessor recall: ::Float
+      attr_accessor f1_score: ::Float
+      attr_accessor micro_precision: ::Float
+      attr_accessor micro_recall: ::Float
+      attr_accessor micro_f1_score: ::Float
+      attr_accessor hamming_loss: ::Float
+      SENSITIVE: []
+    end
+
+    class ClassifierMetadata
+      attr_accessor number_of_labels: ::Integer
+      attr_accessor number_of_trained_documents: ::Integer
+      attr_accessor number_of_test_documents: ::Integer
+      attr_accessor evaluation_metrics: Types::ClassifierEvaluationMetrics
+      SENSITIVE: []
+    end
+
+    class ClassifyDocumentRequest
+      attr_accessor text: ::String
+      attr_accessor endpoint_arn: ::String
+      attr_accessor bytes: ::String
+      attr_accessor document_reader_config: Types::DocumentReaderConfig
+      SENSITIVE: [:text]
+    end
+
+    class ClassifyDocumentResponse
+      attr_accessor classes: ::Array[Types::DocumentClass]
+      attr_accessor labels: ::Array[Types::DocumentLabel]
+      attr_accessor document_metadata: Types::DocumentMetadata
+      attr_accessor document_type: ::Array[Types::DocumentTypeListItem]
+      attr_accessor errors: ::Array[Types::ErrorsListItem]
+      attr_accessor warnings: ::Array[Types::WarningsListItem]
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ContainsPiiEntitiesRequest
+      attr_accessor text: ::String
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      SENSITIVE: []
+    end
+
+    class ContainsPiiEntitiesResponse
+      attr_accessor labels: ::Array[Types::EntityLabel]
+      SENSITIVE: []
+    end
+
+    class CreateDatasetRequest
+      attr_accessor flywheel_arn: ::String
+      attr_accessor dataset_name: ::String
+      attr_accessor dataset_type: ("TRAIN" | "TEST")
+      attr_accessor description: ::String
+      attr_accessor input_data_config: Types::DatasetInputDataConfig
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDatasetResponse
+      attr_accessor dataset_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDocumentClassifierRequest
+      attr_accessor document_classifier_name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor input_data_config: Types::DocumentClassifierInputDataConfig
+      attr_accessor output_data_config: Types::DocumentClassifierOutputDataConfig
+      attr_accessor client_request_token: ::String
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      attr_accessor volume_kms_key_id: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor mode: ("MULTI_CLASS" | "MULTI_LABEL")
+      attr_accessor model_kms_key_id: ::String
+      attr_accessor model_policy: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDocumentClassifierResponse
+      attr_accessor document_classifier_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEndpointRequest
+      attr_accessor endpoint_name: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor desired_inference_units: ::Integer
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor flywheel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEndpointResponse
+      attr_accessor endpoint_arn: ::String
+      attr_accessor model_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEntityRecognizerRequest
+      attr_accessor recognizer_name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor input_data_config: Types::EntityRecognizerInputDataConfig
+      attr_accessor client_request_token: ::String
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      attr_accessor volume_kms_key_id: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor model_kms_key_id: ::String
+      attr_accessor model_policy: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEntityRecognizerResponse
+      attr_accessor entity_recognizer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFlywheelRequest
+      attr_accessor flywheel_name: ::String
+      attr_accessor active_model_arn: ::String
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor task_config: Types::TaskConfig
+      attr_accessor model_type: ("DOCUMENT_CLASSIFIER" | "ENTITY_RECOGNIZER")
+      attr_accessor data_lake_s3_uri: ::String
+      attr_accessor data_security_config: Types::DataSecurityConfig
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateFlywheelResponse
+      attr_accessor flywheel_arn: ::String
+      attr_accessor active_model_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DataSecurityConfig
+      attr_accessor model_kms_key_id: ::String
+      attr_accessor volume_kms_key_id: ::String
+      attr_accessor data_lake_kms_key_id: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      SENSITIVE: []
+    end
+
+    class DatasetAugmentedManifestsListItem
+      attr_accessor attribute_names: ::Array[::String]
+      attr_accessor s3_uri: ::String
+      attr_accessor annotation_data_s3_uri: ::String
+      attr_accessor source_documents_s3_uri: ::String
+      attr_accessor document_type: ("PLAIN_TEXT_DOCUMENT" | "SEMI_STRUCTURED_DOCUMENT")
+      SENSITIVE: []
+    end
+
+    class DatasetDocumentClassifierInputDataConfig
+      attr_accessor s3_uri: ::String
+      attr_accessor label_delimiter: ::String
+      SENSITIVE: []
+    end
+
+    class DatasetEntityRecognizerAnnotations
+      attr_accessor s3_uri: ::String
+      SENSITIVE: []
+    end
+
+    class DatasetEntityRecognizerDocuments
+      attr_accessor s3_uri: ::String
+      attr_accessor input_format: ("ONE_DOC_PER_FILE" | "ONE_DOC_PER_LINE")
+      SENSITIVE: []
+    end
+
+    class DatasetEntityRecognizerEntityList
+      attr_accessor s3_uri: ::String
+      SENSITIVE: []
+    end
+
+    class DatasetEntityRecognizerInputDataConfig
+      attr_accessor annotations: Types::DatasetEntityRecognizerAnnotations
+      attr_accessor documents: Types::DatasetEntityRecognizerDocuments
+      attr_accessor entity_list: Types::DatasetEntityRecognizerEntityList
+      SENSITIVE: []
+    end
+
+    class DatasetFilter
+      attr_accessor status: ("CREATING" | "COMPLETED" | "FAILED")
+      attr_accessor dataset_type: ("TRAIN" | "TEST")
+      attr_accessor creation_time_after: ::Time
+      attr_accessor creation_time_before: ::Time
+      SENSITIVE: []
+    end
+
+    class DatasetInputDataConfig
+      attr_accessor augmented_manifests: ::Array[Types::DatasetAugmentedManifestsListItem]
+      attr_accessor data_format: ("COMPREHEND_CSV" | "AUGMENTED_MANIFEST")
+      attr_accessor document_classifier_input_data_config: Types::DatasetDocumentClassifierInputDataConfig
+      attr_accessor entity_recognizer_input_data_config: Types::DatasetEntityRecognizerInputDataConfig
+      SENSITIVE: []
+    end
+
+    class DatasetProperties
+      attr_accessor dataset_arn: ::String
+      attr_accessor dataset_name: ::String
+      attr_accessor dataset_type: ("TRAIN" | "TEST")
+      attr_accessor dataset_s3_uri: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("CREATING" | "COMPLETED" | "FAILED")
+      attr_accessor message: ::String
+      attr_accessor number_of_documents: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteDocumentClassifierRequest
+      attr_accessor document_classifier_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDocumentClassifierResponse < Aws::EmptyStructure
+    end
+
+    class DeleteEndpointRequest
+      attr_accessor endpoint_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEndpointResponse < Aws::EmptyStructure
+    end
+
+    class DeleteEntityRecognizerRequest
+      attr_accessor entity_recognizer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEntityRecognizerResponse < Aws::EmptyStructure
+    end
+
+    class DeleteFlywheelRequest
+      attr_accessor flywheel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFlywheelResponse < Aws::EmptyStructure
+    end
+
+    class DeleteResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor policy_revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyResponse < Aws::EmptyStructure
+    end
+
+    class DescribeDatasetRequest
+      attr_accessor dataset_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetResponse
+      attr_accessor dataset_properties: Types::DatasetProperties
+      SENSITIVE: []
+    end
+
+    class DescribeDocumentClassificationJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDocumentClassificationJobResponse
+      attr_accessor document_classification_job_properties: Types::DocumentClassificationJobProperties
+      SENSITIVE: []
+    end
+
+    class DescribeDocumentClassifierRequest
+      attr_accessor document_classifier_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDocumentClassifierResponse
+      attr_accessor document_classifier_properties: Types::DocumentClassifierProperties
+      SENSITIVE: []
+    end
+
+    class DescribeDominantLanguageDetectionJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDominantLanguageDetectionJobResponse
+      attr_accessor dominant_language_detection_job_properties: Types::DominantLanguageDetectionJobProperties
+      SENSITIVE: []
+    end
+
+    class DescribeEndpointRequest
+      attr_accessor endpoint_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEndpointResponse
+      attr_accessor endpoint_properties: Types::EndpointProperties
+      SENSITIVE: []
+    end
+
+    class DescribeEntitiesDetectionJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEntitiesDetectionJobResponse
+      attr_accessor entities_detection_job_properties: Types::EntitiesDetectionJobProperties
+      SENSITIVE: []
+    end
+
+    class DescribeEntityRecognizerRequest
+      attr_accessor entity_recognizer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEntityRecognizerResponse
+      attr_accessor entity_recognizer_properties: Types::EntityRecognizerProperties
+      SENSITIVE: []
+    end
+
+    class DescribeEventsDetectionJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventsDetectionJobResponse
+      attr_accessor events_detection_job_properties: Types::EventsDetectionJobProperties
+      SENSITIVE: []
+    end
+
+    class DescribeFlywheelIterationRequest
+      attr_accessor flywheel_arn: ::String
+      attr_accessor flywheel_iteration_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFlywheelIterationResponse
+      attr_accessor flywheel_iteration_properties: Types::FlywheelIterationProperties
+      SENSITIVE: []
+    end
+
+    class DescribeFlywheelRequest
+      attr_accessor flywheel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFlywheelResponse
+      attr_accessor flywheel_properties: Types::FlywheelProperties
+      SENSITIVE: []
+    end
+
+    class DescribeKeyPhrasesDetectionJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeKeyPhrasesDetectionJobResponse
+      attr_accessor key_phrases_detection_job_properties: Types::KeyPhrasesDetectionJobProperties
+      SENSITIVE: []
+    end
+
+    class DescribePiiEntitiesDetectionJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePiiEntitiesDetectionJobResponse
+      attr_accessor pii_entities_detection_job_properties: Types::PiiEntitiesDetectionJobProperties
+      SENSITIVE: []
+    end
+
+    class DescribeResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeResourcePolicyResponse
+      attr_accessor resource_policy: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor policy_revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSentimentDetectionJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSentimentDetectionJobResponse
+      attr_accessor sentiment_detection_job_properties: Types::SentimentDetectionJobProperties
+      SENSITIVE: []
+    end
+
+    class DescribeTargetedSentimentDetectionJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTargetedSentimentDetectionJobResponse
+      attr_accessor targeted_sentiment_detection_job_properties: Types::TargetedSentimentDetectionJobProperties
+      SENSITIVE: []
+    end
+
+    class DescribeTopicsDetectionJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTopicsDetectionJobResponse
+      attr_accessor topics_detection_job_properties: Types::TopicsDetectionJobProperties
+      SENSITIVE: []
+    end
+
+    class DetectDominantLanguageRequest
+      attr_accessor text: ::String
+      SENSITIVE: [:text]
+    end
+
+    class DetectDominantLanguageResponse
+      attr_accessor languages: ::Array[Types::DominantLanguage]
+      SENSITIVE: []
+    end
+
+    class DetectEntitiesRequest
+      attr_accessor text: ::String
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      attr_accessor endpoint_arn: ::String
+      attr_accessor bytes: ::String
+      attr_accessor document_reader_config: Types::DocumentReaderConfig
+      SENSITIVE: [:text]
+    end
+
+    class DetectEntitiesResponse
+      attr_accessor entities: ::Array[Types::Entity]
+      attr_accessor document_metadata: Types::DocumentMetadata
+      attr_accessor document_type: ::Array[Types::DocumentTypeListItem]
+      attr_accessor blocks: ::Array[Types::Block]
+      attr_accessor errors: ::Array[Types::ErrorsListItem]
+      SENSITIVE: []
+    end
+
+    class DetectKeyPhrasesRequest
+      attr_accessor text: ::String
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      SENSITIVE: [:text]
+    end
+
+    class DetectKeyPhrasesResponse
+      attr_accessor key_phrases: ::Array[Types::KeyPhrase]
+      SENSITIVE: []
+    end
+
+    class DetectPiiEntitiesRequest
+      attr_accessor text: ::String
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      SENSITIVE: []
+    end
+
+    class DetectPiiEntitiesResponse
+      attr_accessor entities: ::Array[Types::PiiEntity]
+      SENSITIVE: []
+    end
+
+    class DetectSentimentRequest
+      attr_accessor text: ::String
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      SENSITIVE: [:text]
+    end
+
+    class DetectSentimentResponse
+      attr_accessor sentiment: ("POSITIVE" | "NEGATIVE" | "NEUTRAL" | "MIXED")
+      attr_accessor sentiment_score: Types::SentimentScore
+      SENSITIVE: []
+    end
+
+    class DetectSyntaxRequest
+      attr_accessor text: ::String
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt")
+      SENSITIVE: [:text]
+    end
+
+    class DetectSyntaxResponse
+      attr_accessor syntax_tokens: ::Array[Types::SyntaxToken]
+      SENSITIVE: []
+    end
+
+    class DetectTargetedSentimentRequest
+      attr_accessor text: ::String
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      SENSITIVE: [:text]
+    end
+
+    class DetectTargetedSentimentResponse
+      attr_accessor entities: ::Array[Types::TargetedSentimentEntity]
+      SENSITIVE: []
+    end
+
+    class DetectToxicContentRequest
+      attr_accessor text_segments: ::Array[Types::TextSegment]
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      SENSITIVE: [:text_segments]
+    end
+
+    class DetectToxicContentResponse
+      attr_accessor result_list: ::Array[Types::ToxicLabels]
+      SENSITIVE: []
+    end
+
+    class DocumentClass
+      attr_accessor name: ::String
+      attr_accessor score: ::Float
+      attr_accessor page: ::Integer
+      SENSITIVE: []
+    end
+
+    class DocumentClassificationConfig
+      attr_accessor mode: ("MULTI_CLASS" | "MULTI_LABEL")
+      attr_accessor labels: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DocumentClassificationJobFilter
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor submit_time_before: ::Time
+      attr_accessor submit_time_after: ::Time
+      SENSITIVE: []
+    end
+
+    class DocumentClassificationJobProperties
+      attr_accessor job_id: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor message: ::String
+      attr_accessor submit_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor document_classifier_arn: ::String
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor volume_kms_key_id: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor flywheel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DocumentClassifierDocuments
+      attr_accessor s3_uri: ::String
+      attr_accessor test_s3_uri: ::String
+      SENSITIVE: []
+    end
+
+    class DocumentClassifierFilter
+      attr_accessor status: ("SUBMITTED" | "TRAINING" | "DELETING" | "STOP_REQUESTED" | "STOPPED" | "IN_ERROR" | "TRAINED" | "TRAINED_WITH_WARNING")
+      attr_accessor document_classifier_name: ::String
+      attr_accessor submit_time_before: ::Time
+      attr_accessor submit_time_after: ::Time
+      SENSITIVE: []
+    end
+
+    class DocumentClassifierInputDataConfig
+      attr_accessor data_format: ("COMPREHEND_CSV" | "AUGMENTED_MANIFEST")
+      attr_accessor s3_uri: ::String
+      attr_accessor test_s3_uri: ::String
+      attr_accessor label_delimiter: ::String
+      attr_accessor augmented_manifests: ::Array[Types::AugmentedManifestsListItem]
+      attr_accessor document_type: ("PLAIN_TEXT_DOCUMENT" | "SEMI_STRUCTURED_DOCUMENT")
+      attr_accessor documents: Types::DocumentClassifierDocuments
+      attr_accessor document_reader_config: Types::DocumentReaderConfig
+      SENSITIVE: []
+    end
+
+    class DocumentClassifierOutputDataConfig
+      attr_accessor s3_uri: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor flywheel_stats_s3_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class DocumentClassifierProperties
+      attr_accessor document_classifier_arn: ::String
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      attr_accessor status: ("SUBMITTED" | "TRAINING" | "DELETING" | "STOP_REQUESTED" | "STOPPED" | "IN_ERROR" | "TRAINED" | "TRAINED_WITH_WARNING")
+      attr_accessor message: ::String
+      attr_accessor submit_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor training_start_time: ::Time
+      attr_accessor training_end_time: ::Time
+      attr_accessor input_data_config: Types::DocumentClassifierInputDataConfig
+      attr_accessor output_data_config: Types::DocumentClassifierOutputDataConfig
+      attr_accessor classifier_metadata: Types::ClassifierMetadata
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor volume_kms_key_id: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor mode: ("MULTI_CLASS" | "MULTI_LABEL")
+      attr_accessor model_kms_key_id: ::String
+      attr_accessor version_name: ::String
+      attr_accessor source_model_arn: ::String
+      attr_accessor flywheel_arn: ::String
+      SENSITIVE: [:classifier_metadata]
+    end
+
+    class DocumentClassifierSummary
+      attr_accessor document_classifier_name: ::String
+      attr_accessor number_of_versions: ::Integer
+      attr_accessor latest_version_created_at: ::Time
+      attr_accessor latest_version_name: ::String
+      attr_accessor latest_version_status: ("SUBMITTED" | "TRAINING" | "DELETING" | "STOP_REQUESTED" | "STOPPED" | "IN_ERROR" | "TRAINED" | "TRAINED_WITH_WARNING")
+      SENSITIVE: []
+    end
+
+    class DocumentLabel
+      attr_accessor name: ::String
+      attr_accessor score: ::Float
+      attr_accessor page: ::Integer
+      SENSITIVE: []
+    end
+
+    class DocumentMetadata
+      attr_accessor pages: ::Integer
+      attr_accessor extracted_characters: ::Array[Types::ExtractedCharactersListItem]
+      SENSITIVE: []
+    end
+
+    class DocumentReaderConfig
+      attr_accessor document_read_action: ("TEXTRACT_DETECT_DOCUMENT_TEXT" | "TEXTRACT_ANALYZE_DOCUMENT")
+      attr_accessor document_read_mode: ("SERVICE_DEFAULT" | "FORCE_DOCUMENT_READ_ACTION")
+      attr_accessor feature_types: ::Array[("TABLES" | "FORMS")]
+      SENSITIVE: []
+    end
+
+    class DocumentTypeListItem
+      attr_accessor page: ::Integer
+      attr_accessor type: ("NATIVE_PDF" | "SCANNED_PDF" | "MS_WORD" | "IMAGE" | "PLAIN_TEXT" | "TEXTRACT_DETECT_DOCUMENT_TEXT_JSON" | "TEXTRACT_ANALYZE_DOCUMENT_JSON")
+      SENSITIVE: []
+    end
+
+    class DominantLanguage
+      attr_accessor language_code: ::String
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
+    class DominantLanguageDetectionJobFilter
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor submit_time_before: ::Time
+      attr_accessor submit_time_after: ::Time
+      SENSITIVE: []
+    end
+
+    class DominantLanguageDetectionJobProperties
+      attr_accessor job_id: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor message: ::String
+      attr_accessor submit_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor volume_kms_key_id: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      SENSITIVE: []
+    end
+
+    class EndpointFilter
+      attr_accessor model_arn: ::String
+      attr_accessor status: ("CREATING" | "DELETING" | "FAILED" | "IN_SERVICE" | "UPDATING")
+      attr_accessor creation_time_before: ::Time
+      attr_accessor creation_time_after: ::Time
+      SENSITIVE: []
+    end
+
+    class EndpointProperties
+      attr_accessor endpoint_arn: ::String
+      attr_accessor status: ("CREATING" | "DELETING" | "FAILED" | "IN_SERVICE" | "UPDATING")
+      attr_accessor message: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor desired_model_arn: ::String
+      attr_accessor desired_inference_units: ::Integer
+      attr_accessor current_inference_units: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor desired_data_access_role_arn: ::String
+      attr_accessor flywheel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class EntitiesDetectionJobFilter
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor submit_time_before: ::Time
+      attr_accessor submit_time_after: ::Time
+      SENSITIVE: []
+    end
+
+    class EntitiesDetectionJobProperties
+      attr_accessor job_id: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor message: ::String
+      attr_accessor submit_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor entity_recognizer_arn: ::String
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor volume_kms_key_id: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor flywheel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Entity
+      attr_accessor score: ::Float
+      attr_accessor type: ("PERSON" | "LOCATION" | "ORGANIZATION" | "COMMERCIAL_ITEM" | "EVENT" | "DATE" | "QUANTITY" | "TITLE" | "OTHER")
+      attr_accessor text: ::String
+      attr_accessor begin_offset: ::Integer
+      attr_accessor end_offset: ::Integer
+      attr_accessor block_references: ::Array[Types::BlockReference]
+      SENSITIVE: []
+    end
+
+    class EntityLabel
+      attr_accessor name: ("BANK_ACCOUNT_NUMBER" | "BANK_ROUTING" | "CREDIT_DEBIT_NUMBER" | "CREDIT_DEBIT_CVV" | "CREDIT_DEBIT_EXPIRY" | "PIN" | "EMAIL" | "ADDRESS" | "NAME" | "PHONE" | "SSN" | "DATE_TIME" | "PASSPORT_NUMBER" | "DRIVER_ID" | "URL" | "AGE" | "USERNAME" | "PASSWORD" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "IP_ADDRESS" | "MAC_ADDRESS" | "ALL" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER" | "IN_PERMANENT_ACCOUNT_NUMBER" | "IN_NREGA" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "CA_HEALTH_NUMBER" | "IN_AADHAAR" | "IN_VOTER_NUMBER")
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
+    class EntityRecognitionConfig
+      attr_accessor entity_types: ::Array[Types::EntityTypesListItem]
+      SENSITIVE: []
+    end
+
+    class EntityRecognizerAnnotations
+      attr_accessor s3_uri: ::String
+      attr_accessor test_s3_uri: ::String
+      SENSITIVE: []
+    end
+
+    class EntityRecognizerDocuments
+      attr_accessor s3_uri: ::String
+      attr_accessor test_s3_uri: ::String
+      attr_accessor input_format: ("ONE_DOC_PER_FILE" | "ONE_DOC_PER_LINE")
+      SENSITIVE: []
+    end
+
+    class EntityRecognizerEntityList
+      attr_accessor s3_uri: ::String
+      SENSITIVE: []
+    end
+
+    class EntityRecognizerEvaluationMetrics
+      attr_accessor precision: ::Float
+      attr_accessor recall: ::Float
+      attr_accessor f1_score: ::Float
+      SENSITIVE: []
+    end
+
+    class EntityRecognizerFilter
+      attr_accessor status: ("SUBMITTED" | "TRAINING" | "DELETING" | "STOP_REQUESTED" | "STOPPED" | "IN_ERROR" | "TRAINED" | "TRAINED_WITH_WARNING")
+      attr_accessor recognizer_name: ::String
+      attr_accessor submit_time_before: ::Time
+      attr_accessor submit_time_after: ::Time
+      SENSITIVE: []
+    end
+
+    class EntityRecognizerInputDataConfig
+      attr_accessor data_format: ("COMPREHEND_CSV" | "AUGMENTED_MANIFEST")
+      attr_accessor entity_types: ::Array[Types::EntityTypesListItem]
+      attr_accessor documents: Types::EntityRecognizerDocuments
+      attr_accessor annotations: Types::EntityRecognizerAnnotations
+      attr_accessor entity_list: Types::EntityRecognizerEntityList
+      attr_accessor augmented_manifests: ::Array[Types::AugmentedManifestsListItem]
+      SENSITIVE: []
+    end
+
+    class EntityRecognizerMetadata
+      attr_accessor number_of_trained_documents: ::Integer
+      attr_accessor number_of_test_documents: ::Integer
+      attr_accessor evaluation_metrics: Types::EntityRecognizerEvaluationMetrics
+      attr_accessor entity_types: ::Array[Types::EntityRecognizerMetadataEntityTypesListItem]
+      SENSITIVE: []
+    end
+
+    class EntityRecognizerMetadataEntityTypesListItem
+      attr_accessor type: ::String
+      attr_accessor evaluation_metrics: Types::EntityTypesEvaluationMetrics
+      attr_accessor number_of_train_mentions: ::Integer
+      SENSITIVE: []
+    end
+
+    class EntityRecognizerOutputDataConfig
+      attr_accessor flywheel_stats_s3_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class EntityRecognizerProperties
+      attr_accessor entity_recognizer_arn: ::String
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      attr_accessor status: ("SUBMITTED" | "TRAINING" | "DELETING" | "STOP_REQUESTED" | "STOPPED" | "IN_ERROR" | "TRAINED" | "TRAINED_WITH_WARNING")
+      attr_accessor message: ::String
+      attr_accessor submit_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor training_start_time: ::Time
+      attr_accessor training_end_time: ::Time
+      attr_accessor input_data_config: Types::EntityRecognizerInputDataConfig
+      attr_accessor recognizer_metadata: Types::EntityRecognizerMetadata
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor volume_kms_key_id: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor model_kms_key_id: ::String
+      attr_accessor version_name: ::String
+      attr_accessor source_model_arn: ::String
+      attr_accessor flywheel_arn: ::String
+      attr_accessor output_data_config: Types::EntityRecognizerOutputDataConfig
+      SENSITIVE: [:recognizer_metadata]
+    end
+
+    class EntityRecognizerSummary
+      attr_accessor recognizer_name: ::String
+      attr_accessor number_of_versions: ::Integer
+      attr_accessor latest_version_created_at: ::Time
+      attr_accessor latest_version_name: ::String
+      attr_accessor latest_version_status: ("SUBMITTED" | "TRAINING" | "DELETING" | "STOP_REQUESTED" | "STOPPED" | "IN_ERROR" | "TRAINED" | "TRAINED_WITH_WARNING")
+      SENSITIVE: []
+    end
+
+    class EntityTypesEvaluationMetrics
+      attr_accessor precision: ::Float
+      attr_accessor recall: ::Float
+      attr_accessor f1_score: ::Float
+      SENSITIVE: []
+    end
+
+    class EntityTypesListItem
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ErrorsListItem
+      attr_accessor page: ::Integer
+      attr_accessor error_code: ("TEXTRACT_BAD_PAGE" | "TEXTRACT_PROVISIONED_THROUGHPUT_EXCEEDED" | "PAGE_CHARACTERS_EXCEEDED" | "PAGE_SIZE_EXCEEDED" | "INTERNAL_SERVER_ERROR")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class EventsDetectionJobFilter
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor submit_time_before: ::Time
+      attr_accessor submit_time_after: ::Time
+      SENSITIVE: []
+    end
+
+    class EventsDetectionJobProperties
+      attr_accessor job_id: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor message: ::String
+      attr_accessor submit_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor target_event_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ExtractedCharactersListItem
+      attr_accessor page: ::Integer
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
+    class FlywheelFilter
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "FAILED")
+      attr_accessor creation_time_after: ::Time
+      attr_accessor creation_time_before: ::Time
+      SENSITIVE: []
+    end
+
+    class FlywheelIterationFilter
+      attr_accessor creation_time_after: ::Time
+      attr_accessor creation_time_before: ::Time
+      SENSITIVE: []
+    end
+
+    class FlywheelIterationProperties
+      attr_accessor flywheel_arn: ::String
+      attr_accessor flywheel_iteration_id: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor status: ("TRAINING" | "EVALUATING" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor message: ::String
+      attr_accessor evaluated_model_arn: ::String
+      attr_accessor evaluated_model_metrics: Types::FlywheelModelEvaluationMetrics
+      attr_accessor trained_model_arn: ::String
+      attr_accessor trained_model_metrics: Types::FlywheelModelEvaluationMetrics
+      attr_accessor evaluation_manifest_s3_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class FlywheelModelEvaluationMetrics
+      attr_accessor average_f1_score: ::Float
+      attr_accessor average_precision: ::Float
+      attr_accessor average_recall: ::Float
+      attr_accessor average_accuracy: ::Float
+      SENSITIVE: []
+    end
+
+    class FlywheelProperties
+      attr_accessor flywheel_arn: ::String
+      attr_accessor active_model_arn: ::String
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor task_config: Types::TaskConfig
+      attr_accessor data_lake_s3_uri: ::String
+      attr_accessor data_security_config: Types::DataSecurityConfig
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "FAILED")
+      attr_accessor model_type: ("DOCUMENT_CLASSIFIER" | "ENTITY_RECOGNIZER")
+      attr_accessor message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor latest_flywheel_iteration: ::String
+      SENSITIVE: []
+    end
+
+    class FlywheelSummary
+      attr_accessor flywheel_arn: ::String
+      attr_accessor active_model_arn: ::String
+      attr_accessor data_lake_s3_uri: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "FAILED")
+      attr_accessor model_type: ("DOCUMENT_CLASSIFIER" | "ENTITY_RECOGNIZER")
+      attr_accessor message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor latest_flywheel_iteration: ::String
+      SENSITIVE: []
+    end
+
+    class Geometry
+      attr_accessor bounding_box: Types::BoundingBox
+      attr_accessor polygon: ::Array[Types::Point]
+      SENSITIVE: []
+    end
+
+    class ImportModelRequest
+      attr_accessor source_model_arn: ::String
+      attr_accessor model_name: ::String
+      attr_accessor version_name: ::String
+      attr_accessor model_kms_key_id: ::String
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ImportModelResponse
+      attr_accessor model_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InputDataConfig
+      attr_accessor s3_uri: ::String
+      attr_accessor input_format: ("ONE_DOC_PER_FILE" | "ONE_DOC_PER_LINE")
+      attr_accessor document_reader_config: Types::DocumentReaderConfig
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidFilterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestDetail
+      attr_accessor reason: ("DOCUMENT_SIZE_EXCEEDED" | "UNSUPPORTED_DOC_TYPE" | "PAGE_LIMIT_EXCEEDED" | "TEXTRACT_ACCESS_DENIED")
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      attr_accessor reason: ("INVALID_DOCUMENT")
+      attr_accessor detail: Types::InvalidRequestDetail
+      SENSITIVE: []
+    end
+
+    class JobNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KeyPhrase
+      attr_accessor score: ::Float
+      attr_accessor text: ::String
+      attr_accessor begin_offset: ::Integer
+      attr_accessor end_offset: ::Integer
+      SENSITIVE: []
+    end
+
+    class KeyPhrasesDetectionJobFilter
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor submit_time_before: ::Time
+      attr_accessor submit_time_after: ::Time
+      SENSITIVE: []
+    end
+
+    class KeyPhrasesDetectionJobProperties
+      attr_accessor job_id: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor message: ::String
+      attr_accessor submit_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor volume_kms_key_id: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      SENSITIVE: []
+    end
+
+    class KmsKeyValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatasetsRequest
+      attr_accessor flywheel_arn: ::String
+      attr_accessor filter: Types::DatasetFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDatasetsResponse
+      attr_accessor dataset_properties_list: ::Array[Types::DatasetProperties]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDocumentClassificationJobsRequest
+      attr_accessor filter: Types::DocumentClassificationJobFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDocumentClassificationJobsResponse
+      attr_accessor document_classification_job_properties_list: ::Array[Types::DocumentClassificationJobProperties]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDocumentClassifierSummariesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDocumentClassifierSummariesResponse
+      attr_accessor document_classifier_summaries_list: ::Array[Types::DocumentClassifierSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDocumentClassifiersRequest
+      attr_accessor filter: Types::DocumentClassifierFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDocumentClassifiersResponse
+      attr_accessor document_classifier_properties_list: ::Array[Types::DocumentClassifierProperties]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDominantLanguageDetectionJobsRequest
+      attr_accessor filter: Types::DominantLanguageDetectionJobFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDominantLanguageDetectionJobsResponse
+      attr_accessor dominant_language_detection_job_properties_list: ::Array[Types::DominantLanguageDetectionJobProperties]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEndpointsRequest
+      attr_accessor filter: Types::EndpointFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEndpointsResponse
+      attr_accessor endpoint_properties_list: ::Array[Types::EndpointProperties]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEntitiesDetectionJobsRequest
+      attr_accessor filter: Types::EntitiesDetectionJobFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEntitiesDetectionJobsResponse
+      attr_accessor entities_detection_job_properties_list: ::Array[Types::EntitiesDetectionJobProperties]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEntityRecognizerSummariesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEntityRecognizerSummariesResponse
+      attr_accessor entity_recognizer_summaries_list: ::Array[Types::EntityRecognizerSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEntityRecognizersRequest
+      attr_accessor filter: Types::EntityRecognizerFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEntityRecognizersResponse
+      attr_accessor entity_recognizer_properties_list: ::Array[Types::EntityRecognizerProperties]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventsDetectionJobsRequest
+      attr_accessor filter: Types::EventsDetectionJobFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEventsDetectionJobsResponse
+      attr_accessor events_detection_job_properties_list: ::Array[Types::EventsDetectionJobProperties]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFlywheelIterationHistoryRequest
+      attr_accessor flywheel_arn: ::String
+      attr_accessor filter: Types::FlywheelIterationFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFlywheelIterationHistoryResponse
+      attr_accessor flywheel_iteration_properties_list: ::Array[Types::FlywheelIterationProperties]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFlywheelsRequest
+      attr_accessor filter: Types::FlywheelFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFlywheelsResponse
+      attr_accessor flywheel_summary_list: ::Array[Types::FlywheelSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListKeyPhrasesDetectionJobsRequest
+      attr_accessor filter: Types::KeyPhrasesDetectionJobFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListKeyPhrasesDetectionJobsResponse
+      attr_accessor key_phrases_detection_job_properties_list: ::Array[Types::KeyPhrasesDetectionJobProperties]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPiiEntitiesDetectionJobsRequest
+      attr_accessor filter: Types::PiiEntitiesDetectionJobFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPiiEntitiesDetectionJobsResponse
+      attr_accessor pii_entities_detection_job_properties_list: ::Array[Types::PiiEntitiesDetectionJobProperties]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSentimentDetectionJobsRequest
+      attr_accessor filter: Types::SentimentDetectionJobFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSentimentDetectionJobsResponse
+      attr_accessor sentiment_detection_job_properties_list: ::Array[Types::SentimentDetectionJobProperties]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListTargetedSentimentDetectionJobsRequest
+      attr_accessor filter: Types::TargetedSentimentDetectionJobFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTargetedSentimentDetectionJobsResponse
+      attr_accessor targeted_sentiment_detection_job_properties_list: ::Array[Types::TargetedSentimentDetectionJobProperties]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTopicsDetectionJobsRequest
+      attr_accessor filter: Types::TopicsDetectionJobFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTopicsDetectionJobsResponse
+      attr_accessor topics_detection_job_properties_list: ::Array[Types::TopicsDetectionJobProperties]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MentionSentiment
+      attr_accessor sentiment: ("POSITIVE" | "NEGATIVE" | "NEUTRAL" | "MIXED")
+      attr_accessor sentiment_score: Types::SentimentScore
+      SENSITIVE: []
+    end
+
+    class OutputDataConfig
+      attr_accessor s3_uri: ::String
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class PartOfSpeechTag
+      attr_accessor tag: ("ADJ" | "ADP" | "ADV" | "AUX" | "CONJ" | "CCONJ" | "DET" | "INTJ" | "NOUN" | "NUM" | "O" | "PART" | "PRON" | "PROPN" | "PUNCT" | "SCONJ" | "SYM" | "VERB")
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
+    class PiiEntitiesDetectionJobFilter
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor submit_time_before: ::Time
+      attr_accessor submit_time_after: ::Time
+      SENSITIVE: []
+    end
+
+    class PiiEntitiesDetectionJobProperties
+      attr_accessor job_id: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor message: ::String
+      attr_accessor submit_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::PiiOutputDataConfig
+      attr_accessor redaction_config: Types::RedactionConfig
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor mode: ("ONLY_REDACTION" | "ONLY_OFFSETS")
+      SENSITIVE: []
+    end
+
+    class PiiEntity
+      attr_accessor score: ::Float
+      attr_accessor type: ("BANK_ACCOUNT_NUMBER" | "BANK_ROUTING" | "CREDIT_DEBIT_NUMBER" | "CREDIT_DEBIT_CVV" | "CREDIT_DEBIT_EXPIRY" | "PIN" | "EMAIL" | "ADDRESS" | "NAME" | "PHONE" | "SSN" | "DATE_TIME" | "PASSPORT_NUMBER" | "DRIVER_ID" | "URL" | "AGE" | "USERNAME" | "PASSWORD" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "IP_ADDRESS" | "MAC_ADDRESS" | "ALL" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER" | "IN_PERMANENT_ACCOUNT_NUMBER" | "IN_NREGA" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "CA_HEALTH_NUMBER" | "IN_AADHAAR" | "IN_VOTER_NUMBER")
+      attr_accessor begin_offset: ::Integer
+      attr_accessor end_offset: ::Integer
+      SENSITIVE: []
+    end
+
+    class PiiOutputDataConfig
+      attr_accessor s3_uri: ::String
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class Point
+      attr_accessor x: ::Float
+      attr_accessor y: ::Float
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_policy: ::String
+      attr_accessor policy_revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyResponse
+      attr_accessor policy_revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class RedactionConfig
+      attr_accessor pii_entity_types: ::Array[("BANK_ACCOUNT_NUMBER" | "BANK_ROUTING" | "CREDIT_DEBIT_NUMBER" | "CREDIT_DEBIT_CVV" | "CREDIT_DEBIT_EXPIRY" | "PIN" | "EMAIL" | "ADDRESS" | "NAME" | "PHONE" | "SSN" | "DATE_TIME" | "PASSPORT_NUMBER" | "DRIVER_ID" | "URL" | "AGE" | "USERNAME" | "PASSWORD" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "IP_ADDRESS" | "MAC_ADDRESS" | "ALL" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER" | "IN_PERMANENT_ACCOUNT_NUMBER" | "IN_NREGA" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "CA_HEALTH_NUMBER" | "IN_AADHAAR" | "IN_VOTER_NUMBER")]
+      attr_accessor mask_mode: ("MASK" | "REPLACE_WITH_PII_ENTITY_TYPE")
+      attr_accessor mask_character: ::String
+      SENSITIVE: []
+    end
+
+    class RelationshipsListItem
+      attr_accessor ids: ::Array[::String]
+      attr_accessor type: ("CHILD")
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SentimentDetectionJobFilter
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor submit_time_before: ::Time
+      attr_accessor submit_time_after: ::Time
+      SENSITIVE: []
+    end
+
+    class SentimentDetectionJobProperties
+      attr_accessor job_id: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor message: ::String
+      attr_accessor submit_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor volume_kms_key_id: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      SENSITIVE: []
+    end
+
+    class SentimentScore
+      attr_accessor positive: ::Float
+      attr_accessor negative: ::Float
+      attr_accessor neutral: ::Float
+      attr_accessor mixed: ::Float
+      SENSITIVE: []
+    end
+
+    class StartDocumentClassificationJobRequest
+      attr_accessor job_name: ::String
+      attr_accessor document_classifier_arn: ::String
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor volume_kms_key_id: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor flywheel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartDocumentClassificationJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor document_classifier_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartDominantLanguageDetectionJobRequest
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor volume_kms_key_id: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class StartDominantLanguageDetectionJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class StartEntitiesDetectionJobRequest
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor entity_recognizer_arn: ::String
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      attr_accessor client_request_token: ::String
+      attr_accessor volume_kms_key_id: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor flywheel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartEntitiesDetectionJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor entity_recognizer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartEventsDetectionJobRequest
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      attr_accessor client_request_token: ::String
+      attr_accessor target_event_types: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class StartEventsDetectionJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class StartFlywheelIterationRequest
+      attr_accessor flywheel_arn: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartFlywheelIterationResponse
+      attr_accessor flywheel_arn: ::String
+      attr_accessor flywheel_iteration_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartKeyPhrasesDetectionJobRequest
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      attr_accessor client_request_token: ::String
+      attr_accessor volume_kms_key_id: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class StartKeyPhrasesDetectionJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class StartPiiEntitiesDetectionJobRequest
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor mode: ("ONLY_REDACTION" | "ONLY_OFFSETS")
+      attr_accessor redaction_config: Types::RedactionConfig
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class StartPiiEntitiesDetectionJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class StartSentimentDetectionJobRequest
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      attr_accessor client_request_token: ::String
+      attr_accessor volume_kms_key_id: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class StartSentimentDetectionJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class StartTargetedSentimentDetectionJobRequest
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      attr_accessor client_request_token: ::String
+      attr_accessor volume_kms_key_id: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class StartTargetedSentimentDetectionJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class StartTopicsDetectionJobRequest
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor number_of_topics: ::Integer
+      attr_accessor client_request_token: ::String
+      attr_accessor volume_kms_key_id: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class StartTopicsDetectionJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class StopDominantLanguageDetectionJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopDominantLanguageDetectionJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class StopEntitiesDetectionJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopEntitiesDetectionJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class StopEventsDetectionJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopEventsDetectionJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class StopKeyPhrasesDetectionJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopKeyPhrasesDetectionJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class StopPiiEntitiesDetectionJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopPiiEntitiesDetectionJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class StopSentimentDetectionJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopSentimentDetectionJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class StopTargetedSentimentDetectionJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopTargetedSentimentDetectionJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class StopTrainingDocumentClassifierRequest
+      attr_accessor document_classifier_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopTrainingDocumentClassifierResponse < Aws::EmptyStructure
+    end
+
+    class StopTrainingEntityRecognizerRequest
+      attr_accessor entity_recognizer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopTrainingEntityRecognizerResponse < Aws::EmptyStructure
+    end
+
+    class SyntaxToken
+      attr_accessor token_id: ::Integer
+      attr_accessor text: ::String
+      attr_accessor begin_offset: ::Integer
+      attr_accessor end_offset: ::Integer
+      attr_accessor part_of_speech: Types::PartOfSpeechTag
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TargetedSentimentDetectionJobFilter
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor submit_time_before: ::Time
+      attr_accessor submit_time_after: ::Time
+      SENSITIVE: []
+    end
+
+    class TargetedSentimentDetectionJobProperties
+      attr_accessor job_id: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor message: ::String
+      attr_accessor submit_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor volume_kms_key_id: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      SENSITIVE: []
+    end
+
+    class TargetedSentimentEntity
+      attr_accessor descriptive_mention_index: ::Array[::Integer]
+      attr_accessor mentions: ::Array[Types::TargetedSentimentMention]
+      SENSITIVE: []
+    end
+
+    class TargetedSentimentMention
+      attr_accessor score: ::Float
+      attr_accessor group_score: ::Float
+      attr_accessor text: ::String
+      attr_accessor type: ("PERSON" | "LOCATION" | "ORGANIZATION" | "FACILITY" | "BRAND" | "COMMERCIAL_ITEM" | "MOVIE" | "MUSIC" | "BOOK" | "SOFTWARE" | "GAME" | "PERSONAL_TITLE" | "EVENT" | "DATE" | "QUANTITY" | "ATTRIBUTE" | "OTHER")
+      attr_accessor mention_sentiment: Types::MentionSentiment
+      attr_accessor begin_offset: ::Integer
+      attr_accessor end_offset: ::Integer
+      SENSITIVE: []
+    end
+
+    class TaskConfig
+      attr_accessor language_code: ("en" | "es" | "fr" | "de" | "it" | "pt" | "ar" | "hi" | "ja" | "ko" | "zh" | "zh-TW")
+      attr_accessor document_classification_config: Types::DocumentClassificationConfig
+      attr_accessor entity_recognition_config: Types::EntityRecognitionConfig
+      SENSITIVE: []
+    end
+
+    class TextSegment
+      attr_accessor text: ::String
+      SENSITIVE: [:text]
+    end
+
+    class TextSizeLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTagKeysException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TopicsDetectionJobFilter
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor submit_time_before: ::Time
+      attr_accessor submit_time_after: ::Time
+      SENSITIVE: []
+    end
+
+    class TopicsDetectionJobProperties
+      attr_accessor job_id: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor message: ::String
+      attr_accessor submit_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor number_of_topics: ::Integer
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor volume_kms_key_id: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      SENSITIVE: []
+    end
+
+    class ToxicContent
+      attr_accessor name: ("GRAPHIC" | "HARASSMENT_OR_ABUSE" | "HATE_SPEECH" | "INSULT" | "PROFANITY" | "SEXUAL" | "VIOLENCE_OR_THREAT")
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
+    class ToxicLabels
+      attr_accessor labels: ::Array[Types::ToxicContent]
+      attr_accessor toxicity: ::Float
+      SENSITIVE: []
+    end
+
+    class UnsupportedLanguageException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDataSecurityConfig
+      attr_accessor model_kms_key_id: ::String
+      attr_accessor volume_kms_key_id: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      SENSITIVE: []
+    end
+
+    class UpdateEndpointRequest
+      attr_accessor endpoint_arn: ::String
+      attr_accessor desired_model_arn: ::String
+      attr_accessor desired_inference_units: ::Integer
+      attr_accessor desired_data_access_role_arn: ::String
+      attr_accessor flywheel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateEndpointResponse
+      attr_accessor desired_model_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFlywheelRequest
+      attr_accessor flywheel_arn: ::String
+      attr_accessor active_model_arn: ::String
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor data_security_config: Types::UpdateDataSecurityConfig
+      SENSITIVE: []
+    end
+
+    class UpdateFlywheelResponse
+      attr_accessor flywheel_properties: Types::FlywheelProperties
+      SENSITIVE: []
+    end
+
+    class VpcConfig
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnets: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class WarningsListItem
+      attr_accessor page: ::Integer
+      attr_accessor warn_code: ("INFERENCING_PLAINTEXT_WITH_NATIVE_TRAINED_MODEL" | "INFERENCING_NATIVE_DOCUMENT_WITH_PLAINTEXT_TRAINED_MODEL")
+      attr_accessor warn_message: ::String
+      SENSITIVE: []
+    end
+  end
+end

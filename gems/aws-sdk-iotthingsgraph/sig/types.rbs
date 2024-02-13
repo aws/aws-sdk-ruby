@@ -1,0 +1,583 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::IoTThingsGraph
+  module Types
+
+    class AssociateEntityToThingRequest
+      attr_accessor thing_name: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor namespace_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class AssociateEntityToThingResponse < Aws::EmptyStructure
+    end
+
+    class CreateFlowTemplateRequest
+      attr_accessor definition: Types::DefinitionDocument
+      attr_accessor compatible_namespace_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateFlowTemplateResponse
+      attr_accessor summary: Types::FlowTemplateSummary
+      SENSITIVE: []
+    end
+
+    class CreateSystemInstanceRequest
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor definition: Types::DefinitionDocument
+      attr_accessor target: ("GREENGRASS" | "CLOUD")
+      attr_accessor greengrass_group_name: ::String
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor metrics_configuration: Types::MetricsConfiguration
+      attr_accessor flow_actions_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSystemInstanceResponse
+      attr_accessor summary: Types::SystemInstanceSummary
+      SENSITIVE: []
+    end
+
+    class CreateSystemTemplateRequest
+      attr_accessor definition: Types::DefinitionDocument
+      attr_accessor compatible_namespace_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateSystemTemplateResponse
+      attr_accessor summary: Types::SystemTemplateSummary
+      SENSITIVE: []
+    end
+
+    class DefinitionDocument
+      attr_accessor language: ("GRAPHQL")
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFlowTemplateRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFlowTemplateResponse < Aws::EmptyStructure
+    end
+
+    class DeleteNamespaceRequest < Aws::EmptyStructure
+    end
+
+    class DeleteNamespaceResponse
+      attr_accessor namespace_arn: ::String
+      attr_accessor namespace_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSystemInstanceRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSystemInstanceResponse < Aws::EmptyStructure
+    end
+
+    class DeleteSystemTemplateRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSystemTemplateResponse < Aws::EmptyStructure
+    end
+
+    class DependencyRevision
+      attr_accessor id: ::String
+      attr_accessor revision_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeploySystemInstanceRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeploySystemInstanceResponse
+      attr_accessor summary: Types::SystemInstanceSummary
+      attr_accessor greengrass_deployment_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeprecateFlowTemplateRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeprecateFlowTemplateResponse < Aws::EmptyStructure
+    end
+
+    class DeprecateSystemTemplateRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeprecateSystemTemplateResponse < Aws::EmptyStructure
+    end
+
+    class DescribeNamespaceRequest
+      attr_accessor namespace_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeNamespaceResponse
+      attr_accessor namespace_arn: ::String
+      attr_accessor namespace_name: ::String
+      attr_accessor tracking_namespace_name: ::String
+      attr_accessor tracking_namespace_version: ::Integer
+      attr_accessor namespace_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class DissociateEntityFromThingRequest
+      attr_accessor thing_name: ::String
+      attr_accessor entity_type: ("DEVICE" | "SERVICE" | "DEVICE_MODEL" | "CAPABILITY" | "STATE" | "ACTION" | "EVENT" | "PROPERTY" | "MAPPING" | "ENUM")
+      SENSITIVE: []
+    end
+
+    class DissociateEntityFromThingResponse < Aws::EmptyStructure
+    end
+
+    class EntityDescription
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor type: ("DEVICE" | "SERVICE" | "DEVICE_MODEL" | "CAPABILITY" | "STATE" | "ACTION" | "EVENT" | "PROPERTY" | "MAPPING" | "ENUM")
+      attr_accessor created_at: ::Time
+      attr_accessor definition: Types::DefinitionDocument
+      SENSITIVE: []
+    end
+
+    class EntityFilter
+      attr_accessor name: ("NAME" | "NAMESPACE" | "SEMANTIC_TYPE_PATH" | "REFERENCED_ENTITY_ID")
+      attr_accessor value: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FlowExecutionMessage
+      attr_accessor message_id: ::String
+      attr_accessor event_type: ("EXECUTION_STARTED" | "EXECUTION_FAILED" | "EXECUTION_ABORTED" | "EXECUTION_SUCCEEDED" | "STEP_STARTED" | "STEP_FAILED" | "STEP_SUCCEEDED" | "ACTIVITY_SCHEDULED" | "ACTIVITY_STARTED" | "ACTIVITY_FAILED" | "ACTIVITY_SUCCEEDED" | "START_FLOW_EXECUTION_TASK" | "SCHEDULE_NEXT_READY_STEPS_TASK" | "THING_ACTION_TASK" | "THING_ACTION_TASK_FAILED" | "THING_ACTION_TASK_SUCCEEDED" | "ACKNOWLEDGE_TASK_MESSAGE")
+      attr_accessor timestamp: ::Time
+      attr_accessor payload: ::String
+      SENSITIVE: []
+    end
+
+    class FlowExecutionSummary
+      attr_accessor flow_execution_id: ::String
+      attr_accessor status: ("RUNNING" | "ABORTED" | "SUCCEEDED" | "FAILED")
+      attr_accessor system_instance_id: ::String
+      attr_accessor flow_template_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class FlowTemplateDescription
+      attr_accessor summary: Types::FlowTemplateSummary
+      attr_accessor definition: Types::DefinitionDocument
+      attr_accessor validated_namespace_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class FlowTemplateFilter
+      attr_accessor name: ("DEVICE_MODEL_ID")
+      attr_accessor value: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FlowTemplateSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor revision_number: ::Integer
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetEntitiesRequest
+      attr_accessor ids: ::Array[::String]
+      attr_accessor namespace_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetEntitiesResponse
+      attr_accessor descriptions: ::Array[Types::EntityDescription]
+      SENSITIVE: []
+    end
+
+    class GetFlowTemplateRequest
+      attr_accessor id: ::String
+      attr_accessor revision_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetFlowTemplateResponse
+      attr_accessor description: Types::FlowTemplateDescription
+      SENSITIVE: []
+    end
+
+    class GetFlowTemplateRevisionsRequest
+      attr_accessor id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetFlowTemplateRevisionsResponse
+      attr_accessor summaries: ::Array[Types::FlowTemplateSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetNamespaceDeletionStatusRequest < Aws::EmptyStructure
+    end
+
+    class GetNamespaceDeletionStatusResponse
+      attr_accessor namespace_arn: ::String
+      attr_accessor namespace_name: ::String
+      attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor error_code: ("VALIDATION_FAILED")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class GetSystemInstanceRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSystemInstanceResponse
+      attr_accessor description: Types::SystemInstanceDescription
+      SENSITIVE: []
+    end
+
+    class GetSystemTemplateRequest
+      attr_accessor id: ::String
+      attr_accessor revision_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetSystemTemplateResponse
+      attr_accessor description: Types::SystemTemplateDescription
+      SENSITIVE: []
+    end
+
+    class GetSystemTemplateRevisionsRequest
+      attr_accessor id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetSystemTemplateRevisionsResponse
+      attr_accessor summaries: ::Array[Types::SystemTemplateSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetUploadStatusRequest
+      attr_accessor upload_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetUploadStatusResponse
+      attr_accessor upload_id: ::String
+      attr_accessor upload_status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor namespace_arn: ::String
+      attr_accessor namespace_name: ::String
+      attr_accessor namespace_version: ::Integer
+      attr_accessor failure_reason: ::Array[::String]
+      attr_accessor created_date: ::Time
+      SENSITIVE: []
+    end
+
+    class InternalFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListFlowExecutionMessagesRequest
+      attr_accessor flow_execution_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFlowExecutionMessagesResponse
+      attr_accessor messages: ::Array[Types::FlowExecutionMessage]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor resource_arn: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MetricsConfiguration
+      attr_accessor cloud_metric_enabled: bool
+      attr_accessor metric_rule_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SearchEntitiesRequest
+      attr_accessor entity_types: ::Array[("DEVICE" | "SERVICE" | "DEVICE_MODEL" | "CAPABILITY" | "STATE" | "ACTION" | "EVENT" | "PROPERTY" | "MAPPING" | "ENUM")]
+      attr_accessor filters: ::Array[Types::EntityFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor namespace_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchEntitiesResponse
+      attr_accessor descriptions: ::Array[Types::EntityDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchFlowExecutionsRequest
+      attr_accessor system_instance_id: ::String
+      attr_accessor flow_execution_id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchFlowExecutionsResponse
+      attr_accessor summaries: ::Array[Types::FlowExecutionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchFlowTemplatesRequest
+      attr_accessor filters: ::Array[Types::FlowTemplateFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchFlowTemplatesResponse
+      attr_accessor summaries: ::Array[Types::FlowTemplateSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchSystemInstancesRequest
+      attr_accessor filters: ::Array[Types::SystemInstanceFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchSystemInstancesResponse
+      attr_accessor summaries: ::Array[Types::SystemInstanceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchSystemTemplatesRequest
+      attr_accessor filters: ::Array[Types::SystemTemplateFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchSystemTemplatesResponse
+      attr_accessor summaries: ::Array[Types::SystemTemplateSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchThingsRequest
+      attr_accessor entity_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor namespace_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchThingsResponse
+      attr_accessor things: ::Array[Types::Thing]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SystemInstanceDescription
+      attr_accessor summary: Types::SystemInstanceSummary
+      attr_accessor definition: Types::DefinitionDocument
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor metrics_configuration: Types::MetricsConfiguration
+      attr_accessor validated_namespace_version: ::Integer
+      attr_accessor validated_dependency_revisions: ::Array[Types::DependencyRevision]
+      attr_accessor flow_actions_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SystemInstanceFilter
+      attr_accessor name: ("SYSTEM_TEMPLATE_ID" | "STATUS" | "GREENGRASS_GROUP_NAME")
+      attr_accessor value: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SystemInstanceSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("NOT_DEPLOYED" | "BOOTSTRAP" | "DEPLOY_IN_PROGRESS" | "DEPLOYED_IN_TARGET" | "UNDEPLOY_IN_PROGRESS" | "FAILED" | "PENDING_DELETE" | "DELETED_IN_TARGET")
+      attr_accessor target: ("GREENGRASS" | "CLOUD")
+      attr_accessor greengrass_group_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor greengrass_group_id: ::String
+      attr_accessor greengrass_group_version_id: ::String
+      SENSITIVE: []
+    end
+
+    class SystemTemplateDescription
+      attr_accessor summary: Types::SystemTemplateSummary
+      attr_accessor definition: Types::DefinitionDocument
+      attr_accessor validated_namespace_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class SystemTemplateFilter
+      attr_accessor name: ("FLOW_TEMPLATE_ID")
+      attr_accessor value: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SystemTemplateSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor revision_number: ::Integer
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class Thing
+      attr_accessor thing_arn: ::String
+      attr_accessor thing_name: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UndeploySystemInstanceRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class UndeploySystemInstanceResponse
+      attr_accessor summary: Types::SystemInstanceSummary
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateFlowTemplateRequest
+      attr_accessor id: ::String
+      attr_accessor definition: Types::DefinitionDocument
+      attr_accessor compatible_namespace_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateFlowTemplateResponse
+      attr_accessor summary: Types::FlowTemplateSummary
+      SENSITIVE: []
+    end
+
+    class UpdateSystemTemplateRequest
+      attr_accessor id: ::String
+      attr_accessor definition: Types::DefinitionDocument
+      attr_accessor compatible_namespace_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateSystemTemplateResponse
+      attr_accessor summary: Types::SystemTemplateSummary
+      SENSITIVE: []
+    end
+
+    class UploadEntityDefinitionsRequest
+      attr_accessor document: Types::DefinitionDocument
+      attr_accessor sync_with_public_namespace: bool
+      attr_accessor deprecate_existing_entities: bool
+      SENSITIVE: []
+    end
+
+    class UploadEntityDefinitionsResponse
+      attr_accessor upload_id: ::String
+      SENSITIVE: []
+    end
+  end
+end

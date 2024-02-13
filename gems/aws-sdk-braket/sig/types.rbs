@@ -1,0 +1,411 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Braket
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AlgorithmSpecification
+      attr_accessor container_image: Types::ContainerImage
+      attr_accessor script_mode_config: Types::ScriptModeConfig
+      SENSITIVE: []
+    end
+
+    class Association
+      attr_accessor arn: ::String
+      attr_accessor type: ("RESERVATION_TIME_WINDOW_ARN")
+      SENSITIVE: []
+    end
+
+    class CancelJobRequest
+      attr_accessor job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CancelJobResponse
+      attr_accessor cancellation_status: ("CANCELLING" | "CANCELLED")
+      attr_accessor job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CancelQuantumTaskRequest
+      attr_accessor client_token: ::String
+      attr_accessor quantum_task_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CancelQuantumTaskResponse
+      attr_accessor cancellation_status: ("CANCELLING" | "CANCELLED")
+      attr_accessor quantum_task_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ContainerImage
+      attr_accessor uri: ::String
+      SENSITIVE: []
+    end
+
+    class CreateJobRequest
+      attr_accessor algorithm_specification: Types::AlgorithmSpecification
+      attr_accessor associations: ::Array[Types::Association]
+      attr_accessor checkpoint_config: Types::JobCheckpointConfig
+      attr_accessor client_token: ::String
+      attr_accessor device_config: Types::DeviceConfig
+      attr_accessor hyper_parameters: ::Hash[::String, ::String]
+      attr_accessor input_data_config: ::Array[Types::InputFileConfig]
+      attr_accessor instance_config: Types::InstanceConfig
+      attr_accessor job_name: ::String
+      attr_accessor output_data_config: Types::JobOutputDataConfig
+      attr_accessor role_arn: ::String
+      attr_accessor stopping_condition: Types::JobStoppingCondition
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateJobResponse
+      attr_accessor job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateQuantumTaskRequest
+      attr_accessor action: ::String
+      attr_accessor associations: ::Array[Types::Association]
+      attr_accessor client_token: ::String
+      attr_accessor device_arn: ::String
+      attr_accessor device_parameters: ::String
+      attr_accessor job_token: ::String
+      attr_accessor output_s3_bucket: ::String
+      attr_accessor output_s3_key_prefix: ::String
+      attr_accessor shots: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateQuantumTaskResponse
+      attr_accessor quantum_task_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DataSource
+      attr_accessor s3_data_source: Types::S3DataSource
+      SENSITIVE: []
+    end
+
+    class DeviceConfig
+      attr_accessor device: ::String
+      SENSITIVE: []
+    end
+
+    class DeviceOfflineException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeviceQueueInfo
+      attr_accessor queue: ("QUANTUM_TASKS_QUEUE" | "JOBS_QUEUE")
+      attr_accessor queue_priority: ("Normal" | "Priority")
+      attr_accessor queue_size: ::String
+      SENSITIVE: []
+    end
+
+    class DeviceRetiredException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeviceSummary
+      attr_accessor device_arn: ::String
+      attr_accessor device_name: ::String
+      attr_accessor device_status: ("ONLINE" | "OFFLINE" | "RETIRED")
+      attr_accessor device_type: ("QPU" | "SIMULATOR")
+      attr_accessor provider_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeviceRequest
+      attr_accessor device_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeviceResponse
+      attr_accessor device_arn: ::String
+      attr_accessor device_capabilities: ::String
+      attr_accessor device_name: ::String
+      attr_accessor device_queue_info: ::Array[Types::DeviceQueueInfo]
+      attr_accessor device_status: ("ONLINE" | "OFFLINE" | "RETIRED")
+      attr_accessor device_type: ("QPU" | "SIMULATOR")
+      attr_accessor provider_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobRequest
+      attr_accessor additional_attribute_names: ::Array[("QueueInfo")]
+      attr_accessor job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobResponse
+      attr_accessor algorithm_specification: Types::AlgorithmSpecification
+      attr_accessor associations: ::Array[Types::Association]
+      attr_accessor billable_duration: ::Integer
+      attr_accessor checkpoint_config: Types::JobCheckpointConfig
+      attr_accessor created_at: ::Time
+      attr_accessor device_config: Types::DeviceConfig
+      attr_accessor ended_at: ::Time
+      attr_accessor events: ::Array[Types::JobEventDetails]
+      attr_accessor failure_reason: ::String
+      attr_accessor hyper_parameters: ::Hash[::String, ::String]
+      attr_accessor input_data_config: ::Array[Types::InputFileConfig]
+      attr_accessor instance_config: Types::InstanceConfig
+      attr_accessor job_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor output_data_config: Types::JobOutputDataConfig
+      attr_accessor queue_info: Types::HybridJobQueueInfo
+      attr_accessor role_arn: ::String
+      attr_accessor started_at: ::Time
+      attr_accessor status: ("QUEUED" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED")
+      attr_accessor stopping_condition: Types::JobStoppingCondition
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetQuantumTaskRequest
+      attr_accessor additional_attribute_names: ::Array[("QueueInfo")]
+      attr_accessor quantum_task_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetQuantumTaskResponse
+      attr_accessor associations: ::Array[Types::Association]
+      attr_accessor created_at: ::Time
+      attr_accessor device_arn: ::String
+      attr_accessor device_parameters: ::String
+      attr_accessor ended_at: ::Time
+      attr_accessor failure_reason: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor output_s3_bucket: ::String
+      attr_accessor output_s3_directory: ::String
+      attr_accessor quantum_task_arn: ::String
+      attr_accessor queue_info: Types::QuantumTaskQueueInfo
+      attr_accessor shots: ::Integer
+      attr_accessor status: ("CREATED" | "QUEUED" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class HybridJobQueueInfo
+      attr_accessor message: ::String
+      attr_accessor position: ::String
+      attr_accessor queue: ("QUANTUM_TASKS_QUEUE" | "JOBS_QUEUE")
+      SENSITIVE: []
+    end
+
+    class InputFileConfig
+      attr_accessor channel_name: ::String
+      attr_accessor content_type: ::String
+      attr_accessor data_source: Types::DataSource
+      SENSITIVE: []
+    end
+
+    class InstanceConfig
+      attr_accessor instance_count: ::Integer
+      attr_accessor instance_type: ("ml.m4.xlarge" | "ml.m4.2xlarge" | "ml.m4.4xlarge" | "ml.m4.10xlarge" | "ml.m4.16xlarge" | "ml.g4dn.xlarge" | "ml.g4dn.2xlarge" | "ml.g4dn.4xlarge" | "ml.g4dn.8xlarge" | "ml.g4dn.12xlarge" | "ml.g4dn.16xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.12xlarge" | "ml.m5.24xlarge" | "ml.c4.xlarge" | "ml.c4.2xlarge" | "ml.c4.4xlarge" | "ml.c4.8xlarge" | "ml.p2.xlarge" | "ml.p2.8xlarge" | "ml.p2.16xlarge" | "ml.p3.2xlarge" | "ml.p3.8xlarge" | "ml.p3.16xlarge" | "ml.p3dn.24xlarge" | "ml.p4d.24xlarge" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.18xlarge" | "ml.c5n.xlarge" | "ml.c5n.2xlarge" | "ml.c5n.4xlarge" | "ml.c5n.9xlarge" | "ml.c5n.18xlarge")
+      attr_accessor volume_size_in_gb: ::Integer
+      SENSITIVE: []
+    end
+
+    class InternalServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JobCheckpointConfig
+      attr_accessor local_path: ::String
+      attr_accessor s3_uri: ::String
+      SENSITIVE: []
+    end
+
+    class JobEventDetails
+      attr_accessor event_type: ("WAITING_FOR_PRIORITY" | "QUEUED_FOR_EXECUTION" | "STARTING_INSTANCE" | "DOWNLOADING_DATA" | "RUNNING" | "DEPRIORITIZED_DUE_TO_INACTIVITY" | "UPLOADING_RESULTS" | "COMPLETED" | "FAILED" | "MAX_RUNTIME_EXCEEDED" | "CANCELLED")
+      attr_accessor message: ::String
+      attr_accessor time_of_event: ::Time
+      SENSITIVE: []
+    end
+
+    class JobOutputDataConfig
+      attr_accessor kms_key_id: ::String
+      attr_accessor s3_path: ::String
+      SENSITIVE: []
+    end
+
+    class JobStoppingCondition
+      attr_accessor max_runtime_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class JobSummary
+      attr_accessor created_at: ::Time
+      attr_accessor device: ::String
+      attr_accessor ended_at: ::Time
+      attr_accessor job_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor started_at: ::Time
+      attr_accessor status: ("QUEUED" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class QuantumTaskQueueInfo
+      attr_accessor message: ::String
+      attr_accessor position: ::String
+      attr_accessor queue: ("QUANTUM_TASKS_QUEUE" | "JOBS_QUEUE")
+      attr_accessor queue_priority: ("Normal" | "Priority")
+      SENSITIVE: []
+    end
+
+    class QuantumTaskSummary
+      attr_accessor created_at: ::Time
+      attr_accessor device_arn: ::String
+      attr_accessor ended_at: ::Time
+      attr_accessor output_s3_bucket: ::String
+      attr_accessor output_s3_directory: ::String
+      attr_accessor quantum_task_arn: ::String
+      attr_accessor shots: ::Integer
+      attr_accessor status: ("CREATED" | "QUEUED" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class S3DataSource
+      attr_accessor s3_uri: ::String
+      SENSITIVE: []
+    end
+
+    class ScriptModeConfig
+      attr_accessor compression_type: ("NONE" | "GZIP")
+      attr_accessor entry_point: ::String
+      attr_accessor s3_uri: ::String
+      SENSITIVE: []
+    end
+
+    class SearchDevicesFilter
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SearchDevicesRequest
+      attr_accessor filters: ::Array[Types::SearchDevicesFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchDevicesResponse
+      attr_accessor devices: ::Array[Types::DeviceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchJobsFilter
+      attr_accessor name: ::String
+      attr_accessor operator: ("LT" | "LTE" | "EQUAL" | "GT" | "GTE" | "BETWEEN" | "CONTAINS")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SearchJobsRequest
+      attr_accessor filters: ::Array[Types::SearchJobsFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchJobsResponse
+      attr_accessor jobs: ::Array[Types::JobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchQuantumTasksFilter
+      attr_accessor name: ::String
+      attr_accessor operator: ("LT" | "LTE" | "EQUAL" | "GT" | "GTE" | "BETWEEN")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SearchQuantumTasksRequest
+      attr_accessor filters: ::Array[Types::SearchQuantumTasksFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchQuantumTasksResponse
+      attr_accessor next_token: ::String
+      attr_accessor quantum_tasks: ::Array[Types::QuantumTaskSummary]
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,0 +1,933 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AuditManager
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateAssessmentReportEvidenceFolderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateAssessmentReportEvidenceFolderResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#associate_assessment_report_evidence_folder-instance_method
+      def associate_assessment_report_evidence_folder: (
+                                                         assessment_id: ::String,
+                                                         evidence_folder_id: ::String
+                                                       ) -> _AssociateAssessmentReportEvidenceFolderResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateAssessmentReportEvidenceFolderResponseSuccess
+
+      interface _BatchAssociateAssessmentReportEvidenceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchAssociateAssessmentReportEvidenceResponse]
+        def evidence_ids: () -> ::Array[::String]
+        def errors: () -> ::Array[Types::AssessmentReportEvidenceError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#batch_associate_assessment_report_evidence-instance_method
+      def batch_associate_assessment_report_evidence: (
+                                                        assessment_id: ::String,
+                                                        evidence_folder_id: ::String,
+                                                        evidence_ids: Array[::String]
+                                                      ) -> _BatchAssociateAssessmentReportEvidenceResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchAssociateAssessmentReportEvidenceResponseSuccess
+
+      interface _BatchCreateDelegationByAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchCreateDelegationByAssessmentResponse]
+        def delegations: () -> ::Array[Types::Delegation]
+        def errors: () -> ::Array[Types::BatchCreateDelegationByAssessmentError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#batch_create_delegation_by_assessment-instance_method
+      def batch_create_delegation_by_assessment: (
+                                                   create_delegation_requests: Array[
+                                                     {
+                                                       comment: ::String?,
+                                                       control_set_id: ::String?,
+                                                       role_arn: ::String?,
+                                                       role_type: ("PROCESS_OWNER" | "RESOURCE_OWNER")?
+                                                     },
+                                                   ],
+                                                   assessment_id: ::String
+                                                 ) -> _BatchCreateDelegationByAssessmentResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateDelegationByAssessmentResponseSuccess
+
+      interface _BatchDeleteDelegationByAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteDelegationByAssessmentResponse]
+        def errors: () -> ::Array[Types::BatchDeleteDelegationByAssessmentError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#batch_delete_delegation_by_assessment-instance_method
+      def batch_delete_delegation_by_assessment: (
+                                                   delegation_ids: Array[::String],
+                                                   assessment_id: ::String
+                                                 ) -> _BatchDeleteDelegationByAssessmentResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteDelegationByAssessmentResponseSuccess
+
+      interface _BatchDisassociateAssessmentReportEvidenceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDisassociateAssessmentReportEvidenceResponse]
+        def evidence_ids: () -> ::Array[::String]
+        def errors: () -> ::Array[Types::AssessmentReportEvidenceError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#batch_disassociate_assessment_report_evidence-instance_method
+      def batch_disassociate_assessment_report_evidence: (
+                                                           assessment_id: ::String,
+                                                           evidence_folder_id: ::String,
+                                                           evidence_ids: Array[::String]
+                                                         ) -> _BatchDisassociateAssessmentReportEvidenceResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDisassociateAssessmentReportEvidenceResponseSuccess
+
+      interface _BatchImportEvidenceToAssessmentControlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchImportEvidenceToAssessmentControlResponse]
+        def errors: () -> ::Array[Types::BatchImportEvidenceToAssessmentControlError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#batch_import_evidence_to_assessment_control-instance_method
+      def batch_import_evidence_to_assessment_control: (
+                                                         assessment_id: ::String,
+                                                         control_set_id: ::String,
+                                                         control_id: ::String,
+                                                         manual_evidence: Array[
+                                                           {
+                                                             s3_resource_path: ::String?,
+                                                             text_response: ::String?,
+                                                             evidence_file_name: ::String?
+                                                           },
+                                                         ]
+                                                       ) -> _BatchImportEvidenceToAssessmentControlResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchImportEvidenceToAssessmentControlResponseSuccess
+
+      interface _CreateAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAssessmentResponse]
+        def assessment: () -> Types::Assessment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#create_assessment-instance_method
+      def create_assessment: (
+                               name: ::String,
+                               ?description: ::String,
+                               assessment_reports_destination: {
+                                 destination_type: ("S3")?,
+                                 destination: ::String?
+                               },
+                               scope: {
+                                 aws_accounts: Array[
+                                   {
+                                     id: ::String?,
+                                     email_address: ::String?,
+                                     name: ::String?
+                                   },
+                                 ]?,
+                                 aws_services: Array[
+                                   {
+                                     service_name: ::String?
+                                   },
+                                 ]?
+                               },
+                               roles: Array[
+                                 {
+                                   role_type: ("PROCESS_OWNER" | "RESOURCE_OWNER"),
+                                   role_arn: ::String
+                                 },
+                               ],
+                               framework_id: ::String,
+                               ?tags: Hash[::String, ::String]
+                             ) -> _CreateAssessmentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssessmentResponseSuccess
+
+      interface _CreateAssessmentFrameworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAssessmentFrameworkResponse]
+        def framework: () -> Types::Framework
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#create_assessment_framework-instance_method
+      def create_assessment_framework: (
+                                         name: ::String,
+                                         ?description: ::String,
+                                         ?compliance_type: ::String,
+                                         control_sets: Array[
+                                           {
+                                             name: ::String,
+                                             controls: Array[
+                                               {
+                                                 id: ::String
+                                               },
+                                             ]?
+                                           },
+                                         ],
+                                         ?tags: Hash[::String, ::String]
+                                       ) -> _CreateAssessmentFrameworkResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssessmentFrameworkResponseSuccess
+
+      interface _CreateAssessmentReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAssessmentReportResponse]
+        def assessment_report: () -> Types::AssessmentReport
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#create_assessment_report-instance_method
+      def create_assessment_report: (
+                                      name: ::String,
+                                      ?description: ::String,
+                                      assessment_id: ::String,
+                                      ?query_statement: ::String
+                                    ) -> _CreateAssessmentReportResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssessmentReportResponseSuccess
+
+      interface _CreateControlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateControlResponse]
+        def control: () -> Types::Control
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#create_control-instance_method
+      def create_control: (
+                            name: ::String,
+                            ?description: ::String,
+                            ?testing_information: ::String,
+                            ?action_plan_title: ::String,
+                            ?action_plan_instructions: ::String,
+                            control_mapping_sources: Array[
+                              {
+                                source_name: ::String?,
+                                source_description: ::String?,
+                                source_set_up_option: ("System_Controls_Mapping" | "Procedural_Controls_Mapping")?,
+                                source_type: ("AWS_Cloudtrail" | "AWS_Config" | "AWS_Security_Hub" | "AWS_API_Call" | "MANUAL")?,
+                                source_keyword: {
+                                  keyword_input_type: ("SELECT_FROM_LIST" | "UPLOAD_FILE" | "INPUT_TEXT")?,
+                                  keyword_value: ::String?
+                                }?,
+                                source_frequency: ("DAILY" | "WEEKLY" | "MONTHLY")?,
+                                troubleshooting_text: ::String?
+                              },
+                            ],
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateControlResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateControlResponseSuccess
+
+      interface _DeleteAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAssessmentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#delete_assessment-instance_method
+      def delete_assessment: (
+                               assessment_id: ::String
+                             ) -> _DeleteAssessmentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAssessmentResponseSuccess
+
+      interface _DeleteAssessmentFrameworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAssessmentFrameworkResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#delete_assessment_framework-instance_method
+      def delete_assessment_framework: (
+                                         framework_id: ::String
+                                       ) -> _DeleteAssessmentFrameworkResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAssessmentFrameworkResponseSuccess
+
+      interface _DeleteAssessmentFrameworkShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAssessmentFrameworkShareResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#delete_assessment_framework_share-instance_method
+      def delete_assessment_framework_share: (
+                                               request_id: ::String,
+                                               request_type: ("SENT" | "RECEIVED")
+                                             ) -> _DeleteAssessmentFrameworkShareResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAssessmentFrameworkShareResponseSuccess
+
+      interface _DeleteAssessmentReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAssessmentReportResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#delete_assessment_report-instance_method
+      def delete_assessment_report: (
+                                      assessment_id: ::String,
+                                      assessment_report_id: ::String
+                                    ) -> _DeleteAssessmentReportResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAssessmentReportResponseSuccess
+
+      interface _DeleteControlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteControlResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#delete_control-instance_method
+      def delete_control: (
+                            control_id: ::String
+                          ) -> _DeleteControlResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteControlResponseSuccess
+
+      interface _DeregisterAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterAccountResponse]
+        def status: () -> ("ACTIVE" | "INACTIVE" | "PENDING_ACTIVATION")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#deregister_account-instance_method
+      def deregister_account: (
+                              ) -> _DeregisterAccountResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterAccountResponseSuccess
+
+      interface _DeregisterOrganizationAdminAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterOrganizationAdminAccountResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#deregister_organization_admin_account-instance_method
+      def deregister_organization_admin_account: (
+                                                   ?admin_account_id: ::String
+                                                 ) -> _DeregisterOrganizationAdminAccountResponseSuccess
+                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterOrganizationAdminAccountResponseSuccess
+
+      interface _DisassociateAssessmentReportEvidenceFolderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateAssessmentReportEvidenceFolderResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#disassociate_assessment_report_evidence_folder-instance_method
+      def disassociate_assessment_report_evidence_folder: (
+                                                            assessment_id: ::String,
+                                                            evidence_folder_id: ::String
+                                                          ) -> _DisassociateAssessmentReportEvidenceFolderResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateAssessmentReportEvidenceFolderResponseSuccess
+
+      interface _GetAccountStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountStatusResponse]
+        def status: () -> ("ACTIVE" | "INACTIVE" | "PENDING_ACTIVATION")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#get_account_status-instance_method
+      def get_account_status: (
+                              ) -> _GetAccountStatusResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountStatusResponseSuccess
+
+      interface _GetAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAssessmentResponse]
+        def assessment: () -> Types::Assessment
+        def user_role: () -> Types::Role
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#get_assessment-instance_method
+      def get_assessment: (
+                            assessment_id: ::String
+                          ) -> _GetAssessmentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssessmentResponseSuccess
+
+      interface _GetAssessmentFrameworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAssessmentFrameworkResponse]
+        def framework: () -> Types::Framework
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#get_assessment_framework-instance_method
+      def get_assessment_framework: (
+                                      framework_id: ::String
+                                    ) -> _GetAssessmentFrameworkResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssessmentFrameworkResponseSuccess
+
+      interface _GetAssessmentReportUrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAssessmentReportUrlResponse]
+        def pre_signed_url: () -> Types::URL
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#get_assessment_report_url-instance_method
+      def get_assessment_report_url: (
+                                       assessment_report_id: ::String,
+                                       assessment_id: ::String
+                                     ) -> _GetAssessmentReportUrlResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssessmentReportUrlResponseSuccess
+
+      interface _GetChangeLogsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetChangeLogsResponse]
+        def change_logs: () -> ::Array[Types::ChangeLog]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#get_change_logs-instance_method
+      def get_change_logs: (
+                             assessment_id: ::String,
+                             ?control_set_id: ::String,
+                             ?control_id: ::String,
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _GetChangeLogsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetChangeLogsResponseSuccess
+
+      interface _GetControlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetControlResponse]
+        def control: () -> Types::Control
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#get_control-instance_method
+      def get_control: (
+                         control_id: ::String
+                       ) -> _GetControlResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetControlResponseSuccess
+
+      interface _GetDelegationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDelegationsResponse]
+        def delegations: () -> ::Array[Types::DelegationMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#get_delegations-instance_method
+      def get_delegations: (
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _GetDelegationsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDelegationsResponseSuccess
+
+      interface _GetEvidenceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEvidenceResponse]
+        def evidence: () -> Types::Evidence
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#get_evidence-instance_method
+      def get_evidence: (
+                          assessment_id: ::String,
+                          control_set_id: ::String,
+                          evidence_folder_id: ::String,
+                          evidence_id: ::String
+                        ) -> _GetEvidenceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEvidenceResponseSuccess
+
+      interface _GetEvidenceByEvidenceFolderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEvidenceByEvidenceFolderResponse]
+        def evidence: () -> ::Array[Types::Evidence]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#get_evidence_by_evidence_folder-instance_method
+      def get_evidence_by_evidence_folder: (
+                                             assessment_id: ::String,
+                                             control_set_id: ::String,
+                                             evidence_folder_id: ::String,
+                                             ?next_token: ::String,
+                                             ?max_results: ::Integer
+                                           ) -> _GetEvidenceByEvidenceFolderResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEvidenceByEvidenceFolderResponseSuccess
+
+      interface _GetEvidenceFileUploadUrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEvidenceFileUploadUrlResponse]
+        def evidence_file_name: () -> ::String
+        def upload_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#get_evidence_file_upload_url-instance_method
+      def get_evidence_file_upload_url: (
+                                          file_name: ::String
+                                        ) -> _GetEvidenceFileUploadUrlResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEvidenceFileUploadUrlResponseSuccess
+
+      interface _GetEvidenceFolderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEvidenceFolderResponse]
+        def evidence_folder: () -> Types::AssessmentEvidenceFolder
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#get_evidence_folder-instance_method
+      def get_evidence_folder: (
+                                 assessment_id: ::String,
+                                 control_set_id: ::String,
+                                 evidence_folder_id: ::String
+                               ) -> _GetEvidenceFolderResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEvidenceFolderResponseSuccess
+
+      interface _GetEvidenceFoldersByAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEvidenceFoldersByAssessmentResponse]
+        def evidence_folders: () -> ::Array[Types::AssessmentEvidenceFolder]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#get_evidence_folders_by_assessment-instance_method
+      def get_evidence_folders_by_assessment: (
+                                                assessment_id: ::String,
+                                                ?next_token: ::String,
+                                                ?max_results: ::Integer
+                                              ) -> _GetEvidenceFoldersByAssessmentResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEvidenceFoldersByAssessmentResponseSuccess
+
+      interface _GetEvidenceFoldersByAssessmentControlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEvidenceFoldersByAssessmentControlResponse]
+        def evidence_folders: () -> ::Array[Types::AssessmentEvidenceFolder]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#get_evidence_folders_by_assessment_control-instance_method
+      def get_evidence_folders_by_assessment_control: (
+                                                        assessment_id: ::String,
+                                                        control_set_id: ::String,
+                                                        control_id: ::String,
+                                                        ?next_token: ::String,
+                                                        ?max_results: ::Integer
+                                                      ) -> _GetEvidenceFoldersByAssessmentControlResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEvidenceFoldersByAssessmentControlResponseSuccess
+
+      interface _GetInsightsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInsightsResponse]
+        def insights: () -> Types::Insights
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#get_insights-instance_method
+      def get_insights: (
+                        ) -> _GetInsightsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInsightsResponseSuccess
+
+      interface _GetInsightsByAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInsightsByAssessmentResponse]
+        def insights: () -> Types::InsightsByAssessment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#get_insights_by_assessment-instance_method
+      def get_insights_by_assessment: (
+                                        assessment_id: ::String
+                                      ) -> _GetInsightsByAssessmentResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInsightsByAssessmentResponseSuccess
+
+      interface _GetOrganizationAdminAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOrganizationAdminAccountResponse]
+        def admin_account_id: () -> ::String
+        def organization_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#get_organization_admin_account-instance_method
+      def get_organization_admin_account: (
+                                          ) -> _GetOrganizationAdminAccountResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOrganizationAdminAccountResponseSuccess
+
+      interface _GetServicesInScopeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServicesInScopeResponse]
+        def service_metadata: () -> ::Array[Types::ServiceMetadata]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#get_services_in_scope-instance_method
+      def get_services_in_scope: (
+                                 ) -> _GetServicesInScopeResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServicesInScopeResponseSuccess
+
+      interface _GetSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSettingsResponse]
+        def settings: () -> Types::Settings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#get_settings-instance_method
+      def get_settings: (
+                          attribute: ("ALL" | "IS_AWS_ORG_ENABLED" | "SNS_TOPIC" | "DEFAULT_ASSESSMENT_REPORTS_DESTINATION" | "DEFAULT_PROCESS_OWNERS" | "EVIDENCE_FINDER_ENABLEMENT" | "DEREGISTRATION_POLICY" | "DEFAULT_EXPORT_DESTINATION")
+                        ) -> _GetSettingsResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSettingsResponseSuccess
+
+      interface _ListAssessmentControlInsightsByControlDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssessmentControlInsightsByControlDomainResponse]
+        def control_insights_by_assessment: () -> ::Array[Types::ControlInsightsMetadataByAssessmentItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#list_assessment_control_insights_by_control_domain-instance_method
+      def list_assessment_control_insights_by_control_domain: (
+                                                                control_domain_id: ::String,
+                                                                assessment_id: ::String,
+                                                                ?next_token: ::String,
+                                                                ?max_results: ::Integer
+                                                              ) -> _ListAssessmentControlInsightsByControlDomainResponseSuccess
+                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssessmentControlInsightsByControlDomainResponseSuccess
+
+      interface _ListAssessmentFrameworkShareRequestsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssessmentFrameworkShareRequestsResponse]
+        def assessment_framework_share_requests: () -> ::Array[Types::AssessmentFrameworkShareRequest]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#list_assessment_framework_share_requests-instance_method
+      def list_assessment_framework_share_requests: (
+                                                      request_type: ("SENT" | "RECEIVED"),
+                                                      ?next_token: ::String,
+                                                      ?max_results: ::Integer
+                                                    ) -> _ListAssessmentFrameworkShareRequestsResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssessmentFrameworkShareRequestsResponseSuccess
+
+      interface _ListAssessmentFrameworksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssessmentFrameworksResponse]
+        def framework_metadata_list: () -> ::Array[Types::AssessmentFrameworkMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#list_assessment_frameworks-instance_method
+      def list_assessment_frameworks: (
+                                        framework_type: ("Standard" | "Custom"),
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _ListAssessmentFrameworksResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssessmentFrameworksResponseSuccess
+
+      interface _ListAssessmentReportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssessmentReportsResponse]
+        def assessment_reports: () -> ::Array[Types::AssessmentReportMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#list_assessment_reports-instance_method
+      def list_assessment_reports: (
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListAssessmentReportsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssessmentReportsResponseSuccess
+
+      interface _ListAssessmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssessmentsResponse]
+        def assessment_metadata: () -> ::Array[Types::AssessmentMetadataItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#list_assessments-instance_method
+      def list_assessments: (
+                              ?status: ("ACTIVE" | "INACTIVE"),
+                              ?next_token: ::String,
+                              ?max_results: ::Integer
+                            ) -> _ListAssessmentsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssessmentsResponseSuccess
+
+      interface _ListControlDomainInsightsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListControlDomainInsightsResponse]
+        def control_domain_insights: () -> ::Array[Types::ControlDomainInsights]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#list_control_domain_insights-instance_method
+      def list_control_domain_insights: (
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListControlDomainInsightsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListControlDomainInsightsResponseSuccess
+
+      interface _ListControlDomainInsightsByAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListControlDomainInsightsByAssessmentResponse]
+        def control_domain_insights: () -> ::Array[Types::ControlDomainInsights]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#list_control_domain_insights_by_assessment-instance_method
+      def list_control_domain_insights_by_assessment: (
+                                                        assessment_id: ::String,
+                                                        ?next_token: ::String,
+                                                        ?max_results: ::Integer
+                                                      ) -> _ListControlDomainInsightsByAssessmentResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListControlDomainInsightsByAssessmentResponseSuccess
+
+      interface _ListControlInsightsByControlDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListControlInsightsByControlDomainResponse]
+        def control_insights_metadata: () -> ::Array[Types::ControlInsightsMetadataItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#list_control_insights_by_control_domain-instance_method
+      def list_control_insights_by_control_domain: (
+                                                     control_domain_id: ::String,
+                                                     ?next_token: ::String,
+                                                     ?max_results: ::Integer
+                                                   ) -> _ListControlInsightsByControlDomainResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListControlInsightsByControlDomainResponseSuccess
+
+      interface _ListControlsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListControlsResponse]
+        def control_metadata_list: () -> ::Array[Types::ControlMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#list_controls-instance_method
+      def list_controls: (
+                           control_type: ("Standard" | "Custom"),
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListControlsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListControlsResponseSuccess
+
+      interface _ListKeywordsForDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListKeywordsForDataSourceResponse]
+        def keywords: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#list_keywords_for_data_source-instance_method
+      def list_keywords_for_data_source: (
+                                           source: ("AWS_Cloudtrail" | "AWS_Config" | "AWS_Security_Hub" | "AWS_API_Call" | "MANUAL"),
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer
+                                         ) -> _ListKeywordsForDataSourceResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKeywordsForDataSourceResponseSuccess
+
+      interface _ListNotificationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNotificationsResponse]
+        def notifications: () -> ::Array[Types::Notification]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#list_notifications-instance_method
+      def list_notifications: (
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListNotificationsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNotificationsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _RegisterAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterAccountResponse]
+        def status: () -> ("ACTIVE" | "INACTIVE" | "PENDING_ACTIVATION")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#register_account-instance_method
+      def register_account: (
+                              ?kms_key: ::String,
+                              ?delegated_admin_account: ::String
+                            ) -> _RegisterAccountResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterAccountResponseSuccess
+
+      interface _RegisterOrganizationAdminAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterOrganizationAdminAccountResponse]
+        def admin_account_id: () -> ::String
+        def organization_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#register_organization_admin_account-instance_method
+      def register_organization_admin_account: (
+                                                 admin_account_id: ::String
+                                               ) -> _RegisterOrganizationAdminAccountResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterOrganizationAdminAccountResponseSuccess
+
+      interface _StartAssessmentFrameworkShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAssessmentFrameworkShareResponse]
+        def assessment_framework_share_request: () -> Types::AssessmentFrameworkShareRequest
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#start_assessment_framework_share-instance_method
+      def start_assessment_framework_share: (
+                                              framework_id: ::String,
+                                              destination_account: ::String,
+                                              destination_region: ::String,
+                                              ?comment: ::String
+                                            ) -> _StartAssessmentFrameworkShareResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAssessmentFrameworkShareResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAssessmentResponse]
+        def assessment: () -> Types::Assessment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#update_assessment-instance_method
+      def update_assessment: (
+                               assessment_id: ::String,
+                               ?assessment_name: ::String,
+                               ?assessment_description: ::String,
+                               scope: {
+                                 aws_accounts: Array[
+                                   {
+                                     id: ::String?,
+                                     email_address: ::String?,
+                                     name: ::String?
+                                   },
+                                 ]?,
+                                 aws_services: Array[
+                                   {
+                                     service_name: ::String?
+                                   },
+                                 ]?
+                               },
+                               ?assessment_reports_destination: {
+                                 destination_type: ("S3")?,
+                                 destination: ::String?
+                               },
+                               ?roles: Array[
+                                 {
+                                   role_type: ("PROCESS_OWNER" | "RESOURCE_OWNER"),
+                                   role_arn: ::String
+                                 },
+                               ]
+                             ) -> _UpdateAssessmentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssessmentResponseSuccess
+
+      interface _UpdateAssessmentControlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAssessmentControlResponse]
+        def control: () -> Types::AssessmentControl
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#update_assessment_control-instance_method
+      def update_assessment_control: (
+                                       assessment_id: ::String,
+                                       control_set_id: ::String,
+                                       control_id: ::String,
+                                       ?control_status: ("UNDER_REVIEW" | "REVIEWED" | "INACTIVE"),
+                                       ?comment_body: ::String
+                                     ) -> _UpdateAssessmentControlResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssessmentControlResponseSuccess
+
+      interface _UpdateAssessmentControlSetStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAssessmentControlSetStatusResponse]
+        def control_set: () -> Types::AssessmentControlSet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#update_assessment_control_set_status-instance_method
+      def update_assessment_control_set_status: (
+                                                  assessment_id: ::String,
+                                                  control_set_id: ::String,
+                                                  status: ("ACTIVE" | "UNDER_REVIEW" | "REVIEWED"),
+                                                  comment: ::String
+                                                ) -> _UpdateAssessmentControlSetStatusResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssessmentControlSetStatusResponseSuccess
+
+      interface _UpdateAssessmentFrameworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAssessmentFrameworkResponse]
+        def framework: () -> Types::Framework
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#update_assessment_framework-instance_method
+      def update_assessment_framework: (
+                                         framework_id: ::String,
+                                         name: ::String,
+                                         ?description: ::String,
+                                         ?compliance_type: ::String,
+                                         control_sets: Array[
+                                           {
+                                             id: ::String?,
+                                             name: ::String,
+                                             controls: Array[
+                                               {
+                                                 id: ::String
+                                               },
+                                             ]
+                                           },
+                                         ]
+                                       ) -> _UpdateAssessmentFrameworkResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssessmentFrameworkResponseSuccess
+
+      interface _UpdateAssessmentFrameworkShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAssessmentFrameworkShareResponse]
+        def assessment_framework_share_request: () -> Types::AssessmentFrameworkShareRequest
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#update_assessment_framework_share-instance_method
+      def update_assessment_framework_share: (
+                                               request_id: ::String,
+                                               request_type: ("SENT" | "RECEIVED"),
+                                               action: ("ACCEPT" | "DECLINE" | "REVOKE")
+                                             ) -> _UpdateAssessmentFrameworkShareResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssessmentFrameworkShareResponseSuccess
+
+      interface _UpdateAssessmentStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAssessmentStatusResponse]
+        def assessment: () -> Types::Assessment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#update_assessment_status-instance_method
+      def update_assessment_status: (
+                                      assessment_id: ::String,
+                                      status: ("ACTIVE" | "INACTIVE")
+                                    ) -> _UpdateAssessmentStatusResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssessmentStatusResponseSuccess
+
+      interface _UpdateControlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateControlResponse]
+        def control: () -> Types::Control
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#update_control-instance_method
+      def update_control: (
+                            control_id: ::String,
+                            name: ::String,
+                            ?description: ::String,
+                            ?testing_information: ::String,
+                            ?action_plan_title: ::String,
+                            ?action_plan_instructions: ::String,
+                            control_mapping_sources: Array[
+                              {
+                                source_id: ::String?,
+                                source_name: ::String?,
+                                source_description: ::String?,
+                                source_set_up_option: ("System_Controls_Mapping" | "Procedural_Controls_Mapping")?,
+                                source_type: ("AWS_Cloudtrail" | "AWS_Config" | "AWS_Security_Hub" | "AWS_API_Call" | "MANUAL")?,
+                                source_keyword: {
+                                  keyword_input_type: ("SELECT_FROM_LIST" | "UPLOAD_FILE" | "INPUT_TEXT")?,
+                                  keyword_value: ::String?
+                                }?,
+                                source_frequency: ("DAILY" | "WEEKLY" | "MONTHLY")?,
+                                troubleshooting_text: ::String?
+                              },
+                            ]
+                          ) -> _UpdateControlResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateControlResponseSuccess
+
+      interface _UpdateSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSettingsResponse]
+        def settings: () -> Types::Settings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#update_settings-instance_method
+      def update_settings: (
+                             ?sns_topic: ::String,
+                             ?default_assessment_reports_destination: {
+                               destination_type: ("S3")?,
+                               destination: ::String?
+                             },
+                             ?default_process_owners: Array[
+                               {
+                                 role_type: ("PROCESS_OWNER" | "RESOURCE_OWNER"),
+                                 role_arn: ::String
+                               },
+                             ],
+                             ?kms_key: ::String,
+                             ?evidence_finder_enabled: bool,
+                             ?deregistration_policy: {
+                               delete_resources: ("ALL" | "DEFAULT")?
+                             },
+                             ?default_export_destination: {
+                               destination_type: ("S3")?,
+                               destination: ::String?
+                             }
+                           ) -> _UpdateSettingsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSettingsResponseSuccess
+
+      interface _ValidateAssessmentReportIntegrityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ValidateAssessmentReportIntegrityResponse]
+        def signature_valid: () -> bool
+        def signature_algorithm: () -> ::String
+        def signature_date_time: () -> ::String
+        def signature_key_id: () -> ::String
+        def validation_errors: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#validate_assessment_report_integrity-instance_method
+      def validate_assessment_report_integrity: (
+                                                  s3_relative_path: ::String
+                                                ) -> _ValidateAssessmentReportIntegrityResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidateAssessmentReportIntegrityResponseSuccess
+    end
+  end
+end
+

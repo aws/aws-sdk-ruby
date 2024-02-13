@@ -1,0 +1,512 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MigrationHubRefactorSpaces
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApplicationResponse]
+        def api_gateway_proxy: () -> Types::ApiGatewayProxyInput
+        def application_id: () -> ::String
+        def arn: () -> ::String
+        def created_by_account_id: () -> ::String
+        def created_time: () -> ::Time
+        def environment_id: () -> ::String
+        def last_updated_time: () -> ::Time
+        def name: () -> ::String
+        def owner_account_id: () -> ::String
+        def proxy_type: () -> ("API_GATEWAY")
+        def state: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
+        def tags: () -> ::Hash[::String, ::String]
+        def vpc_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#create_application-instance_method
+      def create_application: (
+                                ?api_gateway_proxy: {
+                                  endpoint_type: ("REGIONAL" | "PRIVATE")?,
+                                  stage_name: ::String?
+                                },
+                                ?client_token: ::String,
+                                environment_identifier: ::String,
+                                name: ::String,
+                                proxy_type: ("API_GATEWAY"),
+                                ?tags: Hash[::String, ::String],
+                                vpc_id: ::String
+                              ) -> _CreateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
+
+      interface _CreateEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEnvironmentResponse]
+        def arn: () -> ::String
+        def created_time: () -> ::Time
+        def description: () -> ::String
+        def environment_id: () -> ::String
+        def last_updated_time: () -> ::Time
+        def name: () -> ::String
+        def network_fabric_type: () -> ("TRANSIT_GATEWAY" | "NONE")
+        def owner_account_id: () -> ::String
+        def state: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#create_environment-instance_method
+      def create_environment: (
+                                ?client_token: ::String,
+                                ?description: ::String,
+                                name: ::String,
+                                network_fabric_type: ("TRANSIT_GATEWAY" | "NONE"),
+                                ?tags: Hash[::String, ::String]
+                              ) -> _CreateEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentResponseSuccess
+
+      interface _CreateRouteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRouteResponse]
+        def application_id: () -> ::String
+        def arn: () -> ::String
+        def created_by_account_id: () -> ::String
+        def created_time: () -> ::Time
+        def last_updated_time: () -> ::Time
+        def owner_account_id: () -> ::String
+        def route_id: () -> ::String
+        def route_type: () -> ("DEFAULT" | "URI_PATH")
+        def service_id: () -> ::String
+        def state: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING" | "INACTIVE")
+        def tags: () -> ::Hash[::String, ::String]
+        def uri_path_route: () -> Types::UriPathRouteInput
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#create_route-instance_method
+      def create_route: (
+                          application_identifier: ::String,
+                          ?client_token: ::String,
+                          ?default_route: {
+                            activation_state: ("ACTIVE" | "INACTIVE")?
+                          },
+                          environment_identifier: ::String,
+                          route_type: ("DEFAULT" | "URI_PATH"),
+                          service_identifier: ::String,
+                          ?tags: Hash[::String, ::String],
+                          ?uri_path_route: {
+                            activation_state: ("ACTIVE" | "INACTIVE"),
+                            append_source_path: bool?,
+                            include_child_paths: bool?,
+                            methods: Array[("DELETE" | "GET" | "HEAD" | "OPTIONS" | "PATCH" | "POST" | "PUT")]?,
+                            source_path: ::String
+                          }
+                        ) -> _CreateRouteResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRouteResponseSuccess
+
+      interface _CreateServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateServiceResponse]
+        def application_id: () -> ::String
+        def arn: () -> ::String
+        def created_by_account_id: () -> ::String
+        def created_time: () -> ::Time
+        def description: () -> ::String
+        def endpoint_type: () -> ("LAMBDA" | "URL")
+        def environment_id: () -> ::String
+        def lambda_endpoint: () -> Types::LambdaEndpointInput
+        def last_updated_time: () -> ::Time
+        def name: () -> ::String
+        def owner_account_id: () -> ::String
+        def service_id: () -> ::String
+        def state: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+        def tags: () -> ::Hash[::String, ::String]
+        def url_endpoint: () -> Types::UrlEndpointInput
+        def vpc_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#create_service-instance_method
+      def create_service: (
+                            application_identifier: ::String,
+                            ?client_token: ::String,
+                            ?description: ::String,
+                            endpoint_type: ("LAMBDA" | "URL"),
+                            environment_identifier: ::String,
+                            ?lambda_endpoint: {
+                              arn: ::String
+                            },
+                            name: ::String,
+                            ?tags: Hash[::String, ::String],
+                            ?url_endpoint: {
+                              health_url: ::String?,
+                              url: ::String
+                            },
+                            ?vpc_id: ::String
+                          ) -> _CreateServiceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceResponseSuccess
+
+      interface _DeleteApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApplicationResponse]
+        def application_id: () -> ::String
+        def arn: () -> ::String
+        def environment_id: () -> ::String
+        def last_updated_time: () -> ::Time
+        def name: () -> ::String
+        def state: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#delete_application-instance_method
+      def delete_application: (
+                                application_identifier: ::String,
+                                environment_identifier: ::String
+                              ) -> _DeleteApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApplicationResponseSuccess
+
+      interface _DeleteEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEnvironmentResponse]
+        def arn: () -> ::String
+        def environment_id: () -> ::String
+        def last_updated_time: () -> ::Time
+        def name: () -> ::String
+        def state: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#delete_environment-instance_method
+      def delete_environment: (
+                                environment_identifier: ::String
+                              ) -> _DeleteEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEnvironmentResponseSuccess
+
+      interface _DeleteResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourcePolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#delete_resource_policy-instance_method
+      def delete_resource_policy: (
+                                    identifier: ::String
+                                  ) -> _DeleteResourcePolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePolicyResponseSuccess
+
+      interface _DeleteRouteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRouteResponse]
+        def application_id: () -> ::String
+        def arn: () -> ::String
+        def last_updated_time: () -> ::Time
+        def route_id: () -> ::String
+        def service_id: () -> ::String
+        def state: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING" | "INACTIVE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#delete_route-instance_method
+      def delete_route: (
+                          application_identifier: ::String,
+                          environment_identifier: ::String,
+                          route_identifier: ::String
+                        ) -> _DeleteRouteResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRouteResponseSuccess
+
+      interface _DeleteServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteServiceResponse]
+        def application_id: () -> ::String
+        def arn: () -> ::String
+        def environment_id: () -> ::String
+        def last_updated_time: () -> ::Time
+        def name: () -> ::String
+        def service_id: () -> ::String
+        def state: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#delete_service-instance_method
+      def delete_service: (
+                            application_identifier: ::String,
+                            environment_identifier: ::String,
+                            service_identifier: ::String
+                          ) -> _DeleteServiceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteServiceResponseSuccess
+
+      interface _GetApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApplicationResponse]
+        def api_gateway_proxy: () -> Types::ApiGatewayProxyConfig
+        def application_id: () -> ::String
+        def arn: () -> ::String
+        def created_by_account_id: () -> ::String
+        def created_time: () -> ::Time
+        def environment_id: () -> ::String
+        def last_updated_time: () -> ::Time
+        def name: () -> ::String
+        def owner_account_id: () -> ::String
+        def proxy_type: () -> ("API_GATEWAY")
+        def state: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
+        def tags: () -> ::Hash[::String, ::String]
+        def vpc_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#get_application-instance_method
+      def get_application: (
+                             application_identifier: ::String,
+                             environment_identifier: ::String
+                           ) -> _GetApplicationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApplicationResponseSuccess
+
+      interface _GetEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnvironmentResponse]
+        def arn: () -> ::String
+        def created_time: () -> ::Time
+        def description: () -> ::String
+        def environment_id: () -> ::String
+        def last_updated_time: () -> ::Time
+        def name: () -> ::String
+        def network_fabric_type: () -> ("TRANSIT_GATEWAY" | "NONE")
+        def owner_account_id: () -> ::String
+        def state: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+        def tags: () -> ::Hash[::String, ::String]
+        def transit_gateway_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#get_environment-instance_method
+      def get_environment: (
+                             environment_identifier: ::String
+                           ) -> _GetEnvironmentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentResponseSuccess
+
+      interface _GetResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePolicyResponse]
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#get_resource_policy-instance_method
+      def get_resource_policy: (
+                                 identifier: ::String
+                               ) -> _GetResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
+
+      interface _GetRouteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRouteResponse]
+        def append_source_path: () -> bool
+        def application_id: () -> ::String
+        def arn: () -> ::String
+        def created_by_account_id: () -> ::String
+        def created_time: () -> ::Time
+        def environment_id: () -> ::String
+        def include_child_paths: () -> bool
+        def last_updated_time: () -> ::Time
+        def methods: () -> ::Array[("DELETE" | "GET" | "HEAD" | "OPTIONS" | "PATCH" | "POST" | "PUT")]
+        def owner_account_id: () -> ::String
+        def path_resource_to_id: () -> ::Hash[::String, ::String]
+        def route_id: () -> ::String
+        def route_type: () -> ("DEFAULT" | "URI_PATH")
+        def service_id: () -> ::String
+        def source_path: () -> ::String
+        def state: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING" | "INACTIVE")
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#get_route-instance_method
+      def get_route: (
+                       application_identifier: ::String,
+                       environment_identifier: ::String,
+                       route_identifier: ::String
+                     ) -> _GetRouteResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRouteResponseSuccess
+
+      interface _GetServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceResponse]
+        def application_id: () -> ::String
+        def arn: () -> ::String
+        def created_by_account_id: () -> ::String
+        def created_time: () -> ::Time
+        def description: () -> ::String
+        def endpoint_type: () -> ("LAMBDA" | "URL")
+        def environment_id: () -> ::String
+        def lambda_endpoint: () -> Types::LambdaEndpointConfig
+        def last_updated_time: () -> ::Time
+        def name: () -> ::String
+        def owner_account_id: () -> ::String
+        def service_id: () -> ::String
+        def state: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+        def tags: () -> ::Hash[::String, ::String]
+        def url_endpoint: () -> Types::UrlEndpointConfig
+        def vpc_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#get_service-instance_method
+      def get_service: (
+                         application_identifier: ::String,
+                         environment_identifier: ::String,
+                         service_identifier: ::String
+                       ) -> _GetServiceResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceResponseSuccess
+
+      interface _ListApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationsResponse]
+        def application_summary_list: () -> ::Array[Types::ApplicationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#list_applications-instance_method
+      def list_applications: (
+                               environment_identifier: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListApplicationsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationsResponseSuccess
+
+      interface _ListEnvironmentVpcsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnvironmentVpcsResponse]
+        def environment_vpc_list: () -> ::Array[Types::EnvironmentVpc]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#list_environment_vpcs-instance_method
+      def list_environment_vpcs: (
+                                   environment_identifier: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListEnvironmentVpcsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentVpcsResponseSuccess
+
+      interface _ListEnvironmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnvironmentsResponse]
+        def environment_summary_list: () -> ::Array[Types::EnvironmentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#list_environments-instance_method
+      def list_environments: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListEnvironmentsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentsResponseSuccess
+
+      interface _ListRoutesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRoutesResponse]
+        def next_token: () -> ::String
+        def route_summary_list: () -> ::Array[Types::RouteSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#list_routes-instance_method
+      def list_routes: (
+                         application_identifier: ::String,
+                         environment_identifier: ::String,
+                         ?max_results: ::Integer,
+                         ?next_token: ::String
+                       ) -> _ListRoutesResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRoutesResponseSuccess
+
+      interface _ListServicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServicesResponse]
+        def next_token: () -> ::String
+        def service_summary_list: () -> ::Array[Types::ServiceSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#list_services-instance_method
+      def list_services: (
+                           application_identifier: ::String,
+                           environment_identifier: ::String,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListServicesResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServicesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 policy: ::String,
+                                 resource_arn: ::String
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateRouteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRouteResponse]
+        def application_id: () -> ::String
+        def arn: () -> ::String
+        def last_updated_time: () -> ::Time
+        def route_id: () -> ::String
+        def service_id: () -> ::String
+        def state: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING" | "INACTIVE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubRefactorSpaces/Client.html#update_route-instance_method
+      def update_route: (
+                          activation_state: ("ACTIVE" | "INACTIVE"),
+                          application_identifier: ::String,
+                          environment_identifier: ::String,
+                          route_identifier: ::String
+                        ) -> _UpdateRouteResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRouteResponseSuccess
+    end
+  end
+end
+

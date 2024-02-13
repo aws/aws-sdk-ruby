@@ -1,0 +1,59 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IAM
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/PolicyVersion.html
+    class PolicyVersion
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/PolicyVersion.html#initialize-instance_method
+      def initialize: (String arn, String version_id, Hash[Symbol, untyped] options) -> void
+                    | (arn: String, version_id: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/PolicyVersion.html#arn-instance_method
+      def arn: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/PolicyVersion.html#version_id-instance_method
+      def version_id: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/PolicyVersion.html#document-instance_method
+      def document: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/PolicyVersion.html#is_default_version-instance_method
+      def is_default_version: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/PolicyVersion.html#create_date-instance_method
+      def create_date: () -> ::Time
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/PolicyVersion.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/PolicyVersion.html#data-instance_method
+      def data: () -> Types::PolicyVersion
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/PolicyVersion.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/PolicyVersion.html#delete-instance_method
+      def delete: (
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/PolicyVersion.html#set_as_default-instance_method
+      def set_as_default: (
+                          ) -> ::Aws::EmptyStructure
+                        | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      class Collection < ::Aws::Resources::Collection[PolicyVersion]
+      end
+    end
+  end
+end

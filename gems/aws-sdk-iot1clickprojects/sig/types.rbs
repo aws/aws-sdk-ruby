@@ -1,0 +1,254 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::IoT1ClickProjects
+  module Types
+
+    class AssociateDeviceWithPlacementRequest
+      attr_accessor project_name: ::String
+      attr_accessor placement_name: ::String
+      attr_accessor device_id: ::String
+      attr_accessor device_template_name: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateDeviceWithPlacementResponse < Aws::EmptyStructure
+    end
+
+    class CreatePlacementRequest
+      attr_accessor placement_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePlacementResponse < Aws::EmptyStructure
+    end
+
+    class CreateProjectRequest
+      attr_accessor project_name: ::String
+      attr_accessor description: ::String
+      attr_accessor placement_template: Types::PlacementTemplate
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateProjectResponse < Aws::EmptyStructure
+    end
+
+    class DeletePlacementRequest
+      attr_accessor placement_name: ::String
+      attr_accessor project_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePlacementResponse < Aws::EmptyStructure
+    end
+
+    class DeleteProjectRequest
+      attr_accessor project_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProjectResponse < Aws::EmptyStructure
+    end
+
+    class DescribePlacementRequest
+      attr_accessor placement_name: ::String
+      attr_accessor project_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePlacementResponse
+      attr_accessor placement: Types::PlacementDescription
+      SENSITIVE: []
+    end
+
+    class DescribeProjectRequest
+      attr_accessor project_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProjectResponse
+      attr_accessor project: Types::ProjectDescription
+      SENSITIVE: []
+    end
+
+    class DeviceTemplate
+      attr_accessor device_type: ::String
+      attr_accessor callback_overrides: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DisassociateDeviceFromPlacementRequest
+      attr_accessor project_name: ::String
+      attr_accessor placement_name: ::String
+      attr_accessor device_template_name: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateDeviceFromPlacementResponse < Aws::EmptyStructure
+    end
+
+    class GetDevicesInPlacementRequest
+      attr_accessor project_name: ::String
+      attr_accessor placement_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDevicesInPlacementResponse
+      attr_accessor devices: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class InternalFailureException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListPlacementsRequest
+      attr_accessor project_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPlacementsResponse
+      attr_accessor placements: ::Array[Types::PlacementSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProjectsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProjectsResponse
+      attr_accessor projects: ::Array[Types::ProjectSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PlacementDescription
+      attr_accessor project_name: ::String
+      attr_accessor placement_name: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor created_date: ::Time
+      attr_accessor updated_date: ::Time
+      SENSITIVE: []
+    end
+
+    class PlacementSummary
+      attr_accessor project_name: ::String
+      attr_accessor placement_name: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor updated_date: ::Time
+      SENSITIVE: []
+    end
+
+    class PlacementTemplate
+      attr_accessor default_attributes: ::Hash[::String, ::String]
+      attr_accessor device_templates: ::Hash[::String, Types::DeviceTemplate]
+      SENSITIVE: []
+    end
+
+    class ProjectDescription
+      attr_accessor arn: ::String
+      attr_accessor project_name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor updated_date: ::Time
+      attr_accessor placement_template: Types::PlacementTemplate
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ProjectSummary
+      attr_accessor arn: ::String
+      attr_accessor project_name: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor updated_date: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ResourceConflictException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TooManyRequestsException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdatePlacementRequest
+      attr_accessor placement_name: ::String
+      attr_accessor project_name: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdatePlacementResponse < Aws::EmptyStructure
+    end
+
+    class UpdateProjectRequest
+      attr_accessor project_name: ::String
+      attr_accessor description: ::String
+      attr_accessor placement_template: Types::PlacementTemplate
+      SENSITIVE: []
+    end
+
+    class UpdateProjectResponse < Aws::EmptyStructure
+    end
+  end
+end

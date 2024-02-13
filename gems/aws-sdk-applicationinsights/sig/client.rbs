@@ -1,0 +1,533 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ApplicationInsights
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddWorkloadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddWorkloadResponse]
+        def workload_id: () -> ::String
+        def workload_configuration: () -> Types::WorkloadConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#add_workload-instance_method
+      def add_workload: (
+                          resource_group_name: ::String,
+                          component_name: ::String,
+                          workload_configuration: {
+                            workload_name: ::String?,
+                            tier: ("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY")?,
+                            configuration: ::String?
+                          }
+                        ) -> _AddWorkloadResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddWorkloadResponseSuccess
+
+      interface _CreateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApplicationResponse]
+        def application_info: () -> Types::ApplicationInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#create_application-instance_method
+      def create_application: (
+                                ?resource_group_name: ::String,
+                                ?ops_center_enabled: bool,
+                                ?cwe_monitor_enabled: bool,
+                                ?ops_item_sns_topic_arn: ::String,
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ],
+                                ?auto_config_enabled: bool,
+                                ?auto_create: bool,
+                                ?grouping_type: ("ACCOUNT_BASED"),
+                                ?attach_missing_permission: bool
+                              ) -> _CreateApplicationResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
+
+      interface _CreateComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateComponentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#create_component-instance_method
+      def create_component: (
+                              resource_group_name: ::String,
+                              component_name: ::String,
+                              resource_list: Array[::String]
+                            ) -> _CreateComponentResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateComponentResponseSuccess
+
+      interface _CreateLogPatternResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLogPatternResponse]
+        def log_pattern: () -> Types::LogPattern
+        def resource_group_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#create_log_pattern-instance_method
+      def create_log_pattern: (
+                                resource_group_name: ::String,
+                                pattern_set_name: ::String,
+                                pattern_name: ::String,
+                                pattern: ::String,
+                                rank: ::Integer
+                              ) -> _CreateLogPatternResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLogPatternResponseSuccess
+
+      interface _DeleteApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApplicationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#delete_application-instance_method
+      def delete_application: (
+                                resource_group_name: ::String
+                              ) -> _DeleteApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApplicationResponseSuccess
+
+      interface _DeleteComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteComponentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#delete_component-instance_method
+      def delete_component: (
+                              resource_group_name: ::String,
+                              component_name: ::String
+                            ) -> _DeleteComponentResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteComponentResponseSuccess
+
+      interface _DeleteLogPatternResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLogPatternResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#delete_log_pattern-instance_method
+      def delete_log_pattern: (
+                                resource_group_name: ::String,
+                                pattern_set_name: ::String,
+                                pattern_name: ::String
+                              ) -> _DeleteLogPatternResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLogPatternResponseSuccess
+
+      interface _DescribeApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeApplicationResponse]
+        def application_info: () -> Types::ApplicationInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#describe_application-instance_method
+      def describe_application: (
+                                  resource_group_name: ::String,
+                                  ?account_id: ::String
+                                ) -> _DescribeApplicationResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeApplicationResponseSuccess
+
+      interface _DescribeComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeComponentResponse]
+        def application_component: () -> Types::ApplicationComponent
+        def resource_list: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#describe_component-instance_method
+      def describe_component: (
+                                resource_group_name: ::String,
+                                component_name: ::String,
+                                ?account_id: ::String
+                              ) -> _DescribeComponentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeComponentResponseSuccess
+
+      interface _DescribeComponentConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeComponentConfigurationResponse]
+        def monitor: () -> bool
+        def tier: () -> ("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY")
+        def component_configuration: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#describe_component_configuration-instance_method
+      def describe_component_configuration: (
+                                              resource_group_name: ::String,
+                                              component_name: ::String,
+                                              ?account_id: ::String
+                                            ) -> _DescribeComponentConfigurationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeComponentConfigurationResponseSuccess
+
+      interface _DescribeComponentConfigurationRecommendationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeComponentConfigurationRecommendationResponse]
+        def component_configuration: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#describe_component_configuration_recommendation-instance_method
+      def describe_component_configuration_recommendation: (
+                                                             resource_group_name: ::String,
+                                                             component_name: ::String,
+                                                             tier: ("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY"),
+                                                             ?workload_name: ::String,
+                                                             ?recommendation_type: ("INFRA_ONLY" | "WORKLOAD_ONLY" | "ALL")
+                                                           ) -> _DescribeComponentConfigurationRecommendationResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeComponentConfigurationRecommendationResponseSuccess
+
+      interface _DescribeLogPatternResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLogPatternResponse]
+        def resource_group_name: () -> ::String
+        def account_id: () -> ::String
+        def log_pattern: () -> Types::LogPattern
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#describe_log_pattern-instance_method
+      def describe_log_pattern: (
+                                  resource_group_name: ::String,
+                                  pattern_set_name: ::String,
+                                  pattern_name: ::String,
+                                  ?account_id: ::String
+                                ) -> _DescribeLogPatternResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLogPatternResponseSuccess
+
+      interface _DescribeObservationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeObservationResponse]
+        def observation: () -> Types::Observation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#describe_observation-instance_method
+      def describe_observation: (
+                                  observation_id: ::String,
+                                  ?account_id: ::String
+                                ) -> _DescribeObservationResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeObservationResponseSuccess
+
+      interface _DescribeProblemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProblemResponse]
+        def problem: () -> Types::Problem
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#describe_problem-instance_method
+      def describe_problem: (
+                              problem_id: ::String,
+                              ?account_id: ::String
+                            ) -> _DescribeProblemResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProblemResponseSuccess
+
+      interface _DescribeProblemObservationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProblemObservationsResponse]
+        def related_observations: () -> Types::RelatedObservations
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#describe_problem_observations-instance_method
+      def describe_problem_observations: (
+                                           problem_id: ::String,
+                                           ?account_id: ::String
+                                         ) -> _DescribeProblemObservationsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProblemObservationsResponseSuccess
+
+      interface _DescribeWorkloadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWorkloadResponse]
+        def workload_id: () -> ::String
+        def workload_remarks: () -> ::String
+        def workload_configuration: () -> Types::WorkloadConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#describe_workload-instance_method
+      def describe_workload: (
+                               resource_group_name: ::String,
+                               component_name: ::String,
+                               workload_id: ::String,
+                               ?account_id: ::String
+                             ) -> _DescribeWorkloadResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkloadResponseSuccess
+
+      interface _ListApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationsResponse]
+        def application_info_list: () -> ::Array[Types::ApplicationInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#list_applications-instance_method
+      def list_applications: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String,
+                               ?account_id: ::String
+                             ) -> _ListApplicationsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationsResponseSuccess
+
+      interface _ListComponentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListComponentsResponse]
+        def application_component_list: () -> ::Array[Types::ApplicationComponent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#list_components-instance_method
+      def list_components: (
+                             resource_group_name: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             ?account_id: ::String
+                           ) -> _ListComponentsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComponentsResponseSuccess
+
+      interface _ListConfigurationHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConfigurationHistoryResponse]
+        def event_list: () -> ::Array[Types::ConfigurationEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#list_configuration_history-instance_method
+      def list_configuration_history: (
+                                        ?resource_group_name: ::String,
+                                        ?start_time: ::Time,
+                                        ?end_time: ::Time,
+                                        ?event_status: ("INFO" | "WARN" | "ERROR"),
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String,
+                                        ?account_id: ::String
+                                      ) -> _ListConfigurationHistoryResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfigurationHistoryResponseSuccess
+
+      interface _ListLogPatternSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLogPatternSetsResponse]
+        def resource_group_name: () -> ::String
+        def account_id: () -> ::String
+        def log_pattern_sets: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#list_log_pattern_sets-instance_method
+      def list_log_pattern_sets: (
+                                   resource_group_name: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String,
+                                   ?account_id: ::String
+                                 ) -> _ListLogPatternSetsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLogPatternSetsResponseSuccess
+
+      interface _ListLogPatternsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLogPatternsResponse]
+        def resource_group_name: () -> ::String
+        def account_id: () -> ::String
+        def log_patterns: () -> ::Array[Types::LogPattern]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#list_log_patterns-instance_method
+      def list_log_patterns: (
+                               resource_group_name: ::String,
+                               ?pattern_set_name: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String,
+                               ?account_id: ::String
+                             ) -> _ListLogPatternsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLogPatternsResponseSuccess
+
+      interface _ListProblemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProblemsResponse]
+        def problem_list: () -> ::Array[Types::Problem]
+        def next_token: () -> ::String
+        def resource_group_name: () -> ::String
+        def account_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#list_problems-instance_method
+      def list_problems: (
+                           ?account_id: ::String,
+                           ?resource_group_name: ::String,
+                           ?start_time: ::Time,
+                           ?end_time: ::Time,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           ?component_name: ::String,
+                           ?visibility: ("IGNORED" | "VISIBLE")
+                         ) -> _ListProblemsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProblemsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListWorkloadsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkloadsResponse]
+        def workload_list: () -> ::Array[Types::Workload]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#list_workloads-instance_method
+      def list_workloads: (
+                            resource_group_name: ::String,
+                            component_name: ::String,
+                            ?max_results: ::Integer,
+                            ?next_token: ::String,
+                            ?account_id: ::String
+                          ) -> _ListWorkloadsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkloadsResponseSuccess
+
+      interface _RemoveWorkloadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveWorkloadResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#remove_workload-instance_method
+      def remove_workload: (
+                             resource_group_name: ::String,
+                             component_name: ::String,
+                             workload_id: ::String
+                           ) -> _RemoveWorkloadResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveWorkloadResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApplicationResponse]
+        def application_info: () -> Types::ApplicationInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#update_application-instance_method
+      def update_application: (
+                                resource_group_name: ::String,
+                                ?ops_center_enabled: bool,
+                                ?cwe_monitor_enabled: bool,
+                                ?ops_item_sns_topic_arn: ::String,
+                                ?remove_sns_topic: bool,
+                                ?auto_config_enabled: bool,
+                                ?attach_missing_permission: bool
+                              ) -> _UpdateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess
+
+      interface _UpdateComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateComponentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#update_component-instance_method
+      def update_component: (
+                              resource_group_name: ::String,
+                              component_name: ::String,
+                              ?new_component_name: ::String,
+                              ?resource_list: Array[::String]
+                            ) -> _UpdateComponentResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateComponentResponseSuccess
+
+      interface _UpdateComponentConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateComponentConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#update_component_configuration-instance_method
+      def update_component_configuration: (
+                                            resource_group_name: ::String,
+                                            component_name: ::String,
+                                            ?monitor: bool,
+                                            ?tier: ("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY"),
+                                            ?component_configuration: ::String,
+                                            ?auto_config_enabled: bool
+                                          ) -> _UpdateComponentConfigurationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateComponentConfigurationResponseSuccess
+
+      interface _UpdateLogPatternResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLogPatternResponse]
+        def resource_group_name: () -> ::String
+        def log_pattern: () -> Types::LogPattern
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#update_log_pattern-instance_method
+      def update_log_pattern: (
+                                resource_group_name: ::String,
+                                pattern_set_name: ::String,
+                                pattern_name: ::String,
+                                ?pattern: ::String,
+                                ?rank: ::Integer
+                              ) -> _UpdateLogPatternResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLogPatternResponseSuccess
+
+      interface _UpdateProblemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProblemResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#update_problem-instance_method
+      def update_problem: (
+                            problem_id: ::String,
+                            ?update_status: ("RESOLVED"),
+                            ?visibility: ("IGNORED" | "VISIBLE")
+                          ) -> _UpdateProblemResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProblemResponseSuccess
+
+      interface _UpdateWorkloadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWorkloadResponse]
+        def workload_id: () -> ::String
+        def workload_configuration: () -> Types::WorkloadConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationInsights/Client.html#update_workload-instance_method
+      def update_workload: (
+                             resource_group_name: ::String,
+                             component_name: ::String,
+                             ?workload_id: ::String,
+                             workload_configuration: {
+                               workload_name: ::String?,
+                               tier: ("CUSTOM" | "DEFAULT" | "DOT_NET_CORE" | "DOT_NET_WORKER" | "DOT_NET_WEB_TIER" | "DOT_NET_WEB" | "SQL_SERVER" | "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP" | "MYSQL" | "POSTGRESQL" | "JAVA_JMX" | "ORACLE" | "SAP_HANA_MULTI_NODE" | "SAP_HANA_SINGLE_NODE" | "SAP_HANA_HIGH_AVAILABILITY" | "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE" | "SHAREPOINT" | "ACTIVE_DIRECTORY" | "SAP_NETWEAVER_STANDARD" | "SAP_NETWEAVER_DISTRIBUTED" | "SAP_NETWEAVER_HIGH_AVAILABILITY")?,
+                               configuration: ::String?
+                             }
+                           ) -> _UpdateWorkloadResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkloadResponseSuccess
+    end
+  end
+end
+

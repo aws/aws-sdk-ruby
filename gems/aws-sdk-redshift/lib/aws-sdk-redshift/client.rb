@@ -8319,6 +8319,86 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # List the Amazon Redshift Advisor recommendations for one or multiple
+    # Amazon Redshift clusters in an Amazon Web Services account.
+    #
+    # @option params [String] :cluster_identifier
+    #   The unique identifier of the Amazon Redshift cluster for which the
+    #   list of Advisor recommendations is returned. If the neither the
+    #   cluster identifier and the cluster namespace ARN parameters are
+    #   specified, then recommendations for all clusters in the account are
+    #   returned.
+    #
+    # @option params [String] :namespace_arn
+    #   The Amazon Redshift cluster namespace Amazon Resource Name (ARN) for
+    #   which the list of Advisor recommendations is returned. If the neither
+    #   the cluster identifier and the cluster namespace ARN parameters are
+    #   specified, then recommendations for all clusters in the account are
+    #   returned.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of response records to return in each call. If the
+    #   number of remaining response records exceeds the specified MaxRecords
+    #   value, a value is returned in a marker field of the response. You can
+    #   retrieve the next set of records by retrying the command with the
+    #   returned marker value.
+    #
+    # @option params [String] :marker
+    #   A value that indicates the starting point for the next set of response
+    #   records in a subsequent request. If a value is returned in a response,
+    #   you can retrieve the next set of records by providing this returned
+    #   marker value in the Marker parameter and retrying the command. If the
+    #   Marker field is empty, all response records have been retrieved for
+    #   the request.
+    #
+    # @return [Types::ListRecommendationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRecommendationsResult#recommendations #recommendations} => Array&lt;Types::Recommendation&gt;
+    #   * {Types::ListRecommendationsResult#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_recommendations({
+    #     cluster_identifier: "String",
+    #     namespace_arn: "String",
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recommendations #=> Array
+    #   resp.recommendations[0].id #=> String
+    #   resp.recommendations[0].cluster_identifier #=> String
+    #   resp.recommendations[0].namespace_arn #=> String
+    #   resp.recommendations[0].created_at #=> Time
+    #   resp.recommendations[0].recommendation_type #=> String
+    #   resp.recommendations[0].title #=> String
+    #   resp.recommendations[0].description #=> String
+    #   resp.recommendations[0].observation #=> String
+    #   resp.recommendations[0].impact_ranking #=> String, one of "HIGH", "MEDIUM", "LOW"
+    #   resp.recommendations[0].recommendation_text #=> String
+    #   resp.recommendations[0].recommended_actions #=> Array
+    #   resp.recommendations[0].recommended_actions[0].text #=> String
+    #   resp.recommendations[0].recommended_actions[0].database #=> String
+    #   resp.recommendations[0].recommended_actions[0].command #=> String
+    #   resp.recommendations[0].recommended_actions[0].type #=> String, one of "SQL", "CLI"
+    #   resp.recommendations[0].reference_links #=> Array
+    #   resp.recommendations[0].reference_links[0].text #=> String
+    #   resp.recommendations[0].reference_links[0].link #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ListRecommendations AWS API Documentation
+    #
+    # @overload list_recommendations(params = {})
+    # @param [Hash] params ({})
+    def list_recommendations(params = {}, options = {})
+      req = build_request(:list_recommendations, params)
+      req.send_request(options)
+    end
+
     # This operation is retired. Calling this operation does not change AQUA
     # configuration. Amazon Redshift automatically determines whether to use
     # AQUA (Advanced Query Accelerator).
@@ -12285,7 +12365,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.107.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

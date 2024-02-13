@@ -1,0 +1,1091 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::AmplifyBackend
+  module Types
+
+    class BackendAPIAppSyncAuthSettings
+      attr_accessor cognito_user_pool_id: ::String
+      attr_accessor description: ::String
+      attr_accessor expiration_time: ::Float
+      attr_accessor open_id_auth_ttl: ::String
+      attr_accessor open_id_client_id: ::String
+      attr_accessor open_id_iat_ttl: ::String
+      attr_accessor open_id_issue_url: ::String
+      attr_accessor open_id_provider_name: ::String
+      SENSITIVE: []
+    end
+
+    class BackendAPIAuthType
+      attr_accessor mode: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT")
+      attr_accessor settings: Types::BackendAPIAppSyncAuthSettings
+      SENSITIVE: []
+    end
+
+    class BackendAPICodegenReqObj
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class BackendAPICodegenRespObj
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor error: ::String
+      attr_accessor job_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class BackendAPIConflictResolution
+      attr_accessor resolution_strategy: ("OPTIMISTIC_CONCURRENCY" | "LAMBDA" | "AUTOMERGE" | "NONE")
+      SENSITIVE: []
+    end
+
+    class BackendAPIReqObj
+      attr_accessor resource_config: Types::BackendAPIResourceConfig
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class BackendAPIResourceConfig
+      attr_accessor additional_auth_types: ::Array[Types::BackendAPIAuthType]
+      attr_accessor api_name: ::String
+      attr_accessor conflict_resolution: Types::BackendAPIConflictResolution
+      attr_accessor default_auth_type: Types::BackendAPIAuthType
+      attr_accessor service: ::String
+      attr_accessor transform_schema: ::String
+      SENSITIVE: []
+    end
+
+    class BackendAPIRespObj
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor error: ::String
+      attr_accessor job_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class BackendAuthAppleProviderConfig
+      attr_accessor client_id: ::String
+      attr_accessor key_id: ::String
+      attr_accessor private_key: ::String
+      attr_accessor team_id: ::String
+      SENSITIVE: []
+    end
+
+    class BackendAuthRespObj
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor error: ::String
+      attr_accessor job_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class BackendAuthSocialProviderConfig
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      SENSITIVE: []
+    end
+
+    class BackendConfigRespObj
+      attr_accessor app_id: ::String
+      attr_accessor backend_manager_app_id: ::String
+      attr_accessor error: ::String
+      attr_accessor login_auth_config: Types::LoginAuthConfigReqObj
+      SENSITIVE: []
+    end
+
+    class BackendJobReqObj
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class BackendJobRespObj
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor create_time: ::String
+      attr_accessor error: ::String
+      attr_accessor job_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      attr_accessor update_time: ::String
+      SENSITIVE: []
+    end
+
+    class BackendStoragePermissions
+      attr_accessor authenticated: ::Array[("READ" | "CREATE_AND_UPDATE" | "DELETE")]
+      attr_accessor un_authenticated: ::Array[("READ" | "CREATE_AND_UPDATE" | "DELETE")]
+      SENSITIVE: []
+    end
+
+    class BackendStorageRespObj
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor job_id: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CloneBackendReqObj
+      attr_accessor target_environment_name: ::String
+      SENSITIVE: []
+    end
+
+    class CloneBackendRequest
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor target_environment_name: ::String
+      SENSITIVE: []
+    end
+
+    class CloneBackendRespObj
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor error: ::String
+      attr_accessor job_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class CloneBackendResponse
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor error: ::String
+      attr_accessor job_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBackendAPIReqObj
+      attr_accessor backend_environment_name: ::String
+      attr_accessor resource_config: Types::BackendAPIResourceConfig
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBackendAPIRequest
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor resource_config: Types::BackendAPIResourceConfig
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBackendAPIResponse
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor error: ::String
+      attr_accessor job_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBackendAuthForgotPasswordConfig
+      attr_accessor delivery_method: ("EMAIL" | "SMS")
+      attr_accessor email_settings: Types::EmailSettings
+      attr_accessor sms_settings: Types::SmsSettings
+      SENSITIVE: [:email_settings, :sms_settings]
+    end
+
+    class CreateBackendAuthIdentityPoolConfig
+      attr_accessor identity_pool_name: ::String
+      attr_accessor unauthenticated_login: bool
+      SENSITIVE: []
+    end
+
+    class CreateBackendAuthMFAConfig
+      attr_accessor mfa_mode: ("ON" | "OFF" | "OPTIONAL")
+      attr_accessor settings: Types::Settings
+      SENSITIVE: []
+    end
+
+    class CreateBackendAuthOAuthConfig
+      attr_accessor domain_prefix: ::String
+      attr_accessor o_auth_grant_type: ("CODE" | "IMPLICIT")
+      attr_accessor o_auth_scopes: ::Array[("PHONE" | "EMAIL" | "OPENID" | "PROFILE" | "AWS_COGNITO_SIGNIN_USER_ADMIN")]
+      attr_accessor redirect_sign_in_ur_is: ::Array[::String]
+      attr_accessor redirect_sign_out_ur_is: ::Array[::String]
+      attr_accessor social_provider_settings: Types::SocialProviderSettings
+      SENSITIVE: []
+    end
+
+    class CreateBackendAuthPasswordPolicyConfig
+      attr_accessor additional_constraints: ::Array[("REQUIRE_DIGIT" | "REQUIRE_LOWERCASE" | "REQUIRE_SYMBOL" | "REQUIRE_UPPERCASE")]
+      attr_accessor minimum_length: ::Float
+      SENSITIVE: []
+    end
+
+    class CreateBackendAuthReqObj
+      attr_accessor backend_environment_name: ::String
+      attr_accessor resource_config: Types::CreateBackendAuthResourceConfig
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBackendAuthRequest
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor resource_config: Types::CreateBackendAuthResourceConfig
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBackendAuthResourceConfig
+      attr_accessor auth_resources: ("USER_POOL_ONLY" | "IDENTITY_POOL_AND_USER_POOL")
+      attr_accessor identity_pool_configs: Types::CreateBackendAuthIdentityPoolConfig
+      attr_accessor service: ("COGNITO")
+      attr_accessor user_pool_configs: Types::CreateBackendAuthUserPoolConfig
+      SENSITIVE: []
+    end
+
+    class CreateBackendAuthResponse
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor error: ::String
+      attr_accessor job_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBackendAuthUserPoolConfig
+      attr_accessor forgot_password: Types::CreateBackendAuthForgotPasswordConfig
+      attr_accessor mfa: Types::CreateBackendAuthMFAConfig
+      attr_accessor o_auth: Types::CreateBackendAuthOAuthConfig
+      attr_accessor password_policy: Types::CreateBackendAuthPasswordPolicyConfig
+      attr_accessor required_sign_up_attributes: ::Array[("ADDRESS" | "BIRTHDATE" | "EMAIL" | "FAMILY_NAME" | "GENDER" | "GIVEN_NAME" | "LOCALE" | "MIDDLE_NAME" | "NAME" | "NICKNAME" | "PHONE_NUMBER" | "PICTURE" | "PREFERRED_USERNAME" | "PROFILE" | "UPDATED_AT" | "WEBSITE" | "ZONE_INFO")]
+      attr_accessor sign_in_method: ("EMAIL" | "EMAIL_AND_PHONE_NUMBER" | "PHONE_NUMBER" | "USERNAME")
+      attr_accessor user_pool_name: ::String
+      attr_accessor verification_message: Types::CreateBackendAuthVerificationMessageConfig
+      SENSITIVE: []
+    end
+
+    class CreateBackendAuthVerificationMessageConfig
+      attr_accessor delivery_method: ("EMAIL" | "SMS")
+      attr_accessor email_settings: Types::EmailSettings
+      attr_accessor sms_settings: Types::SmsSettings
+      SENSITIVE: [:email_settings, :sms_settings]
+    end
+
+    class CreateBackendConfigReqObj
+      attr_accessor backend_manager_app_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBackendConfigRequest
+      attr_accessor app_id: ::String
+      attr_accessor backend_manager_app_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBackendConfigRespObj
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor job_id: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBackendConfigResponse
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor job_id: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBackendReqObj
+      attr_accessor app_id: ::String
+      attr_accessor app_name: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor resource_config: Types::ResourceConfig
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBackendRequest
+      attr_accessor app_id: ::String
+      attr_accessor app_name: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor resource_config: Types::ResourceConfig
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBackendRespObj
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor error: ::String
+      attr_accessor job_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBackendResponse
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor error: ::String
+      attr_accessor job_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBackendStorageReqObj
+      attr_accessor backend_environment_name: ::String
+      attr_accessor resource_config: Types::CreateBackendStorageResourceConfig
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBackendStorageRequest
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor resource_config: Types::CreateBackendStorageResourceConfig
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBackendStorageResourceConfig
+      attr_accessor bucket_name: ::String
+      attr_accessor permissions: Types::BackendStoragePermissions
+      attr_accessor service_name: ("S3")
+      SENSITIVE: []
+    end
+
+    class CreateBackendStorageResponse
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor job_id: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTokenRequest
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTokenRespObj
+      attr_accessor app_id: ::String
+      attr_accessor challenge_code: ::String
+      attr_accessor session_id: ::String
+      attr_accessor ttl: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTokenResponse
+      attr_accessor app_id: ::String
+      attr_accessor challenge_code: ::String
+      attr_accessor session_id: ::String
+      attr_accessor ttl: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBackendAPIRequest
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor resource_config: Types::BackendAPIResourceConfig
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBackendAPIResponse
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor error: ::String
+      attr_accessor job_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBackendAuthRequest
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBackendAuthResponse
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor error: ::String
+      attr_accessor job_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBackendRequest
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBackendRespObj
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor error: ::String
+      attr_accessor job_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBackendResponse
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor error: ::String
+      attr_accessor job_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBackendStorageRequest
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor resource_name: ::String
+      attr_accessor service_name: ("S3")
+      SENSITIVE: []
+    end
+
+    class DeleteBackendStorageResponse
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor job_id: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTokenRequest
+      attr_accessor app_id: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTokenRespObj
+      attr_accessor is_success: bool
+      SENSITIVE: []
+    end
+
+    class DeleteTokenResponse
+      attr_accessor is_success: bool
+      SENSITIVE: []
+    end
+
+    class EmailSettings
+      attr_accessor email_message: ::String
+      attr_accessor email_subject: ::String
+      SENSITIVE: []
+    end
+
+    class GatewayTimeoutException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GenerateBackendAPIModelsRequest
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class GenerateBackendAPIModelsResponse
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor error: ::String
+      attr_accessor job_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackendAPIModelsRequest
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackendAPIModelsResponse
+      attr_accessor models: ::String
+      attr_accessor status: ("LATEST" | "STALE")
+      attr_accessor model_introspection_schema: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackendAPIRequest
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor resource_config: Types::BackendAPIResourceConfig
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackendAPIRespObj
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor error: ::String
+      attr_accessor resource_config: Types::BackendAPIResourceConfig
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackendAPIResponse
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor error: ::String
+      attr_accessor resource_config: Types::BackendAPIResourceConfig
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackendAuthReqObj
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackendAuthRequest
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackendAuthRespObj
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor error: ::String
+      attr_accessor resource_config: Types::CreateBackendAuthResourceConfig
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackendAuthResponse
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor error: ::String
+      attr_accessor resource_config: Types::CreateBackendAuthResourceConfig
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackendJobRequest
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackendJobResponse
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor create_time: ::String
+      attr_accessor error: ::String
+      attr_accessor job_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      attr_accessor update_time: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackendReqObj
+      attr_accessor backend_environment_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackendRequest
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackendRespObj
+      attr_accessor amplify_feature_flags: ::String
+      attr_accessor amplify_meta_config: ::String
+      attr_accessor app_id: ::String
+      attr_accessor app_name: ::String
+      attr_accessor backend_environment_list: ::Array[::String]
+      attr_accessor backend_environment_name: ::String
+      attr_accessor error: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackendResponse
+      attr_accessor amplify_feature_flags: ::String
+      attr_accessor amplify_meta_config: ::String
+      attr_accessor app_id: ::String
+      attr_accessor app_name: ::String
+      attr_accessor backend_environment_list: ::Array[::String]
+      attr_accessor backend_environment_name: ::String
+      attr_accessor error: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackendStorageReqObj
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackendStorageRequest
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackendStorageResourceConfig
+      attr_accessor bucket_name: ::String
+      attr_accessor imported: bool
+      attr_accessor permissions: Types::BackendStoragePermissions
+      attr_accessor service_name: ("S3")
+      SENSITIVE: []
+    end
+
+    class GetBackendStorageRespObj
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor resource_config: Types::GetBackendStorageResourceConfig
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetBackendStorageResponse
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor resource_config: Types::GetBackendStorageResourceConfig
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetTokenRequest
+      attr_accessor app_id: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetTokenRespObj
+      attr_accessor app_id: ::String
+      attr_accessor challenge_code: ::String
+      attr_accessor session_id: ::String
+      attr_accessor ttl: ::String
+      SENSITIVE: []
+    end
+
+    class GetTokenResponse
+      attr_accessor app_id: ::String
+      attr_accessor challenge_code: ::String
+      attr_accessor session_id: ::String
+      attr_accessor ttl: ::String
+      SENSITIVE: []
+    end
+
+    class ImportBackendAuthReqObj
+      attr_accessor identity_pool_id: ::String
+      attr_accessor native_client_id: ::String
+      attr_accessor user_pool_id: ::String
+      attr_accessor web_client_id: ::String
+      SENSITIVE: []
+    end
+
+    class ImportBackendAuthRequest
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor identity_pool_id: ::String
+      attr_accessor native_client_id: ::String
+      attr_accessor user_pool_id: ::String
+      attr_accessor web_client_id: ::String
+      SENSITIVE: []
+    end
+
+    class ImportBackendAuthResponse
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor error: ::String
+      attr_accessor job_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class ImportBackendStorageReqObj
+      attr_accessor bucket_name: ::String
+      attr_accessor service_name: ("S3")
+      SENSITIVE: []
+    end
+
+    class ImportBackendStorageRequest
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor bucket_name: ::String
+      attr_accessor service_name: ("S3")
+      SENSITIVE: []
+    end
+
+    class ImportBackendStorageResponse
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor job_id: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor limit_type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListBackendJobReqObj
+      attr_accessor job_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class ListBackendJobRespObj
+      attr_accessor jobs: ::Array[Types::BackendJobRespObj]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBackendJobsRequest
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor job_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class ListBackendJobsResponse
+      attr_accessor jobs: ::Array[Types::BackendJobRespObj]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListS3BucketsReqObj
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListS3BucketsRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListS3BucketsRespObj
+      attr_accessor buckets: ::Array[Types::S3BucketInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListS3BucketsResponse
+      attr_accessor buckets: ::Array[Types::S3BucketInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LoginAuthConfigReqObj
+      attr_accessor aws_cognito_identity_pool_id: ::String
+      attr_accessor aws_cognito_region: ::String
+      attr_accessor aws_user_pools_id: ::String
+      attr_accessor aws_user_pools_web_client_id: ::String
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveAllBackendsReqObj
+      attr_accessor clean_amplify_app: bool
+      SENSITIVE: []
+    end
+
+    class RemoveAllBackendsRequest
+      attr_accessor app_id: ::String
+      attr_accessor clean_amplify_app: bool
+      SENSITIVE: []
+    end
+
+    class RemoveAllBackendsRespObj
+      attr_accessor app_id: ::String
+      attr_accessor error: ::String
+      attr_accessor job_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveAllBackendsResponse
+      attr_accessor app_id: ::String
+      attr_accessor error: ::String
+      attr_accessor job_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveBackendAuthReqObj
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveBackendConfigRequest
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveBackendConfigRespObj
+      attr_accessor error: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveBackendConfigResponse
+      attr_accessor error: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveBackendStorageReqObj
+      attr_accessor resource_name: ::String
+      attr_accessor service_name: ("S3")
+      SENSITIVE: []
+    end
+
+    class ResourceConfig < Aws::EmptyStructure
+    end
+
+    class S3BucketInfo
+      attr_accessor creation_date: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class Settings
+      attr_accessor mfa_types: ::Array[("SMS" | "TOTP")]
+      attr_accessor sms_message: ::String
+      SENSITIVE: []
+    end
+
+    class SmsSettings
+      attr_accessor sms_message: ::String
+      SENSITIVE: []
+    end
+
+    class SocialProviderSettings
+      attr_accessor facebook: Types::BackendAuthSocialProviderConfig
+      attr_accessor google: Types::BackendAuthSocialProviderConfig
+      attr_accessor login_with_amazon: Types::BackendAuthSocialProviderConfig
+      attr_accessor sign_in_with_apple: Types::BackendAuthAppleProviderConfig
+      SENSITIVE: [:facebook, :google, :login_with_amazon, :sign_in_with_apple]
+    end
+
+    class TooManyRequestsException
+      attr_accessor limit_type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBackendAPIRequest
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor resource_config: Types::BackendAPIResourceConfig
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBackendAPIResponse
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor error: ::String
+      attr_accessor job_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBackendAuthForgotPasswordConfig
+      attr_accessor delivery_method: ("EMAIL" | "SMS")
+      attr_accessor email_settings: Types::EmailSettings
+      attr_accessor sms_settings: Types::SmsSettings
+      SENSITIVE: [:email_settings, :sms_settings]
+    end
+
+    class UpdateBackendAuthIdentityPoolConfig
+      attr_accessor unauthenticated_login: bool
+      SENSITIVE: []
+    end
+
+    class UpdateBackendAuthMFAConfig
+      attr_accessor mfa_mode: ("ON" | "OFF" | "OPTIONAL")
+      attr_accessor settings: Types::Settings
+      SENSITIVE: []
+    end
+
+    class UpdateBackendAuthOAuthConfig
+      attr_accessor domain_prefix: ::String
+      attr_accessor o_auth_grant_type: ("CODE" | "IMPLICIT")
+      attr_accessor o_auth_scopes: ::Array[("PHONE" | "EMAIL" | "OPENID" | "PROFILE" | "AWS_COGNITO_SIGNIN_USER_ADMIN")]
+      attr_accessor redirect_sign_in_ur_is: ::Array[::String]
+      attr_accessor redirect_sign_out_ur_is: ::Array[::String]
+      attr_accessor social_provider_settings: Types::SocialProviderSettings
+      SENSITIVE: []
+    end
+
+    class UpdateBackendAuthPasswordPolicyConfig
+      attr_accessor additional_constraints: ::Array[("REQUIRE_DIGIT" | "REQUIRE_LOWERCASE" | "REQUIRE_SYMBOL" | "REQUIRE_UPPERCASE")]
+      attr_accessor minimum_length: ::Float
+      SENSITIVE: []
+    end
+
+    class UpdateBackendAuthReqObj
+      attr_accessor resource_config: Types::UpdateBackendAuthResourceConfig
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBackendAuthRequest
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor resource_config: Types::UpdateBackendAuthResourceConfig
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBackendAuthResourceConfig
+      attr_accessor auth_resources: ("USER_POOL_ONLY" | "IDENTITY_POOL_AND_USER_POOL")
+      attr_accessor identity_pool_configs: Types::UpdateBackendAuthIdentityPoolConfig
+      attr_accessor service: ("COGNITO")
+      attr_accessor user_pool_configs: Types::UpdateBackendAuthUserPoolConfig
+      SENSITIVE: []
+    end
+
+    class UpdateBackendAuthResponse
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor error: ::String
+      attr_accessor job_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBackendAuthUserPoolConfig
+      attr_accessor forgot_password: Types::UpdateBackendAuthForgotPasswordConfig
+      attr_accessor mfa: Types::UpdateBackendAuthMFAConfig
+      attr_accessor o_auth: Types::UpdateBackendAuthOAuthConfig
+      attr_accessor password_policy: Types::UpdateBackendAuthPasswordPolicyConfig
+      attr_accessor verification_message: Types::UpdateBackendAuthVerificationMessageConfig
+      SENSITIVE: []
+    end
+
+    class UpdateBackendAuthVerificationMessageConfig
+      attr_accessor delivery_method: ("EMAIL" | "SMS")
+      attr_accessor email_settings: Types::EmailSettings
+      attr_accessor sms_settings: Types::SmsSettings
+      SENSITIVE: [:email_settings, :sms_settings]
+    end
+
+    class UpdateBackendConfigReqObj
+      attr_accessor login_auth_config: Types::LoginAuthConfigReqObj
+      SENSITIVE: []
+    end
+
+    class UpdateBackendConfigRequest
+      attr_accessor app_id: ::String
+      attr_accessor login_auth_config: Types::LoginAuthConfigReqObj
+      SENSITIVE: []
+    end
+
+    class UpdateBackendConfigResponse
+      attr_accessor app_id: ::String
+      attr_accessor backend_manager_app_id: ::String
+      attr_accessor error: ::String
+      attr_accessor login_auth_config: Types::LoginAuthConfigReqObj
+      SENSITIVE: []
+    end
+
+    class UpdateBackendJobRequest
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor job_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBackendJobResponse
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor create_time: ::String
+      attr_accessor error: ::String
+      attr_accessor job_id: ::String
+      attr_accessor operation: ::String
+      attr_accessor status: ::String
+      attr_accessor update_time: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBackendStorageReqObj
+      attr_accessor resource_config: Types::UpdateBackendStorageResourceConfig
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBackendStorageRequest
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor resource_config: Types::UpdateBackendStorageResourceConfig
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBackendStorageResourceConfig
+      attr_accessor permissions: Types::BackendStoragePermissions
+      attr_accessor service_name: ("S3")
+      SENSITIVE: []
+    end
+
+    class UpdateBackendStorageResponse
+      attr_accessor app_id: ::String
+      attr_accessor backend_environment_name: ::String
+      attr_accessor job_id: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+  end
+end

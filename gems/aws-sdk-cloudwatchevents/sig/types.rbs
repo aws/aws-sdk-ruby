@@ -1,0 +1,1136 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CloudWatchEvents
+  module Types
+
+    class ActivateEventSourceRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ApiDestination
+      attr_accessor api_destination_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor api_destination_state: ("ACTIVE" | "INACTIVE")
+      attr_accessor connection_arn: ::String
+      attr_accessor invocation_endpoint: ::String
+      attr_accessor http_method: ("POST" | "GET" | "HEAD" | "OPTIONS" | "PUT" | "PATCH" | "DELETE")
+      attr_accessor invocation_rate_limit_per_second: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Archive
+      attr_accessor archive_name: ::String
+      attr_accessor event_source_arn: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor state_reason: ::String
+      attr_accessor retention_days: ::Integer
+      attr_accessor size_bytes: ::Integer
+      attr_accessor event_count: ::Integer
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class AwsVpcConfiguration
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor assign_public_ip: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class BatchArrayProperties
+      attr_accessor size: ::Integer
+      SENSITIVE: []
+    end
+
+    class BatchParameters
+      attr_accessor job_definition: ::String
+      attr_accessor job_name: ::String
+      attr_accessor array_properties: Types::BatchArrayProperties
+      attr_accessor retry_strategy: Types::BatchRetryStrategy
+      SENSITIVE: []
+    end
+
+    class BatchRetryStrategy
+      attr_accessor attempts: ::Integer
+      SENSITIVE: []
+    end
+
+    class CancelReplayRequest
+      attr_accessor replay_name: ::String
+      SENSITIVE: []
+    end
+
+    class CancelReplayResponse
+      attr_accessor replay_arn: ::String
+      attr_accessor state: ("STARTING" | "RUNNING" | "CANCELLING" | "COMPLETED" | "CANCELLED" | "FAILED")
+      attr_accessor state_reason: ::String
+      SENSITIVE: []
+    end
+
+    class CapacityProviderStrategyItem
+      attr_accessor capacity_provider: ::String
+      attr_accessor weight: ::Integer
+      attr_accessor base: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException < Aws::EmptyStructure
+    end
+
+    class Condition
+      attr_accessor type: ::String
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class Connection
+      attr_accessor connection_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor connection_state: ("CREATING" | "UPDATING" | "DELETING" | "AUTHORIZED" | "DEAUTHORIZED" | "AUTHORIZING" | "DEAUTHORIZING")
+      attr_accessor state_reason: ::String
+      attr_accessor authorization_type: ("BASIC" | "OAUTH_CLIENT_CREDENTIALS" | "API_KEY")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_authorized_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ConnectionApiKeyAuthResponseParameters
+      attr_accessor api_key_name: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectionAuthResponseParameters
+      attr_accessor basic_auth_parameters: Types::ConnectionBasicAuthResponseParameters
+      attr_accessor o_auth_parameters: Types::ConnectionOAuthResponseParameters
+      attr_accessor api_key_auth_parameters: Types::ConnectionApiKeyAuthResponseParameters
+      attr_accessor invocation_http_parameters: Types::ConnectionHttpParameters
+      SENSITIVE: []
+    end
+
+    class ConnectionBasicAuthResponseParameters
+      attr_accessor username: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectionBodyParameter
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor is_value_secret: bool
+      SENSITIVE: [:value]
+    end
+
+    class ConnectionHeaderParameter
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor is_value_secret: bool
+      SENSITIVE: [:value]
+    end
+
+    class ConnectionHttpParameters
+      attr_accessor header_parameters: ::Array[Types::ConnectionHeaderParameter]
+      attr_accessor query_string_parameters: ::Array[Types::ConnectionQueryStringParameter]
+      attr_accessor body_parameters: ::Array[Types::ConnectionBodyParameter]
+      SENSITIVE: []
+    end
+
+    class ConnectionOAuthClientResponseParameters
+      attr_accessor client_id: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectionOAuthResponseParameters
+      attr_accessor client_parameters: Types::ConnectionOAuthClientResponseParameters
+      attr_accessor authorization_endpoint: ::String
+      attr_accessor http_method: ("GET" | "POST" | "PUT")
+      attr_accessor o_auth_http_parameters: Types::ConnectionHttpParameters
+      SENSITIVE: []
+    end
+
+    class ConnectionQueryStringParameter
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor is_value_secret: bool
+      SENSITIVE: [:value]
+    end
+
+    class CreateApiDestinationRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor connection_arn: ::String
+      attr_accessor invocation_endpoint: ::String
+      attr_accessor http_method: ("POST" | "GET" | "HEAD" | "OPTIONS" | "PUT" | "PATCH" | "DELETE")
+      attr_accessor invocation_rate_limit_per_second: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateApiDestinationResponse
+      attr_accessor api_destination_arn: ::String
+      attr_accessor api_destination_state: ("ACTIVE" | "INACTIVE")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateArchiveRequest
+      attr_accessor archive_name: ::String
+      attr_accessor event_source_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor event_pattern: ::String
+      attr_accessor retention_days: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateArchiveResponse
+      attr_accessor archive_arn: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor state_reason: ::String
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateConnectionApiKeyAuthRequestParameters
+      attr_accessor api_key_name: ::String
+      attr_accessor api_key_value: ::String
+      SENSITIVE: [:api_key_value]
+    end
+
+    class CreateConnectionAuthRequestParameters
+      attr_accessor basic_auth_parameters: Types::CreateConnectionBasicAuthRequestParameters
+      attr_accessor o_auth_parameters: Types::CreateConnectionOAuthRequestParameters
+      attr_accessor api_key_auth_parameters: Types::CreateConnectionApiKeyAuthRequestParameters
+      attr_accessor invocation_http_parameters: Types::ConnectionHttpParameters
+      SENSITIVE: []
+    end
+
+    class CreateConnectionBasicAuthRequestParameters
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      SENSITIVE: [:password]
+    end
+
+    class CreateConnectionOAuthClientRequestParameters
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      SENSITIVE: [:client_secret]
+    end
+
+    class CreateConnectionOAuthRequestParameters
+      attr_accessor client_parameters: Types::CreateConnectionOAuthClientRequestParameters
+      attr_accessor authorization_endpoint: ::String
+      attr_accessor http_method: ("GET" | "POST" | "PUT")
+      attr_accessor o_auth_http_parameters: Types::ConnectionHttpParameters
+      SENSITIVE: []
+    end
+
+    class CreateConnectionRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor authorization_type: ("BASIC" | "OAUTH_CLIENT_CREDENTIALS" | "API_KEY")
+      attr_accessor auth_parameters: Types::CreateConnectionAuthRequestParameters
+      SENSITIVE: []
+    end
+
+    class CreateConnectionResponse
+      attr_accessor connection_arn: ::String
+      attr_accessor connection_state: ("CREATING" | "UPDATING" | "DELETING" | "AUTHORIZED" | "DEAUTHORIZED" | "AUTHORIZING" | "DEAUTHORIZING")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateEventBusRequest
+      attr_accessor name: ::String
+      attr_accessor event_source_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateEventBusResponse
+      attr_accessor event_bus_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePartnerEventSourceRequest
+      attr_accessor name: ::String
+      attr_accessor account: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePartnerEventSourceResponse
+      attr_accessor event_source_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeactivateEventSourceRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeadLetterConfig
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeauthorizeConnectionRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeauthorizeConnectionResponse
+      attr_accessor connection_arn: ::String
+      attr_accessor connection_state: ("CREATING" | "UPDATING" | "DELETING" | "AUTHORIZED" | "DEAUTHORIZED" | "AUTHORIZING" | "DEAUTHORIZING")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_authorized_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteApiDestinationRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApiDestinationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteArchiveRequest
+      attr_accessor archive_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteArchiveResponse < Aws::EmptyStructure
+    end
+
+    class DeleteConnectionRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectionResponse
+      attr_accessor connection_arn: ::String
+      attr_accessor connection_state: ("CREATING" | "UPDATING" | "DELETING" | "AUTHORIZED" | "DEAUTHORIZED" | "AUTHORIZING" | "DEAUTHORIZING")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_authorized_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteEventBusRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePartnerEventSourceRequest
+      attr_accessor name: ::String
+      attr_accessor account: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRuleRequest
+      attr_accessor name: ::String
+      attr_accessor event_bus_name: ::String
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class DescribeApiDestinationRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeApiDestinationResponse
+      attr_accessor api_destination_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor api_destination_state: ("ACTIVE" | "INACTIVE")
+      attr_accessor connection_arn: ::String
+      attr_accessor invocation_endpoint: ::String
+      attr_accessor http_method: ("POST" | "GET" | "HEAD" | "OPTIONS" | "PUT" | "PATCH" | "DELETE")
+      attr_accessor invocation_rate_limit_per_second: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeArchiveRequest
+      attr_accessor archive_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeArchiveResponse
+      attr_accessor archive_arn: ::String
+      attr_accessor archive_name: ::String
+      attr_accessor event_source_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor event_pattern: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor state_reason: ::String
+      attr_accessor retention_days: ::Integer
+      attr_accessor size_bytes: ::Integer
+      attr_accessor event_count: ::Integer
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeConnectionRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeConnectionResponse
+      attr_accessor connection_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor connection_state: ("CREATING" | "UPDATING" | "DELETING" | "AUTHORIZED" | "DEAUTHORIZED" | "AUTHORIZING" | "DEAUTHORIZING")
+      attr_accessor state_reason: ::String
+      attr_accessor authorization_type: ("BASIC" | "OAUTH_CLIENT_CREDENTIALS" | "API_KEY")
+      attr_accessor secret_arn: ::String
+      attr_accessor auth_parameters: Types::ConnectionAuthResponseParameters
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_authorized_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeEventBusRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventBusResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventSourceRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventSourceResponse
+      attr_accessor arn: ::String
+      attr_accessor created_by: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor expiration_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor state: ("PENDING" | "ACTIVE" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class DescribePartnerEventSourceRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePartnerEventSourceResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReplayRequest
+      attr_accessor replay_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReplayResponse
+      attr_accessor replay_name: ::String
+      attr_accessor replay_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor state: ("STARTING" | "RUNNING" | "CANCELLING" | "COMPLETED" | "CANCELLED" | "FAILED")
+      attr_accessor state_reason: ::String
+      attr_accessor event_source_arn: ::String
+      attr_accessor destination: Types::ReplayDestination
+      attr_accessor event_start_time: ::Time
+      attr_accessor event_end_time: ::Time
+      attr_accessor event_last_replayed_time: ::Time
+      attr_accessor replay_start_time: ::Time
+      attr_accessor replay_end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeRuleRequest
+      attr_accessor name: ::String
+      attr_accessor event_bus_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRuleResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor event_pattern: ::String
+      attr_accessor schedule_expression: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor managed_by: ::String
+      attr_accessor event_bus_name: ::String
+      attr_accessor created_by: ::String
+      SENSITIVE: []
+    end
+
+    class DisableRuleRequest
+      attr_accessor name: ::String
+      attr_accessor event_bus_name: ::String
+      SENSITIVE: []
+    end
+
+    class EcsParameters
+      attr_accessor task_definition_arn: ::String
+      attr_accessor task_count: ::Integer
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor platform_version: ::String
+      attr_accessor group: ::String
+      attr_accessor capacity_provider_strategy: ::Array[Types::CapacityProviderStrategyItem]
+      attr_accessor enable_ecs_managed_tags: bool
+      attr_accessor enable_execute_command: bool
+      attr_accessor placement_constraints: ::Array[Types::PlacementConstraint]
+      attr_accessor placement_strategy: ::Array[Types::PlacementStrategy]
+      attr_accessor propagate_tags: ("TASK_DEFINITION")
+      attr_accessor reference_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class EnableRuleRequest
+      attr_accessor name: ::String
+      attr_accessor event_bus_name: ::String
+      SENSITIVE: []
+    end
+
+    class EventBus
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class EventSource
+      attr_accessor arn: ::String
+      attr_accessor created_by: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor expiration_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor state: ("PENDING" | "ACTIVE" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class HttpParameters
+      attr_accessor path_parameter_values: ::Array[::String]
+      attr_accessor header_parameters: ::Hash[::String, ::String]
+      attr_accessor query_string_parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class IllegalStatusException < Aws::EmptyStructure
+    end
+
+    class InputTransformer
+      attr_accessor input_paths_map: ::Hash[::String, ::String]
+      attr_accessor input_template: ::String
+      SENSITIVE: []
+    end
+
+    class InternalException < Aws::EmptyStructure
+    end
+
+    class InvalidEventPatternException < Aws::EmptyStructure
+    end
+
+    class InvalidStateException < Aws::EmptyStructure
+    end
+
+    class KinesisParameters
+      attr_accessor partition_key_path: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException < Aws::EmptyStructure
+    end
+
+    class ListApiDestinationsRequest
+      attr_accessor name_prefix: ::String
+      attr_accessor connection_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListApiDestinationsResponse
+      attr_accessor api_destinations: ::Array[Types::ApiDestination]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListArchivesRequest
+      attr_accessor name_prefix: ::String
+      attr_accessor event_source_arn: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListArchivesResponse
+      attr_accessor archives: ::Array[Types::Archive]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectionsRequest
+      attr_accessor name_prefix: ::String
+      attr_accessor connection_state: ("CREATING" | "UPDATING" | "DELETING" | "AUTHORIZED" | "DEAUTHORIZED" | "AUTHORIZING" | "DEAUTHORIZING")
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListConnectionsResponse
+      attr_accessor connections: ::Array[Types::Connection]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventBusesRequest
+      attr_accessor name_prefix: ::String
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEventBusesResponse
+      attr_accessor event_buses: ::Array[Types::EventBus]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventSourcesRequest
+      attr_accessor name_prefix: ::String
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEventSourcesResponse
+      attr_accessor event_sources: ::Array[Types::EventSource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPartnerEventSourceAccountsRequest
+      attr_accessor event_source_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPartnerEventSourceAccountsResponse
+      attr_accessor partner_event_source_accounts: ::Array[Types::PartnerEventSourceAccount]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPartnerEventSourcesRequest
+      attr_accessor name_prefix: ::String
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPartnerEventSourcesResponse
+      attr_accessor partner_event_sources: ::Array[Types::PartnerEventSource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReplaysRequest
+      attr_accessor name_prefix: ::String
+      attr_accessor state: ("STARTING" | "RUNNING" | "CANCELLING" | "COMPLETED" | "CANCELLED" | "FAILED")
+      attr_accessor event_source_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListReplaysResponse
+      attr_accessor replays: ::Array[Types::Replay]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRuleNamesByTargetRequest
+      attr_accessor target_arn: ::String
+      attr_accessor event_bus_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRuleNamesByTargetResponse
+      attr_accessor rule_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRulesRequest
+      attr_accessor name_prefix: ::String
+      attr_accessor event_bus_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRulesResponse
+      attr_accessor rules: ::Array[Types::Rule]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListTargetsByRuleRequest
+      attr_accessor rule: ::String
+      attr_accessor event_bus_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTargetsByRuleResponse
+      attr_accessor targets: ::Array[Types::Target]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ManagedRuleException < Aws::EmptyStructure
+    end
+
+    class NetworkConfiguration
+      attr_accessor awsvpc_configuration: Types::AwsVpcConfiguration
+      SENSITIVE: []
+    end
+
+    class OperationDisabledException < Aws::EmptyStructure
+    end
+
+    class PartnerEventSource
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class PartnerEventSourceAccount
+      attr_accessor account: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor expiration_time: ::Time
+      attr_accessor state: ("PENDING" | "ACTIVE" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class PlacementConstraint
+      attr_accessor type: ("distinctInstance" | "memberOf")
+      attr_accessor expression: ::String
+      SENSITIVE: []
+    end
+
+    class PlacementStrategy
+      attr_accessor type: ("random" | "spread" | "binpack")
+      attr_accessor field: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyLengthExceededException < Aws::EmptyStructure
+    end
+
+    class PutEventsRequest
+      attr_accessor entries: ::Array[Types::PutEventsRequestEntry]
+      SENSITIVE: []
+    end
+
+    class PutEventsRequestEntry
+      attr_accessor time: ::Time
+      attr_accessor source: ::String
+      attr_accessor resources: ::Array[::String]
+      attr_accessor detail_type: ::String
+      attr_accessor detail: ::String
+      attr_accessor event_bus_name: ::String
+      attr_accessor trace_header: ::String
+      SENSITIVE: []
+    end
+
+    class PutEventsResponse
+      attr_accessor failed_entry_count: ::Integer
+      attr_accessor entries: ::Array[Types::PutEventsResultEntry]
+      SENSITIVE: []
+    end
+
+    class PutEventsResultEntry
+      attr_accessor event_id: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class PutPartnerEventsRequest
+      attr_accessor entries: ::Array[Types::PutPartnerEventsRequestEntry]
+      SENSITIVE: []
+    end
+
+    class PutPartnerEventsRequestEntry
+      attr_accessor time: ::Time
+      attr_accessor source: ::String
+      attr_accessor resources: ::Array[::String]
+      attr_accessor detail_type: ::String
+      attr_accessor detail: ::String
+      SENSITIVE: []
+    end
+
+    class PutPartnerEventsResponse
+      attr_accessor failed_entry_count: ::Integer
+      attr_accessor entries: ::Array[Types::PutPartnerEventsResultEntry]
+      SENSITIVE: []
+    end
+
+    class PutPartnerEventsResultEntry
+      attr_accessor event_id: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class PutPermissionRequest
+      attr_accessor event_bus_name: ::String
+      attr_accessor action: ::String
+      attr_accessor principal: ::String
+      attr_accessor statement_id: ::String
+      attr_accessor condition: Types::Condition
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutRuleRequest
+      attr_accessor name: ::String
+      attr_accessor schedule_expression: ::String
+      attr_accessor event_pattern: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor event_bus_name: ::String
+      SENSITIVE: []
+    end
+
+    class PutRuleResponse
+      attr_accessor rule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutTargetsRequest
+      attr_accessor rule: ::String
+      attr_accessor event_bus_name: ::String
+      attr_accessor targets: ::Array[Types::Target]
+      SENSITIVE: []
+    end
+
+    class PutTargetsResponse
+      attr_accessor failed_entry_count: ::Integer
+      attr_accessor failed_entries: ::Array[Types::PutTargetsResultEntry]
+      SENSITIVE: []
+    end
+
+    class PutTargetsResultEntry
+      attr_accessor target_id: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class RedshiftDataParameters
+      attr_accessor secret_manager_arn: ::String
+      attr_accessor database: ::String
+      attr_accessor db_user: ::String
+      attr_accessor sql: ::String
+      attr_accessor statement_name: ::String
+      attr_accessor with_event: bool
+      SENSITIVE: []
+    end
+
+    class RemovePermissionRequest
+      attr_accessor statement_id: ::String
+      attr_accessor remove_all_permissions: bool
+      attr_accessor event_bus_name: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveTargetsRequest
+      attr_accessor rule: ::String
+      attr_accessor event_bus_name: ::String
+      attr_accessor ids: ::Array[::String]
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class RemoveTargetsResponse
+      attr_accessor failed_entry_count: ::Integer
+      attr_accessor failed_entries: ::Array[Types::RemoveTargetsResultEntry]
+      SENSITIVE: []
+    end
+
+    class RemoveTargetsResultEntry
+      attr_accessor target_id: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class Replay
+      attr_accessor replay_name: ::String
+      attr_accessor event_source_arn: ::String
+      attr_accessor state: ("STARTING" | "RUNNING" | "CANCELLING" | "COMPLETED" | "CANCELLED" | "FAILED")
+      attr_accessor state_reason: ::String
+      attr_accessor event_start_time: ::Time
+      attr_accessor event_end_time: ::Time
+      attr_accessor event_last_replayed_time: ::Time
+      attr_accessor replay_start_time: ::Time
+      attr_accessor replay_end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ReplayDestination
+      attr_accessor arn: ::String
+      attr_accessor filter_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException < Aws::EmptyStructure
+    end
+
+    class RetryPolicy
+      attr_accessor maximum_retry_attempts: ::Integer
+      attr_accessor maximum_event_age_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class Rule
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor event_pattern: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor description: ::String
+      attr_accessor schedule_expression: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor managed_by: ::String
+      attr_accessor event_bus_name: ::String
+      SENSITIVE: []
+    end
+
+    class RunCommandParameters
+      attr_accessor run_command_targets: ::Array[Types::RunCommandTarget]
+      SENSITIVE: []
+    end
+
+    class RunCommandTarget
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SageMakerPipelineParameter
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SageMakerPipelineParameters
+      attr_accessor pipeline_parameter_list: ::Array[Types::SageMakerPipelineParameter]
+      SENSITIVE: []
+    end
+
+    class SqsParameters
+      attr_accessor message_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartReplayRequest
+      attr_accessor replay_name: ::String
+      attr_accessor description: ::String
+      attr_accessor event_source_arn: ::String
+      attr_accessor event_start_time: ::Time
+      attr_accessor event_end_time: ::Time
+      attr_accessor destination: Types::ReplayDestination
+      SENSITIVE: []
+    end
+
+    class StartReplayResponse
+      attr_accessor replay_arn: ::String
+      attr_accessor state: ("STARTING" | "RUNNING" | "CANCELLING" | "COMPLETED" | "CANCELLED" | "FAILED")
+      attr_accessor state_reason: ::String
+      attr_accessor replay_start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class Target
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor input: ::String
+      attr_accessor input_path: ::String
+      attr_accessor input_transformer: Types::InputTransformer
+      attr_accessor kinesis_parameters: Types::KinesisParameters
+      attr_accessor run_command_parameters: Types::RunCommandParameters
+      attr_accessor ecs_parameters: Types::EcsParameters
+      attr_accessor batch_parameters: Types::BatchParameters
+      attr_accessor sqs_parameters: Types::SqsParameters
+      attr_accessor http_parameters: Types::HttpParameters
+      attr_accessor redshift_data_parameters: Types::RedshiftDataParameters
+      attr_accessor sage_maker_pipeline_parameters: Types::SageMakerPipelineParameters
+      attr_accessor dead_letter_config: Types::DeadLetterConfig
+      attr_accessor retry_policy: Types::RetryPolicy
+      SENSITIVE: []
+    end
+
+    class TestEventPatternRequest
+      attr_accessor event_pattern: ::String
+      attr_accessor event: ::String
+      SENSITIVE: []
+    end
+
+    class TestEventPatternResponse
+      attr_accessor result: bool
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateApiDestinationRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor connection_arn: ::String
+      attr_accessor invocation_endpoint: ::String
+      attr_accessor http_method: ("POST" | "GET" | "HEAD" | "OPTIONS" | "PUT" | "PATCH" | "DELETE")
+      attr_accessor invocation_rate_limit_per_second: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateApiDestinationResponse
+      attr_accessor api_destination_arn: ::String
+      attr_accessor api_destination_state: ("ACTIVE" | "INACTIVE")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateArchiveRequest
+      attr_accessor archive_name: ::String
+      attr_accessor description: ::String
+      attr_accessor event_pattern: ::String
+      attr_accessor retention_days: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateArchiveResponse
+      attr_accessor archive_arn: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor state_reason: ::String
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateConnectionApiKeyAuthRequestParameters
+      attr_accessor api_key_name: ::String
+      attr_accessor api_key_value: ::String
+      SENSITIVE: [:api_key_value]
+    end
+
+    class UpdateConnectionAuthRequestParameters
+      attr_accessor basic_auth_parameters: Types::UpdateConnectionBasicAuthRequestParameters
+      attr_accessor o_auth_parameters: Types::UpdateConnectionOAuthRequestParameters
+      attr_accessor api_key_auth_parameters: Types::UpdateConnectionApiKeyAuthRequestParameters
+      attr_accessor invocation_http_parameters: Types::ConnectionHttpParameters
+      SENSITIVE: []
+    end
+
+    class UpdateConnectionBasicAuthRequestParameters
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      SENSITIVE: [:password]
+    end
+
+    class UpdateConnectionOAuthClientRequestParameters
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      SENSITIVE: [:client_secret]
+    end
+
+    class UpdateConnectionOAuthRequestParameters
+      attr_accessor client_parameters: Types::UpdateConnectionOAuthClientRequestParameters
+      attr_accessor authorization_endpoint: ::String
+      attr_accessor http_method: ("GET" | "POST" | "PUT")
+      attr_accessor o_auth_http_parameters: Types::ConnectionHttpParameters
+      SENSITIVE: []
+    end
+
+    class UpdateConnectionRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor authorization_type: ("BASIC" | "OAUTH_CLIENT_CREDENTIALS" | "API_KEY")
+      attr_accessor auth_parameters: Types::UpdateConnectionAuthRequestParameters
+      SENSITIVE: []
+    end
+
+    class UpdateConnectionResponse
+      attr_accessor connection_arn: ::String
+      attr_accessor connection_state: ("CREATING" | "UPDATING" | "DELETING" | "AUTHORIZED" | "DEAUTHORIZED" | "AUTHORIZING" | "DEAUTHORIZING")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_authorized_time: ::Time
+      SENSITIVE: []
+    end
+  end
+end

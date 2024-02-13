@@ -1,0 +1,623 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Shield
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccessDeniedForDependencyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationLayerAutomaticResponseConfiguration
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor action: Types::ResponseAction
+      SENSITIVE: []
+    end
+
+    class AssociateDRTLogBucketRequest
+      attr_accessor log_bucket: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateDRTLogBucketResponse < Aws::EmptyStructure
+    end
+
+    class AssociateDRTRoleRequest
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateDRTRoleResponse < Aws::EmptyStructure
+    end
+
+    class AssociateHealthCheckRequest
+      attr_accessor protection_id: ::String
+      attr_accessor health_check_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateHealthCheckResponse < Aws::EmptyStructure
+    end
+
+    class AssociateProactiveEngagementDetailsRequest
+      attr_accessor emergency_contact_list: ::Array[Types::EmergencyContact]
+      SENSITIVE: []
+    end
+
+    class AssociateProactiveEngagementDetailsResponse < Aws::EmptyStructure
+    end
+
+    class AttackDetail
+      attr_accessor attack_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor sub_resources: ::Array[Types::SubResourceSummary]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor attack_counters: ::Array[Types::SummarizedCounter]
+      attr_accessor attack_properties: ::Array[Types::AttackProperty]
+      attr_accessor mitigations: ::Array[Types::Mitigation]
+      SENSITIVE: []
+    end
+
+    class AttackProperty
+      attr_accessor attack_layer: ("NETWORK" | "APPLICATION")
+      attr_accessor attack_property_identifier: ("DESTINATION_URL" | "REFERRER" | "SOURCE_ASN" | "SOURCE_COUNTRY" | "SOURCE_IP_ADDRESS" | "SOURCE_USER_AGENT" | "WORDPRESS_PINGBACK_REFLECTOR" | "WORDPRESS_PINGBACK_SOURCE")
+      attr_accessor top_contributors: ::Array[Types::Contributor]
+      attr_accessor unit: ("BITS" | "BYTES" | "PACKETS" | "REQUESTS")
+      attr_accessor total: ::Integer
+      SENSITIVE: []
+    end
+
+    class AttackStatisticsDataItem
+      attr_accessor attack_volume: Types::AttackVolume
+      attr_accessor attack_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class AttackSummary
+      attr_accessor attack_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor attack_vectors: ::Array[Types::AttackVectorDescription]
+      SENSITIVE: []
+    end
+
+    class AttackVectorDescription
+      attr_accessor vector_type: ::String
+      SENSITIVE: []
+    end
+
+    class AttackVolume
+      attr_accessor bits_per_second: Types::AttackVolumeStatistics
+      attr_accessor packets_per_second: Types::AttackVolumeStatistics
+      attr_accessor requests_per_second: Types::AttackVolumeStatistics
+      SENSITIVE: []
+    end
+
+    class AttackVolumeStatistics
+      attr_accessor max: ::Float
+      SENSITIVE: []
+    end
+
+    class BlockAction < Aws::EmptyStructure
+    end
+
+    class Contributor
+      attr_accessor name: ::String
+      attr_accessor value: ::Integer
+      SENSITIVE: []
+    end
+
+    class CountAction < Aws::EmptyStructure
+    end
+
+    class CreateProtectionGroupRequest
+      attr_accessor protection_group_id: ::String
+      attr_accessor aggregation: ("SUM" | "MEAN" | "MAX")
+      attr_accessor pattern: ("ALL" | "ARBITRARY" | "BY_RESOURCE_TYPE")
+      attr_accessor resource_type: ("CLOUDFRONT_DISTRIBUTION" | "ROUTE_53_HOSTED_ZONE" | "ELASTIC_IP_ALLOCATION" | "CLASSIC_LOAD_BALANCER" | "APPLICATION_LOAD_BALANCER" | "GLOBAL_ACCELERATOR")
+      attr_accessor members: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateProtectionGroupResponse < Aws::EmptyStructure
+    end
+
+    class CreateProtectionRequest
+      attr_accessor name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateProtectionResponse
+      attr_accessor protection_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSubscriptionRequest < Aws::EmptyStructure
+    end
+
+    class CreateSubscriptionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteProtectionGroupRequest
+      attr_accessor protection_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProtectionGroupResponse < Aws::EmptyStructure
+    end
+
+    class DeleteProtectionRequest
+      attr_accessor protection_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProtectionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteSubscriptionRequest < Aws::EmptyStructure
+    end
+
+    class DeleteSubscriptionResponse < Aws::EmptyStructure
+    end
+
+    class DescribeAttackRequest
+      attr_accessor attack_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAttackResponse
+      attr_accessor attack: Types::AttackDetail
+      SENSITIVE: []
+    end
+
+    class DescribeAttackStatisticsRequest < Aws::EmptyStructure
+    end
+
+    class DescribeAttackStatisticsResponse
+      attr_accessor time_range: Types::TimeRange
+      attr_accessor data_items: ::Array[Types::AttackStatisticsDataItem]
+      SENSITIVE: []
+    end
+
+    class DescribeDRTAccessRequest < Aws::EmptyStructure
+    end
+
+    class DescribeDRTAccessResponse
+      attr_accessor role_arn: ::String
+      attr_accessor log_bucket_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeEmergencyContactSettingsRequest < Aws::EmptyStructure
+    end
+
+    class DescribeEmergencyContactSettingsResponse
+      attr_accessor emergency_contact_list: ::Array[Types::EmergencyContact]
+      SENSITIVE: []
+    end
+
+    class DescribeProtectionGroupRequest
+      attr_accessor protection_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProtectionGroupResponse
+      attr_accessor protection_group: Types::ProtectionGroup
+      SENSITIVE: []
+    end
+
+    class DescribeProtectionRequest
+      attr_accessor protection_id: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProtectionResponse
+      attr_accessor protection: Types::Protection
+      SENSITIVE: []
+    end
+
+    class DescribeSubscriptionRequest < Aws::EmptyStructure
+    end
+
+    class DescribeSubscriptionResponse
+      attr_accessor subscription: Types::Subscription
+      SENSITIVE: []
+    end
+
+    class DisableApplicationLayerAutomaticResponseRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisableApplicationLayerAutomaticResponseResponse < Aws::EmptyStructure
+    end
+
+    class DisableProactiveEngagementRequest < Aws::EmptyStructure
+    end
+
+    class DisableProactiveEngagementResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateDRTLogBucketRequest
+      attr_accessor log_bucket: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateDRTLogBucketResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateDRTRoleRequest < Aws::EmptyStructure
+    end
+
+    class DisassociateDRTRoleResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateHealthCheckRequest
+      attr_accessor protection_id: ::String
+      attr_accessor health_check_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateHealthCheckResponse < Aws::EmptyStructure
+    end
+
+    class EmergencyContact
+      attr_accessor email_address: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor contact_notes: ::String
+      SENSITIVE: []
+    end
+
+    class EnableApplicationLayerAutomaticResponseRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor action: Types::ResponseAction
+      SENSITIVE: []
+    end
+
+    class EnableApplicationLayerAutomaticResponseResponse < Aws::EmptyStructure
+    end
+
+    class EnableProactiveEngagementRequest < Aws::EmptyStructure
+    end
+
+    class EnableProactiveEngagementResponse < Aws::EmptyStructure
+    end
+
+    class GetSubscriptionStateRequest < Aws::EmptyStructure
+    end
+
+    class GetSubscriptionStateResponse
+      attr_accessor subscription_state: ("ACTIVE" | "INACTIVE")
+      SENSITIVE: []
+    end
+
+    class InclusionProtectionFilters
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor protection_names: ::Array[::String]
+      attr_accessor resource_types: ::Array[("CLOUDFRONT_DISTRIBUTION" | "ROUTE_53_HOSTED_ZONE" | "ELASTIC_IP_ALLOCATION" | "CLASSIC_LOAD_BALANCER" | "APPLICATION_LOAD_BALANCER" | "GLOBAL_ACCELERATOR")]
+      SENSITIVE: []
+    end
+
+    class InclusionProtectionGroupFilters
+      attr_accessor protection_group_ids: ::Array[::String]
+      attr_accessor patterns: ::Array[("ALL" | "ARBITRARY" | "BY_RESOURCE_TYPE")]
+      attr_accessor resource_types: ::Array[("CLOUDFRONT_DISTRIBUTION" | "ROUTE_53_HOSTED_ZONE" | "ELASTIC_IP_ALLOCATION" | "CLASSIC_LOAD_BALANCER" | "APPLICATION_LOAD_BALANCER" | "GLOBAL_ACCELERATOR")]
+      attr_accessor aggregations: ::Array[("SUM" | "MEAN" | "MAX")]
+      SENSITIVE: []
+    end
+
+    class InternalErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidPaginationTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      attr_accessor reason: ("FIELD_VALIDATION_FAILED" | "OTHER")
+      attr_accessor fields: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class InvalidResourceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Limit
+      attr_accessor type: ::String
+      attr_accessor max: ::Integer
+      SENSITIVE: []
+    end
+
+    class LimitsExceededException
+      attr_accessor message: ::String
+      attr_accessor type: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAttacksRequest
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor start_time: Types::TimeRange
+      attr_accessor end_time: Types::TimeRange
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAttacksResponse
+      attr_accessor attack_summaries: ::Array[Types::AttackSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProtectionGroupsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor inclusion_filters: Types::InclusionProtectionGroupFilters
+      SENSITIVE: []
+    end
+
+    class ListProtectionGroupsResponse
+      attr_accessor protection_groups: ::Array[Types::ProtectionGroup]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProtectionsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor inclusion_filters: Types::InclusionProtectionFilters
+      SENSITIVE: []
+    end
+
+    class ListProtectionsResponse
+      attr_accessor protections: ::Array[Types::Protection]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourcesInProtectionGroupRequest
+      attr_accessor protection_group_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListResourcesInProtectionGroupResponse
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class LockedSubscriptionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Mitigation
+      attr_accessor mitigation_name: ::String
+      SENSITIVE: []
+    end
+
+    class NoAssociatedRoleException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OptimisticLockException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Protection
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor health_check_ids: ::Array[::String]
+      attr_accessor protection_arn: ::String
+      attr_accessor application_layer_automatic_response_configuration: Types::ApplicationLayerAutomaticResponseConfiguration
+      SENSITIVE: []
+    end
+
+    class ProtectionGroup
+      attr_accessor protection_group_id: ::String
+      attr_accessor aggregation: ("SUM" | "MEAN" | "MAX")
+      attr_accessor pattern: ("ALL" | "ARBITRARY" | "BY_RESOURCE_TYPE")
+      attr_accessor resource_type: ("CLOUDFRONT_DISTRIBUTION" | "ROUTE_53_HOSTED_ZONE" | "ELASTIC_IP_ALLOCATION" | "CLASSIC_LOAD_BALANCER" | "APPLICATION_LOAD_BALANCER" | "GLOBAL_ACCELERATOR")
+      attr_accessor members: ::Array[::String]
+      attr_accessor protection_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ProtectionGroupArbitraryPatternLimits
+      attr_accessor max_members: ::Integer
+      SENSITIVE: []
+    end
+
+    class ProtectionGroupLimits
+      attr_accessor max_protection_groups: ::Integer
+      attr_accessor pattern_type_limits: Types::ProtectionGroupPatternTypeLimits
+      SENSITIVE: []
+    end
+
+    class ProtectionGroupPatternTypeLimits
+      attr_accessor arbitrary_pattern_limits: Types::ProtectionGroupArbitraryPatternLimits
+      SENSITIVE: []
+    end
+
+    class ProtectionLimits
+      attr_accessor protected_resource_type_limits: ::Array[Types::Limit]
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ResponseAction
+      attr_accessor block: Types::BlockAction
+      attr_accessor count: Types::CountAction
+      SENSITIVE: []
+    end
+
+    class SubResourceSummary
+      attr_accessor type: ("IP" | "URL")
+      attr_accessor id: ::String
+      attr_accessor attack_vectors: ::Array[Types::SummarizedAttackVector]
+      attr_accessor counters: ::Array[Types::SummarizedCounter]
+      SENSITIVE: []
+    end
+
+    class Subscription
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor time_commitment_in_seconds: ::Integer
+      attr_accessor auto_renew: ("ENABLED" | "DISABLED")
+      attr_accessor limits: ::Array[Types::Limit]
+      attr_accessor proactive_engagement_status: ("ENABLED" | "DISABLED" | "PENDING")
+      attr_accessor subscription_limits: Types::SubscriptionLimits
+      attr_accessor subscription_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SubscriptionLimits
+      attr_accessor protection_limits: Types::ProtectionLimits
+      attr_accessor protection_group_limits: Types::ProtectionGroupLimits
+      SENSITIVE: []
+    end
+
+    class SummarizedAttackVector
+      attr_accessor vector_type: ::String
+      attr_accessor vector_counters: ::Array[Types::SummarizedCounter]
+      SENSITIVE: []
+    end
+
+    class SummarizedCounter
+      attr_accessor name: ::String
+      attr_accessor max: ::Float
+      attr_accessor average: ::Float
+      attr_accessor sum: ::Float
+      attr_accessor n: ::Integer
+      attr_accessor unit: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TimeRange
+      attr_accessor from_inclusive: ::Time
+      attr_accessor to_exclusive: ::Time
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateApplicationLayerAutomaticResponseRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor action: Types::ResponseAction
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationLayerAutomaticResponseResponse < Aws::EmptyStructure
+    end
+
+    class UpdateEmergencyContactSettingsRequest
+      attr_accessor emergency_contact_list: ::Array[Types::EmergencyContact]
+      SENSITIVE: []
+    end
+
+    class UpdateEmergencyContactSettingsResponse < Aws::EmptyStructure
+    end
+
+    class UpdateProtectionGroupRequest
+      attr_accessor protection_group_id: ::String
+      attr_accessor aggregation: ("SUM" | "MEAN" | "MAX")
+      attr_accessor pattern: ("ALL" | "ARBITRARY" | "BY_RESOURCE_TYPE")
+      attr_accessor resource_type: ("CLOUDFRONT_DISTRIBUTION" | "ROUTE_53_HOSTED_ZONE" | "ELASTIC_IP_ALLOCATION" | "CLASSIC_LOAD_BALANCER" | "APPLICATION_LOAD_BALANCER" | "GLOBAL_ACCELERATOR")
+      attr_accessor members: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateProtectionGroupResponse < Aws::EmptyStructure
+    end
+
+    class UpdateSubscriptionRequest
+      attr_accessor auto_renew: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateSubscriptionResponse < Aws::EmptyStructure
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

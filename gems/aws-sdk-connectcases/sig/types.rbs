@@ -1,0 +1,823 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ConnectCases
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AuditEvent
+      attr_accessor event_id: ::String
+      attr_accessor fields: ::Array[Types::AuditEventField]
+      attr_accessor performed_by: Types::AuditEventPerformedBy
+      attr_accessor performed_time: ::Time
+      attr_accessor related_item_type: ("Contact" | "Comment")
+      attr_accessor type: ("Case.Created" | "Case.Updated" | "RelatedItem.Created")
+      SENSITIVE: []
+    end
+
+    class AuditEventField
+      attr_accessor event_field_id: ::String
+      attr_accessor new_value: Types::AuditEventFieldValueUnion
+      attr_accessor old_value: Types::AuditEventFieldValueUnion
+      SENSITIVE: []
+    end
+
+    class AuditEventFieldValueUnion
+      attr_accessor boolean_value: bool
+      attr_accessor double_value: ::Float
+      attr_accessor empty_value: Types::EmptyFieldValue
+      attr_accessor string_value: ::String
+      attr_accessor user_arn_value: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class BooleanValue < AuditEventFieldValueUnion
+      end
+      class DoubleValue < AuditEventFieldValueUnion
+      end
+      class EmptyValue < AuditEventFieldValueUnion
+      end
+      class StringValue < AuditEventFieldValueUnion
+      end
+      class UserArnValue < AuditEventFieldValueUnion
+      end
+      class Unknown < AuditEventFieldValueUnion
+      end
+    end
+
+    class AuditEventPerformedBy
+      attr_accessor iam_principal_arn: ::String
+      attr_accessor user: Types::UserUnion
+      SENSITIVE: []
+    end
+
+    class BasicLayout
+      attr_accessor more_info: Types::LayoutSections
+      attr_accessor top_panel: Types::LayoutSections
+      SENSITIVE: []
+    end
+
+    class BatchGetFieldRequest
+      attr_accessor domain_id: ::String
+      attr_accessor fields: ::Array[Types::FieldIdentifier]
+      SENSITIVE: []
+    end
+
+    class BatchGetFieldResponse
+      attr_accessor errors: ::Array[Types::FieldError]
+      attr_accessor fields: ::Array[Types::GetFieldResponse]
+      SENSITIVE: []
+    end
+
+    class BatchPutFieldOptionsRequest
+      attr_accessor domain_id: ::String
+      attr_accessor field_id: ::String
+      attr_accessor options: ::Array[Types::FieldOption]
+      SENSITIVE: []
+    end
+
+    class BatchPutFieldOptionsResponse
+      attr_accessor errors: ::Array[Types::FieldOptionError]
+      SENSITIVE: []
+    end
+
+    class CaseEventIncludedData
+      attr_accessor fields: ::Array[Types::FieldIdentifier]
+      SENSITIVE: []
+    end
+
+    class CaseFilter
+      attr_accessor and_all: ::Array[Types::CaseFilter]
+      attr_accessor field: Types::FieldFilter
+      attr_accessor not: Types::CaseFilter
+      attr_accessor or_all: ::Array[Types::CaseFilter]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AndAll < CaseFilter
+      end
+      class Field < CaseFilter
+      end
+      class Not < CaseFilter
+      end
+      class OrAll < CaseFilter
+      end
+      class Unknown < CaseFilter
+      end
+    end
+
+    class CaseSummary
+      attr_accessor case_id: ::String
+      attr_accessor template_id: ::String
+      SENSITIVE: []
+    end
+
+    class CommentContent
+      attr_accessor body: ::String
+      attr_accessor content_type: ("Text/Plain")
+      SENSITIVE: []
+    end
+
+    class CommentFilter < Aws::EmptyStructure
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Contact
+      attr_accessor contact_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ContactContent
+      attr_accessor channel: ::String
+      attr_accessor connected_to_system_time: ::Time
+      attr_accessor contact_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ContactFilter
+      attr_accessor channel: ::Array[::String]
+      attr_accessor contact_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCaseRequest
+      attr_accessor client_token: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor fields: ::Array[Types::FieldValue]
+      attr_accessor performed_by: Types::UserUnion
+      attr_accessor template_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCaseResponse
+      attr_accessor case_arn: ::String
+      attr_accessor case_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDomainRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDomainResponse
+      attr_accessor domain_arn: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor domain_status: ("Active" | "CreationInProgress" | "CreationFailed")
+      SENSITIVE: []
+    end
+
+    class CreateFieldRequest
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("Text" | "Number" | "Boolean" | "DateTime" | "SingleSelect" | "Url" | "User")
+      SENSITIVE: []
+    end
+
+    class CreateFieldResponse
+      attr_accessor field_arn: ::String
+      attr_accessor field_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLayoutRequest
+      attr_accessor content: Types::LayoutContent
+      attr_accessor domain_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLayoutResponse
+      attr_accessor layout_arn: ::String
+      attr_accessor layout_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRelatedItemRequest
+      attr_accessor case_id: ::String
+      attr_accessor content: Types::RelatedItemInputContent
+      attr_accessor domain_id: ::String
+      attr_accessor performed_by: Types::UserUnion
+      attr_accessor type: ("Contact" | "Comment")
+      SENSITIVE: []
+    end
+
+    class CreateRelatedItemResponse
+      attr_accessor related_item_arn: ::String
+      attr_accessor related_item_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTemplateRequest
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor layout_configuration: Types::LayoutConfiguration
+      attr_accessor name: ::String
+      attr_accessor required_fields: ::Array[Types::RequiredField]
+      attr_accessor status: ("Active" | "Inactive")
+      SENSITIVE: []
+    end
+
+    class CreateTemplateResponse
+      attr_accessor template_arn: ::String
+      attr_accessor template_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDomainRequest
+      attr_accessor domain_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDomainResponse < Aws::EmptyStructure
+    end
+
+    class DomainSummary
+      attr_accessor domain_arn: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class EmptyFieldValue < Aws::EmptyStructure
+    end
+
+    class EventBridgeConfiguration
+      attr_accessor enabled: bool
+      attr_accessor included_data: Types::EventIncludedData
+      SENSITIVE: []
+    end
+
+    class EventIncludedData
+      attr_accessor case_data: Types::CaseEventIncludedData
+      attr_accessor related_item_data: Types::RelatedItemEventIncludedData
+      SENSITIVE: []
+    end
+
+    class FieldError
+      attr_accessor error_code: ::String
+      attr_accessor id: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FieldFilter
+      attr_accessor contains: Types::FieldValue
+      attr_accessor equal_to: Types::FieldValue
+      attr_accessor greater_than: Types::FieldValue
+      attr_accessor greater_than_or_equal_to: Types::FieldValue
+      attr_accessor less_than: Types::FieldValue
+      attr_accessor less_than_or_equal_to: Types::FieldValue
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Contains < FieldFilter
+      end
+      class EqualTo < FieldFilter
+      end
+      class GreaterThan < FieldFilter
+      end
+      class GreaterThanOrEqualTo < FieldFilter
+      end
+      class LessThan < FieldFilter
+      end
+      class LessThanOrEqualTo < FieldFilter
+      end
+      class Unknown < FieldFilter
+      end
+    end
+
+    class FieldGroup
+      attr_accessor fields: ::Array[Types::FieldItem]
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class FieldIdentifier
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class FieldItem
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class FieldOption
+      attr_accessor active: bool
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class FieldOptionError
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class FieldSummary
+      attr_accessor field_arn: ::String
+      attr_accessor field_id: ::String
+      attr_accessor name: ::String
+      attr_accessor namespace: ("System" | "Custom")
+      attr_accessor type: ("Text" | "Number" | "Boolean" | "DateTime" | "SingleSelect" | "Url" | "User")
+      SENSITIVE: []
+    end
+
+    class FieldValue
+      attr_accessor id: ::String
+      attr_accessor value: Types::FieldValueUnion
+      SENSITIVE: []
+    end
+
+    class FieldValueUnion
+      attr_accessor boolean_value: bool
+      attr_accessor double_value: ::Float
+      attr_accessor empty_value: Types::EmptyFieldValue
+      attr_accessor string_value: ::String
+      attr_accessor user_arn_value: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class BooleanValue < FieldValueUnion
+      end
+      class DoubleValue < FieldValueUnion
+      end
+      class EmptyValue < FieldValueUnion
+      end
+      class StringValue < FieldValueUnion
+      end
+      class UserArnValue < FieldValueUnion
+      end
+      class Unknown < FieldValueUnion
+      end
+    end
+
+    class GetCaseAuditEventsRequest
+      attr_accessor case_id: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCaseAuditEventsResponse
+      attr_accessor audit_events: ::Array[Types::AuditEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCaseEventConfigurationRequest
+      attr_accessor domain_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCaseEventConfigurationResponse
+      attr_accessor event_bridge: Types::EventBridgeConfiguration
+      SENSITIVE: []
+    end
+
+    class GetCaseRequest
+      attr_accessor case_id: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor fields: ::Array[Types::FieldIdentifier]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCaseResponse
+      attr_accessor fields: ::Array[Types::FieldValue]
+      attr_accessor next_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor template_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainRequest
+      attr_accessor domain_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainResponse
+      attr_accessor created_time: ::Time
+      attr_accessor domain_arn: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor domain_status: ("Active" | "CreationInProgress" | "CreationFailed")
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetFieldResponse
+      attr_accessor description: ::String
+      attr_accessor field_arn: ::String
+      attr_accessor field_id: ::String
+      attr_accessor name: ::String
+      attr_accessor namespace: ("System" | "Custom")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("Text" | "Number" | "Boolean" | "DateTime" | "SingleSelect" | "Url" | "User")
+      SENSITIVE: []
+    end
+
+    class GetLayoutRequest
+      attr_accessor domain_id: ::String
+      attr_accessor layout_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetLayoutResponse
+      attr_accessor content: Types::LayoutContent
+      attr_accessor layout_arn: ::String
+      attr_accessor layout_id: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetTemplateRequest
+      attr_accessor domain_id: ::String
+      attr_accessor template_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetTemplateResponse
+      attr_accessor description: ::String
+      attr_accessor layout_configuration: Types::LayoutConfiguration
+      attr_accessor name: ::String
+      attr_accessor required_fields: ::Array[Types::RequiredField]
+      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor template_arn: ::String
+      attr_accessor template_id: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class LayoutConfiguration
+      attr_accessor default_layout: ::String
+      SENSITIVE: []
+    end
+
+    class LayoutContent
+      attr_accessor basic: Types::BasicLayout
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Basic < LayoutContent
+      end
+      class Unknown < LayoutContent
+      end
+    end
+
+    class LayoutSections
+      attr_accessor sections: ::Array[Types::Section]
+      SENSITIVE: []
+    end
+
+    class LayoutSummary
+      attr_accessor layout_arn: ::String
+      attr_accessor layout_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ListCasesForContactRequest
+      attr_accessor contact_arn: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCasesForContactResponse
+      attr_accessor cases: ::Array[Types::CaseSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDomainsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDomainsResponse
+      attr_accessor domains: ::Array[Types::DomainSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFieldOptionsRequest
+      attr_accessor domain_id: ::String
+      attr_accessor field_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListFieldOptionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor options: ::Array[Types::FieldOption]
+      SENSITIVE: []
+    end
+
+    class ListFieldsRequest
+      attr_accessor domain_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFieldsResponse
+      attr_accessor fields: ::Array[Types::FieldSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLayoutsRequest
+      attr_accessor domain_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLayoutsResponse
+      attr_accessor layouts: ::Array[Types::LayoutSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListTemplatesRequest
+      attr_accessor domain_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor status: ::Array[("Active" | "Inactive")]
+      SENSITIVE: []
+    end
+
+    class ListTemplatesResponse
+      attr_accessor next_token: ::String
+      attr_accessor templates: ::Array[Types::TemplateSummary]
+      SENSITIVE: []
+    end
+
+    class PutCaseEventConfigurationRequest
+      attr_accessor domain_id: ::String
+      attr_accessor event_bridge: Types::EventBridgeConfiguration
+      SENSITIVE: []
+    end
+
+    class PutCaseEventConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class RelatedItemContent
+      attr_accessor comment: Types::CommentContent
+      attr_accessor contact: Types::ContactContent
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Comment < RelatedItemContent
+      end
+      class Contact < RelatedItemContent
+      end
+      class Unknown < RelatedItemContent
+      end
+    end
+
+    class RelatedItemEventIncludedData
+      attr_accessor include_content: bool
+      SENSITIVE: []
+    end
+
+    class RelatedItemInputContent
+      attr_accessor comment: Types::CommentContent
+      attr_accessor contact: Types::Contact
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Comment < RelatedItemInputContent
+      end
+      class Contact < RelatedItemInputContent
+      end
+      class Unknown < RelatedItemInputContent
+      end
+    end
+
+    class RelatedItemTypeFilter
+      attr_accessor comment: Types::CommentFilter
+      attr_accessor contact: Types::ContactFilter
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Comment < RelatedItemTypeFilter
+      end
+      class Contact < RelatedItemTypeFilter
+      end
+      class Unknown < RelatedItemTypeFilter
+      end
+    end
+
+    class RequiredField
+      attr_accessor field_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class SearchCasesRequest
+      attr_accessor domain_id: ::String
+      attr_accessor fields: ::Array[Types::FieldIdentifier]
+      attr_accessor filter: Types::CaseFilter
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor search_term: ::String
+      attr_accessor sorts: ::Array[Types::Sort]
+      SENSITIVE: []
+    end
+
+    class SearchCasesResponse
+      attr_accessor cases: ::Array[Types::SearchCasesResponseItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchCasesResponseItem
+      attr_accessor case_id: ::String
+      attr_accessor fields: ::Array[Types::FieldValue]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor template_id: ::String
+      SENSITIVE: []
+    end
+
+    class SearchRelatedItemsRequest
+      attr_accessor case_id: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor filters: ::Array[Types::RelatedItemTypeFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchRelatedItemsResponse
+      attr_accessor next_token: ::String
+      attr_accessor related_items: ::Array[Types::SearchRelatedItemsResponseItem]
+      SENSITIVE: []
+    end
+
+    class SearchRelatedItemsResponseItem
+      attr_accessor association_time: ::Time
+      attr_accessor content: Types::RelatedItemContent
+      attr_accessor performed_by: Types::UserUnion
+      attr_accessor related_item_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("Contact" | "Comment")
+      SENSITIVE: []
+    end
+
+    class Section
+      attr_accessor field_group: Types::FieldGroup
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class FieldGroup < Section
+      end
+      class Unknown < Section
+      end
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Sort
+      attr_accessor field_id: ::String
+      attr_accessor sort_order: ("Asc" | "Desc")
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TemplateSummary
+      attr_accessor name: ::String
+      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor template_arn: ::String
+      attr_accessor template_id: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateCaseRequest
+      attr_accessor case_id: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor fields: ::Array[Types::FieldValue]
+      attr_accessor performed_by: Types::UserUnion
+      SENSITIVE: []
+    end
+
+    class UpdateCaseResponse < Aws::EmptyStructure
+    end
+
+    class UpdateFieldRequest
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor field_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFieldResponse < Aws::EmptyStructure
+    end
+
+    class UpdateLayoutRequest
+      attr_accessor content: Types::LayoutContent
+      attr_accessor domain_id: ::String
+      attr_accessor layout_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateLayoutResponse < Aws::EmptyStructure
+    end
+
+    class UpdateTemplateRequest
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor layout_configuration: Types::LayoutConfiguration
+      attr_accessor name: ::String
+      attr_accessor required_fields: ::Array[Types::RequiredField]
+      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor template_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTemplateResponse < Aws::EmptyStructure
+    end
+
+    class UserUnion
+      attr_accessor user_arn: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class UserArn < UserUnion
+      end
+      class Unknown < UserUnion
+      end
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

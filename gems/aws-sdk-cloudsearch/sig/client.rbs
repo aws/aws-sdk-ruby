@@ -1,0 +1,471 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudSearch
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BuildSuggestersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BuildSuggestersResponse]
+        def field_names: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#build_suggesters-instance_method
+      def build_suggesters: (
+                              domain_name: ::String
+                            ) -> _BuildSuggestersResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BuildSuggestersResponseSuccess
+
+      interface _CreateDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDomainResponse]
+        def domain_status: () -> Types::DomainStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#create_domain-instance_method
+      def create_domain: (
+                           domain_name: ::String
+                         ) -> _CreateDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainResponseSuccess
+
+      interface _DefineAnalysisSchemeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DefineAnalysisSchemeResponse]
+        def analysis_scheme: () -> Types::AnalysisSchemeStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#define_analysis_scheme-instance_method
+      def define_analysis_scheme: (
+                                    domain_name: ::String,
+                                    analysis_scheme: {
+                                      analysis_scheme_name: ::String,
+                                      analysis_scheme_language: ("ar" | "bg" | "ca" | "cs" | "da" | "de" | "el" | "en" | "es" | "eu" | "fa" | "fi" | "fr" | "ga" | "gl" | "he" | "hi" | "hu" | "hy" | "id" | "it" | "ja" | "ko" | "lv" | "mul" | "nl" | "no" | "pt" | "ro" | "ru" | "sv" | "th" | "tr" | "zh-Hans" | "zh-Hant"),
+                                      analysis_options: {
+                                        synonyms: ::String?,
+                                        stopwords: ::String?,
+                                        stemming_dictionary: ::String?,
+                                        japanese_tokenization_dictionary: ::String?,
+                                        algorithmic_stemming: ("none" | "minimal" | "light" | "full")?
+                                      }?
+                                    }
+                                  ) -> _DefineAnalysisSchemeResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DefineAnalysisSchemeResponseSuccess
+
+      interface _DefineExpressionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DefineExpressionResponse]
+        def expression: () -> Types::ExpressionStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#define_expression-instance_method
+      def define_expression: (
+                               domain_name: ::String,
+                               expression: {
+                                 expression_name: ::String,
+                                 expression_value: ::String
+                               }
+                             ) -> _DefineExpressionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DefineExpressionResponseSuccess
+
+      interface _DefineIndexFieldResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DefineIndexFieldResponse]
+        def index_field: () -> Types::IndexFieldStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#define_index_field-instance_method
+      def define_index_field: (
+                                domain_name: ::String,
+                                index_field: {
+                                  index_field_name: ::String,
+                                  index_field_type: ("int" | "double" | "literal" | "text" | "date" | "latlon" | "int-array" | "double-array" | "literal-array" | "text-array" | "date-array"),
+                                  int_options: {
+                                    default_value: ::Integer?,
+                                    source_field: ::String?,
+                                    facet_enabled: bool?,
+                                    search_enabled: bool?,
+                                    return_enabled: bool?,
+                                    sort_enabled: bool?
+                                  }?,
+                                  double_options: {
+                                    default_value: ::Float?,
+                                    source_field: ::String?,
+                                    facet_enabled: bool?,
+                                    search_enabled: bool?,
+                                    return_enabled: bool?,
+                                    sort_enabled: bool?
+                                  }?,
+                                  literal_options: {
+                                    default_value: ::String?,
+                                    source_field: ::String?,
+                                    facet_enabled: bool?,
+                                    search_enabled: bool?,
+                                    return_enabled: bool?,
+                                    sort_enabled: bool?
+                                  }?,
+                                  text_options: {
+                                    default_value: ::String?,
+                                    source_field: ::String?,
+                                    return_enabled: bool?,
+                                    sort_enabled: bool?,
+                                    highlight_enabled: bool?,
+                                    analysis_scheme: ::String?
+                                  }?,
+                                  date_options: {
+                                    default_value: ::String?,
+                                    source_field: ::String?,
+                                    facet_enabled: bool?,
+                                    search_enabled: bool?,
+                                    return_enabled: bool?,
+                                    sort_enabled: bool?
+                                  }?,
+                                  lat_lon_options: {
+                                    default_value: ::String?,
+                                    source_field: ::String?,
+                                    facet_enabled: bool?,
+                                    search_enabled: bool?,
+                                    return_enabled: bool?,
+                                    sort_enabled: bool?
+                                  }?,
+                                  int_array_options: {
+                                    default_value: ::Integer?,
+                                    source_fields: ::String?,
+                                    facet_enabled: bool?,
+                                    search_enabled: bool?,
+                                    return_enabled: bool?
+                                  }?,
+                                  double_array_options: {
+                                    default_value: ::Float?,
+                                    source_fields: ::String?,
+                                    facet_enabled: bool?,
+                                    search_enabled: bool?,
+                                    return_enabled: bool?
+                                  }?,
+                                  literal_array_options: {
+                                    default_value: ::String?,
+                                    source_fields: ::String?,
+                                    facet_enabled: bool?,
+                                    search_enabled: bool?,
+                                    return_enabled: bool?
+                                  }?,
+                                  text_array_options: {
+                                    default_value: ::String?,
+                                    source_fields: ::String?,
+                                    return_enabled: bool?,
+                                    highlight_enabled: bool?,
+                                    analysis_scheme: ::String?
+                                  }?,
+                                  date_array_options: {
+                                    default_value: ::String?,
+                                    source_fields: ::String?,
+                                    facet_enabled: bool?,
+                                    search_enabled: bool?,
+                                    return_enabled: bool?
+                                  }?
+                                }
+                              ) -> _DefineIndexFieldResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DefineIndexFieldResponseSuccess
+
+      interface _DefineSuggesterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DefineSuggesterResponse]
+        def suggester: () -> Types::SuggesterStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#define_suggester-instance_method
+      def define_suggester: (
+                              domain_name: ::String,
+                              suggester: {
+                                suggester_name: ::String,
+                                document_suggester_options: {
+                                  source_field: ::String,
+                                  fuzzy_matching: ("none" | "low" | "high")?,
+                                  sort_expression: ::String?
+                                }
+                              }
+                            ) -> _DefineSuggesterResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DefineSuggesterResponseSuccess
+
+      interface _DeleteAnalysisSchemeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAnalysisSchemeResponse]
+        def analysis_scheme: () -> Types::AnalysisSchemeStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#delete_analysis_scheme-instance_method
+      def delete_analysis_scheme: (
+                                    domain_name: ::String,
+                                    analysis_scheme_name: ::String
+                                  ) -> _DeleteAnalysisSchemeResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAnalysisSchemeResponseSuccess
+
+      interface _DeleteDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDomainResponse]
+        def domain_status: () -> Types::DomainStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#delete_domain-instance_method
+      def delete_domain: (
+                           domain_name: ::String
+                         ) -> _DeleteDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainResponseSuccess
+
+      interface _DeleteExpressionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteExpressionResponse]
+        def expression: () -> Types::ExpressionStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#delete_expression-instance_method
+      def delete_expression: (
+                               domain_name: ::String,
+                               expression_name: ::String
+                             ) -> _DeleteExpressionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteExpressionResponseSuccess
+
+      interface _DeleteIndexFieldResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIndexFieldResponse]
+        def index_field: () -> Types::IndexFieldStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#delete_index_field-instance_method
+      def delete_index_field: (
+                                domain_name: ::String,
+                                index_field_name: ::String
+                              ) -> _DeleteIndexFieldResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIndexFieldResponseSuccess
+
+      interface _DeleteSuggesterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSuggesterResponse]
+        def suggester: () -> Types::SuggesterStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#delete_suggester-instance_method
+      def delete_suggester: (
+                              domain_name: ::String,
+                              suggester_name: ::String
+                            ) -> _DeleteSuggesterResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSuggesterResponseSuccess
+
+      interface _DescribeAnalysisSchemesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAnalysisSchemesResponse]
+        def analysis_schemes: () -> ::Array[Types::AnalysisSchemeStatus]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#describe_analysis_schemes-instance_method
+      def describe_analysis_schemes: (
+                                       domain_name: ::String,
+                                       ?analysis_scheme_names: Array[::String],
+                                       ?deployed: bool
+                                     ) -> _DescribeAnalysisSchemesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAnalysisSchemesResponseSuccess
+
+      interface _DescribeAvailabilityOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAvailabilityOptionsResponse]
+        def availability_options: () -> Types::AvailabilityOptionsStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#describe_availability_options-instance_method
+      def describe_availability_options: (
+                                           domain_name: ::String,
+                                           ?deployed: bool
+                                         ) -> _DescribeAvailabilityOptionsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAvailabilityOptionsResponseSuccess
+
+      interface _DescribeDomainEndpointOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDomainEndpointOptionsResponse]
+        def domain_endpoint_options: () -> Types::DomainEndpointOptionsStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#describe_domain_endpoint_options-instance_method
+      def describe_domain_endpoint_options: (
+                                              domain_name: ::String,
+                                              ?deployed: bool
+                                            ) -> _DescribeDomainEndpointOptionsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDomainEndpointOptionsResponseSuccess
+
+      interface _DescribeDomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDomainsResponse]
+        def domain_status_list: () -> ::Array[Types::DomainStatus]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#describe_domains-instance_method
+      def describe_domains: (
+                              ?domain_names: Array[::String]
+                            ) -> _DescribeDomainsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDomainsResponseSuccess
+
+      interface _DescribeExpressionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeExpressionsResponse]
+        def expressions: () -> ::Array[Types::ExpressionStatus]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#describe_expressions-instance_method
+      def describe_expressions: (
+                                  domain_name: ::String,
+                                  ?expression_names: Array[::String],
+                                  ?deployed: bool
+                                ) -> _DescribeExpressionsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeExpressionsResponseSuccess
+
+      interface _DescribeIndexFieldsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeIndexFieldsResponse]
+        def index_fields: () -> ::Array[Types::IndexFieldStatus]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#describe_index_fields-instance_method
+      def describe_index_fields: (
+                                   domain_name: ::String,
+                                   ?field_names: Array[::String],
+                                   ?deployed: bool
+                                 ) -> _DescribeIndexFieldsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeIndexFieldsResponseSuccess
+
+      interface _DescribeScalingParametersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeScalingParametersResponse]
+        def scaling_parameters: () -> Types::ScalingParametersStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#describe_scaling_parameters-instance_method
+      def describe_scaling_parameters: (
+                                         domain_name: ::String
+                                       ) -> _DescribeScalingParametersResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeScalingParametersResponseSuccess
+
+      interface _DescribeServiceAccessPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeServiceAccessPoliciesResponse]
+        def access_policies: () -> Types::AccessPoliciesStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#describe_service_access_policies-instance_method
+      def describe_service_access_policies: (
+                                              domain_name: ::String,
+                                              ?deployed: bool
+                                            ) -> _DescribeServiceAccessPoliciesResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeServiceAccessPoliciesResponseSuccess
+
+      interface _DescribeSuggestersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSuggestersResponse]
+        def suggesters: () -> ::Array[Types::SuggesterStatus]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#describe_suggesters-instance_method
+      def describe_suggesters: (
+                                 domain_name: ::String,
+                                 ?suggester_names: Array[::String],
+                                 ?deployed: bool
+                               ) -> _DescribeSuggestersResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSuggestersResponseSuccess
+
+      interface _IndexDocumentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::IndexDocumentsResponse]
+        def field_names: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#index_documents-instance_method
+      def index_documents: (
+                             domain_name: ::String
+                           ) -> _IndexDocumentsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _IndexDocumentsResponseSuccess
+
+      interface _ListDomainNamesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainNamesResponse]
+        def domain_names: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#list_domain_names-instance_method
+      def list_domain_names: () -> _ListDomainNamesResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainNamesResponseSuccess
+
+      interface _UpdateAvailabilityOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAvailabilityOptionsResponse]
+        def availability_options: () -> Types::AvailabilityOptionsStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#update_availability_options-instance_method
+      def update_availability_options: (
+                                         domain_name: ::String,
+                                         multi_az: bool
+                                       ) -> _UpdateAvailabilityOptionsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAvailabilityOptionsResponseSuccess
+
+      interface _UpdateDomainEndpointOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDomainEndpointOptionsResponse]
+        def domain_endpoint_options: () -> Types::DomainEndpointOptionsStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#update_domain_endpoint_options-instance_method
+      def update_domain_endpoint_options: (
+                                            domain_name: ::String,
+                                            domain_endpoint_options: {
+                                              enforce_https: bool?,
+                                              tls_security_policy: ("Policy-Min-TLS-1-0-2019-07" | "Policy-Min-TLS-1-2-2019-07")?
+                                            }
+                                          ) -> _UpdateDomainEndpointOptionsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainEndpointOptionsResponseSuccess
+
+      interface _UpdateScalingParametersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateScalingParametersResponse]
+        def scaling_parameters: () -> Types::ScalingParametersStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#update_scaling_parameters-instance_method
+      def update_scaling_parameters: (
+                                       domain_name: ::String,
+                                       scaling_parameters: {
+                                         desired_instance_type: ("search.m1.small" | "search.m1.large" | "search.m2.xlarge" | "search.m2.2xlarge" | "search.m3.medium" | "search.m3.large" | "search.m3.xlarge" | "search.m3.2xlarge" | "search.small" | "search.medium" | "search.large" | "search.xlarge" | "search.2xlarge" | "search.previousgeneration.small" | "search.previousgeneration.large" | "search.previousgeneration.xlarge" | "search.previousgeneration.2xlarge")?,
+                                         desired_replication_count: ::Integer?,
+                                         desired_partition_count: ::Integer?
+                                       }
+                                     ) -> _UpdateScalingParametersResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateScalingParametersResponseSuccess
+
+      interface _UpdateServiceAccessPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateServiceAccessPoliciesResponse]
+        def access_policies: () -> Types::AccessPoliciesStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudSearch/Client.html#update_service_access_policies-instance_method
+      def update_service_access_policies: (
+                                            domain_name: ::String,
+                                            access_policies: ::String
+                                          ) -> _UpdateServiceAccessPoliciesResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceAccessPoliciesResponseSuccess
+    end
+  end
+end
+

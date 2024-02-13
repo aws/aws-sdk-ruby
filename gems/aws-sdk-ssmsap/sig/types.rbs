@@ -1,0 +1,409 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SsmSap
+  module Types
+
+    class Application
+      attr_accessor id: ::String
+      attr_accessor type: ("HANA" | "SAP_ABAP")
+      attr_accessor arn: ::String
+      attr_accessor app_registry_arn: ::String
+      attr_accessor status: ("ACTIVATED" | "STARTING" | "STOPPED" | "STOPPING" | "FAILED" | "REGISTERING" | "DELETING" | "UNKNOWN")
+      attr_accessor discovery_status: ("SUCCESS" | "REGISTRATION_FAILED" | "REFRESH_FAILED" | "REGISTERING" | "DELETING")
+      attr_accessor components: ::Array[::String]
+      attr_accessor last_updated: ::Time
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationCredential
+      attr_accessor database_name: ::String
+      attr_accessor credential_type: ("ADMIN")
+      attr_accessor secret_id: ::String
+      SENSITIVE: [:secret_id]
+    end
+
+    class ApplicationSummary
+      attr_accessor id: ::String
+      attr_accessor discovery_status: ("SUCCESS" | "REGISTRATION_FAILED" | "REFRESH_FAILED" | "REGISTERING" | "DELETING")
+      attr_accessor type: ("HANA" | "SAP_ABAP")
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class AssociatedHost
+      attr_accessor hostname: ::String
+      attr_accessor ec2_instance_id: ::String
+      attr_accessor ip_addresses: ::Array[Types::IpAddressMember]
+      attr_accessor os_version: ::String
+      SENSITIVE: []
+    end
+
+    class BackintConfig
+      attr_accessor backint_mode: ("AWSBackup")
+      attr_accessor ensure_no_backup_in_process: bool
+      SENSITIVE: []
+    end
+
+    class Component
+      attr_accessor component_id: ::String
+      attr_accessor sid: ::String
+      attr_accessor system_number: ::String
+      attr_accessor parent_component: ::String
+      attr_accessor child_components: ::Array[::String]
+      attr_accessor application_id: ::String
+      attr_accessor component_type: ("HANA" | "HANA_NODE" | "ABAP" | "ASCS" | "DIALOG" | "WEBDISP" | "WD" | "ERS")
+      attr_accessor status: ("ACTIVATED" | "STARTING" | "STOPPED" | "STOPPING" | "RUNNING" | "RUNNING_WITH_ERROR" | "UNDEFINED")
+      attr_accessor sap_hostname: ::String
+      attr_accessor sap_feature: ::String
+      attr_accessor sap_kernel_version: ::String
+      attr_accessor hdb_version: ::String
+      attr_accessor resilience: Types::Resilience
+      attr_accessor associated_host: Types::AssociatedHost
+      attr_accessor databases: ::Array[::String]
+      attr_accessor hosts: ::Array[Types::Host]
+      attr_accessor primary_host: ::String
+      attr_accessor database_connection: Types::DatabaseConnection
+      attr_accessor last_updated: ::Time
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ComponentSummary
+      attr_accessor application_id: ::String
+      attr_accessor component_id: ::String
+      attr_accessor component_type: ("HANA" | "HANA_NODE" | "ABAP" | "ASCS" | "DIALOG" | "WEBDISP" | "WD" | "ERS")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Database
+      attr_accessor application_id: ::String
+      attr_accessor component_id: ::String
+      attr_accessor credentials: ::Array[Types::ApplicationCredential]
+      attr_accessor database_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor database_type: ("SYSTEM" | "TENANT")
+      attr_accessor arn: ::String
+      attr_accessor status: ("RUNNING" | "STARTING" | "STOPPED" | "WARNING" | "UNKNOWN" | "ERROR")
+      attr_accessor primary_host: ::String
+      attr_accessor sql_port: ::Integer
+      attr_accessor last_updated: ::Time
+      SENSITIVE: []
+    end
+
+    class DatabaseConnection
+      attr_accessor database_connection_method: ("DIRECT" | "OVERLAY")
+      attr_accessor database_arn: ::String
+      attr_accessor connection_ip: ::String
+      SENSITIVE: []
+    end
+
+    class DatabaseSummary
+      attr_accessor application_id: ::String
+      attr_accessor component_id: ::String
+      attr_accessor database_id: ::String
+      attr_accessor database_type: ("SYSTEM" | "TENANT")
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePermissionInput
+      attr_accessor action_type: ("RESTORE")
+      attr_accessor source_resource_arn: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePermissionOutput
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterApplicationInput
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterApplicationOutput < Aws::EmptyStructure
+    end
+
+    class Filter
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      attr_accessor operator: ("Equals" | "GreaterThanOrEquals" | "LessThanOrEquals")
+      SENSITIVE: []
+    end
+
+    class GetApplicationInput
+      attr_accessor application_id: ::String
+      attr_accessor application_arn: ::String
+      attr_accessor app_registry_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetApplicationOutput
+      attr_accessor application: Types::Application
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetComponentInput
+      attr_accessor application_id: ::String
+      attr_accessor component_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetComponentOutput
+      attr_accessor component: Types::Component
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetDatabaseInput
+      attr_accessor application_id: ::String
+      attr_accessor component_id: ::String
+      attr_accessor database_id: ::String
+      attr_accessor database_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDatabaseOutput
+      attr_accessor database: Types::Database
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetOperationInput
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetOperationOutput
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
+    class GetResourcePermissionInput
+      attr_accessor action_type: ("RESTORE")
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePermissionOutput
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class Host
+      attr_accessor host_name: ::String
+      attr_accessor host_ip: ::String
+      attr_accessor ec2_instance_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor host_role: ("LEADER" | "WORKER" | "STANDBY" | "UNKNOWN")
+      attr_accessor os_version: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IpAddressMember
+      attr_accessor ip_address: ::String
+      attr_accessor primary: bool
+      attr_accessor allocation_type: ("VPC_SUBNET" | "ELASTIC_IP" | "OVERLAY" | "UNKNOWN")
+      SENSITIVE: []
+    end
+
+    class ListApplicationsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListApplicationsOutput
+      attr_accessor applications: ::Array[Types::ApplicationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListComponentsInput
+      attr_accessor application_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListComponentsOutput
+      attr_accessor components: ::Array[Types::ComponentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatabasesInput
+      attr_accessor application_id: ::String
+      attr_accessor component_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDatabasesOutput
+      attr_accessor databases: ::Array[Types::DatabaseSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOperationsInput
+      attr_accessor application_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListOperationsOutput
+      attr_accessor operations: ::Array[Types::Operation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Operation
+      attr_accessor id: ::String
+      attr_accessor type: ::String
+      attr_accessor status: ("INPROGRESS" | "SUCCESS" | "ERROR")
+      attr_accessor status_message: ::String
+      attr_accessor properties: ::Hash[::String, ::String]
+      attr_accessor resource_type: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class PutResourcePermissionInput
+      attr_accessor action_type: ("RESTORE")
+      attr_accessor source_resource_arn: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePermissionOutput
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterApplicationInput
+      attr_accessor application_id: ::String
+      attr_accessor application_type: ("HANA" | "SAP_ABAP")
+      attr_accessor instances: ::Array[::String]
+      attr_accessor sap_instance_number: ::String
+      attr_accessor sid: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor credentials: ::Array[Types::ApplicationCredential]
+      attr_accessor database_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterApplicationOutput
+      attr_accessor application: Types::Application
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class Resilience
+      attr_accessor hsr_tier: ::String
+      attr_accessor hsr_replication_mode: ("PRIMARY" | "NONE" | "SYNC" | "SYNCMEM" | "ASYNC")
+      attr_accessor hsr_operation_mode: ("PRIMARY" | "LOGREPLAY" | "DELTA_DATASHIPPING" | "LOGREPLAY_READACCESS" | "NONE")
+      attr_accessor cluster_status: ("ONLINE" | "STANDBY" | "MAINTENANCE" | "OFFLINE" | "NONE")
+      attr_accessor enqueue_replication: bool
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartApplicationRefreshInput
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartApplicationRefreshOutput
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateApplicationSettingsInput
+      attr_accessor application_id: ::String
+      attr_accessor credentials_to_add_or_update: ::Array[Types::ApplicationCredential]
+      attr_accessor credentials_to_remove: ::Array[Types::ApplicationCredential]
+      attr_accessor backint: Types::BackintConfig
+      attr_accessor database_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationSettingsOutput
+      attr_accessor message: ::String
+      attr_accessor operation_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

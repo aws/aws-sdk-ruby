@@ -1,0 +1,61 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudWatchLogs
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+      end
+      class ConflictException < ::Aws::Errors::ServiceError
+      end
+      class DataAlreadyAcceptedException < ::Aws::Errors::ServiceError
+        def expected_sequence_token: () -> ::String
+      end
+      class InvalidOperationException < ::Aws::Errors::ServiceError
+      end
+      class InvalidParameterException < ::Aws::Errors::ServiceError
+      end
+      class InvalidSequenceTokenException < ::Aws::Errors::ServiceError
+        def expected_sequence_token: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class MalformedQueryException < ::Aws::Errors::ServiceError
+        def query_compile_error: () -> ::String
+      end
+      class OperationAbortedException < ::Aws::Errors::ServiceError
+      end
+      class ResourceAlreadyExistsException < ::Aws::Errors::ServiceError
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+      end
+      class ServiceUnavailableException < ::Aws::Errors::ServiceError
+      end
+      class SessionStreamingException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class SessionTimeoutException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ThrottlingException < ::Aws::Errors::ServiceError
+      end
+      class TooManyTagsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def resource_name: () -> ::String
+      end
+      class UnrecognizedClientException < ::Aws::Errors::ServiceError
+      end
+      class ValidationException < ::Aws::Errors::ServiceError
+      end
+    end
+  end
+end

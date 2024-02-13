@@ -899,7 +899,7 @@ module Aws::ElasticLoadBalancingV2
     #   "internal-".
     #
     # @option params [Array<String>] :subnets
-    #   The IDs of the public subnets. You can specify only one subnet per
+    #   The IDs of the subnets. You can specify only one subnet per
     #   Availability Zone. You must specify either subnets or subnet mappings,
     #   but not both. To specify an Elastic IP address, specify subnet
     #   mappings instead of subnets.
@@ -920,7 +920,7 @@ module Aws::ElasticLoadBalancingV2
     #   Availability Zones.
     #
     # @option params [Array<Types::SubnetMapping>] :subnet_mappings
-    #   The IDs of the public subnets. You can specify only one subnet per
+    #   The IDs of the subnets. You can specify only one subnet per
     #   Availability Zone. You must specify either subnets or subnet mappings,
     #   but not both.
     #
@@ -3052,7 +3052,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_health_descriptions[0].target.port #=> Integer
     #   resp.target_health_descriptions[0].target.availability_zone #=> String
     #   resp.target_health_descriptions[0].health_check_port #=> String
-    #   resp.target_health_descriptions[0].target_health.state #=> String, one of "initial", "healthy", "unhealthy", "unused", "draining", "unavailable"
+    #   resp.target_health_descriptions[0].target_health.state #=> String, one of "initial", "healthy", "unhealthy", "unhealthy.draining", "unused", "draining", "unavailable"
     #   resp.target_health_descriptions[0].target_health.reason #=> String, one of "Elb.RegistrationInProgress", "Elb.InitialHealthChecking", "Target.ResponseCodeMismatch", "Target.Timeout", "Target.FailedHealthChecks", "Target.NotRegistered", "Target.NotInUse", "Target.DeregistrationInProgress", "Target.InvalidState", "Target.IpUnusable", "Target.HealthCheckDisabled", "Elb.InternalError"
     #   resp.target_health_descriptions[0].target_health.description #=> String
     #   resp.target_health_descriptions[0].anomaly_detection.result #=> String, one of "anomalous", "normal"
@@ -4831,7 +4831,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

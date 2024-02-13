@@ -1,0 +1,444 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::IdentityStore
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class Address
+      attr_accessor street_address: ::String
+      attr_accessor locality: ::String
+      attr_accessor region: ::String
+      attr_accessor postal_code: ::String
+      attr_accessor country: ::String
+      attr_accessor formatted: ::String
+      attr_accessor type: ::String
+      attr_accessor primary: bool
+      SENSITIVE: [:street_address, :locality, :region, :postal_code, :country, :formatted, :type, :primary]
+    end
+
+    class AlternateIdentifier
+      attr_accessor external_id: Types::ExternalId
+      attr_accessor unique_attribute: Types::UniqueAttribute
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ExternalId < AlternateIdentifier
+      end
+      class UniqueAttribute < AlternateIdentifier
+      end
+      class Unknown < AlternateIdentifier
+      end
+    end
+
+    class AttributeOperation
+      attr_accessor attribute_path: ::String
+      attr_accessor attribute_value: untyped
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor reason: ("UNIQUENESS_CONSTRAINT_VIOLATION" | "CONCURRENT_MODIFICATION")
+      SENSITIVE: []
+    end
+
+    class CreateGroupMembershipRequest
+      attr_accessor identity_store_id: ::String
+      attr_accessor group_id: ::String
+      attr_accessor member_id: Types::MemberId
+      SENSITIVE: []
+    end
+
+    class CreateGroupMembershipResponse
+      attr_accessor membership_id: ::String
+      attr_accessor identity_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGroupRequest
+      attr_accessor identity_store_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: [:display_name, :description]
+    end
+
+    class CreateGroupResponse
+      attr_accessor group_id: ::String
+      attr_accessor identity_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateUserRequest
+      attr_accessor identity_store_id: ::String
+      attr_accessor user_name: ::String
+      attr_accessor name: Types::Name
+      attr_accessor display_name: ::String
+      attr_accessor nick_name: ::String
+      attr_accessor profile_url: ::String
+      attr_accessor emails: ::Array[Types::Email]
+      attr_accessor addresses: ::Array[Types::Address]
+      attr_accessor phone_numbers: ::Array[Types::PhoneNumber]
+      attr_accessor user_type: ::String
+      attr_accessor title: ::String
+      attr_accessor preferred_language: ::String
+      attr_accessor locale: ::String
+      attr_accessor timezone: ::String
+      SENSITIVE: [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone]
+    end
+
+    class CreateUserResponse
+      attr_accessor user_id: ::String
+      attr_accessor identity_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGroupMembershipRequest
+      attr_accessor identity_store_id: ::String
+      attr_accessor membership_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGroupMembershipResponse < Aws::EmptyStructure
+    end
+
+    class DeleteGroupRequest
+      attr_accessor identity_store_id: ::String
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGroupResponse < Aws::EmptyStructure
+    end
+
+    class DeleteUserRequest
+      attr_accessor identity_store_id: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserResponse < Aws::EmptyStructure
+    end
+
+    class DescribeGroupMembershipRequest
+      attr_accessor identity_store_id: ::String
+      attr_accessor membership_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeGroupMembershipResponse
+      attr_accessor identity_store_id: ::String
+      attr_accessor membership_id: ::String
+      attr_accessor group_id: ::String
+      attr_accessor member_id: Types::MemberId
+      SENSITIVE: []
+    end
+
+    class DescribeGroupRequest
+      attr_accessor identity_store_id: ::String
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeGroupResponse
+      attr_accessor group_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor external_ids: ::Array[Types::ExternalId]
+      attr_accessor description: ::String
+      attr_accessor identity_store_id: ::String
+      SENSITIVE: [:display_name, :description]
+    end
+
+    class DescribeUserRequest
+      attr_accessor identity_store_id: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUserResponse
+      attr_accessor user_name: ::String
+      attr_accessor user_id: ::String
+      attr_accessor external_ids: ::Array[Types::ExternalId]
+      attr_accessor name: Types::Name
+      attr_accessor display_name: ::String
+      attr_accessor nick_name: ::String
+      attr_accessor profile_url: ::String
+      attr_accessor emails: ::Array[Types::Email]
+      attr_accessor addresses: ::Array[Types::Address]
+      attr_accessor phone_numbers: ::Array[Types::PhoneNumber]
+      attr_accessor user_type: ::String
+      attr_accessor title: ::String
+      attr_accessor preferred_language: ::String
+      attr_accessor locale: ::String
+      attr_accessor timezone: ::String
+      attr_accessor identity_store_id: ::String
+      SENSITIVE: [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone]
+    end
+
+    class Email
+      attr_accessor value: ::String
+      attr_accessor type: ::String
+      attr_accessor primary: bool
+      SENSITIVE: [:value, :type, :primary]
+    end
+
+    class ExternalId
+      attr_accessor issuer: ::String
+      attr_accessor id: ::String
+      SENSITIVE: [:issuer, :id]
+    end
+
+    class Filter
+      attr_accessor attribute_path: ::String
+      attr_accessor attribute_value: ::String
+      SENSITIVE: [:attribute_value]
+    end
+
+    class GetGroupIdRequest
+      attr_accessor identity_store_id: ::String
+      attr_accessor alternate_identifier: Types::AlternateIdentifier
+      SENSITIVE: []
+    end
+
+    class GetGroupIdResponse
+      attr_accessor group_id: ::String
+      attr_accessor identity_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetGroupMembershipIdRequest
+      attr_accessor identity_store_id: ::String
+      attr_accessor group_id: ::String
+      attr_accessor member_id: Types::MemberId
+      SENSITIVE: []
+    end
+
+    class GetGroupMembershipIdResponse
+      attr_accessor membership_id: ::String
+      attr_accessor identity_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetUserIdRequest
+      attr_accessor identity_store_id: ::String
+      attr_accessor alternate_identifier: Types::AlternateIdentifier
+      SENSITIVE: []
+    end
+
+    class GetUserIdResponse
+      attr_accessor user_id: ::String
+      attr_accessor identity_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class Group
+      attr_accessor group_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor external_ids: ::Array[Types::ExternalId]
+      attr_accessor description: ::String
+      attr_accessor identity_store_id: ::String
+      SENSITIVE: [:display_name, :description]
+    end
+
+    class GroupMembership
+      attr_accessor identity_store_id: ::String
+      attr_accessor membership_id: ::String
+      attr_accessor group_id: ::String
+      attr_accessor member_id: Types::MemberId
+      SENSITIVE: []
+    end
+
+    class GroupMembershipExistenceResult
+      attr_accessor group_id: ::String
+      attr_accessor member_id: Types::MemberId
+      attr_accessor membership_exists: bool
+      SENSITIVE: [:membership_exists]
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class IsMemberInGroupsRequest
+      attr_accessor identity_store_id: ::String
+      attr_accessor member_id: Types::MemberId
+      attr_accessor group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class IsMemberInGroupsResponse
+      attr_accessor results: ::Array[Types::GroupMembershipExistenceResult]
+      SENSITIVE: []
+    end
+
+    class ListGroupMembershipsForMemberRequest
+      attr_accessor identity_store_id: ::String
+      attr_accessor member_id: Types::MemberId
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupMembershipsForMemberResponse
+      attr_accessor group_memberships: ::Array[Types::GroupMembership]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupMembershipsRequest
+      attr_accessor identity_store_id: ::String
+      attr_accessor group_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupMembershipsResponse
+      attr_accessor group_memberships: ::Array[Types::GroupMembership]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupsRequest
+      attr_accessor identity_store_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListGroupsResponse
+      attr_accessor groups: ::Array[Types::Group]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUsersRequest
+      attr_accessor identity_store_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListUsersResponse
+      attr_accessor users: ::Array[Types::User]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MemberId
+      attr_accessor user_id: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class UserId < MemberId
+      end
+      class Unknown < MemberId
+      end
+    end
+
+    class Name
+      attr_accessor formatted: ::String
+      attr_accessor family_name: ::String
+      attr_accessor given_name: ::String
+      attr_accessor middle_name: ::String
+      attr_accessor honorific_prefix: ::String
+      attr_accessor honorific_suffix: ::String
+      SENSITIVE: [:formatted, :family_name, :given_name, :middle_name, :honorific_prefix, :honorific_suffix]
+    end
+
+    class PhoneNumber
+      attr_accessor value: ::String
+      attr_accessor type: ::String
+      attr_accessor primary: bool
+      SENSITIVE: [:value, :type, :primary]
+    end
+
+    class ResourceNotFoundException
+      attr_accessor resource_type: ("GROUP" | "USER" | "IDENTITY_STORE" | "GROUP_MEMBERSHIP")
+      attr_accessor resource_id: ::String
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UniqueAttribute
+      attr_accessor attribute_path: ::String
+      attr_accessor attribute_value: untyped
+      SENSITIVE: []
+    end
+
+    class UpdateGroupRequest
+      attr_accessor identity_store_id: ::String
+      attr_accessor group_id: ::String
+      attr_accessor operations: ::Array[Types::AttributeOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateGroupResponse < Aws::EmptyStructure
+    end
+
+    class UpdateUserRequest
+      attr_accessor identity_store_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor operations: ::Array[Types::AttributeOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateUserResponse < Aws::EmptyStructure
+    end
+
+    class User
+      attr_accessor user_name: ::String
+      attr_accessor user_id: ::String
+      attr_accessor external_ids: ::Array[Types::ExternalId]
+      attr_accessor name: Types::Name
+      attr_accessor display_name: ::String
+      attr_accessor nick_name: ::String
+      attr_accessor profile_url: ::String
+      attr_accessor emails: ::Array[Types::Email]
+      attr_accessor addresses: ::Array[Types::Address]
+      attr_accessor phone_numbers: ::Array[Types::PhoneNumber]
+      attr_accessor user_type: ::String
+      attr_accessor title: ::String
+      attr_accessor preferred_language: ::String
+      attr_accessor locale: ::String
+      attr_accessor timezone: ::String
+      attr_accessor identity_store_id: ::String
+      SENSITIVE: [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone]
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+  end
+end

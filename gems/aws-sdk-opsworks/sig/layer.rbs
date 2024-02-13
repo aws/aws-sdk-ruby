@@ -1,0 +1,114 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module OpsWorks
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html
+    class Layer
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#initialize-instance_method
+      def initialize: (String id, Hash[Symbol, untyped] options) -> void
+                    | (id: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#id-instance_method
+      def id: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#arn-instance_method
+      def arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#stack_id-instance_method
+      def stack_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#layer_id-instance_method
+      def layer_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#type-instance_method
+      def type: () -> ("aws-flow-ruby" | "ecs-cluster" | "java-app" | "lb" | "web" | "php-app" | "rails-app" | "nodejs-app" | "memcached" | "db-master" | "monitoring-master" | "custom")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#name-instance_method
+      def name: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#shortname-instance_method
+      def shortname: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#attributes-instance_method
+      def attributes: () -> ::Hash[("EcsClusterArn" | "EnableHaproxyStats" | "HaproxyStatsUrl" | "HaproxyStatsUser" | "HaproxyStatsPassword" | "HaproxyHealthCheckUrl" | "HaproxyHealthCheckMethod" | "MysqlRootPassword" | "MysqlRootPasswordUbiquitous" | "GangliaUrl" | "GangliaUser" | "GangliaPassword" | "MemcachedMemory" | "NodejsVersion" | "RubyVersion" | "RubygemsVersion" | "ManageBundler" | "BundlerVersion" | "RailsStack" | "PassengerVersion" | "Jvm" | "JvmVersion" | "JvmOptions" | "JavaAppServer" | "JavaAppServerVersion"), ::String]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#cloud_watch_logs_configuration-instance_method
+      def cloud_watch_logs_configuration: () -> Types::CloudWatchLogsConfiguration
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#custom_instance_profile_arn-instance_method
+      def custom_instance_profile_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#custom_json-instance_method
+      def custom_json: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#custom_security_group_ids-instance_method
+      def custom_security_group_ids: () -> ::Array[::String]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#default_security_group_names-instance_method
+      def default_security_group_names: () -> ::Array[::String]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#packages-instance_method
+      def packages: () -> ::Array[::String]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#volume_configurations-instance_method
+      def volume_configurations: () -> ::Array[Types::VolumeConfiguration]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#enable_auto_healing-instance_method
+      def enable_auto_healing: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#auto_assign_elastic_ips-instance_method
+      def auto_assign_elastic_ips: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#auto_assign_public_ips-instance_method
+      def auto_assign_public_ips: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#default_recipes-instance_method
+      def default_recipes: () -> Types::Recipes
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#custom_recipes-instance_method
+      def custom_recipes: () -> Types::Recipes
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#created_at-instance_method
+      def created_at: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#install_updates_on_boot-instance_method
+      def install_updates_on_boot: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#use_ebs_optimized_instances-instance_method
+      def use_ebs_optimized_instances: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#lifecycle_event_configuration-instance_method
+      def lifecycle_event_configuration: () -> Types::LifecycleEventConfiguration
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#data-instance_method
+      def data: () -> Types::Layer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#delete-instance_method
+      def delete: (
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpsWorks/Layer.html#stack-instance_method
+      def stack: () -> Stack?
+
+      class Collection < ::Aws::Resources::Collection[Layer]
+      end
+    end
+  end
+end

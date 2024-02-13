@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2024-01-31)
+------------------
+
+* Feature - This release enables unhealthy target draining intervals for Network Load Balancers.
+
+1.97.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.96.0 (2023-11-28)
 ------------------
 

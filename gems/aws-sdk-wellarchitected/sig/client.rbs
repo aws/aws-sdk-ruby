@@ -1,0 +1,1009 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module WellArchitected
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#associate_lenses-instance_method
+      def associate_lenses: (
+                              workload_id: ::String,
+                              lens_aliases: Array[::String]
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#associate_profiles-instance_method
+      def associate_profiles: (
+                                workload_id: ::String,
+                                profile_arns: Array[::String]
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CreateLensShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLensShareOutput]
+        def share_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#create_lens_share-instance_method
+      def create_lens_share: (
+                               lens_alias: ::String,
+                               shared_with: ::String,
+                               client_request_token: ::String
+                             ) -> _CreateLensShareResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLensShareResponseSuccess
+
+      interface _CreateLensVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLensVersionOutput]
+        def lens_arn: () -> ::String
+        def lens_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#create_lens_version-instance_method
+      def create_lens_version: (
+                                 lens_alias: ::String,
+                                 lens_version: ::String,
+                                 ?is_major_version: bool,
+                                 client_request_token: ::String
+                               ) -> _CreateLensVersionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLensVersionResponseSuccess
+
+      interface _CreateMilestoneResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMilestoneOutput]
+        def workload_id: () -> ::String
+        def milestone_number: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#create_milestone-instance_method
+      def create_milestone: (
+                              workload_id: ::String,
+                              milestone_name: ::String,
+                              client_request_token: ::String
+                            ) -> _CreateMilestoneResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMilestoneResponseSuccess
+
+      interface _CreateProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProfileOutput]
+        def profile_arn: () -> ::String
+        def profile_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#create_profile-instance_method
+      def create_profile: (
+                            profile_name: ::String,
+                            profile_description: ::String,
+                            profile_questions: Array[
+                              {
+                                question_id: ::String?,
+                                selected_choice_ids: Array[::String]?
+                              },
+                            ],
+                            client_request_token: ::String,
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateProfileResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProfileResponseSuccess
+
+      interface _CreateProfileShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProfileShareOutput]
+        def share_id: () -> ::String
+        def profile_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#create_profile_share-instance_method
+      def create_profile_share: (
+                                  profile_arn: ::String,
+                                  shared_with: ::String,
+                                  client_request_token: ::String
+                                ) -> _CreateProfileShareResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProfileShareResponseSuccess
+
+      interface _CreateReviewTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateReviewTemplateOutput]
+        def template_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#create_review_template-instance_method
+      def create_review_template: (
+                                    template_name: ::String,
+                                    description: ::String,
+                                    lenses: Array[::String],
+                                    ?notes: ::String,
+                                    ?tags: Hash[::String, ::String],
+                                    client_request_token: ::String
+                                  ) -> _CreateReviewTemplateResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReviewTemplateResponseSuccess
+
+      interface _CreateTemplateShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTemplateShareOutput]
+        def template_arn: () -> ::String
+        def share_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#create_template_share-instance_method
+      def create_template_share: (
+                                   template_arn: ::String,
+                                   shared_with: ::String,
+                                   client_request_token: ::String
+                                 ) -> _CreateTemplateShareResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTemplateShareResponseSuccess
+
+      interface _CreateWorkloadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkloadOutput]
+        def workload_id: () -> ::String
+        def workload_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#create_workload-instance_method
+      def create_workload: (
+                             workload_name: ::String,
+                             description: ::String,
+                             environment: ("PRODUCTION" | "PREPRODUCTION"),
+                             ?account_ids: Array[::String],
+                             ?aws_regions: Array[::String],
+                             ?non_aws_regions: Array[::String],
+                             ?pillar_priorities: Array[::String],
+                             ?architectural_design: ::String,
+                             ?review_owner: ::String,
+                             ?industry_type: ::String,
+                             ?industry: ::String,
+                             lenses: Array[::String],
+                             ?notes: ::String,
+                             client_request_token: ::String,
+                             ?tags: Hash[::String, ::String],
+                             ?discovery_config: {
+                               trusted_advisor_integration_status: ("ENABLED" | "DISABLED")?,
+                               workload_resource_definition: Array[("WORKLOAD_METADATA" | "APP_REGISTRY")]?
+                             },
+                             ?applications: Array[::String],
+                             ?profile_arns: Array[::String],
+                             ?review_template_arns: Array[::String]
+                           ) -> _CreateWorkloadResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkloadResponseSuccess
+
+      interface _CreateWorkloadShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkloadShareOutput]
+        def workload_id: () -> ::String
+        def share_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#create_workload_share-instance_method
+      def create_workload_share: (
+                                   workload_id: ::String,
+                                   shared_with: ::String,
+                                   permission_type: ("READONLY" | "CONTRIBUTOR"),
+                                   client_request_token: ::String
+                                 ) -> _CreateWorkloadShareResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkloadShareResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#delete_lens-instance_method
+      def delete_lens: (
+                         lens_alias: ::String,
+                         client_request_token: ::String,
+                         lens_status: ("ALL" | "DRAFT" | "PUBLISHED")
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#delete_lens_share-instance_method
+      def delete_lens_share: (
+                               share_id: ::String,
+                               lens_alias: ::String,
+                               client_request_token: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#delete_profile-instance_method
+      def delete_profile: (
+                            profile_arn: ::String,
+                            client_request_token: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#delete_profile_share-instance_method
+      def delete_profile_share: (
+                                  share_id: ::String,
+                                  profile_arn: ::String,
+                                  client_request_token: ::String
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#delete_review_template-instance_method
+      def delete_review_template: (
+                                    template_arn: ::String,
+                                    client_request_token: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#delete_template_share-instance_method
+      def delete_template_share: (
+                                   share_id: ::String,
+                                   template_arn: ::String,
+                                   client_request_token: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#delete_workload-instance_method
+      def delete_workload: (
+                             workload_id: ::String,
+                             client_request_token: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#delete_workload_share-instance_method
+      def delete_workload_share: (
+                                   share_id: ::String,
+                                   workload_id: ::String,
+                                   client_request_token: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#disassociate_lenses-instance_method
+      def disassociate_lenses: (
+                                 workload_id: ::String,
+                                 lens_aliases: Array[::String]
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#disassociate_profiles-instance_method
+      def disassociate_profiles: (
+                                   workload_id: ::String,
+                                   profile_arns: Array[::String]
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _ExportLensResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportLensOutput]
+        def lens_json: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#export_lens-instance_method
+      def export_lens: (
+                         lens_alias: ::String,
+                         ?lens_version: ::String
+                       ) -> _ExportLensResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportLensResponseSuccess
+
+      interface _GetAnswerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAnswerOutput]
+        def workload_id: () -> ::String
+        def milestone_number: () -> ::Integer
+        def lens_alias: () -> ::String
+        def lens_arn: () -> ::String
+        def answer: () -> Types::Answer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#get_answer-instance_method
+      def get_answer: (
+                        workload_id: ::String,
+                        lens_alias: ::String,
+                        question_id: ::String,
+                        ?milestone_number: ::Integer
+                      ) -> _GetAnswerResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAnswerResponseSuccess
+
+      interface _GetConsolidatedReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConsolidatedReportOutput]
+        def metrics: () -> ::Array[Types::ConsolidatedReportMetric]
+        def next_token: () -> ::String
+        def base_64_string: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#get_consolidated_report-instance_method
+      def get_consolidated_report: (
+                                     format: ("PDF" | "JSON"),
+                                     ?include_shared_resources: bool,
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _GetConsolidatedReportResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConsolidatedReportResponseSuccess
+
+      interface _GetLensResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLensOutput]
+        def lens: () -> Types::Lens
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#get_lens-instance_method
+      def get_lens: (
+                      lens_alias: ::String,
+                      ?lens_version: ::String
+                    ) -> _GetLensResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLensResponseSuccess
+
+      interface _GetLensReviewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLensReviewOutput]
+        def workload_id: () -> ::String
+        def milestone_number: () -> ::Integer
+        def lens_review: () -> Types::LensReview
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#get_lens_review-instance_method
+      def get_lens_review: (
+                             workload_id: ::String,
+                             lens_alias: ::String,
+                             ?milestone_number: ::Integer
+                           ) -> _GetLensReviewResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLensReviewResponseSuccess
+
+      interface _GetLensReviewReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLensReviewReportOutput]
+        def workload_id: () -> ::String
+        def milestone_number: () -> ::Integer
+        def lens_review_report: () -> Types::LensReviewReport
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#get_lens_review_report-instance_method
+      def get_lens_review_report: (
+                                    workload_id: ::String,
+                                    lens_alias: ::String,
+                                    ?milestone_number: ::Integer
+                                  ) -> _GetLensReviewReportResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLensReviewReportResponseSuccess
+
+      interface _GetLensVersionDifferenceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLensVersionDifferenceOutput]
+        def lens_alias: () -> ::String
+        def lens_arn: () -> ::String
+        def base_lens_version: () -> ::String
+        def target_lens_version: () -> ::String
+        def latest_lens_version: () -> ::String
+        def version_differences: () -> Types::VersionDifferences
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#get_lens_version_difference-instance_method
+      def get_lens_version_difference: (
+                                         lens_alias: ::String,
+                                         ?base_lens_version: ::String,
+                                         ?target_lens_version: ::String
+                                       ) -> _GetLensVersionDifferenceResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLensVersionDifferenceResponseSuccess
+
+      interface _GetMilestoneResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMilestoneOutput]
+        def workload_id: () -> ::String
+        def milestone: () -> Types::Milestone
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#get_milestone-instance_method
+      def get_milestone: (
+                           workload_id: ::String,
+                           milestone_number: ::Integer
+                         ) -> _GetMilestoneResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMilestoneResponseSuccess
+
+      interface _GetProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProfileOutput]
+        def profile: () -> Types::Profile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#get_profile-instance_method
+      def get_profile: (
+                         profile_arn: ::String,
+                         ?profile_version: ::String
+                       ) -> _GetProfileResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProfileResponseSuccess
+
+      interface _GetProfileTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProfileTemplateOutput]
+        def profile_template: () -> Types::ProfileTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#get_profile_template-instance_method
+      def get_profile_template: (
+                                ) -> _GetProfileTemplateResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProfileTemplateResponseSuccess
+
+      interface _GetReviewTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReviewTemplateOutput]
+        def review_template: () -> Types::ReviewTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#get_review_template-instance_method
+      def get_review_template: (
+                                 template_arn: ::String
+                               ) -> _GetReviewTemplateResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReviewTemplateResponseSuccess
+
+      interface _GetReviewTemplateAnswerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReviewTemplateAnswerOutput]
+        def template_arn: () -> ::String
+        def lens_alias: () -> ::String
+        def answer: () -> Types::ReviewTemplateAnswer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#get_review_template_answer-instance_method
+      def get_review_template_answer: (
+                                        template_arn: ::String,
+                                        lens_alias: ::String,
+                                        question_id: ::String
+                                      ) -> _GetReviewTemplateAnswerResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReviewTemplateAnswerResponseSuccess
+
+      interface _GetReviewTemplateLensReviewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReviewTemplateLensReviewOutput]
+        def template_arn: () -> ::String
+        def lens_review: () -> Types::ReviewTemplateLensReview
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#get_review_template_lens_review-instance_method
+      def get_review_template_lens_review: (
+                                             template_arn: ::String,
+                                             lens_alias: ::String
+                                           ) -> _GetReviewTemplateLensReviewResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReviewTemplateLensReviewResponseSuccess
+
+      interface _GetWorkloadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkloadOutput]
+        def workload: () -> Types::Workload
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#get_workload-instance_method
+      def get_workload: (
+                          workload_id: ::String
+                        ) -> _GetWorkloadResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkloadResponseSuccess
+
+      interface _ImportLensResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportLensOutput]
+        def lens_arn: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "COMPLETE" | "ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#import_lens-instance_method
+      def import_lens: (
+                         ?lens_alias: ::String,
+                         json_string: ::String,
+                         client_request_token: ::String,
+                         ?tags: Hash[::String, ::String]
+                       ) -> _ImportLensResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportLensResponseSuccess
+
+      interface _ListAnswersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAnswersOutput]
+        def workload_id: () -> ::String
+        def milestone_number: () -> ::Integer
+        def lens_alias: () -> ::String
+        def lens_arn: () -> ::String
+        def answer_summaries: () -> ::Array[Types::AnswerSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_answers-instance_method
+      def list_answers: (
+                          workload_id: ::String,
+                          lens_alias: ::String,
+                          ?pillar_id: ::String,
+                          ?milestone_number: ::Integer,
+                          ?next_token: ::String,
+                          ?max_results: ::Integer,
+                          ?question_priority: ("PRIORITIZED" | "NONE")
+                        ) -> _ListAnswersResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAnswersResponseSuccess
+
+      interface _ListCheckDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCheckDetailsOutput]
+        def check_details: () -> ::Array[Types::CheckDetail]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_check_details-instance_method
+      def list_check_details: (
+                                workload_id: ::String,
+                                ?next_token: ::String,
+                                ?max_results: ::Integer,
+                                lens_arn: ::String,
+                                pillar_id: ::String,
+                                question_id: ::String,
+                                choice_id: ::String
+                              ) -> _ListCheckDetailsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCheckDetailsResponseSuccess
+
+      interface _ListCheckSummariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCheckSummariesOutput]
+        def check_summaries: () -> ::Array[Types::CheckSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_check_summaries-instance_method
+      def list_check_summaries: (
+                                  workload_id: ::String,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer,
+                                  lens_arn: ::String,
+                                  pillar_id: ::String,
+                                  question_id: ::String,
+                                  choice_id: ::String
+                                ) -> _ListCheckSummariesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCheckSummariesResponseSuccess
+
+      interface _ListLensReviewImprovementsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLensReviewImprovementsOutput]
+        def workload_id: () -> ::String
+        def milestone_number: () -> ::Integer
+        def lens_alias: () -> ::String
+        def lens_arn: () -> ::String
+        def improvement_summaries: () -> ::Array[Types::ImprovementSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_lens_review_improvements-instance_method
+      def list_lens_review_improvements: (
+                                           workload_id: ::String,
+                                           lens_alias: ::String,
+                                           ?pillar_id: ::String,
+                                           ?milestone_number: ::Integer,
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer,
+                                           ?question_priority: ("PRIORITIZED" | "NONE")
+                                         ) -> _ListLensReviewImprovementsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLensReviewImprovementsResponseSuccess
+
+      interface _ListLensReviewsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLensReviewsOutput]
+        def workload_id: () -> ::String
+        def milestone_number: () -> ::Integer
+        def lens_review_summaries: () -> ::Array[Types::LensReviewSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_lens_reviews-instance_method
+      def list_lens_reviews: (
+                               workload_id: ::String,
+                               ?milestone_number: ::Integer,
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListLensReviewsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLensReviewsResponseSuccess
+
+      interface _ListLensSharesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLensSharesOutput]
+        def lens_share_summaries: () -> ::Array[Types::LensShareSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_lens_shares-instance_method
+      def list_lens_shares: (
+                              lens_alias: ::String,
+                              ?shared_with_prefix: ::String,
+                              ?next_token: ::String,
+                              ?max_results: ::Integer,
+                              ?status: ("ACCEPTED" | "REJECTED" | "PENDING" | "REVOKED" | "EXPIRED" | "ASSOCIATING" | "ASSOCIATED" | "FAILED")
+                            ) -> _ListLensSharesResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLensSharesResponseSuccess
+
+      interface _ListLensesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLensesOutput]
+        def lens_summaries: () -> ::Array[Types::LensSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_lenses-instance_method
+      def list_lenses: (
+                         ?next_token: ::String,
+                         ?max_results: ::Integer,
+                         ?lens_type: ("AWS_OFFICIAL" | "CUSTOM_SHARED" | "CUSTOM_SELF"),
+                         ?lens_status: ("ALL" | "DRAFT" | "PUBLISHED"),
+                         ?lens_name: ::String
+                       ) -> _ListLensesResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLensesResponseSuccess
+
+      interface _ListMilestonesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMilestonesOutput]
+        def workload_id: () -> ::String
+        def milestone_summaries: () -> ::Array[Types::MilestoneSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_milestones-instance_method
+      def list_milestones: (
+                             workload_id: ::String,
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _ListMilestonesResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMilestonesResponseSuccess
+
+      interface _ListNotificationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNotificationsOutput]
+        def notification_summaries: () -> ::Array[Types::NotificationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_notifications-instance_method
+      def list_notifications: (
+                                ?workload_id: ::String,
+                                ?next_token: ::String,
+                                ?max_results: ::Integer,
+                                ?resource_arn: ::String
+                              ) -> _ListNotificationsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNotificationsResponseSuccess
+
+      interface _ListProfileNotificationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProfileNotificationsOutput]
+        def notification_summaries: () -> ::Array[Types::ProfileNotificationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_profile_notifications-instance_method
+      def list_profile_notifications: (
+                                        ?workload_id: ::String,
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _ListProfileNotificationsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProfileNotificationsResponseSuccess
+
+      interface _ListProfileSharesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProfileSharesOutput]
+        def profile_share_summaries: () -> ::Array[Types::ProfileShareSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_profile_shares-instance_method
+      def list_profile_shares: (
+                                 profile_arn: ::String,
+                                 ?shared_with_prefix: ::String,
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer,
+                                 ?status: ("ACCEPTED" | "REJECTED" | "PENDING" | "REVOKED" | "EXPIRED" | "ASSOCIATING" | "ASSOCIATED" | "FAILED")
+                               ) -> _ListProfileSharesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProfileSharesResponseSuccess
+
+      interface _ListProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProfilesOutput]
+        def profile_summaries: () -> ::Array[Types::ProfileSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_profiles-instance_method
+      def list_profiles: (
+                           ?profile_name_prefix: ::String,
+                           ?profile_owner_type: ("SELF" | "SHARED"),
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListProfilesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProfilesResponseSuccess
+
+      interface _ListReviewTemplateAnswersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReviewTemplateAnswersOutput]
+        def template_arn: () -> ::String
+        def lens_alias: () -> ::String
+        def answer_summaries: () -> ::Array[Types::ReviewTemplateAnswerSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_review_template_answers-instance_method
+      def list_review_template_answers: (
+                                          template_arn: ::String,
+                                          lens_alias: ::String,
+                                          ?pillar_id: ::String,
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListReviewTemplateAnswersResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReviewTemplateAnswersResponseSuccess
+
+      interface _ListReviewTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReviewTemplatesOutput]
+        def review_templates: () -> ::Array[Types::ReviewTemplateSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_review_templates-instance_method
+      def list_review_templates: (
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _ListReviewTemplatesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReviewTemplatesResponseSuccess
+
+      interface _ListShareInvitationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListShareInvitationsOutput]
+        def share_invitation_summaries: () -> ::Array[Types::ShareInvitationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_share_invitations-instance_method
+      def list_share_invitations: (
+                                    ?workload_name_prefix: ::String,
+                                    ?lens_name_prefix: ::String,
+                                    ?share_resource_type: ("WORKLOAD" | "LENS" | "PROFILE" | "TEMPLATE"),
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer,
+                                    ?profile_name_prefix: ::String,
+                                    ?template_name_prefix: ::String
+                                  ) -> _ListShareInvitationsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListShareInvitationsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    workload_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTemplateSharesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTemplateSharesOutput]
+        def template_arn: () -> ::String
+        def template_share_summaries: () -> ::Array[Types::TemplateShareSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_template_shares-instance_method
+      def list_template_shares: (
+                                  template_arn: ::String,
+                                  ?shared_with_prefix: ::String,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer,
+                                  ?status: ("ACCEPTED" | "REJECTED" | "PENDING" | "REVOKED" | "EXPIRED" | "ASSOCIATING" | "ASSOCIATED" | "FAILED")
+                                ) -> _ListTemplateSharesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTemplateSharesResponseSuccess
+
+      interface _ListWorkloadSharesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkloadSharesOutput]
+        def workload_id: () -> ::String
+        def workload_share_summaries: () -> ::Array[Types::WorkloadShareSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_workload_shares-instance_method
+      def list_workload_shares: (
+                                  workload_id: ::String,
+                                  ?shared_with_prefix: ::String,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer,
+                                  ?status: ("ACCEPTED" | "REJECTED" | "PENDING" | "REVOKED" | "EXPIRED" | "ASSOCIATING" | "ASSOCIATED" | "FAILED")
+                                ) -> _ListWorkloadSharesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkloadSharesResponseSuccess
+
+      interface _ListWorkloadsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkloadsOutput]
+        def workload_summaries: () -> ::Array[Types::WorkloadSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#list_workloads-instance_method
+      def list_workloads: (
+                            ?workload_name_prefix: ::String,
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListWorkloadsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkloadsResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          workload_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            workload_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAnswerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAnswerOutput]
+        def workload_id: () -> ::String
+        def lens_alias: () -> ::String
+        def lens_arn: () -> ::String
+        def answer: () -> Types::Answer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#update_answer-instance_method
+      def update_answer: (
+                           workload_id: ::String,
+                           lens_alias: ::String,
+                           question_id: ::String,
+                           ?selected_choices: Array[::String],
+                           ?choice_updates: Hash[::String, {
+                               status: ("SELECTED" | "NOT_APPLICABLE" | "UNSELECTED"),
+                               reason: ("OUT_OF_SCOPE" | "BUSINESS_PRIORITIES" | "ARCHITECTURE_CONSTRAINTS" | "OTHER" | "NONE")?,
+                               notes: ::String?
+                             }],
+                           ?notes: ::String,
+                           ?is_applicable: bool,
+                           ?reason: ("OUT_OF_SCOPE" | "BUSINESS_PRIORITIES" | "ARCHITECTURE_CONSTRAINTS" | "OTHER" | "NONE")
+                         ) -> _UpdateAnswerResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAnswerResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#update_global_settings-instance_method
+      def update_global_settings: (
+                                    ?organization_sharing_status: ("ENABLED" | "DISABLED"),
+                                    ?discovery_integration_status: ("ENABLED" | "DISABLED")
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateLensReviewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLensReviewOutput]
+        def workload_id: () -> ::String
+        def lens_review: () -> Types::LensReview
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#update_lens_review-instance_method
+      def update_lens_review: (
+                                workload_id: ::String,
+                                lens_alias: ::String,
+                                ?lens_notes: ::String,
+                                ?pillar_notes: Hash[::String, ::String]
+                              ) -> _UpdateLensReviewResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLensReviewResponseSuccess
+
+      interface _UpdateProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProfileOutput]
+        def profile: () -> Types::Profile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#update_profile-instance_method
+      def update_profile: (
+                            profile_arn: ::String,
+                            ?profile_description: ::String,
+                            ?profile_questions: Array[
+                              {
+                                question_id: ::String?,
+                                selected_choice_ids: Array[::String]?
+                              },
+                            ]
+                          ) -> _UpdateProfileResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProfileResponseSuccess
+
+      interface _UpdateReviewTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateReviewTemplateOutput]
+        def review_template: () -> Types::ReviewTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#update_review_template-instance_method
+      def update_review_template: (
+                                    template_arn: ::String,
+                                    ?template_name: ::String,
+                                    ?description: ::String,
+                                    ?notes: ::String,
+                                    ?lenses_to_associate: Array[::String],
+                                    ?lenses_to_disassociate: Array[::String]
+                                  ) -> _UpdateReviewTemplateResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateReviewTemplateResponseSuccess
+
+      interface _UpdateReviewTemplateAnswerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateReviewTemplateAnswerOutput]
+        def template_arn: () -> ::String
+        def lens_alias: () -> ::String
+        def answer: () -> Types::ReviewTemplateAnswer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#update_review_template_answer-instance_method
+      def update_review_template_answer: (
+                                           template_arn: ::String,
+                                           lens_alias: ::String,
+                                           question_id: ::String,
+                                           ?selected_choices: Array[::String],
+                                           ?choice_updates: Hash[::String, {
+                                               status: ("SELECTED" | "NOT_APPLICABLE" | "UNSELECTED"),
+                                               reason: ("OUT_OF_SCOPE" | "BUSINESS_PRIORITIES" | "ARCHITECTURE_CONSTRAINTS" | "OTHER" | "NONE")?,
+                                               notes: ::String?
+                                             }],
+                                           ?notes: ::String,
+                                           ?is_applicable: bool,
+                                           ?reason: ("OUT_OF_SCOPE" | "BUSINESS_PRIORITIES" | "ARCHITECTURE_CONSTRAINTS" | "OTHER" | "NONE")
+                                         ) -> _UpdateReviewTemplateAnswerResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateReviewTemplateAnswerResponseSuccess
+
+      interface _UpdateReviewTemplateLensReviewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateReviewTemplateLensReviewOutput]
+        def template_arn: () -> ::String
+        def lens_review: () -> Types::ReviewTemplateLensReview
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#update_review_template_lens_review-instance_method
+      def update_review_template_lens_review: (
+                                                template_arn: ::String,
+                                                lens_alias: ::String,
+                                                ?lens_notes: ::String,
+                                                ?pillar_notes: Hash[::String, ::String]
+                                              ) -> _UpdateReviewTemplateLensReviewResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateReviewTemplateLensReviewResponseSuccess
+
+      interface _UpdateShareInvitationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateShareInvitationOutput]
+        def share_invitation: () -> Types::ShareInvitation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#update_share_invitation-instance_method
+      def update_share_invitation: (
+                                     share_invitation_id: ::String,
+                                     share_invitation_action: ("ACCEPT" | "REJECT")
+                                   ) -> _UpdateShareInvitationResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateShareInvitationResponseSuccess
+
+      interface _UpdateWorkloadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWorkloadOutput]
+        def workload: () -> Types::Workload
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#update_workload-instance_method
+      def update_workload: (
+                             workload_id: ::String,
+                             ?workload_name: ::String,
+                             ?description: ::String,
+                             ?environment: ("PRODUCTION" | "PREPRODUCTION"),
+                             ?account_ids: Array[::String],
+                             ?aws_regions: Array[::String],
+                             ?non_aws_regions: Array[::String],
+                             ?pillar_priorities: Array[::String],
+                             ?architectural_design: ::String,
+                             ?review_owner: ::String,
+                             ?is_review_owner_update_acknowledged: bool,
+                             ?industry_type: ::String,
+                             ?industry: ::String,
+                             ?notes: ::String,
+                             ?improvement_status: ("NOT_APPLICABLE" | "NOT_STARTED" | "IN_PROGRESS" | "COMPLETE" | "RISK_ACKNOWLEDGED"),
+                             ?discovery_config: {
+                               trusted_advisor_integration_status: ("ENABLED" | "DISABLED")?,
+                               workload_resource_definition: Array[("WORKLOAD_METADATA" | "APP_REGISTRY")]?
+                             },
+                             ?applications: Array[::String]
+                           ) -> _UpdateWorkloadResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkloadResponseSuccess
+
+      interface _UpdateWorkloadShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWorkloadShareOutput]
+        def workload_id: () -> ::String
+        def workload_share: () -> Types::WorkloadShare
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#update_workload_share-instance_method
+      def update_workload_share: (
+                                   share_id: ::String,
+                                   workload_id: ::String,
+                                   permission_type: ("READONLY" | "CONTRIBUTOR")
+                                 ) -> _UpdateWorkloadShareResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkloadShareResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#upgrade_lens_review-instance_method
+      def upgrade_lens_review: (
+                                 workload_id: ::String,
+                                 lens_alias: ::String,
+                                 milestone_name: ::String,
+                                 ?client_request_token: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#upgrade_profile_version-instance_method
+      def upgrade_profile_version: (
+                                     workload_id: ::String,
+                                     profile_arn: ::String,
+                                     ?milestone_name: ::String,
+                                     ?client_request_token: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WellArchitected/Client.html#upgrade_review_template_lens_review-instance_method
+      def upgrade_review_template_lens_review: (
+                                                 template_arn: ::String,
+                                                 lens_alias: ::String,
+                                                 ?client_request_token: ::String
+                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+    end
+  end
+end
+

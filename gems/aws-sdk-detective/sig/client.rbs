@@ -1,0 +1,403 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Detective
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#accept_invitation-instance_method
+      def accept_invitation: (
+                               graph_arn: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _BatchGetGraphMemberDatasourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetGraphMemberDatasourcesResponse]
+        def member_datasources: () -> ::Array[Types::MembershipDatasources]
+        def unprocessed_accounts: () -> ::Array[Types::UnprocessedAccount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#batch_get_graph_member_datasources-instance_method
+      def batch_get_graph_member_datasources: (
+                                                graph_arn: ::String,
+                                                account_ids: Array[::String]
+                                              ) -> _BatchGetGraphMemberDatasourcesResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetGraphMemberDatasourcesResponseSuccess
+
+      interface _BatchGetMembershipDatasourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetMembershipDatasourcesResponse]
+        def membership_datasources: () -> ::Array[Types::MembershipDatasources]
+        def unprocessed_graphs: () -> ::Array[Types::UnprocessedGraph]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#batch_get_membership_datasources-instance_method
+      def batch_get_membership_datasources: (
+                                              graph_arns: Array[::String]
+                                            ) -> _BatchGetMembershipDatasourcesResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetMembershipDatasourcesResponseSuccess
+
+      interface _CreateGraphResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGraphResponse]
+        def graph_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#create_graph-instance_method
+      def create_graph: (
+                          ?tags: Hash[::String, ::String]
+                        ) -> _CreateGraphResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGraphResponseSuccess
+
+      interface _CreateMembersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMembersResponse]
+        def members: () -> ::Array[Types::MemberDetail]
+        def unprocessed_accounts: () -> ::Array[Types::UnprocessedAccount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#create_members-instance_method
+      def create_members: (
+                            graph_arn: ::String,
+                            ?message: ::String,
+                            ?disable_email_notification: bool,
+                            accounts: Array[
+                              {
+                                account_id: ::String,
+                                email_address: ::String
+                              },
+                            ]
+                          ) -> _CreateMembersResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMembersResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#delete_graph-instance_method
+      def delete_graph: (
+                          graph_arn: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteMembersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMembersResponse]
+        def account_ids: () -> ::Array[::String]
+        def unprocessed_accounts: () -> ::Array[Types::UnprocessedAccount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#delete_members-instance_method
+      def delete_members: (
+                            graph_arn: ::String,
+                            account_ids: Array[::String]
+                          ) -> _DeleteMembersResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMembersResponseSuccess
+
+      interface _DescribeOrganizationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeOrganizationConfigurationResponse]
+        def auto_enable: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#describe_organization_configuration-instance_method
+      def describe_organization_configuration: (
+                                                 graph_arn: ::String
+                                               ) -> _DescribeOrganizationConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeOrganizationConfigurationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#disable_organization_admin_account-instance_method
+      def disable_organization_admin_account: () -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#disassociate_membership-instance_method
+      def disassociate_membership: (
+                                     graph_arn: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#enable_organization_admin_account-instance_method
+      def enable_organization_admin_account: (
+                                               account_id: ::String
+                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetInvestigationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInvestigationResponse]
+        def graph_arn: () -> ::String
+        def investigation_id: () -> ::String
+        def entity_arn: () -> ::String
+        def entity_type: () -> ("IAM_ROLE" | "IAM_USER")
+        def created_time: () -> ::Time
+        def scope_start_time: () -> ::Time
+        def scope_end_time: () -> ::Time
+        def status: () -> ("RUNNING" | "FAILED" | "SUCCESSFUL")
+        def severity: () -> ("INFORMATIONAL" | "LOW" | "MEDIUM" | "HIGH" | "CRITICAL")
+        def state: () -> ("ACTIVE" | "ARCHIVED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#get_investigation-instance_method
+      def get_investigation: (
+                               graph_arn: ::String,
+                               investigation_id: ::String
+                             ) -> _GetInvestigationResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInvestigationResponseSuccess
+
+      interface _GetMembersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMembersResponse]
+        def member_details: () -> ::Array[Types::MemberDetail]
+        def unprocessed_accounts: () -> ::Array[Types::UnprocessedAccount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#get_members-instance_method
+      def get_members: (
+                         graph_arn: ::String,
+                         account_ids: Array[::String]
+                       ) -> _GetMembersResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMembersResponseSuccess
+
+      interface _ListDatasourcePackagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasourcePackagesResponse]
+        def datasource_packages: () -> ::Hash[("DETECTIVE_CORE" | "EKS_AUDIT" | "ASFF_SECURITYHUB_FINDING"), Types::DatasourcePackageIngestDetail]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#list_datasource_packages-instance_method
+      def list_datasource_packages: (
+                                      graph_arn: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListDatasourcePackagesResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasourcePackagesResponseSuccess
+
+      interface _ListGraphsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGraphsResponse]
+        def graph_list: () -> ::Array[Types::Graph]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#list_graphs-instance_method
+      def list_graphs: (
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
+                       ) -> _ListGraphsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGraphsResponseSuccess
+
+      interface _ListIndicatorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIndicatorsResponse]
+        def graph_arn: () -> ::String
+        def investigation_id: () -> ::String
+        def next_token: () -> ::String
+        def indicators: () -> ::Array[Types::Indicator]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#list_indicators-instance_method
+      def list_indicators: (
+                             graph_arn: ::String,
+                             investigation_id: ::String,
+                             ?indicator_type: ("TTP_OBSERVED" | "IMPOSSIBLE_TRAVEL" | "FLAGGED_IP_ADDRESS" | "NEW_GEOLOCATION" | "NEW_ASO" | "NEW_USER_AGENT" | "RELATED_FINDING" | "RELATED_FINDING_GROUP"),
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _ListIndicatorsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIndicatorsResponseSuccess
+
+      interface _ListInvestigationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInvestigationsResponse]
+        def investigation_details: () -> ::Array[Types::InvestigationDetail]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#list_investigations-instance_method
+      def list_investigations: (
+                                 graph_arn: ::String,
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer,
+                                 ?filter_criteria: {
+                                   severity: {
+                                     value: ::String
+                                   }?,
+                                   status: {
+                                     value: ::String
+                                   }?,
+                                   state: {
+                                     value: ::String
+                                   }?,
+                                   entity_arn: {
+                                     value: ::String
+                                   }?,
+                                   created_time: {
+                                     start_inclusive: ::Time,
+                                     end_inclusive: ::Time
+                                   }?
+                                 },
+                                 ?sort_criteria: {
+                                   field: ("SEVERITY" | "STATUS" | "CREATED_TIME")?,
+                                   sort_order: ("ASC" | "DESC")?
+                                 }
+                               ) -> _ListInvestigationsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInvestigationsResponseSuccess
+
+      interface _ListInvitationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInvitationsResponse]
+        def invitations: () -> ::Array[Types::MemberDetail]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#list_invitations-instance_method
+      def list_invitations: (
+                              ?next_token: ::String,
+                              ?max_results: ::Integer
+                            ) -> _ListInvitationsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInvitationsResponseSuccess
+
+      interface _ListMembersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMembersResponse]
+        def member_details: () -> ::Array[Types::MemberDetail]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#list_members-instance_method
+      def list_members: (
+                          graph_arn: ::String,
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
+                        ) -> _ListMembersResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMembersResponseSuccess
+
+      interface _ListOrganizationAdminAccountsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOrganizationAdminAccountsResponse]
+        def administrators: () -> ::Array[Types::Administrator]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#list_organization_admin_accounts-instance_method
+      def list_organization_admin_accounts: (
+                                              ?next_token: ::String,
+                                              ?max_results: ::Integer
+                                            ) -> _ListOrganizationAdminAccountsResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOrganizationAdminAccountsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#reject_invitation-instance_method
+      def reject_invitation: (
+                               graph_arn: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _StartInvestigationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartInvestigationResponse]
+        def investigation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#start_investigation-instance_method
+      def start_investigation: (
+                                 graph_arn: ::String,
+                                 entity_arn: ::String,
+                                 scope_start_time: ::Time,
+                                 scope_end_time: ::Time
+                               ) -> _StartInvestigationResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartInvestigationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#start_monitoring_member-instance_method
+      def start_monitoring_member: (
+                                     graph_arn: ::String,
+                                     account_id: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#update_datasource_packages-instance_method
+      def update_datasource_packages: (
+                                        graph_arn: ::String,
+                                        datasource_packages: Array[("DETECTIVE_CORE" | "EKS_AUDIT" | "ASFF_SECURITYHUB_FINDING")]
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#update_investigation_state-instance_method
+      def update_investigation_state: (
+                                        graph_arn: ::String,
+                                        investigation_id: ::String,
+                                        state: ("ACTIVE" | "ARCHIVED")
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Detective/Client.html#update_organization_configuration-instance_method
+      def update_organization_configuration: (
+                                               graph_arn: ::String,
+                                               ?auto_enable: bool
+                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+    end
+  end
+end
+

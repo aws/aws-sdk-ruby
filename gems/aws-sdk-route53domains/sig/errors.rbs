@@ -1,0 +1,38 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Route53Domains
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class DnssecLimitExceeded < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DomainLimitExceeded < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DuplicateRequest < ::Aws::Errors::ServiceError
+        def request_id: () -> ::String
+        def message: () -> ::String
+      end
+      class InvalidInput < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class OperationLimitExceeded < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TLDRulesViolation < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnsupportedTLD < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

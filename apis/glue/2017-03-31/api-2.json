@@ -4234,7 +4234,8 @@
       "type":"string",
       "enum":[
         "DISABLED",
-        "SSE-KMS"
+        "SSE-KMS",
+        "SSE-KMS-WITH-SERVICE-ROLE"
       ]
     },
     "CatalogEntries":{
@@ -4925,6 +4926,9 @@
         "CONNECTOR_TYPE",
         "CONNECTOR_CLASS_NAME",
         "KAFKA_SASL_MECHANISM",
+        "KAFKA_SASL_PLAIN_USERNAME",
+        "KAFKA_SASL_PLAIN_PASSWORD",
+        "ENCRYPTED_KAFKA_SASL_PLAIN_PASSWORD",
         "KAFKA_SASL_SCRAM_USERNAME",
         "KAFKA_SASL_SCRAM_PASSWORD",
         "KAFKA_SASL_SCRAM_SECRETS_ARN",
@@ -6939,7 +6943,8 @@
       "required":["CatalogEncryptionMode"],
       "members":{
         "CatalogEncryptionMode":{"shape":"CatalogEncryptionMode"},
-        "SseAwsKmsKeyId":{"shape":"NameString"}
+        "SseAwsKmsKeyId":{"shape":"NameString"},
+        "CatalogEncryptionServiceRole":{"shape":"IAMRoleArn"}
       }
     },
     "EncryptionConfiguration":{
@@ -7786,7 +7791,7 @@
       "members":{
         "JobName":{"shape":"NameString"},
         "NextToken":{"shape":"GenericString"},
-        "MaxResults":{"shape":"PageSize"}
+        "MaxResults":{"shape":"OrchestrationPageSize200"}
       }
     },
     "GetJobRunsResponse":{
@@ -8342,7 +8347,7 @@
       "members":{
         "NextToken":{"shape":"GenericString"},
         "DependentJobName":{"shape":"NameString"},
-        "MaxResults":{"shape":"PageSize"}
+        "MaxResults":{"shape":"OrchestrationPageSize200"}
       }
     },
     "GetTriggersResponse":{
@@ -8727,6 +8732,10 @@
     "HudiTargetList":{
       "type":"list",
       "member":{"shape":"HudiTarget"}
+    },
+    "IAMRoleArn":{
+      "type":"string",
+      "pattern":"^arn:aws(-(cn|us-gov|iso(-[bef])?))?:iam::[0-9]{12}:role/.+"
     },
     "IcebergInput":{
       "type":"structure",
@@ -9343,7 +9352,7 @@
       "type":"structure",
       "members":{
         "NextToken":{"shape":"GenericString"},
-        "MaxResults":{"shape":"PageSize"},
+        "MaxResults":{"shape":"OrchestrationPageSize25"},
         "Tags":{"shape":"TagsMap"}
       }
     },
@@ -9636,7 +9645,7 @@
       "members":{
         "NextToken":{"shape":"GenericString"},
         "DependentJobName":{"shape":"NameString"},
-        "MaxResults":{"shape":"PageSize"},
+        "MaxResults":{"shape":"OrchestrationPageSize200"},
         "Tags":{"shape":"TagsMap"}
       }
     },
@@ -9651,7 +9660,7 @@
       "type":"structure",
       "members":{
         "NextToken":{"shape":"GenericString"},
-        "MaxResults":{"shape":"PageSize"}
+        "MaxResults":{"shape":"OrchestrationPageSize25"}
       }
     },
     "ListWorkflowsResponse":{
@@ -10176,6 +10185,18 @@
       "max":128,
       "min":1,
       "pattern":"[\\.\\-_A-Za-z0-9]+"
+    },
+    "OrchestrationPageSize200":{
+      "type":"integer",
+      "box":true,
+      "max":200,
+      "min":1
+    },
+    "OrchestrationPageSize25":{
+      "type":"integer",
+      "box":true,
+      "max":25,
+      "min":1
     },
     "OrchestrationRoleArn":{
       "type":"string",

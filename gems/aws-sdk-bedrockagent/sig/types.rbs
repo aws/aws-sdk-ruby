@@ -1,0 +1,989 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::BedrockAgent
+  module Types
+
+    class APISchema
+      attr_accessor s3: Types::S3Identifier
+      attr_accessor payload: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: [:payload]
+
+      class S3 < APISchema
+      end
+      class Payload < APISchema
+      end
+      class Unknown < APISchema
+      end
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ActionGroupExecutor
+      attr_accessor lambda: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Lambda < ActionGroupExecutor
+      end
+      class Unknown < ActionGroupExecutor
+      end
+    end
+
+    class ActionGroupSummary
+      attr_accessor action_group_id: ::String
+      attr_accessor action_group_name: ::String
+      attr_accessor action_group_state: ("ENABLED" | "DISABLED")
+      attr_accessor description: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class Agent
+      attr_accessor agent_id: ::String
+      attr_accessor agent_name: ::String
+      attr_accessor agent_arn: ::String
+      attr_accessor agent_version: ::String
+      attr_accessor client_token: ::String
+      attr_accessor instruction: ::String
+      attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
+      attr_accessor foundation_model: ::String
+      attr_accessor description: ::String
+      attr_accessor idle_session_ttl_in_seconds: ::Integer
+      attr_accessor agent_resource_role_arn: ::String
+      attr_accessor customer_encryption_key_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor prepared_at: ::Time
+      attr_accessor failure_reasons: ::Array[::String]
+      attr_accessor recommended_actions: ::Array[::String]
+      attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration
+      SENSITIVE: [:instruction, :prompt_override_configuration]
+    end
+
+    class AgentActionGroup
+      attr_accessor agent_id: ::String
+      attr_accessor agent_version: ::String
+      attr_accessor action_group_id: ::String
+      attr_accessor action_group_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor parent_action_signature: ("AMAZON.UserInput")
+      attr_accessor action_group_executor: Types::ActionGroupExecutor
+      attr_accessor api_schema: Types::APISchema
+      attr_accessor action_group_state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class AgentAlias
+      attr_accessor agent_id: ::String
+      attr_accessor agent_alias_id: ::String
+      attr_accessor agent_alias_name: ::String
+      attr_accessor agent_alias_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor routing_configuration: ::Array[Types::AgentAliasRoutingConfigurationListItem]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor agent_alias_history_events: ::Array[Types::AgentAliasHistoryEvent]
+      attr_accessor agent_alias_status: ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class AgentAliasHistoryEvent
+      attr_accessor routing_configuration: ::Array[Types::AgentAliasRoutingConfigurationListItem]
+      attr_accessor end_date: ::Time
+      attr_accessor start_date: ::Time
+      SENSITIVE: []
+    end
+
+    class AgentAliasRoutingConfigurationListItem
+      attr_accessor agent_version: ::String
+      SENSITIVE: []
+    end
+
+    class AgentAliasSummary
+      attr_accessor agent_alias_id: ::String
+      attr_accessor agent_alias_name: ::String
+      attr_accessor description: ::String
+      attr_accessor routing_configuration: ::Array[Types::AgentAliasRoutingConfigurationListItem]
+      attr_accessor agent_alias_status: ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AgentKnowledgeBase
+      attr_accessor agent_id: ::String
+      attr_accessor agent_version: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor knowledge_base_state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class AgentKnowledgeBaseSummary
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor description: ::String
+      attr_accessor knowledge_base_state: ("ENABLED" | "DISABLED")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AgentSummary
+      attr_accessor agent_id: ::String
+      attr_accessor agent_name: ::String
+      attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
+      attr_accessor description: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor latest_agent_version: ::String
+      SENSITIVE: []
+    end
+
+    class AgentVersion
+      attr_accessor agent_id: ::String
+      attr_accessor agent_name: ::String
+      attr_accessor agent_arn: ::String
+      attr_accessor version: ::String
+      attr_accessor instruction: ::String
+      attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
+      attr_accessor foundation_model: ::String
+      attr_accessor description: ::String
+      attr_accessor idle_session_ttl_in_seconds: ::Integer
+      attr_accessor agent_resource_role_arn: ::String
+      attr_accessor customer_encryption_key_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor failure_reasons: ::Array[::String]
+      attr_accessor recommended_actions: ::Array[::String]
+      attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration
+      SENSITIVE: [:instruction, :prompt_override_configuration]
+    end
+
+    class AgentVersionSummary
+      attr_accessor agent_name: ::String
+      attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
+      attr_accessor agent_version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateAgentKnowledgeBaseRequest
+      attr_accessor agent_id: ::String
+      attr_accessor agent_version: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor description: ::String
+      attr_accessor knowledge_base_state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class AssociateAgentKnowledgeBaseResponse
+      attr_accessor agent_knowledge_base: Types::AgentKnowledgeBase
+      SENSITIVE: []
+    end
+
+    class ChunkingConfiguration
+      attr_accessor chunking_strategy: ("FIXED_SIZE" | "NONE")
+      attr_accessor fixed_size_chunking_configuration: Types::FixedSizeChunkingConfiguration
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAgentActionGroupRequest
+      attr_accessor agent_id: ::String
+      attr_accessor agent_version: ::String
+      attr_accessor action_group_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor parent_action_group_signature: ("AMAZON.UserInput")
+      attr_accessor action_group_executor: Types::ActionGroupExecutor
+      attr_accessor api_schema: Types::APISchema
+      attr_accessor action_group_state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class CreateAgentActionGroupResponse
+      attr_accessor agent_action_group: Types::AgentActionGroup
+      SENSITIVE: []
+    end
+
+    class CreateAgentAliasRequest
+      attr_accessor agent_id: ::String
+      attr_accessor agent_alias_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor routing_configuration: ::Array[Types::AgentAliasRoutingConfigurationListItem]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateAgentAliasResponse
+      attr_accessor agent_alias: Types::AgentAlias
+      SENSITIVE: []
+    end
+
+    class CreateAgentRequest
+      attr_accessor agent_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor instruction: ::String
+      attr_accessor foundation_model: ::String
+      attr_accessor description: ::String
+      attr_accessor idle_session_ttl_in_seconds: ::Integer
+      attr_accessor agent_resource_role_arn: ::String
+      attr_accessor customer_encryption_key_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration
+      SENSITIVE: [:instruction, :prompt_override_configuration]
+    end
+
+    class CreateAgentResponse
+      attr_accessor agent: Types::Agent
+      SENSITIVE: []
+    end
+
+    class CreateDataSourceRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor data_source_configuration: Types::DataSourceConfiguration
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
+      attr_accessor vector_ingestion_configuration: Types::VectorIngestionConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateDataSourceResponse
+      attr_accessor data_source: Types::DataSource
+      SENSITIVE: []
+    end
+
+    class CreateKnowledgeBaseRequest
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor knowledge_base_configuration: Types::KnowledgeBaseConfiguration
+      attr_accessor storage_configuration: Types::StorageConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateKnowledgeBaseResponse
+      attr_accessor knowledge_base: Types::KnowledgeBase
+      SENSITIVE: []
+    end
+
+    class DataSource
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor data_source_id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("AVAILABLE" | "DELETING")
+      attr_accessor description: ::String
+      attr_accessor data_source_configuration: Types::DataSourceConfiguration
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
+      attr_accessor vector_ingestion_configuration: Types::VectorIngestionConfiguration
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DataSourceConfiguration
+      attr_accessor type: ("S3")
+      attr_accessor s3_configuration: Types::S3DataSourceConfiguration
+      SENSITIVE: []
+    end
+
+    class DataSourceSummary
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor data_source_id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("AVAILABLE" | "DELETING")
+      attr_accessor description: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteAgentActionGroupRequest
+      attr_accessor agent_id: ::String
+      attr_accessor agent_version: ::String
+      attr_accessor action_group_id: ::String
+      attr_accessor skip_resource_in_use_check: bool
+      SENSITIVE: []
+    end
+
+    class DeleteAgentActionGroupResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAgentAliasRequest
+      attr_accessor agent_id: ::String
+      attr_accessor agent_alias_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAgentAliasResponse
+      attr_accessor agent_id: ::String
+      attr_accessor agent_alias_id: ::String
+      attr_accessor agent_alias_status: ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class DeleteAgentRequest
+      attr_accessor agent_id: ::String
+      attr_accessor skip_resource_in_use_check: bool
+      SENSITIVE: []
+    end
+
+    class DeleteAgentResponse
+      attr_accessor agent_id: ::String
+      attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
+      SENSITIVE: []
+    end
+
+    class DeleteAgentVersionRequest
+      attr_accessor agent_id: ::String
+      attr_accessor agent_version: ::String
+      attr_accessor skip_resource_in_use_check: bool
+      SENSITIVE: []
+    end
+
+    class DeleteAgentVersionResponse
+      attr_accessor agent_id: ::String
+      attr_accessor agent_version: ::String
+      attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
+      SENSITIVE: []
+    end
+
+    class DeleteDataSourceRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor data_source_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDataSourceResponse
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor data_source_id: ::String
+      attr_accessor status: ("AVAILABLE" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class DeleteKnowledgeBaseRequest
+      attr_accessor knowledge_base_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKnowledgeBaseResponse
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class DisassociateAgentKnowledgeBaseRequest
+      attr_accessor agent_id: ::String
+      attr_accessor agent_version: ::String
+      attr_accessor knowledge_base_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateAgentKnowledgeBaseResponse < Aws::EmptyStructure
+    end
+
+    class FixedSizeChunkingConfiguration
+      attr_accessor max_tokens: ::Integer
+      attr_accessor overlap_percentage: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetAgentActionGroupRequest
+      attr_accessor agent_id: ::String
+      attr_accessor agent_version: ::String
+      attr_accessor action_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAgentActionGroupResponse
+      attr_accessor agent_action_group: Types::AgentActionGroup
+      SENSITIVE: []
+    end
+
+    class GetAgentAliasRequest
+      attr_accessor agent_id: ::String
+      attr_accessor agent_alias_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAgentAliasResponse
+      attr_accessor agent_alias: Types::AgentAlias
+      SENSITIVE: []
+    end
+
+    class GetAgentKnowledgeBaseRequest
+      attr_accessor agent_id: ::String
+      attr_accessor agent_version: ::String
+      attr_accessor knowledge_base_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAgentKnowledgeBaseResponse
+      attr_accessor agent_knowledge_base: Types::AgentKnowledgeBase
+      SENSITIVE: []
+    end
+
+    class GetAgentRequest
+      attr_accessor agent_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAgentResponse
+      attr_accessor agent: Types::Agent
+      SENSITIVE: []
+    end
+
+    class GetAgentVersionRequest
+      attr_accessor agent_id: ::String
+      attr_accessor agent_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetAgentVersionResponse
+      attr_accessor agent_version: Types::AgentVersion
+      SENSITIVE: []
+    end
+
+    class GetDataSourceRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor data_source_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataSourceResponse
+      attr_accessor data_source: Types::DataSource
+      SENSITIVE: []
+    end
+
+    class GetIngestionJobRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor data_source_id: ::String
+      attr_accessor ingestion_job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetIngestionJobResponse
+      attr_accessor ingestion_job: Types::IngestionJob
+      SENSITIVE: []
+    end
+
+    class GetKnowledgeBaseRequest
+      attr_accessor knowledge_base_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetKnowledgeBaseResponse
+      attr_accessor knowledge_base: Types::KnowledgeBase
+      SENSITIVE: []
+    end
+
+    class InferenceConfiguration
+      attr_accessor temperature: ::Float
+      attr_accessor top_p: ::Float
+      attr_accessor top_k: ::Integer
+      attr_accessor maximum_length: ::Integer
+      attr_accessor stop_sequences: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class IngestionJob
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor data_source_id: ::String
+      attr_accessor ingestion_job_id: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("STARTING" | "IN_PROGRESS" | "COMPLETE" | "FAILED")
+      attr_accessor statistics: Types::IngestionJobStatistics
+      attr_accessor failure_reasons: ::Array[::String]
+      attr_accessor started_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class IngestionJobFilter
+      attr_accessor attribute: ("STATUS")
+      attr_accessor operator: ("EQ")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class IngestionJobSortBy
+      attr_accessor attribute: ("STATUS" | "STARTED_AT")
+      attr_accessor order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class IngestionJobStatistics
+      attr_accessor number_of_documents_scanned: ::Integer
+      attr_accessor number_of_new_documents_indexed: ::Integer
+      attr_accessor number_of_modified_documents_indexed: ::Integer
+      attr_accessor number_of_documents_deleted: ::Integer
+      attr_accessor number_of_documents_failed: ::Integer
+      SENSITIVE: []
+    end
+
+    class IngestionJobSummary
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor data_source_id: ::String
+      attr_accessor ingestion_job_id: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("STARTING" | "IN_PROGRESS" | "COMPLETE" | "FAILED")
+      attr_accessor started_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor statistics: Types::IngestionJobStatistics
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KnowledgeBase
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor name: ::String
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor knowledge_base_configuration: Types::KnowledgeBaseConfiguration
+      attr_accessor storage_configuration: Types::StorageConfiguration
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "FAILED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor failure_reasons: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class KnowledgeBaseConfiguration
+      attr_accessor type: ("VECTOR")
+      attr_accessor vector_knowledge_base_configuration: Types::VectorKnowledgeBaseConfiguration
+      SENSITIVE: []
+    end
+
+    class KnowledgeBaseSummary
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "FAILED")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ListAgentActionGroupsRequest
+      attr_accessor agent_id: ::String
+      attr_accessor agent_version: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentActionGroupsResponse
+      attr_accessor action_group_summaries: ::Array[Types::ActionGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentAliasesRequest
+      attr_accessor agent_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentAliasesResponse
+      attr_accessor agent_alias_summaries: ::Array[Types::AgentAliasSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentKnowledgeBasesRequest
+      attr_accessor agent_id: ::String
+      attr_accessor agent_version: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentKnowledgeBasesResponse
+      attr_accessor agent_knowledge_base_summaries: ::Array[Types::AgentKnowledgeBaseSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentVersionsRequest
+      attr_accessor agent_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentVersionsResponse
+      attr_accessor agent_version_summaries: ::Array[Types::AgentVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentsResponse
+      attr_accessor agent_summaries: ::Array[Types::AgentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataSourcesRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataSourcesResponse
+      attr_accessor data_source_summaries: ::Array[Types::DataSourceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIngestionJobsRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor data_source_id: ::String
+      attr_accessor filters: ::Array[Types::IngestionJobFilter]
+      attr_accessor sort_by: Types::IngestionJobSortBy
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIngestionJobsResponse
+      attr_accessor ingestion_job_summaries: ::Array[Types::IngestionJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListKnowledgeBasesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListKnowledgeBasesResponse
+      attr_accessor knowledge_base_summaries: ::Array[Types::KnowledgeBaseSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class OpenSearchServerlessConfiguration
+      attr_accessor collection_arn: ::String
+      attr_accessor vector_index_name: ::String
+      attr_accessor field_mapping: Types::OpenSearchServerlessFieldMapping
+      SENSITIVE: []
+    end
+
+    class OpenSearchServerlessFieldMapping
+      attr_accessor vector_field: ::String
+      attr_accessor text_field: ::String
+      attr_accessor metadata_field: ::String
+      SENSITIVE: []
+    end
+
+    class PineconeConfiguration
+      attr_accessor connection_string: ::String
+      attr_accessor credentials_secret_arn: ::String
+      attr_accessor namespace: ::String
+      attr_accessor field_mapping: Types::PineconeFieldMapping
+      SENSITIVE: []
+    end
+
+    class PineconeFieldMapping
+      attr_accessor text_field: ::String
+      attr_accessor metadata_field: ::String
+      SENSITIVE: []
+    end
+
+    class PrepareAgentRequest
+      attr_accessor agent_id: ::String
+      SENSITIVE: []
+    end
+
+    class PrepareAgentResponse
+      attr_accessor agent_id: ::String
+      attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
+      attr_accessor agent_version: ::String
+      attr_accessor prepared_at: ::Time
+      SENSITIVE: []
+    end
+
+    class PromptConfiguration
+      attr_accessor prompt_type: ("PRE_PROCESSING" | "ORCHESTRATION" | "POST_PROCESSING" | "KNOWLEDGE_BASE_RESPONSE_GENERATION")
+      attr_accessor prompt_creation_mode: ("DEFAULT" | "OVERRIDDEN")
+      attr_accessor prompt_state: ("ENABLED" | "DISABLED")
+      attr_accessor base_prompt_template: ::String
+      attr_accessor inference_configuration: Types::InferenceConfiguration
+      attr_accessor parser_mode: ("DEFAULT" | "OVERRIDDEN")
+      SENSITIVE: []
+    end
+
+    class PromptOverrideConfiguration
+      attr_accessor prompt_configurations: ::Array[Types::PromptConfiguration]
+      attr_accessor override_lambda: ::String
+      SENSITIVE: []
+    end
+
+    class RdsConfiguration
+      attr_accessor resource_arn: ::String
+      attr_accessor credentials_secret_arn: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor field_mapping: Types::RdsFieldMapping
+      SENSITIVE: []
+    end
+
+    class RdsFieldMapping
+      attr_accessor primary_key_field: ::String
+      attr_accessor vector_field: ::String
+      attr_accessor text_field: ::String
+      attr_accessor metadata_field: ::String
+      SENSITIVE: []
+    end
+
+    class RedisEnterpriseCloudConfiguration
+      attr_accessor endpoint: ::String
+      attr_accessor vector_index_name: ::String
+      attr_accessor credentials_secret_arn: ::String
+      attr_accessor field_mapping: Types::RedisEnterpriseCloudFieldMapping
+      SENSITIVE: []
+    end
+
+    class RedisEnterpriseCloudFieldMapping
+      attr_accessor vector_field: ::String
+      attr_accessor text_field: ::String
+      attr_accessor metadata_field: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class S3DataSourceConfiguration
+      attr_accessor bucket_arn: ::String
+      attr_accessor inclusion_prefixes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class S3Identifier
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_object_key: ::String
+      SENSITIVE: []
+    end
+
+    class ServerSideEncryptionConfiguration
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartIngestionJobRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor data_source_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class StartIngestionJobResponse
+      attr_accessor ingestion_job: Types::IngestionJob
+      SENSITIVE: []
+    end
+
+    class StorageConfiguration
+      attr_accessor type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS")
+      attr_accessor opensearch_serverless_configuration: Types::OpenSearchServerlessConfiguration
+      attr_accessor pinecone_configuration: Types::PineconeConfiguration
+      attr_accessor redis_enterprise_cloud_configuration: Types::RedisEnterpriseCloudConfiguration
+      attr_accessor rds_configuration: Types::RdsConfiguration
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAgentActionGroupRequest
+      attr_accessor agent_id: ::String
+      attr_accessor agent_version: ::String
+      attr_accessor action_group_id: ::String
+      attr_accessor action_group_name: ::String
+      attr_accessor description: ::String
+      attr_accessor parent_action_group_signature: ("AMAZON.UserInput")
+      attr_accessor action_group_executor: Types::ActionGroupExecutor
+      attr_accessor action_group_state: ("ENABLED" | "DISABLED")
+      attr_accessor api_schema: Types::APISchema
+      SENSITIVE: []
+    end
+
+    class UpdateAgentActionGroupResponse
+      attr_accessor agent_action_group: Types::AgentActionGroup
+      SENSITIVE: []
+    end
+
+    class UpdateAgentAliasRequest
+      attr_accessor agent_id: ::String
+      attr_accessor agent_alias_id: ::String
+      attr_accessor agent_alias_name: ::String
+      attr_accessor description: ::String
+      attr_accessor routing_configuration: ::Array[Types::AgentAliasRoutingConfigurationListItem]
+      SENSITIVE: []
+    end
+
+    class UpdateAgentAliasResponse
+      attr_accessor agent_alias: Types::AgentAlias
+      SENSITIVE: []
+    end
+
+    class UpdateAgentKnowledgeBaseRequest
+      attr_accessor agent_id: ::String
+      attr_accessor agent_version: ::String
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor description: ::String
+      attr_accessor knowledge_base_state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateAgentKnowledgeBaseResponse
+      attr_accessor agent_knowledge_base: Types::AgentKnowledgeBase
+      SENSITIVE: []
+    end
+
+    class UpdateAgentRequest
+      attr_accessor agent_id: ::String
+      attr_accessor agent_name: ::String
+      attr_accessor instruction: ::String
+      attr_accessor foundation_model: ::String
+      attr_accessor description: ::String
+      attr_accessor idle_session_ttl_in_seconds: ::Integer
+      attr_accessor agent_resource_role_arn: ::String
+      attr_accessor customer_encryption_key_arn: ::String
+      attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration
+      SENSITIVE: [:instruction, :prompt_override_configuration]
+    end
+
+    class UpdateAgentResponse
+      attr_accessor agent: Types::Agent
+      SENSITIVE: []
+    end
+
+    class UpdateDataSourceRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor data_source_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor data_source_configuration: Types::DataSourceConfiguration
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
+      attr_accessor vector_ingestion_configuration: Types::VectorIngestionConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateDataSourceResponse
+      attr_accessor data_source: Types::DataSource
+      SENSITIVE: []
+    end
+
+    class UpdateKnowledgeBaseRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor knowledge_base_configuration: Types::KnowledgeBaseConfiguration
+      attr_accessor storage_configuration: Types::StorageConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateKnowledgeBaseResponse
+      attr_accessor knowledge_base: Types::KnowledgeBase
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VectorIngestionConfiguration
+      attr_accessor chunking_configuration: Types::ChunkingConfiguration
+      SENSITIVE: []
+    end
+
+    class VectorKnowledgeBaseConfiguration
+      attr_accessor embedding_model_arn: ::String
+      SENSITIVE: []
+    end
+  end
+end

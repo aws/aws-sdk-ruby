@@ -546,8 +546,8 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] last_rotated_date
     #   The last date and time that Secrets Manager rotated the secret. If
-    #   the secret isn't configured for rotation, Secrets Manager returns
-    #   null.
+    #   the secret isn't configured for rotation or rotation has been
+    #   disabled, Secrets Manager returns null.
     #   @return [Time]
     #
     # @!attribute [rw] last_changed_date
@@ -573,8 +573,8 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] next_rotation_date
     #   The next rotation is scheduled to occur on or before this date. If
-    #   the secret isn't configured for rotation, Secrets Manager returns
-    #   null.
+    #   the secret isn't configured for rotation or rotation has been
+    #   disabled, Secrets Manager returns null.
     #   @return [Time]
     #
     # @!attribute [rw] tags
@@ -912,18 +912,15 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] secret_binary
     #   The decrypted secret value, if the secret value was originally
-    #   provided as binary data in the form of a byte array. The response
-    #   parameter represents the binary data as a [base64-encoded][1]
-    #   string.
+    #   provided as binary data in the form of a byte array. When you
+    #   retrieve a `SecretBinary` using the HTTP API, the Python SDK, or the
+    #   Amazon Web Services CLI, the value is Base64-encoded. Otherwise, it
+    #   is not encoded.
     #
     #   If the secret was created by using the Secrets Manager console, or
     #   if the secret value was originally provided as a string, then this
     #   field is omitted. The secret value appears in `SecretString`
     #   instead.
-    #
-    #
-    #
-    #   [1]: https://tools.ietf.org/html/rfc4648#section-4
     #   @return [String]
     #
     # @!attribute [rw] secret_string
@@ -1867,8 +1864,8 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] next_rotation_date
     #   The next rotation is scheduled to occur on or before this date. If
-    #   the secret isn't configured for rotation, Secrets Manager returns
-    #   null.
+    #   the secret isn't configured for rotation or rotation has been
+    #   disabled, Secrets Manager returns null.
     #   @return [Time]
     #
     # @!attribute [rw] tags

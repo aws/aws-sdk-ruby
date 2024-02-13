@@ -14,6 +14,7 @@ module Aws::OpenSearchService
       option(
         :endpoint_provider,
         doc_type: 'Aws::OpenSearchService::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -67,6 +68,8 @@ module Aws::OpenSearchService
             Aws::OpenSearchService::Endpoints::AssociatePackage.build(context)
           when :authorize_vpc_endpoint_access
             Aws::OpenSearchService::Endpoints::AuthorizeVpcEndpointAccess.build(context)
+          when :cancel_domain_config_change
+            Aws::OpenSearchService::Endpoints::CancelDomainConfigChange.build(context)
           when :cancel_service_software_update
             Aws::OpenSearchService::Endpoints::CancelServiceSoftwareUpdate.build(context)
           when :create_domain

@@ -1,0 +1,1127 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ECR
+  module Types
+
+    class Attribute
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class AuthorizationData
+      attr_accessor authorization_token: ::String
+      attr_accessor expires_at: ::Time
+      attr_accessor proxy_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class AwsEcrContainerImageDetails
+      attr_accessor architecture: ::String
+      attr_accessor author: ::String
+      attr_accessor image_hash: ::String
+      attr_accessor image_tags: ::Array[::String]
+      attr_accessor platform: ::String
+      attr_accessor pushed_at: ::Time
+      attr_accessor registry: ::String
+      attr_accessor repository_name: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCheckLayerAvailabilityRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor layer_digests: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchCheckLayerAvailabilityResponse
+      attr_accessor layers: ::Array[Types::Layer]
+      attr_accessor failures: ::Array[Types::LayerFailure]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteImageRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor image_ids: ::Array[Types::ImageIdentifier]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteImageResponse
+      attr_accessor image_ids: ::Array[Types::ImageIdentifier]
+      attr_accessor failures: ::Array[Types::ImageFailure]
+      SENSITIVE: []
+    end
+
+    class BatchGetImageRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor image_ids: ::Array[Types::ImageIdentifier]
+      attr_accessor accepted_media_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetImageResponse
+      attr_accessor images: ::Array[Types::Image]
+      attr_accessor failures: ::Array[Types::ImageFailure]
+      SENSITIVE: []
+    end
+
+    class BatchGetRepositoryScanningConfigurationRequest
+      attr_accessor repository_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetRepositoryScanningConfigurationResponse
+      attr_accessor scanning_configurations: ::Array[Types::RepositoryScanningConfiguration]
+      attr_accessor failures: ::Array[Types::RepositoryScanningConfigurationFailure]
+      SENSITIVE: []
+    end
+
+    class CompleteLayerUploadRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor upload_id: ::String
+      attr_accessor layer_digests: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CompleteLayerUploadResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor upload_id: ::String
+      attr_accessor layer_digest: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePullThroughCacheRuleRequest
+      attr_accessor ecr_repository_prefix: ::String
+      attr_accessor upstream_registry_url: ::String
+      attr_accessor registry_id: ::String
+      attr_accessor upstream_registry: ("ecr-public" | "quay" | "k8s" | "docker-hub" | "github-container-registry" | "azure-container-registry")
+      attr_accessor credential_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePullThroughCacheRuleResponse
+      attr_accessor ecr_repository_prefix: ::String
+      attr_accessor upstream_registry_url: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor registry_id: ::String
+      attr_accessor upstream_registry: ("ecr-public" | "quay" | "k8s" | "docker-hub" | "github-container-registry" | "azure-container-registry")
+      attr_accessor credential_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRepositoryRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor image_tag_mutability: ("MUTABLE" | "IMMUTABLE")
+      attr_accessor image_scanning_configuration: Types::ImageScanningConfiguration
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateRepositoryResponse
+      attr_accessor repository: Types::Repository
+      SENSITIVE: []
+    end
+
+    class CvssScore
+      attr_accessor base_score: ::Float
+      attr_accessor scoring_vector: ::String
+      attr_accessor source: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class CvssScoreAdjustment
+      attr_accessor metric: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class CvssScoreDetails
+      attr_accessor adjustments: ::Array[Types::CvssScoreAdjustment]
+      attr_accessor score: ::Float
+      attr_accessor score_source: ::String
+      attr_accessor scoring_vector: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLifecyclePolicyRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLifecyclePolicyResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor lifecycle_policy_text: ::String
+      attr_accessor last_evaluated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DeletePullThroughCacheRuleRequest
+      attr_accessor ecr_repository_prefix: ::String
+      attr_accessor registry_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePullThroughCacheRuleResponse
+      attr_accessor ecr_repository_prefix: ::String
+      attr_accessor upstream_registry_url: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor registry_id: ::String
+      attr_accessor credential_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRegistryPolicyRequest < Aws::EmptyStructure
+    end
+
+    class DeleteRegistryPolicyResponse
+      attr_accessor registry_id: ::String
+      attr_accessor policy_text: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRepositoryPolicyRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRepositoryPolicyResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor policy_text: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRepositoryRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class DeleteRepositoryResponse
+      attr_accessor repository: Types::Repository
+      SENSITIVE: []
+    end
+
+    class DescribeImageReplicationStatusRequest
+      attr_accessor repository_name: ::String
+      attr_accessor image_id: Types::ImageIdentifier
+      attr_accessor registry_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeImageReplicationStatusResponse
+      attr_accessor repository_name: ::String
+      attr_accessor image_id: Types::ImageIdentifier
+      attr_accessor replication_statuses: ::Array[Types::ImageReplicationStatus]
+      SENSITIVE: []
+    end
+
+    class DescribeImageScanFindingsRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor image_id: Types::ImageIdentifier
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeImageScanFindingsResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor image_id: Types::ImageIdentifier
+      attr_accessor image_scan_status: Types::ImageScanStatus
+      attr_accessor image_scan_findings: Types::ImageScanFindings
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeImagesFilter
+      attr_accessor tag_status: ("TAGGED" | "UNTAGGED" | "ANY")
+      SENSITIVE: []
+    end
+
+    class DescribeImagesRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor image_ids: ::Array[Types::ImageIdentifier]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filter: Types::DescribeImagesFilter
+      SENSITIVE: []
+    end
+
+    class DescribeImagesResponse
+      attr_accessor image_details: ::Array[Types::ImageDetail]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePullThroughCacheRulesRequest
+      attr_accessor registry_id: ::String
+      attr_accessor ecr_repository_prefixes: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribePullThroughCacheRulesResponse
+      attr_accessor pull_through_cache_rules: ::Array[Types::PullThroughCacheRule]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRegistryRequest < Aws::EmptyStructure
+    end
+
+    class DescribeRegistryResponse
+      attr_accessor registry_id: ::String
+      attr_accessor replication_configuration: Types::ReplicationConfiguration
+      SENSITIVE: []
+    end
+
+    class DescribeRepositoriesRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeRepositoriesResponse
+      attr_accessor repositories: ::Array[Types::Repository]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class EmptyUploadException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EncryptionConfiguration
+      attr_accessor encryption_type: ("AES256" | "KMS")
+      attr_accessor kms_key: ::String
+      SENSITIVE: []
+    end
+
+    class EnhancedImageScanFinding
+      attr_accessor aws_account_id: ::String
+      attr_accessor description: ::String
+      attr_accessor finding_arn: ::String
+      attr_accessor first_observed_at: ::Time
+      attr_accessor last_observed_at: ::Time
+      attr_accessor package_vulnerability_details: Types::PackageVulnerabilityDetails
+      attr_accessor remediation: Types::Remediation
+      attr_accessor resources: ::Array[Types::Resource]
+      attr_accessor score: ::Float
+      attr_accessor score_details: Types::ScoreDetails
+      attr_accessor severity: ::String
+      attr_accessor status: ::String
+      attr_accessor title: ::String
+      attr_accessor type: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetAuthorizationTokenRequest
+      attr_accessor registry_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetAuthorizationTokenResponse
+      attr_accessor authorization_data: ::Array[Types::AuthorizationData]
+      SENSITIVE: []
+    end
+
+    class GetDownloadUrlForLayerRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor layer_digest: ::String
+      SENSITIVE: []
+    end
+
+    class GetDownloadUrlForLayerResponse
+      attr_accessor download_url: ::String
+      attr_accessor layer_digest: ::String
+      SENSITIVE: []
+    end
+
+    class GetLifecyclePolicyPreviewRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor image_ids: ::Array[Types::ImageIdentifier]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filter: Types::LifecyclePolicyPreviewFilter
+      SENSITIVE: []
+    end
+
+    class GetLifecyclePolicyPreviewResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor lifecycle_policy_text: ::String
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETE" | "EXPIRED" | "FAILED")
+      attr_accessor next_token: ::String
+      attr_accessor preview_results: ::Array[Types::LifecyclePolicyPreviewResult]
+      attr_accessor summary: Types::LifecyclePolicyPreviewSummary
+      SENSITIVE: []
+    end
+
+    class GetLifecyclePolicyRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetLifecyclePolicyResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor lifecycle_policy_text: ::String
+      attr_accessor last_evaluated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetRegistryPolicyRequest < Aws::EmptyStructure
+    end
+
+    class GetRegistryPolicyResponse
+      attr_accessor registry_id: ::String
+      attr_accessor policy_text: ::String
+      SENSITIVE: []
+    end
+
+    class GetRegistryScanningConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class GetRegistryScanningConfigurationResponse
+      attr_accessor registry_id: ::String
+      attr_accessor scanning_configuration: Types::RegistryScanningConfiguration
+      SENSITIVE: []
+    end
+
+    class GetRepositoryPolicyRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetRepositoryPolicyResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor policy_text: ::String
+      SENSITIVE: []
+    end
+
+    class Image
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor image_id: Types::ImageIdentifier
+      attr_accessor image_manifest: ::String
+      attr_accessor image_manifest_media_type: ::String
+      SENSITIVE: []
+    end
+
+    class ImageAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ImageDetail
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor image_digest: ::String
+      attr_accessor image_tags: ::Array[::String]
+      attr_accessor image_size_in_bytes: ::Integer
+      attr_accessor image_pushed_at: ::Time
+      attr_accessor image_scan_status: Types::ImageScanStatus
+      attr_accessor image_scan_findings_summary: Types::ImageScanFindingsSummary
+      attr_accessor image_manifest_media_type: ::String
+      attr_accessor artifact_media_type: ::String
+      attr_accessor last_recorded_pull_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ImageDigestDoesNotMatchException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ImageFailure
+      attr_accessor image_id: Types::ImageIdentifier
+      attr_accessor failure_code: ("InvalidImageDigest" | "InvalidImageTag" | "ImageTagDoesNotMatchDigest" | "ImageNotFound" | "MissingDigestAndTag" | "ImageReferencedByManifestList" | "KmsError" | "UpstreamAccessDenied" | "UpstreamTooManyRequests" | "UpstreamUnavailable")
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class ImageIdentifier
+      attr_accessor image_digest: ::String
+      attr_accessor image_tag: ::String
+      SENSITIVE: []
+    end
+
+    class ImageNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ImageReplicationStatus
+      attr_accessor region: ::String
+      attr_accessor registry_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETE" | "FAILED")
+      attr_accessor failure_code: ::String
+      SENSITIVE: []
+    end
+
+    class ImageScanFinding
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor uri: ::String
+      attr_accessor severity: ("INFORMATIONAL" | "LOW" | "MEDIUM" | "HIGH" | "CRITICAL" | "UNDEFINED")
+      attr_accessor attributes: ::Array[Types::Attribute]
+      SENSITIVE: []
+    end
+
+    class ImageScanFindings
+      attr_accessor image_scan_completed_at: ::Time
+      attr_accessor vulnerability_source_updated_at: ::Time
+      attr_accessor finding_severity_counts: ::Hash[("INFORMATIONAL" | "LOW" | "MEDIUM" | "HIGH" | "CRITICAL" | "UNDEFINED"), ::Integer]
+      attr_accessor findings: ::Array[Types::ImageScanFinding]
+      attr_accessor enhanced_findings: ::Array[Types::EnhancedImageScanFinding]
+      SENSITIVE: []
+    end
+
+    class ImageScanFindingsSummary
+      attr_accessor image_scan_completed_at: ::Time
+      attr_accessor vulnerability_source_updated_at: ::Time
+      attr_accessor finding_severity_counts: ::Hash[("INFORMATIONAL" | "LOW" | "MEDIUM" | "HIGH" | "CRITICAL" | "UNDEFINED"), ::Integer]
+      SENSITIVE: []
+    end
+
+    class ImageScanStatus
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETE" | "FAILED" | "UNSUPPORTED_IMAGE" | "ACTIVE" | "PENDING" | "SCAN_ELIGIBILITY_EXPIRED" | "FINDINGS_UNAVAILABLE")
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ImageScanningConfiguration
+      attr_accessor scan_on_push: bool
+      SENSITIVE: []
+    end
+
+    class ImageTagAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InitiateLayerUploadRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      SENSITIVE: []
+    end
+
+    class InitiateLayerUploadResponse
+      attr_accessor upload_id: ::String
+      attr_accessor part_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class InvalidLayerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidLayerPartException
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor upload_id: ::String
+      attr_accessor last_valid_byte_received: ::Integer
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTagParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KmsException
+      attr_accessor message: ::String
+      attr_accessor kms_error: ::String
+      SENSITIVE: []
+    end
+
+    class Layer
+      attr_accessor layer_digest: ::String
+      attr_accessor layer_availability: ("AVAILABLE" | "UNAVAILABLE")
+      attr_accessor layer_size: ::Integer
+      attr_accessor media_type: ::String
+      SENSITIVE: []
+    end
+
+    class LayerAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LayerFailure
+      attr_accessor layer_digest: ::String
+      attr_accessor failure_code: ("InvalidLayerDigest" | "MissingLayerDigest")
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class LayerInaccessibleException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LayerPartTooSmallException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LayersNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LifecyclePolicyNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LifecyclePolicyPreviewFilter
+      attr_accessor tag_status: ("TAGGED" | "UNTAGGED" | "ANY")
+      SENSITIVE: []
+    end
+
+    class LifecyclePolicyPreviewInProgressException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LifecyclePolicyPreviewNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LifecyclePolicyPreviewResult
+      attr_accessor image_tags: ::Array[::String]
+      attr_accessor image_digest: ::String
+      attr_accessor image_pushed_at: ::Time
+      attr_accessor action: Types::LifecyclePolicyRuleAction
+      attr_accessor applied_rule_priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class LifecyclePolicyPreviewSummary
+      attr_accessor expiring_image_total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class LifecyclePolicyRuleAction
+      attr_accessor type: ("EXPIRE")
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListImagesFilter
+      attr_accessor tag_status: ("TAGGED" | "UNTAGGED" | "ANY")
+      SENSITIVE: []
+    end
+
+    class ListImagesRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filter: Types::ListImagesFilter
+      SENSITIVE: []
+    end
+
+    class ListImagesResponse
+      attr_accessor image_ids: ::Array[Types::ImageIdentifier]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PackageVulnerabilityDetails
+      attr_accessor cvss: ::Array[Types::CvssScore]
+      attr_accessor reference_urls: ::Array[::String]
+      attr_accessor related_vulnerabilities: ::Array[::String]
+      attr_accessor source: ::String
+      attr_accessor source_url: ::String
+      attr_accessor vendor_created_at: ::Time
+      attr_accessor vendor_severity: ::String
+      attr_accessor vendor_updated_at: ::Time
+      attr_accessor vulnerability_id: ::String
+      attr_accessor vulnerable_packages: ::Array[Types::VulnerablePackage]
+      SENSITIVE: []
+    end
+
+    class PullThroughCacheRule
+      attr_accessor ecr_repository_prefix: ::String
+      attr_accessor upstream_registry_url: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor registry_id: ::String
+      attr_accessor credential_arn: ::String
+      attr_accessor upstream_registry: ("ecr-public" | "quay" | "k8s" | "docker-hub" | "github-container-registry" | "azure-container-registry")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class PullThroughCacheRuleAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PullThroughCacheRuleNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PutImageRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor image_manifest: ::String
+      attr_accessor image_manifest_media_type: ::String
+      attr_accessor image_tag: ::String
+      attr_accessor image_digest: ::String
+      SENSITIVE: []
+    end
+
+    class PutImageResponse
+      attr_accessor image: Types::Image
+      SENSITIVE: []
+    end
+
+    class PutImageScanningConfigurationRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor image_scanning_configuration: Types::ImageScanningConfiguration
+      SENSITIVE: []
+    end
+
+    class PutImageScanningConfigurationResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor image_scanning_configuration: Types::ImageScanningConfiguration
+      SENSITIVE: []
+    end
+
+    class PutImageTagMutabilityRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor image_tag_mutability: ("MUTABLE" | "IMMUTABLE")
+      SENSITIVE: []
+    end
+
+    class PutImageTagMutabilityResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor image_tag_mutability: ("MUTABLE" | "IMMUTABLE")
+      SENSITIVE: []
+    end
+
+    class PutLifecyclePolicyRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor lifecycle_policy_text: ::String
+      SENSITIVE: []
+    end
+
+    class PutLifecyclePolicyResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor lifecycle_policy_text: ::String
+      SENSITIVE: []
+    end
+
+    class PutRegistryPolicyRequest
+      attr_accessor policy_text: ::String
+      SENSITIVE: []
+    end
+
+    class PutRegistryPolicyResponse
+      attr_accessor registry_id: ::String
+      attr_accessor policy_text: ::String
+      SENSITIVE: []
+    end
+
+    class PutRegistryScanningConfigurationRequest
+      attr_accessor scan_type: ("BASIC" | "ENHANCED")
+      attr_accessor rules: ::Array[Types::RegistryScanningRule]
+      SENSITIVE: []
+    end
+
+    class PutRegistryScanningConfigurationResponse
+      attr_accessor registry_scanning_configuration: Types::RegistryScanningConfiguration
+      SENSITIVE: []
+    end
+
+    class PutReplicationConfigurationRequest
+      attr_accessor replication_configuration: Types::ReplicationConfiguration
+      SENSITIVE: []
+    end
+
+    class PutReplicationConfigurationResponse
+      attr_accessor replication_configuration: Types::ReplicationConfiguration
+      SENSITIVE: []
+    end
+
+    class Recommendation
+      attr_accessor url: ::String
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class ReferencedImagesNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RegistryPolicyNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RegistryScanningConfiguration
+      attr_accessor scan_type: ("BASIC" | "ENHANCED")
+      attr_accessor rules: ::Array[Types::RegistryScanningRule]
+      SENSITIVE: []
+    end
+
+    class RegistryScanningRule
+      attr_accessor scan_frequency: ("SCAN_ON_PUSH" | "CONTINUOUS_SCAN" | "MANUAL")
+      attr_accessor repository_filters: ::Array[Types::ScanningRepositoryFilter]
+      SENSITIVE: []
+    end
+
+    class Remediation
+      attr_accessor recommendation: Types::Recommendation
+      SENSITIVE: []
+    end
+
+    class ReplicationConfiguration
+      attr_accessor rules: ::Array[Types::ReplicationRule]
+      SENSITIVE: []
+    end
+
+    class ReplicationDestination
+      attr_accessor region: ::String
+      attr_accessor registry_id: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicationRule
+      attr_accessor destinations: ::Array[Types::ReplicationDestination]
+      attr_accessor repository_filters: ::Array[Types::RepositoryFilter]
+      SENSITIVE: []
+    end
+
+    class Repository
+      attr_accessor repository_arn: ::String
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor repository_uri: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor image_tag_mutability: ("MUTABLE" | "IMMUTABLE")
+      attr_accessor image_scanning_configuration: Types::ImageScanningConfiguration
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class RepositoryAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RepositoryFilter
+      attr_accessor filter: ::String
+      attr_accessor filter_type: ("PREFIX_MATCH")
+      SENSITIVE: []
+    end
+
+    class RepositoryNotEmptyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RepositoryNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RepositoryPolicyNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RepositoryScanningConfiguration
+      attr_accessor repository_arn: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor scan_on_push: bool
+      attr_accessor scan_frequency: ("SCAN_ON_PUSH" | "CONTINUOUS_SCAN" | "MANUAL")
+      attr_accessor applied_scan_filters: ::Array[Types::ScanningRepositoryFilter]
+      SENSITIVE: []
+    end
+
+    class RepositoryScanningConfigurationFailure
+      attr_accessor repository_name: ::String
+      attr_accessor failure_code: ("REPOSITORY_NOT_FOUND")
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class Resource
+      attr_accessor details: Types::ResourceDetails
+      attr_accessor id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceDetails
+      attr_accessor aws_ecr_container_image: Types::AwsEcrContainerImageDetails
+      SENSITIVE: []
+    end
+
+    class ScanNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ScanningRepositoryFilter
+      attr_accessor filter: ::String
+      attr_accessor filter_type: ("WILDCARD")
+      SENSITIVE: []
+    end
+
+    class ScoreDetails
+      attr_accessor cvss: Types::CvssScoreDetails
+      SENSITIVE: []
+    end
+
+    class SecretNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SetRepositoryPolicyRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor policy_text: ::String
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class SetRepositoryPolicyResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor policy_text: ::String
+      SENSITIVE: []
+    end
+
+    class StartImageScanRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor image_id: Types::ImageIdentifier
+      SENSITIVE: []
+    end
+
+    class StartImageScanResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor image_id: Types::ImageIdentifier
+      attr_accessor image_scan_status: Types::ImageScanStatus
+      SENSITIVE: []
+    end
+
+    class StartLifecyclePolicyPreviewRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor lifecycle_policy_text: ::String
+      SENSITIVE: []
+    end
+
+    class StartLifecyclePolicyPreviewResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor lifecycle_policy_text: ::String
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETE" | "EXPIRED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnableToAccessSecretException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnableToDecryptSecretValueException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnableToGetUpstreamImageException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnableToGetUpstreamLayerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedImageTypeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedUpstreamRegistryException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdatePullThroughCacheRuleRequest
+      attr_accessor registry_id: ::String
+      attr_accessor ecr_repository_prefix: ::String
+      attr_accessor credential_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePullThroughCacheRuleResponse
+      attr_accessor ecr_repository_prefix: ::String
+      attr_accessor registry_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor credential_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UploadLayerPartRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor upload_id: ::String
+      attr_accessor part_first_byte: ::Integer
+      attr_accessor part_last_byte: ::Integer
+      attr_accessor layer_part_blob: ::String
+      SENSITIVE: []
+    end
+
+    class UploadLayerPartResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor upload_id: ::String
+      attr_accessor last_byte_received: ::Integer
+      SENSITIVE: []
+    end
+
+    class UploadNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidatePullThroughCacheRuleRequest
+      attr_accessor ecr_repository_prefix: ::String
+      attr_accessor registry_id: ::String
+      SENSITIVE: []
+    end
+
+    class ValidatePullThroughCacheRuleResponse
+      attr_accessor ecr_repository_prefix: ::String
+      attr_accessor registry_id: ::String
+      attr_accessor upstream_registry_url: ::String
+      attr_accessor credential_arn: ::String
+      attr_accessor is_valid: bool
+      attr_accessor failure: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VulnerablePackage
+      attr_accessor arch: ::String
+      attr_accessor epoch: ::Integer
+      attr_accessor file_path: ::String
+      attr_accessor name: ::String
+      attr_accessor package_manager: ::String
+      attr_accessor release: ::String
+      attr_accessor source_layer_hash: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+  end
+end

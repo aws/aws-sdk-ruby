@@ -1,0 +1,902 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::XRay
+  module Types
+
+    class Alias
+      attr_accessor name: ::String
+      attr_accessor names: ::Array[::String]
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class AnnotationValue
+      attr_accessor number_value: ::Float
+      attr_accessor boolean_value: bool
+      attr_accessor string_value: ::String
+      SENSITIVE: []
+    end
+
+    class AnomalousService
+      attr_accessor service_id: Types::ServiceId
+      SENSITIVE: []
+    end
+
+    class AvailabilityZoneDetail
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class BackendConnectionErrors
+      attr_accessor timeout_count: ::Integer
+      attr_accessor connection_refused_count: ::Integer
+      attr_accessor http_code_4_xx_count: ::Integer
+      attr_accessor http_code_5_xx_count: ::Integer
+      attr_accessor unknown_host_count: ::Integer
+      attr_accessor other_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class BatchGetTracesRequest
+      attr_accessor trace_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetTracesResult
+      attr_accessor traces: ::Array[Types::Trace]
+      attr_accessor unprocessed_trace_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGroupRequest
+      attr_accessor group_name: ::String
+      attr_accessor filter_expression: ::String
+      attr_accessor insights_configuration: Types::InsightsConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateGroupResult
+      attr_accessor group: Types::Group
+      SENSITIVE: []
+    end
+
+    class CreateSamplingRuleRequest
+      attr_accessor sampling_rule: Types::SamplingRule
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateSamplingRuleResult
+      attr_accessor sampling_rule_record: Types::SamplingRuleRecord
+      SENSITIVE: []
+    end
+
+    class DeleteGroupRequest
+      attr_accessor group_name: ::String
+      attr_accessor group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGroupResult < Aws::EmptyStructure
+    end
+
+    class DeleteResourcePolicyRequest
+      attr_accessor policy_name: ::String
+      attr_accessor policy_revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyResult < Aws::EmptyStructure
+    end
+
+    class DeleteSamplingRuleRequest
+      attr_accessor rule_name: ::String
+      attr_accessor rule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSamplingRuleResult
+      attr_accessor sampling_rule_record: Types::SamplingRuleRecord
+      SENSITIVE: []
+    end
+
+    class Edge
+      attr_accessor reference_id: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor summary_statistics: Types::EdgeStatistics
+      attr_accessor response_time_histogram: ::Array[Types::HistogramEntry]
+      attr_accessor aliases: ::Array[Types::Alias]
+      attr_accessor edge_type: ::String
+      attr_accessor received_event_age_histogram: ::Array[Types::HistogramEntry]
+      SENSITIVE: []
+    end
+
+    class EdgeStatistics
+      attr_accessor ok_count: ::Integer
+      attr_accessor error_statistics: Types::ErrorStatistics
+      attr_accessor fault_statistics: Types::FaultStatistics
+      attr_accessor total_count: ::Integer
+      attr_accessor total_response_time: ::Float
+      SENSITIVE: []
+    end
+
+    class EncryptionConfig
+      attr_accessor key_id: ::String
+      attr_accessor status: ("UPDATING" | "ACTIVE")
+      attr_accessor type: ("NONE" | "KMS")
+      SENSITIVE: []
+    end
+
+    class ErrorRootCause
+      attr_accessor services: ::Array[Types::ErrorRootCauseService]
+      attr_accessor client_impacting: bool
+      SENSITIVE: []
+    end
+
+    class ErrorRootCauseEntity
+      attr_accessor name: ::String
+      attr_accessor exceptions: ::Array[Types::RootCauseException]
+      attr_accessor remote: bool
+      SENSITIVE: []
+    end
+
+    class ErrorRootCauseService
+      attr_accessor name: ::String
+      attr_accessor names: ::Array[::String]
+      attr_accessor type: ::String
+      attr_accessor account_id: ::String
+      attr_accessor entity_path: ::Array[Types::ErrorRootCauseEntity]
+      attr_accessor inferred: bool
+      SENSITIVE: []
+    end
+
+    class ErrorStatistics
+      attr_accessor throttle_count: ::Integer
+      attr_accessor other_count: ::Integer
+      attr_accessor total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class FaultRootCause
+      attr_accessor services: ::Array[Types::FaultRootCauseService]
+      attr_accessor client_impacting: bool
+      SENSITIVE: []
+    end
+
+    class FaultRootCauseEntity
+      attr_accessor name: ::String
+      attr_accessor exceptions: ::Array[Types::RootCauseException]
+      attr_accessor remote: bool
+      SENSITIVE: []
+    end
+
+    class FaultRootCauseService
+      attr_accessor name: ::String
+      attr_accessor names: ::Array[::String]
+      attr_accessor type: ::String
+      attr_accessor account_id: ::String
+      attr_accessor entity_path: ::Array[Types::FaultRootCauseEntity]
+      attr_accessor inferred: bool
+      SENSITIVE: []
+    end
+
+    class FaultStatistics
+      attr_accessor other_count: ::Integer
+      attr_accessor total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ForecastStatistics
+      attr_accessor fault_count_high: ::Integer
+      attr_accessor fault_count_low: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetEncryptionConfigRequest < Aws::EmptyStructure
+    end
+
+    class GetEncryptionConfigResult
+      attr_accessor encryption_config: Types::EncryptionConfig
+      SENSITIVE: []
+    end
+
+    class GetGroupRequest
+      attr_accessor group_name: ::String
+      attr_accessor group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetGroupResult
+      attr_accessor group: Types::Group
+      SENSITIVE: []
+    end
+
+    class GetGroupsRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetGroupsResult
+      attr_accessor groups: ::Array[Types::GroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetInsightEventsRequest
+      attr_accessor insight_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetInsightEventsResult
+      attr_accessor insight_events: ::Array[Types::InsightEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetInsightImpactGraphRequest
+      attr_accessor insight_id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetInsightImpactGraphResult
+      attr_accessor insight_id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor service_graph_start_time: ::Time
+      attr_accessor service_graph_end_time: ::Time
+      attr_accessor services: ::Array[Types::InsightImpactGraphService]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetInsightRequest
+      attr_accessor insight_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetInsightResult
+      attr_accessor insight: Types::Insight
+      SENSITIVE: []
+    end
+
+    class GetInsightSummariesRequest
+      attr_accessor states: ::Array[("ACTIVE" | "CLOSED")]
+      attr_accessor group_arn: ::String
+      attr_accessor group_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetInsightSummariesResult
+      attr_accessor insight_summaries: ::Array[Types::InsightSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSamplingRulesRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSamplingRulesResult
+      attr_accessor sampling_rule_records: ::Array[Types::SamplingRuleRecord]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSamplingStatisticSummariesRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSamplingStatisticSummariesResult
+      attr_accessor sampling_statistic_summaries: ::Array[Types::SamplingStatisticSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSamplingTargetsRequest
+      attr_accessor sampling_statistics_documents: ::Array[Types::SamplingStatisticsDocument]
+      SENSITIVE: []
+    end
+
+    class GetSamplingTargetsResult
+      attr_accessor sampling_target_documents: ::Array[Types::SamplingTargetDocument]
+      attr_accessor last_rule_modification: ::Time
+      attr_accessor unprocessed_statistics: ::Array[Types::UnprocessedStatistics]
+      SENSITIVE: []
+    end
+
+    class GetServiceGraphRequest
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor group_name: ::String
+      attr_accessor group_arn: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceGraphResult
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor services: ::Array[Types::Service]
+      attr_accessor contains_old_group_versions: bool
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetTimeSeriesServiceStatisticsRequest
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor group_name: ::String
+      attr_accessor group_arn: ::String
+      attr_accessor entity_selector_expression: ::String
+      attr_accessor period: ::Integer
+      attr_accessor forecast_statistics: bool
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetTimeSeriesServiceStatisticsResult
+      attr_accessor time_series_service_statistics: ::Array[Types::TimeSeriesServiceStatistics]
+      attr_accessor contains_old_group_versions: bool
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetTraceGraphRequest
+      attr_accessor trace_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetTraceGraphResult
+      attr_accessor services: ::Array[Types::Service]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetTraceSummariesRequest
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor time_range_type: ("TraceId" | "Event" | "Service")
+      attr_accessor sampling: bool
+      attr_accessor sampling_strategy: Types::SamplingStrategy
+      attr_accessor filter_expression: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetTraceSummariesResult
+      attr_accessor trace_summaries: ::Array[Types::TraceSummary]
+      attr_accessor approximate_time: ::Time
+      attr_accessor traces_processed_count: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Group
+      attr_accessor group_name: ::String
+      attr_accessor group_arn: ::String
+      attr_accessor filter_expression: ::String
+      attr_accessor insights_configuration: Types::InsightsConfiguration
+      SENSITIVE: []
+    end
+
+    class GroupSummary
+      attr_accessor group_name: ::String
+      attr_accessor group_arn: ::String
+      attr_accessor filter_expression: ::String
+      attr_accessor insights_configuration: Types::InsightsConfiguration
+      SENSITIVE: []
+    end
+
+    class HistogramEntry
+      attr_accessor value: ::Float
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
+    class Http
+      attr_accessor http_url: ::String
+      attr_accessor http_status: ::Integer
+      attr_accessor http_method: ::String
+      attr_accessor user_agent: ::String
+      attr_accessor client_ip: ::String
+      SENSITIVE: []
+    end
+
+    class Insight
+      attr_accessor insight_id: ::String
+      attr_accessor group_arn: ::String
+      attr_accessor group_name: ::String
+      attr_accessor root_cause_service_id: Types::ServiceId
+      attr_accessor categories: ::Array[("FAULT")]
+      attr_accessor state: ("ACTIVE" | "CLOSED")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor summary: ::String
+      attr_accessor client_request_impact_statistics: Types::RequestImpactStatistics
+      attr_accessor root_cause_service_request_impact_statistics: Types::RequestImpactStatistics
+      attr_accessor top_anomalous_services: ::Array[Types::AnomalousService]
+      SENSITIVE: []
+    end
+
+    class InsightEvent
+      attr_accessor summary: ::String
+      attr_accessor event_time: ::Time
+      attr_accessor client_request_impact_statistics: Types::RequestImpactStatistics
+      attr_accessor root_cause_service_request_impact_statistics: Types::RequestImpactStatistics
+      attr_accessor top_anomalous_services: ::Array[Types::AnomalousService]
+      SENSITIVE: []
+    end
+
+    class InsightImpactGraphEdge
+      attr_accessor reference_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class InsightImpactGraphService
+      attr_accessor reference_id: ::Integer
+      attr_accessor type: ::String
+      attr_accessor name: ::String
+      attr_accessor names: ::Array[::String]
+      attr_accessor account_id: ::String
+      attr_accessor edges: ::Array[Types::InsightImpactGraphEdge]
+      SENSITIVE: []
+    end
+
+    class InsightSummary
+      attr_accessor insight_id: ::String
+      attr_accessor group_arn: ::String
+      attr_accessor group_name: ::String
+      attr_accessor root_cause_service_id: Types::ServiceId
+      attr_accessor categories: ::Array[("FAULT")]
+      attr_accessor state: ("ACTIVE" | "CLOSED")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor summary: ::String
+      attr_accessor client_request_impact_statistics: Types::RequestImpactStatistics
+      attr_accessor root_cause_service_request_impact_statistics: Types::RequestImpactStatistics
+      attr_accessor top_anomalous_services: ::Array[Types::AnomalousService]
+      attr_accessor last_update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class InsightsConfiguration
+      attr_accessor insights_enabled: bool
+      attr_accessor notifications_enabled: bool
+      SENSITIVE: []
+    end
+
+    class InstanceIdDetail
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidPolicyRevisionIdException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourcePoliciesRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourcePoliciesResult
+      attr_accessor resource_policies: ::Array[Types::ResourcePolicy]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LockoutPreventionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MalformedPolicyDocumentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyCountLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PolicySizeLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PutEncryptionConfigRequest
+      attr_accessor key_id: ::String
+      attr_accessor type: ("NONE" | "KMS")
+      SENSITIVE: []
+    end
+
+    class PutEncryptionConfigResult
+      attr_accessor encryption_config: Types::EncryptionConfig
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyRequest
+      attr_accessor policy_name: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor policy_revision_id: ::String
+      attr_accessor bypass_policy_lockout_check: bool
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyResult
+      attr_accessor resource_policy: Types::ResourcePolicy
+      SENSITIVE: []
+    end
+
+    class PutTelemetryRecordsRequest
+      attr_accessor telemetry_records: ::Array[Types::TelemetryRecord]
+      attr_accessor ec2_instance_id: ::String
+      attr_accessor hostname: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutTelemetryRecordsResult < Aws::EmptyStructure
+    end
+
+    class PutTraceSegmentsRequest
+      attr_accessor trace_segment_documents: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PutTraceSegmentsResult
+      attr_accessor unprocessed_trace_segments: ::Array[Types::UnprocessedTraceSegment]
+      SENSITIVE: []
+    end
+
+    class RequestImpactStatistics
+      attr_accessor fault_count: ::Integer
+      attr_accessor ok_count: ::Integer
+      attr_accessor total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResourceARNDetail
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResourcePolicy
+      attr_accessor policy_name: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor policy_revision_id: ::String
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ResponseTimeRootCause
+      attr_accessor services: ::Array[Types::ResponseTimeRootCauseService]
+      attr_accessor client_impacting: bool
+      SENSITIVE: []
+    end
+
+    class ResponseTimeRootCauseEntity
+      attr_accessor name: ::String
+      attr_accessor coverage: ::Float
+      attr_accessor remote: bool
+      SENSITIVE: []
+    end
+
+    class ResponseTimeRootCauseService
+      attr_accessor name: ::String
+      attr_accessor names: ::Array[::String]
+      attr_accessor type: ::String
+      attr_accessor account_id: ::String
+      attr_accessor entity_path: ::Array[Types::ResponseTimeRootCauseEntity]
+      attr_accessor inferred: bool
+      SENSITIVE: []
+    end
+
+    class RootCauseException
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RuleLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SamplingRule
+      attr_accessor rule_name: ::String
+      attr_accessor rule_arn: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor fixed_rate: ::Float
+      attr_accessor reservoir_size: ::Integer
+      attr_accessor service_name: ::String
+      attr_accessor service_type: ::String
+      attr_accessor host: ::String
+      attr_accessor http_method: ::String
+      attr_accessor url_path: ::String
+      attr_accessor version: ::Integer
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SamplingRuleRecord
+      attr_accessor sampling_rule: Types::SamplingRule
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      SENSITIVE: []
+    end
+
+    class SamplingRuleUpdate
+      attr_accessor rule_name: ::String
+      attr_accessor rule_arn: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor fixed_rate: ::Float
+      attr_accessor reservoir_size: ::Integer
+      attr_accessor host: ::String
+      attr_accessor service_name: ::String
+      attr_accessor service_type: ::String
+      attr_accessor http_method: ::String
+      attr_accessor url_path: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SamplingStatisticSummary
+      attr_accessor rule_name: ::String
+      attr_accessor timestamp: ::Time
+      attr_accessor request_count: ::Integer
+      attr_accessor borrow_count: ::Integer
+      attr_accessor sampled_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SamplingStatisticsDocument
+      attr_accessor rule_name: ::String
+      attr_accessor client_id: ::String
+      attr_accessor timestamp: ::Time
+      attr_accessor request_count: ::Integer
+      attr_accessor sampled_count: ::Integer
+      attr_accessor borrow_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SamplingStrategy
+      attr_accessor name: ("PartialScan" | "FixedRate")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class SamplingTargetDocument
+      attr_accessor rule_name: ::String
+      attr_accessor fixed_rate: ::Float
+      attr_accessor reservoir_quota: ::Integer
+      attr_accessor reservoir_quota_ttl: ::Time
+      attr_accessor interval: ::Integer
+      SENSITIVE: []
+    end
+
+    class Segment
+      attr_accessor id: ::String
+      attr_accessor document: ::String
+      SENSITIVE: []
+    end
+
+    class Service
+      attr_accessor reference_id: ::Integer
+      attr_accessor name: ::String
+      attr_accessor names: ::Array[::String]
+      attr_accessor root: bool
+      attr_accessor account_id: ::String
+      attr_accessor type: ::String
+      attr_accessor state: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor edges: ::Array[Types::Edge]
+      attr_accessor summary_statistics: Types::ServiceStatistics
+      attr_accessor duration_histogram: ::Array[Types::HistogramEntry]
+      attr_accessor response_time_histogram: ::Array[Types::HistogramEntry]
+      SENSITIVE: []
+    end
+
+    class ServiceId
+      attr_accessor name: ::String
+      attr_accessor names: ::Array[::String]
+      attr_accessor account_id: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceStatistics
+      attr_accessor ok_count: ::Integer
+      attr_accessor error_statistics: Types::ErrorStatistics
+      attr_accessor fault_statistics: Types::FaultStatistics
+      attr_accessor total_count: ::Integer
+      attr_accessor total_response_time: ::Float
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TelemetryRecord
+      attr_accessor timestamp: ::Time
+      attr_accessor segments_received_count: ::Integer
+      attr_accessor segments_sent_count: ::Integer
+      attr_accessor segments_spillover_count: ::Integer
+      attr_accessor segments_rejected_count: ::Integer
+      attr_accessor backend_connection_errors: Types::BackendConnectionErrors
+      SENSITIVE: []
+    end
+
+    class ThrottledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TimeSeriesServiceStatistics
+      attr_accessor timestamp: ::Time
+      attr_accessor edge_summary_statistics: Types::EdgeStatistics
+      attr_accessor service_summary_statistics: Types::ServiceStatistics
+      attr_accessor service_forecast_statistics: Types::ForecastStatistics
+      attr_accessor response_time_histogram: ::Array[Types::HistogramEntry]
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class Trace
+      attr_accessor id: ::String
+      attr_accessor duration: ::Float
+      attr_accessor limit_exceeded: bool
+      attr_accessor segments: ::Array[Types::Segment]
+      SENSITIVE: []
+    end
+
+    class TraceSummary
+      attr_accessor id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor duration: ::Float
+      attr_accessor response_time: ::Float
+      attr_accessor has_fault: bool
+      attr_accessor has_error: bool
+      attr_accessor has_throttle: bool
+      attr_accessor is_partial: bool
+      attr_accessor http: Types::Http
+      attr_accessor annotations: ::Hash[::String, ::Array[Types::ValueWithServiceIds]]
+      attr_accessor users: ::Array[Types::TraceUser]
+      attr_accessor service_ids: ::Array[Types::ServiceId]
+      attr_accessor resource_arns: ::Array[Types::ResourceARNDetail]
+      attr_accessor instance_ids: ::Array[Types::InstanceIdDetail]
+      attr_accessor availability_zones: ::Array[Types::AvailabilityZoneDetail]
+      attr_accessor entry_point: Types::ServiceId
+      attr_accessor fault_root_causes: ::Array[Types::FaultRootCause]
+      attr_accessor error_root_causes: ::Array[Types::ErrorRootCause]
+      attr_accessor response_time_root_causes: ::Array[Types::ResponseTimeRootCause]
+      attr_accessor revision: ::Integer
+      attr_accessor matched_event_time: ::Time
+      SENSITIVE: []
+    end
+
+    class TraceUser
+      attr_accessor user_name: ::String
+      attr_accessor service_ids: ::Array[Types::ServiceId]
+      SENSITIVE: []
+    end
+
+    class UnprocessedStatistics
+      attr_accessor rule_name: ::String
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnprocessedTraceSegment
+      attr_accessor id: ::String
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateGroupRequest
+      attr_accessor group_name: ::String
+      attr_accessor group_arn: ::String
+      attr_accessor filter_expression: ::String
+      attr_accessor insights_configuration: Types::InsightsConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateGroupResult
+      attr_accessor group: Types::Group
+      SENSITIVE: []
+    end
+
+    class UpdateSamplingRuleRequest
+      attr_accessor sampling_rule_update: Types::SamplingRuleUpdate
+      SENSITIVE: []
+    end
+
+    class UpdateSamplingRuleResult
+      attr_accessor sampling_rule_record: Types::SamplingRuleRecord
+      SENSITIVE: []
+    end
+
+    class ValueWithServiceIds
+      attr_accessor annotation_value: Types::AnnotationValue
+      attr_accessor service_ids: ::Array[Types::ServiceId]
+      SENSITIVE: []
+    end
+  end
+end

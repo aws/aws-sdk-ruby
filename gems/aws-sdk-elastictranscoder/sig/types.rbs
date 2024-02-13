@@ -1,0 +1,559 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ElasticTranscoder
+  module Types
+
+    class AccessDeniedException < Aws::EmptyStructure
+    end
+
+    class Artwork
+      attr_accessor input_key: ::String
+      attr_accessor max_width: ::String
+      attr_accessor max_height: ::String
+      attr_accessor sizing_policy: ::String
+      attr_accessor padding_policy: ::String
+      attr_accessor album_art_format: ::String
+      attr_accessor encryption: Types::Encryption
+      SENSITIVE: []
+    end
+
+    class AudioCodecOptions
+      attr_accessor profile: ::String
+      attr_accessor bit_depth: ::String
+      attr_accessor bit_order: ::String
+      attr_accessor signed: ::String
+      SENSITIVE: []
+    end
+
+    class AudioParameters
+      attr_accessor codec: ::String
+      attr_accessor sample_rate: ::String
+      attr_accessor bit_rate: ::String
+      attr_accessor channels: ::String
+      attr_accessor audio_packing_mode: ::String
+      attr_accessor codec_options: Types::AudioCodecOptions
+      SENSITIVE: []
+    end
+
+    class CancelJobRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelJobResponse < Aws::EmptyStructure
+    end
+
+    class CaptionFormat
+      attr_accessor format: ::String
+      attr_accessor pattern: ::String
+      attr_accessor encryption: Types::Encryption
+      SENSITIVE: []
+    end
+
+    class CaptionSource
+      attr_accessor key: ::String
+      attr_accessor language: ::String
+      attr_accessor time_offset: ::String
+      attr_accessor label: ::String
+      attr_accessor encryption: Types::Encryption
+      SENSITIVE: []
+    end
+
+    class Captions
+      attr_accessor merge_policy: ::String
+      attr_accessor caption_sources: ::Array[Types::CaptionSource]
+      attr_accessor caption_formats: ::Array[Types::CaptionFormat]
+      SENSITIVE: []
+    end
+
+    class Clip
+      attr_accessor time_span: Types::TimeSpan
+      SENSITIVE: []
+    end
+
+    class CreateJobOutput
+      attr_accessor key: ::String
+      attr_accessor thumbnail_pattern: ::String
+      attr_accessor thumbnail_encryption: Types::Encryption
+      attr_accessor rotate: ::String
+      attr_accessor preset_id: ::String
+      attr_accessor segment_duration: ::String
+      attr_accessor watermarks: ::Array[Types::JobWatermark]
+      attr_accessor album_art: Types::JobAlbumArt
+      attr_accessor composition: ::Array[Types::Clip]
+      attr_accessor captions: Types::Captions
+      attr_accessor encryption: Types::Encryption
+      SENSITIVE: []
+    end
+
+    class CreateJobPlaylist
+      attr_accessor name: ::String
+      attr_accessor format: ::String
+      attr_accessor output_keys: ::Array[::String]
+      attr_accessor hls_content_protection: Types::HlsContentProtection
+      attr_accessor play_ready_drm: Types::PlayReadyDrm
+      SENSITIVE: []
+    end
+
+    class CreateJobRequest
+      attr_accessor pipeline_id: ::String
+      attr_accessor input: Types::JobInput
+      attr_accessor inputs: ::Array[Types::JobInput]
+      attr_accessor output: Types::CreateJobOutput
+      attr_accessor outputs: ::Array[Types::CreateJobOutput]
+      attr_accessor output_key_prefix: ::String
+      attr_accessor playlists: ::Array[Types::CreateJobPlaylist]
+      attr_accessor user_metadata: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateJobResponse
+      attr_accessor job: Types::Job
+      SENSITIVE: []
+    end
+
+    class CreatePipelineRequest
+      attr_accessor name: ::String
+      attr_accessor input_bucket: ::String
+      attr_accessor output_bucket: ::String
+      attr_accessor role: ::String
+      attr_accessor aws_kms_key_arn: ::String
+      attr_accessor notifications: Types::Notifications
+      attr_accessor content_config: Types::PipelineOutputConfig
+      attr_accessor thumbnail_config: Types::PipelineOutputConfig
+      SENSITIVE: []
+    end
+
+    class CreatePipelineResponse
+      attr_accessor pipeline: Types::Pipeline
+      attr_accessor warnings: ::Array[Types::Warning]
+      SENSITIVE: []
+    end
+
+    class CreatePresetRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor container: ::String
+      attr_accessor video: Types::VideoParameters
+      attr_accessor audio: Types::AudioParameters
+      attr_accessor thumbnails: Types::Thumbnails
+      SENSITIVE: []
+    end
+
+    class CreatePresetResponse
+      attr_accessor preset: Types::Preset
+      attr_accessor warning: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePipelineRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePipelineResponse < Aws::EmptyStructure
+    end
+
+    class DeletePresetRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePresetResponse < Aws::EmptyStructure
+    end
+
+    class DetectedProperties
+      attr_accessor width: ::Integer
+      attr_accessor height: ::Integer
+      attr_accessor frame_rate: ::String
+      attr_accessor file_size: ::Integer
+      attr_accessor duration_millis: ::Integer
+      SENSITIVE: []
+    end
+
+    class Encryption
+      attr_accessor mode: ::String
+      attr_accessor key: ::String
+      attr_accessor key_md_5: ::String
+      attr_accessor initialization_vector: ::String
+      SENSITIVE: []
+    end
+
+    class HlsContentProtection
+      attr_accessor method: ::String
+      attr_accessor key: ::String
+      attr_accessor key_md_5: ::String
+      attr_accessor initialization_vector: ::String
+      attr_accessor license_acquisition_url: ::String
+      attr_accessor key_storage_policy: ::String
+      SENSITIVE: []
+    end
+
+    class IncompatibleVersionException < Aws::EmptyStructure
+    end
+
+    class InputCaptions
+      attr_accessor merge_policy: ::String
+      attr_accessor caption_sources: ::Array[Types::CaptionSource]
+      SENSITIVE: []
+    end
+
+    class InternalServiceException < Aws::EmptyStructure
+    end
+
+    class Job
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor pipeline_id: ::String
+      attr_accessor input: Types::JobInput
+      attr_accessor inputs: ::Array[Types::JobInput]
+      attr_accessor output: Types::JobOutput
+      attr_accessor outputs: ::Array[Types::JobOutput]
+      attr_accessor output_key_prefix: ::String
+      attr_accessor playlists: ::Array[Types::Playlist]
+      attr_accessor status: ::String
+      attr_accessor user_metadata: ::Hash[::String, ::String]
+      attr_accessor timing: Types::Timing
+      SENSITIVE: []
+    end
+
+    class JobAlbumArt
+      attr_accessor merge_policy: ::String
+      attr_accessor artwork: ::Array[Types::Artwork]
+      SENSITIVE: []
+    end
+
+    class JobInput
+      attr_accessor key: ::String
+      attr_accessor frame_rate: ::String
+      attr_accessor resolution: ::String
+      attr_accessor aspect_ratio: ::String
+      attr_accessor interlaced: ::String
+      attr_accessor container: ::String
+      attr_accessor encryption: Types::Encryption
+      attr_accessor time_span: Types::TimeSpan
+      attr_accessor input_captions: Types::InputCaptions
+      attr_accessor detected_properties: Types::DetectedProperties
+      SENSITIVE: []
+    end
+
+    class JobOutput
+      attr_accessor id: ::String
+      attr_accessor key: ::String
+      attr_accessor thumbnail_pattern: ::String
+      attr_accessor thumbnail_encryption: Types::Encryption
+      attr_accessor rotate: ::String
+      attr_accessor preset_id: ::String
+      attr_accessor segment_duration: ::String
+      attr_accessor status: ::String
+      attr_accessor status_detail: ::String
+      attr_accessor duration: ::Integer
+      attr_accessor width: ::Integer
+      attr_accessor height: ::Integer
+      attr_accessor frame_rate: ::String
+      attr_accessor file_size: ::Integer
+      attr_accessor duration_millis: ::Integer
+      attr_accessor watermarks: ::Array[Types::JobWatermark]
+      attr_accessor album_art: Types::JobAlbumArt
+      attr_accessor composition: ::Array[Types::Clip]
+      attr_accessor captions: Types::Captions
+      attr_accessor encryption: Types::Encryption
+      attr_accessor applied_color_space_conversion: ::String
+      SENSITIVE: []
+    end
+
+    class JobWatermark
+      attr_accessor preset_watermark_id: ::String
+      attr_accessor input_key: ::String
+      attr_accessor encryption: Types::Encryption
+      SENSITIVE: []
+    end
+
+    class LimitExceededException < Aws::EmptyStructure
+    end
+
+    class ListJobsByPipelineRequest
+      attr_accessor pipeline_id: ::String
+      attr_accessor ascending: ::String
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobsByPipelineResponse
+      attr_accessor jobs: ::Array[Types::Job]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobsByStatusRequest
+      attr_accessor status: ::String
+      attr_accessor ascending: ::String
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobsByStatusResponse
+      attr_accessor jobs: ::Array[Types::Job]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPipelinesRequest
+      attr_accessor ascending: ::String
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPipelinesResponse
+      attr_accessor pipelines: ::Array[Types::Pipeline]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPresetsRequest
+      attr_accessor ascending: ::String
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPresetsResponse
+      attr_accessor presets: ::Array[Types::Preset]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class Notifications
+      attr_accessor progressing: ::String
+      attr_accessor completed: ::String
+      attr_accessor warning: ::String
+      attr_accessor error: ::String
+      SENSITIVE: []
+    end
+
+    class Permission
+      attr_accessor grantee_type: ::String
+      attr_accessor grantee: ::String
+      attr_accessor access: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Pipeline
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ::String
+      attr_accessor input_bucket: ::String
+      attr_accessor output_bucket: ::String
+      attr_accessor role: ::String
+      attr_accessor aws_kms_key_arn: ::String
+      attr_accessor notifications: Types::Notifications
+      attr_accessor content_config: Types::PipelineOutputConfig
+      attr_accessor thumbnail_config: Types::PipelineOutputConfig
+      SENSITIVE: []
+    end
+
+    class PipelineOutputConfig
+      attr_accessor bucket: ::String
+      attr_accessor storage_class: ::String
+      attr_accessor permissions: ::Array[Types::Permission]
+      SENSITIVE: []
+    end
+
+    class PlayReadyDrm
+      attr_accessor format: ::String
+      attr_accessor key: ::String
+      attr_accessor key_md_5: ::String
+      attr_accessor key_id: ::String
+      attr_accessor initialization_vector: ::String
+      attr_accessor license_acquisition_url: ::String
+      SENSITIVE: []
+    end
+
+    class Playlist
+      attr_accessor name: ::String
+      attr_accessor format: ::String
+      attr_accessor output_keys: ::Array[::String]
+      attr_accessor hls_content_protection: Types::HlsContentProtection
+      attr_accessor play_ready_drm: Types::PlayReadyDrm
+      attr_accessor status: ::String
+      attr_accessor status_detail: ::String
+      SENSITIVE: []
+    end
+
+    class Preset
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor container: ::String
+      attr_accessor audio: Types::AudioParameters
+      attr_accessor video: Types::VideoParameters
+      attr_accessor thumbnails: Types::Thumbnails
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class PresetWatermark
+      attr_accessor id: ::String
+      attr_accessor max_width: ::String
+      attr_accessor max_height: ::String
+      attr_accessor sizing_policy: ::String
+      attr_accessor horizontal_align: ::String
+      attr_accessor horizontal_offset: ::String
+      attr_accessor vertical_align: ::String
+      attr_accessor vertical_offset: ::String
+      attr_accessor opacity: ::String
+      attr_accessor target: ::String
+      SENSITIVE: []
+    end
+
+    class ReadJobRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class ReadJobResponse
+      attr_accessor job: Types::Job
+      SENSITIVE: []
+    end
+
+    class ReadPipelineRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class ReadPipelineResponse
+      attr_accessor pipeline: Types::Pipeline
+      attr_accessor warnings: ::Array[Types::Warning]
+      SENSITIVE: []
+    end
+
+    class ReadPresetRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class ReadPresetResponse
+      attr_accessor preset: Types::Preset
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException < Aws::EmptyStructure
+    end
+
+    class TestRoleRequest
+      attr_accessor role: ::String
+      attr_accessor input_bucket: ::String
+      attr_accessor output_bucket: ::String
+      attr_accessor topics: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TestRoleResponse
+      attr_accessor success: ::String
+      attr_accessor messages: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Thumbnails
+      attr_accessor format: ::String
+      attr_accessor interval: ::String
+      attr_accessor resolution: ::String
+      attr_accessor aspect_ratio: ::String
+      attr_accessor max_width: ::String
+      attr_accessor max_height: ::String
+      attr_accessor sizing_policy: ::String
+      attr_accessor padding_policy: ::String
+      SENSITIVE: []
+    end
+
+    class TimeSpan
+      attr_accessor start_time: ::String
+      attr_accessor duration: ::String
+      SENSITIVE: []
+    end
+
+    class Timing
+      attr_accessor submit_time_millis: ::Integer
+      attr_accessor start_time_millis: ::Integer
+      attr_accessor finish_time_millis: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdatePipelineNotificationsRequest
+      attr_accessor id: ::String
+      attr_accessor notifications: Types::Notifications
+      SENSITIVE: []
+    end
+
+    class UpdatePipelineNotificationsResponse
+      attr_accessor pipeline: Types::Pipeline
+      SENSITIVE: []
+    end
+
+    class UpdatePipelineRequest
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor input_bucket: ::String
+      attr_accessor role: ::String
+      attr_accessor aws_kms_key_arn: ::String
+      attr_accessor notifications: Types::Notifications
+      attr_accessor content_config: Types::PipelineOutputConfig
+      attr_accessor thumbnail_config: Types::PipelineOutputConfig
+      SENSITIVE: []
+    end
+
+    class UpdatePipelineResponse
+      attr_accessor pipeline: Types::Pipeline
+      attr_accessor warnings: ::Array[Types::Warning]
+      SENSITIVE: []
+    end
+
+    class UpdatePipelineStatusRequest
+      attr_accessor id: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePipelineStatusResponse
+      attr_accessor pipeline: Types::Pipeline
+      SENSITIVE: []
+    end
+
+    class ValidationException < Aws::EmptyStructure
+    end
+
+    class VideoParameters
+      attr_accessor codec: ::String
+      attr_accessor codec_options: ::Hash[::String, ::String]
+      attr_accessor keyframes_max_dist: ::String
+      attr_accessor fixed_gop: ::String
+      attr_accessor bit_rate: ::String
+      attr_accessor frame_rate: ::String
+      attr_accessor max_frame_rate: ::String
+      attr_accessor resolution: ::String
+      attr_accessor aspect_ratio: ::String
+      attr_accessor max_width: ::String
+      attr_accessor max_height: ::String
+      attr_accessor display_aspect_ratio: ::String
+      attr_accessor sizing_policy: ::String
+      attr_accessor padding_policy: ::String
+      attr_accessor watermarks: ::Array[Types::PresetWatermark]
+      SENSITIVE: []
+    end
+
+    class Warning
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

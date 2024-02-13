@@ -1061,6 +1061,49 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # Action to create a replication of the source bot in the secondary
+    # region.
+    #
+    # @option params [required, String] :bot_id
+    #   The request for the unique bot ID of the source bot to be replicated
+    #   in the secondary region.
+    #
+    # @option params [required, String] :replica_region
+    #   The request for the secondary region that will be used in the
+    #   replication of the source bot.
+    #
+    # @return [Types::CreateBotReplicaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBotReplicaResponse#bot_id #bot_id} => String
+    #   * {Types::CreateBotReplicaResponse#replica_region #replica_region} => String
+    #   * {Types::CreateBotReplicaResponse#source_region #source_region} => String
+    #   * {Types::CreateBotReplicaResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::CreateBotReplicaResponse#bot_replica_status #bot_replica_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_bot_replica({
+    #     bot_id: "Id", # required
+    #     replica_region: "ReplicaRegion", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.replica_region #=> String
+    #   resp.source_region #=> String
+    #   resp.creation_date_time #=> Time
+    #   resp.bot_replica_status #=> String, one of "Enabling", "Enabled", "Deleting", "Failed"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateBotReplica AWS API Documentation
+    #
+    # @overload create_bot_replica(params = {})
+    # @param [Hash] params ({})
+    def create_bot_replica(params = {}, options = {})
+      req = build_request(:create_bot_replica, params)
+      req.send_request(options)
+    end
+
     # Creates an immutable version of the bot. When you create the first
     # version of a bot, Amazon Lex sets the version number to 1. Subsequent
     # bot versions increase in an increment of 1. The version number will
@@ -2715,6 +2758,43 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # The action to delete the replicated bot in the secondary region.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique ID of the replicated bot to be deleted from the secondary
+    #   region
+    #
+    # @option params [required, String] :replica_region
+    #   The secondary region of the replicated bot that will be deleted.
+    #
+    # @return [Types::DeleteBotReplicaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteBotReplicaResponse#bot_id #bot_id} => String
+    #   * {Types::DeleteBotReplicaResponse#replica_region #replica_region} => String
+    #   * {Types::DeleteBotReplicaResponse#bot_replica_status #bot_replica_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_bot_replica({
+    #     bot_id: "Id", # required
+    #     replica_region: "ReplicaRegion", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.replica_region #=> String
+    #   resp.bot_replica_status #=> String, one of "Enabling", "Enabled", "Deleting", "Failed"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteBotReplica AWS API Documentation
+    #
+    # @overload delete_bot_replica(params = {})
+    # @param [Hash] params ({})
+    def delete_bot_replica(params = {}, options = {})
+      req = build_request(:delete_bot_replica, params)
+      req.send_request(options)
+    end
+
     # Deletes a specific version of a bot. To delete all versions of a bot,
     # use the [DeleteBot][1] operation.
     #
@@ -3488,6 +3568,50 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def describe_bot_recommendation(params = {}, options = {})
       req = build_request(:describe_bot_recommendation, params)
+      req.send_request(options)
+    end
+
+    # Monitors the bot replication status through the UI console.
+    #
+    # @option params [required, String] :bot_id
+    #   The request for the unique bot ID of the replicated bot being
+    #   monitored.
+    #
+    # @option params [required, String] :replica_region
+    #   The request for the region of the replicated bot being monitored.
+    #
+    # @return [Types::DescribeBotReplicaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBotReplicaResponse#bot_id #bot_id} => String
+    #   * {Types::DescribeBotReplicaResponse#replica_region #replica_region} => String
+    #   * {Types::DescribeBotReplicaResponse#source_region #source_region} => String
+    #   * {Types::DescribeBotReplicaResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::DescribeBotReplicaResponse#bot_replica_status #bot_replica_status} => String
+    #   * {Types::DescribeBotReplicaResponse#failure_reasons #failure_reasons} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_bot_replica({
+    #     bot_id: "Id", # required
+    #     replica_region: "ReplicaRegion", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.replica_region #=> String
+    #   resp.source_region #=> String
+    #   resp.creation_date_time #=> Time
+    #   resp.bot_replica_status #=> String, one of "Enabling", "Enabled", "Deleting", "Failed"
+    #   resp.failure_reasons #=> Array
+    #   resp.failure_reasons[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotReplica AWS API Documentation
+    #
+    # @overload describe_bot_replica(params = {})
+    # @param [Hash] params ({})
+    def describe_bot_replica(params = {}, options = {})
+      req = build_request(:describe_bot_replica, params)
       req.send_request(options)
     end
 
@@ -5200,6 +5324,68 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # The action to list the replicated bots created from the source bot
+    # alias.
+    #
+    # @option params [required, String] :bot_id
+    #   The request for the unique bot ID of the replicated bot created from
+    #   the source bot alias.
+    #
+    # @option params [required, String] :replica_region
+    #   The request for the secondary region of the replicated bot created
+    #   from the source bot alias.
+    #
+    # @option params [Integer] :max_results
+    #   The request for maximum results to list the replicated bots created
+    #   from the source bot alias.
+    #
+    # @option params [String] :next_token
+    #   The request for the next token for the replicated bot created from the
+    #   source bot alias.
+    #
+    # @return [Types::ListBotAliasReplicasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBotAliasReplicasResponse#bot_id #bot_id} => String
+    #   * {Types::ListBotAliasReplicasResponse#source_region #source_region} => String
+    #   * {Types::ListBotAliasReplicasResponse#replica_region #replica_region} => String
+    #   * {Types::ListBotAliasReplicasResponse#bot_alias_replica_summaries #bot_alias_replica_summaries} => Array&lt;Types::BotAliasReplicaSummary&gt;
+    #   * {Types::ListBotAliasReplicasResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_bot_alias_replicas({
+    #     bot_id: "Id", # required
+    #     replica_region: "ReplicaRegion", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.source_region #=> String
+    #   resp.replica_region #=> String
+    #   resp.bot_alias_replica_summaries #=> Array
+    #   resp.bot_alias_replica_summaries[0].bot_alias_id #=> String
+    #   resp.bot_alias_replica_summaries[0].bot_alias_replication_status #=> String, one of "Creating", "Updating", "Available", "Deleting", "Failed"
+    #   resp.bot_alias_replica_summaries[0].bot_version #=> String
+    #   resp.bot_alias_replica_summaries[0].creation_date_time #=> Time
+    #   resp.bot_alias_replica_summaries[0].last_updated_date_time #=> Time
+    #   resp.bot_alias_replica_summaries[0].failure_reasons #=> Array
+    #   resp.bot_alias_replica_summaries[0].failure_reasons[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListBotAliasReplicas AWS API Documentation
+    #
+    # @overload list_bot_alias_replicas(params = {})
+    # @param [Hash] params ({})
+    def list_bot_alias_replicas(params = {}, options = {})
+      req = build_request(:list_bot_alias_replicas, params)
+      req.send_request(options)
+    end
+
     # Gets a list of aliases for the specified bot.
     #
     # @option params [required, String] :bot_id
@@ -5398,6 +5584,43 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # The action to list the replicated bots.
+    #
+    # @option params [required, String] :bot_id
+    #   The request for the unique bot IDs in the list of replicated bots.
+    #
+    # @return [Types::ListBotReplicasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBotReplicasResponse#bot_id #bot_id} => String
+    #   * {Types::ListBotReplicasResponse#source_region #source_region} => String
+    #   * {Types::ListBotReplicasResponse#bot_replica_summaries #bot_replica_summaries} => Array&lt;Types::BotReplicaSummary&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_bot_replicas({
+    #     bot_id: "Id", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.source_region #=> String
+    #   resp.bot_replica_summaries #=> Array
+    #   resp.bot_replica_summaries[0].replica_region #=> String
+    #   resp.bot_replica_summaries[0].creation_date_time #=> Time
+    #   resp.bot_replica_summaries[0].bot_replica_status #=> String, one of "Enabling", "Enabled", "Deleting", "Failed"
+    #   resp.bot_replica_summaries[0].failure_reasons #=> Array
+    #   resp.bot_replica_summaries[0].failure_reasons[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListBotReplicas AWS API Documentation
+    #
+    # @overload list_bot_replicas(params = {})
+    # @param [Hash] params ({})
+    def list_bot_replicas(params = {}, options = {})
+      req = build_request(:list_bot_replicas, params)
+      req.send_request(options)
+    end
+
     # Lists the generation requests made for a bot locale.
     #
     # @option params [required, String] :bot_id
@@ -5465,6 +5688,69 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def list_bot_resource_generations(params = {}, options = {})
       req = build_request(:list_bot_resource_generations, params)
+      req.send_request(options)
+    end
+
+    # Contains information about all the versions replication statuses
+    # applicable for Global Resiliency.
+    #
+    # @option params [required, String] :bot_id
+    #   The request for the unique ID in the list of replicated bots.
+    #
+    # @option params [required, String] :replica_region
+    #   The request for the region used in the list of replicated bots.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum results given in the list of replicated bots.
+    #
+    # @option params [String] :next_token
+    #   The next token given in the list of replicated bots.
+    #
+    # @option params [Types::BotVersionReplicaSortBy] :sort_by
+    #   The requested sort category for the list of replicated bots.
+    #
+    # @return [Types::ListBotVersionReplicasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBotVersionReplicasResponse#bot_id #bot_id} => String
+    #   * {Types::ListBotVersionReplicasResponse#source_region #source_region} => String
+    #   * {Types::ListBotVersionReplicasResponse#replica_region #replica_region} => String
+    #   * {Types::ListBotVersionReplicasResponse#bot_version_replica_summaries #bot_version_replica_summaries} => Array&lt;Types::BotVersionReplicaSummary&gt;
+    #   * {Types::ListBotVersionReplicasResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_bot_version_replicas({
+    #     bot_id: "Id", # required
+    #     replica_region: "ReplicaRegion", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     sort_by: {
+    #       attribute: "BotVersion", # required, accepts BotVersion
+    #       order: "Ascending", # required, accepts Ascending, Descending
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.source_region #=> String
+    #   resp.replica_region #=> String
+    #   resp.bot_version_replica_summaries #=> Array
+    #   resp.bot_version_replica_summaries[0].bot_version #=> String
+    #   resp.bot_version_replica_summaries[0].bot_version_replication_status #=> String, one of "Creating", "Available", "Deleting", "Failed"
+    #   resp.bot_version_replica_summaries[0].creation_date_time #=> Time
+    #   resp.bot_version_replica_summaries[0].failure_reasons #=> Array
+    #   resp.bot_version_replica_summaries[0].failure_reasons[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListBotVersionReplicas AWS API Documentation
+    #
+    # @overload list_bot_version_replicas(params = {})
+    # @param [Hash] params ({})
+    def list_bot_version_replicas(params = {}, options = {})
+      req = build_request(:list_bot_version_replicas, params)
       req.send_request(options)
     end
 
@@ -10055,7 +10341,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

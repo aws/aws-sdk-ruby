@@ -352,6 +352,13 @@ module Aws::SSM
     #   association.
     #   @return [Integer]
     #
+    # @!attribute [rw] duration
+    #   The number of hours that an association can run on specified
+    #   targets. After the resulting cutoff time passes, associations that
+    #   are currently running are cancelled, and no pending executions are
+    #   started on remaining targets.
+    #   @return [Integer]
+    #
     # @!attribute [rw] target_maps
     #   A key-value mapping of document parameters to target resources. Both
     #   Targets and TargetMaps can't be specified together.
@@ -371,6 +378,7 @@ module Aws::SSM
       :schedule_expression,
       :association_name,
       :schedule_offset,
+      :duration,
       :target_maps)
       SENSITIVE = []
       include Aws::Structure
@@ -538,6 +546,13 @@ module Aws::SSM
     #   association.
     #   @return [Integer]
     #
+    # @!attribute [rw] duration
+    #   The number of hours that an association can run on specified
+    #   targets. After the resulting cutoff time passes, associations that
+    #   are currently running are cancelled, and no pending executions are
+    #   started on remaining targets.
+    #   @return [Integer]
+    #
     # @!attribute [rw] target_maps
     #   A key-value mapping of document parameters to target resources. Both
     #   Targets and TargetMaps can't be specified together.
@@ -580,6 +595,7 @@ module Aws::SSM
       :calendar_names,
       :target_locations,
       :schedule_offset,
+      :duration,
       :target_maps,
       :alarm_configuration,
       :triggered_alarms)
@@ -989,6 +1005,13 @@ module Aws::SSM
     #   association.
     #   @return [Integer]
     #
+    # @!attribute [rw] duration
+    #   The number of hours that an association can run on specified
+    #   targets. After the resulting cutoff time passes, associations that
+    #   are currently running are cancelled, and no pending executions are
+    #   started on remaining targets.
+    #   @return [Integer]
+    #
     # @!attribute [rw] target_maps
     #   A key-value mapping of document parameters to target resources. Both
     #   Targets and TargetMaps can't be specified together.
@@ -1015,6 +1038,7 @@ module Aws::SSM
       :calendar_names,
       :target_locations,
       :schedule_offset,
+      :duration,
       :target_maps)
       SENSITIVE = [:parameters]
       include Aws::Structure
@@ -2940,6 +2964,25 @@ module Aws::SSM
     #   association.
     #   @return [Integer]
     #
+    # @!attribute [rw] duration
+    #   The number of hours the association can run before it is canceled.
+    #   Duration applies to associations that are currently running, and any
+    #   pending and in progress commands on all targets. If a target was
+    #   taken offline for the association to run, it is made available again
+    #   immediately, without a reboot.
+    #
+    #   The `Duration` parameter applies only when both these conditions are
+    #   true:
+    #
+    #   * The association for which you specify a duration is cancelable
+    #     according to the parameters of the SSM command document or
+    #     Automation runbook associated with this execution.
+    #
+    #   * The command specifies the ` ApplyOnlyAtCronInterval ` parameter,
+    #     which means that the association doesn't run immediately after it
+    #     is created, but only according to the specified schedule.
+    #   @return [Integer]
+    #
     # @!attribute [rw] target_maps
     #   A key-value mapping of document parameters to target resources. Both
     #   Targets and TargetMaps can't be specified together.
@@ -2970,6 +3013,7 @@ module Aws::SSM
       :calendar_names,
       :target_locations,
       :schedule_offset,
+      :duration,
       :target_maps,
       :alarm_configuration)
       SENSITIVE = [:parameters]
@@ -3182,6 +3226,25 @@ module Aws::SSM
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html
     #   @return [Integer]
     #
+    # @!attribute [rw] duration
+    #   The number of hours the association can run before it is canceled.
+    #   Duration applies to associations that are currently running, and any
+    #   pending and in progress commands on all targets. If a target was
+    #   taken offline for the association to run, it is made available again
+    #   immediately, without a reboot.
+    #
+    #   The `Duration` parameter applies only when both these conditions are
+    #   true:
+    #
+    #   * The association for which you specify a duration is cancelable
+    #     according to the parameters of the SSM command document or
+    #     Automation runbook associated with this execution.
+    #
+    #   * The command specifies the ` ApplyOnlyAtCronInterval ` parameter,
+    #     which means that the association doesn't run immediately after it
+    #     is created, but only according to the specified schedule.
+    #   @return [Integer]
+    #
     # @!attribute [rw] target_maps
     #   A key-value mapping of document parameters to target resources. Both
     #   Targets and TargetMaps can't be specified together.
@@ -3220,6 +3283,7 @@ module Aws::SSM
       :calendar_names,
       :target_locations,
       :schedule_offset,
+      :duration,
       :target_maps,
       :tags,
       :alarm_configuration)
@@ -4937,8 +5001,8 @@ module Aws::SSM
     #
     # @!attribute [rw] version_name
     #   An optional field specifying the version of the artifact associated
-    #   with the document. For example, "Release 12, Update 6". This value
-    #   is unique across all versions of a document, and can't be changed.
+    #   with the document. For example, 12.6. This value is unique across
+    #   all versions of a document, and can't be changed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocumentRequest AWS API Documentation
@@ -6572,8 +6636,8 @@ module Aws::SSM
     #
     # @!attribute [rw] version_name
     #   An optional field specifying the version of the artifact associated
-    #   with the document. For example, "Release 12, Update 6". This value
-    #   is unique across all versions of a document, and can't be changed.
+    #   with the document. For example, 12.6. This value is unique across
+    #   all versions of a document, and can't be changed.
     #   @return [String]
     #
     # @!attribute [rw] platform_types
@@ -6839,8 +6903,8 @@ module Aws::SSM
     #
     # @!attribute [rw] version_name
     #   An optional field specifying the version of the artifact associated
-    #   with the document. For example, "Release 12, Update 6". This value
-    #   is unique across all versions of a document, and can't be changed.
+    #   with the document. For example, 12.6. This value is unique across
+    #   all versions of a document, and can't be changed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentRequires AWS API Documentation
@@ -6959,8 +7023,8 @@ module Aws::SSM
     #
     # @!attribute [rw] version_name
     #   The version of the artifact associated with the document. For
-    #   example, "Release 12, Update 6". This value is unique across all
-    #   versions of a document, and can't be changed.
+    #   example, 12.6. This value is unique across all versions of a
+    #   document, and can't be changed.
     #   @return [String]
     #
     # @!attribute [rw] created_date
@@ -7497,8 +7561,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the connection to the managed node. For example,
-    #   'Connected' or 'Not Connected'.
+    #   The status of the connection to the managed node.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetConnectionStatusResponse AWS API Documentation
@@ -7600,8 +7663,8 @@ module Aws::SSM
     #
     # @!attribute [rw] version_name
     #   An optional field specifying the version of the artifact associated
-    #   with the document. For example, "Release 12, Update 6". This value
-    #   is unique across all versions of a document and can't be changed.
+    #   with the document. For example, 12.6. This value is unique across
+    #   all versions of a document and can't be changed.
     #   @return [String]
     #
     # @!attribute [rw] document_version
@@ -7640,8 +7703,8 @@ module Aws::SSM
     #
     # @!attribute [rw] version_name
     #   The version of the artifact associated with the document. For
-    #   example, "Release 12, Update 6". This value is unique across all
-    #   versions of a document, and can't be changed.
+    #   example, 12.6. This value is unique across all versions of a
+    #   document, and can't be changed.
     #   @return [String]
     #
     # @!attribute [rw] document_version
@@ -13664,7 +13727,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   The ID of the query key used for this parameter.
+    #   The alias of the Key Management Service (KMS) key used to encrypt
+    #   the parameter. Applies to `SecureString` parameters only
     #   @return [String]
     #
     # @!attribute [rw] last_modified_date
@@ -13831,7 +13895,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   The ID of the query key used for this parameter.
+    #   The alias of the Key Management Service (KMS) key used to encrypt
+    #   the parameter. Applies to `SecureString` parameters only.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_date
@@ -14276,6 +14341,11 @@ module Aws::SSM
     # @!attribute [rw] cve_ids
     #   The IDs of one or more Common Vulnerabilities and Exposure (CVE)
     #   issues that are resolved by the patch.
+    #
+    #   <note markdown="1"> Currently, CVE ID values are reported only for patches with a status
+    #   of `Missing` or `Failed`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchComplianceData AWS API Documentation
@@ -18047,6 +18117,25 @@ module Aws::SSM
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html
     #   @return [Integer]
     #
+    # @!attribute [rw] duration
+    #   The number of hours the association can run before it is canceled.
+    #   Duration applies to associations that are currently running, and any
+    #   pending and in progress commands on all targets. If a target was
+    #   taken offline for the association to run, it is made available again
+    #   immediately, without a reboot.
+    #
+    #   The `Duration` parameter applies only when both these conditions are
+    #   true:
+    #
+    #   * The association for which you specify a duration is cancelable
+    #     according to the parameters of the SSM command document or
+    #     Automation runbook associated with this execution.
+    #
+    #   * The command specifies the ` ApplyOnlyAtCronInterval ` parameter,
+    #     which means that the association doesn't run immediately after it
+    #     is updated, but only according to the specified schedule.
+    #   @return [Integer]
+    #
     # @!attribute [rw] target_maps
     #   A key-value mapping of document parameters to target resources. Both
     #   Targets and TargetMaps can't be specified together.
@@ -18078,6 +18167,7 @@ module Aws::SSM
       :calendar_names,
       :target_locations,
       :schedule_offset,
+      :duration,
       :target_maps,
       :alarm_configuration)
       SENSITIVE = [:parameters]
@@ -18212,9 +18302,8 @@ module Aws::SSM
     #
     # @!attribute [rw] version_name
     #   An optional field specifying the version of the artifact you are
-    #   updating with the document. For example, "Release 12, Update 6".
-    #   This value is unique across all versions of a document, and can't
-    #   be changed.
+    #   updating with the document. For example, 12.6. This value is unique
+    #   across all versions of a document, and can't be changed.
     #   @return [String]
     #
     # @!attribute [rw] document_version

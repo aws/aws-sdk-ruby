@@ -1,0 +1,69 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module LicenseManager
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class AuthorizationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class EntitlementNotAllowedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class FailedDependencyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def error_code: () -> ::String
+      end
+      class FilterLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidParameterValueException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidResourceStateException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LicenseUsageException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoEntitlementsAllowedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RateLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RedirectException < ::Aws::Errors::ServiceError
+        def location: () -> ::String
+        def message: () -> ::String
+      end
+      class ResourceLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServerInternalException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnsupportedDigitalSignatureMethodException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ValidationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

@@ -762,6 +762,49 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   When set to `True`, returns the list of change IDs and properties
+    #   that will be cancelled without actually cancelling the change.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CancelDomainConfigChangeRequest AWS API Documentation
+    #
+    class CancelDomainConfigChangeRequest < Struct.new(
+      :domain_name,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cancelled_change_ids
+    #   The unique identifiers of the changes that were cancelled.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cancelled_change_properties
+    #   The domain change properties that were cancelled.
+    #   @return [Array<Types::CancelledChangeProperty>]
+    #
+    # @!attribute [rw] dry_run
+    #   Whether or not the request was a dry run. If `True`, the changes
+    #   were not actually cancelled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CancelDomainConfigChangeResponse AWS API Documentation
+    #
+    class CancelDomainConfigChangeResponse < Struct.new(
+      :cancelled_change_ids,
+      :cancelled_change_properties,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for the request parameters to cancel a service software
     # update.
     #
@@ -794,6 +837,33 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # A property change that was cancelled for an Amazon OpenSearch Service
+    # domain.
+    #
+    # @!attribute [rw] property_name
+    #   The name of the property whose change was cancelled.
+    #   @return [String]
+    #
+    # @!attribute [rw] cancelled_value
+    #   The pending value of the property that was cancelled. This would
+    #   have been the eventual value of the property if the chance had not
+    #   been cancelled.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_value
+    #   The current value of the property, after the change was cancelled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CancelledChangeProperty AWS API Documentation
+    #
+    class CancelledChangeProperty < Struct.new(
+      :property_name,
+      :cancelled_value,
+      :active_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for information about a configuration change happening on a
     # domain.
     #
@@ -805,11 +875,32 @@ module Aws::OpenSearchService
     #   A message corresponding to the status of the configuration change.
     #   @return [String]
     #
+    # @!attribute [rw] config_change_status
+    #   The current status of the configuration change.
+    #   @return [String]
+    #
+    # @!attribute [rw] initiated_by
+    #   The IAM principal who initiated the configuration change.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time that the configuration change was initiated, in Universal
+    #   Coordinated Time (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The last time that the configuration change was updated.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ChangeProgressDetails AWS API Documentation
     #
     class ChangeProgressDetails < Struct.new(
       :change_id,
-      :message)
+      :message,
+      :config_change_status,
+      :initiated_by,
+      :start_time,
+      :last_updated_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -877,6 +968,19 @@ module Aws::OpenSearchService
     #   configuration change.
     #   @return [Array<Types::ChangeProgressStage>]
     #
+    # @!attribute [rw] last_updated_time
+    #   The last time that the status of the configuration change was
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] config_change_status
+    #   The current status of the configuration change.
+    #   @return [String]
+    #
+    # @!attribute [rw] initiated_by
+    #   The IAM principal who initiated the configuration change.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ChangeProgressStatusDetails AWS API Documentation
     #
     class ChangeProgressStatusDetails < Struct.new(
@@ -886,7 +990,10 @@ module Aws::OpenSearchService
       :pending_properties,
       :completed_properties,
       :total_number_of_stages,
-      :change_progress_stages)
+      :change_progress_stages,
+      :last_updated_time,
+      :config_change_status,
+      :initiated_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2585,6 +2692,11 @@ module Aws::OpenSearchService
     #   Software update options for the domain.
     #   @return [Types::SoftwareUpdateOptionsStatus]
     #
+    # @!attribute [rw] modifying_properties
+    #   Information about the domain properties that are currently being
+    #   modified.
+    #   @return [Array<Types::ModifyingProperties>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DomainConfig AWS API Documentation
     #
     class DomainConfig < Struct.new(
@@ -2605,7 +2717,8 @@ module Aws::OpenSearchService
       :auto_tune_options,
       :change_progress_details,
       :off_peak_window_options,
-      :software_update_options)
+      :software_update_options,
+      :modifying_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3017,6 +3130,16 @@ module Aws::OpenSearchService
     #   Service software update options for the domain.
     #   @return [Types::SoftwareUpdateOptions]
     #
+    # @!attribute [rw] domain_processing_status
+    #   The status of any changes that are currently in progress for the
+    #   domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] modifying_properties
+    #   Information about the domain properties that are currently being
+    #   modified.
+    #   @return [Array<Types::ModifyingProperties>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DomainStatus AWS API Documentation
     #
     class DomainStatus < Struct.new(
@@ -3048,7 +3171,9 @@ module Aws::OpenSearchService
       :auto_tune_options,
       :change_progress_details,
       :off_peak_window_options,
-      :software_update_options)
+      :software_update_options,
+      :domain_processing_status,
+      :modifying_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3201,8 +3326,10 @@ module Aws::OpenSearchService
     end
 
     # Specifies whether the domain should encrypt data at rest, and if so,
-    # the Key Management Service (KMS) key to use. Can be used only to
-    # create a new domain, not update an existing one.
+    # the Key Management Service (KMS) key to use. Can only be used when
+    # creating a new domain or enabling encryption at rest for the first
+    # time on an existing domain. You can't modify this parameter after
+    # it's already been specified.
     #
     # @!attribute [rw] enabled
     #   True to enable encryption at rest.
@@ -4435,6 +4562,44 @@ module Aws::OpenSearchService
       :master_user_name,
       :master_user_password)
       SENSITIVE = [:master_user_name, :master_user_password]
+      include Aws::Structure
+    end
+
+    # Information about the domain properties that are currently being
+    # modified.
+    #
+    # @!attribute [rw] name
+    #   The name of the property that is currently being modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_value
+    #   The current value of the domain property that is being modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] pending_value
+    #   The value that the property that is currently being modified will
+    #   eventually have.
+    #   @return [String]
+    #
+    # @!attribute [rw] value_type
+    #   The type of value that is currently being modified. Properties can
+    #   have two types:
+    #
+    #   * `PLAIN_TEXT`: Contain direct values such as "1", "True", or
+    #     "c5.large.search".
+    #
+    #   * `STRINGIFIED_JSON`: Contain content in JSON format, such as
+    #     \\\{"Enabled":"True"\\}".
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ModifyingProperties AWS API Documentation
+    #
+    class ModifyingProperties < Struct.new(
+      :name,
+      :active_value,
+      :pending_value,
+      :value_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 

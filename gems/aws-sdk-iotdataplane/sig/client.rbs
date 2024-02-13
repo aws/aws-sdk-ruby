@@ -1,0 +1,166 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IoTDataPlane
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDataPlane/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _DeleteThingShadowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteThingShadowResponse]
+        def payload: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDataPlane/Client.html#delete_thing_shadow-instance_method
+      def delete_thing_shadow: (
+                                 thing_name: ::String,
+                                 ?shadow_name: ::String
+                               ) -> _DeleteThingShadowResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteThingShadowResponseSuccess
+
+      interface _GetRetainedMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRetainedMessageResponse]
+        def topic: () -> ::String
+        def payload: () -> ::String
+        def qos: () -> ::Integer
+        def last_modified_time: () -> ::Integer
+        def user_properties: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDataPlane/Client.html#get_retained_message-instance_method
+      def get_retained_message: (
+                                  topic: ::String
+                                ) -> _GetRetainedMessageResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRetainedMessageResponseSuccess
+
+      interface _GetThingShadowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetThingShadowResponse]
+        def payload: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDataPlane/Client.html#get_thing_shadow-instance_method
+      def get_thing_shadow: (
+                              thing_name: ::String,
+                              ?shadow_name: ::String
+                            ) -> _GetThingShadowResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetThingShadowResponseSuccess
+
+      interface _ListNamedShadowsForThingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNamedShadowsForThingResponse]
+        def results: () -> ::Array[::String]
+        def next_token: () -> ::String
+        def timestamp: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDataPlane/Client.html#list_named_shadows_for_thing-instance_method
+      def list_named_shadows_for_thing: (
+                                          thing_name: ::String,
+                                          ?next_token: ::String,
+                                          ?page_size: ::Integer
+                                        ) -> _ListNamedShadowsForThingResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNamedShadowsForThingResponseSuccess
+
+      interface _ListRetainedMessagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRetainedMessagesResponse]
+        def retained_topics: () -> ::Array[Types::RetainedMessageSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDataPlane/Client.html#list_retained_messages-instance_method
+      def list_retained_messages: (
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListRetainedMessagesResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRetainedMessagesResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDataPlane/Client.html#publish-instance_method
+      def publish: (
+                     topic: ::String,
+                     ?qos: ::Integer,
+                     ?retain: bool,
+                     ?payload: ::String,
+                     ?user_properties: ::String,
+                     ?payload_format_indicator: ("UNSPECIFIED_BYTES" | "UTF8_DATA"),
+                     ?content_type: ::String,
+                     ?response_topic: ::String,
+                     ?correlation_data: ::String,
+                     ?message_expiry: ::Integer
+                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateThingShadowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateThingShadowResponse]
+        def payload: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDataPlane/Client.html#update_thing_shadow-instance_method
+      def update_thing_shadow: (
+                                 thing_name: ::String,
+                                 ?shadow_name: ::String,
+                                 payload: ::String
+                               ) -> _UpdateThingShadowResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateThingShadowResponseSuccess
+    end
+  end
+end
+

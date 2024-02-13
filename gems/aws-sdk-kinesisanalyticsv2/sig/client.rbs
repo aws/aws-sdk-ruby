@@ -1,0 +1,960 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module KinesisAnalyticsV2
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddApplicationCloudWatchLoggingOptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddApplicationCloudWatchLoggingOptionResponse]
+        def application_arn: () -> ::String
+        def application_version_id: () -> ::Integer
+        def cloud_watch_logging_option_descriptions: () -> ::Array[Types::CloudWatchLoggingOptionDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#add_application_cloud_watch_logging_option-instance_method
+      def add_application_cloud_watch_logging_option: (
+                                                        application_name: ::String,
+                                                        ?current_application_version_id: ::Integer,
+                                                        cloud_watch_logging_option: {
+                                                          log_stream_arn: ::String
+                                                        },
+                                                        ?conditional_token: ::String
+                                                      ) -> _AddApplicationCloudWatchLoggingOptionResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddApplicationCloudWatchLoggingOptionResponseSuccess
+
+      interface _AddApplicationInputResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddApplicationInputResponse]
+        def application_arn: () -> ::String
+        def application_version_id: () -> ::Integer
+        def input_descriptions: () -> ::Array[Types::InputDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#add_application_input-instance_method
+      def add_application_input: (
+                                   application_name: ::String,
+                                   current_application_version_id: ::Integer,
+                                   input: {
+                                     name_prefix: ::String,
+                                     input_processing_configuration: {
+                                       input_lambda_processor: {
+                                         resource_arn: ::String
+                                       }
+                                     }?,
+                                     kinesis_streams_input: {
+                                       resource_arn: ::String
+                                     }?,
+                                     kinesis_firehose_input: {
+                                       resource_arn: ::String
+                                     }?,
+                                     input_parallelism: {
+                                       count: ::Integer?
+                                     }?,
+                                     input_schema: {
+                                       record_format: {
+                                         record_format_type: ("JSON" | "CSV"),
+                                         mapping_parameters: {
+                                           json_mapping_parameters: {
+                                             record_row_path: ::String
+                                           }?,
+                                           csv_mapping_parameters: {
+                                             record_row_delimiter: ::String,
+                                             record_column_delimiter: ::String
+                                           }?
+                                         }?
+                                       },
+                                       record_encoding: ::String?,
+                                       record_columns: Array[
+                                         {
+                                           name: ::String,
+                                           mapping: ::String?,
+                                           sql_type: ::String
+                                         },
+                                       ]
+                                     }
+                                   }
+                                 ) -> _AddApplicationInputResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddApplicationInputResponseSuccess
+
+      interface _AddApplicationInputProcessingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddApplicationInputProcessingConfigurationResponse]
+        def application_arn: () -> ::String
+        def application_version_id: () -> ::Integer
+        def input_id: () -> ::String
+        def input_processing_configuration_description: () -> Types::InputProcessingConfigurationDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#add_application_input_processing_configuration-instance_method
+      def add_application_input_processing_configuration: (
+                                                            application_name: ::String,
+                                                            current_application_version_id: ::Integer,
+                                                            input_id: ::String,
+                                                            input_processing_configuration: {
+                                                              input_lambda_processor: {
+                                                                resource_arn: ::String
+                                                              }
+                                                            }
+                                                          ) -> _AddApplicationInputProcessingConfigurationResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddApplicationInputProcessingConfigurationResponseSuccess
+
+      interface _AddApplicationOutputResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddApplicationOutputResponse]
+        def application_arn: () -> ::String
+        def application_version_id: () -> ::Integer
+        def output_descriptions: () -> ::Array[Types::OutputDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#add_application_output-instance_method
+      def add_application_output: (
+                                    application_name: ::String,
+                                    current_application_version_id: ::Integer,
+                                    output: {
+                                      name: ::String,
+                                      kinesis_streams_output: {
+                                        resource_arn: ::String
+                                      }?,
+                                      kinesis_firehose_output: {
+                                        resource_arn: ::String
+                                      }?,
+                                      lambda_output: {
+                                        resource_arn: ::String
+                                      }?,
+                                      destination_schema: {
+                                        record_format_type: ("JSON" | "CSV")
+                                      }
+                                    }
+                                  ) -> _AddApplicationOutputResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddApplicationOutputResponseSuccess
+
+      interface _AddApplicationReferenceDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddApplicationReferenceDataSourceResponse]
+        def application_arn: () -> ::String
+        def application_version_id: () -> ::Integer
+        def reference_data_source_descriptions: () -> ::Array[Types::ReferenceDataSourceDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#add_application_reference_data_source-instance_method
+      def add_application_reference_data_source: (
+                                                   application_name: ::String,
+                                                   current_application_version_id: ::Integer,
+                                                   reference_data_source: {
+                                                     table_name: ::String,
+                                                     s3_reference_data_source: {
+                                                       bucket_arn: ::String?,
+                                                       file_key: ::String?
+                                                     }?,
+                                                     reference_schema: {
+                                                       record_format: {
+                                                         record_format_type: ("JSON" | "CSV"),
+                                                         mapping_parameters: {
+                                                           json_mapping_parameters: {
+                                                             record_row_path: ::String
+                                                           }?,
+                                                           csv_mapping_parameters: {
+                                                             record_row_delimiter: ::String,
+                                                             record_column_delimiter: ::String
+                                                           }?
+                                                         }?
+                                                       },
+                                                       record_encoding: ::String?,
+                                                       record_columns: Array[
+                                                         {
+                                                           name: ::String,
+                                                           mapping: ::String?,
+                                                           sql_type: ::String
+                                                         },
+                                                       ]
+                                                     }
+                                                   }
+                                                 ) -> _AddApplicationReferenceDataSourceResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddApplicationReferenceDataSourceResponseSuccess
+
+      interface _AddApplicationVpcConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddApplicationVpcConfigurationResponse]
+        def application_arn: () -> ::String
+        def application_version_id: () -> ::Integer
+        def vpc_configuration_description: () -> Types::VpcConfigurationDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#add_application_vpc_configuration-instance_method
+      def add_application_vpc_configuration: (
+                                               application_name: ::String,
+                                               ?current_application_version_id: ::Integer,
+                                               vpc_configuration: {
+                                                 subnet_ids: Array[::String],
+                                                 security_group_ids: Array[::String]
+                                               },
+                                               ?conditional_token: ::String
+                                             ) -> _AddApplicationVpcConfigurationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddApplicationVpcConfigurationResponseSuccess
+
+      interface _CreateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApplicationResponse]
+        def application_detail: () -> Types::ApplicationDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#create_application-instance_method
+      def create_application: (
+                                application_name: ::String,
+                                ?application_description: ::String,
+                                runtime_environment: ("SQL-1_0" | "FLINK-1_6" | "FLINK-1_8" | "ZEPPELIN-FLINK-1_0" | "FLINK-1_11" | "FLINK-1_13" | "ZEPPELIN-FLINK-2_0" | "FLINK-1_15" | "ZEPPELIN-FLINK-3_0"),
+                                service_execution_role: ::String,
+                                ?application_configuration: {
+                                  sql_application_configuration: {
+                                    inputs: Array[
+                                      {
+                                        name_prefix: ::String,
+                                        input_processing_configuration: {
+                                          input_lambda_processor: {
+                                            resource_arn: ::String
+                                          }
+                                        }?,
+                                        kinesis_streams_input: {
+                                          resource_arn: ::String
+                                        }?,
+                                        kinesis_firehose_input: {
+                                          resource_arn: ::String
+                                        }?,
+                                        input_parallelism: {
+                                          count: ::Integer?
+                                        }?,
+                                        input_schema: {
+                                          record_format: {
+                                            record_format_type: ("JSON" | "CSV"),
+                                            mapping_parameters: {
+                                              json_mapping_parameters: {
+                                                record_row_path: ::String
+                                              }?,
+                                              csv_mapping_parameters: {
+                                                record_row_delimiter: ::String,
+                                                record_column_delimiter: ::String
+                                              }?
+                                            }?
+                                          },
+                                          record_encoding: ::String?,
+                                          record_columns: Array[
+                                            {
+                                              name: ::String,
+                                              mapping: ::String?,
+                                              sql_type: ::String
+                                            },
+                                          ]
+                                        }
+                                      },
+                                    ]?,
+                                    outputs: Array[
+                                      {
+                                        name: ::String,
+                                        kinesis_streams_output: {
+                                          resource_arn: ::String
+                                        }?,
+                                        kinesis_firehose_output: {
+                                          resource_arn: ::String
+                                        }?,
+                                        lambda_output: {
+                                          resource_arn: ::String
+                                        }?,
+                                        destination_schema: {
+                                          record_format_type: ("JSON" | "CSV")
+                                        }
+                                      },
+                                    ]?,
+                                    reference_data_sources: Array[
+                                      {
+                                        table_name: ::String,
+                                        s3_reference_data_source: {
+                                          bucket_arn: ::String?,
+                                          file_key: ::String?
+                                        }?,
+                                        reference_schema: {
+                                          record_format: {
+                                            record_format_type: ("JSON" | "CSV"),
+                                            mapping_parameters: {
+                                              json_mapping_parameters: {
+                                                record_row_path: ::String
+                                              }?,
+                                              csv_mapping_parameters: {
+                                                record_row_delimiter: ::String,
+                                                record_column_delimiter: ::String
+                                              }?
+                                            }?
+                                          },
+                                          record_encoding: ::String?,
+                                          record_columns: Array[
+                                            {
+                                              name: ::String,
+                                              mapping: ::String?,
+                                              sql_type: ::String
+                                            },
+                                          ]
+                                        }
+                                      },
+                                    ]?
+                                  }?,
+                                  flink_application_configuration: {
+                                    checkpoint_configuration: {
+                                      configuration_type: ("DEFAULT" | "CUSTOM"),
+                                      checkpointing_enabled: bool?,
+                                      checkpoint_interval: ::Integer?,
+                                      min_pause_between_checkpoints: ::Integer?
+                                    }?,
+                                    monitoring_configuration: {
+                                      configuration_type: ("DEFAULT" | "CUSTOM"),
+                                      metrics_level: ("APPLICATION" | "TASK" | "OPERATOR" | "PARALLELISM")?,
+                                      log_level: ("INFO" | "WARN" | "ERROR" | "DEBUG")?
+                                    }?,
+                                    parallelism_configuration: {
+                                      configuration_type: ("DEFAULT" | "CUSTOM"),
+                                      parallelism: ::Integer?,
+                                      parallelism_per_kpu: ::Integer?,
+                                      auto_scaling_enabled: bool?
+                                    }?
+                                  }?,
+                                  environment_properties: {
+                                    property_groups: Array[
+                                      {
+                                        property_group_id: ::String,
+                                        property_map: Hash[::String, ::String]
+                                      },
+                                    ]
+                                  }?,
+                                  application_code_configuration: {
+                                    code_content: {
+                                      text_content: ::String?,
+                                      zip_file_content: ::String?,
+                                      s3_content_location: {
+                                        bucket_arn: ::String,
+                                        file_key: ::String,
+                                        object_version: ::String?
+                                      }?
+                                    }?,
+                                    code_content_type: ("PLAINTEXT" | "ZIPFILE")
+                                  }?,
+                                  application_snapshot_configuration: {
+                                    snapshots_enabled: bool
+                                  }?,
+                                  vpc_configurations: Array[
+                                    {
+                                      subnet_ids: Array[::String],
+                                      security_group_ids: Array[::String]
+                                    },
+                                  ]?,
+                                  zeppelin_application_configuration: {
+                                    monitoring_configuration: {
+                                      log_level: ("INFO" | "WARN" | "ERROR" | "DEBUG")
+                                    }?,
+                                    catalog_configuration: {
+                                      glue_data_catalog_configuration: {
+                                        database_arn: ::String
+                                      }
+                                    }?,
+                                    deploy_as_application_configuration: {
+                                      s3_content_location: {
+                                        bucket_arn: ::String,
+                                        base_path: ::String?
+                                      }
+                                    }?,
+                                    custom_artifacts_configuration: Array[
+                                      {
+                                        artifact_type: ("UDF" | "DEPENDENCY_JAR"),
+                                        s3_content_location: {
+                                          bucket_arn: ::String,
+                                          file_key: ::String,
+                                          object_version: ::String?
+                                        }?,
+                                        maven_reference: {
+                                          group_id: ::String,
+                                          artifact_id: ::String,
+                                          version: ::String
+                                        }?
+                                      },
+                                    ]?
+                                  }?
+                                },
+                                ?cloud_watch_logging_options: Array[
+                                  {
+                                    log_stream_arn: ::String
+                                  },
+                                ],
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String?
+                                  },
+                                ],
+                                ?application_mode: ("STREAMING" | "INTERACTIVE")
+                              ) -> _CreateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
+
+      interface _CreateApplicationPresignedUrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApplicationPresignedUrlResponse]
+        def authorized_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#create_application_presigned_url-instance_method
+      def create_application_presigned_url: (
+                                              application_name: ::String,
+                                              url_type: ("FLINK_DASHBOARD_URL" | "ZEPPELIN_UI_URL"),
+                                              ?session_expiration_duration_in_seconds: ::Integer
+                                            ) -> _CreateApplicationPresignedUrlResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationPresignedUrlResponseSuccess
+
+      interface _CreateApplicationSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApplicationSnapshotResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#create_application_snapshot-instance_method
+      def create_application_snapshot: (
+                                         application_name: ::String,
+                                         snapshot_name: ::String
+                                       ) -> _CreateApplicationSnapshotResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationSnapshotResponseSuccess
+
+      interface _DeleteApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApplicationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#delete_application-instance_method
+      def delete_application: (
+                                application_name: ::String,
+                                create_timestamp: ::Time
+                              ) -> _DeleteApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApplicationResponseSuccess
+
+      interface _DeleteApplicationCloudWatchLoggingOptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApplicationCloudWatchLoggingOptionResponse]
+        def application_arn: () -> ::String
+        def application_version_id: () -> ::Integer
+        def cloud_watch_logging_option_descriptions: () -> ::Array[Types::CloudWatchLoggingOptionDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#delete_application_cloud_watch_logging_option-instance_method
+      def delete_application_cloud_watch_logging_option: (
+                                                           application_name: ::String,
+                                                           ?current_application_version_id: ::Integer,
+                                                           cloud_watch_logging_option_id: ::String,
+                                                           ?conditional_token: ::String
+                                                         ) -> _DeleteApplicationCloudWatchLoggingOptionResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApplicationCloudWatchLoggingOptionResponseSuccess
+
+      interface _DeleteApplicationInputProcessingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApplicationInputProcessingConfigurationResponse]
+        def application_arn: () -> ::String
+        def application_version_id: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#delete_application_input_processing_configuration-instance_method
+      def delete_application_input_processing_configuration: (
+                                                               application_name: ::String,
+                                                               current_application_version_id: ::Integer,
+                                                               input_id: ::String
+                                                             ) -> _DeleteApplicationInputProcessingConfigurationResponseSuccess
+                                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApplicationInputProcessingConfigurationResponseSuccess
+
+      interface _DeleteApplicationOutputResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApplicationOutputResponse]
+        def application_arn: () -> ::String
+        def application_version_id: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#delete_application_output-instance_method
+      def delete_application_output: (
+                                       application_name: ::String,
+                                       current_application_version_id: ::Integer,
+                                       output_id: ::String
+                                     ) -> _DeleteApplicationOutputResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApplicationOutputResponseSuccess
+
+      interface _DeleteApplicationReferenceDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApplicationReferenceDataSourceResponse]
+        def application_arn: () -> ::String
+        def application_version_id: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#delete_application_reference_data_source-instance_method
+      def delete_application_reference_data_source: (
+                                                      application_name: ::String,
+                                                      current_application_version_id: ::Integer,
+                                                      reference_id: ::String
+                                                    ) -> _DeleteApplicationReferenceDataSourceResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApplicationReferenceDataSourceResponseSuccess
+
+      interface _DeleteApplicationSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApplicationSnapshotResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#delete_application_snapshot-instance_method
+      def delete_application_snapshot: (
+                                         application_name: ::String,
+                                         snapshot_name: ::String,
+                                         snapshot_creation_timestamp: ::Time
+                                       ) -> _DeleteApplicationSnapshotResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApplicationSnapshotResponseSuccess
+
+      interface _DeleteApplicationVpcConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApplicationVpcConfigurationResponse]
+        def application_arn: () -> ::String
+        def application_version_id: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#delete_application_vpc_configuration-instance_method
+      def delete_application_vpc_configuration: (
+                                                  application_name: ::String,
+                                                  ?current_application_version_id: ::Integer,
+                                                  vpc_configuration_id: ::String,
+                                                  ?conditional_token: ::String
+                                                ) -> _DeleteApplicationVpcConfigurationResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApplicationVpcConfigurationResponseSuccess
+
+      interface _DescribeApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeApplicationResponse]
+        def application_detail: () -> Types::ApplicationDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#describe_application-instance_method
+      def describe_application: (
+                                  application_name: ::String,
+                                  ?include_additional_details: bool
+                                ) -> _DescribeApplicationResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeApplicationResponseSuccess
+
+      interface _DescribeApplicationSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeApplicationSnapshotResponse]
+        def snapshot_details: () -> Types::SnapshotDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#describe_application_snapshot-instance_method
+      def describe_application_snapshot: (
+                                           application_name: ::String,
+                                           snapshot_name: ::String
+                                         ) -> _DescribeApplicationSnapshotResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeApplicationSnapshotResponseSuccess
+
+      interface _DescribeApplicationVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeApplicationVersionResponse]
+        def application_version_detail: () -> Types::ApplicationDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#describe_application_version-instance_method
+      def describe_application_version: (
+                                          application_name: ::String,
+                                          application_version_id: ::Integer
+                                        ) -> _DescribeApplicationVersionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeApplicationVersionResponseSuccess
+
+      interface _DiscoverInputSchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DiscoverInputSchemaResponse]
+        def input_schema: () -> Types::SourceSchema
+        def parsed_input_records: () -> ::Array[::Array[::String]]
+        def processed_input_records: () -> ::Array[::String]
+        def raw_input_records: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#discover_input_schema-instance_method
+      def discover_input_schema: (
+                                   ?resource_arn: ::String,
+                                   service_execution_role: ::String,
+                                   ?input_starting_position_configuration: {
+                                     input_starting_position: ("NOW" | "TRIM_HORIZON" | "LAST_STOPPED_POINT")?
+                                   },
+                                   ?s3_configuration: {
+                                     bucket_arn: ::String,
+                                     file_key: ::String
+                                   },
+                                   ?input_processing_configuration: {
+                                     input_lambda_processor: {
+                                       resource_arn: ::String
+                                     }
+                                   }
+                                 ) -> _DiscoverInputSchemaResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DiscoverInputSchemaResponseSuccess
+
+      interface _ListApplicationSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationSnapshotsResponse]
+        def snapshot_summaries: () -> ::Array[Types::SnapshotDetails]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#list_application_snapshots-instance_method
+      def list_application_snapshots: (
+                                        application_name: ::String,
+                                        ?limit: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListApplicationSnapshotsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationSnapshotsResponseSuccess
+
+      interface _ListApplicationVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationVersionsResponse]
+        def application_version_summaries: () -> ::Array[Types::ApplicationVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#list_application_versions-instance_method
+      def list_application_versions: (
+                                       application_name: ::String,
+                                       ?limit: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListApplicationVersionsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationVersionsResponseSuccess
+
+      interface _ListApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationsResponse]
+        def application_summaries: () -> ::Array[Types::ApplicationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#list_applications-instance_method
+      def list_applications: (
+                               ?limit: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListApplicationsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _RollbackApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RollbackApplicationResponse]
+        def application_detail: () -> Types::ApplicationDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#rollback_application-instance_method
+      def rollback_application: (
+                                  application_name: ::String,
+                                  current_application_version_id: ::Integer
+                                ) -> _RollbackApplicationResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RollbackApplicationResponseSuccess
+
+      interface _StartApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartApplicationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#start_application-instance_method
+      def start_application: (
+                               application_name: ::String,
+                               ?run_configuration: {
+                                 flink_run_configuration: {
+                                   allow_non_restored_state: bool?
+                                 }?,
+                                 sql_run_configurations: Array[
+                                   {
+                                     input_id: ::String,
+                                     input_starting_position_configuration: {
+                                       input_starting_position: ("NOW" | "TRIM_HORIZON" | "LAST_STOPPED_POINT")?
+                                     }
+                                   },
+                                 ]?,
+                                 application_restore_configuration: {
+                                   application_restore_type: ("SKIP_RESTORE_FROM_SNAPSHOT" | "RESTORE_FROM_LATEST_SNAPSHOT" | "RESTORE_FROM_CUSTOM_SNAPSHOT"),
+                                   snapshot_name: ::String?
+                                 }?
+                               }
+                             ) -> _StartApplicationResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartApplicationResponseSuccess
+
+      interface _StopApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopApplicationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#stop_application-instance_method
+      def stop_application: (
+                              application_name: ::String,
+                              ?force: bool
+                            ) -> _StopApplicationResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopApplicationResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApplicationResponse]
+        def application_detail: () -> Types::ApplicationDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#update_application-instance_method
+      def update_application: (
+                                application_name: ::String,
+                                ?current_application_version_id: ::Integer,
+                                ?application_configuration_update: {
+                                  sql_application_configuration_update: {
+                                    input_updates: Array[
+                                      {
+                                        input_id: ::String,
+                                        name_prefix_update: ::String?,
+                                        input_processing_configuration_update: {
+                                          input_lambda_processor_update: {
+                                            resource_arn_update: ::String
+                                          }
+                                        }?,
+                                        kinesis_streams_input_update: {
+                                          resource_arn_update: ::String
+                                        }?,
+                                        kinesis_firehose_input_update: {
+                                          resource_arn_update: ::String
+                                        }?,
+                                        input_schema_update: {
+                                          record_format_update: {
+                                            record_format_type: ("JSON" | "CSV"),
+                                            mapping_parameters: {
+                                              json_mapping_parameters: {
+                                                record_row_path: ::String
+                                              }?,
+                                              csv_mapping_parameters: {
+                                                record_row_delimiter: ::String,
+                                                record_column_delimiter: ::String
+                                              }?
+                                            }?
+                                          }?,
+                                          record_encoding_update: ::String?,
+                                          record_column_updates: Array[
+                                            {
+                                              name: ::String,
+                                              mapping: ::String?,
+                                              sql_type: ::String
+                                            },
+                                          ]?
+                                        }?,
+                                        input_parallelism_update: {
+                                          count_update: ::Integer
+                                        }?
+                                      },
+                                    ]?,
+                                    output_updates: Array[
+                                      {
+                                        output_id: ::String,
+                                        name_update: ::String?,
+                                        kinesis_streams_output_update: {
+                                          resource_arn_update: ::String
+                                        }?,
+                                        kinesis_firehose_output_update: {
+                                          resource_arn_update: ::String
+                                        }?,
+                                        lambda_output_update: {
+                                          resource_arn_update: ::String
+                                        }?,
+                                        destination_schema_update: {
+                                          record_format_type: ("JSON" | "CSV")
+                                        }?
+                                      },
+                                    ]?,
+                                    reference_data_source_updates: Array[
+                                      {
+                                        reference_id: ::String,
+                                        table_name_update: ::String?,
+                                        s3_reference_data_source_update: {
+                                          bucket_arn_update: ::String?,
+                                          file_key_update: ::String?
+                                        }?,
+                                        reference_schema_update: {
+                                          record_format: {
+                                            record_format_type: ("JSON" | "CSV"),
+                                            mapping_parameters: {
+                                              json_mapping_parameters: {
+                                                record_row_path: ::String
+                                              }?,
+                                              csv_mapping_parameters: {
+                                                record_row_delimiter: ::String,
+                                                record_column_delimiter: ::String
+                                              }?
+                                            }?
+                                          },
+                                          record_encoding: ::String?,
+                                          record_columns: Array[
+                                            {
+                                              name: ::String,
+                                              mapping: ::String?,
+                                              sql_type: ::String
+                                            },
+                                          ]
+                                        }?
+                                      },
+                                    ]?
+                                  }?,
+                                  application_code_configuration_update: {
+                                    code_content_type_update: ("PLAINTEXT" | "ZIPFILE")?,
+                                    code_content_update: {
+                                      text_content_update: ::String?,
+                                      zip_file_content_update: ::String?,
+                                      s3_content_location_update: {
+                                        bucket_arn_update: ::String?,
+                                        file_key_update: ::String?,
+                                        object_version_update: ::String?
+                                      }?
+                                    }?
+                                  }?,
+                                  flink_application_configuration_update: {
+                                    checkpoint_configuration_update: {
+                                      configuration_type_update: ("DEFAULT" | "CUSTOM")?,
+                                      checkpointing_enabled_update: bool?,
+                                      checkpoint_interval_update: ::Integer?,
+                                      min_pause_between_checkpoints_update: ::Integer?
+                                    }?,
+                                    monitoring_configuration_update: {
+                                      configuration_type_update: ("DEFAULT" | "CUSTOM")?,
+                                      metrics_level_update: ("APPLICATION" | "TASK" | "OPERATOR" | "PARALLELISM")?,
+                                      log_level_update: ("INFO" | "WARN" | "ERROR" | "DEBUG")?
+                                    }?,
+                                    parallelism_configuration_update: {
+                                      configuration_type_update: ("DEFAULT" | "CUSTOM")?,
+                                      parallelism_update: ::Integer?,
+                                      parallelism_per_kpu_update: ::Integer?,
+                                      auto_scaling_enabled_update: bool?
+                                    }?
+                                  }?,
+                                  environment_property_updates: {
+                                    property_groups: Array[
+                                      {
+                                        property_group_id: ::String,
+                                        property_map: Hash[::String, ::String]
+                                      },
+                                    ]
+                                  }?,
+                                  application_snapshot_configuration_update: {
+                                    snapshots_enabled_update: bool
+                                  }?,
+                                  vpc_configuration_updates: Array[
+                                    {
+                                      vpc_configuration_id: ::String,
+                                      subnet_id_updates: Array[::String]?,
+                                      security_group_id_updates: Array[::String]?
+                                    },
+                                  ]?,
+                                  zeppelin_application_configuration_update: {
+                                    monitoring_configuration_update: {
+                                      log_level_update: ("INFO" | "WARN" | "ERROR" | "DEBUG")
+                                    }?,
+                                    catalog_configuration_update: {
+                                      glue_data_catalog_configuration_update: {
+                                        database_arn_update: ::String
+                                      }
+                                    }?,
+                                    deploy_as_application_configuration_update: {
+                                      s3_content_location_update: {
+                                        bucket_arn_update: ::String?,
+                                        base_path_update: ::String?
+                                      }?
+                                    }?,
+                                    custom_artifacts_configuration_update: Array[
+                                      {
+                                        artifact_type: ("UDF" | "DEPENDENCY_JAR"),
+                                        s3_content_location: {
+                                          bucket_arn: ::String,
+                                          file_key: ::String,
+                                          object_version: ::String?
+                                        }?,
+                                        maven_reference: {
+                                          group_id: ::String,
+                                          artifact_id: ::String,
+                                          version: ::String
+                                        }?
+                                      },
+                                    ]?
+                                  }?
+                                },
+                                ?service_execution_role_update: ::String,
+                                ?run_configuration_update: {
+                                  flink_run_configuration: {
+                                    allow_non_restored_state: bool?
+                                  }?,
+                                  application_restore_configuration: {
+                                    application_restore_type: ("SKIP_RESTORE_FROM_SNAPSHOT" | "RESTORE_FROM_LATEST_SNAPSHOT" | "RESTORE_FROM_CUSTOM_SNAPSHOT"),
+                                    snapshot_name: ::String?
+                                  }?
+                                },
+                                ?cloud_watch_logging_option_updates: Array[
+                                  {
+                                    cloud_watch_logging_option_id: ::String,
+                                    log_stream_arn_update: ::String?
+                                  },
+                                ],
+                                ?conditional_token: ::String
+                              ) -> _UpdateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess
+
+      interface _UpdateApplicationMaintenanceConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApplicationMaintenanceConfigurationResponse]
+        def application_arn: () -> ::String
+        def application_maintenance_configuration_description: () -> Types::ApplicationMaintenanceConfigurationDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#update_application_maintenance_configuration-instance_method
+      def update_application_maintenance_configuration: (
+                                                          application_name: ::String,
+                                                          application_maintenance_configuration_update: {
+                                                            application_maintenance_window_start_time_update: ::String
+                                                          }
+                                                        ) -> _UpdateApplicationMaintenanceConfigurationResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationMaintenanceConfigurationResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,127 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::AugmentedAIRuntime
+  module Types
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteHumanLoopRequest
+      attr_accessor human_loop_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteHumanLoopResponse < Aws::EmptyStructure
+    end
+
+    class DescribeHumanLoopRequest
+      attr_accessor human_loop_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeHumanLoopResponse
+      attr_accessor creation_time: ::Time
+      attr_accessor failure_reason: ::String
+      attr_accessor failure_code: ::String
+      attr_accessor human_loop_status: ("InProgress" | "Failed" | "Completed" | "Stopped" | "Stopping")
+      attr_accessor human_loop_name: ::String
+      attr_accessor human_loop_arn: ::String
+      attr_accessor flow_definition_arn: ::String
+      attr_accessor human_loop_output: Types::HumanLoopOutput
+      SENSITIVE: []
+    end
+
+    class HumanLoopDataAttributes
+      attr_accessor content_classifiers: ::Array[("FreeOfPersonallyIdentifiableInformation" | "FreeOfAdultContent")]
+      SENSITIVE: []
+    end
+
+    class HumanLoopInput
+      attr_accessor input_content: ::String
+      SENSITIVE: []
+    end
+
+    class HumanLoopOutput
+      attr_accessor output_s3_uri: ::String
+      SENSITIVE: []
+    end
+
+    class HumanLoopSummary
+      attr_accessor human_loop_name: ::String
+      attr_accessor human_loop_status: ("InProgress" | "Failed" | "Completed" | "Stopped" | "Stopping")
+      attr_accessor creation_time: ::Time
+      attr_accessor failure_reason: ::String
+      attr_accessor flow_definition_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListHumanLoopsRequest
+      attr_accessor creation_time_after: ::Time
+      attr_accessor creation_time_before: ::Time
+      attr_accessor flow_definition_arn: ::String
+      attr_accessor sort_order: ("Ascending" | "Descending")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListHumanLoopsResponse
+      attr_accessor human_loop_summaries: ::Array[Types::HumanLoopSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartHumanLoopRequest
+      attr_accessor human_loop_name: ::String
+      attr_accessor flow_definition_arn: ::String
+      attr_accessor human_loop_input: Types::HumanLoopInput
+      attr_accessor data_attributes: Types::HumanLoopDataAttributes
+      SENSITIVE: []
+    end
+
+    class StartHumanLoopResponse
+      attr_accessor human_loop_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopHumanLoopRequest
+      attr_accessor human_loop_name: ::String
+      SENSITIVE: []
+    end
+
+    class StopHumanLoopResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

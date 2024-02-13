@@ -33,6 +33,7 @@ module Aws::Pricing
   # * {InvalidNextTokenException}
   # * {InvalidParameterException}
   # * {NotFoundException}
+  # * {ThrottlingException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -83,6 +84,10 @@ module Aws::Pricing
       def message
         @message || @data[:message]
       end
+
+      def retryable?
+        true
+      end
     end
 
     class InvalidNextTokenException < ServiceError
@@ -127,6 +132,29 @@ module Aws::Pricing
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class ThrottlingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Pricing::Types::ThrottlingException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      def retryable?
+        true
+      end
+
+      def throttling?
+        true
       end
     end
 

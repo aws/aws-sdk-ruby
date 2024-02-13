@@ -27,6 +27,21 @@ module Aws::NeptuneGraph
       end
     end
 
+    class CancelQuery
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::NeptuneGraph::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          endpoint: endpoint,
+          api_type: "DataPlane",
+        )
+      end
+    end
+
     class CreateGraph
       def self.build(context)
         unless context.config.regional_endpoint
@@ -132,6 +147,21 @@ module Aws::NeptuneGraph
       end
     end
 
+    class ExecuteQuery
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::NeptuneGraph::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          endpoint: endpoint,
+          api_type: "DataPlane",
+        )
+      end
+    end
+
     class GetGraph
       def self.build(context)
         unless context.config.regional_endpoint
@@ -162,6 +192,21 @@ module Aws::NeptuneGraph
       end
     end
 
+    class GetGraphSummary
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::NeptuneGraph::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          endpoint: endpoint,
+          api_type: "DataPlane",
+        )
+      end
+    end
+
     class GetImportTask
       def self.build(context)
         unless context.config.regional_endpoint
@@ -188,6 +233,21 @@ module Aws::NeptuneGraph
           use_dual_stack: context.config.use_dualstack_endpoint,
           endpoint: endpoint,
           api_type: "ControlPlane",
+        )
+      end
+    end
+
+    class GetQuery
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::NeptuneGraph::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          endpoint: endpoint,
+          api_type: "DataPlane",
         )
       end
     end
@@ -248,6 +308,21 @@ module Aws::NeptuneGraph
           use_dual_stack: context.config.use_dualstack_endpoint,
           endpoint: endpoint,
           api_type: "ControlPlane",
+        )
+      end
+    end
+
+    class ListQueries
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::NeptuneGraph::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          endpoint: endpoint,
+          api_type: "DataPlane",
         )
       end
     end

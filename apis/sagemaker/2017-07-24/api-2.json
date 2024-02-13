@@ -1012,6 +1012,14 @@
         {"shape":"ResourceNotFound"}
       ]
     },
+    "DeleteHyperParameterTuningJob":{
+      "name":"DeleteHyperParameterTuningJob",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteHyperParameterTuningJobRequest"}
+    },
     "DeleteImage":{
       "name":"DeleteImage",
       "http":{
@@ -3714,7 +3722,10 @@
     },
     "AdditionalS3DataSourceDataType":{
       "type":"string",
-      "enum":["S3Object"]
+      "enum":[
+        "S3Object",
+        "S3Prefix"
+      ]
     },
     "AgentVersion":{
       "type":"structure",
@@ -4060,17 +4071,11 @@
         "KernelGateway",
         "DetailedProfiler",
         "TensorBoard",
-        "VSCode",
-        "Savitur",
         "CodeEditor",
         "JupyterLab",
         "RStudioServerPro",
-        "RSession",
         "RSessionGateway",
-        "Canvas",
-        "DatasetManager",
-        "SageMakerLite",
-        "Local"
+        "Canvas"
       ]
     },
     "ApprovalDescription":{
@@ -5086,7 +5091,8 @@
         "WorkspaceSettings":{"shape":"WorkspaceSettings"},
         "IdentityProviderOAuthSettings":{"shape":"IdentityProviderOAuthSettings"},
         "DirectDeploySettings":{"shape":"DirectDeploySettings"},
-        "KendraSettings":{"shape":"KendraSettings"}
+        "KendraSettings":{"shape":"KendraSettings"},
+        "GenerativeAiSettings":{"shape":"GenerativeAiSettings"}
       }
     },
     "CapacitySize":{
@@ -8091,6 +8097,13 @@
     "DeleteHumanTaskUiResponse":{
       "type":"structure",
       "members":{
+      }
+    },
+    "DeleteHyperParameterTuningJobRequest":{
+      "type":"structure",
+      "required":["HyperParameterTuningJobName"],
+      "members":{
+        "HyperParameterTuningJobName":{"shape":"HyperParameterTuningJobName"}
       }
     },
     "DeleteImageRequest":{
@@ -11814,6 +11827,12 @@
       "pattern":"[0-9]\\.[A-Za-z0-9.]+"
     },
     "GenerateCandidateDefinitionsOnly":{"type":"boolean"},
+    "GenerativeAiSettings":{
+      "type":"structure",
+      "members":{
+        "AmazonBedrockRoleArn":{"shape":"RoleArn"}
+      }
+    },
     "GetDeviceFleetReportRequest":{
       "type":"structure",
       "required":["DeviceFleetName"],
@@ -20696,8 +20715,6 @@
       "enum":[
         "JupyterServer",
         "KernelGateway",
-        "VSCode",
-        "Savitur",
         "CodeEditor",
         "JupyterLab"
       ]
@@ -22887,7 +22904,8 @@
     },
     "VpcOnlyTrustedAccounts":{
       "type":"list",
-      "member":{"shape":"AccountId"}
+      "member":{"shape":"AccountId"},
+      "max":10
     },
     "VpcSecurityGroupIds":{
       "type":"list",

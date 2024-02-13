@@ -1,0 +1,1374 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CostExplorer
+  module Types
+
+    class Anomaly
+      attr_accessor anomaly_id: ::String
+      attr_accessor anomaly_start_date: ::String
+      attr_accessor anomaly_end_date: ::String
+      attr_accessor dimension_value: ::String
+      attr_accessor root_causes: ::Array[Types::RootCause]
+      attr_accessor anomaly_score: Types::AnomalyScore
+      attr_accessor impact: Types::Impact
+      attr_accessor monitor_arn: ::String
+      attr_accessor feedback: ("YES" | "NO" | "PLANNED_ACTIVITY")
+      SENSITIVE: []
+    end
+
+    class AnomalyDateInterval
+      attr_accessor start_date: ::String
+      attr_accessor end_date: ::String
+      SENSITIVE: []
+    end
+
+    class AnomalyMonitor
+      attr_accessor monitor_arn: ::String
+      attr_accessor monitor_name: ::String
+      attr_accessor creation_date: ::String
+      attr_accessor last_updated_date: ::String
+      attr_accessor last_evaluated_date: ::String
+      attr_accessor monitor_type: ("DIMENSIONAL" | "CUSTOM")
+      attr_accessor monitor_dimension: ("SERVICE")
+      attr_accessor monitor_specification: Types::Expression
+      attr_accessor dimensional_value_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class AnomalyScore
+      attr_accessor max_score: ::Float
+      attr_accessor current_score: ::Float
+      SENSITIVE: []
+    end
+
+    class AnomalySubscription
+      attr_accessor subscription_arn: ::String
+      attr_accessor account_id: ::String
+      attr_accessor monitor_arn_list: ::Array[::String]
+      attr_accessor subscribers: ::Array[Types::Subscriber]
+      attr_accessor threshold: ::Float
+      attr_accessor frequency: ("DAILY" | "IMMEDIATE" | "WEEKLY")
+      attr_accessor subscription_name: ::String
+      attr_accessor threshold_expression: Types::Expression
+      SENSITIVE: []
+    end
+
+    class BillExpirationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CostAllocationTag
+      attr_accessor tag_key: ::String
+      attr_accessor type: ("AWSGenerated" | "UserDefined")
+      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor last_updated_date: ::String
+      attr_accessor last_used_date: ::String
+      SENSITIVE: []
+    end
+
+    class CostAllocationTagStatusEntry
+      attr_accessor tag_key: ::String
+      attr_accessor status: ("Active" | "Inactive")
+      SENSITIVE: []
+    end
+
+    class CostCategory
+      attr_accessor cost_category_arn: ::String
+      attr_accessor effective_start: ::String
+      attr_accessor effective_end: ::String
+      attr_accessor name: ::String
+      attr_accessor rule_version: ("CostCategoryExpression.v1")
+      attr_accessor rules: ::Array[Types::CostCategoryRule]
+      attr_accessor split_charge_rules: ::Array[Types::CostCategorySplitChargeRule]
+      attr_accessor processing_status: ::Array[Types::CostCategoryProcessingStatus]
+      attr_accessor default_value: ::String
+      SENSITIVE: []
+    end
+
+    class CostCategoryInheritedValueDimension
+      attr_accessor dimension_name: ("LINKED_ACCOUNT_NAME" | "TAG")
+      attr_accessor dimension_key: ::String
+      SENSITIVE: []
+    end
+
+    class CostCategoryProcessingStatus
+      attr_accessor component: ("COST_EXPLORER")
+      attr_accessor status: ("PROCESSING" | "APPLIED")
+      SENSITIVE: []
+    end
+
+    class CostCategoryReference
+      attr_accessor cost_category_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor effective_start: ::String
+      attr_accessor effective_end: ::String
+      attr_accessor number_of_rules: ::Integer
+      attr_accessor processing_status: ::Array[Types::CostCategoryProcessingStatus]
+      attr_accessor values: ::Array[::String]
+      attr_accessor default_value: ::String
+      SENSITIVE: []
+    end
+
+    class CostCategoryRule
+      attr_accessor value: ::String
+      attr_accessor rule: Types::Expression
+      attr_accessor inherited_value: Types::CostCategoryInheritedValueDimension
+      attr_accessor type: ("REGULAR" | "INHERITED_VALUE")
+      SENSITIVE: []
+    end
+
+    class CostCategorySplitChargeRule
+      attr_accessor source: ::String
+      attr_accessor targets: ::Array[::String]
+      attr_accessor method: ("FIXED" | "PROPORTIONAL" | "EVEN")
+      attr_accessor parameters: ::Array[Types::CostCategorySplitChargeRuleParameter]
+      SENSITIVE: []
+    end
+
+    class CostCategorySplitChargeRuleParameter
+      attr_accessor type: ("ALLOCATION_PERCENTAGES")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CostCategoryValues
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      attr_accessor match_options: ::Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]
+      SENSITIVE: []
+    end
+
+    class Coverage
+      attr_accessor coverage_hours: Types::CoverageHours
+      attr_accessor coverage_normalized_units: Types::CoverageNormalizedUnits
+      attr_accessor coverage_cost: Types::CoverageCost
+      SENSITIVE: []
+    end
+
+    class CoverageByTime
+      attr_accessor time_period: Types::DateInterval
+      attr_accessor groups: ::Array[Types::ReservationCoverageGroup]
+      attr_accessor total: Types::Coverage
+      SENSITIVE: []
+    end
+
+    class CoverageCost
+      attr_accessor on_demand_cost: ::String
+      SENSITIVE: []
+    end
+
+    class CoverageHours
+      attr_accessor on_demand_hours: ::String
+      attr_accessor reserved_hours: ::String
+      attr_accessor total_running_hours: ::String
+      attr_accessor coverage_hours_percentage: ::String
+      SENSITIVE: []
+    end
+
+    class CoverageNormalizedUnits
+      attr_accessor on_demand_normalized_units: ::String
+      attr_accessor reserved_normalized_units: ::String
+      attr_accessor total_running_normalized_units: ::String
+      attr_accessor coverage_normalized_units_percentage: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAnomalyMonitorRequest
+      attr_accessor anomaly_monitor: Types::AnomalyMonitor
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      SENSITIVE: []
+    end
+
+    class CreateAnomalyMonitorResponse
+      attr_accessor monitor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAnomalySubscriptionRequest
+      attr_accessor anomaly_subscription: Types::AnomalySubscription
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      SENSITIVE: []
+    end
+
+    class CreateAnomalySubscriptionResponse
+      attr_accessor subscription_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCostCategoryDefinitionRequest
+      attr_accessor name: ::String
+      attr_accessor effective_start: ::String
+      attr_accessor rule_version: ("CostCategoryExpression.v1")
+      attr_accessor rules: ::Array[Types::CostCategoryRule]
+      attr_accessor default_value: ::String
+      attr_accessor split_charge_rules: ::Array[Types::CostCategorySplitChargeRule]
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      SENSITIVE: []
+    end
+
+    class CreateCostCategoryDefinitionResponse
+      attr_accessor cost_category_arn: ::String
+      attr_accessor effective_start: ::String
+      SENSITIVE: []
+    end
+
+    class CurrentInstance
+      attr_accessor resource_id: ::String
+      attr_accessor instance_name: ::String
+      attr_accessor tags: ::Array[Types::TagValues]
+      attr_accessor resource_details: Types::ResourceDetails
+      attr_accessor resource_utilization: Types::ResourceUtilization
+      attr_accessor reservation_covered_hours_in_lookback_period: ::String
+      attr_accessor savings_plans_covered_hours_in_lookback_period: ::String
+      attr_accessor on_demand_hours_in_lookback_period: ::String
+      attr_accessor total_running_hours_in_lookback_period: ::String
+      attr_accessor monthly_cost: ::String
+      attr_accessor currency_code: ::String
+      SENSITIVE: []
+    end
+
+    class DataUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DateInterval
+      attr_accessor start: ::String
+      attr_accessor end: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAnomalyMonitorRequest
+      attr_accessor monitor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAnomalyMonitorResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAnomalySubscriptionRequest
+      attr_accessor subscription_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAnomalySubscriptionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteCostCategoryDefinitionRequest
+      attr_accessor cost_category_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCostCategoryDefinitionResponse
+      attr_accessor cost_category_arn: ::String
+      attr_accessor effective_end: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCostCategoryDefinitionRequest
+      attr_accessor cost_category_arn: ::String
+      attr_accessor effective_on: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCostCategoryDefinitionResponse
+      attr_accessor cost_category: Types::CostCategory
+      SENSITIVE: []
+    end
+
+    class DimensionValues
+      attr_accessor key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")
+      attr_accessor values: ::Array[::String]
+      attr_accessor match_options: ::Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]
+      SENSITIVE: []
+    end
+
+    class DimensionValuesWithAttributes
+      attr_accessor value: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DiskResourceUtilization
+      attr_accessor disk_read_ops_per_second: ::String
+      attr_accessor disk_write_ops_per_second: ::String
+      attr_accessor disk_read_bytes_per_second: ::String
+      attr_accessor disk_write_bytes_per_second: ::String
+      SENSITIVE: []
+    end
+
+    class EBSResourceUtilization
+      attr_accessor ebs_read_ops_per_second: ::String
+      attr_accessor ebs_write_ops_per_second: ::String
+      attr_accessor ebs_read_bytes_per_second: ::String
+      attr_accessor ebs_write_bytes_per_second: ::String
+      SENSITIVE: []
+    end
+
+    class EC2InstanceDetails
+      attr_accessor family: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor region: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor platform: ::String
+      attr_accessor tenancy: ::String
+      attr_accessor current_generation: bool
+      attr_accessor size_flex_eligible: bool
+      SENSITIVE: []
+    end
+
+    class EC2ResourceDetails
+      attr_accessor hourly_on_demand_rate: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor platform: ::String
+      attr_accessor region: ::String
+      attr_accessor sku: ::String
+      attr_accessor memory: ::String
+      attr_accessor network_performance: ::String
+      attr_accessor storage: ::String
+      attr_accessor vcpu: ::String
+      SENSITIVE: []
+    end
+
+    class EC2ResourceUtilization
+      attr_accessor max_cpu_utilization_percentage: ::String
+      attr_accessor max_memory_utilization_percentage: ::String
+      attr_accessor max_storage_utilization_percentage: ::String
+      attr_accessor ebs_resource_utilization: Types::EBSResourceUtilization
+      attr_accessor disk_resource_utilization: Types::DiskResourceUtilization
+      attr_accessor network_resource_utilization: Types::NetworkResourceUtilization
+      SENSITIVE: []
+    end
+
+    class EC2Specification
+      attr_accessor offering_class: ("STANDARD" | "CONVERTIBLE")
+      SENSITIVE: []
+    end
+
+    class ESInstanceDetails
+      attr_accessor instance_class: ::String
+      attr_accessor instance_size: ::String
+      attr_accessor region: ::String
+      attr_accessor current_generation: bool
+      attr_accessor size_flex_eligible: bool
+      SENSITIVE: []
+    end
+
+    class ElastiCacheInstanceDetails
+      attr_accessor family: ::String
+      attr_accessor node_type: ::String
+      attr_accessor region: ::String
+      attr_accessor product_description: ::String
+      attr_accessor current_generation: bool
+      attr_accessor size_flex_eligible: bool
+      SENSITIVE: []
+    end
+
+    class Expression
+      attr_accessor or: ::Array[Types::Expression]
+      attr_accessor and: ::Array[Types::Expression]
+      attr_accessor not: Types::Expression
+      attr_accessor dimensions: Types::DimensionValues
+      attr_accessor tags: Types::TagValues
+      attr_accessor cost_categories: Types::CostCategoryValues
+      SENSITIVE: []
+    end
+
+    class ForecastResult
+      attr_accessor time_period: Types::DateInterval
+      attr_accessor mean_value: ::String
+      attr_accessor prediction_interval_lower_bound: ::String
+      attr_accessor prediction_interval_upper_bound: ::String
+      SENSITIVE: []
+    end
+
+    class GenerationExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GenerationSummary
+      attr_accessor recommendation_id: ::String
+      attr_accessor generation_status: ("SUCCEEDED" | "PROCESSING" | "FAILED")
+      attr_accessor generation_started_time: ::String
+      attr_accessor generation_completion_time: ::String
+      attr_accessor estimated_completion_time: ::String
+      SENSITIVE: []
+    end
+
+    class GetAnomaliesRequest
+      attr_accessor monitor_arn: ::String
+      attr_accessor date_interval: Types::AnomalyDateInterval
+      attr_accessor feedback: ("YES" | "NO" | "PLANNED_ACTIVITY")
+      attr_accessor total_impact: Types::TotalImpactFilter
+      attr_accessor next_page_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetAnomaliesResponse
+      attr_accessor anomalies: ::Array[Types::Anomaly]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetAnomalyMonitorsRequest
+      attr_accessor monitor_arn_list: ::Array[::String]
+      attr_accessor next_page_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetAnomalyMonitorsResponse
+      attr_accessor anomaly_monitors: ::Array[Types::AnomalyMonitor]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetAnomalySubscriptionsRequest
+      attr_accessor subscription_arn_list: ::Array[::String]
+      attr_accessor monitor_arn: ::String
+      attr_accessor next_page_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetAnomalySubscriptionsResponse
+      attr_accessor anomaly_subscriptions: ::Array[Types::AnomalySubscription]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCostAndUsageRequest
+      attr_accessor time_period: Types::DateInterval
+      attr_accessor granularity: ("DAILY" | "MONTHLY" | "HOURLY")
+      attr_accessor filter: Types::Expression
+      attr_accessor metrics: ::Array[::String]
+      attr_accessor group_by: ::Array[Types::GroupDefinition]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCostAndUsageResponse
+      attr_accessor next_page_token: ::String
+      attr_accessor group_definitions: ::Array[Types::GroupDefinition]
+      attr_accessor results_by_time: ::Array[Types::ResultByTime]
+      attr_accessor dimension_value_attributes: ::Array[Types::DimensionValuesWithAttributes]
+      SENSITIVE: []
+    end
+
+    class GetCostAndUsageWithResourcesRequest
+      attr_accessor time_period: Types::DateInterval
+      attr_accessor granularity: ("DAILY" | "MONTHLY" | "HOURLY")
+      attr_accessor filter: Types::Expression
+      attr_accessor metrics: ::Array[::String]
+      attr_accessor group_by: ::Array[Types::GroupDefinition]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCostAndUsageWithResourcesResponse
+      attr_accessor next_page_token: ::String
+      attr_accessor group_definitions: ::Array[Types::GroupDefinition]
+      attr_accessor results_by_time: ::Array[Types::ResultByTime]
+      attr_accessor dimension_value_attributes: ::Array[Types::DimensionValuesWithAttributes]
+      SENSITIVE: []
+    end
+
+    class GetCostCategoriesRequest
+      attr_accessor search_string: ::String
+      attr_accessor time_period: Types::DateInterval
+      attr_accessor cost_category_name: ::String
+      attr_accessor filter: Types::Expression
+      attr_accessor sort_by: ::Array[Types::SortDefinition]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCostCategoriesResponse
+      attr_accessor next_page_token: ::String
+      attr_accessor cost_category_names: ::Array[::String]
+      attr_accessor cost_category_values: ::Array[::String]
+      attr_accessor return_size: ::Integer
+      attr_accessor total_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetCostForecastRequest
+      attr_accessor time_period: Types::DateInterval
+      attr_accessor metric: ("BLENDED_COST" | "UNBLENDED_COST" | "AMORTIZED_COST" | "NET_UNBLENDED_COST" | "NET_AMORTIZED_COST" | "USAGE_QUANTITY" | "NORMALIZED_USAGE_AMOUNT")
+      attr_accessor granularity: ("DAILY" | "MONTHLY" | "HOURLY")
+      attr_accessor filter: Types::Expression
+      attr_accessor prediction_interval_level: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetCostForecastResponse
+      attr_accessor total: Types::MetricValue
+      attr_accessor forecast_results_by_time: ::Array[Types::ForecastResult]
+      SENSITIVE: []
+    end
+
+    class GetDimensionValuesRequest
+      attr_accessor search_string: ::String
+      attr_accessor time_period: Types::DateInterval
+      attr_accessor dimension: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")
+      attr_accessor context: ("COST_AND_USAGE" | "RESERVATIONS" | "SAVINGS_PLANS")
+      attr_accessor filter: Types::Expression
+      attr_accessor sort_by: ::Array[Types::SortDefinition]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDimensionValuesResponse
+      attr_accessor dimension_values: ::Array[Types::DimensionValuesWithAttributes]
+      attr_accessor return_size: ::Integer
+      attr_accessor total_size: ::Integer
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetReservationCoverageRequest
+      attr_accessor time_period: Types::DateInterval
+      attr_accessor group_by: ::Array[Types::GroupDefinition]
+      attr_accessor granularity: ("DAILY" | "MONTHLY" | "HOURLY")
+      attr_accessor filter: Types::Expression
+      attr_accessor metrics: ::Array[::String]
+      attr_accessor next_page_token: ::String
+      attr_accessor sort_by: Types::SortDefinition
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetReservationCoverageResponse
+      attr_accessor coverages_by_time: ::Array[Types::CoverageByTime]
+      attr_accessor total: Types::Coverage
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetReservationPurchaseRecommendationRequest
+      attr_accessor account_id: ::String
+      attr_accessor service: ::String
+      attr_accessor filter: Types::Expression
+      attr_accessor account_scope: ("PAYER" | "LINKED")
+      attr_accessor lookback_period_in_days: ("SEVEN_DAYS" | "THIRTY_DAYS" | "SIXTY_DAYS")
+      attr_accessor term_in_years: ("ONE_YEAR" | "THREE_YEARS")
+      attr_accessor payment_option: ("NO_UPFRONT" | "PARTIAL_UPFRONT" | "ALL_UPFRONT" | "LIGHT_UTILIZATION" | "MEDIUM_UTILIZATION" | "HEAVY_UTILIZATION")
+      attr_accessor service_specification: Types::ServiceSpecification
+      attr_accessor page_size: ::Integer
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetReservationPurchaseRecommendationResponse
+      attr_accessor metadata: Types::ReservationPurchaseRecommendationMetadata
+      attr_accessor recommendations: ::Array[Types::ReservationPurchaseRecommendation]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetReservationUtilizationRequest
+      attr_accessor time_period: Types::DateInterval
+      attr_accessor group_by: ::Array[Types::GroupDefinition]
+      attr_accessor granularity: ("DAILY" | "MONTHLY" | "HOURLY")
+      attr_accessor filter: Types::Expression
+      attr_accessor sort_by: Types::SortDefinition
+      attr_accessor next_page_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetReservationUtilizationResponse
+      attr_accessor utilizations_by_time: ::Array[Types::UtilizationByTime]
+      attr_accessor total: Types::ReservationAggregates
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRightsizingRecommendationRequest
+      attr_accessor filter: Types::Expression
+      attr_accessor configuration: Types::RightsizingRecommendationConfiguration
+      attr_accessor service: ::String
+      attr_accessor page_size: ::Integer
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRightsizingRecommendationResponse
+      attr_accessor metadata: Types::RightsizingRecommendationMetadata
+      attr_accessor summary: Types::RightsizingRecommendationSummary
+      attr_accessor rightsizing_recommendations: ::Array[Types::RightsizingRecommendation]
+      attr_accessor next_page_token: ::String
+      attr_accessor configuration: Types::RightsizingRecommendationConfiguration
+      SENSITIVE: []
+    end
+
+    class GetSavingsPlanPurchaseRecommendationDetailsRequest
+      attr_accessor recommendation_detail_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSavingsPlanPurchaseRecommendationDetailsResponse
+      attr_accessor recommendation_detail_id: ::String
+      attr_accessor recommendation_detail_data: Types::RecommendationDetailData
+      SENSITIVE: []
+    end
+
+    class GetSavingsPlansCoverageRequest
+      attr_accessor time_period: Types::DateInterval
+      attr_accessor group_by: ::Array[Types::GroupDefinition]
+      attr_accessor granularity: ("DAILY" | "MONTHLY" | "HOURLY")
+      attr_accessor filter: Types::Expression
+      attr_accessor metrics: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor sort_by: Types::SortDefinition
+      SENSITIVE: []
+    end
+
+    class GetSavingsPlansCoverageResponse
+      attr_accessor savings_plans_coverages: ::Array[Types::SavingsPlansCoverage]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSavingsPlansPurchaseRecommendationRequest
+      attr_accessor savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP")
+      attr_accessor term_in_years: ("ONE_YEAR" | "THREE_YEARS")
+      attr_accessor payment_option: ("NO_UPFRONT" | "PARTIAL_UPFRONT" | "ALL_UPFRONT" | "LIGHT_UTILIZATION" | "MEDIUM_UTILIZATION" | "HEAVY_UTILIZATION")
+      attr_accessor account_scope: ("PAYER" | "LINKED")
+      attr_accessor next_page_token: ::String
+      attr_accessor page_size: ::Integer
+      attr_accessor lookback_period_in_days: ("SEVEN_DAYS" | "THIRTY_DAYS" | "SIXTY_DAYS")
+      attr_accessor filter: Types::Expression
+      SENSITIVE: []
+    end
+
+    class GetSavingsPlansPurchaseRecommendationResponse
+      attr_accessor metadata: Types::SavingsPlansPurchaseRecommendationMetadata
+      attr_accessor savings_plans_purchase_recommendation: Types::SavingsPlansPurchaseRecommendation
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSavingsPlansUtilizationDetailsRequest
+      attr_accessor time_period: Types::DateInterval
+      attr_accessor filter: Types::Expression
+      attr_accessor data_type: ::Array[("ATTRIBUTES" | "UTILIZATION" | "AMORTIZED_COMMITMENT" | "SAVINGS")]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor sort_by: Types::SortDefinition
+      SENSITIVE: []
+    end
+
+    class GetSavingsPlansUtilizationDetailsResponse
+      attr_accessor savings_plans_utilization_details: ::Array[Types::SavingsPlansUtilizationDetail]
+      attr_accessor total: Types::SavingsPlansUtilizationAggregates
+      attr_accessor time_period: Types::DateInterval
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSavingsPlansUtilizationRequest
+      attr_accessor time_period: Types::DateInterval
+      attr_accessor granularity: ("DAILY" | "MONTHLY" | "HOURLY")
+      attr_accessor filter: Types::Expression
+      attr_accessor sort_by: Types::SortDefinition
+      SENSITIVE: []
+    end
+
+    class GetSavingsPlansUtilizationResponse
+      attr_accessor savings_plans_utilizations_by_time: ::Array[Types::SavingsPlansUtilizationByTime]
+      attr_accessor total: Types::SavingsPlansUtilizationAggregates
+      SENSITIVE: []
+    end
+
+    class GetTagsRequest
+      attr_accessor search_string: ::String
+      attr_accessor time_period: Types::DateInterval
+      attr_accessor tag_key: ::String
+      attr_accessor filter: Types::Expression
+      attr_accessor sort_by: ::Array[Types::SortDefinition]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetTagsResponse
+      attr_accessor next_page_token: ::String
+      attr_accessor tags: ::Array[::String]
+      attr_accessor return_size: ::Integer
+      attr_accessor total_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetUsageForecastRequest
+      attr_accessor time_period: Types::DateInterval
+      attr_accessor metric: ("BLENDED_COST" | "UNBLENDED_COST" | "AMORTIZED_COST" | "NET_UNBLENDED_COST" | "NET_AMORTIZED_COST" | "USAGE_QUANTITY" | "NORMALIZED_USAGE_AMOUNT")
+      attr_accessor granularity: ("DAILY" | "MONTHLY" | "HOURLY")
+      attr_accessor filter: Types::Expression
+      attr_accessor prediction_interval_level: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetUsageForecastResponse
+      attr_accessor total: Types::MetricValue
+      attr_accessor forecast_results_by_time: ::Array[Types::ForecastResult]
+      SENSITIVE: []
+    end
+
+    class Group
+      attr_accessor keys: ::Array[::String]
+      attr_accessor metrics: ::Hash[::String, Types::MetricValue]
+      SENSITIVE: []
+    end
+
+    class GroupDefinition
+      attr_accessor type: ("DIMENSION" | "TAG" | "COST_CATEGORY")
+      attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class Impact
+      attr_accessor max_impact: ::Float
+      attr_accessor total_impact: ::Float
+      attr_accessor total_actual_spend: ::Float
+      attr_accessor total_expected_spend: ::Float
+      attr_accessor total_impact_percentage: ::Float
+      SENSITIVE: []
+    end
+
+    class InstanceDetails
+      attr_accessor ec2_instance_details: Types::EC2InstanceDetails
+      attr_accessor rds_instance_details: Types::RDSInstanceDetails
+      attr_accessor redshift_instance_details: Types::RedshiftInstanceDetails
+      attr_accessor elasticache_instance_details: Types::ElastiCacheInstanceDetails
+      attr_accessor es_instance_details: Types::ESInstanceDetails
+      attr_accessor memory_db_instance_details: Types::MemoryDBInstanceDetails
+      SENSITIVE: []
+    end
+
+    class InvalidNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListCostAllocationTagsRequest
+      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor tag_keys: ::Array[::String]
+      attr_accessor type: ("AWSGenerated" | "UserDefined")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCostAllocationTagsResponse
+      attr_accessor cost_allocation_tags: ::Array[Types::CostAllocationTag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCostCategoryDefinitionsRequest
+      attr_accessor effective_on: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCostCategoryDefinitionsResponse
+      attr_accessor cost_category_references: ::Array[Types::CostCategoryReference]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSavingsPlansPurchaseRecommendationGenerationRequest
+      attr_accessor generation_status: ("SUCCEEDED" | "PROCESSING" | "FAILED")
+      attr_accessor recommendation_ids: ::Array[::String]
+      attr_accessor page_size: ::Integer
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSavingsPlansPurchaseRecommendationGenerationResponse
+      attr_accessor generation_summary_list: ::Array[Types::GenerationSummary]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      SENSITIVE: []
+    end
+
+    class MemoryDBInstanceDetails
+      attr_accessor family: ::String
+      attr_accessor node_type: ::String
+      attr_accessor region: ::String
+      attr_accessor current_generation: bool
+      attr_accessor size_flex_eligible: bool
+      SENSITIVE: []
+    end
+
+    class MetricValue
+      attr_accessor amount: ::String
+      attr_accessor unit: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyRecommendationDetail
+      attr_accessor target_instances: ::Array[Types::TargetInstance]
+      SENSITIVE: []
+    end
+
+    class NetworkResourceUtilization
+      attr_accessor network_in_bytes_per_second: ::String
+      attr_accessor network_out_bytes_per_second: ::String
+      attr_accessor network_packets_in_per_second: ::String
+      attr_accessor network_packets_out_per_second: ::String
+      SENSITIVE: []
+    end
+
+    class ProvideAnomalyFeedbackRequest
+      attr_accessor anomaly_id: ::String
+      attr_accessor feedback: ("YES" | "NO" | "PLANNED_ACTIVITY")
+      SENSITIVE: []
+    end
+
+    class ProvideAnomalyFeedbackResponse
+      attr_accessor anomaly_id: ::String
+      SENSITIVE: []
+    end
+
+    class RDSInstanceDetails
+      attr_accessor family: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor region: ::String
+      attr_accessor database_engine: ::String
+      attr_accessor database_edition: ::String
+      attr_accessor deployment_option: ::String
+      attr_accessor license_model: ::String
+      attr_accessor current_generation: bool
+      attr_accessor size_flex_eligible: bool
+      SENSITIVE: []
+    end
+
+    class RecommendationDetailData
+      attr_accessor account_scope: ("PAYER" | "LINKED")
+      attr_accessor lookback_period_in_days: ("SEVEN_DAYS" | "THIRTY_DAYS" | "SIXTY_DAYS")
+      attr_accessor savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP")
+      attr_accessor term_in_years: ("ONE_YEAR" | "THREE_YEARS")
+      attr_accessor payment_option: ("NO_UPFRONT" | "PARTIAL_UPFRONT" | "ALL_UPFRONT" | "LIGHT_UTILIZATION" | "MEDIUM_UTILIZATION" | "HEAVY_UTILIZATION")
+      attr_accessor account_id: ::String
+      attr_accessor currency_code: ::String
+      attr_accessor instance_family: ::String
+      attr_accessor region: ::String
+      attr_accessor offering_id: ::String
+      attr_accessor generation_timestamp: ::String
+      attr_accessor latest_usage_timestamp: ::String
+      attr_accessor current_average_hourly_on_demand_spend: ::String
+      attr_accessor current_maximum_hourly_on_demand_spend: ::String
+      attr_accessor current_minimum_hourly_on_demand_spend: ::String
+      attr_accessor estimated_average_utilization: ::String
+      attr_accessor estimated_monthly_savings_amount: ::String
+      attr_accessor estimated_on_demand_cost: ::String
+      attr_accessor estimated_on_demand_cost_with_current_commitment: ::String
+      attr_accessor estimated_roi: ::String
+      attr_accessor estimated_sp_cost: ::String
+      attr_accessor estimated_savings_amount: ::String
+      attr_accessor estimated_savings_percentage: ::String
+      attr_accessor existing_hourly_commitment: ::String
+      attr_accessor hourly_commitment_to_purchase: ::String
+      attr_accessor upfront_cost: ::String
+      attr_accessor current_average_coverage: ::String
+      attr_accessor estimated_average_coverage: ::String
+      attr_accessor metrics_over_lookback_period: ::Array[Types::RecommendationDetailHourlyMetrics]
+      SENSITIVE: []
+    end
+
+    class RecommendationDetailHourlyMetrics
+      attr_accessor start_time: ::String
+      attr_accessor estimated_on_demand_cost: ::String
+      attr_accessor current_coverage: ::String
+      attr_accessor estimated_coverage: ::String
+      attr_accessor estimated_new_commitment_utilization: ::String
+      SENSITIVE: []
+    end
+
+    class RedshiftInstanceDetails
+      attr_accessor family: ::String
+      attr_accessor node_type: ::String
+      attr_accessor region: ::String
+      attr_accessor current_generation: bool
+      attr_accessor size_flex_eligible: bool
+      SENSITIVE: []
+    end
+
+    class RequestChangedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ReservationAggregates
+      attr_accessor utilization_percentage: ::String
+      attr_accessor utilization_percentage_in_units: ::String
+      attr_accessor purchased_hours: ::String
+      attr_accessor purchased_units: ::String
+      attr_accessor total_actual_hours: ::String
+      attr_accessor total_actual_units: ::String
+      attr_accessor unused_hours: ::String
+      attr_accessor unused_units: ::String
+      attr_accessor on_demand_cost_of_ri_hours_used: ::String
+      attr_accessor net_ri_savings: ::String
+      attr_accessor total_potential_ri_savings: ::String
+      attr_accessor amortized_upfront_fee: ::String
+      attr_accessor amortized_recurring_fee: ::String
+      attr_accessor total_amortized_fee: ::String
+      attr_accessor ri_cost_for_unused_hours: ::String
+      attr_accessor realized_savings: ::String
+      attr_accessor unrealized_savings: ::String
+      SENSITIVE: []
+    end
+
+    class ReservationCoverageGroup
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor coverage: Types::Coverage
+      SENSITIVE: []
+    end
+
+    class ReservationPurchaseRecommendation
+      attr_accessor account_scope: ("PAYER" | "LINKED")
+      attr_accessor lookback_period_in_days: ("SEVEN_DAYS" | "THIRTY_DAYS" | "SIXTY_DAYS")
+      attr_accessor term_in_years: ("ONE_YEAR" | "THREE_YEARS")
+      attr_accessor payment_option: ("NO_UPFRONT" | "PARTIAL_UPFRONT" | "ALL_UPFRONT" | "LIGHT_UTILIZATION" | "MEDIUM_UTILIZATION" | "HEAVY_UTILIZATION")
+      attr_accessor service_specification: Types::ServiceSpecification
+      attr_accessor recommendation_details: ::Array[Types::ReservationPurchaseRecommendationDetail]
+      attr_accessor recommendation_summary: Types::ReservationPurchaseRecommendationSummary
+      SENSITIVE: []
+    end
+
+    class ReservationPurchaseRecommendationDetail
+      attr_accessor account_id: ::String
+      attr_accessor instance_details: Types::InstanceDetails
+      attr_accessor recommended_number_of_instances_to_purchase: ::String
+      attr_accessor recommended_normalized_units_to_purchase: ::String
+      attr_accessor minimum_number_of_instances_used_per_hour: ::String
+      attr_accessor minimum_normalized_units_used_per_hour: ::String
+      attr_accessor maximum_number_of_instances_used_per_hour: ::String
+      attr_accessor maximum_normalized_units_used_per_hour: ::String
+      attr_accessor average_number_of_instances_used_per_hour: ::String
+      attr_accessor average_normalized_units_used_per_hour: ::String
+      attr_accessor average_utilization: ::String
+      attr_accessor estimated_break_even_in_months: ::String
+      attr_accessor currency_code: ::String
+      attr_accessor estimated_monthly_savings_amount: ::String
+      attr_accessor estimated_monthly_savings_percentage: ::String
+      attr_accessor estimated_monthly_on_demand_cost: ::String
+      attr_accessor estimated_reservation_cost_for_lookback_period: ::String
+      attr_accessor upfront_cost: ::String
+      attr_accessor recurring_standard_monthly_cost: ::String
+      SENSITIVE: []
+    end
+
+    class ReservationPurchaseRecommendationMetadata
+      attr_accessor recommendation_id: ::String
+      attr_accessor generation_timestamp: ::String
+      SENSITIVE: []
+    end
+
+    class ReservationPurchaseRecommendationSummary
+      attr_accessor total_estimated_monthly_savings_amount: ::String
+      attr_accessor total_estimated_monthly_savings_percentage: ::String
+      attr_accessor currency_code: ::String
+      SENSITIVE: []
+    end
+
+    class ReservationUtilizationGroup
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor utilization: Types::ReservationAggregates
+      SENSITIVE: []
+    end
+
+    class ResourceDetails
+      attr_accessor ec2_resource_details: Types::EC2ResourceDetails
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceTag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceUtilization
+      attr_accessor ec2_resource_utilization: Types::EC2ResourceUtilization
+      SENSITIVE: []
+    end
+
+    class ResultByTime
+      attr_accessor time_period: Types::DateInterval
+      attr_accessor total: ::Hash[::String, Types::MetricValue]
+      attr_accessor groups: ::Array[Types::Group]
+      attr_accessor estimated: bool
+      SENSITIVE: []
+    end
+
+    class RightsizingRecommendation
+      attr_accessor account_id: ::String
+      attr_accessor current_instance: Types::CurrentInstance
+      attr_accessor rightsizing_type: ("TERMINATE" | "MODIFY")
+      attr_accessor modify_recommendation_detail: Types::ModifyRecommendationDetail
+      attr_accessor terminate_recommendation_detail: Types::TerminateRecommendationDetail
+      attr_accessor finding_reason_codes: ::Array[("CPU_OVER_PROVISIONED" | "CPU_UNDER_PROVISIONED" | "MEMORY_OVER_PROVISIONED" | "MEMORY_UNDER_PROVISIONED" | "EBS_THROUGHPUT_OVER_PROVISIONED" | "EBS_THROUGHPUT_UNDER_PROVISIONED" | "EBS_IOPS_OVER_PROVISIONED" | "EBS_IOPS_UNDER_PROVISIONED" | "NETWORK_BANDWIDTH_OVER_PROVISIONED" | "NETWORK_BANDWIDTH_UNDER_PROVISIONED" | "NETWORK_PPS_OVER_PROVISIONED" | "NETWORK_PPS_UNDER_PROVISIONED" | "DISK_IOPS_OVER_PROVISIONED" | "DISK_IOPS_UNDER_PROVISIONED" | "DISK_THROUGHPUT_OVER_PROVISIONED" | "DISK_THROUGHPUT_UNDER_PROVISIONED")]
+      SENSITIVE: []
+    end
+
+    class RightsizingRecommendationConfiguration
+      attr_accessor recommendation_target: ("SAME_INSTANCE_FAMILY" | "CROSS_INSTANCE_FAMILY")
+      attr_accessor benefits_considered: bool
+      SENSITIVE: []
+    end
+
+    class RightsizingRecommendationMetadata
+      attr_accessor recommendation_id: ::String
+      attr_accessor generation_timestamp: ::String
+      attr_accessor lookback_period_in_days: ("SEVEN_DAYS" | "THIRTY_DAYS" | "SIXTY_DAYS")
+      attr_accessor additional_metadata: ::String
+      SENSITIVE: []
+    end
+
+    class RightsizingRecommendationSummary
+      attr_accessor total_recommendation_count: ::String
+      attr_accessor estimated_total_monthly_savings_amount: ::String
+      attr_accessor savings_currency_code: ::String
+      attr_accessor savings_percentage: ::String
+      SENSITIVE: []
+    end
+
+    class RootCause
+      attr_accessor service: ::String
+      attr_accessor region: ::String
+      attr_accessor linked_account: ::String
+      attr_accessor usage_type: ::String
+      attr_accessor linked_account_name: ::String
+      SENSITIVE: []
+    end
+
+    class SavingsPlansAmortizedCommitment
+      attr_accessor amortized_recurring_commitment: ::String
+      attr_accessor amortized_upfront_commitment: ::String
+      attr_accessor total_amortized_commitment: ::String
+      SENSITIVE: []
+    end
+
+    class SavingsPlansCoverage
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor coverage: Types::SavingsPlansCoverageData
+      attr_accessor time_period: Types::DateInterval
+      SENSITIVE: []
+    end
+
+    class SavingsPlansCoverageData
+      attr_accessor spend_covered_by_savings_plans: ::String
+      attr_accessor on_demand_cost: ::String
+      attr_accessor total_cost: ::String
+      attr_accessor coverage_percentage: ::String
+      SENSITIVE: []
+    end
+
+    class SavingsPlansDetails
+      attr_accessor region: ::String
+      attr_accessor instance_family: ::String
+      attr_accessor offering_id: ::String
+      SENSITIVE: []
+    end
+
+    class SavingsPlansPurchaseRecommendation
+      attr_accessor account_scope: ("PAYER" | "LINKED")
+      attr_accessor savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP")
+      attr_accessor term_in_years: ("ONE_YEAR" | "THREE_YEARS")
+      attr_accessor payment_option: ("NO_UPFRONT" | "PARTIAL_UPFRONT" | "ALL_UPFRONT" | "LIGHT_UTILIZATION" | "MEDIUM_UTILIZATION" | "HEAVY_UTILIZATION")
+      attr_accessor lookback_period_in_days: ("SEVEN_DAYS" | "THIRTY_DAYS" | "SIXTY_DAYS")
+      attr_accessor savings_plans_purchase_recommendation_details: ::Array[Types::SavingsPlansPurchaseRecommendationDetail]
+      attr_accessor savings_plans_purchase_recommendation_summary: Types::SavingsPlansPurchaseRecommendationSummary
+      SENSITIVE: []
+    end
+
+    class SavingsPlansPurchaseRecommendationDetail
+      attr_accessor savings_plans_details: Types::SavingsPlansDetails
+      attr_accessor account_id: ::String
+      attr_accessor upfront_cost: ::String
+      attr_accessor estimated_roi: ::String
+      attr_accessor currency_code: ::String
+      attr_accessor estimated_sp_cost: ::String
+      attr_accessor estimated_on_demand_cost: ::String
+      attr_accessor estimated_on_demand_cost_with_current_commitment: ::String
+      attr_accessor estimated_savings_amount: ::String
+      attr_accessor estimated_savings_percentage: ::String
+      attr_accessor hourly_commitment_to_purchase: ::String
+      attr_accessor estimated_average_utilization: ::String
+      attr_accessor estimated_monthly_savings_amount: ::String
+      attr_accessor current_minimum_hourly_on_demand_spend: ::String
+      attr_accessor current_maximum_hourly_on_demand_spend: ::String
+      attr_accessor current_average_hourly_on_demand_spend: ::String
+      attr_accessor recommendation_detail_id: ::String
+      SENSITIVE: []
+    end
+
+    class SavingsPlansPurchaseRecommendationMetadata
+      attr_accessor recommendation_id: ::String
+      attr_accessor generation_timestamp: ::String
+      attr_accessor additional_metadata: ::String
+      SENSITIVE: []
+    end
+
+    class SavingsPlansPurchaseRecommendationSummary
+      attr_accessor estimated_roi: ::String
+      attr_accessor currency_code: ::String
+      attr_accessor estimated_total_cost: ::String
+      attr_accessor current_on_demand_spend: ::String
+      attr_accessor estimated_savings_amount: ::String
+      attr_accessor total_recommendation_count: ::String
+      attr_accessor daily_commitment_to_purchase: ::String
+      attr_accessor hourly_commitment_to_purchase: ::String
+      attr_accessor estimated_savings_percentage: ::String
+      attr_accessor estimated_monthly_savings_amount: ::String
+      attr_accessor estimated_on_demand_cost_with_current_commitment: ::String
+      SENSITIVE: []
+    end
+
+    class SavingsPlansSavings
+      attr_accessor net_savings: ::String
+      attr_accessor on_demand_cost_equivalent: ::String
+      SENSITIVE: []
+    end
+
+    class SavingsPlansUtilization
+      attr_accessor total_commitment: ::String
+      attr_accessor used_commitment: ::String
+      attr_accessor unused_commitment: ::String
+      attr_accessor utilization_percentage: ::String
+      SENSITIVE: []
+    end
+
+    class SavingsPlansUtilizationAggregates
+      attr_accessor utilization: Types::SavingsPlansUtilization
+      attr_accessor savings: Types::SavingsPlansSavings
+      attr_accessor amortized_commitment: Types::SavingsPlansAmortizedCommitment
+      SENSITIVE: []
+    end
+
+    class SavingsPlansUtilizationByTime
+      attr_accessor time_period: Types::DateInterval
+      attr_accessor utilization: Types::SavingsPlansUtilization
+      attr_accessor savings: Types::SavingsPlansSavings
+      attr_accessor amortized_commitment: Types::SavingsPlansAmortizedCommitment
+      SENSITIVE: []
+    end
+
+    class SavingsPlansUtilizationDetail
+      attr_accessor savings_plan_arn: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor utilization: Types::SavingsPlansUtilization
+      attr_accessor savings: Types::SavingsPlansSavings
+      attr_accessor amortized_commitment: Types::SavingsPlansAmortizedCommitment
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceSpecification
+      attr_accessor ec2_specification: Types::EC2Specification
+      SENSITIVE: []
+    end
+
+    class SortDefinition
+      attr_accessor key: ::String
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class StartSavingsPlansPurchaseRecommendationGenerationRequest < Aws::EmptyStructure
+    end
+
+    class StartSavingsPlansPurchaseRecommendationGenerationResponse
+      attr_accessor recommendation_id: ::String
+      attr_accessor generation_started_time: ::String
+      attr_accessor estimated_completion_time: ::String
+      SENSITIVE: []
+    end
+
+    class Subscriber
+      attr_accessor address: ::String
+      attr_accessor type: ("EMAIL" | "SNS")
+      attr_accessor status: ("CONFIRMED" | "DECLINED")
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TagValues
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      attr_accessor match_options: ::Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]
+      SENSITIVE: []
+    end
+
+    class TargetInstance
+      attr_accessor estimated_monthly_cost: ::String
+      attr_accessor estimated_monthly_savings: ::String
+      attr_accessor currency_code: ::String
+      attr_accessor default_target_instance: bool
+      attr_accessor resource_details: Types::ResourceDetails
+      attr_accessor expected_resource_utilization: Types::ResourceUtilization
+      attr_accessor platform_differences: ::Array[("HYPERVISOR" | "NETWORK_INTERFACE" | "STORAGE_INTERFACE" | "INSTANCE_STORE_AVAILABILITY" | "VIRTUALIZATION_TYPE")]
+      SENSITIVE: []
+    end
+
+    class TerminateRecommendationDetail
+      attr_accessor estimated_monthly_savings: ::String
+      attr_accessor currency_code: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class TotalImpactFilter
+      attr_accessor numeric_operator: ("EQUAL" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN" | "LESS_THAN" | "BETWEEN")
+      attr_accessor start_value: ::Float
+      attr_accessor end_value: ::Float
+      SENSITIVE: []
+    end
+
+    class UnknownMonitorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnknownSubscriptionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnresolvableUsageUnitException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAnomalyMonitorRequest
+      attr_accessor monitor_arn: ::String
+      attr_accessor monitor_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAnomalyMonitorResponse
+      attr_accessor monitor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAnomalySubscriptionRequest
+      attr_accessor subscription_arn: ::String
+      attr_accessor threshold: ::Float
+      attr_accessor frequency: ("DAILY" | "IMMEDIATE" | "WEEKLY")
+      attr_accessor monitor_arn_list: ::Array[::String]
+      attr_accessor subscribers: ::Array[Types::Subscriber]
+      attr_accessor subscription_name: ::String
+      attr_accessor threshold_expression: Types::Expression
+      SENSITIVE: []
+    end
+
+    class UpdateAnomalySubscriptionResponse
+      attr_accessor subscription_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCostAllocationTagsStatusError
+      attr_accessor tag_key: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCostAllocationTagsStatusRequest
+      attr_accessor cost_allocation_tags_status: ::Array[Types::CostAllocationTagStatusEntry]
+      SENSITIVE: []
+    end
+
+    class UpdateCostAllocationTagsStatusResponse
+      attr_accessor errors: ::Array[Types::UpdateCostAllocationTagsStatusError]
+      SENSITIVE: []
+    end
+
+    class UpdateCostCategoryDefinitionRequest
+      attr_accessor cost_category_arn: ::String
+      attr_accessor effective_start: ::String
+      attr_accessor rule_version: ("CostCategoryExpression.v1")
+      attr_accessor rules: ::Array[Types::CostCategoryRule]
+      attr_accessor default_value: ::String
+      attr_accessor split_charge_rules: ::Array[Types::CostCategorySplitChargeRule]
+      SENSITIVE: []
+    end
+
+    class UpdateCostCategoryDefinitionResponse
+      attr_accessor cost_category_arn: ::String
+      attr_accessor effective_start: ::String
+      SENSITIVE: []
+    end
+
+    class UtilizationByTime
+      attr_accessor time_period: Types::DateInterval
+      attr_accessor groups: ::Array[Types::ReservationUtilizationGroup]
+      attr_accessor total: Types::ReservationAggregates
+      SENSITIVE: []
+    end
+  end
+end

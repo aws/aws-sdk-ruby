@@ -1,0 +1,163 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RDS
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html
+    class DBEngineVersion
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#initialize-instance_method
+      def initialize: (String engine_name, String version, Hash[Symbol, untyped] options) -> void
+                    | (engine_name: String, version: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#engine_name-instance_method
+      def engine_name: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#version-instance_method
+      def version: () -> String
+      alias engine_version version
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#db_parameter_group_family-instance_method
+      def db_parameter_group_family: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#db_engine_description-instance_method
+      def db_engine_description: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#db_engine_version_description-instance_method
+      def db_engine_version_description: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#default_character_set-instance_method
+      def default_character_set: () -> Types::CharacterSet
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#image-instance_method
+      def image: () -> Types::CustomDBEngineVersionAMI
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#db_engine_media_type-instance_method
+      def db_engine_media_type: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#supported_character_sets-instance_method
+      def supported_character_sets: () -> ::Array[Types::CharacterSet]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#supported_nchar_character_sets-instance_method
+      def supported_nchar_character_sets: () -> ::Array[Types::CharacterSet]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#valid_upgrade_target-instance_method
+      def valid_upgrade_target: () -> ::Array[Types::UpgradeTarget]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#supported_timezones-instance_method
+      def supported_timezones: () -> ::Array[Types::Timezone]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#exportable_log_types-instance_method
+      def exportable_log_types: () -> ::Array[::String]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#supports_log_exports_to_cloudwatch_logs-instance_method
+      def supports_log_exports_to_cloudwatch_logs: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#supports_read_replica-instance_method
+      def supports_read_replica: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#supported_engine_modes-instance_method
+      def supported_engine_modes: () -> ::Array[::String]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#supported_feature_names-instance_method
+      def supported_feature_names: () -> ::Array[::String]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#status-instance_method
+      def status: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#supports_parallel_query-instance_method
+      def supports_parallel_query: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#supports_global_databases-instance_method
+      def supports_global_databases: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#major_engine_version-instance_method
+      def major_engine_version: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#database_installation_files_s3_bucket_name-instance_method
+      def database_installation_files_s3_bucket_name: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#database_installation_files_s3_prefix-instance_method
+      def database_installation_files_s3_prefix: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#db_engine_version_arn-instance_method
+      def db_engine_version_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#kms_key_id-instance_method
+      def kms_key_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#create_time-instance_method
+      def create_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#tag_list-instance_method
+      def tag_list: () -> ::Array[Types::Tag]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#supports_babelfish-instance_method
+      def supports_babelfish: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#custom_db_engine_version_manifest-instance_method
+      def custom_db_engine_version_manifest: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#supports_certificate_rotation_without_restart-instance_method
+      def supports_certificate_rotation_without_restart: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#supported_ca_certificate_identifiers-instance_method
+      def supported_ca_certificate_identifiers: () -> ::Array[::String]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#supports_local_write_forwarding-instance_method
+      def supports_local_write_forwarding: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#supports_integrations-instance_method
+      def supports_integrations: () -> bool
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#data-instance_method
+      def data: () -> Types::DBEngineVersion
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#engine-instance_method
+      def engine: () -> DBEngine
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#option_group_options-instance_method
+      def option_group_options: (
+                                  ?filters: Array[
+                                    {
+                                      name: ::String,
+                                      values: Array[::String]
+                                    },
+                                  ]
+                                ) -> OptionGroupOption::Collection
+                              | (?Hash[Symbol, untyped]) -> OptionGroupOption::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#option_groups-instance_method
+      def option_groups: (
+                           ?option_group_name: ::String,
+                           ?filters: Array[
+                             {
+                               name: ::String,
+                               values: Array[::String]
+                             },
+                           ]
+                         ) -> OptionGroup::Collection
+                       | (?Hash[Symbol, untyped]) -> OptionGroup::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#parameter_group_family-instance_method
+      def parameter_group_family: () -> DBParameterGroupFamily?
+
+      class Collection < ::Aws::Resources::Collection[DBEngineVersion]
+      end
+    end
+  end
+end

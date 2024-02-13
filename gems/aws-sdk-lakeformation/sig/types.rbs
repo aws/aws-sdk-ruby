@@ -1,0 +1,1080 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::LakeFormation
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AddLFTagsToResourceRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor resource: Types::Resource
+      attr_accessor lf_tags: ::Array[Types::LFTagPair]
+      SENSITIVE: []
+    end
+
+    class AddLFTagsToResourceResponse
+      attr_accessor failures: ::Array[Types::LFTagError]
+      SENSITIVE: []
+    end
+
+    class AddObjectInput
+      attr_accessor uri: ::String
+      attr_accessor etag: ::String
+      attr_accessor size: ::Integer
+      attr_accessor partition_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AllRowsWildcard < Aws::EmptyStructure
+    end
+
+    class AlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssumeDecoratedRoleWithSAMLRequest
+      attr_accessor saml_assertion: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor principal_arn: ::String
+      attr_accessor duration_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class AssumeDecoratedRoleWithSAMLResponse
+      attr_accessor access_key_id: ::String
+      attr_accessor secret_access_key: ::String
+      attr_accessor session_token: ::String
+      attr_accessor expiration: ::Time
+      SENSITIVE: []
+    end
+
+    class AuditContext
+      attr_accessor additional_audit_context: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGrantPermissionsRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor entries: ::Array[Types::BatchPermissionsRequestEntry]
+      SENSITIVE: []
+    end
+
+    class BatchGrantPermissionsResponse
+      attr_accessor failures: ::Array[Types::BatchPermissionsFailureEntry]
+      SENSITIVE: []
+    end
+
+    class BatchPermissionsFailureEntry
+      attr_accessor request_entry: Types::BatchPermissionsRequestEntry
+      attr_accessor error: Types::ErrorDetail
+      SENSITIVE: []
+    end
+
+    class BatchPermissionsRequestEntry
+      attr_accessor id: ::String
+      attr_accessor principal: Types::DataLakePrincipal
+      attr_accessor resource: Types::Resource
+      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
+      attr_accessor permissions_with_grant_option: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
+      SENSITIVE: []
+    end
+
+    class BatchRevokePermissionsRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor entries: ::Array[Types::BatchPermissionsRequestEntry]
+      SENSITIVE: []
+    end
+
+    class BatchRevokePermissionsResponse
+      attr_accessor failures: ::Array[Types::BatchPermissionsFailureEntry]
+      SENSITIVE: []
+    end
+
+    class CancelTransactionRequest
+      attr_accessor transaction_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelTransactionResponse < Aws::EmptyStructure
+    end
+
+    class CatalogResource < Aws::EmptyStructure
+    end
+
+    class ColumnLFTag
+      attr_accessor name: ::String
+      attr_accessor lf_tags: ::Array[Types::LFTagPair]
+      SENSITIVE: []
+    end
+
+    class ColumnWildcard
+      attr_accessor excluded_column_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CommitTransactionRequest
+      attr_accessor transaction_id: ::String
+      SENSITIVE: []
+    end
+
+    class CommitTransactionResponse
+      attr_accessor transaction_status: ("ACTIVE" | "COMMITTED" | "ABORTED" | "COMMIT_IN_PROGRESS")
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDataCellsFilterRequest
+      attr_accessor table_data: Types::DataCellsFilter
+      SENSITIVE: []
+    end
+
+    class CreateDataCellsFilterResponse < Aws::EmptyStructure
+    end
+
+    class CreateLFTagRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor tag_key: ::String
+      attr_accessor tag_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateLFTagResponse < Aws::EmptyStructure
+    end
+
+    class CreateLakeFormationIdentityCenterConfigurationRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor external_filtering: Types::ExternalFilteringConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateLakeFormationIdentityCenterConfigurationResponse
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLakeFormationOptInRequest
+      attr_accessor principal: Types::DataLakePrincipal
+      attr_accessor resource: Types::Resource
+      SENSITIVE: []
+    end
+
+    class CreateLakeFormationOptInResponse < Aws::EmptyStructure
+    end
+
+    class DataCellsFilter
+      attr_accessor table_catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor name: ::String
+      attr_accessor row_filter: Types::RowFilter
+      attr_accessor column_names: ::Array[::String]
+      attr_accessor column_wildcard: Types::ColumnWildcard
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class DataCellsFilterResource
+      attr_accessor table_catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DataLakePrincipal
+      attr_accessor data_lake_principal_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DataLakeSettings
+      attr_accessor data_lake_admins: ::Array[Types::DataLakePrincipal]
+      attr_accessor read_only_admins: ::Array[Types::DataLakePrincipal]
+      attr_accessor create_database_default_permissions: ::Array[Types::PrincipalPermissions]
+      attr_accessor create_table_default_permissions: ::Array[Types::PrincipalPermissions]
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor trusted_resource_owners: ::Array[::String]
+      attr_accessor allow_external_data_filtering: bool
+      attr_accessor allow_full_table_external_data_access: bool
+      attr_accessor external_data_filtering_allow_list: ::Array[Types::DataLakePrincipal]
+      attr_accessor authorized_session_tag_value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DataLocationResource
+      attr_accessor catalog_id: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DatabaseResource
+      attr_accessor catalog_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDataCellsFilterRequest
+      attr_accessor table_catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDataCellsFilterResponse < Aws::EmptyStructure
+    end
+
+    class DeleteLFTagRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor tag_key: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLFTagResponse < Aws::EmptyStructure
+    end
+
+    class DeleteLakeFormationIdentityCenterConfigurationRequest
+      attr_accessor catalog_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLakeFormationIdentityCenterConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteLakeFormationOptInRequest
+      attr_accessor principal: Types::DataLakePrincipal
+      attr_accessor resource: Types::Resource
+      SENSITIVE: []
+    end
+
+    class DeleteLakeFormationOptInResponse < Aws::EmptyStructure
+    end
+
+    class DeleteObjectInput
+      attr_accessor uri: ::String
+      attr_accessor etag: ::String
+      attr_accessor partition_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteObjectsOnCancelRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor transaction_id: ::String
+      attr_accessor objects: ::Array[Types::VirtualObject]
+      SENSITIVE: []
+    end
+
+    class DeleteObjectsOnCancelResponse < Aws::EmptyStructure
+    end
+
+    class DeregisterResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterResourceResponse < Aws::EmptyStructure
+    end
+
+    class DescribeLakeFormationIdentityCenterConfigurationRequest
+      attr_accessor catalog_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLakeFormationIdentityCenterConfigurationResponse
+      attr_accessor catalog_id: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor application_arn: ::String
+      attr_accessor external_filtering: Types::ExternalFilteringConfiguration
+      SENSITIVE: []
+    end
+
+    class DescribeResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeResourceResponse
+      attr_accessor resource_info: Types::ResourceInfo
+      SENSITIVE: []
+    end
+
+    class DescribeTransactionRequest
+      attr_accessor transaction_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTransactionResponse
+      attr_accessor transaction_description: Types::TransactionDescription
+      SENSITIVE: []
+    end
+
+    class DetailsMap
+      attr_accessor resource_share: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EntityNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ErrorDetail
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class ExecutionStatistics
+      attr_accessor average_execution_time_millis: ::Integer
+      attr_accessor data_scanned_bytes: ::Integer
+      attr_accessor work_units_executed_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExpiredException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ExtendTransactionRequest
+      attr_accessor transaction_id: ::String
+      SENSITIVE: []
+    end
+
+    class ExtendTransactionResponse < Aws::EmptyStructure
+    end
+
+    class ExternalFilteringConfiguration
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor authorized_targets: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FilterCondition
+      attr_accessor field: ("RESOURCE_ARN" | "ROLE_ARN" | "LAST_MODIFIED")
+      attr_accessor comparison_operator: ("EQ" | "NE" | "LE" | "LT" | "GE" | "GT" | "CONTAINS" | "NOT_CONTAINS" | "BEGINS_WITH" | "IN" | "BETWEEN")
+      attr_accessor string_value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetDataCellsFilterRequest
+      attr_accessor table_catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataCellsFilterResponse
+      attr_accessor data_cells_filter: Types::DataCellsFilter
+      SENSITIVE: []
+    end
+
+    class GetDataLakeSettingsRequest
+      attr_accessor catalog_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataLakeSettingsResponse
+      attr_accessor data_lake_settings: Types::DataLakeSettings
+      SENSITIVE: []
+    end
+
+    class GetEffectivePermissionsForPathRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetEffectivePermissionsForPathResponse
+      attr_accessor permissions: ::Array[Types::PrincipalResourcePermissions]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetLFTagRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor tag_key: ::String
+      SENSITIVE: []
+    end
+
+    class GetLFTagResponse
+      attr_accessor catalog_id: ::String
+      attr_accessor tag_key: ::String
+      attr_accessor tag_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetQueryStateRequest
+      attr_accessor query_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetQueryStateResponse
+      attr_accessor error: ::String
+      attr_accessor state: ("PENDING" | "WORKUNITS_AVAILABLE" | "ERROR" | "FINISHED" | "EXPIRED")
+      SENSITIVE: []
+    end
+
+    class GetQueryStatisticsRequest
+      attr_accessor query_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetQueryStatisticsResponse
+      attr_accessor execution_statistics: Types::ExecutionStatistics
+      attr_accessor planning_statistics: Types::PlanningStatistics
+      attr_accessor query_submission_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetResourceLFTagsRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor resource: Types::Resource
+      attr_accessor show_assigned_lf_tags: bool
+      SENSITIVE: []
+    end
+
+    class GetResourceLFTagsResponse
+      attr_accessor lf_tag_on_database: ::Array[Types::LFTagPair]
+      attr_accessor lf_tags_on_table: ::Array[Types::LFTagPair]
+      attr_accessor lf_tags_on_columns: ::Array[Types::ColumnLFTag]
+      SENSITIVE: []
+    end
+
+    class GetTableObjectsRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor transaction_id: ::String
+      attr_accessor query_as_of_time: ::Time
+      attr_accessor partition_predicate: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetTableObjectsResponse
+      attr_accessor objects: ::Array[Types::PartitionObjects]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetTemporaryGluePartitionCredentialsRequest
+      attr_accessor table_arn: ::String
+      attr_accessor partition: Types::PartitionValueList
+      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
+      attr_accessor duration_seconds: ::Integer
+      attr_accessor audit_context: Types::AuditContext
+      attr_accessor supported_permission_types: ::Array[("COLUMN_PERMISSION" | "CELL_FILTER_PERMISSION" | "NESTED_PERMISSION" | "NESTED_CELL_PERMISSION")]
+      SENSITIVE: []
+    end
+
+    class GetTemporaryGluePartitionCredentialsResponse
+      attr_accessor access_key_id: ::String
+      attr_accessor secret_access_key: ::String
+      attr_accessor session_token: ::String
+      attr_accessor expiration: ::Time
+      SENSITIVE: []
+    end
+
+    class GetTemporaryGlueTableCredentialsRequest
+      attr_accessor table_arn: ::String
+      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
+      attr_accessor duration_seconds: ::Integer
+      attr_accessor audit_context: Types::AuditContext
+      attr_accessor supported_permission_types: ::Array[("COLUMN_PERMISSION" | "CELL_FILTER_PERMISSION" | "NESTED_PERMISSION" | "NESTED_CELL_PERMISSION")]
+      attr_accessor s3_path: ::String
+      attr_accessor query_session_context: Types::QuerySessionContext
+      SENSITIVE: []
+    end
+
+    class GetTemporaryGlueTableCredentialsResponse
+      attr_accessor access_key_id: ::String
+      attr_accessor secret_access_key: ::String
+      attr_accessor session_token: ::String
+      attr_accessor expiration: ::Time
+      attr_accessor vended_s3_path: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetWorkUnitResultsRequest
+      attr_accessor query_id: ::String
+      attr_accessor work_unit_id: ::Integer
+      attr_accessor work_unit_token: ::String
+      SENSITIVE: [:work_unit_token]
+    end
+
+    class GetWorkUnitResultsResponse
+      attr_accessor result_stream: ::IO
+      SENSITIVE: []
+    end
+
+    class GetWorkUnitsRequest
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      attr_accessor query_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkUnitsResponse
+      attr_accessor next_token: ::String
+      attr_accessor query_id: ::String
+      attr_accessor work_unit_ranges: ::Array[Types::WorkUnitRange]
+      SENSITIVE: []
+    end
+
+    class GlueEncryptionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GrantPermissionsRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor principal: Types::DataLakePrincipal
+      attr_accessor resource: Types::Resource
+      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
+      attr_accessor permissions_with_grant_option: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
+      SENSITIVE: []
+    end
+
+    class GrantPermissionsResponse < Aws::EmptyStructure
+    end
+
+    class InternalServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidInputException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LFTag
+      attr_accessor tag_key: ::String
+      attr_accessor tag_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class LFTagError
+      attr_accessor lf_tag: Types::LFTagPair
+      attr_accessor error: Types::ErrorDetail
+      SENSITIVE: []
+    end
+
+    class LFTagKeyResource
+      attr_accessor catalog_id: ::String
+      attr_accessor tag_key: ::String
+      attr_accessor tag_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class LFTagPair
+      attr_accessor catalog_id: ::String
+      attr_accessor tag_key: ::String
+      attr_accessor tag_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class LFTagPolicyResource
+      attr_accessor catalog_id: ::String
+      attr_accessor resource_type: ("DATABASE" | "TABLE")
+      attr_accessor expression: ::Array[Types::LFTag]
+      SENSITIVE: []
+    end
+
+    class LakeFormationOptInsInfo
+      attr_accessor resource: Types::Resource
+      attr_accessor principal: Types::DataLakePrincipal
+      attr_accessor last_modified: ::Time
+      attr_accessor last_updated_by: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataCellsFilterRequest
+      attr_accessor table: Types::TableResource
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDataCellsFilterResponse
+      attr_accessor data_cells_filters: ::Array[Types::DataCellsFilter]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLFTagsRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor resource_share_type: ("FOREIGN" | "ALL")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLFTagsResponse
+      attr_accessor lf_tags: ::Array[Types::LFTagPair]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLakeFormationOptInsRequest
+      attr_accessor principal: Types::DataLakePrincipal
+      attr_accessor resource: Types::Resource
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLakeFormationOptInsResponse
+      attr_accessor lake_formation_opt_ins_info_list: ::Array[Types::LakeFormationOptInsInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPermissionsRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor principal: Types::DataLakePrincipal
+      attr_accessor resource_type: ("CATALOG" | "DATABASE" | "TABLE" | "DATA_LOCATION" | "LF_TAG" | "LF_TAG_POLICY" | "LF_TAG_POLICY_DATABASE" | "LF_TAG_POLICY_TABLE")
+      attr_accessor resource: Types::Resource
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor include_related: ::String
+      SENSITIVE: []
+    end
+
+    class ListPermissionsResponse
+      attr_accessor principal_resource_permissions: ::Array[Types::PrincipalResourcePermissions]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourcesRequest
+      attr_accessor filter_condition_list: ::Array[Types::FilterCondition]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourcesResponse
+      attr_accessor resource_info_list: ::Array[Types::ResourceInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTableStorageOptimizersRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor storage_optimizer_type: ("COMPACTION" | "GARBAGE_COLLECTION" | "ALL")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTableStorageOptimizersResponse
+      attr_accessor storage_optimizer_list: ::Array[Types::StorageOptimizer]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTransactionsRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor status_filter: ("ALL" | "COMPLETED" | "ACTIVE" | "COMMITTED" | "ABORTED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTransactionsResponse
+      attr_accessor transactions: ::Array[Types::TransactionDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class OperationTimeoutException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PartitionObjects
+      attr_accessor partition_values: ::Array[::String]
+      attr_accessor objects: ::Array[Types::TableObject]
+      SENSITIVE: []
+    end
+
+    class PartitionValueList
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PermissionTypeMismatchException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PlanningStatistics
+      attr_accessor estimated_data_to_scan_bytes: ::Integer
+      attr_accessor planning_time_millis: ::Integer
+      attr_accessor queue_time_millis: ::Integer
+      attr_accessor work_units_generated_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class PrincipalPermissions
+      attr_accessor principal: Types::DataLakePrincipal
+      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
+      SENSITIVE: []
+    end
+
+    class PrincipalResourcePermissions
+      attr_accessor principal: Types::DataLakePrincipal
+      attr_accessor resource: Types::Resource
+      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
+      attr_accessor permissions_with_grant_option: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
+      attr_accessor additional_details: Types::DetailsMap
+      attr_accessor last_updated: ::Time
+      attr_accessor last_updated_by: ::String
+      SENSITIVE: []
+    end
+
+    class PutDataLakeSettingsRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor data_lake_settings: Types::DataLakeSettings
+      SENSITIVE: []
+    end
+
+    class PutDataLakeSettingsResponse < Aws::EmptyStructure
+    end
+
+    class QueryPlanningContext
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor query_as_of_time: ::Time
+      attr_accessor query_parameters: ::Hash[::String, ::String]
+      attr_accessor transaction_id: ::String
+      SENSITIVE: []
+    end
+
+    class QuerySessionContext
+      attr_accessor query_id: ::String
+      attr_accessor query_start_time: ::Time
+      attr_accessor cluster_id: ::String
+      attr_accessor query_authorization_id: ::String
+      attr_accessor additional_context: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RegisterResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor use_service_linked_role: bool
+      attr_accessor role_arn: ::String
+      attr_accessor with_federation: bool
+      attr_accessor hybrid_access_enabled: bool
+      SENSITIVE: []
+    end
+
+    class RegisterResourceResponse < Aws::EmptyStructure
+    end
+
+    class RemoveLFTagsFromResourceRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor resource: Types::Resource
+      attr_accessor lf_tags: ::Array[Types::LFTagPair]
+      SENSITIVE: []
+    end
+
+    class RemoveLFTagsFromResourceResponse
+      attr_accessor failures: ::Array[Types::LFTagError]
+      SENSITIVE: []
+    end
+
+    class Resource
+      attr_accessor catalog: Types::CatalogResource
+      attr_accessor database: Types::DatabaseResource
+      attr_accessor table: Types::TableResource
+      attr_accessor table_with_columns: Types::TableWithColumnsResource
+      attr_accessor data_location: Types::DataLocationResource
+      attr_accessor data_cells_filter: Types::DataCellsFilterResource
+      attr_accessor lf_tag: Types::LFTagKeyResource
+      attr_accessor lf_tag_policy: Types::LFTagPolicyResource
+      SENSITIVE: []
+    end
+
+    class ResourceInfo
+      attr_accessor resource_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor last_modified: ::Time
+      attr_accessor with_federation: bool
+      attr_accessor hybrid_access_enabled: bool
+      SENSITIVE: []
+    end
+
+    class ResourceNotReadyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNumberLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RevokePermissionsRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor principal: Types::DataLakePrincipal
+      attr_accessor resource: Types::Resource
+      attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
+      attr_accessor permissions_with_grant_option: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
+      SENSITIVE: []
+    end
+
+    class RevokePermissionsResponse < Aws::EmptyStructure
+    end
+
+    class RowFilter
+      attr_accessor filter_expression: ::String
+      attr_accessor all_rows_wildcard: Types::AllRowsWildcard
+      SENSITIVE: []
+    end
+
+    class SearchDatabasesByLFTagsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor catalog_id: ::String
+      attr_accessor expression: ::Array[Types::LFTag]
+      SENSITIVE: []
+    end
+
+    class SearchDatabasesByLFTagsResponse
+      attr_accessor next_token: ::String
+      attr_accessor database_list: ::Array[Types::TaggedDatabase]
+      SENSITIVE: []
+    end
+
+    class SearchTablesByLFTagsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor catalog_id: ::String
+      attr_accessor expression: ::Array[Types::LFTag]
+      SENSITIVE: []
+    end
+
+    class SearchTablesByLFTagsResponse
+      attr_accessor next_token: ::String
+      attr_accessor table_list: ::Array[Types::TaggedTable]
+      SENSITIVE: []
+    end
+
+    class StartQueryPlanningRequest
+      attr_accessor query_planning_context: Types::QueryPlanningContext
+      attr_accessor query_string: ::String
+      SENSITIVE: [:query_string]
+    end
+
+    class StartQueryPlanningResponse
+      attr_accessor query_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartTransactionRequest
+      attr_accessor transaction_type: ("READ_AND_WRITE" | "READ_ONLY")
+      SENSITIVE: []
+    end
+
+    class StartTransactionResponse
+      attr_accessor transaction_id: ::String
+      SENSITIVE: []
+    end
+
+    class StatisticsNotReadyYetException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StorageOptimizer
+      attr_accessor storage_optimizer_type: ("COMPACTION" | "GARBAGE_COLLECTION" | "ALL")
+      attr_accessor config: ::Hash[::String, ::String]
+      attr_accessor error_message: ::String
+      attr_accessor warnings: ::String
+      attr_accessor last_run_details: ::String
+      SENSITIVE: []
+    end
+
+    class TableObject
+      attr_accessor uri: ::String
+      attr_accessor etag: ::String
+      attr_accessor size: ::Integer
+      SENSITIVE: []
+    end
+
+    class TableResource
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor name: ::String
+      attr_accessor table_wildcard: Types::TableWildcard
+      SENSITIVE: []
+    end
+
+    class TableWildcard < Aws::EmptyStructure
+    end
+
+    class TableWithColumnsResource
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor name: ::String
+      attr_accessor column_names: ::Array[::String]
+      attr_accessor column_wildcard: Types::ColumnWildcard
+      SENSITIVE: []
+    end
+
+    class TaggedDatabase
+      attr_accessor database: Types::DatabaseResource
+      attr_accessor lf_tags: ::Array[Types::LFTagPair]
+      SENSITIVE: []
+    end
+
+    class TaggedTable
+      attr_accessor table: Types::TableResource
+      attr_accessor lf_tag_on_database: ::Array[Types::LFTagPair]
+      attr_accessor lf_tags_on_table: ::Array[Types::LFTagPair]
+      attr_accessor lf_tags_on_columns: ::Array[Types::ColumnLFTag]
+      SENSITIVE: []
+    end
+
+    class ThrottledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TransactionCanceledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TransactionCommitInProgressException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TransactionCommittedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TransactionDescription
+      attr_accessor transaction_id: ::String
+      attr_accessor transaction_status: ("ACTIVE" | "COMMITTED" | "ABORTED" | "COMMIT_IN_PROGRESS")
+      attr_accessor transaction_start_time: ::Time
+      attr_accessor transaction_end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateDataCellsFilterRequest
+      attr_accessor table_data: Types::DataCellsFilter
+      SENSITIVE: []
+    end
+
+    class UpdateDataCellsFilterResponse < Aws::EmptyStructure
+    end
+
+    class UpdateLFTagRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor tag_key: ::String
+      attr_accessor tag_values_to_delete: ::Array[::String]
+      attr_accessor tag_values_to_add: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateLFTagResponse < Aws::EmptyStructure
+    end
+
+    class UpdateLakeFormationIdentityCenterConfigurationRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor application_status: ("ENABLED" | "DISABLED")
+      attr_accessor external_filtering: Types::ExternalFilteringConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateLakeFormationIdentityCenterConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateResourceRequest
+      attr_accessor role_arn: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor with_federation: bool
+      attr_accessor hybrid_access_enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateTableObjectsRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor transaction_id: ::String
+      attr_accessor write_operations: ::Array[Types::WriteOperation]
+      SENSITIVE: []
+    end
+
+    class UpdateTableObjectsResponse < Aws::EmptyStructure
+    end
+
+    class UpdateTableStorageOptimizerRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor storage_optimizer_config: ::Hash[("COMPACTION" | "GARBAGE_COLLECTION" | "ALL"), ::Hash[::String, ::String]]
+      SENSITIVE: []
+    end
+
+    class UpdateTableStorageOptimizerResponse
+      attr_accessor result: ::String
+      SENSITIVE: []
+    end
+
+    class VirtualObject
+      attr_accessor uri: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class WorkUnitRange
+      attr_accessor work_unit_id_max: ::Integer
+      attr_accessor work_unit_id_min: ::Integer
+      attr_accessor work_unit_token: ::String
+      SENSITIVE: []
+    end
+
+    class WorkUnitsNotReadyYetException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WriteOperation
+      attr_accessor add_object: Types::AddObjectInput
+      attr_accessor delete_object: Types::DeleteObjectInput
+      SENSITIVE: []
+    end
+  end
+end

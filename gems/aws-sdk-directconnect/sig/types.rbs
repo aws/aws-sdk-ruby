@@ -1,0 +1,986 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::DirectConnect
+  module Types
+
+    class AcceptDirectConnectGatewayAssociationProposalRequest
+      attr_accessor direct_connect_gateway_id: ::String
+      attr_accessor proposal_id: ::String
+      attr_accessor associated_gateway_owner_account: ::String
+      attr_accessor override_allowed_prefixes_to_direct_connect_gateway: ::Array[Types::RouteFilterPrefix]
+      SENSITIVE: []
+    end
+
+    class AcceptDirectConnectGatewayAssociationProposalResult
+      attr_accessor direct_connect_gateway_association: Types::DirectConnectGatewayAssociation
+      SENSITIVE: []
+    end
+
+    class AllocateConnectionOnInterconnectRequest
+      attr_accessor bandwidth: ::String
+      attr_accessor connection_name: ::String
+      attr_accessor owner_account: ::String
+      attr_accessor interconnect_id: ::String
+      attr_accessor vlan: ::Integer
+      SENSITIVE: []
+    end
+
+    class AllocateHostedConnectionRequest
+      attr_accessor connection_id: ::String
+      attr_accessor owner_account: ::String
+      attr_accessor bandwidth: ::String
+      attr_accessor connection_name: ::String
+      attr_accessor vlan: ::Integer
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class AllocatePrivateVirtualInterfaceRequest
+      attr_accessor connection_id: ::String
+      attr_accessor owner_account: ::String
+      attr_accessor new_private_virtual_interface_allocation: Types::NewPrivateVirtualInterfaceAllocation
+      SENSITIVE: []
+    end
+
+    class AllocatePublicVirtualInterfaceRequest
+      attr_accessor connection_id: ::String
+      attr_accessor owner_account: ::String
+      attr_accessor new_public_virtual_interface_allocation: Types::NewPublicVirtualInterfaceAllocation
+      SENSITIVE: []
+    end
+
+    class AllocateTransitVirtualInterfaceRequest
+      attr_accessor connection_id: ::String
+      attr_accessor owner_account: ::String
+      attr_accessor new_transit_virtual_interface_allocation: Types::NewTransitVirtualInterfaceAllocation
+      SENSITIVE: []
+    end
+
+    class AllocateTransitVirtualInterfaceResult
+      attr_accessor virtual_interface: Types::VirtualInterface
+      SENSITIVE: []
+    end
+
+    class AssociateConnectionWithLagRequest
+      attr_accessor connection_id: ::String
+      attr_accessor lag_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateHostedConnectionRequest
+      attr_accessor connection_id: ::String
+      attr_accessor parent_connection_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateMacSecKeyRequest
+      attr_accessor connection_id: ::String
+      attr_accessor secret_arn: ::String
+      attr_accessor ckn: ::String
+      attr_accessor cak: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateMacSecKeyResponse
+      attr_accessor connection_id: ::String
+      attr_accessor mac_sec_keys: ::Array[Types::MacSecKey]
+      SENSITIVE: []
+    end
+
+    class AssociateVirtualInterfaceRequest
+      attr_accessor virtual_interface_id: ::String
+      attr_accessor connection_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociatedGateway
+      attr_accessor id: ::String
+      attr_accessor type: ("virtualPrivateGateway" | "transitGateway")
+      attr_accessor owner_account: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class BGPPeer
+      attr_accessor bgp_peer_id: ::String
+      attr_accessor asn: ::Integer
+      attr_accessor auth_key: ::String
+      attr_accessor address_family: ("ipv4" | "ipv6")
+      attr_accessor amazon_address: ::String
+      attr_accessor customer_address: ::String
+      attr_accessor bgp_peer_state: ("verifying" | "pending" | "available" | "deleting" | "deleted")
+      attr_accessor bgp_status: ("up" | "down" | "unknown")
+      attr_accessor aws_device_v2: ::String
+      attr_accessor aws_logical_device_id: ::String
+      SENSITIVE: []
+    end
+
+    class ConfirmConnectionRequest
+      attr_accessor connection_id: ::String
+      SENSITIVE: []
+    end
+
+    class ConfirmConnectionResponse
+      attr_accessor connection_state: ("ordering" | "requested" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+      SENSITIVE: []
+    end
+
+    class ConfirmCustomerAgreementRequest
+      attr_accessor agreement_name: ::String
+      SENSITIVE: []
+    end
+
+    class ConfirmCustomerAgreementResponse
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class ConfirmPrivateVirtualInterfaceRequest
+      attr_accessor virtual_interface_id: ::String
+      attr_accessor virtual_gateway_id: ::String
+      attr_accessor direct_connect_gateway_id: ::String
+      SENSITIVE: []
+    end
+
+    class ConfirmPrivateVirtualInterfaceResponse
+      attr_accessor virtual_interface_state: ("confirming" | "verifying" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+      SENSITIVE: []
+    end
+
+    class ConfirmPublicVirtualInterfaceRequest
+      attr_accessor virtual_interface_id: ::String
+      SENSITIVE: []
+    end
+
+    class ConfirmPublicVirtualInterfaceResponse
+      attr_accessor virtual_interface_state: ("confirming" | "verifying" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+      SENSITIVE: []
+    end
+
+    class ConfirmTransitVirtualInterfaceRequest
+      attr_accessor virtual_interface_id: ::String
+      attr_accessor direct_connect_gateway_id: ::String
+      SENSITIVE: []
+    end
+
+    class ConfirmTransitVirtualInterfaceResponse
+      attr_accessor virtual_interface_state: ("confirming" | "verifying" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+      SENSITIVE: []
+    end
+
+    class Connection
+      attr_accessor owner_account: ::String
+      attr_accessor connection_id: ::String
+      attr_accessor connection_name: ::String
+      attr_accessor connection_state: ("ordering" | "requested" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+      attr_accessor region: ::String
+      attr_accessor location: ::String
+      attr_accessor bandwidth: ::String
+      attr_accessor vlan: ::Integer
+      attr_accessor partner_name: ::String
+      attr_accessor loa_issue_time: ::Time
+      attr_accessor lag_id: ::String
+      attr_accessor aws_device: ::String
+      attr_accessor jumbo_frame_capable: bool
+      attr_accessor aws_device_v2: ::String
+      attr_accessor aws_logical_device_id: ::String
+      attr_accessor has_logical_redundancy: ("unknown" | "yes" | "no")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor provider_name: ::String
+      attr_accessor mac_sec_capable: bool
+      attr_accessor port_encryption_status: ::String
+      attr_accessor encryption_mode: ::String
+      attr_accessor mac_sec_keys: ::Array[Types::MacSecKey]
+      SENSITIVE: []
+    end
+
+    class Connections
+      attr_accessor connections: ::Array[Types::Connection]
+      SENSITIVE: []
+    end
+
+    class CreateBGPPeerRequest
+      attr_accessor virtual_interface_id: ::String
+      attr_accessor new_bgp_peer: Types::NewBGPPeer
+      SENSITIVE: []
+    end
+
+    class CreateBGPPeerResponse
+      attr_accessor virtual_interface: Types::VirtualInterface
+      SENSITIVE: []
+    end
+
+    class CreateConnectionRequest
+      attr_accessor location: ::String
+      attr_accessor bandwidth: ::String
+      attr_accessor connection_name: ::String
+      attr_accessor lag_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor provider_name: ::String
+      attr_accessor request_mac_sec: bool
+      SENSITIVE: []
+    end
+
+    class CreateDirectConnectGatewayAssociationProposalRequest
+      attr_accessor direct_connect_gateway_id: ::String
+      attr_accessor direct_connect_gateway_owner_account: ::String
+      attr_accessor gateway_id: ::String
+      attr_accessor add_allowed_prefixes_to_direct_connect_gateway: ::Array[Types::RouteFilterPrefix]
+      attr_accessor remove_allowed_prefixes_to_direct_connect_gateway: ::Array[Types::RouteFilterPrefix]
+      SENSITIVE: []
+    end
+
+    class CreateDirectConnectGatewayAssociationProposalResult
+      attr_accessor direct_connect_gateway_association_proposal: Types::DirectConnectGatewayAssociationProposal
+      SENSITIVE: []
+    end
+
+    class CreateDirectConnectGatewayAssociationRequest
+      attr_accessor direct_connect_gateway_id: ::String
+      attr_accessor gateway_id: ::String
+      attr_accessor add_allowed_prefixes_to_direct_connect_gateway: ::Array[Types::RouteFilterPrefix]
+      attr_accessor virtual_gateway_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDirectConnectGatewayAssociationResult
+      attr_accessor direct_connect_gateway_association: Types::DirectConnectGatewayAssociation
+      SENSITIVE: []
+    end
+
+    class CreateDirectConnectGatewayRequest
+      attr_accessor direct_connect_gateway_name: ::String
+      attr_accessor amazon_side_asn: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateDirectConnectGatewayResult
+      attr_accessor direct_connect_gateway: Types::DirectConnectGateway
+      SENSITIVE: []
+    end
+
+    class CreateInterconnectRequest
+      attr_accessor interconnect_name: ::String
+      attr_accessor bandwidth: ::String
+      attr_accessor location: ::String
+      attr_accessor lag_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor provider_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLagRequest
+      attr_accessor number_of_connections: ::Integer
+      attr_accessor location: ::String
+      attr_accessor connections_bandwidth: ::String
+      attr_accessor lag_name: ::String
+      attr_accessor connection_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor child_connection_tags: ::Array[Types::Tag]
+      attr_accessor provider_name: ::String
+      attr_accessor request_mac_sec: bool
+      SENSITIVE: []
+    end
+
+    class CreatePrivateVirtualInterfaceRequest
+      attr_accessor connection_id: ::String
+      attr_accessor new_private_virtual_interface: Types::NewPrivateVirtualInterface
+      SENSITIVE: []
+    end
+
+    class CreatePublicVirtualInterfaceRequest
+      attr_accessor connection_id: ::String
+      attr_accessor new_public_virtual_interface: Types::NewPublicVirtualInterface
+      SENSITIVE: []
+    end
+
+    class CreateTransitVirtualInterfaceRequest
+      attr_accessor connection_id: ::String
+      attr_accessor new_transit_virtual_interface: Types::NewTransitVirtualInterface
+      SENSITIVE: []
+    end
+
+    class CreateTransitVirtualInterfaceResult
+      attr_accessor virtual_interface: Types::VirtualInterface
+      SENSITIVE: []
+    end
+
+    class CustomerAgreement
+      attr_accessor agreement_name: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBGPPeerRequest
+      attr_accessor virtual_interface_id: ::String
+      attr_accessor asn: ::Integer
+      attr_accessor customer_address: ::String
+      attr_accessor bgp_peer_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBGPPeerResponse
+      attr_accessor virtual_interface: Types::VirtualInterface
+      SENSITIVE: []
+    end
+
+    class DeleteConnectionRequest
+      attr_accessor connection_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDirectConnectGatewayAssociationProposalRequest
+      attr_accessor proposal_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDirectConnectGatewayAssociationProposalResult
+      attr_accessor direct_connect_gateway_association_proposal: Types::DirectConnectGatewayAssociationProposal
+      SENSITIVE: []
+    end
+
+    class DeleteDirectConnectGatewayAssociationRequest
+      attr_accessor association_id: ::String
+      attr_accessor direct_connect_gateway_id: ::String
+      attr_accessor virtual_gateway_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDirectConnectGatewayAssociationResult
+      attr_accessor direct_connect_gateway_association: Types::DirectConnectGatewayAssociation
+      SENSITIVE: []
+    end
+
+    class DeleteDirectConnectGatewayRequest
+      attr_accessor direct_connect_gateway_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDirectConnectGatewayResult
+      attr_accessor direct_connect_gateway: Types::DirectConnectGateway
+      SENSITIVE: []
+    end
+
+    class DeleteInterconnectRequest
+      attr_accessor interconnect_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInterconnectResponse
+      attr_accessor interconnect_state: ("requested" | "pending" | "available" | "down" | "deleting" | "deleted" | "unknown")
+      SENSITIVE: []
+    end
+
+    class DeleteLagRequest
+      attr_accessor lag_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVirtualInterfaceRequest
+      attr_accessor virtual_interface_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVirtualInterfaceResponse
+      attr_accessor virtual_interface_state: ("confirming" | "verifying" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+      SENSITIVE: []
+    end
+
+    class DescribeConnectionLoaRequest
+      attr_accessor connection_id: ::String
+      attr_accessor provider_name: ::String
+      attr_accessor loa_content_type: ("application/pdf")
+      SENSITIVE: []
+    end
+
+    class DescribeConnectionLoaResponse
+      attr_accessor loa: Types::Loa
+      SENSITIVE: []
+    end
+
+    class DescribeConnectionsOnInterconnectRequest
+      attr_accessor interconnect_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeConnectionsRequest
+      attr_accessor connection_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCustomerMetadataResponse
+      attr_accessor agreements: ::Array[Types::CustomerAgreement]
+      attr_accessor nni_partner_type: ("v1" | "v2" | "nonPartner")
+      SENSITIVE: []
+    end
+
+    class DescribeDirectConnectGatewayAssociationProposalsRequest
+      attr_accessor direct_connect_gateway_id: ::String
+      attr_accessor proposal_id: ::String
+      attr_accessor associated_gateway_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDirectConnectGatewayAssociationProposalsResult
+      attr_accessor direct_connect_gateway_association_proposals: ::Array[Types::DirectConnectGatewayAssociationProposal]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDirectConnectGatewayAssociationsRequest
+      attr_accessor association_id: ::String
+      attr_accessor associated_gateway_id: ::String
+      attr_accessor direct_connect_gateway_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor virtual_gateway_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDirectConnectGatewayAssociationsResult
+      attr_accessor direct_connect_gateway_associations: ::Array[Types::DirectConnectGatewayAssociation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDirectConnectGatewayAttachmentsRequest
+      attr_accessor direct_connect_gateway_id: ::String
+      attr_accessor virtual_interface_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDirectConnectGatewayAttachmentsResult
+      attr_accessor direct_connect_gateway_attachments: ::Array[Types::DirectConnectGatewayAttachment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDirectConnectGatewaysRequest
+      attr_accessor direct_connect_gateway_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDirectConnectGatewaysResult
+      attr_accessor direct_connect_gateways: ::Array[Types::DirectConnectGateway]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeHostedConnectionsRequest
+      attr_accessor connection_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInterconnectLoaRequest
+      attr_accessor interconnect_id: ::String
+      attr_accessor provider_name: ::String
+      attr_accessor loa_content_type: ("application/pdf")
+      SENSITIVE: []
+    end
+
+    class DescribeInterconnectLoaResponse
+      attr_accessor loa: Types::Loa
+      SENSITIVE: []
+    end
+
+    class DescribeInterconnectsRequest
+      attr_accessor interconnect_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLagsRequest
+      attr_accessor lag_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLoaRequest
+      attr_accessor connection_id: ::String
+      attr_accessor provider_name: ::String
+      attr_accessor loa_content_type: ("application/pdf")
+      SENSITIVE: []
+    end
+
+    class DescribeRouterConfigurationRequest
+      attr_accessor virtual_interface_id: ::String
+      attr_accessor router_type_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRouterConfigurationResponse
+      attr_accessor customer_router_config: ::String
+      attr_accessor router: Types::RouterType
+      attr_accessor virtual_interface_id: ::String
+      attr_accessor virtual_interface_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTagsRequest
+      attr_accessor resource_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeTagsResponse
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      SENSITIVE: []
+    end
+
+    class DescribeVirtualInterfacesRequest
+      attr_accessor connection_id: ::String
+      attr_accessor virtual_interface_id: ::String
+      SENSITIVE: []
+    end
+
+    class DirectConnectClientException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DirectConnectGateway
+      attr_accessor direct_connect_gateway_id: ::String
+      attr_accessor direct_connect_gateway_name: ::String
+      attr_accessor amazon_side_asn: ::Integer
+      attr_accessor owner_account: ::String
+      attr_accessor direct_connect_gateway_state: ("pending" | "available" | "deleting" | "deleted")
+      attr_accessor state_change_error: ::String
+      SENSITIVE: []
+    end
+
+    class DirectConnectGatewayAssociation
+      attr_accessor direct_connect_gateway_id: ::String
+      attr_accessor direct_connect_gateway_owner_account: ::String
+      attr_accessor association_state: ("associating" | "associated" | "disassociating" | "disassociated" | "updating")
+      attr_accessor state_change_error: ::String
+      attr_accessor associated_gateway: Types::AssociatedGateway
+      attr_accessor association_id: ::String
+      attr_accessor allowed_prefixes_to_direct_connect_gateway: ::Array[Types::RouteFilterPrefix]
+      attr_accessor virtual_gateway_id: ::String
+      attr_accessor virtual_gateway_region: ::String
+      attr_accessor virtual_gateway_owner_account: ::String
+      SENSITIVE: []
+    end
+
+    class DirectConnectGatewayAssociationProposal
+      attr_accessor proposal_id: ::String
+      attr_accessor direct_connect_gateway_id: ::String
+      attr_accessor direct_connect_gateway_owner_account: ::String
+      attr_accessor proposal_state: ("requested" | "accepted" | "deleted")
+      attr_accessor associated_gateway: Types::AssociatedGateway
+      attr_accessor existing_allowed_prefixes_to_direct_connect_gateway: ::Array[Types::RouteFilterPrefix]
+      attr_accessor requested_allowed_prefixes_to_direct_connect_gateway: ::Array[Types::RouteFilterPrefix]
+      SENSITIVE: []
+    end
+
+    class DirectConnectGatewayAttachment
+      attr_accessor direct_connect_gateway_id: ::String
+      attr_accessor virtual_interface_id: ::String
+      attr_accessor virtual_interface_region: ::String
+      attr_accessor virtual_interface_owner_account: ::String
+      attr_accessor attachment_state: ("attaching" | "attached" | "detaching" | "detached")
+      attr_accessor attachment_type: ("TransitVirtualInterface" | "PrivateVirtualInterface")
+      attr_accessor state_change_error: ::String
+      SENSITIVE: []
+    end
+
+    class DirectConnectServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateConnectionFromLagRequest
+      attr_accessor connection_id: ::String
+      attr_accessor lag_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateMacSecKeyRequest
+      attr_accessor connection_id: ::String
+      attr_accessor secret_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateMacSecKeyResponse
+      attr_accessor connection_id: ::String
+      attr_accessor mac_sec_keys: ::Array[Types::MacSecKey]
+      SENSITIVE: []
+    end
+
+    class DuplicateTagKeysException < Aws::EmptyStructure
+    end
+
+    class Interconnect
+      attr_accessor interconnect_id: ::String
+      attr_accessor interconnect_name: ::String
+      attr_accessor interconnect_state: ("requested" | "pending" | "available" | "down" | "deleting" | "deleted" | "unknown")
+      attr_accessor region: ::String
+      attr_accessor location: ::String
+      attr_accessor bandwidth: ::String
+      attr_accessor loa_issue_time: ::Time
+      attr_accessor lag_id: ::String
+      attr_accessor aws_device: ::String
+      attr_accessor jumbo_frame_capable: bool
+      attr_accessor aws_device_v2: ::String
+      attr_accessor aws_logical_device_id: ::String
+      attr_accessor has_logical_redundancy: ("unknown" | "yes" | "no")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor provider_name: ::String
+      SENSITIVE: []
+    end
+
+    class Interconnects
+      attr_accessor interconnects: ::Array[Types::Interconnect]
+      SENSITIVE: []
+    end
+
+    class Lag
+      attr_accessor connections_bandwidth: ::String
+      attr_accessor number_of_connections: ::Integer
+      attr_accessor lag_id: ::String
+      attr_accessor owner_account: ::String
+      attr_accessor lag_name: ::String
+      attr_accessor lag_state: ("requested" | "pending" | "available" | "down" | "deleting" | "deleted" | "unknown")
+      attr_accessor location: ::String
+      attr_accessor region: ::String
+      attr_accessor minimum_links: ::Integer
+      attr_accessor aws_device: ::String
+      attr_accessor aws_device_v2: ::String
+      attr_accessor aws_logical_device_id: ::String
+      attr_accessor connections: ::Array[Types::Connection]
+      attr_accessor allows_hosted_connections: bool
+      attr_accessor jumbo_frame_capable: bool
+      attr_accessor has_logical_redundancy: ("unknown" | "yes" | "no")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor provider_name: ::String
+      attr_accessor mac_sec_capable: bool
+      attr_accessor encryption_mode: ::String
+      attr_accessor mac_sec_keys: ::Array[Types::MacSecKey]
+      SENSITIVE: []
+    end
+
+    class Lags
+      attr_accessor lags: ::Array[Types::Lag]
+      SENSITIVE: []
+    end
+
+    class ListVirtualInterfaceTestHistoryRequest
+      attr_accessor test_id: ::String
+      attr_accessor virtual_interface_id: ::String
+      attr_accessor bgp_peers: ::Array[::String]
+      attr_accessor status: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVirtualInterfaceTestHistoryResponse
+      attr_accessor virtual_interface_test_history: ::Array[Types::VirtualInterfaceTestHistory]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Loa
+      attr_accessor loa_content: ::String
+      attr_accessor loa_content_type: ("application/pdf")
+      SENSITIVE: []
+    end
+
+    class Location
+      attr_accessor location_code: ::String
+      attr_accessor location_name: ::String
+      attr_accessor region: ::String
+      attr_accessor available_port_speeds: ::Array[::String]
+      attr_accessor available_providers: ::Array[::String]
+      attr_accessor available_mac_sec_port_speeds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Locations
+      attr_accessor locations: ::Array[Types::Location]
+      SENSITIVE: []
+    end
+
+    class MacSecKey
+      attr_accessor secret_arn: ::String
+      attr_accessor ckn: ::String
+      attr_accessor state: ::String
+      attr_accessor start_on: ::String
+      SENSITIVE: []
+    end
+
+    class NewBGPPeer
+      attr_accessor asn: ::Integer
+      attr_accessor auth_key: ::String
+      attr_accessor address_family: ("ipv4" | "ipv6")
+      attr_accessor amazon_address: ::String
+      attr_accessor customer_address: ::String
+      SENSITIVE: []
+    end
+
+    class NewPrivateVirtualInterface
+      attr_accessor virtual_interface_name: ::String
+      attr_accessor vlan: ::Integer
+      attr_accessor asn: ::Integer
+      attr_accessor mtu: ::Integer
+      attr_accessor auth_key: ::String
+      attr_accessor amazon_address: ::String
+      attr_accessor customer_address: ::String
+      attr_accessor address_family: ("ipv4" | "ipv6")
+      attr_accessor virtual_gateway_id: ::String
+      attr_accessor direct_connect_gateway_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor enable_site_link: bool
+      SENSITIVE: []
+    end
+
+    class NewPrivateVirtualInterfaceAllocation
+      attr_accessor virtual_interface_name: ::String
+      attr_accessor vlan: ::Integer
+      attr_accessor asn: ::Integer
+      attr_accessor mtu: ::Integer
+      attr_accessor auth_key: ::String
+      attr_accessor amazon_address: ::String
+      attr_accessor address_family: ("ipv4" | "ipv6")
+      attr_accessor customer_address: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class NewPublicVirtualInterface
+      attr_accessor virtual_interface_name: ::String
+      attr_accessor vlan: ::Integer
+      attr_accessor asn: ::Integer
+      attr_accessor auth_key: ::String
+      attr_accessor amazon_address: ::String
+      attr_accessor customer_address: ::String
+      attr_accessor address_family: ("ipv4" | "ipv6")
+      attr_accessor route_filter_prefixes: ::Array[Types::RouteFilterPrefix]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class NewPublicVirtualInterfaceAllocation
+      attr_accessor virtual_interface_name: ::String
+      attr_accessor vlan: ::Integer
+      attr_accessor asn: ::Integer
+      attr_accessor auth_key: ::String
+      attr_accessor amazon_address: ::String
+      attr_accessor customer_address: ::String
+      attr_accessor address_family: ("ipv4" | "ipv6")
+      attr_accessor route_filter_prefixes: ::Array[Types::RouteFilterPrefix]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class NewTransitVirtualInterface
+      attr_accessor virtual_interface_name: ::String
+      attr_accessor vlan: ::Integer
+      attr_accessor asn: ::Integer
+      attr_accessor mtu: ::Integer
+      attr_accessor auth_key: ::String
+      attr_accessor amazon_address: ::String
+      attr_accessor customer_address: ::String
+      attr_accessor address_family: ("ipv4" | "ipv6")
+      attr_accessor direct_connect_gateway_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor enable_site_link: bool
+      SENSITIVE: []
+    end
+
+    class NewTransitVirtualInterfaceAllocation
+      attr_accessor virtual_interface_name: ::String
+      attr_accessor vlan: ::Integer
+      attr_accessor asn: ::Integer
+      attr_accessor mtu: ::Integer
+      attr_accessor auth_key: ::String
+      attr_accessor amazon_address: ::String
+      attr_accessor customer_address: ::String
+      attr_accessor address_family: ("ipv4" | "ipv6")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ResourceTag
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class RouteFilterPrefix
+      attr_accessor cidr: ::String
+      SENSITIVE: []
+    end
+
+    class RouterType
+      attr_accessor vendor: ::String
+      attr_accessor platform: ::String
+      attr_accessor software: ::String
+      attr_accessor xslt_template_name: ::String
+      attr_accessor xslt_template_name_for_mac_sec: ::String
+      attr_accessor router_type_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StartBgpFailoverTestRequest
+      attr_accessor virtual_interface_id: ::String
+      attr_accessor bgp_peers: ::Array[::String]
+      attr_accessor test_duration_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartBgpFailoverTestResponse
+      attr_accessor virtual_interface_test: Types::VirtualInterfaceTestHistory
+      SENSITIVE: []
+    end
+
+    class StopBgpFailoverTestRequest
+      attr_accessor virtual_interface_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopBgpFailoverTestResponse
+      attr_accessor virtual_interface_test: Types::VirtualInterfaceTestHistory
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TooManyTagsException < Aws::EmptyStructure
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateConnectionRequest
+      attr_accessor connection_id: ::String
+      attr_accessor connection_name: ::String
+      attr_accessor encryption_mode: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDirectConnectGatewayAssociationRequest
+      attr_accessor association_id: ::String
+      attr_accessor add_allowed_prefixes_to_direct_connect_gateway: ::Array[Types::RouteFilterPrefix]
+      attr_accessor remove_allowed_prefixes_to_direct_connect_gateway: ::Array[Types::RouteFilterPrefix]
+      SENSITIVE: []
+    end
+
+    class UpdateDirectConnectGatewayAssociationResult
+      attr_accessor direct_connect_gateway_association: Types::DirectConnectGatewayAssociation
+      SENSITIVE: []
+    end
+
+    class UpdateDirectConnectGatewayRequest
+      attr_accessor direct_connect_gateway_id: ::String
+      attr_accessor new_direct_connect_gateway_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDirectConnectGatewayResponse
+      attr_accessor direct_connect_gateway: Types::DirectConnectGateway
+      SENSITIVE: []
+    end
+
+    class UpdateLagRequest
+      attr_accessor lag_id: ::String
+      attr_accessor lag_name: ::String
+      attr_accessor minimum_links: ::Integer
+      attr_accessor encryption_mode: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateVirtualInterfaceAttributesRequest
+      attr_accessor virtual_interface_id: ::String
+      attr_accessor mtu: ::Integer
+      attr_accessor enable_site_link: bool
+      attr_accessor virtual_interface_name: ::String
+      SENSITIVE: []
+    end
+
+    class VirtualGateway
+      attr_accessor virtual_gateway_id: ::String
+      attr_accessor virtual_gateway_state: ::String
+      SENSITIVE: []
+    end
+
+    class VirtualGateways
+      attr_accessor virtual_gateways: ::Array[Types::VirtualGateway]
+      SENSITIVE: []
+    end
+
+    class VirtualInterface
+      attr_accessor owner_account: ::String
+      attr_accessor virtual_interface_id: ::String
+      attr_accessor location: ::String
+      attr_accessor connection_id: ::String
+      attr_accessor virtual_interface_type: ::String
+      attr_accessor virtual_interface_name: ::String
+      attr_accessor vlan: ::Integer
+      attr_accessor asn: ::Integer
+      attr_accessor amazon_side_asn: ::Integer
+      attr_accessor auth_key: ::String
+      attr_accessor amazon_address: ::String
+      attr_accessor customer_address: ::String
+      attr_accessor address_family: ("ipv4" | "ipv6")
+      attr_accessor virtual_interface_state: ("confirming" | "verifying" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+      attr_accessor customer_router_config: ::String
+      attr_accessor mtu: ::Integer
+      attr_accessor jumbo_frame_capable: bool
+      attr_accessor virtual_gateway_id: ::String
+      attr_accessor direct_connect_gateway_id: ::String
+      attr_accessor route_filter_prefixes: ::Array[Types::RouteFilterPrefix]
+      attr_accessor bgp_peers: ::Array[Types::BGPPeer]
+      attr_accessor region: ::String
+      attr_accessor aws_device_v2: ::String
+      attr_accessor aws_logical_device_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor site_link_enabled: bool
+      SENSITIVE: []
+    end
+
+    class VirtualInterfaceTestHistory
+      attr_accessor test_id: ::String
+      attr_accessor virtual_interface_id: ::String
+      attr_accessor bgp_peers: ::Array[::String]
+      attr_accessor status: ::String
+      attr_accessor owner_account: ::String
+      attr_accessor test_duration_in_minutes: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class VirtualInterfaces
+      attr_accessor virtual_interfaces: ::Array[Types::VirtualInterface]
+      SENSITIVE: []
+    end
+  end
+end

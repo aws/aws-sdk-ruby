@@ -1,0 +1,531 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Budgets
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Action
+      attr_accessor action_id: ::String
+      attr_accessor budget_name: ::String
+      attr_accessor notification_type: ("ACTUAL" | "FORECASTED")
+      attr_accessor action_type: ("APPLY_IAM_POLICY" | "APPLY_SCP_POLICY" | "RUN_SSM_DOCUMENTS")
+      attr_accessor action_threshold: Types::ActionThreshold
+      attr_accessor definition: Types::Definition
+      attr_accessor execution_role_arn: ::String
+      attr_accessor approval_model: ("AUTOMATIC" | "MANUAL")
+      attr_accessor status: ("STANDBY" | "PENDING" | "EXECUTION_IN_PROGRESS" | "EXECUTION_SUCCESS" | "EXECUTION_FAILURE" | "REVERSE_IN_PROGRESS" | "REVERSE_SUCCESS" | "REVERSE_FAILURE" | "RESET_IN_PROGRESS" | "RESET_FAILURE")
+      attr_accessor subscribers: ::Array[Types::Subscriber]
+      SENSITIVE: []
+    end
+
+    class ActionHistory
+      attr_accessor timestamp: ::Time
+      attr_accessor status: ("STANDBY" | "PENDING" | "EXECUTION_IN_PROGRESS" | "EXECUTION_SUCCESS" | "EXECUTION_FAILURE" | "REVERSE_IN_PROGRESS" | "REVERSE_SUCCESS" | "REVERSE_FAILURE" | "RESET_IN_PROGRESS" | "RESET_FAILURE")
+      attr_accessor event_type: ("SYSTEM" | "CREATE_ACTION" | "DELETE_ACTION" | "UPDATE_ACTION" | "EXECUTE_ACTION")
+      attr_accessor action_history_details: Types::ActionHistoryDetails
+      SENSITIVE: []
+    end
+
+    class ActionHistoryDetails
+      attr_accessor message: ::String
+      attr_accessor action: Types::Action
+      SENSITIVE: []
+    end
+
+    class ActionThreshold
+      attr_accessor action_threshold_value: ::Float
+      attr_accessor action_threshold_type: ("PERCENTAGE" | "ABSOLUTE_VALUE")
+      SENSITIVE: []
+    end
+
+    class AutoAdjustData
+      attr_accessor auto_adjust_type: ("HISTORICAL" | "FORECAST")
+      attr_accessor historical_options: Types::HistoricalOptions
+      attr_accessor last_auto_adjust_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Budget
+      attr_accessor budget_name: ::String
+      attr_accessor budget_limit: Types::Spend
+      attr_accessor planned_budget_limits: ::Hash[::String, Types::Spend]
+      attr_accessor cost_filters: ::Hash[::String, ::Array[::String]]
+      attr_accessor cost_types: Types::CostTypes
+      attr_accessor time_unit: ("DAILY" | "MONTHLY" | "QUARTERLY" | "ANNUALLY")
+      attr_accessor time_period: Types::TimePeriod
+      attr_accessor calculated_spend: Types::CalculatedSpend
+      attr_accessor budget_type: ("USAGE" | "COST" | "RI_UTILIZATION" | "RI_COVERAGE" | "SAVINGS_PLANS_UTILIZATION" | "SAVINGS_PLANS_COVERAGE")
+      attr_accessor last_updated_time: ::Time
+      attr_accessor auto_adjust_data: Types::AutoAdjustData
+      SENSITIVE: []
+    end
+
+    class BudgetNotificationsForAccount
+      attr_accessor notifications: ::Array[Types::Notification]
+      attr_accessor budget_name: ::String
+      SENSITIVE: []
+    end
+
+    class BudgetPerformanceHistory
+      attr_accessor budget_name: ::String
+      attr_accessor budget_type: ("USAGE" | "COST" | "RI_UTILIZATION" | "RI_COVERAGE" | "SAVINGS_PLANS_UTILIZATION" | "SAVINGS_PLANS_COVERAGE")
+      attr_accessor cost_filters: ::Hash[::String, ::Array[::String]]
+      attr_accessor cost_types: Types::CostTypes
+      attr_accessor time_unit: ("DAILY" | "MONTHLY" | "QUARTERLY" | "ANNUALLY")
+      attr_accessor budgeted_and_actual_amounts_list: ::Array[Types::BudgetedAndActualAmounts]
+      SENSITIVE: []
+    end
+
+    class BudgetedAndActualAmounts
+      attr_accessor budgeted_amount: Types::Spend
+      attr_accessor actual_amount: Types::Spend
+      attr_accessor time_period: Types::TimePeriod
+      SENSITIVE: []
+    end
+
+    class CalculatedSpend
+      attr_accessor actual_spend: Types::Spend
+      attr_accessor forecasted_spend: Types::Spend
+      SENSITIVE: []
+    end
+
+    class CostTypes
+      attr_accessor include_tax: bool
+      attr_accessor include_subscription: bool
+      attr_accessor use_blended: bool
+      attr_accessor include_refund: bool
+      attr_accessor include_credit: bool
+      attr_accessor include_upfront: bool
+      attr_accessor include_recurring: bool
+      attr_accessor include_other_subscription: bool
+      attr_accessor include_support: bool
+      attr_accessor include_discount: bool
+      attr_accessor use_amortized: bool
+      SENSITIVE: []
+    end
+
+    class CreateBudgetActionRequest
+      attr_accessor account_id: ::String
+      attr_accessor budget_name: ::String
+      attr_accessor notification_type: ("ACTUAL" | "FORECASTED")
+      attr_accessor action_type: ("APPLY_IAM_POLICY" | "APPLY_SCP_POLICY" | "RUN_SSM_DOCUMENTS")
+      attr_accessor action_threshold: Types::ActionThreshold
+      attr_accessor definition: Types::Definition
+      attr_accessor execution_role_arn: ::String
+      attr_accessor approval_model: ("AUTOMATIC" | "MANUAL")
+      attr_accessor subscribers: ::Array[Types::Subscriber]
+      SENSITIVE: []
+    end
+
+    class CreateBudgetActionResponse
+      attr_accessor account_id: ::String
+      attr_accessor budget_name: ::String
+      attr_accessor action_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBudgetRequest
+      attr_accessor account_id: ::String
+      attr_accessor budget: Types::Budget
+      attr_accessor notifications_with_subscribers: ::Array[Types::NotificationWithSubscribers]
+      SENSITIVE: []
+    end
+
+    class CreateBudgetResponse < Aws::EmptyStructure
+    end
+
+    class CreateNotificationRequest
+      attr_accessor account_id: ::String
+      attr_accessor budget_name: ::String
+      attr_accessor notification: Types::Notification
+      attr_accessor subscribers: ::Array[Types::Subscriber]
+      SENSITIVE: []
+    end
+
+    class CreateNotificationResponse < Aws::EmptyStructure
+    end
+
+    class CreateSubscriberRequest
+      attr_accessor account_id: ::String
+      attr_accessor budget_name: ::String
+      attr_accessor notification: Types::Notification
+      attr_accessor subscriber: Types::Subscriber
+      SENSITIVE: []
+    end
+
+    class CreateSubscriberResponse < Aws::EmptyStructure
+    end
+
+    class CreationLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Definition
+      attr_accessor iam_action_definition: Types::IamActionDefinition
+      attr_accessor scp_action_definition: Types::ScpActionDefinition
+      attr_accessor ssm_action_definition: Types::SsmActionDefinition
+      SENSITIVE: []
+    end
+
+    class DeleteBudgetActionRequest
+      attr_accessor account_id: ::String
+      attr_accessor budget_name: ::String
+      attr_accessor action_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBudgetActionResponse
+      attr_accessor account_id: ::String
+      attr_accessor budget_name: ::String
+      attr_accessor action: Types::Action
+      SENSITIVE: []
+    end
+
+    class DeleteBudgetRequest
+      attr_accessor account_id: ::String
+      attr_accessor budget_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBudgetResponse < Aws::EmptyStructure
+    end
+
+    class DeleteNotificationRequest
+      attr_accessor account_id: ::String
+      attr_accessor budget_name: ::String
+      attr_accessor notification: Types::Notification
+      SENSITIVE: []
+    end
+
+    class DeleteNotificationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteSubscriberRequest
+      attr_accessor account_id: ::String
+      attr_accessor budget_name: ::String
+      attr_accessor notification: Types::Notification
+      attr_accessor subscriber: Types::Subscriber
+      SENSITIVE: []
+    end
+
+    class DeleteSubscriberResponse < Aws::EmptyStructure
+    end
+
+    class DescribeBudgetActionHistoriesRequest
+      attr_accessor account_id: ::String
+      attr_accessor budget_name: ::String
+      attr_accessor action_id: ::String
+      attr_accessor time_period: Types::TimePeriod
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBudgetActionHistoriesResponse
+      attr_accessor action_histories: ::Array[Types::ActionHistory]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBudgetActionRequest
+      attr_accessor account_id: ::String
+      attr_accessor budget_name: ::String
+      attr_accessor action_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBudgetActionResponse
+      attr_accessor account_id: ::String
+      attr_accessor budget_name: ::String
+      attr_accessor action: Types::Action
+      SENSITIVE: []
+    end
+
+    class DescribeBudgetActionsForAccountRequest
+      attr_accessor account_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBudgetActionsForAccountResponse
+      attr_accessor actions: ::Array[Types::Action]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBudgetActionsForBudgetRequest
+      attr_accessor account_id: ::String
+      attr_accessor budget_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBudgetActionsForBudgetResponse
+      attr_accessor actions: ::Array[Types::Action]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBudgetNotificationsForAccountRequest
+      attr_accessor account_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBudgetNotificationsForAccountResponse
+      attr_accessor budget_notifications_for_account: ::Array[Types::BudgetNotificationsForAccount]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBudgetPerformanceHistoryRequest
+      attr_accessor account_id: ::String
+      attr_accessor budget_name: ::String
+      attr_accessor time_period: Types::TimePeriod
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBudgetPerformanceHistoryResponse
+      attr_accessor budget_performance_history: Types::BudgetPerformanceHistory
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBudgetRequest
+      attr_accessor account_id: ::String
+      attr_accessor budget_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBudgetResponse
+      attr_accessor budget: Types::Budget
+      SENSITIVE: []
+    end
+
+    class DescribeBudgetsRequest
+      attr_accessor account_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBudgetsResponse
+      attr_accessor budgets: ::Array[Types::Budget]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeNotificationsForBudgetRequest
+      attr_accessor account_id: ::String
+      attr_accessor budget_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeNotificationsForBudgetResponse
+      attr_accessor notifications: ::Array[Types::Notification]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSubscribersForNotificationRequest
+      attr_accessor account_id: ::String
+      attr_accessor budget_name: ::String
+      attr_accessor notification: Types::Notification
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSubscribersForNotificationResponse
+      attr_accessor subscribers: ::Array[Types::Subscriber]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DuplicateRecordException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ExecuteBudgetActionRequest
+      attr_accessor account_id: ::String
+      attr_accessor budget_name: ::String
+      attr_accessor action_id: ::String
+      attr_accessor execution_type: ("APPROVE_BUDGET_ACTION" | "RETRY_BUDGET_ACTION" | "REVERSE_BUDGET_ACTION" | "RESET_BUDGET_ACTION")
+      SENSITIVE: []
+    end
+
+    class ExecuteBudgetActionResponse
+      attr_accessor account_id: ::String
+      attr_accessor budget_name: ::String
+      attr_accessor action_id: ::String
+      attr_accessor execution_type: ("APPROVE_BUDGET_ACTION" | "RETRY_BUDGET_ACTION" | "REVERSE_BUDGET_ACTION" | "RESET_BUDGET_ACTION")
+      SENSITIVE: []
+    end
+
+    class ExpiredNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class HistoricalOptions
+      attr_accessor budget_adjustment_period: ::Integer
+      attr_accessor look_back_available_periods: ::Integer
+      SENSITIVE: []
+    end
+
+    class IamActionDefinition
+      attr_accessor policy_arn: ::String
+      attr_accessor roles: ::Array[::String]
+      attr_accessor groups: ::Array[::String]
+      attr_accessor users: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InternalErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Notification
+      attr_accessor notification_type: ("ACTUAL" | "FORECASTED")
+      attr_accessor comparison_operator: ("GREATER_THAN" | "LESS_THAN" | "EQUAL_TO")
+      attr_accessor threshold: ::Float
+      attr_accessor threshold_type: ("PERCENTAGE" | "ABSOLUTE_VALUE")
+      attr_accessor notification_state: ("OK" | "ALARM")
+      SENSITIVE: []
+    end
+
+    class NotificationWithSubscribers
+      attr_accessor notification: Types::Notification
+      attr_accessor subscribers: ::Array[Types::Subscriber]
+      SENSITIVE: []
+    end
+
+    class ResourceLockedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ScpActionDefinition
+      attr_accessor policy_id: ::String
+      attr_accessor target_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Spend
+      attr_accessor amount: ::String
+      attr_accessor unit: ::String
+      SENSITIVE: []
+    end
+
+    class SsmActionDefinition
+      attr_accessor action_sub_type: ("STOP_EC2_INSTANCES" | "STOP_RDS_INSTANCES")
+      attr_accessor region: ::String
+      attr_accessor instance_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Subscriber
+      attr_accessor subscription_type: ("SNS" | "EMAIL")
+      attr_accessor address: ::String
+      SENSITIVE: [:address]
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TimePeriod
+      attr_accessor start: ::Time
+      attr_accessor end: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateBudgetActionRequest
+      attr_accessor account_id: ::String
+      attr_accessor budget_name: ::String
+      attr_accessor action_id: ::String
+      attr_accessor notification_type: ("ACTUAL" | "FORECASTED")
+      attr_accessor action_threshold: Types::ActionThreshold
+      attr_accessor definition: Types::Definition
+      attr_accessor execution_role_arn: ::String
+      attr_accessor approval_model: ("AUTOMATIC" | "MANUAL")
+      attr_accessor subscribers: ::Array[Types::Subscriber]
+      SENSITIVE: []
+    end
+
+    class UpdateBudgetActionResponse
+      attr_accessor account_id: ::String
+      attr_accessor budget_name: ::String
+      attr_accessor old_action: Types::Action
+      attr_accessor new_action: Types::Action
+      SENSITIVE: []
+    end
+
+    class UpdateBudgetRequest
+      attr_accessor account_id: ::String
+      attr_accessor new_budget: Types::Budget
+      SENSITIVE: []
+    end
+
+    class UpdateBudgetResponse < Aws::EmptyStructure
+    end
+
+    class UpdateNotificationRequest
+      attr_accessor account_id: ::String
+      attr_accessor budget_name: ::String
+      attr_accessor old_notification: Types::Notification
+      attr_accessor new_notification: Types::Notification
+      SENSITIVE: []
+    end
+
+    class UpdateNotificationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateSubscriberRequest
+      attr_accessor account_id: ::String
+      attr_accessor budget_name: ::String
+      attr_accessor notification: Types::Notification
+      attr_accessor old_subscriber: Types::Subscriber
+      attr_accessor new_subscriber: Types::Subscriber
+      SENSITIVE: []
+    end
+
+    class UpdateSubscriberResponse < Aws::EmptyStructure
+    end
+  end
+end

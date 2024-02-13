@@ -1,0 +1,161 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Account
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AlternateContact
+      attr_accessor alternate_contact_type: ("BILLING" | "OPERATIONS" | "SECURITY")
+      attr_accessor email_address: ::String
+      attr_accessor name: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor title: ::String
+      SENSITIVE: [:email_address, :name, :phone_number, :title]
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ContactInformation
+      attr_accessor address_line_1: ::String
+      attr_accessor address_line_2: ::String
+      attr_accessor address_line_3: ::String
+      attr_accessor city: ::String
+      attr_accessor company_name: ::String
+      attr_accessor country_code: ::String
+      attr_accessor district_or_county: ::String
+      attr_accessor full_name: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor postal_code: ::String
+      attr_accessor state_or_region: ::String
+      attr_accessor website_url: ::String
+      SENSITIVE: [:address_line_1, :address_line_2, :address_line_3, :city, :company_name, :country_code, :district_or_county, :full_name, :phone_number, :postal_code, :state_or_region, :website_url]
+    end
+
+    class DeleteAlternateContactRequest
+      attr_accessor account_id: ::String
+      attr_accessor alternate_contact_type: ("BILLING" | "OPERATIONS" | "SECURITY")
+      SENSITIVE: []
+    end
+
+    class DisableRegionRequest
+      attr_accessor account_id: ::String
+      attr_accessor region_name: ::String
+      SENSITIVE: []
+    end
+
+    class EnableRegionRequest
+      attr_accessor account_id: ::String
+      attr_accessor region_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetAlternateContactRequest
+      attr_accessor account_id: ::String
+      attr_accessor alternate_contact_type: ("BILLING" | "OPERATIONS" | "SECURITY")
+      SENSITIVE: []
+    end
+
+    class GetAlternateContactResponse
+      attr_accessor alternate_contact: Types::AlternateContact
+      SENSITIVE: []
+    end
+
+    class GetContactInformationRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetContactInformationResponse
+      attr_accessor contact_information: Types::ContactInformation
+      SENSITIVE: []
+    end
+
+    class GetRegionOptStatusRequest
+      attr_accessor account_id: ::String
+      attr_accessor region_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetRegionOptStatusResponse
+      attr_accessor region_name: ::String
+      attr_accessor region_opt_status: ("ENABLED" | "ENABLING" | "DISABLING" | "DISABLED" | "ENABLED_BY_DEFAULT")
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListRegionsRequest
+      attr_accessor account_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor region_opt_status_contains: ::Array[("ENABLED" | "ENABLING" | "DISABLING" | "DISABLED" | "ENABLED_BY_DEFAULT")]
+      SENSITIVE: []
+    end
+
+    class ListRegionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor regions: ::Array[Types::Region]
+      SENSITIVE: []
+    end
+
+    class PutAlternateContactRequest
+      attr_accessor account_id: ::String
+      attr_accessor alternate_contact_type: ("BILLING" | "OPERATIONS" | "SECURITY")
+      attr_accessor email_address: ::String
+      attr_accessor name: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor title: ::String
+      SENSITIVE: [:email_address, :name, :phone_number, :title]
+    end
+
+    class PutContactInformationRequest
+      attr_accessor account_id: ::String
+      attr_accessor contact_information: Types::ContactInformation
+      SENSITIVE: []
+    end
+
+    class Region
+      attr_accessor region_name: ::String
+      attr_accessor region_opt_status: ("ENABLED" | "ENABLING" | "DISABLING" | "DISABLED" | "ENABLED_BY_DEFAULT")
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      attr_accessor message: ::String
+      attr_accessor reason: ("invalidRegionOptTarget" | "fieldValidationFailed")
+      SENSITIVE: [:message]
+    end
+
+    class ValidationExceptionField
+      attr_accessor message: ::String
+      attr_accessor name: ::String
+      SENSITIVE: [:message]
+    end
+  end
+end

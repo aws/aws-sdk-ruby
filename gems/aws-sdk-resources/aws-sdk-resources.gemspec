@@ -363,6 +363,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-ssmsap', '~> 1')
   spec.add_dependency('aws-sdk-states', '~> 1')
   spec.add_dependency('aws-sdk-storagegateway', '~> 1')
+  spec.add_dependency('aws-sdk-supplychain', '~> 1')
   spec.add_dependency('aws-sdk-support', '~> 1')
   spec.add_dependency('aws-sdk-supportapp', '~> 1')
   spec.add_dependency('aws-sdk-synthetics', '~> 1')

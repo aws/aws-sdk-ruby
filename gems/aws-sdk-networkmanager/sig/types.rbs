@@ -1,0 +1,1685 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::NetworkManager
+  module Types
+
+    class AWSLocation
+      attr_accessor zone: ::String
+      attr_accessor subnet_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptAttachmentRequest
+      attr_accessor attachment_id: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptAttachmentResponse
+      attr_accessor attachment: Types::Attachment
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccountStatus
+      attr_accessor account_id: ::String
+      attr_accessor slr_deployment_status: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateConnectPeerRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor connect_peer_id: ::String
+      attr_accessor device_id: ::String
+      attr_accessor link_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateConnectPeerResponse
+      attr_accessor connect_peer_association: Types::ConnectPeerAssociation
+      SENSITIVE: []
+    end
+
+    class AssociateCustomerGatewayRequest
+      attr_accessor customer_gateway_arn: ::String
+      attr_accessor global_network_id: ::String
+      attr_accessor device_id: ::String
+      attr_accessor link_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateCustomerGatewayResponse
+      attr_accessor customer_gateway_association: Types::CustomerGatewayAssociation
+      SENSITIVE: []
+    end
+
+    class AssociateLinkRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor device_id: ::String
+      attr_accessor link_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateLinkResponse
+      attr_accessor link_association: Types::LinkAssociation
+      SENSITIVE: []
+    end
+
+    class AssociateTransitGatewayConnectPeerRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor transit_gateway_connect_peer_arn: ::String
+      attr_accessor device_id: ::String
+      attr_accessor link_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateTransitGatewayConnectPeerResponse
+      attr_accessor transit_gateway_connect_peer_association: Types::TransitGatewayConnectPeerAssociation
+      SENSITIVE: []
+    end
+
+    class Attachment
+      attr_accessor core_network_id: ::String
+      attr_accessor core_network_arn: ::String
+      attr_accessor attachment_id: ::String
+      attr_accessor owner_account_id: ::String
+      attr_accessor attachment_type: ("CONNECT" | "SITE_TO_SITE_VPN" | "VPC" | "TRANSIT_GATEWAY_ROUTE_TABLE")
+      attr_accessor state: ("REJECTED" | "PENDING_ATTACHMENT_ACCEPTANCE" | "CREATING" | "FAILED" | "AVAILABLE" | "UPDATING" | "PENDING_NETWORK_UPDATE" | "PENDING_TAG_ACCEPTANCE" | "DELETING")
+      attr_accessor edge_location: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor attachment_policy_rule_number: ::Integer
+      attr_accessor segment_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor proposed_segment_change: Types::ProposedSegmentChange
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class Bandwidth
+      attr_accessor upload_speed: ::Integer
+      attr_accessor download_speed: ::Integer
+      SENSITIVE: []
+    end
+
+    class BgpOptions
+      attr_accessor peer_asn: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectAttachment
+      attr_accessor attachment: Types::Attachment
+      attr_accessor transport_attachment_id: ::String
+      attr_accessor options: Types::ConnectAttachmentOptions
+      SENSITIVE: []
+    end
+
+    class ConnectAttachmentOptions
+      attr_accessor protocol: ("GRE" | "NO_ENCAP")
+      SENSITIVE: []
+    end
+
+    class ConnectPeer
+      attr_accessor core_network_id: ::String
+      attr_accessor connect_attachment_id: ::String
+      attr_accessor connect_peer_id: ::String
+      attr_accessor edge_location: ::String
+      attr_accessor state: ("CREATING" | "FAILED" | "AVAILABLE" | "DELETING")
+      attr_accessor created_at: ::Time
+      attr_accessor configuration: Types::ConnectPeerConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor subnet_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectPeerAssociation
+      attr_accessor connect_peer_id: ::String
+      attr_accessor global_network_id: ::String
+      attr_accessor device_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor state: ("PENDING" | "AVAILABLE" | "DELETING" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class ConnectPeerBgpConfiguration
+      attr_accessor core_network_asn: ::Integer
+      attr_accessor peer_asn: ::Integer
+      attr_accessor core_network_address: ::String
+      attr_accessor peer_address: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectPeerConfiguration
+      attr_accessor core_network_address: ::String
+      attr_accessor peer_address: ::String
+      attr_accessor inside_cidr_blocks: ::Array[::String]
+      attr_accessor protocol: ("GRE" | "NO_ENCAP")
+      attr_accessor bgp_configurations: ::Array[Types::ConnectPeerBgpConfiguration]
+      SENSITIVE: []
+    end
+
+    class ConnectPeerSummary
+      attr_accessor core_network_id: ::String
+      attr_accessor connect_attachment_id: ::String
+      attr_accessor connect_peer_id: ::String
+      attr_accessor edge_location: ::String
+      attr_accessor connect_peer_state: ("CREATING" | "FAILED" | "AVAILABLE" | "DELETING")
+      attr_accessor created_at: ::Time
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor subnet_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Connection
+      attr_accessor connection_id: ::String
+      attr_accessor connection_arn: ::String
+      attr_accessor global_network_id: ::String
+      attr_accessor device_id: ::String
+      attr_accessor connected_device_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor connected_link_id: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor state: ("PENDING" | "AVAILABLE" | "DELETING" | "UPDATING")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ConnectionHealth
+      attr_accessor type: ("BGP" | "IPSEC")
+      attr_accessor status: ("UP" | "DOWN")
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class CoreNetwork
+      attr_accessor global_network_id: ::String
+      attr_accessor core_network_id: ::String
+      attr_accessor core_network_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor state: ("CREATING" | "UPDATING" | "AVAILABLE" | "DELETING")
+      attr_accessor segments: ::Array[Types::CoreNetworkSegment]
+      attr_accessor edges: ::Array[Types::CoreNetworkEdge]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CoreNetworkChange
+      attr_accessor type: ("CORE_NETWORK_SEGMENT" | "CORE_NETWORK_EDGE" | "ATTACHMENT_MAPPING" | "ATTACHMENT_ROUTE_PROPAGATION" | "ATTACHMENT_ROUTE_STATIC" | "CORE_NETWORK_CONFIGURATION" | "SEGMENTS_CONFIGURATION" | "SEGMENT_ACTIONS_CONFIGURATION" | "ATTACHMENT_POLICIES_CONFIGURATION")
+      attr_accessor action: ("ADD" | "MODIFY" | "REMOVE")
+      attr_accessor identifier: ::String
+      attr_accessor previous_values: Types::CoreNetworkChangeValues
+      attr_accessor new_values: Types::CoreNetworkChangeValues
+      attr_accessor identifier_path: ::String
+      SENSITIVE: []
+    end
+
+    class CoreNetworkChangeEvent
+      attr_accessor type: ("CORE_NETWORK_SEGMENT" | "CORE_NETWORK_EDGE" | "ATTACHMENT_MAPPING" | "ATTACHMENT_ROUTE_PROPAGATION" | "ATTACHMENT_ROUTE_STATIC" | "CORE_NETWORK_CONFIGURATION" | "SEGMENTS_CONFIGURATION" | "SEGMENT_ACTIONS_CONFIGURATION" | "ATTACHMENT_POLICIES_CONFIGURATION")
+      attr_accessor action: ("ADD" | "MODIFY" | "REMOVE")
+      attr_accessor identifier_path: ::String
+      attr_accessor event_time: ::Time
+      attr_accessor status: ("NOT_STARTED" | "IN_PROGRESS" | "COMPLETE" | "FAILED")
+      attr_accessor values: Types::CoreNetworkChangeEventValues
+      SENSITIVE: []
+    end
+
+    class CoreNetworkChangeEventValues
+      attr_accessor edge_location: ::String
+      attr_accessor segment_name: ::String
+      attr_accessor attachment_id: ::String
+      attr_accessor cidr: ::String
+      SENSITIVE: []
+    end
+
+    class CoreNetworkChangeValues
+      attr_accessor segment_name: ::String
+      attr_accessor edge_locations: ::Array[::String]
+      attr_accessor asn: ::Integer
+      attr_accessor cidr: ::String
+      attr_accessor destination_identifier: ::String
+      attr_accessor inside_cidr_blocks: ::Array[::String]
+      attr_accessor shared_segments: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CoreNetworkEdge
+      attr_accessor edge_location: ::String
+      attr_accessor asn: ::Integer
+      attr_accessor inside_cidr_blocks: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CoreNetworkPolicy
+      attr_accessor core_network_id: ::String
+      attr_accessor policy_version_id: ::Integer
+      attr_accessor alias: ("LIVE" | "LATEST")
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor change_set_state: ("PENDING_GENERATION" | "FAILED_GENERATION" | "READY_TO_EXECUTE" | "EXECUTING" | "EXECUTION_SUCCEEDED" | "OUT_OF_DATE")
+      attr_accessor policy_errors: ::Array[Types::CoreNetworkPolicyError]
+      attr_accessor policy_document: ::String
+      SENSITIVE: []
+    end
+
+    class CoreNetworkPolicyError
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      attr_accessor path: ::String
+      SENSITIVE: []
+    end
+
+    class CoreNetworkPolicyException
+      attr_accessor message: ::String
+      attr_accessor errors: ::Array[Types::CoreNetworkPolicyError]
+      SENSITIVE: []
+    end
+
+    class CoreNetworkPolicyVersion
+      attr_accessor core_network_id: ::String
+      attr_accessor policy_version_id: ::Integer
+      attr_accessor alias: ("LIVE" | "LATEST")
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor change_set_state: ("PENDING_GENERATION" | "FAILED_GENERATION" | "READY_TO_EXECUTE" | "EXECUTING" | "EXECUTION_SUCCEEDED" | "OUT_OF_DATE")
+      SENSITIVE: []
+    end
+
+    class CoreNetworkSegment
+      attr_accessor name: ::String
+      attr_accessor edge_locations: ::Array[::String]
+      attr_accessor shared_segments: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CoreNetworkSegmentEdgeIdentifier
+      attr_accessor core_network_id: ::String
+      attr_accessor segment_name: ::String
+      attr_accessor edge_location: ::String
+      SENSITIVE: []
+    end
+
+    class CoreNetworkSummary
+      attr_accessor core_network_id: ::String
+      attr_accessor core_network_arn: ::String
+      attr_accessor global_network_id: ::String
+      attr_accessor owner_account_id: ::String
+      attr_accessor state: ("CREATING" | "UPDATING" | "AVAILABLE" | "DELETING")
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateConnectAttachmentRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor edge_location: ::String
+      attr_accessor transport_attachment_id: ::String
+      attr_accessor options: Types::ConnectAttachmentOptions
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConnectAttachmentResponse
+      attr_accessor connect_attachment: Types::ConnectAttachment
+      SENSITIVE: []
+    end
+
+    class CreateConnectPeerRequest
+      attr_accessor connect_attachment_id: ::String
+      attr_accessor core_network_address: ::String
+      attr_accessor peer_address: ::String
+      attr_accessor bgp_options: Types::BgpOptions
+      attr_accessor inside_cidr_blocks: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      attr_accessor subnet_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConnectPeerResponse
+      attr_accessor connect_peer: Types::ConnectPeer
+      SENSITIVE: []
+    end
+
+    class CreateConnectionRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor device_id: ::String
+      attr_accessor connected_device_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor connected_link_id: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateConnectionResponse
+      attr_accessor connection: Types::Connection
+      SENSITIVE: []
+    end
+
+    class CreateCoreNetworkRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor policy_document: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCoreNetworkResponse
+      attr_accessor core_network: Types::CoreNetwork
+      SENSITIVE: []
+    end
+
+    class CreateDeviceRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor aws_location: Types::AWSLocation
+      attr_accessor description: ::String
+      attr_accessor type: ::String
+      attr_accessor vendor: ::String
+      attr_accessor model: ::String
+      attr_accessor serial_number: ::String
+      attr_accessor location: Types::Location
+      attr_accessor site_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:location]
+    end
+
+    class CreateDeviceResponse
+      attr_accessor device: Types::Device
+      SENSITIVE: []
+    end
+
+    class CreateGlobalNetworkRequest
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateGlobalNetworkResponse
+      attr_accessor global_network: Types::GlobalNetwork
+      SENSITIVE: []
+    end
+
+    class CreateLinkRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ::String
+      attr_accessor bandwidth: Types::Bandwidth
+      attr_accessor provider: ::String
+      attr_accessor site_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateLinkResponse
+      attr_accessor link: Types::Link
+      SENSITIVE: []
+    end
+
+    class CreateSiteRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor description: ::String
+      attr_accessor location: Types::Location
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:location]
+    end
+
+    class CreateSiteResponse
+      attr_accessor site: Types::Site
+      SENSITIVE: []
+    end
+
+    class CreateSiteToSiteVpnAttachmentRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor vpn_connection_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSiteToSiteVpnAttachmentResponse
+      attr_accessor site_to_site_vpn_attachment: Types::SiteToSiteVpnAttachment
+      SENSITIVE: []
+    end
+
+    class CreateTransitGatewayPeeringRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor transit_gateway_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTransitGatewayPeeringResponse
+      attr_accessor transit_gateway_peering: Types::TransitGatewayPeering
+      SENSITIVE: []
+    end
+
+    class CreateTransitGatewayRouteTableAttachmentRequest
+      attr_accessor peering_id: ::String
+      attr_accessor transit_gateway_route_table_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTransitGatewayRouteTableAttachmentResponse
+      attr_accessor transit_gateway_route_table_attachment: Types::TransitGatewayRouteTableAttachment
+      SENSITIVE: []
+    end
+
+    class CreateVpcAttachmentRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor vpc_arn: ::String
+      attr_accessor subnet_arns: ::Array[::String]
+      attr_accessor options: Types::VpcOptions
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVpcAttachmentResponse
+      attr_accessor vpc_attachment: Types::VpcAttachment
+      SENSITIVE: []
+    end
+
+    class CustomerGatewayAssociation
+      attr_accessor customer_gateway_arn: ::String
+      attr_accessor global_network_id: ::String
+      attr_accessor device_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor state: ("PENDING" | "AVAILABLE" | "DELETING" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class DeleteAttachmentRequest
+      attr_accessor attachment_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAttachmentResponse
+      attr_accessor attachment: Types::Attachment
+      SENSITIVE: []
+    end
+
+    class DeleteConnectPeerRequest
+      attr_accessor connect_peer_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectPeerResponse
+      attr_accessor connect_peer: Types::ConnectPeer
+      SENSITIVE: []
+    end
+
+    class DeleteConnectionRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor connection_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectionResponse
+      attr_accessor connection: Types::Connection
+      SENSITIVE: []
+    end
+
+    class DeleteCoreNetworkPolicyVersionRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor policy_version_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteCoreNetworkPolicyVersionResponse
+      attr_accessor core_network_policy: Types::CoreNetworkPolicy
+      SENSITIVE: []
+    end
+
+    class DeleteCoreNetworkRequest
+      attr_accessor core_network_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCoreNetworkResponse
+      attr_accessor core_network: Types::CoreNetwork
+      SENSITIVE: []
+    end
+
+    class DeleteDeviceRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor device_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDeviceResponse
+      attr_accessor device: Types::Device
+      SENSITIVE: []
+    end
+
+    class DeleteGlobalNetworkRequest
+      attr_accessor global_network_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGlobalNetworkResponse
+      attr_accessor global_network: Types::GlobalNetwork
+      SENSITIVE: []
+    end
+
+    class DeleteLinkRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor link_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLinkResponse
+      attr_accessor link: Types::Link
+      SENSITIVE: []
+    end
+
+    class DeletePeeringRequest
+      attr_accessor peering_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePeeringResponse
+      attr_accessor peering: Types::Peering
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteSiteRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor site_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSiteResponse
+      attr_accessor site: Types::Site
+      SENSITIVE: []
+    end
+
+    class DeregisterTransitGatewayRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor transit_gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterTransitGatewayResponse
+      attr_accessor transit_gateway_registration: Types::TransitGatewayRegistration
+      SENSITIVE: []
+    end
+
+    class DescribeGlobalNetworksRequest
+      attr_accessor global_network_ids: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeGlobalNetworksResponse
+      attr_accessor global_networks: ::Array[Types::GlobalNetwork]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Device
+      attr_accessor device_id: ::String
+      attr_accessor device_arn: ::String
+      attr_accessor global_network_id: ::String
+      attr_accessor aws_location: Types::AWSLocation
+      attr_accessor description: ::String
+      attr_accessor type: ::String
+      attr_accessor vendor: ::String
+      attr_accessor model: ::String
+      attr_accessor serial_number: ::String
+      attr_accessor location: Types::Location
+      attr_accessor site_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor state: ("PENDING" | "AVAILABLE" | "DELETING" | "UPDATING")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:location]
+    end
+
+    class DisassociateConnectPeerRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor connect_peer_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateConnectPeerResponse
+      attr_accessor connect_peer_association: Types::ConnectPeerAssociation
+      SENSITIVE: []
+    end
+
+    class DisassociateCustomerGatewayRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor customer_gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateCustomerGatewayResponse
+      attr_accessor customer_gateway_association: Types::CustomerGatewayAssociation
+      SENSITIVE: []
+    end
+
+    class DisassociateLinkRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor device_id: ::String
+      attr_accessor link_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateLinkResponse
+      attr_accessor link_association: Types::LinkAssociation
+      SENSITIVE: []
+    end
+
+    class DisassociateTransitGatewayConnectPeerRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor transit_gateway_connect_peer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateTransitGatewayConnectPeerResponse
+      attr_accessor transit_gateway_connect_peer_association: Types::TransitGatewayConnectPeerAssociation
+      SENSITIVE: []
+    end
+
+    class ExecuteCoreNetworkChangeSetRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor policy_version_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExecuteCoreNetworkChangeSetResponse < Aws::EmptyStructure
+    end
+
+    class GetConnectAttachmentRequest
+      attr_accessor attachment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectAttachmentResponse
+      attr_accessor connect_attachment: Types::ConnectAttachment
+      SENSITIVE: []
+    end
+
+    class GetConnectPeerAssociationsRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor connect_peer_ids: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectPeerAssociationsResponse
+      attr_accessor connect_peer_associations: ::Array[Types::ConnectPeerAssociation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectPeerRequest
+      attr_accessor connect_peer_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectPeerResponse
+      attr_accessor connect_peer: Types::ConnectPeer
+      SENSITIVE: []
+    end
+
+    class GetConnectionsRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor connection_ids: ::Array[::String]
+      attr_accessor device_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectionsResponse
+      attr_accessor connections: ::Array[Types::Connection]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCoreNetworkChangeEventsRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor policy_version_id: ::Integer
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCoreNetworkChangeEventsResponse
+      attr_accessor core_network_change_events: ::Array[Types::CoreNetworkChangeEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCoreNetworkChangeSetRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor policy_version_id: ::Integer
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCoreNetworkChangeSetResponse
+      attr_accessor core_network_changes: ::Array[Types::CoreNetworkChange]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCoreNetworkPolicyRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor policy_version_id: ::Integer
+      attr_accessor alias: ("LIVE" | "LATEST")
+      SENSITIVE: []
+    end
+
+    class GetCoreNetworkPolicyResponse
+      attr_accessor core_network_policy: Types::CoreNetworkPolicy
+      SENSITIVE: []
+    end
+
+    class GetCoreNetworkRequest
+      attr_accessor core_network_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCoreNetworkResponse
+      attr_accessor core_network: Types::CoreNetwork
+      SENSITIVE: []
+    end
+
+    class GetCustomerGatewayAssociationsRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor customer_gateway_arns: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCustomerGatewayAssociationsResponse
+      attr_accessor customer_gateway_associations: ::Array[Types::CustomerGatewayAssociation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDevicesRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor device_ids: ::Array[::String]
+      attr_accessor site_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDevicesResponse
+      attr_accessor devices: ::Array[Types::Device]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetLinkAssociationsRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor device_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetLinkAssociationsResponse
+      attr_accessor link_associations: ::Array[Types::LinkAssociation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetLinksRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor link_ids: ::Array[::String]
+      attr_accessor site_id: ::String
+      attr_accessor type: ::String
+      attr_accessor provider: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetLinksResponse
+      attr_accessor links: ::Array[Types::Link]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetNetworkResourceCountsRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetNetworkResourceCountsResponse
+      attr_accessor network_resource_counts: ::Array[Types::NetworkResourceCount]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetNetworkResourceRelationshipsRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor core_network_id: ::String
+      attr_accessor registered_gateway_arn: ::String
+      attr_accessor aws_region: ::String
+      attr_accessor account_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetNetworkResourceRelationshipsResponse
+      attr_accessor relationships: ::Array[Types::Relationship]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetNetworkResourcesRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor core_network_id: ::String
+      attr_accessor registered_gateway_arn: ::String
+      attr_accessor aws_region: ::String
+      attr_accessor account_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetNetworkResourcesResponse
+      attr_accessor network_resources: ::Array[Types::NetworkResource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetNetworkRoutesRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor route_table_identifier: Types::RouteTableIdentifier
+      attr_accessor exact_cidr_matches: ::Array[::String]
+      attr_accessor longest_prefix_matches: ::Array[::String]
+      attr_accessor subnet_of_matches: ::Array[::String]
+      attr_accessor supernet_of_matches: ::Array[::String]
+      attr_accessor prefix_list_ids: ::Array[::String]
+      attr_accessor states: ::Array[("ACTIVE" | "BLACKHOLE")]
+      attr_accessor types: ::Array[("PROPAGATED" | "STATIC")]
+      attr_accessor destination_filters: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class GetNetworkRoutesResponse
+      attr_accessor route_table_arn: ::String
+      attr_accessor core_network_segment_edge: Types::CoreNetworkSegmentEdgeIdentifier
+      attr_accessor route_table_type: ("TRANSIT_GATEWAY_ROUTE_TABLE" | "CORE_NETWORK_SEGMENT")
+      attr_accessor route_table_timestamp: ::Time
+      attr_accessor network_routes: ::Array[Types::NetworkRoute]
+      SENSITIVE: []
+    end
+
+    class GetNetworkTelemetryRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor core_network_id: ::String
+      attr_accessor registered_gateway_arn: ::String
+      attr_accessor aws_region: ::String
+      attr_accessor account_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetNetworkTelemetryResponse
+      attr_accessor network_telemetry: ::Array[Types::NetworkTelemetry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyResponse
+      attr_accessor policy_document: ::String
+      SENSITIVE: []
+    end
+
+    class GetRouteAnalysisRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor route_analysis_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRouteAnalysisResponse
+      attr_accessor route_analysis: Types::RouteAnalysis
+      SENSITIVE: []
+    end
+
+    class GetSiteToSiteVpnAttachmentRequest
+      attr_accessor attachment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSiteToSiteVpnAttachmentResponse
+      attr_accessor site_to_site_vpn_attachment: Types::SiteToSiteVpnAttachment
+      SENSITIVE: []
+    end
+
+    class GetSitesRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor site_ids: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSitesResponse
+      attr_accessor sites: ::Array[Types::Site]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetTransitGatewayConnectPeerAssociationsRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor transit_gateway_connect_peer_arns: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetTransitGatewayConnectPeerAssociationsResponse
+      attr_accessor transit_gateway_connect_peer_associations: ::Array[Types::TransitGatewayConnectPeerAssociation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetTransitGatewayPeeringRequest
+      attr_accessor peering_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetTransitGatewayPeeringResponse
+      attr_accessor transit_gateway_peering: Types::TransitGatewayPeering
+      SENSITIVE: []
+    end
+
+    class GetTransitGatewayRegistrationsRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor transit_gateway_arns: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetTransitGatewayRegistrationsResponse
+      attr_accessor transit_gateway_registrations: ::Array[Types::TransitGatewayRegistration]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetTransitGatewayRouteTableAttachmentRequest
+      attr_accessor attachment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetTransitGatewayRouteTableAttachmentResponse
+      attr_accessor transit_gateway_route_table_attachment: Types::TransitGatewayRouteTableAttachment
+      SENSITIVE: []
+    end
+
+    class GetVpcAttachmentRequest
+      attr_accessor attachment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetVpcAttachmentResponse
+      attr_accessor vpc_attachment: Types::VpcAttachment
+      SENSITIVE: []
+    end
+
+    class GlobalNetwork
+      attr_accessor global_network_id: ::String
+      attr_accessor global_network_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor state: ("PENDING" | "AVAILABLE" | "DELETING" | "UPDATING")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class Link
+      attr_accessor link_id: ::String
+      attr_accessor link_arn: ::String
+      attr_accessor global_network_id: ::String
+      attr_accessor site_id: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ::String
+      attr_accessor bandwidth: Types::Bandwidth
+      attr_accessor provider: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor state: ("PENDING" | "AVAILABLE" | "DELETING" | "UPDATING")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class LinkAssociation
+      attr_accessor global_network_id: ::String
+      attr_accessor device_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor link_association_state: ("PENDING" | "AVAILABLE" | "DELETING" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class ListAttachmentsRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor attachment_type: ("CONNECT" | "SITE_TO_SITE_VPN" | "VPC" | "TRANSIT_GATEWAY_ROUTE_TABLE")
+      attr_accessor edge_location: ::String
+      attr_accessor state: ("REJECTED" | "PENDING_ATTACHMENT_ACCEPTANCE" | "CREATING" | "FAILED" | "AVAILABLE" | "UPDATING" | "PENDING_NETWORK_UPDATE" | "PENDING_TAG_ACCEPTANCE" | "DELETING")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAttachmentsResponse
+      attr_accessor attachments: ::Array[Types::Attachment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectPeersRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor connect_attachment_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectPeersResponse
+      attr_accessor connect_peers: ::Array[Types::ConnectPeerSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCoreNetworkPolicyVersionsRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCoreNetworkPolicyVersionsResponse
+      attr_accessor core_network_policy_versions: ::Array[Types::CoreNetworkPolicyVersion]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCoreNetworksRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCoreNetworksResponse
+      attr_accessor core_networks: ::Array[Types::CoreNetworkSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOrganizationServiceAccessStatusRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOrganizationServiceAccessStatusResponse
+      attr_accessor organization_status: Types::OrganizationStatus
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPeeringsRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor peering_type: ("TRANSIT_GATEWAY")
+      attr_accessor edge_location: ::String
+      attr_accessor state: ("CREATING" | "FAILED" | "AVAILABLE" | "DELETING")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPeeringsResponse
+      attr_accessor peerings: ::Array[Types::Peering]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class Location
+      attr_accessor address: ::String
+      attr_accessor latitude: ::String
+      attr_accessor longitude: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkResource
+      attr_accessor registered_gateway_arn: ::String
+      attr_accessor core_network_id: ::String
+      attr_accessor aws_region: ::String
+      attr_accessor account_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor definition: ::String
+      attr_accessor definition_timestamp: ::Time
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor metadata: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class NetworkResourceCount
+      attr_accessor resource_type: ::String
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
+    class NetworkResourceSummary
+      attr_accessor registered_gateway_arn: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor definition: ::String
+      attr_accessor name_tag: ::String
+      attr_accessor is_middlebox: bool
+      SENSITIVE: []
+    end
+
+    class NetworkRoute
+      attr_accessor destination_cidr_block: ::String
+      attr_accessor destinations: ::Array[Types::NetworkRouteDestination]
+      attr_accessor prefix_list_id: ::String
+      attr_accessor state: ("ACTIVE" | "BLACKHOLE")
+      attr_accessor type: ("PROPAGATED" | "STATIC")
+      SENSITIVE: []
+    end
+
+    class NetworkRouteDestination
+      attr_accessor core_network_attachment_id: ::String
+      attr_accessor transit_gateway_attachment_id: ::String
+      attr_accessor segment_name: ::String
+      attr_accessor edge_location: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkTelemetry
+      attr_accessor registered_gateway_arn: ::String
+      attr_accessor core_network_id: ::String
+      attr_accessor aws_region: ::String
+      attr_accessor account_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor address: ::String
+      attr_accessor health: Types::ConnectionHealth
+      SENSITIVE: []
+    end
+
+    class OrganizationStatus
+      attr_accessor organization_id: ::String
+      attr_accessor organization_aws_service_access_status: ::String
+      attr_accessor slr_deployment_status: ::String
+      attr_accessor account_status_list: ::Array[Types::AccountStatus]
+      SENSITIVE: []
+    end
+
+    class PathComponent
+      attr_accessor sequence: ::Integer
+      attr_accessor resource: Types::NetworkResourceSummary
+      attr_accessor destination_cidr_block: ::String
+      SENSITIVE: []
+    end
+
+    class Peering
+      attr_accessor core_network_id: ::String
+      attr_accessor core_network_arn: ::String
+      attr_accessor peering_id: ::String
+      attr_accessor owner_account_id: ::String
+      attr_accessor peering_type: ("TRANSIT_GATEWAY")
+      attr_accessor state: ("CREATING" | "FAILED" | "AVAILABLE" | "DELETING")
+      attr_accessor edge_location: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ProposedSegmentChange
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor attachment_policy_rule_number: ::Integer
+      attr_accessor segment_name: ::String
+      SENSITIVE: []
+    end
+
+    class PutCoreNetworkPolicyRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor description: ::String
+      attr_accessor latest_version_id: ::Integer
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class PutCoreNetworkPolicyResponse
+      attr_accessor core_network_policy: Types::CoreNetworkPolicy
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyRequest
+      attr_accessor policy_document: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyResponse < Aws::EmptyStructure
+    end
+
+    class RegisterTransitGatewayRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor transit_gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterTransitGatewayResponse
+      attr_accessor transit_gateway_registration: Types::TransitGatewayRegistration
+      SENSITIVE: []
+    end
+
+    class RejectAttachmentRequest
+      attr_accessor attachment_id: ::String
+      SENSITIVE: []
+    end
+
+    class RejectAttachmentResponse
+      attr_accessor attachment: Types::Attachment
+      SENSITIVE: []
+    end
+
+    class Relationship
+      attr_accessor from: ::String
+      attr_accessor to: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor context: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RestoreCoreNetworkPolicyVersionRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor policy_version_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class RestoreCoreNetworkPolicyVersionResponse
+      attr_accessor core_network_policy: Types::CoreNetworkPolicy
+      SENSITIVE: []
+    end
+
+    class RouteAnalysis
+      attr_accessor global_network_id: ::String
+      attr_accessor owner_account_id: ::String
+      attr_accessor route_analysis_id: ::String
+      attr_accessor start_timestamp: ::Time
+      attr_accessor status: ("RUNNING" | "COMPLETED" | "FAILED")
+      attr_accessor source: Types::RouteAnalysisEndpointOptions
+      attr_accessor destination: Types::RouteAnalysisEndpointOptions
+      attr_accessor include_return_path: bool
+      attr_accessor use_middleboxes: bool
+      attr_accessor forward_path: Types::RouteAnalysisPath
+      attr_accessor return_path: Types::RouteAnalysisPath
+      SENSITIVE: []
+    end
+
+    class RouteAnalysisCompletion
+      attr_accessor result_code: ("CONNECTED" | "NOT_CONNECTED")
+      attr_accessor reason_code: ("TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND" | "TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY" | "CYCLIC_PATH_DETECTED" | "TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND" | "ROUTE_NOT_FOUND" | "BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND" | "INACTIVE_ROUTE_FOR_DESTINATION_FOUND" | "TRANSIT_GATEWAY_ATTACHMENT_ATTACH_ARN_NO_MATCH" | "MAX_HOPS_EXCEEDED" | "POSSIBLE_MIDDLEBOX" | "NO_DESTINATION_ARN_PROVIDED")
+      attr_accessor reason_context: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RouteAnalysisEndpointOptions
+      attr_accessor transit_gateway_attachment_arn: ::String
+      attr_accessor transit_gateway_arn: ::String
+      attr_accessor ip_address: ::String
+      SENSITIVE: []
+    end
+
+    class RouteAnalysisEndpointOptionsSpecification
+      attr_accessor transit_gateway_attachment_arn: ::String
+      attr_accessor ip_address: ::String
+      SENSITIVE: []
+    end
+
+    class RouteAnalysisPath
+      attr_accessor completion_status: Types::RouteAnalysisCompletion
+      attr_accessor path: ::Array[Types::PathComponent]
+      SENSITIVE: []
+    end
+
+    class RouteTableIdentifier
+      attr_accessor transit_gateway_route_table_arn: ::String
+      attr_accessor core_network_segment_edge: Types::CoreNetworkSegmentEdgeIdentifier
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor limit_code: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class Site
+      attr_accessor site_id: ::String
+      attr_accessor site_arn: ::String
+      attr_accessor global_network_id: ::String
+      attr_accessor description: ::String
+      attr_accessor location: Types::Location
+      attr_accessor created_at: ::Time
+      attr_accessor state: ("PENDING" | "AVAILABLE" | "DELETING" | "UPDATING")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:location]
+    end
+
+    class SiteToSiteVpnAttachment
+      attr_accessor attachment: Types::Attachment
+      attr_accessor vpn_connection_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartOrganizationServiceAccessUpdateRequest
+      attr_accessor action: ::String
+      SENSITIVE: []
+    end
+
+    class StartOrganizationServiceAccessUpdateResponse
+      attr_accessor organization_status: Types::OrganizationStatus
+      SENSITIVE: []
+    end
+
+    class StartRouteAnalysisRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor source: Types::RouteAnalysisEndpointOptionsSpecification
+      attr_accessor destination: Types::RouteAnalysisEndpointOptionsSpecification
+      attr_accessor include_return_path: bool
+      attr_accessor use_middleboxes: bool
+      SENSITIVE: []
+    end
+
+    class StartRouteAnalysisResponse
+      attr_accessor route_analysis: Types::RouteAnalysis
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class TransitGatewayConnectPeerAssociation
+      attr_accessor transit_gateway_connect_peer_arn: ::String
+      attr_accessor global_network_id: ::String
+      attr_accessor device_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor state: ("PENDING" | "AVAILABLE" | "DELETING" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class TransitGatewayPeering
+      attr_accessor peering: Types::Peering
+      attr_accessor transit_gateway_arn: ::String
+      attr_accessor transit_gateway_peering_attachment_id: ::String
+      SENSITIVE: []
+    end
+
+    class TransitGatewayRegistration
+      attr_accessor global_network_id: ::String
+      attr_accessor transit_gateway_arn: ::String
+      attr_accessor state: Types::TransitGatewayRegistrationStateReason
+      SENSITIVE: []
+    end
+
+    class TransitGatewayRegistrationStateReason
+      attr_accessor code: ("PENDING" | "AVAILABLE" | "DELETING" | "DELETED" | "FAILED")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TransitGatewayRouteTableAttachment
+      attr_accessor attachment: Types::Attachment
+      attr_accessor peering_id: ::String
+      attr_accessor transit_gateway_route_table_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateConnectionRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor connection_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor connected_link_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConnectionResponse
+      attr_accessor connection: Types::Connection
+      SENSITIVE: []
+    end
+
+    class UpdateCoreNetworkRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCoreNetworkResponse
+      attr_accessor core_network: Types::CoreNetwork
+      SENSITIVE: []
+    end
+
+    class UpdateDeviceRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor device_id: ::String
+      attr_accessor aws_location: Types::AWSLocation
+      attr_accessor description: ::String
+      attr_accessor type: ::String
+      attr_accessor vendor: ::String
+      attr_accessor model: ::String
+      attr_accessor serial_number: ::String
+      attr_accessor location: Types::Location
+      attr_accessor site_id: ::String
+      SENSITIVE: [:location]
+    end
+
+    class UpdateDeviceResponse
+      attr_accessor device: Types::Device
+      SENSITIVE: []
+    end
+
+    class UpdateGlobalNetworkRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGlobalNetworkResponse
+      attr_accessor global_network: Types::GlobalNetwork
+      SENSITIVE: []
+    end
+
+    class UpdateLinkRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ::String
+      attr_accessor bandwidth: Types::Bandwidth
+      attr_accessor provider: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateLinkResponse
+      attr_accessor link: Types::Link
+      SENSITIVE: []
+    end
+
+    class UpdateNetworkResourceMetadataRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateNetworkResourceMetadataResponse
+      attr_accessor resource_arn: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateSiteRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor site_id: ::String
+      attr_accessor description: ::String
+      attr_accessor location: Types::Location
+      SENSITIVE: [:location]
+    end
+
+    class UpdateSiteResponse
+      attr_accessor site: Types::Site
+      SENSITIVE: []
+    end
+
+    class UpdateVpcAttachmentRequest
+      attr_accessor attachment_id: ::String
+      attr_accessor add_subnet_arns: ::Array[::String]
+      attr_accessor remove_subnet_arns: ::Array[::String]
+      attr_accessor options: Types::VpcOptions
+      SENSITIVE: []
+    end
+
+    class UpdateVpcAttachmentResponse
+      attr_accessor vpc_attachment: Types::VpcAttachment
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("UnknownOperation" | "CannotParse" | "FieldValidationFailed" | "Other")
+      attr_accessor fields: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VpcAttachment
+      attr_accessor attachment: Types::Attachment
+      attr_accessor subnet_arns: ::Array[::String]
+      attr_accessor options: Types::VpcOptions
+      SENSITIVE: []
+    end
+
+    class VpcOptions
+      attr_accessor ipv_6_support: bool
+      attr_accessor appliance_mode_support: bool
+      SENSITIVE: []
+    end
+  end
+end

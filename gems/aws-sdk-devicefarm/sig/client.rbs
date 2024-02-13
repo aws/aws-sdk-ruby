@@ -1,0 +1,1106 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DeviceFarm
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateDevicePoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDevicePoolResult]
+        def device_pool: () -> Types::DevicePool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#create_device_pool-instance_method
+      def create_device_pool: (
+                                project_arn: ::String,
+                                name: ::String,
+                                ?description: ::String,
+                                rules: Array[
+                                  {
+                                    attribute: ("ARN" | "PLATFORM" | "FORM_FACTOR" | "MANUFACTURER" | "REMOTE_ACCESS_ENABLED" | "REMOTE_DEBUG_ENABLED" | "APPIUM_VERSION" | "INSTANCE_ARN" | "INSTANCE_LABELS" | "FLEET_TYPE" | "OS_VERSION" | "MODEL" | "AVAILABILITY")?,
+                                    operator: ("EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "IN" | "NOT_IN" | "CONTAINS")?,
+                                    value: ::String?
+                                  },
+                                ],
+                                ?max_devices: ::Integer
+                              ) -> _CreateDevicePoolResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDevicePoolResponseSuccess
+
+      interface _CreateInstanceProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateInstanceProfileResult]
+        def instance_profile: () -> Types::InstanceProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#create_instance_profile-instance_method
+      def create_instance_profile: (
+                                     name: ::String,
+                                     ?description: ::String,
+                                     ?package_cleanup: bool,
+                                     ?exclude_app_packages_from_cleanup: Array[::String],
+                                     ?reboot_after_use: bool
+                                   ) -> _CreateInstanceProfileResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInstanceProfileResponseSuccess
+
+      interface _CreateNetworkProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNetworkProfileResult]
+        def network_profile: () -> Types::NetworkProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#create_network_profile-instance_method
+      def create_network_profile: (
+                                    project_arn: ::String,
+                                    name: ::String,
+                                    ?description: ::String,
+                                    ?type: ("CURATED" | "PRIVATE"),
+                                    ?uplink_bandwidth_bits: ::Integer,
+                                    ?downlink_bandwidth_bits: ::Integer,
+                                    ?uplink_delay_ms: ::Integer,
+                                    ?downlink_delay_ms: ::Integer,
+                                    ?uplink_jitter_ms: ::Integer,
+                                    ?downlink_jitter_ms: ::Integer,
+                                    ?uplink_loss_percent: ::Integer,
+                                    ?downlink_loss_percent: ::Integer
+                                  ) -> _CreateNetworkProfileResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNetworkProfileResponseSuccess
+
+      interface _CreateProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProjectResult]
+        def project: () -> Types::Project
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#create_project-instance_method
+      def create_project: (
+                            name: ::String,
+                            ?default_job_timeout_minutes: ::Integer,
+                            ?vpc_config: {
+                              security_group_ids: Array[::String],
+                              subnet_ids: Array[::String],
+                              vpc_id: ::String
+                            }
+                          ) -> _CreateProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProjectResponseSuccess
+
+      interface _CreateRemoteAccessSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRemoteAccessSessionResult]
+        def remote_access_session: () -> Types::RemoteAccessSession
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#create_remote_access_session-instance_method
+      def create_remote_access_session: (
+                                          project_arn: ::String,
+                                          device_arn: ::String,
+                                          ?instance_arn: ::String,
+                                          ?ssh_public_key: ::String,
+                                          ?remote_debug_enabled: bool,
+                                          ?remote_record_enabled: bool,
+                                          ?remote_record_app_arn: ::String,
+                                          ?name: ::String,
+                                          ?client_id: ::String,
+                                          ?configuration: {
+                                            billing_method: ("METERED" | "UNMETERED")?,
+                                            vpce_configuration_arns: Array[::String]?
+                                          },
+                                          ?interaction_mode: ("INTERACTIVE" | "NO_VIDEO" | "VIDEO_ONLY"),
+                                          ?skip_app_resign: bool
+                                        ) -> _CreateRemoteAccessSessionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRemoteAccessSessionResponseSuccess
+
+      interface _CreateTestGridProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTestGridProjectResult]
+        def test_grid_project: () -> Types::TestGridProject
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#create_test_grid_project-instance_method
+      def create_test_grid_project: (
+                                      name: ::String,
+                                      ?description: ::String,
+                                      ?vpc_config: {
+                                        security_group_ids: Array[::String],
+                                        subnet_ids: Array[::String],
+                                        vpc_id: ::String
+                                      }
+                                    ) -> _CreateTestGridProjectResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTestGridProjectResponseSuccess
+
+      interface _CreateTestGridUrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTestGridUrlResult]
+        def url: () -> ::String
+        def expires: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#create_test_grid_url-instance_method
+      def create_test_grid_url: (
+                                  project_arn: ::String,
+                                  expires_in_seconds: ::Integer
+                                ) -> _CreateTestGridUrlResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTestGridUrlResponseSuccess
+
+      interface _CreateUploadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateUploadResult]
+        def upload: () -> Types::Upload
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#create_upload-instance_method
+      def create_upload: (
+                           project_arn: ::String,
+                           name: ::String,
+                           type: ("ANDROID_APP" | "IOS_APP" | "WEB_APP" | "EXTERNAL_DATA" | "APPIUM_JAVA_JUNIT_TEST_PACKAGE" | "APPIUM_JAVA_TESTNG_TEST_PACKAGE" | "APPIUM_PYTHON_TEST_PACKAGE" | "APPIUM_NODE_TEST_PACKAGE" | "APPIUM_RUBY_TEST_PACKAGE" | "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE" | "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE" | "APPIUM_WEB_PYTHON_TEST_PACKAGE" | "APPIUM_WEB_NODE_TEST_PACKAGE" | "APPIUM_WEB_RUBY_TEST_PACKAGE" | "CALABASH_TEST_PACKAGE" | "INSTRUMENTATION_TEST_PACKAGE" | "UIAUTOMATION_TEST_PACKAGE" | "UIAUTOMATOR_TEST_PACKAGE" | "XCTEST_TEST_PACKAGE" | "XCTEST_UI_TEST_PACKAGE" | "APPIUM_JAVA_JUNIT_TEST_SPEC" | "APPIUM_JAVA_TESTNG_TEST_SPEC" | "APPIUM_PYTHON_TEST_SPEC" | "APPIUM_NODE_TEST_SPEC" | "APPIUM_RUBY_TEST_SPEC" | "APPIUM_WEB_JAVA_JUNIT_TEST_SPEC" | "APPIUM_WEB_JAVA_TESTNG_TEST_SPEC" | "APPIUM_WEB_PYTHON_TEST_SPEC" | "APPIUM_WEB_NODE_TEST_SPEC" | "APPIUM_WEB_RUBY_TEST_SPEC" | "INSTRUMENTATION_TEST_SPEC" | "XCTEST_UI_TEST_SPEC"),
+                           ?content_type: ::String
+                         ) -> _CreateUploadResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUploadResponseSuccess
+
+      interface _CreateVPCEConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVPCEConfigurationResult]
+        def vpce_configuration: () -> Types::VPCEConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#create_vpce_configuration-instance_method
+      def create_vpce_configuration: (
+                                       vpce_configuration_name: ::String,
+                                       vpce_service_name: ::String,
+                                       service_dns_name: ::String,
+                                       ?vpce_configuration_description: ::String
+                                     ) -> _CreateVPCEConfigurationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVPCEConfigurationResponseSuccess
+
+      interface _DeleteDevicePoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDevicePoolResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#delete_device_pool-instance_method
+      def delete_device_pool: (
+                                arn: ::String
+                              ) -> _DeleteDevicePoolResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDevicePoolResponseSuccess
+
+      interface _DeleteInstanceProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteInstanceProfileResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#delete_instance_profile-instance_method
+      def delete_instance_profile: (
+                                     arn: ::String
+                                   ) -> _DeleteInstanceProfileResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInstanceProfileResponseSuccess
+
+      interface _DeleteNetworkProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNetworkProfileResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#delete_network_profile-instance_method
+      def delete_network_profile: (
+                                    arn: ::String
+                                  ) -> _DeleteNetworkProfileResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNetworkProfileResponseSuccess
+
+      interface _DeleteProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProjectResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#delete_project-instance_method
+      def delete_project: (
+                            arn: ::String
+                          ) -> _DeleteProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProjectResponseSuccess
+
+      interface _DeleteRemoteAccessSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRemoteAccessSessionResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#delete_remote_access_session-instance_method
+      def delete_remote_access_session: (
+                                          arn: ::String
+                                        ) -> _DeleteRemoteAccessSessionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRemoteAccessSessionResponseSuccess
+
+      interface _DeleteRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRunResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#delete_run-instance_method
+      def delete_run: (
+                        arn: ::String
+                      ) -> _DeleteRunResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRunResponseSuccess
+
+      interface _DeleteTestGridProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTestGridProjectResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#delete_test_grid_project-instance_method
+      def delete_test_grid_project: (
+                                      project_arn: ::String
+                                    ) -> _DeleteTestGridProjectResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTestGridProjectResponseSuccess
+
+      interface _DeleteUploadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteUploadResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#delete_upload-instance_method
+      def delete_upload: (
+                           arn: ::String
+                         ) -> _DeleteUploadResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteUploadResponseSuccess
+
+      interface _DeleteVPCEConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVPCEConfigurationResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#delete_vpce_configuration-instance_method
+      def delete_vpce_configuration: (
+                                       arn: ::String
+                                     ) -> _DeleteVPCEConfigurationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVPCEConfigurationResponseSuccess
+
+      interface _GetAccountSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountSettingsResult]
+        def account_settings: () -> Types::AccountSettings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#get_account_settings-instance_method
+      def get_account_settings: (
+                                ) -> _GetAccountSettingsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountSettingsResponseSuccess
+
+      interface _GetDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeviceResult]
+        def device: () -> Types::Device
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#get_device-instance_method
+      def get_device: (
+                        arn: ::String
+                      ) -> _GetDeviceResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeviceResponseSuccess
+
+      interface _GetDeviceInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeviceInstanceResult]
+        def device_instance: () -> Types::DeviceInstance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#get_device_instance-instance_method
+      def get_device_instance: (
+                                 arn: ::String
+                               ) -> _GetDeviceInstanceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeviceInstanceResponseSuccess
+
+      interface _GetDevicePoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDevicePoolResult]
+        def device_pool: () -> Types::DevicePool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#get_device_pool-instance_method
+      def get_device_pool: (
+                             arn: ::String
+                           ) -> _GetDevicePoolResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDevicePoolResponseSuccess
+
+      interface _GetDevicePoolCompatibilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDevicePoolCompatibilityResult]
+        def compatible_devices: () -> ::Array[Types::DevicePoolCompatibilityResult]
+        def incompatible_devices: () -> ::Array[Types::DevicePoolCompatibilityResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#get_device_pool_compatibility-instance_method
+      def get_device_pool_compatibility: (
+                                           device_pool_arn: ::String,
+                                           ?app_arn: ::String,
+                                           ?test_type: ("BUILTIN_FUZZ" | "BUILTIN_EXPLORER" | "WEB_PERFORMANCE_PROFILE" | "APPIUM_JAVA_JUNIT" | "APPIUM_JAVA_TESTNG" | "APPIUM_PYTHON" | "APPIUM_NODE" | "APPIUM_RUBY" | "APPIUM_WEB_JAVA_JUNIT" | "APPIUM_WEB_JAVA_TESTNG" | "APPIUM_WEB_PYTHON" | "APPIUM_WEB_NODE" | "APPIUM_WEB_RUBY" | "CALABASH" | "INSTRUMENTATION" | "UIAUTOMATION" | "UIAUTOMATOR" | "XCTEST" | "XCTEST_UI" | "REMOTE_ACCESS_RECORD" | "REMOTE_ACCESS_REPLAY"),
+                                           ?test: {
+                                             type: ("BUILTIN_FUZZ" | "BUILTIN_EXPLORER" | "WEB_PERFORMANCE_PROFILE" | "APPIUM_JAVA_JUNIT" | "APPIUM_JAVA_TESTNG" | "APPIUM_PYTHON" | "APPIUM_NODE" | "APPIUM_RUBY" | "APPIUM_WEB_JAVA_JUNIT" | "APPIUM_WEB_JAVA_TESTNG" | "APPIUM_WEB_PYTHON" | "APPIUM_WEB_NODE" | "APPIUM_WEB_RUBY" | "CALABASH" | "INSTRUMENTATION" | "UIAUTOMATION" | "UIAUTOMATOR" | "XCTEST" | "XCTEST_UI" | "REMOTE_ACCESS_RECORD" | "REMOTE_ACCESS_REPLAY"),
+                                             test_package_arn: ::String?,
+                                             test_spec_arn: ::String?,
+                                             filter: ::String?,
+                                             parameters: Hash[::String, ::String]?
+                                           },
+                                           ?configuration: {
+                                             extra_data_package_arn: ::String?,
+                                             network_profile_arn: ::String?,
+                                             locale: ::String?,
+                                             location: {
+                                               latitude: ::Float,
+                                               longitude: ::Float
+                                             }?,
+                                             vpce_configuration_arns: Array[::String]?,
+                                             customer_artifact_paths: {
+                                               ios_paths: Array[::String]?,
+                                               android_paths: Array[::String]?,
+                                               device_host_paths: Array[::String]?
+                                             }?,
+                                             radios: {
+                                               wifi: bool?,
+                                               bluetooth: bool?,
+                                               nfc: bool?,
+                                               gps: bool?
+                                             }?,
+                                             auxiliary_apps: Array[::String]?,
+                                             billing_method: ("METERED" | "UNMETERED")?
+                                           }
+                                         ) -> _GetDevicePoolCompatibilityResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDevicePoolCompatibilityResponseSuccess
+
+      interface _GetInstanceProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceProfileResult]
+        def instance_profile: () -> Types::InstanceProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#get_instance_profile-instance_method
+      def get_instance_profile: (
+                                  arn: ::String
+                                ) -> _GetInstanceProfileResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInstanceProfileResponseSuccess
+
+      interface _GetJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetJobResult]
+        def job: () -> Types::Job
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#get_job-instance_method
+      def get_job: (
+                     arn: ::String
+                   ) -> _GetJobResponseSuccess
+                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetJobResponseSuccess
+
+      interface _GetNetworkProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNetworkProfileResult]
+        def network_profile: () -> Types::NetworkProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#get_network_profile-instance_method
+      def get_network_profile: (
+                                 arn: ::String
+                               ) -> _GetNetworkProfileResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNetworkProfileResponseSuccess
+
+      interface _GetOfferingStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOfferingStatusResult]
+        def current: () -> ::Hash[::String, Types::OfferingStatus]
+        def next_period: () -> ::Hash[::String, Types::OfferingStatus]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#get_offering_status-instance_method
+      def get_offering_status: (
+                                 ?next_token: ::String
+                               ) -> _GetOfferingStatusResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOfferingStatusResponseSuccess
+
+      interface _GetProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProjectResult]
+        def project: () -> Types::Project
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#get_project-instance_method
+      def get_project: (
+                         arn: ::String
+                       ) -> _GetProjectResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProjectResponseSuccess
+
+      interface _GetRemoteAccessSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRemoteAccessSessionResult]
+        def remote_access_session: () -> Types::RemoteAccessSession
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#get_remote_access_session-instance_method
+      def get_remote_access_session: (
+                                       arn: ::String
+                                     ) -> _GetRemoteAccessSessionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRemoteAccessSessionResponseSuccess
+
+      interface _GetRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRunResult]
+        def run: () -> Types::Run
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#get_run-instance_method
+      def get_run: (
+                     arn: ::String
+                   ) -> _GetRunResponseSuccess
+                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRunResponseSuccess
+
+      interface _GetSuiteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSuiteResult]
+        def suite: () -> Types::Suite
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#get_suite-instance_method
+      def get_suite: (
+                       arn: ::String
+                     ) -> _GetSuiteResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSuiteResponseSuccess
+
+      interface _GetTestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTestResult]
+        def test: () -> Types::Test
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#get_test-instance_method
+      def get_test: (
+                      arn: ::String
+                    ) -> _GetTestResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTestResponseSuccess
+
+      interface _GetTestGridProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTestGridProjectResult]
+        def test_grid_project: () -> Types::TestGridProject
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#get_test_grid_project-instance_method
+      def get_test_grid_project: (
+                                   project_arn: ::String
+                                 ) -> _GetTestGridProjectResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTestGridProjectResponseSuccess
+
+      interface _GetTestGridSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTestGridSessionResult]
+        def test_grid_session: () -> Types::TestGridSession
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#get_test_grid_session-instance_method
+      def get_test_grid_session: (
+                                   ?project_arn: ::String,
+                                   ?session_id: ::String,
+                                   ?session_arn: ::String
+                                 ) -> _GetTestGridSessionResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTestGridSessionResponseSuccess
+
+      interface _GetUploadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUploadResult]
+        def upload: () -> Types::Upload
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#get_upload-instance_method
+      def get_upload: (
+                        arn: ::String
+                      ) -> _GetUploadResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUploadResponseSuccess
+
+      interface _GetVPCEConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVPCEConfigurationResult]
+        def vpce_configuration: () -> Types::VPCEConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#get_vpce_configuration-instance_method
+      def get_vpce_configuration: (
+                                    arn: ::String
+                                  ) -> _GetVPCEConfigurationResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVPCEConfigurationResponseSuccess
+
+      interface _InstallToRemoteAccessSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InstallToRemoteAccessSessionResult]
+        def app_upload: () -> Types::Upload
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#install_to_remote_access_session-instance_method
+      def install_to_remote_access_session: (
+                                              remote_access_session_arn: ::String,
+                                              app_arn: ::String
+                                            ) -> _InstallToRemoteAccessSessionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InstallToRemoteAccessSessionResponseSuccess
+
+      interface _ListArtifactsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListArtifactsResult]
+        def artifacts: () -> ::Array[Types::Artifact]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_artifacts-instance_method
+      def list_artifacts: (
+                            arn: ::String,
+                            type: ("SCREENSHOT" | "FILE" | "LOG"),
+                            ?next_token: ::String
+                          ) -> _ListArtifactsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListArtifactsResponseSuccess
+
+      interface _ListDeviceInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeviceInstancesResult]
+        def device_instances: () -> ::Array[Types::DeviceInstance]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_device_instances-instance_method
+      def list_device_instances: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListDeviceInstancesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeviceInstancesResponseSuccess
+
+      interface _ListDevicePoolsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDevicePoolsResult]
+        def device_pools: () -> ::Array[Types::DevicePool]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_device_pools-instance_method
+      def list_device_pools: (
+                               arn: ::String,
+                               ?type: ("CURATED" | "PRIVATE"),
+                               ?next_token: ::String
+                             ) -> _ListDevicePoolsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDevicePoolsResponseSuccess
+
+      interface _ListDevicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDevicesResult]
+        def devices: () -> ::Array[Types::Device]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_devices-instance_method
+      def list_devices: (
+                          ?arn: ::String,
+                          ?next_token: ::String,
+                          ?filters: Array[
+                            {
+                              attribute: ("ARN" | "PLATFORM" | "OS_VERSION" | "MODEL" | "AVAILABILITY" | "FORM_FACTOR" | "MANUFACTURER" | "REMOTE_ACCESS_ENABLED" | "REMOTE_DEBUG_ENABLED" | "INSTANCE_ARN" | "INSTANCE_LABELS" | "FLEET_TYPE"),
+                              operator: ("EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "IN" | "NOT_IN" | "CONTAINS"),
+                              values: Array[::String]
+                            },
+                          ]
+                        ) -> _ListDevicesResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDevicesResponseSuccess
+
+      interface _ListInstanceProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInstanceProfilesResult]
+        def instance_profiles: () -> ::Array[Types::InstanceProfile]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_instance_profiles-instance_method
+      def list_instance_profiles: (
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListInstanceProfilesResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInstanceProfilesResponseSuccess
+
+      interface _ListJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListJobsResult]
+        def jobs: () -> ::Array[Types::Job]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_jobs-instance_method
+      def list_jobs: (
+                       arn: ::String,
+                       ?next_token: ::String
+                     ) -> _ListJobsResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobsResponseSuccess
+
+      interface _ListNetworkProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworkProfilesResult]
+        def network_profiles: () -> ::Array[Types::NetworkProfile]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_network_profiles-instance_method
+      def list_network_profiles: (
+                                   arn: ::String,
+                                   ?type: ("CURATED" | "PRIVATE"),
+                                   ?next_token: ::String
+                                 ) -> _ListNetworkProfilesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworkProfilesResponseSuccess
+
+      interface _ListOfferingPromotionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOfferingPromotionsResult]
+        def offering_promotions: () -> ::Array[Types::OfferingPromotion]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_offering_promotions-instance_method
+      def list_offering_promotions: (
+                                      ?next_token: ::String
+                                    ) -> _ListOfferingPromotionsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOfferingPromotionsResponseSuccess
+
+      interface _ListOfferingTransactionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOfferingTransactionsResult]
+        def offering_transactions: () -> ::Array[Types::OfferingTransaction]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_offering_transactions-instance_method
+      def list_offering_transactions: (
+                                        ?next_token: ::String
+                                      ) -> _ListOfferingTransactionsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOfferingTransactionsResponseSuccess
+
+      interface _ListOfferingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOfferingsResult]
+        def offerings: () -> ::Array[Types::Offering]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_offerings-instance_method
+      def list_offerings: (
+                            ?next_token: ::String
+                          ) -> _ListOfferingsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOfferingsResponseSuccess
+
+      interface _ListProjectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProjectsResult]
+        def projects: () -> ::Array[Types::Project]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_projects-instance_method
+      def list_projects: (
+                           ?arn: ::String,
+                           ?next_token: ::String
+                         ) -> _ListProjectsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProjectsResponseSuccess
+
+      interface _ListRemoteAccessSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRemoteAccessSessionsResult]
+        def remote_access_sessions: () -> ::Array[Types::RemoteAccessSession]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_remote_access_sessions-instance_method
+      def list_remote_access_sessions: (
+                                         arn: ::String,
+                                         ?next_token: ::String
+                                       ) -> _ListRemoteAccessSessionsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRemoteAccessSessionsResponseSuccess
+
+      interface _ListRunsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRunsResult]
+        def runs: () -> ::Array[Types::Run]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_runs-instance_method
+      def list_runs: (
+                       arn: ::String,
+                       ?next_token: ::String
+                     ) -> _ListRunsResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRunsResponseSuccess
+
+      interface _ListSamplesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSamplesResult]
+        def samples: () -> ::Array[Types::Sample]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_samples-instance_method
+      def list_samples: (
+                          arn: ::String,
+                          ?next_token: ::String
+                        ) -> _ListSamplesResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSamplesResponseSuccess
+
+      interface _ListSuitesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSuitesResult]
+        def suites: () -> ::Array[Types::Suite]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_suites-instance_method
+      def list_suites: (
+                         arn: ::String,
+                         ?next_token: ::String
+                       ) -> _ListSuitesResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSuitesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTestGridProjectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTestGridProjectsResult]
+        def test_grid_projects: () -> ::Array[Types::TestGridProject]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_test_grid_projects-instance_method
+      def list_test_grid_projects: (
+                                     ?max_result: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListTestGridProjectsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTestGridProjectsResponseSuccess
+
+      interface _ListTestGridSessionActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTestGridSessionActionsResult]
+        def actions: () -> ::Array[Types::TestGridSessionAction]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_test_grid_session_actions-instance_method
+      def list_test_grid_session_actions: (
+                                            session_arn: ::String,
+                                            ?max_result: ::Integer,
+                                            ?next_token: ::String
+                                          ) -> _ListTestGridSessionActionsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTestGridSessionActionsResponseSuccess
+
+      interface _ListTestGridSessionArtifactsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTestGridSessionArtifactsResult]
+        def artifacts: () -> ::Array[Types::TestGridSessionArtifact]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_test_grid_session_artifacts-instance_method
+      def list_test_grid_session_artifacts: (
+                                              session_arn: ::String,
+                                              ?type: ("VIDEO" | "LOG"),
+                                              ?max_result: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _ListTestGridSessionArtifactsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTestGridSessionArtifactsResponseSuccess
+
+      interface _ListTestGridSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTestGridSessionsResult]
+        def test_grid_sessions: () -> ::Array[Types::TestGridSession]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_test_grid_sessions-instance_method
+      def list_test_grid_sessions: (
+                                     project_arn: ::String,
+                                     ?status: ("ACTIVE" | "CLOSED" | "ERRORED"),
+                                     ?creation_time_after: ::Time,
+                                     ?creation_time_before: ::Time,
+                                     ?end_time_after: ::Time,
+                                     ?end_time_before: ::Time,
+                                     ?max_result: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListTestGridSessionsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTestGridSessionsResponseSuccess
+
+      interface _ListTestsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTestsResult]
+        def tests: () -> ::Array[Types::Test]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_tests-instance_method
+      def list_tests: (
+                        arn: ::String,
+                        ?next_token: ::String
+                      ) -> _ListTestsResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTestsResponseSuccess
+
+      interface _ListUniqueProblemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUniqueProblemsResult]
+        def unique_problems: () -> ::Hash[("PENDING" | "PASSED" | "WARNED" | "FAILED" | "SKIPPED" | "ERRORED" | "STOPPED"), ::Array[Types::UniqueProblem]]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_unique_problems-instance_method
+      def list_unique_problems: (
+                                  arn: ::String,
+                                  ?next_token: ::String
+                                ) -> _ListUniqueProblemsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUniqueProblemsResponseSuccess
+
+      interface _ListUploadsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUploadsResult]
+        def uploads: () -> ::Array[Types::Upload]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_uploads-instance_method
+      def list_uploads: (
+                          arn: ::String,
+                          ?type: ("ANDROID_APP" | "IOS_APP" | "WEB_APP" | "EXTERNAL_DATA" | "APPIUM_JAVA_JUNIT_TEST_PACKAGE" | "APPIUM_JAVA_TESTNG_TEST_PACKAGE" | "APPIUM_PYTHON_TEST_PACKAGE" | "APPIUM_NODE_TEST_PACKAGE" | "APPIUM_RUBY_TEST_PACKAGE" | "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE" | "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE" | "APPIUM_WEB_PYTHON_TEST_PACKAGE" | "APPIUM_WEB_NODE_TEST_PACKAGE" | "APPIUM_WEB_RUBY_TEST_PACKAGE" | "CALABASH_TEST_PACKAGE" | "INSTRUMENTATION_TEST_PACKAGE" | "UIAUTOMATION_TEST_PACKAGE" | "UIAUTOMATOR_TEST_PACKAGE" | "XCTEST_TEST_PACKAGE" | "XCTEST_UI_TEST_PACKAGE" | "APPIUM_JAVA_JUNIT_TEST_SPEC" | "APPIUM_JAVA_TESTNG_TEST_SPEC" | "APPIUM_PYTHON_TEST_SPEC" | "APPIUM_NODE_TEST_SPEC" | "APPIUM_RUBY_TEST_SPEC" | "APPIUM_WEB_JAVA_JUNIT_TEST_SPEC" | "APPIUM_WEB_JAVA_TESTNG_TEST_SPEC" | "APPIUM_WEB_PYTHON_TEST_SPEC" | "APPIUM_WEB_NODE_TEST_SPEC" | "APPIUM_WEB_RUBY_TEST_SPEC" | "INSTRUMENTATION_TEST_SPEC" | "XCTEST_UI_TEST_SPEC"),
+                          ?next_token: ::String
+                        ) -> _ListUploadsResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUploadsResponseSuccess
+
+      interface _ListVPCEConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVPCEConfigurationsResult]
+        def vpce_configurations: () -> ::Array[Types::VPCEConfiguration]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#list_vpce_configurations-instance_method
+      def list_vpce_configurations: (
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListVPCEConfigurationsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVPCEConfigurationsResponseSuccess
+
+      interface _PurchaseOfferingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PurchaseOfferingResult]
+        def offering_transaction: () -> Types::OfferingTransaction
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#purchase_offering-instance_method
+      def purchase_offering: (
+                               offering_id: ::String,
+                               quantity: ::Integer,
+                               ?offering_promotion_id: ::String
+                             ) -> _PurchaseOfferingResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PurchaseOfferingResponseSuccess
+
+      interface _RenewOfferingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RenewOfferingResult]
+        def offering_transaction: () -> Types::OfferingTransaction
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#renew_offering-instance_method
+      def renew_offering: (
+                            offering_id: ::String,
+                            quantity: ::Integer
+                          ) -> _RenewOfferingResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RenewOfferingResponseSuccess
+
+      interface _ScheduleRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ScheduleRunResult]
+        def run: () -> Types::Run
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#schedule_run-instance_method
+      def schedule_run: (
+                          project_arn: ::String,
+                          ?app_arn: ::String,
+                          ?device_pool_arn: ::String,
+                          ?device_selection_configuration: {
+                            filters: Array[
+                              {
+                                attribute: ("ARN" | "PLATFORM" | "OS_VERSION" | "MODEL" | "AVAILABILITY" | "FORM_FACTOR" | "MANUFACTURER" | "REMOTE_ACCESS_ENABLED" | "REMOTE_DEBUG_ENABLED" | "INSTANCE_ARN" | "INSTANCE_LABELS" | "FLEET_TYPE"),
+                                operator: ("EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "IN" | "NOT_IN" | "CONTAINS"),
+                                values: Array[::String]
+                              },
+                            ],
+                            max_devices: ::Integer
+                          },
+                          ?name: ::String,
+                          test: {
+                            type: ("BUILTIN_FUZZ" | "BUILTIN_EXPLORER" | "WEB_PERFORMANCE_PROFILE" | "APPIUM_JAVA_JUNIT" | "APPIUM_JAVA_TESTNG" | "APPIUM_PYTHON" | "APPIUM_NODE" | "APPIUM_RUBY" | "APPIUM_WEB_JAVA_JUNIT" | "APPIUM_WEB_JAVA_TESTNG" | "APPIUM_WEB_PYTHON" | "APPIUM_WEB_NODE" | "APPIUM_WEB_RUBY" | "CALABASH" | "INSTRUMENTATION" | "UIAUTOMATION" | "UIAUTOMATOR" | "XCTEST" | "XCTEST_UI" | "REMOTE_ACCESS_RECORD" | "REMOTE_ACCESS_REPLAY"),
+                            test_package_arn: ::String?,
+                            test_spec_arn: ::String?,
+                            filter: ::String?,
+                            parameters: Hash[::String, ::String]?
+                          },
+                          ?configuration: {
+                            extra_data_package_arn: ::String?,
+                            network_profile_arn: ::String?,
+                            locale: ::String?,
+                            location: {
+                              latitude: ::Float,
+                              longitude: ::Float
+                            }?,
+                            vpce_configuration_arns: Array[::String]?,
+                            customer_artifact_paths: {
+                              ios_paths: Array[::String]?,
+                              android_paths: Array[::String]?,
+                              device_host_paths: Array[::String]?
+                            }?,
+                            radios: {
+                              wifi: bool?,
+                              bluetooth: bool?,
+                              nfc: bool?,
+                              gps: bool?
+                            }?,
+                            auxiliary_apps: Array[::String]?,
+                            billing_method: ("METERED" | "UNMETERED")?
+                          },
+                          ?execution_configuration: {
+                            job_timeout_minutes: ::Integer?,
+                            accounts_cleanup: bool?,
+                            app_packages_cleanup: bool?,
+                            video_capture: bool?,
+                            skip_app_resign: bool?
+                          }
+                        ) -> _ScheduleRunResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ScheduleRunResponseSuccess
+
+      interface _StopJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopJobResult]
+        def job: () -> Types::Job
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#stop_job-instance_method
+      def stop_job: (
+                      arn: ::String
+                    ) -> _StopJobResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopJobResponseSuccess
+
+      interface _StopRemoteAccessSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopRemoteAccessSessionResult]
+        def remote_access_session: () -> Types::RemoteAccessSession
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#stop_remote_access_session-instance_method
+      def stop_remote_access_session: (
+                                        arn: ::String
+                                      ) -> _StopRemoteAccessSessionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopRemoteAccessSessionResponseSuccess
+
+      interface _StopRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopRunResult]
+        def run: () -> Types::Run
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#stop_run-instance_method
+      def stop_run: (
+                      arn: ::String
+                    ) -> _StopRunResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopRunResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateDeviceInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDeviceInstanceResult]
+        def device_instance: () -> Types::DeviceInstance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#update_device_instance-instance_method
+      def update_device_instance: (
+                                    arn: ::String,
+                                    ?profile_arn: ::String,
+                                    ?labels: Array[::String]
+                                  ) -> _UpdateDeviceInstanceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDeviceInstanceResponseSuccess
+
+      interface _UpdateDevicePoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDevicePoolResult]
+        def device_pool: () -> Types::DevicePool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#update_device_pool-instance_method
+      def update_device_pool: (
+                                arn: ::String,
+                                ?name: ::String,
+                                ?description: ::String,
+                                ?rules: Array[
+                                  {
+                                    attribute: ("ARN" | "PLATFORM" | "FORM_FACTOR" | "MANUFACTURER" | "REMOTE_ACCESS_ENABLED" | "REMOTE_DEBUG_ENABLED" | "APPIUM_VERSION" | "INSTANCE_ARN" | "INSTANCE_LABELS" | "FLEET_TYPE" | "OS_VERSION" | "MODEL" | "AVAILABILITY")?,
+                                    operator: ("EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "IN" | "NOT_IN" | "CONTAINS")?,
+                                    value: ::String?
+                                  },
+                                ],
+                                ?max_devices: ::Integer,
+                                ?clear_max_devices: bool
+                              ) -> _UpdateDevicePoolResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDevicePoolResponseSuccess
+
+      interface _UpdateInstanceProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateInstanceProfileResult]
+        def instance_profile: () -> Types::InstanceProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#update_instance_profile-instance_method
+      def update_instance_profile: (
+                                     arn: ::String,
+                                     ?name: ::String,
+                                     ?description: ::String,
+                                     ?package_cleanup: bool,
+                                     ?exclude_app_packages_from_cleanup: Array[::String],
+                                     ?reboot_after_use: bool
+                                   ) -> _UpdateInstanceProfileResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInstanceProfileResponseSuccess
+
+      interface _UpdateNetworkProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNetworkProfileResult]
+        def network_profile: () -> Types::NetworkProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#update_network_profile-instance_method
+      def update_network_profile: (
+                                    arn: ::String,
+                                    ?name: ::String,
+                                    ?description: ::String,
+                                    ?type: ("CURATED" | "PRIVATE"),
+                                    ?uplink_bandwidth_bits: ::Integer,
+                                    ?downlink_bandwidth_bits: ::Integer,
+                                    ?uplink_delay_ms: ::Integer,
+                                    ?downlink_delay_ms: ::Integer,
+                                    ?uplink_jitter_ms: ::Integer,
+                                    ?downlink_jitter_ms: ::Integer,
+                                    ?uplink_loss_percent: ::Integer,
+                                    ?downlink_loss_percent: ::Integer
+                                  ) -> _UpdateNetworkProfileResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNetworkProfileResponseSuccess
+
+      interface _UpdateProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProjectResult]
+        def project: () -> Types::Project
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#update_project-instance_method
+      def update_project: (
+                            arn: ::String,
+                            ?name: ::String,
+                            ?default_job_timeout_minutes: ::Integer,
+                            ?vpc_config: {
+                              security_group_ids: Array[::String],
+                              subnet_ids: Array[::String],
+                              vpc_id: ::String
+                            }
+                          ) -> _UpdateProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProjectResponseSuccess
+
+      interface _UpdateTestGridProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTestGridProjectResult]
+        def test_grid_project: () -> Types::TestGridProject
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#update_test_grid_project-instance_method
+      def update_test_grid_project: (
+                                      project_arn: ::String,
+                                      ?name: ::String,
+                                      ?description: ::String,
+                                      ?vpc_config: {
+                                        security_group_ids: Array[::String],
+                                        subnet_ids: Array[::String],
+                                        vpc_id: ::String
+                                      }
+                                    ) -> _UpdateTestGridProjectResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTestGridProjectResponseSuccess
+
+      interface _UpdateUploadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateUploadResult]
+        def upload: () -> Types::Upload
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#update_upload-instance_method
+      def update_upload: (
+                           arn: ::String,
+                           ?name: ::String,
+                           ?content_type: ::String,
+                           ?edit_content: bool
+                         ) -> _UpdateUploadResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUploadResponseSuccess
+
+      interface _UpdateVPCEConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateVPCEConfigurationResult]
+        def vpce_configuration: () -> Types::VPCEConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DeviceFarm/Client.html#update_vpce_configuration-instance_method
+      def update_vpce_configuration: (
+                                       arn: ::String,
+                                       ?vpce_configuration_name: ::String,
+                                       ?vpce_service_name: ::String,
+                                       ?service_dns_name: ::String,
+                                       ?vpce_configuration_description: ::String
+                                     ) -> _UpdateVPCEConfigurationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVPCEConfigurationResponseSuccess
+    end
+  end
+end
+

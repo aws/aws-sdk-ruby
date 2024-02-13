@@ -1,0 +1,1237 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ResilienceHub
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AddDraftAppVersionResourceMappingsRequest
+      attr_accessor app_arn: ::String
+      attr_accessor resource_mappings: ::Array[Types::ResourceMapping]
+      SENSITIVE: []
+    end
+
+    class AddDraftAppVersionResourceMappingsResponse
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      attr_accessor resource_mappings: ::Array[Types::ResourceMapping]
+      SENSITIVE: []
+    end
+
+    class AlarmRecommendation
+      attr_accessor app_component_name: ::String
+      attr_accessor app_component_names: ::Array[::String]
+      attr_accessor description: ::String
+      attr_accessor items: ::Array[Types::RecommendationItem]
+      attr_accessor name: ::String
+      attr_accessor prerequisite: ::String
+      attr_accessor recommendation_id: ::String
+      attr_accessor recommendation_status: ("Implemented" | "Inactive" | "NotImplemented" | "Excluded")
+      attr_accessor reference_id: ::String
+      attr_accessor type: ("Metric" | "Composite" | "Canary" | "Logs" | "Event")
+      SENSITIVE: []
+    end
+
+    class App
+      attr_accessor app_arn: ::String
+      attr_accessor assessment_schedule: ("Disabled" | "Daily")
+      attr_accessor compliance_status: ("PolicyBreached" | "PolicyMet" | "NotAssessed" | "ChangesDetected")
+      attr_accessor creation_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor drift_status: ("NotChecked" | "NotDetected" | "Detected")
+      attr_accessor event_subscriptions: ::Array[Types::EventSubscription]
+      attr_accessor last_app_compliance_evaluation_time: ::Time
+      attr_accessor last_drift_evaluation_time: ::Time
+      attr_accessor last_resiliency_score_evaluation_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor permission_model: Types::PermissionModel
+      attr_accessor policy_arn: ::String
+      attr_accessor resiliency_score: ::Float
+      attr_accessor rpo_in_secs: ::Integer
+      attr_accessor rto_in_secs: ::Integer
+      attr_accessor status: ("Active" | "Deleting")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class AppAssessment
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      attr_accessor assessment_arn: ::String
+      attr_accessor assessment_name: ::String
+      attr_accessor assessment_status: ("Pending" | "InProgress" | "Failed" | "Success")
+      attr_accessor compliance: ::Hash[("Software" | "Hardware" | "AZ" | "Region"), Types::DisruptionCompliance]
+      attr_accessor compliance_status: ("PolicyBreached" | "PolicyMet")
+      attr_accessor cost: Types::Cost
+      attr_accessor drift_status: ("NotChecked" | "NotDetected" | "Detected")
+      attr_accessor end_time: ::Time
+      attr_accessor invoker: ("User" | "System")
+      attr_accessor message: ::String
+      attr_accessor policy: Types::ResiliencyPolicy
+      attr_accessor resiliency_score: Types::ResiliencyScore
+      attr_accessor resource_errors_details: Types::ResourceErrorsDetails
+      attr_accessor start_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor version_name: ::String
+      SENSITIVE: [:tags]
+    end
+
+    class AppAssessmentSummary
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      attr_accessor assessment_arn: ::String
+      attr_accessor assessment_name: ::String
+      attr_accessor assessment_status: ("Pending" | "InProgress" | "Failed" | "Success")
+      attr_accessor compliance_status: ("PolicyBreached" | "PolicyMet")
+      attr_accessor cost: Types::Cost
+      attr_accessor drift_status: ("NotChecked" | "NotDetected" | "Detected")
+      attr_accessor end_time: ::Time
+      attr_accessor invoker: ("User" | "System")
+      attr_accessor message: ::String
+      attr_accessor resiliency_score: ::Float
+      attr_accessor start_time: ::Time
+      attr_accessor version_name: ::String
+      SENSITIVE: []
+    end
+
+    class AppComponent
+      attr_accessor additional_info: ::Hash[::String, ::Array[::String]]
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class AppComponentCompliance
+      attr_accessor app_component_name: ::String
+      attr_accessor compliance: ::Hash[("Software" | "Hardware" | "AZ" | "Region"), Types::DisruptionCompliance]
+      attr_accessor cost: Types::Cost
+      attr_accessor message: ::String
+      attr_accessor resiliency_score: Types::ResiliencyScore
+      attr_accessor status: ("PolicyBreached" | "PolicyMet")
+      SENSITIVE: []
+    end
+
+    class AppInputSource
+      attr_accessor eks_source_cluster_namespace: Types::EksSourceClusterNamespace
+      attr_accessor import_type: ("CfnStack" | "Resource" | "AppRegistryApp" | "ResourceGroup" | "Terraform" | "EKS")
+      attr_accessor resource_count: ::Integer
+      attr_accessor source_arn: ::String
+      attr_accessor source_name: ::String
+      attr_accessor terraform_source: Types::TerraformSource
+      SENSITIVE: []
+    end
+
+    class AppSummary
+      attr_accessor app_arn: ::String
+      attr_accessor assessment_schedule: ("Disabled" | "Daily")
+      attr_accessor compliance_status: ("PolicyBreached" | "PolicyMet" | "NotAssessed" | "ChangesDetected")
+      attr_accessor creation_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor drift_status: ("NotChecked" | "NotDetected" | "Detected")
+      attr_accessor last_app_compliance_evaluation_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor resiliency_score: ::Float
+      attr_accessor rpo_in_secs: ::Integer
+      attr_accessor rto_in_secs: ::Integer
+      attr_accessor status: ("Active" | "Deleting")
+      SENSITIVE: []
+    end
+
+    class AppVersionSummary
+      attr_accessor app_version: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor identifier: ::Integer
+      attr_accessor version_name: ::String
+      SENSITIVE: []
+    end
+
+    class BatchUpdateRecommendationStatusFailedEntry
+      attr_accessor entry_id: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchUpdateRecommendationStatusRequest
+      attr_accessor app_arn: ::String
+      attr_accessor request_entries: ::Array[Types::UpdateRecommendationStatusRequestEntry]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateRecommendationStatusResponse
+      attr_accessor app_arn: ::String
+      attr_accessor failed_entries: ::Array[Types::BatchUpdateRecommendationStatusFailedEntry]
+      attr_accessor successful_entries: ::Array[Types::BatchUpdateRecommendationStatusSuccessfulEntry]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateRecommendationStatusSuccessfulEntry
+      attr_accessor entry_id: ::String
+      attr_accessor exclude_reason: ("AlreadyImplemented" | "NotRelevant" | "ComplexityOfImplementation")
+      attr_accessor excluded: bool
+      attr_accessor item: Types::UpdateRecommendationStatusItem
+      attr_accessor reference_id: ::String
+      SENSITIVE: []
+    end
+
+    class ComplianceDrift
+      attr_accessor actual_reference_id: ::String
+      attr_accessor actual_value: ::Hash[("Software" | "Hardware" | "AZ" | "Region"), Types::DisruptionCompliance]
+      attr_accessor app_id: ::String
+      attr_accessor app_version: ::String
+      attr_accessor diff_type: ("NotEqual")
+      attr_accessor drift_type: ("ApplicationCompliance")
+      attr_accessor entity_id: ::String
+      attr_accessor entity_type: ::String
+      attr_accessor expected_reference_id: ::String
+      attr_accessor expected_value: ::Hash[("Software" | "Hardware" | "AZ" | "Region"), Types::DisruptionCompliance]
+      SENSITIVE: []
+    end
+
+    class ComponentRecommendation
+      attr_accessor app_component_name: ::String
+      attr_accessor config_recommendations: ::Array[Types::ConfigRecommendation]
+      attr_accessor recommendation_status: ("BreachedUnattainable" | "BreachedCanMeet" | "MetCanImprove")
+      SENSITIVE: []
+    end
+
+    class ConfigRecommendation
+      attr_accessor app_component_name: ::String
+      attr_accessor compliance: ::Hash[("Software" | "Hardware" | "AZ" | "Region"), Types::DisruptionCompliance]
+      attr_accessor cost: Types::Cost
+      attr_accessor description: ::String
+      attr_accessor ha_architecture: ("MultiSite" | "WarmStandby" | "PilotLight" | "BackupAndRestore" | "NoRecoveryPlan")
+      attr_accessor name: ::String
+      attr_accessor optimization_type: ("LeastCost" | "LeastChange" | "BestAZRecovery" | "LeastErrors" | "BestAttainable" | "BestRegionRecovery")
+      attr_accessor recommendation_compliance: ::Hash[("Software" | "Hardware" | "AZ" | "Region"), Types::RecommendationDisruptionCompliance]
+      attr_accessor reference_id: ::String
+      attr_accessor suggested_changes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class Cost
+      attr_accessor amount: ::Float
+      attr_accessor currency: ::String
+      attr_accessor frequency: ("Hourly" | "Daily" | "Monthly" | "Yearly")
+      SENSITIVE: []
+    end
+
+    class CreateAppRequest
+      attr_accessor assessment_schedule: ("Disabled" | "Daily")
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor event_subscriptions: ::Array[Types::EventSubscription]
+      attr_accessor name: ::String
+      attr_accessor permission_model: Types::PermissionModel
+      attr_accessor policy_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class CreateAppResponse
+      attr_accessor app: Types::App
+      SENSITIVE: []
+    end
+
+    class CreateAppVersionAppComponentRequest
+      attr_accessor additional_info: ::Hash[::String, ::Array[::String]]
+      attr_accessor app_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAppVersionAppComponentResponse
+      attr_accessor app_arn: ::String
+      attr_accessor app_component: Types::AppComponent
+      attr_accessor app_version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAppVersionResourceRequest
+      attr_accessor additional_info: ::Hash[::String, ::Array[::String]]
+      attr_accessor app_arn: ::String
+      attr_accessor app_components: ::Array[::String]
+      attr_accessor aws_account_id: ::String
+      attr_accessor aws_region: ::String
+      attr_accessor client_token: ::String
+      attr_accessor logical_resource_id: Types::LogicalResourceId
+      attr_accessor physical_resource_id: ::String
+      attr_accessor resource_name: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAppVersionResourceResponse
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      attr_accessor physical_resource: Types::PhysicalResource
+      SENSITIVE: []
+    end
+
+    class CreateRecommendationTemplateRequest
+      attr_accessor assessment_arn: ::String
+      attr_accessor bucket_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor format: ("CfnYaml" | "CfnJson")
+      attr_accessor name: ::String
+      attr_accessor recommendation_ids: ::Array[::String]
+      attr_accessor recommendation_types: ::Array[("Alarm" | "Sop" | "Test")]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class CreateRecommendationTemplateResponse
+      attr_accessor recommendation_template: Types::RecommendationTemplate
+      SENSITIVE: []
+    end
+
+    class CreateResiliencyPolicyRequest
+      attr_accessor client_token: ::String
+      attr_accessor data_location_constraint: ("AnyLocation" | "SameContinent" | "SameCountry")
+      attr_accessor policy: ::Hash[("Software" | "Hardware" | "AZ" | "Region"), Types::FailurePolicy]
+      attr_accessor policy_description: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor tier: ("MissionCritical" | "Critical" | "Important" | "CoreServices" | "NonCritical" | "NotApplicable")
+      SENSITIVE: [:tags]
+    end
+
+    class CreateResiliencyPolicyResponse
+      attr_accessor policy: Types::ResiliencyPolicy
+      SENSITIVE: []
+    end
+
+    class DeleteAppAssessmentRequest
+      attr_accessor assessment_arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppAssessmentResponse
+      attr_accessor assessment_arn: ::String
+      attr_accessor assessment_status: ("Pending" | "InProgress" | "Failed" | "Success")
+      SENSITIVE: []
+    end
+
+    class DeleteAppInputSourceRequest
+      attr_accessor app_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor eks_source_cluster_namespace: Types::EksSourceClusterNamespace
+      attr_accessor source_arn: ::String
+      attr_accessor terraform_source: Types::TerraformSource
+      SENSITIVE: []
+    end
+
+    class DeleteAppInputSourceResponse
+      attr_accessor app_arn: ::String
+      attr_accessor app_input_source: Types::AppInputSource
+      SENSITIVE: []
+    end
+
+    class DeleteAppRequest
+      attr_accessor app_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor force_delete: bool
+      SENSITIVE: []
+    end
+
+    class DeleteAppResponse
+      attr_accessor app_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppVersionAppComponentRequest
+      attr_accessor app_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppVersionAppComponentResponse
+      attr_accessor app_arn: ::String
+      attr_accessor app_component: Types::AppComponent
+      attr_accessor app_version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppVersionResourceRequest
+      attr_accessor app_arn: ::String
+      attr_accessor aws_account_id: ::String
+      attr_accessor aws_region: ::String
+      attr_accessor client_token: ::String
+      attr_accessor logical_resource_id: Types::LogicalResourceId
+      attr_accessor physical_resource_id: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppVersionResourceResponse
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      attr_accessor physical_resource: Types::PhysicalResource
+      SENSITIVE: []
+    end
+
+    class DeleteRecommendationTemplateRequest
+      attr_accessor client_token: ::String
+      attr_accessor recommendation_template_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRecommendationTemplateResponse
+      attr_accessor recommendation_template_arn: ::String
+      attr_accessor status: ("Pending" | "InProgress" | "Failed" | "Success")
+      SENSITIVE: []
+    end
+
+    class DeleteResiliencyPolicyRequest
+      attr_accessor client_token: ::String
+      attr_accessor policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResiliencyPolicyResponse
+      attr_accessor policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppAssessmentRequest
+      attr_accessor assessment_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppAssessmentResponse
+      attr_accessor assessment: Types::AppAssessment
+      SENSITIVE: []
+    end
+
+    class DescribeAppRequest
+      attr_accessor app_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppResponse
+      attr_accessor app: Types::App
+      SENSITIVE: []
+    end
+
+    class DescribeAppVersionAppComponentRequest
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppVersionAppComponentResponse
+      attr_accessor app_arn: ::String
+      attr_accessor app_component: Types::AppComponent
+      attr_accessor app_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppVersionRequest
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppVersionResourceRequest
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      attr_accessor aws_account_id: ::String
+      attr_accessor aws_region: ::String
+      attr_accessor logical_resource_id: Types::LogicalResourceId
+      attr_accessor physical_resource_id: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppVersionResourceResponse
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      attr_accessor physical_resource: Types::PhysicalResource
+      SENSITIVE: []
+    end
+
+    class DescribeAppVersionResourcesResolutionStatusRequest
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      attr_accessor resolution_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppVersionResourcesResolutionStatusResponse
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      attr_accessor error_message: ::String
+      attr_accessor resolution_id: ::String
+      attr_accessor status: ("Pending" | "InProgress" | "Failed" | "Success")
+      SENSITIVE: []
+    end
+
+    class DescribeAppVersionResponse
+      attr_accessor additional_info: ::Hash[::String, ::Array[::String]]
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppVersionTemplateRequest
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppVersionTemplateResponse
+      attr_accessor app_arn: ::String
+      attr_accessor app_template_body: ::String
+      attr_accessor app_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDraftAppVersionResourcesImportStatusRequest
+      attr_accessor app_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDraftAppVersionResourcesImportStatusResponse
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      attr_accessor error_message: ::String
+      attr_accessor status: ("Pending" | "InProgress" | "Failed" | "Success")
+      attr_accessor status_change_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeResiliencyPolicyRequest
+      attr_accessor policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeResiliencyPolicyResponse
+      attr_accessor policy: Types::ResiliencyPolicy
+      SENSITIVE: []
+    end
+
+    class DisruptionCompliance
+      attr_accessor achievable_rpo_in_secs: ::Integer
+      attr_accessor achievable_rto_in_secs: ::Integer
+      attr_accessor compliance_status: ("PolicyBreached" | "PolicyMet")
+      attr_accessor current_rpo_in_secs: ::Integer
+      attr_accessor current_rto_in_secs: ::Integer
+      attr_accessor message: ::String
+      attr_accessor rpo_description: ::String
+      attr_accessor rpo_reference_id: ::String
+      attr_accessor rto_description: ::String
+      attr_accessor rto_reference_id: ::String
+      SENSITIVE: []
+    end
+
+    class EksSource
+      attr_accessor eks_cluster_arn: ::String
+      attr_accessor namespaces: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EksSourceClusterNamespace
+      attr_accessor eks_cluster_arn: ::String
+      attr_accessor namespace: ::String
+      SENSITIVE: []
+    end
+
+    class EventSubscription
+      attr_accessor event_type: ("ScheduledAssessmentFailure" | "DriftDetected")
+      attr_accessor name: ::String
+      attr_accessor sns_topic_arn: ::String
+      SENSITIVE: []
+    end
+
+    class FailurePolicy
+      attr_accessor rpo_in_secs: ::Integer
+      attr_accessor rto_in_secs: ::Integer
+      SENSITIVE: []
+    end
+
+    class ImportResourcesToDraftAppVersionRequest
+      attr_accessor app_arn: ::String
+      attr_accessor eks_sources: ::Array[Types::EksSource]
+      attr_accessor import_strategy: ("AddOnly" | "ReplaceAll")
+      attr_accessor source_arns: ::Array[::String]
+      attr_accessor terraform_sources: ::Array[Types::TerraformSource]
+      SENSITIVE: []
+    end
+
+    class ImportResourcesToDraftAppVersionResponse
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      attr_accessor eks_sources: ::Array[Types::EksSource]
+      attr_accessor source_arns: ::Array[::String]
+      attr_accessor status: ("Pending" | "InProgress" | "Failed" | "Success")
+      attr_accessor terraform_sources: ::Array[Types::TerraformSource]
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAlarmRecommendationsRequest
+      attr_accessor assessment_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAlarmRecommendationsResponse
+      attr_accessor alarm_recommendations: ::Array[Types::AlarmRecommendation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppAssessmentComplianceDriftsRequest
+      attr_accessor assessment_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppAssessmentComplianceDriftsResponse
+      attr_accessor compliance_drifts: ::Array[Types::ComplianceDrift]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppAssessmentsRequest
+      attr_accessor app_arn: ::String
+      attr_accessor assessment_name: ::String
+      attr_accessor assessment_status: ::Array[("Pending" | "InProgress" | "Failed" | "Success")]
+      attr_accessor compliance_status: ("PolicyBreached" | "PolicyMet")
+      attr_accessor invoker: ("User" | "System")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor reverse_order: bool
+      SENSITIVE: []
+    end
+
+    class ListAppAssessmentsResponse
+      attr_accessor assessment_summaries: ::Array[Types::AppAssessmentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppComponentCompliancesRequest
+      attr_accessor assessment_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppComponentCompliancesResponse
+      attr_accessor component_compliances: ::Array[Types::AppComponentCompliance]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppComponentRecommendationsRequest
+      attr_accessor assessment_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppComponentRecommendationsResponse
+      attr_accessor component_recommendations: ::Array[Types::ComponentRecommendation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppInputSourcesRequest
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppInputSourcesResponse
+      attr_accessor app_input_sources: ::Array[Types::AppInputSource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppVersionAppComponentsRequest
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppVersionAppComponentsResponse
+      attr_accessor app_arn: ::String
+      attr_accessor app_components: ::Array[Types::AppComponent]
+      attr_accessor app_version: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppVersionResourceMappingsRequest
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppVersionResourceMappingsResponse
+      attr_accessor next_token: ::String
+      attr_accessor resource_mappings: ::Array[Types::ResourceMapping]
+      SENSITIVE: []
+    end
+
+    class ListAppVersionResourcesRequest
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor resolution_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppVersionResourcesResponse
+      attr_accessor next_token: ::String
+      attr_accessor physical_resources: ::Array[Types::PhysicalResource]
+      attr_accessor resolution_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppVersionsRequest
+      attr_accessor app_arn: ::String
+      attr_accessor end_time: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ListAppVersionsResponse
+      attr_accessor app_versions: ::Array[Types::AppVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppsRequest
+      attr_accessor app_arn: ::String
+      attr_accessor from_last_assessment_time: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor reverse_order: bool
+      attr_accessor to_last_assessment_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ListAppsResponse
+      attr_accessor app_summaries: ::Array[Types::AppSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecommendationTemplatesRequest
+      attr_accessor assessment_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor recommendation_template_arn: ::String
+      attr_accessor reverse_order: bool
+      attr_accessor status: ::Array[("Pending" | "InProgress" | "Failed" | "Success")]
+      SENSITIVE: []
+    end
+
+    class ListRecommendationTemplatesResponse
+      attr_accessor next_token: ::String
+      attr_accessor recommendation_templates: ::Array[Types::RecommendationTemplate]
+      SENSITIVE: []
+    end
+
+    class ListResiliencyPoliciesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListResiliencyPoliciesResponse
+      attr_accessor next_token: ::String
+      attr_accessor resiliency_policies: ::Array[Types::ResiliencyPolicy]
+      SENSITIVE: []
+    end
+
+    class ListSopRecommendationsRequest
+      attr_accessor assessment_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSopRecommendationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor sop_recommendations: ::Array[Types::SopRecommendation]
+      SENSITIVE: []
+    end
+
+    class ListSuggestedResiliencyPoliciesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSuggestedResiliencyPoliciesResponse
+      attr_accessor next_token: ::String
+      attr_accessor resiliency_policies: ::Array[Types::ResiliencyPolicy]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class ListTestRecommendationsRequest
+      attr_accessor assessment_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestRecommendationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor test_recommendations: ::Array[Types::TestRecommendation]
+      SENSITIVE: []
+    end
+
+    class ListUnsupportedAppVersionResourcesRequest
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor resolution_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListUnsupportedAppVersionResourcesResponse
+      attr_accessor next_token: ::String
+      attr_accessor resolution_id: ::String
+      attr_accessor unsupported_resources: ::Array[Types::UnsupportedResource]
+      SENSITIVE: []
+    end
+
+    class LogicalResourceId
+      attr_accessor eks_source_name: ::String
+      attr_accessor identifier: ::String
+      attr_accessor logical_stack_name: ::String
+      attr_accessor resource_group_name: ::String
+      attr_accessor terraform_source_name: ::String
+      SENSITIVE: []
+    end
+
+    class PermissionModel
+      attr_accessor cross_account_role_arns: ::Array[::String]
+      attr_accessor invoker_role_name: ::String
+      attr_accessor type: ("LegacyIAMUser" | "RoleBased")
+      SENSITIVE: []
+    end
+
+    class PhysicalResource
+      attr_accessor additional_info: ::Hash[::String, ::Array[::String]]
+      attr_accessor app_components: ::Array[Types::AppComponent]
+      attr_accessor excluded: bool
+      attr_accessor logical_resource_id: Types::LogicalResourceId
+      attr_accessor parent_resource_name: ::String
+      attr_accessor physical_resource_id: Types::PhysicalResourceId
+      attr_accessor resource_name: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor source_type: ("AppTemplate" | "Discovered")
+      SENSITIVE: []
+    end
+
+    class PhysicalResourceId
+      attr_accessor aws_account_id: ::String
+      attr_accessor aws_region: ::String
+      attr_accessor identifier: ::String
+      attr_accessor type: ("Arn" | "Native")
+      SENSITIVE: []
+    end
+
+    class PublishAppVersionRequest
+      attr_accessor app_arn: ::String
+      attr_accessor version_name: ::String
+      SENSITIVE: []
+    end
+
+    class PublishAppVersionResponse
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      attr_accessor identifier: ::Integer
+      attr_accessor version_name: ::String
+      SENSITIVE: []
+    end
+
+    class PutDraftAppVersionTemplateRequest
+      attr_accessor app_arn: ::String
+      attr_accessor app_template_body: ::String
+      SENSITIVE: []
+    end
+
+    class PutDraftAppVersionTemplateResponse
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      SENSITIVE: []
+    end
+
+    class RecommendationDisruptionCompliance
+      attr_accessor expected_compliance_status: ("PolicyBreached" | "PolicyMet")
+      attr_accessor expected_rpo_description: ::String
+      attr_accessor expected_rpo_in_secs: ::Integer
+      attr_accessor expected_rto_description: ::String
+      attr_accessor expected_rto_in_secs: ::Integer
+      SENSITIVE: []
+    end
+
+    class RecommendationItem
+      attr_accessor already_implemented: bool
+      attr_accessor exclude_reason: ("AlreadyImplemented" | "NotRelevant" | "ComplexityOfImplementation")
+      attr_accessor excluded: bool
+      attr_accessor resource_id: ::String
+      attr_accessor target_account_id: ::String
+      attr_accessor target_region: ::String
+      SENSITIVE: []
+    end
+
+    class RecommendationTemplate
+      attr_accessor app_arn: ::String
+      attr_accessor assessment_arn: ::String
+      attr_accessor end_time: ::Time
+      attr_accessor format: ("CfnYaml" | "CfnJson")
+      attr_accessor message: ::String
+      attr_accessor name: ::String
+      attr_accessor needs_replacements: bool
+      attr_accessor recommendation_ids: ::Array[::String]
+      attr_accessor recommendation_template_arn: ::String
+      attr_accessor recommendation_types: ::Array[("Alarm" | "Sop" | "Test")]
+      attr_accessor start_time: ::Time
+      attr_accessor status: ("Pending" | "InProgress" | "Failed" | "Success")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor templates_location: Types::S3Location
+      SENSITIVE: [:tags]
+    end
+
+    class RemoveDraftAppVersionResourceMappingsRequest
+      attr_accessor app_arn: ::String
+      attr_accessor app_registry_app_names: ::Array[::String]
+      attr_accessor eks_source_names: ::Array[::String]
+      attr_accessor logical_stack_names: ::Array[::String]
+      attr_accessor resource_group_names: ::Array[::String]
+      attr_accessor resource_names: ::Array[::String]
+      attr_accessor terraform_source_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RemoveDraftAppVersionResourceMappingsResponse
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      SENSITIVE: []
+    end
+
+    class ResiliencyPolicy
+      attr_accessor creation_time: ::Time
+      attr_accessor data_location_constraint: ("AnyLocation" | "SameContinent" | "SameCountry")
+      attr_accessor estimated_cost_tier: ("L1" | "L2" | "L3" | "L4")
+      attr_accessor policy: ::Hash[("Software" | "Hardware" | "AZ" | "Region"), Types::FailurePolicy]
+      attr_accessor policy_arn: ::String
+      attr_accessor policy_description: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor tier: ("MissionCritical" | "Critical" | "Important" | "CoreServices" | "NonCritical" | "NotApplicable")
+      SENSITIVE: [:tags]
+    end
+
+    class ResiliencyScore
+      attr_accessor component_score: ::Hash[("Compliance" | "Test" | "Alarm" | "Sop"), Types::ScoringComponentResiliencyScore]
+      attr_accessor disruption_score: ::Hash[("Software" | "Hardware" | "AZ" | "Region"), ::Float]
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
+    class ResolveAppVersionResourcesRequest
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      SENSITIVE: []
+    end
+
+    class ResolveAppVersionResourcesResponse
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      attr_accessor resolution_id: ::String
+      attr_accessor status: ("Pending" | "InProgress" | "Failed" | "Success")
+      SENSITIVE: []
+    end
+
+    class ResourceError
+      attr_accessor logical_resource_id: ::String
+      attr_accessor physical_resource_id: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceErrorsDetails
+      attr_accessor has_more_errors: bool
+      attr_accessor resource_errors: ::Array[Types::ResourceError]
+      SENSITIVE: []
+    end
+
+    class ResourceMapping
+      attr_accessor app_registry_app_name: ::String
+      attr_accessor eks_source_name: ::String
+      attr_accessor logical_stack_name: ::String
+      attr_accessor mapping_type: ("CfnStack" | "Resource" | "AppRegistryApp" | "ResourceGroup" | "Terraform" | "EKS")
+      attr_accessor physical_resource_id: Types::PhysicalResourceId
+      attr_accessor resource_group_name: ::String
+      attr_accessor resource_name: ::String
+      attr_accessor terraform_source_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class S3Location
+      attr_accessor bucket: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ScoringComponentResiliencyScore
+      attr_accessor excluded_count: ::Integer
+      attr_accessor outstanding_count: ::Integer
+      attr_accessor possible_score: ::Float
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SopRecommendation
+      attr_accessor app_component_name: ::String
+      attr_accessor description: ::String
+      attr_accessor items: ::Array[Types::RecommendationItem]
+      attr_accessor name: ::String
+      attr_accessor prerequisite: ::String
+      attr_accessor recommendation_id: ::String
+      attr_accessor recommendation_status: ("Implemented" | "Inactive" | "NotImplemented" | "Excluded")
+      attr_accessor reference_id: ::String
+      attr_accessor service_type: ("SSM")
+      SENSITIVE: []
+    end
+
+    class StartAppAssessmentRequest
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      attr_accessor assessment_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class StartAppAssessmentResponse
+      attr_accessor assessment: Types::AppAssessment
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TerraformSource
+      attr_accessor s3_state_file_url: ::String
+      SENSITIVE: []
+    end
+
+    class TestRecommendation
+      attr_accessor app_component_name: ::String
+      attr_accessor depends_on_alarms: ::Array[::String]
+      attr_accessor description: ::String
+      attr_accessor intent: ::String
+      attr_accessor items: ::Array[Types::RecommendationItem]
+      attr_accessor name: ::String
+      attr_accessor prerequisite: ::String
+      attr_accessor recommendation_id: ::String
+      attr_accessor recommendation_status: ("Implemented" | "Inactive" | "NotImplemented" | "Excluded")
+      attr_accessor reference_id: ::String
+      attr_accessor risk: ("Small" | "Medium" | "High")
+      attr_accessor type: ("Software" | "Hardware" | "AZ" | "Region")
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UnsupportedResource
+      attr_accessor logical_resource_id: Types::LogicalResourceId
+      attr_accessor physical_resource_id: Types::PhysicalResourceId
+      attr_accessor resource_type: ::String
+      attr_accessor unsupported_resource_status: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: [:tag_keys]
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAppRequest
+      attr_accessor app_arn: ::String
+      attr_accessor assessment_schedule: ("Disabled" | "Daily")
+      attr_accessor clear_resiliency_policy_arn: bool
+      attr_accessor description: ::String
+      attr_accessor event_subscriptions: ::Array[Types::EventSubscription]
+      attr_accessor permission_model: Types::PermissionModel
+      attr_accessor policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAppResponse
+      attr_accessor app: Types::App
+      SENSITIVE: []
+    end
+
+    class UpdateAppVersionAppComponentRequest
+      attr_accessor additional_info: ::Hash[::String, ::Array[::String]]
+      attr_accessor app_arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAppVersionAppComponentResponse
+      attr_accessor app_arn: ::String
+      attr_accessor app_component: Types::AppComponent
+      attr_accessor app_version: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAppVersionRequest
+      attr_accessor additional_info: ::Hash[::String, ::Array[::String]]
+      attr_accessor app_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAppVersionResourceRequest
+      attr_accessor additional_info: ::Hash[::String, ::Array[::String]]
+      attr_accessor app_arn: ::String
+      attr_accessor app_components: ::Array[::String]
+      attr_accessor aws_account_id: ::String
+      attr_accessor aws_region: ::String
+      attr_accessor excluded: bool
+      attr_accessor logical_resource_id: Types::LogicalResourceId
+      attr_accessor physical_resource_id: ::String
+      attr_accessor resource_name: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAppVersionResourceResponse
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      attr_accessor physical_resource: Types::PhysicalResource
+      SENSITIVE: []
+    end
+
+    class UpdateAppVersionResponse
+      attr_accessor additional_info: ::Hash[::String, ::Array[::String]]
+      attr_accessor app_arn: ::String
+      attr_accessor app_version: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRecommendationStatusItem
+      attr_accessor resource_id: ::String
+      attr_accessor target_account_id: ::String
+      attr_accessor target_region: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRecommendationStatusRequestEntry
+      attr_accessor entry_id: ::String
+      attr_accessor exclude_reason: ("AlreadyImplemented" | "NotRelevant" | "ComplexityOfImplementation")
+      attr_accessor excluded: bool
+      attr_accessor item: Types::UpdateRecommendationStatusItem
+      attr_accessor reference_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateResiliencyPolicyRequest
+      attr_accessor data_location_constraint: ("AnyLocation" | "SameContinent" | "SameCountry")
+      attr_accessor policy: ::Hash[("Software" | "Hardware" | "AZ" | "Region"), Types::FailurePolicy]
+      attr_accessor policy_arn: ::String
+      attr_accessor policy_description: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor tier: ("MissionCritical" | "Critical" | "Important" | "CoreServices" | "NonCritical" | "NotApplicable")
+      SENSITIVE: []
+    end
+
+    class UpdateResiliencyPolicyResponse
+      attr_accessor policy: Types::ResiliencyPolicy
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

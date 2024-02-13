@@ -1,0 +1,1064 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Route53
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _ActivateKeySigningKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ActivateKeySigningKeyResponse]
+        def change_info: () -> Types::ChangeInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#activate_key_signing_key-instance_method
+      def activate_key_signing_key: (
+                                      hosted_zone_id: ::String,
+                                      name: ::String
+                                    ) -> _ActivateKeySigningKeyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ActivateKeySigningKeyResponseSuccess
+
+      interface _AssociateVPCWithHostedZoneResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateVPCWithHostedZoneResponse]
+        def change_info: () -> Types::ChangeInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#associate_vpc_with_hosted_zone-instance_method
+      def associate_vpc_with_hosted_zone: (
+                                            hosted_zone_id: ::String,
+                                            vpc: {
+                                              vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1")?,
+                                              vpc_id: ::String?
+                                            },
+                                            ?comment: ::String
+                                          ) -> _AssociateVPCWithHostedZoneResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateVPCWithHostedZoneResponseSuccess
+
+      interface _ChangeCidrCollectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ChangeCidrCollectionResponse]
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#change_cidr_collection-instance_method
+      def change_cidr_collection: (
+                                    id: ::String,
+                                    ?collection_version: ::Integer,
+                                    changes: Array[
+                                      {
+                                        location_name: ::String,
+                                        action: ("PUT" | "DELETE_IF_EXISTS"),
+                                        cidr_list: Array[::String]
+                                      },
+                                    ]
+                                  ) -> _ChangeCidrCollectionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ChangeCidrCollectionResponseSuccess
+
+      interface _ChangeResourceRecordSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ChangeResourceRecordSetsResponse]
+        def change_info: () -> Types::ChangeInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#change_resource_record_sets-instance_method
+      def change_resource_record_sets: (
+                                         hosted_zone_id: ::String,
+                                         change_batch: {
+                                           comment: ::String?,
+                                           changes: Array[
+                                             {
+                                               action: ("CREATE" | "DELETE" | "UPSERT"),
+                                               resource_record_set: {
+                                                 name: ::String,
+                                                 type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS"),
+                                                 set_identifier: ::String?,
+                                                 weight: ::Integer?,
+                                                 region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "ca-central-1" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "cn-north-1" | "cn-northwest-1" | "ap-east-1" | "me-south-1" | "me-central-1" | "ap-south-1" | "ap-south-2" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1")?,
+                                                 geo_location: {
+                                                   continent_code: ::String?,
+                                                   country_code: ::String?,
+                                                   subdivision_code: ::String?
+                                                 }?,
+                                                 failover: ("PRIMARY" | "SECONDARY")?,
+                                                 multi_value_answer: bool?,
+                                                 ttl: ::Integer?,
+                                                 resource_records: Array[
+                                                   {
+                                                     value: ::String
+                                                   },
+                                                 ]?,
+                                                 alias_target: {
+                                                   hosted_zone_id: ::String,
+                                                   dns_name: ::String,
+                                                   evaluate_target_health: bool
+                                                 }?,
+                                                 health_check_id: ::String?,
+                                                 traffic_policy_instance_id: ::String?,
+                                                 cidr_routing_config: {
+                                                   collection_id: ::String,
+                                                   location_name: ::String
+                                                 }?,
+                                                 geo_proximity_location: {
+                                                   aws_region: ::String?,
+                                                   local_zone_group: ::String?,
+                                                   coordinates: {
+                                                     latitude: ::String,
+                                                     longitude: ::String
+                                                   }?,
+                                                   bias: ::Integer?
+                                                 }?
+                                               }
+                                             },
+                                           ]
+                                         }
+                                       ) -> _ChangeResourceRecordSetsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ChangeResourceRecordSetsResponseSuccess
+
+      interface _ChangeTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ChangeTagsForResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#change_tags_for_resource-instance_method
+      def change_tags_for_resource: (
+                                      resource_type: ("healthcheck" | "hostedzone"),
+                                      resource_id: ::String,
+                                      ?add_tags: Array[
+                                        {
+                                          key: ::String?,
+                                          value: ::String?
+                                        },
+                                      ],
+                                      ?remove_tag_keys: Array[::String]
+                                    ) -> _ChangeTagsForResourceResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ChangeTagsForResourceResponseSuccess
+
+      interface _CreateCidrCollectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCidrCollectionResponse]
+        def collection: () -> Types::CidrCollection
+        def location: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#create_cidr_collection-instance_method
+      def create_cidr_collection: (
+                                    name: ::String,
+                                    caller_reference: ::String
+                                  ) -> _CreateCidrCollectionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCidrCollectionResponseSuccess
+
+      interface _CreateHealthCheckResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateHealthCheckResponse]
+        def health_check: () -> Types::HealthCheck
+        def location: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#create_health_check-instance_method
+      def create_health_check: (
+                                 caller_reference: ::String,
+                                 health_check_config: {
+                                   ip_address: ::String?,
+                                   port: ::Integer?,
+                                   type: ("HTTP" | "HTTPS" | "HTTP_STR_MATCH" | "HTTPS_STR_MATCH" | "TCP" | "CALCULATED" | "CLOUDWATCH_METRIC" | "RECOVERY_CONTROL"),
+                                   resource_path: ::String?,
+                                   fully_qualified_domain_name: ::String?,
+                                   search_string: ::String?,
+                                   request_interval: ::Integer?,
+                                   failure_threshold: ::Integer?,
+                                   measure_latency: bool?,
+                                   inverted: bool?,
+                                   disabled: bool?,
+                                   health_threshold: ::Integer?,
+                                   child_health_checks: Array[::String]?,
+                                   enable_sni: bool?,
+                                   regions: Array[("us-east-1" | "us-west-1" | "us-west-2" | "eu-west-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "sa-east-1")]?,
+                                   alarm_identifier: {
+                                     region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "ca-central-1" | "eu-central-1" | "eu-central-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "ap-east-1" | "me-south-1" | "me-central-1" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "cn-northwest-1" | "cn-north-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "ap-southeast-4" | "il-central-1" | "ca-west-1"),
+                                     name: ::String
+                                   }?,
+                                   insufficient_data_health_status: ("Healthy" | "Unhealthy" | "LastKnownStatus")?,
+                                   routing_control_arn: ::String?
+                                 }
+                               ) -> _CreateHealthCheckResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHealthCheckResponseSuccess
+
+      interface _CreateHostedZoneResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateHostedZoneResponse]
+        def hosted_zone: () -> Types::HostedZone
+        def change_info: () -> Types::ChangeInfo
+        def delegation_set: () -> Types::DelegationSet
+        def vpc: () -> Types::VPC
+        def location: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#create_hosted_zone-instance_method
+      def create_hosted_zone: (
+                                name: ::String,
+                                ?vpc: {
+                                  vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1")?,
+                                  vpc_id: ::String?
+                                },
+                                caller_reference: ::String,
+                                ?hosted_zone_config: {
+                                  comment: ::String?,
+                                  private_zone: bool?
+                                },
+                                ?delegation_set_id: ::String
+                              ) -> _CreateHostedZoneResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHostedZoneResponseSuccess
+
+      interface _CreateKeySigningKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateKeySigningKeyResponse]
+        def change_info: () -> Types::ChangeInfo
+        def key_signing_key: () -> Types::KeySigningKey
+        def location: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#create_key_signing_key-instance_method
+      def create_key_signing_key: (
+                                    caller_reference: ::String,
+                                    hosted_zone_id: ::String,
+                                    key_management_service_arn: ::String,
+                                    name: ::String,
+                                    status: ::String
+                                  ) -> _CreateKeySigningKeyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKeySigningKeyResponseSuccess
+
+      interface _CreateQueryLoggingConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateQueryLoggingConfigResponse]
+        def query_logging_config: () -> Types::QueryLoggingConfig
+        def location: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#create_query_logging_config-instance_method
+      def create_query_logging_config: (
+                                         hosted_zone_id: ::String,
+                                         cloud_watch_logs_log_group_arn: ::String
+                                       ) -> _CreateQueryLoggingConfigResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQueryLoggingConfigResponseSuccess
+
+      interface _CreateReusableDelegationSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateReusableDelegationSetResponse]
+        def delegation_set: () -> Types::DelegationSet
+        def location: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#create_reusable_delegation_set-instance_method
+      def create_reusable_delegation_set: (
+                                            caller_reference: ::String,
+                                            ?hosted_zone_id: ::String
+                                          ) -> _CreateReusableDelegationSetResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReusableDelegationSetResponseSuccess
+
+      interface _CreateTrafficPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTrafficPolicyResponse]
+        def traffic_policy: () -> Types::TrafficPolicy
+        def location: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#create_traffic_policy-instance_method
+      def create_traffic_policy: (
+                                   name: ::String,
+                                   document: ::String,
+                                   ?comment: ::String
+                                 ) -> _CreateTrafficPolicyResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrafficPolicyResponseSuccess
+
+      interface _CreateTrafficPolicyInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTrafficPolicyInstanceResponse]
+        def traffic_policy_instance: () -> Types::TrafficPolicyInstance
+        def location: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#create_traffic_policy_instance-instance_method
+      def create_traffic_policy_instance: (
+                                            hosted_zone_id: ::String,
+                                            name: ::String,
+                                            ttl: ::Integer,
+                                            traffic_policy_id: ::String,
+                                            traffic_policy_version: ::Integer
+                                          ) -> _CreateTrafficPolicyInstanceResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrafficPolicyInstanceResponseSuccess
+
+      interface _CreateTrafficPolicyVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTrafficPolicyVersionResponse]
+        def traffic_policy: () -> Types::TrafficPolicy
+        def location: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#create_traffic_policy_version-instance_method
+      def create_traffic_policy_version: (
+                                           id: ::String,
+                                           document: ::String,
+                                           ?comment: ::String
+                                         ) -> _CreateTrafficPolicyVersionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrafficPolicyVersionResponseSuccess
+
+      interface _CreateVPCAssociationAuthorizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVPCAssociationAuthorizationResponse]
+        def hosted_zone_id: () -> ::String
+        def vpc: () -> Types::VPC
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#create_vpc_association_authorization-instance_method
+      def create_vpc_association_authorization: (
+                                                  hosted_zone_id: ::String,
+                                                  vpc: {
+                                                    vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1")?,
+                                                    vpc_id: ::String?
+                                                  }
+                                                ) -> _CreateVPCAssociationAuthorizationResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVPCAssociationAuthorizationResponseSuccess
+
+      interface _DeactivateKeySigningKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeactivateKeySigningKeyResponse]
+        def change_info: () -> Types::ChangeInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#deactivate_key_signing_key-instance_method
+      def deactivate_key_signing_key: (
+                                        hosted_zone_id: ::String,
+                                        name: ::String
+                                      ) -> _DeactivateKeySigningKeyResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeactivateKeySigningKeyResponseSuccess
+
+      interface _DeleteCidrCollectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCidrCollectionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#delete_cidr_collection-instance_method
+      def delete_cidr_collection: (
+                                    id: ::String
+                                  ) -> _DeleteCidrCollectionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCidrCollectionResponseSuccess
+
+      interface _DeleteHealthCheckResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteHealthCheckResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#delete_health_check-instance_method
+      def delete_health_check: (
+                                 health_check_id: ::String
+                               ) -> _DeleteHealthCheckResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteHealthCheckResponseSuccess
+
+      interface _DeleteHostedZoneResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteHostedZoneResponse]
+        def change_info: () -> Types::ChangeInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#delete_hosted_zone-instance_method
+      def delete_hosted_zone: (
+                                id: ::String
+                              ) -> _DeleteHostedZoneResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteHostedZoneResponseSuccess
+
+      interface _DeleteKeySigningKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteKeySigningKeyResponse]
+        def change_info: () -> Types::ChangeInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#delete_key_signing_key-instance_method
+      def delete_key_signing_key: (
+                                    hosted_zone_id: ::String,
+                                    name: ::String
+                                  ) -> _DeleteKeySigningKeyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKeySigningKeyResponseSuccess
+
+      interface _DeleteQueryLoggingConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteQueryLoggingConfigResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#delete_query_logging_config-instance_method
+      def delete_query_logging_config: (
+                                         id: ::String
+                                       ) -> _DeleteQueryLoggingConfigResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteQueryLoggingConfigResponseSuccess
+
+      interface _DeleteReusableDelegationSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReusableDelegationSetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#delete_reusable_delegation_set-instance_method
+      def delete_reusable_delegation_set: (
+                                            id: ::String
+                                          ) -> _DeleteReusableDelegationSetResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteReusableDelegationSetResponseSuccess
+
+      interface _DeleteTrafficPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTrafficPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#delete_traffic_policy-instance_method
+      def delete_traffic_policy: (
+                                   id: ::String,
+                                   version: ::Integer
+                                 ) -> _DeleteTrafficPolicyResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTrafficPolicyResponseSuccess
+
+      interface _DeleteTrafficPolicyInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTrafficPolicyInstanceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#delete_traffic_policy_instance-instance_method
+      def delete_traffic_policy_instance: (
+                                            id: ::String
+                                          ) -> _DeleteTrafficPolicyInstanceResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTrafficPolicyInstanceResponseSuccess
+
+      interface _DeleteVPCAssociationAuthorizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVPCAssociationAuthorizationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#delete_vpc_association_authorization-instance_method
+      def delete_vpc_association_authorization: (
+                                                  hosted_zone_id: ::String,
+                                                  vpc: {
+                                                    vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1")?,
+                                                    vpc_id: ::String?
+                                                  }
+                                                ) -> _DeleteVPCAssociationAuthorizationResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVPCAssociationAuthorizationResponseSuccess
+
+      interface _DisableHostedZoneDNSSECResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableHostedZoneDNSSECResponse]
+        def change_info: () -> Types::ChangeInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#disable_hosted_zone_dnssec-instance_method
+      def disable_hosted_zone_dnssec: (
+                                        hosted_zone_id: ::String
+                                      ) -> _DisableHostedZoneDNSSECResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableHostedZoneDNSSECResponseSuccess
+
+      interface _DisassociateVPCFromHostedZoneResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateVPCFromHostedZoneResponse]
+        def change_info: () -> Types::ChangeInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#disassociate_vpc_from_hosted_zone-instance_method
+      def disassociate_vpc_from_hosted_zone: (
+                                               hosted_zone_id: ::String,
+                                               vpc: {
+                                                 vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1")?,
+                                                 vpc_id: ::String?
+                                               },
+                                               ?comment: ::String
+                                             ) -> _DisassociateVPCFromHostedZoneResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateVPCFromHostedZoneResponseSuccess
+
+      interface _EnableHostedZoneDNSSECResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableHostedZoneDNSSECResponse]
+        def change_info: () -> Types::ChangeInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#enable_hosted_zone_dnssec-instance_method
+      def enable_hosted_zone_dnssec: (
+                                       hosted_zone_id: ::String
+                                     ) -> _EnableHostedZoneDNSSECResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableHostedZoneDNSSECResponseSuccess
+
+      interface _GetAccountLimitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountLimitResponse]
+        def limit: () -> Types::AccountLimit
+        def count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#get_account_limit-instance_method
+      def get_account_limit: (
+                               type: ("MAX_HEALTH_CHECKS_BY_OWNER" | "MAX_HOSTED_ZONES_BY_OWNER" | "MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER" | "MAX_REUSABLE_DELEGATION_SETS_BY_OWNER" | "MAX_TRAFFIC_POLICIES_BY_OWNER")
+                             ) -> _GetAccountLimitResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountLimitResponseSuccess
+
+      interface _GetChangeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetChangeResponse]
+        def change_info: () -> Types::ChangeInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#get_change-instance_method
+      def get_change: (
+                        id: ::String
+                      ) -> _GetChangeResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetChangeResponseSuccess
+
+      interface _GetCheckerIpRangesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCheckerIpRangesResponse]
+        def checker_ip_ranges: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#get_checker_ip_ranges-instance_method
+      def get_checker_ip_ranges: (
+                                 ) -> _GetCheckerIpRangesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCheckerIpRangesResponseSuccess
+
+      interface _GetDNSSECResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDNSSECResponse]
+        def status: () -> Types::DNSSECStatus
+        def key_signing_keys: () -> ::Array[Types::KeySigningKey]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#get_dnssec-instance_method
+      def get_dnssec: (
+                        hosted_zone_id: ::String
+                      ) -> _GetDNSSECResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDNSSECResponseSuccess
+
+      interface _GetGeoLocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGeoLocationResponse]
+        def geo_location_details: () -> Types::GeoLocationDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#get_geo_location-instance_method
+      def get_geo_location: (
+                              ?continent_code: ::String,
+                              ?country_code: ::String,
+                              ?subdivision_code: ::String
+                            ) -> _GetGeoLocationResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGeoLocationResponseSuccess
+
+      interface _GetHealthCheckResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetHealthCheckResponse]
+        def health_check: () -> Types::HealthCheck
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#get_health_check-instance_method
+      def get_health_check: (
+                              health_check_id: ::String
+                            ) -> _GetHealthCheckResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHealthCheckResponseSuccess
+
+      interface _GetHealthCheckCountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetHealthCheckCountResponse]
+        def health_check_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#get_health_check_count-instance_method
+      def get_health_check_count: (
+                                  ) -> _GetHealthCheckCountResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHealthCheckCountResponseSuccess
+
+      interface _GetHealthCheckLastFailureReasonResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetHealthCheckLastFailureReasonResponse]
+        def health_check_observations: () -> ::Array[Types::HealthCheckObservation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#get_health_check_last_failure_reason-instance_method
+      def get_health_check_last_failure_reason: (
+                                                  health_check_id: ::String
+                                                ) -> _GetHealthCheckLastFailureReasonResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHealthCheckLastFailureReasonResponseSuccess
+
+      interface _GetHealthCheckStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetHealthCheckStatusResponse]
+        def health_check_observations: () -> ::Array[Types::HealthCheckObservation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#get_health_check_status-instance_method
+      def get_health_check_status: (
+                                     health_check_id: ::String
+                                   ) -> _GetHealthCheckStatusResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHealthCheckStatusResponseSuccess
+
+      interface _GetHostedZoneResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetHostedZoneResponse]
+        def hosted_zone: () -> Types::HostedZone
+        def delegation_set: () -> Types::DelegationSet
+        def vp_cs: () -> ::Array[Types::VPC]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#get_hosted_zone-instance_method
+      def get_hosted_zone: (
+                             id: ::String
+                           ) -> _GetHostedZoneResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHostedZoneResponseSuccess
+
+      interface _GetHostedZoneCountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetHostedZoneCountResponse]
+        def hosted_zone_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#get_hosted_zone_count-instance_method
+      def get_hosted_zone_count: (
+                                 ) -> _GetHostedZoneCountResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHostedZoneCountResponseSuccess
+
+      interface _GetHostedZoneLimitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetHostedZoneLimitResponse]
+        def limit: () -> Types::HostedZoneLimit
+        def count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#get_hosted_zone_limit-instance_method
+      def get_hosted_zone_limit: (
+                                   type: ("MAX_RRSETS_BY_ZONE" | "MAX_VPCS_ASSOCIATED_BY_ZONE"),
+                                   hosted_zone_id: ::String
+                                 ) -> _GetHostedZoneLimitResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHostedZoneLimitResponseSuccess
+
+      interface _GetQueryLoggingConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQueryLoggingConfigResponse]
+        def query_logging_config: () -> Types::QueryLoggingConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#get_query_logging_config-instance_method
+      def get_query_logging_config: (
+                                      id: ::String
+                                    ) -> _GetQueryLoggingConfigResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQueryLoggingConfigResponseSuccess
+
+      interface _GetReusableDelegationSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReusableDelegationSetResponse]
+        def delegation_set: () -> Types::DelegationSet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#get_reusable_delegation_set-instance_method
+      def get_reusable_delegation_set: (
+                                         id: ::String
+                                       ) -> _GetReusableDelegationSetResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReusableDelegationSetResponseSuccess
+
+      interface _GetReusableDelegationSetLimitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReusableDelegationSetLimitResponse]
+        def limit: () -> Types::ReusableDelegationSetLimit
+        def count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#get_reusable_delegation_set_limit-instance_method
+      def get_reusable_delegation_set_limit: (
+                                               type: ("MAX_ZONES_BY_REUSABLE_DELEGATION_SET"),
+                                               delegation_set_id: ::String
+                                             ) -> _GetReusableDelegationSetLimitResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReusableDelegationSetLimitResponseSuccess
+
+      interface _GetTrafficPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTrafficPolicyResponse]
+        def traffic_policy: () -> Types::TrafficPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#get_traffic_policy-instance_method
+      def get_traffic_policy: (
+                                id: ::String,
+                                version: ::Integer
+                              ) -> _GetTrafficPolicyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTrafficPolicyResponseSuccess
+
+      interface _GetTrafficPolicyInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTrafficPolicyInstanceResponse]
+        def traffic_policy_instance: () -> Types::TrafficPolicyInstance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#get_traffic_policy_instance-instance_method
+      def get_traffic_policy_instance: (
+                                         id: ::String
+                                       ) -> _GetTrafficPolicyInstanceResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTrafficPolicyInstanceResponseSuccess
+
+      interface _GetTrafficPolicyInstanceCountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTrafficPolicyInstanceCountResponse]
+        def traffic_policy_instance_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#get_traffic_policy_instance_count-instance_method
+      def get_traffic_policy_instance_count: (
+                                             ) -> _GetTrafficPolicyInstanceCountResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTrafficPolicyInstanceCountResponseSuccess
+
+      interface _ListCidrBlocksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCidrBlocksResponse]
+        def next_token: () -> ::String
+        def cidr_blocks: () -> ::Array[Types::CidrBlockSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_cidr_blocks-instance_method
+      def list_cidr_blocks: (
+                              collection_id: ::String,
+                              ?location_name: ::String,
+                              ?next_token: ::String,
+                              ?max_results: ::String
+                            ) -> _ListCidrBlocksResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCidrBlocksResponseSuccess
+
+      interface _ListCidrCollectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCidrCollectionsResponse]
+        def next_token: () -> ::String
+        def cidr_collections: () -> ::Array[Types::CollectionSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_cidr_collections-instance_method
+      def list_cidr_collections: (
+                                   ?next_token: ::String,
+                                   ?max_results: ::String
+                                 ) -> _ListCidrCollectionsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCidrCollectionsResponseSuccess
+
+      interface _ListCidrLocationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCidrLocationsResponse]
+        def next_token: () -> ::String
+        def cidr_locations: () -> ::Array[Types::LocationSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_cidr_locations-instance_method
+      def list_cidr_locations: (
+                                 collection_id: ::String,
+                                 ?next_token: ::String,
+                                 ?max_results: ::String
+                               ) -> _ListCidrLocationsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCidrLocationsResponseSuccess
+
+      interface _ListGeoLocationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGeoLocationsResponse]
+        def geo_location_details_list: () -> ::Array[Types::GeoLocationDetails]
+        def is_truncated: () -> bool
+        def next_continent_code: () -> ::String
+        def next_country_code: () -> ::String
+        def next_subdivision_code: () -> ::String
+        def max_items: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_geo_locations-instance_method
+      def list_geo_locations: (
+                                ?start_continent_code: ::String,
+                                ?start_country_code: ::String,
+                                ?start_subdivision_code: ::String,
+                                ?max_items: ::Integer
+                              ) -> _ListGeoLocationsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGeoLocationsResponseSuccess
+
+      interface _ListHealthChecksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListHealthChecksResponse]
+        def health_checks: () -> ::Array[Types::HealthCheck]
+        def marker: () -> ::String
+        def is_truncated: () -> bool
+        def next_marker: () -> ::String
+        def max_items: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_health_checks-instance_method
+      def list_health_checks: (
+                                ?marker: ::String,
+                                ?max_items: ::Integer
+                              ) -> _ListHealthChecksResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHealthChecksResponseSuccess
+
+      interface _ListHostedZonesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListHostedZonesResponse]
+        def hosted_zones: () -> ::Array[Types::HostedZone]
+        def marker: () -> ::String
+        def is_truncated: () -> bool
+        def next_marker: () -> ::String
+        def max_items: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_hosted_zones-instance_method
+      def list_hosted_zones: (
+                               ?marker: ::String,
+                               ?max_items: ::Integer,
+                               ?delegation_set_id: ::String,
+                               ?hosted_zone_type: ("PrivateHostedZone")
+                             ) -> _ListHostedZonesResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHostedZonesResponseSuccess
+
+      interface _ListHostedZonesByNameResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListHostedZonesByNameResponse]
+        def hosted_zones: () -> ::Array[Types::HostedZone]
+        def dns_name: () -> ::String
+        def hosted_zone_id: () -> ::String
+        def is_truncated: () -> bool
+        def next_dns_name: () -> ::String
+        def next_hosted_zone_id: () -> ::String
+        def max_items: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_hosted_zones_by_name-instance_method
+      def list_hosted_zones_by_name: (
+                                       ?dns_name: ::String,
+                                       ?hosted_zone_id: ::String,
+                                       ?max_items: ::Integer
+                                     ) -> _ListHostedZonesByNameResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHostedZonesByNameResponseSuccess
+
+      interface _ListHostedZonesByVPCResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListHostedZonesByVPCResponse]
+        def hosted_zone_summaries: () -> ::Array[Types::HostedZoneSummary]
+        def max_items: () -> ::Integer
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_hosted_zones_by_vpc-instance_method
+      def list_hosted_zones_by_vpc: (
+                                      vpc_id: ::String,
+                                      vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1"),
+                                      ?max_items: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListHostedZonesByVPCResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHostedZonesByVPCResponseSuccess
+
+      interface _ListQueryLoggingConfigsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListQueryLoggingConfigsResponse]
+        def query_logging_configs: () -> ::Array[Types::QueryLoggingConfig]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_query_logging_configs-instance_method
+      def list_query_logging_configs: (
+                                        ?hosted_zone_id: ::String,
+                                        ?next_token: ::String,
+                                        ?max_results: ::String
+                                      ) -> _ListQueryLoggingConfigsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQueryLoggingConfigsResponseSuccess
+
+      interface _ListResourceRecordSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceRecordSetsResponse]
+        def resource_record_sets: () -> ::Array[Types::ResourceRecordSet]
+        def is_truncated: () -> bool
+        def next_record_name: () -> ::String
+        def next_record_type: () -> ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+        def next_record_identifier: () -> ::String
+        def max_items: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_resource_record_sets-instance_method
+      def list_resource_record_sets: (
+                                       hosted_zone_id: ::String,
+                                       ?start_record_name: ::String,
+                                       ?start_record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS"),
+                                       ?start_record_identifier: ::String,
+                                       ?max_items: ::Integer
+                                     ) -> _ListResourceRecordSetsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceRecordSetsResponseSuccess
+
+      interface _ListReusableDelegationSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReusableDelegationSetsResponse]
+        def delegation_sets: () -> ::Array[Types::DelegationSet]
+        def marker: () -> ::String
+        def is_truncated: () -> bool
+        def next_marker: () -> ::String
+        def max_items: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_reusable_delegation_sets-instance_method
+      def list_reusable_delegation_sets: (
+                                           ?marker: ::String,
+                                           ?max_items: ::Integer
+                                         ) -> _ListReusableDelegationSetsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReusableDelegationSetsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def resource_tag_set: () -> Types::ResourceTagSet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_type: ("healthcheck" | "hostedzone"),
+                                    resource_id: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTagsForResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourcesResponse]
+        def resource_tag_sets: () -> ::Array[Types::ResourceTagSet]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_tags_for_resources-instance_method
+      def list_tags_for_resources: (
+                                     resource_type: ("healthcheck" | "hostedzone"),
+                                     resource_ids: Array[::String]
+                                   ) -> _ListTagsForResourcesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourcesResponseSuccess
+
+      interface _ListTrafficPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTrafficPoliciesResponse]
+        def traffic_policy_summaries: () -> ::Array[Types::TrafficPolicySummary]
+        def is_truncated: () -> bool
+        def traffic_policy_id_marker: () -> ::String
+        def max_items: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_traffic_policies-instance_method
+      def list_traffic_policies: (
+                                   ?traffic_policy_id_marker: ::String,
+                                   ?max_items: ::Integer
+                                 ) -> _ListTrafficPoliciesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrafficPoliciesResponseSuccess
+
+      interface _ListTrafficPolicyInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTrafficPolicyInstancesResponse]
+        def traffic_policy_instances: () -> ::Array[Types::TrafficPolicyInstance]
+        def hosted_zone_id_marker: () -> ::String
+        def traffic_policy_instance_name_marker: () -> ::String
+        def traffic_policy_instance_type_marker: () -> ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+        def is_truncated: () -> bool
+        def max_items: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_traffic_policy_instances-instance_method
+      def list_traffic_policy_instances: (
+                                           ?hosted_zone_id_marker: ::String,
+                                           ?traffic_policy_instance_name_marker: ::String,
+                                           ?traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS"),
+                                           ?max_items: ::Integer
+                                         ) -> _ListTrafficPolicyInstancesResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrafficPolicyInstancesResponseSuccess
+
+      interface _ListTrafficPolicyInstancesByHostedZoneResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTrafficPolicyInstancesByHostedZoneResponse]
+        def traffic_policy_instances: () -> ::Array[Types::TrafficPolicyInstance]
+        def traffic_policy_instance_name_marker: () -> ::String
+        def traffic_policy_instance_type_marker: () -> ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+        def is_truncated: () -> bool
+        def max_items: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_traffic_policy_instances_by_hosted_zone-instance_method
+      def list_traffic_policy_instances_by_hosted_zone: (
+                                                          hosted_zone_id: ::String,
+                                                          ?traffic_policy_instance_name_marker: ::String,
+                                                          ?traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS"),
+                                                          ?max_items: ::Integer
+                                                        ) -> _ListTrafficPolicyInstancesByHostedZoneResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrafficPolicyInstancesByHostedZoneResponseSuccess
+
+      interface _ListTrafficPolicyInstancesByPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTrafficPolicyInstancesByPolicyResponse]
+        def traffic_policy_instances: () -> ::Array[Types::TrafficPolicyInstance]
+        def hosted_zone_id_marker: () -> ::String
+        def traffic_policy_instance_name_marker: () -> ::String
+        def traffic_policy_instance_type_marker: () -> ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+        def is_truncated: () -> bool
+        def max_items: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_traffic_policy_instances_by_policy-instance_method
+      def list_traffic_policy_instances_by_policy: (
+                                                     traffic_policy_id: ::String,
+                                                     traffic_policy_version: ::Integer,
+                                                     ?hosted_zone_id_marker: ::String,
+                                                     ?traffic_policy_instance_name_marker: ::String,
+                                                     ?traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS"),
+                                                     ?max_items: ::Integer
+                                                   ) -> _ListTrafficPolicyInstancesByPolicyResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrafficPolicyInstancesByPolicyResponseSuccess
+
+      interface _ListTrafficPolicyVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTrafficPolicyVersionsResponse]
+        def traffic_policies: () -> ::Array[Types::TrafficPolicy]
+        def is_truncated: () -> bool
+        def traffic_policy_version_marker: () -> ::String
+        def max_items: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_traffic_policy_versions-instance_method
+      def list_traffic_policy_versions: (
+                                          id: ::String,
+                                          ?traffic_policy_version_marker: ::String,
+                                          ?max_items: ::Integer
+                                        ) -> _ListTrafficPolicyVersionsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrafficPolicyVersionsResponseSuccess
+
+      interface _ListVPCAssociationAuthorizationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVPCAssociationAuthorizationsResponse]
+        def hosted_zone_id: () -> ::String
+        def next_token: () -> ::String
+        def vp_cs: () -> ::Array[Types::VPC]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_vpc_association_authorizations-instance_method
+      def list_vpc_association_authorizations: (
+                                                 hosted_zone_id: ::String,
+                                                 ?next_token: ::String,
+                                                 ?max_results: ::String
+                                               ) -> _ListVPCAssociationAuthorizationsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVPCAssociationAuthorizationsResponseSuccess
+
+      interface _TestDNSAnswerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestDNSAnswerResponse]
+        def nameserver: () -> ::String
+        def record_name: () -> ::String
+        def record_type: () -> ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+        def record_data: () -> ::Array[::String]
+        def response_code: () -> ::String
+        def protocol: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#test_dns_answer-instance_method
+      def test_dns_answer: (
+                             hosted_zone_id: ::String,
+                             record_name: ::String,
+                             record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS"),
+                             ?resolver_ip: ::String,
+                             ?edns0_client_subnet_ip: ::String,
+                             ?edns0_client_subnet_mask: ::String
+                           ) -> _TestDNSAnswerResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestDNSAnswerResponseSuccess
+
+      interface _UpdateHealthCheckResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateHealthCheckResponse]
+        def health_check: () -> Types::HealthCheck
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#update_health_check-instance_method
+      def update_health_check: (
+                                 health_check_id: ::String,
+                                 ?health_check_version: ::Integer,
+                                 ?ip_address: ::String,
+                                 ?port: ::Integer,
+                                 ?resource_path: ::String,
+                                 ?fully_qualified_domain_name: ::String,
+                                 ?search_string: ::String,
+                                 ?failure_threshold: ::Integer,
+                                 ?inverted: bool,
+                                 ?disabled: bool,
+                                 ?health_threshold: ::Integer,
+                                 ?child_health_checks: Array[::String],
+                                 ?enable_sni: bool,
+                                 ?regions: Array[("us-east-1" | "us-west-1" | "us-west-2" | "eu-west-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "sa-east-1")],
+                                 ?alarm_identifier: {
+                                   region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "ca-central-1" | "eu-central-1" | "eu-central-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "ap-east-1" | "me-south-1" | "me-central-1" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "cn-northwest-1" | "cn-north-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "ap-southeast-4" | "il-central-1" | "ca-west-1"),
+                                   name: ::String
+                                 },
+                                 ?insufficient_data_health_status: ("Healthy" | "Unhealthy" | "LastKnownStatus"),
+                                 ?reset_elements: Array[("FullyQualifiedDomainName" | "Regions" | "ResourcePath" | "ChildHealthChecks")]
+                               ) -> _UpdateHealthCheckResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateHealthCheckResponseSuccess
+
+      interface _UpdateHostedZoneCommentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateHostedZoneCommentResponse]
+        def hosted_zone: () -> Types::HostedZone
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#update_hosted_zone_comment-instance_method
+      def update_hosted_zone_comment: (
+                                        id: ::String,
+                                        ?comment: ::String
+                                      ) -> _UpdateHostedZoneCommentResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateHostedZoneCommentResponseSuccess
+
+      interface _UpdateTrafficPolicyCommentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTrafficPolicyCommentResponse]
+        def traffic_policy: () -> Types::TrafficPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#update_traffic_policy_comment-instance_method
+      def update_traffic_policy_comment: (
+                                           id: ::String,
+                                           version: ::Integer,
+                                           comment: ::String
+                                         ) -> _UpdateTrafficPolicyCommentResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTrafficPolicyCommentResponseSuccess
+
+      interface _UpdateTrafficPolicyInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTrafficPolicyInstanceResponse]
+        def traffic_policy_instance: () -> Types::TrafficPolicyInstance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#update_traffic_policy_instance-instance_method
+      def update_traffic_policy_instance: (
+                                            id: ::String,
+                                            ttl: ::Integer,
+                                            traffic_policy_id: ::String,
+                                            traffic_policy_version: ::Integer
+                                          ) -> _UpdateTrafficPolicyInstanceResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTrafficPolicyInstanceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#wait_until-instance_method
+      def wait_until: (:resource_record_sets_changed waiter_name, 
+                    id: ::String
+                  ) -> Client::_GetChangeResponseSuccess
+                    | (:resource_record_sets_changed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetChangeResponseSuccess
+    end
+  end
+end
+

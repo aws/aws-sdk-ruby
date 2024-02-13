@@ -1,0 +1,1141 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module WAF
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateByteMatchSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateByteMatchSetResponse]
+        def byte_match_set: () -> Types::ByteMatchSet
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#create_byte_match_set-instance_method
+      def create_byte_match_set: (
+                                   name: ::String,
+                                   change_token: ::String
+                                 ) -> _CreateByteMatchSetResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateByteMatchSetResponseSuccess
+
+      interface _CreateGeoMatchSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGeoMatchSetResponse]
+        def geo_match_set: () -> Types::GeoMatchSet
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#create_geo_match_set-instance_method
+      def create_geo_match_set: (
+                                  name: ::String,
+                                  change_token: ::String
+                                ) -> _CreateGeoMatchSetResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGeoMatchSetResponseSuccess
+
+      interface _CreateIPSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIPSetResponse]
+        def ip_set: () -> Types::IPSet
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#create_ip_set-instance_method
+      def create_ip_set: (
+                           name: ::String,
+                           change_token: ::String
+                         ) -> _CreateIPSetResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIPSetResponseSuccess
+
+      interface _CreateRateBasedRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRateBasedRuleResponse]
+        def rule: () -> Types::RateBasedRule
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#create_rate_based_rule-instance_method
+      def create_rate_based_rule: (
+                                    name: ::String,
+                                    metric_name: ::String,
+                                    rate_key: ("IP"),
+                                    rate_limit: ::Integer,
+                                    change_token: ::String,
+                                    ?tags: Array[
+                                      {
+                                        key: ::String,
+                                        value: ::String
+                                      },
+                                    ]
+                                  ) -> _CreateRateBasedRuleResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRateBasedRuleResponseSuccess
+
+      interface _CreateRegexMatchSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRegexMatchSetResponse]
+        def regex_match_set: () -> Types::RegexMatchSet
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#create_regex_match_set-instance_method
+      def create_regex_match_set: (
+                                    name: ::String,
+                                    change_token: ::String
+                                  ) -> _CreateRegexMatchSetResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRegexMatchSetResponseSuccess
+
+      interface _CreateRegexPatternSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRegexPatternSetResponse]
+        def regex_pattern_set: () -> Types::RegexPatternSet
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#create_regex_pattern_set-instance_method
+      def create_regex_pattern_set: (
+                                      name: ::String,
+                                      change_token: ::String
+                                    ) -> _CreateRegexPatternSetResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRegexPatternSetResponseSuccess
+
+      interface _CreateRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRuleResponse]
+        def rule: () -> Types::Rule
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#create_rule-instance_method
+      def create_rule: (
+                         name: ::String,
+                         metric_name: ::String,
+                         change_token: ::String,
+                         ?tags: Array[
+                           {
+                             key: ::String,
+                             value: ::String
+                           },
+                         ]
+                       ) -> _CreateRuleResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRuleResponseSuccess
+
+      interface _CreateRuleGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRuleGroupResponse]
+        def rule_group: () -> Types::RuleGroup
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#create_rule_group-instance_method
+      def create_rule_group: (
+                               name: ::String,
+                               metric_name: ::String,
+                               change_token: ::String,
+                               ?tags: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String
+                                 },
+                               ]
+                             ) -> _CreateRuleGroupResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRuleGroupResponseSuccess
+
+      interface _CreateSizeConstraintSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSizeConstraintSetResponse]
+        def size_constraint_set: () -> Types::SizeConstraintSet
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#create_size_constraint_set-instance_method
+      def create_size_constraint_set: (
+                                        name: ::String,
+                                        change_token: ::String
+                                      ) -> _CreateSizeConstraintSetResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSizeConstraintSetResponseSuccess
+
+      interface _CreateSqlInjectionMatchSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSqlInjectionMatchSetResponse]
+        def sql_injection_match_set: () -> Types::SqlInjectionMatchSet
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#create_sql_injection_match_set-instance_method
+      def create_sql_injection_match_set: (
+                                            name: ::String,
+                                            change_token: ::String
+                                          ) -> _CreateSqlInjectionMatchSetResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSqlInjectionMatchSetResponseSuccess
+
+      interface _CreateWebACLResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWebACLResponse]
+        def web_acl: () -> Types::WebACL
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#create_web_acl-instance_method
+      def create_web_acl: (
+                            name: ::String,
+                            metric_name: ::String,
+                            default_action: {
+                              type: ("BLOCK" | "ALLOW" | "COUNT")
+                            },
+                            change_token: ::String,
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ]
+                          ) -> _CreateWebACLResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWebACLResponseSuccess
+
+      interface _CreateWebACLMigrationStackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWebACLMigrationStackResponse]
+        def s3_object_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#create_web_acl_migration_stack-instance_method
+      def create_web_acl_migration_stack: (
+                                            web_acl_id: ::String,
+                                            s3_bucket_name: ::String,
+                                            ignore_unsupported_type: bool
+                                          ) -> _CreateWebACLMigrationStackResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWebACLMigrationStackResponseSuccess
+
+      interface _CreateXssMatchSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateXssMatchSetResponse]
+        def xss_match_set: () -> Types::XssMatchSet
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#create_xss_match_set-instance_method
+      def create_xss_match_set: (
+                                  name: ::String,
+                                  change_token: ::String
+                                ) -> _CreateXssMatchSetResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateXssMatchSetResponseSuccess
+
+      interface _DeleteByteMatchSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteByteMatchSetResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#delete_byte_match_set-instance_method
+      def delete_byte_match_set: (
+                                   byte_match_set_id: ::String,
+                                   change_token: ::String
+                                 ) -> _DeleteByteMatchSetResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteByteMatchSetResponseSuccess
+
+      interface _DeleteGeoMatchSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGeoMatchSetResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#delete_geo_match_set-instance_method
+      def delete_geo_match_set: (
+                                  geo_match_set_id: ::String,
+                                  change_token: ::String
+                                ) -> _DeleteGeoMatchSetResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGeoMatchSetResponseSuccess
+
+      interface _DeleteIPSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIPSetResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#delete_ip_set-instance_method
+      def delete_ip_set: (
+                           ip_set_id: ::String,
+                           change_token: ::String
+                         ) -> _DeleteIPSetResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIPSetResponseSuccess
+
+      interface _DeleteLoggingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLoggingConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#delete_logging_configuration-instance_method
+      def delete_logging_configuration: (
+                                          resource_arn: ::String
+                                        ) -> _DeleteLoggingConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLoggingConfigurationResponseSuccess
+
+      interface _DeletePermissionPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePermissionPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#delete_permission_policy-instance_method
+      def delete_permission_policy: (
+                                      resource_arn: ::String
+                                    ) -> _DeletePermissionPolicyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePermissionPolicyResponseSuccess
+
+      interface _DeleteRateBasedRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRateBasedRuleResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#delete_rate_based_rule-instance_method
+      def delete_rate_based_rule: (
+                                    rule_id: ::String,
+                                    change_token: ::String
+                                  ) -> _DeleteRateBasedRuleResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRateBasedRuleResponseSuccess
+
+      interface _DeleteRegexMatchSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRegexMatchSetResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#delete_regex_match_set-instance_method
+      def delete_regex_match_set: (
+                                    regex_match_set_id: ::String,
+                                    change_token: ::String
+                                  ) -> _DeleteRegexMatchSetResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRegexMatchSetResponseSuccess
+
+      interface _DeleteRegexPatternSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRegexPatternSetResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#delete_regex_pattern_set-instance_method
+      def delete_regex_pattern_set: (
+                                      regex_pattern_set_id: ::String,
+                                      change_token: ::String
+                                    ) -> _DeleteRegexPatternSetResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRegexPatternSetResponseSuccess
+
+      interface _DeleteRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRuleResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#delete_rule-instance_method
+      def delete_rule: (
+                         rule_id: ::String,
+                         change_token: ::String
+                       ) -> _DeleteRuleResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRuleResponseSuccess
+
+      interface _DeleteRuleGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRuleGroupResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#delete_rule_group-instance_method
+      def delete_rule_group: (
+                               rule_group_id: ::String,
+                               change_token: ::String
+                             ) -> _DeleteRuleGroupResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRuleGroupResponseSuccess
+
+      interface _DeleteSizeConstraintSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSizeConstraintSetResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#delete_size_constraint_set-instance_method
+      def delete_size_constraint_set: (
+                                        size_constraint_set_id: ::String,
+                                        change_token: ::String
+                                      ) -> _DeleteSizeConstraintSetResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSizeConstraintSetResponseSuccess
+
+      interface _DeleteSqlInjectionMatchSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSqlInjectionMatchSetResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#delete_sql_injection_match_set-instance_method
+      def delete_sql_injection_match_set: (
+                                            sql_injection_match_set_id: ::String,
+                                            change_token: ::String
+                                          ) -> _DeleteSqlInjectionMatchSetResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSqlInjectionMatchSetResponseSuccess
+
+      interface _DeleteWebACLResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWebACLResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#delete_web_acl-instance_method
+      def delete_web_acl: (
+                            web_acl_id: ::String,
+                            change_token: ::String
+                          ) -> _DeleteWebACLResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWebACLResponseSuccess
+
+      interface _DeleteXssMatchSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteXssMatchSetResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#delete_xss_match_set-instance_method
+      def delete_xss_match_set: (
+                                  xss_match_set_id: ::String,
+                                  change_token: ::String
+                                ) -> _DeleteXssMatchSetResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteXssMatchSetResponseSuccess
+
+      interface _GetByteMatchSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetByteMatchSetResponse]
+        def byte_match_set: () -> Types::ByteMatchSet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#get_byte_match_set-instance_method
+      def get_byte_match_set: (
+                                byte_match_set_id: ::String
+                              ) -> _GetByteMatchSetResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetByteMatchSetResponseSuccess
+
+      interface _GetChangeTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetChangeTokenResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#get_change_token-instance_method
+      def get_change_token: (
+                            ) -> _GetChangeTokenResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetChangeTokenResponseSuccess
+
+      interface _GetChangeTokenStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetChangeTokenStatusResponse]
+        def change_token_status: () -> ("PROVISIONED" | "PENDING" | "INSYNC")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#get_change_token_status-instance_method
+      def get_change_token_status: (
+                                     change_token: ::String
+                                   ) -> _GetChangeTokenStatusResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetChangeTokenStatusResponseSuccess
+
+      interface _GetGeoMatchSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGeoMatchSetResponse]
+        def geo_match_set: () -> Types::GeoMatchSet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#get_geo_match_set-instance_method
+      def get_geo_match_set: (
+                               geo_match_set_id: ::String
+                             ) -> _GetGeoMatchSetResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGeoMatchSetResponseSuccess
+
+      interface _GetIPSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIPSetResponse]
+        def ip_set: () -> Types::IPSet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#get_ip_set-instance_method
+      def get_ip_set: (
+                        ip_set_id: ::String
+                      ) -> _GetIPSetResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIPSetResponseSuccess
+
+      interface _GetLoggingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLoggingConfigurationResponse]
+        def logging_configuration: () -> Types::LoggingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#get_logging_configuration-instance_method
+      def get_logging_configuration: (
+                                       resource_arn: ::String
+                                     ) -> _GetLoggingConfigurationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLoggingConfigurationResponseSuccess
+
+      interface _GetPermissionPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPermissionPolicyResponse]
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#get_permission_policy-instance_method
+      def get_permission_policy: (
+                                   resource_arn: ::String
+                                 ) -> _GetPermissionPolicyResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPermissionPolicyResponseSuccess
+
+      interface _GetRateBasedRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRateBasedRuleResponse]
+        def rule: () -> Types::RateBasedRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#get_rate_based_rule-instance_method
+      def get_rate_based_rule: (
+                                 rule_id: ::String
+                               ) -> _GetRateBasedRuleResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRateBasedRuleResponseSuccess
+
+      interface _GetRateBasedRuleManagedKeysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRateBasedRuleManagedKeysResponse]
+        def managed_keys: () -> ::Array[::String]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#get_rate_based_rule_managed_keys-instance_method
+      def get_rate_based_rule_managed_keys: (
+                                              rule_id: ::String,
+                                              ?next_marker: ::String
+                                            ) -> _GetRateBasedRuleManagedKeysResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRateBasedRuleManagedKeysResponseSuccess
+
+      interface _GetRegexMatchSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRegexMatchSetResponse]
+        def regex_match_set: () -> Types::RegexMatchSet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#get_regex_match_set-instance_method
+      def get_regex_match_set: (
+                                 regex_match_set_id: ::String
+                               ) -> _GetRegexMatchSetResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRegexMatchSetResponseSuccess
+
+      interface _GetRegexPatternSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRegexPatternSetResponse]
+        def regex_pattern_set: () -> Types::RegexPatternSet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#get_regex_pattern_set-instance_method
+      def get_regex_pattern_set: (
+                                   regex_pattern_set_id: ::String
+                                 ) -> _GetRegexPatternSetResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRegexPatternSetResponseSuccess
+
+      interface _GetRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRuleResponse]
+        def rule: () -> Types::Rule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#get_rule-instance_method
+      def get_rule: (
+                      rule_id: ::String
+                    ) -> _GetRuleResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRuleResponseSuccess
+
+      interface _GetRuleGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRuleGroupResponse]
+        def rule_group: () -> Types::RuleGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#get_rule_group-instance_method
+      def get_rule_group: (
+                            rule_group_id: ::String
+                          ) -> _GetRuleGroupResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRuleGroupResponseSuccess
+
+      interface _GetSampledRequestsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSampledRequestsResponse]
+        def sampled_requests: () -> ::Array[Types::SampledHTTPRequest]
+        def population_size: () -> ::Integer
+        def time_window: () -> Types::TimeWindow
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#get_sampled_requests-instance_method
+      def get_sampled_requests: (
+                                  web_acl_id: ::String,
+                                  rule_id: ::String,
+                                  time_window: {
+                                    start_time: ::Time,
+                                    end_time: ::Time
+                                  },
+                                  max_items: ::Integer
+                                ) -> _GetSampledRequestsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSampledRequestsResponseSuccess
+
+      interface _GetSizeConstraintSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSizeConstraintSetResponse]
+        def size_constraint_set: () -> Types::SizeConstraintSet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#get_size_constraint_set-instance_method
+      def get_size_constraint_set: (
+                                     size_constraint_set_id: ::String
+                                   ) -> _GetSizeConstraintSetResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSizeConstraintSetResponseSuccess
+
+      interface _GetSqlInjectionMatchSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSqlInjectionMatchSetResponse]
+        def sql_injection_match_set: () -> Types::SqlInjectionMatchSet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#get_sql_injection_match_set-instance_method
+      def get_sql_injection_match_set: (
+                                         sql_injection_match_set_id: ::String
+                                       ) -> _GetSqlInjectionMatchSetResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSqlInjectionMatchSetResponseSuccess
+
+      interface _GetWebACLResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWebACLResponse]
+        def web_acl: () -> Types::WebACL
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#get_web_acl-instance_method
+      def get_web_acl: (
+                         web_acl_id: ::String
+                       ) -> _GetWebACLResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWebACLResponseSuccess
+
+      interface _GetXssMatchSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetXssMatchSetResponse]
+        def xss_match_set: () -> Types::XssMatchSet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#get_xss_match_set-instance_method
+      def get_xss_match_set: (
+                               xss_match_set_id: ::String
+                             ) -> _GetXssMatchSetResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetXssMatchSetResponseSuccess
+
+      interface _ListActivatedRulesInRuleGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListActivatedRulesInRuleGroupResponse]
+        def next_marker: () -> ::String
+        def activated_rules: () -> ::Array[Types::ActivatedRule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#list_activated_rules_in_rule_group-instance_method
+      def list_activated_rules_in_rule_group: (
+                                                ?rule_group_id: ::String,
+                                                ?next_marker: ::String,
+                                                ?limit: ::Integer
+                                              ) -> _ListActivatedRulesInRuleGroupResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListActivatedRulesInRuleGroupResponseSuccess
+
+      interface _ListByteMatchSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListByteMatchSetsResponse]
+        def next_marker: () -> ::String
+        def byte_match_sets: () -> ::Array[Types::ByteMatchSetSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#list_byte_match_sets-instance_method
+      def list_byte_match_sets: (
+                                  ?next_marker: ::String,
+                                  ?limit: ::Integer
+                                ) -> _ListByteMatchSetsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListByteMatchSetsResponseSuccess
+
+      interface _ListGeoMatchSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGeoMatchSetsResponse]
+        def next_marker: () -> ::String
+        def geo_match_sets: () -> ::Array[Types::GeoMatchSetSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#list_geo_match_sets-instance_method
+      def list_geo_match_sets: (
+                                 ?next_marker: ::String,
+                                 ?limit: ::Integer
+                               ) -> _ListGeoMatchSetsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGeoMatchSetsResponseSuccess
+
+      interface _ListIPSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIPSetsResponse]
+        def next_marker: () -> ::String
+        def ip_sets: () -> ::Array[Types::IPSetSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#list_ip_sets-instance_method
+      def list_ip_sets: (
+                          ?next_marker: ::String,
+                          ?limit: ::Integer
+                        ) -> _ListIPSetsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIPSetsResponseSuccess
+
+      interface _ListLoggingConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLoggingConfigurationsResponse]
+        def logging_configurations: () -> ::Array[Types::LoggingConfiguration]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#list_logging_configurations-instance_method
+      def list_logging_configurations: (
+                                         ?next_marker: ::String,
+                                         ?limit: ::Integer
+                                       ) -> _ListLoggingConfigurationsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLoggingConfigurationsResponseSuccess
+
+      interface _ListRateBasedRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRateBasedRulesResponse]
+        def next_marker: () -> ::String
+        def rules: () -> ::Array[Types::RuleSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#list_rate_based_rules-instance_method
+      def list_rate_based_rules: (
+                                   ?next_marker: ::String,
+                                   ?limit: ::Integer
+                                 ) -> _ListRateBasedRulesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRateBasedRulesResponseSuccess
+
+      interface _ListRegexMatchSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRegexMatchSetsResponse]
+        def next_marker: () -> ::String
+        def regex_match_sets: () -> ::Array[Types::RegexMatchSetSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#list_regex_match_sets-instance_method
+      def list_regex_match_sets: (
+                                   ?next_marker: ::String,
+                                   ?limit: ::Integer
+                                 ) -> _ListRegexMatchSetsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRegexMatchSetsResponseSuccess
+
+      interface _ListRegexPatternSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRegexPatternSetsResponse]
+        def next_marker: () -> ::String
+        def regex_pattern_sets: () -> ::Array[Types::RegexPatternSetSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#list_regex_pattern_sets-instance_method
+      def list_regex_pattern_sets: (
+                                     ?next_marker: ::String,
+                                     ?limit: ::Integer
+                                   ) -> _ListRegexPatternSetsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRegexPatternSetsResponseSuccess
+
+      interface _ListRuleGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRuleGroupsResponse]
+        def next_marker: () -> ::String
+        def rule_groups: () -> ::Array[Types::RuleGroupSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#list_rule_groups-instance_method
+      def list_rule_groups: (
+                              ?next_marker: ::String,
+                              ?limit: ::Integer
+                            ) -> _ListRuleGroupsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRuleGroupsResponseSuccess
+
+      interface _ListRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRulesResponse]
+        def next_marker: () -> ::String
+        def rules: () -> ::Array[Types::RuleSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#list_rules-instance_method
+      def list_rules: (
+                        ?next_marker: ::String,
+                        ?limit: ::Integer
+                      ) -> _ListRulesResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRulesResponseSuccess
+
+      interface _ListSizeConstraintSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSizeConstraintSetsResponse]
+        def next_marker: () -> ::String
+        def size_constraint_sets: () -> ::Array[Types::SizeConstraintSetSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#list_size_constraint_sets-instance_method
+      def list_size_constraint_sets: (
+                                       ?next_marker: ::String,
+                                       ?limit: ::Integer
+                                     ) -> _ListSizeConstraintSetsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSizeConstraintSetsResponseSuccess
+
+      interface _ListSqlInjectionMatchSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSqlInjectionMatchSetsResponse]
+        def next_marker: () -> ::String
+        def sql_injection_match_sets: () -> ::Array[Types::SqlInjectionMatchSetSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#list_sql_injection_match_sets-instance_method
+      def list_sql_injection_match_sets: (
+                                           ?next_marker: ::String,
+                                           ?limit: ::Integer
+                                         ) -> _ListSqlInjectionMatchSetsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSqlInjectionMatchSetsResponseSuccess
+
+      interface _ListSubscribedRuleGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSubscribedRuleGroupsResponse]
+        def next_marker: () -> ::String
+        def rule_groups: () -> ::Array[Types::SubscribedRuleGroupSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#list_subscribed_rule_groups-instance_method
+      def list_subscribed_rule_groups: (
+                                         ?next_marker: ::String,
+                                         ?limit: ::Integer
+                                       ) -> _ListSubscribedRuleGroupsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSubscribedRuleGroupsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def next_marker: () -> ::String
+        def tag_info_for_resource: () -> Types::TagInfoForResource
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    ?next_marker: ::String,
+                                    ?limit: ::Integer,
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListWebACLsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWebACLsResponse]
+        def next_marker: () -> ::String
+        def web_acls: () -> ::Array[Types::WebACLSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#list_web_acls-instance_method
+      def list_web_acls: (
+                           ?next_marker: ::String,
+                           ?limit: ::Integer
+                         ) -> _ListWebACLsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWebACLsResponseSuccess
+
+      interface _ListXssMatchSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListXssMatchSetsResponse]
+        def next_marker: () -> ::String
+        def xss_match_sets: () -> ::Array[Types::XssMatchSetSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#list_xss_match_sets-instance_method
+      def list_xss_match_sets: (
+                                 ?next_marker: ::String,
+                                 ?limit: ::Integer
+                               ) -> _ListXssMatchSetsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListXssMatchSetsResponseSuccess
+
+      interface _PutLoggingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutLoggingConfigurationResponse]
+        def logging_configuration: () -> Types::LoggingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#put_logging_configuration-instance_method
+      def put_logging_configuration: (
+                                       logging_configuration: {
+                                         resource_arn: ::String,
+                                         log_destination_configs: Array[::String],
+                                         redacted_fields: Array[
+                                           {
+                                             type: ("URI" | "QUERY_STRING" | "HEADER" | "METHOD" | "BODY" | "SINGLE_QUERY_ARG" | "ALL_QUERY_ARGS"),
+                                             data: ::String?
+                                           },
+                                         ]?
+                                       }
+                                     ) -> _PutLoggingConfigurationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutLoggingConfigurationResponseSuccess
+
+      interface _PutPermissionPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutPermissionPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#put_permission_policy-instance_method
+      def put_permission_policy: (
+                                   resource_arn: ::String,
+                                   policy: ::String
+                                 ) -> _PutPermissionPolicyResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutPermissionPolicyResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateByteMatchSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateByteMatchSetResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#update_byte_match_set-instance_method
+      def update_byte_match_set: (
+                                   byte_match_set_id: ::String,
+                                   change_token: ::String,
+                                   updates: Array[
+                                     {
+                                       action: ("INSERT" | "DELETE"),
+                                       byte_match_tuple: {
+                                         field_to_match: {
+                                           type: ("URI" | "QUERY_STRING" | "HEADER" | "METHOD" | "BODY" | "SINGLE_QUERY_ARG" | "ALL_QUERY_ARGS"),
+                                           data: ::String?
+                                         },
+                                         target_string: ::String,
+                                         text_transformation: ("NONE" | "COMPRESS_WHITE_SPACE" | "HTML_ENTITY_DECODE" | "LOWERCASE" | "CMD_LINE" | "URL_DECODE"),
+                                         positional_constraint: ("EXACTLY" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CONTAINS_WORD")
+                                       }
+                                     },
+                                   ]
+                                 ) -> _UpdateByteMatchSetResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateByteMatchSetResponseSuccess
+
+      interface _UpdateGeoMatchSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGeoMatchSetResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#update_geo_match_set-instance_method
+      def update_geo_match_set: (
+                                  geo_match_set_id: ::String,
+                                  change_token: ::String,
+                                  updates: Array[
+                                    {
+                                      action: ("INSERT" | "DELETE"),
+                                      geo_match_constraint: {
+                                        type: ("Country"),
+                                        value: ("AF" | "AX" | "AL" | "DZ" | "AS" | "AD" | "AO" | "AI" | "AQ" | "AG" | "AR" | "AM" | "AW" | "AU" | "AT" | "AZ" | "BS" | "BH" | "BD" | "BB" | "BY" | "BE" | "BZ" | "BJ" | "BM" | "BT" | "BO" | "BQ" | "BA" | "BW" | "BV" | "BR" | "IO" | "BN" | "BG" | "BF" | "BI" | "KH" | "CM" | "CA" | "CV" | "KY" | "CF" | "TD" | "CL" | "CN" | "CX" | "CC" | "CO" | "KM" | "CG" | "CD" | "CK" | "CR" | "CI" | "HR" | "CU" | "CW" | "CY" | "CZ" | "DK" | "DJ" | "DM" | "DO" | "EC" | "EG" | "SV" | "GQ" | "ER" | "EE" | "ET" | "FK" | "FO" | "FJ" | "FI" | "FR" | "GF" | "PF" | "TF" | "GA" | "GM" | "GE" | "DE" | "GH" | "GI" | "GR" | "GL" | "GD" | "GP" | "GU" | "GT" | "GG" | "GN" | "GW" | "GY" | "HT" | "HM" | "VA" | "HN" | "HK" | "HU" | "IS" | "IN" | "ID" | "IR" | "IQ" | "IE" | "IM" | "IL" | "IT" | "JM" | "JP" | "JE" | "JO" | "KZ" | "KE" | "KI" | "KP" | "KR" | "KW" | "KG" | "LA" | "LV" | "LB" | "LS" | "LR" | "LY" | "LI" | "LT" | "LU" | "MO" | "MK" | "MG" | "MW" | "MY" | "MV" | "ML" | "MT" | "MH" | "MQ" | "MR" | "MU" | "YT" | "MX" | "FM" | "MD" | "MC" | "MN" | "ME" | "MS" | "MA" | "MZ" | "MM" | "NA" | "NR" | "NP" | "NL" | "NC" | "NZ" | "NI" | "NE" | "NG" | "NU" | "NF" | "MP" | "NO" | "OM" | "PK" | "PW" | "PS" | "PA" | "PG" | "PY" | "PE" | "PH" | "PN" | "PL" | "PT" | "PR" | "QA" | "RE" | "RO" | "RU" | "RW" | "BL" | "SH" | "KN" | "LC" | "MF" | "PM" | "VC" | "WS" | "SM" | "ST" | "SA" | "SN" | "RS" | "SC" | "SL" | "SG" | "SX" | "SK" | "SI" | "SB" | "SO" | "ZA" | "GS" | "SS" | "ES" | "LK" | "SD" | "SR" | "SJ" | "SZ" | "SE" | "CH" | "SY" | "TW" | "TJ" | "TZ" | "TH" | "TL" | "TG" | "TK" | "TO" | "TT" | "TN" | "TR" | "TM" | "TC" | "TV" | "UG" | "UA" | "AE" | "GB" | "US" | "UM" | "UY" | "UZ" | "VU" | "VE" | "VN" | "VG" | "VI" | "WF" | "EH" | "YE" | "ZM" | "ZW")
+                                      }
+                                    },
+                                  ]
+                                ) -> _UpdateGeoMatchSetResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGeoMatchSetResponseSuccess
+
+      interface _UpdateIPSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIPSetResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#update_ip_set-instance_method
+      def update_ip_set: (
+                           ip_set_id: ::String,
+                           change_token: ::String,
+                           updates: Array[
+                             {
+                               action: ("INSERT" | "DELETE"),
+                               ip_set_descriptor: {
+                                 type: ("IPV4" | "IPV6"),
+                                 value: ::String
+                               }
+                             },
+                           ]
+                         ) -> _UpdateIPSetResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIPSetResponseSuccess
+
+      interface _UpdateRateBasedRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRateBasedRuleResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#update_rate_based_rule-instance_method
+      def update_rate_based_rule: (
+                                    rule_id: ::String,
+                                    change_token: ::String,
+                                    updates: Array[
+                                      {
+                                        action: ("INSERT" | "DELETE"),
+                                        predicate: {
+                                          negated: bool,
+                                          type: ("IPMatch" | "ByteMatch" | "SqlInjectionMatch" | "GeoMatch" | "SizeConstraint" | "XssMatch" | "RegexMatch"),
+                                          data_id: ::String
+                                        }
+                                      },
+                                    ],
+                                    rate_limit: ::Integer
+                                  ) -> _UpdateRateBasedRuleResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRateBasedRuleResponseSuccess
+
+      interface _UpdateRegexMatchSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRegexMatchSetResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#update_regex_match_set-instance_method
+      def update_regex_match_set: (
+                                    regex_match_set_id: ::String,
+                                    updates: Array[
+                                      {
+                                        action: ("INSERT" | "DELETE"),
+                                        regex_match_tuple: {
+                                          field_to_match: {
+                                            type: ("URI" | "QUERY_STRING" | "HEADER" | "METHOD" | "BODY" | "SINGLE_QUERY_ARG" | "ALL_QUERY_ARGS"),
+                                            data: ::String?
+                                          },
+                                          text_transformation: ("NONE" | "COMPRESS_WHITE_SPACE" | "HTML_ENTITY_DECODE" | "LOWERCASE" | "CMD_LINE" | "URL_DECODE"),
+                                          regex_pattern_set_id: ::String
+                                        }
+                                      },
+                                    ],
+                                    change_token: ::String
+                                  ) -> _UpdateRegexMatchSetResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRegexMatchSetResponseSuccess
+
+      interface _UpdateRegexPatternSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRegexPatternSetResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#update_regex_pattern_set-instance_method
+      def update_regex_pattern_set: (
+                                      regex_pattern_set_id: ::String,
+                                      updates: Array[
+                                        {
+                                          action: ("INSERT" | "DELETE"),
+                                          regex_pattern_string: ::String
+                                        },
+                                      ],
+                                      change_token: ::String
+                                    ) -> _UpdateRegexPatternSetResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRegexPatternSetResponseSuccess
+
+      interface _UpdateRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRuleResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#update_rule-instance_method
+      def update_rule: (
+                         rule_id: ::String,
+                         change_token: ::String,
+                         updates: Array[
+                           {
+                             action: ("INSERT" | "DELETE"),
+                             predicate: {
+                               negated: bool,
+                               type: ("IPMatch" | "ByteMatch" | "SqlInjectionMatch" | "GeoMatch" | "SizeConstraint" | "XssMatch" | "RegexMatch"),
+                               data_id: ::String
+                             }
+                           },
+                         ]
+                       ) -> _UpdateRuleResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRuleResponseSuccess
+
+      interface _UpdateRuleGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRuleGroupResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#update_rule_group-instance_method
+      def update_rule_group: (
+                               rule_group_id: ::String,
+                               updates: Array[
+                                 {
+                                   action: ("INSERT" | "DELETE"),
+                                   activated_rule: {
+                                     priority: ::Integer,
+                                     rule_id: ::String,
+                                     action: {
+                                       type: ("BLOCK" | "ALLOW" | "COUNT")
+                                     }?,
+                                     override_action: {
+                                       type: ("NONE" | "COUNT")
+                                     }?,
+                                     type: ("REGULAR" | "RATE_BASED" | "GROUP")?,
+                                     excluded_rules: Array[
+                                       {
+                                         rule_id: ::String
+                                       },
+                                     ]?
+                                   }
+                                 },
+                               ],
+                               change_token: ::String
+                             ) -> _UpdateRuleGroupResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRuleGroupResponseSuccess
+
+      interface _UpdateSizeConstraintSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSizeConstraintSetResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#update_size_constraint_set-instance_method
+      def update_size_constraint_set: (
+                                        size_constraint_set_id: ::String,
+                                        change_token: ::String,
+                                        updates: Array[
+                                          {
+                                            action: ("INSERT" | "DELETE"),
+                                            size_constraint: {
+                                              field_to_match: {
+                                                type: ("URI" | "QUERY_STRING" | "HEADER" | "METHOD" | "BODY" | "SINGLE_QUERY_ARG" | "ALL_QUERY_ARGS"),
+                                                data: ::String?
+                                              },
+                                              text_transformation: ("NONE" | "COMPRESS_WHITE_SPACE" | "HTML_ENTITY_DECODE" | "LOWERCASE" | "CMD_LINE" | "URL_DECODE"),
+                                              comparison_operator: ("EQ" | "NE" | "LE" | "LT" | "GE" | "GT"),
+                                              size: ::Integer
+                                            }
+                                          },
+                                        ]
+                                      ) -> _UpdateSizeConstraintSetResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSizeConstraintSetResponseSuccess
+
+      interface _UpdateSqlInjectionMatchSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSqlInjectionMatchSetResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#update_sql_injection_match_set-instance_method
+      def update_sql_injection_match_set: (
+                                            sql_injection_match_set_id: ::String,
+                                            change_token: ::String,
+                                            updates: Array[
+                                              {
+                                                action: ("INSERT" | "DELETE"),
+                                                sql_injection_match_tuple: {
+                                                  field_to_match: {
+                                                    type: ("URI" | "QUERY_STRING" | "HEADER" | "METHOD" | "BODY" | "SINGLE_QUERY_ARG" | "ALL_QUERY_ARGS"),
+                                                    data: ::String?
+                                                  },
+                                                  text_transformation: ("NONE" | "COMPRESS_WHITE_SPACE" | "HTML_ENTITY_DECODE" | "LOWERCASE" | "CMD_LINE" | "URL_DECODE")
+                                                }
+                                              },
+                                            ]
+                                          ) -> _UpdateSqlInjectionMatchSetResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSqlInjectionMatchSetResponseSuccess
+
+      interface _UpdateWebACLResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWebACLResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#update_web_acl-instance_method
+      def update_web_acl: (
+                            web_acl_id: ::String,
+                            change_token: ::String,
+                            ?updates: Array[
+                              {
+                                action: ("INSERT" | "DELETE"),
+                                activated_rule: {
+                                  priority: ::Integer,
+                                  rule_id: ::String,
+                                  action: {
+                                    type: ("BLOCK" | "ALLOW" | "COUNT")
+                                  }?,
+                                  override_action: {
+                                    type: ("NONE" | "COUNT")
+                                  }?,
+                                  type: ("REGULAR" | "RATE_BASED" | "GROUP")?,
+                                  excluded_rules: Array[
+                                    {
+                                      rule_id: ::String
+                                    },
+                                  ]?
+                                }
+                              },
+                            ],
+                            ?default_action: {
+                              type: ("BLOCK" | "ALLOW" | "COUNT")
+                            }
+                          ) -> _UpdateWebACLResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWebACLResponseSuccess
+
+      interface _UpdateXssMatchSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateXssMatchSetResponse]
+        def change_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAF/Client.html#update_xss_match_set-instance_method
+      def update_xss_match_set: (
+                                  xss_match_set_id: ::String,
+                                  change_token: ::String,
+                                  updates: Array[
+                                    {
+                                      action: ("INSERT" | "DELETE"),
+                                      xss_match_tuple: {
+                                        field_to_match: {
+                                          type: ("URI" | "QUERY_STRING" | "HEADER" | "METHOD" | "BODY" | "SINGLE_QUERY_ARG" | "ALL_QUERY_ARGS"),
+                                          data: ::String?
+                                        },
+                                        text_transformation: ("NONE" | "COMPRESS_WHITE_SPACE" | "HTML_ENTITY_DECODE" | "LOWERCASE" | "CMD_LINE" | "URL_DECODE")
+                                      }
+                                    },
+                                  ]
+                                ) -> _UpdateXssMatchSetResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateXssMatchSetResponseSuccess
+    end
+  end
+end
+

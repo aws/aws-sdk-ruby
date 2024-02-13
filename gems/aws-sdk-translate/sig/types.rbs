@@ -1,0 +1,495 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Translate
+  module Types
+
+    class AppliedTerminology
+      attr_accessor name: ::String
+      attr_accessor terms: ::Array[Types::Term]
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateParallelDataRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor parallel_data_config: Types::ParallelDataConfig
+      attr_accessor encryption_key: Types::EncryptionKey
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateParallelDataResponse
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "UPDATING" | "ACTIVE" | "DELETING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class DeleteParallelDataRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteParallelDataResponse
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "UPDATING" | "ACTIVE" | "DELETING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class DeleteTerminologyRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTextTranslationJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTextTranslationJobResponse
+      attr_accessor text_translation_job_properties: Types::TextTranslationJobProperties
+      SENSITIVE: []
+    end
+
+    class DetectedLanguageLowConfidenceException
+      attr_accessor message: ::String
+      attr_accessor detected_language_code: ::String
+      SENSITIVE: []
+    end
+
+    class Document
+      attr_accessor content: ::String
+      attr_accessor content_type: ::String
+      SENSITIVE: [:content]
+    end
+
+    class EncryptionKey
+      attr_accessor type: ("KMS")
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetParallelDataRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetParallelDataResponse
+      attr_accessor parallel_data_properties: Types::ParallelDataProperties
+      attr_accessor data_location: Types::ParallelDataDataLocation
+      attr_accessor auxiliary_data_location: Types::ParallelDataDataLocation
+      attr_accessor latest_update_attempt_auxiliary_data_location: Types::ParallelDataDataLocation
+      SENSITIVE: []
+    end
+
+    class GetTerminologyRequest
+      attr_accessor name: ::String
+      attr_accessor terminology_data_format: ("CSV" | "TMX" | "TSV")
+      SENSITIVE: []
+    end
+
+    class GetTerminologyResponse
+      attr_accessor terminology_properties: Types::TerminologyProperties
+      attr_accessor terminology_data_location: Types::TerminologyDataLocation
+      attr_accessor auxiliary_data_location: Types::TerminologyDataLocation
+      SENSITIVE: []
+    end
+
+    class ImportTerminologyRequest
+      attr_accessor name: ::String
+      attr_accessor merge_strategy: ("OVERWRITE")
+      attr_accessor description: ::String
+      attr_accessor terminology_data: Types::TerminologyData
+      attr_accessor encryption_key: Types::EncryptionKey
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ImportTerminologyResponse
+      attr_accessor terminology_properties: Types::TerminologyProperties
+      attr_accessor auxiliary_data_location: Types::TerminologyDataLocation
+      SENSITIVE: []
+    end
+
+    class InputDataConfig
+      attr_accessor s3_uri: ::String
+      attr_accessor content_type: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidFilterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterValueException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JobDetails
+      attr_accessor translated_documents_count: ::Integer
+      attr_accessor documents_with_errors_count: ::Integer
+      attr_accessor input_documents_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class Language
+      attr_accessor language_name: ::String
+      attr_accessor language_code: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListLanguagesRequest
+      attr_accessor display_language_code: ("de" | "en" | "es" | "fr" | "it" | "ja" | "ko" | "pt" | "zh" | "zh-TW")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListLanguagesResponse
+      attr_accessor languages: ::Array[Types::Language]
+      attr_accessor display_language_code: ("de" | "en" | "es" | "fr" | "it" | "ja" | "ko" | "pt" | "zh" | "zh-TW")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListParallelDataRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListParallelDataResponse
+      attr_accessor parallel_data_properties_list: ::Array[Types::ParallelDataProperties]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListTerminologiesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTerminologiesResponse
+      attr_accessor terminology_properties_list: ::Array[Types::TerminologyProperties]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTextTranslationJobsRequest
+      attr_accessor filter: Types::TextTranslationJobFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTextTranslationJobsResponse
+      attr_accessor text_translation_job_properties_list: ::Array[Types::TextTranslationJobProperties]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class OutputDataConfig
+      attr_accessor s3_uri: ::String
+      attr_accessor encryption_key: Types::EncryptionKey
+      SENSITIVE: []
+    end
+
+    class ParallelDataConfig
+      attr_accessor s3_uri: ::String
+      attr_accessor format: ("TSV" | "CSV" | "TMX")
+      SENSITIVE: []
+    end
+
+    class ParallelDataDataLocation
+      attr_accessor repository_type: ::String
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class ParallelDataProperties
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("CREATING" | "UPDATING" | "ACTIVE" | "DELETING" | "FAILED")
+      attr_accessor source_language_code: ::String
+      attr_accessor target_language_codes: ::Array[::String]
+      attr_accessor parallel_data_config: Types::ParallelDataConfig
+      attr_accessor message: ::String
+      attr_accessor imported_data_size: ::Integer
+      attr_accessor imported_record_count: ::Integer
+      attr_accessor failed_record_count: ::Integer
+      attr_accessor skipped_record_count: ::Integer
+      attr_accessor encryption_key: Types::EncryptionKey
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor latest_update_attempt_status: ("CREATING" | "UPDATING" | "ACTIVE" | "DELETING" | "FAILED")
+      attr_accessor latest_update_attempt_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartTextTranslationJobRequest
+      attr_accessor job_name: ::String
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor source_language_code: ::String
+      attr_accessor target_language_codes: ::Array[::String]
+      attr_accessor terminology_names: ::Array[::String]
+      attr_accessor parallel_data_names: ::Array[::String]
+      attr_accessor client_token: ::String
+      attr_accessor settings: Types::TranslationSettings
+      SENSITIVE: []
+    end
+
+    class StartTextTranslationJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERROR" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class StopTextTranslationJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopTextTranslationJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERROR" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class Term
+      attr_accessor source_text: ::String
+      attr_accessor target_text: ::String
+      SENSITIVE: []
+    end
+
+    class TerminologyData
+      attr_accessor file: ::String
+      attr_accessor format: ("CSV" | "TMX" | "TSV")
+      attr_accessor directionality: ("UNI" | "MULTI")
+      SENSITIVE: [:file]
+    end
+
+    class TerminologyDataLocation
+      attr_accessor repository_type: ::String
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class TerminologyProperties
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor arn: ::String
+      attr_accessor source_language_code: ::String
+      attr_accessor target_language_codes: ::Array[::String]
+      attr_accessor encryption_key: Types::EncryptionKey
+      attr_accessor size_bytes: ::Integer
+      attr_accessor term_count: ::Integer
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor directionality: ("UNI" | "MULTI")
+      attr_accessor message: ::String
+      attr_accessor skipped_term_count: ::Integer
+      attr_accessor format: ("CSV" | "TMX" | "TSV")
+      SENSITIVE: []
+    end
+
+    class TextSizeLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TextTranslationJobFilter
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERROR" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor submitted_before_time: ::Time
+      attr_accessor submitted_after_time: ::Time
+      SENSITIVE: []
+    end
+
+    class TextTranslationJobProperties
+      attr_accessor job_id: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERROR" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      attr_accessor job_details: Types::JobDetails
+      attr_accessor source_language_code: ::String
+      attr_accessor target_language_codes: ::Array[::String]
+      attr_accessor terminology_names: ::Array[::String]
+      attr_accessor parallel_data_names: ::Array[::String]
+      attr_accessor message: ::String
+      attr_accessor submitted_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor output_data_config: Types::OutputDataConfig
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor settings: Types::TranslationSettings
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class TranslateDocumentRequest
+      attr_accessor document: Types::Document
+      attr_accessor terminology_names: ::Array[::String]
+      attr_accessor source_language_code: ::String
+      attr_accessor target_language_code: ::String
+      attr_accessor settings: Types::TranslationSettings
+      SENSITIVE: []
+    end
+
+    class TranslateDocumentResponse
+      attr_accessor translated_document: Types::TranslatedDocument
+      attr_accessor source_language_code: ::String
+      attr_accessor target_language_code: ::String
+      attr_accessor applied_terminologies: ::Array[Types::AppliedTerminology]
+      attr_accessor applied_settings: Types::TranslationSettings
+      SENSITIVE: []
+    end
+
+    class TranslateTextRequest
+      attr_accessor text: ::String
+      attr_accessor terminology_names: ::Array[::String]
+      attr_accessor source_language_code: ::String
+      attr_accessor target_language_code: ::String
+      attr_accessor settings: Types::TranslationSettings
+      SENSITIVE: []
+    end
+
+    class TranslateTextResponse
+      attr_accessor translated_text: ::String
+      attr_accessor source_language_code: ::String
+      attr_accessor target_language_code: ::String
+      attr_accessor applied_terminologies: ::Array[Types::AppliedTerminology]
+      attr_accessor applied_settings: Types::TranslationSettings
+      SENSITIVE: []
+    end
+
+    class TranslatedDocument
+      attr_accessor content: ::String
+      SENSITIVE: [:content]
+    end
+
+    class TranslationSettings
+      attr_accessor formality: ("FORMAL" | "INFORMAL")
+      attr_accessor profanity: ("MASK")
+      attr_accessor brevity: ("ON")
+      SENSITIVE: []
+    end
+
+    class UnsupportedDisplayLanguageCodeException
+      attr_accessor message: ::String
+      attr_accessor display_language_code: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedLanguagePairException
+      attr_accessor message: ::String
+      attr_accessor source_language_code: ::String
+      attr_accessor target_language_code: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateParallelDataRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor parallel_data_config: Types::ParallelDataConfig
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateParallelDataResponse
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "UPDATING" | "ACTIVE" | "DELETING" | "FAILED")
+      attr_accessor latest_update_attempt_status: ("CREATING" | "UPDATING" | "ACTIVE" | "DELETING" | "FAILED")
+      attr_accessor latest_update_attempt_at: ::Time
+      SENSITIVE: []
+    end
+  end
+end

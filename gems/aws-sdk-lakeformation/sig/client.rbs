@@ -1,0 +1,1446 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module LakeFormation
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddLFTagsToResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddLFTagsToResourceResponse]
+        def failures: () -> ::Array[Types::LFTagError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#add_lf_tags_to_resource-instance_method
+      def add_lf_tags_to_resource: (
+                                     ?catalog_id: ::String,
+                                     resource: {
+                                       catalog: {
+                                       }?,
+                                       database: {
+                                         catalog_id: ::String?,
+                                         name: ::String
+                                       }?,
+                                       table: {
+                                         catalog_id: ::String?,
+                                         database_name: ::String,
+                                         name: ::String?,
+                                         table_wildcard: {
+                                         }?
+                                       }?,
+                                       table_with_columns: {
+                                         catalog_id: ::String?,
+                                         database_name: ::String,
+                                         name: ::String,
+                                         column_names: Array[::String]?,
+                                         column_wildcard: {
+                                           excluded_column_names: Array[::String]?
+                                         }?
+                                       }?,
+                                       data_location: {
+                                         catalog_id: ::String?,
+                                         resource_arn: ::String
+                                       }?,
+                                       data_cells_filter: {
+                                         table_catalog_id: ::String?,
+                                         database_name: ::String?,
+                                         table_name: ::String?,
+                                         name: ::String?
+                                       }?,
+                                       lf_tag: {
+                                         catalog_id: ::String?,
+                                         tag_key: ::String,
+                                         tag_values: Array[::String]
+                                       }?,
+                                       lf_tag_policy: {
+                                         catalog_id: ::String?,
+                                         resource_type: ("DATABASE" | "TABLE"),
+                                         expression: Array[
+                                           {
+                                             tag_key: ::String,
+                                             tag_values: Array[::String]
+                                           },
+                                         ]
+                                       }?
+                                     },
+                                     lf_tags: Array[
+                                       {
+                                         catalog_id: ::String?,
+                                         tag_key: ::String,
+                                         tag_values: Array[::String]
+                                       },
+                                     ]
+                                   ) -> _AddLFTagsToResourceResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddLFTagsToResourceResponseSuccess
+
+      interface _AssumeDecoratedRoleWithSAMLResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssumeDecoratedRoleWithSAMLResponse]
+        def access_key_id: () -> ::String
+        def secret_access_key: () -> ::String
+        def session_token: () -> ::String
+        def expiration: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#assume_decorated_role_with_saml-instance_method
+      def assume_decorated_role_with_saml: (
+                                             saml_assertion: ::String,
+                                             role_arn: ::String,
+                                             principal_arn: ::String,
+                                             ?duration_seconds: ::Integer
+                                           ) -> _AssumeDecoratedRoleWithSAMLResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssumeDecoratedRoleWithSAMLResponseSuccess
+
+      interface _BatchGrantPermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGrantPermissionsResponse]
+        def failures: () -> ::Array[Types::BatchPermissionsFailureEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#batch_grant_permissions-instance_method
+      def batch_grant_permissions: (
+                                     ?catalog_id: ::String,
+                                     entries: Array[
+                                       {
+                                         id: ::String,
+                                         principal: {
+                                           data_lake_principal_identifier: ::String?
+                                         }?,
+                                         resource: {
+                                           catalog: {
+                                           }?,
+                                           database: {
+                                             catalog_id: ::String?,
+                                             name: ::String
+                                           }?,
+                                           table: {
+                                             catalog_id: ::String?,
+                                             database_name: ::String,
+                                             name: ::String?,
+                                             table_wildcard: {
+                                             }?
+                                           }?,
+                                           table_with_columns: {
+                                             catalog_id: ::String?,
+                                             database_name: ::String,
+                                             name: ::String,
+                                             column_names: Array[::String]?,
+                                             column_wildcard: {
+                                               excluded_column_names: Array[::String]?
+                                             }?
+                                           }?,
+                                           data_location: {
+                                             catalog_id: ::String?,
+                                             resource_arn: ::String
+                                           }?,
+                                           data_cells_filter: {
+                                             table_catalog_id: ::String?,
+                                             database_name: ::String?,
+                                             table_name: ::String?,
+                                             name: ::String?
+                                           }?,
+                                           lf_tag: {
+                                             catalog_id: ::String?,
+                                             tag_key: ::String,
+                                             tag_values: Array[::String]
+                                           }?,
+                                           lf_tag_policy: {
+                                             catalog_id: ::String?,
+                                             resource_type: ("DATABASE" | "TABLE"),
+                                             expression: Array[
+                                               {
+                                                 tag_key: ::String,
+                                                 tag_values: Array[::String]
+                                               },
+                                             ]
+                                           }?
+                                         }?,
+                                         permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]?,
+                                         permissions_with_grant_option: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]?
+                                       },
+                                     ]
+                                   ) -> _BatchGrantPermissionsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGrantPermissionsResponseSuccess
+
+      interface _BatchRevokePermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchRevokePermissionsResponse]
+        def failures: () -> ::Array[Types::BatchPermissionsFailureEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#batch_revoke_permissions-instance_method
+      def batch_revoke_permissions: (
+                                      ?catalog_id: ::String,
+                                      entries: Array[
+                                        {
+                                          id: ::String,
+                                          principal: {
+                                            data_lake_principal_identifier: ::String?
+                                          }?,
+                                          resource: {
+                                            catalog: {
+                                            }?,
+                                            database: {
+                                              catalog_id: ::String?,
+                                              name: ::String
+                                            }?,
+                                            table: {
+                                              catalog_id: ::String?,
+                                              database_name: ::String,
+                                              name: ::String?,
+                                              table_wildcard: {
+                                              }?
+                                            }?,
+                                            table_with_columns: {
+                                              catalog_id: ::String?,
+                                              database_name: ::String,
+                                              name: ::String,
+                                              column_names: Array[::String]?,
+                                              column_wildcard: {
+                                                excluded_column_names: Array[::String]?
+                                              }?
+                                            }?,
+                                            data_location: {
+                                              catalog_id: ::String?,
+                                              resource_arn: ::String
+                                            }?,
+                                            data_cells_filter: {
+                                              table_catalog_id: ::String?,
+                                              database_name: ::String?,
+                                              table_name: ::String?,
+                                              name: ::String?
+                                            }?,
+                                            lf_tag: {
+                                              catalog_id: ::String?,
+                                              tag_key: ::String,
+                                              tag_values: Array[::String]
+                                            }?,
+                                            lf_tag_policy: {
+                                              catalog_id: ::String?,
+                                              resource_type: ("DATABASE" | "TABLE"),
+                                              expression: Array[
+                                                {
+                                                  tag_key: ::String,
+                                                  tag_values: Array[::String]
+                                                },
+                                              ]
+                                            }?
+                                          }?,
+                                          permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]?,
+                                          permissions_with_grant_option: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]?
+                                        },
+                                      ]
+                                    ) -> _BatchRevokePermissionsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchRevokePermissionsResponseSuccess
+
+      interface _CancelTransactionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelTransactionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#cancel_transaction-instance_method
+      def cancel_transaction: (
+                                transaction_id: ::String
+                              ) -> _CancelTransactionResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelTransactionResponseSuccess
+
+      interface _CommitTransactionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CommitTransactionResponse]
+        def transaction_status: () -> ("ACTIVE" | "COMMITTED" | "ABORTED" | "COMMIT_IN_PROGRESS")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#commit_transaction-instance_method
+      def commit_transaction: (
+                                transaction_id: ::String
+                              ) -> _CommitTransactionResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CommitTransactionResponseSuccess
+
+      interface _CreateDataCellsFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataCellsFilterResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#create_data_cells_filter-instance_method
+      def create_data_cells_filter: (
+                                      table_data: {
+                                        table_catalog_id: ::String,
+                                        database_name: ::String,
+                                        table_name: ::String,
+                                        name: ::String,
+                                        row_filter: {
+                                          filter_expression: ::String?,
+                                          all_rows_wildcard: {
+                                          }?
+                                        }?,
+                                        column_names: Array[::String]?,
+                                        column_wildcard: {
+                                          excluded_column_names: Array[::String]?
+                                        }?,
+                                        version_id: ::String?
+                                      }
+                                    ) -> _CreateDataCellsFilterResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataCellsFilterResponseSuccess
+
+      interface _CreateLFTagResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLFTagResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#create_lf_tag-instance_method
+      def create_lf_tag: (
+                           ?catalog_id: ::String,
+                           tag_key: ::String,
+                           tag_values: Array[::String]
+                         ) -> _CreateLFTagResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLFTagResponseSuccess
+
+      interface _CreateLakeFormationIdentityCenterConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLakeFormationIdentityCenterConfigurationResponse]
+        def application_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#create_lake_formation_identity_center_configuration-instance_method
+      def create_lake_formation_identity_center_configuration: (
+                                                                 ?catalog_id: ::String,
+                                                                 ?instance_arn: ::String,
+                                                                 ?external_filtering: {
+                                                                   status: ("ENABLED" | "DISABLED"),
+                                                                   authorized_targets: Array[::String]
+                                                                 }
+                                                               ) -> _CreateLakeFormationIdentityCenterConfigurationResponseSuccess
+                                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLakeFormationIdentityCenterConfigurationResponseSuccess
+
+      interface _CreateLakeFormationOptInResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLakeFormationOptInResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#create_lake_formation_opt_in-instance_method
+      def create_lake_formation_opt_in: (
+                                          principal: {
+                                            data_lake_principal_identifier: ::String?
+                                          },
+                                          resource: {
+                                            catalog: {
+                                            }?,
+                                            database: {
+                                              catalog_id: ::String?,
+                                              name: ::String
+                                            }?,
+                                            table: {
+                                              catalog_id: ::String?,
+                                              database_name: ::String,
+                                              name: ::String?,
+                                              table_wildcard: {
+                                              }?
+                                            }?,
+                                            table_with_columns: {
+                                              catalog_id: ::String?,
+                                              database_name: ::String,
+                                              name: ::String,
+                                              column_names: Array[::String]?,
+                                              column_wildcard: {
+                                                excluded_column_names: Array[::String]?
+                                              }?
+                                            }?,
+                                            data_location: {
+                                              catalog_id: ::String?,
+                                              resource_arn: ::String
+                                            }?,
+                                            data_cells_filter: {
+                                              table_catalog_id: ::String?,
+                                              database_name: ::String?,
+                                              table_name: ::String?,
+                                              name: ::String?
+                                            }?,
+                                            lf_tag: {
+                                              catalog_id: ::String?,
+                                              tag_key: ::String,
+                                              tag_values: Array[::String]
+                                            }?,
+                                            lf_tag_policy: {
+                                              catalog_id: ::String?,
+                                              resource_type: ("DATABASE" | "TABLE"),
+                                              expression: Array[
+                                                {
+                                                  tag_key: ::String,
+                                                  tag_values: Array[::String]
+                                                },
+                                              ]
+                                            }?
+                                          }
+                                        ) -> _CreateLakeFormationOptInResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLakeFormationOptInResponseSuccess
+
+      interface _DeleteDataCellsFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataCellsFilterResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#delete_data_cells_filter-instance_method
+      def delete_data_cells_filter: (
+                                      ?table_catalog_id: ::String,
+                                      ?database_name: ::String,
+                                      ?table_name: ::String,
+                                      ?name: ::String
+                                    ) -> _DeleteDataCellsFilterResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataCellsFilterResponseSuccess
+
+      interface _DeleteLFTagResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLFTagResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#delete_lf_tag-instance_method
+      def delete_lf_tag: (
+                           ?catalog_id: ::String,
+                           tag_key: ::String
+                         ) -> _DeleteLFTagResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLFTagResponseSuccess
+
+      interface _DeleteLakeFormationIdentityCenterConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLakeFormationIdentityCenterConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#delete_lake_formation_identity_center_configuration-instance_method
+      def delete_lake_formation_identity_center_configuration: (
+                                                                 ?catalog_id: ::String
+                                                               ) -> _DeleteLakeFormationIdentityCenterConfigurationResponseSuccess
+                                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLakeFormationIdentityCenterConfigurationResponseSuccess
+
+      interface _DeleteLakeFormationOptInResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLakeFormationOptInResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#delete_lake_formation_opt_in-instance_method
+      def delete_lake_formation_opt_in: (
+                                          principal: {
+                                            data_lake_principal_identifier: ::String?
+                                          },
+                                          resource: {
+                                            catalog: {
+                                            }?,
+                                            database: {
+                                              catalog_id: ::String?,
+                                              name: ::String
+                                            }?,
+                                            table: {
+                                              catalog_id: ::String?,
+                                              database_name: ::String,
+                                              name: ::String?,
+                                              table_wildcard: {
+                                              }?
+                                            }?,
+                                            table_with_columns: {
+                                              catalog_id: ::String?,
+                                              database_name: ::String,
+                                              name: ::String,
+                                              column_names: Array[::String]?,
+                                              column_wildcard: {
+                                                excluded_column_names: Array[::String]?
+                                              }?
+                                            }?,
+                                            data_location: {
+                                              catalog_id: ::String?,
+                                              resource_arn: ::String
+                                            }?,
+                                            data_cells_filter: {
+                                              table_catalog_id: ::String?,
+                                              database_name: ::String?,
+                                              table_name: ::String?,
+                                              name: ::String?
+                                            }?,
+                                            lf_tag: {
+                                              catalog_id: ::String?,
+                                              tag_key: ::String,
+                                              tag_values: Array[::String]
+                                            }?,
+                                            lf_tag_policy: {
+                                              catalog_id: ::String?,
+                                              resource_type: ("DATABASE" | "TABLE"),
+                                              expression: Array[
+                                                {
+                                                  tag_key: ::String,
+                                                  tag_values: Array[::String]
+                                                },
+                                              ]
+                                            }?
+                                          }
+                                        ) -> _DeleteLakeFormationOptInResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLakeFormationOptInResponseSuccess
+
+      interface _DeleteObjectsOnCancelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteObjectsOnCancelResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#delete_objects_on_cancel-instance_method
+      def delete_objects_on_cancel: (
+                                      ?catalog_id: ::String,
+                                      database_name: ::String,
+                                      table_name: ::String,
+                                      transaction_id: ::String,
+                                      objects: Array[
+                                        {
+                                          uri: ::String,
+                                          etag: ::String?
+                                        },
+                                      ]
+                                    ) -> _DeleteObjectsOnCancelResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteObjectsOnCancelResponseSuccess
+
+      interface _DeregisterResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#deregister_resource-instance_method
+      def deregister_resource: (
+                                 resource_arn: ::String
+                               ) -> _DeregisterResourceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterResourceResponseSuccess
+
+      interface _DescribeLakeFormationIdentityCenterConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLakeFormationIdentityCenterConfigurationResponse]
+        def catalog_id: () -> ::String
+        def instance_arn: () -> ::String
+        def application_arn: () -> ::String
+        def external_filtering: () -> Types::ExternalFilteringConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#describe_lake_formation_identity_center_configuration-instance_method
+      def describe_lake_formation_identity_center_configuration: (
+                                                                   ?catalog_id: ::String
+                                                                 ) -> _DescribeLakeFormationIdentityCenterConfigurationResponseSuccess
+                                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLakeFormationIdentityCenterConfigurationResponseSuccess
+
+      interface _DescribeResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeResourceResponse]
+        def resource_info: () -> Types::ResourceInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#describe_resource-instance_method
+      def describe_resource: (
+                               resource_arn: ::String
+                             ) -> _DescribeResourceResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeResourceResponseSuccess
+
+      interface _DescribeTransactionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTransactionResponse]
+        def transaction_description: () -> Types::TransactionDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#describe_transaction-instance_method
+      def describe_transaction: (
+                                  transaction_id: ::String
+                                ) -> _DescribeTransactionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTransactionResponseSuccess
+
+      interface _ExtendTransactionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExtendTransactionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#extend_transaction-instance_method
+      def extend_transaction: (
+                                ?transaction_id: ::String
+                              ) -> _ExtendTransactionResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExtendTransactionResponseSuccess
+
+      interface _GetDataCellsFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataCellsFilterResponse]
+        def data_cells_filter: () -> Types::DataCellsFilter
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#get_data_cells_filter-instance_method
+      def get_data_cells_filter: (
+                                   table_catalog_id: ::String,
+                                   database_name: ::String,
+                                   table_name: ::String,
+                                   name: ::String
+                                 ) -> _GetDataCellsFilterResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataCellsFilterResponseSuccess
+
+      interface _GetDataLakeSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataLakeSettingsResponse]
+        def data_lake_settings: () -> Types::DataLakeSettings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#get_data_lake_settings-instance_method
+      def get_data_lake_settings: (
+                                    ?catalog_id: ::String
+                                  ) -> _GetDataLakeSettingsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataLakeSettingsResponseSuccess
+
+      interface _GetEffectivePermissionsForPathResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEffectivePermissionsForPathResponse]
+        def permissions: () -> ::Array[Types::PrincipalResourcePermissions]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#get_effective_permissions_for_path-instance_method
+      def get_effective_permissions_for_path: (
+                                                ?catalog_id: ::String,
+                                                resource_arn: ::String,
+                                                ?next_token: ::String,
+                                                ?max_results: ::Integer
+                                              ) -> _GetEffectivePermissionsForPathResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEffectivePermissionsForPathResponseSuccess
+
+      interface _GetLFTagResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLFTagResponse]
+        def catalog_id: () -> ::String
+        def tag_key: () -> ::String
+        def tag_values: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#get_lf_tag-instance_method
+      def get_lf_tag: (
+                        ?catalog_id: ::String,
+                        tag_key: ::String
+                      ) -> _GetLFTagResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLFTagResponseSuccess
+
+      interface _GetQueryStateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQueryStateResponse]
+        def state: () -> ("PENDING" | "WORKUNITS_AVAILABLE" | "ERROR" | "FINISHED" | "EXPIRED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#get_query_state-instance_method
+      def get_query_state: (
+                             query_id: ::String
+                           ) -> _GetQueryStateResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQueryStateResponseSuccess
+
+      interface _GetQueryStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQueryStatisticsResponse]
+        def execution_statistics: () -> Types::ExecutionStatistics
+        def planning_statistics: () -> Types::PlanningStatistics
+        def query_submission_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#get_query_statistics-instance_method
+      def get_query_statistics: (
+                                  query_id: ::String
+                                ) -> _GetQueryStatisticsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQueryStatisticsResponseSuccess
+
+      interface _GetResourceLFTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceLFTagsResponse]
+        def lf_tag_on_database: () -> ::Array[Types::LFTagPair]
+        def lf_tags_on_table: () -> ::Array[Types::LFTagPair]
+        def lf_tags_on_columns: () -> ::Array[Types::ColumnLFTag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#get_resource_lf_tags-instance_method
+      def get_resource_lf_tags: (
+                                  ?catalog_id: ::String,
+                                  resource: {
+                                    catalog: {
+                                    }?,
+                                    database: {
+                                      catalog_id: ::String?,
+                                      name: ::String
+                                    }?,
+                                    table: {
+                                      catalog_id: ::String?,
+                                      database_name: ::String,
+                                      name: ::String?,
+                                      table_wildcard: {
+                                      }?
+                                    }?,
+                                    table_with_columns: {
+                                      catalog_id: ::String?,
+                                      database_name: ::String,
+                                      name: ::String,
+                                      column_names: Array[::String]?,
+                                      column_wildcard: {
+                                        excluded_column_names: Array[::String]?
+                                      }?
+                                    }?,
+                                    data_location: {
+                                      catalog_id: ::String?,
+                                      resource_arn: ::String
+                                    }?,
+                                    data_cells_filter: {
+                                      table_catalog_id: ::String?,
+                                      database_name: ::String?,
+                                      table_name: ::String?,
+                                      name: ::String?
+                                    }?,
+                                    lf_tag: {
+                                      catalog_id: ::String?,
+                                      tag_key: ::String,
+                                      tag_values: Array[::String]
+                                    }?,
+                                    lf_tag_policy: {
+                                      catalog_id: ::String?,
+                                      resource_type: ("DATABASE" | "TABLE"),
+                                      expression: Array[
+                                        {
+                                          tag_key: ::String,
+                                          tag_values: Array[::String]
+                                        },
+                                      ]
+                                    }?
+                                  },
+                                  ?show_assigned_lf_tags: bool
+                                ) -> _GetResourceLFTagsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceLFTagsResponseSuccess
+
+      interface _GetTableObjectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTableObjectsResponse]
+        def objects: () -> ::Array[Types::PartitionObjects]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#get_table_objects-instance_method
+      def get_table_objects: (
+                               ?catalog_id: ::String,
+                               database_name: ::String,
+                               table_name: ::String,
+                               ?transaction_id: ::String,
+                               ?query_as_of_time: ::Time,
+                               ?partition_predicate: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _GetTableObjectsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableObjectsResponseSuccess
+
+      interface _GetTemporaryGluePartitionCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTemporaryGluePartitionCredentialsResponse]
+        def access_key_id: () -> ::String
+        def secret_access_key: () -> ::String
+        def session_token: () -> ::String
+        def expiration: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#get_temporary_glue_partition_credentials-instance_method
+      def get_temporary_glue_partition_credentials: (
+                                                      table_arn: ::String,
+                                                      partition: {
+                                                        values: Array[::String]
+                                                      },
+                                                      ?permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")],
+                                                      ?duration_seconds: ::Integer,
+                                                      ?audit_context: {
+                                                        additional_audit_context: ::String?
+                                                      },
+                                                      ?supported_permission_types: Array[("COLUMN_PERMISSION" | "CELL_FILTER_PERMISSION" | "NESTED_PERMISSION" | "NESTED_CELL_PERMISSION")]
+                                                    ) -> _GetTemporaryGluePartitionCredentialsResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTemporaryGluePartitionCredentialsResponseSuccess
+
+      interface _GetTemporaryGlueTableCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTemporaryGlueTableCredentialsResponse]
+        def access_key_id: () -> ::String
+        def secret_access_key: () -> ::String
+        def session_token: () -> ::String
+        def expiration: () -> ::Time
+        def vended_s3_path: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#get_temporary_glue_table_credentials-instance_method
+      def get_temporary_glue_table_credentials: (
+                                                  table_arn: ::String,
+                                                  ?permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")],
+                                                  ?duration_seconds: ::Integer,
+                                                  ?audit_context: {
+                                                    additional_audit_context: ::String?
+                                                  },
+                                                  ?supported_permission_types: Array[("COLUMN_PERMISSION" | "CELL_FILTER_PERMISSION" | "NESTED_PERMISSION" | "NESTED_CELL_PERMISSION")],
+                                                  ?s3_path: ::String,
+                                                  ?query_session_context: {
+                                                    query_id: ::String?,
+                                                    query_start_time: ::Time?,
+                                                    cluster_id: ::String?,
+                                                    query_authorization_id: ::String?,
+                                                    additional_context: Hash[::String, ::String]?
+                                                  }
+                                                ) -> _GetTemporaryGlueTableCredentialsResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTemporaryGlueTableCredentialsResponseSuccess
+
+      interface _GetWorkUnitResultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkUnitResultsResponse]
+        def result_stream: () -> ::IO
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#get_work_unit_results-instance_method
+      def get_work_unit_results: (
+                                   query_id: ::String,
+                                   work_unit_id: ::Integer,
+                                   work_unit_token: ::String
+                                 ) ?{ (*untyped) -> void } -> _GetWorkUnitResultsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetWorkUnitResultsResponseSuccess
+
+      interface _GetWorkUnitsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkUnitsResponse]
+        def next_token: () -> ::String
+        def query_id: () -> ::String
+        def work_unit_ranges: () -> ::Array[Types::WorkUnitRange]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#get_work_units-instance_method
+      def get_work_units: (
+                            ?next_token: ::String,
+                            ?page_size: ::Integer,
+                            query_id: ::String
+                          ) -> _GetWorkUnitsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkUnitsResponseSuccess
+
+      interface _GrantPermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GrantPermissionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#grant_permissions-instance_method
+      def grant_permissions: (
+                               ?catalog_id: ::String,
+                               principal: {
+                                 data_lake_principal_identifier: ::String?
+                               },
+                               resource: {
+                                 catalog: {
+                                 }?,
+                                 database: {
+                                   catalog_id: ::String?,
+                                   name: ::String
+                                 }?,
+                                 table: {
+                                   catalog_id: ::String?,
+                                   database_name: ::String,
+                                   name: ::String?,
+                                   table_wildcard: {
+                                   }?
+                                 }?,
+                                 table_with_columns: {
+                                   catalog_id: ::String?,
+                                   database_name: ::String,
+                                   name: ::String,
+                                   column_names: Array[::String]?,
+                                   column_wildcard: {
+                                     excluded_column_names: Array[::String]?
+                                   }?
+                                 }?,
+                                 data_location: {
+                                   catalog_id: ::String?,
+                                   resource_arn: ::String
+                                 }?,
+                                 data_cells_filter: {
+                                   table_catalog_id: ::String?,
+                                   database_name: ::String?,
+                                   table_name: ::String?,
+                                   name: ::String?
+                                 }?,
+                                 lf_tag: {
+                                   catalog_id: ::String?,
+                                   tag_key: ::String,
+                                   tag_values: Array[::String]
+                                 }?,
+                                 lf_tag_policy: {
+                                   catalog_id: ::String?,
+                                   resource_type: ("DATABASE" | "TABLE"),
+                                   expression: Array[
+                                     {
+                                       tag_key: ::String,
+                                       tag_values: Array[::String]
+                                     },
+                                   ]
+                                 }?
+                               },
+                               permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")],
+                               ?permissions_with_grant_option: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
+                             ) -> _GrantPermissionsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GrantPermissionsResponseSuccess
+
+      interface _ListDataCellsFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataCellsFilterResponse]
+        def data_cells_filters: () -> ::Array[Types::DataCellsFilter]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#list_data_cells_filter-instance_method
+      def list_data_cells_filter: (
+                                    ?table: {
+                                      catalog_id: ::String?,
+                                      database_name: ::String,
+                                      name: ::String?,
+                                      table_wildcard: {
+                                      }?
+                                    },
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListDataCellsFilterResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataCellsFilterResponseSuccess
+
+      interface _ListLFTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLFTagsResponse]
+        def lf_tags: () -> ::Array[Types::LFTagPair]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#list_lf_tags-instance_method
+      def list_lf_tags: (
+                          ?catalog_id: ::String,
+                          ?resource_share_type: ("FOREIGN" | "ALL"),
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListLFTagsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLFTagsResponseSuccess
+
+      interface _ListLakeFormationOptInsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLakeFormationOptInsResponse]
+        def lake_formation_opt_ins_info_list: () -> ::Array[Types::LakeFormationOptInsInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#list_lake_formation_opt_ins-instance_method
+      def list_lake_formation_opt_ins: (
+                                         ?principal: {
+                                           data_lake_principal_identifier: ::String?
+                                         },
+                                         ?resource: {
+                                           catalog: {
+                                           }?,
+                                           database: {
+                                             catalog_id: ::String?,
+                                             name: ::String
+                                           }?,
+                                           table: {
+                                             catalog_id: ::String?,
+                                             database_name: ::String,
+                                             name: ::String?,
+                                             table_wildcard: {
+                                             }?
+                                           }?,
+                                           table_with_columns: {
+                                             catalog_id: ::String?,
+                                             database_name: ::String,
+                                             name: ::String,
+                                             column_names: Array[::String]?,
+                                             column_wildcard: {
+                                               excluded_column_names: Array[::String]?
+                                             }?
+                                           }?,
+                                           data_location: {
+                                             catalog_id: ::String?,
+                                             resource_arn: ::String
+                                           }?,
+                                           data_cells_filter: {
+                                             table_catalog_id: ::String?,
+                                             database_name: ::String?,
+                                             table_name: ::String?,
+                                             name: ::String?
+                                           }?,
+                                           lf_tag: {
+                                             catalog_id: ::String?,
+                                             tag_key: ::String,
+                                             tag_values: Array[::String]
+                                           }?,
+                                           lf_tag_policy: {
+                                             catalog_id: ::String?,
+                                             resource_type: ("DATABASE" | "TABLE"),
+                                             expression: Array[
+                                               {
+                                                 tag_key: ::String,
+                                                 tag_values: Array[::String]
+                                               },
+                                             ]
+                                           }?
+                                         },
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListLakeFormationOptInsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLakeFormationOptInsResponseSuccess
+
+      interface _ListPermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPermissionsResponse]
+        def principal_resource_permissions: () -> ::Array[Types::PrincipalResourcePermissions]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#list_permissions-instance_method
+      def list_permissions: (
+                              ?catalog_id: ::String,
+                              ?principal: {
+                                data_lake_principal_identifier: ::String?
+                              },
+                              ?resource_type: ("CATALOG" | "DATABASE" | "TABLE" | "DATA_LOCATION" | "LF_TAG" | "LF_TAG_POLICY" | "LF_TAG_POLICY_DATABASE" | "LF_TAG_POLICY_TABLE"),
+                              ?resource: {
+                                catalog: {
+                                }?,
+                                database: {
+                                  catalog_id: ::String?,
+                                  name: ::String
+                                }?,
+                                table: {
+                                  catalog_id: ::String?,
+                                  database_name: ::String,
+                                  name: ::String?,
+                                  table_wildcard: {
+                                  }?
+                                }?,
+                                table_with_columns: {
+                                  catalog_id: ::String?,
+                                  database_name: ::String,
+                                  name: ::String,
+                                  column_names: Array[::String]?,
+                                  column_wildcard: {
+                                    excluded_column_names: Array[::String]?
+                                  }?
+                                }?,
+                                data_location: {
+                                  catalog_id: ::String?,
+                                  resource_arn: ::String
+                                }?,
+                                data_cells_filter: {
+                                  table_catalog_id: ::String?,
+                                  database_name: ::String?,
+                                  table_name: ::String?,
+                                  name: ::String?
+                                }?,
+                                lf_tag: {
+                                  catalog_id: ::String?,
+                                  tag_key: ::String,
+                                  tag_values: Array[::String]
+                                }?,
+                                lf_tag_policy: {
+                                  catalog_id: ::String?,
+                                  resource_type: ("DATABASE" | "TABLE"),
+                                  expression: Array[
+                                    {
+                                      tag_key: ::String,
+                                      tag_values: Array[::String]
+                                    },
+                                  ]
+                                }?
+                              },
+                              ?next_token: ::String,
+                              ?max_results: ::Integer,
+                              ?include_related: ::String
+                            ) -> _ListPermissionsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPermissionsResponseSuccess
+
+      interface _ListResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourcesResponse]
+        def resource_info_list: () -> ::Array[Types::ResourceInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#list_resources-instance_method
+      def list_resources: (
+                            ?filter_condition_list: Array[
+                              {
+                                field: ("RESOURCE_ARN" | "ROLE_ARN" | "LAST_MODIFIED")?,
+                                comparison_operator: ("EQ" | "NE" | "LE" | "LT" | "GE" | "GT" | "CONTAINS" | "NOT_CONTAINS" | "BEGINS_WITH" | "IN" | "BETWEEN")?,
+                                string_value_list: Array[::String]?
+                              },
+                            ],
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListResourcesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourcesResponseSuccess
+
+      interface _ListTableStorageOptimizersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTableStorageOptimizersResponse]
+        def storage_optimizer_list: () -> ::Array[Types::StorageOptimizer]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#list_table_storage_optimizers-instance_method
+      def list_table_storage_optimizers: (
+                                           ?catalog_id: ::String,
+                                           database_name: ::String,
+                                           table_name: ::String,
+                                           ?storage_optimizer_type: ("COMPACTION" | "GARBAGE_COLLECTION" | "ALL"),
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String
+                                         ) -> _ListTableStorageOptimizersResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTableStorageOptimizersResponseSuccess
+
+      interface _ListTransactionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTransactionsResponse]
+        def transactions: () -> ::Array[Types::TransactionDescription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#list_transactions-instance_method
+      def list_transactions: (
+                               ?catalog_id: ::String,
+                               ?status_filter: ("ALL" | "COMPLETED" | "ACTIVE" | "COMMITTED" | "ABORTED"),
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListTransactionsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTransactionsResponseSuccess
+
+      interface _PutDataLakeSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDataLakeSettingsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#put_data_lake_settings-instance_method
+      def put_data_lake_settings: (
+                                    ?catalog_id: ::String,
+                                    data_lake_settings: {
+                                      data_lake_admins: Array[
+                                        {
+                                          data_lake_principal_identifier: ::String?
+                                        },
+                                      ]?,
+                                      read_only_admins: Array[
+                                        {
+                                          data_lake_principal_identifier: ::String?
+                                        },
+                                      ]?,
+                                      create_database_default_permissions: Array[
+                                        {
+                                          principal: {
+                                            data_lake_principal_identifier: ::String?
+                                          }?,
+                                          permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]?
+                                        },
+                                      ]?,
+                                      create_table_default_permissions: Array[
+                                        {
+                                          principal: {
+                                            data_lake_principal_identifier: ::String?
+                                          }?,
+                                          permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]?
+                                        },
+                                      ]?,
+                                      parameters: Hash[::String, ::String]?,
+                                      trusted_resource_owners: Array[::String]?,
+                                      allow_external_data_filtering: bool?,
+                                      allow_full_table_external_data_access: bool?,
+                                      external_data_filtering_allow_list: Array[
+                                        {
+                                          data_lake_principal_identifier: ::String?
+                                        },
+                                      ]?,
+                                      authorized_session_tag_value_list: Array[::String]?
+                                    }
+                                  ) -> _PutDataLakeSettingsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDataLakeSettingsResponseSuccess
+
+      interface _RegisterResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#register_resource-instance_method
+      def register_resource: (
+                               resource_arn: ::String,
+                               ?use_service_linked_role: bool,
+                               ?role_arn: ::String,
+                               ?with_federation: bool,
+                               ?hybrid_access_enabled: bool
+                             ) -> _RegisterResourceResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterResourceResponseSuccess
+
+      interface _RemoveLFTagsFromResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveLFTagsFromResourceResponse]
+        def failures: () -> ::Array[Types::LFTagError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#remove_lf_tags_from_resource-instance_method
+      def remove_lf_tags_from_resource: (
+                                          ?catalog_id: ::String,
+                                          resource: {
+                                            catalog: {
+                                            }?,
+                                            database: {
+                                              catalog_id: ::String?,
+                                              name: ::String
+                                            }?,
+                                            table: {
+                                              catalog_id: ::String?,
+                                              database_name: ::String,
+                                              name: ::String?,
+                                              table_wildcard: {
+                                              }?
+                                            }?,
+                                            table_with_columns: {
+                                              catalog_id: ::String?,
+                                              database_name: ::String,
+                                              name: ::String,
+                                              column_names: Array[::String]?,
+                                              column_wildcard: {
+                                                excluded_column_names: Array[::String]?
+                                              }?
+                                            }?,
+                                            data_location: {
+                                              catalog_id: ::String?,
+                                              resource_arn: ::String
+                                            }?,
+                                            data_cells_filter: {
+                                              table_catalog_id: ::String?,
+                                              database_name: ::String?,
+                                              table_name: ::String?,
+                                              name: ::String?
+                                            }?,
+                                            lf_tag: {
+                                              catalog_id: ::String?,
+                                              tag_key: ::String,
+                                              tag_values: Array[::String]
+                                            }?,
+                                            lf_tag_policy: {
+                                              catalog_id: ::String?,
+                                              resource_type: ("DATABASE" | "TABLE"),
+                                              expression: Array[
+                                                {
+                                                  tag_key: ::String,
+                                                  tag_values: Array[::String]
+                                                },
+                                              ]
+                                            }?
+                                          },
+                                          lf_tags: Array[
+                                            {
+                                              catalog_id: ::String?,
+                                              tag_key: ::String,
+                                              tag_values: Array[::String]
+                                            },
+                                          ]
+                                        ) -> _RemoveLFTagsFromResourceResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveLFTagsFromResourceResponseSuccess
+
+      interface _RevokePermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RevokePermissionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#revoke_permissions-instance_method
+      def revoke_permissions: (
+                                ?catalog_id: ::String,
+                                principal: {
+                                  data_lake_principal_identifier: ::String?
+                                },
+                                resource: {
+                                  catalog: {
+                                  }?,
+                                  database: {
+                                    catalog_id: ::String?,
+                                    name: ::String
+                                  }?,
+                                  table: {
+                                    catalog_id: ::String?,
+                                    database_name: ::String,
+                                    name: ::String?,
+                                    table_wildcard: {
+                                    }?
+                                  }?,
+                                  table_with_columns: {
+                                    catalog_id: ::String?,
+                                    database_name: ::String,
+                                    name: ::String,
+                                    column_names: Array[::String]?,
+                                    column_wildcard: {
+                                      excluded_column_names: Array[::String]?
+                                    }?
+                                  }?,
+                                  data_location: {
+                                    catalog_id: ::String?,
+                                    resource_arn: ::String
+                                  }?,
+                                  data_cells_filter: {
+                                    table_catalog_id: ::String?,
+                                    database_name: ::String?,
+                                    table_name: ::String?,
+                                    name: ::String?
+                                  }?,
+                                  lf_tag: {
+                                    catalog_id: ::String?,
+                                    tag_key: ::String,
+                                    tag_values: Array[::String]
+                                  }?,
+                                  lf_tag_policy: {
+                                    catalog_id: ::String?,
+                                    resource_type: ("DATABASE" | "TABLE"),
+                                    expression: Array[
+                                      {
+                                        tag_key: ::String,
+                                        tag_values: Array[::String]
+                                      },
+                                    ]
+                                  }?
+                                },
+                                permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")],
+                                ?permissions_with_grant_option: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION")]
+                              ) -> _RevokePermissionsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RevokePermissionsResponseSuccess
+
+      interface _SearchDatabasesByLFTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchDatabasesByLFTagsResponse]
+        def next_token: () -> ::String
+        def database_list: () -> ::Array[Types::TaggedDatabase]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#search_databases_by_lf_tags-instance_method
+      def search_databases_by_lf_tags: (
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer,
+                                         ?catalog_id: ::String,
+                                         expression: Array[
+                                           {
+                                             tag_key: ::String,
+                                             tag_values: Array[::String]
+                                           },
+                                         ]
+                                       ) -> _SearchDatabasesByLFTagsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchDatabasesByLFTagsResponseSuccess
+
+      interface _SearchTablesByLFTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchTablesByLFTagsResponse]
+        def next_token: () -> ::String
+        def table_list: () -> ::Array[Types::TaggedTable]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#search_tables_by_lf_tags-instance_method
+      def search_tables_by_lf_tags: (
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer,
+                                      ?catalog_id: ::String,
+                                      expression: Array[
+                                        {
+                                          tag_key: ::String,
+                                          tag_values: Array[::String]
+                                        },
+                                      ]
+                                    ) -> _SearchTablesByLFTagsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchTablesByLFTagsResponseSuccess
+
+      interface _StartQueryPlanningResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartQueryPlanningResponse]
+        def query_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#start_query_planning-instance_method
+      def start_query_planning: (
+                                  query_planning_context: {
+                                    catalog_id: ::String?,
+                                    database_name: ::String,
+                                    query_as_of_time: ::Time?,
+                                    query_parameters: Hash[::String, ::String]?,
+                                    transaction_id: ::String?
+                                  },
+                                  query_string: ::String
+                                ) -> _StartQueryPlanningResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartQueryPlanningResponseSuccess
+
+      interface _StartTransactionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartTransactionResponse]
+        def transaction_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#start_transaction-instance_method
+      def start_transaction: (
+                               ?transaction_type: ("READ_AND_WRITE" | "READ_ONLY")
+                             ) -> _StartTransactionResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTransactionResponseSuccess
+
+      interface _UpdateDataCellsFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataCellsFilterResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#update_data_cells_filter-instance_method
+      def update_data_cells_filter: (
+                                      table_data: {
+                                        table_catalog_id: ::String,
+                                        database_name: ::String,
+                                        table_name: ::String,
+                                        name: ::String,
+                                        row_filter: {
+                                          filter_expression: ::String?,
+                                          all_rows_wildcard: {
+                                          }?
+                                        }?,
+                                        column_names: Array[::String]?,
+                                        column_wildcard: {
+                                          excluded_column_names: Array[::String]?
+                                        }?,
+                                        version_id: ::String?
+                                      }
+                                    ) -> _UpdateDataCellsFilterResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataCellsFilterResponseSuccess
+
+      interface _UpdateLFTagResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLFTagResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#update_lf_tag-instance_method
+      def update_lf_tag: (
+                           ?catalog_id: ::String,
+                           tag_key: ::String,
+                           ?tag_values_to_delete: Array[::String],
+                           ?tag_values_to_add: Array[::String]
+                         ) -> _UpdateLFTagResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLFTagResponseSuccess
+
+      interface _UpdateLakeFormationIdentityCenterConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLakeFormationIdentityCenterConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#update_lake_formation_identity_center_configuration-instance_method
+      def update_lake_formation_identity_center_configuration: (
+                                                                 ?catalog_id: ::String,
+                                                                 ?application_status: ("ENABLED" | "DISABLED"),
+                                                                 ?external_filtering: {
+                                                                   status: ("ENABLED" | "DISABLED"),
+                                                                   authorized_targets: Array[::String]
+                                                                 }
+                                                               ) -> _UpdateLakeFormationIdentityCenterConfigurationResponseSuccess
+                                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLakeFormationIdentityCenterConfigurationResponseSuccess
+
+      interface _UpdateResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#update_resource-instance_method
+      def update_resource: (
+                             role_arn: ::String,
+                             resource_arn: ::String,
+                             ?with_federation: bool,
+                             ?hybrid_access_enabled: bool
+                           ) -> _UpdateResourceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResourceResponseSuccess
+
+      interface _UpdateTableObjectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTableObjectsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#update_table_objects-instance_method
+      def update_table_objects: (
+                                  ?catalog_id: ::String,
+                                  database_name: ::String,
+                                  table_name: ::String,
+                                  ?transaction_id: ::String,
+                                  write_operations: Array[
+                                    {
+                                      add_object: {
+                                        uri: ::String,
+                                        etag: ::String,
+                                        size: ::Integer,
+                                        partition_values: Array[::String]?
+                                      }?,
+                                      delete_object: {
+                                        uri: ::String,
+                                        etag: ::String?,
+                                        partition_values: Array[::String]?
+                                      }?
+                                    },
+                                  ]
+                                ) -> _UpdateTableObjectsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTableObjectsResponseSuccess
+
+      interface _UpdateTableStorageOptimizerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTableStorageOptimizerResponse]
+        def result: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#update_table_storage_optimizer-instance_method
+      def update_table_storage_optimizer: (
+                                            ?catalog_id: ::String,
+                                            database_name: ::String,
+                                            table_name: ::String,
+                                            storage_optimizer_config: Hash[("COMPACTION" | "GARBAGE_COLLECTION" | "ALL"), Hash[::String, ::String]]
+                                          ) -> _UpdateTableStorageOptimizerResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTableStorageOptimizerResponseSuccess
+    end
+  end
+end
+

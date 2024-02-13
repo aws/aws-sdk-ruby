@@ -43,7 +43,7 @@ module AwsSdkCodeGenerator
       end
 
       def files
-        ['LICENSE.txt', 'CHANGELOG.md', 'VERSION', 'lib/**/*.rb']
+        ['LICENSE.txt', 'CHANGELOG.md', 'VERSION', 'lib/**/*.rb', 'sig/**/*.rbs']
       end
 
       # @return [String]

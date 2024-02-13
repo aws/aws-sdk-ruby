@@ -618,7 +618,7 @@ module Aws::SageMaker
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].framework #=> String
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].framework_version #=> String
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].nearest_model_name #=> String
-    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].additional_s3_data_source.s3_data_type #=> String, one of "S3Object"
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].additional_s3_data_source.s3_data_type #=> String, one of "S3Object", "S3Prefix"
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].additional_s3_data_source.s3_uri #=> String
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].additional_s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.supported_transform_instance_types #=> Array
@@ -849,7 +849,7 @@ module Aws::SageMaker
     #         },
     #       ],
     #       additional_s3_data_source: {
-    #         s3_data_type: "S3Object", # required, accepts S3Object
+    #         s3_data_type: "S3Object", # required, accepts S3Object, S3Prefix
     #         s3_uri: "S3Uri", # required
     #         compression_type: "None", # accepts None, Gzip
     #       },
@@ -872,7 +872,7 @@ module Aws::SageMaker
     #           framework_version: "ModelPackageFrameworkVersion",
     #           nearest_model_name: "String",
     #           additional_s3_data_source: {
-    #             s3_data_type: "S3Object", # required, accepts S3Object
+    #             s3_data_type: "S3Object", # required, accepts S3Object, S3Prefix
     #             s3_uri: "S3Uri", # required
     #             compression_type: "None", # accepts None, Gzip
     #           },
@@ -1049,7 +1049,7 @@ module Aws::SageMaker
     #     domain_id: "DomainId", # required
     #     user_profile_name: "UserProfileName",
     #     space_name: "SpaceName",
-    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, VSCode, Savitur, CodeEditor, JupyterLab, RStudioServerPro, RSession, RSessionGateway, Canvas, DatasetManager, SageMakerLite, Local
+    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, CodeEditor, JupyterLab, RStudioServerPro, RSessionGateway, Canvas
     #     app_name: "AppName", # required
     #     tags: [
     #       {
@@ -1081,8 +1081,8 @@ module Aws::SageMaker
 
     # Creates a configuration for running a SageMaker image as a
     # KernelGateway app. The configuration specifies the Amazon Elastic File
-    # System (EFS) storage volume on the image, and a list of the kernels in
-    # the image.
+    # System storage volume on the image, and a list of the kernels in the
+    # image.
     #
     # @option params [required, String] :app_image_config_name
     #   The name of the AppImageConfig. Must be unique to your account.
@@ -1286,8 +1286,8 @@ module Aws::SageMaker
     #
     # @option params [String] :problem_type
     #   Defines the type of supervised learning problem available for the
-    #   candidates. For more information, see [ Amazon SageMaker Autopilot
-    #   problem types][1].
+    #   candidates. For more information, see [ SageMaker Autopilot problem
+    #   types][1].
     #
     #
     #
@@ -2297,7 +2297,7 @@ module Aws::SageMaker
     end
 
     # Creates a `Domain`. A domain consists of an associated Amazon Elastic
-    # File System (EFS) volume, a list of authorized users, and a variety of
+    # File System volume, a list of authorized users, and a variety of
     # security, application, policy, and Amazon Virtual Private Cloud (VPC)
     # configurations. Users within a domain can share notebook files and
     # other artifacts with each other.
@@ -2317,8 +2317,8 @@ module Aws::SageMaker
     #
     # **VPC configuration**
     #
-    # All traffic between the domain and the EFS volume is through the
-    # specified VPC and subnets. For other traffic, you can specify the
+    # All traffic between the domain and the Amazon EFS volume is through
+    # the specified VPC and subnets. For other traffic, you can specify the
     # `AppNetworkAccessType` parameter. `AppNetworkAccessType` corresponds
     # to the network access type that you choose when you onboard to the
     # domain. The following options are available:
@@ -2514,6 +2514,9 @@ module Aws::SageMaker
     #         },
     #         kendra_settings: {
     #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         generative_ai_settings: {
+    #           amazon_bedrock_role_arn: "RoleArn",
     #         },
     #       },
     #       code_editor_app_settings: {
@@ -4356,8 +4359,8 @@ module Aws::SageMaker
 
     # Creates a custom SageMaker image. A SageMaker image is a set of image
     # versions. Each image version represents a container image stored in
-    # Amazon Elastic Container Registry (ECR). For more information, see
-    # [Bring your own SageMaker image][1].
+    # Amazon ECR. For more information, see [Bring your own SageMaker
+    # image][1].
     #
     #
     #
@@ -4413,13 +4416,13 @@ module Aws::SageMaker
     end
 
     # Creates a version of the SageMaker image specified by `ImageName`. The
-    # version represents the Amazon Elastic Container Registry (ECR)
-    # container image specified by `BaseImage`.
+    # version represents the Amazon ECR container image specified by
+    # `BaseImage`.
     #
     # @option params [required, String] :base_image
     #   The registry path of the container image to use as the starting point
-    #   for this version. The path is an Amazon Elastic Container Registry
-    #   (ECR) URI in the following format:
+    #   for this version. The path is an Amazon ECR URI in the following
+    #   format:
     #
     #   `<acct-id>.dkr.ecr.<region>.amazonaws.com/<repo-name[:tag] or
     #   [@digest]>`
@@ -6082,7 +6085,7 @@ module Aws::SageMaker
     #           framework_version: "ModelPackageFrameworkVersion",
     #           nearest_model_name: "String",
     #           additional_s3_data_source: {
-    #             s3_data_type: "S3Object", # required, accepts S3Object
+    #             s3_data_type: "S3Object", # required, accepts S3Object, S3Prefix
     #             s3_uri: "S3Uri", # required
     #             compression_type: "None", # accepts None, Gzip
     #           },
@@ -6286,7 +6289,7 @@ module Aws::SageMaker
     #             framework_version: "ModelPackageFrameworkVersion",
     #             nearest_model_name: "String",
     #             additional_s3_data_source: {
-    #               s3_data_type: "S3Object", # required, accepts S3Object
+    #               s3_data_type: "S3Object", # required, accepts S3Object, S3Prefix
     #               s3_uri: "S3Uri", # required
     #               compression_type: "None", # accepts None, Gzip
     #             },
@@ -6911,9 +6914,9 @@ module Aws::SageMaker
     # The value of the `$PATH` environment variable that is available to
     # both scripts is `/sbin:bin:/usr/sbin:/usr/bin`.
     #
-    # View CloudWatch Logs for notebook instance lifecycle configurations in
-    # log group `/aws/sagemaker/NotebookInstances` in log stream
-    # `[notebook-instance-name]/[LifecycleConfigHook]`.
+    # View Amazon CloudWatch Logs for notebook instance lifecycle
+    # configurations in log group `/aws/sagemaker/NotebookInstances` in log
+    # stream `[notebook-instance-name]/[LifecycleConfigHook]`.
     #
     # Lifecycle configuration scripts cannot run for longer than 5 minutes.
     # If a script runs for longer than 5 minutes, it fails and the notebook
@@ -7059,8 +7062,8 @@ module Aws::SageMaker
     # Creates a URL for a specified UserProfile in a Domain. When accessed
     # in a web browser, the user will be automatically signed in to the
     # domain, and granted access to all of the Apps and files associated
-    # with the Domain's Amazon Elastic File System (EFS) volume. This
-    # operation can only be called when the authentication mode equals IAM.
+    # with the Domain's Amazon Elastic File System volume. This operation
+    # can only be called when the authentication mode equals IAM.
     #
     # The IAM role or user passed to this API defines the permissions to
     # access the app. Once the presigned URL is created, no additional
@@ -7475,10 +7478,10 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates a space used for real time collaboration in a Domain.
+    # Creates a space used for real time collaboration in a domain.
     #
     # @option params [required, String] :domain_id
-    #   The ID of the associated Domain.
+    #   The ID of the associated domain.
     #
     # @option params [required, String] :space_name
     #   The name of the space.
@@ -7571,7 +7574,7 @@ module Aws::SageMaker
     #           },
     #         ],
     #       },
-    #       app_type: "JupyterServer", # accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, VSCode, Savitur, CodeEditor, JupyterLab, RStudioServerPro, RSession, RSessionGateway, Canvas, DatasetManager, SageMakerLite, Local
+    #       app_type: "JupyterServer", # accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, CodeEditor, JupyterLab, RStudioServerPro, RSessionGateway, Canvas
     #       space_storage_settings: {
     #         ebs_storage_settings: {
     #           ebs_volume_size_in_gb: 1, # required
@@ -7634,7 +7637,7 @@ module Aws::SageMaker
     #   resp = client.create_studio_lifecycle_config({
     #     studio_lifecycle_config_name: "StudioLifecycleConfigName", # required
     #     studio_lifecycle_config_content: "StudioLifecycleConfigContent", # required
-    #     studio_lifecycle_config_app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, VSCode, Savitur, CodeEditor, JupyterLab
+    #     studio_lifecycle_config_app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, CodeEditor, JupyterLab
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -8578,8 +8581,8 @@ module Aws::SageMaker
     # administrator invites a person by email or imports them from IAM
     # Identity Center, a user profile is automatically created. A user
     # profile is the primary holder of settings for an individual user and
-    # has a reference to the user's private Amazon Elastic File System
-    # (EFS) home directory.
+    # has a reference to the user's private Amazon Elastic File System home
+    # directory.
     #
     # @option params [required, String] :domain_id
     #   The ID of the associated Domain.
@@ -8722,6 +8725,9 @@ module Aws::SageMaker
     #         },
     #         kendra_settings: {
     #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         generative_ai_settings: {
+    #           amazon_bedrock_role_arn: "RoleArn",
     #         },
     #       },
     #       code_editor_app_settings: {
@@ -9088,7 +9094,7 @@ module Aws::SageMaker
     #     domain_id: "DomainId", # required
     #     user_profile_name: "UserProfileName",
     #     space_name: "SpaceName",
-    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, VSCode, Savitur, CodeEditor, JupyterLab, RStudioServerPro, RSession, RSessionGateway, Canvas, DatasetManager, SageMakerLite, Local
+    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, CodeEditor, JupyterLab, RStudioServerPro, RSessionGateway, Canvas
     #     app_name: "AppName", # required
     #   })
     #
@@ -9689,6 +9695,32 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Deletes a hyperparameter tuning job. The
+    # `DeleteHyperParameterTuningJob` API deletes only the tuning job entry
+    # that was created in SageMaker when you called the
+    # `CreateHyperParameterTuningJob` API. It does not delete training jobs,
+    # artifacts, or the IAM role that you specified when creating the model.
+    #
+    # @option params [required, String] :hyper_parameter_tuning_job_name
+    #   The name of the hyperparameter tuning job that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_hyper_parameter_tuning_job({
+    #     hyper_parameter_tuning_job_name: "HyperParameterTuningJobName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteHyperParameterTuningJob AWS API Documentation
+    #
+    # @overload delete_hyper_parameter_tuning_job(params = {})
+    # @param [Hash] params ({})
+    def delete_hyper_parameter_tuning_job(params = {}, options = {})
+      req = build_request(:delete_hyper_parameter_tuning_job, params)
+      req.send_request(options)
+    end
+
     # Deletes a SageMaker image and all versions of the image. The container
     # images aren't deleted.
     #
@@ -10125,7 +10157,7 @@ module Aws::SageMaker
     # Used to delete a space.
     #
     # @option params [required, String] :domain_id
-    #   The ID of the associated Domain.
+    #   The ID of the associated domain.
     #
     # @option params [required, String] :space_name
     #   The name of the space.
@@ -10538,7 +10570,7 @@ module Aws::SageMaker
     #   resp.training_specification.supported_tuning_job_objective_metrics #=> Array
     #   resp.training_specification.supported_tuning_job_objective_metrics[0].type #=> String, one of "Maximize", "Minimize"
     #   resp.training_specification.supported_tuning_job_objective_metrics[0].metric_name #=> String
-    #   resp.training_specification.additional_s3_data_source.s3_data_type #=> String, one of "S3Object"
+    #   resp.training_specification.additional_s3_data_source.s3_data_type #=> String, one of "S3Object", "S3Prefix"
     #   resp.training_specification.additional_s3_data_source.s3_uri #=> String
     #   resp.training_specification.additional_s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.inference_specification.containers #=> Array
@@ -10553,7 +10585,7 @@ module Aws::SageMaker
     #   resp.inference_specification.containers[0].framework #=> String
     #   resp.inference_specification.containers[0].framework_version #=> String
     #   resp.inference_specification.containers[0].nearest_model_name #=> String
-    #   resp.inference_specification.containers[0].additional_s3_data_source.s3_data_type #=> String, one of "S3Object"
+    #   resp.inference_specification.containers[0].additional_s3_data_source.s3_data_type #=> String, one of "S3Object", "S3Prefix"
     #   resp.inference_specification.containers[0].additional_s3_data_source.s3_uri #=> String
     #   resp.inference_specification.containers[0].additional_s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.inference_specification.supported_transform_instance_types #=> Array
@@ -10680,14 +10712,14 @@ module Aws::SageMaker
     #     domain_id: "DomainId", # required
     #     user_profile_name: "UserProfileName",
     #     space_name: "SpaceName",
-    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, VSCode, Savitur, CodeEditor, JupyterLab, RStudioServerPro, RSession, RSessionGateway, Canvas, DatasetManager, SageMakerLite, Local
+    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, CodeEditor, JupyterLab, RStudioServerPro, RSessionGateway, Canvas
     #     app_name: "AppName", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.app_arn #=> String
-    #   resp.app_type #=> String, one of "JupyterServer", "KernelGateway", "DetailedProfiler", "TensorBoard", "VSCode", "Savitur", "CodeEditor", "JupyterLab", "RStudioServerPro", "RSession", "RSessionGateway", "Canvas", "DatasetManager", "SageMakerLite", "Local"
+    #   resp.app_type #=> String, one of "JupyterServer", "KernelGateway", "DetailedProfiler", "TensorBoard", "CodeEditor", "JupyterLab", "RStudioServerPro", "RSessionGateway", "Canvas"
     #   resp.app_name #=> String
     #   resp.domain_id #=> String
     #   resp.user_profile_name #=> String
@@ -11723,6 +11755,7 @@ module Aws::SageMaker
     #   resp.default_user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].secret_arn #=> String
     #   resp.default_user_settings.canvas_app_settings.direct_deploy_settings.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.default_user_settings.canvas_app_settings.kendra_settings.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.default_user_settings.canvas_app_settings.generative_ai_settings.amazon_bedrock_role_arn #=> String
     #   resp.default_user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_arn #=> String
     #   resp.default_user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
     #   resp.default_user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_version_alias #=> String
@@ -13977,7 +14010,7 @@ module Aws::SageMaker
     #   resp.inference_specification.containers[0].framework #=> String
     #   resp.inference_specification.containers[0].framework_version #=> String
     #   resp.inference_specification.containers[0].nearest_model_name #=> String
-    #   resp.inference_specification.containers[0].additional_s3_data_source.s3_data_type #=> String, one of "S3Object"
+    #   resp.inference_specification.containers[0].additional_s3_data_source.s3_data_type #=> String, one of "S3Object", "S3Prefix"
     #   resp.inference_specification.containers[0].additional_s3_data_source.s3_uri #=> String
     #   resp.inference_specification.containers[0].additional_s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.inference_specification.supported_transform_instance_types #=> Array
@@ -14111,7 +14144,7 @@ module Aws::SageMaker
     #   resp.additional_inference_specifications[0].containers[0].framework #=> String
     #   resp.additional_inference_specifications[0].containers[0].framework_version #=> String
     #   resp.additional_inference_specifications[0].containers[0].nearest_model_name #=> String
-    #   resp.additional_inference_specifications[0].containers[0].additional_s3_data_source.s3_data_type #=> String, one of "S3Object"
+    #   resp.additional_inference_specifications[0].containers[0].additional_s3_data_source.s3_data_type #=> String, one of "S3Object", "S3Prefix"
     #   resp.additional_inference_specifications[0].containers[0].additional_s3_data_source.s3_uri #=> String
     #   resp.additional_inference_specifications[0].containers[0].additional_s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.additional_inference_specifications[0].supported_transform_instance_types #=> Array
@@ -14136,7 +14169,7 @@ module Aws::SageMaker
     # Gets a description for the specified model group.
     #
     # @option params [required, String] :model_package_group_name
-    #   The name of gthe model group to describe.
+    #   The name of the model group to describe.
     #
     # @return [Types::DescribeModelPackageGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -14860,7 +14893,7 @@ module Aws::SageMaker
     # Describes the space.
     #
     # @option params [required, String] :domain_id
-    #   The ID of the associated Domain.
+    #   The ID of the associated domain.
     #
     # @option params [required, String] :space_name
     #   The name of the space.
@@ -14930,7 +14963,7 @@ module Aws::SageMaker
     #   resp.space_settings.jupyter_lab_app_settings.default_resource_spec.lifecycle_config_arn #=> String
     #   resp.space_settings.jupyter_lab_app_settings.code_repositories #=> Array
     #   resp.space_settings.jupyter_lab_app_settings.code_repositories[0].repository_url #=> String
-    #   resp.space_settings.app_type #=> String, one of "JupyterServer", "KernelGateway", "DetailedProfiler", "TensorBoard", "VSCode", "Savitur", "CodeEditor", "JupyterLab", "RStudioServerPro", "RSession", "RSessionGateway", "Canvas", "DatasetManager", "SageMakerLite", "Local"
+    #   resp.space_settings.app_type #=> String, one of "JupyterServer", "KernelGateway", "DetailedProfiler", "TensorBoard", "CodeEditor", "JupyterLab", "RStudioServerPro", "RSessionGateway", "Canvas"
     #   resp.space_settings.space_storage_settings.ebs_storage_settings.ebs_volume_size_in_gb #=> Integer
     #   resp.space_settings.custom_file_systems #=> Array
     #   resp.space_settings.custom_file_systems[0].efs_file_system.file_system_id #=> String
@@ -14976,7 +15009,7 @@ module Aws::SageMaker
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
     #   resp.studio_lifecycle_config_content #=> String
-    #   resp.studio_lifecycle_config_app_type #=> String, one of "JupyterServer", "KernelGateway", "VSCode", "Savitur", "CodeEditor", "JupyterLab"
+    #   resp.studio_lifecycle_config_app_type #=> String, one of "JupyterServer", "KernelGateway", "CodeEditor", "JupyterLab"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeStudioLifecycleConfig AWS API Documentation
     #
@@ -15583,6 +15616,7 @@ module Aws::SageMaker
     #   resp.user_settings.canvas_app_settings.identity_provider_o_auth_settings[0].secret_arn #=> String
     #   resp.user_settings.canvas_app_settings.direct_deploy_settings.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.user_settings.canvas_app_settings.kendra_settings.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.user_settings.canvas_app_settings.generative_ai_settings.amazon_bedrock_role_arn #=> String
     #   resp.user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_arn #=> String
     #   resp.user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
     #   resp.user_settings.code_editor_app_settings.default_resource_spec.sage_maker_image_version_alias #=> String
@@ -16495,7 +16529,7 @@ module Aws::SageMaker
     #   resp.apps[0].domain_id #=> String
     #   resp.apps[0].user_profile_name #=> String
     #   resp.apps[0].space_name #=> String
-    #   resp.apps[0].app_type #=> String, one of "JupyterServer", "KernelGateway", "DetailedProfiler", "TensorBoard", "VSCode", "Savitur", "CodeEditor", "JupyterLab", "RStudioServerPro", "RSession", "RSessionGateway", "Canvas", "DatasetManager", "SageMakerLite", "Local"
+    #   resp.apps[0].app_type #=> String, one of "JupyterServer", "KernelGateway", "DetailedProfiler", "TensorBoard", "CodeEditor", "JupyterLab", "RStudioServerPro", "RSessionGateway", "Canvas"
     #   resp.apps[0].app_name #=> String
     #   resp.apps[0].status #=> String, one of "Deleted", "Deleting", "Failed", "InService", "Pending"
     #   resp.apps[0].creation_time #=> Time
@@ -20995,7 +21029,7 @@ module Aws::SageMaker
     #   `CreationTime`.
     #
     # @option params [String] :domain_id_equals
-    #   A parameter to search for the Domain ID.
+    #   A parameter to search for the domain ID.
     #
     # @option params [String] :space_name_contains
     #   A parameter by which to filter the results.
@@ -21026,7 +21060,7 @@ module Aws::SageMaker
     #   resp.spaces[0].status #=> String, one of "Deleting", "Failed", "InService", "Pending", "Updating", "Update_Failed", "Delete_Failed"
     #   resp.spaces[0].creation_time #=> Time
     #   resp.spaces[0].last_modified_time #=> Time
-    #   resp.spaces[0].space_settings_summary.app_type #=> String, one of "JupyterServer", "KernelGateway", "DetailedProfiler", "TensorBoard", "VSCode", "Savitur", "CodeEditor", "JupyterLab", "RStudioServerPro", "RSession", "RSessionGateway", "Canvas", "DatasetManager", "SageMakerLite", "Local"
+    #   resp.spaces[0].space_settings_summary.app_type #=> String, one of "JupyterServer", "KernelGateway", "DetailedProfiler", "TensorBoard", "CodeEditor", "JupyterLab", "RStudioServerPro", "RSessionGateway", "Canvas"
     #   resp.spaces[0].space_settings_summary.space_storage_settings.ebs_storage_settings.ebs_volume_size_in_gb #=> Integer
     #   resp.spaces[0].space_sharing_settings_summary.sharing_type #=> String, one of "Private", "Shared"
     #   resp.spaces[0].ownership_settings_summary.owner_user_profile_name #=> String
@@ -21161,7 +21195,7 @@ module Aws::SageMaker
     #     max_results: 1,
     #     next_token: "NextToken",
     #     name_contains: "StudioLifecycleConfigName",
-    #     app_type_equals: "JupyterServer", # accepts JupyterServer, KernelGateway, VSCode, Savitur, CodeEditor, JupyterLab
+    #     app_type_equals: "JupyterServer", # accepts JupyterServer, KernelGateway, CodeEditor, JupyterLab
     #     creation_time_before: Time.now,
     #     creation_time_after: Time.now,
     #     modified_time_before: Time.now,
@@ -21178,7 +21212,7 @@ module Aws::SageMaker
     #   resp.studio_lifecycle_configs[0].studio_lifecycle_config_name #=> String
     #   resp.studio_lifecycle_configs[0].creation_time #=> Time
     #   resp.studio_lifecycle_configs[0].last_modified_time #=> Time
-    #   resp.studio_lifecycle_configs[0].studio_lifecycle_config_app_type #=> String, one of "JupyterServer", "KernelGateway", "VSCode", "Savitur", "CodeEditor", "JupyterLab"
+    #   resp.studio_lifecycle_configs[0].studio_lifecycle_config_app_type #=> String, one of "JupyterServer", "KernelGateway", "CodeEditor", "JupyterLab"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListStudioLifecycleConfigs AWS API Documentation
     #
@@ -23456,7 +23490,7 @@ module Aws::SageMaker
     #   must be set to `Service`.
     #
     # @option params [Types::DefaultSpaceSettings] :default_space_settings
-    #   The default settings used to create a space within the Domain.
+    #   The default settings used to create a space within the domain.
     #
     # @option params [Array<String>] :subnet_ids
     #   The VPC subnets that Studio uses for communication.
@@ -23583,6 +23617,9 @@ module Aws::SageMaker
     #         },
     #         kendra_settings: {
     #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         generative_ai_settings: {
+    #           amazon_bedrock_role_arn: "RoleArn",
     #         },
     #       },
     #       code_editor_app_settings: {
@@ -23712,15 +23749,18 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Deploys the new `EndpointConfig` specified in the request, switches to
-    # using newly created endpoint, and then deletes resources provisioned
-    # for the endpoint using the previous `EndpointConfig` (there is no
-    # availability loss).
+    # Deploys the `EndpointConfig` specified in the request to a new fleet
+    # of instances. SageMaker shifts endpoint traffic to the new instances
+    # with the updated endpoint configuration and then deletes the old
+    # instances using the previous `EndpointConfig` (there is no
+    # availability loss). For more information about how to control the
+    # update and traffic shifting process, see [ Update models in
+    # production][1].
     #
     # When SageMaker receives the request, it sets the endpoint status to
     # `Updating`. After updating the endpoint, it sets the status to
     # `InService`. To check the status of an endpoint, use the
-    # [DescribeEndpoint][1] API.
+    # [DescribeEndpoint][2] API.
     #
     # <note markdown="1"> You must not delete an `EndpointConfig` in use by an endpoint that is
     # live or while the `UpdateEndpoint` or `CreateEndpoint` operations are
@@ -23736,7 +23776,8 @@ module Aws::SageMaker
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/deployment-guardrails.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html
     #
     # @option params [required, String] :endpoint_name
     #   The name of the endpoint whose configuration you want to update.
@@ -24564,7 +24605,7 @@ module Aws::SageMaker
     #             framework_version: "ModelPackageFrameworkVersion",
     #             nearest_model_name: "String",
     #             additional_s3_data_source: {
-    #               s3_data_type: "S3Object", # required, accepts S3Object
+    #               s3_data_type: "S3Object", # required, accepts S3Object, S3Prefix
     #               s3_uri: "S3Uri", # required
     #               compression_type: "None", # accepts None, Gzip
     #             },
@@ -25155,7 +25196,7 @@ module Aws::SageMaker
     # Updates the settings of a space.
     #
     # @option params [required, String] :domain_id
-    #   The ID of the associated Domain.
+    #   The ID of the associated domain.
     #
     # @option params [required, String] :space_name
     #   The name of the space.
@@ -25231,7 +25272,7 @@ module Aws::SageMaker
     #           },
     #         ],
     #       },
-    #       app_type: "JupyterServer", # accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, VSCode, Savitur, CodeEditor, JupyterLab, RStudioServerPro, RSession, RSessionGateway, Canvas, DatasetManager, SageMakerLite, Local
+    #       app_type: "JupyterServer", # accepts JupyterServer, KernelGateway, DetailedProfiler, TensorBoard, CodeEditor, JupyterLab, RStudioServerPro, RSessionGateway, Canvas
     #       space_storage_settings: {
     #         ebs_storage_settings: {
     #           ebs_volume_size_in_gb: 1, # required
@@ -25587,6 +25628,9 @@ module Aws::SageMaker
     #         kendra_settings: {
     #           status: "ENABLED", # accepts ENABLED, DISABLED
     #         },
+    #         generative_ai_settings: {
+    #           amazon_bedrock_role_arn: "RoleArn",
+    #         },
     #       },
     #       code_editor_app_settings: {
     #         default_resource_spec: {
@@ -25896,7 +25940,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.228.0'
+      context[:gem_version] = '1.231.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

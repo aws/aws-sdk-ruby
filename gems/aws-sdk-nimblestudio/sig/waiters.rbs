@@ -1,0 +1,144 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module NimbleStudio
+    module Waiters
+
+      class LaunchProfileDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    launch_profile_id: ::String,
+                    studio_id: ::String
+                  ) -> Client::_GetLaunchProfileResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetLaunchProfileResponseSuccess
+      end
+
+      class LaunchProfileReady
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    launch_profile_id: ::String,
+                    studio_id: ::String
+                  ) -> Client::_GetLaunchProfileResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetLaunchProfileResponseSuccess
+      end
+
+      class StreamingImageDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    streaming_image_id: ::String,
+                    studio_id: ::String
+                  ) -> Client::_GetStreamingImageResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetStreamingImageResponseSuccess
+      end
+
+      class StreamingImageReady
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    streaming_image_id: ::String,
+                    studio_id: ::String
+                  ) -> Client::_GetStreamingImageResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetStreamingImageResponseSuccess
+      end
+
+      class StreamingSessionDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    session_id: ::String,
+                    studio_id: ::String
+                  ) -> Client::_GetStreamingSessionResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetStreamingSessionResponseSuccess
+      end
+
+      class StreamingSessionReady
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    session_id: ::String,
+                    studio_id: ::String
+                  ) -> Client::_GetStreamingSessionResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetStreamingSessionResponseSuccess
+      end
+
+      class StreamingSessionStopped
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    session_id: ::String,
+                    studio_id: ::String
+                  ) -> Client::_GetStreamingSessionResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetStreamingSessionResponseSuccess
+      end
+
+      class StreamingSessionStreamReady
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    session_id: ::String,
+                    stream_id: ::String,
+                    studio_id: ::String
+                  ) -> Client::_GetStreamingSessionStreamResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetStreamingSessionStreamResponseSuccess
+      end
+
+      class StudioComponentDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    studio_component_id: ::String,
+                    studio_id: ::String
+                  ) -> Client::_GetStudioComponentResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetStudioComponentResponseSuccess
+      end
+
+      class StudioComponentReady
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    studio_component_id: ::String,
+                    studio_id: ::String
+                  ) -> Client::_GetStudioComponentResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetStudioComponentResponseSuccess
+      end
+
+      class StudioDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    studio_id: ::String
+                  ) -> Client::_GetStudioResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetStudioResponseSuccess
+      end
+
+      class StudioReady
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    studio_id: ::String
+                  ) -> Client::_GetStudioResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetStudioResponseSuccess
+      end
+    end
+  end
+end

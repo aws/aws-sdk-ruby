@@ -1,0 +1,58 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Lightsail
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def docs: () -> ::String
+        def message: () -> ::String
+        def tip: () -> ::String
+      end
+      class AccountSetupInProgressException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def docs: () -> ::String
+        def message: () -> ::String
+        def tip: () -> ::String
+      end
+      class InvalidInputException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def docs: () -> ::String
+        def message: () -> ::String
+        def tip: () -> ::String
+      end
+      class NotFoundException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def docs: () -> ::String
+        def message: () -> ::String
+        def tip: () -> ::String
+      end
+      class OperationFailureException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def docs: () -> ::String
+        def message: () -> ::String
+        def tip: () -> ::String
+      end
+      class ServiceException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def docs: () -> ::String
+        def message: () -> ::String
+        def tip: () -> ::String
+      end
+      class UnauthenticatedException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def docs: () -> ::String
+        def message: () -> ::String
+        def tip: () -> ::String
+      end
+    end
+  end
+end

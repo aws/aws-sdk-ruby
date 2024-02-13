@@ -1,0 +1,82 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module WorkMail
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class DirectoryInUseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DirectoryServiceAuthenticationFailedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DirectoryUnavailableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class EmailAddressInUseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class EntityAlreadyRegisteredException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class EntityNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class EntityStateException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidConfigurationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidCustomSesConfigurationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidParameterException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidPasswordException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MailDomainInUseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MailDomainNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MailDomainStateException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NameAvailabilityException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class OrganizationNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class OrganizationStateException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ReservedNameException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyTagsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnsupportedOperationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.39.0 (2024-01-12)
+------------------
+
+* Feature - Introduce new Supervisor participant role
+
 1.38.0 (2023-11-28)
 ------------------
 

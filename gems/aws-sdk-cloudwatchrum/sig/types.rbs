@@ -1,0 +1,384 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CloudWatchRUM
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AppMonitor
+      attr_accessor app_monitor_configuration: Types::AppMonitorConfiguration
+      attr_accessor created: ::String
+      attr_accessor custom_events: Types::CustomEvents
+      attr_accessor data_storage: Types::DataStorage
+      attr_accessor domain: ::String
+      attr_accessor id: ::String
+      attr_accessor last_modified: ::String
+      attr_accessor name: ::String
+      attr_accessor state: ("CREATED" | "DELETING" | "ACTIVE")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class AppMonitorConfiguration
+      attr_accessor allow_cookies: bool
+      attr_accessor enable_x_ray: bool
+      attr_accessor excluded_pages: ::Array[::String]
+      attr_accessor favorite_pages: ::Array[::String]
+      attr_accessor guest_role_arn: ::String
+      attr_accessor identity_pool_id: ::String
+      attr_accessor included_pages: ::Array[::String]
+      attr_accessor session_sample_rate: ::Float
+      attr_accessor telemetries: ::Array[("errors" | "performance" | "http")]
+      SENSITIVE: []
+    end
+
+    class AppMonitorDetails
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class AppMonitorSummary
+      attr_accessor created: ::String
+      attr_accessor id: ::String
+      attr_accessor last_modified: ::String
+      attr_accessor name: ::String
+      attr_accessor state: ("CREATED" | "DELETING" | "ACTIVE")
+      SENSITIVE: []
+    end
+
+    class BatchCreateRumMetricDefinitionsError
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      attr_accessor metric_definition: Types::MetricDefinitionRequest
+      SENSITIVE: []
+    end
+
+    class BatchCreateRumMetricDefinitionsRequest
+      attr_accessor app_monitor_name: ::String
+      attr_accessor destination: ("CloudWatch" | "Evidently")
+      attr_accessor destination_arn: ::String
+      attr_accessor metric_definitions: ::Array[Types::MetricDefinitionRequest]
+      SENSITIVE: []
+    end
+
+    class BatchCreateRumMetricDefinitionsResponse
+      attr_accessor errors: ::Array[Types::BatchCreateRumMetricDefinitionsError]
+      attr_accessor metric_definitions: ::Array[Types::MetricDefinition]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteRumMetricDefinitionsError
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      attr_accessor metric_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDeleteRumMetricDefinitionsRequest
+      attr_accessor app_monitor_name: ::String
+      attr_accessor destination: ("CloudWatch" | "Evidently")
+      attr_accessor destination_arn: ::String
+      attr_accessor metric_definition_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteRumMetricDefinitionsResponse
+      attr_accessor errors: ::Array[Types::BatchDeleteRumMetricDefinitionsError]
+      attr_accessor metric_definition_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetRumMetricDefinitionsRequest
+      attr_accessor app_monitor_name: ::String
+      attr_accessor destination: ("CloudWatch" | "Evidently")
+      attr_accessor destination_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetRumMetricDefinitionsResponse
+      attr_accessor metric_definitions: ::Array[Types::MetricDefinition]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAppMonitorRequest
+      attr_accessor app_monitor_configuration: Types::AppMonitorConfiguration
+      attr_accessor custom_events: Types::CustomEvents
+      attr_accessor cw_log_enabled: bool
+      attr_accessor domain: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateAppMonitorResponse
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CustomEvents
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class CwLog
+      attr_accessor cw_log_enabled: bool
+      attr_accessor cw_log_group: ::String
+      SENSITIVE: []
+    end
+
+    class DataStorage
+      attr_accessor cw_log: Types::CwLog
+      SENSITIVE: []
+    end
+
+    class DeleteAppMonitorRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppMonitorResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRumMetricsDestinationRequest
+      attr_accessor app_monitor_name: ::String
+      attr_accessor destination: ("CloudWatch" | "Evidently")
+      attr_accessor destination_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRumMetricsDestinationResponse < Aws::EmptyStructure
+    end
+
+    class GetAppMonitorDataRequest
+      attr_accessor filters: ::Array[Types::QueryFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor time_range: Types::TimeRange
+      SENSITIVE: []
+    end
+
+    class GetAppMonitorDataResponse
+      attr_accessor events: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetAppMonitorRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetAppMonitorResponse
+      attr_accessor app_monitor: Types::AppMonitor
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAppMonitorsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppMonitorsResponse
+      attr_accessor app_monitor_summaries: ::Array[Types::AppMonitorSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRumMetricsDestinationsRequest
+      attr_accessor app_monitor_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRumMetricsDestinationsResponse
+      attr_accessor destinations: ::Array[Types::MetricDestinationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MetricDefinition
+      attr_accessor dimension_keys: ::Hash[::String, ::String]
+      attr_accessor event_pattern: ::String
+      attr_accessor metric_definition_id: ::String
+      attr_accessor name: ::String
+      attr_accessor namespace: ::String
+      attr_accessor unit_label: ::String
+      attr_accessor value_key: ::String
+      SENSITIVE: []
+    end
+
+    class MetricDefinitionRequest
+      attr_accessor dimension_keys: ::Hash[::String, ::String]
+      attr_accessor event_pattern: ::String
+      attr_accessor name: ::String
+      attr_accessor namespace: ::String
+      attr_accessor unit_label: ::String
+      attr_accessor value_key: ::String
+      SENSITIVE: []
+    end
+
+    class MetricDestinationSummary
+      attr_accessor destination: ("CloudWatch" | "Evidently")
+      attr_accessor destination_arn: ::String
+      attr_accessor iam_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutRumEventsRequest
+      attr_accessor app_monitor_details: Types::AppMonitorDetails
+      attr_accessor batch_id: ::String
+      attr_accessor id: ::String
+      attr_accessor rum_events: ::Array[Types::RumEvent]
+      attr_accessor user_details: Types::UserDetails
+      SENSITIVE: []
+    end
+
+    class PutRumEventsResponse < Aws::EmptyStructure
+    end
+
+    class PutRumMetricsDestinationRequest
+      attr_accessor app_monitor_name: ::String
+      attr_accessor destination: ("CloudWatch" | "Evidently")
+      attr_accessor destination_arn: ::String
+      attr_accessor iam_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutRumMetricsDestinationResponse < Aws::EmptyStructure
+    end
+
+    class QueryFilter
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class RumEvent
+      attr_accessor details: ::String
+      attr_accessor id: ::String
+      attr_accessor metadata: ::String
+      attr_accessor timestamp: ::Time
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class TimeRange
+      attr_accessor after: ::Integer
+      attr_accessor before: ::Integer
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAppMonitorRequest
+      attr_accessor app_monitor_configuration: Types::AppMonitorConfiguration
+      attr_accessor custom_events: Types::CustomEvents
+      attr_accessor cw_log_enabled: bool
+      attr_accessor domain: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAppMonitorResponse < Aws::EmptyStructure
+    end
+
+    class UpdateRumMetricDefinitionRequest
+      attr_accessor app_monitor_name: ::String
+      attr_accessor destination: ("CloudWatch" | "Evidently")
+      attr_accessor destination_arn: ::String
+      attr_accessor metric_definition: Types::MetricDefinitionRequest
+      attr_accessor metric_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRumMetricDefinitionResponse < Aws::EmptyStructure
+    end
+
+    class UserDetails
+      attr_accessor session_id: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

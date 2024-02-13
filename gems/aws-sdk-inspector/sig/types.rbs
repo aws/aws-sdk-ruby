@@ -1,0 +1,763 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Inspector
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      attr_accessor error_code: ("ACCESS_DENIED_TO_ASSESSMENT_TARGET" | "ACCESS_DENIED_TO_ASSESSMENT_TEMPLATE" | "ACCESS_DENIED_TO_ASSESSMENT_RUN" | "ACCESS_DENIED_TO_FINDING" | "ACCESS_DENIED_TO_RESOURCE_GROUP" | "ACCESS_DENIED_TO_RULES_PACKAGE" | "ACCESS_DENIED_TO_SNS_TOPIC" | "ACCESS_DENIED_TO_IAM_ROLE")
+      attr_accessor can_retry: bool
+      SENSITIVE: []
+    end
+
+    class AddAttributesToFindingsRequest
+      attr_accessor finding_arns: ::Array[::String]
+      attr_accessor attributes: ::Array[Types::Attribute]
+      SENSITIVE: []
+    end
+
+    class AddAttributesToFindingsResponse
+      attr_accessor failed_items: ::Hash[::String, Types::FailedItemDetails]
+      SENSITIVE: []
+    end
+
+    class AgentAlreadyRunningAssessment
+      attr_accessor agent_id: ::String
+      attr_accessor assessment_run_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AgentFilter
+      attr_accessor agent_healths: ::Array[("HEALTHY" | "UNHEALTHY" | "UNKNOWN")]
+      attr_accessor agent_health_codes: ::Array[("IDLE" | "RUNNING" | "SHUTDOWN" | "UNHEALTHY" | "THROTTLED" | "UNKNOWN")]
+      SENSITIVE: []
+    end
+
+    class AgentPreview
+      attr_accessor hostname: ::String
+      attr_accessor agent_id: ::String
+      attr_accessor auto_scaling_group: ::String
+      attr_accessor agent_health: ("HEALTHY" | "UNHEALTHY" | "UNKNOWN")
+      attr_accessor agent_version: ::String
+      attr_accessor operating_system: ::String
+      attr_accessor kernel_version: ::String
+      attr_accessor ipv4_address: ::String
+      SENSITIVE: []
+    end
+
+    class AgentsAlreadyRunningAssessmentException
+      attr_accessor message: ::String
+      attr_accessor agents: ::Array[Types::AgentAlreadyRunningAssessment]
+      attr_accessor agents_truncated: bool
+      attr_accessor can_retry: bool
+      SENSITIVE: []
+    end
+
+    class AssessmentRun
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor assessment_template_arn: ::String
+      attr_accessor state: ("CREATED" | "START_DATA_COLLECTION_PENDING" | "START_DATA_COLLECTION_IN_PROGRESS" | "COLLECTING_DATA" | "STOP_DATA_COLLECTION_PENDING" | "DATA_COLLECTED" | "START_EVALUATING_RULES_PENDING" | "EVALUATING_RULES" | "FAILED" | "ERROR" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "CANCELED")
+      attr_accessor duration_in_seconds: ::Integer
+      attr_accessor rules_package_arns: ::Array[::String]
+      attr_accessor user_attributes_for_findings: ::Array[Types::Attribute]
+      attr_accessor created_at: ::Time
+      attr_accessor started_at: ::Time
+      attr_accessor completed_at: ::Time
+      attr_accessor state_changed_at: ::Time
+      attr_accessor data_collected: bool
+      attr_accessor state_changes: ::Array[Types::AssessmentRunStateChange]
+      attr_accessor notifications: ::Array[Types::AssessmentRunNotification]
+      attr_accessor finding_counts: ::Hash[("Low" | "Medium" | "High" | "Informational" | "Undefined"), ::Integer]
+      SENSITIVE: []
+    end
+
+    class AssessmentRunAgent
+      attr_accessor agent_id: ::String
+      attr_accessor assessment_run_arn: ::String
+      attr_accessor agent_health: ("HEALTHY" | "UNHEALTHY" | "UNKNOWN")
+      attr_accessor agent_health_code: ("IDLE" | "RUNNING" | "SHUTDOWN" | "UNHEALTHY" | "THROTTLED" | "UNKNOWN")
+      attr_accessor agent_health_details: ::String
+      attr_accessor auto_scaling_group: ::String
+      attr_accessor telemetry_metadata: ::Array[Types::TelemetryMetadata]
+      SENSITIVE: []
+    end
+
+    class AssessmentRunFilter
+      attr_accessor name_pattern: ::String
+      attr_accessor states: ::Array[("CREATED" | "START_DATA_COLLECTION_PENDING" | "START_DATA_COLLECTION_IN_PROGRESS" | "COLLECTING_DATA" | "STOP_DATA_COLLECTION_PENDING" | "DATA_COLLECTED" | "START_EVALUATING_RULES_PENDING" | "EVALUATING_RULES" | "FAILED" | "ERROR" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "CANCELED")]
+      attr_accessor duration_range: Types::DurationRange
+      attr_accessor rules_package_arns: ::Array[::String]
+      attr_accessor start_time_range: Types::TimestampRange
+      attr_accessor completion_time_range: Types::TimestampRange
+      attr_accessor state_change_time_range: Types::TimestampRange
+      SENSITIVE: []
+    end
+
+    class AssessmentRunInProgressException
+      attr_accessor message: ::String
+      attr_accessor assessment_run_arns: ::Array[::String]
+      attr_accessor assessment_run_arns_truncated: bool
+      attr_accessor can_retry: bool
+      SENSITIVE: []
+    end
+
+    class AssessmentRunNotification
+      attr_accessor date: ::Time
+      attr_accessor event: ("ASSESSMENT_RUN_STARTED" | "ASSESSMENT_RUN_COMPLETED" | "ASSESSMENT_RUN_STATE_CHANGED" | "FINDING_REPORTED" | "OTHER")
+      attr_accessor message: ::String
+      attr_accessor error: bool
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor sns_publish_status_code: ("SUCCESS" | "TOPIC_DOES_NOT_EXIST" | "ACCESS_DENIED" | "INTERNAL_ERROR")
+      SENSITIVE: []
+    end
+
+    class AssessmentRunStateChange
+      attr_accessor state_changed_at: ::Time
+      attr_accessor state: ("CREATED" | "START_DATA_COLLECTION_PENDING" | "START_DATA_COLLECTION_IN_PROGRESS" | "COLLECTING_DATA" | "STOP_DATA_COLLECTION_PENDING" | "DATA_COLLECTED" | "START_EVALUATING_RULES_PENDING" | "EVALUATING_RULES" | "FAILED" | "ERROR" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "CANCELED")
+      SENSITIVE: []
+    end
+
+    class AssessmentTarget
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor resource_group_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AssessmentTargetFilter
+      attr_accessor assessment_target_name_pattern: ::String
+      SENSITIVE: []
+    end
+
+    class AssessmentTemplate
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor assessment_target_arn: ::String
+      attr_accessor duration_in_seconds: ::Integer
+      attr_accessor rules_package_arns: ::Array[::String]
+      attr_accessor user_attributes_for_findings: ::Array[Types::Attribute]
+      attr_accessor last_assessment_run_arn: ::String
+      attr_accessor assessment_run_count: ::Integer
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AssessmentTemplateFilter
+      attr_accessor name_pattern: ::String
+      attr_accessor duration_range: Types::DurationRange
+      attr_accessor rules_package_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AssetAttributes
+      attr_accessor schema_version: ::Integer
+      attr_accessor agent_id: ::String
+      attr_accessor auto_scaling_group: ::String
+      attr_accessor ami_id: ::String
+      attr_accessor hostname: ::String
+      attr_accessor ipv4_addresses: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor network_interfaces: ::Array[Types::NetworkInterface]
+      SENSITIVE: []
+    end
+
+    class Attribute
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAssessmentTargetRequest
+      attr_accessor assessment_target_name: ::String
+      attr_accessor resource_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAssessmentTargetResponse
+      attr_accessor assessment_target_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAssessmentTemplateRequest
+      attr_accessor assessment_target_arn: ::String
+      attr_accessor assessment_template_name: ::String
+      attr_accessor duration_in_seconds: ::Integer
+      attr_accessor rules_package_arns: ::Array[::String]
+      attr_accessor user_attributes_for_findings: ::Array[Types::Attribute]
+      SENSITIVE: []
+    end
+
+    class CreateAssessmentTemplateResponse
+      attr_accessor assessment_template_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateExclusionsPreviewRequest
+      attr_accessor assessment_template_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateExclusionsPreviewResponse
+      attr_accessor preview_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateResourceGroupRequest
+      attr_accessor resource_group_tags: ::Array[Types::ResourceGroupTag]
+      SENSITIVE: []
+    end
+
+    class CreateResourceGroupResponse
+      attr_accessor resource_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAssessmentRunRequest
+      attr_accessor assessment_run_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAssessmentTargetRequest
+      attr_accessor assessment_target_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAssessmentTemplateRequest
+      attr_accessor assessment_template_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAssessmentRunsRequest
+      attr_accessor assessment_run_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeAssessmentRunsResponse
+      attr_accessor assessment_runs: ::Array[Types::AssessmentRun]
+      attr_accessor failed_items: ::Hash[::String, Types::FailedItemDetails]
+      SENSITIVE: []
+    end
+
+    class DescribeAssessmentTargetsRequest
+      attr_accessor assessment_target_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeAssessmentTargetsResponse
+      attr_accessor assessment_targets: ::Array[Types::AssessmentTarget]
+      attr_accessor failed_items: ::Hash[::String, Types::FailedItemDetails]
+      SENSITIVE: []
+    end
+
+    class DescribeAssessmentTemplatesRequest
+      attr_accessor assessment_template_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeAssessmentTemplatesResponse
+      attr_accessor assessment_templates: ::Array[Types::AssessmentTemplate]
+      attr_accessor failed_items: ::Hash[::String, Types::FailedItemDetails]
+      SENSITIVE: []
+    end
+
+    class DescribeCrossAccountAccessRoleResponse
+      attr_accessor role_arn: ::String
+      attr_accessor valid: bool
+      attr_accessor registered_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeExclusionsRequest
+      attr_accessor exclusion_arns: ::Array[::String]
+      attr_accessor locale: ("EN_US")
+      SENSITIVE: []
+    end
+
+    class DescribeExclusionsResponse
+      attr_accessor exclusions: ::Hash[::String, Types::Exclusion]
+      attr_accessor failed_items: ::Hash[::String, Types::FailedItemDetails]
+      SENSITIVE: []
+    end
+
+    class DescribeFindingsRequest
+      attr_accessor finding_arns: ::Array[::String]
+      attr_accessor locale: ("EN_US")
+      SENSITIVE: []
+    end
+
+    class DescribeFindingsResponse
+      attr_accessor findings: ::Array[Types::Finding]
+      attr_accessor failed_items: ::Hash[::String, Types::FailedItemDetails]
+      SENSITIVE: []
+    end
+
+    class DescribeResourceGroupsRequest
+      attr_accessor resource_group_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeResourceGroupsResponse
+      attr_accessor resource_groups: ::Array[Types::ResourceGroup]
+      attr_accessor failed_items: ::Hash[::String, Types::FailedItemDetails]
+      SENSITIVE: []
+    end
+
+    class DescribeRulesPackagesRequest
+      attr_accessor rules_package_arns: ::Array[::String]
+      attr_accessor locale: ("EN_US")
+      SENSITIVE: []
+    end
+
+    class DescribeRulesPackagesResponse
+      attr_accessor rules_packages: ::Array[Types::RulesPackage]
+      attr_accessor failed_items: ::Hash[::String, Types::FailedItemDetails]
+      SENSITIVE: []
+    end
+
+    class DurationRange
+      attr_accessor min_seconds: ::Integer
+      attr_accessor max_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class EventSubscription
+      attr_accessor event: ("ASSESSMENT_RUN_STARTED" | "ASSESSMENT_RUN_COMPLETED" | "ASSESSMENT_RUN_STATE_CHANGED" | "FINDING_REPORTED" | "OTHER")
+      attr_accessor subscribed_at: ::Time
+      SENSITIVE: []
+    end
+
+    class Exclusion
+      attr_accessor arn: ::String
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor recommendation: ::String
+      attr_accessor scopes: ::Array[Types::Scope]
+      attr_accessor attributes: ::Array[Types::Attribute]
+      SENSITIVE: []
+    end
+
+    class ExclusionPreview
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor recommendation: ::String
+      attr_accessor scopes: ::Array[Types::Scope]
+      attr_accessor attributes: ::Array[Types::Attribute]
+      SENSITIVE: []
+    end
+
+    class FailedItemDetails
+      attr_accessor failure_code: ("INVALID_ARN" | "DUPLICATE_ARN" | "ITEM_DOES_NOT_EXIST" | "ACCESS_DENIED" | "LIMIT_EXCEEDED" | "INTERNAL_ERROR")
+      attr_accessor retryable: bool
+      SENSITIVE: []
+    end
+
+    class Finding
+      attr_accessor arn: ::String
+      attr_accessor schema_version: ::Integer
+      attr_accessor service: ::String
+      attr_accessor service_attributes: Types::InspectorServiceAttributes
+      attr_accessor asset_type: ("ec2-instance")
+      attr_accessor asset_attributes: Types::AssetAttributes
+      attr_accessor id: ::String
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor recommendation: ::String
+      attr_accessor severity: ("Low" | "Medium" | "High" | "Informational" | "Undefined")
+      attr_accessor numeric_severity: ::Float
+      attr_accessor confidence: ::Integer
+      attr_accessor indicator_of_compromise: bool
+      attr_accessor attributes: ::Array[Types::Attribute]
+      attr_accessor user_attributes: ::Array[Types::Attribute]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class FindingFilter
+      attr_accessor agent_ids: ::Array[::String]
+      attr_accessor auto_scaling_groups: ::Array[::String]
+      attr_accessor rule_names: ::Array[::String]
+      attr_accessor severities: ::Array[("Low" | "Medium" | "High" | "Informational" | "Undefined")]
+      attr_accessor rules_package_arns: ::Array[::String]
+      attr_accessor attributes: ::Array[Types::Attribute]
+      attr_accessor user_attributes: ::Array[Types::Attribute]
+      attr_accessor creation_time_range: Types::TimestampRange
+      SENSITIVE: []
+    end
+
+    class GetAssessmentReportRequest
+      attr_accessor assessment_run_arn: ::String
+      attr_accessor report_file_format: ("HTML" | "PDF")
+      attr_accessor report_type: ("FINDING" | "FULL")
+      SENSITIVE: []
+    end
+
+    class GetAssessmentReportResponse
+      attr_accessor status: ("WORK_IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class GetExclusionsPreviewRequest
+      attr_accessor assessment_template_arn: ::String
+      attr_accessor preview_token: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor locale: ("EN_US")
+      SENSITIVE: []
+    end
+
+    class GetExclusionsPreviewResponse
+      attr_accessor preview_status: ("WORK_IN_PROGRESS" | "COMPLETED")
+      attr_accessor exclusion_previews: ::Array[Types::ExclusionPreview]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetTelemetryMetadataRequest
+      attr_accessor assessment_run_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetTelemetryMetadataResponse
+      attr_accessor telemetry_metadata: ::Array[Types::TelemetryMetadata]
+      SENSITIVE: []
+    end
+
+    class InspectorServiceAttributes
+      attr_accessor schema_version: ::Integer
+      attr_accessor assessment_run_arn: ::String
+      attr_accessor rules_package_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InternalException
+      attr_accessor message: ::String
+      attr_accessor can_retry: bool
+      SENSITIVE: []
+    end
+
+    class InvalidCrossAccountRoleException
+      attr_accessor message: ::String
+      attr_accessor error_code: ("ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP" | "ROLE_DOES_NOT_HAVE_CORRECT_POLICY")
+      attr_accessor can_retry: bool
+      SENSITIVE: []
+    end
+
+    class InvalidInputException
+      attr_accessor message: ::String
+      attr_accessor error_code: ("INVALID_ASSESSMENT_TARGET_ARN" | "INVALID_ASSESSMENT_TEMPLATE_ARN" | "INVALID_ASSESSMENT_RUN_ARN" | "INVALID_FINDING_ARN" | "INVALID_RESOURCE_GROUP_ARN" | "INVALID_RULES_PACKAGE_ARN" | "INVALID_RESOURCE_ARN" | "INVALID_SNS_TOPIC_ARN" | "INVALID_IAM_ROLE_ARN" | "INVALID_ASSESSMENT_TARGET_NAME" | "INVALID_ASSESSMENT_TARGET_NAME_PATTERN" | "INVALID_ASSESSMENT_TEMPLATE_NAME" | "INVALID_ASSESSMENT_TEMPLATE_NAME_PATTERN" | "INVALID_ASSESSMENT_TEMPLATE_DURATION" | "INVALID_ASSESSMENT_TEMPLATE_DURATION_RANGE" | "INVALID_ASSESSMENT_RUN_DURATION_RANGE" | "INVALID_ASSESSMENT_RUN_START_TIME_RANGE" | "INVALID_ASSESSMENT_RUN_COMPLETION_TIME_RANGE" | "INVALID_ASSESSMENT_RUN_STATE_CHANGE_TIME_RANGE" | "INVALID_ASSESSMENT_RUN_STATE" | "INVALID_TAG" | "INVALID_TAG_KEY" | "INVALID_TAG_VALUE" | "INVALID_RESOURCE_GROUP_TAG_KEY" | "INVALID_RESOURCE_GROUP_TAG_VALUE" | "INVALID_ATTRIBUTE" | "INVALID_USER_ATTRIBUTE" | "INVALID_USER_ATTRIBUTE_KEY" | "INVALID_USER_ATTRIBUTE_VALUE" | "INVALID_PAGINATION_TOKEN" | "INVALID_MAX_RESULTS" | "INVALID_AGENT_ID" | "INVALID_AUTO_SCALING_GROUP" | "INVALID_RULE_NAME" | "INVALID_SEVERITY" | "INVALID_LOCALE" | "INVALID_EVENT" | "ASSESSMENT_TARGET_NAME_ALREADY_TAKEN" | "ASSESSMENT_TEMPLATE_NAME_ALREADY_TAKEN" | "INVALID_NUMBER_OF_ASSESSMENT_TARGET_ARNS" | "INVALID_NUMBER_OF_ASSESSMENT_TEMPLATE_ARNS" | "INVALID_NUMBER_OF_ASSESSMENT_RUN_ARNS" | "INVALID_NUMBER_OF_FINDING_ARNS" | "INVALID_NUMBER_OF_RESOURCE_GROUP_ARNS" | "INVALID_NUMBER_OF_RULES_PACKAGE_ARNS" | "INVALID_NUMBER_OF_ASSESSMENT_RUN_STATES" | "INVALID_NUMBER_OF_TAGS" | "INVALID_NUMBER_OF_RESOURCE_GROUP_TAGS" | "INVALID_NUMBER_OF_ATTRIBUTES" | "INVALID_NUMBER_OF_USER_ATTRIBUTES" | "INVALID_NUMBER_OF_AGENT_IDS" | "INVALID_NUMBER_OF_AUTO_SCALING_GROUPS" | "INVALID_NUMBER_OF_RULE_NAMES" | "INVALID_NUMBER_OF_SEVERITIES")
+      attr_accessor can_retry: bool
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      attr_accessor error_code: ("ASSESSMENT_TARGET_LIMIT_EXCEEDED" | "ASSESSMENT_TEMPLATE_LIMIT_EXCEEDED" | "ASSESSMENT_RUN_LIMIT_EXCEEDED" | "RESOURCE_GROUP_LIMIT_EXCEEDED" | "EVENT_SUBSCRIPTION_LIMIT_EXCEEDED")
+      attr_accessor can_retry: bool
+      SENSITIVE: []
+    end
+
+    class ListAssessmentRunAgentsRequest
+      attr_accessor assessment_run_arn: ::String
+      attr_accessor filter: Types::AgentFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAssessmentRunAgentsResponse
+      attr_accessor assessment_run_agents: ::Array[Types::AssessmentRunAgent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssessmentRunsRequest
+      attr_accessor assessment_template_arns: ::Array[::String]
+      attr_accessor filter: Types::AssessmentRunFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAssessmentRunsResponse
+      attr_accessor assessment_run_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssessmentTargetsRequest
+      attr_accessor filter: Types::AssessmentTargetFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAssessmentTargetsResponse
+      attr_accessor assessment_target_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssessmentTemplatesRequest
+      attr_accessor assessment_target_arns: ::Array[::String]
+      attr_accessor filter: Types::AssessmentTemplateFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAssessmentTemplatesResponse
+      attr_accessor assessment_template_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventSubscriptionsRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEventSubscriptionsResponse
+      attr_accessor subscriptions: ::Array[Types::Subscription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExclusionsRequest
+      attr_accessor assessment_run_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListExclusionsResponse
+      attr_accessor exclusion_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFindingsRequest
+      attr_accessor assessment_run_arns: ::Array[::String]
+      attr_accessor filter: Types::FindingFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFindingsResponse
+      attr_accessor finding_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRulesPackagesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRulesPackagesResponse
+      attr_accessor rules_package_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class NetworkInterface
+      attr_accessor network_interface_id: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor private_dns_name: ::String
+      attr_accessor private_ip_address: ::String
+      attr_accessor private_ip_addresses: ::Array[Types::PrivateIp]
+      attr_accessor public_dns_name: ::String
+      attr_accessor public_ip: ::String
+      attr_accessor ipv6_addresses: ::Array[::String]
+      attr_accessor security_groups: ::Array[Types::SecurityGroup]
+      SENSITIVE: []
+    end
+
+    class NoSuchEntityException
+      attr_accessor message: ::String
+      attr_accessor error_code: ("ASSESSMENT_TARGET_DOES_NOT_EXIST" | "ASSESSMENT_TEMPLATE_DOES_NOT_EXIST" | "ASSESSMENT_RUN_DOES_NOT_EXIST" | "FINDING_DOES_NOT_EXIST" | "RESOURCE_GROUP_DOES_NOT_EXIST" | "RULES_PACKAGE_DOES_NOT_EXIST" | "SNS_TOPIC_DOES_NOT_EXIST" | "IAM_ROLE_DOES_NOT_EXIST")
+      attr_accessor can_retry: bool
+      SENSITIVE: []
+    end
+
+    class PreviewAgentsRequest
+      attr_accessor preview_agents_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class PreviewAgentsResponse
+      attr_accessor agent_previews: ::Array[Types::AgentPreview]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class PreviewGenerationInProgressException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PrivateIp
+      attr_accessor private_dns_name: ::String
+      attr_accessor private_ip_address: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterCrossAccountAccessRoleRequest
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveAttributesFromFindingsRequest
+      attr_accessor finding_arns: ::Array[::String]
+      attr_accessor attribute_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RemoveAttributesFromFindingsResponse
+      attr_accessor failed_items: ::Hash[::String, Types::FailedItemDetails]
+      SENSITIVE: []
+    end
+
+    class ResourceGroup
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Array[Types::ResourceGroupTag]
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ResourceGroupTag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class RulesPackage
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor provider: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class Scope
+      attr_accessor key: ("INSTANCE_ID" | "RULES_PACKAGE_ARN")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SecurityGroup
+      attr_accessor group_name: ::String
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceTemporarilyUnavailableException
+      attr_accessor message: ::String
+      attr_accessor can_retry: bool
+      SENSITIVE: []
+    end
+
+    class SetTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class StartAssessmentRunRequest
+      attr_accessor assessment_template_arn: ::String
+      attr_accessor assessment_run_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartAssessmentRunResponse
+      attr_accessor assessment_run_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopAssessmentRunRequest
+      attr_accessor assessment_run_arn: ::String
+      attr_accessor stop_action: ("START_EVALUATION" | "SKIP_EVALUATION")
+      SENSITIVE: []
+    end
+
+    class SubscribeToEventRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor event: ("ASSESSMENT_RUN_STARTED" | "ASSESSMENT_RUN_COMPLETED" | "ASSESSMENT_RUN_STATE_CHANGED" | "FINDING_REPORTED" | "OTHER")
+      attr_accessor topic_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Subscription
+      attr_accessor resource_arn: ::String
+      attr_accessor topic_arn: ::String
+      attr_accessor event_subscriptions: ::Array[Types::EventSubscription]
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TelemetryMetadata
+      attr_accessor message_type: ::String
+      attr_accessor count: ::Integer
+      attr_accessor data_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class TimestampRange
+      attr_accessor begin_date: ::Time
+      attr_accessor end_date: ::Time
+      SENSITIVE: []
+    end
+
+    class UnsubscribeFromEventRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor event: ("ASSESSMENT_RUN_STARTED" | "ASSESSMENT_RUN_COMPLETED" | "ASSESSMENT_RUN_STATE_CHANGED" | "FINDING_REPORTED" | "OTHER")
+      attr_accessor topic_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedFeatureException
+      attr_accessor message: ::String
+      attr_accessor can_retry: bool
+      SENSITIVE: []
+    end
+
+    class UpdateAssessmentTargetRequest
+      attr_accessor assessment_target_arn: ::String
+      attr_accessor assessment_target_name: ::String
+      attr_accessor resource_group_arn: ::String
+      SENSITIVE: []
+    end
+  end
+end

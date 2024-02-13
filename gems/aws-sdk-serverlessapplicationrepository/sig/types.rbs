@@ -1,0 +1,492 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ServerlessApplicationRepository
+  module Types
+
+    class Application
+      attr_accessor application_id: ::String
+      attr_accessor author: ::String
+      attr_accessor creation_time: ::String
+      attr_accessor description: ::String
+      attr_accessor home_page_url: ::String
+      attr_accessor is_verified_author: bool
+      attr_accessor labels: ::Array[::String]
+      attr_accessor license_url: ::String
+      attr_accessor name: ::String
+      attr_accessor readme_url: ::String
+      attr_accessor spdx_license_id: ::String
+      attr_accessor verified_author_url: ::String
+      attr_accessor version: Types::Version
+      SENSITIVE: []
+    end
+
+    class ApplicationDependencyPage
+      attr_accessor dependencies: ::Array[Types::ApplicationDependencySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationDependencySummary
+      attr_accessor application_id: ::String
+      attr_accessor semantic_version: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationPage
+      attr_accessor applications: ::Array[Types::ApplicationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationPolicy
+      attr_accessor statements: ::Array[Types::ApplicationPolicyStatement]
+      SENSITIVE: []
+    end
+
+    class ApplicationPolicyStatement
+      attr_accessor actions: ::Array[::String]
+      attr_accessor principal_org_i_ds: ::Array[::String]
+      attr_accessor principals: ::Array[::String]
+      attr_accessor statement_id: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationSummary
+      attr_accessor application_id: ::String
+      attr_accessor author: ::String
+      attr_accessor creation_time: ::String
+      attr_accessor description: ::String
+      attr_accessor home_page_url: ::String
+      attr_accessor labels: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor spdx_license_id: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationVersionPage
+      attr_accessor next_token: ::String
+      attr_accessor versions: ::Array[Types::VersionSummary]
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ChangeSetDetails
+      attr_accessor application_id: ::String
+      attr_accessor change_set_id: ::String
+      attr_accessor semantic_version: ::String
+      attr_accessor stack_id: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApplicationInput
+      attr_accessor author: ::String
+      attr_accessor description: ::String
+      attr_accessor home_page_url: ::String
+      attr_accessor labels: ::Array[::String]
+      attr_accessor license_body: ::String
+      attr_accessor license_url: ::String
+      attr_accessor name: ::String
+      attr_accessor readme_body: ::String
+      attr_accessor readme_url: ::String
+      attr_accessor semantic_version: ::String
+      attr_accessor source_code_archive_url: ::String
+      attr_accessor source_code_url: ::String
+      attr_accessor spdx_license_id: ::String
+      attr_accessor template_body: ::String
+      attr_accessor template_url: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApplicationRequest
+      attr_accessor author: ::String
+      attr_accessor description: ::String
+      attr_accessor home_page_url: ::String
+      attr_accessor labels: ::Array[::String]
+      attr_accessor license_body: ::String
+      attr_accessor license_url: ::String
+      attr_accessor name: ::String
+      attr_accessor readme_body: ::String
+      attr_accessor readme_url: ::String
+      attr_accessor semantic_version: ::String
+      attr_accessor source_code_archive_url: ::String
+      attr_accessor source_code_url: ::String
+      attr_accessor spdx_license_id: ::String
+      attr_accessor template_body: ::String
+      attr_accessor template_url: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApplicationResponse
+      attr_accessor application_id: ::String
+      attr_accessor author: ::String
+      attr_accessor creation_time: ::String
+      attr_accessor description: ::String
+      attr_accessor home_page_url: ::String
+      attr_accessor is_verified_author: bool
+      attr_accessor labels: ::Array[::String]
+      attr_accessor license_url: ::String
+      attr_accessor name: ::String
+      attr_accessor readme_url: ::String
+      attr_accessor spdx_license_id: ::String
+      attr_accessor verified_author_url: ::String
+      attr_accessor version: Types::Version
+      SENSITIVE: []
+    end
+
+    class CreateApplicationVersionInput
+      attr_accessor source_code_archive_url: ::String
+      attr_accessor source_code_url: ::String
+      attr_accessor template_body: ::String
+      attr_accessor template_url: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApplicationVersionRequest
+      attr_accessor application_id: ::String
+      attr_accessor semantic_version: ::String
+      attr_accessor source_code_archive_url: ::String
+      attr_accessor source_code_url: ::String
+      attr_accessor template_body: ::String
+      attr_accessor template_url: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApplicationVersionResponse
+      attr_accessor application_id: ::String
+      attr_accessor creation_time: ::String
+      attr_accessor parameter_definitions: ::Array[Types::ParameterDefinition]
+      attr_accessor required_capabilities: ::Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND" | "CAPABILITY_RESOURCE_POLICY")]
+      attr_accessor resources_supported: bool
+      attr_accessor semantic_version: ::String
+      attr_accessor source_code_archive_url: ::String
+      attr_accessor source_code_url: ::String
+      attr_accessor template_url: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCloudFormationChangeSetInput
+      attr_accessor capabilities: ::Array[::String]
+      attr_accessor change_set_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor notification_arns: ::Array[::String]
+      attr_accessor parameter_overrides: ::Array[Types::ParameterValue]
+      attr_accessor resource_types: ::Array[::String]
+      attr_accessor rollback_configuration: Types::RollbackConfiguration
+      attr_accessor semantic_version: ::String
+      attr_accessor stack_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor template_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCloudFormationChangeSetRequest
+      attr_accessor application_id: ::String
+      attr_accessor capabilities: ::Array[::String]
+      attr_accessor change_set_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor notification_arns: ::Array[::String]
+      attr_accessor parameter_overrides: ::Array[Types::ParameterValue]
+      attr_accessor resource_types: ::Array[::String]
+      attr_accessor rollback_configuration: Types::RollbackConfiguration
+      attr_accessor semantic_version: ::String
+      attr_accessor stack_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor template_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCloudFormationChangeSetResponse
+      attr_accessor application_id: ::String
+      attr_accessor change_set_id: ::String
+      attr_accessor semantic_version: ::String
+      attr_accessor stack_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCloudFormationTemplateRequest
+      attr_accessor application_id: ::String
+      attr_accessor semantic_version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCloudFormationTemplateResponse
+      attr_accessor application_id: ::String
+      attr_accessor creation_time: ::String
+      attr_accessor expiration_time: ::String
+      attr_accessor semantic_version: ::String
+      attr_accessor status: ("PREPARING" | "ACTIVE" | "EXPIRED")
+      attr_accessor template_id: ::String
+      attr_accessor template_url: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class ForbiddenException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetApplicationPolicyRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetApplicationPolicyResponse
+      attr_accessor statements: ::Array[Types::ApplicationPolicyStatement]
+      SENSITIVE: []
+    end
+
+    class GetApplicationRequest
+      attr_accessor application_id: ::String
+      attr_accessor semantic_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetApplicationResponse
+      attr_accessor application_id: ::String
+      attr_accessor author: ::String
+      attr_accessor creation_time: ::String
+      attr_accessor description: ::String
+      attr_accessor home_page_url: ::String
+      attr_accessor is_verified_author: bool
+      attr_accessor labels: ::Array[::String]
+      attr_accessor license_url: ::String
+      attr_accessor name: ::String
+      attr_accessor readme_url: ::String
+      attr_accessor spdx_license_id: ::String
+      attr_accessor verified_author_url: ::String
+      attr_accessor version: Types::Version
+      SENSITIVE: []
+    end
+
+    class GetCloudFormationTemplateRequest
+      attr_accessor application_id: ::String
+      attr_accessor template_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCloudFormationTemplateResponse
+      attr_accessor application_id: ::String
+      attr_accessor creation_time: ::String
+      attr_accessor expiration_time: ::String
+      attr_accessor semantic_version: ::String
+      attr_accessor status: ("PREPARING" | "ACTIVE" | "EXPIRED")
+      attr_accessor template_id: ::String
+      attr_accessor template_url: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerErrorException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationDependenciesRequest
+      attr_accessor application_id: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor semantic_version: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationDependenciesResponse
+      attr_accessor dependencies: ::Array[Types::ApplicationDependencySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationVersionsRequest
+      attr_accessor application_id: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationVersionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor versions: ::Array[Types::VersionSummary]
+      SENSITIVE: []
+    end
+
+    class ListApplicationsRequest
+      attr_accessor max_items: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationsResponse
+      attr_accessor applications: ::Array[Types::ApplicationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ParameterDefinition
+      attr_accessor allowed_pattern: ::String
+      attr_accessor allowed_values: ::Array[::String]
+      attr_accessor constraint_description: ::String
+      attr_accessor default_value: ::String
+      attr_accessor description: ::String
+      attr_accessor max_length: ::Integer
+      attr_accessor max_value: ::Integer
+      attr_accessor min_length: ::Integer
+      attr_accessor min_value: ::Integer
+      attr_accessor name: ::String
+      attr_accessor no_echo: bool
+      attr_accessor referenced_by_resources: ::Array[::String]
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ParameterValue
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class PutApplicationPolicyRequest
+      attr_accessor application_id: ::String
+      attr_accessor statements: ::Array[Types::ApplicationPolicyStatement]
+      SENSITIVE: []
+    end
+
+    class PutApplicationPolicyResponse
+      attr_accessor statements: ::Array[Types::ApplicationPolicyStatement]
+      SENSITIVE: []
+    end
+
+    class RollbackConfiguration
+      attr_accessor monitoring_time_in_minutes: ::Integer
+      attr_accessor rollback_triggers: ::Array[Types::RollbackTrigger]
+      SENSITIVE: []
+    end
+
+    class RollbackTrigger
+      attr_accessor arn: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TemplateDetails
+      attr_accessor application_id: ::String
+      attr_accessor creation_time: ::String
+      attr_accessor expiration_time: ::String
+      attr_accessor semantic_version: ::String
+      attr_accessor status: ("PREPARING" | "ACTIVE" | "EXPIRED")
+      attr_accessor template_id: ::String
+      attr_accessor template_url: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnshareApplicationInput
+      attr_accessor organization_id: ::String
+      SENSITIVE: []
+    end
+
+    class UnshareApplicationRequest
+      attr_accessor application_id: ::String
+      attr_accessor organization_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationInput
+      attr_accessor author: ::String
+      attr_accessor description: ::String
+      attr_accessor home_page_url: ::String
+      attr_accessor labels: ::Array[::String]
+      attr_accessor readme_body: ::String
+      attr_accessor readme_url: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationRequest
+      attr_accessor application_id: ::String
+      attr_accessor author: ::String
+      attr_accessor description: ::String
+      attr_accessor home_page_url: ::String
+      attr_accessor labels: ::Array[::String]
+      attr_accessor readme_body: ::String
+      attr_accessor readme_url: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationResponse
+      attr_accessor application_id: ::String
+      attr_accessor author: ::String
+      attr_accessor creation_time: ::String
+      attr_accessor description: ::String
+      attr_accessor home_page_url: ::String
+      attr_accessor is_verified_author: bool
+      attr_accessor labels: ::Array[::String]
+      attr_accessor license_url: ::String
+      attr_accessor name: ::String
+      attr_accessor readme_url: ::String
+      attr_accessor spdx_license_id: ::String
+      attr_accessor verified_author_url: ::String
+      attr_accessor version: Types::Version
+      SENSITIVE: []
+    end
+
+    class Version
+      attr_accessor application_id: ::String
+      attr_accessor creation_time: ::String
+      attr_accessor parameter_definitions: ::Array[Types::ParameterDefinition]
+      attr_accessor required_capabilities: ::Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND" | "CAPABILITY_RESOURCE_POLICY")]
+      attr_accessor resources_supported: bool
+      attr_accessor semantic_version: ::String
+      attr_accessor source_code_archive_url: ::String
+      attr_accessor source_code_url: ::String
+      attr_accessor template_url: ::String
+      SENSITIVE: []
+    end
+
+    class VersionSummary
+      attr_accessor application_id: ::String
+      attr_accessor creation_time: ::String
+      attr_accessor semantic_version: ::String
+      attr_accessor source_code_url: ::String
+      SENSITIVE: []
+    end
+  end
+end

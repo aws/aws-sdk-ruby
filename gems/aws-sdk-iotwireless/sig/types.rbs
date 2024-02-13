@@ -1,0 +1,2228 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::IoTWireless
+  module Types
+
+    class AbpV1_0_x
+      attr_accessor dev_addr: ::String
+      attr_accessor session_keys: Types::SessionKeysAbpV1_0_x
+      attr_accessor f_cnt_start: ::Integer
+      SENSITIVE: []
+    end
+
+    class AbpV1_1
+      attr_accessor dev_addr: ::String
+      attr_accessor session_keys: Types::SessionKeysAbpV1_1
+      attr_accessor f_cnt_start: ::Integer
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Accuracy
+      attr_accessor horizontal_accuracy: ::Float
+      attr_accessor vertical_accuracy: ::Float
+      SENSITIVE: []
+    end
+
+    class ApplicationConfig
+      attr_accessor f_port: ::Integer
+      attr_accessor type: ("SemtechGeolocation")
+      attr_accessor destination_name: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateAwsAccountWithPartnerAccountRequest
+      attr_accessor sidewalk: Types::SidewalkAccountInfo
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class AssociateAwsAccountWithPartnerAccountResponse
+      attr_accessor sidewalk: Types::SidewalkAccountInfo
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateMulticastGroupWithFuotaTaskRequest
+      attr_accessor id: ::String
+      attr_accessor multicast_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateMulticastGroupWithFuotaTaskResponse < Aws::EmptyStructure
+    end
+
+    class AssociateWirelessDeviceWithFuotaTaskRequest
+      attr_accessor id: ::String
+      attr_accessor wireless_device_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateWirelessDeviceWithFuotaTaskResponse < Aws::EmptyStructure
+    end
+
+    class AssociateWirelessDeviceWithMulticastGroupRequest
+      attr_accessor id: ::String
+      attr_accessor wireless_device_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateWirelessDeviceWithMulticastGroupResponse < Aws::EmptyStructure
+    end
+
+    class AssociateWirelessDeviceWithThingRequest
+      attr_accessor id: ::String
+      attr_accessor thing_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateWirelessDeviceWithThingResponse < Aws::EmptyStructure
+    end
+
+    class AssociateWirelessGatewayWithCertificateRequest
+      attr_accessor id: ::String
+      attr_accessor iot_certificate_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateWirelessGatewayWithCertificateResponse
+      attr_accessor iot_certificate_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateWirelessGatewayWithThingRequest
+      attr_accessor id: ::String
+      attr_accessor thing_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateWirelessGatewayWithThingResponse < Aws::EmptyStructure
+    end
+
+    class Beaconing
+      attr_accessor data_rate: ::Integer
+      attr_accessor frequencies: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class CancelMulticastGroupSessionRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelMulticastGroupSessionResponse < Aws::EmptyStructure
+    end
+
+    class CdmaLocalId
+      attr_accessor pn_offset: ::Integer
+      attr_accessor cdma_channel: ::Integer
+      SENSITIVE: []
+    end
+
+    class CdmaNmrObj
+      attr_accessor pn_offset: ::Integer
+      attr_accessor cdma_channel: ::Integer
+      attr_accessor pilot_power: ::Integer
+      attr_accessor base_station_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class CdmaObj
+      attr_accessor system_id: ::Integer
+      attr_accessor network_id: ::Integer
+      attr_accessor base_station_id: ::Integer
+      attr_accessor registration_zone: ::Integer
+      attr_accessor cdma_local_id: Types::CdmaLocalId
+      attr_accessor pilot_power: ::Integer
+      attr_accessor base_lat: ::Float
+      attr_accessor base_lng: ::Float
+      attr_accessor cdma_nmr: ::Array[Types::CdmaNmrObj]
+      SENSITIVE: []
+    end
+
+    class CellTowers
+      attr_accessor gsm: ::Array[Types::GsmObj]
+      attr_accessor wcdma: ::Array[Types::WcdmaObj]
+      attr_accessor tdscdma: ::Array[Types::TdscdmaObj]
+      attr_accessor lte: ::Array[Types::LteObj]
+      attr_accessor cdma: ::Array[Types::CdmaObj]
+      SENSITIVE: []
+    end
+
+    class CertificateList
+      attr_accessor signing_alg: ("Ed25519" | "P256r1")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectionStatusEventConfiguration
+      attr_accessor lo_ra_wan: Types::LoRaWANConnectionStatusEventNotificationConfigurations
+      attr_accessor wireless_gateway_id_event_topic: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class ConnectionStatusResourceTypeEventConfiguration
+      attr_accessor lo_ra_wan: Types::LoRaWANConnectionStatusResourceTypeEventConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateDestinationRequest
+      attr_accessor name: ::String
+      attr_accessor expression_type: ("RuleName" | "MqttTopic")
+      attr_accessor expression: ::String
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDestinationResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDeviceProfileRequest
+      attr_accessor name: ::String
+      attr_accessor lo_ra_wan: Types::LoRaWANDeviceProfile
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_request_token: ::String
+      attr_accessor sidewalk: Types::SidewalkCreateDeviceProfile
+      SENSITIVE: []
+    end
+
+    class CreateDeviceProfileResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFuotaTaskRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor lo_ra_wan: Types::LoRaWANFuotaTask
+      attr_accessor firmware_update_image: ::String
+      attr_accessor firmware_update_role: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor redundancy_percent: ::Integer
+      attr_accessor fragment_size_bytes: ::Integer
+      attr_accessor fragment_interval_ms: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateFuotaTaskResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMulticastGroupRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor lo_ra_wan: Types::LoRaWANMulticast
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateMulticastGroupResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateNetworkAnalyzerConfigurationRequest
+      attr_accessor name: ::String
+      attr_accessor trace_content: Types::TraceContent
+      attr_accessor wireless_devices: ::Array[::String]
+      attr_accessor wireless_gateways: ::Array[::String]
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_request_token: ::String
+      attr_accessor multicast_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateNetworkAnalyzerConfigurationResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateServiceProfileRequest
+      attr_accessor name: ::String
+      attr_accessor lo_ra_wan: Types::LoRaWANServiceProfile
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateServiceProfileResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWirelessDeviceRequest
+      attr_accessor type: ("Sidewalk" | "LoRaWAN")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor destination_name: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor lo_ra_wan: Types::LoRaWANDevice
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor positioning: ("Enabled" | "Disabled")
+      attr_accessor sidewalk: Types::SidewalkCreateWirelessDevice
+      SENSITIVE: []
+    end
+
+    class CreateWirelessDeviceResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWirelessGatewayRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor lo_ra_wan: Types::LoRaWANGateway
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWirelessGatewayResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWirelessGatewayTaskDefinitionRequest
+      attr_accessor auto_create_tasks: bool
+      attr_accessor name: ::String
+      attr_accessor update: Types::UpdateWirelessGatewayTaskCreate
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateWirelessGatewayTaskDefinitionResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWirelessGatewayTaskRequest
+      attr_accessor id: ::String
+      attr_accessor wireless_gateway_task_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWirelessGatewayTaskResponse
+      attr_accessor wireless_gateway_task_definition_id: ::String
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "FIRST_RETRY" | "SECOND_RETRY" | "COMPLETED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class DakCertificateMetadata
+      attr_accessor certificate_id: ::String
+      attr_accessor max_allowed_signature: ::Integer
+      attr_accessor factory_support: bool
+      attr_accessor ap_id: ::String
+      attr_accessor device_type_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDestinationRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDestinationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteDeviceProfileRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDeviceProfileResponse < Aws::EmptyStructure
+    end
+
+    class DeleteFuotaTaskRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFuotaTaskResponse < Aws::EmptyStructure
+    end
+
+    class DeleteMulticastGroupRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMulticastGroupResponse < Aws::EmptyStructure
+    end
+
+    class DeleteNetworkAnalyzerConfigurationRequest
+      attr_accessor configuration_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNetworkAnalyzerConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteQueuedMessagesRequest
+      attr_accessor id: ::String
+      attr_accessor message_id: ::String
+      attr_accessor wireless_device_type: ("Sidewalk" | "LoRaWAN")
+      SENSITIVE: []
+    end
+
+    class DeleteQueuedMessagesResponse < Aws::EmptyStructure
+    end
+
+    class DeleteServiceProfileRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServiceProfileResponse < Aws::EmptyStructure
+    end
+
+    class DeleteWirelessDeviceImportTaskRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWirelessDeviceImportTaskResponse < Aws::EmptyStructure
+    end
+
+    class DeleteWirelessDeviceRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWirelessDeviceResponse < Aws::EmptyStructure
+    end
+
+    class DeleteWirelessGatewayRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWirelessGatewayResponse < Aws::EmptyStructure
+    end
+
+    class DeleteWirelessGatewayTaskDefinitionRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWirelessGatewayTaskDefinitionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteWirelessGatewayTaskRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWirelessGatewayTaskResponse < Aws::EmptyStructure
+    end
+
+    class DeregisterWirelessDeviceRequest
+      attr_accessor identifier: ::String
+      attr_accessor wireless_device_type: ("Sidewalk" | "LoRaWAN")
+      SENSITIVE: []
+    end
+
+    class DeregisterWirelessDeviceResponse < Aws::EmptyStructure
+    end
+
+    class Destinations
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor expression_type: ("RuleName" | "MqttTopic")
+      attr_accessor expression: ::String
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeviceProfile
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeviceRegistrationStateEventConfiguration
+      attr_accessor sidewalk: Types::SidewalkEventNotificationConfigurations
+      attr_accessor wireless_device_id_event_topic: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class DeviceRegistrationStateResourceTypeEventConfiguration
+      attr_accessor sidewalk: Types::SidewalkResourceTypeEventConfiguration
+      SENSITIVE: []
+    end
+
+    class DisassociateAwsAccountFromPartnerAccountRequest
+      attr_accessor partner_account_id: ::String
+      attr_accessor partner_type: ("Sidewalk")
+      SENSITIVE: []
+    end
+
+    class DisassociateAwsAccountFromPartnerAccountResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateMulticastGroupFromFuotaTaskRequest
+      attr_accessor id: ::String
+      attr_accessor multicast_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateMulticastGroupFromFuotaTaskResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateWirelessDeviceFromFuotaTaskRequest
+      attr_accessor id: ::String
+      attr_accessor wireless_device_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateWirelessDeviceFromFuotaTaskResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateWirelessDeviceFromMulticastGroupRequest
+      attr_accessor id: ::String
+      attr_accessor wireless_device_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateWirelessDeviceFromMulticastGroupResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateWirelessDeviceFromThingRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateWirelessDeviceFromThingResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateWirelessGatewayFromCertificateRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateWirelessGatewayFromCertificateResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateWirelessGatewayFromThingRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateWirelessGatewayFromThingResponse < Aws::EmptyStructure
+    end
+
+    class DownlinkQueueMessage
+      attr_accessor message_id: ::String
+      attr_accessor transmit_mode: ::Integer
+      attr_accessor received_at: ::String
+      attr_accessor lo_ra_wan: Types::LoRaWANSendDataToDevice
+      SENSITIVE: []
+    end
+
+    class EventConfigurationItem
+      attr_accessor identifier: ::String
+      attr_accessor identifier_type: ("PartnerAccountId" | "DevEui" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId")
+      attr_accessor partner_type: ("Sidewalk")
+      attr_accessor events: Types::EventNotificationItemConfigurations
+      SENSITIVE: []
+    end
+
+    class EventNotificationItemConfigurations
+      attr_accessor device_registration_state: Types::DeviceRegistrationStateEventConfiguration
+      attr_accessor proximity: Types::ProximityEventConfiguration
+      attr_accessor join: Types::JoinEventConfiguration
+      attr_accessor connection_status: Types::ConnectionStatusEventConfiguration
+      attr_accessor message_delivery_status: Types::MessageDeliveryStatusEventConfiguration
+      SENSITIVE: []
+    end
+
+    class FPorts
+      attr_accessor fuota: ::Integer
+      attr_accessor multicast: ::Integer
+      attr_accessor clock_sync: ::Integer
+      attr_accessor positioning: Types::Positioning
+      attr_accessor applications: ::Array[Types::ApplicationConfig]
+      SENSITIVE: []
+    end
+
+    class FuotaTask
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GatewayListItem
+      attr_accessor gateway_id: ::String
+      attr_accessor downlink_frequency: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetDestinationRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDestinationResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor expression: ::String
+      attr_accessor expression_type: ("RuleName" | "MqttTopic")
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeviceProfileRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeviceProfileResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor lo_ra_wan: Types::LoRaWANDeviceProfile
+      attr_accessor sidewalk: Types::SidewalkGetDeviceProfile
+      SENSITIVE: []
+    end
+
+    class GetEventConfigurationByResourceTypesRequest < Aws::EmptyStructure
+    end
+
+    class GetEventConfigurationByResourceTypesResponse
+      attr_accessor device_registration_state: Types::DeviceRegistrationStateResourceTypeEventConfiguration
+      attr_accessor proximity: Types::ProximityResourceTypeEventConfiguration
+      attr_accessor join: Types::JoinResourceTypeEventConfiguration
+      attr_accessor connection_status: Types::ConnectionStatusResourceTypeEventConfiguration
+      attr_accessor message_delivery_status: Types::MessageDeliveryStatusResourceTypeEventConfiguration
+      SENSITIVE: []
+    end
+
+    class GetFuotaTaskRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFuotaTaskResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("Pending" | "FuotaSession_Waiting" | "In_FuotaSession" | "FuotaDone" | "Delete_Waiting")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor lo_ra_wan: Types::LoRaWANFuotaTaskGetInfo
+      attr_accessor firmware_update_image: ::String
+      attr_accessor firmware_update_role: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor redundancy_percent: ::Integer
+      attr_accessor fragment_size_bytes: ::Integer
+      attr_accessor fragment_interval_ms: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetLogLevelsByResourceTypesRequest < Aws::EmptyStructure
+    end
+
+    class GetLogLevelsByResourceTypesResponse
+      attr_accessor default_log_level: ("INFO" | "ERROR" | "DISABLED")
+      attr_accessor wireless_gateway_log_options: ::Array[Types::WirelessGatewayLogOption]
+      attr_accessor wireless_device_log_options: ::Array[Types::WirelessDeviceLogOption]
+      SENSITIVE: []
+    end
+
+    class GetMulticastGroupRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMulticastGroupResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ::String
+      attr_accessor lo_ra_wan: Types::LoRaWANMulticastGet
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetMulticastGroupSessionRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMulticastGroupSessionResponse
+      attr_accessor lo_ra_wan: Types::LoRaWANMulticastSession
+      SENSITIVE: []
+    end
+
+    class GetNetworkAnalyzerConfigurationRequest
+      attr_accessor configuration_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetNetworkAnalyzerConfigurationResponse
+      attr_accessor trace_content: Types::TraceContent
+      attr_accessor wireless_devices: ::Array[::String]
+      attr_accessor wireless_gateways: ::Array[::String]
+      attr_accessor description: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor multicast_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetPartnerAccountRequest
+      attr_accessor partner_account_id: ::String
+      attr_accessor partner_type: ("Sidewalk")
+      SENSITIVE: []
+    end
+
+    class GetPartnerAccountResponse
+      attr_accessor sidewalk: Types::SidewalkAccountInfoWithFingerprint
+      attr_accessor account_linked: bool
+      SENSITIVE: []
+    end
+
+    class GetPositionConfigurationRequest
+      attr_accessor resource_identifier: ::String
+      attr_accessor resource_type: ("WirelessDevice" | "WirelessGateway")
+      SENSITIVE: []
+    end
+
+    class GetPositionConfigurationResponse
+      attr_accessor solvers: Types::PositionSolverDetails
+      attr_accessor destination: ::String
+      SENSITIVE: []
+    end
+
+    class GetPositionEstimateRequest
+      attr_accessor wi_fi_access_points: ::Array[Types::WiFiAccessPoint]
+      attr_accessor cell_towers: Types::CellTowers
+      attr_accessor ip: Types::Ip
+      attr_accessor gnss: Types::Gnss
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class GetPositionEstimateResponse
+      attr_accessor geo_json_payload: ::IO
+      SENSITIVE: []
+    end
+
+    class GetPositionRequest
+      attr_accessor resource_identifier: ::String
+      attr_accessor resource_type: ("WirelessDevice" | "WirelessGateway")
+      SENSITIVE: []
+    end
+
+    class GetPositionResponse
+      attr_accessor position: ::Array[::Float]
+      attr_accessor accuracy: Types::Accuracy
+      attr_accessor solver_type: ("GNSS")
+      attr_accessor solver_provider: ("Semtech")
+      attr_accessor solver_version: ::String
+      attr_accessor timestamp: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourceEventConfigurationRequest
+      attr_accessor identifier: ::String
+      attr_accessor identifier_type: ("PartnerAccountId" | "DevEui" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId")
+      attr_accessor partner_type: ("Sidewalk")
+      SENSITIVE: []
+    end
+
+    class GetResourceEventConfigurationResponse
+      attr_accessor device_registration_state: Types::DeviceRegistrationStateEventConfiguration
+      attr_accessor proximity: Types::ProximityEventConfiguration
+      attr_accessor join: Types::JoinEventConfiguration
+      attr_accessor connection_status: Types::ConnectionStatusEventConfiguration
+      attr_accessor message_delivery_status: Types::MessageDeliveryStatusEventConfiguration
+      SENSITIVE: []
+    end
+
+    class GetResourceLogLevelRequest
+      attr_accessor resource_identifier: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourceLogLevelResponse
+      attr_accessor log_level: ("INFO" | "ERROR" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class GetResourcePositionRequest
+      attr_accessor resource_identifier: ::String
+      attr_accessor resource_type: ("WirelessDevice" | "WirelessGateway")
+      SENSITIVE: []
+    end
+
+    class GetResourcePositionResponse
+      attr_accessor geo_json_payload: ::IO
+      SENSITIVE: []
+    end
+
+    class GetServiceEndpointRequest
+      attr_accessor service_type: ("CUPS" | "LNS")
+      SENSITIVE: []
+    end
+
+    class GetServiceEndpointResponse
+      attr_accessor service_type: ("CUPS" | "LNS")
+      attr_accessor service_endpoint: ::String
+      attr_accessor server_trust: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceProfileRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceProfileResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor lo_ra_wan: Types::LoRaWANGetServiceProfileInfo
+      SENSITIVE: []
+    end
+
+    class GetWirelessDeviceImportTaskRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWirelessDeviceImportTaskResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor destination_name: ::String
+      attr_accessor sidewalk: Types::SidewalkGetStartImportInfo
+      attr_accessor creation_time: ::Time
+      attr_accessor status: ("INITIALIZING" | "INITIALIZED" | "PENDING" | "COMPLETE" | "FAILED" | "DELETING")
+      attr_accessor status_reason: ::String
+      attr_accessor initialized_imported_device_count: ::Integer
+      attr_accessor pending_imported_device_count: ::Integer
+      attr_accessor onboarded_imported_device_count: ::Integer
+      attr_accessor failed_imported_device_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetWirelessDeviceRequest
+      attr_accessor identifier: ::String
+      attr_accessor identifier_type: ("WirelessDeviceId" | "DevEui" | "ThingName" | "SidewalkManufacturingSn")
+      SENSITIVE: []
+    end
+
+    class GetWirelessDeviceResponse
+      attr_accessor type: ("Sidewalk" | "LoRaWAN")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor destination_name: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor thing_name: ::String
+      attr_accessor thing_arn: ::String
+      attr_accessor lo_ra_wan: Types::LoRaWANDevice
+      attr_accessor sidewalk: Types::SidewalkDevice
+      attr_accessor positioning: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class GetWirelessDeviceStatisticsRequest
+      attr_accessor wireless_device_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWirelessDeviceStatisticsResponse
+      attr_accessor wireless_device_id: ::String
+      attr_accessor last_uplink_received_at: ::String
+      attr_accessor lo_ra_wan: Types::LoRaWANDeviceMetadata
+      attr_accessor sidewalk: Types::SidewalkDeviceMetadata
+      SENSITIVE: []
+    end
+
+    class GetWirelessGatewayCertificateRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWirelessGatewayCertificateResponse
+      attr_accessor iot_certificate_id: ::String
+      attr_accessor lo_ra_wan_network_server_certificate_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWirelessGatewayFirmwareInformationRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWirelessGatewayFirmwareInformationResponse
+      attr_accessor lo_ra_wan: Types::LoRaWANGatewayCurrentVersion
+      SENSITIVE: []
+    end
+
+    class GetWirelessGatewayRequest
+      attr_accessor identifier: ::String
+      attr_accessor identifier_type: ("GatewayEui" | "WirelessGatewayId" | "ThingName")
+      SENSITIVE: []
+    end
+
+    class GetWirelessGatewayResponse
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor description: ::String
+      attr_accessor lo_ra_wan: Types::LoRaWANGateway
+      attr_accessor arn: ::String
+      attr_accessor thing_name: ::String
+      attr_accessor thing_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetWirelessGatewayStatisticsRequest
+      attr_accessor wireless_gateway_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWirelessGatewayStatisticsResponse
+      attr_accessor wireless_gateway_id: ::String
+      attr_accessor last_uplink_received_at: ::String
+      attr_accessor connection_status: ("Connected" | "Disconnected")
+      SENSITIVE: []
+    end
+
+    class GetWirelessGatewayTaskDefinitionRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWirelessGatewayTaskDefinitionResponse
+      attr_accessor auto_create_tasks: bool
+      attr_accessor name: ::String
+      attr_accessor update: Types::UpdateWirelessGatewayTaskCreate
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetWirelessGatewayTaskRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWirelessGatewayTaskResponse
+      attr_accessor wireless_gateway_id: ::String
+      attr_accessor wireless_gateway_task_definition_id: ::String
+      attr_accessor last_uplink_received_at: ::String
+      attr_accessor task_created_at: ::String
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "FIRST_RETRY" | "SECOND_RETRY" | "COMPLETED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class GlobalIdentity
+      attr_accessor lac: ::Integer
+      attr_accessor geran_cid: ::Integer
+      SENSITIVE: []
+    end
+
+    class Gnss
+      attr_accessor payload: ::String
+      attr_accessor capture_time: ::Float
+      attr_accessor capture_time_accuracy: ::Float
+      attr_accessor assist_position: ::Array[::Float]
+      attr_accessor assist_altitude: ::Float
+      attr_accessor use_2_d_solver: bool
+      SENSITIVE: []
+    end
+
+    class GsmLocalId
+      attr_accessor bsic: ::Integer
+      attr_accessor bcch: ::Integer
+      SENSITIVE: []
+    end
+
+    class GsmNmrObj
+      attr_accessor bsic: ::Integer
+      attr_accessor bcch: ::Integer
+      attr_accessor rx_level: ::Integer
+      attr_accessor global_identity: Types::GlobalIdentity
+      SENSITIVE: []
+    end
+
+    class GsmObj
+      attr_accessor mcc: ::Integer
+      attr_accessor mnc: ::Integer
+      attr_accessor lac: ::Integer
+      attr_accessor geran_cid: ::Integer
+      attr_accessor gsm_local_id: Types::GsmLocalId
+      attr_accessor gsm_timing_advance: ::Integer
+      attr_accessor rx_level: ::Integer
+      attr_accessor gsm_nmr: ::Array[Types::GsmNmrObj]
+      SENSITIVE: []
+    end
+
+    class ImportedSidewalkDevice
+      attr_accessor sidewalk_manufacturing_sn: ::String
+      attr_accessor onboarding_status: ("INITIALIZED" | "PENDING" | "ONBOARDED" | "FAILED")
+      attr_accessor onboarding_status_reason: ::String
+      attr_accessor last_update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ImportedWirelessDevice
+      attr_accessor sidewalk: Types::ImportedSidewalkDevice
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Ip
+      attr_accessor ip_address: ::String
+      SENSITIVE: []
+    end
+
+    class JoinEventConfiguration
+      attr_accessor lo_ra_wan: Types::LoRaWANJoinEventNotificationConfigurations
+      attr_accessor wireless_device_id_event_topic: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class JoinResourceTypeEventConfiguration
+      attr_accessor lo_ra_wan: Types::LoRaWANJoinResourceTypeEventConfiguration
+      SENSITIVE: []
+    end
+
+    class ListDestinationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDestinationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor destination_list: ::Array[Types::Destinations]
+      SENSITIVE: []
+    end
+
+    class ListDeviceProfilesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor device_profile_type: ("Sidewalk" | "LoRaWAN")
+      SENSITIVE: []
+    end
+
+    class ListDeviceProfilesResponse
+      attr_accessor next_token: ::String
+      attr_accessor device_profile_list: ::Array[Types::DeviceProfile]
+      SENSITIVE: []
+    end
+
+    class ListDevicesForWirelessDeviceImportTaskRequest
+      attr_accessor id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor status: ("INITIALIZED" | "PENDING" | "ONBOARDED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ListDevicesForWirelessDeviceImportTaskResponse
+      attr_accessor next_token: ::String
+      attr_accessor destination_name: ::String
+      attr_accessor imported_wireless_device_list: ::Array[Types::ImportedWirelessDevice]
+      SENSITIVE: []
+    end
+
+    class ListEventConfigurationsRequest
+      attr_accessor resource_type: ("SidewalkAccount" | "WirelessDevice" | "WirelessGateway")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventConfigurationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor event_configurations_list: ::Array[Types::EventConfigurationItem]
+      SENSITIVE: []
+    end
+
+    class ListFuotaTasksRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFuotaTasksResponse
+      attr_accessor next_token: ::String
+      attr_accessor fuota_task_list: ::Array[Types::FuotaTask]
+      SENSITIVE: []
+    end
+
+    class ListMulticastGroupsByFuotaTaskRequest
+      attr_accessor id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMulticastGroupsByFuotaTaskResponse
+      attr_accessor next_token: ::String
+      attr_accessor multicast_group_list: ::Array[Types::MulticastGroupByFuotaTask]
+      SENSITIVE: []
+    end
+
+    class ListMulticastGroupsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMulticastGroupsResponse
+      attr_accessor next_token: ::String
+      attr_accessor multicast_group_list: ::Array[Types::MulticastGroup]
+      SENSITIVE: []
+    end
+
+    class ListNetworkAnalyzerConfigurationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkAnalyzerConfigurationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor network_analyzer_configuration_list: ::Array[Types::NetworkAnalyzerConfigurations]
+      SENSITIVE: []
+    end
+
+    class ListPartnerAccountsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPartnerAccountsResponse
+      attr_accessor next_token: ::String
+      attr_accessor sidewalk: ::Array[Types::SidewalkAccountInfoWithFingerprint]
+      SENSITIVE: []
+    end
+
+    class ListPositionConfigurationsRequest
+      attr_accessor resource_type: ("WirelessDevice" | "WirelessGateway")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPositionConfigurationsResponse
+      attr_accessor position_configuration_list: ::Array[Types::PositionConfigurationItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListQueuedMessagesRequest
+      attr_accessor id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor wireless_device_type: ("Sidewalk" | "LoRaWAN")
+      SENSITIVE: []
+    end
+
+    class ListQueuedMessagesResponse
+      attr_accessor next_token: ::String
+      attr_accessor downlink_queue_messages_list: ::Array[Types::DownlinkQueueMessage]
+      SENSITIVE: []
+    end
+
+    class ListServiceProfilesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListServiceProfilesResponse
+      attr_accessor next_token: ::String
+      attr_accessor service_profile_list: ::Array[Types::ServiceProfile]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListWirelessDeviceImportTasksRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWirelessDeviceImportTasksResponse
+      attr_accessor next_token: ::String
+      attr_accessor wireless_device_import_task_list: ::Array[Types::WirelessDeviceImportTask]
+      SENSITIVE: []
+    end
+
+    class ListWirelessDevicesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor destination_name: ::String
+      attr_accessor device_profile_id: ::String
+      attr_accessor service_profile_id: ::String
+      attr_accessor wireless_device_type: ("Sidewalk" | "LoRaWAN")
+      attr_accessor fuota_task_id: ::String
+      attr_accessor multicast_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListWirelessDevicesResponse
+      attr_accessor next_token: ::String
+      attr_accessor wireless_device_list: ::Array[Types::WirelessDeviceStatistics]
+      SENSITIVE: []
+    end
+
+    class ListWirelessGatewayTaskDefinitionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor task_definition_type: ("UPDATE")
+      SENSITIVE: []
+    end
+
+    class ListWirelessGatewayTaskDefinitionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor task_definitions: ::Array[Types::UpdateWirelessGatewayTaskEntry]
+      SENSITIVE: []
+    end
+
+    class ListWirelessGatewaysRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListWirelessGatewaysResponse
+      attr_accessor next_token: ::String
+      attr_accessor wireless_gateway_list: ::Array[Types::WirelessGatewayStatistics]
+      SENSITIVE: []
+    end
+
+    class LoRaWANConnectionStatusEventNotificationConfigurations
+      attr_accessor gateway_eui_event_topic: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class LoRaWANConnectionStatusResourceTypeEventConfiguration
+      attr_accessor wireless_gateway_event_topic: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class LoRaWANDevice
+      attr_accessor dev_eui: ::String
+      attr_accessor device_profile_id: ::String
+      attr_accessor service_profile_id: ::String
+      attr_accessor otaa_v1_1: Types::OtaaV1_1
+      attr_accessor otaa_v1_0_x: Types::OtaaV1_0_x
+      attr_accessor abp_v1_1: Types::AbpV1_1
+      attr_accessor abp_v1_0_x: Types::AbpV1_0_x
+      attr_accessor f_ports: Types::FPorts
+      SENSITIVE: []
+    end
+
+    class LoRaWANDeviceMetadata
+      attr_accessor dev_eui: ::String
+      attr_accessor f_port: ::Integer
+      attr_accessor data_rate: ::Integer
+      attr_accessor frequency: ::Integer
+      attr_accessor timestamp: ::String
+      attr_accessor gateways: ::Array[Types::LoRaWANGatewayMetadata]
+      SENSITIVE: []
+    end
+
+    class LoRaWANDeviceProfile
+      attr_accessor supports_class_b: bool
+      attr_accessor class_b_timeout: ::Integer
+      attr_accessor ping_slot_period: ::Integer
+      attr_accessor ping_slot_dr: ::Integer
+      attr_accessor ping_slot_freq: ::Integer
+      attr_accessor supports_class_c: bool
+      attr_accessor class_c_timeout: ::Integer
+      attr_accessor mac_version: ::String
+      attr_accessor reg_params_revision: ::String
+      attr_accessor rx_delay_1: ::Integer
+      attr_accessor rx_dr_offset_1: ::Integer
+      attr_accessor rx_data_rate_2: ::Integer
+      attr_accessor rx_freq_2: ::Integer
+      attr_accessor factory_preset_freqs_list: ::Array[::Integer]
+      attr_accessor max_eirp: ::Integer
+      attr_accessor max_duty_cycle: ::Integer
+      attr_accessor rf_region: ::String
+      attr_accessor supports_join: bool
+      attr_accessor supports_32_bit_f_cnt: bool
+      SENSITIVE: []
+    end
+
+    class LoRaWANFuotaTask
+      attr_accessor rf_region: ("EU868" | "US915" | "AU915" | "AS923-1" | "AS923-2" | "AS923-3" | "AS923-4" | "EU433" | "CN470" | "CN779" | "RU864" | "KR920" | "IN865")
+      SENSITIVE: []
+    end
+
+    class LoRaWANFuotaTaskGetInfo
+      attr_accessor rf_region: ::String
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class LoRaWANGateway
+      attr_accessor gateway_eui: ::String
+      attr_accessor rf_region: ::String
+      attr_accessor join_eui_filters: ::Array[::Array[::String]]
+      attr_accessor net_id_filters: ::Array[::String]
+      attr_accessor sub_bands: ::Array[::Integer]
+      attr_accessor beaconing: Types::Beaconing
+      attr_accessor max_eirp: ::Float
+      SENSITIVE: []
+    end
+
+    class LoRaWANGatewayCurrentVersion
+      attr_accessor current_version: Types::LoRaWANGatewayVersion
+      SENSITIVE: []
+    end
+
+    class LoRaWANGatewayMetadata
+      attr_accessor gateway_eui: ::String
+      attr_accessor snr: ::Float
+      attr_accessor rssi: ::Float
+      SENSITIVE: []
+    end
+
+    class LoRaWANGatewayVersion
+      attr_accessor package_version: ::String
+      attr_accessor model: ::String
+      attr_accessor station: ::String
+      SENSITIVE: []
+    end
+
+    class LoRaWANGetServiceProfileInfo
+      attr_accessor ul_rate: ::Integer
+      attr_accessor ul_bucket_size: ::Integer
+      attr_accessor ul_rate_policy: ::String
+      attr_accessor dl_rate: ::Integer
+      attr_accessor dl_bucket_size: ::Integer
+      attr_accessor dl_rate_policy: ::String
+      attr_accessor add_gw_metadata: bool
+      attr_accessor dev_status_req_freq: ::Integer
+      attr_accessor report_dev_status_battery: bool
+      attr_accessor report_dev_status_margin: bool
+      attr_accessor dr_min: ::Integer
+      attr_accessor dr_max: ::Integer
+      attr_accessor channel_mask: ::String
+      attr_accessor pr_allowed: bool
+      attr_accessor hr_allowed: bool
+      attr_accessor ra_allowed: bool
+      attr_accessor nwk_geo_loc: bool
+      attr_accessor target_per: ::Integer
+      attr_accessor min_gw_diversity: ::Integer
+      SENSITIVE: []
+    end
+
+    class LoRaWANJoinEventNotificationConfigurations
+      attr_accessor dev_eui_event_topic: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class LoRaWANJoinResourceTypeEventConfiguration
+      attr_accessor wireless_device_event_topic: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class LoRaWANListDevice
+      attr_accessor dev_eui: ::String
+      SENSITIVE: []
+    end
+
+    class LoRaWANMulticast
+      attr_accessor rf_region: ("EU868" | "US915" | "AU915" | "AS923-1" | "AS923-2" | "AS923-3" | "AS923-4" | "EU433" | "CN470" | "CN779" | "RU864" | "KR920" | "IN865")
+      attr_accessor dl_class: ("ClassB" | "ClassC")
+      SENSITIVE: []
+    end
+
+    class LoRaWANMulticastGet
+      attr_accessor rf_region: ("EU868" | "US915" | "AU915" | "AS923-1" | "AS923-2" | "AS923-3" | "AS923-4" | "EU433" | "CN470" | "CN779" | "RU864" | "KR920" | "IN865")
+      attr_accessor dl_class: ("ClassB" | "ClassC")
+      attr_accessor number_of_devices_requested: ::Integer
+      attr_accessor number_of_devices_in_group: ::Integer
+      SENSITIVE: []
+    end
+
+    class LoRaWANMulticastMetadata
+      attr_accessor f_port: ::Integer
+      SENSITIVE: []
+    end
+
+    class LoRaWANMulticastSession
+      attr_accessor dl_dr: ::Integer
+      attr_accessor dl_freq: ::Integer
+      attr_accessor session_start_time: ::Time
+      attr_accessor session_timeout: ::Integer
+      attr_accessor ping_slot_period: ::Integer
+      SENSITIVE: []
+    end
+
+    class LoRaWANSendDataToDevice
+      attr_accessor f_port: ::Integer
+      attr_accessor participating_gateways: Types::ParticipatingGateways
+      SENSITIVE: []
+    end
+
+    class LoRaWANServiceProfile
+      attr_accessor add_gw_metadata: bool
+      attr_accessor dr_min: ::Integer
+      attr_accessor dr_max: ::Integer
+      attr_accessor pr_allowed: bool
+      attr_accessor ra_allowed: bool
+      SENSITIVE: []
+    end
+
+    class LoRaWANStartFuotaTask
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class LoRaWANUpdateDevice
+      attr_accessor device_profile_id: ::String
+      attr_accessor service_profile_id: ::String
+      attr_accessor abp_v1_1: Types::UpdateAbpV1_1
+      attr_accessor abp_v1_0_x: Types::UpdateAbpV1_0_x
+      attr_accessor f_ports: Types::UpdateFPorts
+      SENSITIVE: []
+    end
+
+    class LoRaWANUpdateGatewayTaskCreate
+      attr_accessor update_signature: ::String
+      attr_accessor sig_key_crc: ::Integer
+      attr_accessor current_version: Types::LoRaWANGatewayVersion
+      attr_accessor update_version: Types::LoRaWANGatewayVersion
+      SENSITIVE: []
+    end
+
+    class LoRaWANUpdateGatewayTaskEntry
+      attr_accessor current_version: Types::LoRaWANGatewayVersion
+      attr_accessor update_version: Types::LoRaWANGatewayVersion
+      SENSITIVE: []
+    end
+
+    class LteLocalId
+      attr_accessor pci: ::Integer
+      attr_accessor earfcn: ::Integer
+      SENSITIVE: []
+    end
+
+    class LteNmrObj
+      attr_accessor pci: ::Integer
+      attr_accessor earfcn: ::Integer
+      attr_accessor eutran_cid: ::Integer
+      attr_accessor rsrp: ::Integer
+      attr_accessor rsrq: ::Float
+      SENSITIVE: []
+    end
+
+    class LteObj
+      attr_accessor mcc: ::Integer
+      attr_accessor mnc: ::Integer
+      attr_accessor eutran_cid: ::Integer
+      attr_accessor tac: ::Integer
+      attr_accessor lte_local_id: Types::LteLocalId
+      attr_accessor lte_timing_advance: ::Integer
+      attr_accessor rsrp: ::Integer
+      attr_accessor rsrq: ::Float
+      attr_accessor nr_capable: bool
+      attr_accessor lte_nmr: ::Array[Types::LteNmrObj]
+      SENSITIVE: []
+    end
+
+    class MessageDeliveryStatusEventConfiguration
+      attr_accessor sidewalk: Types::SidewalkEventNotificationConfigurations
+      attr_accessor wireless_device_id_event_topic: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class MessageDeliveryStatusResourceTypeEventConfiguration
+      attr_accessor sidewalk: Types::SidewalkResourceTypeEventConfiguration
+      SENSITIVE: []
+    end
+
+    class MulticastGroup
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class MulticastGroupByFuotaTask
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class MulticastWirelessMetadata
+      attr_accessor lo_ra_wan: Types::LoRaWANMulticastMetadata
+      SENSITIVE: []
+    end
+
+    class NetworkAnalyzerConfigurations
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class OtaaV1_0_x
+      attr_accessor app_key: ::String
+      attr_accessor app_eui: ::String
+      attr_accessor join_eui: ::String
+      attr_accessor gen_app_key: ::String
+      SENSITIVE: []
+    end
+
+    class OtaaV1_1
+      attr_accessor app_key: ::String
+      attr_accessor nwk_key: ::String
+      attr_accessor join_eui: ::String
+      SENSITIVE: []
+    end
+
+    class ParticipatingGateways
+      attr_accessor downlink_mode: ("SEQUENTIAL" | "CONCURRENT" | "USING_UPLINK_GATEWAY")
+      attr_accessor gateway_list: ::Array[Types::GatewayListItem]
+      attr_accessor transmission_interval: ::Integer
+      SENSITIVE: []
+    end
+
+    class PositionConfigurationItem
+      attr_accessor resource_identifier: ::String
+      attr_accessor resource_type: ("WirelessDevice" | "WirelessGateway")
+      attr_accessor solvers: Types::PositionSolverDetails
+      attr_accessor destination: ::String
+      SENSITIVE: []
+    end
+
+    class PositionSolverConfigurations
+      attr_accessor semtech_gnss: Types::SemtechGnssConfiguration
+      SENSITIVE: []
+    end
+
+    class PositionSolverDetails
+      attr_accessor semtech_gnss: Types::SemtechGnssDetail
+      SENSITIVE: []
+    end
+
+    class Positioning
+      attr_accessor clock_sync: ::Integer
+      attr_accessor stream: ::Integer
+      attr_accessor gnss: ::Integer
+      SENSITIVE: []
+    end
+
+    class ProximityEventConfiguration
+      attr_accessor sidewalk: Types::SidewalkEventNotificationConfigurations
+      attr_accessor wireless_device_id_event_topic: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class ProximityResourceTypeEventConfiguration
+      attr_accessor sidewalk: Types::SidewalkResourceTypeEventConfiguration
+      SENSITIVE: []
+    end
+
+    class PutPositionConfigurationRequest
+      attr_accessor resource_identifier: ::String
+      attr_accessor resource_type: ("WirelessDevice" | "WirelessGateway")
+      attr_accessor solvers: Types::PositionSolverConfigurations
+      attr_accessor destination: ::String
+      SENSITIVE: []
+    end
+
+    class PutPositionConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class PutResourceLogLevelRequest
+      attr_accessor resource_identifier: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor log_level: ("INFO" | "ERROR" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class PutResourceLogLevelResponse < Aws::EmptyStructure
+    end
+
+    class ResetAllResourceLogLevelsRequest < Aws::EmptyStructure
+    end
+
+    class ResetAllResourceLogLevelsResponse < Aws::EmptyStructure
+    end
+
+    class ResetResourceLogLevelRequest
+      attr_accessor resource_identifier: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ResetResourceLogLevelResponse < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class SemtechGnssConfiguration
+      attr_accessor status: ("Enabled" | "Disabled")
+      attr_accessor fec: ("ROSE" | "NONE")
+      SENSITIVE: []
+    end
+
+    class SemtechGnssDetail
+      attr_accessor provider: ("Semtech")
+      attr_accessor type: ("GNSS")
+      attr_accessor status: ("Enabled" | "Disabled")
+      attr_accessor fec: ("ROSE" | "NONE")
+      SENSITIVE: []
+    end
+
+    class SendDataToMulticastGroupRequest
+      attr_accessor id: ::String
+      attr_accessor payload_data: ::String
+      attr_accessor wireless_metadata: Types::MulticastWirelessMetadata
+      SENSITIVE: []
+    end
+
+    class SendDataToMulticastGroupResponse
+      attr_accessor message_id: ::String
+      SENSITIVE: []
+    end
+
+    class SendDataToWirelessDeviceRequest
+      attr_accessor id: ::String
+      attr_accessor transmit_mode: ::Integer
+      attr_accessor payload_data: ::String
+      attr_accessor wireless_metadata: Types::WirelessMetadata
+      SENSITIVE: []
+    end
+
+    class SendDataToWirelessDeviceResponse
+      attr_accessor message_id: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceProfile
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class SessionKeysAbpV1_0_x
+      attr_accessor nwk_s_key: ::String
+      attr_accessor app_s_key: ::String
+      SENSITIVE: []
+    end
+
+    class SessionKeysAbpV1_1
+      attr_accessor f_nwk_s_int_key: ::String
+      attr_accessor s_nwk_s_int_key: ::String
+      attr_accessor nwk_s_enc_key: ::String
+      attr_accessor app_s_key: ::String
+      SENSITIVE: []
+    end
+
+    class SidewalkAccountInfo
+      attr_accessor amazon_id: ::String
+      attr_accessor app_server_private_key: ::String
+      SENSITIVE: [:app_server_private_key]
+    end
+
+    class SidewalkAccountInfoWithFingerprint
+      attr_accessor amazon_id: ::String
+      attr_accessor fingerprint: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: [:fingerprint]
+    end
+
+    class SidewalkCreateDeviceProfile < Aws::EmptyStructure
+    end
+
+    class SidewalkCreateWirelessDevice
+      attr_accessor device_profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class SidewalkDevice
+      attr_accessor amazon_id: ::String
+      attr_accessor sidewalk_id: ::String
+      attr_accessor sidewalk_manufacturing_sn: ::String
+      attr_accessor device_certificates: ::Array[Types::CertificateList]
+      attr_accessor private_keys: ::Array[Types::CertificateList]
+      attr_accessor device_profile_id: ::String
+      attr_accessor certificate_id: ::String
+      attr_accessor status: ("PROVISIONED" | "REGISTERED" | "ACTIVATED" | "UNKNOWN")
+      SENSITIVE: []
+    end
+
+    class SidewalkDeviceMetadata
+      attr_accessor rssi: ::Integer
+      attr_accessor battery_level: ("normal" | "low" | "critical")
+      attr_accessor event: ("discovered" | "lost" | "ack" | "nack" | "passthrough")
+      attr_accessor device_state: ("Provisioned" | "RegisteredNotSeen" | "RegisteredReachable" | "RegisteredUnreachable")
+      SENSITIVE: []
+    end
+
+    class SidewalkEventNotificationConfigurations
+      attr_accessor amazon_id_event_topic: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class SidewalkGetDeviceProfile
+      attr_accessor application_server_public_key: ::String
+      attr_accessor qualification_status: bool
+      attr_accessor dak_certificate_metadata: ::Array[Types::DakCertificateMetadata]
+      SENSITIVE: [:application_server_public_key]
+    end
+
+    class SidewalkGetStartImportInfo
+      attr_accessor device_creation_file_list: ::Array[::String]
+      attr_accessor role: ::String
+      SENSITIVE: []
+    end
+
+    class SidewalkListDevice
+      attr_accessor amazon_id: ::String
+      attr_accessor sidewalk_id: ::String
+      attr_accessor sidewalk_manufacturing_sn: ::String
+      attr_accessor device_certificates: ::Array[Types::CertificateList]
+      attr_accessor device_profile_id: ::String
+      attr_accessor status: ("PROVISIONED" | "REGISTERED" | "ACTIVATED" | "UNKNOWN")
+      SENSITIVE: []
+    end
+
+    class SidewalkResourceTypeEventConfiguration
+      attr_accessor wireless_device_event_topic: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class SidewalkSendDataToDevice
+      attr_accessor seq: ::Integer
+      attr_accessor message_type: ("CUSTOM_COMMAND_ID_NOTIFY" | "CUSTOM_COMMAND_ID_GET" | "CUSTOM_COMMAND_ID_SET" | "CUSTOM_COMMAND_ID_RESP")
+      attr_accessor ack_mode_retry_duration_secs: ::Integer
+      SENSITIVE: []
+    end
+
+    class SidewalkSingleStartImportInfo
+      attr_accessor sidewalk_manufacturing_sn: ::String
+      SENSITIVE: []
+    end
+
+    class SidewalkStartImportInfo
+      attr_accessor device_creation_file: ::String
+      attr_accessor role: ::String
+      SENSITIVE: []
+    end
+
+    class SidewalkUpdateAccount
+      attr_accessor app_server_private_key: ::String
+      SENSITIVE: [:app_server_private_key]
+    end
+
+    class SidewalkUpdateImportInfo
+      attr_accessor device_creation_file: ::String
+      SENSITIVE: []
+    end
+
+    class StartBulkAssociateWirelessDeviceWithMulticastGroupRequest
+      attr_accessor id: ::String
+      attr_accessor query_string: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class StartBulkAssociateWirelessDeviceWithMulticastGroupResponse < Aws::EmptyStructure
+    end
+
+    class StartBulkDisassociateWirelessDeviceFromMulticastGroupRequest
+      attr_accessor id: ::String
+      attr_accessor query_string: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse < Aws::EmptyStructure
+    end
+
+    class StartFuotaTaskRequest
+      attr_accessor id: ::String
+      attr_accessor lo_ra_wan: Types::LoRaWANStartFuotaTask
+      SENSITIVE: []
+    end
+
+    class StartFuotaTaskResponse < Aws::EmptyStructure
+    end
+
+    class StartMulticastGroupSessionRequest
+      attr_accessor id: ::String
+      attr_accessor lo_ra_wan: Types::LoRaWANMulticastSession
+      SENSITIVE: []
+    end
+
+    class StartMulticastGroupSessionResponse < Aws::EmptyStructure
+    end
+
+    class StartSingleWirelessDeviceImportTaskRequest
+      attr_accessor destination_name: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor device_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor sidewalk: Types::SidewalkSingleStartImportInfo
+      SENSITIVE: []
+    end
+
+    class StartSingleWirelessDeviceImportTaskResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartWirelessDeviceImportTaskRequest
+      attr_accessor destination_name: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor sidewalk: Types::SidewalkStartImportInfo
+      SENSITIVE: []
+    end
+
+    class StartWirelessDeviceImportTaskResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TdscdmaLocalId
+      attr_accessor uarfcn: ::Integer
+      attr_accessor cell_params: ::Integer
+      SENSITIVE: []
+    end
+
+    class TdscdmaNmrObj
+      attr_accessor uarfcn: ::Integer
+      attr_accessor cell_params: ::Integer
+      attr_accessor utran_cid: ::Integer
+      attr_accessor rscp: ::Integer
+      attr_accessor path_loss: ::Integer
+      SENSITIVE: []
+    end
+
+    class TdscdmaObj
+      attr_accessor mcc: ::Integer
+      attr_accessor mnc: ::Integer
+      attr_accessor lac: ::Integer
+      attr_accessor utran_cid: ::Integer
+      attr_accessor tdscdma_local_id: Types::TdscdmaLocalId
+      attr_accessor tdscdma_timing_advance: ::Integer
+      attr_accessor rscp: ::Integer
+      attr_accessor path_loss: ::Integer
+      attr_accessor tdscdma_nmr: ::Array[Types::TdscdmaNmrObj]
+      SENSITIVE: []
+    end
+
+    class TestWirelessDeviceRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class TestWirelessDeviceResponse
+      attr_accessor result: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class TraceContent
+      attr_accessor wireless_device_frame_info: ("ENABLED" | "DISABLED")
+      attr_accessor log_level: ("INFO" | "ERROR" | "DISABLED")
+      attr_accessor multicast_frame_info: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAbpV1_0_x
+      attr_accessor f_cnt_start: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateAbpV1_1
+      attr_accessor f_cnt_start: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateDestinationRequest
+      attr_accessor name: ::String
+      attr_accessor expression_type: ("RuleName" | "MqttTopic")
+      attr_accessor expression: ::String
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDestinationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateEventConfigurationByResourceTypesRequest
+      attr_accessor device_registration_state: Types::DeviceRegistrationStateResourceTypeEventConfiguration
+      attr_accessor proximity: Types::ProximityResourceTypeEventConfiguration
+      attr_accessor join: Types::JoinResourceTypeEventConfiguration
+      attr_accessor connection_status: Types::ConnectionStatusResourceTypeEventConfiguration
+      attr_accessor message_delivery_status: Types::MessageDeliveryStatusResourceTypeEventConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateEventConfigurationByResourceTypesResponse < Aws::EmptyStructure
+    end
+
+    class UpdateFPorts
+      attr_accessor positioning: Types::Positioning
+      attr_accessor applications: ::Array[Types::ApplicationConfig]
+      SENSITIVE: []
+    end
+
+    class UpdateFuotaTaskRequest
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor lo_ra_wan: Types::LoRaWANFuotaTask
+      attr_accessor firmware_update_image: ::String
+      attr_accessor firmware_update_role: ::String
+      attr_accessor redundancy_percent: ::Integer
+      attr_accessor fragment_size_bytes: ::Integer
+      attr_accessor fragment_interval_ms: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateFuotaTaskResponse < Aws::EmptyStructure
+    end
+
+    class UpdateLogLevelsByResourceTypesRequest
+      attr_accessor default_log_level: ("INFO" | "ERROR" | "DISABLED")
+      attr_accessor wireless_device_log_options: ::Array[Types::WirelessDeviceLogOption]
+      attr_accessor wireless_gateway_log_options: ::Array[Types::WirelessGatewayLogOption]
+      SENSITIVE: []
+    end
+
+    class UpdateLogLevelsByResourceTypesResponse < Aws::EmptyStructure
+    end
+
+    class UpdateMulticastGroupRequest
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor lo_ra_wan: Types::LoRaWANMulticast
+      SENSITIVE: []
+    end
+
+    class UpdateMulticastGroupResponse < Aws::EmptyStructure
+    end
+
+    class UpdateNetworkAnalyzerConfigurationRequest
+      attr_accessor configuration_name: ::String
+      attr_accessor trace_content: Types::TraceContent
+      attr_accessor wireless_devices_to_add: ::Array[::String]
+      attr_accessor wireless_devices_to_remove: ::Array[::String]
+      attr_accessor wireless_gateways_to_add: ::Array[::String]
+      attr_accessor wireless_gateways_to_remove: ::Array[::String]
+      attr_accessor description: ::String
+      attr_accessor multicast_groups_to_add: ::Array[::String]
+      attr_accessor multicast_groups_to_remove: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateNetworkAnalyzerConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class UpdatePartnerAccountRequest
+      attr_accessor sidewalk: Types::SidewalkUpdateAccount
+      attr_accessor partner_account_id: ::String
+      attr_accessor partner_type: ("Sidewalk")
+      SENSITIVE: []
+    end
+
+    class UpdatePartnerAccountResponse < Aws::EmptyStructure
+    end
+
+    class UpdatePositionRequest
+      attr_accessor resource_identifier: ::String
+      attr_accessor resource_type: ("WirelessDevice" | "WirelessGateway")
+      attr_accessor position: ::Array[::Float]
+      SENSITIVE: []
+    end
+
+    class UpdatePositionResponse < Aws::EmptyStructure
+    end
+
+    class UpdateResourceEventConfigurationRequest
+      attr_accessor identifier: ::String
+      attr_accessor identifier_type: ("PartnerAccountId" | "DevEui" | "GatewayEui" | "WirelessDeviceId" | "WirelessGatewayId")
+      attr_accessor partner_type: ("Sidewalk")
+      attr_accessor device_registration_state: Types::DeviceRegistrationStateEventConfiguration
+      attr_accessor proximity: Types::ProximityEventConfiguration
+      attr_accessor join: Types::JoinEventConfiguration
+      attr_accessor connection_status: Types::ConnectionStatusEventConfiguration
+      attr_accessor message_delivery_status: Types::MessageDeliveryStatusEventConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateResourceEventConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateResourcePositionRequest
+      attr_accessor resource_identifier: ::String
+      attr_accessor resource_type: ("WirelessDevice" | "WirelessGateway")
+      attr_accessor geo_json_payload: ::IO
+      SENSITIVE: []
+    end
+
+    class UpdateResourcePositionResponse < Aws::EmptyStructure
+    end
+
+    class UpdateWirelessDeviceImportTaskRequest
+      attr_accessor id: ::String
+      attr_accessor sidewalk: Types::SidewalkUpdateImportInfo
+      SENSITIVE: []
+    end
+
+    class UpdateWirelessDeviceImportTaskResponse < Aws::EmptyStructure
+    end
+
+    class UpdateWirelessDeviceRequest
+      attr_accessor id: ::String
+      attr_accessor destination_name: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor lo_ra_wan: Types::LoRaWANUpdateDevice
+      attr_accessor positioning: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class UpdateWirelessDeviceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateWirelessGatewayRequest
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor join_eui_filters: ::Array[::Array[::String]]
+      attr_accessor net_id_filters: ::Array[::String]
+      attr_accessor max_eirp: ::Float
+      SENSITIVE: []
+    end
+
+    class UpdateWirelessGatewayResponse < Aws::EmptyStructure
+    end
+
+    class UpdateWirelessGatewayTaskCreate
+      attr_accessor update_data_source: ::String
+      attr_accessor update_data_role: ::String
+      attr_accessor lo_ra_wan: Types::LoRaWANUpdateGatewayTaskCreate
+      SENSITIVE: []
+    end
+
+    class UpdateWirelessGatewayTaskEntry
+      attr_accessor id: ::String
+      attr_accessor lo_ra_wan: Types::LoRaWANUpdateGatewayTaskEntry
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WcdmaLocalId
+      attr_accessor uarfcndl: ::Integer
+      attr_accessor psc: ::Integer
+      SENSITIVE: []
+    end
+
+    class WcdmaNmrObj
+      attr_accessor uarfcndl: ::Integer
+      attr_accessor psc: ::Integer
+      attr_accessor utran_cid: ::Integer
+      attr_accessor rscp: ::Integer
+      attr_accessor path_loss: ::Integer
+      SENSITIVE: []
+    end
+
+    class WcdmaObj
+      attr_accessor mcc: ::Integer
+      attr_accessor mnc: ::Integer
+      attr_accessor lac: ::Integer
+      attr_accessor utran_cid: ::Integer
+      attr_accessor wcdma_local_id: Types::WcdmaLocalId
+      attr_accessor rscp: ::Integer
+      attr_accessor path_loss: ::Integer
+      attr_accessor wcdma_nmr: ::Array[Types::WcdmaNmrObj]
+      SENSITIVE: []
+    end
+
+    class WiFiAccessPoint
+      attr_accessor mac_address: ::String
+      attr_accessor rss: ::Integer
+      SENSITIVE: []
+    end
+
+    class WirelessDeviceEventLogOption
+      attr_accessor event: ("Join" | "Rejoin" | "Uplink_Data" | "Downlink_Data" | "Registration")
+      attr_accessor log_level: ("INFO" | "ERROR" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class WirelessDeviceImportTask
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor destination_name: ::String
+      attr_accessor sidewalk: Types::SidewalkGetStartImportInfo
+      attr_accessor creation_time: ::Time
+      attr_accessor status: ("INITIALIZING" | "INITIALIZED" | "PENDING" | "COMPLETE" | "FAILED" | "DELETING")
+      attr_accessor status_reason: ::String
+      attr_accessor initialized_imported_device_count: ::Integer
+      attr_accessor pending_imported_device_count: ::Integer
+      attr_accessor onboarded_imported_device_count: ::Integer
+      attr_accessor failed_imported_device_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class WirelessDeviceLogOption
+      attr_accessor type: ("Sidewalk" | "LoRaWAN")
+      attr_accessor log_level: ("INFO" | "ERROR" | "DISABLED")
+      attr_accessor events: ::Array[Types::WirelessDeviceEventLogOption]
+      SENSITIVE: []
+    end
+
+    class WirelessDeviceStatistics
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor type: ("Sidewalk" | "LoRaWAN")
+      attr_accessor name: ::String
+      attr_accessor destination_name: ::String
+      attr_accessor last_uplink_received_at: ::String
+      attr_accessor lo_ra_wan: Types::LoRaWANListDevice
+      attr_accessor sidewalk: Types::SidewalkListDevice
+      attr_accessor fuota_device_status: ("Initial" | "Package_Not_Supported" | "FragAlgo_unsupported" | "Not_enough_memory" | "FragIndex_unsupported" | "Wrong_descriptor" | "SessionCnt_replay" | "MissingFrag" | "MemoryError" | "MICError" | "Successful")
+      attr_accessor multicast_device_status: ::String
+      attr_accessor mc_group_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class WirelessGatewayEventLogOption
+      attr_accessor event: ("CUPS_Request" | "Certificate")
+      attr_accessor log_level: ("INFO" | "ERROR" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class WirelessGatewayLogOption
+      attr_accessor type: ("LoRaWAN")
+      attr_accessor log_level: ("INFO" | "ERROR" | "DISABLED")
+      attr_accessor events: ::Array[Types::WirelessGatewayEventLogOption]
+      SENSITIVE: []
+    end
+
+    class WirelessGatewayStatistics
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor lo_ra_wan: Types::LoRaWANGateway
+      attr_accessor last_uplink_received_at: ::String
+      SENSITIVE: []
+    end
+
+    class WirelessMetadata
+      attr_accessor lo_ra_wan: Types::LoRaWANSendDataToDevice
+      attr_accessor sidewalk: Types::SidewalkSendDataToDevice
+      SENSITIVE: []
+    end
+  end
+end

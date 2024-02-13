@@ -1,0 +1,162 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Organizations
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AWSOrganizationsNotInUseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class AccessDeniedForDependencyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def reason: () -> ::String
+      end
+      class AccountAlreadyClosedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class AccountAlreadyRegisteredException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class AccountNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class AccountNotRegisteredException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class AccountOwnerNotVerifiedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class AlreadyInOrganizationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ChildNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ConstraintViolationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def reason: () -> ::String
+      end
+      class CreateAccountStatusNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DestinationParentNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DuplicateAccountException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DuplicateHandshakeException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DuplicateOrganizationalUnitException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DuplicatePolicyAttachmentException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DuplicatePolicyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class EffectivePolicyNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class FinalizingOrganizationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class HandshakeAlreadyInStateException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class HandshakeConstraintViolationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def reason: () -> ::String
+      end
+      class HandshakeNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidHandshakeTransitionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidInputException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def reason: () -> ::String
+      end
+      class MalformedPolicyDocumentException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MasterCannotLeaveOrganizationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class OrganizationNotEmptyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class OrganizationalUnitNotEmptyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class OrganizationalUnitNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ParentNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PolicyChangesInProgressException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PolicyInUseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PolicyNotAttachedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PolicyNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PolicyTypeAlreadyEnabledException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PolicyTypeNotAvailableForOrganizationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PolicyTypeNotEnabledException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourcePolicyNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RootNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class SourceParentNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TargetNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyRequestsException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class UnsupportedAPIEndpointException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

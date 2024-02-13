@@ -137,6 +137,14 @@ module Aws::ECS
     DockerLabelsMap = Shapes::MapShape.new(name: 'DockerLabelsMap')
     DockerVolumeConfiguration = Shapes::StructureShape.new(name: 'DockerVolumeConfiguration')
     Double = Shapes::FloatShape.new(name: 'Double')
+    Duration = Shapes::IntegerShape.new(name: 'Duration')
+    EBSKMSKeyId = Shapes::StringShape.new(name: 'EBSKMSKeyId')
+    EBSResourceType = Shapes::StringShape.new(name: 'EBSResourceType')
+    EBSSnapshotId = Shapes::StringShape.new(name: 'EBSSnapshotId')
+    EBSTagSpecification = Shapes::StructureShape.new(name: 'EBSTagSpecification')
+    EBSTagSpecifications = Shapes::ListShape.new(name: 'EBSTagSpecifications')
+    EBSVolumeType = Shapes::StringShape.new(name: 'EBSVolumeType')
+    ECSVolumeName = Shapes::StringShape.new(name: 'ECSVolumeName')
     EFSAuthorizationConfig = Shapes::StructureShape.new(name: 'EFSAuthorizationConfig')
     EFSAuthorizationConfigIAM = Shapes::StringShape.new(name: 'EFSAuthorizationConfigIAM')
     EFSTransitEncryption = Shapes::StringShape.new(name: 'EFSTransitEncryption')
@@ -166,6 +174,7 @@ module Aws::ECS
     HostEntry = Shapes::StructureShape.new(name: 'HostEntry')
     HostEntryList = Shapes::ListShape.new(name: 'HostEntryList')
     HostVolumeProperties = Shapes::StructureShape.new(name: 'HostVolumeProperties')
+    IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
     InferenceAccelerator = Shapes::StructureShape.new(name: 'InferenceAccelerator')
     InferenceAcceleratorOverride = Shapes::StructureShape.new(name: 'InferenceAcceleratorOverride')
     InferenceAcceleratorOverrides = Shapes::ListShape.new(name: 'InferenceAcceleratorOverrides')
@@ -294,14 +303,19 @@ module Aws::ECS
     ServiceConnectServiceList = Shapes::ListShape.new(name: 'ServiceConnectServiceList')
     ServiceConnectServiceResource = Shapes::StructureShape.new(name: 'ServiceConnectServiceResource')
     ServiceConnectServiceResourceList = Shapes::ListShape.new(name: 'ServiceConnectServiceResourceList')
+    ServiceConnectTlsCertificateAuthority = Shapes::StructureShape.new(name: 'ServiceConnectTlsCertificateAuthority')
+    ServiceConnectTlsConfiguration = Shapes::StructureShape.new(name: 'ServiceConnectTlsConfiguration')
     ServiceEvent = Shapes::StructureShape.new(name: 'ServiceEvent')
     ServiceEvents = Shapes::ListShape.new(name: 'ServiceEvents')
     ServiceField = Shapes::StringShape.new(name: 'ServiceField')
     ServiceFieldList = Shapes::ListShape.new(name: 'ServiceFieldList')
+    ServiceManagedEBSVolumeConfiguration = Shapes::StructureShape.new(name: 'ServiceManagedEBSVolumeConfiguration')
     ServiceNotActiveException = Shapes::StructureShape.new(name: 'ServiceNotActiveException')
     ServiceNotFoundException = Shapes::StructureShape.new(name: 'ServiceNotFoundException')
     ServiceRegistries = Shapes::ListShape.new(name: 'ServiceRegistries')
     ServiceRegistry = Shapes::StructureShape.new(name: 'ServiceRegistry')
+    ServiceVolumeConfiguration = Shapes::StructureShape.new(name: 'ServiceVolumeConfiguration')
+    ServiceVolumeConfigurations = Shapes::ListShape.new(name: 'ServiceVolumeConfigurations')
     Services = Shapes::ListShape.new(name: 'Services')
     Session = Shapes::StructureShape.new(name: 'Session')
     Setting = Shapes::StructureShape.new(name: 'Setting')
@@ -348,6 +362,9 @@ module Aws::ECS
     TaskDefinitionStatus = Shapes::StringShape.new(name: 'TaskDefinitionStatus')
     TaskField = Shapes::StringShape.new(name: 'TaskField')
     TaskFieldList = Shapes::ListShape.new(name: 'TaskFieldList')
+    TaskFilesystemType = Shapes::StringShape.new(name: 'TaskFilesystemType')
+    TaskManagedEBSVolumeConfiguration = Shapes::StructureShape.new(name: 'TaskManagedEBSVolumeConfiguration')
+    TaskManagedEBSVolumeTerminationPolicy = Shapes::StructureShape.new(name: 'TaskManagedEBSVolumeTerminationPolicy')
     TaskOverride = Shapes::StructureShape.new(name: 'TaskOverride')
     TaskSet = Shapes::StructureShape.new(name: 'TaskSet')
     TaskSetField = Shapes::StringShape.new(name: 'TaskSetField')
@@ -355,7 +372,10 @@ module Aws::ECS
     TaskSetNotFoundException = Shapes::StructureShape.new(name: 'TaskSetNotFoundException')
     TaskSets = Shapes::ListShape.new(name: 'TaskSets')
     TaskStopCode = Shapes::StringShape.new(name: 'TaskStopCode')
+    TaskVolumeConfiguration = Shapes::StructureShape.new(name: 'TaskVolumeConfiguration')
+    TaskVolumeConfigurations = Shapes::ListShape.new(name: 'TaskVolumeConfigurations')
     Tasks = Shapes::ListShape.new(name: 'Tasks')
+    TimeoutConfiguration = Shapes::StructureShape.new(name: 'TimeoutConfiguration')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Tmpfs = Shapes::StructureShape.new(name: 'Tmpfs')
     TmpfsList = Shapes::ListShape.new(name: 'TmpfsList')
@@ -675,6 +695,7 @@ module Aws::ECS
     CreateServiceRequest.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: PropagateTags, location_name: "propagateTags"))
     CreateServiceRequest.add_member(:enable_execute_command, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableExecuteCommand"))
     CreateServiceRequest.add_member(:service_connect_configuration, Shapes::ShapeRef.new(shape: ServiceConnectConfiguration, location_name: "serviceConnectConfiguration"))
+    CreateServiceRequest.add_member(:volume_configurations, Shapes::ShapeRef.new(shape: ServiceVolumeConfigurations, location_name: "volumeConfigurations"))
     CreateServiceRequest.struct_class = Types::CreateServiceRequest
 
     CreateServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "service"))
@@ -766,6 +787,7 @@ module Aws::ECS
     Deployment.add_member(:rollout_state_reason, Shapes::ShapeRef.new(shape: String, location_name: "rolloutStateReason"))
     Deployment.add_member(:service_connect_configuration, Shapes::ShapeRef.new(shape: ServiceConnectConfiguration, location_name: "serviceConnectConfiguration"))
     Deployment.add_member(:service_connect_resources, Shapes::ShapeRef.new(shape: ServiceConnectServiceResourceList, location_name: "serviceConnectResources"))
+    Deployment.add_member(:volume_configurations, Shapes::ShapeRef.new(shape: ServiceVolumeConfigurations, location_name: "volumeConfigurations"))
     Deployment.struct_class = Types::Deployment
 
     DeploymentAlarms.add_member(:alarm_names, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "alarmNames"))
@@ -893,6 +915,13 @@ module Aws::ECS
     DockerVolumeConfiguration.add_member(:driver_opts, Shapes::ShapeRef.new(shape: StringMap, location_name: "driverOpts"))
     DockerVolumeConfiguration.add_member(:labels, Shapes::ShapeRef.new(shape: StringMap, location_name: "labels"))
     DockerVolumeConfiguration.struct_class = Types::DockerVolumeConfiguration
+
+    EBSTagSpecification.add_member(:resource_type, Shapes::ShapeRef.new(shape: EBSResourceType, required: true, location_name: "resourceType"))
+    EBSTagSpecification.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    EBSTagSpecification.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: PropagateTags, location_name: "propagateTags"))
+    EBSTagSpecification.struct_class = Types::EBSTagSpecification
+
+    EBSTagSpecifications.member = Shapes::ShapeRef.new(shape: EBSTagSpecification)
 
     EFSAuthorizationConfig.add_member(:access_point_id, Shapes::ShapeRef.new(shape: String, location_name: "accessPointId"))
     EFSAuthorizationConfig.add_member(:iam, Shapes::ShapeRef.new(shape: EFSAuthorizationConfigIAM, location_name: "iam"))
@@ -1368,6 +1397,7 @@ module Aws::ECS
     RunTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     RunTaskRequest.add_member(:task_definition, Shapes::ShapeRef.new(shape: String, required: true, location_name: "taskDefinition"))
     RunTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    RunTaskRequest.add_member(:volume_configurations, Shapes::ShapeRef.new(shape: TaskVolumeConfigurations, location_name: "volumeConfigurations"))
     RunTaskRequest.struct_class = Types::RunTaskRequest
 
     RunTaskResponse.add_member(:tasks, Shapes::ShapeRef.new(shape: Tasks, location_name: "tasks"))
@@ -1440,6 +1470,8 @@ module Aws::ECS
     ServiceConnectService.add_member(:discovery_name, Shapes::ShapeRef.new(shape: String, location_name: "discoveryName"))
     ServiceConnectService.add_member(:client_aliases, Shapes::ShapeRef.new(shape: ServiceConnectClientAliasList, location_name: "clientAliases"))
     ServiceConnectService.add_member(:ingress_port_override, Shapes::ShapeRef.new(shape: PortNumber, location_name: "ingressPortOverride"))
+    ServiceConnectService.add_member(:timeout, Shapes::ShapeRef.new(shape: TimeoutConfiguration, location_name: "timeout"))
+    ServiceConnectService.add_member(:tls, Shapes::ShapeRef.new(shape: ServiceConnectTlsConfiguration, location_name: "tls"))
     ServiceConnectService.struct_class = Types::ServiceConnectService
 
     ServiceConnectServiceList.member = Shapes::ShapeRef.new(shape: ServiceConnectService)
@@ -1450,6 +1482,14 @@ module Aws::ECS
 
     ServiceConnectServiceResourceList.member = Shapes::ShapeRef.new(shape: ServiceConnectServiceResource)
 
+    ServiceConnectTlsCertificateAuthority.add_member(:aws_pca_authority_arn, Shapes::ShapeRef.new(shape: String, location_name: "awsPcaAuthorityArn"))
+    ServiceConnectTlsCertificateAuthority.struct_class = Types::ServiceConnectTlsCertificateAuthority
+
+    ServiceConnectTlsConfiguration.add_member(:issuer_certificate_authority, Shapes::ShapeRef.new(shape: ServiceConnectTlsCertificateAuthority, required: true, location_name: "issuerCertificateAuthority"))
+    ServiceConnectTlsConfiguration.add_member(:kms_key, Shapes::ShapeRef.new(shape: String, location_name: "kmsKey"))
+    ServiceConnectTlsConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, location_name: "roleArn"))
+    ServiceConnectTlsConfiguration.struct_class = Types::ServiceConnectTlsConfiguration
+
     ServiceEvent.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     ServiceEvent.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     ServiceEvent.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -1458,6 +1498,18 @@ module Aws::ECS
     ServiceEvents.member = Shapes::ShapeRef.new(shape: ServiceEvent)
 
     ServiceFieldList.member = Shapes::ShapeRef.new(shape: ServiceField)
+
+    ServiceManagedEBSVolumeConfiguration.add_member(:encrypted, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "encrypted"))
+    ServiceManagedEBSVolumeConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: EBSKMSKeyId, location_name: "kmsKeyId"))
+    ServiceManagedEBSVolumeConfiguration.add_member(:volume_type, Shapes::ShapeRef.new(shape: EBSVolumeType, location_name: "volumeType"))
+    ServiceManagedEBSVolumeConfiguration.add_member(:size_in_gi_b, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "sizeInGiB"))
+    ServiceManagedEBSVolumeConfiguration.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: EBSSnapshotId, location_name: "snapshotId"))
+    ServiceManagedEBSVolumeConfiguration.add_member(:iops, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "iops"))
+    ServiceManagedEBSVolumeConfiguration.add_member(:throughput, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "throughput"))
+    ServiceManagedEBSVolumeConfiguration.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: EBSTagSpecifications, location_name: "tagSpecifications"))
+    ServiceManagedEBSVolumeConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "roleArn"))
+    ServiceManagedEBSVolumeConfiguration.add_member(:filesystem_type, Shapes::ShapeRef.new(shape: TaskFilesystemType, location_name: "filesystemType"))
+    ServiceManagedEBSVolumeConfiguration.struct_class = Types::ServiceManagedEBSVolumeConfiguration
 
     ServiceNotActiveException.struct_class = Types::ServiceNotActiveException
 
@@ -1470,6 +1522,12 @@ module Aws::ECS
     ServiceRegistry.add_member(:container_name, Shapes::ShapeRef.new(shape: String, location_name: "containerName"))
     ServiceRegistry.add_member(:container_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "containerPort"))
     ServiceRegistry.struct_class = Types::ServiceRegistry
+
+    ServiceVolumeConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: ECSVolumeName, required: true, location_name: "name"))
+    ServiceVolumeConfiguration.add_member(:managed_ebs_volume, Shapes::ShapeRef.new(shape: ServiceManagedEBSVolumeConfiguration, location_name: "managedEBSVolume"))
+    ServiceVolumeConfiguration.struct_class = Types::ServiceVolumeConfiguration
+
+    ServiceVolumeConfigurations.member = Shapes::ShapeRef.new(shape: ServiceVolumeConfiguration)
 
     Services.member = Shapes::ShapeRef.new(shape: Service)
 
@@ -1498,6 +1556,7 @@ module Aws::ECS
     StartTaskRequest.add_member(:started_by, Shapes::ShapeRef.new(shape: String, location_name: "startedBy"))
     StartTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     StartTaskRequest.add_member(:task_definition, Shapes::ShapeRef.new(shape: String, required: true, location_name: "taskDefinition"))
+    StartTaskRequest.add_member(:volume_configurations, Shapes::ShapeRef.new(shape: TaskVolumeConfigurations, location_name: "volumeConfigurations"))
     StartTaskRequest.struct_class = Types::StartTaskRequest
 
     StartTaskResponse.add_member(:tasks, Shapes::ShapeRef.new(shape: Tasks, location_name: "tasks"))
@@ -1654,6 +1713,22 @@ module Aws::ECS
 
     TaskFieldList.member = Shapes::ShapeRef.new(shape: TaskField)
 
+    TaskManagedEBSVolumeConfiguration.add_member(:encrypted, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "encrypted"))
+    TaskManagedEBSVolumeConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: EBSKMSKeyId, location_name: "kmsKeyId"))
+    TaskManagedEBSVolumeConfiguration.add_member(:volume_type, Shapes::ShapeRef.new(shape: EBSVolumeType, location_name: "volumeType"))
+    TaskManagedEBSVolumeConfiguration.add_member(:size_in_gi_b, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "sizeInGiB"))
+    TaskManagedEBSVolumeConfiguration.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: EBSSnapshotId, location_name: "snapshotId"))
+    TaskManagedEBSVolumeConfiguration.add_member(:iops, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "iops"))
+    TaskManagedEBSVolumeConfiguration.add_member(:throughput, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "throughput"))
+    TaskManagedEBSVolumeConfiguration.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: EBSTagSpecifications, location_name: "tagSpecifications"))
+    TaskManagedEBSVolumeConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "roleArn"))
+    TaskManagedEBSVolumeConfiguration.add_member(:termination_policy, Shapes::ShapeRef.new(shape: TaskManagedEBSVolumeTerminationPolicy, location_name: "terminationPolicy"))
+    TaskManagedEBSVolumeConfiguration.add_member(:filesystem_type, Shapes::ShapeRef.new(shape: TaskFilesystemType, location_name: "filesystemType"))
+    TaskManagedEBSVolumeConfiguration.struct_class = Types::TaskManagedEBSVolumeConfiguration
+
+    TaskManagedEBSVolumeTerminationPolicy.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: BoxedBoolean, required: true, location_name: "deleteOnTermination"))
+    TaskManagedEBSVolumeTerminationPolicy.struct_class = Types::TaskManagedEBSVolumeTerminationPolicy
+
     TaskOverride.add_member(:container_overrides, Shapes::ShapeRef.new(shape: ContainerOverrides, location_name: "containerOverrides"))
     TaskOverride.add_member(:cpu, Shapes::ShapeRef.new(shape: String, location_name: "cpu"))
     TaskOverride.add_member(:inference_accelerator_overrides, Shapes::ShapeRef.new(shape: InferenceAcceleratorOverrides, location_name: "inferenceAcceleratorOverrides"))
@@ -1695,7 +1770,17 @@ module Aws::ECS
 
     TaskSets.member = Shapes::ShapeRef.new(shape: TaskSet)
 
+    TaskVolumeConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: ECSVolumeName, required: true, location_name: "name"))
+    TaskVolumeConfiguration.add_member(:managed_ebs_volume, Shapes::ShapeRef.new(shape: TaskManagedEBSVolumeConfiguration, location_name: "managedEBSVolume"))
+    TaskVolumeConfiguration.struct_class = Types::TaskVolumeConfiguration
+
+    TaskVolumeConfigurations.member = Shapes::ShapeRef.new(shape: TaskVolumeConfiguration)
+
     Tasks.member = Shapes::ShapeRef.new(shape: Task)
+
+    TimeoutConfiguration.add_member(:idle_timeout_seconds, Shapes::ShapeRef.new(shape: Duration, location_name: "idleTimeoutSeconds"))
+    TimeoutConfiguration.add_member(:per_request_timeout_seconds, Shapes::ShapeRef.new(shape: Duration, location_name: "perRequestTimeoutSeconds"))
+    TimeoutConfiguration.struct_class = Types::TimeoutConfiguration
 
     Tmpfs.add_member(:container_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "containerPath"))
     Tmpfs.add_member(:size, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "size"))
@@ -1786,6 +1871,7 @@ module Aws::ECS
     UpdateServiceRequest.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: PropagateTags, location_name: "propagateTags"))
     UpdateServiceRequest.add_member(:service_registries, Shapes::ShapeRef.new(shape: ServiceRegistries, location_name: "serviceRegistries"))
     UpdateServiceRequest.add_member(:service_connect_configuration, Shapes::ShapeRef.new(shape: ServiceConnectConfiguration, location_name: "serviceConnectConfiguration"))
+    UpdateServiceRequest.add_member(:volume_configurations, Shapes::ShapeRef.new(shape: ServiceVolumeConfigurations, location_name: "volumeConfigurations"))
     UpdateServiceRequest.struct_class = Types::UpdateServiceRequest
 
     UpdateServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "service"))
@@ -1820,6 +1906,7 @@ module Aws::ECS
     Volume.add_member(:docker_volume_configuration, Shapes::ShapeRef.new(shape: DockerVolumeConfiguration, location_name: "dockerVolumeConfiguration"))
     Volume.add_member(:efs_volume_configuration, Shapes::ShapeRef.new(shape: EFSVolumeConfiguration, location_name: "efsVolumeConfiguration"))
     Volume.add_member(:fsx_windows_file_server_volume_configuration, Shapes::ShapeRef.new(shape: FSxWindowsFileServerVolumeConfiguration, location_name: "fsxWindowsFileServerVolumeConfiguration"))
+    Volume.add_member(:configured_at_launch, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "configuredAtLaunch"))
     Volume.struct_class = Types::Volume
 
     VolumeFrom.add_member(:source_container, Shapes::ShapeRef.new(shape: String, location_name: "sourceContainer"))
@@ -2415,6 +2502,7 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
       api.add_operation(:stop_task, Seahorse::Model::Operation.new.tap do |o|
@@ -2569,6 +2657,7 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: PlatformTaskDefinitionIncompatibilityException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NamespaceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
       api.add_operation(:update_service_primary_task_set, Seahorse::Model::Operation.new.tap do |o|

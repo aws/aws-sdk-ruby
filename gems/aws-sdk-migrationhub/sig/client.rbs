@@ -1,0 +1,298 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MigrationHub
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHub/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateCreatedArtifactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateCreatedArtifactResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHub/Client.html#associate_created_artifact-instance_method
+      def associate_created_artifact: (
+                                        progress_update_stream: ::String,
+                                        migration_task_name: ::String,
+                                        created_artifact: {
+                                          name: ::String,
+                                          description: ::String?
+                                        },
+                                        ?dry_run: bool
+                                      ) -> _AssociateCreatedArtifactResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateCreatedArtifactResponseSuccess
+
+      interface _AssociateDiscoveredResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateDiscoveredResourceResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHub/Client.html#associate_discovered_resource-instance_method
+      def associate_discovered_resource: (
+                                           progress_update_stream: ::String,
+                                           migration_task_name: ::String,
+                                           discovered_resource: {
+                                             configuration_id: ::String,
+                                             description: ::String?
+                                           },
+                                           ?dry_run: bool
+                                         ) -> _AssociateDiscoveredResourceResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateDiscoveredResourceResponseSuccess
+
+      interface _CreateProgressUpdateStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProgressUpdateStreamResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHub/Client.html#create_progress_update_stream-instance_method
+      def create_progress_update_stream: (
+                                           progress_update_stream_name: ::String,
+                                           ?dry_run: bool
+                                         ) -> _CreateProgressUpdateStreamResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProgressUpdateStreamResponseSuccess
+
+      interface _DeleteProgressUpdateStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProgressUpdateStreamResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHub/Client.html#delete_progress_update_stream-instance_method
+      def delete_progress_update_stream: (
+                                           progress_update_stream_name: ::String,
+                                           ?dry_run: bool
+                                         ) -> _DeleteProgressUpdateStreamResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProgressUpdateStreamResponseSuccess
+
+      interface _DescribeApplicationStateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeApplicationStateResult]
+        def application_status: () -> ("NOT_STARTED" | "IN_PROGRESS" | "COMPLETED")
+        def last_updated_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHub/Client.html#describe_application_state-instance_method
+      def describe_application_state: (
+                                        application_id: ::String
+                                      ) -> _DescribeApplicationStateResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeApplicationStateResponseSuccess
+
+      interface _DescribeMigrationTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMigrationTaskResult]
+        def migration_task: () -> Types::MigrationTask
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHub/Client.html#describe_migration_task-instance_method
+      def describe_migration_task: (
+                                     progress_update_stream: ::String,
+                                     migration_task_name: ::String
+                                   ) -> _DescribeMigrationTaskResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMigrationTaskResponseSuccess
+
+      interface _DisassociateCreatedArtifactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateCreatedArtifactResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHub/Client.html#disassociate_created_artifact-instance_method
+      def disassociate_created_artifact: (
+                                           progress_update_stream: ::String,
+                                           migration_task_name: ::String,
+                                           created_artifact_name: ::String,
+                                           ?dry_run: bool
+                                         ) -> _DisassociateCreatedArtifactResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateCreatedArtifactResponseSuccess
+
+      interface _DisassociateDiscoveredResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateDiscoveredResourceResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHub/Client.html#disassociate_discovered_resource-instance_method
+      def disassociate_discovered_resource: (
+                                              progress_update_stream: ::String,
+                                              migration_task_name: ::String,
+                                              configuration_id: ::String,
+                                              ?dry_run: bool
+                                            ) -> _DisassociateDiscoveredResourceResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateDiscoveredResourceResponseSuccess
+
+      interface _ImportMigrationTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportMigrationTaskResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHub/Client.html#import_migration_task-instance_method
+      def import_migration_task: (
+                                   progress_update_stream: ::String,
+                                   migration_task_name: ::String,
+                                   ?dry_run: bool
+                                 ) -> _ImportMigrationTaskResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportMigrationTaskResponseSuccess
+
+      interface _ListApplicationStatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationStatesResult]
+        def application_state_list: () -> ::Array[Types::ApplicationState]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHub/Client.html#list_application_states-instance_method
+      def list_application_states: (
+                                     ?application_ids: Array[::String],
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListApplicationStatesResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationStatesResponseSuccess
+
+      interface _ListCreatedArtifactsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCreatedArtifactsResult]
+        def next_token: () -> ::String
+        def created_artifact_list: () -> ::Array[Types::CreatedArtifact]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHub/Client.html#list_created_artifacts-instance_method
+      def list_created_artifacts: (
+                                    progress_update_stream: ::String,
+                                    migration_task_name: ::String,
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListCreatedArtifactsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCreatedArtifactsResponseSuccess
+
+      interface _ListDiscoveredResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDiscoveredResourcesResult]
+        def next_token: () -> ::String
+        def discovered_resource_list: () -> ::Array[Types::DiscoveredResource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHub/Client.html#list_discovered_resources-instance_method
+      def list_discovered_resources: (
+                                       progress_update_stream: ::String,
+                                       migration_task_name: ::String,
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListDiscoveredResourcesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDiscoveredResourcesResponseSuccess
+
+      interface _ListMigrationTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMigrationTasksResult]
+        def next_token: () -> ::String
+        def migration_task_summary_list: () -> ::Array[Types::MigrationTaskSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHub/Client.html#list_migration_tasks-instance_method
+      def list_migration_tasks: (
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer,
+                                  ?resource_name: ::String
+                                ) -> _ListMigrationTasksResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMigrationTasksResponseSuccess
+
+      interface _ListProgressUpdateStreamsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProgressUpdateStreamsResult]
+        def progress_update_stream_summary_list: () -> ::Array[Types::ProgressUpdateStreamSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHub/Client.html#list_progress_update_streams-instance_method
+      def list_progress_update_streams: (
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListProgressUpdateStreamsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProgressUpdateStreamsResponseSuccess
+
+      interface _NotifyApplicationStateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::NotifyApplicationStateResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHub/Client.html#notify_application_state-instance_method
+      def notify_application_state: (
+                                      application_id: ::String,
+                                      status: ("NOT_STARTED" | "IN_PROGRESS" | "COMPLETED"),
+                                      ?update_date_time: ::Time,
+                                      ?dry_run: bool
+                                    ) -> _NotifyApplicationStateResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _NotifyApplicationStateResponseSuccess
+
+      interface _NotifyMigrationTaskStateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::NotifyMigrationTaskStateResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHub/Client.html#notify_migration_task_state-instance_method
+      def notify_migration_task_state: (
+                                         progress_update_stream: ::String,
+                                         migration_task_name: ::String,
+                                         task: {
+                                           status: ("NOT_STARTED" | "IN_PROGRESS" | "FAILED" | "COMPLETED"),
+                                           status_detail: ::String?,
+                                           progress_percent: ::Integer?
+                                         },
+                                         update_date_time: ::Time,
+                                         next_update_seconds: ::Integer,
+                                         ?dry_run: bool
+                                       ) -> _NotifyMigrationTaskStateResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _NotifyMigrationTaskStateResponseSuccess
+
+      interface _PutResourceAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourceAttributesResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHub/Client.html#put_resource_attributes-instance_method
+      def put_resource_attributes: (
+                                     progress_update_stream: ::String,
+                                     migration_task_name: ::String,
+                                     resource_attribute_list: Array[
+                                       {
+                                         type: ("IPV4_ADDRESS" | "IPV6_ADDRESS" | "MAC_ADDRESS" | "FQDN" | "VM_MANAGER_ID" | "VM_MANAGED_OBJECT_REFERENCE" | "VM_NAME" | "VM_PATH" | "BIOS_ID" | "MOTHERBOARD_SERIAL_NUMBER"),
+                                         value: ::String
+                                       },
+                                     ],
+                                     ?dry_run: bool
+                                   ) -> _PutResourceAttributesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourceAttributesResponseSuccess
+    end
+  end
+end
+

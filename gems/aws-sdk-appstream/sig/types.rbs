@@ -1,0 +1,1417 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::AppStream
+  module Types
+
+    class AccessEndpoint
+      attr_accessor endpoint_type: ("STREAMING")
+      attr_accessor vpce_id: ::String
+      SENSITIVE: []
+    end
+
+    class AppBlock
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor source_s3_location: Types::S3Location
+      attr_accessor setup_script_details: Types::ScriptDetails
+      attr_accessor created_time: ::Time
+      attr_accessor post_setup_script_details: Types::ScriptDetails
+      attr_accessor packaging_type: ("CUSTOM" | "APPSTREAM2")
+      attr_accessor state: ("INACTIVE" | "ACTIVE")
+      attr_accessor app_block_errors: ::Array[Types::ErrorDetails]
+      SENSITIVE: []
+    end
+
+    class AppBlockBuilder
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor platform: ("WINDOWS_SERVER_2019")
+      attr_accessor instance_type: ::String
+      attr_accessor enable_default_internet_access: bool
+      attr_accessor iam_role_arn: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor state: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED")
+      attr_accessor created_time: ::Time
+      attr_accessor app_block_builder_errors: ::Array[Types::ResourceError]
+      attr_accessor state_change_reason: Types::AppBlockBuilderStateChangeReason
+      attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
+      SENSITIVE: []
+    end
+
+    class AppBlockBuilderAppBlockAssociation
+      attr_accessor app_block_arn: ::String
+      attr_accessor app_block_builder_name: ::String
+      SENSITIVE: []
+    end
+
+    class AppBlockBuilderStateChangeReason
+      attr_accessor code: ("INTERNAL_ERROR")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Application
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor icon_url: ::String
+      attr_accessor launch_path: ::String
+      attr_accessor launch_parameters: ::String
+      attr_accessor enabled: bool
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor working_directory: ::String
+      attr_accessor description: ::String
+      attr_accessor arn: ::String
+      attr_accessor app_block_arn: ::String
+      attr_accessor icon_s3_location: Types::S3Location
+      attr_accessor platforms: ::Array[("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2")]
+      attr_accessor instance_families: ::Array[::String]
+      attr_accessor created_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ApplicationFleetAssociation
+      attr_accessor fleet_name: ::String
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationSettings
+      attr_accessor enabled: bool
+      attr_accessor settings_group: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationSettingsResponse
+      attr_accessor enabled: bool
+      attr_accessor settings_group: ::String
+      attr_accessor s3_bucket_name: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateAppBlockBuilderAppBlockRequest
+      attr_accessor app_block_arn: ::String
+      attr_accessor app_block_builder_name: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateAppBlockBuilderAppBlockResult
+      attr_accessor app_block_builder_app_block_association: Types::AppBlockBuilderAppBlockAssociation
+      SENSITIVE: []
+    end
+
+    class AssociateApplicationFleetRequest
+      attr_accessor fleet_name: ::String
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateApplicationFleetResult
+      attr_accessor application_fleet_association: Types::ApplicationFleetAssociation
+      SENSITIVE: []
+    end
+
+    class AssociateApplicationToEntitlementRequest
+      attr_accessor stack_name: ::String
+      attr_accessor entitlement_name: ::String
+      attr_accessor application_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateApplicationToEntitlementResult < Aws::EmptyStructure
+    end
+
+    class AssociateFleetRequest
+      attr_accessor fleet_name: ::String
+      attr_accessor stack_name: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateFleetResult < Aws::EmptyStructure
+    end
+
+    class BatchAssociateUserStackRequest
+      attr_accessor user_stack_associations: ::Array[Types::UserStackAssociation]
+      SENSITIVE: []
+    end
+
+    class BatchAssociateUserStackResult
+      attr_accessor errors: ::Array[Types::UserStackAssociationError]
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateUserStackRequest
+      attr_accessor user_stack_associations: ::Array[Types::UserStackAssociation]
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateUserStackResult
+      attr_accessor errors: ::Array[Types::UserStackAssociationError]
+      SENSITIVE: []
+    end
+
+    class CertificateBasedAuthProperties
+      attr_accessor status: ("DISABLED" | "ENABLED" | "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK")
+      attr_accessor certificate_authority_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ComputeCapacity
+      attr_accessor desired_instances: ::Integer
+      attr_accessor desired_sessions: ::Integer
+      SENSITIVE: []
+    end
+
+    class ComputeCapacityStatus
+      attr_accessor desired: ::Integer
+      attr_accessor running: ::Integer
+      attr_accessor in_use: ::Integer
+      attr_accessor available: ::Integer
+      attr_accessor desired_user_sessions: ::Integer
+      attr_accessor available_user_sessions: ::Integer
+      attr_accessor active_user_sessions: ::Integer
+      attr_accessor actual_user_sessions: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CopyImageRequest
+      attr_accessor source_image_name: ::String
+      attr_accessor destination_image_name: ::String
+      attr_accessor destination_region: ::String
+      attr_accessor destination_image_description: ::String
+      SENSITIVE: []
+    end
+
+    class CopyImageResponse
+      attr_accessor destination_image_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAppBlockBuilderRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor platform: ("WINDOWS_SERVER_2019")
+      attr_accessor instance_type: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor enable_default_internet_access: bool
+      attr_accessor iam_role_arn: ::String
+      attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
+      SENSITIVE: []
+    end
+
+    class CreateAppBlockBuilderResult
+      attr_accessor app_block_builder: Types::AppBlockBuilder
+      SENSITIVE: []
+    end
+
+    class CreateAppBlockBuilderStreamingURLRequest
+      attr_accessor app_block_builder_name: ::String
+      attr_accessor validity: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateAppBlockBuilderStreamingURLResult
+      attr_accessor streaming_url: ::String
+      attr_accessor expires: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateAppBlockRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor source_s3_location: Types::S3Location
+      attr_accessor setup_script_details: Types::ScriptDetails
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor post_setup_script_details: Types::ScriptDetails
+      attr_accessor packaging_type: ("CUSTOM" | "APPSTREAM2")
+      SENSITIVE: []
+    end
+
+    class CreateAppBlockResult
+      attr_accessor app_block: Types::AppBlock
+      SENSITIVE: []
+    end
+
+    class CreateApplicationRequest
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor icon_s3_location: Types::S3Location
+      attr_accessor launch_path: ::String
+      attr_accessor working_directory: ::String
+      attr_accessor launch_parameters: ::String
+      attr_accessor platforms: ::Array[("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2")]
+      attr_accessor instance_families: ::Array[::String]
+      attr_accessor app_block_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateApplicationResult
+      attr_accessor application: Types::Application
+      SENSITIVE: []
+    end
+
+    class CreateDirectoryConfigRequest
+      attr_accessor directory_name: ::String
+      attr_accessor organizational_unit_distinguished_names: ::Array[::String]
+      attr_accessor service_account_credentials: Types::ServiceAccountCredentials
+      attr_accessor certificate_based_auth_properties: Types::CertificateBasedAuthProperties
+      SENSITIVE: []
+    end
+
+    class CreateDirectoryConfigResult
+      attr_accessor directory_config: Types::DirectoryConfig
+      SENSITIVE: []
+    end
+
+    class CreateEntitlementRequest
+      attr_accessor name: ::String
+      attr_accessor stack_name: ::String
+      attr_accessor description: ::String
+      attr_accessor app_visibility: ("ALL" | "ASSOCIATED")
+      attr_accessor attributes: ::Array[Types::EntitlementAttribute]
+      SENSITIVE: []
+    end
+
+    class CreateEntitlementResult
+      attr_accessor entitlement: Types::Entitlement
+      SENSITIVE: []
+    end
+
+    class CreateFleetRequest
+      attr_accessor name: ::String
+      attr_accessor image_name: ::String
+      attr_accessor image_arn: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor fleet_type: ("ALWAYS_ON" | "ON_DEMAND" | "ELASTIC")
+      attr_accessor compute_capacity: Types::ComputeCapacity
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor max_user_duration_in_seconds: ::Integer
+      attr_accessor disconnect_timeout_in_seconds: ::Integer
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor enable_default_internet_access: bool
+      attr_accessor domain_join_info: Types::DomainJoinInfo
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor idle_disconnect_timeout_in_seconds: ::Integer
+      attr_accessor iam_role_arn: ::String
+      attr_accessor stream_view: ("APP" | "DESKTOP")
+      attr_accessor platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2")
+      attr_accessor max_concurrent_sessions: ::Integer
+      attr_accessor usb_device_filter_strings: ::Array[::String]
+      attr_accessor session_script_s3_location: Types::S3Location
+      attr_accessor max_sessions_per_instance: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateFleetResult
+      attr_accessor fleet: Types::Fleet
+      SENSITIVE: []
+    end
+
+    class CreateImageBuilderRequest
+      attr_accessor name: ::String
+      attr_accessor image_name: ::String
+      attr_accessor image_arn: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor iam_role_arn: ::String
+      attr_accessor enable_default_internet_access: bool
+      attr_accessor domain_join_info: Types::DomainJoinInfo
+      attr_accessor appstream_agent_version: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
+      SENSITIVE: []
+    end
+
+    class CreateImageBuilderResult
+      attr_accessor image_builder: Types::ImageBuilder
+      SENSITIVE: []
+    end
+
+    class CreateImageBuilderStreamingURLRequest
+      attr_accessor name: ::String
+      attr_accessor validity: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateImageBuilderStreamingURLResult
+      attr_accessor streaming_url: ::String
+      attr_accessor expires: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateStackRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor storage_connectors: ::Array[Types::StorageConnector]
+      attr_accessor redirect_url: ::String
+      attr_accessor feedback_url: ::String
+      attr_accessor user_settings: ::Array[Types::UserSetting]
+      attr_accessor application_settings: Types::ApplicationSettings
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
+      attr_accessor embed_host_domains: ::Array[::String]
+      attr_accessor streaming_experience_settings: Types::StreamingExperienceSettings
+      SENSITIVE: []
+    end
+
+    class CreateStackResult
+      attr_accessor stack: Types::Stack
+      SENSITIVE: []
+    end
+
+    class CreateStreamingURLRequest
+      attr_accessor stack_name: ::String
+      attr_accessor fleet_name: ::String
+      attr_accessor user_id: ::String
+      attr_accessor application_id: ::String
+      attr_accessor validity: ::Integer
+      attr_accessor session_context: ::String
+      SENSITIVE: []
+    end
+
+    class CreateStreamingURLResult
+      attr_accessor streaming_url: ::String
+      attr_accessor expires: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateUpdatedImageRequest
+      attr_accessor existing_image_name: ::String
+      attr_accessor new_image_name: ::String
+      attr_accessor new_image_description: ::String
+      attr_accessor new_image_display_name: ::String
+      attr_accessor new_image_tags: ::Hash[::String, ::String]
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class CreateUpdatedImageResult
+      attr_accessor image: Types::Image
+      attr_accessor can_update_image: bool
+      SENSITIVE: []
+    end
+
+    class CreateUsageReportSubscriptionRequest < Aws::EmptyStructure
+    end
+
+    class CreateUsageReportSubscriptionResult
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor schedule: ("DAILY")
+      SENSITIVE: []
+    end
+
+    class CreateUserRequest
+      attr_accessor user_name: ::String
+      attr_accessor message_action: ("SUPPRESS" | "RESEND")
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor authentication_type: ("API" | "SAML" | "USERPOOL" | "AWS_AD")
+      SENSITIVE: [:user_name, :first_name, :last_name]
+    end
+
+    class CreateUserResult < Aws::EmptyStructure
+    end
+
+    class DeleteAppBlockBuilderRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppBlockBuilderResult < Aws::EmptyStructure
+    end
+
+    class DeleteAppBlockRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppBlockResult < Aws::EmptyStructure
+    end
+
+    class DeleteApplicationRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationResult < Aws::EmptyStructure
+    end
+
+    class DeleteDirectoryConfigRequest
+      attr_accessor directory_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDirectoryConfigResult < Aws::EmptyStructure
+    end
+
+    class DeleteEntitlementRequest
+      attr_accessor name: ::String
+      attr_accessor stack_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEntitlementResult < Aws::EmptyStructure
+    end
+
+    class DeleteFleetRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFleetResult < Aws::EmptyStructure
+    end
+
+    class DeleteImageBuilderRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteImageBuilderResult
+      attr_accessor image_builder: Types::ImageBuilder
+      SENSITIVE: []
+    end
+
+    class DeleteImagePermissionsRequest
+      attr_accessor name: ::String
+      attr_accessor shared_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteImagePermissionsResult < Aws::EmptyStructure
+    end
+
+    class DeleteImageRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteImageResult
+      attr_accessor image: Types::Image
+      SENSITIVE: []
+    end
+
+    class DeleteStackRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStackResult < Aws::EmptyStructure
+    end
+
+    class DeleteUsageReportSubscriptionRequest < Aws::EmptyStructure
+    end
+
+    class DeleteUsageReportSubscriptionResult < Aws::EmptyStructure
+    end
+
+    class DeleteUserRequest
+      attr_accessor user_name: ::String
+      attr_accessor authentication_type: ("API" | "SAML" | "USERPOOL" | "AWS_AD")
+      SENSITIVE: [:user_name]
+    end
+
+    class DeleteUserResult < Aws::EmptyStructure
+    end
+
+    class DescribeAppBlockBuilderAppBlockAssociationsRequest
+      attr_accessor app_block_arn: ::String
+      attr_accessor app_block_builder_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppBlockBuilderAppBlockAssociationsResult
+      attr_accessor app_block_builder_app_block_associations: ::Array[Types::AppBlockBuilderAppBlockAssociation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppBlockBuildersRequest
+      attr_accessor names: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeAppBlockBuildersResult
+      attr_accessor app_block_builders: ::Array[Types::AppBlockBuilder]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppBlocksRequest
+      attr_accessor arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeAppBlocksResult
+      attr_accessor app_blocks: ::Array[Types::AppBlock]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationFleetAssociationsRequest
+      attr_accessor fleet_name: ::String
+      attr_accessor application_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationFleetAssociationsResult
+      attr_accessor application_fleet_associations: ::Array[Types::ApplicationFleetAssociation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationsRequest
+      attr_accessor arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationsResult
+      attr_accessor applications: ::Array[Types::Application]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDirectoryConfigsRequest
+      attr_accessor directory_names: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDirectoryConfigsResult
+      attr_accessor directory_configs: ::Array[Types::DirectoryConfig]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEntitlementsRequest
+      attr_accessor name: ::String
+      attr_accessor stack_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeEntitlementsResult
+      attr_accessor entitlements: ::Array[Types::Entitlement]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFleetsRequest
+      attr_accessor names: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFleetsResult
+      attr_accessor fleets: ::Array[Types::Fleet]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeImageBuildersRequest
+      attr_accessor names: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeImageBuildersResult
+      attr_accessor image_builders: ::Array[Types::ImageBuilder]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeImagePermissionsRequest
+      attr_accessor name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor shared_aws_account_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeImagePermissionsResult
+      attr_accessor name: ::String
+      attr_accessor shared_image_permissions_list: ::Array[Types::SharedImagePermissions]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeImagesRequest
+      attr_accessor names: ::Array[::String]
+      attr_accessor arns: ::Array[::String]
+      attr_accessor type: ("PUBLIC" | "PRIVATE" | "SHARED")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeImagesResult
+      attr_accessor images: ::Array[Types::Image]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSessionsRequest
+      attr_accessor stack_name: ::String
+      attr_accessor fleet_name: ::String
+      attr_accessor user_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor authentication_type: ("API" | "SAML" | "USERPOOL" | "AWS_AD")
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSessionsResult
+      attr_accessor sessions: ::Array[Types::Session]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStacksRequest
+      attr_accessor names: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStacksResult
+      attr_accessor stacks: ::Array[Types::Stack]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUsageReportSubscriptionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUsageReportSubscriptionsResult
+      attr_accessor usage_report_subscriptions: ::Array[Types::UsageReportSubscription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUserStackAssociationsRequest
+      attr_accessor stack_name: ::String
+      attr_accessor user_name: ::String
+      attr_accessor authentication_type: ("API" | "SAML" | "USERPOOL" | "AWS_AD")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:user_name]
+    end
+
+    class DescribeUserStackAssociationsResult
+      attr_accessor user_stack_associations: ::Array[Types::UserStackAssociation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUsersRequest
+      attr_accessor authentication_type: ("API" | "SAML" | "USERPOOL" | "AWS_AD")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUsersResult
+      attr_accessor users: ::Array[Types::User]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DirectoryConfig
+      attr_accessor directory_name: ::String
+      attr_accessor organizational_unit_distinguished_names: ::Array[::String]
+      attr_accessor service_account_credentials: Types::ServiceAccountCredentials
+      attr_accessor created_time: ::Time
+      attr_accessor certificate_based_auth_properties: Types::CertificateBasedAuthProperties
+      SENSITIVE: []
+    end
+
+    class DisableUserRequest
+      attr_accessor user_name: ::String
+      attr_accessor authentication_type: ("API" | "SAML" | "USERPOOL" | "AWS_AD")
+      SENSITIVE: [:user_name]
+    end
+
+    class DisableUserResult < Aws::EmptyStructure
+    end
+
+    class DisassociateAppBlockBuilderAppBlockRequest
+      attr_accessor app_block_arn: ::String
+      attr_accessor app_block_builder_name: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateAppBlockBuilderAppBlockResult < Aws::EmptyStructure
+    end
+
+    class DisassociateApplicationFleetRequest
+      attr_accessor fleet_name: ::String
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateApplicationFleetResult < Aws::EmptyStructure
+    end
+
+    class DisassociateApplicationFromEntitlementRequest
+      attr_accessor stack_name: ::String
+      attr_accessor entitlement_name: ::String
+      attr_accessor application_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateApplicationFromEntitlementResult < Aws::EmptyStructure
+    end
+
+    class DisassociateFleetRequest
+      attr_accessor fleet_name: ::String
+      attr_accessor stack_name: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateFleetResult < Aws::EmptyStructure
+    end
+
+    class DomainJoinInfo
+      attr_accessor directory_name: ::String
+      attr_accessor organizational_unit_distinguished_name: ::String
+      SENSITIVE: []
+    end
+
+    class EnableUserRequest
+      attr_accessor user_name: ::String
+      attr_accessor authentication_type: ("API" | "SAML" | "USERPOOL" | "AWS_AD")
+      SENSITIVE: [:user_name]
+    end
+
+    class EnableUserResult < Aws::EmptyStructure
+    end
+
+    class EntitledApplication
+      attr_accessor application_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class Entitlement
+      attr_accessor name: ::String
+      attr_accessor stack_name: ::String
+      attr_accessor description: ::String
+      attr_accessor app_visibility: ("ALL" | "ASSOCIATED")
+      attr_accessor attributes: ::Array[Types::EntitlementAttribute]
+      attr_accessor created_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class EntitlementAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EntitlementAttribute
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class EntitlementNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ErrorDetails
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class ExpireSessionRequest
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class ExpireSessionResult < Aws::EmptyStructure
+    end
+
+    class Fleet
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor image_name: ::String
+      attr_accessor image_arn: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor fleet_type: ("ALWAYS_ON" | "ON_DEMAND" | "ELASTIC")
+      attr_accessor compute_capacity_status: Types::ComputeCapacityStatus
+      attr_accessor max_user_duration_in_seconds: ::Integer
+      attr_accessor disconnect_timeout_in_seconds: ::Integer
+      attr_accessor state: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED")
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor created_time: ::Time
+      attr_accessor fleet_errors: ::Array[Types::FleetError]
+      attr_accessor enable_default_internet_access: bool
+      attr_accessor domain_join_info: Types::DomainJoinInfo
+      attr_accessor idle_disconnect_timeout_in_seconds: ::Integer
+      attr_accessor iam_role_arn: ::String
+      attr_accessor stream_view: ("APP" | "DESKTOP")
+      attr_accessor platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2")
+      attr_accessor max_concurrent_sessions: ::Integer
+      attr_accessor usb_device_filter_strings: ::Array[::String]
+      attr_accessor session_script_s3_location: Types::S3Location
+      attr_accessor max_sessions_per_instance: ::Integer
+      SENSITIVE: []
+    end
+
+    class FleetError
+      attr_accessor error_code: ("IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" | "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION" | "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION" | "NETWORK_INTERFACE_LIMIT_EXCEEDED" | "INTERNAL_SERVICE_ERROR" | "IAM_SERVICE_ROLE_IS_MISSING" | "MACHINE_ROLE_IS_MISSING" | "STS_DISABLED_IN_REGION" | "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES" | "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION" | "SUBNET_NOT_FOUND" | "IMAGE_NOT_FOUND" | "INVALID_SUBNET_CONFIGURATION" | "SECURITY_GROUPS_NOT_FOUND" | "IGW_NOT_ATTACHED" | "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION" | "FLEET_STOPPED" | "FLEET_INSTANCE_PROVISIONING_FAILURE" | "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND" | "DOMAIN_JOIN_ERROR_ACCESS_DENIED" | "DOMAIN_JOIN_ERROR_LOGON_FAILURE" | "DOMAIN_JOIN_ERROR_INVALID_PARAMETER" | "DOMAIN_JOIN_ERROR_MORE_DATA" | "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN" | "DOMAIN_JOIN_ERROR_NOT_SUPPORTED" | "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME" | "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED" | "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED" | "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED" | "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class Image
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor base_image_arn: ::String
+      attr_accessor display_name: ::String
+      attr_accessor state: ("PENDING" | "AVAILABLE" | "FAILED" | "COPYING" | "DELETING" | "CREATING" | "IMPORTING")
+      attr_accessor visibility: ("PUBLIC" | "PRIVATE" | "SHARED")
+      attr_accessor image_builder_supported: bool
+      attr_accessor image_builder_name: ::String
+      attr_accessor platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2")
+      attr_accessor description: ::String
+      attr_accessor state_change_reason: Types::ImageStateChangeReason
+      attr_accessor applications: ::Array[Types::Application]
+      attr_accessor created_time: ::Time
+      attr_accessor public_base_image_released_date: ::Time
+      attr_accessor appstream_agent_version: ::String
+      attr_accessor image_permissions: Types::ImagePermissions
+      attr_accessor image_errors: ::Array[Types::ResourceError]
+      SENSITIVE: []
+    end
+
+    class ImageBuilder
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor image_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor instance_type: ::String
+      attr_accessor platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2")
+      attr_accessor iam_role_arn: ::String
+      attr_accessor state: ("PENDING" | "UPDATING_AGENT" | "RUNNING" | "STOPPING" | "STOPPED" | "REBOOTING" | "SNAPSHOTTING" | "DELETING" | "FAILED" | "UPDATING" | "PENDING_QUALIFICATION")
+      attr_accessor state_change_reason: Types::ImageBuilderStateChangeReason
+      attr_accessor created_time: ::Time
+      attr_accessor enable_default_internet_access: bool
+      attr_accessor domain_join_info: Types::DomainJoinInfo
+      attr_accessor network_access_configuration: Types::NetworkAccessConfiguration
+      attr_accessor image_builder_errors: ::Array[Types::ResourceError]
+      attr_accessor appstream_agent_version: ::String
+      attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
+      SENSITIVE: []
+    end
+
+    class ImageBuilderStateChangeReason
+      attr_accessor code: ("INTERNAL_ERROR" | "IMAGE_UNAVAILABLE")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ImagePermissions
+      attr_accessor allow_fleet: bool
+      attr_accessor allow_image_builder: bool
+      SENSITIVE: []
+    end
+
+    class ImageStateChangeReason
+      attr_accessor code: ("INTERNAL_ERROR" | "IMAGE_BUILDER_NOT_AVAILABLE" | "IMAGE_COPY_FAILURE")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IncompatibleImageException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidAccountStatusException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterCombinationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRoleException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LastReportGenerationExecutionError
+      attr_accessor error_code: ("RESOURCE_NOT_FOUND" | "ACCESS_DENIED" | "INTERNAL_SERVICE_ERROR")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssociatedFleetsRequest
+      attr_accessor stack_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssociatedFleetsResult
+      attr_accessor names: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssociatedStacksRequest
+      attr_accessor fleet_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssociatedStacksResult
+      attr_accessor names: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEntitledApplicationsRequest
+      attr_accessor stack_name: ::String
+      attr_accessor entitlement_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEntitledApplicationsResult
+      attr_accessor entitled_applications: ::Array[Types::EntitledApplication]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class NetworkAccessConfiguration
+      attr_accessor eni_private_ip_address: ::String
+      attr_accessor eni_id: ::String
+      SENSITIVE: []
+    end
+
+    class OperationNotPermittedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RequestLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceError
+      attr_accessor error_code: ("IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION" | "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION" | "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION" | "NETWORK_INTERFACE_LIMIT_EXCEEDED" | "INTERNAL_SERVICE_ERROR" | "IAM_SERVICE_ROLE_IS_MISSING" | "MACHINE_ROLE_IS_MISSING" | "STS_DISABLED_IN_REGION" | "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES" | "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION" | "SUBNET_NOT_FOUND" | "IMAGE_NOT_FOUND" | "INVALID_SUBNET_CONFIGURATION" | "SECURITY_GROUPS_NOT_FOUND" | "IGW_NOT_ATTACHED" | "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION" | "FLEET_STOPPED" | "FLEET_INSTANCE_PROVISIONING_FAILURE" | "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND" | "DOMAIN_JOIN_ERROR_ACCESS_DENIED" | "DOMAIN_JOIN_ERROR_LOGON_FAILURE" | "DOMAIN_JOIN_ERROR_INVALID_PARAMETER" | "DOMAIN_JOIN_ERROR_MORE_DATA" | "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN" | "DOMAIN_JOIN_ERROR_NOT_SUPPORTED" | "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME" | "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED" | "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED" | "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED" | "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR")
+      attr_accessor error_message: ::String
+      attr_accessor error_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotAvailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class S3Location
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_key: ::String
+      SENSITIVE: []
+    end
+
+    class ScriptDetails
+      attr_accessor script_s3_location: Types::S3Location
+      attr_accessor executable_path: ::String
+      attr_accessor executable_parameters: ::String
+      attr_accessor timeout_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ServiceAccountCredentials
+      attr_accessor account_name: ::String
+      attr_accessor account_password: ::String
+      SENSITIVE: [:account_name, :account_password]
+    end
+
+    class Session
+      attr_accessor id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor stack_name: ::String
+      attr_accessor fleet_name: ::String
+      attr_accessor state: ("ACTIVE" | "PENDING" | "EXPIRED")
+      attr_accessor connection_state: ("CONNECTED" | "NOT_CONNECTED")
+      attr_accessor start_time: ::Time
+      attr_accessor max_expiration_time: ::Time
+      attr_accessor authentication_type: ("API" | "SAML" | "USERPOOL" | "AWS_AD")
+      attr_accessor network_access_configuration: Types::NetworkAccessConfiguration
+      attr_accessor instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class SharedImagePermissions
+      attr_accessor shared_account_id: ::String
+      attr_accessor image_permissions: Types::ImagePermissions
+      SENSITIVE: []
+    end
+
+    class Stack
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor storage_connectors: ::Array[Types::StorageConnector]
+      attr_accessor redirect_url: ::String
+      attr_accessor feedback_url: ::String
+      attr_accessor stack_errors: ::Array[Types::StackError]
+      attr_accessor user_settings: ::Array[Types::UserSetting]
+      attr_accessor application_settings: Types::ApplicationSettingsResponse
+      attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
+      attr_accessor embed_host_domains: ::Array[::String]
+      attr_accessor streaming_experience_settings: Types::StreamingExperienceSettings
+      SENSITIVE: []
+    end
+
+    class StackError
+      attr_accessor error_code: ("STORAGE_CONNECTOR_ERROR" | "INTERNAL_SERVICE_ERROR")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class StartAppBlockBuilderRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class StartAppBlockBuilderResult
+      attr_accessor app_block_builder: Types::AppBlockBuilder
+      SENSITIVE: []
+    end
+
+    class StartFleetRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class StartFleetResult < Aws::EmptyStructure
+    end
+
+    class StartImageBuilderRequest
+      attr_accessor name: ::String
+      attr_accessor appstream_agent_version: ::String
+      SENSITIVE: []
+    end
+
+    class StartImageBuilderResult
+      attr_accessor image_builder: Types::ImageBuilder
+      SENSITIVE: []
+    end
+
+    class StopAppBlockBuilderRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class StopAppBlockBuilderResult
+      attr_accessor app_block_builder: Types::AppBlockBuilder
+      SENSITIVE: []
+    end
+
+    class StopFleetRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class StopFleetResult < Aws::EmptyStructure
+    end
+
+    class StopImageBuilderRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class StopImageBuilderResult
+      attr_accessor image_builder: Types::ImageBuilder
+      SENSITIVE: []
+    end
+
+    class StorageConnector
+      attr_accessor connector_type: ("HOMEFOLDERS" | "GOOGLE_DRIVE" | "ONE_DRIVE")
+      attr_accessor resource_identifier: ::String
+      attr_accessor domains: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StreamingExperienceSettings
+      attr_accessor preferred_protocol: ("TCP" | "UDP")
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAppBlockBuilderRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2")
+      attr_accessor instance_type: ::String
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor enable_default_internet_access: bool
+      attr_accessor iam_role_arn: ::String
+      attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
+      attr_accessor attributes_to_delete: ::Array[("IAM_ROLE_ARN" | "ACCESS_ENDPOINTS" | "VPC_CONFIGURATION_SECURITY_GROUP_IDS")]
+      SENSITIVE: []
+    end
+
+    class UpdateAppBlockBuilderResult
+      attr_accessor app_block_builder: Types::AppBlockBuilder
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationRequest
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor icon_s3_location: Types::S3Location
+      attr_accessor launch_path: ::String
+      attr_accessor working_directory: ::String
+      attr_accessor launch_parameters: ::String
+      attr_accessor app_block_arn: ::String
+      attr_accessor attributes_to_delete: ::Array[("LAUNCH_PARAMETERS" | "WORKING_DIRECTORY")]
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationResult
+      attr_accessor application: Types::Application
+      SENSITIVE: []
+    end
+
+    class UpdateDirectoryConfigRequest
+      attr_accessor directory_name: ::String
+      attr_accessor organizational_unit_distinguished_names: ::Array[::String]
+      attr_accessor service_account_credentials: Types::ServiceAccountCredentials
+      attr_accessor certificate_based_auth_properties: Types::CertificateBasedAuthProperties
+      SENSITIVE: []
+    end
+
+    class UpdateDirectoryConfigResult
+      attr_accessor directory_config: Types::DirectoryConfig
+      SENSITIVE: []
+    end
+
+    class UpdateEntitlementRequest
+      attr_accessor name: ::String
+      attr_accessor stack_name: ::String
+      attr_accessor description: ::String
+      attr_accessor app_visibility: ("ALL" | "ASSOCIATED")
+      attr_accessor attributes: ::Array[Types::EntitlementAttribute]
+      SENSITIVE: []
+    end
+
+    class UpdateEntitlementResult
+      attr_accessor entitlement: Types::Entitlement
+      SENSITIVE: []
+    end
+
+    class UpdateFleetRequest
+      attr_accessor image_name: ::String
+      attr_accessor image_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor compute_capacity: Types::ComputeCapacity
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor max_user_duration_in_seconds: ::Integer
+      attr_accessor disconnect_timeout_in_seconds: ::Integer
+      attr_accessor delete_vpc_config: bool
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor enable_default_internet_access: bool
+      attr_accessor domain_join_info: Types::DomainJoinInfo
+      attr_accessor idle_disconnect_timeout_in_seconds: ::Integer
+      attr_accessor attributes_to_delete: ::Array[("VPC_CONFIGURATION" | "VPC_CONFIGURATION_SECURITY_GROUP_IDS" | "DOMAIN_JOIN_INFO" | "IAM_ROLE_ARN" | "USB_DEVICE_FILTER_STRINGS" | "SESSION_SCRIPT_S3_LOCATION" | "MAX_SESSIONS_PER_INSTANCE")]
+      attr_accessor iam_role_arn: ::String
+      attr_accessor stream_view: ("APP" | "DESKTOP")
+      attr_accessor platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2")
+      attr_accessor max_concurrent_sessions: ::Integer
+      attr_accessor usb_device_filter_strings: ::Array[::String]
+      attr_accessor session_script_s3_location: Types::S3Location
+      attr_accessor max_sessions_per_instance: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateFleetResult
+      attr_accessor fleet: Types::Fleet
+      SENSITIVE: []
+    end
+
+    class UpdateImagePermissionsRequest
+      attr_accessor name: ::String
+      attr_accessor shared_account_id: ::String
+      attr_accessor image_permissions: Types::ImagePermissions
+      SENSITIVE: []
+    end
+
+    class UpdateImagePermissionsResult < Aws::EmptyStructure
+    end
+
+    class UpdateStackRequest
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor storage_connectors: ::Array[Types::StorageConnector]
+      attr_accessor delete_storage_connectors: bool
+      attr_accessor redirect_url: ::String
+      attr_accessor feedback_url: ::String
+      attr_accessor attributes_to_delete: ::Array[("STORAGE_CONNECTORS" | "STORAGE_CONNECTOR_HOMEFOLDERS" | "STORAGE_CONNECTOR_GOOGLE_DRIVE" | "STORAGE_CONNECTOR_ONE_DRIVE" | "REDIRECT_URL" | "FEEDBACK_URL" | "THEME_NAME" | "USER_SETTINGS" | "EMBED_HOST_DOMAINS" | "IAM_ROLE_ARN" | "ACCESS_ENDPOINTS" | "STREAMING_EXPERIENCE_SETTINGS")]
+      attr_accessor user_settings: ::Array[Types::UserSetting]
+      attr_accessor application_settings: Types::ApplicationSettings
+      attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
+      attr_accessor embed_host_domains: ::Array[::String]
+      attr_accessor streaming_experience_settings: Types::StreamingExperienceSettings
+      SENSITIVE: []
+    end
+
+    class UpdateStackResult
+      attr_accessor stack: Types::Stack
+      SENSITIVE: []
+    end
+
+    class UsageReportSubscription
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor schedule: ("DAILY")
+      attr_accessor last_generated_report_date: ::Time
+      attr_accessor subscription_errors: ::Array[Types::LastReportGenerationExecutionError]
+      SENSITIVE: []
+    end
+
+    class User
+      attr_accessor arn: ::String
+      attr_accessor user_name: ::String
+      attr_accessor enabled: bool
+      attr_accessor status: ::String
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor authentication_type: ("API" | "SAML" | "USERPOOL" | "AWS_AD")
+      SENSITIVE: [:user_name, :first_name, :last_name]
+    end
+
+    class UserSetting
+      attr_accessor action: ("CLIPBOARD_COPY_FROM_LOCAL_DEVICE" | "CLIPBOARD_COPY_TO_LOCAL_DEVICE" | "FILE_UPLOAD" | "FILE_DOWNLOAD" | "PRINTING_TO_LOCAL_DEVICE" | "DOMAIN_PASSWORD_SIGNIN" | "DOMAIN_SMART_CARD_SIGNIN")
+      attr_accessor permission: ("ENABLED" | "DISABLED")
+      attr_accessor maximum_length: ::Integer
+      SENSITIVE: []
+    end
+
+    class UserStackAssociation
+      attr_accessor stack_name: ::String
+      attr_accessor user_name: ::String
+      attr_accessor authentication_type: ("API" | "SAML" | "USERPOOL" | "AWS_AD")
+      attr_accessor send_email_notification: bool
+      SENSITIVE: [:user_name]
+    end
+
+    class UserStackAssociationError
+      attr_accessor user_stack_association: Types::UserStackAssociation
+      attr_accessor error_code: ("STACK_NOT_FOUND" | "USER_NAME_NOT_FOUND" | "DIRECTORY_NOT_FOUND" | "INTERNAL_ERROR")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class VpcConfig
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+  end
+end

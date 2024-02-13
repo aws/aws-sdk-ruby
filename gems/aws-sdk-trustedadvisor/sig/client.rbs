@@ -1,0 +1,216 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module TrustedAdvisor
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TrustedAdvisor/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _GetOrganizationRecommendationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOrganizationRecommendationResponse]
+        def organization_recommendation: () -> Types::OrganizationRecommendation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TrustedAdvisor/Client.html#get_organization_recommendation-instance_method
+      def get_organization_recommendation: (
+                                             organization_recommendation_identifier: ::String
+                                           ) -> _GetOrganizationRecommendationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOrganizationRecommendationResponseSuccess
+
+      interface _GetRecommendationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRecommendationResponse]
+        def recommendation: () -> Types::Recommendation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TrustedAdvisor/Client.html#get_recommendation-instance_method
+      def get_recommendation: (
+                                recommendation_identifier: ::String
+                              ) -> _GetRecommendationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecommendationResponseSuccess
+
+      interface _ListChecksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChecksResponse]
+        def check_summaries: () -> ::Array[Types::CheckSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TrustedAdvisor/Client.html#list_checks-instance_method
+      def list_checks: (
+                         ?aws_service: ::String,
+                         ?language: ("en" | "ja" | "zh" | "fr" | "de" | "ko" | "zh_TW" | "it" | "es" | "pt_BR" | "id"),
+                         ?max_results: ::Integer,
+                         ?next_token: ::String,
+                         ?pillar: ("cost_optimizing" | "performance" | "security" | "service_limits" | "fault_tolerance" | "operational_excellence"),
+                         ?source: ("aws_config" | "compute_optimizer" | "cost_explorer" | "lse" | "manual" | "pse" | "rds" | "resilience" | "resilience_hub" | "security_hub" | "stir" | "ta_check" | "well_architected")
+                       ) -> _ListChecksResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChecksResponseSuccess
+
+      interface _ListOrganizationRecommendationAccountsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOrganizationRecommendationAccountsResponse]
+        def account_recommendation_lifecycle_summaries: () -> ::Array[Types::AccountRecommendationLifecycleSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TrustedAdvisor/Client.html#list_organization_recommendation_accounts-instance_method
+      def list_organization_recommendation_accounts: (
+                                                       ?affected_account_id: ::String,
+                                                       ?max_results: ::Integer,
+                                                       ?next_token: ::String,
+                                                       organization_recommendation_identifier: ::String
+                                                     ) -> _ListOrganizationRecommendationAccountsResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOrganizationRecommendationAccountsResponseSuccess
+
+      interface _ListOrganizationRecommendationResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOrganizationRecommendationResourcesResponse]
+        def next_token: () -> ::String
+        def organization_recommendation_resource_summaries: () -> ::Array[Types::OrganizationRecommendationResourceSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TrustedAdvisor/Client.html#list_organization_recommendation_resources-instance_method
+      def list_organization_recommendation_resources: (
+                                                        ?affected_account_id: ::String,
+                                                        ?max_results: ::Integer,
+                                                        ?next_token: ::String,
+                                                        organization_recommendation_identifier: ::String,
+                                                        ?region_code: ::String,
+                                                        ?status: ("ok" | "warning" | "error")
+                                                      ) -> _ListOrganizationRecommendationResourcesResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOrganizationRecommendationResourcesResponseSuccess
+
+      interface _ListOrganizationRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOrganizationRecommendationsResponse]
+        def next_token: () -> ::String
+        def organization_recommendation_summaries: () -> ::Array[Types::OrganizationRecommendationSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TrustedAdvisor/Client.html#list_organization_recommendations-instance_method
+      def list_organization_recommendations: (
+                                               ?after_last_updated_at: ::Time,
+                                               ?aws_service: ::String,
+                                               ?before_last_updated_at: ::Time,
+                                               ?check_identifier: ::String,
+                                               ?max_results: ::Integer,
+                                               ?next_token: ::String,
+                                               ?pillar: ("cost_optimizing" | "performance" | "security" | "service_limits" | "fault_tolerance" | "operational_excellence"),
+                                               ?source: ("aws_config" | "compute_optimizer" | "cost_explorer" | "lse" | "manual" | "pse" | "rds" | "resilience" | "resilience_hub" | "security_hub" | "stir" | "ta_check" | "well_architected"),
+                                               ?status: ("ok" | "warning" | "error"),
+                                               ?type: ("standard" | "priority")
+                                             ) -> _ListOrganizationRecommendationsResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOrganizationRecommendationsResponseSuccess
+
+      interface _ListRecommendationResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecommendationResourcesResponse]
+        def next_token: () -> ::String
+        def recommendation_resource_summaries: () -> ::Array[Types::RecommendationResourceSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TrustedAdvisor/Client.html#list_recommendation_resources-instance_method
+      def list_recommendation_resources: (
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String,
+                                           recommendation_identifier: ::String,
+                                           ?region_code: ::String,
+                                           ?status: ("ok" | "warning" | "error")
+                                         ) -> _ListRecommendationResourcesResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommendationResourcesResponseSuccess
+
+      interface _ListRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecommendationsResponse]
+        def next_token: () -> ::String
+        def recommendation_summaries: () -> ::Array[Types::RecommendationSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TrustedAdvisor/Client.html#list_recommendations-instance_method
+      def list_recommendations: (
+                                  ?after_last_updated_at: ::Time,
+                                  ?aws_service: ::String,
+                                  ?before_last_updated_at: ::Time,
+                                  ?check_identifier: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
+                                  ?pillar: ("cost_optimizing" | "performance" | "security" | "service_limits" | "fault_tolerance" | "operational_excellence"),
+                                  ?source: ("aws_config" | "compute_optimizer" | "cost_explorer" | "lse" | "manual" | "pse" | "rds" | "resilience" | "resilience_hub" | "security_hub" | "stir" | "ta_check" | "well_architected"),
+                                  ?status: ("ok" | "warning" | "error"),
+                                  ?type: ("standard" | "priority")
+                                ) -> _ListRecommendationsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommendationsResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TrustedAdvisor/Client.html#update_organization_recommendation_lifecycle-instance_method
+      def update_organization_recommendation_lifecycle: (
+                                                          lifecycle_stage: ("pending_response" | "in_progress" | "dismissed" | "resolved"),
+                                                          organization_recommendation_identifier: ::String,
+                                                          ?update_reason: ::String,
+                                                          ?update_reason_code: ("non_critical_account" | "temporary_account" | "valid_business_case" | "other_methods_available" | "low_priority" | "not_applicable" | "other")
+                                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TrustedAdvisor/Client.html#update_recommendation_lifecycle-instance_method
+      def update_recommendation_lifecycle: (
+                                             lifecycle_stage: ("pending_response" | "in_progress" | "dismissed" | "resolved"),
+                                             recommendation_identifier: ::String,
+                                             ?update_reason: ::String,
+                                             ?update_reason_code: ("non_critical_account" | "temporary_account" | "valid_business_case" | "other_methods_available" | "low_priority" | "not_applicable" | "other")
+                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+    end
+  end
+end
+

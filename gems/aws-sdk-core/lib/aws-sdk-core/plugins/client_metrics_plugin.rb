@@ -40,6 +40,7 @@ side monitoring agent is running on, where client metrics will be published via 
       option(:client_side_monitoring_publisher,
         default: ClientSideMonitoring::Publisher,
         doc_type: Aws::ClientSideMonitoring::Publisher,
+        rbs_type: 'untyped',
         docstring: <<-DOCS) do |cfg|
 Allows you to provide a custom client-side monitoring publisher class. By default,
 will use the Client Side Monitoring Agent Publisher.

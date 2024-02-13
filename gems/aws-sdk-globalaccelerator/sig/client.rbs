@@ -1,0 +1,807 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module GlobalAccelerator
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddCustomRoutingEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddCustomRoutingEndpointsResponse]
+        def endpoint_descriptions: () -> ::Array[Types::CustomRoutingEndpointDescription]
+        def endpoint_group_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#add_custom_routing_endpoints-instance_method
+      def add_custom_routing_endpoints: (
+                                          endpoint_configurations: Array[
+                                            {
+                                              endpoint_id: ::String?,
+                                              attachment_arn: ::String?
+                                            },
+                                          ],
+                                          endpoint_group_arn: ::String
+                                        ) -> _AddCustomRoutingEndpointsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddCustomRoutingEndpointsResponseSuccess
+
+      interface _AddEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddEndpointsResponse]
+        def endpoint_descriptions: () -> ::Array[Types::EndpointDescription]
+        def endpoint_group_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#add_endpoints-instance_method
+      def add_endpoints: (
+                           endpoint_configurations: Array[
+                             {
+                               endpoint_id: ::String?,
+                               weight: ::Integer?,
+                               client_ip_preservation_enabled: bool?,
+                               attachment_arn: ::String?
+                             },
+                           ],
+                           endpoint_group_arn: ::String
+                         ) -> _AddEndpointsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddEndpointsResponseSuccess
+
+      interface _AdvertiseByoipCidrResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AdvertiseByoipCidrResponse]
+        def byoip_cidr: () -> Types::ByoipCidr
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#advertise_byoip_cidr-instance_method
+      def advertise_byoip_cidr: (
+                                  cidr: ::String
+                                ) -> _AdvertiseByoipCidrResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AdvertiseByoipCidrResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#allow_custom_routing_traffic-instance_method
+      def allow_custom_routing_traffic: (
+                                          endpoint_group_arn: ::String,
+                                          endpoint_id: ::String,
+                                          ?destination_addresses: Array[::String],
+                                          ?destination_ports: Array[::Integer],
+                                          ?allow_all_traffic_to_endpoint: bool
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CreateAcceleratorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAcceleratorResponse]
+        def accelerator: () -> Types::Accelerator
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#create_accelerator-instance_method
+      def create_accelerator: (
+                                name: ::String,
+                                ?ip_address_type: ("IPV4" | "DUAL_STACK"),
+                                ?ip_addresses: Array[::String],
+                                ?enabled: bool,
+                                idempotency_token: ::String,
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ]
+                              ) -> _CreateAcceleratorResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAcceleratorResponseSuccess
+
+      interface _CreateCrossAccountAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCrossAccountAttachmentResponse]
+        def cross_account_attachment: () -> Types::Attachment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#create_cross_account_attachment-instance_method
+      def create_cross_account_attachment: (
+                                             name: ::String,
+                                             ?principals: Array[::String],
+                                             ?resources: Array[
+                                               {
+                                                 endpoint_id: ::String,
+                                                 region: ::String?
+                                               },
+                                             ],
+                                             idempotency_token: ::String,
+                                             ?tags: Array[
+                                               {
+                                                 key: ::String,
+                                                 value: ::String
+                                               },
+                                             ]
+                                           ) -> _CreateCrossAccountAttachmentResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCrossAccountAttachmentResponseSuccess
+
+      interface _CreateCustomRoutingAcceleratorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCustomRoutingAcceleratorResponse]
+        def accelerator: () -> Types::CustomRoutingAccelerator
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#create_custom_routing_accelerator-instance_method
+      def create_custom_routing_accelerator: (
+                                               name: ::String,
+                                               ?ip_address_type: ("IPV4" | "DUAL_STACK"),
+                                               ?ip_addresses: Array[::String],
+                                               ?enabled: bool,
+                                               idempotency_token: ::String,
+                                               ?tags: Array[
+                                                 {
+                                                   key: ::String,
+                                                   value: ::String
+                                                 },
+                                               ]
+                                             ) -> _CreateCustomRoutingAcceleratorResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomRoutingAcceleratorResponseSuccess
+
+      interface _CreateCustomRoutingEndpointGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCustomRoutingEndpointGroupResponse]
+        def endpoint_group: () -> Types::CustomRoutingEndpointGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#create_custom_routing_endpoint_group-instance_method
+      def create_custom_routing_endpoint_group: (
+                                                  listener_arn: ::String,
+                                                  endpoint_group_region: ::String,
+                                                  destination_configurations: Array[
+                                                    {
+                                                      from_port: ::Integer,
+                                                      to_port: ::Integer,
+                                                      protocols: Array[("TCP" | "UDP")]
+                                                    },
+                                                  ],
+                                                  idempotency_token: ::String
+                                                ) -> _CreateCustomRoutingEndpointGroupResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomRoutingEndpointGroupResponseSuccess
+
+      interface _CreateCustomRoutingListenerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCustomRoutingListenerResponse]
+        def listener: () -> Types::CustomRoutingListener
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#create_custom_routing_listener-instance_method
+      def create_custom_routing_listener: (
+                                            accelerator_arn: ::String,
+                                            port_ranges: Array[
+                                              {
+                                                from_port: ::Integer?,
+                                                to_port: ::Integer?
+                                              },
+                                            ],
+                                            idempotency_token: ::String
+                                          ) -> _CreateCustomRoutingListenerResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomRoutingListenerResponseSuccess
+
+      interface _CreateEndpointGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEndpointGroupResponse]
+        def endpoint_group: () -> Types::EndpointGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#create_endpoint_group-instance_method
+      def create_endpoint_group: (
+                                   listener_arn: ::String,
+                                   endpoint_group_region: ::String,
+                                   ?endpoint_configurations: Array[
+                                     {
+                                       endpoint_id: ::String?,
+                                       weight: ::Integer?,
+                                       client_ip_preservation_enabled: bool?,
+                                       attachment_arn: ::String?
+                                     },
+                                   ],
+                                   ?traffic_dial_percentage: ::Float,
+                                   ?health_check_port: ::Integer,
+                                   ?health_check_protocol: ("TCP" | "HTTP" | "HTTPS"),
+                                   ?health_check_path: ::String,
+                                   ?health_check_interval_seconds: ::Integer,
+                                   ?threshold_count: ::Integer,
+                                   idempotency_token: ::String,
+                                   ?port_overrides: Array[
+                                     {
+                                       listener_port: ::Integer?,
+                                       endpoint_port: ::Integer?
+                                     },
+                                   ]
+                                 ) -> _CreateEndpointGroupResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEndpointGroupResponseSuccess
+
+      interface _CreateListenerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateListenerResponse]
+        def listener: () -> Types::Listener
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#create_listener-instance_method
+      def create_listener: (
+                             accelerator_arn: ::String,
+                             port_ranges: Array[
+                               {
+                                 from_port: ::Integer?,
+                                 to_port: ::Integer?
+                               },
+                             ],
+                             protocol: ("TCP" | "UDP"),
+                             ?client_affinity: ("NONE" | "SOURCE_IP"),
+                             idempotency_token: ::String
+                           ) -> _CreateListenerResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateListenerResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#delete_accelerator-instance_method
+      def delete_accelerator: (
+                                accelerator_arn: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#delete_cross_account_attachment-instance_method
+      def delete_cross_account_attachment: (
+                                             attachment_arn: ::String
+                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#delete_custom_routing_accelerator-instance_method
+      def delete_custom_routing_accelerator: (
+                                               accelerator_arn: ::String
+                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#delete_custom_routing_endpoint_group-instance_method
+      def delete_custom_routing_endpoint_group: (
+                                                  endpoint_group_arn: ::String
+                                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#delete_custom_routing_listener-instance_method
+      def delete_custom_routing_listener: (
+                                            listener_arn: ::String
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#delete_endpoint_group-instance_method
+      def delete_endpoint_group: (
+                                   endpoint_group_arn: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#delete_listener-instance_method
+      def delete_listener: (
+                             listener_arn: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#deny_custom_routing_traffic-instance_method
+      def deny_custom_routing_traffic: (
+                                         endpoint_group_arn: ::String,
+                                         endpoint_id: ::String,
+                                         ?destination_addresses: Array[::String],
+                                         ?destination_ports: Array[::Integer],
+                                         ?deny_all_traffic_to_endpoint: bool
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeprovisionByoipCidrResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeprovisionByoipCidrResponse]
+        def byoip_cidr: () -> Types::ByoipCidr
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#deprovision_byoip_cidr-instance_method
+      def deprovision_byoip_cidr: (
+                                    cidr: ::String
+                                  ) -> _DeprovisionByoipCidrResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeprovisionByoipCidrResponseSuccess
+
+      interface _DescribeAcceleratorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAcceleratorResponse]
+        def accelerator: () -> Types::Accelerator
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#describe_accelerator-instance_method
+      def describe_accelerator: (
+                                  accelerator_arn: ::String
+                                ) -> _DescribeAcceleratorResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAcceleratorResponseSuccess
+
+      interface _DescribeAcceleratorAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAcceleratorAttributesResponse]
+        def accelerator_attributes: () -> Types::AcceleratorAttributes
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#describe_accelerator_attributes-instance_method
+      def describe_accelerator_attributes: (
+                                             accelerator_arn: ::String
+                                           ) -> _DescribeAcceleratorAttributesResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAcceleratorAttributesResponseSuccess
+
+      interface _DescribeCrossAccountAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCrossAccountAttachmentResponse]
+        def cross_account_attachment: () -> Types::Attachment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#describe_cross_account_attachment-instance_method
+      def describe_cross_account_attachment: (
+                                               attachment_arn: ::String
+                                             ) -> _DescribeCrossAccountAttachmentResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCrossAccountAttachmentResponseSuccess
+
+      interface _DescribeCustomRoutingAcceleratorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCustomRoutingAcceleratorResponse]
+        def accelerator: () -> Types::CustomRoutingAccelerator
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#describe_custom_routing_accelerator-instance_method
+      def describe_custom_routing_accelerator: (
+                                                 accelerator_arn: ::String
+                                               ) -> _DescribeCustomRoutingAcceleratorResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCustomRoutingAcceleratorResponseSuccess
+
+      interface _DescribeCustomRoutingAcceleratorAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCustomRoutingAcceleratorAttributesResponse]
+        def accelerator_attributes: () -> Types::CustomRoutingAcceleratorAttributes
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#describe_custom_routing_accelerator_attributes-instance_method
+      def describe_custom_routing_accelerator_attributes: (
+                                                            accelerator_arn: ::String
+                                                          ) -> _DescribeCustomRoutingAcceleratorAttributesResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCustomRoutingAcceleratorAttributesResponseSuccess
+
+      interface _DescribeCustomRoutingEndpointGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCustomRoutingEndpointGroupResponse]
+        def endpoint_group: () -> Types::CustomRoutingEndpointGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#describe_custom_routing_endpoint_group-instance_method
+      def describe_custom_routing_endpoint_group: (
+                                                    endpoint_group_arn: ::String
+                                                  ) -> _DescribeCustomRoutingEndpointGroupResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCustomRoutingEndpointGroupResponseSuccess
+
+      interface _DescribeCustomRoutingListenerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCustomRoutingListenerResponse]
+        def listener: () -> Types::CustomRoutingListener
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#describe_custom_routing_listener-instance_method
+      def describe_custom_routing_listener: (
+                                              listener_arn: ::String
+                                            ) -> _DescribeCustomRoutingListenerResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCustomRoutingListenerResponseSuccess
+
+      interface _DescribeEndpointGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEndpointGroupResponse]
+        def endpoint_group: () -> Types::EndpointGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#describe_endpoint_group-instance_method
+      def describe_endpoint_group: (
+                                     endpoint_group_arn: ::String
+                                   ) -> _DescribeEndpointGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEndpointGroupResponseSuccess
+
+      interface _DescribeListenerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeListenerResponse]
+        def listener: () -> Types::Listener
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#describe_listener-instance_method
+      def describe_listener: (
+                               listener_arn: ::String
+                             ) -> _DescribeListenerResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeListenerResponseSuccess
+
+      interface _ListAcceleratorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAcceleratorsResponse]
+        def accelerators: () -> ::Array[Types::Accelerator]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#list_accelerators-instance_method
+      def list_accelerators: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListAcceleratorsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAcceleratorsResponseSuccess
+
+      interface _ListByoipCidrsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListByoipCidrsResponse]
+        def byoip_cidrs: () -> ::Array[Types::ByoipCidr]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#list_byoip_cidrs-instance_method
+      def list_byoip_cidrs: (
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListByoipCidrsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListByoipCidrsResponseSuccess
+
+      interface _ListCrossAccountAttachmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCrossAccountAttachmentsResponse]
+        def cross_account_attachments: () -> ::Array[Types::Attachment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#list_cross_account_attachments-instance_method
+      def list_cross_account_attachments: (
+                                            ?max_results: ::Integer,
+                                            ?next_token: ::String
+                                          ) -> _ListCrossAccountAttachmentsResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCrossAccountAttachmentsResponseSuccess
+
+      interface _ListCrossAccountResourceAccountsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCrossAccountResourceAccountsResponse]
+        def resource_owner_aws_account_ids: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#list_cross_account_resource_accounts-instance_method
+      def list_cross_account_resource_accounts: (
+                                                ) -> _ListCrossAccountResourceAccountsResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCrossAccountResourceAccountsResponseSuccess
+
+      interface _ListCrossAccountResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCrossAccountResourcesResponse]
+        def cross_account_resources: () -> ::Array[Types::CrossAccountResource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#list_cross_account_resources-instance_method
+      def list_cross_account_resources: (
+                                          ?accelerator_arn: ::String,
+                                          resource_owner_aws_account_id: ::String,
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListCrossAccountResourcesResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCrossAccountResourcesResponseSuccess
+
+      interface _ListCustomRoutingAcceleratorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCustomRoutingAcceleratorsResponse]
+        def accelerators: () -> ::Array[Types::CustomRoutingAccelerator]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#list_custom_routing_accelerators-instance_method
+      def list_custom_routing_accelerators: (
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _ListCustomRoutingAcceleratorsResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomRoutingAcceleratorsResponseSuccess
+
+      interface _ListCustomRoutingEndpointGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCustomRoutingEndpointGroupsResponse]
+        def endpoint_groups: () -> ::Array[Types::CustomRoutingEndpointGroup]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#list_custom_routing_endpoint_groups-instance_method
+      def list_custom_routing_endpoint_groups: (
+                                                 listener_arn: ::String,
+                                                 ?max_results: ::Integer,
+                                                 ?next_token: ::String
+                                               ) -> _ListCustomRoutingEndpointGroupsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomRoutingEndpointGroupsResponseSuccess
+
+      interface _ListCustomRoutingListenersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCustomRoutingListenersResponse]
+        def listeners: () -> ::Array[Types::CustomRoutingListener]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#list_custom_routing_listeners-instance_method
+      def list_custom_routing_listeners: (
+                                           accelerator_arn: ::String,
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String
+                                         ) -> _ListCustomRoutingListenersResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomRoutingListenersResponseSuccess
+
+      interface _ListCustomRoutingPortMappingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCustomRoutingPortMappingsResponse]
+        def port_mappings: () -> ::Array[Types::PortMapping]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#list_custom_routing_port_mappings-instance_method
+      def list_custom_routing_port_mappings: (
+                                               accelerator_arn: ::String,
+                                               ?endpoint_group_arn: ::String,
+                                               ?max_results: ::Integer,
+                                               ?next_token: ::String
+                                             ) -> _ListCustomRoutingPortMappingsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomRoutingPortMappingsResponseSuccess
+
+      interface _ListCustomRoutingPortMappingsByDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCustomRoutingPortMappingsByDestinationResponse]
+        def destination_port_mappings: () -> ::Array[Types::DestinationPortMapping]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#list_custom_routing_port_mappings_by_destination-instance_method
+      def list_custom_routing_port_mappings_by_destination: (
+                                                              endpoint_id: ::String,
+                                                              destination_address: ::String,
+                                                              ?max_results: ::Integer,
+                                                              ?next_token: ::String
+                                                            ) -> _ListCustomRoutingPortMappingsByDestinationResponseSuccess
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomRoutingPortMappingsByDestinationResponseSuccess
+
+      interface _ListEndpointGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEndpointGroupsResponse]
+        def endpoint_groups: () -> ::Array[Types::EndpointGroup]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#list_endpoint_groups-instance_method
+      def list_endpoint_groups: (
+                                  listener_arn: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListEndpointGroupsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEndpointGroupsResponseSuccess
+
+      interface _ListListenersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListListenersResponse]
+        def listeners: () -> ::Array[Types::Listener]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#list_listeners-instance_method
+      def list_listeners: (
+                            accelerator_arn: ::String,
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListListenersResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListListenersResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ProvisionByoipCidrResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ProvisionByoipCidrResponse]
+        def byoip_cidr: () -> Types::ByoipCidr
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#provision_byoip_cidr-instance_method
+      def provision_byoip_cidr: (
+                                  cidr: ::String,
+                                  cidr_authorization_context: {
+                                    message: ::String,
+                                    signature: ::String
+                                  }
+                                ) -> _ProvisionByoipCidrResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ProvisionByoipCidrResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#remove_custom_routing_endpoints-instance_method
+      def remove_custom_routing_endpoints: (
+                                             endpoint_ids: Array[::String],
+                                             endpoint_group_arn: ::String
+                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#remove_endpoints-instance_method
+      def remove_endpoints: (
+                              endpoint_identifiers: Array[
+                                {
+                                  endpoint_id: ::String,
+                                  client_ip_preservation_enabled: bool?
+                                },
+                              ],
+                              endpoint_group_arn: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAcceleratorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAcceleratorResponse]
+        def accelerator: () -> Types::Accelerator
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#update_accelerator-instance_method
+      def update_accelerator: (
+                                accelerator_arn: ::String,
+                                ?name: ::String,
+                                ?ip_address_type: ("IPV4" | "DUAL_STACK"),
+                                ?enabled: bool
+                              ) -> _UpdateAcceleratorResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAcceleratorResponseSuccess
+
+      interface _UpdateAcceleratorAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAcceleratorAttributesResponse]
+        def accelerator_attributes: () -> Types::AcceleratorAttributes
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#update_accelerator_attributes-instance_method
+      def update_accelerator_attributes: (
+                                           accelerator_arn: ::String,
+                                           ?flow_logs_enabled: bool,
+                                           ?flow_logs_s3_bucket: ::String,
+                                           ?flow_logs_s3_prefix: ::String
+                                         ) -> _UpdateAcceleratorAttributesResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAcceleratorAttributesResponseSuccess
+
+      interface _UpdateCrossAccountAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCrossAccountAttachmentResponse]
+        def cross_account_attachment: () -> Types::Attachment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#update_cross_account_attachment-instance_method
+      def update_cross_account_attachment: (
+                                             attachment_arn: ::String,
+                                             ?name: ::String,
+                                             ?add_principals: Array[::String],
+                                             ?remove_principals: Array[::String],
+                                             ?add_resources: Array[
+                                               {
+                                                 endpoint_id: ::String,
+                                                 region: ::String?
+                                               },
+                                             ],
+                                             ?remove_resources: Array[
+                                               {
+                                                 endpoint_id: ::String,
+                                                 region: ::String?
+                                               },
+                                             ]
+                                           ) -> _UpdateCrossAccountAttachmentResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCrossAccountAttachmentResponseSuccess
+
+      interface _UpdateCustomRoutingAcceleratorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCustomRoutingAcceleratorResponse]
+        def accelerator: () -> Types::CustomRoutingAccelerator
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#update_custom_routing_accelerator-instance_method
+      def update_custom_routing_accelerator: (
+                                               accelerator_arn: ::String,
+                                               ?name: ::String,
+                                               ?ip_address_type: ("IPV4" | "DUAL_STACK"),
+                                               ?enabled: bool
+                                             ) -> _UpdateCustomRoutingAcceleratorResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCustomRoutingAcceleratorResponseSuccess
+
+      interface _UpdateCustomRoutingAcceleratorAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCustomRoutingAcceleratorAttributesResponse]
+        def accelerator_attributes: () -> Types::CustomRoutingAcceleratorAttributes
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#update_custom_routing_accelerator_attributes-instance_method
+      def update_custom_routing_accelerator_attributes: (
+                                                          accelerator_arn: ::String,
+                                                          ?flow_logs_enabled: bool,
+                                                          ?flow_logs_s3_bucket: ::String,
+                                                          ?flow_logs_s3_prefix: ::String
+                                                        ) -> _UpdateCustomRoutingAcceleratorAttributesResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCustomRoutingAcceleratorAttributesResponseSuccess
+
+      interface _UpdateCustomRoutingListenerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCustomRoutingListenerResponse]
+        def listener: () -> Types::CustomRoutingListener
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#update_custom_routing_listener-instance_method
+      def update_custom_routing_listener: (
+                                            listener_arn: ::String,
+                                            port_ranges: Array[
+                                              {
+                                                from_port: ::Integer?,
+                                                to_port: ::Integer?
+                                              },
+                                            ]
+                                          ) -> _UpdateCustomRoutingListenerResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCustomRoutingListenerResponseSuccess
+
+      interface _UpdateEndpointGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEndpointGroupResponse]
+        def endpoint_group: () -> Types::EndpointGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#update_endpoint_group-instance_method
+      def update_endpoint_group: (
+                                   endpoint_group_arn: ::String,
+                                   ?endpoint_configurations: Array[
+                                     {
+                                       endpoint_id: ::String?,
+                                       weight: ::Integer?,
+                                       client_ip_preservation_enabled: bool?,
+                                       attachment_arn: ::String?
+                                     },
+                                   ],
+                                   ?traffic_dial_percentage: ::Float,
+                                   ?health_check_port: ::Integer,
+                                   ?health_check_protocol: ("TCP" | "HTTP" | "HTTPS"),
+                                   ?health_check_path: ::String,
+                                   ?health_check_interval_seconds: ::Integer,
+                                   ?threshold_count: ::Integer,
+                                   ?port_overrides: Array[
+                                     {
+                                       listener_port: ::Integer?,
+                                       endpoint_port: ::Integer?
+                                     },
+                                   ]
+                                 ) -> _UpdateEndpointGroupResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEndpointGroupResponseSuccess
+
+      interface _UpdateListenerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateListenerResponse]
+        def listener: () -> Types::Listener
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#update_listener-instance_method
+      def update_listener: (
+                             listener_arn: ::String,
+                             ?port_ranges: Array[
+                               {
+                                 from_port: ::Integer?,
+                                 to_port: ::Integer?
+                               },
+                             ],
+                             ?protocol: ("TCP" | "UDP"),
+                             ?client_affinity: ("NONE" | "SOURCE_IP")
+                           ) -> _UpdateListenerResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateListenerResponseSuccess
+
+      interface _WithdrawByoipCidrResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::WithdrawByoipCidrResponse]
+        def byoip_cidr: () -> Types::ByoipCidr
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlobalAccelerator/Client.html#withdraw_byoip_cidr-instance_method
+      def withdraw_byoip_cidr: (
+                                 cidr: ::String
+                               ) -> _WithdrawByoipCidrResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _WithdrawByoipCidrResponseSuccess
+    end
+  end
+end
+

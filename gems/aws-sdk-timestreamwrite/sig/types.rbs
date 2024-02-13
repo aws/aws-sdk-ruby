@@ -1,0 +1,497 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::TimestreamWrite
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchLoadProgressReport
+      attr_accessor records_processed: ::Integer
+      attr_accessor records_ingested: ::Integer
+      attr_accessor parse_failures: ::Integer
+      attr_accessor record_ingestion_failures: ::Integer
+      attr_accessor file_failures: ::Integer
+      attr_accessor bytes_metered: ::Integer
+      SENSITIVE: []
+    end
+
+    class BatchLoadTask
+      attr_accessor task_id: ::String
+      attr_accessor task_status: ("CREATED" | "IN_PROGRESS" | "FAILED" | "SUCCEEDED" | "PROGRESS_STOPPED" | "PENDING_RESUME")
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor resumable_until: ::Time
+      SENSITIVE: []
+    end
+
+    class BatchLoadTaskDescription
+      attr_accessor task_id: ::String
+      attr_accessor error_message: ::String
+      attr_accessor data_source_configuration: Types::DataSourceConfiguration
+      attr_accessor progress_report: Types::BatchLoadProgressReport
+      attr_accessor report_configuration: Types::ReportConfiguration
+      attr_accessor data_model_configuration: Types::DataModelConfiguration
+      attr_accessor target_database_name: ::String
+      attr_accessor target_table_name: ::String
+      attr_accessor task_status: ("CREATED" | "IN_PROGRESS" | "FAILED" | "SUCCEEDED" | "PROGRESS_STOPPED" | "PENDING_RESUME")
+      attr_accessor record_version: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor resumable_until: ::Time
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBatchLoadTaskRequest
+      attr_accessor client_token: ::String
+      attr_accessor data_model_configuration: Types::DataModelConfiguration
+      attr_accessor data_source_configuration: Types::DataSourceConfiguration
+      attr_accessor report_configuration: Types::ReportConfiguration
+      attr_accessor target_database_name: ::String
+      attr_accessor target_table_name: ::String
+      attr_accessor record_version: ::Integer
+      SENSITIVE: [:client_token]
+    end
+
+    class CreateBatchLoadTaskResponse
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDatabaseRequest
+      attr_accessor database_name: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDatabaseResponse
+      attr_accessor database: Types::Database
+      SENSITIVE: []
+    end
+
+    class CreateTableRequest
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor retention_properties: Types::RetentionProperties
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor magnetic_store_write_properties: Types::MagneticStoreWriteProperties
+      attr_accessor schema: Types::Schema
+      SENSITIVE: []
+    end
+
+    class CreateTableResponse
+      attr_accessor table: Types::Table
+      SENSITIVE: []
+    end
+
+    class CsvConfiguration
+      attr_accessor column_separator: ::String
+      attr_accessor escape_char: ::String
+      attr_accessor quote_char: ::String
+      attr_accessor null_value: ::String
+      attr_accessor trim_white_space: bool
+      SENSITIVE: []
+    end
+
+    class DataModel
+      attr_accessor time_column: ::String
+      attr_accessor time_unit: ("MILLISECONDS" | "SECONDS" | "MICROSECONDS" | "NANOSECONDS")
+      attr_accessor dimension_mappings: ::Array[Types::DimensionMapping]
+      attr_accessor multi_measure_mappings: Types::MultiMeasureMappings
+      attr_accessor mixed_measure_mappings: ::Array[Types::MixedMeasureMapping]
+      attr_accessor measure_name_column: ::String
+      SENSITIVE: []
+    end
+
+    class DataModelConfiguration
+      attr_accessor data_model: Types::DataModel
+      attr_accessor data_model_s3_configuration: Types::DataModelS3Configuration
+      SENSITIVE: []
+    end
+
+    class DataModelS3Configuration
+      attr_accessor bucket_name: ::String
+      attr_accessor object_key: ::String
+      SENSITIVE: []
+    end
+
+    class DataSourceConfiguration
+      attr_accessor data_source_s3_configuration: Types::DataSourceS3Configuration
+      attr_accessor csv_configuration: Types::CsvConfiguration
+      attr_accessor data_format: ("CSV")
+      SENSITIVE: []
+    end
+
+    class DataSourceS3Configuration
+      attr_accessor bucket_name: ::String
+      attr_accessor object_key_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class Database
+      attr_accessor arn: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_count: ::Integer
+      attr_accessor kms_key_id: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteDatabaseRequest
+      attr_accessor database_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTableRequest
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBatchLoadTaskRequest
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBatchLoadTaskResponse
+      attr_accessor batch_load_task_description: Types::BatchLoadTaskDescription
+      SENSITIVE: []
+    end
+
+    class DescribeDatabaseRequest
+      attr_accessor database_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDatabaseResponse
+      attr_accessor database: Types::Database
+      SENSITIVE: []
+    end
+
+    class DescribeEndpointsRequest < Aws::EmptyStructure
+    end
+
+    class DescribeEndpointsResponse
+      attr_accessor endpoints: ::Array[Types::Endpoint]
+      SENSITIVE: []
+    end
+
+    class DescribeTableRequest
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTableResponse
+      attr_accessor table: Types::Table
+      SENSITIVE: []
+    end
+
+    class Dimension
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      attr_accessor dimension_value_type: ("VARCHAR")
+      SENSITIVE: []
+    end
+
+    class DimensionMapping
+      attr_accessor source_column: ::String
+      attr_accessor destination_column: ::String
+      SENSITIVE: []
+    end
+
+    class Endpoint
+      attr_accessor address: ::String
+      attr_accessor cache_period_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidEndpointException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListBatchLoadTasksRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor task_status: ("CREATED" | "IN_PROGRESS" | "FAILED" | "SUCCEEDED" | "PROGRESS_STOPPED" | "PENDING_RESUME")
+      SENSITIVE: []
+    end
+
+    class ListBatchLoadTasksResponse
+      attr_accessor next_token: ::String
+      attr_accessor batch_load_tasks: ::Array[Types::BatchLoadTask]
+      SENSITIVE: []
+    end
+
+    class ListDatabasesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDatabasesResponse
+      attr_accessor databases: ::Array[Types::Database]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTablesRequest
+      attr_accessor database_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTablesResponse
+      attr_accessor tables: ::Array[Types::Table]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class MagneticStoreRejectedDataLocation
+      attr_accessor s3_configuration: Types::S3Configuration
+      SENSITIVE: []
+    end
+
+    class MagneticStoreWriteProperties
+      attr_accessor enable_magnetic_store_writes: bool
+      attr_accessor magnetic_store_rejected_data_location: Types::MagneticStoreRejectedDataLocation
+      SENSITIVE: []
+    end
+
+    class MeasureValue
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      attr_accessor type: ("DOUBLE" | "BIGINT" | "VARCHAR" | "BOOLEAN" | "TIMESTAMP" | "MULTI")
+      SENSITIVE: []
+    end
+
+    class MixedMeasureMapping
+      attr_accessor measure_name: ::String
+      attr_accessor source_column: ::String
+      attr_accessor target_measure_name: ::String
+      attr_accessor measure_value_type: ("DOUBLE" | "BIGINT" | "VARCHAR" | "BOOLEAN" | "TIMESTAMP" | "MULTI")
+      attr_accessor multi_measure_attribute_mappings: ::Array[Types::MultiMeasureAttributeMapping]
+      SENSITIVE: []
+    end
+
+    class MultiMeasureAttributeMapping
+      attr_accessor source_column: ::String
+      attr_accessor target_multi_measure_attribute_name: ::String
+      attr_accessor measure_value_type: ("DOUBLE" | "BIGINT" | "BOOLEAN" | "VARCHAR" | "TIMESTAMP")
+      SENSITIVE: []
+    end
+
+    class MultiMeasureMappings
+      attr_accessor target_multi_measure_name: ::String
+      attr_accessor multi_measure_attribute_mappings: ::Array[Types::MultiMeasureAttributeMapping]
+      SENSITIVE: []
+    end
+
+    class PartitionKey
+      attr_accessor type: ("DIMENSION" | "MEASURE")
+      attr_accessor name: ::String
+      attr_accessor enforcement_in_record: ("REQUIRED" | "OPTIONAL")
+      SENSITIVE: []
+    end
+
+    class Record
+      attr_accessor dimensions: ::Array[Types::Dimension]
+      attr_accessor measure_name: ::String
+      attr_accessor measure_value: ::String
+      attr_accessor measure_value_type: ("DOUBLE" | "BIGINT" | "VARCHAR" | "BOOLEAN" | "TIMESTAMP" | "MULTI")
+      attr_accessor time: ::String
+      attr_accessor time_unit: ("MILLISECONDS" | "SECONDS" | "MICROSECONDS" | "NANOSECONDS")
+      attr_accessor version: ::Integer
+      attr_accessor measure_values: ::Array[Types::MeasureValue]
+      SENSITIVE: []
+    end
+
+    class RecordsIngested
+      attr_accessor total: ::Integer
+      attr_accessor memory_store: ::Integer
+      attr_accessor magnetic_store: ::Integer
+      SENSITIVE: []
+    end
+
+    class RejectedRecord
+      attr_accessor record_index: ::Integer
+      attr_accessor reason: ::String
+      attr_accessor existing_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class RejectedRecordsException
+      attr_accessor message: ::String
+      attr_accessor rejected_records: ::Array[Types::RejectedRecord]
+      SENSITIVE: []
+    end
+
+    class ReportConfiguration
+      attr_accessor report_s3_configuration: Types::ReportS3Configuration
+      SENSITIVE: []
+    end
+
+    class ReportS3Configuration
+      attr_accessor bucket_name: ::String
+      attr_accessor object_key_prefix: ::String
+      attr_accessor encryption_option: ("SSE_S3" | "SSE_KMS")
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResumeBatchLoadTaskRequest
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResumeBatchLoadTaskResponse < Aws::EmptyStructure
+    end
+
+    class RetentionProperties
+      attr_accessor memory_store_retention_period_in_hours: ::Integer
+      attr_accessor magnetic_store_retention_period_in_days: ::Integer
+      SENSITIVE: []
+    end
+
+    class S3Configuration
+      attr_accessor bucket_name: ::String
+      attr_accessor object_key_prefix: ::String
+      attr_accessor encryption_option: ("SSE_S3" | "SSE_KMS")
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class Schema
+      attr_accessor composite_partition_key: ::Array[Types::PartitionKey]
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Table
+      attr_accessor arn: ::String
+      attr_accessor table_name: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_status: ("ACTIVE" | "DELETING" | "RESTORING")
+      attr_accessor retention_properties: Types::RetentionProperties
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor magnetic_store_write_properties: Types::MagneticStoreWriteProperties
+      attr_accessor schema: Types::Schema
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDatabaseRequest
+      attr_accessor database_name: ::String
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDatabaseResponse
+      attr_accessor database: Types::Database
+      SENSITIVE: []
+    end
+
+    class UpdateTableRequest
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor retention_properties: Types::RetentionProperties
+      attr_accessor magnetic_store_write_properties: Types::MagneticStoreWriteProperties
+      attr_accessor schema: Types::Schema
+      SENSITIVE: []
+    end
+
+    class UpdateTableResponse
+      attr_accessor table: Types::Table
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WriteRecordsRequest
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor common_attributes: Types::Record
+      attr_accessor records: ::Array[Types::Record]
+      SENSITIVE: []
+    end
+
+    class WriteRecordsResponse
+      attr_accessor records_ingested: Types::RecordsIngested
+      SENSITIVE: []
+    end
+  end
+end

@@ -34,6 +34,7 @@ RSpec.configure do |config|
     path = '/latest/meta-data/iam/security-credentials/'
     stub_request(:get, "http://169.254.169.254#{path}").to_raise(SocketError)
     stub_request(:put, "http://169.254.169.254#{token_path}").to_raise(SocketError)
+    allow_any_instance_of(Aws::InstanceProfileCredentials).to receive(:warn)
 
     Aws.shared_config.fresh
   end

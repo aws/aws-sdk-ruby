@@ -1,0 +1,696 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DataExchange
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#cancel_job-instance_method
+      def cancel_job: (
+                        job_id: ::String
+                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CreateDataSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataSetResponse]
+        def arn: () -> ::String
+        def asset_type: () -> ("S3_SNAPSHOT" | "REDSHIFT_DATA_SHARE" | "API_GATEWAY_API" | "S3_DATA_ACCESS" | "LAKE_FORMATION_DATA_PERMISSION")
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def origin: () -> ("OWNED" | "ENTITLED")
+        def origin_details: () -> Types::OriginDetails
+        def source_id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#create_data_set-instance_method
+      def create_data_set: (
+                             asset_type: ("S3_SNAPSHOT" | "REDSHIFT_DATA_SHARE" | "API_GATEWAY_API" | "S3_DATA_ACCESS" | "LAKE_FORMATION_DATA_PERMISSION"),
+                             description: ::String,
+                             name: ::String,
+                             ?tags: Hash[::String, ::String]
+                           ) -> _CreateDataSetResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataSetResponseSuccess
+
+      interface _CreateEventActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEventActionResponse]
+        def action: () -> Types::Action
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def event: () -> Types::Event
+        def id: () -> ::String
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#create_event_action-instance_method
+      def create_event_action: (
+                                 action: {
+                                   export_revision_to_s3: {
+                                     encryption: {
+                                       kms_key_arn: ::String?,
+                                       type: ("aws:kms" | "AES256")
+                                     }?,
+                                     revision_destination: {
+                                       bucket: ::String,
+                                       key_pattern: ::String?
+                                     }
+                                   }?
+                                 },
+                                 event: {
+                                   revision_published: {
+                                     data_set_id: ::String
+                                   }?
+                                 }
+                               ) -> _CreateEventActionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventActionResponseSuccess
+
+      interface _CreateJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateJobResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def details: () -> Types::ResponseDetails
+        def errors: () -> ::Array[Types::JobError]
+        def id: () -> ::String
+        def state: () -> ("WAITING" | "IN_PROGRESS" | "ERROR" | "COMPLETED" | "CANCELLED" | "TIMED_OUT")
+        def type: () -> ("IMPORT_ASSETS_FROM_S3" | "IMPORT_ASSET_FROM_SIGNED_URL" | "EXPORT_ASSETS_TO_S3" | "EXPORT_ASSET_TO_SIGNED_URL" | "EXPORT_REVISIONS_TO_S3" | "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES" | "IMPORT_ASSET_FROM_API_GATEWAY_API" | "CREATE_S3_DATA_ACCESS_FROM_S3_BUCKET" | "IMPORT_ASSETS_FROM_LAKE_FORMATION_TAG_POLICY")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#create_job-instance_method
+      def create_job: (
+                        details: {
+                          export_asset_to_signed_url: {
+                            asset_id: ::String,
+                            data_set_id: ::String,
+                            revision_id: ::String
+                          }?,
+                          export_assets_to_s3: {
+                            asset_destinations: Array[
+                              {
+                                asset_id: ::String,
+                                bucket: ::String,
+                                key: ::String?
+                              },
+                            ],
+                            data_set_id: ::String,
+                            encryption: {
+                              kms_key_arn: ::String?,
+                              type: ("aws:kms" | "AES256")
+                            }?,
+                            revision_id: ::String
+                          }?,
+                          export_revisions_to_s3: {
+                            data_set_id: ::String,
+                            encryption: {
+                              kms_key_arn: ::String?,
+                              type: ("aws:kms" | "AES256")
+                            }?,
+                            revision_destinations: Array[
+                              {
+                                bucket: ::String,
+                                key_pattern: ::String?,
+                                revision_id: ::String
+                              },
+                            ]
+                          }?,
+                          import_asset_from_signed_url: {
+                            asset_name: ::String,
+                            data_set_id: ::String,
+                            md_5_hash: ::String,
+                            revision_id: ::String
+                          }?,
+                          import_assets_from_s3: {
+                            asset_sources: Array[
+                              {
+                                bucket: ::String,
+                                key: ::String
+                              },
+                            ],
+                            data_set_id: ::String,
+                            revision_id: ::String
+                          }?,
+                          import_assets_from_redshift_data_shares: {
+                            asset_sources: Array[
+                              {
+                                data_share_arn: ::String
+                              },
+                            ],
+                            data_set_id: ::String,
+                            revision_id: ::String
+                          }?,
+                          import_asset_from_api_gateway_api: {
+                            api_description: ::String?,
+                            api_id: ::String,
+                            api_key: ::String?,
+                            api_name: ::String,
+                            api_specification_md_5_hash: ::String,
+                            data_set_id: ::String,
+                            protocol_type: ("REST"),
+                            revision_id: ::String,
+                            stage: ::String
+                          }?,
+                          create_s3_data_access_from_s3_bucket: {
+                            asset_source: {
+                              bucket: ::String,
+                              key_prefixes: Array[::String]?,
+                              keys: Array[::String]?,
+                              kms_keys_to_grant: Array[
+                                {
+                                  kms_key_arn: ::String
+                                },
+                              ]?
+                            },
+                            data_set_id: ::String,
+                            revision_id: ::String
+                          }?,
+                          import_assets_from_lake_formation_tag_policy: {
+                            catalog_id: ::String,
+                            database: {
+                              expression: Array[
+                                {
+                                  tag_key: ::String,
+                                  tag_values: Array[::String]
+                                },
+                              ],
+                              permissions: Array[("DESCRIBE")]
+                            }?,
+                            table: {
+                              expression: Array[
+                                {
+                                  tag_key: ::String,
+                                  tag_values: Array[::String]
+                                },
+                              ],
+                              permissions: Array[("DESCRIBE" | "SELECT")]
+                            }?,
+                            role_arn: ::String,
+                            data_set_id: ::String,
+                            revision_id: ::String
+                          }?
+                        },
+                        type: ("IMPORT_ASSETS_FROM_S3" | "IMPORT_ASSET_FROM_SIGNED_URL" | "EXPORT_ASSETS_TO_S3" | "EXPORT_ASSET_TO_SIGNED_URL" | "EXPORT_REVISIONS_TO_S3" | "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES" | "IMPORT_ASSET_FROM_API_GATEWAY_API" | "CREATE_S3_DATA_ACCESS_FROM_S3_BUCKET" | "IMPORT_ASSETS_FROM_LAKE_FORMATION_TAG_POLICY")
+                      ) -> _CreateJobResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateJobResponseSuccess
+
+      interface _CreateRevisionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRevisionResponse]
+        def arn: () -> ::String
+        def comment: () -> ::String
+        def created_at: () -> ::Time
+        def data_set_id: () -> ::String
+        def finalized: () -> bool
+        def id: () -> ::String
+        def source_id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def updated_at: () -> ::Time
+        def revocation_comment: () -> ::String
+        def revoked: () -> bool
+        def revoked_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#create_revision-instance_method
+      def create_revision: (
+                             ?comment: ::String,
+                             data_set_id: ::String,
+                             ?tags: Hash[::String, ::String]
+                           ) -> _CreateRevisionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRevisionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#delete_asset-instance_method
+      def delete_asset: (
+                          asset_id: ::String,
+                          data_set_id: ::String,
+                          revision_id: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#delete_data_set-instance_method
+      def delete_data_set: (
+                             data_set_id: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#delete_event_action-instance_method
+      def delete_event_action: (
+                                 event_action_id: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#delete_revision-instance_method
+      def delete_revision: (
+                             data_set_id: ::String,
+                             revision_id: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetAssetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAssetResponse]
+        def arn: () -> ::String
+        def asset_details: () -> Types::AssetDetails
+        def asset_type: () -> ("S3_SNAPSHOT" | "REDSHIFT_DATA_SHARE" | "API_GATEWAY_API" | "S3_DATA_ACCESS" | "LAKE_FORMATION_DATA_PERMISSION")
+        def created_at: () -> ::Time
+        def data_set_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def revision_id: () -> ::String
+        def source_id: () -> ::String
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#get_asset-instance_method
+      def get_asset: (
+                       asset_id: ::String,
+                       data_set_id: ::String,
+                       revision_id: ::String
+                     ) -> _GetAssetResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssetResponseSuccess
+
+      interface _GetDataSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataSetResponse]
+        def arn: () -> ::String
+        def asset_type: () -> ("S3_SNAPSHOT" | "REDSHIFT_DATA_SHARE" | "API_GATEWAY_API" | "S3_DATA_ACCESS" | "LAKE_FORMATION_DATA_PERMISSION")
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def origin: () -> ("OWNED" | "ENTITLED")
+        def origin_details: () -> Types::OriginDetails
+        def source_id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#get_data_set-instance_method
+      def get_data_set: (
+                          data_set_id: ::String
+                        ) -> _GetDataSetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataSetResponseSuccess
+
+      interface _GetEventActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEventActionResponse]
+        def action: () -> Types::Action
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def event: () -> Types::Event
+        def id: () -> ::String
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#get_event_action-instance_method
+      def get_event_action: (
+                              event_action_id: ::String
+                            ) -> _GetEventActionResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEventActionResponseSuccess
+
+      interface _GetJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetJobResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def details: () -> Types::ResponseDetails
+        def errors: () -> ::Array[Types::JobError]
+        def id: () -> ::String
+        def state: () -> ("WAITING" | "IN_PROGRESS" | "ERROR" | "COMPLETED" | "CANCELLED" | "TIMED_OUT")
+        def type: () -> ("IMPORT_ASSETS_FROM_S3" | "IMPORT_ASSET_FROM_SIGNED_URL" | "EXPORT_ASSETS_TO_S3" | "EXPORT_ASSET_TO_SIGNED_URL" | "EXPORT_REVISIONS_TO_S3" | "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES" | "IMPORT_ASSET_FROM_API_GATEWAY_API" | "CREATE_S3_DATA_ACCESS_FROM_S3_BUCKET" | "IMPORT_ASSETS_FROM_LAKE_FORMATION_TAG_POLICY")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#get_job-instance_method
+      def get_job: (
+                     job_id: ::String
+                   ) -> _GetJobResponseSuccess
+                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetJobResponseSuccess
+
+      interface _GetRevisionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRevisionResponse]
+        def arn: () -> ::String
+        def comment: () -> ::String
+        def created_at: () -> ::Time
+        def data_set_id: () -> ::String
+        def finalized: () -> bool
+        def id: () -> ::String
+        def source_id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def updated_at: () -> ::Time
+        def revocation_comment: () -> ::String
+        def revoked: () -> bool
+        def revoked_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#get_revision-instance_method
+      def get_revision: (
+                          data_set_id: ::String,
+                          revision_id: ::String
+                        ) -> _GetRevisionResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRevisionResponseSuccess
+
+      interface _ListDataSetRevisionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataSetRevisionsResponse]
+        def next_token: () -> ::String
+        def revisions: () -> ::Array[Types::RevisionEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#list_data_set_revisions-instance_method
+      def list_data_set_revisions: (
+                                     data_set_id: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListDataSetRevisionsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataSetRevisionsResponseSuccess
+
+      interface _ListDataSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataSetsResponse]
+        def data_sets: () -> ::Array[Types::DataSetEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#list_data_sets-instance_method
+      def list_data_sets: (
+                            ?max_results: ::Integer,
+                            ?next_token: ::String,
+                            ?origin: ::String
+                          ) -> _ListDataSetsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataSetsResponseSuccess
+
+      interface _ListEventActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventActionsResponse]
+        def event_actions: () -> ::Array[Types::EventActionEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#list_event_actions-instance_method
+      def list_event_actions: (
+                                ?event_source_id: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListEventActionsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventActionsResponseSuccess
+
+      interface _ListJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListJobsResponse]
+        def jobs: () -> ::Array[Types::JobEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#list_jobs-instance_method
+      def list_jobs: (
+                       ?data_set_id: ::String,
+                       ?max_results: ::Integer,
+                       ?next_token: ::String,
+                       ?revision_id: ::String
+                     ) -> _ListJobsResponseSuccess
+                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobsResponseSuccess
+
+      interface _ListRevisionAssetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRevisionAssetsResponse]
+        def assets: () -> ::Array[Types::AssetEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#list_revision_assets-instance_method
+      def list_revision_assets: (
+                                  data_set_id: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
+                                  revision_id: ::String
+                                ) -> _ListRevisionAssetsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRevisionAssetsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _RevokeRevisionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RevokeRevisionResponse]
+        def arn: () -> ::String
+        def comment: () -> ::String
+        def created_at: () -> ::Time
+        def data_set_id: () -> ::String
+        def finalized: () -> bool
+        def id: () -> ::String
+        def source_id: () -> ::String
+        def updated_at: () -> ::Time
+        def revocation_comment: () -> ::String
+        def revoked: () -> bool
+        def revoked_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#revoke_revision-instance_method
+      def revoke_revision: (
+                             data_set_id: ::String,
+                             revision_id: ::String,
+                             revocation_comment: ::String
+                           ) -> _RevokeRevisionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RevokeRevisionResponseSuccess
+
+      interface _SendApiAssetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendApiAssetResponse]
+        def body: () -> ::String
+        def response_headers: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#send_api_asset-instance_method
+      def send_api_asset: (
+                            ?body: ::String,
+                            ?query_string_parameters: Hash[::String, ::String],
+                            asset_id: ::String,
+                            data_set_id: ::String,
+                            ?request_headers: Hash[::String, ::String],
+                            ?method: ::String,
+                            ?path: ::String,
+                            revision_id: ::String
+                          ) -> _SendApiAssetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendApiAssetResponseSuccess
+
+      interface _SendDataSetNotificationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendDataSetNotificationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#send_data_set_notification-instance_method
+      def send_data_set_notification: (
+                                        ?scope: {
+                                          lake_formation_tag_policies: Array[
+                                            {
+                                              database: ::String?,
+                                              table: ::String?
+                                            },
+                                          ]?,
+                                          redshift_data_shares: Array[
+                                            {
+                                              arn: ::String,
+                                              database: ::String,
+                                              function: ::String?,
+                                              table: ::String?,
+                                              schema: ::String?,
+                                              view: ::String?
+                                            },
+                                          ]?,
+                                          s3_data_accesses: Array[
+                                            {
+                                              key_prefixes: Array[::String]?,
+                                              keys: Array[::String]?
+                                            },
+                                          ]?
+                                        },
+                                        ?client_token: ::String,
+                                        ?comment: ::String,
+                                        data_set_id: ::String,
+                                        ?details: {
+                                          data_update: {
+                                            data_updated_at: ::Time?
+                                          }?,
+                                          deprecation: {
+                                            deprecation_at: ::Time
+                                          }?,
+                                          schema_change: {
+                                            changes: Array[
+                                              {
+                                                name: ::String,
+                                                type: ("ADD" | "REMOVE" | "MODIFY"),
+                                                description: ::String?
+                                              },
+                                            ]?,
+                                            schema_change_at: ::Time
+                                          }?
+                                        },
+                                        type: ("DATA_DELAY" | "DATA_UPDATE" | "DEPRECATION" | "SCHEMA_CHANGE")
+                                      ) -> _SendDataSetNotificationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendDataSetNotificationResponseSuccess
+
+      interface _StartJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#start_job-instance_method
+      def start_job: (
+                       job_id: ::String
+                     ) -> _StartJobResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartJobResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateAssetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAssetResponse]
+        def arn: () -> ::String
+        def asset_details: () -> Types::AssetDetails
+        def asset_type: () -> ("S3_SNAPSHOT" | "REDSHIFT_DATA_SHARE" | "API_GATEWAY_API" | "S3_DATA_ACCESS" | "LAKE_FORMATION_DATA_PERMISSION")
+        def created_at: () -> ::Time
+        def data_set_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def revision_id: () -> ::String
+        def source_id: () -> ::String
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#update_asset-instance_method
+      def update_asset: (
+                          asset_id: ::String,
+                          data_set_id: ::String,
+                          name: ::String,
+                          revision_id: ::String
+                        ) -> _UpdateAssetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssetResponseSuccess
+
+      interface _UpdateDataSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataSetResponse]
+        def arn: () -> ::String
+        def asset_type: () -> ("S3_SNAPSHOT" | "REDSHIFT_DATA_SHARE" | "API_GATEWAY_API" | "S3_DATA_ACCESS" | "LAKE_FORMATION_DATA_PERMISSION")
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def origin: () -> ("OWNED" | "ENTITLED")
+        def origin_details: () -> Types::OriginDetails
+        def source_id: () -> ::String
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#update_data_set-instance_method
+      def update_data_set: (
+                             data_set_id: ::String,
+                             ?description: ::String,
+                             ?name: ::String
+                           ) -> _UpdateDataSetResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataSetResponseSuccess
+
+      interface _UpdateEventActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEventActionResponse]
+        def action: () -> Types::Action
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def event: () -> Types::Event
+        def id: () -> ::String
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#update_event_action-instance_method
+      def update_event_action: (
+                                 ?action: {
+                                   export_revision_to_s3: {
+                                     encryption: {
+                                       kms_key_arn: ::String?,
+                                       type: ("aws:kms" | "AES256")
+                                     }?,
+                                     revision_destination: {
+                                       bucket: ::String,
+                                       key_pattern: ::String?
+                                     }
+                                   }?
+                                 },
+                                 event_action_id: ::String
+                               ) -> _UpdateEventActionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEventActionResponseSuccess
+
+      interface _UpdateRevisionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRevisionResponse]
+        def arn: () -> ::String
+        def comment: () -> ::String
+        def created_at: () -> ::Time
+        def data_set_id: () -> ::String
+        def finalized: () -> bool
+        def id: () -> ::String
+        def source_id: () -> ::String
+        def updated_at: () -> ::Time
+        def revocation_comment: () -> ::String
+        def revoked: () -> bool
+        def revoked_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#update_revision-instance_method
+      def update_revision: (
+                             ?comment: ::String,
+                             data_set_id: ::String,
+                             ?finalized: bool,
+                             revision_id: ::String
+                           ) -> _UpdateRevisionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRevisionResponseSuccess
+    end
+  end
+end
+

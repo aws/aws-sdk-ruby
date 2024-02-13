@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.99.0 (2024-02-08)
+------------------
+
+* Feature - This release introduces User-Decoupling feature. This feature allows Workspaces Core customers to provision workspaces without providing users. CreateWorkspaces and DescribeWorkspaces APIs will now take a new optional parameter "WorkspaceName".
+
+1.98.0 (2024-02-05)
+------------------
+
+* Feature - Added definitions of various WorkSpace states
+
+1.97.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.96.0 (2024-01-11)
+------------------
+
+* Feature - Added AWS Workspaces RebootWorkspaces API - Extended Reboot documentation update
+
 1.95.0 (2023-12-14)
 ------------------
 

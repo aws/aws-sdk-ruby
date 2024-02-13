@@ -1,0 +1,466 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ChimeSDKIdentity
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateAppInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAppInstanceResponse]
+        def app_instance_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#create_app_instance-instance_method
+      def create_app_instance: (
+                                 name: ::String,
+                                 ?metadata: ::String,
+                                 client_request_token: ::String,
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String
+                                   },
+                                 ]
+                               ) -> _CreateAppInstanceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppInstanceResponseSuccess
+
+      interface _CreateAppInstanceAdminResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAppInstanceAdminResponse]
+        def app_instance_admin: () -> Types::Identity
+        def app_instance_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#create_app_instance_admin-instance_method
+      def create_app_instance_admin: (
+                                       app_instance_admin_arn: ::String,
+                                       app_instance_arn: ::String
+                                     ) -> _CreateAppInstanceAdminResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppInstanceAdminResponseSuccess
+
+      interface _CreateAppInstanceBotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAppInstanceBotResponse]
+        def app_instance_bot_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#create_app_instance_bot-instance_method
+      def create_app_instance_bot: (
+                                     app_instance_arn: ::String,
+                                     ?name: ::String,
+                                     ?metadata: ::String,
+                                     client_request_token: ::String,
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       },
+                                     ],
+                                     configuration: {
+                                       lex: {
+                                         responds_to: ("STANDARD_MESSAGES")?,
+                                         invoked_by: {
+                                           standard_messages: ("AUTO" | "ALL" | "MENTIONS" | "NONE"),
+                                           targeted_messages: ("ALL" | "NONE")
+                                         }?,
+                                         lex_bot_alias_arn: ::String,
+                                         locale_id: ::String,
+                                         welcome_intent: ::String?
+                                       }
+                                     }
+                                   ) -> _CreateAppInstanceBotResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppInstanceBotResponseSuccess
+
+      interface _CreateAppInstanceUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAppInstanceUserResponse]
+        def app_instance_user_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#create_app_instance_user-instance_method
+      def create_app_instance_user: (
+                                      app_instance_arn: ::String,
+                                      app_instance_user_id: ::String,
+                                      name: ::String,
+                                      ?metadata: ::String,
+                                      client_request_token: ::String,
+                                      ?tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String
+                                        },
+                                      ],
+                                      ?expiration_settings: {
+                                        expiration_days: ::Integer,
+                                        expiration_criterion: ("CREATED_TIMESTAMP")
+                                      }
+                                    ) -> _CreateAppInstanceUserResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppInstanceUserResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#delete_app_instance-instance_method
+      def delete_app_instance: (
+                                 app_instance_arn: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#delete_app_instance_admin-instance_method
+      def delete_app_instance_admin: (
+                                       app_instance_admin_arn: ::String,
+                                       app_instance_arn: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#delete_app_instance_bot-instance_method
+      def delete_app_instance_bot: (
+                                     app_instance_bot_arn: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#delete_app_instance_user-instance_method
+      def delete_app_instance_user: (
+                                      app_instance_user_arn: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#deregister_app_instance_user_endpoint-instance_method
+      def deregister_app_instance_user_endpoint: (
+                                                   app_instance_user_arn: ::String,
+                                                   endpoint_id: ::String
+                                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeAppInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAppInstanceResponse]
+        def app_instance: () -> Types::AppInstance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#describe_app_instance-instance_method
+      def describe_app_instance: (
+                                   app_instance_arn: ::String
+                                 ) -> _DescribeAppInstanceResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAppInstanceResponseSuccess
+
+      interface _DescribeAppInstanceAdminResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAppInstanceAdminResponse]
+        def app_instance_admin: () -> Types::AppInstanceAdmin
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#describe_app_instance_admin-instance_method
+      def describe_app_instance_admin: (
+                                         app_instance_admin_arn: ::String,
+                                         app_instance_arn: ::String
+                                       ) -> _DescribeAppInstanceAdminResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAppInstanceAdminResponseSuccess
+
+      interface _DescribeAppInstanceBotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAppInstanceBotResponse]
+        def app_instance_bot: () -> Types::AppInstanceBot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#describe_app_instance_bot-instance_method
+      def describe_app_instance_bot: (
+                                       app_instance_bot_arn: ::String
+                                     ) -> _DescribeAppInstanceBotResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAppInstanceBotResponseSuccess
+
+      interface _DescribeAppInstanceUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAppInstanceUserResponse]
+        def app_instance_user: () -> Types::AppInstanceUser
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#describe_app_instance_user-instance_method
+      def describe_app_instance_user: (
+                                        app_instance_user_arn: ::String
+                                      ) -> _DescribeAppInstanceUserResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAppInstanceUserResponseSuccess
+
+      interface _DescribeAppInstanceUserEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAppInstanceUserEndpointResponse]
+        def app_instance_user_endpoint: () -> Types::AppInstanceUserEndpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#describe_app_instance_user_endpoint-instance_method
+      def describe_app_instance_user_endpoint: (
+                                                 app_instance_user_arn: ::String,
+                                                 endpoint_id: ::String
+                                               ) -> _DescribeAppInstanceUserEndpointResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAppInstanceUserEndpointResponseSuccess
+
+      interface _GetAppInstanceRetentionSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAppInstanceRetentionSettingsResponse]
+        def app_instance_retention_settings: () -> Types::AppInstanceRetentionSettings
+        def initiate_deletion_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#get_app_instance_retention_settings-instance_method
+      def get_app_instance_retention_settings: (
+                                                 app_instance_arn: ::String
+                                               ) -> _GetAppInstanceRetentionSettingsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAppInstanceRetentionSettingsResponseSuccess
+
+      interface _ListAppInstanceAdminsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppInstanceAdminsResponse]
+        def app_instance_arn: () -> ::String
+        def app_instance_admins: () -> ::Array[Types::AppInstanceAdminSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#list_app_instance_admins-instance_method
+      def list_app_instance_admins: (
+                                      app_instance_arn: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListAppInstanceAdminsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppInstanceAdminsResponseSuccess
+
+      interface _ListAppInstanceBotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppInstanceBotsResponse]
+        def app_instance_arn: () -> ::String
+        def app_instance_bots: () -> ::Array[Types::AppInstanceBotSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#list_app_instance_bots-instance_method
+      def list_app_instance_bots: (
+                                    app_instance_arn: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListAppInstanceBotsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppInstanceBotsResponseSuccess
+
+      interface _ListAppInstanceUserEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppInstanceUserEndpointsResponse]
+        def app_instance_user_endpoints: () -> ::Array[Types::AppInstanceUserEndpointSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#list_app_instance_user_endpoints-instance_method
+      def list_app_instance_user_endpoints: (
+                                              app_instance_user_arn: ::String,
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _ListAppInstanceUserEndpointsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppInstanceUserEndpointsResponseSuccess
+
+      interface _ListAppInstanceUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppInstanceUsersResponse]
+        def app_instance_arn: () -> ::String
+        def app_instance_users: () -> ::Array[Types::AppInstanceUserSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#list_app_instance_users-instance_method
+      def list_app_instance_users: (
+                                     app_instance_arn: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListAppInstanceUsersResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppInstanceUsersResponseSuccess
+
+      interface _ListAppInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppInstancesResponse]
+        def app_instances: () -> ::Array[Types::AppInstanceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#list_app_instances-instance_method
+      def list_app_instances: (
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListAppInstancesResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppInstancesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutAppInstanceRetentionSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAppInstanceRetentionSettingsResponse]
+        def app_instance_retention_settings: () -> Types::AppInstanceRetentionSettings
+        def initiate_deletion_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#put_app_instance_retention_settings-instance_method
+      def put_app_instance_retention_settings: (
+                                                 app_instance_arn: ::String,
+                                                 app_instance_retention_settings: {
+                                                   channel_retention_settings: {
+                                                     retention_days: ::Integer?
+                                                   }?
+                                                 }
+                                               ) -> _PutAppInstanceRetentionSettingsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAppInstanceRetentionSettingsResponseSuccess
+
+      interface _PutAppInstanceUserExpirationSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAppInstanceUserExpirationSettingsResponse]
+        def app_instance_user_arn: () -> ::String
+        def expiration_settings: () -> Types::ExpirationSettings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#put_app_instance_user_expiration_settings-instance_method
+      def put_app_instance_user_expiration_settings: (
+                                                       app_instance_user_arn: ::String,
+                                                       ?expiration_settings: {
+                                                         expiration_days: ::Integer,
+                                                         expiration_criterion: ("CREATED_TIMESTAMP")
+                                                       }
+                                                     ) -> _PutAppInstanceUserExpirationSettingsResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAppInstanceUserExpirationSettingsResponseSuccess
+
+      interface _RegisterAppInstanceUserEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterAppInstanceUserEndpointResponse]
+        def app_instance_user_arn: () -> ::String
+        def endpoint_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#register_app_instance_user_endpoint-instance_method
+      def register_app_instance_user_endpoint: (
+                                                 app_instance_user_arn: ::String,
+                                                 ?name: ::String,
+                                                 type: ("APNS" | "APNS_SANDBOX" | "GCM"),
+                                                 resource_arn: ::String,
+                                                 endpoint_attributes: {
+                                                   device_token: ::String,
+                                                   voip_device_token: ::String?
+                                                 },
+                                                 client_request_token: ::String,
+                                                 ?allow_messages: ("ALL" | "NONE")
+                                               ) -> _RegisterAppInstanceUserEndpointResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterAppInstanceUserEndpointResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateAppInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAppInstanceResponse]
+        def app_instance_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#update_app_instance-instance_method
+      def update_app_instance: (
+                                 app_instance_arn: ::String,
+                                 name: ::String,
+                                 metadata: ::String
+                               ) -> _UpdateAppInstanceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAppInstanceResponseSuccess
+
+      interface _UpdateAppInstanceBotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAppInstanceBotResponse]
+        def app_instance_bot_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#update_app_instance_bot-instance_method
+      def update_app_instance_bot: (
+                                     app_instance_bot_arn: ::String,
+                                     name: ::String,
+                                     metadata: ::String,
+                                     ?configuration: {
+                                       lex: {
+                                         responds_to: ("STANDARD_MESSAGES")?,
+                                         invoked_by: {
+                                           standard_messages: ("AUTO" | "ALL" | "MENTIONS" | "NONE"),
+                                           targeted_messages: ("ALL" | "NONE")
+                                         }?,
+                                         lex_bot_alias_arn: ::String,
+                                         locale_id: ::String,
+                                         welcome_intent: ::String?
+                                       }
+                                     }
+                                   ) -> _UpdateAppInstanceBotResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAppInstanceBotResponseSuccess
+
+      interface _UpdateAppInstanceUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAppInstanceUserResponse]
+        def app_instance_user_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#update_app_instance_user-instance_method
+      def update_app_instance_user: (
+                                      app_instance_user_arn: ::String,
+                                      name: ::String,
+                                      metadata: ::String
+                                    ) -> _UpdateAppInstanceUserResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAppInstanceUserResponseSuccess
+
+      interface _UpdateAppInstanceUserEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAppInstanceUserEndpointResponse]
+        def app_instance_user_arn: () -> ::String
+        def endpoint_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKIdentity/Client.html#update_app_instance_user_endpoint-instance_method
+      def update_app_instance_user_endpoint: (
+                                               app_instance_user_arn: ::String,
+                                               endpoint_id: ::String,
+                                               ?name: ::String,
+                                               ?allow_messages: ("ALL" | "NONE")
+                                             ) -> _UpdateAppInstanceUserEndpointResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAppInstanceUserEndpointResponseSuccess
+    end
+  end
+end
+

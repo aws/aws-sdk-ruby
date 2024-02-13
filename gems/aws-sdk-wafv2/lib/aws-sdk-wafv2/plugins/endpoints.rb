@@ -14,6 +14,7 @@ module Aws::WAFV2
       option(
         :endpoint_provider,
         doc_type: 'Aws::WAFV2::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -71,6 +72,8 @@ module Aws::WAFV2
             Aws::WAFV2::Endpoints::CreateRuleGroup.build(context)
           when :create_web_acl
             Aws::WAFV2::Endpoints::CreateWebACL.build(context)
+          when :delete_api_key
+            Aws::WAFV2::Endpoints::DeleteAPIKey.build(context)
           when :delete_firewall_manager_rule_groups
             Aws::WAFV2::Endpoints::DeleteFirewallManagerRuleGroups.build(context)
           when :delete_ip_set

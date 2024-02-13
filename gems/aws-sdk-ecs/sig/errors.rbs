@@ -1,0 +1,71 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ECS
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+      end
+      class AttributeLimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class BlockedException < ::Aws::Errors::ServiceError
+      end
+      class ClientException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ClusterContainsContainerInstancesException < ::Aws::Errors::ServiceError
+      end
+      class ClusterContainsServicesException < ::Aws::Errors::ServiceError
+      end
+      class ClusterContainsTasksException < ::Aws::Errors::ServiceError
+      end
+      class ClusterNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class ConflictException < ::Aws::Errors::ServiceError
+        def resource_ids: () -> ::String
+      end
+      class InvalidParameterException < ::Aws::Errors::ServiceError
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class MissingVersionException < ::Aws::Errors::ServiceError
+      end
+      class NamespaceNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class NoUpdateAvailableException < ::Aws::Errors::ServiceError
+      end
+      class PlatformTaskDefinitionIncompatibilityException < ::Aws::Errors::ServiceError
+      end
+      class PlatformUnknownException < ::Aws::Errors::ServiceError
+      end
+      class ResourceInUseException < ::Aws::Errors::ServiceError
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class ServerException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceNotActiveException < ::Aws::Errors::ServiceError
+      end
+      class ServiceNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class TargetNotConnectedException < ::Aws::Errors::ServiceError
+      end
+      class TargetNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class TaskSetNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class UnsupportedFeatureException < ::Aws::Errors::ServiceError
+      end
+      class UpdateInProgressException < ::Aws::Errors::ServiceError
+      end
+    end
+  end
+end

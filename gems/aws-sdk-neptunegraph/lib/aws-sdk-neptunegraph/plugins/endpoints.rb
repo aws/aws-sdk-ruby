@@ -14,6 +14,7 @@ module Aws::NeptuneGraph
       option(
         :endpoint_provider,
         doc_type: 'Aws::NeptuneGraph::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -59,6 +60,8 @@ module Aws::NeptuneGraph
           case context.operation_name
           when :cancel_import_task
             Aws::NeptuneGraph::Endpoints::CancelImportTask.build(context)
+          when :cancel_query
+            Aws::NeptuneGraph::Endpoints::CancelQuery.build(context)
           when :create_graph
             Aws::NeptuneGraph::Endpoints::CreateGraph.build(context)
           when :create_graph_snapshot
@@ -73,14 +76,20 @@ module Aws::NeptuneGraph
             Aws::NeptuneGraph::Endpoints::DeleteGraphSnapshot.build(context)
           when :delete_private_graph_endpoint
             Aws::NeptuneGraph::Endpoints::DeletePrivateGraphEndpoint.build(context)
+          when :execute_query
+            Aws::NeptuneGraph::Endpoints::ExecuteQuery.build(context)
           when :get_graph
             Aws::NeptuneGraph::Endpoints::GetGraph.build(context)
           when :get_graph_snapshot
             Aws::NeptuneGraph::Endpoints::GetGraphSnapshot.build(context)
+          when :get_graph_summary
+            Aws::NeptuneGraph::Endpoints::GetGraphSummary.build(context)
           when :get_import_task
             Aws::NeptuneGraph::Endpoints::GetImportTask.build(context)
           when :get_private_graph_endpoint
             Aws::NeptuneGraph::Endpoints::GetPrivateGraphEndpoint.build(context)
+          when :get_query
+            Aws::NeptuneGraph::Endpoints::GetQuery.build(context)
           when :list_graph_snapshots
             Aws::NeptuneGraph::Endpoints::ListGraphSnapshots.build(context)
           when :list_graphs
@@ -89,6 +98,8 @@ module Aws::NeptuneGraph
             Aws::NeptuneGraph::Endpoints::ListImportTasks.build(context)
           when :list_private_graph_endpoints
             Aws::NeptuneGraph::Endpoints::ListPrivateGraphEndpoints.build(context)
+          when :list_queries
+            Aws::NeptuneGraph::Endpoints::ListQueries.build(context)
           when :list_tags_for_resource
             Aws::NeptuneGraph::Endpoints::ListTagsForResource.build(context)
           when :reset_graph

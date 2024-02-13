@@ -2025,7 +2025,7 @@ module Aws::Connect
     #     contact_id: "ContactId", # required
     #     client_token: "ClientToken",
     #     participant_details: { # required
-    #       participant_role: "AGENT", # accepts AGENT, CUSTOMER, SYSTEM, CUSTOM_BOT
+    #       participant_role: "AGENT", # accepts AGENT, CUSTOMER, SYSTEM, CUSTOM_BOT, SUPERVISOR
     #       display_name: "DisplayName",
     #     },
     #   })
@@ -4742,12 +4742,12 @@ module Aws::Connect
     #
     #   resp = client.describe_instance_attribute({
     #     instance_id: "InstanceId", # required
-    #     attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA, MULTI_PARTY_CONFERENCE, HIGH_VOLUME_OUTBOUND, ENHANCED_CONTACT_MONITORING
+    #     attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA, MULTI_PARTY_CONFERENCE, HIGH_VOLUME_OUTBOUND, ENHANCED_CONTACT_MONITORING, ENHANCED_CHAT_MONITORING
     #   })
     #
     # @example Response structure
     #
-    #   resp.attribute.attribute_type #=> String, one of "INBOUND_CALLS", "OUTBOUND_CALLS", "CONTACTFLOW_LOGS", "CONTACT_LENS", "AUTO_RESOLVE_BEST_VOICES", "USE_CUSTOM_TTS_VOICES", "EARLY_MEDIA", "MULTI_PARTY_CONFERENCE", "HIGH_VOLUME_OUTBOUND", "ENHANCED_CONTACT_MONITORING"
+    #   resp.attribute.attribute_type #=> String, one of "INBOUND_CALLS", "OUTBOUND_CALLS", "CONTACTFLOW_LOGS", "CONTACT_LENS", "AUTO_RESOLVE_BEST_VOICES", "USE_CUSTOM_TTS_VOICES", "EARLY_MEDIA", "MULTI_PARTY_CONFERENCE", "HIGH_VOLUME_OUTBOUND", "ENHANCED_CONTACT_MONITORING", "ENHANCED_CHAT_MONITORING"
     #   resp.attribute.value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeInstanceAttribute AWS API Documentation
@@ -6170,10 +6170,17 @@ module Aws::Connect
     #
     #   * Channels: 3 (VOICE, CHAT, and TASK channels are supported.)
     #
+    #   * RoutingStepExpressions: 50
+    #
     #   Metric data is retrieved only for the resources associated with the
     #   queues or routing profiles, and by any channels included in the
     #   filter. (You cannot filter by both queue AND routing profile.) You can
     #   include both resource IDs and resource ARNs in the same request.
+    #
+    #   When using the `RoutingStepExpression` filter, you need to pass
+    #   exactly one `QueueId`. The filter is also case sensitive so when using
+    #   the `RoutingStepExpression` filter, grouping by
+    #   `ROUTING_STEP_EXPRESSION` is required.
     #
     #   Currently tagging is only supported on the resources that are passed
     #   in the filter.
@@ -6193,6 +6200,9 @@ module Aws::Connect
     #
     #   * If no `Grouping` is included in the request, a summary of metrics is
     #     returned.
+    #
+    #   * When using the `RoutingStepExpression` filter, group by
+    #     `ROUTING_STEP_EXPRESSION` is required.
     #
     # @option params [required, Array<Types::CurrentMetric>] :current_metrics
     #   The metrics to retrieve. Specify the name and unit for each metric.
@@ -6275,6 +6285,12 @@ module Aws::Connect
     #     "Value": 24113.0 `\\}
     #
     #     The actual OLDEST\_CONTACT\_AGE is 24 seconds.
+    #
+    #     When the filter `RoutingStepExpression` is used, this metric is
+    #     still calculated from enqueue time. For example, if a contact that
+    #     has been queued under `<Expression 1>` for 10 seconds has expired
+    #     and `<Expression 2>` becomes active, then `OLDEST_CONTACT_AGE` for
+    #     this queue will be counted starting from 10, not 0.
     #
     #     Name in real-time metrics report: [Oldest][11]
     #
@@ -6666,6 +6682,9 @@ module Aws::Connect
     #   both queue IDs and queue ARNs in the same request. VOICE, CHAT, and
     #   TASK channels are supported.
     #
+    #   RoutingStepExpression is not a valid filter for GetMetricData and we
+    #   recommend switching to GetMetricDataV2 for more up-to-date features.
+    #
     #   <note markdown="1"> To filter by `Queues`, enter the queue ID/ARN, not the name of the
     #   queue.
     #
@@ -6679,6 +6698,9 @@ module Aws::Connect
     #
     #   If no grouping is specified, a summary of metrics for all queues is
     #   returned.
+    #
+    #   RoutingStepExpression is not a valid filter for GetMetricData and we
+    #   recommend switching to GetMetricDataV2 for more up-to-date features.
     #
     # @option params [required, Array<Types::HistoricalMetric>] :historical_metrics
     #   The metrics to retrieve. Specify the name, unit, and statistic for
@@ -7009,6 +7031,8 @@ module Aws::Connect
     #
     #   * Feature
     #
+    #   * Routing step expression
+    #
     #   At least one filter must be passed from queues, routing profiles,
     #   agents, or user hierarchy groups.
     #
@@ -7022,7 +7046,8 @@ module Aws::Connect
     #     `AGENT` \| `CHANNEL` \| `AGENT_HIERARCHY_LEVEL_ONE` \|
     #     `AGENT_HIERARCHY_LEVEL_TWO` \| `AGENT_HIERARCHY_LEVEL_THREE` \|
     #     `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE` \|
-    #     `FEATURE` \| `contact/segmentAttributes/connect:Subtype`
+    #     `FEATURE` \| `contact/segmentAttributes/connect:Subtype` \|
+    #     `ROUTING_STEP_EXPRESSION`
     #
     #   * **Filter values**: A maximum of 100 filter values are supported in a
     #     single request. VOICE, CHAT, and TASK are valid `filterValue` for
@@ -7038,6 +7063,11 @@ module Aws::Connect
     #     `connect:Chat`, `connect:SMS`, `connect:Telephony`, and
     #     `connect:WebRTC` are valid `filterValue` examples (not exhaustive)
     #     for the `contact/segmentAttributes/connect:Subtype filter` key.
+    #
+    #     `ROUTING_STEP_EXPRESSION` is a valid filter key with a filter value
+    #     up to 3000 length. This filter is case and order sensitive. JSON
+    #     string fields must be sorted in ascending order and JSON array order
+    #     should be kept as is.
     #
     #
     #
@@ -7055,7 +7085,8 @@ module Aws::Connect
     #   `CHANNEL` \| `AGENT_HIERARCHY_LEVEL_ONE` \|
     #   `AGENT_HIERARCHY_LEVEL_TWO` \| `AGENT_HIERARCHY_LEVEL_THREE` \|
     #   `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE`,
-    #   `contact/segmentAttributes/connect:Subtype`
+    #   `contact/segmentAttributes/connect:Subtype` \|
+    #   `ROUTING_STEP_EXPRESSION`
     #
     # @option params [required, Array<Types::MetricV2>] :metrics
     #   The metrics to retrieve. Specify the name, groupings, and filters for
@@ -7220,7 +7251,8 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
+    #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype,
+    #     RoutingStepExpression
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -7358,7 +7390,8 @@ module Aws::Connect
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
+    #     RoutingStepExpression
     #
     #   CONTACTS\_CREATED
     #
@@ -7380,11 +7413,21 @@ module Aws::Connect
     #     Valid metric filter key: `INITIATION_METHOD`, `DISCONNECT_REASON`
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
+    #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype,
+    #     RoutingStepExpression
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
     #      </note>
+    #
+    #   CONTACTS\_HANDLED\_BY\_CONNECTED\_TO\_AGENT
+    #
+    #   : Unit: Count
+    #
+    #     Valid metric filter key: `INITIATION_METHOD`
+    #
+    #     Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy,
+    #     contact/segmentAttributes/connect:Subtype
     #
     #   CONTACTS\_HOLD\_ABANDONS
     #
@@ -7435,6 +7478,13 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
+    #   CONTACTS\_QUEUED\_BY\_ENQUEUE
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy,
+    #     contact/segmentAttributes/connect:Subtype
+    #
     #   CONTACTS\_RESOLVED\_IN\_X
     #
     #   : Unit: Count
@@ -7477,6 +7527,18 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #
+    #   PERCENT\_CONTACTS\_STEP\_EXPIRED
+    #
+    #   : Unit: Percent
+    #
+    #     Valid groupings and filters: Queue, RoutingStepExpression
+    #
+    #   PERCENT\_CONTACTS\_STEP\_JOINED
+    #
+    #   : Unit: Percent
+    #
+    #     Valid groupings and filters: Queue, RoutingStepExpression
     #
     #   PERCENT\_NON\_TALK\_TIME
     #
@@ -7529,6 +7591,12 @@ module Aws::Connect
     #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
     #     `LT` (for "Less than").
+    #
+    #   STEP\_CONTACTS\_QUEUED
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, RoutingStepExpression
     #
     #   SUM\_AFTER\_CONTACT\_WORK\_TIME
     #
@@ -7872,7 +7940,10 @@ module Aws::Connect
     # distribution group.
     #
     # @option params [required, String] :id
-    #   The identifier of the traffic distribution group.
+    #   The identifier of the traffic distribution group. This can be the ID
+    #   or the ARN if the API is being called in the Region where the traffic
+    #   distribution group was created. The ARN must be provided if the call
+    #   is from the replicated Region.
     #
     # @return [Types::GetTrafficDistributionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8802,7 +8873,7 @@ module Aws::Connect
     # @example Response structure
     #
     #   resp.attributes #=> Array
-    #   resp.attributes[0].attribute_type #=> String, one of "INBOUND_CALLS", "OUTBOUND_CALLS", "CONTACTFLOW_LOGS", "CONTACT_LENS", "AUTO_RESOLVE_BEST_VOICES", "USE_CUSTOM_TTS_VOICES", "EARLY_MEDIA", "MULTI_PARTY_CONFERENCE", "HIGH_VOLUME_OUTBOUND", "ENHANCED_CONTACT_MONITORING"
+    #   resp.attributes[0].attribute_type #=> String, one of "INBOUND_CALLS", "OUTBOUND_CALLS", "CONTACTFLOW_LOGS", "CONTACT_LENS", "AUTO_RESOLVE_BEST_VOICES", "USE_CUSTOM_TTS_VOICES", "EARLY_MEDIA", "MULTI_PARTY_CONFERENCE", "HIGH_VOLUME_OUTBOUND", "ENHANCED_CONTACT_MONITORING", "ENHANCED_CHAT_MONITORING"
     #   resp.attributes[0].value #=> String
     #   resp.next_token #=> String
     #
@@ -9658,7 +9729,7 @@ module Aws::Connect
     #   resp.segments #=> Array
     #   resp.segments[0].transcript.id #=> String
     #   resp.segments[0].transcript.participant_id #=> String
-    #   resp.segments[0].transcript.participant_role #=> String, one of "AGENT", "CUSTOMER", "SYSTEM", "CUSTOM_BOT"
+    #   resp.segments[0].transcript.participant_role #=> String, one of "AGENT", "CUSTOMER", "SYSTEM", "CUSTOM_BOT", "SUPERVISOR"
     #   resp.segments[0].transcript.display_name #=> String
     #   resp.segments[0].transcript.content #=> String
     #   resp.segments[0].transcript.content_type #=> String
@@ -9681,13 +9752,13 @@ module Aws::Connect
     #   resp.segments[0].issues.issues_detected[0].transcript_items[0].character_offsets.end_offset_char #=> Integer
     #   resp.segments[0].event.id #=> String
     #   resp.segments[0].event.participant_id #=> String
-    #   resp.segments[0].event.participant_role #=> String, one of "AGENT", "CUSTOMER", "SYSTEM", "CUSTOM_BOT"
+    #   resp.segments[0].event.participant_role #=> String, one of "AGENT", "CUSTOMER", "SYSTEM", "CUSTOM_BOT", "SUPERVISOR"
     #   resp.segments[0].event.display_name #=> String
     #   resp.segments[0].event.event_type #=> String
     #   resp.segments[0].event.time.absolute_time #=> Time
     #   resp.segments[0].attachments.id #=> String
     #   resp.segments[0].attachments.participant_id #=> String
-    #   resp.segments[0].attachments.participant_role #=> String, one of "AGENT", "CUSTOMER", "SYSTEM", "CUSTOM_BOT"
+    #   resp.segments[0].attachments.participant_role #=> String, one of "AGENT", "CUSTOMER", "SYSTEM", "CUSTOM_BOT", "SUPERVISOR"
     #   resp.segments[0].attachments.display_name #=> String
     #   resp.segments[0].attachments.attachments #=> Array
     #   resp.segments[0].attachments.attachments[0].attachment_name #=> String
@@ -10691,7 +10762,8 @@ module Aws::Connect
     # @option params [Array<String>] :allowed_monitor_capabilities
     #   Specify which monitoring actions the user is allowed to take. For
     #   example, whether the user is allowed to escalate from silent
-    #   monitoring to barge.
+    #   monitoring to barge. AllowedMonitorCapabilities is required if barge
+    #   is enabled.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -11147,7 +11219,7 @@ module Aws::Connect
     #         transcript: {
     #           criteria: [ # required
     #             {
-    #               participant_role: "AGENT", # required, accepts AGENT, CUSTOMER, SYSTEM, CUSTOM_BOT
+    #               participant_role: "AGENT", # required, accepts AGENT, CUSTOMER, SYSTEM, CUSTOM_BOT, SUPERVISOR
     #               search_text: ["SearchText"], # required
     #               match_type: "MATCH_ALL", # required, accepts MATCH_ALL, MATCH_ANY
     #             },
@@ -14454,7 +14526,7 @@ module Aws::Connect
     #
     #   resp = client.update_instance_attribute({
     #     instance_id: "InstanceId", # required
-    #     attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA, MULTI_PARTY_CONFERENCE, HIGH_VOLUME_OUTBOUND, ENHANCED_CONTACT_MONITORING
+    #     attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA, MULTI_PARTY_CONFERENCE, HIGH_VOLUME_OUTBOUND, ENHANCED_CONTACT_MONITORING, ENHANCED_CHAT_MONITORING
     #     value: "InstanceAttributeValue", # required
     #   })
     #
@@ -16195,7 +16267,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.147.0'
+      context[:gem_version] = '1.150.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

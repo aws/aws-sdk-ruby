@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2024-02-13)
+------------------
+
+* Feature - This release adds support to upgrade the major version of a database.
+
+1.87.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.86.0 (2024-01-25)
+------------------
+
+* Feature - This release adds support for IPv6-only instance plans.
+
 1.85.0 (2024-01-04)
 ------------------
 

@@ -1,0 +1,1562 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Greengrass
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateRoleToGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateRoleToGroupResponse]
+        def associated_at: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#associate_role_to_group-instance_method
+      def associate_role_to_group: (
+                                     group_id: ::String,
+                                     role_arn: ::String
+                                   ) -> _AssociateRoleToGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateRoleToGroupResponseSuccess
+
+      interface _AssociateServiceRoleToAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateServiceRoleToAccountResponse]
+        def associated_at: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#associate_service_role_to_account-instance_method
+      def associate_service_role_to_account: (
+                                               role_arn: ::String
+                                             ) -> _AssociateServiceRoleToAccountResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateServiceRoleToAccountResponseSuccess
+
+      interface _CreateConnectorDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectorDefinitionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def last_updated_timestamp: () -> ::String
+        def latest_version: () -> ::String
+        def latest_version_arn: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#create_connector_definition-instance_method
+      def create_connector_definition: (
+                                         ?amzn_client_token: ::String,
+                                         ?initial_version: {
+                                           connectors: Array[
+                                             {
+                                               connector_arn: ::String,
+                                               id: ::String,
+                                               parameters: Hash[::String, ::String]?
+                                             },
+                                           ]?
+                                         },
+                                         ?name: ::String,
+                                         ?tags: Hash[::String, ::String]
+                                       ) -> _CreateConnectorDefinitionResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectorDefinitionResponseSuccess
+
+      interface _CreateConnectorDefinitionVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectorDefinitionVersionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#create_connector_definition_version-instance_method
+      def create_connector_definition_version: (
+                                                 ?amzn_client_token: ::String,
+                                                 connector_definition_id: ::String,
+                                                 ?connectors: Array[
+                                                   {
+                                                     connector_arn: ::String,
+                                                     id: ::String,
+                                                     parameters: Hash[::String, ::String]?
+                                                   },
+                                                 ]
+                                               ) -> _CreateConnectorDefinitionVersionResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectorDefinitionVersionResponseSuccess
+
+      interface _CreateCoreDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCoreDefinitionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def last_updated_timestamp: () -> ::String
+        def latest_version: () -> ::String
+        def latest_version_arn: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#create_core_definition-instance_method
+      def create_core_definition: (
+                                    ?amzn_client_token: ::String,
+                                    ?initial_version: {
+                                      cores: Array[
+                                        {
+                                          certificate_arn: ::String,
+                                          id: ::String,
+                                          sync_shadow: bool?,
+                                          thing_arn: ::String
+                                        },
+                                      ]?
+                                    },
+                                    ?name: ::String,
+                                    ?tags: Hash[::String, ::String]
+                                  ) -> _CreateCoreDefinitionResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCoreDefinitionResponseSuccess
+
+      interface _CreateCoreDefinitionVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCoreDefinitionVersionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#create_core_definition_version-instance_method
+      def create_core_definition_version: (
+                                            ?amzn_client_token: ::String,
+                                            core_definition_id: ::String,
+                                            ?cores: Array[
+                                              {
+                                                certificate_arn: ::String,
+                                                id: ::String,
+                                                sync_shadow: bool?,
+                                                thing_arn: ::String
+                                              },
+                                            ]
+                                          ) -> _CreateCoreDefinitionVersionResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCoreDefinitionVersionResponseSuccess
+
+      interface _CreateDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDeploymentResponse]
+        def deployment_arn: () -> ::String
+        def deployment_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#create_deployment-instance_method
+      def create_deployment: (
+                               ?amzn_client_token: ::String,
+                               ?deployment_id: ::String,
+                               deployment_type: ("NewDeployment" | "Redeployment" | "ResetDeployment" | "ForceResetDeployment"),
+                               group_id: ::String,
+                               ?group_version_id: ::String
+                             ) -> _CreateDeploymentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeploymentResponseSuccess
+
+      interface _CreateDeviceDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDeviceDefinitionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def last_updated_timestamp: () -> ::String
+        def latest_version: () -> ::String
+        def latest_version_arn: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#create_device_definition-instance_method
+      def create_device_definition: (
+                                      ?amzn_client_token: ::String,
+                                      ?initial_version: {
+                                        devices: Array[
+                                          {
+                                            certificate_arn: ::String,
+                                            id: ::String,
+                                            sync_shadow: bool?,
+                                            thing_arn: ::String
+                                          },
+                                        ]?
+                                      },
+                                      ?name: ::String,
+                                      ?tags: Hash[::String, ::String]
+                                    ) -> _CreateDeviceDefinitionResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeviceDefinitionResponseSuccess
+
+      interface _CreateDeviceDefinitionVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDeviceDefinitionVersionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#create_device_definition_version-instance_method
+      def create_device_definition_version: (
+                                              ?amzn_client_token: ::String,
+                                              device_definition_id: ::String,
+                                              ?devices: Array[
+                                                {
+                                                  certificate_arn: ::String,
+                                                  id: ::String,
+                                                  sync_shadow: bool?,
+                                                  thing_arn: ::String
+                                                },
+                                              ]
+                                            ) -> _CreateDeviceDefinitionVersionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeviceDefinitionVersionResponseSuccess
+
+      interface _CreateFunctionDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFunctionDefinitionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def last_updated_timestamp: () -> ::String
+        def latest_version: () -> ::String
+        def latest_version_arn: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#create_function_definition-instance_method
+      def create_function_definition: (
+                                        ?amzn_client_token: ::String,
+                                        ?initial_version: {
+                                          default_config: {
+                                            execution: {
+                                              isolation_mode: ("GreengrassContainer" | "NoContainer")?,
+                                              run_as: {
+                                                gid: ::Integer?,
+                                                uid: ::Integer?
+                                              }?
+                                            }?
+                                          }?,
+                                          functions: Array[
+                                            {
+                                              function_arn: ::String?,
+                                              function_configuration: {
+                                                encoding_type: ("binary" | "json")?,
+                                                environment: {
+                                                  access_sysfs: bool?,
+                                                  execution: {
+                                                    isolation_mode: ("GreengrassContainer" | "NoContainer")?,
+                                                    run_as: {
+                                                      gid: ::Integer?,
+                                                      uid: ::Integer?
+                                                    }?
+                                                  }?,
+                                                  resource_access_policies: Array[
+                                                    {
+                                                      permission: ("ro" | "rw")?,
+                                                      resource_id: ::String
+                                                    },
+                                                  ]?,
+                                                  variables: Hash[::String, ::String]?
+                                                }?,
+                                                exec_args: ::String?,
+                                                executable: ::String?,
+                                                memory_size: ::Integer?,
+                                                pinned: bool?,
+                                                timeout: ::Integer?,
+                                                function_runtime_override: ::String?
+                                              }?,
+                                              id: ::String
+                                            },
+                                          ]?
+                                        },
+                                        ?name: ::String,
+                                        ?tags: Hash[::String, ::String]
+                                      ) -> _CreateFunctionDefinitionResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFunctionDefinitionResponseSuccess
+
+      interface _CreateFunctionDefinitionVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFunctionDefinitionVersionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#create_function_definition_version-instance_method
+      def create_function_definition_version: (
+                                                ?amzn_client_token: ::String,
+                                                ?default_config: {
+                                                  execution: {
+                                                    isolation_mode: ("GreengrassContainer" | "NoContainer")?,
+                                                    run_as: {
+                                                      gid: ::Integer?,
+                                                      uid: ::Integer?
+                                                    }?
+                                                  }?
+                                                },
+                                                function_definition_id: ::String,
+                                                ?functions: Array[
+                                                  {
+                                                    function_arn: ::String?,
+                                                    function_configuration: {
+                                                      encoding_type: ("binary" | "json")?,
+                                                      environment: {
+                                                        access_sysfs: bool?,
+                                                        execution: {
+                                                          isolation_mode: ("GreengrassContainer" | "NoContainer")?,
+                                                          run_as: {
+                                                            gid: ::Integer?,
+                                                            uid: ::Integer?
+                                                          }?
+                                                        }?,
+                                                        resource_access_policies: Array[
+                                                          {
+                                                            permission: ("ro" | "rw")?,
+                                                            resource_id: ::String
+                                                          },
+                                                        ]?,
+                                                        variables: Hash[::String, ::String]?
+                                                      }?,
+                                                      exec_args: ::String?,
+                                                      executable: ::String?,
+                                                      memory_size: ::Integer?,
+                                                      pinned: bool?,
+                                                      timeout: ::Integer?,
+                                                      function_runtime_override: ::String?
+                                                    }?,
+                                                    id: ::String
+                                                  },
+                                                ]
+                                              ) -> _CreateFunctionDefinitionVersionResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFunctionDefinitionVersionResponseSuccess
+
+      interface _CreateGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGroupResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def last_updated_timestamp: () -> ::String
+        def latest_version: () -> ::String
+        def latest_version_arn: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#create_group-instance_method
+      def create_group: (
+                          ?amzn_client_token: ::String,
+                          ?initial_version: {
+                            connector_definition_version_arn: ::String?,
+                            core_definition_version_arn: ::String?,
+                            device_definition_version_arn: ::String?,
+                            function_definition_version_arn: ::String?,
+                            logger_definition_version_arn: ::String?,
+                            resource_definition_version_arn: ::String?,
+                            subscription_definition_version_arn: ::String?
+                          },
+                          name: ::String,
+                          ?tags: Hash[::String, ::String]
+                        ) -> _CreateGroupResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGroupResponseSuccess
+
+      interface _CreateGroupCertificateAuthorityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGroupCertificateAuthorityResponse]
+        def group_certificate_authority_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#create_group_certificate_authority-instance_method
+      def create_group_certificate_authority: (
+                                                ?amzn_client_token: ::String,
+                                                group_id: ::String
+                                              ) -> _CreateGroupCertificateAuthorityResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGroupCertificateAuthorityResponseSuccess
+
+      interface _CreateGroupVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGroupVersionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#create_group_version-instance_method
+      def create_group_version: (
+                                  ?amzn_client_token: ::String,
+                                  ?connector_definition_version_arn: ::String,
+                                  ?core_definition_version_arn: ::String,
+                                  ?device_definition_version_arn: ::String,
+                                  ?function_definition_version_arn: ::String,
+                                  group_id: ::String,
+                                  ?logger_definition_version_arn: ::String,
+                                  ?resource_definition_version_arn: ::String,
+                                  ?subscription_definition_version_arn: ::String
+                                ) -> _CreateGroupVersionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGroupVersionResponseSuccess
+
+      interface _CreateLoggerDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLoggerDefinitionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def last_updated_timestamp: () -> ::String
+        def latest_version: () -> ::String
+        def latest_version_arn: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#create_logger_definition-instance_method
+      def create_logger_definition: (
+                                      ?amzn_client_token: ::String,
+                                      ?initial_version: {
+                                        loggers: Array[
+                                          {
+                                            component: ("GreengrassSystem" | "Lambda"),
+                                            id: ::String,
+                                            level: ("DEBUG" | "INFO" | "WARN" | "ERROR" | "FATAL"),
+                                            space: ::Integer?,
+                                            type: ("FileSystem" | "AWSCloudWatch")
+                                          },
+                                        ]?
+                                      },
+                                      ?name: ::String,
+                                      ?tags: Hash[::String, ::String]
+                                    ) -> _CreateLoggerDefinitionResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLoggerDefinitionResponseSuccess
+
+      interface _CreateLoggerDefinitionVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLoggerDefinitionVersionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#create_logger_definition_version-instance_method
+      def create_logger_definition_version: (
+                                              ?amzn_client_token: ::String,
+                                              logger_definition_id: ::String,
+                                              ?loggers: Array[
+                                                {
+                                                  component: ("GreengrassSystem" | "Lambda"),
+                                                  id: ::String,
+                                                  level: ("DEBUG" | "INFO" | "WARN" | "ERROR" | "FATAL"),
+                                                  space: ::Integer?,
+                                                  type: ("FileSystem" | "AWSCloudWatch")
+                                                },
+                                              ]
+                                            ) -> _CreateLoggerDefinitionVersionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLoggerDefinitionVersionResponseSuccess
+
+      interface _CreateResourceDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateResourceDefinitionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def last_updated_timestamp: () -> ::String
+        def latest_version: () -> ::String
+        def latest_version_arn: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#create_resource_definition-instance_method
+      def create_resource_definition: (
+                                        ?amzn_client_token: ::String,
+                                        ?initial_version: {
+                                          resources: Array[
+                                            {
+                                              id: ::String,
+                                              name: ::String,
+                                              resource_data_container: {
+                                                local_device_resource_data: {
+                                                  group_owner_setting: {
+                                                    auto_add_group_owner: bool?,
+                                                    group_owner: ::String?
+                                                  }?,
+                                                  source_path: ::String?
+                                                }?,
+                                                local_volume_resource_data: {
+                                                  destination_path: ::String?,
+                                                  group_owner_setting: {
+                                                    auto_add_group_owner: bool?,
+                                                    group_owner: ::String?
+                                                  }?,
+                                                  source_path: ::String?
+                                                }?,
+                                                s3_machine_learning_model_resource_data: {
+                                                  destination_path: ::String?,
+                                                  owner_setting: {
+                                                    group_owner: ::String,
+                                                    group_permission: ("ro" | "rw")
+                                                  }?,
+                                                  s3_uri: ::String?
+                                                }?,
+                                                sage_maker_machine_learning_model_resource_data: {
+                                                  destination_path: ::String?,
+                                                  owner_setting: {
+                                                    group_owner: ::String,
+                                                    group_permission: ("ro" | "rw")
+                                                  }?,
+                                                  sage_maker_job_arn: ::String?
+                                                }?,
+                                                secrets_manager_secret_resource_data: {
+                                                  arn: ::String?,
+                                                  additional_staging_labels_to_download: Array[::String]?
+                                                }?
+                                              }
+                                            },
+                                          ]?
+                                        },
+                                        ?name: ::String,
+                                        ?tags: Hash[::String, ::String]
+                                      ) -> _CreateResourceDefinitionResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResourceDefinitionResponseSuccess
+
+      interface _CreateResourceDefinitionVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateResourceDefinitionVersionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#create_resource_definition_version-instance_method
+      def create_resource_definition_version: (
+                                                ?amzn_client_token: ::String,
+                                                resource_definition_id: ::String,
+                                                ?resources: Array[
+                                                  {
+                                                    id: ::String,
+                                                    name: ::String,
+                                                    resource_data_container: {
+                                                      local_device_resource_data: {
+                                                        group_owner_setting: {
+                                                          auto_add_group_owner: bool?,
+                                                          group_owner: ::String?
+                                                        }?,
+                                                        source_path: ::String?
+                                                      }?,
+                                                      local_volume_resource_data: {
+                                                        destination_path: ::String?,
+                                                        group_owner_setting: {
+                                                          auto_add_group_owner: bool?,
+                                                          group_owner: ::String?
+                                                        }?,
+                                                        source_path: ::String?
+                                                      }?,
+                                                      s3_machine_learning_model_resource_data: {
+                                                        destination_path: ::String?,
+                                                        owner_setting: {
+                                                          group_owner: ::String,
+                                                          group_permission: ("ro" | "rw")
+                                                        }?,
+                                                        s3_uri: ::String?
+                                                      }?,
+                                                      sage_maker_machine_learning_model_resource_data: {
+                                                        destination_path: ::String?,
+                                                        owner_setting: {
+                                                          group_owner: ::String,
+                                                          group_permission: ("ro" | "rw")
+                                                        }?,
+                                                        sage_maker_job_arn: ::String?
+                                                      }?,
+                                                      secrets_manager_secret_resource_data: {
+                                                        arn: ::String?,
+                                                        additional_staging_labels_to_download: Array[::String]?
+                                                      }?
+                                                    }
+                                                  },
+                                                ]
+                                              ) -> _CreateResourceDefinitionVersionResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResourceDefinitionVersionResponseSuccess
+
+      interface _CreateSoftwareUpdateJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSoftwareUpdateJobResponse]
+        def iot_job_arn: () -> ::String
+        def iot_job_id: () -> ::String
+        def platform_software_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#create_software_update_job-instance_method
+      def create_software_update_job: (
+                                        ?amzn_client_token: ::String,
+                                        s3_url_signer_role: ::String,
+                                        software_to_update: ("core" | "ota_agent"),
+                                        ?update_agent_log_level: ("NONE" | "TRACE" | "DEBUG" | "VERBOSE" | "INFO" | "WARN" | "ERROR" | "FATAL"),
+                                        update_targets: Array[::String],
+                                        update_targets_architecture: ("armv6l" | "armv7l" | "x86_64" | "aarch64"),
+                                        update_targets_operating_system: ("ubuntu" | "raspbian" | "amazon_linux" | "openwrt")
+                                      ) -> _CreateSoftwareUpdateJobResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSoftwareUpdateJobResponseSuccess
+
+      interface _CreateSubscriptionDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSubscriptionDefinitionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def last_updated_timestamp: () -> ::String
+        def latest_version: () -> ::String
+        def latest_version_arn: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#create_subscription_definition-instance_method
+      def create_subscription_definition: (
+                                            ?amzn_client_token: ::String,
+                                            ?initial_version: {
+                                              subscriptions: Array[
+                                                {
+                                                  id: ::String,
+                                                  source: ::String,
+                                                  subject: ::String,
+                                                  target: ::String
+                                                },
+                                              ]?
+                                            },
+                                            ?name: ::String,
+                                            ?tags: Hash[::String, ::String]
+                                          ) -> _CreateSubscriptionDefinitionResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSubscriptionDefinitionResponseSuccess
+
+      interface _CreateSubscriptionDefinitionVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSubscriptionDefinitionVersionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#create_subscription_definition_version-instance_method
+      def create_subscription_definition_version: (
+                                                    ?amzn_client_token: ::String,
+                                                    subscription_definition_id: ::String,
+                                                    ?subscriptions: Array[
+                                                      {
+                                                        id: ::String,
+                                                        source: ::String,
+                                                        subject: ::String,
+                                                        target: ::String
+                                                      },
+                                                    ]
+                                                  ) -> _CreateSubscriptionDefinitionVersionResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSubscriptionDefinitionVersionResponseSuccess
+
+      interface _DeleteConnectorDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConnectorDefinitionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#delete_connector_definition-instance_method
+      def delete_connector_definition: (
+                                         connector_definition_id: ::String
+                                       ) -> _DeleteConnectorDefinitionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConnectorDefinitionResponseSuccess
+
+      interface _DeleteCoreDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCoreDefinitionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#delete_core_definition-instance_method
+      def delete_core_definition: (
+                                    core_definition_id: ::String
+                                  ) -> _DeleteCoreDefinitionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCoreDefinitionResponseSuccess
+
+      interface _DeleteDeviceDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDeviceDefinitionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#delete_device_definition-instance_method
+      def delete_device_definition: (
+                                      device_definition_id: ::String
+                                    ) -> _DeleteDeviceDefinitionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDeviceDefinitionResponseSuccess
+
+      interface _DeleteFunctionDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFunctionDefinitionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#delete_function_definition-instance_method
+      def delete_function_definition: (
+                                        function_definition_id: ::String
+                                      ) -> _DeleteFunctionDefinitionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFunctionDefinitionResponseSuccess
+
+      interface _DeleteGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#delete_group-instance_method
+      def delete_group: (
+                          group_id: ::String
+                        ) -> _DeleteGroupResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGroupResponseSuccess
+
+      interface _DeleteLoggerDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLoggerDefinitionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#delete_logger_definition-instance_method
+      def delete_logger_definition: (
+                                      logger_definition_id: ::String
+                                    ) -> _DeleteLoggerDefinitionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLoggerDefinitionResponseSuccess
+
+      interface _DeleteResourceDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourceDefinitionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#delete_resource_definition-instance_method
+      def delete_resource_definition: (
+                                        resource_definition_id: ::String
+                                      ) -> _DeleteResourceDefinitionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourceDefinitionResponseSuccess
+
+      interface _DeleteSubscriptionDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSubscriptionDefinitionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#delete_subscription_definition-instance_method
+      def delete_subscription_definition: (
+                                            subscription_definition_id: ::String
+                                          ) -> _DeleteSubscriptionDefinitionResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSubscriptionDefinitionResponseSuccess
+
+      interface _DisassociateRoleFromGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateRoleFromGroupResponse]
+        def disassociated_at: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#disassociate_role_from_group-instance_method
+      def disassociate_role_from_group: (
+                                          group_id: ::String
+                                        ) -> _DisassociateRoleFromGroupResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateRoleFromGroupResponseSuccess
+
+      interface _DisassociateServiceRoleFromAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateServiceRoleFromAccountResponse]
+        def disassociated_at: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#disassociate_service_role_from_account-instance_method
+      def disassociate_service_role_from_account: (
+                                                  ) -> _DisassociateServiceRoleFromAccountResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateServiceRoleFromAccountResponseSuccess
+
+      interface _GetAssociatedRoleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAssociatedRoleResponse]
+        def associated_at: () -> ::String
+        def role_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_associated_role-instance_method
+      def get_associated_role: (
+                                 group_id: ::String
+                               ) -> _GetAssociatedRoleResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssociatedRoleResponseSuccess
+
+      interface _GetBulkDeploymentStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBulkDeploymentStatusResponse]
+        def bulk_deployment_metrics: () -> Types::BulkDeploymentMetrics
+        def bulk_deployment_status: () -> ("Initializing" | "Running" | "Completed" | "Stopping" | "Stopped" | "Failed")
+        def created_at: () -> ::String
+        def error_details: () -> ::Array[Types::ErrorDetail]
+        def error_message: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_bulk_deployment_status-instance_method
+      def get_bulk_deployment_status: (
+                                        bulk_deployment_id: ::String
+                                      ) -> _GetBulkDeploymentStatusResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBulkDeploymentStatusResponseSuccess
+
+      interface _GetConnectivityInfoResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectivityInfoResponse]
+        def connectivity_info: () -> ::Array[Types::ConnectivityInfo]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_connectivity_info-instance_method
+      def get_connectivity_info: (
+                                   thing_name: ::String
+                                 ) -> _GetConnectivityInfoResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectivityInfoResponseSuccess
+
+      interface _GetConnectorDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectorDefinitionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def last_updated_timestamp: () -> ::String
+        def latest_version: () -> ::String
+        def latest_version_arn: () -> ::String
+        def name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_connector_definition-instance_method
+      def get_connector_definition: (
+                                      connector_definition_id: ::String
+                                    ) -> _GetConnectorDefinitionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectorDefinitionResponseSuccess
+
+      interface _GetConnectorDefinitionVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectorDefinitionVersionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def definition: () -> Types::ConnectorDefinitionVersion
+        def id: () -> ::String
+        def next_token: () -> ::String
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_connector_definition_version-instance_method
+      def get_connector_definition_version: (
+                                              connector_definition_id: ::String,
+                                              connector_definition_version_id: ::String,
+                                              ?next_token: ::String
+                                            ) -> _GetConnectorDefinitionVersionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectorDefinitionVersionResponseSuccess
+
+      interface _GetCoreDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCoreDefinitionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def last_updated_timestamp: () -> ::String
+        def latest_version: () -> ::String
+        def latest_version_arn: () -> ::String
+        def name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_core_definition-instance_method
+      def get_core_definition: (
+                                 core_definition_id: ::String
+                               ) -> _GetCoreDefinitionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCoreDefinitionResponseSuccess
+
+      interface _GetCoreDefinitionVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCoreDefinitionVersionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def definition: () -> Types::CoreDefinitionVersion
+        def id: () -> ::String
+        def next_token: () -> ::String
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_core_definition_version-instance_method
+      def get_core_definition_version: (
+                                         core_definition_id: ::String,
+                                         core_definition_version_id: ::String
+                                       ) -> _GetCoreDefinitionVersionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCoreDefinitionVersionResponseSuccess
+
+      interface _GetDeploymentStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeploymentStatusResponse]
+        def deployment_status: () -> ::String
+        def deployment_type: () -> ("NewDeployment" | "Redeployment" | "ResetDeployment" | "ForceResetDeployment")
+        def error_details: () -> ::Array[Types::ErrorDetail]
+        def error_message: () -> ::String
+        def updated_at: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_deployment_status-instance_method
+      def get_deployment_status: (
+                                   deployment_id: ::String,
+                                   group_id: ::String
+                                 ) -> _GetDeploymentStatusResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeploymentStatusResponseSuccess
+
+      interface _GetDeviceDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeviceDefinitionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def last_updated_timestamp: () -> ::String
+        def latest_version: () -> ::String
+        def latest_version_arn: () -> ::String
+        def name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_device_definition-instance_method
+      def get_device_definition: (
+                                   device_definition_id: ::String
+                                 ) -> _GetDeviceDefinitionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeviceDefinitionResponseSuccess
+
+      interface _GetDeviceDefinitionVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeviceDefinitionVersionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def definition: () -> Types::DeviceDefinitionVersion
+        def id: () -> ::String
+        def next_token: () -> ::String
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_device_definition_version-instance_method
+      def get_device_definition_version: (
+                                           device_definition_id: ::String,
+                                           device_definition_version_id: ::String,
+                                           ?next_token: ::String
+                                         ) -> _GetDeviceDefinitionVersionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeviceDefinitionVersionResponseSuccess
+
+      interface _GetFunctionDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFunctionDefinitionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def last_updated_timestamp: () -> ::String
+        def latest_version: () -> ::String
+        def latest_version_arn: () -> ::String
+        def name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_function_definition-instance_method
+      def get_function_definition: (
+                                     function_definition_id: ::String
+                                   ) -> _GetFunctionDefinitionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFunctionDefinitionResponseSuccess
+
+      interface _GetFunctionDefinitionVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFunctionDefinitionVersionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def definition: () -> Types::FunctionDefinitionVersion
+        def id: () -> ::String
+        def next_token: () -> ::String
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_function_definition_version-instance_method
+      def get_function_definition_version: (
+                                             function_definition_id: ::String,
+                                             function_definition_version_id: ::String,
+                                             ?next_token: ::String
+                                           ) -> _GetFunctionDefinitionVersionResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFunctionDefinitionVersionResponseSuccess
+
+      interface _GetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGroupResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def last_updated_timestamp: () -> ::String
+        def latest_version: () -> ::String
+        def latest_version_arn: () -> ::String
+        def name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_group-instance_method
+      def get_group: (
+                       group_id: ::String
+                     ) -> _GetGroupResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGroupResponseSuccess
+
+      interface _GetGroupCertificateAuthorityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGroupCertificateAuthorityResponse]
+        def group_certificate_authority_arn: () -> ::String
+        def group_certificate_authority_id: () -> ::String
+        def pem_encoded_certificate: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_group_certificate_authority-instance_method
+      def get_group_certificate_authority: (
+                                             certificate_authority_id: ::String,
+                                             group_id: ::String
+                                           ) -> _GetGroupCertificateAuthorityResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGroupCertificateAuthorityResponseSuccess
+
+      interface _GetGroupCertificateConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGroupCertificateConfigurationResponse]
+        def certificate_authority_expiry_in_milliseconds: () -> ::String
+        def certificate_expiry_in_milliseconds: () -> ::String
+        def group_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_group_certificate_configuration-instance_method
+      def get_group_certificate_configuration: (
+                                                 group_id: ::String
+                                               ) -> _GetGroupCertificateConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGroupCertificateConfigurationResponseSuccess
+
+      interface _GetGroupVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGroupVersionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def definition: () -> Types::GroupVersion
+        def id: () -> ::String
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_group_version-instance_method
+      def get_group_version: (
+                               group_id: ::String,
+                               group_version_id: ::String
+                             ) -> _GetGroupVersionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGroupVersionResponseSuccess
+
+      interface _GetLoggerDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLoggerDefinitionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def last_updated_timestamp: () -> ::String
+        def latest_version: () -> ::String
+        def latest_version_arn: () -> ::String
+        def name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_logger_definition-instance_method
+      def get_logger_definition: (
+                                   logger_definition_id: ::String
+                                 ) -> _GetLoggerDefinitionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLoggerDefinitionResponseSuccess
+
+      interface _GetLoggerDefinitionVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLoggerDefinitionVersionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def definition: () -> Types::LoggerDefinitionVersion
+        def id: () -> ::String
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_logger_definition_version-instance_method
+      def get_logger_definition_version: (
+                                           logger_definition_id: ::String,
+                                           logger_definition_version_id: ::String,
+                                           ?next_token: ::String
+                                         ) -> _GetLoggerDefinitionVersionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLoggerDefinitionVersionResponseSuccess
+
+      interface _GetResourceDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceDefinitionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def last_updated_timestamp: () -> ::String
+        def latest_version: () -> ::String
+        def latest_version_arn: () -> ::String
+        def name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_resource_definition-instance_method
+      def get_resource_definition: (
+                                     resource_definition_id: ::String
+                                   ) -> _GetResourceDefinitionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceDefinitionResponseSuccess
+
+      interface _GetResourceDefinitionVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceDefinitionVersionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def definition: () -> Types::ResourceDefinitionVersion
+        def id: () -> ::String
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_resource_definition_version-instance_method
+      def get_resource_definition_version: (
+                                             resource_definition_id: ::String,
+                                             resource_definition_version_id: ::String
+                                           ) -> _GetResourceDefinitionVersionResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceDefinitionVersionResponseSuccess
+
+      interface _GetServiceRoleForAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceRoleForAccountResponse]
+        def associated_at: () -> ::String
+        def role_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_service_role_for_account-instance_method
+      def get_service_role_for_account: (
+                                        ) -> _GetServiceRoleForAccountResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceRoleForAccountResponseSuccess
+
+      interface _GetSubscriptionDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSubscriptionDefinitionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def id: () -> ::String
+        def last_updated_timestamp: () -> ::String
+        def latest_version: () -> ::String
+        def latest_version_arn: () -> ::String
+        def name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_subscription_definition-instance_method
+      def get_subscription_definition: (
+                                         subscription_definition_id: ::String
+                                       ) -> _GetSubscriptionDefinitionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSubscriptionDefinitionResponseSuccess
+
+      interface _GetSubscriptionDefinitionVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSubscriptionDefinitionVersionResponse]
+        def arn: () -> ::String
+        def creation_timestamp: () -> ::String
+        def definition: () -> Types::SubscriptionDefinitionVersion
+        def id: () -> ::String
+        def next_token: () -> ::String
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_subscription_definition_version-instance_method
+      def get_subscription_definition_version: (
+                                                 ?next_token: ::String,
+                                                 subscription_definition_id: ::String,
+                                                 subscription_definition_version_id: ::String
+                                               ) -> _GetSubscriptionDefinitionVersionResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSubscriptionDefinitionVersionResponseSuccess
+
+      interface _GetThingRuntimeConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetThingRuntimeConfigurationResponse]
+        def runtime_configuration: () -> Types::RuntimeConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#get_thing_runtime_configuration-instance_method
+      def get_thing_runtime_configuration: (
+                                             thing_name: ::String
+                                           ) -> _GetThingRuntimeConfigurationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetThingRuntimeConfigurationResponseSuccess
+
+      interface _ListBulkDeploymentDetailedReportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBulkDeploymentDetailedReportsResponse]
+        def deployments: () -> ::Array[Types::BulkDeploymentResult]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#list_bulk_deployment_detailed_reports-instance_method
+      def list_bulk_deployment_detailed_reports: (
+                                                   bulk_deployment_id: ::String,
+                                                   ?max_results: ::String,
+                                                   ?next_token: ::String
+                                                 ) -> _ListBulkDeploymentDetailedReportsResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBulkDeploymentDetailedReportsResponseSuccess
+
+      interface _ListBulkDeploymentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBulkDeploymentsResponse]
+        def bulk_deployments: () -> ::Array[Types::BulkDeployment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#list_bulk_deployments-instance_method
+      def list_bulk_deployments: (
+                                   ?max_results: ::String,
+                                   ?next_token: ::String
+                                 ) -> _ListBulkDeploymentsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBulkDeploymentsResponseSuccess
+
+      interface _ListConnectorDefinitionVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConnectorDefinitionVersionsResponse]
+        def next_token: () -> ::String
+        def versions: () -> ::Array[Types::VersionInformation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#list_connector_definition_versions-instance_method
+      def list_connector_definition_versions: (
+                                                connector_definition_id: ::String,
+                                                ?max_results: ::String,
+                                                ?next_token: ::String
+                                              ) -> _ListConnectorDefinitionVersionsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectorDefinitionVersionsResponseSuccess
+
+      interface _ListConnectorDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConnectorDefinitionsResponse]
+        def definitions: () -> ::Array[Types::DefinitionInformation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#list_connector_definitions-instance_method
+      def list_connector_definitions: (
+                                        ?max_results: ::String,
+                                        ?next_token: ::String
+                                      ) -> _ListConnectorDefinitionsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectorDefinitionsResponseSuccess
+
+      interface _ListCoreDefinitionVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCoreDefinitionVersionsResponse]
+        def next_token: () -> ::String
+        def versions: () -> ::Array[Types::VersionInformation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#list_core_definition_versions-instance_method
+      def list_core_definition_versions: (
+                                           core_definition_id: ::String,
+                                           ?max_results: ::String,
+                                           ?next_token: ::String
+                                         ) -> _ListCoreDefinitionVersionsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCoreDefinitionVersionsResponseSuccess
+
+      interface _ListCoreDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCoreDefinitionsResponse]
+        def definitions: () -> ::Array[Types::DefinitionInformation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#list_core_definitions-instance_method
+      def list_core_definitions: (
+                                   ?max_results: ::String,
+                                   ?next_token: ::String
+                                 ) -> _ListCoreDefinitionsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCoreDefinitionsResponseSuccess
+
+      interface _ListDeploymentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeploymentsResponse]
+        def deployments: () -> ::Array[Types::Deployment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#list_deployments-instance_method
+      def list_deployments: (
+                              group_id: ::String,
+                              ?max_results: ::String,
+                              ?next_token: ::String
+                            ) -> _ListDeploymentsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeploymentsResponseSuccess
+
+      interface _ListDeviceDefinitionVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeviceDefinitionVersionsResponse]
+        def next_token: () -> ::String
+        def versions: () -> ::Array[Types::VersionInformation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#list_device_definition_versions-instance_method
+      def list_device_definition_versions: (
+                                             device_definition_id: ::String,
+                                             ?max_results: ::String,
+                                             ?next_token: ::String
+                                           ) -> _ListDeviceDefinitionVersionsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeviceDefinitionVersionsResponseSuccess
+
+      interface _ListDeviceDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeviceDefinitionsResponse]
+        def definitions: () -> ::Array[Types::DefinitionInformation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#list_device_definitions-instance_method
+      def list_device_definitions: (
+                                     ?max_results: ::String,
+                                     ?next_token: ::String
+                                   ) -> _ListDeviceDefinitionsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeviceDefinitionsResponseSuccess
+
+      interface _ListFunctionDefinitionVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFunctionDefinitionVersionsResponse]
+        def next_token: () -> ::String
+        def versions: () -> ::Array[Types::VersionInformation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#list_function_definition_versions-instance_method
+      def list_function_definition_versions: (
+                                               function_definition_id: ::String,
+                                               ?max_results: ::String,
+                                               ?next_token: ::String
+                                             ) -> _ListFunctionDefinitionVersionsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFunctionDefinitionVersionsResponseSuccess
+
+      interface _ListFunctionDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFunctionDefinitionsResponse]
+        def definitions: () -> ::Array[Types::DefinitionInformation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#list_function_definitions-instance_method
+      def list_function_definitions: (
+                                       ?max_results: ::String,
+                                       ?next_token: ::String
+                                     ) -> _ListFunctionDefinitionsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFunctionDefinitionsResponseSuccess
+
+      interface _ListGroupCertificateAuthoritiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGroupCertificateAuthoritiesResponse]
+        def group_certificate_authorities: () -> ::Array[Types::GroupCertificateAuthorityProperties]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#list_group_certificate_authorities-instance_method
+      def list_group_certificate_authorities: (
+                                                group_id: ::String
+                                              ) -> _ListGroupCertificateAuthoritiesResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupCertificateAuthoritiesResponseSuccess
+
+      interface _ListGroupVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGroupVersionsResponse]
+        def next_token: () -> ::String
+        def versions: () -> ::Array[Types::VersionInformation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#list_group_versions-instance_method
+      def list_group_versions: (
+                                 group_id: ::String,
+                                 ?max_results: ::String,
+                                 ?next_token: ::String
+                               ) -> _ListGroupVersionsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupVersionsResponseSuccess
+
+      interface _ListGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGroupsResponse]
+        def groups: () -> ::Array[Types::GroupInformation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#list_groups-instance_method
+      def list_groups: (
+                         ?max_results: ::String,
+                         ?next_token: ::String
+                       ) -> _ListGroupsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupsResponseSuccess
+
+      interface _ListLoggerDefinitionVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLoggerDefinitionVersionsResponse]
+        def next_token: () -> ::String
+        def versions: () -> ::Array[Types::VersionInformation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#list_logger_definition_versions-instance_method
+      def list_logger_definition_versions: (
+                                             logger_definition_id: ::String,
+                                             ?max_results: ::String,
+                                             ?next_token: ::String
+                                           ) -> _ListLoggerDefinitionVersionsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLoggerDefinitionVersionsResponseSuccess
+
+      interface _ListLoggerDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLoggerDefinitionsResponse]
+        def definitions: () -> ::Array[Types::DefinitionInformation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#list_logger_definitions-instance_method
+      def list_logger_definitions: (
+                                     ?max_results: ::String,
+                                     ?next_token: ::String
+                                   ) -> _ListLoggerDefinitionsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLoggerDefinitionsResponseSuccess
+
+      interface _ListResourceDefinitionVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceDefinitionVersionsResponse]
+        def next_token: () -> ::String
+        def versions: () -> ::Array[Types::VersionInformation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#list_resource_definition_versions-instance_method
+      def list_resource_definition_versions: (
+                                               ?max_results: ::String,
+                                               ?next_token: ::String,
+                                               resource_definition_id: ::String
+                                             ) -> _ListResourceDefinitionVersionsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceDefinitionVersionsResponseSuccess
+
+      interface _ListResourceDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceDefinitionsResponse]
+        def definitions: () -> ::Array[Types::DefinitionInformation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#list_resource_definitions-instance_method
+      def list_resource_definitions: (
+                                       ?max_results: ::String,
+                                       ?next_token: ::String
+                                     ) -> _ListResourceDefinitionsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceDefinitionsResponseSuccess
+
+      interface _ListSubscriptionDefinitionVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSubscriptionDefinitionVersionsResponse]
+        def next_token: () -> ::String
+        def versions: () -> ::Array[Types::VersionInformation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#list_subscription_definition_versions-instance_method
+      def list_subscription_definition_versions: (
+                                                   ?max_results: ::String,
+                                                   ?next_token: ::String,
+                                                   subscription_definition_id: ::String
+                                                 ) -> _ListSubscriptionDefinitionVersionsResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSubscriptionDefinitionVersionsResponseSuccess
+
+      interface _ListSubscriptionDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSubscriptionDefinitionsResponse]
+        def definitions: () -> ::Array[Types::DefinitionInformation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#list_subscription_definitions-instance_method
+      def list_subscription_definitions: (
+                                           ?max_results: ::String,
+                                           ?next_token: ::String
+                                         ) -> _ListSubscriptionDefinitionsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSubscriptionDefinitionsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ResetDeploymentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResetDeploymentsResponse]
+        def deployment_arn: () -> ::String
+        def deployment_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#reset_deployments-instance_method
+      def reset_deployments: (
+                               ?amzn_client_token: ::String,
+                               ?force: bool,
+                               group_id: ::String
+                             ) -> _ResetDeploymentsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetDeploymentsResponseSuccess
+
+      interface _StartBulkDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartBulkDeploymentResponse]
+        def bulk_deployment_arn: () -> ::String
+        def bulk_deployment_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#start_bulk_deployment-instance_method
+      def start_bulk_deployment: (
+                                   ?amzn_client_token: ::String,
+                                   execution_role_arn: ::String,
+                                   input_file_uri: ::String,
+                                   ?tags: Hash[::String, ::String]
+                                 ) -> _StartBulkDeploymentResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartBulkDeploymentResponseSuccess
+
+      interface _StopBulkDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopBulkDeploymentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#stop_bulk_deployment-instance_method
+      def stop_bulk_deployment: (
+                                  bulk_deployment_id: ::String
+                                ) -> _StopBulkDeploymentResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopBulkDeploymentResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          ?tags: Hash[::String, ::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateConnectivityInfoResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectivityInfoResponse]
+        def message: () -> ::String
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#update_connectivity_info-instance_method
+      def update_connectivity_info: (
+                                      ?connectivity_info: Array[
+                                        {
+                                          host_address: ::String?,
+                                          id: ::String?,
+                                          metadata: ::String?,
+                                          port_number: ::Integer?
+                                        },
+                                      ],
+                                      thing_name: ::String
+                                    ) -> _UpdateConnectivityInfoResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectivityInfoResponseSuccess
+
+      interface _UpdateConnectorDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectorDefinitionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#update_connector_definition-instance_method
+      def update_connector_definition: (
+                                         connector_definition_id: ::String,
+                                         ?name: ::String
+                                       ) -> _UpdateConnectorDefinitionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectorDefinitionResponseSuccess
+
+      interface _UpdateCoreDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCoreDefinitionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#update_core_definition-instance_method
+      def update_core_definition: (
+                                    core_definition_id: ::String,
+                                    ?name: ::String
+                                  ) -> _UpdateCoreDefinitionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCoreDefinitionResponseSuccess
+
+      interface _UpdateDeviceDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDeviceDefinitionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#update_device_definition-instance_method
+      def update_device_definition: (
+                                      device_definition_id: ::String,
+                                      ?name: ::String
+                                    ) -> _UpdateDeviceDefinitionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDeviceDefinitionResponseSuccess
+
+      interface _UpdateFunctionDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFunctionDefinitionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#update_function_definition-instance_method
+      def update_function_definition: (
+                                        function_definition_id: ::String,
+                                        ?name: ::String
+                                      ) -> _UpdateFunctionDefinitionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFunctionDefinitionResponseSuccess
+
+      interface _UpdateGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#update_group-instance_method
+      def update_group: (
+                          group_id: ::String,
+                          ?name: ::String
+                        ) -> _UpdateGroupResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGroupResponseSuccess
+
+      interface _UpdateGroupCertificateConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGroupCertificateConfigurationResponse]
+        def certificate_authority_expiry_in_milliseconds: () -> ::String
+        def certificate_expiry_in_milliseconds: () -> ::String
+        def group_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#update_group_certificate_configuration-instance_method
+      def update_group_certificate_configuration: (
+                                                    ?certificate_expiry_in_milliseconds: ::String,
+                                                    group_id: ::String
+                                                  ) -> _UpdateGroupCertificateConfigurationResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGroupCertificateConfigurationResponseSuccess
+
+      interface _UpdateLoggerDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLoggerDefinitionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#update_logger_definition-instance_method
+      def update_logger_definition: (
+                                      logger_definition_id: ::String,
+                                      ?name: ::String
+                                    ) -> _UpdateLoggerDefinitionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLoggerDefinitionResponseSuccess
+
+      interface _UpdateResourceDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResourceDefinitionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#update_resource_definition-instance_method
+      def update_resource_definition: (
+                                        ?name: ::String,
+                                        resource_definition_id: ::String
+                                      ) -> _UpdateResourceDefinitionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResourceDefinitionResponseSuccess
+
+      interface _UpdateSubscriptionDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSubscriptionDefinitionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#update_subscription_definition-instance_method
+      def update_subscription_definition: (
+                                            ?name: ::String,
+                                            subscription_definition_id: ::String
+                                          ) -> _UpdateSubscriptionDefinitionResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSubscriptionDefinitionResponseSuccess
+
+      interface _UpdateThingRuntimeConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateThingRuntimeConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#update_thing_runtime_configuration-instance_method
+      def update_thing_runtime_configuration: (
+                                                ?telemetry_configuration: {
+                                                  telemetry: ("On" | "Off")
+                                                },
+                                                thing_name: ::String
+                                              ) -> _UpdateThingRuntimeConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateThingRuntimeConfigurationResponseSuccess
+    end
+  end
+end
+

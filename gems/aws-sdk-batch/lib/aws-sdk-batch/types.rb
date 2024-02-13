@@ -454,11 +454,11 @@ module Aws::Batch
     #     compute resources.
     #
     #   With `BEST_FIT_PROGRESSIVE`,`SPOT_CAPACITY_OPTIMIZED` and
-    #   `SPOT_PRICE_CAPACITY_OPTIMIZED` strategies using On-Demand or Spot
-    #   Instances, and the `BEST_FIT` strategy using Spot Instances, Batch
-    #   might need to exceed `maxvCpus` to meet your capacity requirements.
-    #   In this event, Batch never exceeds `maxvCpus` by more than a single
-    #   instance.
+    #   `SPOT_PRICE_CAPACITY_OPTIMIZED` (recommended) strategies using
+    #   On-Demand or Spot Instances, and the `BEST_FIT` strategy using Spot
+    #   Instances, Batch might need to exceed `maxvCpus` to meet your
+    #   capacity requirements. In this event, Batch never exceeds `maxvCpus`
+    #   by more than a single instance.
     #
     #
     #
@@ -480,14 +480,12 @@ module Aws::Batch
     # @!attribute [rw] maxv_cpus
     #   The maximum number of vCPUs that a compute environment can support.
     #
-    #   <note markdown="1"> With `BEST_FIT_PROGRESSIVE`, `SPOT_CAPACITY_OPTIMIZED` and
-    #   `SPOT_PRICE_CAPACITY_OPTIMIZED` allocation strategies using
+    #   <note markdown="1"> With `BEST_FIT_PROGRESSIVE`,`SPOT_CAPACITY_OPTIMIZED` and
+    #   `SPOT_PRICE_CAPACITY_OPTIMIZED` (recommended) strategies using
     #   On-Demand or Spot Instances, and the `BEST_FIT` strategy using Spot
     #   Instances, Batch might need to exceed `maxvCpus` to meet your
     #   capacity requirements. In this event, Batch never exceeds `maxvCpus`
-    #   by more than a single instance. For example, no more than a single
-    #   instance from among those specified in your compute environment is
-    #   allocated.
+    #   by more than a single instance.
     #
     #    </note>
     #   @return [Integer]
@@ -606,7 +604,8 @@ module Aws::Batch
     #
     # @!attribute [rw] instance_role
     #   The Amazon ECS instance profile applied to Amazon EC2 instances in a
-    #   compute environment. You can specify the short name or full Amazon
+    #   compute environment. This parameter is required for Amazon EC2
+    #   instances types. You can specify the short name or full Amazon
     #   Resource Name (ARN) of an instance profile. For example, `
     #   ecsInstanceRole ` or
     #   `arn:aws:iam::<aws_account_id>:instance-profile/ecsInstanceRole `.
@@ -785,13 +784,12 @@ module Aws::Batch
     #   The maximum number of Amazon EC2 vCPUs that an environment can
     #   reach.
     #
-    #   <note markdown="1"> With `BEST_FIT_PROGRESSIVE`, `SPOT_CAPACITY_OPTIMIZED`, and
-    #   `SPOT_PRICE_CAPACITY_OPTIMIZED` allocation strategies using
+    #   <note markdown="1"> With `BEST_FIT_PROGRESSIVE`,`SPOT_CAPACITY_OPTIMIZED` and
+    #   `SPOT_PRICE_CAPACITY_OPTIMIZED` (recommended) strategies using
     #   On-Demand or Spot Instances, and the `BEST_FIT` strategy using Spot
     #   Instances, Batch might need to exceed `maxvCpus` to meet your
     #   capacity requirements. In this event, Batch never exceeds `maxvCpus`
-    #   by more than a single instance. That is, no more than a single
-    #   instance from among those specified in your compute environment.
+    #   by more than a single instance.
     #
     #    </note>
     #   @return [Integer]
@@ -922,12 +920,12 @@ module Aws::Batch
     #     This allocation strategy is only available for Spot Instance
     #     compute resources.
     #
-    #   With both `BEST_FIT_PROGRESSIVE`, `SPOT_CAPACITY_OPTIMIZED`, and
-    #   `SPOT_PRICE_CAPACITY_OPTIMIZED` strategies using On-Demand or Spot
-    #   Instances, and the `BEST_FIT` strategy using Spot Instances, Batch
-    #   might need to exceed `maxvCpus` to meet your capacity requirements.
-    #   In this event, Batch never exceeds `maxvCpus` by more than a single
-    #   instance.
+    #   With `BEST_FIT_PROGRESSIVE`,`SPOT_CAPACITY_OPTIMIZED` and
+    #   `SPOT_PRICE_CAPACITY_OPTIMIZED` (recommended) strategies using
+    #   On-Demand or Spot Instances, and the `BEST_FIT` strategy using Spot
+    #   Instances, Batch might need to exceed `maxvCpus` to meet your
+    #   capacity requirements. In this event, Batch never exceeds `maxvCpus`
+    #   by more than a single instance.
     #
     #
     #
@@ -996,9 +994,9 @@ module Aws::Batch
     #
     # @!attribute [rw] instance_role
     #   The Amazon ECS instance profile applied to Amazon EC2 instances in a
-    #   compute environment. You can specify the short name or full Amazon
-    #   Resource Name (ARN) of an instance profile. For example, `
-    #   ecsInstanceRole ` or
+    #   compute environment. Required for Amazon EC2 instances. You can
+    #   specify the short name or full Amazon Resource Name (ARN) of an
+    #   instance profile. For example, ` ecsInstanceRole ` or
     #   `arn:aws:iam::<aws_account_id>:instance-profile/ecsInstanceRole `.
     #   For more information, see [Amazon ECS instance role][1] in the
     #   *Batch User Guide*.
@@ -1508,6 +1506,10 @@ module Aws::Batch
     #   Batch jobs on Fargate.
     #   @return [Types::RuntimePlatform]
     #
+    # @!attribute [rw] repository_credentials
+    #   The private repository authentication credentials to use.
+    #   @return [Types::RepositoryCredentials]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerDetail AWS API Documentation
     #
     class ContainerDetail < Struct.new(
@@ -1538,7 +1540,8 @@ module Aws::Batch
       :network_configuration,
       :fargate_platform_configuration,
       :ephemeral_storage,
-      :runtime_platform)
+      :runtime_platform,
+      :repository_credentials)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1644,8 +1647,8 @@ module Aws::Batch
     # a job.
     #
     # @!attribute [rw] image
-    #   The image used to start a container. This string is passed directly
-    #   to the Docker daemon. Images in the Docker Hub registry are
+    #   Required. The image used to start a container. This string is passed
+    #   directly to the Docker daemon. Images in the Docker Hub registry are
     #   available by default. Other repositories are specified with `
     #   repository-url/image:tag `. It can be 255 characters long. It can
     #   contain uppercase and lowercase letters, numbers, hyphens (-),
@@ -1947,6 +1950,10 @@ module Aws::Batch
     #   Batch jobs on Fargate.
     #   @return [Types::RuntimePlatform]
     #
+    # @!attribute [rw] repository_credentials
+    #   The private repository authentication credentials to use.
+    #   @return [Types::RepositoryCredentials]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerProperties AWS API Documentation
     #
     class ContainerProperties < Struct.new(
@@ -1971,7 +1978,8 @@ module Aws::Batch
       :network_configuration,
       :fargate_platform_configuration,
       :ephemeral_storage,
-      :runtime_platform)
+      :runtime_platform,
+      :repository_credentials)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2464,7 +2472,8 @@ module Aws::Batch
     #   either be an ARN in the format
     #   `arn:aws:batch:$\{Region\}:$\{Account\}:job-definition/$\{JobDefinitionName\}:$\{Revision\}`
     #   or a short version using the form
-    #   `$\{JobDefinitionName\}:$\{Revision\}`.
+    #   `$\{JobDefinitionName\}:$\{Revision\}`. This parameter can't be
+    #   used with other parameters.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -2829,16 +2838,24 @@ module Aws::Batch
     #       (for example `P4` and `G4`) and can be used for all non Amazon
     #       Web Services Graviton-based instance types.
     #
+    #     ECS\_AL2023
+    #
+    #     : [Amazon Linux 2023][3]: Batch supports Amazon Linux 2023.
+    #
+    #       <note markdown="1"> Amazon Linux 2023 does not support `A1` instances.
+    #
+    #        </note>
+    #
     #     ECS\_AL1
     #
-    #     : [Amazon Linux][3]. Amazon Linux has reached the end-of-life of
+    #     : [Amazon Linux][4]. Amazon Linux has reached the end-of-life of
     #       standard support. For more information, see [Amazon Linux
-    #       AMI][4].
+    #       AMI][5].
     #
     #   EKS
     #
     #   : If the `imageIdOverride` parameter isn't specified, then a recent
-    #     [Amazon EKS-optimized Amazon Linux AMI][5] (`EKS_AL2`) is used. If
+    #     [Amazon EKS-optimized Amazon Linux AMI][6] (`EKS_AL2`) is used. If
     #     a new image type is specified in an update, but neither an
     #     `imageId` nor a `imageIdOverride` parameter is specified, then the
     #     latest Amazon EKS optimized AMI for that image type that Batch
@@ -2846,11 +2863,11 @@ module Aws::Batch
     #
     #     EKS\_AL2
     #
-    #     : [Amazon Linux 2][5]: Default for all non-GPU instance families.
+    #     : [Amazon Linux 2][6]: Default for all non-GPU instance families.
     #
     #     EKS\_AL2\_NVIDIA
     #
-    #     : [Amazon Linux 2 (accelerated)][5]: Default for all GPU instance
+    #     : [Amazon Linux 2 (accelerated)][6]: Default for all GPU instance
     #       families (for example, `P4` and `G4`) and can be used for all
     #       non Amazon Web Services Graviton-based instance types.
     #
@@ -2858,9 +2875,10 @@ module Aws::Batch
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami
     #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#gpuami
-    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#alami
-    #   [4]: http://aws.amazon.com/amazon-linux-ami/
-    #   [5]: https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html
+    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
+    #   [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#alami
+    #   [5]: http://aws.amazon.com/amazon-linux-ami/
+    #   [6]: https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html
     #   @return [String]
     #
     # @!attribute [rw] image_id_override
@@ -4066,9 +4084,9 @@ module Aws::Batch
     #   where ` ActiveFairShares ` is the number of active fair share
     #   identifiers.
     #
-    #   For example, a `computeReservation` value of 50 indicates that
-    #   Batchreserves 50% of the maximum available vCPU if there's only one
-    #   fair share identifier. It reserves 25% if there are two fair share
+    #   For example, a `computeReservation` value of 50 indicates that Batch
+    #   reserves 50% of the maximum available vCPU if there's only one fair
+    #   share identifier. It reserves 25% if there are two fair share
     #   identifiers. It reserves 12.5% if there are three fair share
     #   identifiers. A `computeReservation` value of 25 indicates that Batch
     #   should reserve 25% of the maximum available vCPU if there's only
@@ -4369,8 +4387,7 @@ module Aws::Batch
     # @!attribute [rw] started_at
     #   The Unix timestamp (in milliseconds) for when the job was started.
     #   More specifically, it's when the job transitioned from the
-    #   `STARTING` state to the `RUNNING` state. This parameter isn't
-    #   provided for child jobs of array jobs or multi-node parallel jobs.
+    #   `STARTING` state to the `RUNNING` state.
     #   @return [Integer]
     #
     # @!attribute [rw] stopped_at
@@ -5272,7 +5289,7 @@ module Aws::Batch
     #
     #
     #
-    # [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.19/#create-a-container
+    # [1]: https://docs.docker.com/engine/api/v1.43/#tag/Container/operation/ContainerCreate
     #
     # @!attribute [rw] container_path
     #   The path on the container where the host volume is mounted.
@@ -5706,6 +5723,21 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # The repository credentials for private registry authentication.
+    #
+    # @!attribute [rw] credentials_parameter
+    #   The Amazon Resource Name (ARN) of the secret containing the private
+    #   repository credentials.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RepositoryCredentials AWS API Documentation
+    #
+    class RepositoryCredentials < Struct.new(
+      :credentials_parameter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The type and amount of a resource to assign to a container. The
     # supported resources include `GPU`, `MEMORY`, and `VCPU`.
     #
@@ -5927,19 +5959,21 @@ module Aws::Batch
     #
     #    </note>
     #
-    #   <note markdown="1"> The Batch Scheduler checks before registering a task definition with
-    #   Fargate. If the job requires a Windows container and the first
+    #   <note markdown="1"> The Batch Scheduler checks the compute environments that are
+    #   attached to the job queue before registering a task definition with
+    #   Fargate. In this scenario, the job queue is where the job is
+    #   submitted. If the job requires a Windows container and the first
     #   compute environment is `LINUX`, the compute environment is skipped
-    #   and the next is checked until a Windows-based compute environment is
-    #   found.
+    #   and the next compute environment is checked until a Windows-based
+    #   compute environment is found.
     #
     #    </note>
     #
-    #   <note markdown="1"> Fargate Spot is not supported for Windows-based containers on
-    #   Fargate. A job queue will be blocked if a Fargate Windows job is
-    #   submitted to a job queue with only Fargate Spot compute
-    #   environments. However, you can attach both `FARGATE` and
-    #   `FARGATE_SPOT` compute environments to the same job queue.
+    #   <note markdown="1"> Fargate Spot is not supported for `ARM64` and Windows-based
+    #   containers on Fargate. A job queue will be blocked if a Fargate
+    #   `ARM64` or Windows job is submitted to a job queue with only Fargate
+    #   Spot compute environments. However, you can attach both `FARGATE`
+    #   and `FARGATE_SPOT` compute environments to the same job queue.
     #
     #    </note>
     #   @return [String]
@@ -5949,6 +5983,14 @@ module Aws::Batch
     #   are `X86_64` and `ARM64`.
     #
     #   <note markdown="1"> This parameter must be set to `X86_64` for Windows containers.
+    #
+    #    </note>
+    #
+    #   <note markdown="1"> Fargate Spot is not supported for `ARM64` and Windows-based
+    #   containers on Fargate. A job queue will be blocked if a Fargate
+    #   `ARM64` or Windows job is submitted to a job queue with only Fargate
+    #   Spot compute environments. However, you can attach both `FARGATE`
+    #   and `FARGATE_SPOT` compute environments to the same job queue.
     #
     #    </note>
     #   @return [String]
@@ -6139,7 +6181,8 @@ module Aws::Batch
     #   The scheduling priority for the job. This only affects jobs in job
     #   queues with a fair share policy. Jobs with a higher scheduling
     #   priority are scheduled before jobs with a lower scheduling priority.
-    #   This overrides any scheduling priority in the job definition.
+    #   This overrides any scheduling priority in the job definition and
+    #   works only within a single share identifier.
     #
     #   The minimum supported value is 0 and the maximum supported value is
     #   9999.
@@ -6402,19 +6445,27 @@ module Aws::Batch
       include Aws::Structure
     end
 
-    # The `ulimit` settings to pass to the container.
+    # The `ulimit` settings to pass to the container. For more information,
+    # see [Ulimit][1].
     #
     # <note markdown="1"> This object isn't applicable to jobs that are running on Fargate
     # resources.
     #
     #  </note>
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_Ulimit.html
+    #
     # @!attribute [rw] hard_limit
     #   The hard limit for the `ulimit` type.
     #   @return [Integer]
     #
     # @!attribute [rw] name
-    #   The `type` of the `ulimit`.
+    #   The `type` of the `ulimit`. Valid values are: `core` \| `cpu` \|
+    #   `data` \| `fsize` \| `locks` \| `memlock` \| `msgqueue` \| `nice` \|
+    #   `nofile` \| `nproc` \| `rss` \| `rtprio` \| `rttime` \| `sigpending`
+    #   \| `stack`.
     #   @return [String]
     #
     # @!attribute [rw] soft_limit

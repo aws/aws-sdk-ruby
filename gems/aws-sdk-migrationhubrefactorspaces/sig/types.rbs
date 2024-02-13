@@ -1,0 +1,654 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MigrationHubRefactorSpaces
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ApiGatewayProxyConfig
+      attr_accessor api_gateway_id: ::String
+      attr_accessor endpoint_type: ("REGIONAL" | "PRIVATE")
+      attr_accessor nlb_arn: ::String
+      attr_accessor nlb_name: ::String
+      attr_accessor proxy_url: ::String
+      attr_accessor stage_name: ::String
+      attr_accessor vpc_link_id: ::String
+      SENSITIVE: []
+    end
+
+    class ApiGatewayProxyInput
+      attr_accessor endpoint_type: ("REGIONAL" | "PRIVATE")
+      attr_accessor stage_name: ::String
+      SENSITIVE: []
+    end
+
+    class ApiGatewayProxySummary
+      attr_accessor api_gateway_id: ::String
+      attr_accessor endpoint_type: ("REGIONAL" | "PRIVATE")
+      attr_accessor nlb_arn: ::String
+      attr_accessor nlb_name: ::String
+      attr_accessor proxy_url: ::String
+      attr_accessor stage_name: ::String
+      attr_accessor vpc_link_id: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationSummary
+      attr_accessor api_gateway_proxy: Types::ApiGatewayProxySummary
+      attr_accessor application_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_by_account_id: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor environment_id: ::String
+      attr_accessor error: Types::ErrorResponse
+      attr_accessor last_updated_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor owner_account_id: ::String
+      attr_accessor proxy_type: ("API_GATEWAY")
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc_id: ::String
+      SENSITIVE: [:tags]
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApplicationRequest
+      attr_accessor api_gateway_proxy: Types::ApiGatewayProxyInput
+      attr_accessor client_token: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor proxy_type: ("API_GATEWAY")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc_id: ::String
+      SENSITIVE: [:tags]
+    end
+
+    class CreateApplicationResponse
+      attr_accessor api_gateway_proxy: Types::ApiGatewayProxyInput
+      attr_accessor application_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_by_account_id: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor environment_id: ::String
+      attr_accessor last_updated_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor owner_account_id: ::String
+      attr_accessor proxy_type: ("API_GATEWAY")
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc_id: ::String
+      SENSITIVE: [:tags]
+    end
+
+    class CreateEnvironmentRequest
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor network_fabric_type: ("TRANSIT_GATEWAY" | "NONE")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class CreateEnvironmentResponse
+      attr_accessor arn: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor last_updated_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor network_fabric_type: ("TRANSIT_GATEWAY" | "NONE")
+      attr_accessor owner_account_id: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class CreateRouteRequest
+      attr_accessor application_identifier: ::String
+      attr_accessor client_token: ::String
+      attr_accessor default_route: Types::DefaultRouteInput
+      attr_accessor environment_identifier: ::String
+      attr_accessor route_type: ("DEFAULT" | "URI_PATH")
+      attr_accessor service_identifier: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor uri_path_route: Types::UriPathRouteInput
+      SENSITIVE: [:tags]
+    end
+
+    class CreateRouteResponse
+      attr_accessor application_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_by_account_id: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor owner_account_id: ::String
+      attr_accessor route_id: ::String
+      attr_accessor route_type: ("DEFAULT" | "URI_PATH")
+      attr_accessor service_id: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING" | "INACTIVE")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor uri_path_route: Types::UriPathRouteInput
+      SENSITIVE: [:tags]
+    end
+
+    class CreateServiceRequest
+      attr_accessor application_identifier: ::String
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor endpoint_type: ("LAMBDA" | "URL")
+      attr_accessor environment_identifier: ::String
+      attr_accessor lambda_endpoint: Types::LambdaEndpointInput
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor url_endpoint: Types::UrlEndpointInput
+      attr_accessor vpc_id: ::String
+      SENSITIVE: [:tags]
+    end
+
+    class CreateServiceResponse
+      attr_accessor application_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_by_account_id: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor endpoint_type: ("LAMBDA" | "URL")
+      attr_accessor environment_id: ::String
+      attr_accessor lambda_endpoint: Types::LambdaEndpointInput
+      attr_accessor last_updated_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor owner_account_id: ::String
+      attr_accessor service_id: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor url_endpoint: Types::UrlEndpointInput
+      attr_accessor vpc_id: ::String
+      SENSITIVE: [:tags]
+    end
+
+    class DefaultRouteInput
+      attr_accessor activation_state: ("ACTIVE" | "INACTIVE")
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationRequest
+      attr_accessor application_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationResponse
+      attr_accessor application_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor last_updated_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentRequest
+      attr_accessor environment_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentResponse
+      attr_accessor arn: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor last_updated_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRouteRequest
+      attr_accessor application_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor route_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRouteResponse
+      attr_accessor application_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor last_updated_time: ::Time
+      attr_accessor route_id: ::String
+      attr_accessor service_id: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING" | "INACTIVE")
+      SENSITIVE: []
+    end
+
+    class DeleteServiceRequest
+      attr_accessor application_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor service_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServiceResponse
+      attr_accessor application_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor last_updated_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor service_id: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class EnvironmentSummary
+      attr_accessor arn: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor error: Types::ErrorResponse
+      attr_accessor last_updated_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor network_fabric_type: ("TRANSIT_GATEWAY" | "NONE")
+      attr_accessor owner_account_id: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor transit_gateway_id: ::String
+      SENSITIVE: [:tags]
+    end
+
+    class EnvironmentVpc
+      attr_accessor account_id: ::String
+      attr_accessor cidr_blocks: ::Array[::String]
+      attr_accessor created_time: ::Time
+      attr_accessor environment_id: ::String
+      attr_accessor last_updated_time: ::Time
+      attr_accessor vpc_id: ::String
+      attr_accessor vpc_name: ::String
+      SENSITIVE: []
+    end
+
+    class ErrorResponse
+      attr_accessor account_id: ::String
+      attr_accessor additional_details: ::Hash[::String, ::String]
+      attr_accessor code: ("INVALID_RESOURCE_STATE" | "RESOURCE_LIMIT_EXCEEDED" | "RESOURCE_CREATION_FAILURE" | "RESOURCE_UPDATE_FAILURE" | "SERVICE_ENDPOINT_HEALTH_CHECK_FAILURE" | "RESOURCE_DELETION_FAILURE" | "RESOURCE_RETRIEVAL_FAILURE" | "RESOURCE_IN_USE" | "RESOURCE_NOT_FOUND" | "STATE_TRANSITION_FAILURE" | "REQUEST_LIMIT_EXCEEDED" | "NOT_AUTHORIZED")
+      attr_accessor message: ::String
+      attr_accessor resource_identifier: ::String
+      attr_accessor resource_type: ("ENVIRONMENT" | "APPLICATION" | "ROUTE" | "SERVICE" | "TRANSIT_GATEWAY" | "TRANSIT_GATEWAY_ATTACHMENT" | "API_GATEWAY" | "NLB" | "TARGET_GROUP" | "LOAD_BALANCER_LISTENER" | "VPC_LINK" | "LAMBDA" | "VPC" | "SUBNET" | "ROUTE_TABLE" | "SECURITY_GROUP" | "VPC_ENDPOINT_SERVICE_CONFIGURATION" | "RESOURCE_SHARE" | "IAM_ROLE")
+      SENSITIVE: []
+    end
+
+    class GetApplicationRequest
+      attr_accessor application_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetApplicationResponse
+      attr_accessor api_gateway_proxy: Types::ApiGatewayProxyConfig
+      attr_accessor application_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_by_account_id: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor environment_id: ::String
+      attr_accessor error: Types::ErrorResponse
+      attr_accessor last_updated_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor owner_account_id: ::String
+      attr_accessor proxy_type: ("API_GATEWAY")
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc_id: ::String
+      SENSITIVE: [:tags]
+    end
+
+    class GetEnvironmentRequest
+      attr_accessor environment_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentResponse
+      attr_accessor arn: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor error: Types::ErrorResponse
+      attr_accessor last_updated_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor network_fabric_type: ("TRANSIT_GATEWAY" | "NONE")
+      attr_accessor owner_account_id: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor transit_gateway_id: ::String
+      SENSITIVE: [:tags]
+    end
+
+    class GetResourcePolicyRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyResponse
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetRouteRequest
+      attr_accessor application_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor route_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetRouteResponse
+      attr_accessor append_source_path: bool
+      attr_accessor application_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_by_account_id: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor environment_id: ::String
+      attr_accessor error: Types::ErrorResponse
+      attr_accessor include_child_paths: bool
+      attr_accessor last_updated_time: ::Time
+      attr_accessor methods: ::Array[("DELETE" | "GET" | "HEAD" | "OPTIONS" | "PATCH" | "POST" | "PUT")]
+      attr_accessor owner_account_id: ::String
+      attr_accessor path_resource_to_id: ::Hash[::String, ::String]
+      attr_accessor route_id: ::String
+      attr_accessor route_type: ("DEFAULT" | "URI_PATH")
+      attr_accessor service_id: ::String
+      attr_accessor source_path: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING" | "INACTIVE")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class GetServiceRequest
+      attr_accessor application_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor service_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceResponse
+      attr_accessor application_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_by_account_id: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor endpoint_type: ("LAMBDA" | "URL")
+      attr_accessor environment_id: ::String
+      attr_accessor error: Types::ErrorResponse
+      attr_accessor lambda_endpoint: Types::LambdaEndpointConfig
+      attr_accessor last_updated_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor owner_account_id: ::String
+      attr_accessor service_id: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor url_endpoint: Types::UrlEndpointConfig
+      attr_accessor vpc_id: ::String
+      SENSITIVE: [:tags]
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidResourcePolicyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaEndpointConfig
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaEndpointInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaEndpointSummary
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationsRequest
+      attr_accessor environment_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationsResponse
+      attr_accessor application_summary_list: ::Array[Types::ApplicationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentVpcsRequest
+      attr_accessor environment_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentVpcsResponse
+      attr_accessor environment_vpc_list: ::Array[Types::EnvironmentVpc]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentsResponse
+      attr_accessor environment_summary_list: ::Array[Types::EnvironmentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRoutesRequest
+      attr_accessor application_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRoutesResponse
+      attr_accessor next_token: ::String
+      attr_accessor route_summary_list: ::Array[Types::RouteSummary]
+      SENSITIVE: []
+    end
+
+    class ListServicesRequest
+      attr_accessor application_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServicesResponse
+      attr_accessor next_token: ::String
+      attr_accessor service_summary_list: ::Array[Types::ServiceSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class PutResourcePolicyRequest
+      attr_accessor policy: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyResponse < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class RouteSummary
+      attr_accessor append_source_path: bool
+      attr_accessor application_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_by_account_id: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor environment_id: ::String
+      attr_accessor error: Types::ErrorResponse
+      attr_accessor include_child_paths: bool
+      attr_accessor last_updated_time: ::Time
+      attr_accessor methods: ::Array[("DELETE" | "GET" | "HEAD" | "OPTIONS" | "PATCH" | "POST" | "PUT")]
+      attr_accessor owner_account_id: ::String
+      attr_accessor path_resource_to_id: ::Hash[::String, ::String]
+      attr_accessor route_id: ::String
+      attr_accessor route_type: ("DEFAULT" | "URI_PATH")
+      attr_accessor service_id: ::String
+      attr_accessor source_path: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING" | "INACTIVE")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceSummary
+      attr_accessor application_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_by_account_id: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor endpoint_type: ("LAMBDA" | "URL")
+      attr_accessor environment_id: ::String
+      attr_accessor error: Types::ErrorResponse
+      attr_accessor lambda_endpoint: Types::LambdaEndpointSummary
+      attr_accessor last_updated_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor owner_account_id: ::String
+      attr_accessor service_id: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor url_endpoint: Types::UrlEndpointSummary
+      attr_accessor vpc_id: ::String
+      SENSITIVE: [:tags]
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: [:tag_keys]
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateRouteRequest
+      attr_accessor activation_state: ("ACTIVE" | "INACTIVE")
+      attr_accessor application_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor route_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRouteResponse
+      attr_accessor application_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor last_updated_time: ::Time
+      attr_accessor route_id: ::String
+      attr_accessor service_id: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING" | "INACTIVE")
+      SENSITIVE: []
+    end
+
+    class UriPathRouteInput
+      attr_accessor activation_state: ("ACTIVE" | "INACTIVE")
+      attr_accessor append_source_path: bool
+      attr_accessor include_child_paths: bool
+      attr_accessor methods: ::Array[("DELETE" | "GET" | "HEAD" | "OPTIONS" | "PATCH" | "POST" | "PUT")]
+      attr_accessor source_path: ::String
+      SENSITIVE: []
+    end
+
+    class UrlEndpointConfig
+      attr_accessor health_url: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class UrlEndpointInput
+      attr_accessor health_url: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class UrlEndpointSummary
+      attr_accessor health_url: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

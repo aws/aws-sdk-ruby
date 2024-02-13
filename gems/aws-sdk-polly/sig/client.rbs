@@ -1,0 +1,196 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Polly
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _DeleteLexiconResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLexiconOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#delete_lexicon-instance_method
+      def delete_lexicon: (
+                            name: ::String
+                          ) -> _DeleteLexiconResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLexiconResponseSuccess
+
+      interface _DescribeVoicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVoicesOutput]
+        def voices: () -> ::Array[Types::Voice]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#describe_voices-instance_method
+      def describe_voices: (
+                             ?engine: ("standard" | "neural" | "long-form"),
+                             ?language_code: ("arb" | "cmn-CN" | "cy-GB" | "da-DK" | "de-DE" | "en-AU" | "en-GB" | "en-GB-WLS" | "en-IN" | "en-US" | "es-ES" | "es-MX" | "es-US" | "fr-CA" | "fr-FR" | "is-IS" | "it-IT" | "ja-JP" | "hi-IN" | "ko-KR" | "nb-NO" | "nl-NL" | "pl-PL" | "pt-BR" | "pt-PT" | "ro-RO" | "ru-RU" | "sv-SE" | "tr-TR" | "en-NZ" | "en-ZA" | "ca-ES" | "de-AT" | "yue-CN" | "ar-AE" | "fi-FI" | "en-IE" | "nl-BE" | "fr-BE"),
+                             ?include_additional_language_codes: bool,
+                             ?next_token: ::String
+                           ) -> _DescribeVoicesResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVoicesResponseSuccess
+
+      interface _GetLexiconResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLexiconOutput]
+        def lexicon: () -> Types::Lexicon
+        def lexicon_attributes: () -> Types::LexiconAttributes
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#get_lexicon-instance_method
+      def get_lexicon: (
+                         name: ::String
+                       ) -> _GetLexiconResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLexiconResponseSuccess
+
+      interface _GetSpeechSynthesisTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSpeechSynthesisTaskOutput]
+        def synthesis_task: () -> Types::SynthesisTask
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#get_speech_synthesis_task-instance_method
+      def get_speech_synthesis_task: (
+                                       task_id: ::String
+                                     ) -> _GetSpeechSynthesisTaskResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSpeechSynthesisTaskResponseSuccess
+
+      interface _ListLexiconsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLexiconsOutput]
+        def lexicons: () -> ::Array[Types::LexiconDescription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#list_lexicons-instance_method
+      def list_lexicons: (
+                           ?next_token: ::String
+                         ) -> _ListLexiconsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLexiconsResponseSuccess
+
+      interface _ListSpeechSynthesisTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSpeechSynthesisTasksOutput]
+        def next_token: () -> ::String
+        def synthesis_tasks: () -> ::Array[Types::SynthesisTask]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#list_speech_synthesis_tasks-instance_method
+      def list_speech_synthesis_tasks: (
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String,
+                                         ?status: ("scheduled" | "inProgress" | "completed" | "failed")
+                                       ) -> _ListSpeechSynthesisTasksResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSpeechSynthesisTasksResponseSuccess
+
+      interface _PutLexiconResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutLexiconOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#put_lexicon-instance_method
+      def put_lexicon: (
+                         name: ::String,
+                         content: ::String
+                       ) -> _PutLexiconResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutLexiconResponseSuccess
+
+      interface _StartSpeechSynthesisTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartSpeechSynthesisTaskOutput]
+        def synthesis_task: () -> Types::SynthesisTask
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#start_speech_synthesis_task-instance_method
+      def start_speech_synthesis_task: (
+                                         ?engine: ("standard" | "neural" | "long-form"),
+                                         ?language_code: ("arb" | "cmn-CN" | "cy-GB" | "da-DK" | "de-DE" | "en-AU" | "en-GB" | "en-GB-WLS" | "en-IN" | "en-US" | "es-ES" | "es-MX" | "es-US" | "fr-CA" | "fr-FR" | "is-IS" | "it-IT" | "ja-JP" | "hi-IN" | "ko-KR" | "nb-NO" | "nl-NL" | "pl-PL" | "pt-BR" | "pt-PT" | "ro-RO" | "ru-RU" | "sv-SE" | "tr-TR" | "en-NZ" | "en-ZA" | "ca-ES" | "de-AT" | "yue-CN" | "ar-AE" | "fi-FI" | "en-IE" | "nl-BE" | "fr-BE"),
+                                         ?lexicon_names: Array[::String],
+                                         output_format: ("json" | "mp3" | "ogg_vorbis" | "pcm"),
+                                         output_s3_bucket_name: ::String,
+                                         ?output_s3_key_prefix: ::String,
+                                         ?sample_rate: ::String,
+                                         ?sns_topic_arn: ::String,
+                                         ?speech_mark_types: Array[("sentence" | "ssml" | "viseme" | "word")],
+                                         text: ::String,
+                                         ?text_type: ("ssml" | "text"),
+                                         voice_id: ("Aditi" | "Amy" | "Astrid" | "Bianca" | "Brian" | "Camila" | "Carla" | "Carmen" | "Celine" | "Chantal" | "Conchita" | "Cristiano" | "Dora" | "Emma" | "Enrique" | "Ewa" | "Filiz" | "Gabrielle" | "Geraint" | "Giorgio" | "Gwyneth" | "Hans" | "Ines" | "Ivy" | "Jacek" | "Jan" | "Joanna" | "Joey" | "Justin" | "Karl" | "Kendra" | "Kevin" | "Kimberly" | "Lea" | "Liv" | "Lotte" | "Lucia" | "Lupe" | "Mads" | "Maja" | "Marlene" | "Mathieu" | "Matthew" | "Maxim" | "Mia" | "Miguel" | "Mizuki" | "Naja" | "Nicole" | "Olivia" | "Penelope" | "Raveena" | "Ricardo" | "Ruben" | "Russell" | "Salli" | "Seoyeon" | "Takumi" | "Tatyana" | "Vicki" | "Vitoria" | "Zeina" | "Zhiyu" | "Aria" | "Ayanda" | "Arlet" | "Hannah" | "Arthur" | "Daniel" | "Liam" | "Pedro" | "Kajal" | "Hiujin" | "Laura" | "Elin" | "Ida" | "Suvi" | "Ola" | "Hala" | "Andres" | "Sergio" | "Remi" | "Adriano" | "Thiago" | "Ruth" | "Stephen" | "Kazuha" | "Tomoko" | "Niamh" | "Sofie" | "Lisa" | "Isabelle" | "Zayd" | "Danielle" | "Gregory")
+                                       ) -> _StartSpeechSynthesisTaskResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSpeechSynthesisTaskResponseSuccess
+
+      interface _SynthesizeSpeechResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SynthesizeSpeechOutput]
+        def audio_stream: () -> ::IO
+        def content_type: () -> ::String
+        def request_characters: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#synthesize_speech-instance_method
+      def synthesize_speech: (
+                               ?engine: ("standard" | "neural" | "long-form"),
+                               ?language_code: ("arb" | "cmn-CN" | "cy-GB" | "da-DK" | "de-DE" | "en-AU" | "en-GB" | "en-GB-WLS" | "en-IN" | "en-US" | "es-ES" | "es-MX" | "es-US" | "fr-CA" | "fr-FR" | "is-IS" | "it-IT" | "ja-JP" | "hi-IN" | "ko-KR" | "nb-NO" | "nl-NL" | "pl-PL" | "pt-BR" | "pt-PT" | "ro-RO" | "ru-RU" | "sv-SE" | "tr-TR" | "en-NZ" | "en-ZA" | "ca-ES" | "de-AT" | "yue-CN" | "ar-AE" | "fi-FI" | "en-IE" | "nl-BE" | "fr-BE"),
+                               ?lexicon_names: Array[::String],
+                               output_format: ("json" | "mp3" | "ogg_vorbis" | "pcm"),
+                               ?sample_rate: ::String,
+                               ?speech_mark_types: Array[("sentence" | "ssml" | "viseme" | "word")],
+                               text: ::String,
+                               ?text_type: ("ssml" | "text"),
+                               voice_id: ("Aditi" | "Amy" | "Astrid" | "Bianca" | "Brian" | "Camila" | "Carla" | "Carmen" | "Celine" | "Chantal" | "Conchita" | "Cristiano" | "Dora" | "Emma" | "Enrique" | "Ewa" | "Filiz" | "Gabrielle" | "Geraint" | "Giorgio" | "Gwyneth" | "Hans" | "Ines" | "Ivy" | "Jacek" | "Jan" | "Joanna" | "Joey" | "Justin" | "Karl" | "Kendra" | "Kevin" | "Kimberly" | "Lea" | "Liv" | "Lotte" | "Lucia" | "Lupe" | "Mads" | "Maja" | "Marlene" | "Mathieu" | "Matthew" | "Maxim" | "Mia" | "Miguel" | "Mizuki" | "Naja" | "Nicole" | "Olivia" | "Penelope" | "Raveena" | "Ricardo" | "Ruben" | "Russell" | "Salli" | "Seoyeon" | "Takumi" | "Tatyana" | "Vicki" | "Vitoria" | "Zeina" | "Zhiyu" | "Aria" | "Ayanda" | "Arlet" | "Hannah" | "Arthur" | "Daniel" | "Liam" | "Pedro" | "Kajal" | "Hiujin" | "Laura" | "Elin" | "Ida" | "Suvi" | "Ola" | "Hala" | "Andres" | "Sergio" | "Remi" | "Adriano" | "Thiago" | "Ruth" | "Stephen" | "Kazuha" | "Tomoko" | "Niamh" | "Sofie" | "Lisa" | "Isabelle" | "Zayd" | "Danielle" | "Gregory")
+                             ) ?{ (*untyped) -> void } -> _SynthesizeSpeechResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _SynthesizeSpeechResponseSuccess
+    end
+  end
+end
+

@@ -27,7 +27,7 @@ end
 
 desc 'Builds API documentation for a single gem (and its dependencies), e.g. docs:aws-sdk-s3'
 task 'docs:*'
-rule /docs:.+$/ => %w[docs:clobber docs:set-env] do |task|
+rule /^docs:.+$/ => %w[docs:clobber docs:set-env] do |task|
   require 'yard'
 
   gem = task.name.split(':').last

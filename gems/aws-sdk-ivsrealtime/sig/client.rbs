@@ -1,0 +1,421 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IVSRealTime
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateEncoderConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEncoderConfigurationResponse]
+        def encoder_configuration: () -> Types::EncoderConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#create_encoder_configuration-instance_method
+      def create_encoder_configuration: (
+                                          ?name: ::String,
+                                          ?tags: Hash[::String, ::String],
+                                          ?video: {
+                                            bitrate: ::Integer?,
+                                            framerate: ::Float?,
+                                            height: ::Integer?,
+                                            width: ::Integer?
+                                          }
+                                        ) -> _CreateEncoderConfigurationResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEncoderConfigurationResponseSuccess
+
+      interface _CreateParticipantTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateParticipantTokenResponse]
+        def participant_token: () -> Types::ParticipantToken
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#create_participant_token-instance_method
+      def create_participant_token: (
+                                      ?attributes: Hash[::String, ::String],
+                                      ?capabilities: Array[("PUBLISH" | "SUBSCRIBE")],
+                                      ?duration: ::Integer,
+                                      stage_arn: ::String,
+                                      ?user_id: ::String
+                                    ) -> _CreateParticipantTokenResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateParticipantTokenResponseSuccess
+
+      interface _CreateStageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStageResponse]
+        def participant_tokens: () -> ::Array[Types::ParticipantToken]
+        def stage: () -> Types::Stage
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#create_stage-instance_method
+      def create_stage: (
+                          ?name: ::String,
+                          ?participant_token_configurations: Array[
+                            {
+                              attributes: Hash[::String, ::String]?,
+                              capabilities: Array[("PUBLISH" | "SUBSCRIBE")]?,
+                              duration: ::Integer?,
+                              user_id: ::String?
+                            },
+                          ],
+                          ?tags: Hash[::String, ::String]
+                        ) -> _CreateStageResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStageResponseSuccess
+
+      interface _CreateStorageConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStorageConfigurationResponse]
+        def storage_configuration: () -> Types::StorageConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#create_storage_configuration-instance_method
+      def create_storage_configuration: (
+                                          ?name: ::String,
+                                          s3: {
+                                            bucket_name: ::String
+                                          },
+                                          ?tags: Hash[::String, ::String]
+                                        ) -> _CreateStorageConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStorageConfigurationResponseSuccess
+
+      interface _DeleteEncoderConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEncoderConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#delete_encoder_configuration-instance_method
+      def delete_encoder_configuration: (
+                                          arn: ::String
+                                        ) -> _DeleteEncoderConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEncoderConfigurationResponseSuccess
+
+      interface _DeleteStageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteStageResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#delete_stage-instance_method
+      def delete_stage: (
+                          arn: ::String
+                        ) -> _DeleteStageResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteStageResponseSuccess
+
+      interface _DeleteStorageConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteStorageConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#delete_storage_configuration-instance_method
+      def delete_storage_configuration: (
+                                          arn: ::String
+                                        ) -> _DeleteStorageConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteStorageConfigurationResponseSuccess
+
+      interface _DisconnectParticipantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisconnectParticipantResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#disconnect_participant-instance_method
+      def disconnect_participant: (
+                                    participant_id: ::String,
+                                    ?reason: ::String,
+                                    stage_arn: ::String
+                                  ) -> _DisconnectParticipantResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisconnectParticipantResponseSuccess
+
+      interface _GetCompositionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCompositionResponse]
+        def composition: () -> Types::Composition
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#get_composition-instance_method
+      def get_composition: (
+                             arn: ::String
+                           ) -> _GetCompositionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCompositionResponseSuccess
+
+      interface _GetEncoderConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEncoderConfigurationResponse]
+        def encoder_configuration: () -> Types::EncoderConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#get_encoder_configuration-instance_method
+      def get_encoder_configuration: (
+                                       arn: ::String
+                                     ) -> _GetEncoderConfigurationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEncoderConfigurationResponseSuccess
+
+      interface _GetParticipantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetParticipantResponse]
+        def participant: () -> Types::Participant
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#get_participant-instance_method
+      def get_participant: (
+                             participant_id: ::String,
+                             session_id: ::String,
+                             stage_arn: ::String
+                           ) -> _GetParticipantResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetParticipantResponseSuccess
+
+      interface _GetStageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStageResponse]
+        def stage: () -> Types::Stage
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#get_stage-instance_method
+      def get_stage: (
+                       arn: ::String
+                     ) -> _GetStageResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStageResponseSuccess
+
+      interface _GetStageSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStageSessionResponse]
+        def stage_session: () -> Types::StageSession
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#get_stage_session-instance_method
+      def get_stage_session: (
+                               session_id: ::String,
+                               stage_arn: ::String
+                             ) -> _GetStageSessionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStageSessionResponseSuccess
+
+      interface _GetStorageConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStorageConfigurationResponse]
+        def storage_configuration: () -> Types::StorageConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#get_storage_configuration-instance_method
+      def get_storage_configuration: (
+                                       arn: ::String
+                                     ) -> _GetStorageConfigurationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStorageConfigurationResponseSuccess
+
+      interface _ListCompositionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCompositionsResponse]
+        def compositions: () -> ::Array[Types::CompositionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#list_compositions-instance_method
+      def list_compositions: (
+                               ?filter_by_encoder_configuration_arn: ::String,
+                               ?filter_by_stage_arn: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListCompositionsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCompositionsResponseSuccess
+
+      interface _ListEncoderConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEncoderConfigurationsResponse]
+        def encoder_configurations: () -> ::Array[Types::EncoderConfigurationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#list_encoder_configurations-instance_method
+      def list_encoder_configurations: (
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListEncoderConfigurationsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEncoderConfigurationsResponseSuccess
+
+      interface _ListParticipantEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListParticipantEventsResponse]
+        def events: () -> ::Array[Types::Event]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#list_participant_events-instance_method
+      def list_participant_events: (
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String,
+                                     participant_id: ::String,
+                                     session_id: ::String,
+                                     stage_arn: ::String
+                                   ) -> _ListParticipantEventsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListParticipantEventsResponseSuccess
+
+      interface _ListParticipantsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListParticipantsResponse]
+        def next_token: () -> ::String
+        def participants: () -> ::Array[Types::ParticipantSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#list_participants-instance_method
+      def list_participants: (
+                               ?filter_by_published: bool,
+                               ?filter_by_state: ("CONNECTED" | "DISCONNECTED"),
+                               ?filter_by_user_id: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String,
+                               session_id: ::String,
+                               stage_arn: ::String
+                             ) -> _ListParticipantsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListParticipantsResponseSuccess
+
+      interface _ListStageSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStageSessionsResponse]
+        def next_token: () -> ::String
+        def stage_sessions: () -> ::Array[Types::StageSessionSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#list_stage_sessions-instance_method
+      def list_stage_sessions: (
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String,
+                                 stage_arn: ::String
+                               ) -> _ListStageSessionsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStageSessionsResponseSuccess
+
+      interface _ListStagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStagesResponse]
+        def next_token: () -> ::String
+        def stages: () -> ::Array[Types::StageSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#list_stages-instance_method
+      def list_stages: (
+                         ?max_results: ::Integer,
+                         ?next_token: ::String
+                       ) -> _ListStagesResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStagesResponseSuccess
+
+      interface _ListStorageConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStorageConfigurationsResponse]
+        def next_token: () -> ::String
+        def storage_configurations: () -> ::Array[Types::StorageConfigurationSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#list_storage_configurations-instance_method
+      def list_storage_configurations: (
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListStorageConfigurationsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStorageConfigurationsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartCompositionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartCompositionResponse]
+        def composition: () -> Types::Composition
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#start_composition-instance_method
+      def start_composition: (
+                               destinations: Array[
+                                 {
+                                   channel: {
+                                     channel_arn: ::String,
+                                     encoder_configuration_arn: ::String?
+                                   }?,
+                                   name: ::String?,
+                                   s3: {
+                                     encoder_configuration_arns: Array[::String],
+                                     recording_configuration: {
+                                       format: ("HLS")?
+                                     }?,
+                                     storage_configuration_arn: ::String
+                                   }?
+                                 },
+                               ],
+                               ?idempotency_token: ::String,
+                               ?layout: {
+                                 grid: {
+                                   featured_participant_attribute: ::String?
+                                 }?
+                               },
+                               stage_arn: ::String,
+                               ?tags: Hash[::String, ::String]
+                             ) -> _StartCompositionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCompositionResponseSuccess
+
+      interface _StopCompositionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopCompositionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#stop_composition-instance_method
+      def stop_composition: (
+                              arn: ::String
+                            ) -> _StopCompositionResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopCompositionResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateStageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStageResponse]
+        def stage: () -> Types::Stage
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#update_stage-instance_method
+      def update_stage: (
+                          arn: ::String,
+                          ?name: ::String
+                        ) -> _UpdateStageResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStageResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,803 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module BedrockAgent
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateAgentKnowledgeBaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateAgentKnowledgeBaseResponse]
+        def agent_knowledge_base: () -> Types::AgentKnowledgeBase
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#associate_agent_knowledge_base-instance_method
+      def associate_agent_knowledge_base: (
+                                            agent_id: ::String,
+                                            agent_version: ::String,
+                                            knowledge_base_id: ::String,
+                                            description: ::String,
+                                            ?knowledge_base_state: ("ENABLED" | "DISABLED")
+                                          ) -> _AssociateAgentKnowledgeBaseResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateAgentKnowledgeBaseResponseSuccess
+
+      interface _CreateAgentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAgentResponse]
+        def agent: () -> Types::Agent
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#create_agent-instance_method
+      def create_agent: (
+                          agent_name: ::String,
+                          ?client_token: ::String,
+                          ?instruction: ::String,
+                          ?foundation_model: ::String,
+                          ?description: ::String,
+                          ?idle_session_ttl_in_seconds: ::Integer,
+                          agent_resource_role_arn: ::String,
+                          ?customer_encryption_key_arn: ::String,
+                          ?tags: Hash[::String, ::String],
+                          ?prompt_override_configuration: {
+                            prompt_configurations: Array[
+                              {
+                                prompt_type: ("PRE_PROCESSING" | "ORCHESTRATION" | "POST_PROCESSING" | "KNOWLEDGE_BASE_RESPONSE_GENERATION")?,
+                                prompt_creation_mode: ("DEFAULT" | "OVERRIDDEN")?,
+                                prompt_state: ("ENABLED" | "DISABLED")?,
+                                base_prompt_template: ::String?,
+                                inference_configuration: {
+                                  temperature: ::Float?,
+                                  top_p: ::Float?,
+                                  top_k: ::Integer?,
+                                  maximum_length: ::Integer?,
+                                  stop_sequences: Array[::String]?
+                                }?,
+                                parser_mode: ("DEFAULT" | "OVERRIDDEN")?
+                              },
+                            ],
+                            override_lambda: ::String?
+                          }
+                        ) -> _CreateAgentResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgentResponseSuccess
+
+      interface _CreateAgentActionGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAgentActionGroupResponse]
+        def agent_action_group: () -> Types::AgentActionGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#create_agent_action_group-instance_method
+      def create_agent_action_group: (
+                                       agent_id: ::String,
+                                       agent_version: ::String,
+                                       action_group_name: ::String,
+                                       ?client_token: ::String,
+                                       ?description: ::String,
+                                       ?parent_action_group_signature: ("AMAZON.UserInput"),
+                                       ?action_group_executor: {
+                                         lambda: ::String?
+                                       },
+                                       ?api_schema: {
+                                         s3: {
+                                           s3_bucket_name: ::String?,
+                                           s3_object_key: ::String?
+                                         }?,
+                                         payload: ::String?
+                                       },
+                                       ?action_group_state: ("ENABLED" | "DISABLED")
+                                     ) -> _CreateAgentActionGroupResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgentActionGroupResponseSuccess
+
+      interface _CreateAgentAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAgentAliasResponse]
+        def agent_alias: () -> Types::AgentAlias
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#create_agent_alias-instance_method
+      def create_agent_alias: (
+                                agent_id: ::String,
+                                agent_alias_name: ::String,
+                                ?client_token: ::String,
+                                ?description: ::String,
+                                ?routing_configuration: Array[
+                                  {
+                                    agent_version: ::String
+                                  },
+                                ],
+                                ?tags: Hash[::String, ::String]
+                              ) -> _CreateAgentAliasResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgentAliasResponseSuccess
+
+      interface _CreateDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataSourceResponse]
+        def data_source: () -> Types::DataSource
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#create_data_source-instance_method
+      def create_data_source: (
+                                knowledge_base_id: ::String,
+                                ?client_token: ::String,
+                                name: ::String,
+                                ?description: ::String,
+                                data_source_configuration: {
+                                  type: ("S3"),
+                                  s3_configuration: {
+                                    bucket_arn: ::String,
+                                    inclusion_prefixes: Array[::String]?
+                                  }?
+                                },
+                                ?server_side_encryption_configuration: {
+                                  kms_key_arn: ::String?
+                                },
+                                ?vector_ingestion_configuration: {
+                                  chunking_configuration: {
+                                    chunking_strategy: ("FIXED_SIZE" | "NONE"),
+                                    fixed_size_chunking_configuration: {
+                                      max_tokens: ::Integer,
+                                      overlap_percentage: ::Integer
+                                    }?
+                                  }?
+                                }
+                              ) -> _CreateDataSourceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataSourceResponseSuccess
+
+      interface _CreateKnowledgeBaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateKnowledgeBaseResponse]
+        def knowledge_base: () -> Types::KnowledgeBase
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#create_knowledge_base-instance_method
+      def create_knowledge_base: (
+                                   ?client_token: ::String,
+                                   name: ::String,
+                                   ?description: ::String,
+                                   role_arn: ::String,
+                                   knowledge_base_configuration: {
+                                     type: ("VECTOR"),
+                                     vector_knowledge_base_configuration: {
+                                       embedding_model_arn: ::String
+                                     }?
+                                   },
+                                   storage_configuration: {
+                                     type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS"),
+                                     opensearch_serverless_configuration: {
+                                       collection_arn: ::String,
+                                       vector_index_name: ::String,
+                                       field_mapping: {
+                                         vector_field: ::String,
+                                         text_field: ::String,
+                                         metadata_field: ::String
+                                       }
+                                     }?,
+                                     pinecone_configuration: {
+                                       connection_string: ::String,
+                                       credentials_secret_arn: ::String,
+                                       namespace: ::String?,
+                                       field_mapping: {
+                                         text_field: ::String,
+                                         metadata_field: ::String
+                                       }
+                                     }?,
+                                     redis_enterprise_cloud_configuration: {
+                                       endpoint: ::String,
+                                       vector_index_name: ::String,
+                                       credentials_secret_arn: ::String,
+                                       field_mapping: {
+                                         vector_field: ::String,
+                                         text_field: ::String,
+                                         metadata_field: ::String
+                                       }
+                                     }?,
+                                     rds_configuration: {
+                                       resource_arn: ::String,
+                                       credentials_secret_arn: ::String,
+                                       database_name: ::String,
+                                       table_name: ::String,
+                                       field_mapping: {
+                                         primary_key_field: ::String,
+                                         vector_field: ::String,
+                                         text_field: ::String,
+                                         metadata_field: ::String
+                                       }
+                                     }?
+                                   },
+                                   ?tags: Hash[::String, ::String]
+                                 ) -> _CreateKnowledgeBaseResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKnowledgeBaseResponseSuccess
+
+      interface _DeleteAgentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAgentResponse]
+        def agent_id: () -> ::String
+        def agent_status: () -> ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#delete_agent-instance_method
+      def delete_agent: (
+                          agent_id: ::String,
+                          ?skip_resource_in_use_check: bool
+                        ) -> _DeleteAgentResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAgentResponseSuccess
+
+      interface _DeleteAgentActionGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAgentActionGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#delete_agent_action_group-instance_method
+      def delete_agent_action_group: (
+                                       agent_id: ::String,
+                                       agent_version: ::String,
+                                       action_group_id: ::String,
+                                       ?skip_resource_in_use_check: bool
+                                     ) -> _DeleteAgentActionGroupResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAgentActionGroupResponseSuccess
+
+      interface _DeleteAgentAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAgentAliasResponse]
+        def agent_id: () -> ::String
+        def agent_alias_id: () -> ::String
+        def agent_alias_status: () -> ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#delete_agent_alias-instance_method
+      def delete_agent_alias: (
+                                agent_id: ::String,
+                                agent_alias_id: ::String
+                              ) -> _DeleteAgentAliasResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAgentAliasResponseSuccess
+
+      interface _DeleteAgentVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAgentVersionResponse]
+        def agent_id: () -> ::String
+        def agent_version: () -> ::String
+        def agent_status: () -> ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#delete_agent_version-instance_method
+      def delete_agent_version: (
+                                  agent_id: ::String,
+                                  agent_version: ::String,
+                                  ?skip_resource_in_use_check: bool
+                                ) -> _DeleteAgentVersionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAgentVersionResponseSuccess
+
+      interface _DeleteDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataSourceResponse]
+        def knowledge_base_id: () -> ::String
+        def data_source_id: () -> ::String
+        def status: () -> ("AVAILABLE" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#delete_data_source-instance_method
+      def delete_data_source: (
+                                knowledge_base_id: ::String,
+                                data_source_id: ::String
+                              ) -> _DeleteDataSourceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataSourceResponseSuccess
+
+      interface _DeleteKnowledgeBaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteKnowledgeBaseResponse]
+        def knowledge_base_id: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#delete_knowledge_base-instance_method
+      def delete_knowledge_base: (
+                                   knowledge_base_id: ::String
+                                 ) -> _DeleteKnowledgeBaseResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKnowledgeBaseResponseSuccess
+
+      interface _DisassociateAgentKnowledgeBaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateAgentKnowledgeBaseResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#disassociate_agent_knowledge_base-instance_method
+      def disassociate_agent_knowledge_base: (
+                                               agent_id: ::String,
+                                               agent_version: ::String,
+                                               knowledge_base_id: ::String
+                                             ) -> _DisassociateAgentKnowledgeBaseResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateAgentKnowledgeBaseResponseSuccess
+
+      interface _GetAgentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgentResponse]
+        def agent: () -> Types::Agent
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#get_agent-instance_method
+      def get_agent: (
+                       agent_id: ::String
+                     ) -> _GetAgentResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentResponseSuccess
+
+      interface _GetAgentActionGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgentActionGroupResponse]
+        def agent_action_group: () -> Types::AgentActionGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#get_agent_action_group-instance_method
+      def get_agent_action_group: (
+                                    agent_id: ::String,
+                                    agent_version: ::String,
+                                    action_group_id: ::String
+                                  ) -> _GetAgentActionGroupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentActionGroupResponseSuccess
+
+      interface _GetAgentAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgentAliasResponse]
+        def agent_alias: () -> Types::AgentAlias
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#get_agent_alias-instance_method
+      def get_agent_alias: (
+                             agent_id: ::String,
+                             agent_alias_id: ::String
+                           ) -> _GetAgentAliasResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentAliasResponseSuccess
+
+      interface _GetAgentKnowledgeBaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgentKnowledgeBaseResponse]
+        def agent_knowledge_base: () -> Types::AgentKnowledgeBase
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#get_agent_knowledge_base-instance_method
+      def get_agent_knowledge_base: (
+                                      agent_id: ::String,
+                                      agent_version: ::String,
+                                      knowledge_base_id: ::String
+                                    ) -> _GetAgentKnowledgeBaseResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentKnowledgeBaseResponseSuccess
+
+      interface _GetAgentVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgentVersionResponse]
+        def agent_version: () -> Types::AgentVersion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#get_agent_version-instance_method
+      def get_agent_version: (
+                               agent_id: ::String,
+                               agent_version: ::String
+                             ) -> _GetAgentVersionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentVersionResponseSuccess
+
+      interface _GetDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataSourceResponse]
+        def data_source: () -> Types::DataSource
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#get_data_source-instance_method
+      def get_data_source: (
+                             knowledge_base_id: ::String,
+                             data_source_id: ::String
+                           ) -> _GetDataSourceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataSourceResponseSuccess
+
+      interface _GetIngestionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIngestionJobResponse]
+        def ingestion_job: () -> Types::IngestionJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#get_ingestion_job-instance_method
+      def get_ingestion_job: (
+                               knowledge_base_id: ::String,
+                               data_source_id: ::String,
+                               ingestion_job_id: ::String
+                             ) -> _GetIngestionJobResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIngestionJobResponseSuccess
+
+      interface _GetKnowledgeBaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetKnowledgeBaseResponse]
+        def knowledge_base: () -> Types::KnowledgeBase
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#get_knowledge_base-instance_method
+      def get_knowledge_base: (
+                                knowledge_base_id: ::String
+                              ) -> _GetKnowledgeBaseResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetKnowledgeBaseResponseSuccess
+
+      interface _ListAgentActionGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentActionGroupsResponse]
+        def action_group_summaries: () -> ::Array[Types::ActionGroupSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#list_agent_action_groups-instance_method
+      def list_agent_action_groups: (
+                                      agent_id: ::String,
+                                      agent_version: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListAgentActionGroupsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgentActionGroupsResponseSuccess
+
+      interface _ListAgentAliasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentAliasesResponse]
+        def agent_alias_summaries: () -> ::Array[Types::AgentAliasSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#list_agent_aliases-instance_method
+      def list_agent_aliases: (
+                                agent_id: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListAgentAliasesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgentAliasesResponseSuccess
+
+      interface _ListAgentKnowledgeBasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentKnowledgeBasesResponse]
+        def agent_knowledge_base_summaries: () -> ::Array[Types::AgentKnowledgeBaseSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#list_agent_knowledge_bases-instance_method
+      def list_agent_knowledge_bases: (
+                                        agent_id: ::String,
+                                        agent_version: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListAgentKnowledgeBasesResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgentKnowledgeBasesResponseSuccess
+
+      interface _ListAgentVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentVersionsResponse]
+        def agent_version_summaries: () -> ::Array[Types::AgentVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#list_agent_versions-instance_method
+      def list_agent_versions: (
+                                 agent_id: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListAgentVersionsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgentVersionsResponseSuccess
+
+      interface _ListAgentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentsResponse]
+        def agent_summaries: () -> ::Array[Types::AgentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#list_agents-instance_method
+      def list_agents: (
+                         ?max_results: ::Integer,
+                         ?next_token: ::String
+                       ) -> _ListAgentsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgentsResponseSuccess
+
+      interface _ListDataSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataSourcesResponse]
+        def data_source_summaries: () -> ::Array[Types::DataSourceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#list_data_sources-instance_method
+      def list_data_sources: (
+                               knowledge_base_id: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListDataSourcesResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataSourcesResponseSuccess
+
+      interface _ListIngestionJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIngestionJobsResponse]
+        def ingestion_job_summaries: () -> ::Array[Types::IngestionJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#list_ingestion_jobs-instance_method
+      def list_ingestion_jobs: (
+                                 knowledge_base_id: ::String,
+                                 data_source_id: ::String,
+                                 ?filters: Array[
+                                   {
+                                     attribute: ("STATUS"),
+                                     operator: ("EQ"),
+                                     values: Array[::String]
+                                   },
+                                 ],
+                                 ?sort_by: {
+                                   attribute: ("STATUS" | "STARTED_AT"),
+                                   order: ("ASCENDING" | "DESCENDING")
+                                 },
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListIngestionJobsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIngestionJobsResponseSuccess
+
+      interface _ListKnowledgeBasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListKnowledgeBasesResponse]
+        def knowledge_base_summaries: () -> ::Array[Types::KnowledgeBaseSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#list_knowledge_bases-instance_method
+      def list_knowledge_bases: (
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListKnowledgeBasesResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKnowledgeBasesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PrepareAgentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PrepareAgentResponse]
+        def agent_id: () -> ::String
+        def agent_status: () -> ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
+        def agent_version: () -> ::String
+        def prepared_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#prepare_agent-instance_method
+      def prepare_agent: (
+                           agent_id: ::String
+                         ) -> _PrepareAgentResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PrepareAgentResponseSuccess
+
+      interface _StartIngestionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartIngestionJobResponse]
+        def ingestion_job: () -> Types::IngestionJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#start_ingestion_job-instance_method
+      def start_ingestion_job: (
+                                 knowledge_base_id: ::String,
+                                 data_source_id: ::String,
+                                 ?client_token: ::String,
+                                 ?description: ::String
+                               ) -> _StartIngestionJobResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartIngestionJobResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAgentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAgentResponse]
+        def agent: () -> Types::Agent
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#update_agent-instance_method
+      def update_agent: (
+                          agent_id: ::String,
+                          agent_name: ::String,
+                          ?instruction: ::String,
+                          ?foundation_model: ::String,
+                          ?description: ::String,
+                          ?idle_session_ttl_in_seconds: ::Integer,
+                          agent_resource_role_arn: ::String,
+                          ?customer_encryption_key_arn: ::String,
+                          ?prompt_override_configuration: {
+                            prompt_configurations: Array[
+                              {
+                                prompt_type: ("PRE_PROCESSING" | "ORCHESTRATION" | "POST_PROCESSING" | "KNOWLEDGE_BASE_RESPONSE_GENERATION")?,
+                                prompt_creation_mode: ("DEFAULT" | "OVERRIDDEN")?,
+                                prompt_state: ("ENABLED" | "DISABLED")?,
+                                base_prompt_template: ::String?,
+                                inference_configuration: {
+                                  temperature: ::Float?,
+                                  top_p: ::Float?,
+                                  top_k: ::Integer?,
+                                  maximum_length: ::Integer?,
+                                  stop_sequences: Array[::String]?
+                                }?,
+                                parser_mode: ("DEFAULT" | "OVERRIDDEN")?
+                              },
+                            ],
+                            override_lambda: ::String?
+                          }
+                        ) -> _UpdateAgentResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentResponseSuccess
+
+      interface _UpdateAgentActionGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAgentActionGroupResponse]
+        def agent_action_group: () -> Types::AgentActionGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#update_agent_action_group-instance_method
+      def update_agent_action_group: (
+                                       agent_id: ::String,
+                                       agent_version: ::String,
+                                       action_group_id: ::String,
+                                       action_group_name: ::String,
+                                       ?description: ::String,
+                                       ?parent_action_group_signature: ("AMAZON.UserInput"),
+                                       ?action_group_executor: {
+                                         lambda: ::String?
+                                       },
+                                       ?action_group_state: ("ENABLED" | "DISABLED"),
+                                       ?api_schema: {
+                                         s3: {
+                                           s3_bucket_name: ::String?,
+                                           s3_object_key: ::String?
+                                         }?,
+                                         payload: ::String?
+                                       }
+                                     ) -> _UpdateAgentActionGroupResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentActionGroupResponseSuccess
+
+      interface _UpdateAgentAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAgentAliasResponse]
+        def agent_alias: () -> Types::AgentAlias
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#update_agent_alias-instance_method
+      def update_agent_alias: (
+                                agent_id: ::String,
+                                agent_alias_id: ::String,
+                                agent_alias_name: ::String,
+                                ?description: ::String,
+                                ?routing_configuration: Array[
+                                  {
+                                    agent_version: ::String
+                                  },
+                                ]
+                              ) -> _UpdateAgentAliasResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentAliasResponseSuccess
+
+      interface _UpdateAgentKnowledgeBaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAgentKnowledgeBaseResponse]
+        def agent_knowledge_base: () -> Types::AgentKnowledgeBase
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#update_agent_knowledge_base-instance_method
+      def update_agent_knowledge_base: (
+                                         agent_id: ::String,
+                                         agent_version: ::String,
+                                         knowledge_base_id: ::String,
+                                         ?description: ::String,
+                                         ?knowledge_base_state: ("ENABLED" | "DISABLED")
+                                       ) -> _UpdateAgentKnowledgeBaseResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentKnowledgeBaseResponseSuccess
+
+      interface _UpdateDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataSourceResponse]
+        def data_source: () -> Types::DataSource
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#update_data_source-instance_method
+      def update_data_source: (
+                                knowledge_base_id: ::String,
+                                data_source_id: ::String,
+                                name: ::String,
+                                ?description: ::String,
+                                data_source_configuration: {
+                                  type: ("S3"),
+                                  s3_configuration: {
+                                    bucket_arn: ::String,
+                                    inclusion_prefixes: Array[::String]?
+                                  }?
+                                },
+                                ?server_side_encryption_configuration: {
+                                  kms_key_arn: ::String?
+                                },
+                                ?vector_ingestion_configuration: {
+                                  chunking_configuration: {
+                                    chunking_strategy: ("FIXED_SIZE" | "NONE"),
+                                    fixed_size_chunking_configuration: {
+                                      max_tokens: ::Integer,
+                                      overlap_percentage: ::Integer
+                                    }?
+                                  }?
+                                }
+                              ) -> _UpdateDataSourceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataSourceResponseSuccess
+
+      interface _UpdateKnowledgeBaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateKnowledgeBaseResponse]
+        def knowledge_base: () -> Types::KnowledgeBase
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgent/Client.html#update_knowledge_base-instance_method
+      def update_knowledge_base: (
+                                   knowledge_base_id: ::String,
+                                   name: ::String,
+                                   ?description: ::String,
+                                   role_arn: ::String,
+                                   knowledge_base_configuration: {
+                                     type: ("VECTOR"),
+                                     vector_knowledge_base_configuration: {
+                                       embedding_model_arn: ::String
+                                     }?
+                                   },
+                                   storage_configuration: {
+                                     type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS"),
+                                     opensearch_serverless_configuration: {
+                                       collection_arn: ::String,
+                                       vector_index_name: ::String,
+                                       field_mapping: {
+                                         vector_field: ::String,
+                                         text_field: ::String,
+                                         metadata_field: ::String
+                                       }
+                                     }?,
+                                     pinecone_configuration: {
+                                       connection_string: ::String,
+                                       credentials_secret_arn: ::String,
+                                       namespace: ::String?,
+                                       field_mapping: {
+                                         text_field: ::String,
+                                         metadata_field: ::String
+                                       }
+                                     }?,
+                                     redis_enterprise_cloud_configuration: {
+                                       endpoint: ::String,
+                                       vector_index_name: ::String,
+                                       credentials_secret_arn: ::String,
+                                       field_mapping: {
+                                         vector_field: ::String,
+                                         text_field: ::String,
+                                         metadata_field: ::String
+                                       }
+                                     }?,
+                                     rds_configuration: {
+                                       resource_arn: ::String,
+                                       credentials_secret_arn: ::String,
+                                       database_name: ::String,
+                                       table_name: ::String,
+                                       field_mapping: {
+                                         primary_key_field: ::String,
+                                         vector_field: ::String,
+                                         text_field: ::String,
+                                         metadata_field: ::String
+                                       }
+                                     }?
+                                   }
+                                 ) -> _UpdateKnowledgeBaseResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKnowledgeBaseResponseSuccess
+    end
+  end
+end
+

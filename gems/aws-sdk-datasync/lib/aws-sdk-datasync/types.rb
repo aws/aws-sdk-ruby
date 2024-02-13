@@ -674,8 +674,9 @@ module Aws::DataSync
     #   @return [Array<Types::TagListEntry>]
     #
     # @!attribute [rw] user
-    #   Specifies the user who has the permissions to access files, folders,
-    #   and metadata in your file system.
+    #   Specifies the user with the permissions to mount and access the
+    #   files, folders, and file metadata in your FSx for Windows File
+    #   Server file system.
     #
     #   For information about choosing a user with the right level of access
     #   for your transfer, see [required permissions][1] for FSx for Windows
@@ -687,31 +688,18 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   Specifies the name of the Windows domain that the FSx for Windows
-    #   File Server belongs to.
+    #   Specifies the name of the Microsoft Active Directory domain that the
+    #   FSx for Windows File Server file system belongs to.
     #
-    #   If you have multiple domains in your environment, configuring this
-    #   parameter makes sure that DataSync connects to the right file
-    #   server.
-    #
-    #   For more information, see [required permissions][1] for FSx for
-    #   Windows File Server locations.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-windows-location-permissions
+    #   If you have multiple Active Directory domains in your environment,
+    #   configuring this parameter makes sure that DataSync connects to the
+    #   right file system.
     #   @return [String]
     #
     # @!attribute [rw] password
-    #   Specifies the password of the user who has the permissions to access
-    #   files and folders in the file system.
-    #
-    #   For more information, see [required permissions][1] for FSx for
-    #   Windows File Server locations.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-windows-location-permissions
+    #   Specifies the password of the user with the permissions to mount and
+    #   access the files, folders, and file metadata in your FSx for Windows
+    #   File Server file system.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationFsxWindowsRequest AWS API Documentation
@@ -1048,49 +1036,73 @@ module Aws::DataSync
     # CreateLocationS3Request
     #
     # @!attribute [rw] subdirectory
-    #   A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon
-    #   S3 is used to read data from the S3 source location or write data to
-    #   the S3 destination.
+    #   Specifies a prefix in the S3 bucket that DataSync reads from or
+    #   writes to (depending on whether the bucket is a source or
+    #   destination location).
+    #
+    #   <note markdown="1"> DataSync can't transfer objects with a prefix that begins with a
+    #   slash (`/`) or includes `//`, `/./`, or `/../` patterns. For
+    #   example:
+    #
+    #    * `/photos`
+    #
+    #   * `photos//2006/January`
+    #
+    #   * `photos/./2006/February`
+    #
+    #   * `photos/../2006/March`
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_arn
-    #   The ARN of the Amazon S3 bucket. If the bucket is on an Amazon Web
-    #   Services Outpost, this must be an access point ARN.
+    #   Specifies the ARN of the S3 bucket that you want to use as a
+    #   location. (When creating your DataSync task later, you specify
+    #   whether this location is a transfer source or destination.)
+    #
+    #   If your S3 bucket is located on an Outposts resource, you must
+    #   specify an Amazon S3 access point. For more information, see
+    #   [Managing data access with Amazon S3 access points][1] in the
+    #   *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html
     #   @return [String]
     #
     # @!attribute [rw] s3_storage_class
-    #   The Amazon S3 storage class that you want to store your files in
-    #   when this location is used as a task destination. For buckets in
-    #   Amazon Web Services Regions, the storage class defaults to Standard.
-    #   For buckets on Outposts, the storage class defaults to Amazon Web
-    #   Services S3 Outposts.
+    #   Specifies the storage class that you want your objects to use when
+    #   Amazon S3 is a transfer destination.
     #
-    #   For more information about S3 storage classes, see [Amazon S3
-    #   Storage Classes][1]. Some storage classes have behaviors that can
-    #   affect your S3 storage cost. For detailed information, see
-    #   [Considerations when working with S3 storage classes in
-    #   DataSync][2].
+    #   For buckets in Amazon Web Services Regions, the storage class
+    #   defaults to `STANDARD`. For buckets on Outposts, the storage class
+    #   defaults to `OUTPOSTS`.
+    #
+    #   For more information, see [Storage class considerations with Amazon
+    #   S3 transfers][1].
     #
     #
     #
-    #   [1]: http://aws.amazon.com/s3/storage-classes/
-    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes
     #   @return [String]
     #
     # @!attribute [rw] s3_config
-    #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) role used to access an Amazon S3 bucket.
+    #   Specifies the Amazon Resource Name (ARN) of the Identity and Access
+    #   Management (IAM) role that DataSync uses to access your S3 bucket.
     #
-    #   For detailed information about using such a role, see Creating a
-    #   Location for Amazon S3 in the *DataSync User Guide*.
+    #   For more information, see [Accessing S3 buckets][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-access
     #   @return [Types::S3Config]
     #
     # @!attribute [rw] agent_arns
-    #   If you're using DataSync on an Amazon Web Services Outpost, specify
-    #   the Amazon Resource Names (ARNs) of the DataSync agents deployed on
-    #   your Outpost. For more information about launching a DataSync agent
-    #   on an Amazon Web Services Outpost, see [Deploy your DataSync agent
-    #   on Outposts][1].
+    #   (Amazon S3 on Outposts only) Specifies the Amazon Resource Name
+    #   (ARN) of the DataSync agent on your Outpost.
+    #
+    #   For more information, see [Deploy your DataSync agent on
+    #   Outposts][1].
     #
     #
     #
@@ -1098,9 +1110,9 @@ module Aws::DataSync
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   The key-value pair that represents the tag that you want to add to
-    #   the location. The value can be an empty string. We recommend using
-    #   tags to name your resources.
+    #   Specifies labels that help you categorize, filter, and search for
+    #   your Amazon Web Services resources. We recommend creating at least a
+    #   name tag for your transfer location.
     #   @return [Array<Types::TagListEntry>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationS3Request AWS API Documentation
@@ -1119,8 +1131,7 @@ module Aws::DataSync
     # CreateLocationS3Response
     #
     # @!attribute [rw] location_arn
-    #   The Amazon Resource Name (ARN) of the source Amazon S3 bucket
-    #   location that is created.
+    #   The ARN of the S3 location that you created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationS3Response AWS API Documentation
@@ -1140,9 +1151,9 @@ module Aws::DataSync
     #   `/path/to/subdirectory`). Make sure that other SMB clients in your
     #   network can also mount this path.
     #
-    #   To copy all data in the specified subdirectory, DataSync must be
-    #   able to mount the SMB share and access all of its data. For more
-    #   information, see [required permissions][1] for SMB locations.
+    #   To copy all data in the subdirectory, DataSync must be able to mount
+    #   the SMB share and access all of its data. For more information, see
+    #   [required permissions][1] for SMB locations.
     #
     #
     #
@@ -1159,9 +1170,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] user
-    #   Specifies the user name that can mount your SMB file server and has
-    #   permission to access the files and folders involved in your
-    #   transfer.
+    #   Specifies the user that can mount and access the files, folders, and
+    #   file metadata in your SMB file server.
     #
     #   For information about choosing a user with the right level of access
     #   for your transfer, see [required permissions][1] for SMB locations.
@@ -1172,19 +1182,12 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   Specifies the Windows domain name that your SMB file server belongs
-    #   to.
+    #   Specifies the name of the Active Directory domain that your SMB file
+    #   server belongs to.
     #
-    #   If you have multiple domains in your environment, configuring this
-    #   parameter makes sure that DataSync connects to the right file
-    #   server.
-    #
-    #   For more information, see [required permissions][1] for SMB
-    #   locations.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
+    #   If you have multiple Active Directory domains in your environment,
+    #   configuring this parameter makes sure that DataSync connects to the
+    #   right file server.
     #   @return [String]
     #
     # @!attribute [rw] password
@@ -1318,9 +1321,38 @@ module Aws::DataSync
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
     #   @return [Array<Types::FilterRule>]
     #
+    # @!attribute [rw] manifest_config
+    #   Configures a manifest, which is a list of files or objects that you
+    #   want DataSync to transfer. For more information and configuration
+    #   examples, see [Specifying what DataSync transfers by using a
+    #   manifest][1].
+    #
+    #   When using this parameter, your caller identity (the role that
+    #   you're using DataSync with) must have the `iam:PassRole`
+    #   permission. The [AWSDataSyncFullAccess][2] policy includes this
+    #   permission.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awsdatasyncfullaccess
+    #   @return [Types::ManifestConfig]
+    #
     # @!attribute [rw] task_report_config
     #   Specifies how you want to configure a task report, which provides
-    #   detailed information about for your DataSync transfer.
+    #   detailed information about your DataSync transfer. For more
+    #   information, see [Monitoring your DataSync transfers with task
+    #   reports][1].
+    #
+    #   When using this parameter, your caller identity (the role that
+    #   you're using DataSync with) must have the `iam:PassRole`
+    #   permission. The [AWSDataSyncFullAccess][2] policy includes this
+    #   permission.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awsdatasyncfullaccess
     #   @return [Types::TaskReportConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateTaskRequest AWS API Documentation
@@ -1335,6 +1367,7 @@ module Aws::DataSync
       :schedule,
       :tags,
       :includes,
+      :manifest_config,
       :task_report_config)
       SENSITIVE = []
       include Aws::Structure
@@ -1876,8 +1909,8 @@ module Aws::DataSync
     end
 
     # @!attribute [rw] location_arn
-    #   The Amazon Resource Name (ARN) of the FSx for Windows File Server
-    #   location to describe.
+    #   Specifies the Amazon Resource Name (ARN) of the FSx for Windows File
+    #   Server location.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationFsxWindowsRequest AWS API Documentation
@@ -1889,18 +1922,17 @@ module Aws::DataSync
     end
 
     # @!attribute [rw] location_arn
-    #   The Amazon Resource Name (ARN) of the FSx for Windows File Server
-    #   location that was described.
+    #   The ARN of the FSx for Windows File Server location.
     #   @return [String]
     #
     # @!attribute [rw] location_uri
-    #   The URL of the FSx for Windows File Server location that was
-    #   described.
+    #   The uniform resource identifier (URI) of the FSx for Windows File
+    #   Server location.
     #   @return [String]
     #
     # @!attribute [rw] security_group_arns
-    #   The Amazon Resource Names (ARNs) of the security groups that are
-    #   configured for the FSx for Windows File Server file system.
+    #   The ARNs of the security groups that are configured for the FSx for
+    #   Windows File Server file system.
     #   @return [Array<String>]
     #
     # @!attribute [rw] creation_time
@@ -1908,13 +1940,13 @@ module Aws::DataSync
     #   @return [Time]
     #
     # @!attribute [rw] user
-    #   The user who has the permissions to access files and folders in the
-    #   FSx for Windows File Server file system.
+    #   The user with the permissions to mount and access the FSx for
+    #   Windows File Server file system.
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   The name of the Windows domain that the FSx for Windows File Server
-    #   belongs to.
+    #   The name of the Microsoft Active Directory domain that the FSx for
+    #   Windows File Server file system belongs to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationFsxWindowsResponse AWS API Documentation
@@ -1931,8 +1963,7 @@ module Aws::DataSync
     end
 
     # @!attribute [rw] location_arn
-    #   The Amazon Resource Name (ARN) of the HDFS cluster location to
-    #   describe.
+    #   Specifies the Amazon Resource Name (ARN) of the HDFS location.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationHdfsRequest AWS API Documentation
@@ -1944,15 +1975,15 @@ module Aws::DataSync
     end
 
     # @!attribute [rw] location_arn
-    #   The ARN of the HDFS cluster location.
+    #   The ARN of the HDFS location.
     #   @return [String]
     #
     # @!attribute [rw] location_uri
-    #   The URI of the HDFS cluster location.
+    #   The URI of the HDFS location.
     #   @return [String]
     #
     # @!attribute [rw] name_nodes
-    #   The NameNode that manage the HDFS namespace.
+    #   The NameNode that manages the HDFS namespace.
     #   @return [Array<Types::HdfsNameNode>]
     #
     # @!attribute [rw] block_size
@@ -1969,9 +2000,9 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] qop_configuration
-    #   The Quality of Protection (QOP) configuration specifies the Remote
-    #   Procedure Call (RPC) and data transfer protection settings
-    #   configured on the Hadoop Distributed File System (HDFS) cluster.
+    #   The Quality of Protection (QOP) configuration, which specifies the
+    #   Remote Procedure Call (RPC) and data transfer protection settings
+    #   configured on the HDFS cluster.
     #   @return [Types::QopConfiguration]
     #
     # @!attribute [rw] authentication_type
@@ -1980,9 +2011,9 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] simple_user
-    #   The user name used to identify the client on the host operating
-    #   system. This parameter is used if the `AuthenticationType` is
-    #   defined as `SIMPLE`.
+    #   The user name to identify the client on the host operating system.
+    #   This parameter is used if the `AuthenticationType` is defined as
+    #   `SIMPLE`.
     #   @return [String]
     #
     # @!attribute [rw] kerberos_principal
@@ -1992,7 +2023,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] agent_arns
-    #   The ARNs of the agents that are used to connect to the HDFS cluster.
+    #   The ARNs of the DataSync agents that can connect with your HDFS
+    #   cluster.
     #   @return [Array<String>]
     #
     # @!attribute [rw] creation_time
@@ -2040,7 +2072,7 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] location_uri
-    #   The URL of the NFS location.
+    #   The URI of the NFS location.
     #   @return [String]
     #
     # @!attribute [rw] on_prem_config
@@ -2071,8 +2103,8 @@ module Aws::DataSync
     # DescribeLocationObjectStorageRequest
     #
     # @!attribute [rw] location_arn
-    #   The Amazon Resource Name (ARN) of the object storage system location
-    #   that you want information about.
+    #   Specifies the Amazon Resource Name (ARN) of the object storage
+    #   system location.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationObjectStorageRequest AWS API Documentation
@@ -2090,7 +2122,7 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] location_uri
-    #   The URL of the object storage system location.
+    #   The URI of the object storage system location.
     #   @return [String]
     #
     # @!attribute [rw] access_key
@@ -2108,8 +2140,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] agent_arns
-    #   The ARNs of the DataSync agents that can securely connect with your
-    #   location.
+    #   The ARNs of the DataSync agents that can connect with your object
+    #   storage system.
     #   @return [Array<String>]
     #
     # @!attribute [rw] creation_time
@@ -2139,8 +2171,7 @@ module Aws::DataSync
     # DescribeLocationS3Request
     #
     # @!attribute [rw] location_arn
-    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket location to
-    #   describe.
+    #   Specifies the Amazon Resource Name (ARN) of the Amazon S3 location.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationS3Request AWS API Documentation
@@ -2154,8 +2185,7 @@ module Aws::DataSync
     # DescribeLocationS3Response
     #
     # @!attribute [rw] location_arn
-    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket or access
-    #   point.
+    #   The ARN of the Amazon S3 location.
     #   @return [String]
     #
     # @!attribute [rw] location_uri
@@ -2163,32 +2193,34 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] s3_storage_class
-    #   The Amazon S3 storage class that you chose to store your files in
-    #   when this location is used as a task destination. For more
-    #   information about S3 storage classes, see [Amazon S3 Storage
-    #   Classes][1]. Some storage classes have behaviors that can affect
-    #   your S3 storage cost. For detailed information, see [Considerations
-    #   when working with S3 storage classes in DataSync][2].
+    #   When Amazon S3 is a destination location, this is the storage class
+    #   that you chose for your objects.
+    #
+    #   Some storage classes have behaviors that can affect your Amazon S3
+    #   storage costs. For more information, see [Storage class
+    #   considerations with Amazon S3 transfers][1].
     #
     #
     #
-    #   [1]: http://aws.amazon.com/s3/storage-classes/
-    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes
     #   @return [String]
     #
     # @!attribute [rw] s3_config
-    #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) role used to access an Amazon S3 bucket.
+    #   Specifies the Amazon Resource Name (ARN) of the Identity and Access
+    #   Management (IAM) role that DataSync uses to access your S3 bucket.
     #
-    #   For detailed information about using such a role, see Creating a
-    #   Location for Amazon S3 in the *DataSync User Guide*.
+    #   For more information, see [Accessing S3 buckets][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-access
     #   @return [Types::S3Config]
     #
     # @!attribute [rw] agent_arns
-    #   If you are using DataSync on an Amazon Web Services Outpost, the
-    #   Amazon Resource Name (ARNs) of the EC2 agents deployed on your
-    #   Outpost. For more information about launching a DataSync agent on an
-    #   Amazon Web Services Outpost, see [Deploy your DataSync agent on
+    #   The ARNs of the DataSync agents deployed on your Outpost when using
+    #   working with Amazon S3 on Outposts.
+    #
+    #   For more information, see [Deploy your DataSync agent on
     #   Outposts][1].
     #
     #
@@ -2197,7 +2229,7 @@ module Aws::DataSync
     #   @return [Array<String>]
     #
     # @!attribute [rw] creation_time
-    #   The time that the Amazon S3 bucket location was created.
+    #   The time that the Amazon S3 location was created.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationS3Response AWS API Documentation
@@ -2216,7 +2248,8 @@ module Aws::DataSync
     # DescribeLocationSmbRequest
     #
     # @!attribute [rw] location_arn
-    #   The Amazon Resource Name (ARN) of the SMB location to describe.
+    #   Specifies the Amazon Resource Name (ARN) of the SMB location that
+    #   you want information about.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationSmbRequest AWS API Documentation
@@ -2230,31 +2263,30 @@ module Aws::DataSync
     # DescribeLocationSmbResponse
     #
     # @!attribute [rw] location_arn
-    #   The Amazon Resource Name (ARN) of the SMB location that was
-    #   described.
+    #   The ARN of the SMB location.
     #   @return [String]
     #
     # @!attribute [rw] location_uri
-    #   The URL of the source SMB location that was described.
+    #   The URI of the SMB location.
     #   @return [String]
     #
     # @!attribute [rw] agent_arns
-    #   The Amazon Resource Name (ARN) of the source SMB file system
-    #   location that is created.
+    #   The ARNs of the DataSync agents that can connect with your SMB file
+    #   server.
     #   @return [Array<String>]
     #
     # @!attribute [rw] user
-    #   The user who can mount the share, has the permissions to access
-    #   files and folders in the SMB share.
+    #   The user that can mount and access the files, folders, and file
+    #   metadata in your SMB file server.
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   The name of the Windows domain that the SMB server belongs to.
+    #   The name of the Microsoft Active Directory domain that the SMB file
+    #   server belongs to.
     #   @return [String]
     #
     # @!attribute [rw] mount_options
-    #   The mount options that are available for DataSync to use to access
-    #   an SMB location.
+    #   The protocol that DataSync use to access your SMB file.
     #   @return [Types::SmbMountOptions]
     #
     # @!attribute [rw] creation_time
@@ -2571,6 +2603,16 @@ module Aws::DataSync
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
     #   @return [Array<Types::FilterRule>]
     #
+    # @!attribute [rw] manifest_config
+    #   The configuration of the manifest that lists the files or objects to
+    #   transfer. For more information, see [Specifying what DataSync
+    #   transfers by using a manifest][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html
+    #   @return [Types::ManifestConfig]
+    #
     # @!attribute [rw] start_time
     #   The time when the task execution started.
     #   @return [Time]
@@ -2612,19 +2654,24 @@ module Aws::DataSync
     #   number of bytes sent over the network, see `BytesCompressed`.
     #   @return [Integer]
     #
-    # @!attribute [rw] result
-    #   The result of the task execution.
-    #   @return [Types::TaskExecutionResultDetail]
-    #
     # @!attribute [rw] bytes_compressed
     #   The physical number of bytes transferred over the network after
     #   compression was applied. In most cases, this number is less than
     #   `BytesTransferred` unless the data isn't compressible.
     #   @return [Integer]
     #
+    # @!attribute [rw] result
+    #   The result of the task execution.
+    #   @return [Types::TaskExecutionResultDetail]
+    #
     # @!attribute [rw] task_report_config
     #   The configuration of your task report, which provides detailed
-    #   information about for your DataSync transfer.
+    #   information about for your DataSync transfer. For more information,
+    #   see [Creating a task report][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
     #   @return [Types::TaskReportConfig]
     #
     # @!attribute [rw] files_deleted
@@ -2686,14 +2733,15 @@ module Aws::DataSync
       :options,
       :excludes,
       :includes,
+      :manifest_config,
       :start_time,
       :estimated_files_to_transfer,
       :estimated_bytes_to_transfer,
       :files_transferred,
       :bytes_written,
       :bytes_transferred,
-      :result,
       :bytes_compressed,
+      :result,
       :task_report_config,
       :files_deleted,
       :files_skipped,
@@ -2831,9 +2879,20 @@ module Aws::DataSync
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
     #   @return [Array<Types::FilterRule>]
     #
+    # @!attribute [rw] manifest_config
+    #   The configuration of the manifest that lists the files or objects to
+    #   transfer. For more information, see [Specifying what DataSync
+    #   transfers by using a manifest][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html
+    #   @return [Types::ManifestConfig]
+    #
     # @!attribute [rw] task_report_config
-    #   The configuration of your task report. For more information, see
-    #   [Creating a task report][1].
+    #   The configuration of your task report, which provides detailed
+    #   information about for your DataSync transfer. For more information,
+    #   see [Creating a task report][1].
     #
     #
     #
@@ -2859,6 +2918,7 @@ module Aws::DataSync
       :error_detail,
       :creation_time,
       :includes,
+      :manifest_config,
       :task_report_config)
       SENSITIVE = []
       include Aws::Structure
@@ -3022,6 +3082,9 @@ module Aws::DataSync
     # @!attribute [rw] domain
     #   Specifies the fully qualified domain name (FQDN) of the Microsoft
     #   Active Directory that your storage virtual machine (SVM) belongs to.
+    #
+    #   If you have multiple domains in your environment, configuring this
+    #   setting makes sure that DataSync connects to the right SVM.
     #   @return [String]
     #
     # @!attribute [rw] mount_options
@@ -3035,37 +3098,15 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] user
-    #   Specifies a user name that can mount the location and access the
-    #   files, folders, and metadata that you need in the SVM.
+    #   Specifies a user that can mount and access the files, folders, and
+    #   metadata in your SVM.
     #
-    #   If you provide a user in your Active Directory, note the following:
-    #
-    #   * If you're using Directory Service for Microsoft Active Directory,
-    #     the user must be a member of the Amazon Web Services Delegated FSx
-    #     Administrators group.
-    #
-    #   * If you're using a self-managed Active Directory, the user must be
-    #     a member of either the Domain Admins group or a custom group that
-    #     you specified for file system administration when you created your
-    #     file system.
-    #
-    #   Make sure that the user has the permissions it needs to copy the
-    #   data you want:
-    #
-    #   * `SE_TCB_NAME`: Required to set object ownership and file metadata.
-    #     With this privilege, you also can copy NTFS discretionary access
-    #     lists (DACLs).
-    #
-    #   * `SE_SECURITY_NAME`: May be needed to copy NTFS system access
-    #     control lists (SACLs). This operation specifically requires the
-    #     Windows privilege, which is granted to members of the Domain
-    #     Admins group. If you configure your task to copy SACLs, make sure
-    #     that the user has the required privileges. For information about
-    #     copying SACLs, see [Ownership and permissions-related options][1].
+    #   For information about choosing a user with the right level of access
+    #   for your transfer, see [Using the SMB protocol][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-task.html#configure-ownership-and-permissions
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-smb
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/FsxProtocolSmb AWS API Documentation
@@ -3449,17 +3490,17 @@ module Aws::DataSync
     # ListTaskExecutions
     #
     # @!attribute [rw] task_arn
-    #   The Amazon Resource Name (ARN) of the task whose tasks you want to
-    #   list.
+    #   Specifies the Amazon Resource Name (ARN) of the task that you want
+    #   execution information about.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of executed tasks to list.
+    #   Specifies how many results you want in the response.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   An opaque string that indicates the position at which to begin the
-    #   next list of the executed tasks.
+    #   Specifies an opaque string that indicates the position at which to
+    #   begin the next list of results in the response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListTaskExecutionsRequest AWS API Documentation
@@ -3475,12 +3516,12 @@ module Aws::DataSync
     # ListTaskExecutionsResponse
     #
     # @!attribute [rw] task_executions
-    #   A list of executed tasks.
+    #   A list of the task's executions.
     #   @return [Array<Types::TaskExecutionListEntry>]
     #
     # @!attribute [rw] next_token
-    #   An opaque string that indicates the position at which to begin
-    #   returning the next list of executed tasks.
+    #   The opaque string that indicates the position to begin the next list
+    #   of results in the response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListTaskExecutionsResponse AWS API Documentation
@@ -3624,6 +3665,58 @@ module Aws::DataSync
     class LocationListEntry < Struct.new(
       :location_arn,
       :location_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures a manifest, which is a list of files or objects that you
+    # want DataSync to transfer. For more information and configuration
+    # examples, see [Specifying what DataSync transfers by using a
+    # manifest][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html
+    #
+    # @!attribute [rw] action
+    #   Specifies what DataSync uses the manifest for.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   Specifies the file format of your manifest. For more information,
+    #   see [Creating a manifest][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html#transferring-with-manifest-create
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   Specifies the manifest that you want DataSync to use and where it's
+    #   hosted.
+    #
+    #   <note markdown="1"> You must specify this parameter if you're configuring a new
+    #   manifest on or after February 7, 2024.
+    #
+    #    If you don't, you'll get a 400 status code and
+    #   `ValidationException` error stating that you're missing the IAM
+    #   role for DataSync to access the S3 bucket where you're hosting your
+    #   manifest. For more information, see [Providing DataSync access to
+    #   your manifest][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html#transferring-with-manifest-access
+    #   @return [Types::SourceManifestConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ManifestConfig AWS API Documentation
+    #
+    class ManifestConfig < Struct.new(
+      :action,
+      :format,
+      :source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4039,30 +4132,28 @@ module Aws::DataSync
     #   Specifies how and when DataSync checks the integrity of your data
     #   during a transfer.
     #
-    #   Default value: `POINT_IN_TIME_CONSISTENT`
+    #   * `ONLY_FILES_TRANSFERRED` (recommended) - DataSync calculates the
+    #     checksum of transferred files and metadata at the source location.
+    #     At the end of the transfer, DataSync then compares this checksum
+    #     to the checksum calculated on those files at the destination.
     #
-    #   `ONLY_FILES_TRANSFERRED` (recommended): DataSync calculates the
-    #   checksum of transferred files and metadata at the source location.
-    #   At the end of the transfer, DataSync then compares this checksum to
-    #   the checksum calculated on those files at the destination.
+    #     We recommend this option when transferring to S3 Glacier Flexible
+    #     Retrieval or S3 Glacier Deep Archive storage classes. For more
+    #     information, see [Storage class considerations with Amazon S3
+    #     locations][1].
     #
-    #   We recommend this option when transferring to S3 Glacier Flexible
-    #   Retrieval or S3 Glacier Deep Archive storage classes. For more
-    #   information, see [Storage class considerations with Amazon S3
-    #   locations][1].
+    #   * `POINT_IN_TIME_CONSISTENT` (default) - At the end of the transfer,
+    #     DataSync scans the entire source and destination to verify that
+    #     both locations are fully synchronized.
     #
-    #   `POINT_IN_TIME_CONSISTENT`: At the end of the transfer, DataSync
-    #   scans the entire source and destination to verify that both
-    #   locations are fully synchronized.
+    #     You can't use this option when transferring to S3 Glacier
+    #     Flexible Retrieval or S3 Glacier Deep Archive storage classes. For
+    #     more information, see [Storage class considerations with Amazon S3
+    #     locations][1].
     #
-    #   You can't use this option when transferring to S3 Glacier Flexible
-    #   Retrieval or S3 Glacier Deep Archive storage classes. For more
-    #   information, see [Storage class considerations with Amazon S3
-    #   locations][1].
-    #
-    #   `NONE`: DataSync doesn't run additional verification at the end of
-    #   the transfer. All data transmissions are still integrity-checked
-    #   with checksum verification during the transfer.
+    #   * `NONE` - DataSync doesn't run additional verification at the end
+    #     of the transfer. All data transmissions are still
+    #     integrity-checked with checksum verification during the transfer.
     #
     #
     #
@@ -4070,17 +4161,21 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] overwrite_mode
-    #   Specifies whether data at the destination location should be
-    #   overwritten or preserved. If set to `NEVER`, a destination file for
-    #   example will not be replaced by a source file (even if the
-    #   destination file differs from the source file). If you modify files
-    #   in the destination and you sync the files, you can use this value to
-    #   protect against overwriting those changes.
+    #   Specifies whether DataSync should modify or preserve data at the
+    #   destination location.
     #
-    #   Some storage classes have specific behaviors that can affect your
-    #   Amazon S3 storage cost. For detailed information, see
-    #   [Considerations when working with Amazon S3 storage classes in
-    #   DataSync][1].
+    #   * `ALWAYS` (default) - DataSync modifies data in the destination
+    #     location when source data (including metadata) has changed.
+    #
+    #     If DataSync overwrites objects, you might incur additional charges
+    #     for certain Amazon S3 storage classes (for example, for retrieval
+    #     or early deletion). For more information, see [Storage class
+    #     considerations with Amazon S3 transfers][1].
+    #
+    #   * `NEVER` - DataSync doesn't overwrite data in the destination
+    #     location even if the source data has changed. You can use this
+    #     option to protect against overwriting changes made to files or
+    #     objects in the destination.
     #
     #
     #
@@ -4089,22 +4184,19 @@ module Aws::DataSync
     #
     # @!attribute [rw] atime
     #   Specifies whether to preserve metadata indicating the last time a
-    #   file was read or written to. If you set `Atime` to `BEST_EFFORT`,
-    #   DataSync attempts to preserve the original `Atime` attribute on all
-    #   source files (that is, the version before the `PREPARING` phase of
-    #   the task execution).
+    #   file was read or written to.
     #
     #   <note markdown="1"> The behavior of `Atime` isn't fully standard across platforms, so
     #   DataSync can only do this on a best-effort basis.
     #
     #    </note>
     #
-    #   Default value: `BEST_EFFORT`
+    #   * `BEST_EFFORT` (default) - DataSync attempts to preserve the
+    #     original `Atime` attribute on all source files (that is, the
+    #     version before the `PREPARING` phase of the task execution). This
+    #     option is recommended.
     #
-    #   `BEST_EFFORT`: Attempt to preserve the per-file `Atime` value
-    #   (recommended).
-    #
-    #   `NONE`: Ignore `Atime`.
+    #   * `NONE` - Ignores `Atime`.
     #
     #   <note markdown="1"> If `Atime` is set to `BEST_EFFORT`, `Mtime` must be set to
     #   `PRESERVE`.
@@ -4120,11 +4212,10 @@ module Aws::DataSync
     #   execution. This option is required when you need to run the a task
     #   more than once.
     #
-    #   Default Value: `PRESERVE`
+    #   * `PRESERVE` (default) - Preserves original `Mtime`, which is
+    #     recommended.
     #
-    #   `PRESERVE`: Preserve original `Mtime` (recommended)
-    #
-    #   `NONE`: Ignore `Mtime`.
+    #   * `NONE` - Ignores `Mtime`.
     #
     #   <note markdown="1"> If `Mtime` is set to `PRESERVE`, `Atime` must be set to
     #   `BEST_EFFORT`.
@@ -4137,15 +4228,12 @@ module Aws::DataSync
     # @!attribute [rw] uid
     #   Specifies the POSIX user ID (UID) of the file's owner.
     #
+    #   * `INT_VALUE` (default) - Preserves the integer value of UID and
+    #     group ID (GID), which is recommended.
+    #
+    #   * `NONE` - Ignores UID and GID.
+    #
     #   For more information, see [Metadata copied by DataSync][1].
-    #
-    #   Default value: `INT_VALUE`. This preserves the integer value of the
-    #   ID.
-    #
-    #   `INT_VALUE`: Preserve the integer value of UID and group ID (GID)
-    #   (recommended).
-    #
-    #   `NONE`: Ignore UID and GID.
     #
     #
     #
@@ -4155,15 +4243,12 @@ module Aws::DataSync
     # @!attribute [rw] gid
     #   Specifies the POSIX group ID (GID) of the file's owners.
     #
+    #   * `INT_VALUE` (default) - Preserves the integer value of user ID
+    #     (UID) and GID, which is recommended.
+    #
+    #   * `NONE` - Ignores UID and GID.
+    #
     #   For more information, see [Metadata copied by DataSync][1].
-    #
-    #   Default value: `INT_VALUE`. This preserves the integer value of the
-    #   ID.
-    #
-    #   `INT_VALUE`: Preserve the integer value of user ID (UID) and GID
-    #   (recommended).
-    #
-    #   `NONE`: Ignore UID and GID.
     #
     #
     #
@@ -4178,12 +4263,11 @@ module Aws::DataSync
     #   For detailed information, see [Considerations when working with
     #   Amazon S3 storage classes in DataSync][1].
     #
-    #   Default value: `PRESERVE`
+    #   * `PRESERVE` (default) - Ignores such destination files, which is
+    #     recommended.
     #
-    #   `PRESERVE`: Ignore such destination files (recommended).
-    #
-    #   `REMOVE`: Delete destination files that aren’t present in the
-    #   source.
+    #   * `REMOVE` - Deletes destination files that aren’t present in the
+    #     source.
     #
     #   <note markdown="1"> If you set this parameter to `REMOVE`, you can't set `TransferMode`
     #   to `ALL`. When you transfer all data, DataSync doesn't scan your
@@ -4207,12 +4291,10 @@ module Aws::DataSync
     #
     #    </note>
     #
-    #   Default value: `NONE`
+    #   * `NONE` (default) - Ignores special devices (recommended).
     #
-    #   `NONE`: Ignore special devices (recommended).
-    #
-    #   `PRESERVE`: Preserve character and block device metadata. This
-    #   option currently isn't supported for Amazon EFS.
+    #   * `PRESERVE` - Preserves character and block device metadata. This
+    #     option currently isn't supported for Amazon EFS.
     #   @return [String]
     #
     # @!attribute [rw] posix_permissions
@@ -4221,11 +4303,10 @@ module Aws::DataSync
     #
     #   For more information, see [Metadata copied by DataSync][1].
     #
-    #   Default value: `PRESERVE`
+    #   * `PRESERVE` (default) - Preserves POSIX-style permissions, which is
+    #     recommended.
     #
-    #   `PRESERVE`: Preserve POSIX-style permissions (recommended).
-    #
-    #   `NONE`: Ignore permissions.
+    #   * `NONE` - Ignores POSIX-style permissions.
     #
     #   <note markdown="1"> DataSync can preserve extant permissions of a source location.
     #
@@ -4257,10 +4338,13 @@ module Aws::DataSync
     #   CloudWatch Logs log group. To specify the log group, see
     #   [CloudWatchLogGroupArn][1].
     #
-    #   If you set `LogLevel` to `OFF`, no logs are published. `BASIC`
-    #   publishes logs on errors for individual files transferred.
-    #   `TRANSFER` publishes logs for every file or object that is
-    #   transferred and integrity checked.
+    #   * `BASIC` - Publishes logs with only basic information (such as
+    #     transfer errors).
+    #
+    #   * `TRANSFER` - Publishes logs for all files or objects that your
+    #     DataSync task transfers and performs data-integrity checks on.
+    #
+    #   * `OFF` - No logs are published.
     #
     #
     #
@@ -4273,12 +4357,12 @@ module Aws::DataSync
     #   transfers all the content from the source (without comparing what's
     #   in the destination).
     #
-    #   `CHANGED`: DataSync copies only data or metadata that is new or
-    #   different content from the source location to the destination
-    #   location.
+    #   * `CHANGED` (default) - DataSync copies only data or metadata that
+    #     is new or different content from the source location to the
+    #     destination location.
     #
-    #   `ALL`: DataSync copies all source location content to the
-    #   destination (without comparing what's in the destination).
+    #   * `ALL` - DataSync copies everything in the source to the
+    #     destination without comparing differences between the locations.
     #   @return [String]
     #
     # @!attribute [rw] security_descriptor_copy_flags
@@ -4290,52 +4374,53 @@ module Aws::DataSync
     #   Server locations. For more information, see [how DataSync handles
     #   metadata][1].
     #
-    #   Default value: `OWNER_DACL`
+    #   * `OWNER_DACL` (default) - For each copied object, DataSync copies
+    #     the following metadata:
     #
-    #   `OWNER_DACL`: For each copied object, DataSync copies the following
-    #   metadata:
+    #     * The object owner.
     #
-    #   * The object owner.
+    #     * NTFS discretionary access control lists (DACLs), which determine
+    #       whether to grant access to an object.
     #
-    #   * NTFS discretionary access control lists (DACLs), which determine
-    #     whether to grant access to an object.
+    #       DataSync won't copy NTFS system access control lists (SACLs)
+    #       with this option.
     #
-    #     DataSync won't copy NTFS system access control lists (SACLs) with
-    #     this option.
+    #   * `OWNER_DACL_SACL` - For each copied object, DataSync copies the
+    #     following metadata:
     #
-    #   `OWNER_DACL_SACL`: For each copied object, DataSync copies the
-    #   following metadata:
+    #     * The object owner.
     #
-    #   * The object owner.
+    #     * NTFS discretionary access control lists (DACLs), which determine
+    #       whether to grant access to an object.
     #
-    #   * NTFS discretionary access control lists (DACLs), which determine
-    #     whether to grant access to an object.
+    #     * SACLs, which are used by administrators to log attempts to
+    #       access a secured object.
     #
-    #   * SACLs, which are used by administrators to log attempts to access
-    #     a secured object.
+    #       Copying SACLs requires granting additional permissions to the
+    #       Windows user that DataSync uses to access your SMB location. For
+    #       information about choosing a user with the right permissions,
+    #       see required permissions for [SMB][2], [FSx for Windows File
+    #       Server][3], or [FSx for ONTAP][4] (depending on the type of
+    #       location in your transfer).
     #
-    #     Copying SACLs requires granting additional permissions to the
-    #     Windows user that DataSync uses to access your SMB location. For
-    #     information about choosing a user that ensures sufficient
-    #     permissions to files, folders, and metadata, see
-    #     [user](create-smb-location.html#SMBuser).
-    #
-    #   `NONE`: None of the SMB security descriptor components are copied.
-    #   Destination objects are owned by the user that was provided for
-    #   accessing the destination location. DACLs and SACLs are set based on
-    #   the destination server’s configuration.
+    #   * `NONE` - None of the SMB security descriptor components are
+    #     copied. Destination objects are owned by the user that was
+    #     provided for accessing the destination location. DACLs and SACLs
+    #     are set based on the destination server’s configuration.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html#configuring-smb-permissions
+    #   [3]: https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-windows-location-permissions
+    #   [4]: https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-smb
     #   @return [String]
     #
     # @!attribute [rw] object_tags
-    #   Specifies whether object tags are preserved when transferring
-    #   between object storage systems. If you want your DataSync task to
-    #   ignore object tags, specify the `NONE` value.
-    #
-    #   Default Value: `PRESERVE`
+    #   Specifies whether you want DataSync to `PRESERVE` object tags
+    #   (default behavior) when transferring between object storage systems.
+    #   If you want your DataSync task to ignore object tags, specify the
+    #   `NONE` value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/Options AWS API Documentation
@@ -4397,16 +4482,17 @@ module Aws::DataSync
     # @!attribute [rw] version
     #   The version of the DataSync agent.
     #
-    #   Beginning December 7, 2023, we will discontinue version 1 DataSync
-    #   agents. Check the DataSync console to see if you have affected
-    #   agents. If you do, [replace][1] those agents before then to avoid
-    #   data transfer or storage discovery disruptions. If you need more
-    #   help, contact [Amazon Web Services Support][2].
+    #   On December 7, 2023, we discontinued version 1 DataSync agents.
+    #   Check the DataSync console to see if you have affected agents. If
+    #   you do, [replace][1] those agents or [delete][2] them if they
+    #   aren't in use. If you need more help, contact [Amazon Web Services
+    #   Support][3].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/replacing-agent.html
-    #   [2]: https://aws.amazon.com/contact-us/
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/deleting-agent.html
+    #   [3]: https://aws.amazon.com/contact-us/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/Platform AWS API Documentation
@@ -4582,7 +4668,7 @@ module Aws::DataSync
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ReportDestinationS3 AWS API Documentation
@@ -4769,20 +4855,69 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # The Amazon Resource Name (ARN) of the Identity and Access Management
-    # (IAM) role used to access an Amazon S3 bucket.
+    # Specifies the Amazon Resource Name (ARN) of the Identity and Access
+    # Management (IAM) role that DataSync uses to access your S3 bucket.
     #
-    # For detailed information about using such a role, see Creating a
-    # Location for Amazon S3 in the *DataSync User Guide*.
+    # For more information, see [Accessing S3 buckets][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-access
     #
     # @!attribute [rw] bucket_access_role_arn
-    #   The ARN of the IAM role for accessing the S3 bucket.
+    #   Specifies the ARN of the IAM role that DataSync uses to access your
+    #   S3 bucket.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/S3Config AWS API Documentation
     #
     class S3Config < Struct.new(
       :bucket_access_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the S3 bucket where you're hosting the manifest that you
+    # want DataSync to use. For more information and configuration examples,
+    # see [Specifying what DataSync transfers by using a manifest][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html
+    #
+    # @!attribute [rw] manifest_object_path
+    #   Specifies the Amazon S3 object key of your manifest. This can
+    #   include a prefix (for example, `prefix/my-manifest.csv`).
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_access_role_arn
+    #   Specifies the Identity and Access Management (IAM) role that allows
+    #   DataSync to access your manifest. For more information, see
+    #   [Providing DataSync access to your manifest][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html#transferring-with-manifest-access
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_arn
+    #   Specifies the Amazon Resource Name (ARN) of the S3 bucket where
+    #   you're hosting your manifest.
+    #   @return [String]
+    #
+    # @!attribute [rw] manifest_object_version_id
+    #   Specifies the object version ID of the manifest that you want
+    #   DataSync to use. If you don't set this, DataSync uses the latest
+    #   version of the object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/S3ManifestConfig AWS API Documentation
+    #
+    class S3ManifestConfig < Struct.new(
+      :manifest_object_path,
+      :bucket_access_role_arn,
+      :s3_bucket_arn,
+      :manifest_object_version_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4833,6 +4968,26 @@ module Aws::DataSync
     #
     class SmbMountOptions < Struct.new(
       :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the manifest that you want DataSync to use and where it's
+    # hosted. For more information and configuration examples, see
+    # [Specifying what DataSync transfers by using a manifest][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html
+    #
+    # @!attribute [rw] s3
+    #   Specifies the S3 bucket where you're hosting your manifest.
+    #   @return [Types::S3ManifestConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/SourceManifestConfig AWS API Documentation
+    #
+    class SourceManifestConfig < Struct.new(
+      :s3)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4923,6 +5078,46 @@ module Aws::DataSync
     #   "\|" (that is, a pipe), for example, `"/folder1|/folder2"`.
     #   @return [Array<Types::FilterRule>]
     #
+    # @!attribute [rw] manifest_config
+    #   Configures a manifest, which is a list of files or objects that you
+    #   want DataSync to transfer. For more information and configuration
+    #   examples, see [Specifying what DataSync transfers by using a
+    #   manifest][1].
+    #
+    #   When using this parameter, your caller identity (the role that
+    #   you're using DataSync with) must have the `iam:PassRole`
+    #   permission. The [AWSDataSyncFullAccess][2] policy includes this
+    #   permission.
+    #
+    #   To remove a manifest configuration, specify this parameter with an
+    #   empty value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awsdatasyncfullaccess
+    #   @return [Types::ManifestConfig]
+    #
+    # @!attribute [rw] task_report_config
+    #   Specifies how you want to configure a task report, which provides
+    #   detailed information about your DataSync transfer. For more
+    #   information, see [Monitoring your DataSync transfers with task
+    #   reports][1].
+    #
+    #   When using this parameter, your caller identity (the role that
+    #   you're using DataSync with) must have the `iam:PassRole`
+    #   permission. The [AWSDataSyncFullAccess][2] policy includes this
+    #   permission.
+    #
+    #   To remove a task report configuration, specify this parameter as
+    #   empty.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awsdatasyncfullaccess
+    #   @return [Types::TaskReportConfig]
+    #
     # @!attribute [rw] tags
     #   Specifies the tags that you want to apply to the Amazon Resource
     #   Name (ARN) representing the task execution.
@@ -4931,11 +5126,6 @@ module Aws::DataSync
     #   for your DataSync resources.
     #   @return [Array<Types::TagListEntry>]
     #
-    # @!attribute [rw] task_report_config
-    #   Specifies how you want to configure a task report, which provides
-    #   detailed information about for your DataSync transfer.
-    #   @return [Types::TaskReportConfig]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/StartTaskExecutionRequest AWS API Documentation
     #
     class StartTaskExecutionRequest < Struct.new(
@@ -4943,8 +5133,9 @@ module Aws::DataSync
       :override_options,
       :includes,
       :excludes,
-      :tags,
-      :task_report_config)
+      :manifest_config,
+      :task_report_config,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5046,21 +5237,24 @@ module Aws::DataSync
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # Represents a single entry in a list of task executions.
-    # `TaskExecutionListEntry` returns an array that contains a list of
-    # specific invocations of a task when the [ListTaskExecutions][1]
-    # operation is called.
+    # Represents a single entry in a list of DataSync task executions
+    # that's returned with the [ListTaskExecutions][1] operation.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_ListTaskExecutions.html
     #
     # @!attribute [rw] task_execution_arn
-    #   The Amazon Resource Name (ARN) of the task that was executed.
+    #   The Amazon Resource Name (ARN) of a task execution.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of a task execution.
+    #   The status of a task execution. For more information, see [Task
+    #   execution statuses][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/understand-task-statuses.html#understand-task-execution-statuses
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TaskExecutionListEntry AWS API Documentation
@@ -5903,9 +6097,43 @@ module Aws::DataSync
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
     #   @return [Array<Types::FilterRule>]
     #
+    # @!attribute [rw] manifest_config
+    #   Configures a manifest, which is a list of files or objects that you
+    #   want DataSync to transfer. For more information and configuration
+    #   examples, see [Specifying what DataSync transfers by using a
+    #   manifest][1].
+    #
+    #   When using this parameter, your caller identity (the IAM role that
+    #   you're using DataSync with) must have the `iam:PassRole`
+    #   permission. The [AWSDataSyncFullAccess][2] policy includes this
+    #   permission.
+    #
+    #   To remove a manifest configuration, specify this parameter as empty.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awsdatasyncfullaccess
+    #   @return [Types::ManifestConfig]
+    #
     # @!attribute [rw] task_report_config
     #   Specifies how you want to configure a task report, which provides
-    #   detailed information about for your DataSync transfer.
+    #   detailed information about your DataSync transfer. For more
+    #   information, see [Monitoring your DataSync transfers with task
+    #   reports][1].
+    #
+    #   When using this parameter, your caller identity (the IAM role that
+    #   you're using DataSync with) must have the `iam:PassRole`
+    #   permission. The [AWSDataSyncFullAccess][2] policy includes this
+    #   permission.
+    #
+    #   To remove a task report configuration, specify this parameter as
+    #   empty.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awsdatasyncfullaccess
     #   @return [Types::TaskReportConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateTaskRequest AWS API Documentation
@@ -5918,6 +6146,7 @@ module Aws::DataSync
       :name,
       :cloud_watch_log_group_arn,
       :includes,
+      :manifest_config,
       :task_report_config)
       SENSITIVE = []
       include Aws::Structure

@@ -1,0 +1,265 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::OAM
+  module Types
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor amzn_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLinkInput
+      attr_accessor label_template: ::String
+      attr_accessor resource_types: ::Array[("AWS::CloudWatch::Metric" | "AWS::Logs::LogGroup" | "AWS::XRay::Trace" | "AWS::ApplicationInsights::Application")]
+      attr_accessor sink_identifier: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateLinkOutput
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor label: ::String
+      attr_accessor label_template: ::String
+      attr_accessor resource_types: ::Array[::String]
+      attr_accessor sink_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSinkInput
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSinkOutput
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DeleteLinkInput
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLinkOutput < Aws::EmptyStructure
+    end
+
+    class DeleteSinkInput
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSinkOutput < Aws::EmptyStructure
+    end
+
+    class GetLinkInput
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetLinkOutput
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor label: ::String
+      attr_accessor label_template: ::String
+      attr_accessor resource_types: ::Array[::String]
+      attr_accessor sink_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetSinkInput
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetSinkOutput
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetSinkPolicyInput
+      attr_accessor sink_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetSinkPolicyOutput
+      attr_accessor sink_arn: ::String
+      attr_accessor sink_id: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServiceFault
+      attr_accessor message: ::String
+      attr_accessor amzn_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      attr_accessor amzn_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class ListAttachedLinksInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sink_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ListAttachedLinksItem
+      attr_accessor label: ::String
+      attr_accessor link_arn: ::String
+      attr_accessor resource_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListAttachedLinksOutput
+      attr_accessor items: ::Array[Types::ListAttachedLinksItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLinksInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLinksItem
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor label: ::String
+      attr_accessor resource_types: ::Array[::String]
+      attr_accessor sink_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListLinksOutput
+      attr_accessor items: ::Array[Types::ListLinksItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSinksInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSinksItem
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ListSinksOutput
+      attr_accessor items: ::Array[Types::ListSinksItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MissingRequiredParameterException
+      attr_accessor message: ::String
+      attr_accessor amzn_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class PutSinkPolicyInput
+      attr_accessor sink_identifier: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutSinkPolicyOutput
+      attr_accessor sink_arn: ::String
+      attr_accessor sink_id: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor amzn_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor amzn_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateLinkInput
+      attr_accessor identifier: ::String
+      attr_accessor resource_types: ::Array[("AWS::CloudWatch::Metric" | "AWS::Logs::LogGroup" | "AWS::XRay::Trace" | "AWS::ApplicationInsights::Application")]
+      SENSITIVE: []
+    end
+
+    class UpdateLinkOutput
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor label: ::String
+      attr_accessor label_template: ::String
+      attr_accessor resource_types: ::Array[::String]
+      attr_accessor sink_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

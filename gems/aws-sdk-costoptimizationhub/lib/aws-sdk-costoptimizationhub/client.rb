@@ -888,7 +888,7 @@ module Aws::CostOptimizationHub
     # list of accounts that are enrolled under the organization.
     #
     # @option params [String] :account_id
-    #   The enrollment status of a specific account ID in the organization.
+    #   The account ID of a member account in the organization.
     #
     # @option params [Boolean] :include_organization_info
     #   Indicates whether to return the enrollment status for the
@@ -902,6 +902,7 @@ module Aws::CostOptimizationHub
     #
     # @return [Types::ListEnrollmentStatusesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::ListEnrollmentStatusesResponse#include_member_accounts #include_member_accounts} => Boolean
     #   * {Types::ListEnrollmentStatusesResponse#items #items} => Array&lt;Types::AccountEnrollmentStatus&gt;
     #   * {Types::ListEnrollmentStatusesResponse#next_token #next_token} => String
     #
@@ -918,6 +919,7 @@ module Aws::CostOptimizationHub
     #
     # @example Response structure
     #
+    #   resp.include_member_accounts #=> Boolean
     #   resp.items #=> Array
     #   resp.items[0].account_id #=> String
     #   resp.items[0].created_timestamp #=> Time
@@ -1197,7 +1199,7 @@ module Aws::CostOptimizationHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costoptimizationhub'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

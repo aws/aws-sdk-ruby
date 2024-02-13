@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2024-01-22)
+------------------
+
+* Feature - Allow customer to set zip default through command line arguments.
+
 1.27.0 (2023-12-08)
 ------------------
 

@@ -1,0 +1,968 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::AmplifyUIBuilder
+  module Types
+
+    class ActionParameters
+      attr_accessor type: Types::ComponentProperty
+      attr_accessor url: Types::ComponentProperty
+      attr_accessor anchor: Types::ComponentProperty
+      attr_accessor target: Types::ComponentProperty
+      attr_accessor global: Types::ComponentProperty
+      attr_accessor model: ::String
+      attr_accessor id: Types::ComponentProperty
+      attr_accessor fields: ::Hash[::String, Types::ComponentProperty]
+      attr_accessor state: Types::MutationActionSetStateParameter
+      SENSITIVE: []
+    end
+
+    class ApiConfiguration
+      attr_accessor graph_ql_config: Types::GraphQLRenderConfig
+      attr_accessor data_store_config: Types::DataStoreRenderConfig
+      attr_accessor no_api_config: Types::NoApiRenderConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class GraphQlConfig < ApiConfiguration
+      end
+      class DataStoreConfig < ApiConfiguration
+      end
+      class NoApiConfig < ApiConfiguration
+      end
+      class Unknown < ApiConfiguration
+      end
+    end
+
+    class CodegenDependency
+      attr_accessor name: ::String
+      attr_accessor supported_version: ::String
+      attr_accessor is_sem_ver: bool
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class CodegenFeatureFlags
+      attr_accessor is_relationship_supported: bool
+      attr_accessor is_non_model_supported: bool
+      SENSITIVE: []
+    end
+
+    class CodegenGenericDataEnum
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CodegenGenericDataField
+      attr_accessor data_type: ("ID" | "String" | "Int" | "Float" | "AWSDate" | "AWSTime" | "AWSDateTime" | "AWSTimestamp" | "AWSEmail" | "AWSURL" | "AWSIPAddress" | "Boolean" | "AWSJSON" | "AWSPhone" | "Enum" | "Model" | "NonModel")
+      attr_accessor data_type_value: ::String
+      attr_accessor required: bool
+      attr_accessor read_only: bool
+      attr_accessor is_array: bool
+      attr_accessor relationship: Types::CodegenGenericDataRelationshipType
+      SENSITIVE: []
+    end
+
+    class CodegenGenericDataModel
+      attr_accessor fields: ::Hash[::String, Types::CodegenGenericDataField]
+      attr_accessor is_join_table: bool
+      attr_accessor primary_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CodegenGenericDataNonModel
+      attr_accessor fields: ::Hash[::String, Types::CodegenGenericDataField]
+      SENSITIVE: []
+    end
+
+    class CodegenGenericDataRelationshipType
+      attr_accessor type: ("HAS_MANY" | "HAS_ONE" | "BELONGS_TO")
+      attr_accessor related_model_name: ::String
+      attr_accessor related_model_fields: ::Array[::String]
+      attr_accessor can_unlink_associated_model: bool
+      attr_accessor related_join_field_name: ::String
+      attr_accessor related_join_table_name: ::String
+      attr_accessor belongs_to_field_on_related_model: ::String
+      attr_accessor associated_fields: ::Array[::String]
+      attr_accessor is_has_many_index: bool
+      SENSITIVE: []
+    end
+
+    class CodegenJob
+      attr_accessor id: ::String
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor render_config: Types::CodegenJobRenderConfig
+      attr_accessor generic_data_schema: Types::CodegenJobGenericDataSchema
+      attr_accessor auto_generate_forms: bool
+      attr_accessor features: Types::CodegenFeatureFlags
+      attr_accessor status: ("in_progress" | "failed" | "succeeded")
+      attr_accessor status_message: ::String
+      attr_accessor asset: Types::CodegenJobAsset
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor dependencies: ::Array[Types::CodegenDependency]
+      SENSITIVE: []
+    end
+
+    class CodegenJobAsset
+      attr_accessor download_url: ::String
+      SENSITIVE: []
+    end
+
+    class CodegenJobGenericDataSchema
+      attr_accessor data_source_type: ("DataStore")
+      attr_accessor models: ::Hash[::String, Types::CodegenGenericDataModel]
+      attr_accessor enums: ::Hash[::String, Types::CodegenGenericDataEnum]
+      attr_accessor non_models: ::Hash[::String, Types::CodegenGenericDataNonModel]
+      SENSITIVE: []
+    end
+
+    class CodegenJobRenderConfig
+      attr_accessor react: Types::ReactStartCodegenJobData
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class React < CodegenJobRenderConfig
+      end
+      class Unknown < CodegenJobRenderConfig
+      end
+    end
+
+    class CodegenJobSummary
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      SENSITIVE: []
+    end
+
+    class Component
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor source_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor component_type: ::String
+      attr_accessor properties: ::Hash[::String, Types::ComponentProperty]
+      attr_accessor children: ::Array[Types::ComponentChild]
+      attr_accessor variants: ::Array[Types::ComponentVariant]
+      attr_accessor overrides: ::Hash[::String, ::Hash[::String, ::String]]
+      attr_accessor binding_properties: ::Hash[::String, Types::ComponentBindingPropertiesValue]
+      attr_accessor collection_properties: ::Hash[::String, Types::ComponentDataConfiguration]
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor events: ::Hash[::String, Types::ComponentEvent]
+      attr_accessor schema_version: ::String
+      SENSITIVE: []
+    end
+
+    class ComponentBindingPropertiesValue
+      attr_accessor type: ::String
+      attr_accessor binding_properties: Types::ComponentBindingPropertiesValueProperties
+      attr_accessor default_value: ::String
+      SENSITIVE: []
+    end
+
+    class ComponentBindingPropertiesValueProperties
+      attr_accessor model: ::String
+      attr_accessor field: ::String
+      attr_accessor predicates: ::Array[Types::Predicate]
+      attr_accessor user_attribute: ::String
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      attr_accessor default_value: ::String
+      attr_accessor slot_name: ::String
+      SENSITIVE: []
+    end
+
+    class ComponentChild
+      attr_accessor component_type: ::String
+      attr_accessor name: ::String
+      attr_accessor properties: ::Hash[::String, Types::ComponentProperty]
+      attr_accessor children: ::Array[Types::ComponentChild]
+      attr_accessor events: ::Hash[::String, Types::ComponentEvent]
+      attr_accessor source_id: ::String
+      SENSITIVE: []
+    end
+
+    class ComponentConditionProperty
+      attr_accessor property: ::String
+      attr_accessor field: ::String
+      attr_accessor operator: ::String
+      attr_accessor operand: ::String
+      attr_accessor then: Types::ComponentProperty
+      attr_accessor else: Types::ComponentProperty
+      attr_accessor operand_type: ::String
+      SENSITIVE: []
+    end
+
+    class ComponentDataConfiguration
+      attr_accessor model: ::String
+      attr_accessor sort: ::Array[Types::SortProperty]
+      attr_accessor predicate: Types::Predicate
+      attr_accessor identifiers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ComponentEvent
+      attr_accessor action: ::String
+      attr_accessor parameters: Types::ActionParameters
+      attr_accessor binding_event: ::String
+      SENSITIVE: []
+    end
+
+    class ComponentProperty
+      attr_accessor value: ::String
+      attr_accessor binding_properties: Types::ComponentPropertyBindingProperties
+      attr_accessor collection_binding_properties: Types::ComponentPropertyBindingProperties
+      attr_accessor default_value: ::String
+      attr_accessor model: ::String
+      attr_accessor bindings: ::Hash[::String, Types::FormBindingElement]
+      attr_accessor event: ::String
+      attr_accessor user_attribute: ::String
+      attr_accessor concat: ::Array[Types::ComponentProperty]
+      attr_accessor condition: Types::ComponentConditionProperty
+      attr_accessor configured: bool
+      attr_accessor type: ::String
+      attr_accessor imported_value: ::String
+      attr_accessor component_name: ::String
+      attr_accessor property: ::String
+      SENSITIVE: []
+    end
+
+    class ComponentPropertyBindingProperties
+      attr_accessor property: ::String
+      attr_accessor field: ::String
+      SENSITIVE: []
+    end
+
+    class ComponentSummary
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor component_type: ::String
+      SENSITIVE: []
+    end
+
+    class ComponentVariant
+      attr_accessor variant_values: ::Hash[::String, ::String]
+      attr_accessor overrides: ::Hash[::String, ::Hash[::String, ::String]]
+      SENSITIVE: []
+    end
+
+    class CreateComponentData
+      attr_accessor name: ::String
+      attr_accessor source_id: ::String
+      attr_accessor component_type: ::String
+      attr_accessor properties: ::Hash[::String, Types::ComponentProperty]
+      attr_accessor children: ::Array[Types::ComponentChild]
+      attr_accessor variants: ::Array[Types::ComponentVariant]
+      attr_accessor overrides: ::Hash[::String, ::Hash[::String, ::String]]
+      attr_accessor binding_properties: ::Hash[::String, Types::ComponentBindingPropertiesValue]
+      attr_accessor collection_properties: ::Hash[::String, Types::ComponentDataConfiguration]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor events: ::Hash[::String, Types::ComponentEvent]
+      attr_accessor schema_version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateComponentRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor component_to_create: Types::CreateComponentData
+      SENSITIVE: []
+    end
+
+    class CreateComponentResponse
+      attr_accessor entity: Types::Component
+      SENSITIVE: []
+    end
+
+    class CreateFormData
+      attr_accessor name: ::String
+      attr_accessor data_type: Types::FormDataTypeConfig
+      attr_accessor form_action_type: ("create" | "update")
+      attr_accessor fields: ::Hash[::String, Types::FieldConfig]
+      attr_accessor style: Types::FormStyle
+      attr_accessor sectional_elements: ::Hash[::String, Types::SectionalElement]
+      attr_accessor schema_version: ::String
+      attr_accessor cta: Types::FormCTA
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor label_decorator: ("required" | "optional" | "none")
+      SENSITIVE: []
+    end
+
+    class CreateFormRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor form_to_create: Types::CreateFormData
+      SENSITIVE: []
+    end
+
+    class CreateFormResponse
+      attr_accessor entity: Types::Form
+      SENSITIVE: []
+    end
+
+    class CreateThemeData
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[Types::ThemeValues]
+      attr_accessor overrides: ::Array[Types::ThemeValues]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateThemeRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor theme_to_create: Types::CreateThemeData
+      SENSITIVE: []
+    end
+
+    class CreateThemeResponse
+      attr_accessor entity: Types::Theme
+      SENSITIVE: []
+    end
+
+    class DataStoreRenderConfig < Aws::EmptyStructure
+    end
+
+    class DeleteComponentRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFormRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteThemeRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class ExchangeCodeForTokenRequest
+      attr_accessor provider: ("figma")
+      attr_accessor request: Types::ExchangeCodeForTokenRequestBody
+      SENSITIVE: []
+    end
+
+    class ExchangeCodeForTokenRequestBody
+      attr_accessor code: ::String
+      attr_accessor redirect_uri: ::String
+      attr_accessor client_id: ::String
+      SENSITIVE: [:code, :client_id]
+    end
+
+    class ExchangeCodeForTokenResponse
+      attr_accessor access_token: ::String
+      attr_accessor expires_in: ::Integer
+      attr_accessor refresh_token: ::String
+      SENSITIVE: [:access_token, :refresh_token]
+    end
+
+    class ExportComponentsRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ExportComponentsResponse
+      attr_accessor entities: ::Array[Types::Component]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ExportFormsRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ExportFormsResponse
+      attr_accessor entities: ::Array[Types::Form]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ExportThemesRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ExportThemesResponse
+      attr_accessor entities: ::Array[Types::Theme]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class FieldConfig
+      attr_accessor label: ::String
+      attr_accessor position: Types::FieldPosition
+      attr_accessor excluded: bool
+      attr_accessor input_type: Types::FieldInputConfig
+      attr_accessor validations: ::Array[Types::FieldValidationConfiguration]
+      SENSITIVE: []
+    end
+
+    class FieldInputConfig
+      attr_accessor type: ::String
+      attr_accessor required: bool
+      attr_accessor read_only: bool
+      attr_accessor placeholder: ::String
+      attr_accessor default_value: ::String
+      attr_accessor descriptive_text: ::String
+      attr_accessor default_checked: bool
+      attr_accessor default_country_code: ::String
+      attr_accessor value_mappings: Types::ValueMappings
+      attr_accessor name: ::String
+      attr_accessor min_value: ::Float
+      attr_accessor max_value: ::Float
+      attr_accessor step: ::Float
+      attr_accessor value: ::String
+      attr_accessor is_array: bool
+      attr_accessor file_uploader_config: Types::FileUploaderFieldConfig
+      SENSITIVE: []
+    end
+
+    class FieldPosition
+      attr_accessor fixed: ("first")
+      attr_accessor right_of: ::String
+      attr_accessor below: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Fixed < FieldPosition
+      end
+      class RightOf < FieldPosition
+      end
+      class Below < FieldPosition
+      end
+      class Unknown < FieldPosition
+      end
+    end
+
+    class FieldValidationConfiguration
+      attr_accessor type: ::String
+      attr_accessor str_values: ::Array[::String]
+      attr_accessor num_values: ::Array[::Integer]
+      attr_accessor validation_message: ::String
+      SENSITIVE: []
+    end
+
+    class FileUploaderFieldConfig
+      attr_accessor access_level: ("public" | "protected" | "private")
+      attr_accessor accepted_file_types: ::Array[::String]
+      attr_accessor show_thumbnails: bool
+      attr_accessor is_resumable: bool
+      attr_accessor max_file_count: ::Integer
+      attr_accessor max_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class Form
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor form_action_type: ("create" | "update")
+      attr_accessor style: Types::FormStyle
+      attr_accessor data_type: Types::FormDataTypeConfig
+      attr_accessor fields: ::Hash[::String, Types::FieldConfig]
+      attr_accessor sectional_elements: ::Hash[::String, Types::SectionalElement]
+      attr_accessor schema_version: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor cta: Types::FormCTA
+      attr_accessor label_decorator: ("required" | "optional" | "none")
+      SENSITIVE: []
+    end
+
+    class FormBindingElement
+      attr_accessor element: ::String
+      attr_accessor property: ::String
+      SENSITIVE: []
+    end
+
+    class FormButton
+      attr_accessor excluded: bool
+      attr_accessor children: ::String
+      attr_accessor position: Types::FieldPosition
+      SENSITIVE: []
+    end
+
+    class FormCTA
+      attr_accessor position: ("top" | "bottom" | "top_and_bottom")
+      attr_accessor clear: Types::FormButton
+      attr_accessor cancel: Types::FormButton
+      attr_accessor submit: Types::FormButton
+      SENSITIVE: []
+    end
+
+    class FormDataTypeConfig
+      attr_accessor data_source_type: ("DataStore" | "Custom")
+      attr_accessor data_type_name: ::String
+      SENSITIVE: []
+    end
+
+    class FormInputBindingPropertiesValue
+      attr_accessor type: ::String
+      attr_accessor binding_properties: Types::FormInputBindingPropertiesValueProperties
+      SENSITIVE: []
+    end
+
+    class FormInputBindingPropertiesValueProperties
+      attr_accessor model: ::String
+      SENSITIVE: []
+    end
+
+    class FormInputValueProperty
+      attr_accessor value: ::String
+      attr_accessor binding_properties: Types::FormInputValuePropertyBindingProperties
+      attr_accessor concat: ::Array[Types::FormInputValueProperty]
+      SENSITIVE: []
+    end
+
+    class FormInputValuePropertyBindingProperties
+      attr_accessor property: ::String
+      attr_accessor field: ::String
+      SENSITIVE: []
+    end
+
+    class FormStyle
+      attr_accessor horizontal_gap: Types::FormStyleConfig
+      attr_accessor vertical_gap: Types::FormStyleConfig
+      attr_accessor outer_padding: Types::FormStyleConfig
+      SENSITIVE: []
+    end
+
+    class FormStyleConfig
+      attr_accessor token_reference: ::String
+      attr_accessor value: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class TokenReference < FormStyleConfig
+      end
+      class Value < FormStyleConfig
+      end
+      class Unknown < FormStyleConfig
+      end
+    end
+
+    class FormSummary
+      attr_accessor app_id: ::String
+      attr_accessor data_type: Types::FormDataTypeConfig
+      attr_accessor environment_name: ::String
+      attr_accessor form_action_type: ("create" | "update")
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCodegenJobRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCodegenJobResponse
+      attr_accessor job: Types::CodegenJob
+      SENSITIVE: []
+    end
+
+    class GetComponentRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetComponentResponse
+      attr_accessor component: Types::Component
+      SENSITIVE: []
+    end
+
+    class GetFormRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFormResponse
+      attr_accessor form: Types::Form
+      SENSITIVE: []
+    end
+
+    class GetMetadataRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetMetadataResponse
+      attr_accessor features: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetThemeRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetThemeResponse
+      attr_accessor theme: Types::Theme
+      SENSITIVE: []
+    end
+
+    class GraphQLRenderConfig
+      attr_accessor types_file_path: ::String
+      attr_accessor queries_file_path: ::String
+      attr_accessor mutations_file_path: ::String
+      attr_accessor subscriptions_file_path: ::String
+      attr_accessor fragments_file_path: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListCodegenJobsRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCodegenJobsResponse
+      attr_accessor entities: ::Array[Types::CodegenJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListComponentsRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListComponentsResponse
+      attr_accessor entities: ::Array[Types::ComponentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFormsRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFormsResponse
+      attr_accessor entities: ::Array[Types::FormSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListThemesRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListThemesResponse
+      attr_accessor entities: ::Array[Types::ThemeSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MutationActionSetStateParameter
+      attr_accessor component_name: ::String
+      attr_accessor property: ::String
+      attr_accessor set: Types::ComponentProperty
+      SENSITIVE: []
+    end
+
+    class NoApiRenderConfig < Aws::EmptyStructure
+    end
+
+    class Predicate
+      attr_accessor or: ::Array[Types::Predicate]
+      attr_accessor and: ::Array[Types::Predicate]
+      attr_accessor field: ::String
+      attr_accessor operator: ::String
+      attr_accessor operand: ::String
+      attr_accessor operand_type: ::String
+      SENSITIVE: []
+    end
+
+    class PutMetadataFlagBody
+      attr_accessor new_value: ::String
+      SENSITIVE: []
+    end
+
+    class PutMetadataFlagRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor feature_name: ::String
+      attr_accessor body: Types::PutMetadataFlagBody
+      SENSITIVE: []
+    end
+
+    class ReactStartCodegenJobData
+      attr_accessor module: ("es2020" | "esnext")
+      attr_accessor target: ("es2015" | "es2020")
+      attr_accessor script: ("jsx" | "tsx" | "js")
+      attr_accessor render_type_declarations: bool
+      attr_accessor inline_source_map: bool
+      attr_accessor api_configuration: Types::ApiConfiguration
+      attr_accessor dependencies: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RefreshTokenRequest
+      attr_accessor provider: ("figma")
+      attr_accessor refresh_token_body: Types::RefreshTokenRequestBody
+      SENSITIVE: []
+    end
+
+    class RefreshTokenRequestBody
+      attr_accessor token: ::String
+      attr_accessor client_id: ::String
+      SENSITIVE: [:token, :client_id]
+    end
+
+    class RefreshTokenResponse
+      attr_accessor access_token: ::String
+      attr_accessor expires_in: ::Integer
+      SENSITIVE: [:access_token]
+    end
+
+    class ResourceConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SectionalElement
+      attr_accessor type: ::String
+      attr_accessor position: Types::FieldPosition
+      attr_accessor text: ::String
+      attr_accessor level: ::Integer
+      attr_accessor orientation: ::String
+      attr_accessor excluded: bool
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SortProperty
+      attr_accessor field: ::String
+      attr_accessor direction: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class StartCodegenJobData
+      attr_accessor render_config: Types::CodegenJobRenderConfig
+      attr_accessor generic_data_schema: Types::CodegenJobGenericDataSchema
+      attr_accessor auto_generate_forms: bool
+      attr_accessor features: Types::CodegenFeatureFlags
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartCodegenJobRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor codegen_job_to_create: Types::StartCodegenJobData
+      SENSITIVE: []
+    end
+
+    class StartCodegenJobResponse
+      attr_accessor entity: Types::CodegenJob
+      SENSITIVE: []
+    end
+
+    class Theme
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor values: ::Array[Types::ThemeValues]
+      attr_accessor overrides: ::Array[Types::ThemeValues]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ThemeSummary
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ThemeValue
+      attr_accessor value: ::String
+      attr_accessor children: ::Array[Types::ThemeValues]
+      SENSITIVE: []
+    end
+
+    class ThemeValues
+      attr_accessor key: ::String
+      attr_accessor value: Types::ThemeValue
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateComponentData
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor source_id: ::String
+      attr_accessor component_type: ::String
+      attr_accessor properties: ::Hash[::String, Types::ComponentProperty]
+      attr_accessor children: ::Array[Types::ComponentChild]
+      attr_accessor variants: ::Array[Types::ComponentVariant]
+      attr_accessor overrides: ::Hash[::String, ::Hash[::String, ::String]]
+      attr_accessor binding_properties: ::Hash[::String, Types::ComponentBindingPropertiesValue]
+      attr_accessor collection_properties: ::Hash[::String, Types::ComponentDataConfiguration]
+      attr_accessor events: ::Hash[::String, Types::ComponentEvent]
+      attr_accessor schema_version: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateComponentRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor updated_component: Types::UpdateComponentData
+      SENSITIVE: []
+    end
+
+    class UpdateComponentResponse
+      attr_accessor entity: Types::Component
+      SENSITIVE: []
+    end
+
+    class UpdateFormData
+      attr_accessor name: ::String
+      attr_accessor data_type: Types::FormDataTypeConfig
+      attr_accessor form_action_type: ("create" | "update")
+      attr_accessor fields: ::Hash[::String, Types::FieldConfig]
+      attr_accessor style: Types::FormStyle
+      attr_accessor sectional_elements: ::Hash[::String, Types::SectionalElement]
+      attr_accessor schema_version: ::String
+      attr_accessor cta: Types::FormCTA
+      attr_accessor label_decorator: ("required" | "optional" | "none")
+      SENSITIVE: []
+    end
+
+    class UpdateFormRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor updated_form: Types::UpdateFormData
+      SENSITIVE: []
+    end
+
+    class UpdateFormResponse
+      attr_accessor entity: Types::Form
+      SENSITIVE: []
+    end
+
+    class UpdateThemeData
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[Types::ThemeValues]
+      attr_accessor overrides: ::Array[Types::ThemeValues]
+      SENSITIVE: []
+    end
+
+    class UpdateThemeRequest
+      attr_accessor app_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor updated_theme: Types::UpdateThemeData
+      SENSITIVE: []
+    end
+
+    class UpdateThemeResponse
+      attr_accessor entity: Types::Theme
+      SENSITIVE: []
+    end
+
+    class ValueMapping
+      attr_accessor display_value: Types::FormInputValueProperty
+      attr_accessor value: Types::FormInputValueProperty
+      SENSITIVE: []
+    end
+
+    class ValueMappings
+      attr_accessor values: ::Array[Types::ValueMapping]
+      attr_accessor binding_properties: ::Hash[::String, Types::FormInputBindingPropertiesValue]
+      SENSITIVE: []
+    end
+  end
+end

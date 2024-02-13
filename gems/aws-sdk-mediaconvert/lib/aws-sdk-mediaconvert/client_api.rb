@@ -150,7 +150,6 @@ module Aws::MediaConvert
     CmfcTimedMetadata = Shapes::StringShape.new(name: 'CmfcTimedMetadata')
     CmfcTimedMetadataBoxVersion = Shapes::StringShape.new(name: 'CmfcTimedMetadataBoxVersion')
     ColorConversion3DLUTSetting = Shapes::StructureShape.new(name: 'ColorConversion3DLUTSetting')
-    ColorConversion3DLUTSettings = Shapes::ListShape.new(name: 'ColorConversion3DLUTSettings')
     ColorCorrector = Shapes::StructureShape.new(name: 'ColorCorrector')
     ColorMetadata = Shapes::StringShape.new(name: 'ColorMetadata')
     ColorSpace = Shapes::StringShape.new(name: 'ColorSpace')
@@ -797,6 +796,7 @@ module Aws::MediaConvert
     __listOfCaptionDescription = Shapes::ListShape.new(name: '__listOfCaptionDescription')
     __listOfCaptionDescriptionPreset = Shapes::ListShape.new(name: '__listOfCaptionDescriptionPreset')
     __listOfCmafAdditionalManifest = Shapes::ListShape.new(name: '__listOfCmafAdditionalManifest')
+    __listOfColorConversion3DLUTSetting = Shapes::ListShape.new(name: '__listOfColorConversion3DLUTSetting')
     __listOfDashAdditionalManifest = Shapes::ListShape.new(name: '__listOfDashAdditionalManifest')
     __listOfEndpoint = Shapes::ListShape.new(name: '__listOfEndpoint')
     __listOfForceIncludeRenditionSize = Shapes::ListShape.new(name: '__listOfForceIncludeRenditionSize')
@@ -871,6 +871,7 @@ module Aws::MediaConvert
     __stringPatternAZaZ0902 = Shapes::StringShape.new(name: '__stringPatternAZaZ0902')
     __stringPatternAZaZ0932 = Shapes::StringShape.new(name: '__stringPatternAZaZ0932')
     __stringPatternAZaZ23AZaZ = Shapes::StringShape.new(name: '__stringPatternAZaZ23AZaZ')
+    __stringPatternAZaZ23AZaZ09 = Shapes::StringShape.new(name: '__stringPatternAZaZ23AZaZ09')
     __stringPatternArnAwsUsGovAcm = Shapes::StringShape.new(name: '__stringPatternArnAwsUsGovAcm')
     __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932 = Shapes::StringShape.new(name: '__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932')
     __stringPatternDD = Shapes::StringShape.new(name: '__stringPatternDD')
@@ -962,7 +963,7 @@ module Aws::MediaConvert
     AudioDescription.add_member(:audio_type, Shapes::ShapeRef.new(shape: __integerMin0Max255, location_name: "audioType"))
     AudioDescription.add_member(:audio_type_control, Shapes::ShapeRef.new(shape: AudioTypeControl, location_name: "audioTypeControl"))
     AudioDescription.add_member(:codec_settings, Shapes::ShapeRef.new(shape: AudioCodecSettings, location_name: "codecSettings"))
-    AudioDescription.add_member(:custom_language_code, Shapes::ShapeRef.new(shape: __stringPatternAZaZ23AZaZ, location_name: "customLanguageCode"))
+    AudioDescription.add_member(:custom_language_code, Shapes::ShapeRef.new(shape: __stringPatternAZaZ23AZaZ09, location_name: "customLanguageCode"))
     AudioDescription.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "languageCode"))
     AudioDescription.add_member(:language_code_control, Shapes::ShapeRef.new(shape: AudioLanguageCodeControl, location_name: "languageCodeControl"))
     AudioDescription.add_member(:remix_settings, Shapes::ShapeRef.new(shape: RemixSettings, location_name: "remixSettings"))
@@ -1209,8 +1210,6 @@ module Aws::MediaConvert
     ColorConversion3DLUTSetting.add_member(:output_mastering_luminance, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "outputMasteringLuminance"))
     ColorConversion3DLUTSetting.struct_class = Types::ColorConversion3DLUTSetting
 
-    ColorConversion3DLUTSettings.member = Shapes::ShapeRef.new(shape: ColorConversion3DLUTSetting)
-
     ColorCorrector.add_member(:brightness, Shapes::ShapeRef.new(shape: __integerMin1Max100, location_name: "brightness"))
     ColorCorrector.add_member(:clip_limits, Shapes::ShapeRef.new(shape: ClipLimits, location_name: "clipLimits"))
     ColorCorrector.add_member(:color_space_conversion, Shapes::ShapeRef.new(shape: ColorSpaceConversion, location_name: "colorSpaceConversion"))
@@ -1356,7 +1355,7 @@ module Aws::MediaConvert
     DeleteQueueResponse.struct_class = Types::DeleteQueueResponse
 
     DescribeEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __integer, location_name: "maxResults"))
-    DescribeEndpointsRequest.add_member(:mode, Shapes::ShapeRef.new(shape: DescribeEndpointsMode, location_name: "mode"))
+    DescribeEndpointsRequest.add_member(:mode, Shapes::ShapeRef.new(shape: DescribeEndpointsMode, deprecated: true, location_name: "mode"))
     DescribeEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     DescribeEndpointsRequest.struct_class = Types::DescribeEndpointsRequest
 
@@ -1887,7 +1886,7 @@ module Aws::MediaConvert
 
     JobSettings.add_member(:ad_avail_offset, Shapes::ShapeRef.new(shape: __integerMinNegative1000Max1000, location_name: "adAvailOffset"))
     JobSettings.add_member(:avail_blanking, Shapes::ShapeRef.new(shape: AvailBlanking, location_name: "availBlanking"))
-    JobSettings.add_member(:color_conversion_3_dlut_settings, Shapes::ShapeRef.new(shape: ColorConversion3DLUTSettings, location_name: "colorConversion3DLUTSettings"))
+    JobSettings.add_member(:color_conversion_3_dlut_settings, Shapes::ShapeRef.new(shape: __listOfColorConversion3DLUTSetting, location_name: "colorConversion3DLUTSettings"))
     JobSettings.add_member(:esam, Shapes::ShapeRef.new(shape: EsamSettings, location_name: "esam"))
     JobSettings.add_member(:extended_data_services, Shapes::ShapeRef.new(shape: ExtendedDataServices, location_name: "extendedDataServices"))
     JobSettings.add_member(:follow_source, Shapes::ShapeRef.new(shape: __integerMin1Max150, location_name: "followSource"))
@@ -1918,7 +1917,7 @@ module Aws::MediaConvert
 
     JobTemplateSettings.add_member(:ad_avail_offset, Shapes::ShapeRef.new(shape: __integerMinNegative1000Max1000, location_name: "adAvailOffset"))
     JobTemplateSettings.add_member(:avail_blanking, Shapes::ShapeRef.new(shape: AvailBlanking, location_name: "availBlanking"))
-    JobTemplateSettings.add_member(:color_conversion_3_dlut_settings, Shapes::ShapeRef.new(shape: ColorConversion3DLUTSettings, location_name: "colorConversion3DLUTSettings"))
+    JobTemplateSettings.add_member(:color_conversion_3_dlut_settings, Shapes::ShapeRef.new(shape: __listOfColorConversion3DLUTSetting, location_name: "colorConversion3DLUTSettings"))
     JobTemplateSettings.add_member(:esam, Shapes::ShapeRef.new(shape: EsamSettings, location_name: "esam"))
     JobTemplateSettings.add_member(:extended_data_services, Shapes::ShapeRef.new(shape: ExtendedDataServices, location_name: "extendedDataServices"))
     JobTemplateSettings.add_member(:follow_source, Shapes::ShapeRef.new(shape: __integerMin1Max150, location_name: "followSource"))
@@ -2350,6 +2349,8 @@ module Aws::MediaConvert
     Rectangle.add_member(:y, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "y"))
     Rectangle.struct_class = Types::Rectangle
 
+    RemixSettings.add_member(:audio_description_audio_channel, Shapes::ShapeRef.new(shape: __integerMin1Max64, location_name: "audioDescriptionAudioChannel"))
+    RemixSettings.add_member(:audio_description_data_channel, Shapes::ShapeRef.new(shape: __integerMin1Max64, location_name: "audioDescriptionDataChannel"))
     RemixSettings.add_member(:channel_mapping, Shapes::ShapeRef.new(shape: ChannelMapping, location_name: "channelMapping"))
     RemixSettings.add_member(:channels_in, Shapes::ShapeRef.new(shape: __integerMin1Max64, location_name: "channelsIn"))
     RemixSettings.add_member(:channels_out, Shapes::ShapeRef.new(shape: __integerMin1Max64, location_name: "channelsOut"))
@@ -2701,6 +2702,8 @@ module Aws::MediaConvert
 
     __listOfCmafAdditionalManifest.member = Shapes::ShapeRef.new(shape: CmafAdditionalManifest)
 
+    __listOfColorConversion3DLUTSetting.member = Shapes::ShapeRef.new(shape: ColorConversion3DLUTSetting)
+
     __listOfDashAdditionalManifest.member = Shapes::ShapeRef.new(shape: DashAdditionalManifest)
 
     __listOfEndpoint.member = Shapes::ShapeRef.new(shape: Endpoint)
@@ -2948,6 +2951,7 @@ module Aws::MediaConvert
         o.name = "DescribeEndpoints"
         o.http_method = "POST"
         o.http_request_uri = "/2017-08-29/endpoints"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeEndpointsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeEndpointsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)

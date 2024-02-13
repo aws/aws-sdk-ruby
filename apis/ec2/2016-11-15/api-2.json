@@ -7918,7 +7918,8 @@
         "available",
         "information",
         "impaired",
-        "unavailable"
+        "unavailable",
+        "constrained"
       ]
     },
     "AvailabilityZoneStringList":{
@@ -11317,6 +11318,10 @@
         "TagSpecifications":{
           "shape":"TagSpecificationList",
           "locationName":"TagSpecification"
+        },
+        "ClientToken":{
+          "shape":"String",
+          "idempotencyToken":true
         }
       }
     },
@@ -11326,6 +11331,10 @@
         "NetworkAcl":{
           "shape":"NetworkAcl",
           "locationName":"networkAcl"
+        },
+        "ClientToken":{
+          "shape":"String",
+          "locationName":"clientToken"
         }
       }
     },
@@ -11717,6 +11726,10 @@
         "TagSpecifications":{
           "shape":"TagSpecificationList",
           "locationName":"TagSpecification"
+        },
+        "ClientToken":{
+          "shape":"String",
+          "idempotencyToken":true
         }
       }
     },
@@ -11726,6 +11739,10 @@
         "RouteTable":{
           "shape":"RouteTable",
           "locationName":"routeTable"
+        },
+        "ClientToken":{
+          "shape":"String",
+          "locationName":"clientToken"
         }
       }
     },
@@ -20723,6 +20740,14 @@
         "VolumeId":{
           "shape":"String",
           "locationName":"volumeId"
+        },
+        "AssociatedResource":{
+          "shape":"String",
+          "locationName":"associatedResource"
+        },
+        "VolumeOwnerId":{
+          "shape":"String",
+          "locationName":"volumeOwnerId"
         }
       }
     },
@@ -27288,6 +27313,10 @@
         "AllowedInstanceTypes":{
           "shape":"AllowedInstanceTypeSet",
           "locationName":"allowedInstanceTypeSet"
+        },
+        "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice":{
+          "shape":"Integer",
+          "locationName":"maxSpotPriceAsPercentageOfOptimalOnDemandPrice"
         }
       }
     },
@@ -27344,7 +27373,8 @@
         "AllowedInstanceTypes":{
           "shape":"AllowedInstanceTypeSet",
           "locationName":"AllowedInstanceType"
-        }
+        },
+        "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice":{"shape":"Integer"}
       }
     },
     "InstanceRequirementsWithMetadataRequest":{
@@ -42039,7 +42069,8 @@
       "type":"string",
       "enum":[
         "pending",
-        "available"
+        "available",
+        "unavailable"
       ]
     },
     "Subscription":{
@@ -45615,6 +45646,14 @@
         "DeleteOnTermination":{
           "shape":"Boolean",
           "locationName":"deleteOnTermination"
+        },
+        "AssociatedResource":{
+          "shape":"String",
+          "locationName":"associatedResource"
+        },
+        "InstanceOwningService":{
+          "shape":"String",
+          "locationName":"instanceOwningService"
         }
       }
     },

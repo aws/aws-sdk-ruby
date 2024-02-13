@@ -78,8 +78,10 @@ module Aws::CloudTrail
     Destinations = Shapes::ListShape.new(name: 'Destinations')
     DisableFederationRequest = Shapes::StructureShape.new(name: 'DisableFederationRequest')
     DisableFederationResponse = Shapes::StructureShape.new(name: 'DisableFederationResponse')
+    Double = Shapes::FloatShape.new(name: 'Double')
     EnableFederationRequest = Shapes::StructureShape.new(name: 'EnableFederationRequest')
     EnableFederationResponse = Shapes::StructureShape.new(name: 'EnableFederationResponse')
+    ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     Event = Shapes::StructureShape.new(name: 'Event')
     EventCategory = Shapes::StringShape.new(name: 'EventCategory')
@@ -96,8 +98,10 @@ module Aws::CloudTrail
     EventDataStoreStatus = Shapes::StringShape.new(name: 'EventDataStoreStatus')
     EventDataStoreTerminationProtectedException = Shapes::StructureShape.new(name: 'EventDataStoreTerminationProtectedException')
     EventDataStores = Shapes::ListShape.new(name: 'EventDataStores')
+    EventName = Shapes::StringShape.new(name: 'EventName')
     EventSelector = Shapes::StructureShape.new(name: 'EventSelector')
     EventSelectors = Shapes::ListShape.new(name: 'EventSelectors')
+    EventSource = Shapes::StringShape.new(name: 'EventSource')
     EventsList = Shapes::ListShape.new(name: 'EventsList')
     ExcludeManagementEventSources = Shapes::ListShape.new(name: 'ExcludeManagementEventSources')
     FederationRoleArn = Shapes::StringShape.new(name: 'FederationRoleArn')
@@ -137,6 +141,11 @@ module Aws::CloudTrail
     InsightSelector = Shapes::StructureShape.new(name: 'InsightSelector')
     InsightSelectors = Shapes::ListShape.new(name: 'InsightSelectors')
     InsightType = Shapes::StringShape.new(name: 'InsightType')
+    InsightsMetricDataType = Shapes::StringShape.new(name: 'InsightsMetricDataType')
+    InsightsMetricMaxResults = Shapes::IntegerShape.new(name: 'InsightsMetricMaxResults')
+    InsightsMetricNextToken = Shapes::StringShape.new(name: 'InsightsMetricNextToken')
+    InsightsMetricPeriod = Shapes::IntegerShape.new(name: 'InsightsMetricPeriod')
+    InsightsMetricValues = Shapes::ListShape.new(name: 'InsightsMetricValues')
     InsufficientDependencyServiceAccessPermissionException = Shapes::StructureShape.new(name: 'InsufficientDependencyServiceAccessPermissionException')
     InsufficientEncryptionPolicyException = Shapes::StructureShape.new(name: 'InsufficientEncryptionPolicyException')
     InsufficientS3BucketPolicyException = Shapes::StructureShape.new(name: 'InsufficientS3BucketPolicyException')
@@ -183,6 +192,8 @@ module Aws::CloudTrail
     ListImportsMaxResultsCount = Shapes::IntegerShape.new(name: 'ListImportsMaxResultsCount')
     ListImportsRequest = Shapes::StructureShape.new(name: 'ListImportsRequest')
     ListImportsResponse = Shapes::StructureShape.new(name: 'ListImportsResponse')
+    ListInsightsMetricDataRequest = Shapes::StructureShape.new(name: 'ListInsightsMetricDataRequest')
+    ListInsightsMetricDataResponse = Shapes::StructureShape.new(name: 'ListInsightsMetricDataResponse')
     ListPublicKeysRequest = Shapes::StructureShape.new(name: 'ListPublicKeysRequest')
     ListPublicKeysResponse = Shapes::StructureShape.new(name: 'ListPublicKeysResponse')
     ListQueriesMaxResultsCount = Shapes::IntegerShape.new(name: 'ListQueriesMaxResultsCount')
@@ -285,6 +296,7 @@ module Aws::CloudTrail
     TagsList = Shapes::ListShape.new(name: 'TagsList')
     TerminationProtectionEnabled = Shapes::BooleanShape.new(name: 'TerminationProtectionEnabled')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    Timestamps = Shapes::ListShape.new(name: 'Timestamps')
     Trail = Shapes::StructureShape.new(name: 'Trail')
     TrailAlreadyExistsException = Shapes::StructureShape.new(name: 'TrailAlreadyExistsException')
     TrailInfo = Shapes::StructureShape.new(name: 'TrailInfo')
@@ -731,6 +743,8 @@ module Aws::CloudTrail
 
     InsightSelectors.member = Shapes::ShapeRef.new(shape: InsightSelector)
 
+    InsightsMetricValues.member = Shapes::ShapeRef.new(shape: Double)
+
     InsufficientDependencyServiceAccessPermissionException.struct_class = Types::InsufficientDependencyServiceAccessPermissionException
 
     InsufficientEncryptionPolicyException.struct_class = Types::InsufficientEncryptionPolicyException
@@ -831,6 +845,27 @@ module Aws::CloudTrail
     ListImportsResponse.add_member(:imports, Shapes::ShapeRef.new(shape: ImportsList, location_name: "Imports"))
     ListImportsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListImportsResponse.struct_class = Types::ListImportsResponse
+
+    ListInsightsMetricDataRequest.add_member(:event_source, Shapes::ShapeRef.new(shape: EventSource, required: true, location_name: "EventSource"))
+    ListInsightsMetricDataRequest.add_member(:event_name, Shapes::ShapeRef.new(shape: EventName, required: true, location_name: "EventName"))
+    ListInsightsMetricDataRequest.add_member(:insight_type, Shapes::ShapeRef.new(shape: InsightType, required: true, location_name: "InsightType"))
+    ListInsightsMetricDataRequest.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
+    ListInsightsMetricDataRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Date, location_name: "StartTime"))
+    ListInsightsMetricDataRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Date, location_name: "EndTime"))
+    ListInsightsMetricDataRequest.add_member(:period, Shapes::ShapeRef.new(shape: InsightsMetricPeriod, location_name: "Period"))
+    ListInsightsMetricDataRequest.add_member(:data_type, Shapes::ShapeRef.new(shape: InsightsMetricDataType, location_name: "DataType"))
+    ListInsightsMetricDataRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: InsightsMetricMaxResults, location_name: "MaxResults"))
+    ListInsightsMetricDataRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: InsightsMetricNextToken, location_name: "NextToken"))
+    ListInsightsMetricDataRequest.struct_class = Types::ListInsightsMetricDataRequest
+
+    ListInsightsMetricDataResponse.add_member(:event_source, Shapes::ShapeRef.new(shape: EventSource, location_name: "EventSource"))
+    ListInsightsMetricDataResponse.add_member(:event_name, Shapes::ShapeRef.new(shape: EventName, location_name: "EventName"))
+    ListInsightsMetricDataResponse.add_member(:insight_type, Shapes::ShapeRef.new(shape: InsightType, location_name: "InsightType"))
+    ListInsightsMetricDataResponse.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
+    ListInsightsMetricDataResponse.add_member(:timestamps, Shapes::ShapeRef.new(shape: Timestamps, location_name: "Timestamps"))
+    ListInsightsMetricDataResponse.add_member(:values, Shapes::ShapeRef.new(shape: InsightsMetricValues, location_name: "Values"))
+    ListInsightsMetricDataResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: InsightsMetricNextToken, location_name: "NextToken"))
+    ListInsightsMetricDataResponse.struct_class = Types::ListInsightsMetricDataResponse
 
     ListPublicKeysRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Date, location_name: "StartTime"))
     ListPublicKeysRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Date, location_name: "EndTime"))
@@ -1104,6 +1139,8 @@ module Aws::CloudTrail
     TagsList.member = Shapes::ShapeRef.new(shape: Tag)
 
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    Timestamps.member = Shapes::ShapeRef.new(shape: Date)
 
     Trail.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     Trail.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "S3BucketName"))
@@ -1709,6 +1746,23 @@ module Aws::CloudTrail
         o.output = Shapes::ShapeRef.new(shape: ListImportsResponse)
         o.errors << Shapes::ShapeRef.new(shape: EventDataStoreARNInvalidException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_insights_metric_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListInsightsMetricData"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListInsightsMetricDataRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListInsightsMetricDataResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)

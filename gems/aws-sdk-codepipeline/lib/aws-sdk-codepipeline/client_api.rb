@@ -97,6 +97,7 @@ module Aws::CodePipeline
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     Code = Shapes::StringShape.new(name: 'Code')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
+    ConcurrentPipelineExecutionsLimitExceededException = Shapes::StructureShape.new(name: 'ConcurrentPipelineExecutionsLimitExceededException')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContinuationToken = Shapes::StringShape.new(name: 'ContinuationToken')
     CreateCustomActionTypeInput = Shapes::StructureShape.new(name: 'CreateCustomActionTypeInput')
@@ -122,6 +123,7 @@ module Aws::CodePipeline
     ErrorDetails = Shapes::StructureShape.new(name: 'ErrorDetails')
     ExecutionDetails = Shapes::StructureShape.new(name: 'ExecutionDetails')
     ExecutionId = Shapes::StringShape.new(name: 'ExecutionId')
+    ExecutionMode = Shapes::StringShape.new(name: 'ExecutionMode')
     ExecutionSummary = Shapes::StringShape.new(name: 'ExecutionSummary')
     ExecutionTrigger = Shapes::StructureShape.new(name: 'ExecutionTrigger')
     ExecutorConfiguration = Shapes::StructureShape.new(name: 'ExecutorConfiguration')
@@ -142,7 +144,17 @@ module Aws::CodePipeline
     GetPipelineStateOutput = Shapes::StructureShape.new(name: 'GetPipelineStateOutput')
     GetThirdPartyJobDetailsInput = Shapes::StructureShape.new(name: 'GetThirdPartyJobDetailsInput')
     GetThirdPartyJobDetailsOutput = Shapes::StructureShape.new(name: 'GetThirdPartyJobDetailsOutput')
+    GitBranchFilterCriteria = Shapes::StructureShape.new(name: 'GitBranchFilterCriteria')
+    GitBranchNamePattern = Shapes::StringShape.new(name: 'GitBranchNamePattern')
+    GitBranchPatternList = Shapes::ListShape.new(name: 'GitBranchPatternList')
     GitConfiguration = Shapes::StructureShape.new(name: 'GitConfiguration')
+    GitFilePathFilterCriteria = Shapes::StructureShape.new(name: 'GitFilePathFilterCriteria')
+    GitFilePathPattern = Shapes::StringShape.new(name: 'GitFilePathPattern')
+    GitFilePathPatternList = Shapes::ListShape.new(name: 'GitFilePathPatternList')
+    GitPullRequestEventType = Shapes::StringShape.new(name: 'GitPullRequestEventType')
+    GitPullRequestEventTypeList = Shapes::ListShape.new(name: 'GitPullRequestEventTypeList')
+    GitPullRequestFilter = Shapes::StructureShape.new(name: 'GitPullRequestFilter')
+    GitPullRequestFilterList = Shapes::ListShape.new(name: 'GitPullRequestFilterList')
     GitPushFilter = Shapes::StructureShape.new(name: 'GitPushFilter')
     GitPushFilterList = Shapes::ListShape.new(name: 'GitPushFilterList')
     GitTagFilterCriteria = Shapes::StructureShape.new(name: 'GitTagFilterCriteria')
@@ -179,6 +191,7 @@ module Aws::CodePipeline
     LastChangedAt = Shapes::TimestampShape.new(name: 'LastChangedAt')
     LastChangedBy = Shapes::StringShape.new(name: 'LastChangedBy')
     LastUpdatedBy = Shapes::StringShape.new(name: 'LastUpdatedBy')
+    LatestInPipelineExecutionFilter = Shapes::StructureShape.new(name: 'LatestInPipelineExecutionFilter')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListActionExecutionsInput = Shapes::StructureShape.new(name: 'ListActionExecutionsInput')
     ListActionExecutionsOutput = Shapes::StructureShape.new(name: 'ListActionExecutionsOutput')
@@ -295,6 +308,7 @@ module Aws::CodePipeline
     StageContext = Shapes::StructureShape.new(name: 'StageContext')
     StageDeclaration = Shapes::StructureShape.new(name: 'StageDeclaration')
     StageExecution = Shapes::StructureShape.new(name: 'StageExecution')
+    StageExecutionList = Shapes::ListShape.new(name: 'StageExecutionList')
     StageExecutionStatus = Shapes::StringShape.new(name: 'StageExecutionStatus')
     StageName = Shapes::StringShape.new(name: 'StageName')
     StageNotFoundException = Shapes::StructureShape.new(name: 'StageNotFoundException')
@@ -305,6 +319,7 @@ module Aws::CodePipeline
     StageTransitionType = Shapes::StringShape.new(name: 'StageTransitionType')
     StartPipelineExecutionInput = Shapes::StructureShape.new(name: 'StartPipelineExecutionInput')
     StartPipelineExecutionOutput = Shapes::StructureShape.new(name: 'StartPipelineExecutionOutput')
+    StartTimeRange = Shapes::StringShape.new(name: 'StartTimeRange')
     StopExecutionTrigger = Shapes::StructureShape.new(name: 'StopExecutionTrigger')
     StopPipelineExecutionInput = Shapes::StructureShape.new(name: 'StopPipelineExecutionInput')
     StopPipelineExecutionOutput = Shapes::StructureShape.new(name: 'StopPipelineExecutionOutput')
@@ -424,6 +439,7 @@ module Aws::CodePipeline
     ActionExecutionDetail.add_member(:action_name, Shapes::ShapeRef.new(shape: ActionName, location_name: "actionName"))
     ActionExecutionDetail.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
     ActionExecutionDetail.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
+    ActionExecutionDetail.add_member(:updated_by, Shapes::ShapeRef.new(shape: LastUpdatedBy, location_name: "updatedBy"))
     ActionExecutionDetail.add_member(:status, Shapes::ShapeRef.new(shape: ActionExecutionStatus, location_name: "status"))
     ActionExecutionDetail.add_member(:input, Shapes::ShapeRef.new(shape: ActionExecutionInput, location_name: "input"))
     ActionExecutionDetail.add_member(:output, Shapes::ShapeRef.new(shape: ActionExecutionOutput, location_name: "output"))
@@ -432,6 +448,7 @@ module Aws::CodePipeline
     ActionExecutionDetailList.member = Shapes::ShapeRef.new(shape: ActionExecutionDetail)
 
     ActionExecutionFilter.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, location_name: "pipelineExecutionId"))
+    ActionExecutionFilter.add_member(:latest_in_pipeline_execution, Shapes::ShapeRef.new(shape: LatestInPipelineExecutionFilter, location_name: "latestInPipelineExecution"))
     ActionExecutionFilter.struct_class = Types::ActionExecutionFilter
 
     ActionExecutionInput.add_member(:action_type_id, Shapes::ShapeRef.new(shape: ActionTypeId, location_name: "actionTypeId"))
@@ -451,6 +468,7 @@ module Aws::CodePipeline
     ActionExecutionResult.add_member(:external_execution_id, Shapes::ShapeRef.new(shape: ExternalExecutionId, location_name: "externalExecutionId"))
     ActionExecutionResult.add_member(:external_execution_summary, Shapes::ShapeRef.new(shape: ExternalExecutionSummary, location_name: "externalExecutionSummary"))
     ActionExecutionResult.add_member(:external_execution_url, Shapes::ShapeRef.new(shape: Url, location_name: "externalExecutionUrl"))
+    ActionExecutionResult.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "errorDetails"))
     ActionExecutionResult.struct_class = Types::ActionExecutionResult
 
     ActionNotFoundException.struct_class = Types::ActionNotFoundException
@@ -593,6 +611,9 @@ module Aws::CodePipeline
     ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
     ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
 
+    ConcurrentPipelineExecutionsLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ConcurrentPipelineExecutionsLimitExceededException.struct_class = Types::ConcurrentPipelineExecutionsLimitExceededException
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
@@ -729,11 +750,35 @@ module Aws::CodePipeline
     GetThirdPartyJobDetailsOutput.add_member(:job_details, Shapes::ShapeRef.new(shape: ThirdPartyJobDetails, location_name: "jobDetails"))
     GetThirdPartyJobDetailsOutput.struct_class = Types::GetThirdPartyJobDetailsOutput
 
+    GitBranchFilterCriteria.add_member(:includes, Shapes::ShapeRef.new(shape: GitBranchPatternList, location_name: "includes"))
+    GitBranchFilterCriteria.add_member(:excludes, Shapes::ShapeRef.new(shape: GitBranchPatternList, location_name: "excludes"))
+    GitBranchFilterCriteria.struct_class = Types::GitBranchFilterCriteria
+
+    GitBranchPatternList.member = Shapes::ShapeRef.new(shape: GitBranchNamePattern)
+
     GitConfiguration.add_member(:source_action_name, Shapes::ShapeRef.new(shape: ActionName, required: true, location_name: "sourceActionName"))
     GitConfiguration.add_member(:push, Shapes::ShapeRef.new(shape: GitPushFilterList, location_name: "push"))
+    GitConfiguration.add_member(:pull_request, Shapes::ShapeRef.new(shape: GitPullRequestFilterList, location_name: "pullRequest"))
     GitConfiguration.struct_class = Types::GitConfiguration
 
+    GitFilePathFilterCriteria.add_member(:includes, Shapes::ShapeRef.new(shape: GitFilePathPatternList, location_name: "includes"))
+    GitFilePathFilterCriteria.add_member(:excludes, Shapes::ShapeRef.new(shape: GitFilePathPatternList, location_name: "excludes"))
+    GitFilePathFilterCriteria.struct_class = Types::GitFilePathFilterCriteria
+
+    GitFilePathPatternList.member = Shapes::ShapeRef.new(shape: GitFilePathPattern)
+
+    GitPullRequestEventTypeList.member = Shapes::ShapeRef.new(shape: GitPullRequestEventType)
+
+    GitPullRequestFilter.add_member(:events, Shapes::ShapeRef.new(shape: GitPullRequestEventTypeList, location_name: "events"))
+    GitPullRequestFilter.add_member(:branches, Shapes::ShapeRef.new(shape: GitBranchFilterCriteria, location_name: "branches"))
+    GitPullRequestFilter.add_member(:file_paths, Shapes::ShapeRef.new(shape: GitFilePathFilterCriteria, location_name: "filePaths"))
+    GitPullRequestFilter.struct_class = Types::GitPullRequestFilter
+
+    GitPullRequestFilterList.member = Shapes::ShapeRef.new(shape: GitPullRequestFilter)
+
     GitPushFilter.add_member(:tags, Shapes::ShapeRef.new(shape: GitTagFilterCriteria, location_name: "tags"))
+    GitPushFilter.add_member(:branches, Shapes::ShapeRef.new(shape: GitBranchFilterCriteria, location_name: "branches"))
+    GitPushFilter.add_member(:file_paths, Shapes::ShapeRef.new(shape: GitFilePathFilterCriteria, location_name: "filePaths"))
     GitPushFilter.struct_class = Types::GitPushFilter
 
     GitPushFilterList.member = Shapes::ShapeRef.new(shape: GitPushFilter)
@@ -810,6 +855,10 @@ module Aws::CodePipeline
 
     LambdaExecutorConfiguration.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: LambdaFunctionArn, required: true, location_name: "lambdaFunctionArn"))
     LambdaExecutorConfiguration.struct_class = Types::LambdaExecutorConfiguration
+
+    LatestInPipelineExecutionFilter.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, required: true, location_name: "pipelineExecutionId"))
+    LatestInPipelineExecutionFilter.add_member(:start_time_range, Shapes::ShapeRef.new(shape: StartTimeRange, required: true, location_name: "startTimeRange"))
+    LatestInPipelineExecutionFilter.struct_class = Types::LatestInPipelineExecutionFilter
 
     LimitExceededException.struct_class = Types::LimitExceededException
 
@@ -901,9 +950,10 @@ module Aws::CodePipeline
     PipelineDeclaration.add_member(:artifact_stores, Shapes::ShapeRef.new(shape: ArtifactStoreMap, location_name: "artifactStores"))
     PipelineDeclaration.add_member(:stages, Shapes::ShapeRef.new(shape: PipelineStageDeclarationList, required: true, location_name: "stages"))
     PipelineDeclaration.add_member(:version, Shapes::ShapeRef.new(shape: PipelineVersion, location_name: "version"))
+    PipelineDeclaration.add_member(:execution_mode, Shapes::ShapeRef.new(shape: ExecutionMode, location_name: "executionMode"))
     PipelineDeclaration.add_member(:pipeline_type, Shapes::ShapeRef.new(shape: PipelineType, location_name: "pipelineType"))
-    PipelineDeclaration.add_member(:triggers, Shapes::ShapeRef.new(shape: PipelineTriggerDeclarationList, location_name: "triggers"))
     PipelineDeclaration.add_member(:variables, Shapes::ShapeRef.new(shape: PipelineVariableDeclarationList, location_name: "variables"))
+    PipelineDeclaration.add_member(:triggers, Shapes::ShapeRef.new(shape: PipelineTriggerDeclarationList, location_name: "triggers"))
     PipelineDeclaration.struct_class = Types::PipelineDeclaration
 
     PipelineExecution.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, location_name: "pipelineName"))
@@ -912,8 +962,9 @@ module Aws::CodePipeline
     PipelineExecution.add_member(:status, Shapes::ShapeRef.new(shape: PipelineExecutionStatus, location_name: "status"))
     PipelineExecution.add_member(:status_summary, Shapes::ShapeRef.new(shape: PipelineExecutionStatusSummary, location_name: "statusSummary"))
     PipelineExecution.add_member(:artifact_revisions, Shapes::ShapeRef.new(shape: ArtifactRevisionList, location_name: "artifactRevisions"))
-    PipelineExecution.add_member(:trigger, Shapes::ShapeRef.new(shape: ExecutionTrigger, location_name: "trigger"))
     PipelineExecution.add_member(:variables, Shapes::ShapeRef.new(shape: ResolvedPipelineVariableList, location_name: "variables"))
+    PipelineExecution.add_member(:trigger, Shapes::ShapeRef.new(shape: ExecutionTrigger, location_name: "trigger"))
+    PipelineExecution.add_member(:execution_mode, Shapes::ShapeRef.new(shape: ExecutionMode, location_name: "executionMode"))
     PipelineExecution.struct_class = Types::PipelineExecution
 
     PipelineExecutionNotFoundException.struct_class = Types::PipelineExecutionNotFoundException
@@ -928,6 +979,7 @@ module Aws::CodePipeline
     PipelineExecutionSummary.add_member(:source_revisions, Shapes::ShapeRef.new(shape: SourceRevisionList, location_name: "sourceRevisions"))
     PipelineExecutionSummary.add_member(:trigger, Shapes::ShapeRef.new(shape: ExecutionTrigger, location_name: "trigger"))
     PipelineExecutionSummary.add_member(:stop_trigger, Shapes::ShapeRef.new(shape: StopExecutionTrigger, location_name: "stopTrigger"))
+    PipelineExecutionSummary.add_member(:execution_mode, Shapes::ShapeRef.new(shape: ExecutionMode, location_name: "executionMode"))
     PipelineExecutionSummary.struct_class = Types::PipelineExecutionSummary
 
     PipelineExecutionSummaryList.member = Shapes::ShapeRef.new(shape: PipelineExecutionSummary)
@@ -949,6 +1001,7 @@ module Aws::CodePipeline
     PipelineSummary.add_member(:name, Shapes::ShapeRef.new(shape: PipelineName, location_name: "name"))
     PipelineSummary.add_member(:version, Shapes::ShapeRef.new(shape: PipelineVersion, location_name: "version"))
     PipelineSummary.add_member(:pipeline_type, Shapes::ShapeRef.new(shape: PipelineType, location_name: "pipelineType"))
+    PipelineSummary.add_member(:execution_mode, Shapes::ShapeRef.new(shape: ExecutionMode, location_name: "executionMode"))
     PipelineSummary.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "created"))
     PipelineSummary.add_member(:updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updated"))
     PipelineSummary.struct_class = Types::PipelineSummary
@@ -1113,12 +1166,15 @@ module Aws::CodePipeline
     StageExecution.add_member(:status, Shapes::ShapeRef.new(shape: StageExecutionStatus, required: true, location_name: "status"))
     StageExecution.struct_class = Types::StageExecution
 
+    StageExecutionList.member = Shapes::ShapeRef.new(shape: StageExecution)
+
     StageNotFoundException.struct_class = Types::StageNotFoundException
 
     StageNotRetryableException.struct_class = Types::StageNotRetryableException
 
     StageState.add_member(:stage_name, Shapes::ShapeRef.new(shape: StageName, location_name: "stageName"))
     StageState.add_member(:inbound_execution, Shapes::ShapeRef.new(shape: StageExecution, location_name: "inboundExecution"))
+    StageState.add_member(:inbound_executions, Shapes::ShapeRef.new(shape: StageExecutionList, location_name: "inboundExecutions"))
     StageState.add_member(:inbound_transition_state, Shapes::ShapeRef.new(shape: TransitionState, location_name: "inboundTransitionState"))
     StageState.add_member(:action_states, Shapes::ShapeRef.new(shape: ActionStateList, location_name: "actionStates"))
     StageState.add_member(:latest_execution, Shapes::ShapeRef.new(shape: StageExecution, location_name: "latestExecution"))
@@ -1671,6 +1727,7 @@ module Aws::CodePipeline
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: PipelineNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentPipelineExecutionsLimitExceededException)
       end)
 
       api.add_operation(:stop_pipeline_execution, Seahorse::Model::Operation.new.tap do |o|

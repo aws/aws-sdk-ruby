@@ -1,0 +1,98 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SQS
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class BatchEntryIdsNotDistinct < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class BatchRequestTooLong < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class EmptyBatchRequest < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidAddress < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidAttributeName < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidAttributeValue < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidBatchEntryId < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidIdFormat < ::Aws::Errors::ServiceError
+      end
+      class InvalidMessageContents < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidSecurity < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class KmsAccessDenied < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class KmsDisabled < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class KmsInvalidKeyUsage < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class KmsInvalidState < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class KmsNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class KmsOptInRequired < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class KmsThrottled < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MessageNotInflight < ::Aws::Errors::ServiceError
+      end
+      class OverLimit < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PurgeQueueInProgress < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class QueueDeletedRecently < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class QueueDoesNotExist < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class QueueNameExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ReceiptHandleIsInvalid < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RequestThrottled < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyEntriesInBatchRequest < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnsupportedOperation < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

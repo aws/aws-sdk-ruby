@@ -1,0 +1,86 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RDS
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstance.html
+    class ReservedDBInstance
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstance.html#initialize-instance_method
+      def initialize: (String id, Hash[Symbol, untyped] options) -> void
+                    | (id: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstance.html#id-instance_method
+      def id: () -> String
+      alias reserved_db_instance_id id
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstance.html#reserved_db_instances_offering_id-instance_method
+      def reserved_db_instances_offering_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstance.html#db_instance_class-instance_method
+      def db_instance_class: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstance.html#start_time-instance_method
+      def start_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstance.html#duration-instance_method
+      def duration: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstance.html#fixed_price-instance_method
+      def fixed_price: () -> ::Float
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstance.html#usage_price-instance_method
+      def usage_price: () -> ::Float
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstance.html#currency_code-instance_method
+      def currency_code: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstance.html#db_instance_count-instance_method
+      def db_instance_count: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstance.html#product_description-instance_method
+      def product_description: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstance.html#offering_type-instance_method
+      def offering_type: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstance.html#multi_az-instance_method
+      def multi_az: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstance.html#state-instance_method
+      def state: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstance.html#recurring_charges-instance_method
+      def recurring_charges: () -> ::Array[Types::RecurringCharge]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstance.html#reserved_db_instance_arn-instance_method
+      def reserved_db_instance_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstance.html#lease_id-instance_method
+      def lease_id: () -> ::String
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstance.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstance.html#data-instance_method
+      def data: () -> Types::ReservedDBInstance
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstance.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstance.html#offering-instance_method
+      def offering: () -> ReservedDBInstancesOffering?
+
+      class Collection < ::Aws::Resources::Collection[ReservedDBInstance]
+      end
+    end
+  end
+end

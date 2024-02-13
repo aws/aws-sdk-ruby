@@ -1,0 +1,1420 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Personalize
+  module Types
+
+    class Algorithm
+      attr_accessor name: ::String
+      attr_accessor algorithm_arn: ::String
+      attr_accessor algorithm_image: Types::AlgorithmImage
+      attr_accessor default_hyper_parameters: ::Hash[::String, ::String]
+      attr_accessor default_hyper_parameter_ranges: Types::DefaultHyperParameterRanges
+      attr_accessor default_resource_config: ::Hash[::String, ::String]
+      attr_accessor training_input_mode: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class AlgorithmImage
+      attr_accessor name: ::String
+      attr_accessor docker_uri: ::String
+      SENSITIVE: []
+    end
+
+    class AutoMLConfig
+      attr_accessor metric_name: ::String
+      attr_accessor recipe_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AutoMLResult
+      attr_accessor best_recipe_arn: ::String
+      SENSITIVE: []
+    end
+
+    class BatchInferenceJob
+      attr_accessor job_name: ::String
+      attr_accessor batch_inference_job_arn: ::String
+      attr_accessor filter_arn: ::String
+      attr_accessor failure_reason: ::String
+      attr_accessor solution_version_arn: ::String
+      attr_accessor num_results: ::Integer
+      attr_accessor job_input: Types::BatchInferenceJobInput
+      attr_accessor job_output: Types::BatchInferenceJobOutput
+      attr_accessor batch_inference_job_config: Types::BatchInferenceJobConfig
+      attr_accessor role_arn: ::String
+      attr_accessor batch_inference_job_mode: ("BATCH_INFERENCE" | "THEME_GENERATION")
+      attr_accessor theme_generation_config: Types::ThemeGenerationConfig
+      attr_accessor status: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class BatchInferenceJobConfig
+      attr_accessor item_exploration_config: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class BatchInferenceJobInput
+      attr_accessor s3_data_source: Types::S3DataConfig
+      SENSITIVE: []
+    end
+
+    class BatchInferenceJobOutput
+      attr_accessor s3_data_destination: Types::S3DataConfig
+      SENSITIVE: []
+    end
+
+    class BatchInferenceJobSummary
+      attr_accessor batch_inference_job_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor failure_reason: ::String
+      attr_accessor solution_version_arn: ::String
+      attr_accessor batch_inference_job_mode: ("BATCH_INFERENCE" | "THEME_GENERATION")
+      SENSITIVE: []
+    end
+
+    class BatchSegmentJob
+      attr_accessor job_name: ::String
+      attr_accessor batch_segment_job_arn: ::String
+      attr_accessor filter_arn: ::String
+      attr_accessor failure_reason: ::String
+      attr_accessor solution_version_arn: ::String
+      attr_accessor num_results: ::Integer
+      attr_accessor job_input: Types::BatchSegmentJobInput
+      attr_accessor job_output: Types::BatchSegmentJobOutput
+      attr_accessor role_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class BatchSegmentJobInput
+      attr_accessor s3_data_source: Types::S3DataConfig
+      SENSITIVE: []
+    end
+
+    class BatchSegmentJobOutput
+      attr_accessor s3_data_destination: Types::S3DataConfig
+      SENSITIVE: []
+    end
+
+    class BatchSegmentJobSummary
+      attr_accessor batch_segment_job_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor failure_reason: ::String
+      attr_accessor solution_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Campaign
+      attr_accessor name: ::String
+      attr_accessor campaign_arn: ::String
+      attr_accessor solution_version_arn: ::String
+      attr_accessor min_provisioned_tps: ::Integer
+      attr_accessor campaign_config: Types::CampaignConfig
+      attr_accessor status: ::String
+      attr_accessor failure_reason: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor latest_campaign_update: Types::CampaignUpdateSummary
+      SENSITIVE: []
+    end
+
+    class CampaignConfig
+      attr_accessor item_exploration_config: ::Hash[::String, ::String]
+      attr_accessor enable_metadata_with_recommendations: bool
+      SENSITIVE: []
+    end
+
+    class CampaignSummary
+      attr_accessor name: ::String
+      attr_accessor campaign_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class CampaignUpdateSummary
+      attr_accessor solution_version_arn: ::String
+      attr_accessor min_provisioned_tps: ::Integer
+      attr_accessor campaign_config: Types::CampaignConfig
+      attr_accessor status: ::String
+      attr_accessor failure_reason: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CategoricalHyperParameterRange
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ContinuousHyperParameterRange
+      attr_accessor name: ::String
+      attr_accessor min_value: ::Float
+      attr_accessor max_value: ::Float
+      SENSITIVE: []
+    end
+
+    class CreateBatchInferenceJobRequest
+      attr_accessor job_name: ::String
+      attr_accessor solution_version_arn: ::String
+      attr_accessor filter_arn: ::String
+      attr_accessor num_results: ::Integer
+      attr_accessor job_input: Types::BatchInferenceJobInput
+      attr_accessor job_output: Types::BatchInferenceJobOutput
+      attr_accessor role_arn: ::String
+      attr_accessor batch_inference_job_config: Types::BatchInferenceJobConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor batch_inference_job_mode: ("BATCH_INFERENCE" | "THEME_GENERATION")
+      attr_accessor theme_generation_config: Types::ThemeGenerationConfig
+      SENSITIVE: []
+    end
+
+    class CreateBatchInferenceJobResponse
+      attr_accessor batch_inference_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBatchSegmentJobRequest
+      attr_accessor job_name: ::String
+      attr_accessor solution_version_arn: ::String
+      attr_accessor filter_arn: ::String
+      attr_accessor num_results: ::Integer
+      attr_accessor job_input: Types::BatchSegmentJobInput
+      attr_accessor job_output: Types::BatchSegmentJobOutput
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateBatchSegmentJobResponse
+      attr_accessor batch_segment_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCampaignRequest
+      attr_accessor name: ::String
+      attr_accessor solution_version_arn: ::String
+      attr_accessor min_provisioned_tps: ::Integer
+      attr_accessor campaign_config: Types::CampaignConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateCampaignResponse
+      attr_accessor campaign_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDatasetExportJobRequest
+      attr_accessor job_name: ::String
+      attr_accessor dataset_arn: ::String
+      attr_accessor ingestion_mode: ("BULK" | "PUT" | "ALL")
+      attr_accessor role_arn: ::String
+      attr_accessor job_output: Types::DatasetExportJobOutput
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDatasetExportJobResponse
+      attr_accessor dataset_export_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDatasetGroupRequest
+      attr_accessor name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor domain: ("ECOMMERCE" | "VIDEO_ON_DEMAND")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDatasetGroupResponse
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor domain: ("ECOMMERCE" | "VIDEO_ON_DEMAND")
+      SENSITIVE: []
+    end
+
+    class CreateDatasetImportJobRequest
+      attr_accessor job_name: ::String
+      attr_accessor dataset_arn: ::String
+      attr_accessor data_source: Types::DataSource
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor import_mode: ("FULL" | "INCREMENTAL")
+      attr_accessor publish_attribution_metrics_to_s3: bool
+      SENSITIVE: []
+    end
+
+    class CreateDatasetImportJobResponse
+      attr_accessor dataset_import_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDatasetRequest
+      attr_accessor name: ::String
+      attr_accessor schema_arn: ::String
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor dataset_type: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDatasetResponse
+      attr_accessor dataset_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEventTrackerRequest
+      attr_accessor name: ::String
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateEventTrackerResponse
+      attr_accessor event_tracker_arn: ::String
+      attr_accessor tracking_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFilterRequest
+      attr_accessor name: ::String
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor filter_expression: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:filter_expression]
+    end
+
+    class CreateFilterResponse
+      attr_accessor filter_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMetricAttributionRequest
+      attr_accessor name: ::String
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor metrics: ::Array[Types::MetricAttribute]
+      attr_accessor metrics_output_config: Types::MetricAttributionOutput
+      SENSITIVE: []
+    end
+
+    class CreateMetricAttributionResponse
+      attr_accessor metric_attribution_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRecommenderRequest
+      attr_accessor name: ::String
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor recipe_arn: ::String
+      attr_accessor recommender_config: Types::RecommenderConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateRecommenderResponse
+      attr_accessor recommender_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSchemaRequest
+      attr_accessor name: ::String
+      attr_accessor schema: ::String
+      attr_accessor domain: ("ECOMMERCE" | "VIDEO_ON_DEMAND")
+      SENSITIVE: []
+    end
+
+    class CreateSchemaResponse
+      attr_accessor schema_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSolutionRequest
+      attr_accessor name: ::String
+      attr_accessor perform_hpo: bool
+      attr_accessor perform_auto_ml: bool
+      attr_accessor recipe_arn: ::String
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor event_type: ::String
+      attr_accessor solution_config: Types::SolutionConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateSolutionResponse
+      attr_accessor solution_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSolutionVersionRequest
+      attr_accessor name: ::String
+      attr_accessor solution_arn: ::String
+      attr_accessor training_mode: ("FULL" | "UPDATE")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateSolutionVersionResponse
+      attr_accessor solution_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DataSource
+      attr_accessor data_location: ::String
+      SENSITIVE: []
+    end
+
+    class Dataset
+      attr_accessor name: ::String
+      attr_accessor dataset_arn: ::String
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor dataset_type: ::String
+      attr_accessor schema_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor latest_dataset_update: Types::DatasetUpdateSummary
+      attr_accessor tracking_id: ::String
+      SENSITIVE: []
+    end
+
+    class DatasetExportJob
+      attr_accessor job_name: ::String
+      attr_accessor dataset_export_job_arn: ::String
+      attr_accessor dataset_arn: ::String
+      attr_accessor ingestion_mode: ("BULK" | "PUT" | "ALL")
+      attr_accessor role_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor job_output: Types::DatasetExportJobOutput
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class DatasetExportJobOutput
+      attr_accessor s3_data_destination: Types::S3DataConfig
+      SENSITIVE: []
+    end
+
+    class DatasetExportJobSummary
+      attr_accessor dataset_export_job_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class DatasetGroup
+      attr_accessor name: ::String
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor failure_reason: ::String
+      attr_accessor domain: ("ECOMMERCE" | "VIDEO_ON_DEMAND")
+      SENSITIVE: []
+    end
+
+    class DatasetGroupSummary
+      attr_accessor name: ::String
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor failure_reason: ::String
+      attr_accessor domain: ("ECOMMERCE" | "VIDEO_ON_DEMAND")
+      SENSITIVE: []
+    end
+
+    class DatasetImportJob
+      attr_accessor job_name: ::String
+      attr_accessor dataset_import_job_arn: ::String
+      attr_accessor dataset_arn: ::String
+      attr_accessor data_source: Types::DataSource
+      attr_accessor role_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor failure_reason: ::String
+      attr_accessor import_mode: ("FULL" | "INCREMENTAL")
+      attr_accessor publish_attribution_metrics_to_s3: bool
+      SENSITIVE: []
+    end
+
+    class DatasetImportJobSummary
+      attr_accessor dataset_import_job_arn: ::String
+      attr_accessor job_name: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor failure_reason: ::String
+      attr_accessor import_mode: ("FULL" | "INCREMENTAL")
+      SENSITIVE: []
+    end
+
+    class DatasetSchema
+      attr_accessor name: ::String
+      attr_accessor schema_arn: ::String
+      attr_accessor schema: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor domain: ("ECOMMERCE" | "VIDEO_ON_DEMAND")
+      SENSITIVE: []
+    end
+
+    class DatasetSchemaSummary
+      attr_accessor name: ::String
+      attr_accessor schema_arn: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor domain: ("ECOMMERCE" | "VIDEO_ON_DEMAND")
+      SENSITIVE: []
+    end
+
+    class DatasetSummary
+      attr_accessor name: ::String
+      attr_accessor dataset_arn: ::String
+      attr_accessor dataset_type: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DatasetUpdateSummary
+      attr_accessor schema_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor failure_reason: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DefaultCategoricalHyperParameterRange
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      attr_accessor is_tunable: bool
+      SENSITIVE: []
+    end
+
+    class DefaultContinuousHyperParameterRange
+      attr_accessor name: ::String
+      attr_accessor min_value: ::Float
+      attr_accessor max_value: ::Float
+      attr_accessor is_tunable: bool
+      SENSITIVE: []
+    end
+
+    class DefaultHyperParameterRanges
+      attr_accessor integer_hyper_parameter_ranges: ::Array[Types::DefaultIntegerHyperParameterRange]
+      attr_accessor continuous_hyper_parameter_ranges: ::Array[Types::DefaultContinuousHyperParameterRange]
+      attr_accessor categorical_hyper_parameter_ranges: ::Array[Types::DefaultCategoricalHyperParameterRange]
+      SENSITIVE: []
+    end
+
+    class DefaultIntegerHyperParameterRange
+      attr_accessor name: ::String
+      attr_accessor min_value: ::Integer
+      attr_accessor max_value: ::Integer
+      attr_accessor is_tunable: bool
+      SENSITIVE: []
+    end
+
+    class DeleteCampaignRequest
+      attr_accessor campaign_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDatasetGroupRequest
+      attr_accessor dataset_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDatasetRequest
+      attr_accessor dataset_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEventTrackerRequest
+      attr_accessor event_tracker_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFilterRequest
+      attr_accessor filter_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMetricAttributionRequest
+      attr_accessor metric_attribution_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRecommenderRequest
+      attr_accessor recommender_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSchemaRequest
+      attr_accessor schema_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSolutionRequest
+      attr_accessor solution_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAlgorithmRequest
+      attr_accessor algorithm_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAlgorithmResponse
+      attr_accessor algorithm: Types::Algorithm
+      SENSITIVE: []
+    end
+
+    class DescribeBatchInferenceJobRequest
+      attr_accessor batch_inference_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBatchInferenceJobResponse
+      attr_accessor batch_inference_job: Types::BatchInferenceJob
+      SENSITIVE: []
+    end
+
+    class DescribeBatchSegmentJobRequest
+      attr_accessor batch_segment_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBatchSegmentJobResponse
+      attr_accessor batch_segment_job: Types::BatchSegmentJob
+      SENSITIVE: []
+    end
+
+    class DescribeCampaignRequest
+      attr_accessor campaign_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCampaignResponse
+      attr_accessor campaign: Types::Campaign
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetExportJobRequest
+      attr_accessor dataset_export_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetExportJobResponse
+      attr_accessor dataset_export_job: Types::DatasetExportJob
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetGroupRequest
+      attr_accessor dataset_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetGroupResponse
+      attr_accessor dataset_group: Types::DatasetGroup
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetImportJobRequest
+      attr_accessor dataset_import_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetImportJobResponse
+      attr_accessor dataset_import_job: Types::DatasetImportJob
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetRequest
+      attr_accessor dataset_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetResponse
+      attr_accessor dataset: Types::Dataset
+      SENSITIVE: []
+    end
+
+    class DescribeEventTrackerRequest
+      attr_accessor event_tracker_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventTrackerResponse
+      attr_accessor event_tracker: Types::EventTracker
+      SENSITIVE: []
+    end
+
+    class DescribeFeatureTransformationRequest
+      attr_accessor feature_transformation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFeatureTransformationResponse
+      attr_accessor feature_transformation: Types::FeatureTransformation
+      SENSITIVE: []
+    end
+
+    class DescribeFilterRequest
+      attr_accessor filter_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFilterResponse
+      attr_accessor filter: Types::Filter
+      SENSITIVE: []
+    end
+
+    class DescribeMetricAttributionRequest
+      attr_accessor metric_attribution_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMetricAttributionResponse
+      attr_accessor metric_attribution: Types::MetricAttribution
+      SENSITIVE: []
+    end
+
+    class DescribeRecipeRequest
+      attr_accessor recipe_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRecipeResponse
+      attr_accessor recipe: Types::Recipe
+      SENSITIVE: []
+    end
+
+    class DescribeRecommenderRequest
+      attr_accessor recommender_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRecommenderResponse
+      attr_accessor recommender: Types::Recommender
+      SENSITIVE: []
+    end
+
+    class DescribeSchemaRequest
+      attr_accessor schema_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSchemaResponse
+      attr_accessor schema: Types::DatasetSchema
+      SENSITIVE: []
+    end
+
+    class DescribeSolutionRequest
+      attr_accessor solution_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSolutionResponse
+      attr_accessor solution: Types::Solution
+      SENSITIVE: []
+    end
+
+    class DescribeSolutionVersionRequest
+      attr_accessor solution_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSolutionVersionResponse
+      attr_accessor solution_version: Types::SolutionVersion
+      SENSITIVE: []
+    end
+
+    class EventTracker
+      attr_accessor name: ::String
+      attr_accessor event_tracker_arn: ::String
+      attr_accessor account_id: ::String
+      attr_accessor tracking_id: ::String
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class EventTrackerSummary
+      attr_accessor name: ::String
+      attr_accessor event_tracker_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class FeatureTransformation
+      attr_accessor name: ::String
+      attr_accessor feature_transformation_arn: ::String
+      attr_accessor default_parameters: ::Hash[::String, ::String]
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class FieldsForThemeGeneration
+      attr_accessor item_name: ::String
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor name: ::String
+      attr_accessor filter_arn: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor failure_reason: ::String
+      attr_accessor filter_expression: ::String
+      attr_accessor status: ::String
+      SENSITIVE: [:filter_expression]
+    end
+
+    class FilterSummary
+      attr_accessor name: ::String
+      attr_accessor filter_arn: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor failure_reason: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class GetSolutionMetricsRequest
+      attr_accessor solution_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetSolutionMetricsResponse
+      attr_accessor solution_version_arn: ::String
+      attr_accessor metrics: ::Hash[::String, ::Float]
+      SENSITIVE: []
+    end
+
+    class HPOConfig
+      attr_accessor hpo_objective: Types::HPOObjective
+      attr_accessor hpo_resource_config: Types::HPOResourceConfig
+      attr_accessor algorithm_hyper_parameter_ranges: Types::HyperParameterRanges
+      SENSITIVE: []
+    end
+
+    class HPOObjective
+      attr_accessor type: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor metric_regex: ::String
+      SENSITIVE: []
+    end
+
+    class HPOResourceConfig
+      attr_accessor max_number_of_training_jobs: ::String
+      attr_accessor max_parallel_training_jobs: ::String
+      SENSITIVE: []
+    end
+
+    class HyperParameterRanges
+      attr_accessor integer_hyper_parameter_ranges: ::Array[Types::IntegerHyperParameterRange]
+      attr_accessor continuous_hyper_parameter_ranges: ::Array[Types::ContinuousHyperParameterRange]
+      attr_accessor categorical_hyper_parameter_ranges: ::Array[Types::CategoricalHyperParameterRange]
+      SENSITIVE: []
+    end
+
+    class IntegerHyperParameterRange
+      attr_accessor name: ::String
+      attr_accessor min_value: ::Integer
+      attr_accessor max_value: ::Integer
+      SENSITIVE: []
+    end
+
+    class InvalidInputException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListBatchInferenceJobsRequest
+      attr_accessor solution_version_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListBatchInferenceJobsResponse
+      attr_accessor batch_inference_jobs: ::Array[Types::BatchInferenceJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBatchSegmentJobsRequest
+      attr_accessor solution_version_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListBatchSegmentJobsResponse
+      attr_accessor batch_segment_jobs: ::Array[Types::BatchSegmentJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCampaignsRequest
+      attr_accessor solution_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCampaignsResponse
+      attr_accessor campaigns: ::Array[Types::CampaignSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatasetExportJobsRequest
+      attr_accessor dataset_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDatasetExportJobsResponse
+      attr_accessor dataset_export_jobs: ::Array[Types::DatasetExportJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatasetGroupsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDatasetGroupsResponse
+      attr_accessor dataset_groups: ::Array[Types::DatasetGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatasetImportJobsRequest
+      attr_accessor dataset_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDatasetImportJobsResponse
+      attr_accessor dataset_import_jobs: ::Array[Types::DatasetImportJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatasetsRequest
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDatasetsResponse
+      attr_accessor datasets: ::Array[Types::DatasetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventTrackersRequest
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEventTrackersResponse
+      attr_accessor event_trackers: ::Array[Types::EventTrackerSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFiltersRequest
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFiltersResponse
+      attr_accessor filters: ::Array[Types::FilterSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMetricAttributionMetricsRequest
+      attr_accessor metric_attribution_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMetricAttributionMetricsResponse
+      attr_accessor metrics: ::Array[Types::MetricAttribute]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMetricAttributionsRequest
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMetricAttributionsResponse
+      attr_accessor metric_attributions: ::Array[Types::MetricAttributionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecipesRequest
+      attr_accessor recipe_provider: ("SERVICE")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor domain: ("ECOMMERCE" | "VIDEO_ON_DEMAND")
+      SENSITIVE: []
+    end
+
+    class ListRecipesResponse
+      attr_accessor recipes: ::Array[Types::RecipeSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecommendersRequest
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRecommendersResponse
+      attr_accessor recommenders: ::Array[Types::RecommenderSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSchemasRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSchemasResponse
+      attr_accessor schemas: ::Array[Types::DatasetSchemaSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSolutionVersionsRequest
+      attr_accessor solution_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSolutionVersionsResponse
+      attr_accessor solution_versions: ::Array[Types::SolutionVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSolutionsRequest
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSolutionsResponse
+      attr_accessor solutions: ::Array[Types::SolutionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class MetricAttribute
+      attr_accessor event_type: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor expression: ::String
+      SENSITIVE: []
+    end
+
+    class MetricAttribution
+      attr_accessor name: ::String
+      attr_accessor metric_attribution_arn: ::String
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor metrics_output_config: Types::MetricAttributionOutput
+      attr_accessor status: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class MetricAttributionOutput
+      attr_accessor s3_data_destination: Types::S3DataConfig
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class MetricAttributionSummary
+      attr_accessor name: ::String
+      attr_accessor metric_attribution_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class OptimizationObjective
+      attr_accessor item_attribute: ::String
+      attr_accessor objective_sensitivity: ("LOW" | "MEDIUM" | "HIGH" | "OFF")
+      SENSITIVE: []
+    end
+
+    class Recipe
+      attr_accessor name: ::String
+      attr_accessor recipe_arn: ::String
+      attr_accessor algorithm_arn: ::String
+      attr_accessor feature_transformation_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor description: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor recipe_type: ::String
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class RecipeSummary
+      attr_accessor name: ::String
+      attr_accessor recipe_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor domain: ("ECOMMERCE" | "VIDEO_ON_DEMAND")
+      SENSITIVE: []
+    end
+
+    class Recommender
+      attr_accessor recommender_arn: ::String
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor recipe_arn: ::String
+      attr_accessor recommender_config: Types::RecommenderConfig
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor status: ::String
+      attr_accessor failure_reason: ::String
+      attr_accessor latest_recommender_update: Types::RecommenderUpdateSummary
+      attr_accessor model_metrics: ::Hash[::String, ::Float]
+      SENSITIVE: []
+    end
+
+    class RecommenderConfig
+      attr_accessor item_exploration_config: ::Hash[::String, ::String]
+      attr_accessor min_recommendation_requests_per_second: ::Integer
+      attr_accessor training_data_config: Types::TrainingDataConfig
+      attr_accessor enable_metadata_with_recommendations: bool
+      SENSITIVE: []
+    end
+
+    class RecommenderSummary
+      attr_accessor name: ::String
+      attr_accessor recommender_arn: ::String
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor recipe_arn: ::String
+      attr_accessor recommender_config: Types::RecommenderConfig
+      attr_accessor status: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class RecommenderUpdateSummary
+      attr_accessor recommender_config: Types::RecommenderConfig
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor status: ::String
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class S3DataConfig
+      attr_accessor path: ::String
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Solution
+      attr_accessor name: ::String
+      attr_accessor solution_arn: ::String
+      attr_accessor perform_hpo: bool
+      attr_accessor perform_auto_ml: bool
+      attr_accessor recipe_arn: ::String
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor event_type: ::String
+      attr_accessor solution_config: Types::SolutionConfig
+      attr_accessor auto_ml_result: Types::AutoMLResult
+      attr_accessor status: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor latest_solution_version: Types::SolutionVersionSummary
+      SENSITIVE: []
+    end
+
+    class SolutionConfig
+      attr_accessor event_value_threshold: ::String
+      attr_accessor hpo_config: Types::HPOConfig
+      attr_accessor algorithm_hyper_parameters: ::Hash[::String, ::String]
+      attr_accessor feature_transformation_parameters: ::Hash[::String, ::String]
+      attr_accessor auto_ml_config: Types::AutoMLConfig
+      attr_accessor optimization_objective: Types::OptimizationObjective
+      attr_accessor training_data_config: Types::TrainingDataConfig
+      SENSITIVE: []
+    end
+
+    class SolutionSummary
+      attr_accessor name: ::String
+      attr_accessor solution_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor recipe_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SolutionVersion
+      attr_accessor name: ::String
+      attr_accessor solution_version_arn: ::String
+      attr_accessor solution_arn: ::String
+      attr_accessor perform_hpo: bool
+      attr_accessor perform_auto_ml: bool
+      attr_accessor recipe_arn: ::String
+      attr_accessor event_type: ::String
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor solution_config: Types::SolutionConfig
+      attr_accessor training_hours: ::Float
+      attr_accessor training_mode: ("FULL" | "UPDATE")
+      attr_accessor tuned_hpo_params: Types::TunedHPOParams
+      attr_accessor status: ::String
+      attr_accessor failure_reason: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class SolutionVersionSummary
+      attr_accessor solution_version_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_date_time: ::Time
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class StartRecommenderRequest
+      attr_accessor recommender_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartRecommenderResponse
+      attr_accessor recommender_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopRecommenderRequest
+      attr_accessor recommender_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopRecommenderResponse
+      attr_accessor recommender_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopSolutionVersionCreationRequest
+      attr_accessor solution_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor tag_key: ::String
+      attr_accessor tag_value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThemeGenerationConfig
+      attr_accessor fields_for_theme_generation: Types::FieldsForThemeGeneration
+      SENSITIVE: []
+    end
+
+    class TooManyTagKeysException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TrainingDataConfig
+      attr_accessor excluded_dataset_columns: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class TunedHPOParams
+      attr_accessor algorithm_hyper_parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateCampaignRequest
+      attr_accessor campaign_arn: ::String
+      attr_accessor solution_version_arn: ::String
+      attr_accessor min_provisioned_tps: ::Integer
+      attr_accessor campaign_config: Types::CampaignConfig
+      SENSITIVE: []
+    end
+
+    class UpdateCampaignResponse
+      attr_accessor campaign_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDatasetRequest
+      attr_accessor dataset_arn: ::String
+      attr_accessor schema_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDatasetResponse
+      attr_accessor dataset_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateMetricAttributionRequest
+      attr_accessor add_metrics: ::Array[Types::MetricAttribute]
+      attr_accessor remove_metrics: ::Array[::String]
+      attr_accessor metrics_output_config: Types::MetricAttributionOutput
+      attr_accessor metric_attribution_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateMetricAttributionResponse
+      attr_accessor metric_attribution_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRecommenderRequest
+      attr_accessor recommender_arn: ::String
+      attr_accessor recommender_config: Types::RecommenderConfig
+      SENSITIVE: []
+    end
+
+    class UpdateRecommenderResponse
+      attr_accessor recommender_arn: ::String
+      SENSITIVE: []
+    end
+  end
+end

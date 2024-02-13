@@ -368,6 +368,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     client_token: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -377,6 +378,14 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the network ACL.
+    # @option options [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     # @return [NetworkAcl]
     def create_network_acl(options = {})
       options = options.merge(vpc_id: @id)
@@ -405,6 +414,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     client_token: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -414,6 +424,14 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the route table.
+    # @option options [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     # @return [RouteTable]
     def create_route_table(options = {})
       options = options.merge(vpc_id: @id)
@@ -1893,6 +1911,9 @@ module Aws::EC2
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
     #   The filters.
+    #
+    #   * `association.gateway-id` - The ID of the gateway involved in the
+    #     association.
     #
     #   * `association.route-table-association-id` - The ID of an association
     #     ID for the route table.

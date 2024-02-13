@@ -680,6 +680,12 @@ module Aws::RDS
       data[:aws_backup_recovery_point_arn]
     end
 
+    # The details for Aurora Limitless Database.
+    # @return [Types::LimitlessDatabase]
+    def limitless_database
+      data[:limitless_database]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -881,6 +887,7 @@ module Aws::RDS
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     performance_insights_retention_period: 1,
+    #     enable_limitless_database: false,
     #     serverless_v2_scaling_configuration: {
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
@@ -1556,6 +1563,11 @@ module Aws::RDS
     #
     #   If you specify a retention period that isn't valid, such as `94`,
     #   Amazon RDS issues an error.
+    # @option options [Boolean] :enable_limitless_database
+    #   Specifies whether to enable Aurora Limitless Database. You must enable
+    #   Aurora Limitless Database to create a DB shard group.
+    #
+    #   Valid for: Aurora DB clusters only
     # @option options [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
     #   Contains the scaling configuration of an Aurora Serverless v2 DB
     #   cluster.
@@ -1834,6 +1846,7 @@ module Aws::RDS
     #     allow_engine_mode_change: false,
     #     enable_local_write_forwarding: false,
     #     aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
+    #     enable_limitless_database: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :new_db_cluster_identifier
@@ -2458,6 +2471,11 @@ module Aws::RDS
     # @option options [String] :aws_backup_recovery_point_arn
     #   The Amazon Resource Name (ARN) of the recovery point in Amazon Web
     #   Services Backup.
+    # @option options [Boolean] :enable_limitless_database
+    #   Specifies whether to enable Aurora Limitless Database. You must enable
+    #   Aurora Limitless Database to create a DB shard group.
+    #
+    #   Valid for: Aurora DB clusters only
     # @return [DBCluster]
     def modify(options = {})
       options = options.merge(db_cluster_identifier: @id)

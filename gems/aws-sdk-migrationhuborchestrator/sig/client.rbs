@@ -1,0 +1,615 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MigrationHubOrchestrator
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMigrationWorkflowResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def template_id: () -> ::String
+        def ads_application_configuration_id: () -> ::String
+        def workflow_inputs: () -> ::Hash[::String, Types::StepInput]
+        def step_targets: () -> ::Array[::String]
+        def status: () -> ("CREATING" | "NOT_STARTED" | "CREATION_FAILED" | "STARTING" | "IN_PROGRESS" | "WORKFLOW_FAILED" | "PAUSED" | "PAUSING" | "PAUSING_FAILED" | "USER_ATTENTION_REQUIRED" | "DELETING" | "DELETION_FAILED" | "DELETED" | "COMPLETED")
+        def creation_time: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#create_workflow-instance_method
+      def create_workflow: (
+                             name: ::String,
+                             ?description: ::String,
+                             template_id: ::String,
+                             application_configuration_id: ::String,
+                             input_parameters: Hash[::String, {
+                                 integer_value: ::Integer?,
+                                 string_value: ::String?,
+                                 list_of_strings_value: Array[::String]?,
+                                 map_of_string_value: Hash[::String, ::String]?
+                               }],
+                             ?step_targets: Array[::String],
+                             ?tags: Hash[::String, ::String]
+                           ) -> _CreateWorkflowResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkflowResponseSuccess
+
+      interface _CreateWorkflowStepResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkflowStepResponse]
+        def id: () -> ::String
+        def step_group_id: () -> ::String
+        def workflow_id: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#create_workflow_step-instance_method
+      def create_workflow_step: (
+                                  name: ::String,
+                                  step_group_id: ::String,
+                                  workflow_id: ::String,
+                                  step_action_type: ("MANUAL" | "AUTOMATED"),
+                                  ?description: ::String,
+                                  ?workflow_step_automation_configuration: {
+                                    script_location_s3_bucket: ::String?,
+                                    script_location_s3_key: {
+                                      linux: ::String?,
+                                      windows: ::String?
+                                    }?,
+                                    command: {
+                                      linux: ::String?,
+                                      windows: ::String?
+                                    }?,
+                                    run_environment: ("AWS" | "ONPREMISE")?,
+                                    target_type: ("SINGLE" | "ALL" | "NONE")?
+                                  },
+                                  ?step_target: Array[::String],
+                                  ?outputs: Array[
+                                    {
+                                      name: ::String?,
+                                      data_type: ("STRING" | "INTEGER" | "STRINGLIST" | "STRINGMAP")?,
+                                      required: bool?,
+                                      value: {
+                                        integer_value: ::Integer?,
+                                        string_value: ::String?,
+                                        list_of_string_value: Array[::String]?
+                                      }?
+                                    },
+                                  ],
+                                  ?previous: Array[::String],
+                                  ?next: Array[::String]
+                                ) -> _CreateWorkflowStepResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkflowStepResponseSuccess
+
+      interface _CreateWorkflowStepGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkflowStepGroupResponse]
+        def workflow_id: () -> ::String
+        def name: () -> ::String
+        def id: () -> ::String
+        def description: () -> ::String
+        def tools: () -> ::Array[Types::Tool]
+        def next: () -> ::Array[::String]
+        def previous: () -> ::Array[::String]
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#create_workflow_step_group-instance_method
+      def create_workflow_step_group: (
+                                        workflow_id: ::String,
+                                        name: ::String,
+                                        ?description: ::String,
+                                        ?next: Array[::String],
+                                        ?previous: Array[::String]
+                                      ) -> _CreateWorkflowStepGroupResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkflowStepGroupResponseSuccess
+
+      interface _DeleteWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMigrationWorkflowResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def status: () -> ("CREATING" | "NOT_STARTED" | "CREATION_FAILED" | "STARTING" | "IN_PROGRESS" | "WORKFLOW_FAILED" | "PAUSED" | "PAUSING" | "PAUSING_FAILED" | "USER_ATTENTION_REQUIRED" | "DELETING" | "DELETION_FAILED" | "DELETED" | "COMPLETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#delete_workflow-instance_method
+      def delete_workflow: (
+                             id: ::String
+                           ) -> _DeleteWorkflowResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkflowResponseSuccess
+
+      interface _DeleteWorkflowStepResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkflowStepResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#delete_workflow_step-instance_method
+      def delete_workflow_step: (
+                                  id: ::String,
+                                  step_group_id: ::String,
+                                  workflow_id: ::String
+                                ) -> _DeleteWorkflowStepResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkflowStepResponseSuccess
+
+      interface _DeleteWorkflowStepGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkflowStepGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#delete_workflow_step_group-instance_method
+      def delete_workflow_step_group: (
+                                        workflow_id: ::String,
+                                        id: ::String
+                                      ) -> _DeleteWorkflowStepGroupResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkflowStepGroupResponseSuccess
+
+      interface _GetTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMigrationWorkflowTemplateResponse]
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def inputs: () -> ::Array[Types::TemplateInput]
+        def tools: () -> ::Array[Types::Tool]
+        def status: () -> ("CREATED")
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#get_template-instance_method
+      def get_template: (
+                          id: ::String
+                        ) -> _GetTemplateResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTemplateResponseSuccess
+
+      interface _GetTemplateStepResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTemplateStepResponse]
+        def id: () -> ::String
+        def step_group_id: () -> ::String
+        def template_id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def step_action_type: () -> ("MANUAL" | "AUTOMATED")
+        def creation_time: () -> ::String
+        def previous: () -> ::Array[::String]
+        def next: () -> ::Array[::String]
+        def outputs: () -> ::Array[Types::StepOutput]
+        def step_automation_configuration: () -> Types::StepAutomationConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#get_template_step-instance_method
+      def get_template_step: (
+                               id: ::String,
+                               template_id: ::String,
+                               step_group_id: ::String
+                             ) -> _GetTemplateStepResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTemplateStepResponseSuccess
+
+      interface _GetTemplateStepGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTemplateStepGroupResponse]
+        def template_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def status: () -> ("AWAITING_DEPENDENCIES" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "PAUSING" | "USER_ATTENTION_REQUIRED")
+        def creation_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+        def tools: () -> ::Array[Types::Tool]
+        def previous: () -> ::Array[::String]
+        def next: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#get_template_step_group-instance_method
+      def get_template_step_group: (
+                                     template_id: ::String,
+                                     id: ::String
+                                   ) -> _GetTemplateStepGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTemplateStepGroupResponseSuccess
+
+      interface _GetWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMigrationWorkflowResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def template_id: () -> ::String
+        def ads_application_configuration_id: () -> ::String
+        def ads_application_name: () -> ::String
+        def status: () -> ("CREATING" | "NOT_STARTED" | "CREATION_FAILED" | "STARTING" | "IN_PROGRESS" | "WORKFLOW_FAILED" | "PAUSED" | "PAUSING" | "PAUSING_FAILED" | "USER_ATTENTION_REQUIRED" | "DELETING" | "DELETION_FAILED" | "DELETED" | "COMPLETED")
+        def status_message: () -> ::String
+        def creation_time: () -> ::Time
+        def last_start_time: () -> ::Time
+        def last_stop_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+        def end_time: () -> ::Time
+        def tools: () -> ::Array[Types::Tool]
+        def total_steps: () -> ::Integer
+        def completed_steps: () -> ::Integer
+        def workflow_inputs: () -> ::Hash[::String, Types::StepInput]
+        def tags: () -> ::Hash[::String, ::String]
+        def workflow_bucket: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#get_workflow-instance_method
+      def get_workflow: (
+                          id: ::String
+                        ) -> _GetWorkflowResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkflowResponseSuccess
+
+      interface _GetWorkflowStepResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkflowStepResponse]
+        def name: () -> ::String
+        def step_group_id: () -> ::String
+        def workflow_id: () -> ::String
+        def step_id: () -> ::String
+        def description: () -> ::String
+        def step_action_type: () -> ("MANUAL" | "AUTOMATED")
+        def owner: () -> ("AWS_MANAGED" | "CUSTOM")
+        def workflow_step_automation_configuration: () -> Types::WorkflowStepAutomationConfiguration
+        def step_target: () -> ::Array[::String]
+        def outputs: () -> ::Array[Types::WorkflowStepOutput]
+        def previous: () -> ::Array[::String]
+        def next: () -> ::Array[::String]
+        def status: () -> ("AWAITING_DEPENDENCIES" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "USER_ATTENTION_REQUIRED")
+        def status_message: () -> ::String
+        def script_output_location: () -> ::String
+        def creation_time: () -> ::Time
+        def last_start_time: () -> ::Time
+        def end_time: () -> ::Time
+        def no_of_srv_completed: () -> ::Integer
+        def no_of_srv_failed: () -> ::Integer
+        def total_no_of_srv: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#get_workflow_step-instance_method
+      def get_workflow_step: (
+                               workflow_id: ::String,
+                               step_group_id: ::String,
+                               id: ::String
+                             ) -> _GetWorkflowStepResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkflowStepResponseSuccess
+
+      interface _GetWorkflowStepGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkflowStepGroupResponse]
+        def id: () -> ::String
+        def workflow_id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def status: () -> ("AWAITING_DEPENDENCIES" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "PAUSING" | "USER_ATTENTION_REQUIRED")
+        def owner: () -> ("AWS_MANAGED" | "CUSTOM")
+        def creation_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+        def end_time: () -> ::Time
+        def tools: () -> ::Array[Types::Tool]
+        def previous: () -> ::Array[::String]
+        def next: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#get_workflow_step_group-instance_method
+      def get_workflow_step_group: (
+                                     id: ::String,
+                                     workflow_id: ::String
+                                   ) -> _GetWorkflowStepGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkflowStepGroupResponseSuccess
+
+      interface _ListPluginsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPluginsResponse]
+        def next_token: () -> ::String
+        def plugins: () -> ::Array[Types::PluginSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#list_plugins-instance_method
+      def list_plugins: (
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListPluginsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPluginsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTemplateStepGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTemplateStepGroupsResponse]
+        def next_token: () -> ::String
+        def template_step_group_summary: () -> ::Array[Types::TemplateStepGroupSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#list_template_step_groups-instance_method
+      def list_template_step_groups: (
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String,
+                                       template_id: ::String
+                                     ) -> _ListTemplateStepGroupsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTemplateStepGroupsResponseSuccess
+
+      interface _ListTemplateStepsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTemplateStepsResponse]
+        def next_token: () -> ::String
+        def template_step_summary_list: () -> ::Array[Types::TemplateStepSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#list_template_steps-instance_method
+      def list_template_steps: (
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String,
+                                 template_id: ::String,
+                                 step_group_id: ::String
+                               ) -> _ListTemplateStepsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTemplateStepsResponseSuccess
+
+      interface _ListTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMigrationWorkflowTemplatesResponse]
+        def next_token: () -> ::String
+        def template_summary: () -> ::Array[Types::TemplateSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#list_templates-instance_method
+      def list_templates: (
+                            ?max_results: ::Integer,
+                            ?next_token: ::String,
+                            ?name: ::String
+                          ) -> _ListTemplatesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTemplatesResponseSuccess
+
+      interface _ListWorkflowStepGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkflowStepGroupsResponse]
+        def next_token: () -> ::String
+        def workflow_step_groups_summary: () -> ::Array[Types::WorkflowStepGroupSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#list_workflow_step_groups-instance_method
+      def list_workflow_step_groups: (
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer,
+                                       workflow_id: ::String
+                                     ) -> _ListWorkflowStepGroupsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkflowStepGroupsResponseSuccess
+
+      interface _ListWorkflowStepsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkflowStepsResponse]
+        def next_token: () -> ::String
+        def workflow_steps_summary: () -> ::Array[Types::WorkflowStepSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#list_workflow_steps-instance_method
+      def list_workflow_steps: (
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer,
+                                 workflow_id: ::String,
+                                 step_group_id: ::String
+                               ) -> _ListWorkflowStepsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkflowStepsResponseSuccess
+
+      interface _ListWorkflowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMigrationWorkflowsResponse]
+        def next_token: () -> ::String
+        def migration_workflow_summary: () -> ::Array[Types::MigrationWorkflowSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#list_workflows-instance_method
+      def list_workflows: (
+                            ?max_results: ::Integer,
+                            ?next_token: ::String,
+                            ?template_id: ::String,
+                            ?ads_application_configuration_name: ::String,
+                            ?status: ("CREATING" | "NOT_STARTED" | "CREATION_FAILED" | "STARTING" | "IN_PROGRESS" | "WORKFLOW_FAILED" | "PAUSED" | "PAUSING" | "PAUSING_FAILED" | "USER_ATTENTION_REQUIRED" | "DELETING" | "DELETION_FAILED" | "DELETED" | "COMPLETED"),
+                            ?name: ::String
+                          ) -> _ListWorkflowsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkflowsResponseSuccess
+
+      interface _RetryWorkflowStepResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RetryWorkflowStepResponse]
+        def step_group_id: () -> ::String
+        def workflow_id: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("AWAITING_DEPENDENCIES" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "USER_ATTENTION_REQUIRED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#retry_workflow_step-instance_method
+      def retry_workflow_step: (
+                                 workflow_id: ::String,
+                                 step_group_id: ::String,
+                                 id: ::String
+                               ) -> _RetryWorkflowStepResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RetryWorkflowStepResponseSuccess
+
+      interface _StartWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMigrationWorkflowResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def status: () -> ("CREATING" | "NOT_STARTED" | "CREATION_FAILED" | "STARTING" | "IN_PROGRESS" | "WORKFLOW_FAILED" | "PAUSED" | "PAUSING" | "PAUSING_FAILED" | "USER_ATTENTION_REQUIRED" | "DELETING" | "DELETION_FAILED" | "DELETED" | "COMPLETED")
+        def status_message: () -> ::String
+        def last_start_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#start_workflow-instance_method
+      def start_workflow: (
+                            id: ::String
+                          ) -> _StartWorkflowResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartWorkflowResponseSuccess
+
+      interface _StopWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopMigrationWorkflowResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def status: () -> ("CREATING" | "NOT_STARTED" | "CREATION_FAILED" | "STARTING" | "IN_PROGRESS" | "WORKFLOW_FAILED" | "PAUSED" | "PAUSING" | "PAUSING_FAILED" | "USER_ATTENTION_REQUIRED" | "DELETING" | "DELETION_FAILED" | "DELETED" | "COMPLETED")
+        def status_message: () -> ::String
+        def last_stop_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#stop_workflow-instance_method
+      def stop_workflow: (
+                           id: ::String
+                         ) -> _StopWorkflowResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopWorkflowResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMigrationWorkflowResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def template_id: () -> ::String
+        def ads_application_configuration_id: () -> ::String
+        def workflow_inputs: () -> ::Hash[::String, Types::StepInput]
+        def step_targets: () -> ::Array[::String]
+        def status: () -> ("CREATING" | "NOT_STARTED" | "CREATION_FAILED" | "STARTING" | "IN_PROGRESS" | "WORKFLOW_FAILED" | "PAUSED" | "PAUSING" | "PAUSING_FAILED" | "USER_ATTENTION_REQUIRED" | "DELETING" | "DELETION_FAILED" | "DELETED" | "COMPLETED")
+        def creation_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#update_workflow-instance_method
+      def update_workflow: (
+                             id: ::String,
+                             ?name: ::String,
+                             ?description: ::String,
+                             ?input_parameters: Hash[::String, {
+                                 integer_value: ::Integer?,
+                                 string_value: ::String?,
+                                 list_of_strings_value: Array[::String]?,
+                                 map_of_string_value: Hash[::String, ::String]?
+                               }],
+                             ?step_targets: Array[::String]
+                           ) -> _UpdateWorkflowResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkflowResponseSuccess
+
+      interface _UpdateWorkflowStepResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWorkflowStepResponse]
+        def id: () -> ::String
+        def step_group_id: () -> ::String
+        def workflow_id: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#update_workflow_step-instance_method
+      def update_workflow_step: (
+                                  id: ::String,
+                                  step_group_id: ::String,
+                                  workflow_id: ::String,
+                                  ?name: ::String,
+                                  ?description: ::String,
+                                  ?step_action_type: ("MANUAL" | "AUTOMATED"),
+                                  ?workflow_step_automation_configuration: {
+                                    script_location_s3_bucket: ::String?,
+                                    script_location_s3_key: {
+                                      linux: ::String?,
+                                      windows: ::String?
+                                    }?,
+                                    command: {
+                                      linux: ::String?,
+                                      windows: ::String?
+                                    }?,
+                                    run_environment: ("AWS" | "ONPREMISE")?,
+                                    target_type: ("SINGLE" | "ALL" | "NONE")?
+                                  },
+                                  ?step_target: Array[::String],
+                                  ?outputs: Array[
+                                    {
+                                      name: ::String?,
+                                      data_type: ("STRING" | "INTEGER" | "STRINGLIST" | "STRINGMAP")?,
+                                      required: bool?,
+                                      value: {
+                                        integer_value: ::Integer?,
+                                        string_value: ::String?,
+                                        list_of_string_value: Array[::String]?
+                                      }?
+                                    },
+                                  ],
+                                  ?previous: Array[::String],
+                                  ?next: Array[::String],
+                                  ?status: ("AWAITING_DEPENDENCIES" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "USER_ATTENTION_REQUIRED")
+                                ) -> _UpdateWorkflowStepResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkflowStepResponseSuccess
+
+      interface _UpdateWorkflowStepGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWorkflowStepGroupResponse]
+        def workflow_id: () -> ::String
+        def name: () -> ::String
+        def id: () -> ::String
+        def description: () -> ::String
+        def tools: () -> ::Array[Types::Tool]
+        def next: () -> ::Array[::String]
+        def previous: () -> ::Array[::String]
+        def last_modified_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#update_workflow_step_group-instance_method
+      def update_workflow_step_group: (
+                                        workflow_id: ::String,
+                                        id: ::String,
+                                        ?name: ::String,
+                                        ?description: ::String,
+                                        ?next: Array[::String],
+                                        ?previous: Array[::String]
+                                      ) -> _UpdateWorkflowStepGroupResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkflowStepGroupResponseSuccess
+    end
+  end
+end
+

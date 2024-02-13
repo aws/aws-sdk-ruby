@@ -1,0 +1,509 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Keyspaces
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Keyspaces/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateKeyspaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateKeyspaceResponse]
+        def resource_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Keyspaces/Client.html#create_keyspace-instance_method
+      def create_keyspace: (
+                             keyspace_name: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ],
+                             ?replication_specification: {
+                               replication_strategy: ("SINGLE_REGION" | "MULTI_REGION"),
+                               region_list: Array[::String]?
+                             }
+                           ) -> _CreateKeyspaceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKeyspaceResponseSuccess
+
+      interface _CreateTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTableResponse]
+        def resource_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Keyspaces/Client.html#create_table-instance_method
+      def create_table: (
+                          keyspace_name: ::String,
+                          table_name: ::String,
+                          schema_definition: {
+                            all_columns: Array[
+                              {
+                                name: ::String,
+                                type: ::String
+                              },
+                            ],
+                            partition_keys: Array[
+                              {
+                                name: ::String
+                              },
+                            ],
+                            clustering_keys: Array[
+                              {
+                                name: ::String,
+                                order_by: ("ASC" | "DESC")
+                              },
+                            ]?,
+                            static_columns: Array[
+                              {
+                                name: ::String
+                              },
+                            ]?
+                          },
+                          ?comment: {
+                            message: ::String
+                          },
+                          ?capacity_specification: {
+                            throughput_mode: ("PAY_PER_REQUEST" | "PROVISIONED"),
+                            read_capacity_units: ::Integer?,
+                            write_capacity_units: ::Integer?
+                          },
+                          ?encryption_specification: {
+                            type: ("CUSTOMER_MANAGED_KMS_KEY" | "AWS_OWNED_KMS_KEY"),
+                            kms_key_identifier: ::String?
+                          },
+                          ?point_in_time_recovery: {
+                            status: ("ENABLED" | "DISABLED")
+                          },
+                          ?ttl: {
+                            status: ("ENABLED")
+                          },
+                          ?default_time_to_live: ::Integer,
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ],
+                          ?client_side_timestamps: {
+                            status: ("ENABLED")
+                          },
+                          ?auto_scaling_specification: {
+                            write_capacity_auto_scaling: {
+                              auto_scaling_disabled: bool?,
+                              minimum_units: ::Integer?,
+                              maximum_units: ::Integer?,
+                              scaling_policy: {
+                                target_tracking_scaling_policy_configuration: {
+                                  disable_scale_in: bool?,
+                                  scale_in_cooldown: ::Integer?,
+                                  scale_out_cooldown: ::Integer?,
+                                  target_value: ::Float
+                                }?
+                              }?
+                            }?,
+                            read_capacity_auto_scaling: {
+                              auto_scaling_disabled: bool?,
+                              minimum_units: ::Integer?,
+                              maximum_units: ::Integer?,
+                              scaling_policy: {
+                                target_tracking_scaling_policy_configuration: {
+                                  disable_scale_in: bool?,
+                                  scale_in_cooldown: ::Integer?,
+                                  scale_out_cooldown: ::Integer?,
+                                  target_value: ::Float
+                                }?
+                              }?
+                            }?
+                          },
+                          ?replica_specifications: Array[
+                            {
+                              region: ::String,
+                              read_capacity_units: ::Integer?,
+                              read_capacity_auto_scaling: {
+                                auto_scaling_disabled: bool?,
+                                minimum_units: ::Integer?,
+                                maximum_units: ::Integer?,
+                                scaling_policy: {
+                                  target_tracking_scaling_policy_configuration: {
+                                    disable_scale_in: bool?,
+                                    scale_in_cooldown: ::Integer?,
+                                    scale_out_cooldown: ::Integer?,
+                                    target_value: ::Float
+                                  }?
+                                }?
+                              }?
+                            },
+                          ]
+                        ) -> _CreateTableResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTableResponseSuccess
+
+      interface _DeleteKeyspaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteKeyspaceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Keyspaces/Client.html#delete_keyspace-instance_method
+      def delete_keyspace: (
+                             keyspace_name: ::String
+                           ) -> _DeleteKeyspaceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKeyspaceResponseSuccess
+
+      interface _DeleteTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTableResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Keyspaces/Client.html#delete_table-instance_method
+      def delete_table: (
+                          keyspace_name: ::String,
+                          table_name: ::String
+                        ) -> _DeleteTableResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTableResponseSuccess
+
+      interface _GetKeyspaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetKeyspaceResponse]
+        def keyspace_name: () -> ::String
+        def resource_arn: () -> ::String
+        def replication_strategy: () -> ("SINGLE_REGION" | "MULTI_REGION")
+        def replication_regions: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Keyspaces/Client.html#get_keyspace-instance_method
+      def get_keyspace: (
+                          keyspace_name: ::String
+                        ) -> _GetKeyspaceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetKeyspaceResponseSuccess
+
+      interface _GetTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTableResponse]
+        def keyspace_name: () -> ::String
+        def table_name: () -> ::String
+        def resource_arn: () -> ::String
+        def creation_timestamp: () -> ::Time
+        def status: () -> ("ACTIVE" | "CREATING" | "UPDATING" | "DELETING" | "DELETED" | "RESTORING" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS")
+        def schema_definition: () -> Types::SchemaDefinition
+        def capacity_specification: () -> Types::CapacitySpecificationSummary
+        def encryption_specification: () -> Types::EncryptionSpecification
+        def point_in_time_recovery: () -> Types::PointInTimeRecoverySummary
+        def ttl: () -> Types::TimeToLive
+        def default_time_to_live: () -> ::Integer
+        def comment: () -> Types::Comment
+        def client_side_timestamps: () -> Types::ClientSideTimestamps
+        def replica_specifications: () -> ::Array[Types::ReplicaSpecificationSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Keyspaces/Client.html#get_table-instance_method
+      def get_table: (
+                       keyspace_name: ::String,
+                       table_name: ::String
+                     ) -> _GetTableResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableResponseSuccess
+
+      interface _GetTableAutoScalingSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTableAutoScalingSettingsResponse]
+        def keyspace_name: () -> ::String
+        def table_name: () -> ::String
+        def resource_arn: () -> ::String
+        def auto_scaling_specification: () -> Types::AutoScalingSpecification
+        def replica_specifications: () -> ::Array[Types::ReplicaAutoScalingSpecification]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Keyspaces/Client.html#get_table_auto_scaling_settings-instance_method
+      def get_table_auto_scaling_settings: (
+                                             keyspace_name: ::String,
+                                             table_name: ::String
+                                           ) -> _GetTableAutoScalingSettingsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableAutoScalingSettingsResponseSuccess
+
+      interface _ListKeyspacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListKeyspacesResponse]
+        def next_token: () -> ::String
+        def keyspaces: () -> ::Array[Types::KeyspaceSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Keyspaces/Client.html#list_keyspaces-instance_method
+      def list_keyspaces: (
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListKeyspacesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKeyspacesResponseSuccess
+
+      interface _ListTablesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTablesResponse]
+        def next_token: () -> ::String
+        def tables: () -> ::Array[Types::TableSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Keyspaces/Client.html#list_tables-instance_method
+      def list_tables: (
+                         ?next_token: ::String,
+                         ?max_results: ::Integer,
+                         keyspace_name: ::String
+                       ) -> _ListTablesResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTablesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def next_token: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Keyspaces/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String,
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _RestoreTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreTableResponse]
+        def restored_table_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Keyspaces/Client.html#restore_table-instance_method
+      def restore_table: (
+                           source_keyspace_name: ::String,
+                           source_table_name: ::String,
+                           target_keyspace_name: ::String,
+                           target_table_name: ::String,
+                           ?restore_timestamp: ::Time,
+                           ?capacity_specification_override: {
+                             throughput_mode: ("PAY_PER_REQUEST" | "PROVISIONED"),
+                             read_capacity_units: ::Integer?,
+                             write_capacity_units: ::Integer?
+                           },
+                           ?encryption_specification_override: {
+                             type: ("CUSTOMER_MANAGED_KMS_KEY" | "AWS_OWNED_KMS_KEY"),
+                             kms_key_identifier: ::String?
+                           },
+                           ?point_in_time_recovery_override: {
+                             status: ("ENABLED" | "DISABLED")
+                           },
+                           ?tags_override: Array[
+                             {
+                               key: ::String,
+                               value: ::String
+                             },
+                           ],
+                           ?auto_scaling_specification: {
+                             write_capacity_auto_scaling: {
+                               auto_scaling_disabled: bool?,
+                               minimum_units: ::Integer?,
+                               maximum_units: ::Integer?,
+                               scaling_policy: {
+                                 target_tracking_scaling_policy_configuration: {
+                                   disable_scale_in: bool?,
+                                   scale_in_cooldown: ::Integer?,
+                                   scale_out_cooldown: ::Integer?,
+                                   target_value: ::Float
+                                 }?
+                               }?
+                             }?,
+                             read_capacity_auto_scaling: {
+                               auto_scaling_disabled: bool?,
+                               minimum_units: ::Integer?,
+                               maximum_units: ::Integer?,
+                               scaling_policy: {
+                                 target_tracking_scaling_policy_configuration: {
+                                   disable_scale_in: bool?,
+                                   scale_in_cooldown: ::Integer?,
+                                   scale_out_cooldown: ::Integer?,
+                                   target_value: ::Float
+                                 }?
+                               }?
+                             }?
+                           },
+                           ?replica_specifications: Array[
+                             {
+                               region: ::String,
+                               read_capacity_units: ::Integer?,
+                               read_capacity_auto_scaling: {
+                                 auto_scaling_disabled: bool?,
+                                 minimum_units: ::Integer?,
+                                 maximum_units: ::Integer?,
+                                 scaling_policy: {
+                                   target_tracking_scaling_policy_configuration: {
+                                     disable_scale_in: bool?,
+                                     scale_in_cooldown: ::Integer?,
+                                     scale_out_cooldown: ::Integer?,
+                                     target_value: ::Float
+                                   }?
+                                 }?
+                               }?
+                             },
+                           ]
+                         ) -> _RestoreTableResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreTableResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Keyspaces/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Keyspaces/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTableResponse]
+        def resource_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Keyspaces/Client.html#update_table-instance_method
+      def update_table: (
+                          keyspace_name: ::String,
+                          table_name: ::String,
+                          ?add_columns: Array[
+                            {
+                              name: ::String,
+                              type: ::String
+                            },
+                          ],
+                          ?capacity_specification: {
+                            throughput_mode: ("PAY_PER_REQUEST" | "PROVISIONED"),
+                            read_capacity_units: ::Integer?,
+                            write_capacity_units: ::Integer?
+                          },
+                          ?encryption_specification: {
+                            type: ("CUSTOMER_MANAGED_KMS_KEY" | "AWS_OWNED_KMS_KEY"),
+                            kms_key_identifier: ::String?
+                          },
+                          ?point_in_time_recovery: {
+                            status: ("ENABLED" | "DISABLED")
+                          },
+                          ?ttl: {
+                            status: ("ENABLED")
+                          },
+                          ?default_time_to_live: ::Integer,
+                          ?client_side_timestamps: {
+                            status: ("ENABLED")
+                          },
+                          ?auto_scaling_specification: {
+                            write_capacity_auto_scaling: {
+                              auto_scaling_disabled: bool?,
+                              minimum_units: ::Integer?,
+                              maximum_units: ::Integer?,
+                              scaling_policy: {
+                                target_tracking_scaling_policy_configuration: {
+                                  disable_scale_in: bool?,
+                                  scale_in_cooldown: ::Integer?,
+                                  scale_out_cooldown: ::Integer?,
+                                  target_value: ::Float
+                                }?
+                              }?
+                            }?,
+                            read_capacity_auto_scaling: {
+                              auto_scaling_disabled: bool?,
+                              minimum_units: ::Integer?,
+                              maximum_units: ::Integer?,
+                              scaling_policy: {
+                                target_tracking_scaling_policy_configuration: {
+                                  disable_scale_in: bool?,
+                                  scale_in_cooldown: ::Integer?,
+                                  scale_out_cooldown: ::Integer?,
+                                  target_value: ::Float
+                                }?
+                              }?
+                            }?
+                          },
+                          ?replica_specifications: Array[
+                            {
+                              region: ::String,
+                              read_capacity_units: ::Integer?,
+                              read_capacity_auto_scaling: {
+                                auto_scaling_disabled: bool?,
+                                minimum_units: ::Integer?,
+                                maximum_units: ::Integer?,
+                                scaling_policy: {
+                                  target_tracking_scaling_policy_configuration: {
+                                    disable_scale_in: bool?,
+                                    scale_in_cooldown: ::Integer?,
+                                    scale_out_cooldown: ::Integer?,
+                                    target_value: ::Float
+                                  }?
+                                }?
+                              }?
+                            },
+                          ]
+                        ) -> _UpdateTableResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTableResponseSuccess
+    end
+  end
+end
+

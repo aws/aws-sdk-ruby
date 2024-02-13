@@ -1,0 +1,803 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AppConfig
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Application]
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#create_application-instance_method
+      def create_application: (
+                                name: ::String,
+                                ?description: ::String,
+                                ?tags: Hash[::String, ::String]
+                              ) -> _CreateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
+
+      interface _CreateConfigurationProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfigurationProfile]
+        def application_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def location_uri: () -> ::String
+        def retrieval_role_arn: () -> ::String
+        def validators: () -> ::Array[Types::Validator]
+        def type: () -> ::String
+        def kms_key_arn: () -> ::String
+        def kms_key_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#create_configuration_profile-instance_method
+      def create_configuration_profile: (
+                                          application_id: ::String,
+                                          name: ::String,
+                                          ?description: ::String,
+                                          location_uri: ::String,
+                                          ?retrieval_role_arn: ::String,
+                                          ?validators: Array[
+                                            {
+                                              type: ("JSON_SCHEMA" | "LAMBDA"),
+                                              content: ::String
+                                            },
+                                          ],
+                                          ?tags: Hash[::String, ::String],
+                                          ?type: ::String,
+                                          ?kms_key_identifier: ::String
+                                        ) -> _CreateConfigurationProfileResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationProfileResponseSuccess
+
+      interface _CreateDeploymentStrategyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeploymentStrategy]
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def deployment_duration_in_minutes: () -> ::Integer
+        def growth_type: () -> ("LINEAR" | "EXPONENTIAL")
+        def growth_factor: () -> ::Float
+        def final_bake_time_in_minutes: () -> ::Integer
+        def replicate_to: () -> ("NONE" | "SSM_DOCUMENT")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#create_deployment_strategy-instance_method
+      def create_deployment_strategy: (
+                                        name: ::String,
+                                        ?description: ::String,
+                                        deployment_duration_in_minutes: ::Integer,
+                                        ?final_bake_time_in_minutes: ::Integer,
+                                        growth_factor: ::Float,
+                                        ?growth_type: ("LINEAR" | "EXPONENTIAL"),
+                                        ?replicate_to: ("NONE" | "SSM_DOCUMENT"),
+                                        ?tags: Hash[::String, ::String]
+                                      ) -> _CreateDeploymentStrategyResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeploymentStrategyResponseSuccess
+
+      interface _CreateEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Environment]
+        def application_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def state: () -> ("READY_FOR_DEPLOYMENT" | "DEPLOYING" | "ROLLING_BACK" | "ROLLED_BACK")
+        def monitors: () -> ::Array[Types::Monitor]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#create_environment-instance_method
+      def create_environment: (
+                                application_id: ::String,
+                                name: ::String,
+                                ?description: ::String,
+                                ?monitors: Array[
+                                  {
+                                    alarm_arn: ::String,
+                                    alarm_role_arn: ::String?
+                                  },
+                                ],
+                                ?tags: Hash[::String, ::String]
+                              ) -> _CreateEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentResponseSuccess
+
+      interface _CreateExtensionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Extension]
+        def id: () -> ::String
+        def name: () -> ::String
+        def version_number: () -> ::Integer
+        def arn: () -> ::String
+        def description: () -> ::String
+        def actions: () -> ::Hash[("PRE_CREATE_HOSTED_CONFIGURATION_VERSION" | "PRE_START_DEPLOYMENT" | "ON_DEPLOYMENT_START" | "ON_DEPLOYMENT_STEP" | "ON_DEPLOYMENT_BAKING" | "ON_DEPLOYMENT_COMPLETE" | "ON_DEPLOYMENT_ROLLED_BACK"), ::Array[Types::Action]]
+        def parameters: () -> ::Hash[::String, Types::Parameter]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#create_extension-instance_method
+      def create_extension: (
+                              name: ::String,
+                              ?description: ::String,
+                              actions: Hash[("PRE_CREATE_HOSTED_CONFIGURATION_VERSION" | "PRE_START_DEPLOYMENT" | "ON_DEPLOYMENT_START" | "ON_DEPLOYMENT_STEP" | "ON_DEPLOYMENT_BAKING" | "ON_DEPLOYMENT_COMPLETE" | "ON_DEPLOYMENT_ROLLED_BACK"), Array[
+                                  {
+                                    name: ::String?,
+                                    description: ::String?,
+                                    uri: ::String?,
+                                    role_arn: ::String?
+                                  },
+                                ]],
+                              ?parameters: Hash[::String, {
+                                  description: ::String?,
+                                  required: bool?
+                                }],
+                              ?tags: Hash[::String, ::String],
+                              ?latest_version_number: ::Integer
+                            ) -> _CreateExtensionResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateExtensionResponseSuccess
+
+      interface _CreateExtensionAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExtensionAssociation]
+        def id: () -> ::String
+        def extension_arn: () -> ::String
+        def resource_arn: () -> ::String
+        def arn: () -> ::String
+        def parameters: () -> ::Hash[::String, ::String]
+        def extension_version_number: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#create_extension_association-instance_method
+      def create_extension_association: (
+                                          extension_identifier: ::String,
+                                          ?extension_version_number: ::Integer,
+                                          resource_identifier: ::String,
+                                          ?parameters: Hash[::String, ::String],
+                                          ?tags: Hash[::String, ::String]
+                                        ) -> _CreateExtensionAssociationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateExtensionAssociationResponseSuccess
+
+      interface _CreateHostedConfigurationVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::HostedConfigurationVersion]
+        def application_id: () -> ::String
+        def configuration_profile_id: () -> ::String
+        def version_number: () -> ::Integer
+        def description: () -> ::String
+        def content: () -> ::String
+        def content_type: () -> ::String
+        def version_label: () -> ::String
+        def kms_key_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#create_hosted_configuration_version-instance_method
+      def create_hosted_configuration_version: (
+                                                 application_id: ::String,
+                                                 configuration_profile_id: ::String,
+                                                 ?description: ::String,
+                                                 content: ::String,
+                                                 content_type: ::String,
+                                                 ?latest_version_number: ::Integer,
+                                                 ?version_label: ::String
+                                               ) -> _CreateHostedConfigurationVersionResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHostedConfigurationVersionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#delete_application-instance_method
+      def delete_application: (
+                                application_id: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#delete_configuration_profile-instance_method
+      def delete_configuration_profile: (
+                                          application_id: ::String,
+                                          configuration_profile_id: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#delete_deployment_strategy-instance_method
+      def delete_deployment_strategy: (
+                                        deployment_strategy_id: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#delete_environment-instance_method
+      def delete_environment: (
+                                application_id: ::String,
+                                environment_id: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#delete_extension-instance_method
+      def delete_extension: (
+                              extension_identifier: ::String,
+                              ?version_number: ::Integer
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#delete_extension_association-instance_method
+      def delete_extension_association: (
+                                          extension_association_id: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#delete_hosted_configuration_version-instance_method
+      def delete_hosted_configuration_version: (
+                                                 application_id: ::String,
+                                                 configuration_profile_id: ::String,
+                                                 version_number: ::Integer
+                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Application]
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#get_application-instance_method
+      def get_application: (
+                             application_id: ::String
+                           ) -> _GetApplicationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApplicationResponseSuccess
+
+      interface _GetConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Configuration]
+        def content: () -> ::String
+        def configuration_version: () -> ::String
+        def content_type: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#get_configuration-instance_method
+      def get_configuration: (
+                               application: ::String,
+                               environment: ::String,
+                               configuration: ::String,
+                               client_id: ::String,
+                               ?client_configuration_version: ::String
+                             ) -> _GetConfigurationResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfigurationResponseSuccess
+
+      interface _GetConfigurationProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfigurationProfile]
+        def application_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def location_uri: () -> ::String
+        def retrieval_role_arn: () -> ::String
+        def validators: () -> ::Array[Types::Validator]
+        def type: () -> ::String
+        def kms_key_arn: () -> ::String
+        def kms_key_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#get_configuration_profile-instance_method
+      def get_configuration_profile: (
+                                       application_id: ::String,
+                                       configuration_profile_id: ::String
+                                     ) -> _GetConfigurationProfileResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfigurationProfileResponseSuccess
+
+      interface _GetDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Deployment]
+        def application_id: () -> ::String
+        def environment_id: () -> ::String
+        def deployment_strategy_id: () -> ::String
+        def configuration_profile_id: () -> ::String
+        def deployment_number: () -> ::Integer
+        def configuration_name: () -> ::String
+        def configuration_location_uri: () -> ::String
+        def configuration_version: () -> ::String
+        def description: () -> ::String
+        def deployment_duration_in_minutes: () -> ::Integer
+        def growth_type: () -> ("LINEAR" | "EXPONENTIAL")
+        def growth_factor: () -> ::Float
+        def final_bake_time_in_minutes: () -> ::Integer
+        def state: () -> ("BAKING" | "VALIDATING" | "DEPLOYING" | "COMPLETE" | "ROLLING_BACK" | "ROLLED_BACK")
+        def event_log: () -> ::Array[Types::DeploymentEvent]
+        def percentage_complete: () -> ::Float
+        def started_at: () -> ::Time
+        def completed_at: () -> ::Time
+        def applied_extensions: () -> ::Array[Types::AppliedExtension]
+        def kms_key_arn: () -> ::String
+        def kms_key_identifier: () -> ::String
+        def version_label: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#get_deployment-instance_method
+      def get_deployment: (
+                            application_id: ::String,
+                            environment_id: ::String,
+                            deployment_number: ::Integer
+                          ) -> _GetDeploymentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeploymentResponseSuccess
+
+      interface _GetDeploymentStrategyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeploymentStrategy]
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def deployment_duration_in_minutes: () -> ::Integer
+        def growth_type: () -> ("LINEAR" | "EXPONENTIAL")
+        def growth_factor: () -> ::Float
+        def final_bake_time_in_minutes: () -> ::Integer
+        def replicate_to: () -> ("NONE" | "SSM_DOCUMENT")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#get_deployment_strategy-instance_method
+      def get_deployment_strategy: (
+                                     deployment_strategy_id: ::String
+                                   ) -> _GetDeploymentStrategyResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeploymentStrategyResponseSuccess
+
+      interface _GetEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Environment]
+        def application_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def state: () -> ("READY_FOR_DEPLOYMENT" | "DEPLOYING" | "ROLLING_BACK" | "ROLLED_BACK")
+        def monitors: () -> ::Array[Types::Monitor]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#get_environment-instance_method
+      def get_environment: (
+                             application_id: ::String,
+                             environment_id: ::String
+                           ) -> _GetEnvironmentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentResponseSuccess
+
+      interface _GetExtensionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Extension]
+        def id: () -> ::String
+        def name: () -> ::String
+        def version_number: () -> ::Integer
+        def arn: () -> ::String
+        def description: () -> ::String
+        def actions: () -> ::Hash[("PRE_CREATE_HOSTED_CONFIGURATION_VERSION" | "PRE_START_DEPLOYMENT" | "ON_DEPLOYMENT_START" | "ON_DEPLOYMENT_STEP" | "ON_DEPLOYMENT_BAKING" | "ON_DEPLOYMENT_COMPLETE" | "ON_DEPLOYMENT_ROLLED_BACK"), ::Array[Types::Action]]
+        def parameters: () -> ::Hash[::String, Types::Parameter]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#get_extension-instance_method
+      def get_extension: (
+                           extension_identifier: ::String,
+                           ?version_number: ::Integer
+                         ) -> _GetExtensionResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetExtensionResponseSuccess
+
+      interface _GetExtensionAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExtensionAssociation]
+        def id: () -> ::String
+        def extension_arn: () -> ::String
+        def resource_arn: () -> ::String
+        def arn: () -> ::String
+        def parameters: () -> ::Hash[::String, ::String]
+        def extension_version_number: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#get_extension_association-instance_method
+      def get_extension_association: (
+                                       extension_association_id: ::String
+                                     ) -> _GetExtensionAssociationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetExtensionAssociationResponseSuccess
+
+      interface _GetHostedConfigurationVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::HostedConfigurationVersion]
+        def application_id: () -> ::String
+        def configuration_profile_id: () -> ::String
+        def version_number: () -> ::Integer
+        def description: () -> ::String
+        def content: () -> ::String
+        def content_type: () -> ::String
+        def version_label: () -> ::String
+        def kms_key_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#get_hosted_configuration_version-instance_method
+      def get_hosted_configuration_version: (
+                                              application_id: ::String,
+                                              configuration_profile_id: ::String,
+                                              version_number: ::Integer
+                                            ) -> _GetHostedConfigurationVersionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHostedConfigurationVersionResponseSuccess
+
+      interface _ListApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Applications]
+        def items: () -> ::Array[Types::Application]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#list_applications-instance_method
+      def list_applications: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListApplicationsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationsResponseSuccess
+
+      interface _ListConfigurationProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfigurationProfiles]
+        def items: () -> ::Array[Types::ConfigurationProfileSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#list_configuration_profiles-instance_method
+      def list_configuration_profiles: (
+                                         application_id: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String,
+                                         ?type: ::String
+                                       ) -> _ListConfigurationProfilesResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfigurationProfilesResponseSuccess
+
+      interface _ListDeploymentStrategiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeploymentStrategies]
+        def items: () -> ::Array[Types::DeploymentStrategy]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#list_deployment_strategies-instance_method
+      def list_deployment_strategies: (
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListDeploymentStrategiesResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeploymentStrategiesResponseSuccess
+
+      interface _ListDeploymentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Deployments]
+        def items: () -> ::Array[Types::DeploymentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#list_deployments-instance_method
+      def list_deployments: (
+                              application_id: ::String,
+                              environment_id: ::String,
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListDeploymentsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeploymentsResponseSuccess
+
+      interface _ListEnvironmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Environments]
+        def items: () -> ::Array[Types::Environment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#list_environments-instance_method
+      def list_environments: (
+                               application_id: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListEnvironmentsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentsResponseSuccess
+
+      interface _ListExtensionAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExtensionAssociations]
+        def items: () -> ::Array[Types::ExtensionAssociationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#list_extension_associations-instance_method
+      def list_extension_associations: (
+                                         ?resource_identifier: ::String,
+                                         ?extension_identifier: ::String,
+                                         ?extension_version_number: ::Integer,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListExtensionAssociationsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExtensionAssociationsResponseSuccess
+
+      interface _ListExtensionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Extensions]
+        def items: () -> ::Array[Types::ExtensionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#list_extensions-instance_method
+      def list_extensions: (
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             ?name: ::String
+                           ) -> _ListExtensionsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExtensionsResponseSuccess
+
+      interface _ListHostedConfigurationVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::HostedConfigurationVersions]
+        def items: () -> ::Array[Types::HostedConfigurationVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#list_hosted_configuration_versions-instance_method
+      def list_hosted_configuration_versions: (
+                                                application_id: ::String,
+                                                configuration_profile_id: ::String,
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String,
+                                                ?version_label: ::String
+                                              ) -> _ListHostedConfigurationVersionsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHostedConfigurationVersionsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResourceTags]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Deployment]
+        def application_id: () -> ::String
+        def environment_id: () -> ::String
+        def deployment_strategy_id: () -> ::String
+        def configuration_profile_id: () -> ::String
+        def deployment_number: () -> ::Integer
+        def configuration_name: () -> ::String
+        def configuration_location_uri: () -> ::String
+        def configuration_version: () -> ::String
+        def description: () -> ::String
+        def deployment_duration_in_minutes: () -> ::Integer
+        def growth_type: () -> ("LINEAR" | "EXPONENTIAL")
+        def growth_factor: () -> ::Float
+        def final_bake_time_in_minutes: () -> ::Integer
+        def state: () -> ("BAKING" | "VALIDATING" | "DEPLOYING" | "COMPLETE" | "ROLLING_BACK" | "ROLLED_BACK")
+        def event_log: () -> ::Array[Types::DeploymentEvent]
+        def percentage_complete: () -> ::Float
+        def started_at: () -> ::Time
+        def completed_at: () -> ::Time
+        def applied_extensions: () -> ::Array[Types::AppliedExtension]
+        def kms_key_arn: () -> ::String
+        def kms_key_identifier: () -> ::String
+        def version_label: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#start_deployment-instance_method
+      def start_deployment: (
+                              application_id: ::String,
+                              environment_id: ::String,
+                              deployment_strategy_id: ::String,
+                              configuration_profile_id: ::String,
+                              configuration_version: ::String,
+                              ?description: ::String,
+                              ?tags: Hash[::String, ::String],
+                              ?kms_key_identifier: ::String
+                            ) -> _StartDeploymentResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDeploymentResponseSuccess
+
+      interface _StopDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Deployment]
+        def application_id: () -> ::String
+        def environment_id: () -> ::String
+        def deployment_strategy_id: () -> ::String
+        def configuration_profile_id: () -> ::String
+        def deployment_number: () -> ::Integer
+        def configuration_name: () -> ::String
+        def configuration_location_uri: () -> ::String
+        def configuration_version: () -> ::String
+        def description: () -> ::String
+        def deployment_duration_in_minutes: () -> ::Integer
+        def growth_type: () -> ("LINEAR" | "EXPONENTIAL")
+        def growth_factor: () -> ::Float
+        def final_bake_time_in_minutes: () -> ::Integer
+        def state: () -> ("BAKING" | "VALIDATING" | "DEPLOYING" | "COMPLETE" | "ROLLING_BACK" | "ROLLED_BACK")
+        def event_log: () -> ::Array[Types::DeploymentEvent]
+        def percentage_complete: () -> ::Float
+        def started_at: () -> ::Time
+        def completed_at: () -> ::Time
+        def applied_extensions: () -> ::Array[Types::AppliedExtension]
+        def kms_key_arn: () -> ::String
+        def kms_key_identifier: () -> ::String
+        def version_label: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#stop_deployment-instance_method
+      def stop_deployment: (
+                             application_id: ::String,
+                             environment_id: ::String,
+                             deployment_number: ::Integer
+                           ) -> _StopDeploymentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopDeploymentResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Application]
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#update_application-instance_method
+      def update_application: (
+                                application_id: ::String,
+                                ?name: ::String,
+                                ?description: ::String
+                              ) -> _UpdateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess
+
+      interface _UpdateConfigurationProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfigurationProfile]
+        def application_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def location_uri: () -> ::String
+        def retrieval_role_arn: () -> ::String
+        def validators: () -> ::Array[Types::Validator]
+        def type: () -> ::String
+        def kms_key_arn: () -> ::String
+        def kms_key_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#update_configuration_profile-instance_method
+      def update_configuration_profile: (
+                                          application_id: ::String,
+                                          configuration_profile_id: ::String,
+                                          ?name: ::String,
+                                          ?description: ::String,
+                                          ?retrieval_role_arn: ::String,
+                                          ?validators: Array[
+                                            {
+                                              type: ("JSON_SCHEMA" | "LAMBDA"),
+                                              content: ::String
+                                            },
+                                          ],
+                                          ?kms_key_identifier: ::String
+                                        ) -> _UpdateConfigurationProfileResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationProfileResponseSuccess
+
+      interface _UpdateDeploymentStrategyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeploymentStrategy]
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def deployment_duration_in_minutes: () -> ::Integer
+        def growth_type: () -> ("LINEAR" | "EXPONENTIAL")
+        def growth_factor: () -> ::Float
+        def final_bake_time_in_minutes: () -> ::Integer
+        def replicate_to: () -> ("NONE" | "SSM_DOCUMENT")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#update_deployment_strategy-instance_method
+      def update_deployment_strategy: (
+                                        deployment_strategy_id: ::String,
+                                        ?description: ::String,
+                                        ?deployment_duration_in_minutes: ::Integer,
+                                        ?final_bake_time_in_minutes: ::Integer,
+                                        ?growth_factor: ::Float,
+                                        ?growth_type: ("LINEAR" | "EXPONENTIAL")
+                                      ) -> _UpdateDeploymentStrategyResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDeploymentStrategyResponseSuccess
+
+      interface _UpdateEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Environment]
+        def application_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def state: () -> ("READY_FOR_DEPLOYMENT" | "DEPLOYING" | "ROLLING_BACK" | "ROLLED_BACK")
+        def monitors: () -> ::Array[Types::Monitor]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#update_environment-instance_method
+      def update_environment: (
+                                application_id: ::String,
+                                environment_id: ::String,
+                                ?name: ::String,
+                                ?description: ::String,
+                                ?monitors: Array[
+                                  {
+                                    alarm_arn: ::String,
+                                    alarm_role_arn: ::String?
+                                  },
+                                ]
+                              ) -> _UpdateEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentResponseSuccess
+
+      interface _UpdateExtensionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Extension]
+        def id: () -> ::String
+        def name: () -> ::String
+        def version_number: () -> ::Integer
+        def arn: () -> ::String
+        def description: () -> ::String
+        def actions: () -> ::Hash[("PRE_CREATE_HOSTED_CONFIGURATION_VERSION" | "PRE_START_DEPLOYMENT" | "ON_DEPLOYMENT_START" | "ON_DEPLOYMENT_STEP" | "ON_DEPLOYMENT_BAKING" | "ON_DEPLOYMENT_COMPLETE" | "ON_DEPLOYMENT_ROLLED_BACK"), ::Array[Types::Action]]
+        def parameters: () -> ::Hash[::String, Types::Parameter]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#update_extension-instance_method
+      def update_extension: (
+                              extension_identifier: ::String,
+                              ?description: ::String,
+                              ?actions: Hash[("PRE_CREATE_HOSTED_CONFIGURATION_VERSION" | "PRE_START_DEPLOYMENT" | "ON_DEPLOYMENT_START" | "ON_DEPLOYMENT_STEP" | "ON_DEPLOYMENT_BAKING" | "ON_DEPLOYMENT_COMPLETE" | "ON_DEPLOYMENT_ROLLED_BACK"), Array[
+                                  {
+                                    name: ::String?,
+                                    description: ::String?,
+                                    uri: ::String?,
+                                    role_arn: ::String?
+                                  },
+                                ]],
+                              ?parameters: Hash[::String, {
+                                  description: ::String?,
+                                  required: bool?
+                                }],
+                              ?version_number: ::Integer
+                            ) -> _UpdateExtensionResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateExtensionResponseSuccess
+
+      interface _UpdateExtensionAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExtensionAssociation]
+        def id: () -> ::String
+        def extension_arn: () -> ::String
+        def resource_arn: () -> ::String
+        def arn: () -> ::String
+        def parameters: () -> ::Hash[::String, ::String]
+        def extension_version_number: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#update_extension_association-instance_method
+      def update_extension_association: (
+                                          extension_association_id: ::String,
+                                          ?parameters: Hash[::String, ::String]
+                                        ) -> _UpdateExtensionAssociationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateExtensionAssociationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#validate_configuration-instance_method
+      def validate_configuration: (
+                                    application_id: ::String,
+                                    configuration_profile_id: ::String,
+                                    configuration_version: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+    end
+  end
+end
+

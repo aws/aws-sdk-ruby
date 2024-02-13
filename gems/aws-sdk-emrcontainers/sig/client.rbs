@@ -1,0 +1,454 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EMRContainers
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CancelJobRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelJobRunResponse]
+        def id: () -> ::String
+        def virtual_cluster_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#cancel_job_run-instance_method
+      def cancel_job_run: (
+                            id: ::String,
+                            virtual_cluster_id: ::String
+                          ) -> _CancelJobRunResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelJobRunResponseSuccess
+
+      interface _CreateJobTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateJobTemplateResponse]
+        def id: () -> ::String
+        def name: () -> ::String
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#create_job_template-instance_method
+      def create_job_template: (
+                                 name: ::String,
+                                 client_token: ::String,
+                                 job_template_data: {
+                                   execution_role_arn: ::String,
+                                   release_label: ::String,
+                                   configuration_overrides: {
+                                     application_configuration: Array[
+                                       {
+                                         classification: ::String,
+                                         properties: Hash[::String, ::String]?,
+                                         configurations: untyped?
+                                       },
+                                     ]?,
+                                     monitoring_configuration: {
+                                       persistent_app_ui: ::String?,
+                                       cloud_watch_monitoring_configuration: {
+                                         log_group_name: ::String?,
+                                         log_stream_name_prefix: ::String?
+                                       }?,
+                                       s3_monitoring_configuration: {
+                                         log_uri: ::String?
+                                       }?
+                                     }?
+                                   }?,
+                                   job_driver: {
+                                     spark_submit_job_driver: {
+                                       entry_point: ::String,
+                                       entry_point_arguments: Array[::String]?,
+                                       spark_submit_parameters: ::String?
+                                     }?,
+                                     spark_sql_job_driver: {
+                                       entry_point: ::String?,
+                                       spark_sql_parameters: ::String?
+                                     }?
+                                   },
+                                   parameter_configuration: Hash[::String, {
+                                       type: ("NUMBER" | "STRING")?,
+                                       default_value: ::String?
+                                     }]?,
+                                   job_tags: Hash[::String, ::String]?
+                                 },
+                                 ?tags: Hash[::String, ::String],
+                                 ?kms_key_arn: ::String
+                               ) -> _CreateJobTemplateResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateJobTemplateResponseSuccess
+
+      interface _CreateManagedEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateManagedEndpointResponse]
+        def id: () -> ::String
+        def name: () -> ::String
+        def arn: () -> ::String
+        def virtual_cluster_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#create_managed_endpoint-instance_method
+      def create_managed_endpoint: (
+                                     name: ::String,
+                                     virtual_cluster_id: ::String,
+                                     type: ::String,
+                                     release_label: ::String,
+                                     execution_role_arn: ::String,
+                                     ?certificate_arn: ::String,
+                                     ?configuration_overrides: {
+                                       application_configuration: Array[
+                                         {
+                                           classification: ::String,
+                                           properties: Hash[::String, ::String]?,
+                                           configurations: untyped?
+                                         },
+                                       ]?,
+                                       monitoring_configuration: {
+                                         persistent_app_ui: ("ENABLED" | "DISABLED")?,
+                                         cloud_watch_monitoring_configuration: {
+                                           log_group_name: ::String,
+                                           log_stream_name_prefix: ::String?
+                                         }?,
+                                         s3_monitoring_configuration: {
+                                           log_uri: ::String
+                                         }?,
+                                         container_log_rotation_configuration: {
+                                           rotation_size: ::String,
+                                           max_files_to_keep: ::Integer
+                                         }?
+                                       }?
+                                     },
+                                     client_token: ::String,
+                                     ?tags: Hash[::String, ::String]
+                                   ) -> _CreateManagedEndpointResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateManagedEndpointResponseSuccess
+
+      interface _CreateVirtualClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVirtualClusterResponse]
+        def id: () -> ::String
+        def name: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#create_virtual_cluster-instance_method
+      def create_virtual_cluster: (
+                                    name: ::String,
+                                    container_provider: {
+                                      type: ("EKS"),
+                                      id: ::String,
+                                      info: {
+                                        eks_info: {
+                                          namespace: ::String?
+                                        }?
+                                      }?
+                                    },
+                                    client_token: ::String,
+                                    ?tags: Hash[::String, ::String]
+                                  ) -> _CreateVirtualClusterResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVirtualClusterResponseSuccess
+
+      interface _DeleteJobTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteJobTemplateResponse]
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#delete_job_template-instance_method
+      def delete_job_template: (
+                                 id: ::String
+                               ) -> _DeleteJobTemplateResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteJobTemplateResponseSuccess
+
+      interface _DeleteManagedEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteManagedEndpointResponse]
+        def id: () -> ::String
+        def virtual_cluster_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#delete_managed_endpoint-instance_method
+      def delete_managed_endpoint: (
+                                     id: ::String,
+                                     virtual_cluster_id: ::String
+                                   ) -> _DeleteManagedEndpointResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteManagedEndpointResponseSuccess
+
+      interface _DeleteVirtualClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVirtualClusterResponse]
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#delete_virtual_cluster-instance_method
+      def delete_virtual_cluster: (
+                                    id: ::String
+                                  ) -> _DeleteVirtualClusterResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVirtualClusterResponseSuccess
+
+      interface _DescribeJobRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeJobRunResponse]
+        def job_run: () -> Types::JobRun
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#describe_job_run-instance_method
+      def describe_job_run: (
+                              id: ::String,
+                              virtual_cluster_id: ::String
+                            ) -> _DescribeJobRunResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeJobRunResponseSuccess
+
+      interface _DescribeJobTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeJobTemplateResponse]
+        def job_template: () -> Types::JobTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#describe_job_template-instance_method
+      def describe_job_template: (
+                                   id: ::String
+                                 ) -> _DescribeJobTemplateResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeJobTemplateResponseSuccess
+
+      interface _DescribeManagedEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeManagedEndpointResponse]
+        def endpoint: () -> Types::Endpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#describe_managed_endpoint-instance_method
+      def describe_managed_endpoint: (
+                                       id: ::String,
+                                       virtual_cluster_id: ::String
+                                     ) -> _DescribeManagedEndpointResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeManagedEndpointResponseSuccess
+
+      interface _DescribeVirtualClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVirtualClusterResponse]
+        def virtual_cluster: () -> Types::VirtualCluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#describe_virtual_cluster-instance_method
+      def describe_virtual_cluster: (
+                                      id: ::String
+                                    ) -> _DescribeVirtualClusterResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVirtualClusterResponseSuccess
+
+      interface _GetManagedEndpointSessionCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetManagedEndpointSessionCredentialsResponse]
+        def id: () -> ::String
+        def credentials: () -> Types::Credentials
+        def expires_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#get_managed_endpoint_session_credentials-instance_method
+      def get_managed_endpoint_session_credentials: (
+                                                      endpoint_identifier: ::String,
+                                                      virtual_cluster_identifier: ::String,
+                                                      execution_role_arn: ::String,
+                                                      credential_type: ::String,
+                                                      ?duration_in_seconds: ::Integer,
+                                                      ?log_context: ::String,
+                                                      ?client_token: ::String
+                                                    ) -> _GetManagedEndpointSessionCredentialsResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetManagedEndpointSessionCredentialsResponseSuccess
+
+      interface _ListJobRunsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListJobRunsResponse]
+        def job_runs: () -> ::Array[Types::JobRun]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#list_job_runs-instance_method
+      def list_job_runs: (
+                           virtual_cluster_id: ::String,
+                           ?created_before: ::Time,
+                           ?created_after: ::Time,
+                           ?name: ::String,
+                           ?states: Array[("PENDING" | "SUBMITTED" | "RUNNING" | "FAILED" | "CANCELLED" | "CANCEL_PENDING" | "COMPLETED")],
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListJobRunsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobRunsResponseSuccess
+
+      interface _ListJobTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListJobTemplatesResponse]
+        def templates: () -> ::Array[Types::JobTemplate]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#list_job_templates-instance_method
+      def list_job_templates: (
+                                ?created_after: ::Time,
+                                ?created_before: ::Time,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListJobTemplatesResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobTemplatesResponseSuccess
+
+      interface _ListManagedEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListManagedEndpointsResponse]
+        def endpoints: () -> ::Array[Types::Endpoint]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#list_managed_endpoints-instance_method
+      def list_managed_endpoints: (
+                                    virtual_cluster_id: ::String,
+                                    ?created_before: ::Time,
+                                    ?created_after: ::Time,
+                                    ?types: Array[::String],
+                                    ?states: Array[("CREATING" | "ACTIVE" | "TERMINATING" | "TERMINATED" | "TERMINATED_WITH_ERRORS")],
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListManagedEndpointsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListManagedEndpointsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListVirtualClustersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVirtualClustersResponse]
+        def virtual_clusters: () -> ::Array[Types::VirtualCluster]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#list_virtual_clusters-instance_method
+      def list_virtual_clusters: (
+                                   ?container_provider_id: ::String,
+                                   ?container_provider_type: ("EKS"),
+                                   ?created_after: ::Time,
+                                   ?created_before: ::Time,
+                                   ?states: Array[("RUNNING" | "TERMINATING" | "TERMINATED" | "ARRESTED")],
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListVirtualClustersResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVirtualClustersResponseSuccess
+
+      interface _StartJobRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartJobRunResponse]
+        def id: () -> ::String
+        def name: () -> ::String
+        def arn: () -> ::String
+        def virtual_cluster_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#start_job_run-instance_method
+      def start_job_run: (
+                           ?name: ::String,
+                           virtual_cluster_id: ::String,
+                           client_token: ::String,
+                           ?execution_role_arn: ::String,
+                           ?release_label: ::String,
+                           ?job_driver: {
+                             spark_submit_job_driver: {
+                               entry_point: ::String,
+                               entry_point_arguments: Array[::String]?,
+                               spark_submit_parameters: ::String?
+                             }?,
+                             spark_sql_job_driver: {
+                               entry_point: ::String?,
+                               spark_sql_parameters: ::String?
+                             }?
+                           },
+                           ?configuration_overrides: {
+                             application_configuration: Array[
+                               {
+                                 classification: ::String,
+                                 properties: Hash[::String, ::String]?,
+                                 configurations: untyped?
+                               },
+                             ]?,
+                             monitoring_configuration: {
+                               persistent_app_ui: ("ENABLED" | "DISABLED")?,
+                               cloud_watch_monitoring_configuration: {
+                                 log_group_name: ::String,
+                                 log_stream_name_prefix: ::String?
+                               }?,
+                               s3_monitoring_configuration: {
+                                 log_uri: ::String
+                               }?,
+                               container_log_rotation_configuration: {
+                                 rotation_size: ::String,
+                                 max_files_to_keep: ::Integer
+                               }?
+                             }?
+                           },
+                           ?tags: Hash[::String, ::String],
+                           ?job_template_id: ::String,
+                           ?job_template_parameters: Hash[::String, ::String],
+                           ?retry_policy_configuration: {
+                             max_attempts: ::Integer
+                           }
+                         ) -> _StartJobRunResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartJobRunResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRContainers/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+    end
+  end
+end
+

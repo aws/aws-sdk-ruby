@@ -1,0 +1,68 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SNS
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/PlatformEndpoint.html
+    class PlatformEndpoint
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/PlatformEndpoint.html#initialize-instance_method
+      def initialize: (String arn, Hash[Symbol, untyped] options) -> void
+                    | (arn: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/PlatformEndpoint.html#arn-instance_method
+      def arn: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/PlatformEndpoint.html#attributes-instance_method
+      def attributes: () -> ::Hash[::String, ::String]
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/PlatformEndpoint.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/PlatformEndpoint.html#data-instance_method
+      def data: () -> Types::GetEndpointAttributesResponse
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/PlatformEndpoint.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/PlatformEndpoint.html#delete-instance_method
+      def delete: (
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/PlatformEndpoint.html#publish-instance_method
+      def publish: (
+                     ?topic_arn: ::String,
+                     ?phone_number: ::String,
+                     message: ::String,
+                     ?subject: ::String,
+                     ?message_structure: ::String,
+                     ?message_attributes: Hash[::String, {
+                         data_type: ::String,
+                         string_value: ::String?,
+                         binary_value: ::String?
+                       }],
+                     ?message_deduplication_id: ::String,
+                     ?message_group_id: ::String
+                   ) -> Types::PublishResponse
+                 | (?Hash[Symbol, untyped]) -> Types::PublishResponse
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/PlatformEndpoint.html#set_attributes-instance_method
+      def set_attributes: (
+                            attributes: Hash[::String, ::String]
+                          ) -> ::Aws::EmptyStructure
+                        | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      class Collection < ::Aws::Resources::Collection[PlatformEndpoint]
+      end
+    end
+  end
+end

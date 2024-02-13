@@ -1,0 +1,53 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IAM
+    module Waiters
+
+      class InstanceProfileExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    instance_profile_name: ::String
+                  ) -> Client::_GetInstanceProfileResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetInstanceProfileResponseSuccess
+      end
+
+      class PolicyExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    policy_arn: ::String
+                  ) -> Client::_GetPolicyResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetPolicyResponseSuccess
+      end
+
+      class RoleExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    role_name: ::String
+                  ) -> Client::_GetRoleResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetRoleResponseSuccess
+      end
+
+      class UserExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?user_name: ::String
+                  ) -> Client::_GetUserResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_GetUserResponseSuccess
+      end
+    end
+  end
+end

@@ -1,0 +1,605 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EntityResolution
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateIdMappingWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIdMappingWorkflowOutput]
+        def description: () -> ::String
+        def id_mapping_techniques: () -> Types::IdMappingTechniques
+        def input_source_config: () -> ::Array[Types::IdMappingWorkflowInputSource]
+        def output_source_config: () -> ::Array[Types::IdMappingWorkflowOutputSource]
+        def role_arn: () -> ::String
+        def workflow_arn: () -> ::String
+        def workflow_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#create_id_mapping_workflow-instance_method
+      def create_id_mapping_workflow: (
+                                        ?description: ::String,
+                                        id_mapping_techniques: {
+                                          id_mapping_type: ("PROVIDER"),
+                                          provider_properties: {
+                                            intermediate_source_configuration: {
+                                              intermediate_s3_path: ::String
+                                            }?,
+                                            provider_configuration: {
+                                            }?,
+                                            provider_service_arn: ::String
+                                          }
+                                        },
+                                        input_source_config: Array[
+                                          {
+                                            input_source_arn: ::String,
+                                            schema_name: ::String
+                                          },
+                                        ],
+                                        output_source_config: Array[
+                                          {
+                                            kms_arn: ::String?,
+                                            output_s3_path: ::String
+                                          },
+                                        ],
+                                        role_arn: ::String,
+                                        ?tags: Hash[::String, ::String],
+                                        workflow_name: ::String
+                                      ) -> _CreateIdMappingWorkflowResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIdMappingWorkflowResponseSuccess
+
+      interface _CreateMatchingWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMatchingWorkflowOutput]
+        def description: () -> ::String
+        def incremental_run_config: () -> Types::IncrementalRunConfig
+        def input_source_config: () -> ::Array[Types::InputSource]
+        def output_source_config: () -> ::Array[Types::OutputSource]
+        def resolution_techniques: () -> Types::ResolutionTechniques
+        def role_arn: () -> ::String
+        def workflow_arn: () -> ::String
+        def workflow_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#create_matching_workflow-instance_method
+      def create_matching_workflow: (
+                                      ?description: ::String,
+                                      ?incremental_run_config: {
+                                        incremental_run_type: ("IMMEDIATE")?
+                                      },
+                                      input_source_config: Array[
+                                        {
+                                          apply_normalization: bool?,
+                                          input_source_arn: ::String,
+                                          schema_name: ::String
+                                        },
+                                      ],
+                                      output_source_config: Array[
+                                        {
+                                          kms_arn: ::String?,
+                                          apply_normalization: bool?,
+                                          output: Array[
+                                            {
+                                              hashed: bool?,
+                                              name: ::String
+                                            },
+                                          ],
+                                          output_s3_path: ::String
+                                        },
+                                      ],
+                                      resolution_techniques: {
+                                        provider_properties: {
+                                          intermediate_source_configuration: {
+                                            intermediate_s3_path: ::String
+                                          }?,
+                                          provider_configuration: {
+                                          }?,
+                                          provider_service_arn: ::String
+                                        }?,
+                                        resolution_type: ("RULE_MATCHING" | "ML_MATCHING" | "PROVIDER"),
+                                        rule_based_properties: {
+                                          attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY"),
+                                          rules: Array[
+                                            {
+                                              matching_keys: Array[::String],
+                                              rule_name: ::String
+                                            },
+                                          ]
+                                        }?
+                                      },
+                                      role_arn: ::String,
+                                      ?tags: Hash[::String, ::String],
+                                      workflow_name: ::String
+                                    ) -> _CreateMatchingWorkflowResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMatchingWorkflowResponseSuccess
+
+      interface _CreateSchemaMappingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSchemaMappingOutput]
+        def description: () -> ::String
+        def mapped_input_fields: () -> ::Array[Types::SchemaInputAttribute]
+        def schema_arn: () -> ::String
+        def schema_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#create_schema_mapping-instance_method
+      def create_schema_mapping: (
+                                   ?description: ::String,
+                                   mapped_input_fields: Array[
+                                     {
+                                       field_name: ::String,
+                                       group_name: ::String?,
+                                       match_key: ::String?,
+                                       sub_type: ::String?,
+                                       type: ("NAME" | "NAME_FIRST" | "NAME_MIDDLE" | "NAME_LAST" | "ADDRESS" | "ADDRESS_STREET1" | "ADDRESS_STREET2" | "ADDRESS_STREET3" | "ADDRESS_CITY" | "ADDRESS_STATE" | "ADDRESS_COUNTRY" | "ADDRESS_POSTALCODE" | "PHONE" | "PHONE_NUMBER" | "PHONE_COUNTRYCODE" | "EMAIL_ADDRESS" | "UNIQUE_ID" | "DATE" | "STRING" | "PROVIDER_ID")
+                                     },
+                                   ],
+                                   schema_name: ::String,
+                                   ?tags: Hash[::String, ::String]
+                                 ) -> _CreateSchemaMappingResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSchemaMappingResponseSuccess
+
+      interface _DeleteIdMappingWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIdMappingWorkflowOutput]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#delete_id_mapping_workflow-instance_method
+      def delete_id_mapping_workflow: (
+                                        workflow_name: ::String
+                                      ) -> _DeleteIdMappingWorkflowResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIdMappingWorkflowResponseSuccess
+
+      interface _DeleteMatchingWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMatchingWorkflowOutput]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#delete_matching_workflow-instance_method
+      def delete_matching_workflow: (
+                                      workflow_name: ::String
+                                    ) -> _DeleteMatchingWorkflowResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMatchingWorkflowResponseSuccess
+
+      interface _DeleteSchemaMappingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSchemaMappingOutput]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#delete_schema_mapping-instance_method
+      def delete_schema_mapping: (
+                                   schema_name: ::String
+                                 ) -> _DeleteSchemaMappingResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSchemaMappingResponseSuccess
+
+      interface _GetIdMappingJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIdMappingJobOutput]
+        def end_time: () -> ::Time
+        def error_details: () -> Types::ErrorDetails
+        def job_id: () -> ::String
+        def metrics: () -> Types::IdMappingJobMetrics
+        def start_time: () -> ::Time
+        def status: () -> ("RUNNING" | "SUCCEEDED" | "FAILED" | "QUEUED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#get_id_mapping_job-instance_method
+      def get_id_mapping_job: (
+                                job_id: ::String,
+                                workflow_name: ::String
+                              ) -> _GetIdMappingJobResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIdMappingJobResponseSuccess
+
+      interface _GetIdMappingWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIdMappingWorkflowOutput]
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def id_mapping_techniques: () -> Types::IdMappingTechniques
+        def input_source_config: () -> ::Array[Types::IdMappingWorkflowInputSource]
+        def output_source_config: () -> ::Array[Types::IdMappingWorkflowOutputSource]
+        def role_arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def updated_at: () -> ::Time
+        def workflow_arn: () -> ::String
+        def workflow_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#get_id_mapping_workflow-instance_method
+      def get_id_mapping_workflow: (
+                                     workflow_name: ::String
+                                   ) -> _GetIdMappingWorkflowResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIdMappingWorkflowResponseSuccess
+
+      interface _GetMatchIdResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMatchIdOutput]
+        def match_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#get_match_id-instance_method
+      def get_match_id: (
+                          record: Hash[::String, ::String],
+                          workflow_name: ::String
+                        ) -> _GetMatchIdResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMatchIdResponseSuccess
+
+      interface _GetMatchingJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMatchingJobOutput]
+        def end_time: () -> ::Time
+        def error_details: () -> Types::ErrorDetails
+        def job_id: () -> ::String
+        def metrics: () -> Types::JobMetrics
+        def start_time: () -> ::Time
+        def status: () -> ("RUNNING" | "SUCCEEDED" | "FAILED" | "QUEUED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#get_matching_job-instance_method
+      def get_matching_job: (
+                              job_id: ::String,
+                              workflow_name: ::String
+                            ) -> _GetMatchingJobResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMatchingJobResponseSuccess
+
+      interface _GetMatchingWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMatchingWorkflowOutput]
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def incremental_run_config: () -> Types::IncrementalRunConfig
+        def input_source_config: () -> ::Array[Types::InputSource]
+        def output_source_config: () -> ::Array[Types::OutputSource]
+        def resolution_techniques: () -> Types::ResolutionTechniques
+        def role_arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def updated_at: () -> ::Time
+        def workflow_arn: () -> ::String
+        def workflow_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#get_matching_workflow-instance_method
+      def get_matching_workflow: (
+                                   workflow_name: ::String
+                                 ) -> _GetMatchingWorkflowResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMatchingWorkflowResponseSuccess
+
+      interface _GetProviderServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProviderServiceOutput]
+        def anonymized_output: () -> bool
+        def provider_configuration_definition: () -> untyped
+        def provider_endpoint_configuration: () -> Types::ProviderEndpointConfiguration
+        def provider_entity_output_definition: () -> untyped
+        def provider_intermediate_data_access_configuration: () -> Types::ProviderIntermediateDataAccessConfiguration
+        def provider_name: () -> ::String
+        def provider_service_arn: () -> ::String
+        def provider_service_display_name: () -> ::String
+        def provider_service_name: () -> ::String
+        def provider_service_type: () -> ("ASSIGNMENT" | "ID_MAPPING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#get_provider_service-instance_method
+      def get_provider_service: (
+                                  provider_name: ::String,
+                                  provider_service_name: ::String
+                                ) -> _GetProviderServiceResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProviderServiceResponseSuccess
+
+      interface _GetSchemaMappingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSchemaMappingOutput]
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def has_workflows: () -> bool
+        def mapped_input_fields: () -> ::Array[Types::SchemaInputAttribute]
+        def schema_arn: () -> ::String
+        def schema_name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#get_schema_mapping-instance_method
+      def get_schema_mapping: (
+                                schema_name: ::String
+                              ) -> _GetSchemaMappingResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSchemaMappingResponseSuccess
+
+      interface _ListIdMappingJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIdMappingJobsOutput]
+        def jobs: () -> ::Array[Types::JobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#list_id_mapping_jobs-instance_method
+      def list_id_mapping_jobs: (
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
+                                  workflow_name: ::String
+                                ) -> _ListIdMappingJobsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIdMappingJobsResponseSuccess
+
+      interface _ListIdMappingWorkflowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIdMappingWorkflowsOutput]
+        def next_token: () -> ::String
+        def workflow_summaries: () -> ::Array[Types::IdMappingWorkflowSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#list_id_mapping_workflows-instance_method
+      def list_id_mapping_workflows: (
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListIdMappingWorkflowsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIdMappingWorkflowsResponseSuccess
+
+      interface _ListMatchingJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMatchingJobsOutput]
+        def jobs: () -> ::Array[Types::JobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#list_matching_jobs-instance_method
+      def list_matching_jobs: (
+                                ?max_results: ::Integer,
+                                ?next_token: ::String,
+                                workflow_name: ::String
+                              ) -> _ListMatchingJobsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMatchingJobsResponseSuccess
+
+      interface _ListMatchingWorkflowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMatchingWorkflowsOutput]
+        def next_token: () -> ::String
+        def workflow_summaries: () -> ::Array[Types::MatchingWorkflowSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#list_matching_workflows-instance_method
+      def list_matching_workflows: (
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListMatchingWorkflowsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMatchingWorkflowsResponseSuccess
+
+      interface _ListProviderServicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProviderServicesOutput]
+        def next_token: () -> ::String
+        def provider_service_summaries: () -> ::Array[Types::ProviderServiceSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#list_provider_services-instance_method
+      def list_provider_services: (
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String,
+                                    ?provider_name: ::String
+                                  ) -> _ListProviderServicesResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProviderServicesResponseSuccess
+
+      interface _ListSchemaMappingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSchemaMappingsOutput]
+        def next_token: () -> ::String
+        def schema_list: () -> ::Array[Types::SchemaMappingSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#list_schema_mappings-instance_method
+      def list_schema_mappings: (
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListSchemaMappingsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSchemaMappingsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartIdMappingJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartIdMappingJobOutput]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#start_id_mapping_job-instance_method
+      def start_id_mapping_job: (
+                                  workflow_name: ::String
+                                ) -> _StartIdMappingJobResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartIdMappingJobResponseSuccess
+
+      interface _StartMatchingJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMatchingJobOutput]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#start_matching_job-instance_method
+      def start_matching_job: (
+                                workflow_name: ::String
+                              ) -> _StartMatchingJobResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMatchingJobResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateIdMappingWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIdMappingWorkflowOutput]
+        def description: () -> ::String
+        def id_mapping_techniques: () -> Types::IdMappingTechniques
+        def input_source_config: () -> ::Array[Types::IdMappingWorkflowInputSource]
+        def output_source_config: () -> ::Array[Types::IdMappingWorkflowOutputSource]
+        def role_arn: () -> ::String
+        def workflow_arn: () -> ::String
+        def workflow_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#update_id_mapping_workflow-instance_method
+      def update_id_mapping_workflow: (
+                                        ?description: ::String,
+                                        id_mapping_techniques: {
+                                          id_mapping_type: ("PROVIDER"),
+                                          provider_properties: {
+                                            intermediate_source_configuration: {
+                                              intermediate_s3_path: ::String
+                                            }?,
+                                            provider_configuration: {
+                                            }?,
+                                            provider_service_arn: ::String
+                                          }
+                                        },
+                                        input_source_config: Array[
+                                          {
+                                            input_source_arn: ::String,
+                                            schema_name: ::String
+                                          },
+                                        ],
+                                        output_source_config: Array[
+                                          {
+                                            kms_arn: ::String?,
+                                            output_s3_path: ::String
+                                          },
+                                        ],
+                                        role_arn: ::String,
+                                        workflow_name: ::String
+                                      ) -> _UpdateIdMappingWorkflowResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIdMappingWorkflowResponseSuccess
+
+      interface _UpdateMatchingWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMatchingWorkflowOutput]
+        def description: () -> ::String
+        def incremental_run_config: () -> Types::IncrementalRunConfig
+        def input_source_config: () -> ::Array[Types::InputSource]
+        def output_source_config: () -> ::Array[Types::OutputSource]
+        def resolution_techniques: () -> Types::ResolutionTechniques
+        def role_arn: () -> ::String
+        def workflow_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#update_matching_workflow-instance_method
+      def update_matching_workflow: (
+                                      ?description: ::String,
+                                      ?incremental_run_config: {
+                                        incremental_run_type: ("IMMEDIATE")?
+                                      },
+                                      input_source_config: Array[
+                                        {
+                                          apply_normalization: bool?,
+                                          input_source_arn: ::String,
+                                          schema_name: ::String
+                                        },
+                                      ],
+                                      output_source_config: Array[
+                                        {
+                                          kms_arn: ::String?,
+                                          apply_normalization: bool?,
+                                          output: Array[
+                                            {
+                                              hashed: bool?,
+                                              name: ::String
+                                            },
+                                          ],
+                                          output_s3_path: ::String
+                                        },
+                                      ],
+                                      resolution_techniques: {
+                                        provider_properties: {
+                                          intermediate_source_configuration: {
+                                            intermediate_s3_path: ::String
+                                          }?,
+                                          provider_configuration: {
+                                          }?,
+                                          provider_service_arn: ::String
+                                        }?,
+                                        resolution_type: ("RULE_MATCHING" | "ML_MATCHING" | "PROVIDER"),
+                                        rule_based_properties: {
+                                          attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY"),
+                                          rules: Array[
+                                            {
+                                              matching_keys: Array[::String],
+                                              rule_name: ::String
+                                            },
+                                          ]
+                                        }?
+                                      },
+                                      role_arn: ::String,
+                                      workflow_name: ::String
+                                    ) -> _UpdateMatchingWorkflowResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMatchingWorkflowResponseSuccess
+
+      interface _UpdateSchemaMappingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSchemaMappingOutput]
+        def description: () -> ::String
+        def mapped_input_fields: () -> ::Array[Types::SchemaInputAttribute]
+        def schema_arn: () -> ::String
+        def schema_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#update_schema_mapping-instance_method
+      def update_schema_mapping: (
+                                   ?description: ::String,
+                                   mapped_input_fields: Array[
+                                     {
+                                       field_name: ::String,
+                                       group_name: ::String?,
+                                       match_key: ::String?,
+                                       sub_type: ::String?,
+                                       type: ("NAME" | "NAME_FIRST" | "NAME_MIDDLE" | "NAME_LAST" | "ADDRESS" | "ADDRESS_STREET1" | "ADDRESS_STREET2" | "ADDRESS_STREET3" | "ADDRESS_CITY" | "ADDRESS_STATE" | "ADDRESS_COUNTRY" | "ADDRESS_POSTALCODE" | "PHONE" | "PHONE_NUMBER" | "PHONE_COUNTRYCODE" | "EMAIL_ADDRESS" | "UNIQUE_ID" | "DATE" | "STRING" | "PROVIDER_ID")
+                                     },
+                                   ],
+                                   schema_name: ::String
+                                 ) -> _UpdateSchemaMappingResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSchemaMappingResponseSuccess
+    end
+  end
+end
+

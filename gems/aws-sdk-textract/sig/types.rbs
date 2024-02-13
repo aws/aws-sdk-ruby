@@ -1,0 +1,760 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Textract
+  module Types
+
+    class AccessDeniedException < Aws::EmptyStructure
+    end
+
+    class Adapter
+      attr_accessor adapter_id: ::String
+      attr_accessor pages: ::Array[::String]
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class AdapterOverview
+      attr_accessor adapter_id: ::String
+      attr_accessor adapter_name: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor feature_types: ::Array[("TABLES" | "FORMS" | "QUERIES" | "SIGNATURES" | "LAYOUT")]
+      SENSITIVE: []
+    end
+
+    class AdapterVersionDatasetConfig
+      attr_accessor manifest_s3_object: Types::S3Object
+      SENSITIVE: []
+    end
+
+    class AdapterVersionEvaluationMetric
+      attr_accessor baseline: Types::EvaluationMetric
+      attr_accessor adapter_version: Types::EvaluationMetric
+      attr_accessor feature_type: ("TABLES" | "FORMS" | "QUERIES" | "SIGNATURES" | "LAYOUT")
+      SENSITIVE: []
+    end
+
+    class AdapterVersionOverview
+      attr_accessor adapter_id: ::String
+      attr_accessor adapter_version: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor feature_types: ::Array[("TABLES" | "FORMS" | "QUERIES" | "SIGNATURES" | "LAYOUT")]
+      attr_accessor status: ("ACTIVE" | "AT_RISK" | "DEPRECATED" | "CREATION_ERROR" | "CREATION_IN_PROGRESS")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class AdaptersConfig
+      attr_accessor adapters: ::Array[Types::Adapter]
+      SENSITIVE: []
+    end
+
+    class AnalyzeDocumentRequest
+      attr_accessor document: Types::Document
+      attr_accessor feature_types: ::Array[("TABLES" | "FORMS" | "QUERIES" | "SIGNATURES" | "LAYOUT")]
+      attr_accessor human_loop_config: Types::HumanLoopConfig
+      attr_accessor queries_config: Types::QueriesConfig
+      attr_accessor adapters_config: Types::AdaptersConfig
+      SENSITIVE: []
+    end
+
+    class AnalyzeDocumentResponse
+      attr_accessor document_metadata: Types::DocumentMetadata
+      attr_accessor blocks: ::Array[Types::Block]
+      attr_accessor human_loop_activation_output: Types::HumanLoopActivationOutput
+      attr_accessor analyze_document_model_version: ::String
+      SENSITIVE: []
+    end
+
+    class AnalyzeExpenseRequest
+      attr_accessor document: Types::Document
+      SENSITIVE: []
+    end
+
+    class AnalyzeExpenseResponse
+      attr_accessor document_metadata: Types::DocumentMetadata
+      attr_accessor expense_documents: ::Array[Types::ExpenseDocument]
+      SENSITIVE: []
+    end
+
+    class AnalyzeIDDetections
+      attr_accessor text: ::String
+      attr_accessor normalized_value: Types::NormalizedValue
+      attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class AnalyzeIDRequest
+      attr_accessor document_pages: ::Array[Types::Document]
+      SENSITIVE: []
+    end
+
+    class AnalyzeIDResponse
+      attr_accessor identity_documents: ::Array[Types::IdentityDocument]
+      attr_accessor document_metadata: Types::DocumentMetadata
+      attr_accessor analyze_id_model_version: ::String
+      SENSITIVE: []
+    end
+
+    class BadDocumentException < Aws::EmptyStructure
+    end
+
+    class Block
+      attr_accessor block_type: ("KEY_VALUE_SET" | "PAGE" | "LINE" | "WORD" | "TABLE" | "CELL" | "SELECTION_ELEMENT" | "MERGED_CELL" | "TITLE" | "QUERY" | "QUERY_RESULT" | "SIGNATURE" | "TABLE_TITLE" | "TABLE_FOOTER" | "LAYOUT_TEXT" | "LAYOUT_TITLE" | "LAYOUT_HEADER" | "LAYOUT_FOOTER" | "LAYOUT_SECTION_HEADER" | "LAYOUT_PAGE_NUMBER" | "LAYOUT_LIST" | "LAYOUT_FIGURE" | "LAYOUT_TABLE" | "LAYOUT_KEY_VALUE")
+      attr_accessor confidence: ::Float
+      attr_accessor text: ::String
+      attr_accessor text_type: ("HANDWRITING" | "PRINTED")
+      attr_accessor row_index: ::Integer
+      attr_accessor column_index: ::Integer
+      attr_accessor row_span: ::Integer
+      attr_accessor column_span: ::Integer
+      attr_accessor geometry: Types::Geometry
+      attr_accessor id: ::String
+      attr_accessor relationships: ::Array[Types::Relationship]
+      attr_accessor entity_types: ::Array[("KEY" | "VALUE" | "COLUMN_HEADER" | "TABLE_TITLE" | "TABLE_FOOTER" | "TABLE_SECTION_TITLE" | "TABLE_SUMMARY" | "STRUCTURED_TABLE" | "SEMI_STRUCTURED_TABLE")]
+      attr_accessor selection_status: ("SELECTED" | "NOT_SELECTED")
+      attr_accessor page: ::Integer
+      attr_accessor query: Types::Query
+      SENSITIVE: []
+    end
+
+    class BoundingBox
+      attr_accessor width: ::Float
+      attr_accessor height: ::Float
+      attr_accessor left: ::Float
+      attr_accessor top: ::Float
+      SENSITIVE: []
+    end
+
+    class ConflictException < Aws::EmptyStructure
+    end
+
+    class CreateAdapterRequest
+      attr_accessor adapter_name: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor description: ::String
+      attr_accessor feature_types: ::Array[("TABLES" | "FORMS" | "QUERIES" | "SIGNATURES" | "LAYOUT")]
+      attr_accessor auto_update: ("ENABLED" | "DISABLED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateAdapterResponse
+      attr_accessor adapter_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAdapterVersionRequest
+      attr_accessor adapter_id: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor dataset_config: Types::AdapterVersionDatasetConfig
+      attr_accessor kms_key_id: ::String
+      attr_accessor output_config: Types::OutputConfig
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateAdapterVersionResponse
+      attr_accessor adapter_id: ::String
+      attr_accessor adapter_version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAdapterRequest
+      attr_accessor adapter_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAdapterResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAdapterVersionRequest
+      attr_accessor adapter_id: ::String
+      attr_accessor adapter_version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAdapterVersionResponse < Aws::EmptyStructure
+    end
+
+    class DetectDocumentTextRequest
+      attr_accessor document: Types::Document
+      SENSITIVE: []
+    end
+
+    class DetectDocumentTextResponse
+      attr_accessor document_metadata: Types::DocumentMetadata
+      attr_accessor blocks: ::Array[Types::Block]
+      attr_accessor detect_document_text_model_version: ::String
+      SENSITIVE: []
+    end
+
+    class DetectedSignature
+      attr_accessor page: ::Integer
+      SENSITIVE: []
+    end
+
+    class Document
+      attr_accessor bytes: ::String
+      attr_accessor s3_object: Types::S3Object
+      SENSITIVE: []
+    end
+
+    class DocumentGroup
+      attr_accessor type: ::String
+      attr_accessor split_documents: ::Array[Types::SplitDocument]
+      attr_accessor detected_signatures: ::Array[Types::DetectedSignature]
+      attr_accessor undetected_signatures: ::Array[Types::UndetectedSignature]
+      SENSITIVE: []
+    end
+
+    class DocumentLocation
+      attr_accessor s3_object: Types::S3Object
+      SENSITIVE: []
+    end
+
+    class DocumentMetadata
+      attr_accessor pages: ::Integer
+      SENSITIVE: []
+    end
+
+    class DocumentTooLargeException < Aws::EmptyStructure
+    end
+
+    class EvaluationMetric
+      attr_accessor f1_score: ::Float
+      attr_accessor precision: ::Float
+      attr_accessor recall: ::Float
+      SENSITIVE: []
+    end
+
+    class ExpenseCurrency
+      attr_accessor code: ::String
+      attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class ExpenseDetection
+      attr_accessor text: ::String
+      attr_accessor geometry: Types::Geometry
+      attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class ExpenseDocument
+      attr_accessor expense_index: ::Integer
+      attr_accessor summary_fields: ::Array[Types::ExpenseField]
+      attr_accessor line_item_groups: ::Array[Types::LineItemGroup]
+      attr_accessor blocks: ::Array[Types::Block]
+      SENSITIVE: []
+    end
+
+    class ExpenseField
+      attr_accessor type: Types::ExpenseType
+      attr_accessor label_detection: Types::ExpenseDetection
+      attr_accessor value_detection: Types::ExpenseDetection
+      attr_accessor page_number: ::Integer
+      attr_accessor currency: Types::ExpenseCurrency
+      attr_accessor group_properties: ::Array[Types::ExpenseGroupProperty]
+      SENSITIVE: []
+    end
+
+    class ExpenseGroupProperty
+      attr_accessor types: ::Array[::String]
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class ExpenseType
+      attr_accessor text: ::String
+      attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class Extraction
+      attr_accessor lending_document: Types::LendingDocument
+      attr_accessor expense_document: Types::ExpenseDocument
+      attr_accessor identity_document: Types::IdentityDocument
+      SENSITIVE: []
+    end
+
+    class Geometry
+      attr_accessor bounding_box: Types::BoundingBox
+      attr_accessor polygon: ::Array[Types::Point]
+      SENSITIVE: []
+    end
+
+    class GetAdapterRequest
+      attr_accessor adapter_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAdapterResponse
+      attr_accessor adapter_id: ::String
+      attr_accessor adapter_name: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor feature_types: ::Array[("TABLES" | "FORMS" | "QUERIES" | "SIGNATURES" | "LAYOUT")]
+      attr_accessor auto_update: ("ENABLED" | "DISABLED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetAdapterVersionRequest
+      attr_accessor adapter_id: ::String
+      attr_accessor adapter_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetAdapterVersionResponse
+      attr_accessor adapter_id: ::String
+      attr_accessor adapter_version: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor feature_types: ::Array[("TABLES" | "FORMS" | "QUERIES" | "SIGNATURES" | "LAYOUT")]
+      attr_accessor status: ("ACTIVE" | "AT_RISK" | "DEPRECATED" | "CREATION_ERROR" | "CREATION_IN_PROGRESS")
+      attr_accessor status_message: ::String
+      attr_accessor dataset_config: Types::AdapterVersionDatasetConfig
+      attr_accessor kms_key_id: ::String
+      attr_accessor output_config: Types::OutputConfig
+      attr_accessor evaluation_metrics: ::Array[Types::AdapterVersionEvaluationMetric]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetDocumentAnalysisRequest
+      attr_accessor job_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDocumentAnalysisResponse
+      attr_accessor document_metadata: Types::DocumentMetadata
+      attr_accessor job_status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "PARTIAL_SUCCESS")
+      attr_accessor next_token: ::String
+      attr_accessor blocks: ::Array[Types::Block]
+      attr_accessor warnings: ::Array[Types::Warning]
+      attr_accessor status_message: ::String
+      attr_accessor analyze_document_model_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetDocumentTextDetectionRequest
+      attr_accessor job_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDocumentTextDetectionResponse
+      attr_accessor document_metadata: Types::DocumentMetadata
+      attr_accessor job_status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "PARTIAL_SUCCESS")
+      attr_accessor next_token: ::String
+      attr_accessor blocks: ::Array[Types::Block]
+      attr_accessor warnings: ::Array[Types::Warning]
+      attr_accessor status_message: ::String
+      attr_accessor detect_document_text_model_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetExpenseAnalysisRequest
+      attr_accessor job_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetExpenseAnalysisResponse
+      attr_accessor document_metadata: Types::DocumentMetadata
+      attr_accessor job_status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "PARTIAL_SUCCESS")
+      attr_accessor next_token: ::String
+      attr_accessor expense_documents: ::Array[Types::ExpenseDocument]
+      attr_accessor warnings: ::Array[Types::Warning]
+      attr_accessor status_message: ::String
+      attr_accessor analyze_expense_model_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetLendingAnalysisRequest
+      attr_accessor job_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetLendingAnalysisResponse
+      attr_accessor document_metadata: Types::DocumentMetadata
+      attr_accessor job_status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "PARTIAL_SUCCESS")
+      attr_accessor next_token: ::String
+      attr_accessor results: ::Array[Types::LendingResult]
+      attr_accessor warnings: ::Array[Types::Warning]
+      attr_accessor status_message: ::String
+      attr_accessor analyze_lending_model_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetLendingAnalysisSummaryRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetLendingAnalysisSummaryResponse
+      attr_accessor document_metadata: Types::DocumentMetadata
+      attr_accessor job_status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "PARTIAL_SUCCESS")
+      attr_accessor summary: Types::LendingSummary
+      attr_accessor warnings: ::Array[Types::Warning]
+      attr_accessor status_message: ::String
+      attr_accessor analyze_lending_model_version: ::String
+      SENSITIVE: []
+    end
+
+    class HumanLoopActivationOutput
+      attr_accessor human_loop_arn: ::String
+      attr_accessor human_loop_activation_reasons: ::Array[::String]
+      attr_accessor human_loop_activation_conditions_evaluation_results: ::String
+      SENSITIVE: []
+    end
+
+    class HumanLoopConfig
+      attr_accessor human_loop_name: ::String
+      attr_accessor flow_definition_arn: ::String
+      attr_accessor data_attributes: Types::HumanLoopDataAttributes
+      SENSITIVE: []
+    end
+
+    class HumanLoopDataAttributes
+      attr_accessor content_classifiers: ::Array[("FreeOfPersonallyIdentifiableInformation" | "FreeOfAdultContent")]
+      SENSITIVE: []
+    end
+
+    class HumanLoopQuotaExceededException
+      attr_accessor resource_type: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class IdempotentParameterMismatchException < Aws::EmptyStructure
+    end
+
+    class IdentityDocument
+      attr_accessor document_index: ::Integer
+      attr_accessor identity_document_fields: ::Array[Types::IdentityDocumentField]
+      attr_accessor blocks: ::Array[Types::Block]
+      SENSITIVE: []
+    end
+
+    class IdentityDocumentField
+      attr_accessor type: Types::AnalyzeIDDetections
+      attr_accessor value_detection: Types::AnalyzeIDDetections
+      SENSITIVE: []
+    end
+
+    class InternalServerError < Aws::EmptyStructure
+    end
+
+    class InvalidJobIdException < Aws::EmptyStructure
+    end
+
+    class InvalidKMSKeyException < Aws::EmptyStructure
+    end
+
+    class InvalidParameterException < Aws::EmptyStructure
+    end
+
+    class InvalidS3ObjectException < Aws::EmptyStructure
+    end
+
+    class LendingDetection
+      attr_accessor text: ::String
+      attr_accessor selection_status: ("SELECTED" | "NOT_SELECTED")
+      attr_accessor geometry: Types::Geometry
+      attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class LendingDocument
+      attr_accessor lending_fields: ::Array[Types::LendingField]
+      attr_accessor signature_detections: ::Array[Types::SignatureDetection]
+      SENSITIVE: []
+    end
+
+    class LendingField
+      attr_accessor type: ::String
+      attr_accessor key_detection: Types::LendingDetection
+      attr_accessor value_detections: ::Array[Types::LendingDetection]
+      SENSITIVE: []
+    end
+
+    class LendingResult
+      attr_accessor page: ::Integer
+      attr_accessor page_classification: Types::PageClassification
+      attr_accessor extractions: ::Array[Types::Extraction]
+      SENSITIVE: []
+    end
+
+    class LendingSummary
+      attr_accessor document_groups: ::Array[Types::DocumentGroup]
+      attr_accessor undetected_document_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class LimitExceededException < Aws::EmptyStructure
+    end
+
+    class LineItemFields
+      attr_accessor line_item_expense_fields: ::Array[Types::ExpenseField]
+      SENSITIVE: []
+    end
+
+    class LineItemGroup
+      attr_accessor line_item_group_index: ::Integer
+      attr_accessor line_items: ::Array[Types::LineItemFields]
+      SENSITIVE: []
+    end
+
+    class ListAdapterVersionsRequest
+      attr_accessor adapter_id: ::String
+      attr_accessor after_creation_time: ::Time
+      attr_accessor before_creation_time: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAdapterVersionsResponse
+      attr_accessor adapter_versions: ::Array[Types::AdapterVersionOverview]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAdaptersRequest
+      attr_accessor after_creation_time: ::Time
+      attr_accessor before_creation_time: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAdaptersResponse
+      attr_accessor adapters: ::Array[Types::AdapterOverview]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class NormalizedValue
+      attr_accessor value: ::String
+      attr_accessor value_type: ("DATE")
+      SENSITIVE: []
+    end
+
+    class NotificationChannel
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class OutputConfig
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class PageClassification
+      attr_accessor page_type: ::Array[Types::Prediction]
+      attr_accessor page_number: ::Array[Types::Prediction]
+      SENSITIVE: []
+    end
+
+    class Point
+      attr_accessor x: ::Float
+      attr_accessor y: ::Float
+      SENSITIVE: []
+    end
+
+    class Prediction
+      attr_accessor value: ::String
+      attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class ProvisionedThroughputExceededException < Aws::EmptyStructure
+    end
+
+    class QueriesConfig
+      attr_accessor queries: ::Array[Types::Query]
+      SENSITIVE: []
+    end
+
+    class Query
+      attr_accessor text: ::String
+      attr_accessor alias: ::String
+      attr_accessor pages: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Relationship
+      attr_accessor type: ("VALUE" | "CHILD" | "COMPLEX_FEATURES" | "MERGED_CELL" | "TITLE" | "ANSWER" | "TABLE" | "TABLE_TITLE" | "TABLE_FOOTER")
+      attr_accessor ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException < Aws::EmptyStructure
+    end
+
+    class S3Object
+      attr_accessor bucket: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException < Aws::EmptyStructure
+    end
+
+    class SignatureDetection
+      attr_accessor confidence: ::Float
+      attr_accessor geometry: Types::Geometry
+      SENSITIVE: []
+    end
+
+    class SplitDocument
+      attr_accessor index: ::Integer
+      attr_accessor pages: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class StartDocumentAnalysisRequest
+      attr_accessor document_location: Types::DocumentLocation
+      attr_accessor feature_types: ::Array[("TABLES" | "FORMS" | "QUERIES" | "SIGNATURES" | "LAYOUT")]
+      attr_accessor client_request_token: ::String
+      attr_accessor job_tag: ::String
+      attr_accessor notification_channel: Types::NotificationChannel
+      attr_accessor output_config: Types::OutputConfig
+      attr_accessor kms_key_id: ::String
+      attr_accessor queries_config: Types::QueriesConfig
+      attr_accessor adapters_config: Types::AdaptersConfig
+      SENSITIVE: []
+    end
+
+    class StartDocumentAnalysisResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartDocumentTextDetectionRequest
+      attr_accessor document_location: Types::DocumentLocation
+      attr_accessor client_request_token: ::String
+      attr_accessor job_tag: ::String
+      attr_accessor notification_channel: Types::NotificationChannel
+      attr_accessor output_config: Types::OutputConfig
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartDocumentTextDetectionResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartExpenseAnalysisRequest
+      attr_accessor document_location: Types::DocumentLocation
+      attr_accessor client_request_token: ::String
+      attr_accessor job_tag: ::String
+      attr_accessor notification_channel: Types::NotificationChannel
+      attr_accessor output_config: Types::OutputConfig
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartExpenseAnalysisResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartLendingAnalysisRequest
+      attr_accessor document_location: Types::DocumentLocation
+      attr_accessor client_request_token: ::String
+      attr_accessor job_tag: ::String
+      attr_accessor notification_channel: Types::NotificationChannel
+      attr_accessor output_config: Types::OutputConfig
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartLendingAnalysisResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException < Aws::EmptyStructure
+    end
+
+    class UndetectedSignature
+      attr_accessor page: ::Integer
+      SENSITIVE: []
+    end
+
+    class UnsupportedDocumentException < Aws::EmptyStructure
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAdapterRequest
+      attr_accessor adapter_id: ::String
+      attr_accessor description: ::String
+      attr_accessor adapter_name: ::String
+      attr_accessor auto_update: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateAdapterResponse
+      attr_accessor adapter_id: ::String
+      attr_accessor adapter_name: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor feature_types: ::Array[("TABLES" | "FORMS" | "QUERIES" | "SIGNATURES" | "LAYOUT")]
+      attr_accessor auto_update: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ValidationException < Aws::EmptyStructure
+    end
+
+    class Warning
+      attr_accessor error_code: ::String
+      attr_accessor pages: ::Array[::Integer]
+      SENSITIVE: []
+    end
+  end
+end

@@ -545,7 +545,7 @@ module Aws::PersonalizeRuntime
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/create-campaign-return-metadata.html
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-return-metadata
     #
     # @return [Types::GetPersonalizedRankingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -691,8 +691,8 @@ module Aws::PersonalizeRuntime
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/create-campaign-return-metadata.html
-    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/create-recommender-return-metadata.html
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-return-metadata
+    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/creating-recommenders.html#create-recommender-return-metadata
     #
     # @return [Types::GetRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -761,7 +761,7 @@ module Aws::PersonalizeRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalizeruntime'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

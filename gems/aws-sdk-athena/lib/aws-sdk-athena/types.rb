@@ -1945,12 +1945,18 @@ module Aws::Athena
     #   @return [String]
     #
     # @!attribute [rw] payload
-    #   The notebook content to be imported.
+    #   The notebook content to be imported. The payload must be in `ipynb`
+    #   format.
     #   @return [String]
     #
     # @!attribute [rw] type
     #   The notebook content type. Currently, the only valid type is
     #   `IPYNB`.
+    #   @return [String]
+    #
+    # @!attribute [rw] notebook_s3_location_uri
+    #   A URI that specifies the Amazon S3 location of a notebook file in
+    #   `ipynb` format.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -1971,6 +1977,7 @@ module Aws::Athena
       :name,
       :payload,
       :type,
+      :notebook_s3_location_uri,
       :client_request_token)
       SENSITIVE = []
       include Aws::Structure
@@ -4941,9 +4948,10 @@ module Aws::Athena
     #
     # @!attribute [rw] execution_role
     #   The ARN of the execution role used to access user resources for
-    #   Spark sessions and Identity Center enabled workgroups. This property
-    #   applies only to Spark enabled workgroups and Identity Center enabled
-    #   workgroups.
+    #   Spark sessions and IAM Identity Center enabled workgroups. This
+    #   property applies only to Spark enabled workgroups and IAM Identity
+    #   Center enabled workgroups. The property is required for IAM Identity
+    #   Center enabled workgroups.
     #   @return [String]
     #
     # @!attribute [rw] customer_content_encryption_configuration

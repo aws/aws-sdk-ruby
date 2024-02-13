@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.437.0 (2024-01-29)
+------------------
+
+* Feature - EC2 Fleet customers who use attribute based instance-type selection can now intuitively define their Spot instances price protection limit as a percentage of the lowest priced On-Demand instance type.
+
+1.436.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.435.0 (2024-01-24)
+------------------
+
+* Feature - Introduced a new clientToken request parameter on CreateNetworkAcl and CreateRouteTable APIs. The clientToken parameter allows idempotent operations on the APIs.
+
+1.434.0 (2024-01-22)
+------------------
+
+* Feature - Documentation updates for Amazon EC2.
+
+1.433.0 (2024-01-11)
+------------------
+
+* Feature - This release adds support for adding an ElasticBlockStorage volume configurations in ECS RunTask/StartTask/CreateService/UpdateService APIs. The configuration allows for attaching EBS volumes to ECS Tasks.
+
 1.432.0 (2024-01-08)
 ------------------
 

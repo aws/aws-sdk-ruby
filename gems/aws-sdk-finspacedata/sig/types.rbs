@@ -1,0 +1,657 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::FinSpaceData
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateUserToPermissionGroupRequest
+      attr_accessor permission_group_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateUserToPermissionGroupResponse
+      attr_accessor status_code: ::Integer
+      SENSITIVE: []
+    end
+
+    class AwsCredentials
+      attr_accessor access_key_id: ::String
+      attr_accessor secret_access_key: ::String
+      attr_accessor session_token: ::String
+      attr_accessor expiration: ::Integer
+      SENSITIVE: [:secret_access_key, :session_token]
+    end
+
+    class ChangesetErrorInfo
+      attr_accessor error_message: ::String
+      attr_accessor error_category: ("VALIDATION" | "SERVICE_QUOTA_EXCEEDED" | "ACCESS_DENIED" | "RESOURCE_NOT_FOUND" | "THROTTLING" | "INTERNAL_SERVICE_EXCEPTION" | "CANCELLED" | "USER_RECOVERABLE")
+      SENSITIVE: []
+    end
+
+    class ChangesetSummary
+      attr_accessor changeset_id: ::String
+      attr_accessor changeset_arn: ::String
+      attr_accessor dataset_id: ::String
+      attr_accessor change_type: ("REPLACE" | "APPEND" | "MODIFY")
+      attr_accessor source_params: ::Hash[::String, ::String]
+      attr_accessor format_params: ::Hash[::String, ::String]
+      attr_accessor create_time: ::Integer
+      attr_accessor status: ("PENDING" | "FAILED" | "SUCCESS" | "RUNNING" | "STOP_REQUESTED")
+      attr_accessor error_info: Types::ChangesetErrorInfo
+      attr_accessor active_until_timestamp: ::Integer
+      attr_accessor active_from_timestamp: ::Integer
+      attr_accessor updates_changeset_id: ::String
+      attr_accessor updated_by_changeset_id: ::String
+      SENSITIVE: []
+    end
+
+    class ColumnDefinition
+      attr_accessor data_type: ("STRING" | "CHAR" | "INTEGER" | "TINYINT" | "SMALLINT" | "BIGINT" | "FLOAT" | "DOUBLE" | "DATE" | "DATETIME" | "BOOLEAN" | "BINARY")
+      attr_accessor column_name: ::String
+      attr_accessor column_description: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class CreateChangesetRequest
+      attr_accessor client_token: ::String
+      attr_accessor dataset_id: ::String
+      attr_accessor change_type: ("REPLACE" | "APPEND" | "MODIFY")
+      attr_accessor source_params: ::Hash[::String, ::String]
+      attr_accessor format_params: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateChangesetResponse
+      attr_accessor dataset_id: ::String
+      attr_accessor changeset_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDataViewRequest
+      attr_accessor client_token: ::String
+      attr_accessor dataset_id: ::String
+      attr_accessor auto_update: bool
+      attr_accessor sort_columns: ::Array[::String]
+      attr_accessor partition_columns: ::Array[::String]
+      attr_accessor as_of_timestamp: ::Integer
+      attr_accessor destination_type_params: Types::DataViewDestinationTypeParams
+      SENSITIVE: []
+    end
+
+    class CreateDataViewResponse
+      attr_accessor dataset_id: ::String
+      attr_accessor data_view_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDatasetRequest
+      attr_accessor client_token: ::String
+      attr_accessor dataset_title: ::String
+      attr_accessor kind: ("TABULAR" | "NON_TABULAR")
+      attr_accessor dataset_description: ::String
+      attr_accessor owner_info: Types::DatasetOwnerInfo
+      attr_accessor permission_group_params: Types::PermissionGroupParams
+      attr_accessor alias: ::String
+      attr_accessor schema_definition: Types::SchemaUnion
+      SENSITIVE: []
+    end
+
+    class CreateDatasetResponse
+      attr_accessor dataset_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePermissionGroupRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor application_permissions: ::Array[("CreateDataset" | "ManageClusters" | "ManageUsersAndGroups" | "ManageAttributeSets" | "ViewAuditData" | "AccessNotebooks" | "GetTemporaryCredentials")]
+      attr_accessor client_token: ::String
+      SENSITIVE: [:name, :description]
+    end
+
+    class CreatePermissionGroupResponse
+      attr_accessor permission_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateUserRequest
+      attr_accessor email_address: ::String
+      attr_accessor type: ("SUPER_USER" | "APP_USER")
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor api_access: ("ENABLED" | "DISABLED")
+      attr_accessor api_access_principal_arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: [:email_address, :first_name, :last_name]
+    end
+
+    class CreateUserResponse
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class Credentials
+      attr_accessor access_key_id: ::String
+      attr_accessor secret_access_key: ::String
+      attr_accessor session_token: ::String
+      SENSITIVE: []
+    end
+
+    class DataViewDestinationTypeParams
+      attr_accessor destination_type: ::String
+      attr_accessor s3_destination_export_file_format: ("PARQUET" | "DELIMITED_TEXT")
+      attr_accessor s3_destination_export_file_format_options: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DataViewErrorInfo
+      attr_accessor error_message: ::String
+      attr_accessor error_category: ("VALIDATION" | "SERVICE_QUOTA_EXCEEDED" | "ACCESS_DENIED" | "RESOURCE_NOT_FOUND" | "THROTTLING" | "INTERNAL_SERVICE_EXCEPTION" | "CANCELLED" | "USER_RECOVERABLE")
+      SENSITIVE: []
+    end
+
+    class DataViewSummary
+      attr_accessor data_view_id: ::String
+      attr_accessor data_view_arn: ::String
+      attr_accessor dataset_id: ::String
+      attr_accessor as_of_timestamp: ::Integer
+      attr_accessor partition_columns: ::Array[::String]
+      attr_accessor sort_columns: ::Array[::String]
+      attr_accessor status: ("RUNNING" | "STARTING" | "FAILED" | "CANCELLED" | "TIMEOUT" | "SUCCESS" | "PENDING" | "FAILED_CLEANUP_FAILED")
+      attr_accessor error_info: Types::DataViewErrorInfo
+      attr_accessor destination_type_properties: Types::DataViewDestinationTypeParams
+      attr_accessor auto_update: bool
+      attr_accessor create_time: ::Integer
+      attr_accessor last_modified_time: ::Integer
+      SENSITIVE: []
+    end
+
+    class Dataset
+      attr_accessor dataset_id: ::String
+      attr_accessor dataset_arn: ::String
+      attr_accessor dataset_title: ::String
+      attr_accessor kind: ("TABULAR" | "NON_TABULAR")
+      attr_accessor dataset_description: ::String
+      attr_accessor owner_info: Types::DatasetOwnerInfo
+      attr_accessor create_time: ::Integer
+      attr_accessor last_modified_time: ::Integer
+      attr_accessor schema_definition: Types::SchemaUnion
+      attr_accessor alias: ::String
+      SENSITIVE: []
+    end
+
+    class DatasetOwnerInfo
+      attr_accessor name: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor email: ::String
+      SENSITIVE: [:email]
+    end
+
+    class DeleteDatasetRequest
+      attr_accessor client_token: ::String
+      attr_accessor dataset_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDatasetResponse
+      attr_accessor dataset_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePermissionGroupRequest
+      attr_accessor permission_group_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePermissionGroupResponse
+      attr_accessor permission_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisableUserRequest
+      attr_accessor user_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisableUserResponse
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateUserFromPermissionGroupRequest
+      attr_accessor permission_group_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateUserFromPermissionGroupResponse
+      attr_accessor status_code: ::Integer
+      SENSITIVE: []
+    end
+
+    class EnableUserRequest
+      attr_accessor user_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class EnableUserResponse
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetChangesetRequest
+      attr_accessor dataset_id: ::String
+      attr_accessor changeset_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetChangesetResponse
+      attr_accessor changeset_id: ::String
+      attr_accessor changeset_arn: ::String
+      attr_accessor dataset_id: ::String
+      attr_accessor change_type: ("REPLACE" | "APPEND" | "MODIFY")
+      attr_accessor source_params: ::Hash[::String, ::String]
+      attr_accessor format_params: ::Hash[::String, ::String]
+      attr_accessor create_time: ::Integer
+      attr_accessor status: ("PENDING" | "FAILED" | "SUCCESS" | "RUNNING" | "STOP_REQUESTED")
+      attr_accessor error_info: Types::ChangesetErrorInfo
+      attr_accessor active_until_timestamp: ::Integer
+      attr_accessor active_from_timestamp: ::Integer
+      attr_accessor updates_changeset_id: ::String
+      attr_accessor updated_by_changeset_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataViewRequest
+      attr_accessor data_view_id: ::String
+      attr_accessor dataset_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataViewResponse
+      attr_accessor auto_update: bool
+      attr_accessor partition_columns: ::Array[::String]
+      attr_accessor dataset_id: ::String
+      attr_accessor as_of_timestamp: ::Integer
+      attr_accessor error_info: Types::DataViewErrorInfo
+      attr_accessor last_modified_time: ::Integer
+      attr_accessor create_time: ::Integer
+      attr_accessor sort_columns: ::Array[::String]
+      attr_accessor data_view_id: ::String
+      attr_accessor data_view_arn: ::String
+      attr_accessor destination_type_params: Types::DataViewDestinationTypeParams
+      attr_accessor status: ("RUNNING" | "STARTING" | "FAILED" | "CANCELLED" | "TIMEOUT" | "SUCCESS" | "PENDING" | "FAILED_CLEANUP_FAILED")
+      SENSITIVE: []
+    end
+
+    class GetDatasetRequest
+      attr_accessor dataset_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDatasetResponse
+      attr_accessor dataset_id: ::String
+      attr_accessor dataset_arn: ::String
+      attr_accessor dataset_title: ::String
+      attr_accessor kind: ("TABULAR" | "NON_TABULAR")
+      attr_accessor dataset_description: ::String
+      attr_accessor create_time: ::Integer
+      attr_accessor last_modified_time: ::Integer
+      attr_accessor schema_definition: Types::SchemaUnion
+      attr_accessor alias: ::String
+      attr_accessor status: ("PENDING" | "FAILED" | "SUCCESS" | "RUNNING")
+      SENSITIVE: []
+    end
+
+    class GetExternalDataViewAccessDetailsRequest
+      attr_accessor data_view_id: ::String
+      attr_accessor dataset_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetExternalDataViewAccessDetailsResponse
+      attr_accessor credentials: Types::AwsCredentials
+      attr_accessor s3_location: Types::S3Location
+      SENSITIVE: [:credentials]
+    end
+
+    class GetPermissionGroupRequest
+      attr_accessor permission_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPermissionGroupResponse
+      attr_accessor permission_group: Types::PermissionGroup
+      SENSITIVE: []
+    end
+
+    class GetProgrammaticAccessCredentialsRequest
+      attr_accessor duration_in_minutes: ::Integer
+      attr_accessor environment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetProgrammaticAccessCredentialsResponse
+      attr_accessor credentials: Types::Credentials
+      attr_accessor duration_in_minutes: ::Integer
+      SENSITIVE: [:credentials]
+    end
+
+    class GetUserRequest
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetUserResponse
+      attr_accessor user_id: ::String
+      attr_accessor status: ("CREATING" | "ENABLED" | "DISABLED")
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor email_address: ::String
+      attr_accessor type: ("SUPER_USER" | "APP_USER")
+      attr_accessor api_access: ("ENABLED" | "DISABLED")
+      attr_accessor api_access_principal_arn: ::String
+      attr_accessor create_time: ::Integer
+      attr_accessor last_enabled_time: ::Integer
+      attr_accessor last_disabled_time: ::Integer
+      attr_accessor last_modified_time: ::Integer
+      attr_accessor last_login_time: ::Integer
+      SENSITIVE: [:first_name, :last_name, :email_address]
+    end
+
+    class GetWorkingLocationRequest
+      attr_accessor location_type: ("INGESTION" | "SAGEMAKER")
+      SENSITIVE: []
+    end
+
+    class GetWorkingLocationResponse
+      attr_accessor s3_uri: ::String
+      attr_accessor s3_path: ::String
+      attr_accessor s3_bucket: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListChangesetsRequest
+      attr_accessor dataset_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChangesetsResponse
+      attr_accessor changesets: ::Array[Types::ChangesetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataViewsRequest
+      attr_accessor dataset_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDataViewsResponse
+      attr_accessor next_token: ::String
+      attr_accessor data_views: ::Array[Types::DataViewSummary]
+      SENSITIVE: []
+    end
+
+    class ListDatasetsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDatasetsResponse
+      attr_accessor datasets: ::Array[Types::Dataset]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPermissionGroupsByUserRequest
+      attr_accessor user_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPermissionGroupsByUserResponse
+      attr_accessor permission_groups: ::Array[Types::PermissionGroupByUser]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPermissionGroupsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPermissionGroupsResponse
+      attr_accessor permission_groups: ::Array[Types::PermissionGroup]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUsersByPermissionGroupRequest
+      attr_accessor permission_group_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListUsersByPermissionGroupResponse
+      attr_accessor users: ::Array[Types::UserByPermissionGroup]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUsersRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListUsersResponse
+      attr_accessor users: ::Array[Types::User]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class PermissionGroup
+      attr_accessor permission_group_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor application_permissions: ::Array[("CreateDataset" | "ManageClusters" | "ManageUsersAndGroups" | "ManageAttributeSets" | "ViewAuditData" | "AccessNotebooks" | "GetTemporaryCredentials")]
+      attr_accessor create_time: ::Integer
+      attr_accessor last_modified_time: ::Integer
+      attr_accessor membership_status: ("ADDITION_IN_PROGRESS" | "ADDITION_SUCCESS" | "REMOVAL_IN_PROGRESS")
+      SENSITIVE: [:name, :description]
+    end
+
+    class PermissionGroupByUser
+      attr_accessor permission_group_id: ::String
+      attr_accessor name: ::String
+      attr_accessor membership_status: ("ADDITION_IN_PROGRESS" | "ADDITION_SUCCESS" | "REMOVAL_IN_PROGRESS")
+      SENSITIVE: [:name]
+    end
+
+    class PermissionGroupParams
+      attr_accessor permission_group_id: ::String
+      attr_accessor dataset_permissions: ::Array[Types::ResourcePermission]
+      SENSITIVE: []
+    end
+
+    class ResetUserPasswordRequest
+      attr_accessor user_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class ResetUserPasswordResponse
+      attr_accessor user_id: ::String
+      attr_accessor temporary_password: ::String
+      SENSITIVE: [:temporary_password]
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class ResourcePermission
+      attr_accessor permission: ::String
+      SENSITIVE: []
+    end
+
+    class S3Location
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class SchemaDefinition
+      attr_accessor columns: ::Array[Types::ColumnDefinition]
+      attr_accessor primary_key_columns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SchemaUnion
+      attr_accessor tabular_schema_config: Types::SchemaDefinition
+      SENSITIVE: []
+    end
+
+    class ThrottlingException < Aws::EmptyStructure
+    end
+
+    class UpdateChangesetRequest
+      attr_accessor client_token: ::String
+      attr_accessor dataset_id: ::String
+      attr_accessor changeset_id: ::String
+      attr_accessor source_params: ::Hash[::String, ::String]
+      attr_accessor format_params: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateChangesetResponse
+      attr_accessor changeset_id: ::String
+      attr_accessor dataset_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDatasetRequest
+      attr_accessor client_token: ::String
+      attr_accessor dataset_id: ::String
+      attr_accessor dataset_title: ::String
+      attr_accessor kind: ("TABULAR" | "NON_TABULAR")
+      attr_accessor dataset_description: ::String
+      attr_accessor alias: ::String
+      attr_accessor schema_definition: Types::SchemaUnion
+      SENSITIVE: []
+    end
+
+    class UpdateDatasetResponse
+      attr_accessor dataset_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePermissionGroupRequest
+      attr_accessor permission_group_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor application_permissions: ::Array[("CreateDataset" | "ManageClusters" | "ManageUsersAndGroups" | "ManageAttributeSets" | "ViewAuditData" | "AccessNotebooks" | "GetTemporaryCredentials")]
+      attr_accessor client_token: ::String
+      SENSITIVE: [:name, :description]
+    end
+
+    class UpdatePermissionGroupResponse
+      attr_accessor permission_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateUserRequest
+      attr_accessor user_id: ::String
+      attr_accessor type: ("SUPER_USER" | "APP_USER")
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor api_access: ("ENABLED" | "DISABLED")
+      attr_accessor api_access_principal_arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: [:first_name, :last_name]
+    end
+
+    class UpdateUserResponse
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class User
+      attr_accessor user_id: ::String
+      attr_accessor status: ("CREATING" | "ENABLED" | "DISABLED")
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor email_address: ::String
+      attr_accessor type: ("SUPER_USER" | "APP_USER")
+      attr_accessor api_access: ("ENABLED" | "DISABLED")
+      attr_accessor api_access_principal_arn: ::String
+      attr_accessor create_time: ::Integer
+      attr_accessor last_enabled_time: ::Integer
+      attr_accessor last_disabled_time: ::Integer
+      attr_accessor last_modified_time: ::Integer
+      attr_accessor last_login_time: ::Integer
+      SENSITIVE: [:first_name, :last_name, :email_address]
+    end
+
+    class UserByPermissionGroup
+      attr_accessor user_id: ::String
+      attr_accessor status: ("CREATING" | "ENABLED" | "DISABLED")
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor email_address: ::String
+      attr_accessor type: ("SUPER_USER" | "APP_USER")
+      attr_accessor api_access: ("ENABLED" | "DISABLED")
+      attr_accessor api_access_principal_arn: ::String
+      attr_accessor membership_status: ("ADDITION_IN_PROGRESS" | "ADDITION_SUCCESS" | "REMOVAL_IN_PROGRESS")
+      SENSITIVE: [:first_name, :last_name, :email_address]
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+  end
+end

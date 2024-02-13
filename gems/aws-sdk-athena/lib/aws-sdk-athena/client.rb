@@ -1945,10 +1945,12 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Imports a single `ipynb` file to a Spark enabled workgroup. The
-    # maximum file size that can be imported is 10 megabytes. If an `ipynb`
-    # file with the same name already exists in the workgroup, throws an
-    # error.
+    # Imports a single `ipynb` file to a Spark enabled workgroup. To import
+    # the notebook, the request must specify a value for either `Payload` or
+    # `NoteBookS3LocationUri`. If neither is specified or both are
+    # specified, an `InvalidRequestException` occurs. The maximum file size
+    # that can be imported is 10 megabytes. If an `ipynb` file with the same
+    # name already exists in the workgroup, throws an error.
     #
     # @option params [required, String] :work_group
     #   The name of the Spark enabled workgroup to import the notebook to.
@@ -1956,11 +1958,16 @@ module Aws::Athena
     # @option params [required, String] :name
     #   The name of the notebook to import.
     #
-    # @option params [required, String] :payload
-    #   The notebook content to be imported.
+    # @option params [String] :payload
+    #   The notebook content to be imported. The payload must be in `ipynb`
+    #   format.
     #
     # @option params [required, String] :type
     #   The notebook content type. Currently, the only valid type is `IPYNB`.
+    #
+    # @option params [String] :notebook_s3_location_uri
+    #   A URI that specifies the Amazon S3 location of a notebook file in
+    #   `ipynb` format.
     #
     # @option params [String] :client_request_token
     #   A unique case-sensitive string used to ensure the request to import
@@ -1981,8 +1988,9 @@ module Aws::Athena
     #   resp = client.import_notebook({
     #     work_group: "WorkGroupName", # required
     #     name: "NotebookName", # required
-    #     payload: "Payload", # required
+    #     payload: "Payload",
     #     type: "IPYNB", # required, accepts IPYNB
+    #     notebook_s3_location_uri: "S3Uri",
     #     client_request_token: "ClientRequestToken",
     #   })
     #
@@ -3650,7 +3658,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -644,28 +644,34 @@ module Aws::Personalize
     #
     # **Minimum Provisioned TPS and Auto-Scaling**
     #
-    # A high `minProvisionedTPS` will increase your bill. We recommend
+    # A high `minProvisionedTPS` will increase your cost. We recommend
     # starting with 1 for `minProvisionedTPS` (the default). Track your
     # usage using Amazon CloudWatch metrics, and increase the
     # `minProvisionedTPS` as necessary.
     #
-    # A transaction is a single `GetRecommendations` or
-    # `GetPersonalizedRanking` call. Transactions per second (TPS) is the
-    # throughput and unit of billing for Amazon Personalize. The minimum
-    # provisioned TPS (`minProvisionedTPS`) specifies the baseline
-    # throughput provisioned by Amazon Personalize, and thus, the minimum
-    # billing charge.
+    # When you create an Amazon Personalize campaign, you can specify the
+    # minimum provisioned transactions per second (`minProvisionedTPS`) for
+    # the campaign. This is the baseline transaction throughput for the
+    # campaign provisioned by Amazon Personalize. It sets the minimum
+    # billing charge for the campaign while it is active. A transaction is a
+    # single `GetRecommendations` or `GetPersonalizedRanking` request. The
+    # default `minProvisionedTPS` is 1.
     #
-    # If your TPS increases beyond `minProvisionedTPS`, Amazon Personalize
-    # auto-scales the provisioned capacity up and down, but never below
-    # `minProvisionedTPS`. There's a short time delay while the capacity is
-    # increased that might cause loss of transactions.
+    # If your TPS increases beyond the `minProvisionedTPS`, Amazon
+    # Personalize auto-scales the provisioned capacity up and down, but
+    # never below `minProvisionedTPS`. There's a short time delay while the
+    # capacity is increased that might cause loss of transactions. When your
+    # traffic reduces, capacity returns to the `minProvisionedTPS`.
     #
-    # The actual TPS used is calculated as the average requests/second
-    # within a 5-minute window. You pay for maximum of either the minimum
-    # provisioned TPS or the actual TPS. We recommend starting with a low
-    # `minProvisionedTPS`, track your usage using Amazon CloudWatch metrics,
-    # and then increase the `minProvisionedTPS` as necessary.
+    # You are charged for the the minimum provisioned TPS or, if your
+    # requests exceed the `minProvisionedTPS`, the actual TPS. The actual
+    # TPS is the total number of recommendation requests you make. We
+    # recommend starting with a low `minProvisionedTPS`, track your usage
+    # using Amazon CloudWatch metrics, and then increase the
+    # `minProvisionedTPS` as necessary.
+    #
+    # For more information about campaign costs, see [Amazon Personalize
+    # pricing][3].
     #
     # **Status**
     #
@@ -676,7 +682,7 @@ module Aws::Personalize
     #
     # * DELETE PENDING &gt; DELETE IN\_PROGRESS
     #
-    # To get the campaign status, call [DescribeCampaign][3].
+    # To get the campaign status, call [DescribeCampaign][4].
     #
     # <note markdown="1"> Wait until the `status` of the campaign is `ACTIVE` before asking the
     # campaign for recommendations.
@@ -685,22 +691,23 @@ module Aws::Personalize
     #
     # **Related APIs**
     #
-    # * [ListCampaigns][4]
+    # * [ListCampaigns][5]
     #
-    # * [DescribeCampaign][3]
+    # * [DescribeCampaign][4]
     #
-    # * [UpdateCampaign][5]
+    # * [UpdateCampaign][6]
     #
-    # * [DeleteCampaign][6]
+    # * [DeleteCampaign][7]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html
     # [2]: https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetPersonalizedRanking.html
-    # [3]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html
-    # [4]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html
-    # [5]: https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateCampaign.html
-    # [6]: https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteCampaign.html
+    # [3]: https://aws.amazon.com/personalize/pricing/
+    # [4]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html
+    # [5]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html
+    # [6]: https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateCampaign.html
+    # [7]: https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteCampaign.html
     #
     # @option params [required, String] :name
     #   A name for the new campaign. The campaign name must be unique within
@@ -1721,7 +1728,7 @@ module Aws::Personalize
     # @option params [Boolean] :perform_auto_ml
     #   We don't recommend enabling automated machine learning. Instead,
     #   match your use case to the available Amazon Personalize recipes. For
-    #   more information, see [Determining your use case.][1]
+    #   more information, see [Choosing a recipe][1].
     #
     #   Whether to perform automated machine learning (AutoML). The default is
     #   `false`. For this case, you must specify `recipeArn`.
@@ -1735,11 +1742,17 @@ module Aws::Personalize
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/determining-use-case.html
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/working-with-predefined-recipes.html
     #
     # @option params [String] :recipe_arn
-    #   The ARN of the recipe to use for model training. This is required when
-    #   `performAutoML` is false.
+    #   The Amazon Resource Name (ARN) of the recipe to use for model
+    #   training. This is required when `performAutoML` is false. For
+    #   information about different Amazon Personalize recipes and their ARNs,
+    #   see [Choosing a recipe][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/working-with-predefined-recipes.html
     #
     # @option params [required, String] :dataset_group_arn
     #   The Amazon Resource Name (ARN) of the dataset group that provides the
@@ -4397,7 +4410,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

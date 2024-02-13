@@ -34,6 +34,7 @@
     "GetDomainName": "<p>Retrieves a custom <code>DomainName</code> object.</p>",
     "GetFunction": "<p>Get a <code>Function</code>.</p>",
     "GetGraphqlApi": "<p>Retrieves a <code>GraphqlApi</code> object.</p>",
+    "GetGraphqlApiEnvironmentVariables": "<p>Retrieves the list of environmental variable key-value pairs associated with an API by its ID value.</p>",
     "GetIntrospectionSchema": "<p>Retrieves the introspection schema for a GraphQL API.</p>",
     "GetResolver": "<p>Retrieves a <code>Resolver</code> object.</p>",
     "GetSchemaCreationStatus": "<p>Retrieves the current status of a schema creation operation.</p>",
@@ -50,6 +51,7 @@
     "ListTagsForResource": "<p>Lists the tags for a resource.</p>",
     "ListTypes": "<p>Lists the types for a given API.</p>",
     "ListTypesByAssociation": "<p>Lists <code>Type</code> objects by the source API association ID.</p>",
+    "PutGraphqlApiEnvironmentVariables": "<p>Creates a list of environmental variables in an API by its ID value. </p> <p>When creating an environmental variable, it must follow the constraints below:</p> <ul> <li> <p>Both JavaScript and VTL templates support environmental variables.</p> </li> <li> <p>Environmental variables are not evaluated before function invocation.</p> </li> <li> <p>Environmental variables only support string values.</p> </li> <li> <p>Any defined value in an environmental variable is considered a string literal and not expanded.</p> </li> <li> <p>Variable evaluations should ideally be performed in the function code.</p> </li> </ul> <p>When creating an environmental variable key-value pair, it must follow the additional constraints below:</p> <ul> <li> <p>Keys must begin with a letter.</p> </li> <li> <p>Keys must be at least two characters long.</p> </li> <li> <p>Keys can only contain letters, numbers, and the underscore character (_).</p> </li> <li> <p>Values can be up to 512 characters long.</p> </li> <li> <p>You can configure up to 50 key-value pairs in a GraphQL API.</p> </li> </ul> <p>You can create a list of environmental variables by adding it to the <code>environmentVariables</code> payload as a list in the format <code>{\"key1\":\"value1\",\"key2\":\"value2\", …}</code>. Note that each call of the <code>PutGraphqlApiEnvironmentVariables</code> action will result in the overwriting of the existing environmental variable list of that API. This means the existing environmental variables will be lost. To avoid this, you must include all existing and new environmental variables in the list each time you call this action.</p>",
     "StartDataSourceIntrospection": "<p>Creates a new introspection. Returns the <code>introspectionId</code> of the new introspection after its creation. </p>",
     "StartSchemaCreation": "<p>Adds a new schema to your GraphQL API.</p> <p>This operation is asynchronous. Use to determine when it has completed.</p>",
     "StartSchemaMerge": "<p>Initiates a merge operation. Returns a status that shows the result of the merge operation.</p>",
@@ -270,6 +272,14 @@
       "base": null,
       "refs": {
         "GetIntrospectionSchemaRequest$includeDirectives": "<p>A flag that specifies whether the schema introspection should contain directives.</p>"
+      }
+    },
+    "CacheHealthMetricsConfig": {
+      "base": null,
+      "refs": {
+        "ApiCache$healthMetricsConfig": "<p>Controls how cache health metrics will be emitted to CloudWatch. Cache health metrics include:</p> <ul> <li> <p>NetworkBandwidthOutAllowanceExceeded: The network packets dropped because the throughput exceeded the aggregated bandwidth limit. This is useful for diagnosing bottlenecks in a cache configuration.</p> </li> <li> <p>EngineCPUUtilization: The CPU utilization (percentage) allocated to the Redis process. This is useful for diagnosing bottlenecks in a cache configuration.</p> </li> </ul> <p>Metrics will be recorded by API ID. You can set the value to <code>ENABLED</code> or <code>DISABLED</code>.</p>",
+        "CreateApiCacheRequest$healthMetricsConfig": "<p>Controls how cache health metrics will be emitted to CloudWatch. Cache health metrics include:</p> <ul> <li> <p>NetworkBandwidthOutAllowanceExceeded: The number of times a specified GraphQL operation was called.</p> </li> <li> <p>EngineCPUUtilization: The number of GraphQL errors that occurred during a specified GraphQL operation.</p> </li> </ul> <p>Metrics will be recorded by API ID. You can set the value to <code>ENABLED</code> or <code>DISABLED</code>.</p>",
+        "UpdateApiCacheRequest$healthMetricsConfig": "<p>Controls how cache health metrics will be emitted to CloudWatch. Cache health metrics include:</p> <ul> <li> <p>NetworkBandwidthOutAllowanceExceeded: The number of times a specified GraphQL operation was called.</p> </li> <li> <p>EngineCPUUtilization: The number of GraphQL errors that occurred during a specified GraphQL operation.</p> </li> </ul> <p>Metrics will be recorded by API ID. You can set the value to <code>ENABLED</code> or <code>DISABLED</code>.</p>"
       }
     },
     "CachingConfig": {
@@ -530,6 +540,20 @@
         "StartDataSourceIntrospectionResponse$introspectionStatus": "<p>The status of the introspection during creation. By default, when a new instrospection has been created, the status will be set to <code>PROCESSING</code>. Once the operation has been completed, the status will change to <code>SUCCESS</code> or <code>FAILED</code> depending on how the data was parsed. A <code>FAILED</code> operation will return an error and its details as an <code>introspectionStatusDetail</code>.</p>"
       }
     },
+    "DataSourceLevelMetricsBehavior": {
+      "base": null,
+      "refs": {
+        "EnhancedMetricsConfig$dataSourceLevelMetricsBehavior": "<p>Controls how data source metrics will be emitted to CloudWatch. Data source metrics include:</p> <ul> <li> <p>Requests: The number of invocations that occured during a request.</p> </li> <li> <p>Latency: The time to complete a data source invocation.</p> </li> <li> <p>Errors: The number of errors that occurred during a data source invocation.</p> </li> </ul> <p>These metrics can be emitted to CloudWatch per data source or for all data sources in the request. Metrics will be recorded by API ID and data source name. <code>dataSourceLevelMetricsBehavior</code> accepts one of these values at a time:</p> <ul> <li> <p> <code>FULL_REQUEST_DATA_SOURCE_METRICS</code>: Records and emits metric data for all data sources in the request.</p> </li> <li> <p> <code>PER_DATA_SOURCE_METRICS</code>: Records and emits metric data for data sources that have the <code>metricConfig</code> value set to <code>ENABLED</code>.</p> </li> </ul>"
+      }
+    },
+    "DataSourceLevelMetricsConfig": {
+      "base": null,
+      "refs": {
+        "CreateDataSourceRequest$metricsConfig": "<p>Enables or disables enhanced data source metrics for specified data sources. Note that <code>metricsConfig</code> won't be used unless the <code>dataSourceLevelMetricsBehavior</code> value is set to <code>PER_DATA_SOURCE_METRICS</code>. If the <code>dataSourceLevelMetricsBehavior</code> is set to <code>FULL_REQUEST_DATA_SOURCE_METRICS</code> instead, <code>metricsConfig</code> will be ignored. However, you can still set its value.</p> <p> <code>metricsConfig</code> can be <code>ENABLED</code> or <code>DISABLED</code>.</p>",
+        "DataSource$metricsConfig": "<p>Enables or disables enhanced data source metrics for specified data sources. Note that <code>metricsConfig</code> won't be used unless the <code>dataSourceLevelMetricsBehavior</code> value is set to <code>PER_DATA_SOURCE_METRICS</code>. If the <code>dataSourceLevelMetricsBehavior</code> is set to <code>FULL_REQUEST_DATA_SOURCE_METRICS</code> instead, <code>metricsConfig</code> will be ignored. However, you can still set its value.</p> <p> <code>metricsConfig</code> can be <code>ENABLED</code> or <code>DISABLED</code>.</p>",
+        "UpdateDataSourceRequest$metricsConfig": "<p>Enables or disables enhanced data source metrics for specified data sources. Note that <code>metricsConfig</code> won't be used unless the <code>dataSourceLevelMetricsBehavior</code> value is set to <code>PER_DATA_SOURCE_METRICS</code>. If the <code>dataSourceLevelMetricsBehavior</code> is set to <code>FULL_REQUEST_DATA_SOURCE_METRICS</code> instead, <code>metricsConfig</code> will be ignored. However, you can still set its value.</p> <p> <code>metricsConfig</code> can be <code>ENABLED</code> or <code>DISABLED</code>.</p>"
+      }
+    },
     "DataSourceType": {
       "base": null,
       "refs": {
@@ -725,6 +749,34 @@
         "UpdateDataSourceRequest$elasticsearchConfig": "<p>The new OpenSearch configuration.</p> <p>As of September 2021, Amazon Elasticsearch service is Amazon OpenSearch Service. This configuration is deprecated. Instead, use <a>UpdateDataSourceRequest$openSearchServiceConfig</a> to update an OpenSearch data source.</p>"
       }
     },
+    "EnhancedMetricsConfig": {
+      "base": "<p>Enables and controls the enhanced metrics feature. Enhanced metrics emit granular data on API usage and performance such as AppSync request and error counts, latency, and cache hits/misses. All enhanced metric data is sent to your CloudWatch account, and you can configure the types of data that will be sent. </p> <p>Enhanced metrics can be configured at the resolver, data source, and operation levels. <code>EnhancedMetricsConfig</code> contains three required parameters, each controlling one of these categories:</p> <ol> <li> <p> <code>resolverLevelMetricsBehavior</code>: Controls how resolver metrics will be emitted to CloudWatch. Resolver metrics include:</p> <ul> <li> <p>GraphQL errors: The number of GraphQL errors that occurred.</p> </li> <li> <p>Requests: The number of invocations that occurred during a request. </p> </li> <li> <p>Latency: The time to complete a resolver invocation.</p> </li> <li> <p>Cache hits: The number of cache hits during a request.</p> </li> <li> <p>Cache misses: The number of cache misses during a request.</p> </li> </ul> <p>These metrics can be emitted to CloudWatch per resolver or for all resolvers in the request. Metrics will be recorded by API ID and resolver name. <code>resolverLevelMetricsBehavior</code> accepts one of these values at a time:</p> <ul> <li> <p> <code>FULL_REQUEST_RESOLVER_METRICS</code>: Records and emits metric data for all resolvers in the request.</p> </li> <li> <p> <code>PER_RESOLVER_METRICS</code>: Records and emits metric data for resolvers that have the <code>metricConfig</code> value set to <code>ENABLED</code>.</p> </li> </ul> </li> <li> <p> <code>dataSourceLevelMetricsBehavior</code>: Controls how data source metrics will be emitted to CloudWatch. Data source metrics include:</p> <ul> <li> <p>Requests: The number of invocations that occured during a request.</p> </li> <li> <p>Latency: The time to complete a data source invocation.</p> </li> <li> <p>Errors: The number of errors that occurred during a data source invocation.</p> </li> </ul> <p>These metrics can be emitted to CloudWatch per data source or for all data sources in the request. Metrics will be recorded by API ID and data source name. <code>dataSourceLevelMetricsBehavior</code> accepts one of these values at a time:</p> <ul> <li> <p> <code>FULL_REQUEST_DATA_SOURCE_METRICS</code>: Records and emits metric data for all data sources in the request.</p> </li> <li> <p> <code>PER_DATA_SOURCE_METRICS</code>: Records and emits metric data for data sources that have the <code>metricConfig</code> value set to <code>ENABLED</code>.</p> </li> </ul> </li> <li> <p> <code>operationLevelMetricsConfig</code>: Controls how operation metrics will be emitted to CloudWatch. Operation metrics include:</p> <ul> <li> <p>Requests: The number of times a specified GraphQL operation was called.</p> </li> <li> <p>GraphQL errors: The number of GraphQL errors that occurred during a specified GraphQL operation.</p> </li> </ul> <p>Metrics will be recorded by API ID and operation name. You can set the value to <code>ENABLED</code> or <code>DISABLED</code>.</p> </li> </ol>",
+      "refs": {
+        "CreateGraphqlApiRequest$enhancedMetricsConfig": "<p>The <code>enhancedMetricsConfig</code> object.</p>",
+        "GraphqlApi$enhancedMetricsConfig": "<p>The <code>enhancedMetricsConfig</code> object.</p>",
+        "UpdateGraphqlApiRequest$enhancedMetricsConfig": "<p>The <code>enhancedMetricsConfig</code> object.</p>"
+      }
+    },
+    "EnvironmentVariableKey": {
+      "base": null,
+      "refs": {
+        "EnvironmentVariableMap$key": null
+      }
+    },
+    "EnvironmentVariableMap": {
+      "base": null,
+      "refs": {
+        "GetGraphqlApiEnvironmentVariablesResponse$environmentVariables": "<p>The payload containing each environmental variable in the <code>\"key\" : \"value\"</code> format.</p>",
+        "PutGraphqlApiEnvironmentVariablesRequest$environmentVariables": "<p>The list of environmental variables to add to the API.</p> <p>When creating an environmental variable key-value pair, it must follow the additional constraints below:</p> <ul> <li> <p>Keys must begin with a letter.</p> </li> <li> <p>Keys must be at least two characters long.</p> </li> <li> <p>Keys can only contain letters, numbers, and the underscore character (_).</p> </li> <li> <p>Values can be up to 512 characters long.</p> </li> <li> <p>You can configure up to 50 key-value pairs in a GraphQL API.</p> </li> </ul> <p>You can create a list of environmental variables by adding it to the <code>environmentVariables</code> payload as a list in the format <code>{\"key1\":\"value1\",\"key2\":\"value2\", …}</code>. Note that each call of the <code>PutGraphqlApiEnvironmentVariables</code> action will result in the overwriting of the existing environmental variable list of that API. This means the existing environmental variables will be lost. To avoid this, you must include all existing and new environmental variables in the list each time you call this action.</p>",
+        "PutGraphqlApiEnvironmentVariablesResponse$environmentVariables": "<p>The payload containing each environmental variable in the <code>\"key\" : \"value\"</code> format.</p>"
+      }
+    },
+    "EnvironmentVariableValue": {
+      "base": null,
+      "refs": {
+        "EnvironmentVariableMap$value": null
+      }
+    },
     "ErrorDetail": {
       "base": "<p>Contains the list of errors generated. When using JavaScript, this will apply to the request or response function evaluation.</p>",
       "refs": {
@@ -875,6 +927,16 @@
       }
     },
     "GetFunctionResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "GetGraphqlApiEnvironmentVariablesRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "GetGraphqlApiEnvironmentVariablesResponse": {
       "base": null,
       "refs": {
       }
@@ -1245,6 +1307,12 @@
         "UpdateDataSourceRequest$openSearchServiceConfig": "<p>The new OpenSearch configuration.</p>"
       }
     },
+    "OperationLevelMetricsConfig": {
+      "base": null,
+      "refs": {
+        "EnhancedMetricsConfig$operationLevelMetricsConfig": "<p> Controls how operation metrics will be emitted to CloudWatch. Operation metrics include:</p> <ul> <li> <p>Requests: The number of times a specified GraphQL operation was called.</p> </li> <li> <p>GraphQL errors: The number of GraphQL errors that occurred during a specified GraphQL operation.</p> </li> </ul> <p>Metrics will be recorded by API ID and operation name. You can set the value to <code>ENABLED</code> or <code>DISABLED</code>.</p>"
+      }
+    },
     "OutputType": {
       "base": null,
       "refs": {
@@ -1290,6 +1358,16 @@
         "CreateResolverRequest$pipelineConfig": "<p>The <code>PipelineConfig</code>.</p>",
         "Resolver$pipelineConfig": "<p>The <code>PipelineConfig</code>.</p>",
         "UpdateResolverRequest$pipelineConfig": "<p>The <code>PipelineConfig</code>.</p>"
+      }
+    },
+    "PutGraphqlApiEnvironmentVariablesRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "PutGraphqlApiEnvironmentVariablesResponse": {
+      "base": null,
+      "refs": {
       }
     },
     "QueryDepthLimit": {
@@ -1367,6 +1445,20 @@
         "CreateResolverRequest$kind": "<p>The resolver type.</p> <ul> <li> <p> <b>UNIT</b>: A UNIT resolver type. A UNIT resolver is the default resolver type. You can use a UNIT resolver to run a GraphQL query against a single data source.</p> </li> <li> <p> <b>PIPELINE</b>: A PIPELINE resolver type. You can use a PIPELINE resolver to invoke a series of <code>Function</code> objects in a serial manner. You can use a pipeline resolver to run a GraphQL query against multiple data sources.</p> </li> </ul>",
         "Resolver$kind": "<p>The resolver type.</p> <ul> <li> <p> <b>UNIT</b>: A UNIT resolver type. A UNIT resolver is the default resolver type. You can use a UNIT resolver to run a GraphQL query against a single data source.</p> </li> <li> <p> <b>PIPELINE</b>: A PIPELINE resolver type. You can use a PIPELINE resolver to invoke a series of <code>Function</code> objects in a serial manner. You can use a pipeline resolver to run a GraphQL query against multiple data sources.</p> </li> </ul>",
         "UpdateResolverRequest$kind": "<p>The resolver type.</p> <ul> <li> <p> <b>UNIT</b>: A UNIT resolver type. A UNIT resolver is the default resolver type. You can use a UNIT resolver to run a GraphQL query against a single data source.</p> </li> <li> <p> <b>PIPELINE</b>: A PIPELINE resolver type. You can use a PIPELINE resolver to invoke a series of <code>Function</code> objects in a serial manner. You can use a pipeline resolver to run a GraphQL query against multiple data sources.</p> </li> </ul>"
+      }
+    },
+    "ResolverLevelMetricsBehavior": {
+      "base": null,
+      "refs": {
+        "EnhancedMetricsConfig$resolverLevelMetricsBehavior": "<p>Controls how resolver metrics will be emitted to CloudWatch. Resolver metrics include:</p> <ul> <li> <p>GraphQL errors: The number of GraphQL errors that occurred.</p> </li> <li> <p>Requests: The number of invocations that occurred during a request. </p> </li> <li> <p>Latency: The time to complete a resolver invocation.</p> </li> <li> <p>Cache hits: The number of cache hits during a request.</p> </li> <li> <p>Cache misses: The number of cache misses during a request.</p> </li> </ul> <p>These metrics can be emitted to CloudWatch per resolver or for all resolvers in the request. Metrics will be recorded by API ID and resolver name. <code>resolverLevelMetricsBehavior</code> accepts one of these values at a time:</p> <ul> <li> <p> <code>FULL_REQUEST_RESOLVER_METRICS</code>: Records and emits metric data for all resolvers in the request.</p> </li> <li> <p> <code>PER_RESOLVER_METRICS</code>: Records and emits metric data for resolvers that have the <code>metricConfig</code> value set to <code>ENABLED</code>.</p> </li> </ul>"
+      }
+    },
+    "ResolverLevelMetricsConfig": {
+      "base": null,
+      "refs": {
+        "CreateResolverRequest$metricsConfig": "<p>Enables or disables enhanced resolver metrics for specified resolvers. Note that <code>metricsConfig</code> won't be used unless the <code>resolverLevelMetricsBehavior</code> value is set to <code>PER_RESOLVER_METRICS</code>. If the <code>resolverLevelMetricsBehavior</code> is set to <code>FULL_REQUEST_RESOLVER_METRICS</code> instead, <code>metricsConfig</code> will be ignored. However, you can still set its value.</p> <p> <code>metricsConfig</code> can be <code>ENABLED</code> or <code>DISABLED</code>.</p>",
+        "Resolver$metricsConfig": "<p>Enables or disables enhanced resolver metrics for specified resolvers. Note that <code>metricsConfig</code> won't be used unless the <code>resolverLevelMetricsBehavior</code> value is set to <code>PER_RESOLVER_METRICS</code>. If the <code>resolverLevelMetricsBehavior</code> is set to <code>FULL_REQUEST_RESOLVER_METRICS</code> instead, <code>metricsConfig</code> will be ignored. However, you can still set its value.</p> <p> <code>metricsConfig</code> can be <code>ENABLED</code> or <code>DISABLED</code>.</p>",
+        "UpdateResolverRequest$metricsConfig": "<p>Enables or disables enhanced resolver metrics for specified resolvers. Note that <code>metricsConfig</code> won't be used unless the <code>resolverLevelMetricsBehavior</code> value is set to <code>PER_RESOLVER_METRICS</code>. If the <code>resolverLevelMetricsBehavior</code> is set to <code>FULL_REQUEST_RESOLVER_METRICS</code> instead, <code>metricsConfig</code> will be ignored. However, you can still set its value.</p> <p> <code>metricsConfig</code> can be <code>ENABLED</code> or <code>DISABLED</code>.</p>"
       }
     },
     "Resolvers": {
@@ -1589,6 +1681,7 @@
         "GetDataSourceIntrospectionResponse$introspectionStatusDetail": "<p>The error detail field. When a <code>FAILED</code> <code>introspectionStatus</code> is returned, the <code>introspectionStatusDetail</code> will also return the exact error that was generated during the operation.</p>",
         "GetDataSourceRequest$apiId": "<p>The API ID.</p>",
         "GetFunctionRequest$apiId": "<p>The GraphQL API ID.</p>",
+        "GetGraphqlApiEnvironmentVariablesRequest$apiId": "<p>The ID of the API from which the environmental variable list will be retrieved.</p>",
         "GetGraphqlApiRequest$apiId": "<p>The API ID for the GraphQL API.</p>",
         "GetIntrospectionSchemaRequest$apiId": "<p>The API ID.</p>",
         "GetResolverRequest$apiId": "<p>The API ID.</p>",
@@ -1630,6 +1723,7 @@
         "OpenIDConnectConfig$clientId": "<p>The client identifier of the relying party at the OpenID identity provider. This identifier is typically obtained when the relying party is registered with the OpenID identity provider. You can specify a regular expression so that AppSync can validate against multiple client identifiers at a time.</p>",
         "OpenSearchServiceDataSourceConfig$endpoint": "<p>The endpoint.</p>",
         "OpenSearchServiceDataSourceConfig$awsRegion": "<p>The Amazon Web Services Region.</p>",
+        "PutGraphqlApiEnvironmentVariablesRequest$apiId": "<p>The ID of the API to which the environmental variable list will be written.</p>",
         "RdsHttpEndpointConfig$awsRegion": "<p>Amazon Web Services Region for Amazon RDS HTTP endpoint.</p>",
         "RdsHttpEndpointConfig$dbClusterIdentifier": "<p>Amazon RDS cluster Amazon Resource Name (ARN).</p>",
         "RdsHttpEndpointConfig$databaseName": "<p>Logical database name.</p>",

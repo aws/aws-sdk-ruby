@@ -2433,9 +2433,8 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # (Resource record sets only): A complex type that lets you control how
-    # Amazon Route 53 responds to DNS queries based on the geographic origin
-    # of the query and your resources. Only one of , `LocalZoneGroup`,
+    # (Resource record sets only): A complex type that lets you specify
+    # where your resources are located. Only one of `LocalZoneGroup`,
     # `Coordinates`, or `Amazon Web ServicesRegion` is allowed per request
     # at a time.
     #

@@ -3069,6 +3069,8 @@ module Aws::EC2
     #   * {Types::VolumeAttachment#state #state} => String
     #   * {Types::VolumeAttachment#volume_id #volume_id} => String
     #   * {Types::VolumeAttachment#delete_on_termination #delete_on_termination} => Boolean
+    #   * {Types::VolumeAttachment#associated_resource #associated_resource} => String
+    #   * {Types::VolumeAttachment#instance_owning_service #instance_owning_service} => String
     #
     #
     # @example Example: To attach a volume to an instance
@@ -3107,6 +3109,8 @@ module Aws::EC2
     #   resp.state #=> String, one of "attaching", "attached", "detaching", "detached", "busy"
     #   resp.volume_id #=> String
     #   resp.delete_on_termination #=> Boolean
+    #   resp.associated_resource #=> String
+    #   resp.instance_owning_service #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachVolume AWS API Documentation
     #
@@ -5888,7 +5892,7 @@ module Aws::EC2
     #   resp.subnet.map_public_ip_on_launch #=> Boolean
     #   resp.subnet.map_customer_owned_ip_on_launch #=> Boolean
     #   resp.subnet.customer_owned_ipv_4_pool #=> String
-    #   resp.subnet.state #=> String, one of "pending", "available"
+    #   resp.subnet.state #=> String, one of "pending", "available", "unavailable"
     #   resp.subnet.subnet_id #=> String
     #   resp.subnet.vpc_id #=> String
     #   resp.subnet.owner_id #=> String
@@ -6136,7 +6140,7 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency of the request. For more information, see [Ensuring
     #   idempotency][1].
     #
     #
@@ -6429,6 +6433,7 @@ module Aws::EC2
     #                 max: 1.0,
     #               },
     #               allowed_instance_types: ["AllowedInstanceType"],
+    #               max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #             },
     #             image_id: "ImageId",
     #           },
@@ -6515,6 +6520,7 @@ module Aws::EC2
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.max #=> Float
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types #=> Array
     #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.errors[0].launch_template_and_overrides.overrides.image_id #=> String
     #   resp.errors[0].lifecycle #=> String, one of "spot", "on-demand"
     #   resp.errors[0].error_code #=> String
@@ -6570,6 +6576,7 @@ module Aws::EC2
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.max #=> Float
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types #=> Array
     #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.instances[0].launch_template_and_overrides.overrides.image_id #=> String
     #   resp.instances[0].lifecycle #=> String, one of "spot", "on-demand"
     #   resp.instances[0].instance_ids #=> Array
@@ -8412,6 +8419,7 @@ module Aws::EC2
     #           max: 1.0,
     #         },
     #         allowed_instance_types: ["AllowedInstanceType"],
+    #         max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #       },
     #       private_dns_name_options: {
     #         hostname_type: "ip-name", # accepts ip-name, resource-name
@@ -8808,6 +8816,7 @@ module Aws::EC2
     #           max: 1.0,
     #         },
     #         allowed_instance_types: ["AllowedInstanceType"],
+    #         max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #       },
     #       private_dns_name_options: {
     #         hostname_type: "ip-name", # accepts ip-name, resource-name
@@ -8974,6 +8983,7 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.instance_requirements.network_bandwidth_gbps.max #=> Float
     #   resp.launch_template_version.launch_template_data.instance_requirements.allowed_instance_types #=> Array
     #   resp.launch_template_version.launch_template_data.instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.launch_template_version.launch_template_data.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.launch_template_version.launch_template_data.private_dns_name_options.hostname_type #=> String, one of "ip-name", "resource-name"
     #   resp.launch_template_version.launch_template_data.private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
     #   resp.launch_template_version.launch_template_data.private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
@@ -9394,7 +9404,7 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency of the request. For more information, see [Ensuring
     #   idempotency][1].
     #
     #   Constraint: Maximum 64 ASCII characters.
@@ -9573,9 +9583,22 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the network ACL.
     #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #
     # @return [Types::CreateNetworkAclResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateNetworkAclResult#network_acl #network_acl} => Types::NetworkAcl
+    #   * {Types::CreateNetworkAclResult#client_token #client_token} => String
     #
     #
     # @example Example: To create a network ACL
@@ -9631,6 +9654,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     client_token: "String",
     #   })
     #
     # @example Response structure
@@ -9657,6 +9681,7 @@ module Aws::EC2
     #   resp.network_acl.tags[0].value #=> String
     #   resp.network_acl.vpc_id #=> String
     #   resp.network_acl.owner_id #=> String
+    #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAcl AWS API Documentation
     #
@@ -11198,9 +11223,22 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the route table.
     #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #
     # @return [Types::CreateRouteTableResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRouteTableResult#route_table #route_table} => Types::RouteTable
+    #   * {Types::CreateRouteTableResult#client_token #client_token} => String
     #
     #
     # @example Example: To create a route table
@@ -11248,6 +11286,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     client_token: "String",
     #   })
     #
     # @example Response structure
@@ -11285,6 +11324,7 @@ module Aws::EC2
     #   resp.route_table.tags[0].value #=> String
     #   resp.route_table.vpc_id #=> String
     #   resp.route_table.owner_id #=> String
+    #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRouteTable AWS API Documentation
     #
@@ -12013,7 +12053,7 @@ module Aws::EC2
     #   resp.subnet.map_public_ip_on_launch #=> Boolean
     #   resp.subnet.map_customer_owned_ip_on_launch #=> Boolean
     #   resp.subnet.customer_owned_ipv_4_pool #=> String
-    #   resp.subnet.state #=> String, one of "pending", "available"
+    #   resp.subnet.state #=> String, one of "pending", "available", "unavailable"
     #   resp.subnet.subnet_id #=> String
     #   resp.subnet.vpc_id #=> String
     #   resp.subnet.owner_id #=> String
@@ -14260,6 +14300,8 @@ module Aws::EC2
     #   resp.attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached", "busy"
     #   resp.attachments[0].volume_id #=> String
     #   resp.attachments[0].delete_on_termination #=> Boolean
+    #   resp.attachments[0].associated_resource #=> String
+    #   resp.attachments[0].instance_owning_service #=> String
     #   resp.availability_zone #=> String
     #   resp.create_time #=> Time
     #   resp.encrypted #=> Boolean
@@ -19785,11 +19827,11 @@ module Aws::EC2
     #   * `opt-in-status` - The opt-in status (`opted-in` \| `not-opted-in` \|
     #     `opt-in-not-required`).
     #
-    #   * `parent-zoneID` - The ID of the zone that handles some of the Local
+    #   * `parent-zone-id` - The ID of the zone that handles some of the Local
     #     Zone and Wavelength Zone control plane operations, such as API
     #     calls.
     #
-    #   * `parent-zoneName` - The ID of the zone that handles some of the
+    #   * `parent-zone-name` - The ID of the zone that handles some of the
     #     Local Zone and Wavelength Zone control plane operations, such as API
     #     calls.
     #
@@ -19895,7 +19937,7 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.availability_zones #=> Array
-    #   resp.availability_zones[0].state #=> String, one of "available", "information", "impaired", "unavailable"
+    #   resp.availability_zones[0].state #=> String, one of "available", "information", "impaired", "unavailable", "constrained"
     #   resp.availability_zones[0].opt_in_status #=> String, one of "opt-in-not-required", "opted-in", "not-opted-in"
     #   resp.availability_zones[0].messages #=> Array
     #   resp.availability_zones[0].messages[0].message #=> String
@@ -20160,11 +20202,13 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive an
-    #   error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @return [Types::DescribeCapacityBlockOfferingsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -20219,11 +20263,13 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive an
-    #   error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -20318,11 +20364,13 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive an
-    #   error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -21556,6 +21604,12 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    # workloads that require graphics acceleration, we recommend that you
+    # use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #  </note>
+    #
     # Describes the Elastic Graphics accelerator associated with your
     # instances. For more information about Elastic Graphics, see [Amazon
     # Elastic Graphics][1].
@@ -22236,6 +22290,7 @@ module Aws::EC2
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.network_bandwidth_gbps.max #=> Float
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.allowed_instance_types #=> Array
     #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.fleets[0].launch_template_configs[0].overrides[0].image_id #=> String
     #   resp.fleets[0].target_capacity_specification.total_target_capacity #=> Integer
     #   resp.fleets[0].target_capacity_specification.on_demand_target_capacity #=> Integer
@@ -22316,6 +22371,7 @@ module Aws::EC2
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.max #=> Float
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types #=> Array
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.image_id #=> String
     #   resp.fleets[0].errors[0].lifecycle #=> String, one of "spot", "on-demand"
     #   resp.fleets[0].errors[0].error_code #=> String
@@ -22371,6 +22427,7 @@ module Aws::EC2
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.network_bandwidth_gbps.max #=> Float
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types #=> Array
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.image_id #=> String
     #   resp.fleets[0].instances[0].lifecycle #=> String, one of "spot", "on-demand"
     #   resp.fleets[0].instances[0].instance_ids #=> Array
@@ -23924,6 +23981,8 @@ module Aws::EC2
     #   resp.block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.block_device_mappings[0].ebs.status #=> String, one of "attaching", "attached", "detaching", "detached"
     #   resp.block_device_mappings[0].ebs.volume_id #=> String
+    #   resp.block_device_mappings[0].ebs.associated_resource #=> String
+    #   resp.block_device_mappings[0].ebs.volume_owner_id #=> String
     #   resp.disable_api_termination.value #=> Boolean
     #   resp.ena_support.value #=> Boolean
     #   resp.enclave_options.enabled #=> Boolean
@@ -25672,6 +25731,8 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.reservations[0].instances[0].block_device_mappings[0].ebs.status #=> String, one of "attaching", "attached", "detaching", "detached"
     #   resp.reservations[0].instances[0].block_device_mappings[0].ebs.volume_id #=> String
+    #   resp.reservations[0].instances[0].block_device_mappings[0].ebs.associated_resource #=> String
+    #   resp.reservations[0].instances[0].block_device_mappings[0].ebs.volume_owner_id #=> String
     #   resp.reservations[0].instances[0].client_token #=> String
     #   resp.reservations[0].instances[0].ebs_optimized #=> Boolean
     #   resp.reservations[0].instances[0].ena_support #=> Boolean
@@ -26928,6 +26989,7 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.network_bandwidth_gbps.max #=> Float
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.allowed_instance_types #=> Array
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.private_dns_name_options.hostname_type #=> String, one of "ip-name", "resource-name"
     #   resp.launch_template_versions[0].launch_template_data.private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
     #   resp.launch_template_versions[0].launch_template_data.private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
@@ -30946,6 +31008,9 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
+    #   * `association.gateway-id` - The ID of the gateway involved in the
+    #     association.
+    #
     #   * `association.route-table-association-id` - The ID of an association
     #     ID for the route table.
     #
@@ -32681,6 +32746,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.network_bandwidth_gbps.max #=> Float
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.allowed_instance_types #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].launch_template_specification.launch_template_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].launch_template_specification.launch_template_name #=> String
@@ -32732,6 +32798,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.network_bandwidth_gbps.max #=> Float
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.allowed_instance_types #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.spot_price #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.target_capacity #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.on_demand_target_capacity #=> Integer
@@ -33676,7 +33743,7 @@ module Aws::EC2
     #   resp.subnets[0].map_public_ip_on_launch #=> Boolean
     #   resp.subnets[0].map_customer_owned_ip_on_launch #=> Boolean
     #   resp.subnets[0].customer_owned_ipv_4_pool #=> String
-    #   resp.subnets[0].state #=> String, one of "pending", "available"
+    #   resp.subnets[0].state #=> String, one of "pending", "available", "unavailable"
     #   resp.subnets[0].subnet_id #=> String
     #   resp.subnets[0].vpc_id #=> String
     #   resp.subnets[0].owner_id #=> String
@@ -35949,6 +36016,8 @@ module Aws::EC2
     #   resp.volumes[0].attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached", "busy"
     #   resp.volumes[0].attachments[0].volume_id #=> String
     #   resp.volumes[0].attachments[0].delete_on_termination #=> Boolean
+    #   resp.volumes[0].attachments[0].associated_resource #=> String
+    #   resp.volumes[0].attachments[0].instance_owning_service #=> String
     #   resp.volumes[0].availability_zone #=> String
     #   resp.volumes[0].create_time #=> Time
     #   resp.volumes[0].encrypted #=> Boolean
@@ -37716,6 +37785,11 @@ module Aws::EC2
     # detached from an instance, the product code is no longer associated
     # with the instance.
     #
+    # You can't detach or force detach volumes that are attached to Amazon
+    # ECS or Fargate tasks. Attempting to do this results in the
+    # `UnsupportedOperationException` exception with the `Unable to detach
+    # volume attached to ECS tasks` error message.
+    #
     # For more information, see [Detach an Amazon EBS volume][1] in the
     # *Amazon Elastic Compute Cloud User Guide*.
     #
@@ -37757,6 +37831,8 @@ module Aws::EC2
     #   * {Types::VolumeAttachment#state #state} => String
     #   * {Types::VolumeAttachment#volume_id #volume_id} => String
     #   * {Types::VolumeAttachment#delete_on_termination #delete_on_termination} => Boolean
+    #   * {Types::VolumeAttachment#associated_resource #associated_resource} => String
+    #   * {Types::VolumeAttachment#instance_owning_service #instance_owning_service} => String
     #
     #
     # @example Example: To detach a volume from an instance
@@ -37794,6 +37870,8 @@ module Aws::EC2
     #   resp.state #=> String, one of "attaching", "attached", "detaching", "detached", "busy"
     #   resp.volume_id #=> String
     #   resp.delete_on_termination #=> Boolean
+    #   resp.associated_resource #=> String
+    #   resp.instance_owning_service #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachVolume AWS API Documentation
     #
@@ -39379,12 +39457,16 @@ module Aws::EC2
     # Enables Infrastructure Performance subscriptions.
     #
     # @option params [String] :source
-    #   The source Region or Availability Zone that the metric subscription is
-    #   enabled for. For example, `us-east-1`.
+    #   The source Region (like `us-east-1`) or Availability Zone ID (like
+    #   `use1-az1`) that the metric subscription is enabled for. If you use
+    #   Availability Zone IDs, the Source and Destination Availability Zones
+    #   must be in the same Region.
     #
     # @option params [String] :destination
-    #   The target Region or Availability Zone that the metric subscription is
-    #   enabled for. For example, `eu-west-1`.
+    #   The target Region (like `us-east-2`) or Availability Zone ID (like
+    #   `use2-az2`) that the metric subscription is enabled for. If you use
+    #   Availability Zone IDs, the Source and Destination Availability Zones
+    #   must be in the same Region.
     #
     # @option params [String] :metric
     #   The metric used for the enabled subscription.
@@ -39960,6 +40042,9 @@ module Aws::EC2
     #     in the Region. Users in the account will no longer be able to
     #     request new public sharing. However, snapshots that are already
     #     publicly shared, remain publicly available.
+    #
+    #   `unblocked` is not a valid value for
+    #   **EnableSnapshotBlockPublicAccess**.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -40668,13 +40753,13 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive an
-    #   error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
     #
-    #   Valid range: Minimum value of 1. Maximum value of 1000.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -41135,11 +41220,13 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive an
-    #   error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -41389,6 +41476,7 @@ module Aws::EC2
     #         max: 1.0,
     #       },
     #       allowed_instance_types: ["AllowedInstanceType"],
+    #       max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #     },
     #     max_results: 1,
     #     next_token: "String",
@@ -42050,9 +42138,9 @@ module Aws::EC2
     # information. Depending on your instance configuration, you may need to
     # allow the following actions in your IAM policy:
     # `DescribeSpotInstanceRequests`,
-    # `DescribeInstanceCreditSpecifications`, `DescribeVolumes`,
-    # `DescribeInstanceAttribute`, and `DescribeElasticGpus`. Or, you can
-    # allow `describe*` depending on your instance requirements.
+    # `DescribeInstanceCreditSpecifications`, `DescribeVolumes`, and
+    # `DescribeInstanceAttribute`. Or, you can allow `describe*` depending
+    # on your instance requirements.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -42281,6 +42369,7 @@ module Aws::EC2
     #   resp.launch_template_data.instance_requirements.network_bandwidth_gbps.max #=> Float
     #   resp.launch_template_data.instance_requirements.allowed_instance_types #=> Array
     #   resp.launch_template_data.instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.launch_template_data.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.launch_template_data.private_dns_name_options.hostname_type #=> String, one of "ip-name", "resource-name"
     #   resp.launch_template_data.private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
     #   resp.launch_template_data.private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
@@ -43241,8 +43330,6 @@ module Aws::EC2
     # @option params [String] :target_capacity_unit_type
     #   The unit for the target capacity.
     #
-    #   Default: `units` (translates to number of instances)
-    #
     # @option params [Boolean] :single_availability_zone
     #   Specify `true` so that the response returns a list of scored
     #   Availability Zones. Otherwise, the response returns a list of scored
@@ -43351,6 +43438,7 @@ module Aws::EC2
     #           max: 1.0,
     #         },
     #         allowed_instance_types: ["AllowedInstanceType"],
+    #         max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #       },
     #     },
     #     dry_run: false,
@@ -45937,6 +46025,7 @@ module Aws::EC2
     #                 max: 1.0,
     #               },
     #               allowed_instance_types: ["AllowedInstanceType"],
+    #               max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #             },
     #             image_id: "ImageId",
     #           },
@@ -46501,7 +46590,9 @@ module Aws::EC2
     #   Modifies the `DeleteOnTermination` attribute for volumes that are
     #   currently attached. The volume must be owned by the caller. If no
     #   value is specified for `DeleteOnTermination`, the default is `true`
-    #   and the volume is deleted when the instance is terminated.
+    #   and the volume is deleted when the instance is terminated. You can't
+    #   modify the `DeleteOnTermination` attribute for volumes that are
+    #   attached to Fargate tasks.
     #
     #   To add instance store volumes to an Amazon EBS-backed instance, you
     #   must add them when you launch the instance. For more information, see
@@ -47037,23 +47128,22 @@ module Aws::EC2
     #   The ID of the instance.
     #
     # @option params [String] :http_tokens
-    #   IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to
-    #   `optional` (in other words, set the use of IMDSv2 to `optional`) or
-    #   `required` (in other words, set the use of IMDSv2 to `required`).
+    #   Indicates whether IMDSv2 is required.
     #
-    #   * `optional` - When IMDSv2 is optional, you can choose to retrieve
-    #     instance metadata with or without a session token in your request.
-    #     If you retrieve the IAM role credentials without a token, the IMDSv1
-    #     role credentials are returned. If you retrieve the IAM role
-    #     credentials using a valid session token, the IMDSv2 role credentials
-    #     are returned.
+    #   * `optional` - IMDSv2 is optional. You can choose whether to send a
+    #     session token in your instance metadata retrieval requests. If you
+    #     retrieve IAM role credentials without a session token, you receive
+    #     the IMDSv1 role credentials. If you retrieve IAM role credentials
+    #     using a valid session token, you receive the IMDSv2 role
+    #     credentials.
     #
-    #   * `required` - When IMDSv2 is required, you must send a session token
-    #     with any instance metadata retrieval requests. In this state,
+    #   * `required` - IMDSv2 is required. You must send a session token in
+    #     your instance metadata retrieval requests. With this option,
     #     retrieving the IAM role credentials always returns IMDSv2
     #     credentials; IMDSv1 credentials are not available.
     #
-    #   Default: `optional`
+    #   Default: If the value of `ImdsSupport` for the Amazon Machine Image
+    #   (AMI) for your instance is `v2.0`, the default is `required`.
     #
     # @option params [Integer] :http_put_response_hop_limit
     #   The desired HTTP PUT response hop limit for instance metadata
@@ -48557,6 +48647,7 @@ module Aws::EC2
     #                 max: 1.0,
     #               },
     #               allowed_instance_types: ["AllowedInstanceType"],
+    #               max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #             },
     #           },
     #         ],
@@ -48619,6 +48710,15 @@ module Aws::EC2
     #   Specify `true` to indicate that network interfaces attached to
     #   instances created in the specified subnet should be assigned a public
     #   IPv4 address.
+    #
+    #   Starting on February 1, 2024, Amazon Web Services will charge for all
+    #   public IPv4 addresses, including public IPv4 addresses associated with
+    #   running instances and Elastic IP addresses. For more information, see
+    #   the *Public IPv4 Address* tab on the [Amazon VPC pricing page][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
     #
     # @option params [required, String] :subnet_id
     #   The ID of the subnet.
@@ -53827,6 +53927,7 @@ module Aws::EC2
     #               max: 1.0,
     #             },
     #             allowed_instance_types: ["AllowedInstanceType"],
+    #             max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #           },
     #         },
     #       ],
@@ -53896,6 +53997,7 @@ module Aws::EC2
     #                   max: 1.0,
     #                 },
     #                 allowed_instance_types: ["AllowedInstanceType"],
+    #                 max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #               },
     #             },
     #           ],
@@ -55615,14 +55717,13 @@ module Aws::EC2
     #   the same request.
     #
     # @option params [Array<Types::ElasticGpuSpecification>] :elastic_gpu_specification
-    #   An elastic GPU to associate with the instance. An Elastic GPU is a GPU
-    #   resource that you can attach to your Windows instance to accelerate
-    #   the graphics performance of your applications. For more information,
-    #   see [Amazon EC2 Elastic GPUs][1] in the *Amazon EC2 User Guide*.
+    #   Deprecated.
     #
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    #   workloads that require graphics acceleration, we recommend that you
+    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
     #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html
+    #    </note>
     #
     # @option params [Array<Types::ElasticInferenceAccelerator>] :elastic_inference_accelerators
     #   An elastic inference accelerator to associate with the instance.
@@ -55653,8 +55754,6 @@ module Aws::EC2
     #   * Instances
     #
     #   * Volumes
-    #
-    #   * Elastic graphics
     #
     #   * Spot Instance requests
     #
@@ -56074,6 +56173,8 @@ module Aws::EC2
     #   resp.instances[0].block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.instances[0].block_device_mappings[0].ebs.status #=> String, one of "attaching", "attached", "detaching", "detached"
     #   resp.instances[0].block_device_mappings[0].ebs.volume_id #=> String
+    #   resp.instances[0].block_device_mappings[0].ebs.associated_resource #=> String
+    #   resp.instances[0].block_device_mappings[0].ebs.volume_owner_id #=> String
     #   resp.instances[0].client_token #=> String
     #   resp.instances[0].ebs_optimized #=> Boolean
     #   resp.instances[0].ena_support #=> Boolean
@@ -56676,7 +56777,7 @@ module Aws::EC2
     # as its root device returns an error.
     #
     # If you attempt to start a T3 instance with `host` tenancy and the
-    # `unlimted` CPU credit option, the request fails. The `unlimited` CPU
+    # `unlimited` CPU credit option, the request fails. The `unlimited` CPU
     # credit option is not supported on Dedicated Hosts. Before you start
     # the instance, either change its CPU credit option to `standard`, or
     # change its tenancy to `default` or `dedicated`.
@@ -58675,7 +58776,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.432.0'
+      context[:gem_version] = '1.437.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

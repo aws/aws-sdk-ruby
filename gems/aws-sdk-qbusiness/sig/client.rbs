@@ -1,0 +1,1370 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module QBusiness
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchDeleteDocumentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteDocumentResponse]
+        def failed_documents: () -> ::Array[Types::FailedDocument]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#batch_delete_document-instance_method
+      def batch_delete_document: (
+                                   application_id: ::String,
+                                   ?data_source_sync_id: ::String,
+                                   documents: Array[
+                                     {
+                                       document_id: ::String
+                                     },
+                                   ],
+                                   index_id: ::String
+                                 ) -> _BatchDeleteDocumentResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteDocumentResponseSuccess
+
+      interface _BatchPutDocumentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchPutDocumentResponse]
+        def failed_documents: () -> ::Array[Types::FailedDocument]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#batch_put_document-instance_method
+      def batch_put_document: (
+                                application_id: ::String,
+                                ?data_source_sync_id: ::String,
+                                documents: Array[
+                                  {
+                                    access_configuration: {
+                                      access_controls: Array[
+                                        {
+                                          member_relation: ("AND" | "OR")?,
+                                          principals: Array[
+                                            {
+                                              group: {
+                                                access: ("ALLOW" | "DENY"),
+                                                membership_type: ("INDEX" | "DATASOURCE")?,
+                                                name: ::String?
+                                              }?,
+                                              user: {
+                                                access: ("ALLOW" | "DENY"),
+                                                id: ::String?,
+                                                membership_type: ("INDEX" | "DATASOURCE")?
+                                              }?
+                                            },
+                                          ]
+                                        },
+                                      ],
+                                      member_relation: ("AND" | "OR")?
+                                    }?,
+                                    attributes: Array[
+                                      {
+                                        name: ::String,
+                                        value: {
+                                          date_value: ::Time?,
+                                          long_value: ::Integer?,
+                                          string_list_value: Array[::String]?,
+                                          string_value: ::String?
+                                        }
+                                      },
+                                    ]?,
+                                    content: {
+                                      blob: ::String?,
+                                      s3: {
+                                        bucket: ::String,
+                                        key: ::String
+                                      }?
+                                    }?,
+                                    content_type: ("PDF" | "HTML" | "MS_WORD" | "PLAIN_TEXT" | "PPT" | "RTF" | "XML" | "XSLT" | "MS_EXCEL" | "CSV" | "JSON" | "MD")?,
+                                    document_enrichment_configuration: {
+                                      inline_configurations: Array[
+                                        {
+                                          condition: {
+                                            key: ::String,
+                                            operator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "EXISTS" | "NOT_EXISTS" | "BEGINS_WITH"),
+                                            value: {
+                                              date_value: ::Time?,
+                                              long_value: ::Integer?,
+                                              string_list_value: Array[::String]?,
+                                              string_value: ::String?
+                                            }?
+                                          }?,
+                                          document_content_operator: ("DELETE")?,
+                                          target: {
+                                            attribute_value_operator: ("DELETE")?,
+                                            key: ::String,
+                                            value: {
+                                              date_value: ::Time?,
+                                              long_value: ::Integer?,
+                                              string_list_value: Array[::String]?,
+                                              string_value: ::String?
+                                            }?
+                                          }?
+                                        },
+                                      ]?,
+                                      post_extraction_hook_configuration: {
+                                        invocation_condition: {
+                                          key: ::String,
+                                          operator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "EXISTS" | "NOT_EXISTS" | "BEGINS_WITH"),
+                                          value: {
+                                            date_value: ::Time?,
+                                            long_value: ::Integer?,
+                                            string_list_value: Array[::String]?,
+                                            string_value: ::String?
+                                          }?
+                                        }?,
+                                        lambda_arn: ::String?,
+                                        role_arn: ::String?,
+                                        s3_bucket_name: ::String?
+                                      }?,
+                                      pre_extraction_hook_configuration: {
+                                        invocation_condition: {
+                                          key: ::String,
+                                          operator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "EXISTS" | "NOT_EXISTS" | "BEGINS_WITH"),
+                                          value: {
+                                            date_value: ::Time?,
+                                            long_value: ::Integer?,
+                                            string_list_value: Array[::String]?,
+                                            string_value: ::String?
+                                          }?
+                                        }?,
+                                        lambda_arn: ::String?,
+                                        role_arn: ::String?,
+                                        s3_bucket_name: ::String?
+                                      }?
+                                    }?,
+                                    id: ::String,
+                                    title: ::String?
+                                  },
+                                ],
+                                index_id: ::String,
+                                ?role_arn: ::String
+                              ) -> _BatchPutDocumentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutDocumentResponseSuccess
+
+      interface _ChatSyncResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ChatSyncOutput]
+        def action_review: () -> Types::ActionReview
+        def conversation_id: () -> ::String
+        def failed_attachments: () -> ::Array[Types::AttachmentOutput]
+        def source_attributions: () -> ::Array[Types::SourceAttribution]
+        def system_message: () -> ::String
+        def system_message_id: () -> ::String
+        def user_message_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#chat_sync-instance_method
+      def chat_sync: (
+                       ?action_execution: {
+                         payload: Hash[::String, {
+                             value: {
+                             }
+                           }],
+                         payload_field_name_separator: ::String,
+                         plugin_id: ::String
+                       },
+                       application_id: ::String,
+                       ?attachments: Array[
+                         {
+                           data: ::String,
+                           name: ::String
+                         },
+                       ],
+                       ?attribute_filter: {
+                         and_all_filters: Array[
+                           untyped,
+                         ]?,
+                         contains_all: {
+                           name: ::String,
+                           value: {
+                             date_value: ::Time?,
+                             long_value: ::Integer?,
+                             string_list_value: Array[::String]?,
+                             string_value: ::String?
+                           }
+                         }?,
+                         contains_any: {
+                           name: ::String,
+                           value: {
+                             date_value: ::Time?,
+                             long_value: ::Integer?,
+                             string_list_value: Array[::String]?,
+                             string_value: ::String?
+                           }
+                         }?,
+                         equals_to: {
+                           name: ::String,
+                           value: {
+                             date_value: ::Time?,
+                             long_value: ::Integer?,
+                             string_list_value: Array[::String]?,
+                             string_value: ::String?
+                           }
+                         }?,
+                         greater_than: {
+                           name: ::String,
+                           value: {
+                             date_value: ::Time?,
+                             long_value: ::Integer?,
+                             string_list_value: Array[::String]?,
+                             string_value: ::String?
+                           }
+                         }?,
+                         greater_than_or_equals: {
+                           name: ::String,
+                           value: {
+                             date_value: ::Time?,
+                             long_value: ::Integer?,
+                             string_list_value: Array[::String]?,
+                             string_value: ::String?
+                           }
+                         }?,
+                         less_than: {
+                           name: ::String,
+                           value: {
+                             date_value: ::Time?,
+                             long_value: ::Integer?,
+                             string_list_value: Array[::String]?,
+                             string_value: ::String?
+                           }
+                         }?,
+                         less_than_or_equals: {
+                           name: ::String,
+                           value: {
+                             date_value: ::Time?,
+                             long_value: ::Integer?,
+                             string_list_value: Array[::String]?,
+                             string_value: ::String?
+                           }
+                         }?,
+                         not_filter: untyped?,
+                         or_all_filters: Array[
+                           untyped,
+                         ]?
+                       },
+                       ?client_token: ::String,
+                       ?conversation_id: ::String,
+                       ?parent_message_id: ::String,
+                       ?user_groups: Array[::String],
+                       user_id: ::String,
+                       ?user_message: ::String
+                     ) -> _ChatSyncResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ChatSyncResponseSuccess
+
+      interface _CreateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApplicationResponse]
+        def application_arn: () -> ::String
+        def application_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#create_application-instance_method
+      def create_application: (
+                                ?attachments_configuration: {
+                                  attachments_control_mode: ("ENABLED" | "DISABLED")
+                                },
+                                ?client_token: ::String,
+                                ?description: ::String,
+                                display_name: ::String,
+                                ?encryption_configuration: {
+                                  kms_key_id: ::String?
+                                },
+                                role_arn: ::String,
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ]
+                              ) -> _CreateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
+
+      interface _CreateDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataSourceResponse]
+        def data_source_arn: () -> ::String
+        def data_source_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#create_data_source-instance_method
+      def create_data_source: (
+                                application_id: ::String,
+                                ?client_token: ::String,
+                                configuration: {
+                                },
+                                ?description: ::String,
+                                display_name: ::String,
+                                ?document_enrichment_configuration: {
+                                  inline_configurations: Array[
+                                    {
+                                      condition: {
+                                        key: ::String,
+                                        operator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "EXISTS" | "NOT_EXISTS" | "BEGINS_WITH"),
+                                        value: {
+                                          date_value: ::Time?,
+                                          long_value: ::Integer?,
+                                          string_list_value: Array[::String]?,
+                                          string_value: ::String?
+                                        }?
+                                      }?,
+                                      document_content_operator: ("DELETE")?,
+                                      target: {
+                                        attribute_value_operator: ("DELETE")?,
+                                        key: ::String,
+                                        value: {
+                                          date_value: ::Time?,
+                                          long_value: ::Integer?,
+                                          string_list_value: Array[::String]?,
+                                          string_value: ::String?
+                                        }?
+                                      }?
+                                    },
+                                  ]?,
+                                  post_extraction_hook_configuration: {
+                                    invocation_condition: {
+                                      key: ::String,
+                                      operator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "EXISTS" | "NOT_EXISTS" | "BEGINS_WITH"),
+                                      value: {
+                                        date_value: ::Time?,
+                                        long_value: ::Integer?,
+                                        string_list_value: Array[::String]?,
+                                        string_value: ::String?
+                                      }?
+                                    }?,
+                                    lambda_arn: ::String?,
+                                    role_arn: ::String?,
+                                    s3_bucket_name: ::String?
+                                  }?,
+                                  pre_extraction_hook_configuration: {
+                                    invocation_condition: {
+                                      key: ::String,
+                                      operator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "EXISTS" | "NOT_EXISTS" | "BEGINS_WITH"),
+                                      value: {
+                                        date_value: ::Time?,
+                                        long_value: ::Integer?,
+                                        string_list_value: Array[::String]?,
+                                        string_value: ::String?
+                                      }?
+                                    }?,
+                                    lambda_arn: ::String?,
+                                    role_arn: ::String?,
+                                    s3_bucket_name: ::String?
+                                  }?
+                                },
+                                index_id: ::String,
+                                ?role_arn: ::String,
+                                ?sync_schedule: ::String,
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ],
+                                ?vpc_configuration: {
+                                  security_group_ids: Array[::String],
+                                  subnet_ids: Array[::String]
+                                }
+                              ) -> _CreateDataSourceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataSourceResponseSuccess
+
+      interface _CreateIndexResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIndexResponse]
+        def index_arn: () -> ::String
+        def index_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#create_index-instance_method
+      def create_index: (
+                          application_id: ::String,
+                          ?capacity_configuration: {
+                            units: ::Integer?
+                          },
+                          ?client_token: ::String,
+                          ?description: ::String,
+                          display_name: ::String,
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _CreateIndexResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIndexResponseSuccess
+
+      interface _CreatePluginResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePluginResponse]
+        def plugin_arn: () -> ::String
+        def plugin_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#create_plugin-instance_method
+      def create_plugin: (
+                           application_id: ::String,
+                           auth_configuration: {
+                             basic_auth_configuration: {
+                               role_arn: ::String,
+                               secret_arn: ::String
+                             }?,
+                             o_auth_2_client_credential_configuration: {
+                               role_arn: ::String,
+                               secret_arn: ::String
+                             }?
+                           },
+                           ?client_token: ::String,
+                           display_name: ::String,
+                           server_url: ::String,
+                           ?tags: Array[
+                             {
+                               key: ::String,
+                               value: ::String
+                             },
+                           ],
+                           type: ("SERVICE_NOW" | "SALESFORCE" | "JIRA" | "ZENDESK")
+                         ) -> _CreatePluginResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePluginResponseSuccess
+
+      interface _CreateRetrieverResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRetrieverResponse]
+        def retriever_arn: () -> ::String
+        def retriever_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#create_retriever-instance_method
+      def create_retriever: (
+                              application_id: ::String,
+                              ?client_token: ::String,
+                              configuration: {
+                                kendra_index_configuration: {
+                                  index_id: ::String
+                                }?,
+                                native_index_configuration: {
+                                  index_id: ::String
+                                }?
+                              },
+                              display_name: ::String,
+                              ?role_arn: ::String,
+                              ?tags: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String
+                                },
+                              ],
+                              type: ("NATIVE_INDEX" | "KENDRA_INDEX")
+                            ) -> _CreateRetrieverResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRetrieverResponseSuccess
+
+      interface _CreateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateUserResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#create_user-instance_method
+      def create_user: (
+                         application_id: ::String,
+                         ?client_token: ::String,
+                         ?user_aliases: Array[
+                           {
+                             data_source_id: ::String?,
+                             index_id: ::String?,
+                             user_id: ::String
+                           },
+                         ],
+                         user_id: ::String
+                       ) -> _CreateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserResponseSuccess
+
+      interface _CreateWebExperienceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWebExperienceResponse]
+        def web_experience_arn: () -> ::String
+        def web_experience_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#create_web_experience-instance_method
+      def create_web_experience: (
+                                   application_id: ::String,
+                                   ?client_token: ::String,
+                                   ?sample_prompts_control_mode: ("ENABLED" | "DISABLED"),
+                                   ?subtitle: ::String,
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ],
+                                   ?title: ::String,
+                                   ?welcome_message: ::String
+                                 ) -> _CreateWebExperienceResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWebExperienceResponseSuccess
+
+      interface _DeleteApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApplicationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#delete_application-instance_method
+      def delete_application: (
+                                application_id: ::String
+                              ) -> _DeleteApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApplicationResponseSuccess
+
+      interface _DeleteChatControlsConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteChatControlsConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#delete_chat_controls_configuration-instance_method
+      def delete_chat_controls_configuration: (
+                                                application_id: ::String
+                                              ) -> _DeleteChatControlsConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteChatControlsConfigurationResponseSuccess
+
+      interface _DeleteConversationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConversationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#delete_conversation-instance_method
+      def delete_conversation: (
+                                 application_id: ::String,
+                                 conversation_id: ::String,
+                                 user_id: ::String
+                               ) -> _DeleteConversationResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConversationResponseSuccess
+
+      interface _DeleteDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataSourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#delete_data_source-instance_method
+      def delete_data_source: (
+                                application_id: ::String,
+                                data_source_id: ::String,
+                                index_id: ::String
+                              ) -> _DeleteDataSourceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataSourceResponseSuccess
+
+      interface _DeleteGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#delete_group-instance_method
+      def delete_group: (
+                          application_id: ::String,
+                          ?data_source_id: ::String,
+                          group_name: ::String,
+                          index_id: ::String
+                        ) -> _DeleteGroupResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGroupResponseSuccess
+
+      interface _DeleteIndexResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIndexResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#delete_index-instance_method
+      def delete_index: (
+                          application_id: ::String,
+                          index_id: ::String
+                        ) -> _DeleteIndexResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIndexResponseSuccess
+
+      interface _DeletePluginResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePluginResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#delete_plugin-instance_method
+      def delete_plugin: (
+                           application_id: ::String,
+                           plugin_id: ::String
+                         ) -> _DeletePluginResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePluginResponseSuccess
+
+      interface _DeleteRetrieverResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRetrieverResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#delete_retriever-instance_method
+      def delete_retriever: (
+                              application_id: ::String,
+                              retriever_id: ::String
+                            ) -> _DeleteRetrieverResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRetrieverResponseSuccess
+
+      interface _DeleteUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteUserResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#delete_user-instance_method
+      def delete_user: (
+                         application_id: ::String,
+                         user_id: ::String
+                       ) -> _DeleteUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteUserResponseSuccess
+
+      interface _DeleteWebExperienceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWebExperienceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#delete_web_experience-instance_method
+      def delete_web_experience: (
+                                   application_id: ::String,
+                                   web_experience_id: ::String
+                                 ) -> _DeleteWebExperienceResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWebExperienceResponseSuccess
+
+      interface _GetApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApplicationResponse]
+        def application_arn: () -> ::String
+        def application_id: () -> ::String
+        def attachments_configuration: () -> Types::AppliedAttachmentsConfiguration
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def display_name: () -> ::String
+        def encryption_configuration: () -> Types::EncryptionConfiguration
+        def role_arn: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#get_application-instance_method
+      def get_application: (
+                             application_id: ::String
+                           ) -> _GetApplicationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApplicationResponseSuccess
+
+      interface _GetChatControlsConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetChatControlsConfigurationResponse]
+        def blocked_phrases: () -> Types::BlockedPhrasesConfiguration
+        def next_token: () -> ::String
+        def response_scope: () -> ("ENTERPRISE_CONTENT_ONLY" | "EXTENDED_KNOWLEDGE_ENABLED")
+        def topic_configurations: () -> ::Array[Types::TopicConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#get_chat_controls_configuration-instance_method
+      def get_chat_controls_configuration: (
+                                             application_id: ::String,
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String
+                                           ) -> _GetChatControlsConfigurationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetChatControlsConfigurationResponseSuccess
+
+      interface _GetDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataSourceResponse]
+        def application_id: () -> ::String
+        def configuration: () -> untyped
+        def created_at: () -> ::Time
+        def data_source_arn: () -> ::String
+        def data_source_id: () -> ::String
+        def description: () -> ::String
+        def display_name: () -> ::String
+        def document_enrichment_configuration: () -> Types::DocumentEnrichmentConfiguration
+        def index_id: () -> ::String
+        def role_arn: () -> ::String
+        def status: () -> ("PENDING_CREATION" | "CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
+        def sync_schedule: () -> ::String
+        def type: () -> ::String
+        def updated_at: () -> ::Time
+        def vpc_configuration: () -> Types::DataSourceVpcConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#get_data_source-instance_method
+      def get_data_source: (
+                             application_id: ::String,
+                             data_source_id: ::String,
+                             index_id: ::String
+                           ) -> _GetDataSourceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataSourceResponseSuccess
+
+      interface _GetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGroupResponse]
+        def status: () -> Types::GroupStatusDetail
+        def status_history: () -> ::Array[Types::GroupStatusDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#get_group-instance_method
+      def get_group: (
+                       application_id: ::String,
+                       ?data_source_id: ::String,
+                       group_name: ::String,
+                       index_id: ::String
+                     ) -> _GetGroupResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGroupResponseSuccess
+
+      interface _GetIndexResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIndexResponse]
+        def application_id: () -> ::String
+        def capacity_configuration: () -> Types::IndexCapacityConfiguration
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def display_name: () -> ::String
+        def document_attribute_configurations: () -> ::Array[Types::DocumentAttributeConfiguration]
+        def index_arn: () -> ::String
+        def index_id: () -> ::String
+        def index_statistics: () -> Types::IndexStatistics
+        def status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#get_index-instance_method
+      def get_index: (
+                       application_id: ::String,
+                       index_id: ::String
+                     ) -> _GetIndexResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIndexResponseSuccess
+
+      interface _GetPluginResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPluginResponse]
+        def application_id: () -> ::String
+        def auth_configuration: () -> Types::PluginAuthConfiguration
+        def created_at: () -> ::Time
+        def display_name: () -> ::String
+        def plugin_arn: () -> ::String
+        def plugin_id: () -> ::String
+        def server_url: () -> ::String
+        def state: () -> ("ENABLED" | "DISABLED")
+        def type: () -> ("SERVICE_NOW" | "SALESFORCE" | "JIRA" | "ZENDESK")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#get_plugin-instance_method
+      def get_plugin: (
+                        application_id: ::String,
+                        plugin_id: ::String
+                      ) -> _GetPluginResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPluginResponseSuccess
+
+      interface _GetRetrieverResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRetrieverResponse]
+        def application_id: () -> ::String
+        def configuration: () -> Types::RetrieverConfiguration
+        def created_at: () -> ::Time
+        def display_name: () -> ::String
+        def retriever_arn: () -> ::String
+        def retriever_id: () -> ::String
+        def role_arn: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "FAILED")
+        def type: () -> ("NATIVE_INDEX" | "KENDRA_INDEX")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#get_retriever-instance_method
+      def get_retriever: (
+                           application_id: ::String,
+                           retriever_id: ::String
+                         ) -> _GetRetrieverResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRetrieverResponseSuccess
+
+      interface _GetUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUserResponse]
+        def user_aliases: () -> ::Array[Types::UserAlias]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#get_user-instance_method
+      def get_user: (
+                      application_id: ::String,
+                      user_id: ::String
+                    ) -> _GetUserResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUserResponseSuccess
+
+      interface _GetWebExperienceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWebExperienceResponse]
+        def application_id: () -> ::String
+        def authentication_configuration: () -> Types::WebExperienceAuthConfiguration
+        def created_at: () -> ::Time
+        def default_endpoint: () -> ::String
+        def sample_prompts_control_mode: () -> ("ENABLED" | "DISABLED")
+        def status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "PENDING_AUTH_CONFIG")
+        def subtitle: () -> ::String
+        def title: () -> ::String
+        def updated_at: () -> ::Time
+        def web_experience_arn: () -> ::String
+        def web_experience_id: () -> ::String
+        def welcome_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#get_web_experience-instance_method
+      def get_web_experience: (
+                                application_id: ::String,
+                                web_experience_id: ::String
+                              ) -> _GetWebExperienceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWebExperienceResponseSuccess
+
+      interface _ListApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationsResponse]
+        def applications: () -> ::Array[Types::Application]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_applications-instance_method
+      def list_applications: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListApplicationsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationsResponseSuccess
+
+      interface _ListConversationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConversationsResponse]
+        def conversations: () -> ::Array[Types::Conversation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_conversations-instance_method
+      def list_conversations: (
+                                application_id: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String,
+                                user_id: ::String
+                              ) -> _ListConversationsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConversationsResponseSuccess
+
+      interface _ListDataSourceSyncJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataSourceSyncJobsResponse]
+        def history: () -> ::Array[Types::DataSourceSyncJob]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_data_source_sync_jobs-instance_method
+      def list_data_source_sync_jobs: (
+                                        application_id: ::String,
+                                        data_source_id: ::String,
+                                        ?end_time: ::Time,
+                                        index_id: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String,
+                                        ?start_time: ::Time,
+                                        ?status_filter: ("FAILED" | "SUCCEEDED" | "SYNCING" | "INCOMPLETE" | "STOPPING" | "ABORTED" | "SYNCING_INDEXING")
+                                      ) -> _ListDataSourceSyncJobsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataSourceSyncJobsResponseSuccess
+
+      interface _ListDataSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataSourcesResponse]
+        def data_sources: () -> ::Array[Types::DataSource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_data_sources-instance_method
+      def list_data_sources: (
+                               application_id: ::String,
+                               index_id: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListDataSourcesResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataSourcesResponseSuccess
+
+      interface _ListDocumentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDocumentsResponse]
+        def document_detail_list: () -> ::Array[Types::DocumentDetails]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_documents-instance_method
+      def list_documents: (
+                            application_id: ::String,
+                            ?data_source_ids: Array[::String],
+                            index_id: ::String,
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListDocumentsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDocumentsResponseSuccess
+
+      interface _ListGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGroupsResponse]
+        def items: () -> ::Array[Types::GroupSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_groups-instance_method
+      def list_groups: (
+                         application_id: ::String,
+                         ?data_source_id: ::String,
+                         index_id: ::String,
+                         ?max_results: ::Integer,
+                         ?next_token: ::String,
+                         updated_earlier_than: ::Time
+                       ) -> _ListGroupsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupsResponseSuccess
+
+      interface _ListIndicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIndicesResponse]
+        def indices: () -> ::Array[Types::Index]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_indices-instance_method
+      def list_indices: (
+                          application_id: ::String,
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListIndicesResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIndicesResponseSuccess
+
+      interface _ListMessagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMessagesResponse]
+        def messages: () -> ::Array[Types::Message]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_messages-instance_method
+      def list_messages: (
+                           application_id: ::String,
+                           conversation_id: ::String,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           user_id: ::String
+                         ) -> _ListMessagesResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMessagesResponseSuccess
+
+      interface _ListPluginsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPluginsResponse]
+        def next_token: () -> ::String
+        def plugins: () -> ::Array[Types::Plugin]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_plugins-instance_method
+      def list_plugins: (
+                          application_id: ::String,
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListPluginsResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPluginsResponseSuccess
+
+      interface _ListRetrieversResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRetrieversResponse]
+        def next_token: () -> ::String
+        def retrievers: () -> ::Array[Types::Retriever]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_retrievers-instance_method
+      def list_retrievers: (
+                             application_id: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListRetrieversResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRetrieversResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListWebExperiencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWebExperiencesResponse]
+        def next_token: () -> ::String
+        def web_experiences: () -> ::Array[Types::WebExperience]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#list_web_experiences-instance_method
+      def list_web_experiences: (
+                                  application_id: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListWebExperiencesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWebExperiencesResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#put_feedback-instance_method
+      def put_feedback: (
+                          application_id: ::String,
+                          conversation_id: ::String,
+                          ?message_copied_at: ::Time,
+                          message_id: ::String,
+                          ?message_usefulness: {
+                            comment: ::String?,
+                            reason: ("NOT_FACTUALLY_CORRECT" | "HARMFUL_OR_UNSAFE" | "INCORRECT_OR_MISSING_SOURCES" | "NOT_HELPFUL" | "FACTUALLY_CORRECT" | "COMPLETE" | "RELEVANT_SOURCES" | "HELPFUL")?,
+                            submitted_at: ::Time,
+                            usefulness: ("USEFUL" | "NOT_USEFUL")
+                          },
+                          user_id: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _PutGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#put_group-instance_method
+      def put_group: (
+                       application_id: ::String,
+                       ?data_source_id: ::String,
+                       group_members: {
+                         member_groups: Array[
+                           {
+                             group_name: ::String,
+                             type: ("INDEX" | "DATASOURCE")?
+                           },
+                         ]?,
+                         member_users: Array[
+                           {
+                             type: ("INDEX" | "DATASOURCE")?,
+                             user_id: ::String
+                           },
+                         ]?
+                       },
+                       group_name: ::String,
+                       index_id: ::String,
+                       type: ("INDEX" | "DATASOURCE")
+                     ) -> _PutGroupResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutGroupResponseSuccess
+
+      interface _StartDataSourceSyncJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDataSourceSyncJobResponse]
+        def execution_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#start_data_source_sync_job-instance_method
+      def start_data_source_sync_job: (
+                                        application_id: ::String,
+                                        data_source_id: ::String,
+                                        index_id: ::String
+                                      ) -> _StartDataSourceSyncJobResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDataSourceSyncJobResponseSuccess
+
+      interface _StopDataSourceSyncJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopDataSourceSyncJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#stop_data_source_sync_job-instance_method
+      def stop_data_source_sync_job: (
+                                       application_id: ::String,
+                                       data_source_id: ::String,
+                                       index_id: ::String
+                                     ) -> _StopDataSourceSyncJobResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopDataSourceSyncJobResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApplicationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#update_application-instance_method
+      def update_application: (
+                                application_id: ::String,
+                                ?attachments_configuration: {
+                                  attachments_control_mode: ("ENABLED" | "DISABLED")
+                                },
+                                ?description: ::String,
+                                ?display_name: ::String,
+                                ?role_arn: ::String
+                              ) -> _UpdateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess
+
+      interface _UpdateChatControlsConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateChatControlsConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#update_chat_controls_configuration-instance_method
+      def update_chat_controls_configuration: (
+                                                application_id: ::String,
+                                                ?blocked_phrases_configuration_update: {
+                                                  blocked_phrases_to_create_or_update: Array[::String]?,
+                                                  blocked_phrases_to_delete: Array[::String]?,
+                                                  system_message_override: ::String?
+                                                },
+                                                ?client_token: ::String,
+                                                ?response_scope: ("ENTERPRISE_CONTENT_ONLY" | "EXTENDED_KNOWLEDGE_ENABLED"),
+                                                ?topic_configurations_to_create_or_update: Array[
+                                                  {
+                                                    description: ::String?,
+                                                    example_chat_messages: Array[::String]?,
+                                                    name: ::String,
+                                                    rules: Array[
+                                                      {
+                                                        excluded_users_and_groups: {
+                                                          user_groups: Array[::String]?,
+                                                          user_ids: Array[::String]?
+                                                        }?,
+                                                        included_users_and_groups: {
+                                                          user_groups: Array[::String]?,
+                                                          user_ids: Array[::String]?
+                                                        }?,
+                                                        rule_configuration: {
+                                                          content_blocker_rule: {
+                                                            system_message_override: ::String?
+                                                          }?,
+                                                          content_retrieval_rule: {
+                                                            eligible_data_sources: Array[
+                                                              {
+                                                                data_source_id: ::String?,
+                                                                index_id: ::String?
+                                                              },
+                                                            ]?
+                                                          }?
+                                                        }?,
+                                                        rule_type: ("CONTENT_BLOCKER_RULE" | "CONTENT_RETRIEVAL_RULE")
+                                                      },
+                                                    ]
+                                                  },
+                                                ],
+                                                ?topic_configurations_to_delete: Array[
+                                                  {
+                                                    description: ::String?,
+                                                    example_chat_messages: Array[::String]?,
+                                                    name: ::String,
+                                                    rules: Array[
+                                                      {
+                                                        excluded_users_and_groups: {
+                                                          user_groups: Array[::String]?,
+                                                          user_ids: Array[::String]?
+                                                        }?,
+                                                        included_users_and_groups: {
+                                                          user_groups: Array[::String]?,
+                                                          user_ids: Array[::String]?
+                                                        }?,
+                                                        rule_configuration: {
+                                                          content_blocker_rule: {
+                                                            system_message_override: ::String?
+                                                          }?,
+                                                          content_retrieval_rule: {
+                                                            eligible_data_sources: Array[
+                                                              {
+                                                                data_source_id: ::String?,
+                                                                index_id: ::String?
+                                                              },
+                                                            ]?
+                                                          }?
+                                                        }?,
+                                                        rule_type: ("CONTENT_BLOCKER_RULE" | "CONTENT_RETRIEVAL_RULE")
+                                                      },
+                                                    ]
+                                                  },
+                                                ]
+                                              ) -> _UpdateChatControlsConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChatControlsConfigurationResponseSuccess
+
+      interface _UpdateDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataSourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#update_data_source-instance_method
+      def update_data_source: (
+                                application_id: ::String,
+                                ?configuration: {
+                                },
+                                data_source_id: ::String,
+                                ?description: ::String,
+                                ?display_name: ::String,
+                                ?document_enrichment_configuration: {
+                                  inline_configurations: Array[
+                                    {
+                                      condition: {
+                                        key: ::String,
+                                        operator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "EXISTS" | "NOT_EXISTS" | "BEGINS_WITH"),
+                                        value: {
+                                          date_value: ::Time?,
+                                          long_value: ::Integer?,
+                                          string_list_value: Array[::String]?,
+                                          string_value: ::String?
+                                        }?
+                                      }?,
+                                      document_content_operator: ("DELETE")?,
+                                      target: {
+                                        attribute_value_operator: ("DELETE")?,
+                                        key: ::String,
+                                        value: {
+                                          date_value: ::Time?,
+                                          long_value: ::Integer?,
+                                          string_list_value: Array[::String]?,
+                                          string_value: ::String?
+                                        }?
+                                      }?
+                                    },
+                                  ]?,
+                                  post_extraction_hook_configuration: {
+                                    invocation_condition: {
+                                      key: ::String,
+                                      operator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "EXISTS" | "NOT_EXISTS" | "BEGINS_WITH"),
+                                      value: {
+                                        date_value: ::Time?,
+                                        long_value: ::Integer?,
+                                        string_list_value: Array[::String]?,
+                                        string_value: ::String?
+                                      }?
+                                    }?,
+                                    lambda_arn: ::String?,
+                                    role_arn: ::String?,
+                                    s3_bucket_name: ::String?
+                                  }?,
+                                  pre_extraction_hook_configuration: {
+                                    invocation_condition: {
+                                      key: ::String,
+                                      operator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "EXISTS" | "NOT_EXISTS" | "BEGINS_WITH"),
+                                      value: {
+                                        date_value: ::Time?,
+                                        long_value: ::Integer?,
+                                        string_list_value: Array[::String]?,
+                                        string_value: ::String?
+                                      }?
+                                    }?,
+                                    lambda_arn: ::String?,
+                                    role_arn: ::String?,
+                                    s3_bucket_name: ::String?
+                                  }?
+                                },
+                                index_id: ::String,
+                                ?role_arn: ::String,
+                                ?sync_schedule: ::String,
+                                ?vpc_configuration: {
+                                  security_group_ids: Array[::String],
+                                  subnet_ids: Array[::String]
+                                }
+                              ) -> _UpdateDataSourceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataSourceResponseSuccess
+
+      interface _UpdateIndexResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIndexResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#update_index-instance_method
+      def update_index: (
+                          application_id: ::String,
+                          ?capacity_configuration: {
+                            units: ::Integer?
+                          },
+                          ?description: ::String,
+                          ?display_name: ::String,
+                          ?document_attribute_configurations: Array[
+                            {
+                              name: ::String?,
+                              search: ("ENABLED" | "DISABLED")?,
+                              type: ("STRING" | "STRING_LIST" | "NUMBER" | "DATE")?
+                            },
+                          ],
+                          index_id: ::String
+                        ) -> _UpdateIndexResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIndexResponseSuccess
+
+      interface _UpdatePluginResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePluginResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#update_plugin-instance_method
+      def update_plugin: (
+                           application_id: ::String,
+                           ?auth_configuration: {
+                             basic_auth_configuration: {
+                               role_arn: ::String,
+                               secret_arn: ::String
+                             }?,
+                             o_auth_2_client_credential_configuration: {
+                               role_arn: ::String,
+                               secret_arn: ::String
+                             }?
+                           },
+                           ?display_name: ::String,
+                           plugin_id: ::String,
+                           ?server_url: ::String,
+                           ?state: ("ENABLED" | "DISABLED")
+                         ) -> _UpdatePluginResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePluginResponseSuccess
+
+      interface _UpdateRetrieverResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRetrieverResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#update_retriever-instance_method
+      def update_retriever: (
+                              application_id: ::String,
+                              ?configuration: {
+                                kendra_index_configuration: {
+                                  index_id: ::String
+                                }?,
+                                native_index_configuration: {
+                                  index_id: ::String
+                                }?
+                              },
+                              ?display_name: ::String,
+                              retriever_id: ::String,
+                              ?role_arn: ::String
+                            ) -> _UpdateRetrieverResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRetrieverResponseSuccess
+
+      interface _UpdateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateUserResponse]
+        def user_aliases_added: () -> ::Array[Types::UserAlias]
+        def user_aliases_deleted: () -> ::Array[Types::UserAlias]
+        def user_aliases_updated: () -> ::Array[Types::UserAlias]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#update_user-instance_method
+      def update_user: (
+                         application_id: ::String,
+                         ?user_aliases_to_delete: Array[
+                           {
+                             data_source_id: ::String?,
+                             index_id: ::String?,
+                             user_id: ::String
+                           },
+                         ],
+                         ?user_aliases_to_update: Array[
+                           {
+                             data_source_id: ::String?,
+                             index_id: ::String?,
+                             user_id: ::String
+                           },
+                         ],
+                         user_id: ::String
+                       ) -> _UpdateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserResponseSuccess
+
+      interface _UpdateWebExperienceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWebExperienceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#update_web_experience-instance_method
+      def update_web_experience: (
+                                   application_id: ::String,
+                                   ?authentication_configuration: {
+                                     saml_configuration: {
+                                       metadata_xml: ::String,
+                                       role_arn: ::String,
+                                       user_group_attribute: ::String?,
+                                       user_id_attribute: ::String
+                                     }?
+                                   },
+                                   ?sample_prompts_control_mode: ("ENABLED" | "DISABLED"),
+                                   ?subtitle: ::String,
+                                   ?title: ::String,
+                                   web_experience_id: ::String,
+                                   ?welcome_message: ::String
+                                 ) -> _UpdateWebExperienceResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWebExperienceResponseSuccess
+    end
+  end
+end
+

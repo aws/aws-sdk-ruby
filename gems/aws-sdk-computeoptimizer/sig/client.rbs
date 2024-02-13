@@ -1,0 +1,546 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ComputeOptimizer
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _DeleteRecommendationPreferencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRecommendationPreferencesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#delete_recommendation_preferences-instance_method
+      def delete_recommendation_preferences: (
+                                               resource_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "NotApplicable" | "EcsService" | "License"),
+                                               ?scope: {
+                                                 name: ("Organization" | "AccountId" | "ResourceArn")?,
+                                                 value: ::String?
+                                               },
+                                               recommendation_preference_names: Array[("EnhancedInfrastructureMetrics" | "InferredWorkloadTypes" | "ExternalMetricsPreference" | "LookBackPeriodPreference" | "PreferredResources" | "UtilizationPreferences")]
+                                             ) -> _DeleteRecommendationPreferencesResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRecommendationPreferencesResponseSuccess
+
+      interface _DescribeRecommendationExportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRecommendationExportJobsResponse]
+        def recommendation_export_jobs: () -> ::Array[Types::RecommendationExportJob]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#describe_recommendation_export_jobs-instance_method
+      def describe_recommendation_export_jobs: (
+                                                 ?job_ids: Array[::String],
+                                                 ?filters: Array[
+                                                   {
+                                                     name: ("ResourceType" | "JobStatus")?,
+                                                     values: Array[::String]?
+                                                   },
+                                                 ],
+                                                 ?next_token: ::String,
+                                                 ?max_results: ::Integer
+                                               ) -> _DescribeRecommendationExportJobsResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRecommendationExportJobsResponseSuccess
+
+      interface _ExportAutoScalingGroupRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportAutoScalingGroupRecommendationsResponse]
+        def job_id: () -> ::String
+        def s3_destination: () -> Types::S3Destination
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#export_auto_scaling_group_recommendations-instance_method
+      def export_auto_scaling_group_recommendations: (
+                                                       ?account_ids: Array[::String],
+                                                       ?filters: Array[
+                                                         {
+                                                           name: ("Finding" | "FindingReasonCodes" | "RecommendationSourceType" | "InferredWorkloadTypes")?,
+                                                           values: Array[::String]?
+                                                         },
+                                                       ],
+                                                       ?fields_to_export: Array[("AccountId" | "AutoScalingGroupArn" | "AutoScalingGroupName" | "Finding" | "UtilizationMetricsCpuMaximum" | "UtilizationMetricsMemoryMaximum" | "UtilizationMetricsEbsReadOpsPerSecondMaximum" | "UtilizationMetricsEbsWriteOpsPerSecondMaximum" | "UtilizationMetricsEbsReadBytesPerSecondMaximum" | "UtilizationMetricsEbsWriteBytesPerSecondMaximum" | "UtilizationMetricsDiskReadOpsPerSecondMaximum" | "UtilizationMetricsDiskWriteOpsPerSecondMaximum" | "UtilizationMetricsDiskReadBytesPerSecondMaximum" | "UtilizationMetricsDiskWriteBytesPerSecondMaximum" | "UtilizationMetricsNetworkInBytesPerSecondMaximum" | "UtilizationMetricsNetworkOutBytesPerSecondMaximum" | "UtilizationMetricsNetworkPacketsInPerSecondMaximum" | "UtilizationMetricsNetworkPacketsOutPerSecondMaximum" | "LookbackPeriodInDays" | "CurrentConfigurationInstanceType" | "CurrentConfigurationDesiredCapacity" | "CurrentConfigurationMinSize" | "CurrentConfigurationMaxSize" | "CurrentOnDemandPrice" | "CurrentStandardOneYearNoUpfrontReservedPrice" | "CurrentStandardThreeYearNoUpfrontReservedPrice" | "CurrentVCpus" | "CurrentMemory" | "CurrentStorage" | "CurrentNetwork" | "RecommendationOptionsConfigurationInstanceType" | "RecommendationOptionsConfigurationDesiredCapacity" | "RecommendationOptionsConfigurationMinSize" | "RecommendationOptionsConfigurationMaxSize" | "RecommendationOptionsProjectedUtilizationMetricsCpuMaximum" | "RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum" | "RecommendationOptionsPerformanceRisk" | "RecommendationOptionsOnDemandPrice" | "RecommendationOptionsStandardOneYearNoUpfrontReservedPrice" | "RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice" | "RecommendationOptionsVcpus" | "RecommendationOptionsMemory" | "RecommendationOptionsStorage" | "RecommendationOptionsNetwork" | "LastRefreshTimestamp" | "CurrentPerformanceRisk" | "RecommendationOptionsSavingsOpportunityPercentage" | "RecommendationOptionsEstimatedMonthlySavingsCurrency" | "RecommendationOptionsEstimatedMonthlySavingsValue" | "EffectiveRecommendationPreferencesCpuVendorArchitectures" | "EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics" | "EffectiveRecommendationPreferencesInferredWorkloadTypes" | "InferredWorkloadTypes" | "RecommendationOptionsMigrationEffort" | "CurrentInstanceGpuInfo" | "RecommendationOptionsInstanceGpuInfo" | "UtilizationMetricsGpuPercentageMaximum" | "UtilizationMetricsGpuMemoryPercentageMaximum" | "RecommendationOptionsProjectedUtilizationMetricsGpuPercentageMaximum" | "RecommendationOptionsProjectedUtilizationMetricsGpuMemoryPercentageMaximum" | "EffectiveRecommendationPreferencesSavingsEstimationMode" | "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage" | "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts" | "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts" | "EffectiveRecommendationPreferencesPreferredResources" | "EffectiveRecommendationPreferencesLookBackPeriod")],
+                                                       s3_destination_config: {
+                                                         bucket: ::String?,
+                                                         key_prefix: ::String?
+                                                       },
+                                                       ?file_format: ("Csv"),
+                                                       ?include_member_accounts: bool,
+                                                       ?recommendation_preferences: {
+                                                         cpu_vendor_architectures: Array[("AWS_ARM64" | "CURRENT")]?
+                                                       }
+                                                     ) -> _ExportAutoScalingGroupRecommendationsResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportAutoScalingGroupRecommendationsResponseSuccess
+
+      interface _ExportEBSVolumeRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportEBSVolumeRecommendationsResponse]
+        def job_id: () -> ::String
+        def s3_destination: () -> Types::S3Destination
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#export_ebs_volume_recommendations-instance_method
+      def export_ebs_volume_recommendations: (
+                                               ?account_ids: Array[::String],
+                                               ?filters: Array[
+                                                 {
+                                                   name: ("Finding")?,
+                                                   values: Array[::String]?
+                                                 },
+                                               ],
+                                               ?fields_to_export: Array[("AccountId" | "VolumeArn" | "Finding" | "UtilizationMetricsVolumeReadOpsPerSecondMaximum" | "UtilizationMetricsVolumeWriteOpsPerSecondMaximum" | "UtilizationMetricsVolumeReadBytesPerSecondMaximum" | "UtilizationMetricsVolumeWriteBytesPerSecondMaximum" | "LookbackPeriodInDays" | "CurrentConfigurationVolumeType" | "CurrentConfigurationVolumeBaselineIOPS" | "CurrentConfigurationVolumeBaselineThroughput" | "CurrentConfigurationVolumeBurstIOPS" | "CurrentConfigurationVolumeBurstThroughput" | "CurrentConfigurationVolumeSize" | "CurrentMonthlyPrice" | "RecommendationOptionsConfigurationVolumeType" | "RecommendationOptionsConfigurationVolumeBaselineIOPS" | "RecommendationOptionsConfigurationVolumeBaselineThroughput" | "RecommendationOptionsConfigurationVolumeBurstIOPS" | "RecommendationOptionsConfigurationVolumeBurstThroughput" | "RecommendationOptionsConfigurationVolumeSize" | "RecommendationOptionsMonthlyPrice" | "RecommendationOptionsPerformanceRisk" | "LastRefreshTimestamp" | "CurrentPerformanceRisk" | "RecommendationOptionsSavingsOpportunityPercentage" | "RecommendationOptionsEstimatedMonthlySavingsCurrency" | "RecommendationOptionsEstimatedMonthlySavingsValue" | "RootVolume" | "Tags" | "CurrentConfigurationRootVolume" | "EffectiveRecommendationPreferencesSavingsEstimationMode" | "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage" | "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts" | "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts")],
+                                               s3_destination_config: {
+                                                 bucket: ::String?,
+                                                 key_prefix: ::String?
+                                               },
+                                               ?file_format: ("Csv"),
+                                               ?include_member_accounts: bool
+                                             ) -> _ExportEBSVolumeRecommendationsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportEBSVolumeRecommendationsResponseSuccess
+
+      interface _ExportEC2InstanceRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportEC2InstanceRecommendationsResponse]
+        def job_id: () -> ::String
+        def s3_destination: () -> Types::S3Destination
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#export_ec2_instance_recommendations-instance_method
+      def export_ec2_instance_recommendations: (
+                                                 ?account_ids: Array[::String],
+                                                 ?filters: Array[
+                                                   {
+                                                     name: ("Finding" | "FindingReasonCodes" | "RecommendationSourceType" | "InferredWorkloadTypes")?,
+                                                     values: Array[::String]?
+                                                   },
+                                                 ],
+                                                 ?fields_to_export: Array[("AccountId" | "InstanceArn" | "InstanceName" | "Finding" | "FindingReasonCodes" | "LookbackPeriodInDays" | "CurrentInstanceType" | "UtilizationMetricsCpuMaximum" | "UtilizationMetricsMemoryMaximum" | "UtilizationMetricsEbsReadOpsPerSecondMaximum" | "UtilizationMetricsEbsWriteOpsPerSecondMaximum" | "UtilizationMetricsEbsReadBytesPerSecondMaximum" | "UtilizationMetricsEbsWriteBytesPerSecondMaximum" | "UtilizationMetricsDiskReadOpsPerSecondMaximum" | "UtilizationMetricsDiskWriteOpsPerSecondMaximum" | "UtilizationMetricsDiskReadBytesPerSecondMaximum" | "UtilizationMetricsDiskWriteBytesPerSecondMaximum" | "UtilizationMetricsNetworkInBytesPerSecondMaximum" | "UtilizationMetricsNetworkOutBytesPerSecondMaximum" | "UtilizationMetricsNetworkPacketsInPerSecondMaximum" | "UtilizationMetricsNetworkPacketsOutPerSecondMaximum" | "CurrentOnDemandPrice" | "CurrentStandardOneYearNoUpfrontReservedPrice" | "CurrentStandardThreeYearNoUpfrontReservedPrice" | "CurrentVCpus" | "CurrentMemory" | "CurrentStorage" | "CurrentNetwork" | "RecommendationOptionsInstanceType" | "RecommendationOptionsProjectedUtilizationMetricsCpuMaximum" | "RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum" | "RecommendationOptionsPlatformDifferences" | "RecommendationOptionsPerformanceRisk" | "RecommendationOptionsVcpus" | "RecommendationOptionsMemory" | "RecommendationOptionsStorage" | "RecommendationOptionsNetwork" | "RecommendationOptionsOnDemandPrice" | "RecommendationOptionsStandardOneYearNoUpfrontReservedPrice" | "RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice" | "RecommendationsSourcesRecommendationSourceArn" | "RecommendationsSourcesRecommendationSourceType" | "LastRefreshTimestamp" | "CurrentPerformanceRisk" | "RecommendationOptionsSavingsOpportunityPercentage" | "RecommendationOptionsEstimatedMonthlySavingsCurrency" | "RecommendationOptionsEstimatedMonthlySavingsValue" | "EffectiveRecommendationPreferencesCpuVendorArchitectures" | "EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics" | "EffectiveRecommendationPreferencesInferredWorkloadTypes" | "InferredWorkloadTypes" | "RecommendationOptionsMigrationEffort" | "EffectiveRecommendationPreferencesExternalMetricsSource" | "InstanceState" | "Tags" | "ExternalMetricStatusCode" | "ExternalMetricStatusReason" | "CurrentInstanceGpuInfo" | "RecommendationOptionsInstanceGpuInfo" | "UtilizationMetricsGpuPercentageMaximum" | "UtilizationMetricsGpuMemoryPercentageMaximum" | "RecommendationOptionsProjectedUtilizationMetricsGpuPercentageMaximum" | "RecommendationOptionsProjectedUtilizationMetricsGpuMemoryPercentageMaximum" | "Idle" | "EffectiveRecommendationPreferencesPreferredResources" | "EffectiveRecommendationPreferencesLookBackPeriod" | "EffectiveRecommendationPreferencesUtilizationPreferences" | "EffectiveRecommendationPreferencesSavingsEstimationMode" | "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage" | "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts" | "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts")],
+                                                 s3_destination_config: {
+                                                   bucket: ::String?,
+                                                   key_prefix: ::String?
+                                                 },
+                                                 ?file_format: ("Csv"),
+                                                 ?include_member_accounts: bool,
+                                                 ?recommendation_preferences: {
+                                                   cpu_vendor_architectures: Array[("AWS_ARM64" | "CURRENT")]?
+                                                 }
+                                               ) -> _ExportEC2InstanceRecommendationsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportEC2InstanceRecommendationsResponseSuccess
+
+      interface _ExportECSServiceRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportECSServiceRecommendationsResponse]
+        def job_id: () -> ::String
+        def s3_destination: () -> Types::S3Destination
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#export_ecs_service_recommendations-instance_method
+      def export_ecs_service_recommendations: (
+                                                ?account_ids: Array[::String],
+                                                ?filters: Array[
+                                                  {
+                                                    name: ("Finding" | "FindingReasonCode")?,
+                                                    values: Array[::String]?
+                                                  },
+                                                ],
+                                                ?fields_to_export: Array[("AccountId" | "ServiceArn" | "LookbackPeriodInDays" | "LastRefreshTimestamp" | "LaunchType" | "CurrentPerformanceRisk" | "CurrentServiceConfigurationMemory" | "CurrentServiceConfigurationCpu" | "CurrentServiceConfigurationTaskDefinitionArn" | "CurrentServiceConfigurationAutoScalingConfiguration" | "CurrentServiceContainerConfigurations" | "UtilizationMetricsCpuMaximum" | "UtilizationMetricsMemoryMaximum" | "Finding" | "FindingReasonCodes" | "RecommendationOptionsMemory" | "RecommendationOptionsCpu" | "RecommendationOptionsSavingsOpportunityPercentage" | "RecommendationOptionsEstimatedMonthlySavingsCurrency" | "RecommendationOptionsEstimatedMonthlySavingsValue" | "RecommendationOptionsContainerRecommendations" | "RecommendationOptionsProjectedUtilizationMetricsCpuMaximum" | "RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum" | "Tags" | "EffectiveRecommendationPreferencesSavingsEstimationMode" | "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage" | "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts" | "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts")],
+                                                s3_destination_config: {
+                                                  bucket: ::String?,
+                                                  key_prefix: ::String?
+                                                },
+                                                ?file_format: ("Csv"),
+                                                ?include_member_accounts: bool
+                                              ) -> _ExportECSServiceRecommendationsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportECSServiceRecommendationsResponseSuccess
+
+      interface _ExportLambdaFunctionRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportLambdaFunctionRecommendationsResponse]
+        def job_id: () -> ::String
+        def s3_destination: () -> Types::S3Destination
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#export_lambda_function_recommendations-instance_method
+      def export_lambda_function_recommendations: (
+                                                    ?account_ids: Array[::String],
+                                                    ?filters: Array[
+                                                      {
+                                                        name: ("Finding" | "FindingReasonCode")?,
+                                                        values: Array[::String]?
+                                                      },
+                                                    ],
+                                                    ?fields_to_export: Array[("AccountId" | "FunctionArn" | "FunctionVersion" | "Finding" | "FindingReasonCodes" | "NumberOfInvocations" | "UtilizationMetricsDurationMaximum" | "UtilizationMetricsDurationAverage" | "UtilizationMetricsMemoryMaximum" | "UtilizationMetricsMemoryAverage" | "LookbackPeriodInDays" | "CurrentConfigurationMemorySize" | "CurrentConfigurationTimeout" | "CurrentCostTotal" | "CurrentCostAverage" | "RecommendationOptionsConfigurationMemorySize" | "RecommendationOptionsCostLow" | "RecommendationOptionsCostHigh" | "RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound" | "RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound" | "RecommendationOptionsProjectedUtilizationMetricsDurationExpected" | "LastRefreshTimestamp" | "CurrentPerformanceRisk" | "RecommendationOptionsSavingsOpportunityPercentage" | "RecommendationOptionsEstimatedMonthlySavingsCurrency" | "RecommendationOptionsEstimatedMonthlySavingsValue" | "Tags" | "EffectiveRecommendationPreferencesSavingsEstimationMode" | "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage" | "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts" | "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts")],
+                                                    s3_destination_config: {
+                                                      bucket: ::String?,
+                                                      key_prefix: ::String?
+                                                    },
+                                                    ?file_format: ("Csv"),
+                                                    ?include_member_accounts: bool
+                                                  ) -> _ExportLambdaFunctionRecommendationsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportLambdaFunctionRecommendationsResponseSuccess
+
+      interface _ExportLicenseRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportLicenseRecommendationsResponse]
+        def job_id: () -> ::String
+        def s3_destination: () -> Types::S3Destination
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#export_license_recommendations-instance_method
+      def export_license_recommendations: (
+                                            ?account_ids: Array[::String],
+                                            ?filters: Array[
+                                              {
+                                                name: ("Finding" | "FindingReasonCode" | "LicenseName")?,
+                                                values: Array[::String]?
+                                              },
+                                            ],
+                                            ?fields_to_export: Array[("AccountId" | "ResourceArn" | "LookbackPeriodInDays" | "LastRefreshTimestamp" | "Finding" | "FindingReasonCodes" | "CurrentLicenseConfigurationNumberOfCores" | "CurrentLicenseConfigurationInstanceType" | "CurrentLicenseConfigurationOperatingSystem" | "CurrentLicenseConfigurationLicenseName" | "CurrentLicenseConfigurationLicenseEdition" | "CurrentLicenseConfigurationLicenseModel" | "CurrentLicenseConfigurationLicenseVersion" | "CurrentLicenseConfigurationMetricsSource" | "RecommendationOptionsOperatingSystem" | "RecommendationOptionsLicenseEdition" | "RecommendationOptionsLicenseModel" | "RecommendationOptionsSavingsOpportunityPercentage" | "RecommendationOptionsEstimatedMonthlySavingsCurrency" | "RecommendationOptionsEstimatedMonthlySavingsValue" | "Tags")],
+                                            s3_destination_config: {
+                                              bucket: ::String?,
+                                              key_prefix: ::String?
+                                            },
+                                            ?file_format: ("Csv"),
+                                            ?include_member_accounts: bool
+                                          ) -> _ExportLicenseRecommendationsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportLicenseRecommendationsResponseSuccess
+
+      interface _GetAutoScalingGroupRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAutoScalingGroupRecommendationsResponse]
+        def next_token: () -> ::String
+        def auto_scaling_group_recommendations: () -> ::Array[Types::AutoScalingGroupRecommendation]
+        def errors: () -> ::Array[Types::GetRecommendationError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#get_auto_scaling_group_recommendations-instance_method
+      def get_auto_scaling_group_recommendations: (
+                                                    ?account_ids: Array[::String],
+                                                    ?auto_scaling_group_arns: Array[::String],
+                                                    ?next_token: ::String,
+                                                    ?max_results: ::Integer,
+                                                    ?filters: Array[
+                                                      {
+                                                        name: ("Finding" | "FindingReasonCodes" | "RecommendationSourceType" | "InferredWorkloadTypes")?,
+                                                        values: Array[::String]?
+                                                      },
+                                                    ],
+                                                    ?recommendation_preferences: {
+                                                      cpu_vendor_architectures: Array[("AWS_ARM64" | "CURRENT")]?
+                                                    }
+                                                  ) -> _GetAutoScalingGroupRecommendationsResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAutoScalingGroupRecommendationsResponseSuccess
+
+      interface _GetEBSVolumeRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEBSVolumeRecommendationsResponse]
+        def next_token: () -> ::String
+        def volume_recommendations: () -> ::Array[Types::VolumeRecommendation]
+        def errors: () -> ::Array[Types::GetRecommendationError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#get_ebs_volume_recommendations-instance_method
+      def get_ebs_volume_recommendations: (
+                                            ?volume_arns: Array[::String],
+                                            ?next_token: ::String,
+                                            ?max_results: ::Integer,
+                                            ?filters: Array[
+                                              {
+                                                name: ("Finding")?,
+                                                values: Array[::String]?
+                                              },
+                                            ],
+                                            ?account_ids: Array[::String]
+                                          ) -> _GetEBSVolumeRecommendationsResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEBSVolumeRecommendationsResponseSuccess
+
+      interface _GetEC2InstanceRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEC2InstanceRecommendationsResponse]
+        def next_token: () -> ::String
+        def instance_recommendations: () -> ::Array[Types::InstanceRecommendation]
+        def errors: () -> ::Array[Types::GetRecommendationError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#get_ec2_instance_recommendations-instance_method
+      def get_ec2_instance_recommendations: (
+                                              ?instance_arns: Array[::String],
+                                              ?next_token: ::String,
+                                              ?max_results: ::Integer,
+                                              ?filters: Array[
+                                                {
+                                                  name: ("Finding" | "FindingReasonCodes" | "RecommendationSourceType" | "InferredWorkloadTypes")?,
+                                                  values: Array[::String]?
+                                                },
+                                              ],
+                                              ?account_ids: Array[::String],
+                                              ?recommendation_preferences: {
+                                                cpu_vendor_architectures: Array[("AWS_ARM64" | "CURRENT")]?
+                                              }
+                                            ) -> _GetEC2InstanceRecommendationsResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEC2InstanceRecommendationsResponseSuccess
+
+      interface _GetEC2RecommendationProjectedMetricsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEC2RecommendationProjectedMetricsResponse]
+        def recommended_option_projected_metrics: () -> ::Array[Types::RecommendedOptionProjectedMetric]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#get_ec2_recommendation_projected_metrics-instance_method
+      def get_ec2_recommendation_projected_metrics: (
+                                                      instance_arn: ::String,
+                                                      stat: ("Maximum" | "Average"),
+                                                      period: ::Integer,
+                                                      start_time: ::Time,
+                                                      end_time: ::Time,
+                                                      ?recommendation_preferences: {
+                                                        cpu_vendor_architectures: Array[("AWS_ARM64" | "CURRENT")]?
+                                                      }
+                                                    ) -> _GetEC2RecommendationProjectedMetricsResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEC2RecommendationProjectedMetricsResponseSuccess
+
+      interface _GetECSServiceRecommendationProjectedMetricsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetECSServiceRecommendationProjectedMetricsResponse]
+        def recommended_option_projected_metrics: () -> ::Array[Types::ECSServiceRecommendedOptionProjectedMetric]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#get_ecs_service_recommendation_projected_metrics-instance_method
+      def get_ecs_service_recommendation_projected_metrics: (
+                                                              service_arn: ::String,
+                                                              stat: ("Maximum" | "Average"),
+                                                              period: ::Integer,
+                                                              start_time: ::Time,
+                                                              end_time: ::Time
+                                                            ) -> _GetECSServiceRecommendationProjectedMetricsResponseSuccess
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetECSServiceRecommendationProjectedMetricsResponseSuccess
+
+      interface _GetECSServiceRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetECSServiceRecommendationsResponse]
+        def next_token: () -> ::String
+        def ecs_service_recommendations: () -> ::Array[Types::ECSServiceRecommendation]
+        def errors: () -> ::Array[Types::GetRecommendationError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#get_ecs_service_recommendations-instance_method
+      def get_ecs_service_recommendations: (
+                                             ?service_arns: Array[::String],
+                                             ?next_token: ::String,
+                                             ?max_results: ::Integer,
+                                             ?filters: Array[
+                                               {
+                                                 name: ("Finding" | "FindingReasonCode")?,
+                                                 values: Array[::String]?
+                                               },
+                                             ],
+                                             ?account_ids: Array[::String]
+                                           ) -> _GetECSServiceRecommendationsResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetECSServiceRecommendationsResponseSuccess
+
+      interface _GetEffectiveRecommendationPreferencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEffectiveRecommendationPreferencesResponse]
+        def enhanced_infrastructure_metrics: () -> ("Active" | "Inactive")
+        def external_metrics_preference: () -> Types::ExternalMetricsPreference
+        def look_back_period: () -> ("DAYS_14" | "DAYS_32" | "DAYS_93")
+        def utilization_preferences: () -> ::Array[Types::UtilizationPreference]
+        def preferred_resources: () -> ::Array[Types::EffectivePreferredResource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#get_effective_recommendation_preferences-instance_method
+      def get_effective_recommendation_preferences: (
+                                                      resource_arn: ::String
+                                                    ) -> _GetEffectiveRecommendationPreferencesResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEffectiveRecommendationPreferencesResponseSuccess
+
+      interface _GetEnrollmentStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnrollmentStatusResponse]
+        def status: () -> ("Active" | "Inactive" | "Pending" | "Failed")
+        def status_reason: () -> ::String
+        def member_accounts_enrolled: () -> bool
+        def last_updated_timestamp: () -> ::Time
+        def number_of_member_accounts_opted_in: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#get_enrollment_status-instance_method
+      def get_enrollment_status: (
+                                 ) -> _GetEnrollmentStatusResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnrollmentStatusResponseSuccess
+
+      interface _GetEnrollmentStatusesForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnrollmentStatusesForOrganizationResponse]
+        def account_enrollment_statuses: () -> ::Array[Types::AccountEnrollmentStatus]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#get_enrollment_statuses_for_organization-instance_method
+      def get_enrollment_statuses_for_organization: (
+                                                      ?filters: Array[
+                                                        {
+                                                          name: ("Status")?,
+                                                          values: Array[::String]?
+                                                        },
+                                                      ],
+                                                      ?next_token: ::String,
+                                                      ?max_results: ::Integer
+                                                    ) -> _GetEnrollmentStatusesForOrganizationResponseSuccess
+                                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnrollmentStatusesForOrganizationResponseSuccess
+
+      interface _GetLambdaFunctionRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLambdaFunctionRecommendationsResponse]
+        def next_token: () -> ::String
+        def lambda_function_recommendations: () -> ::Array[Types::LambdaFunctionRecommendation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#get_lambda_function_recommendations-instance_method
+      def get_lambda_function_recommendations: (
+                                                 ?function_arns: Array[::String],
+                                                 ?account_ids: Array[::String],
+                                                 ?filters: Array[
+                                                   {
+                                                     name: ("Finding" | "FindingReasonCode")?,
+                                                     values: Array[::String]?
+                                                   },
+                                                 ],
+                                                 ?next_token: ::String,
+                                                 ?max_results: ::Integer
+                                               ) -> _GetLambdaFunctionRecommendationsResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLambdaFunctionRecommendationsResponseSuccess
+
+      interface _GetLicenseRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLicenseRecommendationsResponse]
+        def next_token: () -> ::String
+        def license_recommendations: () -> ::Array[Types::LicenseRecommendation]
+        def errors: () -> ::Array[Types::GetRecommendationError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#get_license_recommendations-instance_method
+      def get_license_recommendations: (
+                                         ?resource_arns: Array[::String],
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer,
+                                         ?filters: Array[
+                                           {
+                                             name: ("Finding" | "FindingReasonCode" | "LicenseName")?,
+                                             values: Array[::String]?
+                                           },
+                                         ],
+                                         ?account_ids: Array[::String]
+                                       ) -> _GetLicenseRecommendationsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLicenseRecommendationsResponseSuccess
+
+      interface _GetRecommendationPreferencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRecommendationPreferencesResponse]
+        def next_token: () -> ::String
+        def recommendation_preferences_details: () -> ::Array[Types::RecommendationPreferencesDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#get_recommendation_preferences-instance_method
+      def get_recommendation_preferences: (
+                                            resource_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "NotApplicable" | "EcsService" | "License"),
+                                            ?scope: {
+                                              name: ("Organization" | "AccountId" | "ResourceArn")?,
+                                              value: ::String?
+                                            },
+                                            ?next_token: ::String,
+                                            ?max_results: ::Integer
+                                          ) -> _GetRecommendationPreferencesResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecommendationPreferencesResponseSuccess
+
+      interface _GetRecommendationSummariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRecommendationSummariesResponse]
+        def next_token: () -> ::String
+        def recommendation_summaries: () -> ::Array[Types::RecommendationSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#get_recommendation_summaries-instance_method
+      def get_recommendation_summaries: (
+                                          ?account_ids: Array[::String],
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _GetRecommendationSummariesResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecommendationSummariesResponseSuccess
+
+      interface _PutRecommendationPreferencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutRecommendationPreferencesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#put_recommendation_preferences-instance_method
+      def put_recommendation_preferences: (
+                                            resource_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "NotApplicable" | "EcsService" | "License"),
+                                            ?scope: {
+                                              name: ("Organization" | "AccountId" | "ResourceArn")?,
+                                              value: ::String?
+                                            },
+                                            ?enhanced_infrastructure_metrics: ("Active" | "Inactive"),
+                                            ?inferred_workload_types: ("Active" | "Inactive"),
+                                            ?external_metrics_preference: {
+                                              source: ("Datadog" | "Dynatrace" | "NewRelic" | "Instana")?
+                                            },
+                                            ?look_back_period: ("DAYS_14" | "DAYS_32" | "DAYS_93"),
+                                            ?utilization_preferences: Array[
+                                              {
+                                                metric_name: ("CpuUtilization")?,
+                                                metric_parameters: {
+                                                  threshold: ("P90" | "P95" | "P99_5")?,
+                                                  headroom: ("PERCENT_30" | "PERCENT_20" | "PERCENT_0")?
+                                                }?
+                                              },
+                                            ],
+                                            ?preferred_resources: Array[
+                                              {
+                                                name: ("Ec2InstanceTypes")?,
+                                                include_list: Array[::String]?,
+                                                exclude_list: Array[::String]?
+                                              },
+                                            ],
+                                            ?savings_estimation_mode: ("AfterDiscounts" | "BeforeDiscounts")
+                                          ) -> _PutRecommendationPreferencesResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutRecommendationPreferencesResponseSuccess
+
+      interface _UpdateEnrollmentStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEnrollmentStatusResponse]
+        def status: () -> ("Active" | "Inactive" | "Pending" | "Failed")
+        def status_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizer/Client.html#update_enrollment_status-instance_method
+      def update_enrollment_status: (
+                                      status: ("Active" | "Inactive" | "Pending" | "Failed"),
+                                      ?include_member_accounts: bool
+                                    ) -> _UpdateEnrollmentStatusResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnrollmentStatusResponseSuccess
+    end
+  end
+end
+

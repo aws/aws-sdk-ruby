@@ -1,0 +1,1763 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Proton
+  module Types
+
+    class AcceptEnvironmentAccountConnectionInput
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptEnvironmentAccountConnectionOutput
+      attr_accessor environment_account_connection: Types::EnvironmentAccountConnection
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: [:message]
+    end
+
+    class AccountSettings
+      attr_accessor pipeline_codebuild_role_arn: ::String
+      attr_accessor pipeline_provisioning_repository: Types::RepositoryBranch
+      attr_accessor pipeline_service_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CancelComponentDeploymentInput
+      attr_accessor component_name: ::String
+      SENSITIVE: []
+    end
+
+    class CancelComponentDeploymentOutput
+      attr_accessor component: Types::Component
+      SENSITIVE: []
+    end
+
+    class CancelEnvironmentDeploymentInput
+      attr_accessor environment_name: ::String
+      SENSITIVE: []
+    end
+
+    class CancelEnvironmentDeploymentOutput
+      attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class CancelServiceInstanceDeploymentInput
+      attr_accessor service_instance_name: ::String
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class CancelServiceInstanceDeploymentOutput
+      attr_accessor service_instance: Types::ServiceInstance
+      SENSITIVE: []
+    end
+
+    class CancelServicePipelineDeploymentInput
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class CancelServicePipelineDeploymentOutput
+      attr_accessor pipeline: Types::ServicePipeline
+      SENSITIVE: []
+    end
+
+    class CompatibleEnvironmentTemplate
+      attr_accessor major_version: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class CompatibleEnvironmentTemplateInput
+      attr_accessor major_version: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class Component
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor deployment_status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "CANCELLING" | "CANCELLED")
+      attr_accessor deployment_status_message: ::String
+      attr_accessor description: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor last_attempted_deployment_id: ::String
+      attr_accessor last_client_request_token: ::String
+      attr_accessor last_deployment_attempted_at: ::Time
+      attr_accessor last_deployment_succeeded_at: ::Time
+      attr_accessor last_modified_at: ::Time
+      attr_accessor last_succeeded_deployment_id: ::String
+      attr_accessor name: ::String
+      attr_accessor service_instance_name: ::String
+      attr_accessor service_name: ::String
+      attr_accessor service_spec: ::String
+      SENSITIVE: [:deployment_status_message, :description, :service_spec]
+    end
+
+    class ComponentState
+      attr_accessor service_instance_name: ::String
+      attr_accessor service_name: ::String
+      attr_accessor service_spec: ::String
+      attr_accessor template_file: ::String
+      SENSITIVE: [:service_spec, :template_file]
+    end
+
+    class ComponentSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor deployment_status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "CANCELLING" | "CANCELLED")
+      attr_accessor deployment_status_message: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor last_attempted_deployment_id: ::String
+      attr_accessor last_deployment_attempted_at: ::Time
+      attr_accessor last_deployment_succeeded_at: ::Time
+      attr_accessor last_modified_at: ::Time
+      attr_accessor last_succeeded_deployment_id: ::String
+      attr_accessor name: ::String
+      attr_accessor service_instance_name: ::String
+      attr_accessor service_name: ::String
+      SENSITIVE: [:deployment_status_message]
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: [:message]
+    end
+
+    class CountsSummary
+      attr_accessor components: Types::ResourceCountsSummary
+      attr_accessor environment_templates: Types::ResourceCountsSummary
+      attr_accessor environments: Types::ResourceCountsSummary
+      attr_accessor pipelines: Types::ResourceCountsSummary
+      attr_accessor service_instances: Types::ResourceCountsSummary
+      attr_accessor service_templates: Types::ResourceCountsSummary
+      attr_accessor services: Types::ResourceCountsSummary
+      SENSITIVE: []
+    end
+
+    class CreateComponentInput
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor manifest: ::String
+      attr_accessor name: ::String
+      attr_accessor service_instance_name: ::String
+      attr_accessor service_name: ::String
+      attr_accessor service_spec: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor template_file: ::String
+      SENSITIVE: [:description, :manifest, :service_spec, :template_file]
+    end
+
+    class CreateComponentOutput
+      attr_accessor component: Types::Component
+      SENSITIVE: []
+    end
+
+    class CreateEnvironmentAccountConnectionInput
+      attr_accessor client_token: ::String
+      attr_accessor codebuild_role_arn: ::String
+      attr_accessor component_role_arn: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor management_account_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateEnvironmentAccountConnectionOutput
+      attr_accessor environment_account_connection: Types::EnvironmentAccountConnection
+      SENSITIVE: []
+    end
+
+    class CreateEnvironmentInput
+      attr_accessor codebuild_role_arn: ::String
+      attr_accessor component_role_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor environment_account_connection_id: ::String
+      attr_accessor name: ::String
+      attr_accessor proton_service_role_arn: ::String
+      attr_accessor provisioning_repository: Types::RepositoryBranchInput
+      attr_accessor spec: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor template_major_version: ::String
+      attr_accessor template_minor_version: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: [:description, :spec]
+    end
+
+    class CreateEnvironmentOutput
+      attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class CreateEnvironmentTemplateInput
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor encryption_key: ::String
+      attr_accessor name: ::String
+      attr_accessor provisioning: ("CUSTOMER_MANAGED")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:description, :display_name]
+    end
+
+    class CreateEnvironmentTemplateOutput
+      attr_accessor environment_template: Types::EnvironmentTemplate
+      SENSITIVE: []
+    end
+
+    class CreateEnvironmentTemplateVersionInput
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor major_version: ::String
+      attr_accessor source: Types::TemplateVersionSourceInput
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor template_name: ::String
+      SENSITIVE: [:description]
+    end
+
+    class CreateEnvironmentTemplateVersionOutput
+      attr_accessor environment_template_version: Types::EnvironmentTemplateVersion
+      SENSITIVE: []
+    end
+
+    class CreateRepositoryInput
+      attr_accessor connection_arn: ::String
+      attr_accessor encryption_key: ::String
+      attr_accessor name: ::String
+      attr_accessor provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateRepositoryOutput
+      attr_accessor repository: Types::Repository
+      SENSITIVE: []
+    end
+
+    class CreateServiceInput
+      attr_accessor branch_name: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor repository_connection_arn: ::String
+      attr_accessor repository_id: ::String
+      attr_accessor spec: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor template_major_version: ::String
+      attr_accessor template_minor_version: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: [:description, :spec]
+    end
+
+    class CreateServiceInstanceInput
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor service_name: ::String
+      attr_accessor spec: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor template_major_version: ::String
+      attr_accessor template_minor_version: ::String
+      SENSITIVE: [:spec]
+    end
+
+    class CreateServiceInstanceOutput
+      attr_accessor service_instance: Types::ServiceInstance
+      SENSITIVE: []
+    end
+
+    class CreateServiceOutput
+      attr_accessor service: Types::Service
+      SENSITIVE: []
+    end
+
+    class CreateServiceSyncConfigInput
+      attr_accessor branch: ::String
+      attr_accessor file_path: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor repository_provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET")
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateServiceSyncConfigOutput
+      attr_accessor service_sync_config: Types::ServiceSyncConfig
+      SENSITIVE: []
+    end
+
+    class CreateServiceTemplateInput
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor encryption_key: ::String
+      attr_accessor name: ::String
+      attr_accessor pipeline_provisioning: ("CUSTOMER_MANAGED")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:description, :display_name]
+    end
+
+    class CreateServiceTemplateOutput
+      attr_accessor service_template: Types::ServiceTemplate
+      SENSITIVE: []
+    end
+
+    class CreateServiceTemplateVersionInput
+      attr_accessor client_token: ::String
+      attr_accessor compatible_environment_templates: ::Array[Types::CompatibleEnvironmentTemplateInput]
+      attr_accessor description: ::String
+      attr_accessor major_version: ::String
+      attr_accessor source: Types::TemplateVersionSourceInput
+      attr_accessor supported_component_sources: ::Array[("DIRECTLY_DEFINED")]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor template_name: ::String
+      SENSITIVE: [:description]
+    end
+
+    class CreateServiceTemplateVersionOutput
+      attr_accessor service_template_version: Types::ServiceTemplateVersion
+      SENSITIVE: []
+    end
+
+    class CreateTemplateSyncConfigInput
+      attr_accessor branch: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor repository_provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET")
+      attr_accessor subdirectory: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_type: ("ENVIRONMENT" | "SERVICE")
+      SENSITIVE: []
+    end
+
+    class CreateTemplateSyncConfigOutput
+      attr_accessor template_sync_config: Types::TemplateSyncConfig
+      SENSITIVE: []
+    end
+
+    class DeleteComponentInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteComponentOutput
+      attr_accessor component: Types::Component
+      SENSITIVE: []
+    end
+
+    class DeleteDeploymentInput
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDeploymentOutput
+      attr_accessor deployment: Types::Deployment
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentAccountConnectionInput
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentAccountConnectionOutput
+      attr_accessor environment_account_connection: Types::EnvironmentAccountConnection
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentOutput
+      attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentTemplateInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentTemplateOutput
+      attr_accessor environment_template: Types::EnvironmentTemplate
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentTemplateVersionInput
+      attr_accessor major_version: ::String
+      attr_accessor minor_version: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentTemplateVersionOutput
+      attr_accessor environment_template_version: Types::EnvironmentTemplateVersion
+      SENSITIVE: []
+    end
+
+    class DeleteRepositoryInput
+      attr_accessor name: ::String
+      attr_accessor provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET")
+      SENSITIVE: []
+    end
+
+    class DeleteRepositoryOutput
+      attr_accessor repository: Types::Repository
+      SENSITIVE: []
+    end
+
+    class DeleteServiceInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServiceOutput
+      attr_accessor service: Types::Service
+      SENSITIVE: []
+    end
+
+    class DeleteServiceSyncConfigInput
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServiceSyncConfigOutput
+      attr_accessor service_sync_config: Types::ServiceSyncConfig
+      SENSITIVE: []
+    end
+
+    class DeleteServiceTemplateInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServiceTemplateOutput
+      attr_accessor service_template: Types::ServiceTemplate
+      SENSITIVE: []
+    end
+
+    class DeleteServiceTemplateVersionInput
+      attr_accessor major_version: ::String
+      attr_accessor minor_version: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServiceTemplateVersionOutput
+      attr_accessor service_template_version: Types::ServiceTemplateVersion
+      SENSITIVE: []
+    end
+
+    class DeleteTemplateSyncConfigInput
+      attr_accessor template_name: ::String
+      attr_accessor template_type: ("ENVIRONMENT" | "SERVICE")
+      SENSITIVE: []
+    end
+
+    class DeleteTemplateSyncConfigOutput
+      attr_accessor template_sync_config: Types::TemplateSyncConfig
+      SENSITIVE: []
+    end
+
+    class Deployment
+      attr_accessor arn: ::String
+      attr_accessor completed_at: ::Time
+      attr_accessor component_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor deployment_status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "CANCELLING" | "CANCELLED")
+      attr_accessor deployment_status_message: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor id: ::String
+      attr_accessor initial_state: Types::DeploymentState
+      attr_accessor last_attempted_deployment_id: ::String
+      attr_accessor last_modified_at: ::Time
+      attr_accessor last_succeeded_deployment_id: ::String
+      attr_accessor service_instance_name: ::String
+      attr_accessor service_name: ::String
+      attr_accessor target_arn: ::String
+      attr_accessor target_resource_created_at: ::Time
+      attr_accessor target_resource_type: ("ENVIRONMENT" | "SERVICE_PIPELINE" | "SERVICE_INSTANCE" | "COMPONENT")
+      attr_accessor target_state: Types::DeploymentState
+      SENSITIVE: [:deployment_status_message]
+    end
+
+    class DeploymentState
+      attr_accessor component: Types::ComponentState
+      attr_accessor environment: Types::EnvironmentState
+      attr_accessor service_instance: Types::ServiceInstanceState
+      attr_accessor service_pipeline: Types::ServicePipelineState
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Component < DeploymentState
+      end
+      class Environment < DeploymentState
+      end
+      class ServiceInstance < DeploymentState
+      end
+      class ServicePipeline < DeploymentState
+      end
+      class Unknown < DeploymentState
+      end
+    end
+
+    class DeploymentSummary
+      attr_accessor arn: ::String
+      attr_accessor completed_at: ::Time
+      attr_accessor component_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor deployment_status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "CANCELLING" | "CANCELLED")
+      attr_accessor environment_name: ::String
+      attr_accessor id: ::String
+      attr_accessor last_attempted_deployment_id: ::String
+      attr_accessor last_modified_at: ::Time
+      attr_accessor last_succeeded_deployment_id: ::String
+      attr_accessor service_instance_name: ::String
+      attr_accessor service_name: ::String
+      attr_accessor target_arn: ::String
+      attr_accessor target_resource_created_at: ::Time
+      attr_accessor target_resource_type: ("ENVIRONMENT" | "SERVICE_PIPELINE" | "SERVICE_INSTANCE" | "COMPONENT")
+      SENSITIVE: []
+    end
+
+    class Environment
+      attr_accessor arn: ::String
+      attr_accessor codebuild_role_arn: ::String
+      attr_accessor component_role_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor deployment_status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "CANCELLING" | "CANCELLED")
+      attr_accessor deployment_status_message: ::String
+      attr_accessor description: ::String
+      attr_accessor environment_account_connection_id: ::String
+      attr_accessor environment_account_id: ::String
+      attr_accessor last_attempted_deployment_id: ::String
+      attr_accessor last_deployment_attempted_at: ::Time
+      attr_accessor last_deployment_succeeded_at: ::Time
+      attr_accessor last_succeeded_deployment_id: ::String
+      attr_accessor name: ::String
+      attr_accessor proton_service_role_arn: ::String
+      attr_accessor provisioning: ("CUSTOMER_MANAGED")
+      attr_accessor provisioning_repository: Types::RepositoryBranch
+      attr_accessor spec: ::String
+      attr_accessor template_major_version: ::String
+      attr_accessor template_minor_version: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: [:deployment_status_message, :description, :spec]
+    end
+
+    class EnvironmentAccountConnection
+      attr_accessor arn: ::String
+      attr_accessor codebuild_role_arn: ::String
+      attr_accessor component_role_arn: ::String
+      attr_accessor environment_account_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor id: ::String
+      attr_accessor last_modified_at: ::Time
+      attr_accessor management_account_id: ::String
+      attr_accessor requested_at: ::Time
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("PENDING" | "CONNECTED" | "REJECTED")
+      SENSITIVE: []
+    end
+
+    class EnvironmentAccountConnectionSummary
+      attr_accessor arn: ::String
+      attr_accessor component_role_arn: ::String
+      attr_accessor environment_account_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor id: ::String
+      attr_accessor last_modified_at: ::Time
+      attr_accessor management_account_id: ::String
+      attr_accessor requested_at: ::Time
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("PENDING" | "CONNECTED" | "REJECTED")
+      SENSITIVE: []
+    end
+
+    class EnvironmentState
+      attr_accessor spec: ::String
+      attr_accessor template_major_version: ::String
+      attr_accessor template_minor_version: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: [:spec]
+    end
+
+    class EnvironmentSummary
+      attr_accessor arn: ::String
+      attr_accessor component_role_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor deployment_status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "CANCELLING" | "CANCELLED")
+      attr_accessor deployment_status_message: ::String
+      attr_accessor description: ::String
+      attr_accessor environment_account_connection_id: ::String
+      attr_accessor environment_account_id: ::String
+      attr_accessor last_attempted_deployment_id: ::String
+      attr_accessor last_deployment_attempted_at: ::Time
+      attr_accessor last_deployment_succeeded_at: ::Time
+      attr_accessor last_succeeded_deployment_id: ::String
+      attr_accessor name: ::String
+      attr_accessor proton_service_role_arn: ::String
+      attr_accessor provisioning: ("CUSTOMER_MANAGED")
+      attr_accessor template_major_version: ::String
+      attr_accessor template_minor_version: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: [:deployment_status_message, :description]
+    end
+
+    class EnvironmentTemplate
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor encryption_key: ::String
+      attr_accessor last_modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor provisioning: ("CUSTOMER_MANAGED")
+      attr_accessor recommended_version: ::String
+      SENSITIVE: [:description, :display_name]
+    end
+
+    class EnvironmentTemplateFilter
+      attr_accessor major_version: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class EnvironmentTemplateSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor last_modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor provisioning: ("CUSTOMER_MANAGED")
+      attr_accessor recommended_version: ::String
+      SENSITIVE: [:description, :display_name]
+    end
+
+    class EnvironmentTemplateVersion
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor last_modified_at: ::Time
+      attr_accessor major_version: ::String
+      attr_accessor minor_version: ::String
+      attr_accessor recommended_minor_version: ::String
+      attr_accessor schema: ::String
+      attr_accessor status: ("REGISTRATION_IN_PROGRESS" | "REGISTRATION_FAILED" | "DRAFT" | "PUBLISHED")
+      attr_accessor status_message: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: [:description, :schema, :status_message]
+    end
+
+    class EnvironmentTemplateVersionSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor last_modified_at: ::Time
+      attr_accessor major_version: ::String
+      attr_accessor minor_version: ::String
+      attr_accessor recommended_minor_version: ::String
+      attr_accessor status: ("REGISTRATION_IN_PROGRESS" | "REGISTRATION_FAILED" | "DRAFT" | "PUBLISHED")
+      attr_accessor status_message: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: [:description, :status_message]
+    end
+
+    class GetAccountSettingsInput < Aws::EmptyStructure
+    end
+
+    class GetAccountSettingsOutput
+      attr_accessor account_settings: Types::AccountSettings
+      SENSITIVE: []
+    end
+
+    class GetComponentInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetComponentOutput
+      attr_accessor component: Types::Component
+      SENSITIVE: []
+    end
+
+    class GetDeploymentInput
+      attr_accessor component_name: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor id: ::String
+      attr_accessor service_instance_name: ::String
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeploymentOutput
+      attr_accessor deployment: Types::Deployment
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentAccountConnectionInput
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentAccountConnectionOutput
+      attr_accessor environment_account_connection: Types::EnvironmentAccountConnection
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentOutput
+      attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentTemplateInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentTemplateOutput
+      attr_accessor environment_template: Types::EnvironmentTemplate
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentTemplateVersionInput
+      attr_accessor major_version: ::String
+      attr_accessor minor_version: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentTemplateVersionOutput
+      attr_accessor environment_template_version: Types::EnvironmentTemplateVersion
+      SENSITIVE: []
+    end
+
+    class GetRepositoryInput
+      attr_accessor name: ::String
+      attr_accessor provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET")
+      SENSITIVE: []
+    end
+
+    class GetRepositoryOutput
+      attr_accessor repository: Types::Repository
+      SENSITIVE: []
+    end
+
+    class GetRepositorySyncStatusInput
+      attr_accessor branch: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor repository_provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET")
+      attr_accessor sync_type: ("TEMPLATE_SYNC" | "SERVICE_SYNC")
+      SENSITIVE: []
+    end
+
+    class GetRepositorySyncStatusOutput
+      attr_accessor latest_sync: Types::RepositorySyncAttempt
+      SENSITIVE: []
+    end
+
+    class GetResourcesSummaryInput < Aws::EmptyStructure
+    end
+
+    class GetResourcesSummaryOutput
+      attr_accessor counts: Types::CountsSummary
+      SENSITIVE: []
+    end
+
+    class GetServiceInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceInstanceInput
+      attr_accessor name: ::String
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceInstanceOutput
+      attr_accessor service_instance: Types::ServiceInstance
+      SENSITIVE: []
+    end
+
+    class GetServiceInstanceSyncStatusInput
+      attr_accessor service_instance_name: ::String
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceInstanceSyncStatusOutput
+      attr_accessor desired_state: Types::Revision
+      attr_accessor latest_successful_sync: Types::ResourceSyncAttempt
+      attr_accessor latest_sync: Types::ResourceSyncAttempt
+      SENSITIVE: []
+    end
+
+    class GetServiceOutput
+      attr_accessor service: Types::Service
+      SENSITIVE: []
+    end
+
+    class GetServiceSyncBlockerSummaryInput
+      attr_accessor service_instance_name: ::String
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceSyncBlockerSummaryOutput
+      attr_accessor service_sync_blocker_summary: Types::ServiceSyncBlockerSummary
+      SENSITIVE: []
+    end
+
+    class GetServiceSyncConfigInput
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceSyncConfigOutput
+      attr_accessor service_sync_config: Types::ServiceSyncConfig
+      SENSITIVE: []
+    end
+
+    class GetServiceTemplateInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceTemplateOutput
+      attr_accessor service_template: Types::ServiceTemplate
+      SENSITIVE: []
+    end
+
+    class GetServiceTemplateVersionInput
+      attr_accessor major_version: ::String
+      attr_accessor minor_version: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceTemplateVersionOutput
+      attr_accessor service_template_version: Types::ServiceTemplateVersion
+      SENSITIVE: []
+    end
+
+    class GetTemplateSyncConfigInput
+      attr_accessor template_name: ::String
+      attr_accessor template_type: ("ENVIRONMENT" | "SERVICE")
+      SENSITIVE: []
+    end
+
+    class GetTemplateSyncConfigOutput
+      attr_accessor template_sync_config: Types::TemplateSyncConfig
+      SENSITIVE: []
+    end
+
+    class GetTemplateSyncStatusInput
+      attr_accessor template_name: ::String
+      attr_accessor template_type: ("ENVIRONMENT" | "SERVICE")
+      attr_accessor template_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetTemplateSyncStatusOutput
+      attr_accessor desired_state: Types::Revision
+      attr_accessor latest_successful_sync: Types::ResourceSyncAttempt
+      attr_accessor latest_sync: Types::ResourceSyncAttempt
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: [:message]
+    end
+
+    class ListComponentOutputsInput
+      attr_accessor component_name: ::String
+      attr_accessor deployment_id: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListComponentOutputsOutput
+      attr_accessor next_token: ::String
+      attr_accessor outputs: ::Array[Types::Output]
+      SENSITIVE: []
+    end
+
+    class ListComponentProvisionedResourcesInput
+      attr_accessor component_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListComponentProvisionedResourcesOutput
+      attr_accessor next_token: ::String
+      attr_accessor provisioned_resources: ::Array[Types::ProvisionedResource]
+      SENSITIVE: []
+    end
+
+    class ListComponentsInput
+      attr_accessor environment_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor service_instance_name: ::String
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListComponentsOutput
+      attr_accessor components: ::Array[Types::ComponentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentsInput
+      attr_accessor component_name: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor service_instance_name: ::String
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentsOutput
+      attr_accessor deployments: ::Array[Types::DeploymentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentAccountConnectionsInput
+      attr_accessor environment_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor requested_by: ("MANAGEMENT_ACCOUNT" | "ENVIRONMENT_ACCOUNT")
+      attr_accessor statuses: ::Array[("PENDING" | "CONNECTED" | "REJECTED")]
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentAccountConnectionsOutput
+      attr_accessor environment_account_connections: ::Array[Types::EnvironmentAccountConnectionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentOutputsInput
+      attr_accessor deployment_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentOutputsOutput
+      attr_accessor next_token: ::String
+      attr_accessor outputs: ::Array[Types::Output]
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentProvisionedResourcesInput
+      attr_accessor environment_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentProvisionedResourcesOutput
+      attr_accessor next_token: ::String
+      attr_accessor provisioned_resources: ::Array[Types::ProvisionedResource]
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentTemplateVersionsInput
+      attr_accessor major_version: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentTemplateVersionsOutput
+      attr_accessor next_token: ::String
+      attr_accessor template_versions: ::Array[Types::EnvironmentTemplateVersionSummary]
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentTemplatesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentTemplatesOutput
+      attr_accessor next_token: ::String
+      attr_accessor templates: ::Array[Types::EnvironmentTemplateSummary]
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentsInput
+      attr_accessor environment_templates: ::Array[Types::EnvironmentTemplateFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentsOutput
+      attr_accessor environments: ::Array[Types::EnvironmentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRepositoriesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRepositoriesOutput
+      attr_accessor next_token: ::String
+      attr_accessor repositories: ::Array[Types::RepositorySummary]
+      SENSITIVE: []
+    end
+
+    class ListRepositorySyncDefinitionsInput
+      attr_accessor next_token: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor repository_provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET")
+      attr_accessor sync_type: ("TEMPLATE_SYNC" | "SERVICE_SYNC")
+      SENSITIVE: []
+    end
+
+    class ListRepositorySyncDefinitionsOutput
+      attr_accessor next_token: ::String
+      attr_accessor sync_definitions: ::Array[Types::RepositorySyncDefinition]
+      SENSITIVE: []
+    end
+
+    class ListServiceInstanceOutputsInput
+      attr_accessor deployment_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor service_instance_name: ::String
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceInstanceOutputsOutput
+      attr_accessor next_token: ::String
+      attr_accessor outputs: ::Array[Types::Output]
+      SENSITIVE: []
+    end
+
+    class ListServiceInstanceProvisionedResourcesInput
+      attr_accessor next_token: ::String
+      attr_accessor service_instance_name: ::String
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceInstanceProvisionedResourcesOutput
+      attr_accessor next_token: ::String
+      attr_accessor provisioned_resources: ::Array[Types::ProvisionedResource]
+      SENSITIVE: []
+    end
+
+    class ListServiceInstancesFilter
+      attr_accessor key: ("name" | "deploymentStatus" | "templateName" | "serviceName" | "deployedTemplateVersionStatus" | "environmentName" | "lastDeploymentAttemptedAtBefore" | "lastDeploymentAttemptedAtAfter" | "createdAtBefore" | "createdAtAfter")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceInstancesInput
+      attr_accessor filters: ::Array[Types::ListServiceInstancesFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor service_name: ::String
+      attr_accessor sort_by: ("name" | "deploymentStatus" | "templateName" | "serviceName" | "environmentName" | "lastDeploymentAttemptedAt" | "createdAt")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class ListServiceInstancesOutput
+      attr_accessor next_token: ::String
+      attr_accessor service_instances: ::Array[Types::ServiceInstanceSummary]
+      SENSITIVE: []
+    end
+
+    class ListServicePipelineOutputsInput
+      attr_accessor deployment_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListServicePipelineOutputsOutput
+      attr_accessor next_token: ::String
+      attr_accessor outputs: ::Array[Types::Output]
+      SENSITIVE: []
+    end
+
+    class ListServicePipelineProvisionedResourcesInput
+      attr_accessor next_token: ::String
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListServicePipelineProvisionedResourcesOutput
+      attr_accessor next_token: ::String
+      attr_accessor provisioned_resources: ::Array[Types::ProvisionedResource]
+      SENSITIVE: []
+    end
+
+    class ListServiceTemplateVersionsInput
+      attr_accessor major_version: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceTemplateVersionsOutput
+      attr_accessor next_token: ::String
+      attr_accessor template_versions: ::Array[Types::ServiceTemplateVersionSummary]
+      SENSITIVE: []
+    end
+
+    class ListServiceTemplatesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceTemplatesOutput
+      attr_accessor next_token: ::String
+      attr_accessor templates: ::Array[Types::ServiceTemplateSummary]
+      SENSITIVE: []
+    end
+
+    class ListServicesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServicesOutput
+      attr_accessor next_token: ::String
+      attr_accessor services: ::Array[Types::ServiceSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor next_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class NotifyResourceDeploymentStatusChangeInput
+      attr_accessor deployment_id: ::String
+      attr_accessor outputs: ::Array[Types::Output]
+      attr_accessor resource_arn: ::String
+      attr_accessor status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED")
+      attr_accessor status_message: ::String
+      SENSITIVE: [:status_message]
+    end
+
+    class NotifyResourceDeploymentStatusChangeOutput < Aws::EmptyStructure
+    end
+
+    class Output
+      attr_accessor key: ::String
+      attr_accessor value_string: ::String
+      SENSITIVE: []
+    end
+
+    class ProvisionedResource
+      attr_accessor identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor provisioning_engine: ("CLOUDFORMATION" | "TERRAFORM")
+      SENSITIVE: []
+    end
+
+    class RejectEnvironmentAccountConnectionInput
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class RejectEnvironmentAccountConnectionOutput
+      attr_accessor environment_account_connection: Types::EnvironmentAccountConnection
+      SENSITIVE: []
+    end
+
+    class Repository
+      attr_accessor arn: ::String
+      attr_accessor connection_arn: ::String
+      attr_accessor encryption_key: ::String
+      attr_accessor name: ::String
+      attr_accessor provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET")
+      SENSITIVE: []
+    end
+
+    class RepositoryBranch
+      attr_accessor arn: ::String
+      attr_accessor branch: ::String
+      attr_accessor name: ::String
+      attr_accessor provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET")
+      SENSITIVE: []
+    end
+
+    class RepositoryBranchInput
+      attr_accessor branch: ::String
+      attr_accessor name: ::String
+      attr_accessor provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET")
+      SENSITIVE: []
+    end
+
+    class RepositorySummary
+      attr_accessor arn: ::String
+      attr_accessor connection_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET")
+      SENSITIVE: []
+    end
+
+    class RepositorySyncAttempt
+      attr_accessor events: ::Array[Types::RepositorySyncEvent]
+      attr_accessor started_at: ::Time
+      attr_accessor status: ("INITIATED" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "QUEUED")
+      SENSITIVE: []
+    end
+
+    class RepositorySyncDefinition
+      attr_accessor branch: ::String
+      attr_accessor directory: ::String
+      attr_accessor parent: ::String
+      attr_accessor target: ::String
+      SENSITIVE: []
+    end
+
+    class RepositorySyncEvent
+      attr_accessor event: ::String
+      attr_accessor external_id: ::String
+      attr_accessor time: ::Time
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceCountsSummary
+      attr_accessor behind_major: ::Integer
+      attr_accessor behind_minor: ::Integer
+      attr_accessor failed: ::Integer
+      attr_accessor total: ::Integer
+      attr_accessor up_to_date: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: [:message]
+    end
+
+    class ResourceSyncAttempt
+      attr_accessor events: ::Array[Types::ResourceSyncEvent]
+      attr_accessor initial_revision: Types::Revision
+      attr_accessor started_at: ::Time
+      attr_accessor status: ("INITIATED" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor target: ::String
+      attr_accessor target_revision: Types::Revision
+      SENSITIVE: []
+    end
+
+    class ResourceSyncEvent
+      attr_accessor event: ::String
+      attr_accessor external_id: ::String
+      attr_accessor time: ::Time
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class Revision
+      attr_accessor branch: ::String
+      attr_accessor directory: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor repository_provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET")
+      attr_accessor sha: ::String
+      SENSITIVE: []
+    end
+
+    class S3ObjectSource
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class Service
+      attr_accessor arn: ::String
+      attr_accessor branch_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor last_modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor pipeline: Types::ServicePipeline
+      attr_accessor repository_connection_arn: ::String
+      attr_accessor repository_id: ::String
+      attr_accessor spec: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED_CLEANUP_IN_PROGRESS" | "CREATE_FAILED_CLEANUP_COMPLETE" | "CREATE_FAILED_CLEANUP_FAILED" | "CREATE_FAILED" | "ACTIVE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED_CLEANUP_IN_PROGRESS" | "UPDATE_FAILED_CLEANUP_COMPLETE" | "UPDATE_FAILED_CLEANUP_FAILED" | "UPDATE_FAILED" | "UPDATE_COMPLETE_CLEANUP_FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: [:description, :spec, :status_message]
+    end
+
+    class ServiceInstance
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor deployment_status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "CANCELLING" | "CANCELLED")
+      attr_accessor deployment_status_message: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor last_attempted_deployment_id: ::String
+      attr_accessor last_client_request_token: ::String
+      attr_accessor last_deployment_attempted_at: ::Time
+      attr_accessor last_deployment_succeeded_at: ::Time
+      attr_accessor last_succeeded_deployment_id: ::String
+      attr_accessor name: ::String
+      attr_accessor service_name: ::String
+      attr_accessor spec: ::String
+      attr_accessor template_major_version: ::String
+      attr_accessor template_minor_version: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: [:deployment_status_message, :spec]
+    end
+
+    class ServiceInstanceState
+      attr_accessor last_successful_component_deployment_ids: ::Array[::String]
+      attr_accessor last_successful_environment_deployment_id: ::String
+      attr_accessor last_successful_service_pipeline_deployment_id: ::String
+      attr_accessor spec: ::String
+      attr_accessor template_major_version: ::String
+      attr_accessor template_minor_version: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: [:spec]
+    end
+
+    class ServiceInstanceSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor deployment_status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "CANCELLING" | "CANCELLED")
+      attr_accessor deployment_status_message: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor last_attempted_deployment_id: ::String
+      attr_accessor last_deployment_attempted_at: ::Time
+      attr_accessor last_deployment_succeeded_at: ::Time
+      attr_accessor last_succeeded_deployment_id: ::String
+      attr_accessor name: ::String
+      attr_accessor service_name: ::String
+      attr_accessor template_major_version: ::String
+      attr_accessor template_minor_version: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: [:deployment_status_message]
+    end
+
+    class ServicePipeline
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor deployment_status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "CANCELLING" | "CANCELLED")
+      attr_accessor deployment_status_message: ::String
+      attr_accessor last_attempted_deployment_id: ::String
+      attr_accessor last_deployment_attempted_at: ::Time
+      attr_accessor last_deployment_succeeded_at: ::Time
+      attr_accessor last_succeeded_deployment_id: ::String
+      attr_accessor spec: ::String
+      attr_accessor template_major_version: ::String
+      attr_accessor template_minor_version: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: [:deployment_status_message, :spec]
+    end
+
+    class ServicePipelineState
+      attr_accessor spec: ::String
+      attr_accessor template_major_version: ::String
+      attr_accessor template_minor_version: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: [:spec]
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: [:message]
+    end
+
+    class ServiceSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor last_modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED_CLEANUP_IN_PROGRESS" | "CREATE_FAILED_CLEANUP_COMPLETE" | "CREATE_FAILED_CLEANUP_FAILED" | "CREATE_FAILED" | "ACTIVE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED_CLEANUP_IN_PROGRESS" | "UPDATE_FAILED_CLEANUP_COMPLETE" | "UPDATE_FAILED_CLEANUP_FAILED" | "UPDATE_FAILED" | "UPDATE_COMPLETE_CLEANUP_FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: [:description, :status_message]
+    end
+
+    class ServiceSyncBlockerSummary
+      attr_accessor latest_blockers: ::Array[Types::SyncBlocker]
+      attr_accessor service_instance_name: ::String
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceSyncConfig
+      attr_accessor branch: ::String
+      attr_accessor file_path: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor repository_provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET")
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceTemplate
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor encryption_key: ::String
+      attr_accessor last_modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor pipeline_provisioning: ("CUSTOMER_MANAGED")
+      attr_accessor recommended_version: ::String
+      SENSITIVE: [:description, :display_name]
+    end
+
+    class ServiceTemplateSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor last_modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor pipeline_provisioning: ("CUSTOMER_MANAGED")
+      attr_accessor recommended_version: ::String
+      SENSITIVE: [:description, :display_name]
+    end
+
+    class ServiceTemplateVersion
+      attr_accessor arn: ::String
+      attr_accessor compatible_environment_templates: ::Array[Types::CompatibleEnvironmentTemplate]
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor last_modified_at: ::Time
+      attr_accessor major_version: ::String
+      attr_accessor minor_version: ::String
+      attr_accessor recommended_minor_version: ::String
+      attr_accessor schema: ::String
+      attr_accessor status: ("REGISTRATION_IN_PROGRESS" | "REGISTRATION_FAILED" | "DRAFT" | "PUBLISHED")
+      attr_accessor status_message: ::String
+      attr_accessor supported_component_sources: ::Array[("DIRECTLY_DEFINED")]
+      attr_accessor template_name: ::String
+      SENSITIVE: [:description, :schema, :status_message]
+    end
+
+    class ServiceTemplateVersionSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor last_modified_at: ::Time
+      attr_accessor major_version: ::String
+      attr_accessor minor_version: ::String
+      attr_accessor recommended_minor_version: ::String
+      attr_accessor status: ("REGISTRATION_IN_PROGRESS" | "REGISTRATION_FAILED" | "DRAFT" | "PUBLISHED")
+      attr_accessor status_message: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: [:description, :status_message]
+    end
+
+    class SyncBlocker
+      attr_accessor contexts: ::Array[Types::SyncBlockerContext]
+      attr_accessor created_at: ::Time
+      attr_accessor created_reason: ::String
+      attr_accessor id: ::String
+      attr_accessor resolved_at: ::Time
+      attr_accessor resolved_reason: ::String
+      attr_accessor status: ("ACTIVE" | "RESOLVED")
+      attr_accessor type: ("AUTOMATED")
+      SENSITIVE: []
+    end
+
+    class SyncBlockerContext
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class TemplateSyncConfig
+      attr_accessor branch: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor repository_provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET")
+      attr_accessor subdirectory: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_type: ("ENVIRONMENT" | "SERVICE")
+      SENSITIVE: []
+    end
+
+    class TemplateVersionSourceInput
+      attr_accessor s3: Types::S3ObjectSource
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3 < TemplateVersionSourceInput
+      end
+      class Unknown < TemplateVersionSourceInput
+      end
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: [:message]
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateAccountSettingsInput
+      attr_accessor delete_pipeline_provisioning_repository: bool
+      attr_accessor pipeline_codebuild_role_arn: ::String
+      attr_accessor pipeline_provisioning_repository: Types::RepositoryBranchInput
+      attr_accessor pipeline_service_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAccountSettingsOutput
+      attr_accessor account_settings: Types::AccountSettings
+      SENSITIVE: []
+    end
+
+    class UpdateComponentInput
+      attr_accessor client_token: ::String
+      attr_accessor deployment_type: ("NONE" | "CURRENT_VERSION")
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor service_instance_name: ::String
+      attr_accessor service_name: ::String
+      attr_accessor service_spec: ::String
+      attr_accessor template_file: ::String
+      SENSITIVE: [:description, :service_spec, :template_file]
+    end
+
+    class UpdateComponentOutput
+      attr_accessor component: Types::Component
+      SENSITIVE: []
+    end
+
+    class UpdateEnvironmentAccountConnectionInput
+      attr_accessor codebuild_role_arn: ::String
+      attr_accessor component_role_arn: ::String
+      attr_accessor id: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateEnvironmentAccountConnectionOutput
+      attr_accessor environment_account_connection: Types::EnvironmentAccountConnection
+      SENSITIVE: []
+    end
+
+    class UpdateEnvironmentInput
+      attr_accessor codebuild_role_arn: ::String
+      attr_accessor component_role_arn: ::String
+      attr_accessor deployment_type: ("NONE" | "CURRENT_VERSION" | "MINOR_VERSION" | "MAJOR_VERSION")
+      attr_accessor description: ::String
+      attr_accessor environment_account_connection_id: ::String
+      attr_accessor name: ::String
+      attr_accessor proton_service_role_arn: ::String
+      attr_accessor provisioning_repository: Types::RepositoryBranchInput
+      attr_accessor spec: ::String
+      attr_accessor template_major_version: ::String
+      attr_accessor template_minor_version: ::String
+      SENSITIVE: [:description, :spec]
+    end
+
+    class UpdateEnvironmentOutput
+      attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class UpdateEnvironmentTemplateInput
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor name: ::String
+      SENSITIVE: [:description, :display_name]
+    end
+
+    class UpdateEnvironmentTemplateOutput
+      attr_accessor environment_template: Types::EnvironmentTemplate
+      SENSITIVE: []
+    end
+
+    class UpdateEnvironmentTemplateVersionInput
+      attr_accessor description: ::String
+      attr_accessor major_version: ::String
+      attr_accessor minor_version: ::String
+      attr_accessor status: ("REGISTRATION_IN_PROGRESS" | "REGISTRATION_FAILED" | "DRAFT" | "PUBLISHED")
+      attr_accessor template_name: ::String
+      SENSITIVE: [:description]
+    end
+
+    class UpdateEnvironmentTemplateVersionOutput
+      attr_accessor environment_template_version: Types::EnvironmentTemplateVersion
+      SENSITIVE: []
+    end
+
+    class UpdateServiceInput
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor spec: ::String
+      SENSITIVE: [:description, :spec]
+    end
+
+    class UpdateServiceInstanceInput
+      attr_accessor client_token: ::String
+      attr_accessor deployment_type: ("NONE" | "CURRENT_VERSION" | "MINOR_VERSION" | "MAJOR_VERSION")
+      attr_accessor name: ::String
+      attr_accessor service_name: ::String
+      attr_accessor spec: ::String
+      attr_accessor template_major_version: ::String
+      attr_accessor template_minor_version: ::String
+      SENSITIVE: [:spec]
+    end
+
+    class UpdateServiceInstanceOutput
+      attr_accessor service_instance: Types::ServiceInstance
+      SENSITIVE: []
+    end
+
+    class UpdateServiceOutput
+      attr_accessor service: Types::Service
+      SENSITIVE: []
+    end
+
+    class UpdateServicePipelineInput
+      attr_accessor deployment_type: ("NONE" | "CURRENT_VERSION" | "MINOR_VERSION" | "MAJOR_VERSION")
+      attr_accessor service_name: ::String
+      attr_accessor spec: ::String
+      attr_accessor template_major_version: ::String
+      attr_accessor template_minor_version: ::String
+      SENSITIVE: [:spec]
+    end
+
+    class UpdateServicePipelineOutput
+      attr_accessor pipeline: Types::ServicePipeline
+      SENSITIVE: []
+    end
+
+    class UpdateServiceSyncBlockerInput
+      attr_accessor id: ::String
+      attr_accessor resolved_reason: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateServiceSyncBlockerOutput
+      attr_accessor service_instance_name: ::String
+      attr_accessor service_name: ::String
+      attr_accessor service_sync_blocker: Types::SyncBlocker
+      SENSITIVE: []
+    end
+
+    class UpdateServiceSyncConfigInput
+      attr_accessor branch: ::String
+      attr_accessor file_path: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor repository_provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET")
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateServiceSyncConfigOutput
+      attr_accessor service_sync_config: Types::ServiceSyncConfig
+      SENSITIVE: []
+    end
+
+    class UpdateServiceTemplateInput
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor name: ::String
+      SENSITIVE: [:description, :display_name]
+    end
+
+    class UpdateServiceTemplateOutput
+      attr_accessor service_template: Types::ServiceTemplate
+      SENSITIVE: []
+    end
+
+    class UpdateServiceTemplateVersionInput
+      attr_accessor compatible_environment_templates: ::Array[Types::CompatibleEnvironmentTemplateInput]
+      attr_accessor description: ::String
+      attr_accessor major_version: ::String
+      attr_accessor minor_version: ::String
+      attr_accessor status: ("REGISTRATION_IN_PROGRESS" | "REGISTRATION_FAILED" | "DRAFT" | "PUBLISHED")
+      attr_accessor supported_component_sources: ::Array[("DIRECTLY_DEFINED")]
+      attr_accessor template_name: ::String
+      SENSITIVE: [:description]
+    end
+
+    class UpdateServiceTemplateVersionOutput
+      attr_accessor service_template_version: Types::ServiceTemplateVersion
+      SENSITIVE: []
+    end
+
+    class UpdateTemplateSyncConfigInput
+      attr_accessor branch: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor repository_provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET")
+      attr_accessor subdirectory: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_type: ("ENVIRONMENT" | "SERVICE")
+      SENSITIVE: []
+    end
+
+    class UpdateTemplateSyncConfigOutput
+      attr_accessor template_sync_config: Types::TemplateSyncConfig
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: [:message]
+    end
+  end
+end

@@ -1,0 +1,381 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Signer
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Signer/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddProfilePermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddProfilePermissionResponse]
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Signer/Client.html#add_profile_permission-instance_method
+      def add_profile_permission: (
+                                    profile_name: ::String,
+                                    ?profile_version: ::String,
+                                    action: ::String,
+                                    principal: ::String,
+                                    ?revision_id: ::String,
+                                    statement_id: ::String
+                                  ) -> _AddProfilePermissionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddProfilePermissionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Signer/Client.html#cancel_signing_profile-instance_method
+      def cancel_signing_profile: (
+                                    profile_name: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeSigningJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSigningJobResponse]
+        def job_id: () -> ::String
+        def source: () -> Types::Source
+        def signing_material: () -> Types::SigningMaterial
+        def platform_id: () -> ::String
+        def platform_display_name: () -> ::String
+        def profile_name: () -> ::String
+        def profile_version: () -> ::String
+        def overrides: () -> Types::SigningPlatformOverrides
+        def signing_parameters: () -> ::Hash[::String, ::String]
+        def created_at: () -> ::Time
+        def completed_at: () -> ::Time
+        def signature_expires_at: () -> ::Time
+        def requested_by: () -> ::String
+        def status: () -> ("InProgress" | "Failed" | "Succeeded")
+        def status_reason: () -> ::String
+        def revocation_record: () -> Types::SigningJobRevocationRecord
+        def signed_object: () -> Types::SignedObject
+        def job_owner: () -> ::String
+        def job_invoker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Signer/Client.html#describe_signing_job-instance_method
+      def describe_signing_job: (
+                                  job_id: ::String
+                                ) -> _DescribeSigningJobResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSigningJobResponseSuccess
+
+      interface _GetRevocationStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRevocationStatusResponse]
+        def revoked_entities: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Signer/Client.html#get_revocation_status-instance_method
+      def get_revocation_status: (
+                                   signature_timestamp: ::Time,
+                                   platform_id: ::String,
+                                   profile_version_arn: ::String,
+                                   job_arn: ::String,
+                                   certificate_hashes: Array[::String]
+                                 ) -> _GetRevocationStatusResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRevocationStatusResponseSuccess
+
+      interface _GetSigningPlatformResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSigningPlatformResponse]
+        def platform_id: () -> ::String
+        def display_name: () -> ::String
+        def partner: () -> ::String
+        def target: () -> ::String
+        def category: () -> ("AWSIoT")
+        def signing_configuration: () -> Types::SigningConfiguration
+        def signing_image_format: () -> Types::SigningImageFormat
+        def max_size_in_mb: () -> ::Integer
+        def revocation_supported: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Signer/Client.html#get_signing_platform-instance_method
+      def get_signing_platform: (
+                                  platform_id: ::String
+                                ) -> _GetSigningPlatformResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSigningPlatformResponseSuccess
+
+      interface _GetSigningProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSigningProfileResponse]
+        def profile_name: () -> ::String
+        def profile_version: () -> ::String
+        def profile_version_arn: () -> ::String
+        def revocation_record: () -> Types::SigningProfileRevocationRecord
+        def signing_material: () -> Types::SigningMaterial
+        def platform_id: () -> ::String
+        def platform_display_name: () -> ::String
+        def signature_validity_period: () -> Types::SignatureValidityPeriod
+        def overrides: () -> Types::SigningPlatformOverrides
+        def signing_parameters: () -> ::Hash[::String, ::String]
+        def status: () -> ("Active" | "Canceled" | "Revoked")
+        def status_reason: () -> ::String
+        def arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Signer/Client.html#get_signing_profile-instance_method
+      def get_signing_profile: (
+                                 profile_name: ::String,
+                                 ?profile_owner: ::String
+                               ) -> _GetSigningProfileResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSigningProfileResponseSuccess
+
+      interface _ListProfilePermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProfilePermissionsResponse]
+        def revision_id: () -> ::String
+        def policy_size_bytes: () -> ::Integer
+        def permissions: () -> ::Array[Types::Permission]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Signer/Client.html#list_profile_permissions-instance_method
+      def list_profile_permissions: (
+                                      profile_name: ::String,
+                                      ?next_token: ::String
+                                    ) -> _ListProfilePermissionsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProfilePermissionsResponseSuccess
+
+      interface _ListSigningJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSigningJobsResponse]
+        def jobs: () -> ::Array[Types::SigningJob]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Signer/Client.html#list_signing_jobs-instance_method
+      def list_signing_jobs: (
+                               ?status: ("InProgress" | "Failed" | "Succeeded"),
+                               ?platform_id: ::String,
+                               ?requested_by: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String,
+                               ?is_revoked: bool,
+                               ?signature_expires_before: ::Time,
+                               ?signature_expires_after: ::Time,
+                               ?job_invoker: ::String
+                             ) -> _ListSigningJobsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSigningJobsResponseSuccess
+
+      interface _ListSigningPlatformsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSigningPlatformsResponse]
+        def platforms: () -> ::Array[Types::SigningPlatform]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Signer/Client.html#list_signing_platforms-instance_method
+      def list_signing_platforms: (
+                                    ?category: ::String,
+                                    ?partner: ::String,
+                                    ?target: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListSigningPlatformsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSigningPlatformsResponseSuccess
+
+      interface _ListSigningProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSigningProfilesResponse]
+        def profiles: () -> ::Array[Types::SigningProfile]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Signer/Client.html#list_signing_profiles-instance_method
+      def list_signing_profiles: (
+                                   ?include_canceled: bool,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String,
+                                   ?platform_id: ::String,
+                                   ?statuses: Array[("Active" | "Canceled" | "Revoked")]
+                                 ) -> _ListSigningProfilesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSigningProfilesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Signer/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutSigningProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutSigningProfileResponse]
+        def arn: () -> ::String
+        def profile_version: () -> ::String
+        def profile_version_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Signer/Client.html#put_signing_profile-instance_method
+      def put_signing_profile: (
+                                 profile_name: ::String,
+                                 ?signing_material: {
+                                   certificate_arn: ::String
+                                 },
+                                 ?signature_validity_period: {
+                                   value: ::Integer?,
+                                   type: ("DAYS" | "MONTHS" | "YEARS")?
+                                 },
+                                 platform_id: ::String,
+                                 ?overrides: {
+                                   signing_configuration: {
+                                     encryption_algorithm: ("RSA" | "ECDSA")?,
+                                     hash_algorithm: ("SHA1" | "SHA256")?
+                                   }?,
+                                   signing_image_format: ("JSON" | "JSONEmbedded" | "JSONDetached")?
+                                 },
+                                 ?signing_parameters: Hash[::String, ::String],
+                                 ?tags: Hash[::String, ::String]
+                               ) -> _PutSigningProfileResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutSigningProfileResponseSuccess
+
+      interface _RemoveProfilePermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveProfilePermissionResponse]
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Signer/Client.html#remove_profile_permission-instance_method
+      def remove_profile_permission: (
+                                       profile_name: ::String,
+                                       revision_id: ::String,
+                                       statement_id: ::String
+                                     ) -> _RemoveProfilePermissionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveProfilePermissionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Signer/Client.html#revoke_signature-instance_method
+      def revoke_signature: (
+                              job_id: ::String,
+                              ?job_owner: ::String,
+                              reason: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Signer/Client.html#revoke_signing_profile-instance_method
+      def revoke_signing_profile: (
+                                    profile_name: ::String,
+                                    profile_version: ::String,
+                                    reason: ::String,
+                                    effective_time: ::Time
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _SignPayloadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SignPayloadResponse]
+        def job_id: () -> ::String
+        def job_owner: () -> ::String
+        def metadata: () -> ::Hash[::String, ::String]
+        def signature: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Signer/Client.html#sign_payload-instance_method
+      def sign_payload: (
+                          profile_name: ::String,
+                          ?profile_owner: ::String,
+                          payload: ::String,
+                          payload_format: ::String
+                        ) -> _SignPayloadResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SignPayloadResponseSuccess
+
+      interface _StartSigningJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartSigningJobResponse]
+        def job_id: () -> ::String
+        def job_owner: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Signer/Client.html#start_signing_job-instance_method
+      def start_signing_job: (
+                               source: {
+                                 s3: {
+                                   bucket_name: ::String,
+                                   key: ::String,
+                                   version: ::String
+                                 }?
+                               },
+                               destination: {
+                                 s3: {
+                                   bucket_name: ::String?,
+                                   prefix: ::String?
+                                 }?
+                               },
+                               profile_name: ::String,
+                               client_request_token: ::String,
+                               ?profile_owner: ::String
+                             ) -> _StartSigningJobResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSigningJobResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Signer/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Signer/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Signer/Client.html#wait_until-instance_method
+      def wait_until: (:successful_signing_job waiter_name, 
+                    job_id: ::String
+                  ) -> Client::_DescribeSigningJobResponseSuccess
+                    | (:successful_signing_job waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeSigningJobResponseSuccess
+    end
+  end
+end
+

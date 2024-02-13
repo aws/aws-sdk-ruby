@@ -1,0 +1,1769 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ServiceCatalog
+  module Types
+
+    class AcceptPortfolioShareInput
+      attr_accessor accept_language: ::String
+      attr_accessor portfolio_id: ::String
+      attr_accessor portfolio_share_type: ("IMPORTED" | "AWS_SERVICECATALOG" | "AWS_ORGANIZATIONS")
+      SENSITIVE: []
+    end
+
+    class AcceptPortfolioShareOutput < Aws::EmptyStructure
+    end
+
+    class AccessLevelFilter
+      attr_accessor key: ("Account" | "Role" | "User")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateBudgetWithResourceInput
+      attr_accessor budget_name: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateBudgetWithResourceOutput < Aws::EmptyStructure
+    end
+
+    class AssociatePrincipalWithPortfolioInput
+      attr_accessor accept_language: ::String
+      attr_accessor portfolio_id: ::String
+      attr_accessor principal_arn: ::String
+      attr_accessor principal_type: ("IAM" | "IAM_PATTERN")
+      SENSITIVE: []
+    end
+
+    class AssociatePrincipalWithPortfolioOutput < Aws::EmptyStructure
+    end
+
+    class AssociateProductWithPortfolioInput
+      attr_accessor accept_language: ::String
+      attr_accessor product_id: ::String
+      attr_accessor portfolio_id: ::String
+      attr_accessor source_portfolio_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateProductWithPortfolioOutput < Aws::EmptyStructure
+    end
+
+    class AssociateServiceActionWithProvisioningArtifactInput
+      attr_accessor product_id: ::String
+      attr_accessor provisioning_artifact_id: ::String
+      attr_accessor service_action_id: ::String
+      attr_accessor accept_language: ::String
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateServiceActionWithProvisioningArtifactOutput < Aws::EmptyStructure
+    end
+
+    class AssociateTagOptionWithResourceInput
+      attr_accessor resource_id: ::String
+      attr_accessor tag_option_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateTagOptionWithResourceOutput < Aws::EmptyStructure
+    end
+
+    class BatchAssociateServiceActionWithProvisioningArtifactInput
+      attr_accessor service_action_associations: ::Array[Types::ServiceActionAssociation]
+      attr_accessor accept_language: ::String
+      SENSITIVE: []
+    end
+
+    class BatchAssociateServiceActionWithProvisioningArtifactOutput
+      attr_accessor failed_service_action_associations: ::Array[Types::FailedServiceActionAssociation]
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateServiceActionFromProvisioningArtifactInput
+      attr_accessor service_action_associations: ::Array[Types::ServiceActionAssociation]
+      attr_accessor accept_language: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateServiceActionFromProvisioningArtifactOutput
+      attr_accessor failed_service_action_associations: ::Array[Types::FailedServiceActionAssociation]
+      SENSITIVE: []
+    end
+
+    class BudgetDetail
+      attr_accessor budget_name: ::String
+      SENSITIVE: []
+    end
+
+    class CloudWatchDashboard
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CodeStarParameters
+      attr_accessor connection_arn: ::String
+      attr_accessor repository: ::String
+      attr_accessor branch: ::String
+      attr_accessor artifact_path: ::String
+      SENSITIVE: []
+    end
+
+    class ConstraintDetail
+      attr_accessor constraint_id: ::String
+      attr_accessor type: ::String
+      attr_accessor description: ::String
+      attr_accessor owner: ::String
+      attr_accessor product_id: ::String
+      attr_accessor portfolio_id: ::String
+      SENSITIVE: []
+    end
+
+    class ConstraintSummary
+      attr_accessor type: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CopyProductInput
+      attr_accessor accept_language: ::String
+      attr_accessor source_product_arn: ::String
+      attr_accessor target_product_id: ::String
+      attr_accessor target_product_name: ::String
+      attr_accessor source_provisioning_artifact_identifiers: ::Array[::Hash[("Id"), ::String]]
+      attr_accessor copy_options: ::Array[("CopyTags")]
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class CopyProductOutput
+      attr_accessor copy_product_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConstraintInput
+      attr_accessor accept_language: ::String
+      attr_accessor portfolio_id: ::String
+      attr_accessor product_id: ::String
+      attr_accessor parameters: ::String
+      attr_accessor type: ::String
+      attr_accessor description: ::String
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConstraintOutput
+      attr_accessor constraint_detail: Types::ConstraintDetail
+      attr_accessor constraint_parameters: ::String
+      attr_accessor status: ("AVAILABLE" | "CREATING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class CreatePortfolioInput
+      attr_accessor accept_language: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor provider_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePortfolioOutput
+      attr_accessor portfolio_detail: Types::PortfolioDetail
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreatePortfolioShareInput
+      attr_accessor accept_language: ::String
+      attr_accessor portfolio_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor organization_node: Types::OrganizationNode
+      attr_accessor share_tag_options: bool
+      attr_accessor share_principals: bool
+      SENSITIVE: []
+    end
+
+    class CreatePortfolioShareOutput
+      attr_accessor portfolio_share_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProductInput
+      attr_accessor accept_language: ::String
+      attr_accessor name: ::String
+      attr_accessor owner: ::String
+      attr_accessor description: ::String
+      attr_accessor distributor: ::String
+      attr_accessor support_description: ::String
+      attr_accessor support_email: ::String
+      attr_accessor support_url: ::String
+      attr_accessor product_type: ("CLOUD_FORMATION_TEMPLATE" | "MARKETPLACE" | "TERRAFORM_OPEN_SOURCE" | "TERRAFORM_CLOUD" | "EXTERNAL")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor provisioning_artifact_parameters: Types::ProvisioningArtifactProperties
+      attr_accessor idempotency_token: ::String
+      attr_accessor source_connection: Types::SourceConnection
+      SENSITIVE: []
+    end
+
+    class CreateProductOutput
+      attr_accessor product_view_detail: Types::ProductViewDetail
+      attr_accessor provisioning_artifact_detail: Types::ProvisioningArtifactDetail
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateProvisionedProductPlanInput
+      attr_accessor accept_language: ::String
+      attr_accessor plan_name: ::String
+      attr_accessor plan_type: ("CLOUDFORMATION")
+      attr_accessor notification_arns: ::Array[::String]
+      attr_accessor path_id: ::String
+      attr_accessor product_id: ::String
+      attr_accessor provisioned_product_name: ::String
+      attr_accessor provisioning_artifact_id: ::String
+      attr_accessor provisioning_parameters: ::Array[Types::UpdateProvisioningParameter]
+      attr_accessor idempotency_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateProvisionedProductPlanOutput
+      attr_accessor plan_name: ::String
+      attr_accessor plan_id: ::String
+      attr_accessor provision_product_id: ::String
+      attr_accessor provisioned_product_name: ::String
+      attr_accessor provisioning_artifact_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProvisioningArtifactInput
+      attr_accessor accept_language: ::String
+      attr_accessor product_id: ::String
+      attr_accessor parameters: Types::ProvisioningArtifactProperties
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProvisioningArtifactOutput
+      attr_accessor provisioning_artifact_detail: Types::ProvisioningArtifactDetail
+      attr_accessor info: ::Hash[::String, ::String]
+      attr_accessor status: ("AVAILABLE" | "CREATING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class CreateServiceActionInput
+      attr_accessor name: ::String
+      attr_accessor definition_type: ("SSM_AUTOMATION")
+      attr_accessor definition: ::Hash[("Name" | "Version" | "AssumeRole" | "Parameters"), ::String]
+      attr_accessor description: ::String
+      attr_accessor accept_language: ::String
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateServiceActionOutput
+      attr_accessor service_action_detail: Types::ServiceActionDetail
+      SENSITIVE: []
+    end
+
+    class CreateTagOptionInput
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTagOptionOutput
+      attr_accessor tag_option_detail: Types::TagOptionDetail
+      SENSITIVE: []
+    end
+
+    class DeleteConstraintInput
+      attr_accessor accept_language: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConstraintOutput < Aws::EmptyStructure
+    end
+
+    class DeletePortfolioInput
+      attr_accessor accept_language: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePortfolioOutput < Aws::EmptyStructure
+    end
+
+    class DeletePortfolioShareInput
+      attr_accessor accept_language: ::String
+      attr_accessor portfolio_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor organization_node: Types::OrganizationNode
+      SENSITIVE: []
+    end
+
+    class DeletePortfolioShareOutput
+      attr_accessor portfolio_share_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProductInput
+      attr_accessor accept_language: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProductOutput < Aws::EmptyStructure
+    end
+
+    class DeleteProvisionedProductPlanInput
+      attr_accessor accept_language: ::String
+      attr_accessor plan_id: ::String
+      attr_accessor ignore_errors: bool
+      SENSITIVE: []
+    end
+
+    class DeleteProvisionedProductPlanOutput < Aws::EmptyStructure
+    end
+
+    class DeleteProvisioningArtifactInput
+      attr_accessor accept_language: ::String
+      attr_accessor product_id: ::String
+      attr_accessor provisioning_artifact_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProvisioningArtifactOutput < Aws::EmptyStructure
+    end
+
+    class DeleteServiceActionInput
+      attr_accessor id: ::String
+      attr_accessor accept_language: ::String
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServiceActionOutput < Aws::EmptyStructure
+    end
+
+    class DeleteTagOptionInput
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTagOptionOutput < Aws::EmptyStructure
+    end
+
+    class DescribeConstraintInput
+      attr_accessor accept_language: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeConstraintOutput
+      attr_accessor constraint_detail: Types::ConstraintDetail
+      attr_accessor constraint_parameters: ::String
+      attr_accessor status: ("AVAILABLE" | "CREATING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class DescribeCopyProductStatusInput
+      attr_accessor accept_language: ::String
+      attr_accessor copy_product_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCopyProductStatusOutput
+      attr_accessor copy_product_status: ("SUCCEEDED" | "IN_PROGRESS" | "FAILED")
+      attr_accessor target_product_id: ::String
+      attr_accessor status_detail: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePortfolioInput
+      attr_accessor accept_language: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePortfolioOutput
+      attr_accessor portfolio_detail: Types::PortfolioDetail
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor tag_options: ::Array[Types::TagOptionDetail]
+      attr_accessor budgets: ::Array[Types::BudgetDetail]
+      SENSITIVE: []
+    end
+
+    class DescribePortfolioShareStatusInput
+      attr_accessor portfolio_share_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePortfolioShareStatusOutput
+      attr_accessor portfolio_share_token: ::String
+      attr_accessor portfolio_id: ::String
+      attr_accessor organization_node_value: ::String
+      attr_accessor status: ("NOT_STARTED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "ERROR")
+      attr_accessor share_details: Types::ShareDetails
+      SENSITIVE: []
+    end
+
+    class DescribePortfolioSharesInput
+      attr_accessor portfolio_id: ::String
+      attr_accessor type: ("ACCOUNT" | "ORGANIZATION" | "ORGANIZATIONAL_UNIT" | "ORGANIZATION_MEMBER_ACCOUNT")
+      attr_accessor page_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribePortfolioSharesOutput
+      attr_accessor next_page_token: ::String
+      attr_accessor portfolio_share_details: ::Array[Types::PortfolioShareDetail]
+      SENSITIVE: []
+    end
+
+    class DescribeProductAsAdminInput
+      attr_accessor accept_language: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor source_portfolio_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProductAsAdminOutput
+      attr_accessor product_view_detail: Types::ProductViewDetail
+      attr_accessor provisioning_artifact_summaries: ::Array[Types::ProvisioningArtifactSummary]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor tag_options: ::Array[Types::TagOptionDetail]
+      attr_accessor budgets: ::Array[Types::BudgetDetail]
+      SENSITIVE: []
+    end
+
+    class DescribeProductInput
+      attr_accessor accept_language: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProductOutput
+      attr_accessor product_view_summary: Types::ProductViewSummary
+      attr_accessor provisioning_artifacts: ::Array[Types::ProvisioningArtifact]
+      attr_accessor budgets: ::Array[Types::BudgetDetail]
+      attr_accessor launch_paths: ::Array[Types::LaunchPath]
+      SENSITIVE: []
+    end
+
+    class DescribeProductViewInput
+      attr_accessor accept_language: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProductViewOutput
+      attr_accessor product_view_summary: Types::ProductViewSummary
+      attr_accessor provisioning_artifacts: ::Array[Types::ProvisioningArtifact]
+      SENSITIVE: []
+    end
+
+    class DescribeProvisionedProductInput
+      attr_accessor accept_language: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProvisionedProductOutput
+      attr_accessor provisioned_product_detail: Types::ProvisionedProductDetail
+      attr_accessor cloud_watch_dashboards: ::Array[Types::CloudWatchDashboard]
+      SENSITIVE: []
+    end
+
+    class DescribeProvisionedProductPlanInput
+      attr_accessor accept_language: ::String
+      attr_accessor plan_id: ::String
+      attr_accessor page_size: ::Integer
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProvisionedProductPlanOutput
+      attr_accessor provisioned_product_plan_details: Types::ProvisionedProductPlanDetails
+      attr_accessor resource_changes: ::Array[Types::ResourceChange]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProvisioningArtifactInput
+      attr_accessor accept_language: ::String
+      attr_accessor provisioning_artifact_id: ::String
+      attr_accessor product_id: ::String
+      attr_accessor provisioning_artifact_name: ::String
+      attr_accessor product_name: ::String
+      attr_accessor verbose: bool
+      attr_accessor include_provisioning_artifact_parameters: bool
+      SENSITIVE: []
+    end
+
+    class DescribeProvisioningArtifactOutput
+      attr_accessor provisioning_artifact_detail: Types::ProvisioningArtifactDetail
+      attr_accessor info: ::Hash[::String, ::String]
+      attr_accessor status: ("AVAILABLE" | "CREATING" | "FAILED")
+      attr_accessor provisioning_artifact_parameters: ::Array[Types::ProvisioningArtifactParameter]
+      SENSITIVE: []
+    end
+
+    class DescribeProvisioningParametersInput
+      attr_accessor accept_language: ::String
+      attr_accessor product_id: ::String
+      attr_accessor product_name: ::String
+      attr_accessor provisioning_artifact_id: ::String
+      attr_accessor provisioning_artifact_name: ::String
+      attr_accessor path_id: ::String
+      attr_accessor path_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProvisioningParametersOutput
+      attr_accessor provisioning_artifact_parameters: ::Array[Types::ProvisioningArtifactParameter]
+      attr_accessor constraint_summaries: ::Array[Types::ConstraintSummary]
+      attr_accessor usage_instructions: ::Array[Types::UsageInstruction]
+      attr_accessor tag_options: ::Array[Types::TagOptionSummary]
+      attr_accessor provisioning_artifact_preferences: Types::ProvisioningArtifactPreferences
+      attr_accessor provisioning_artifact_outputs: ::Array[Types::ProvisioningArtifactOutput]
+      attr_accessor provisioning_artifact_output_keys: ::Array[Types::ProvisioningArtifactOutput]
+      SENSITIVE: []
+    end
+
+    class DescribeRecordInput
+      attr_accessor accept_language: ::String
+      attr_accessor id: ::String
+      attr_accessor page_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeRecordOutput
+      attr_accessor record_detail: Types::RecordDetail
+      attr_accessor record_outputs: ::Array[Types::RecordOutput]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeServiceActionExecutionParametersInput
+      attr_accessor provisioned_product_id: ::String
+      attr_accessor service_action_id: ::String
+      attr_accessor accept_language: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeServiceActionExecutionParametersOutput
+      attr_accessor service_action_parameters: ::Array[Types::ExecutionParameter]
+      SENSITIVE: []
+    end
+
+    class DescribeServiceActionInput
+      attr_accessor id: ::String
+      attr_accessor accept_language: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeServiceActionOutput
+      attr_accessor service_action_detail: Types::ServiceActionDetail
+      SENSITIVE: []
+    end
+
+    class DescribeTagOptionInput
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTagOptionOutput
+      attr_accessor tag_option_detail: Types::TagOptionDetail
+      SENSITIVE: []
+    end
+
+    class DisableAWSOrganizationsAccessInput < Aws::EmptyStructure
+    end
+
+    class DisableAWSOrganizationsAccessOutput < Aws::EmptyStructure
+    end
+
+    class DisassociateBudgetFromResourceInput
+      attr_accessor budget_name: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateBudgetFromResourceOutput < Aws::EmptyStructure
+    end
+
+    class DisassociatePrincipalFromPortfolioInput
+      attr_accessor accept_language: ::String
+      attr_accessor portfolio_id: ::String
+      attr_accessor principal_arn: ::String
+      attr_accessor principal_type: ("IAM" | "IAM_PATTERN")
+      SENSITIVE: []
+    end
+
+    class DisassociatePrincipalFromPortfolioOutput < Aws::EmptyStructure
+    end
+
+    class DisassociateProductFromPortfolioInput
+      attr_accessor accept_language: ::String
+      attr_accessor product_id: ::String
+      attr_accessor portfolio_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateProductFromPortfolioOutput < Aws::EmptyStructure
+    end
+
+    class DisassociateServiceActionFromProvisioningArtifactInput
+      attr_accessor product_id: ::String
+      attr_accessor provisioning_artifact_id: ::String
+      attr_accessor service_action_id: ::String
+      attr_accessor accept_language: ::String
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateServiceActionFromProvisioningArtifactOutput < Aws::EmptyStructure
+    end
+
+    class DisassociateTagOptionFromResourceInput
+      attr_accessor resource_id: ::String
+      attr_accessor tag_option_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateTagOptionFromResourceOutput < Aws::EmptyStructure
+    end
+
+    class DuplicateResourceException < Aws::EmptyStructure
+    end
+
+    class EnableAWSOrganizationsAccessInput < Aws::EmptyStructure
+    end
+
+    class EnableAWSOrganizationsAccessOutput < Aws::EmptyStructure
+    end
+
+    class EngineWorkflowResourceIdentifier
+      attr_accessor unique_tag: Types::UniqueTagResourceIdentifier
+      SENSITIVE: []
+    end
+
+    class ExecuteProvisionedProductPlanInput
+      attr_accessor accept_language: ::String
+      attr_accessor plan_id: ::String
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class ExecuteProvisionedProductPlanOutput
+      attr_accessor record_detail: Types::RecordDetail
+      SENSITIVE: []
+    end
+
+    class ExecuteProvisionedProductServiceActionInput
+      attr_accessor provisioned_product_id: ::String
+      attr_accessor service_action_id: ::String
+      attr_accessor execute_token: ::String
+      attr_accessor accept_language: ::String
+      attr_accessor parameters: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class ExecuteProvisionedProductServiceActionOutput
+      attr_accessor record_detail: Types::RecordDetail
+      SENSITIVE: []
+    end
+
+    class ExecutionParameter
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor default_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FailedServiceActionAssociation
+      attr_accessor service_action_id: ::String
+      attr_accessor product_id: ::String
+      attr_accessor provisioning_artifact_id: ::String
+      attr_accessor error_code: ("DUPLICATE_RESOURCE" | "INTERNAL_FAILURE" | "LIMIT_EXCEEDED" | "RESOURCE_NOT_FOUND" | "THROTTLING" | "INVALID_PARAMETER")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class GetAWSOrganizationsAccessStatusInput < Aws::EmptyStructure
+    end
+
+    class GetAWSOrganizationsAccessStatusOutput
+      attr_accessor access_status: ("ENABLED" | "UNDER_CHANGE" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class GetProvisionedProductOutputsInput
+      attr_accessor accept_language: ::String
+      attr_accessor provisioned_product_id: ::String
+      attr_accessor provisioned_product_name: ::String
+      attr_accessor output_keys: ::Array[::String]
+      attr_accessor page_size: ::Integer
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetProvisionedProductOutputsOutput
+      attr_accessor outputs: ::Array[Types::RecordOutput]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ImportAsProvisionedProductInput
+      attr_accessor accept_language: ::String
+      attr_accessor product_id: ::String
+      attr_accessor provisioning_artifact_id: ::String
+      attr_accessor provisioned_product_name: ::String
+      attr_accessor physical_id: ::String
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class ImportAsProvisionedProductOutput
+      attr_accessor record_detail: Types::RecordDetail
+      SENSITIVE: []
+    end
+
+    class InvalidParametersException < Aws::EmptyStructure
+    end
+
+    class InvalidStateException < Aws::EmptyStructure
+    end
+
+    class LastSync
+      attr_accessor last_sync_time: ::Time
+      attr_accessor last_sync_status: ("SUCCEEDED" | "FAILED")
+      attr_accessor last_sync_status_message: ::String
+      attr_accessor last_successful_sync_time: ::Time
+      attr_accessor last_successful_sync_provisioning_artifact_id: ::String
+      SENSITIVE: []
+    end
+
+    class LaunchPath
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class LaunchPathSummary
+      attr_accessor id: ::String
+      attr_accessor constraint_summaries: ::Array[Types::ConstraintSummary]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException < Aws::EmptyStructure
+    end
+
+    class ListAcceptedPortfolioSharesInput
+      attr_accessor accept_language: ::String
+      attr_accessor page_token: ::String
+      attr_accessor page_size: ::Integer
+      attr_accessor portfolio_share_type: ("IMPORTED" | "AWS_SERVICECATALOG" | "AWS_ORGANIZATIONS")
+      SENSITIVE: []
+    end
+
+    class ListAcceptedPortfolioSharesOutput
+      attr_accessor portfolio_details: ::Array[Types::PortfolioDetail]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBudgetsForResourceInput
+      attr_accessor accept_language: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor page_size: ::Integer
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBudgetsForResourceOutput
+      attr_accessor budgets: ::Array[Types::BudgetDetail]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConstraintsForPortfolioInput
+      attr_accessor accept_language: ::String
+      attr_accessor portfolio_id: ::String
+      attr_accessor product_id: ::String
+      attr_accessor page_size: ::Integer
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConstraintsForPortfolioOutput
+      attr_accessor constraint_details: ::Array[Types::ConstraintDetail]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLaunchPathsInput
+      attr_accessor accept_language: ::String
+      attr_accessor product_id: ::String
+      attr_accessor page_size: ::Integer
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLaunchPathsOutput
+      attr_accessor launch_path_summaries: ::Array[Types::LaunchPathSummary]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOrganizationPortfolioAccessInput
+      attr_accessor accept_language: ::String
+      attr_accessor portfolio_id: ::String
+      attr_accessor organization_node_type: ("ORGANIZATION" | "ORGANIZATIONAL_UNIT" | "ACCOUNT")
+      attr_accessor page_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListOrganizationPortfolioAccessOutput
+      attr_accessor organization_nodes: ::Array[Types::OrganizationNode]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPortfolioAccessInput
+      attr_accessor accept_language: ::String
+      attr_accessor portfolio_id: ::String
+      attr_accessor organization_parent_id: ::String
+      attr_accessor page_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPortfolioAccessOutput
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPortfoliosForProductInput
+      attr_accessor accept_language: ::String
+      attr_accessor product_id: ::String
+      attr_accessor page_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPortfoliosForProductOutput
+      attr_accessor portfolio_details: ::Array[Types::PortfolioDetail]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPortfoliosInput
+      attr_accessor accept_language: ::String
+      attr_accessor page_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPortfoliosOutput
+      attr_accessor portfolio_details: ::Array[Types::PortfolioDetail]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPrincipalsForPortfolioInput
+      attr_accessor accept_language: ::String
+      attr_accessor portfolio_id: ::String
+      attr_accessor page_size: ::Integer
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPrincipalsForPortfolioOutput
+      attr_accessor principals: ::Array[Types::Principal]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProvisionedProductPlansInput
+      attr_accessor accept_language: ::String
+      attr_accessor provision_product_id: ::String
+      attr_accessor page_size: ::Integer
+      attr_accessor page_token: ::String
+      attr_accessor access_level_filter: Types::AccessLevelFilter
+      SENSITIVE: []
+    end
+
+    class ListProvisionedProductPlansOutput
+      attr_accessor provisioned_product_plans: ::Array[Types::ProvisionedProductPlanSummary]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProvisioningArtifactsForServiceActionInput
+      attr_accessor service_action_id: ::String
+      attr_accessor page_size: ::Integer
+      attr_accessor page_token: ::String
+      attr_accessor accept_language: ::String
+      SENSITIVE: []
+    end
+
+    class ListProvisioningArtifactsForServiceActionOutput
+      attr_accessor provisioning_artifact_views: ::Array[Types::ProvisioningArtifactView]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProvisioningArtifactsInput
+      attr_accessor accept_language: ::String
+      attr_accessor product_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListProvisioningArtifactsOutput
+      attr_accessor provisioning_artifact_details: ::Array[Types::ProvisioningArtifactDetail]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecordHistoryInput
+      attr_accessor accept_language: ::String
+      attr_accessor access_level_filter: Types::AccessLevelFilter
+      attr_accessor search_filter: Types::ListRecordHistorySearchFilter
+      attr_accessor page_size: ::Integer
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecordHistoryOutput
+      attr_accessor record_details: ::Array[Types::RecordDetail]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecordHistorySearchFilter
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourcesForTagOptionInput
+      attr_accessor tag_option_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor page_size: ::Integer
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourcesForTagOptionOutput
+      attr_accessor resource_details: ::Array[Types::ResourceDetail]
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceActionsForProvisioningArtifactInput
+      attr_accessor product_id: ::String
+      attr_accessor provisioning_artifact_id: ::String
+      attr_accessor page_size: ::Integer
+      attr_accessor page_token: ::String
+      attr_accessor accept_language: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceActionsForProvisioningArtifactOutput
+      attr_accessor service_action_summaries: ::Array[Types::ServiceActionSummary]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceActionsInput
+      attr_accessor accept_language: ::String
+      attr_accessor page_size: ::Integer
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceActionsOutput
+      attr_accessor service_action_summaries: ::Array[Types::ServiceActionSummary]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStackInstancesForProvisionedProductInput
+      attr_accessor accept_language: ::String
+      attr_accessor provisioned_product_id: ::String
+      attr_accessor page_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListStackInstancesForProvisionedProductOutput
+      attr_accessor stack_instances: ::Array[Types::StackInstance]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagOptionsFilters
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor active: bool
+      SENSITIVE: []
+    end
+
+    class ListTagOptionsInput
+      attr_accessor filters: Types::ListTagOptionsFilters
+      attr_accessor page_size: ::Integer
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagOptionsOutput
+      attr_accessor tag_option_details: ::Array[Types::TagOptionDetail]
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class NotifyProvisionProductEngineWorkflowResultInput
+      attr_accessor workflow_token: ::String
+      attr_accessor record_id: ::String
+      attr_accessor status: ("SUCCEEDED" | "FAILED")
+      attr_accessor failure_reason: ::String
+      attr_accessor resource_identifier: Types::EngineWorkflowResourceIdentifier
+      attr_accessor outputs: ::Array[Types::RecordOutput]
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class NotifyProvisionProductEngineWorkflowResultOutput < Aws::EmptyStructure
+    end
+
+    class NotifyTerminateProvisionedProductEngineWorkflowResultInput
+      attr_accessor workflow_token: ::String
+      attr_accessor record_id: ::String
+      attr_accessor status: ("SUCCEEDED" | "FAILED")
+      attr_accessor failure_reason: ::String
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class NotifyTerminateProvisionedProductEngineWorkflowResultOutput < Aws::EmptyStructure
+    end
+
+    class NotifyUpdateProvisionedProductEngineWorkflowResultInput
+      attr_accessor workflow_token: ::String
+      attr_accessor record_id: ::String
+      attr_accessor status: ("SUCCEEDED" | "FAILED")
+      attr_accessor failure_reason: ::String
+      attr_accessor outputs: ::Array[Types::RecordOutput]
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class NotifyUpdateProvisionedProductEngineWorkflowResultOutput < Aws::EmptyStructure
+    end
+
+    class OperationNotSupportedException < Aws::EmptyStructure
+    end
+
+    class OrganizationNode
+      attr_accessor type: ("ORGANIZATION" | "ORGANIZATIONAL_UNIT" | "ACCOUNT")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ParameterConstraints
+      attr_accessor allowed_values: ::Array[::String]
+      attr_accessor allowed_pattern: ::String
+      attr_accessor constraint_description: ::String
+      attr_accessor max_length: ::String
+      attr_accessor min_length: ::String
+      attr_accessor max_value: ::String
+      attr_accessor min_value: ::String
+      SENSITIVE: []
+    end
+
+    class PortfolioDetail
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor provider_name: ::String
+      SENSITIVE: []
+    end
+
+    class PortfolioShareDetail
+      attr_accessor principal_id: ::String
+      attr_accessor type: ("ACCOUNT" | "ORGANIZATION" | "ORGANIZATIONAL_UNIT" | "ORGANIZATION_MEMBER_ACCOUNT")
+      attr_accessor accepted: bool
+      attr_accessor share_tag_options: bool
+      attr_accessor share_principals: bool
+      SENSITIVE: []
+    end
+
+    class Principal
+      attr_accessor principal_arn: ::String
+      attr_accessor principal_type: ("IAM" | "IAM_PATTERN")
+      SENSITIVE: []
+    end
+
+    class ProductViewAggregationValue
+      attr_accessor value: ::String
+      attr_accessor approximate_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ProductViewDetail
+      attr_accessor product_view_summary: Types::ProductViewSummary
+      attr_accessor status: ("AVAILABLE" | "CREATING" | "FAILED")
+      attr_accessor product_arn: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor source_connection: Types::SourceConnectionDetail
+      SENSITIVE: []
+    end
+
+    class ProductViewSummary
+      attr_accessor id: ::String
+      attr_accessor product_id: ::String
+      attr_accessor name: ::String
+      attr_accessor owner: ::String
+      attr_accessor short_description: ::String
+      attr_accessor type: ("CLOUD_FORMATION_TEMPLATE" | "MARKETPLACE" | "TERRAFORM_OPEN_SOURCE" | "TERRAFORM_CLOUD" | "EXTERNAL")
+      attr_accessor distributor: ::String
+      attr_accessor has_default_path: bool
+      attr_accessor support_email: ::String
+      attr_accessor support_description: ::String
+      attr_accessor support_url: ::String
+      SENSITIVE: []
+    end
+
+    class ProvisionProductInput
+      attr_accessor accept_language: ::String
+      attr_accessor product_id: ::String
+      attr_accessor product_name: ::String
+      attr_accessor provisioning_artifact_id: ::String
+      attr_accessor provisioning_artifact_name: ::String
+      attr_accessor path_id: ::String
+      attr_accessor path_name: ::String
+      attr_accessor provisioned_product_name: ::String
+      attr_accessor provisioning_parameters: ::Array[Types::ProvisioningParameter]
+      attr_accessor provisioning_preferences: Types::ProvisioningPreferences
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor notification_arns: ::Array[::String]
+      attr_accessor provision_token: ::String
+      SENSITIVE: []
+    end
+
+    class ProvisionProductOutput
+      attr_accessor record_detail: Types::RecordDetail
+      SENSITIVE: []
+    end
+
+    class ProvisionedProductAttribute
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor type: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("AVAILABLE" | "UNDER_CHANGE" | "TAINTED" | "ERROR" | "PLAN_IN_PROGRESS")
+      attr_accessor status_message: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor idempotency_token: ::String
+      attr_accessor last_record_id: ::String
+      attr_accessor last_provisioning_record_id: ::String
+      attr_accessor last_successful_provisioning_record_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor physical_id: ::String
+      attr_accessor product_id: ::String
+      attr_accessor product_name: ::String
+      attr_accessor provisioning_artifact_id: ::String
+      attr_accessor provisioning_artifact_name: ::String
+      attr_accessor user_arn: ::String
+      attr_accessor user_arn_session: ::String
+      SENSITIVE: []
+    end
+
+    class ProvisionedProductDetail
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor type: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("AVAILABLE" | "UNDER_CHANGE" | "TAINTED" | "ERROR" | "PLAN_IN_PROGRESS")
+      attr_accessor status_message: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor idempotency_token: ::String
+      attr_accessor last_record_id: ::String
+      attr_accessor last_provisioning_record_id: ::String
+      attr_accessor last_successful_provisioning_record_id: ::String
+      attr_accessor product_id: ::String
+      attr_accessor provisioning_artifact_id: ::String
+      attr_accessor launch_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ProvisionedProductPlanDetails
+      attr_accessor created_time: ::Time
+      attr_accessor path_id: ::String
+      attr_accessor product_id: ::String
+      attr_accessor plan_name: ::String
+      attr_accessor plan_id: ::String
+      attr_accessor provision_product_id: ::String
+      attr_accessor provision_product_name: ::String
+      attr_accessor plan_type: ("CLOUDFORMATION")
+      attr_accessor provisioning_artifact_id: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_SUCCESS" | "CREATE_FAILED" | "EXECUTE_IN_PROGRESS" | "EXECUTE_SUCCESS" | "EXECUTE_FAILED")
+      attr_accessor updated_time: ::Time
+      attr_accessor notification_arns: ::Array[::String]
+      attr_accessor provisioning_parameters: ::Array[Types::UpdateProvisioningParameter]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class ProvisionedProductPlanSummary
+      attr_accessor plan_name: ::String
+      attr_accessor plan_id: ::String
+      attr_accessor provision_product_id: ::String
+      attr_accessor provision_product_name: ::String
+      attr_accessor plan_type: ("CLOUDFORMATION")
+      attr_accessor provisioning_artifact_id: ::String
+      SENSITIVE: []
+    end
+
+    class ProvisioningArtifact
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor guidance: ("DEFAULT" | "DEPRECATED")
+      SENSITIVE: []
+    end
+
+    class ProvisioningArtifactDetail
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("CLOUD_FORMATION_TEMPLATE" | "MARKETPLACE_AMI" | "MARKETPLACE_CAR" | "TERRAFORM_OPEN_SOURCE" | "TERRAFORM_CLOUD" | "EXTERNAL")
+      attr_accessor created_time: ::Time
+      attr_accessor active: bool
+      attr_accessor guidance: ("DEFAULT" | "DEPRECATED")
+      attr_accessor source_revision: ::String
+      SENSITIVE: []
+    end
+
+    class ProvisioningArtifactOutput
+      attr_accessor key: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ProvisioningArtifactParameter
+      attr_accessor parameter_key: ::String
+      attr_accessor default_value: ::String
+      attr_accessor parameter_type: ::String
+      attr_accessor is_no_echo: bool
+      attr_accessor description: ::String
+      attr_accessor parameter_constraints: Types::ParameterConstraints
+      SENSITIVE: []
+    end
+
+    class ProvisioningArtifactPreferences
+      attr_accessor stack_set_accounts: ::Array[::String]
+      attr_accessor stack_set_regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ProvisioningArtifactProperties
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor info: ::Hash[::String, ::String]
+      attr_accessor type: ("CLOUD_FORMATION_TEMPLATE" | "MARKETPLACE_AMI" | "MARKETPLACE_CAR" | "TERRAFORM_OPEN_SOURCE" | "TERRAFORM_CLOUD" | "EXTERNAL")
+      attr_accessor disable_template_validation: bool
+      SENSITIVE: []
+    end
+
+    class ProvisioningArtifactSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor provisioning_artifact_metadata: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ProvisioningArtifactView
+      attr_accessor product_view_summary: Types::ProductViewSummary
+      attr_accessor provisioning_artifact: Types::ProvisioningArtifact
+      SENSITIVE: []
+    end
+
+    class ProvisioningParameter
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ProvisioningPreferences
+      attr_accessor stack_set_accounts: ::Array[::String]
+      attr_accessor stack_set_regions: ::Array[::String]
+      attr_accessor stack_set_failure_tolerance_count: ::Integer
+      attr_accessor stack_set_failure_tolerance_percentage: ::Integer
+      attr_accessor stack_set_max_concurrency_count: ::Integer
+      attr_accessor stack_set_max_concurrency_percentage: ::Integer
+      SENSITIVE: []
+    end
+
+    class RecordDetail
+      attr_accessor record_id: ::String
+      attr_accessor provisioned_product_name: ::String
+      attr_accessor status: ("CREATED" | "IN_PROGRESS" | "IN_PROGRESS_IN_ERROR" | "SUCCEEDED" | "FAILED")
+      attr_accessor created_time: ::Time
+      attr_accessor updated_time: ::Time
+      attr_accessor provisioned_product_type: ::String
+      attr_accessor record_type: ::String
+      attr_accessor provisioned_product_id: ::String
+      attr_accessor product_id: ::String
+      attr_accessor provisioning_artifact_id: ::String
+      attr_accessor path_id: ::String
+      attr_accessor record_errors: ::Array[Types::RecordError]
+      attr_accessor record_tags: ::Array[Types::RecordTag]
+      attr_accessor launch_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RecordError
+      attr_accessor code: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class RecordOutput
+      attr_accessor output_key: ::String
+      attr_accessor output_value: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class RecordTag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class RejectPortfolioShareInput
+      attr_accessor accept_language: ::String
+      attr_accessor portfolio_id: ::String
+      attr_accessor portfolio_share_type: ("IMPORTED" | "AWS_SERVICECATALOG" | "AWS_ORGANIZATIONS")
+      SENSITIVE: []
+    end
+
+    class RejectPortfolioShareOutput < Aws::EmptyStructure
+    end
+
+    class ResourceChange
+      attr_accessor action: ("ADD" | "MODIFY" | "REMOVE")
+      attr_accessor logical_resource_id: ::String
+      attr_accessor physical_resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor replacement: ("TRUE" | "FALSE" | "CONDITIONAL")
+      attr_accessor scope: ::Array[("PROPERTIES" | "METADATA" | "CREATIONPOLICY" | "UPDATEPOLICY" | "DELETIONPOLICY" | "TAGS")]
+      attr_accessor details: ::Array[Types::ResourceChangeDetail]
+      SENSITIVE: []
+    end
+
+    class ResourceChangeDetail
+      attr_accessor target: Types::ResourceTargetDefinition
+      attr_accessor evaluation: ("STATIC" | "DYNAMIC")
+      attr_accessor causing_entity: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceDetail
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException < Aws::EmptyStructure
+    end
+
+    class ResourceTargetDefinition
+      attr_accessor attribute: ("PROPERTIES" | "METADATA" | "CREATIONPOLICY" | "UPDATEPOLICY" | "DELETIONPOLICY" | "TAGS")
+      attr_accessor name: ::String
+      attr_accessor requires_recreation: ("NEVER" | "CONDITIONALLY" | "ALWAYS")
+      SENSITIVE: []
+    end
+
+    class ScanProvisionedProductsInput
+      attr_accessor accept_language: ::String
+      attr_accessor access_level_filter: Types::AccessLevelFilter
+      attr_accessor page_size: ::Integer
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ScanProvisionedProductsOutput
+      attr_accessor provisioned_products: ::Array[Types::ProvisionedProductDetail]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchProductsAsAdminInput
+      attr_accessor accept_language: ::String
+      attr_accessor portfolio_id: ::String
+      attr_accessor filters: ::Hash[("FullTextSearch" | "Owner" | "ProductType" | "SourceProductId"), ::Array[::String]]
+      attr_accessor sort_by: ("Title" | "VersionCount" | "CreationDate")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor page_token: ::String
+      attr_accessor page_size: ::Integer
+      attr_accessor product_source: ("ACCOUNT")
+      SENSITIVE: []
+    end
+
+    class SearchProductsAsAdminOutput
+      attr_accessor product_view_details: ::Array[Types::ProductViewDetail]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchProductsInput
+      attr_accessor accept_language: ::String
+      attr_accessor filters: ::Hash[("FullTextSearch" | "Owner" | "ProductType" | "SourceProductId"), ::Array[::String]]
+      attr_accessor page_size: ::Integer
+      attr_accessor sort_by: ("Title" | "VersionCount" | "CreationDate")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchProductsOutput
+      attr_accessor product_view_summaries: ::Array[Types::ProductViewSummary]
+      attr_accessor product_view_aggregations: ::Hash[::String, ::Array[Types::ProductViewAggregationValue]]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchProvisionedProductsInput
+      attr_accessor accept_language: ::String
+      attr_accessor access_level_filter: Types::AccessLevelFilter
+      attr_accessor filters: ::Hash[("SearchQuery"), ::Array[::String]]
+      attr_accessor sort_by: ::String
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor page_size: ::Integer
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchProvisionedProductsOutput
+      attr_accessor provisioned_products: ::Array[Types::ProvisionedProductAttribute]
+      attr_accessor total_results_count: ::Integer
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceActionAssociation
+      attr_accessor service_action_id: ::String
+      attr_accessor product_id: ::String
+      attr_accessor provisioning_artifact_id: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceActionDetail
+      attr_accessor service_action_summary: Types::ServiceActionSummary
+      attr_accessor definition: ::Hash[("Name" | "Version" | "AssumeRole" | "Parameters"), ::String]
+      SENSITIVE: []
+    end
+
+    class ServiceActionSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor definition_type: ("SSM_AUTOMATION")
+      SENSITIVE: []
+    end
+
+    class ShareDetails
+      attr_accessor successful_shares: ::Array[::String]
+      attr_accessor share_errors: ::Array[Types::ShareError]
+      SENSITIVE: []
+    end
+
+    class ShareError
+      attr_accessor accounts: ::Array[::String]
+      attr_accessor message: ::String
+      attr_accessor error: ::String
+      SENSITIVE: []
+    end
+
+    class SourceConnection
+      attr_accessor type: ("CODESTAR")
+      attr_accessor connection_parameters: Types::SourceConnectionParameters
+      SENSITIVE: []
+    end
+
+    class SourceConnectionDetail
+      attr_accessor type: ("CODESTAR")
+      attr_accessor connection_parameters: Types::SourceConnectionParameters
+      attr_accessor last_sync: Types::LastSync
+      SENSITIVE: []
+    end
+
+    class SourceConnectionParameters
+      attr_accessor code_star: Types::CodeStarParameters
+      SENSITIVE: []
+    end
+
+    class StackInstance
+      attr_accessor account: ::String
+      attr_accessor region: ::String
+      attr_accessor stack_instance_status: ("CURRENT" | "OUTDATED" | "INOPERABLE")
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagOptionDetail
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor active: bool
+      attr_accessor id: ::String
+      attr_accessor owner: ::String
+      SENSITIVE: []
+    end
+
+    class TagOptionNotMigratedException < Aws::EmptyStructure
+    end
+
+    class TagOptionSummary
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TerminateProvisionedProductInput
+      attr_accessor provisioned_product_name: ::String
+      attr_accessor provisioned_product_id: ::String
+      attr_accessor terminate_token: ::String
+      attr_accessor ignore_errors: bool
+      attr_accessor accept_language: ::String
+      attr_accessor retain_physical_resources: bool
+      SENSITIVE: []
+    end
+
+    class TerminateProvisionedProductOutput
+      attr_accessor record_detail: Types::RecordDetail
+      SENSITIVE: []
+    end
+
+    class UniqueTagResourceIdentifier
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConstraintInput
+      attr_accessor accept_language: ::String
+      attr_accessor id: ::String
+      attr_accessor description: ::String
+      attr_accessor parameters: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConstraintOutput
+      attr_accessor constraint_detail: Types::ConstraintDetail
+      attr_accessor constraint_parameters: ::String
+      attr_accessor status: ("AVAILABLE" | "CREATING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class UpdatePortfolioInput
+      attr_accessor accept_language: ::String
+      attr_accessor id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor provider_name: ::String
+      attr_accessor add_tags: ::Array[Types::Tag]
+      attr_accessor remove_tags: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdatePortfolioOutput
+      attr_accessor portfolio_detail: Types::PortfolioDetail
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class UpdatePortfolioShareInput
+      attr_accessor accept_language: ::String
+      attr_accessor portfolio_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor organization_node: Types::OrganizationNode
+      attr_accessor share_tag_options: bool
+      attr_accessor share_principals: bool
+      SENSITIVE: []
+    end
+
+    class UpdatePortfolioShareOutput
+      attr_accessor portfolio_share_token: ::String
+      attr_accessor status: ("NOT_STARTED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class UpdateProductInput
+      attr_accessor accept_language: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor owner: ::String
+      attr_accessor description: ::String
+      attr_accessor distributor: ::String
+      attr_accessor support_description: ::String
+      attr_accessor support_email: ::String
+      attr_accessor support_url: ::String
+      attr_accessor add_tags: ::Array[Types::Tag]
+      attr_accessor remove_tags: ::Array[::String]
+      attr_accessor source_connection: Types::SourceConnection
+      SENSITIVE: []
+    end
+
+    class UpdateProductOutput
+      attr_accessor product_view_detail: Types::ProductViewDetail
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class UpdateProvisionedProductInput
+      attr_accessor accept_language: ::String
+      attr_accessor provisioned_product_name: ::String
+      attr_accessor provisioned_product_id: ::String
+      attr_accessor product_id: ::String
+      attr_accessor product_name: ::String
+      attr_accessor provisioning_artifact_id: ::String
+      attr_accessor provisioning_artifact_name: ::String
+      attr_accessor path_id: ::String
+      attr_accessor path_name: ::String
+      attr_accessor provisioning_parameters: ::Array[Types::UpdateProvisioningParameter]
+      attr_accessor provisioning_preferences: Types::UpdateProvisioningPreferences
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProvisionedProductOutput
+      attr_accessor record_detail: Types::RecordDetail
+      SENSITIVE: []
+    end
+
+    class UpdateProvisionedProductPropertiesInput
+      attr_accessor accept_language: ::String
+      attr_accessor provisioned_product_id: ::String
+      attr_accessor provisioned_product_properties: ::Hash[("OWNER" | "LAUNCH_ROLE"), ::String]
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProvisionedProductPropertiesOutput
+      attr_accessor provisioned_product_id: ::String
+      attr_accessor provisioned_product_properties: ::Hash[("OWNER" | "LAUNCH_ROLE"), ::String]
+      attr_accessor record_id: ::String
+      attr_accessor status: ("CREATED" | "IN_PROGRESS" | "IN_PROGRESS_IN_ERROR" | "SUCCEEDED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class UpdateProvisioningArtifactInput
+      attr_accessor accept_language: ::String
+      attr_accessor product_id: ::String
+      attr_accessor provisioning_artifact_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor active: bool
+      attr_accessor guidance: ("DEFAULT" | "DEPRECATED")
+      SENSITIVE: []
+    end
+
+    class UpdateProvisioningArtifactOutput
+      attr_accessor provisioning_artifact_detail: Types::ProvisioningArtifactDetail
+      attr_accessor info: ::Hash[::String, ::String]
+      attr_accessor status: ("AVAILABLE" | "CREATING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class UpdateProvisioningParameter
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor use_previous_value: bool
+      SENSITIVE: []
+    end
+
+    class UpdateProvisioningPreferences
+      attr_accessor stack_set_accounts: ::Array[::String]
+      attr_accessor stack_set_regions: ::Array[::String]
+      attr_accessor stack_set_failure_tolerance_count: ::Integer
+      attr_accessor stack_set_failure_tolerance_percentage: ::Integer
+      attr_accessor stack_set_max_concurrency_count: ::Integer
+      attr_accessor stack_set_max_concurrency_percentage: ::Integer
+      attr_accessor stack_set_operation_type: ("CREATE" | "UPDATE" | "DELETE")
+      SENSITIVE: []
+    end
+
+    class UpdateServiceActionInput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor definition: ::Hash[("Name" | "Version" | "AssumeRole" | "Parameters"), ::String]
+      attr_accessor description: ::String
+      attr_accessor accept_language: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateServiceActionOutput
+      attr_accessor service_action_detail: Types::ServiceActionDetail
+      SENSITIVE: []
+    end
+
+    class UpdateTagOptionInput
+      attr_accessor id: ::String
+      attr_accessor value: ::String
+      attr_accessor active: bool
+      SENSITIVE: []
+    end
+
+    class UpdateTagOptionOutput
+      attr_accessor tag_option_detail: Types::TagOptionDetail
+      SENSITIVE: []
+    end
+
+    class UsageInstruction
+      attr_accessor type: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,0 +1,65 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Rekognition
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+      end
+      class ConflictException < ::Aws::Errors::ServiceError
+      end
+      class HumanLoopQuotaExceededException < ::Aws::Errors::ServiceError
+        def resource_type: () -> ::String
+        def quota_code: () -> ::String
+        def service_code: () -> ::String
+      end
+      class IdempotentParameterMismatchException < ::Aws::Errors::ServiceError
+      end
+      class ImageTooLargeException < ::Aws::Errors::ServiceError
+      end
+      class InternalServerError < ::Aws::Errors::ServiceError
+      end
+      class InvalidImageFormatException < ::Aws::Errors::ServiceError
+      end
+      class InvalidManifestException < ::Aws::Errors::ServiceError
+      end
+      class InvalidPaginationTokenException < ::Aws::Errors::ServiceError
+      end
+      class InvalidParameterException < ::Aws::Errors::ServiceError
+      end
+      class InvalidPolicyRevisionIdException < ::Aws::Errors::ServiceError
+      end
+      class InvalidS3ObjectException < ::Aws::Errors::ServiceError
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class MalformedPolicyDocumentException < ::Aws::Errors::ServiceError
+      end
+      class ProvisionedThroughputExceededException < ::Aws::Errors::ServiceError
+      end
+      class ResourceAlreadyExistsException < ::Aws::Errors::ServiceError
+      end
+      class ResourceInUseException < ::Aws::Errors::ServiceError
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class ResourceNotReadyException < ::Aws::Errors::ServiceError
+      end
+      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+      end
+      class SessionNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class ThrottlingException < ::Aws::Errors::ServiceError
+      end
+      class VideoTooLargeException < ::Aws::Errors::ServiceError
+      end
+    end
+  end
+end

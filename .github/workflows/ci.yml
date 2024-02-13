@@ -13,6 +13,32 @@ permissions:
   contents: read
 
 jobs:
+  sig:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: [3.3]
+
+    steps:
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+
+      - uses: actions/checkout@v4
+
+      - name: Install gems
+        run: |
+          bundle config set --local with 'build signature'
+          bundle install
+
+      - name: SDK Build
+        run: bundle exec rake build
+
+      - name: rbs testing
+        run: bundle exec rake rbs:test
+
   test:
     runs-on: ubuntu-latest
     strategy:
@@ -30,12 +56,13 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup environment
-        run: echo "${{ matrix.env }}=1" >> $GITHUB_ENV
+        run: |
+          echo "${{ matrix.env }}=1" >> $GITHUB_ENV
 
       - name: Install gems
         run: |
-          echo KITCHEN_SINK=$KITCHEN_SINK CRT=$CRT
-          bundle install --without docs repl development
+          bundle config set --local without 'docs repl development'
+          bundle install
 
       - name: SDK Build
         run: bundle exec rake build

@@ -1,0 +1,104 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SNS
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Topic.html
+    class Topic
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Topic.html#initialize-instance_method
+      def initialize: (String arn, Hash[Symbol, untyped] options) -> void
+                    | (arn: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Topic.html#arn-instance_method
+      def arn: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Topic.html#attributes-instance_method
+      def attributes: () -> ::Hash[::String, ::String]
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Topic.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Topic.html#data-instance_method
+      def data: () -> Types::GetTopicAttributesResponse
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Topic.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Topic.html#add_permission-instance_method
+      def add_permission: (
+                            label: ::String,
+                            aws_account_id: Array[::String],
+                            action_name: Array[::String]
+                          ) -> ::Aws::EmptyStructure
+                        | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Topic.html#confirm_subscription-instance_method
+      def confirm_subscription: (
+                                  token: ::String,
+                                  ?authenticate_on_unsubscribe: ::String
+                                ) -> Subscription
+                              | (?Hash[Symbol, untyped]) -> Subscription
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Topic.html#delete-instance_method
+      def delete: (
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Topic.html#publish-instance_method
+      def publish: (
+                     ?target_arn: ::String,
+                     ?phone_number: ::String,
+                     message: ::String,
+                     ?subject: ::String,
+                     ?message_structure: ::String,
+                     ?message_attributes: Hash[::String, {
+                         data_type: ::String,
+                         string_value: ::String?,
+                         binary_value: ::String?
+                       }],
+                     ?message_deduplication_id: ::String,
+                     ?message_group_id: ::String
+                   ) -> Types::PublishResponse
+                 | (?Hash[Symbol, untyped]) -> Types::PublishResponse
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Topic.html#remove_permission-instance_method
+      def remove_permission: (
+                               label: ::String
+                             ) -> ::Aws::EmptyStructure
+                           | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Topic.html#set_attributes-instance_method
+      def set_attributes: (
+                            attribute_name: ::String,
+                            ?attribute_value: ::String
+                          ) -> ::Aws::EmptyStructure
+                        | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Topic.html#subscribe-instance_method
+      def subscribe: (
+                       protocol: ::String,
+                       ?endpoint: ::String,
+                       ?attributes: Hash[::String, ::String],
+                       ?return_subscription_arn: bool
+                     ) -> Subscription
+                   | (?Hash[Symbol, untyped]) -> Subscription
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SNS/Topic.html#subscriptions-instance_method
+      def subscriptions: (
+                         ) -> Subscription::Collection
+                       | (?Hash[Symbol, untyped]) -> Subscription::Collection
+
+      class Collection < ::Aws::Resources::Collection[Topic]
+      end
+    end
+  end
+end

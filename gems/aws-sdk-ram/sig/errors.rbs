@@ -1,0 +1,100 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RAM
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class IdempotentParameterMismatchException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidClientTokenException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidMaxResultsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidParameterException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidPolicyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidResourceTypeException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidStateTransitionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MalformedArnException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MalformedPolicyTemplateException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MissingRequiredParameterException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class OperationNotPermittedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PermissionAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PermissionLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PermissionVersionsLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceArnNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceShareInvitationAlreadyAcceptedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceShareInvitationAlreadyRejectedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceShareInvitationArnNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceShareInvitationExpiredException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceShareLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServerInternalException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceUnavailableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TagLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TagPolicyViolationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ThrottlingException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnknownResourceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnmatchedPolicyPermissionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

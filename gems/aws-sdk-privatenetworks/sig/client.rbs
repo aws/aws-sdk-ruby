@@ -1,0 +1,468 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module PrivateNetworks
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcknowledgeOrderReceiptResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcknowledgeOrderReceiptResponse]
+        def order: () -> Types::Order
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#acknowledge_order_receipt-instance_method
+      def acknowledge_order_receipt: (
+                                       order_arn: ::String
+                                     ) -> _AcknowledgeOrderReceiptResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcknowledgeOrderReceiptResponseSuccess
+
+      interface _ActivateDeviceIdentifierResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ActivateDeviceIdentifierResponse]
+        def device_identifier: () -> Types::DeviceIdentifier
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#activate_device_identifier-instance_method
+      def activate_device_identifier: (
+                                        ?client_token: ::String,
+                                        device_identifier_arn: ::String
+                                      ) -> _ActivateDeviceIdentifierResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ActivateDeviceIdentifierResponseSuccess
+
+      interface _ActivateNetworkSiteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ActivateNetworkSiteResponse]
+        def network_site: () -> Types::NetworkSite
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#activate_network_site-instance_method
+      def activate_network_site: (
+                                   ?client_token: ::String,
+                                   ?commitment_configuration: {
+                                     automatic_renewal: bool,
+                                     commitment_length: ("SIXTY_DAYS" | "ONE_YEAR" | "THREE_YEARS")
+                                   },
+                                   network_site_arn: ::String,
+                                   shipping_address: {
+                                     city: ::String,
+                                     company: ::String?,
+                                     country: ::String,
+                                     email_address: ::String?,
+                                     name: ::String,
+                                     phone_number: ::String?,
+                                     postal_code: ::String,
+                                     state_or_province: ::String,
+                                     street1: ::String,
+                                     street2: ::String?,
+                                     street3: ::String?
+                                   }
+                                 ) -> _ActivateNetworkSiteResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ActivateNetworkSiteResponseSuccess
+
+      interface _ConfigureAccessPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfigureAccessPointResponse]
+        def access_point: () -> Types::NetworkResource
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#configure_access_point-instance_method
+      def configure_access_point: (
+                                    access_point_arn: ::String,
+                                    ?cpi_secret_key: ::String,
+                                    ?cpi_user_id: ::String,
+                                    ?cpi_user_password: ::String,
+                                    ?cpi_username: ::String,
+                                    ?position: {
+                                      elevation: ::Float?,
+                                      elevation_reference: ("AGL" | "AMSL")?,
+                                      elevation_unit: ("FEET")?,
+                                      latitude: ::Float?,
+                                      longitude: ::Float?
+                                    }
+                                  ) -> _ConfigureAccessPointResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConfigureAccessPointResponseSuccess
+
+      interface _CreateNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNetworkResponse]
+        def network: () -> Types::Network
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#create_network-instance_method
+      def create_network: (
+                            ?client_token: ::String,
+                            ?description: ::String,
+                            network_name: ::String,
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateNetworkResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNetworkResponseSuccess
+
+      interface _CreateNetworkSiteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNetworkSiteResponse]
+        def network_site: () -> Types::NetworkSite
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#create_network_site-instance_method
+      def create_network_site: (
+                                 ?availability_zone: ::String,
+                                 ?availability_zone_id: ::String,
+                                 ?client_token: ::String,
+                                 ?description: ::String,
+                                 network_arn: ::String,
+                                 network_site_name: ::String,
+                                 ?pending_plan: {
+                                   options: Array[
+                                     {
+                                       name: ::String,
+                                       value: ::String?
+                                     },
+                                   ]?,
+                                   resource_definitions: Array[
+                                     {
+                                       count: ::Integer,
+                                       options: Array[
+                                         {
+                                           name: ::String,
+                                           value: ::String?
+                                         },
+                                       ]?,
+                                       type: ("RADIO_UNIT" | "DEVICE_IDENTIFIER")
+                                     },
+                                   ]?
+                                 },
+                                 ?tags: Hash[::String, ::String]
+                               ) -> _CreateNetworkSiteResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNetworkSiteResponseSuccess
+
+      interface _DeactivateDeviceIdentifierResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeactivateDeviceIdentifierResponse]
+        def device_identifier: () -> Types::DeviceIdentifier
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#deactivate_device_identifier-instance_method
+      def deactivate_device_identifier: (
+                                          ?client_token: ::String,
+                                          device_identifier_arn: ::String
+                                        ) -> _DeactivateDeviceIdentifierResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeactivateDeviceIdentifierResponseSuccess
+
+      interface _DeleteNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNetworkResponse]
+        def network: () -> Types::Network
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#delete_network-instance_method
+      def delete_network: (
+                            ?client_token: ::String,
+                            network_arn: ::String
+                          ) -> _DeleteNetworkResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNetworkResponseSuccess
+
+      interface _DeleteNetworkSiteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNetworkSiteResponse]
+        def network_site: () -> Types::NetworkSite
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#delete_network_site-instance_method
+      def delete_network_site: (
+                                 ?client_token: ::String,
+                                 network_site_arn: ::String
+                               ) -> _DeleteNetworkSiteResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNetworkSiteResponseSuccess
+
+      interface _GetDeviceIdentifierResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeviceIdentifierResponse]
+        def device_identifier: () -> Types::DeviceIdentifier
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#get_device_identifier-instance_method
+      def get_device_identifier: (
+                                   device_identifier_arn: ::String
+                                 ) -> _GetDeviceIdentifierResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeviceIdentifierResponseSuccess
+
+      interface _GetNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNetworkResponse]
+        def network: () -> Types::Network
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#get_network-instance_method
+      def get_network: (
+                         network_arn: ::String
+                       ) -> _GetNetworkResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNetworkResponseSuccess
+
+      interface _GetNetworkResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNetworkResourceResponse]
+        def network_resource: () -> Types::NetworkResource
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#get_network_resource-instance_method
+      def get_network_resource: (
+                                  network_resource_arn: ::String
+                                ) -> _GetNetworkResourceResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNetworkResourceResponseSuccess
+
+      interface _GetNetworkSiteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNetworkSiteResponse]
+        def network_site: () -> Types::NetworkSite
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#get_network_site-instance_method
+      def get_network_site: (
+                              network_site_arn: ::String
+                            ) -> _GetNetworkSiteResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNetworkSiteResponseSuccess
+
+      interface _GetOrderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOrderResponse]
+        def order: () -> Types::Order
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#get_order-instance_method
+      def get_order: (
+                       order_arn: ::String
+                     ) -> _GetOrderResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOrderResponseSuccess
+
+      interface _ListDeviceIdentifiersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeviceIdentifiersResponse]
+        def device_identifiers: () -> ::Array[Types::DeviceIdentifier]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#list_device_identifiers-instance_method
+      def list_device_identifiers: (
+                                     ?filters: Hash[("STATUS" | "ORDER" | "TRAFFIC_GROUP"), Array[::String]],
+                                     ?max_results: ::Integer,
+                                     network_arn: ::String,
+                                     ?start_token: ::String
+                                   ) -> _ListDeviceIdentifiersResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeviceIdentifiersResponseSuccess
+
+      interface _ListNetworkResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworkResourcesResponse]
+        def network_resources: () -> ::Array[Types::NetworkResource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#list_network_resources-instance_method
+      def list_network_resources: (
+                                    ?filters: Hash[("ORDER" | "STATUS"), Array[::String]],
+                                    ?max_results: ::Integer,
+                                    network_arn: ::String,
+                                    ?start_token: ::String
+                                  ) -> _ListNetworkResourcesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworkResourcesResponseSuccess
+
+      interface _ListNetworkSitesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworkSitesResponse]
+        def network_sites: () -> ::Array[Types::NetworkSite]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#list_network_sites-instance_method
+      def list_network_sites: (
+                                ?filters: Hash[("STATUS"), Array[::String]],
+                                ?max_results: ::Integer,
+                                network_arn: ::String,
+                                ?start_token: ::String
+                              ) -> _ListNetworkSitesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworkSitesResponseSuccess
+
+      interface _ListNetworksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworksResponse]
+        def networks: () -> ::Array[Types::Network]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#list_networks-instance_method
+      def list_networks: (
+                           ?filters: Hash[("STATUS"), Array[::String]],
+                           ?max_results: ::Integer,
+                           ?start_token: ::String
+                         ) -> _ListNetworksResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworksResponseSuccess
+
+      interface _ListOrdersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOrdersResponse]
+        def next_token: () -> ::String
+        def orders: () -> ::Array[Types::Order]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#list_orders-instance_method
+      def list_orders: (
+                         ?filters: Hash[("STATUS" | "NETWORK_SITE"), Array[::String]],
+                         ?max_results: ::Integer,
+                         network_arn: ::String,
+                         ?start_token: ::String
+                       ) -> _ListOrdersResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOrdersResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PingResponse]
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#ping-instance_method
+      def ping: () -> _PingResponseSuccess
+              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PingResponseSuccess
+
+      interface _StartNetworkResourceUpdateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartNetworkResourceUpdateResponse]
+        def network_resource: () -> Types::NetworkResource
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#start_network_resource_update-instance_method
+      def start_network_resource_update: (
+                                           ?commitment_configuration: {
+                                             automatic_renewal: bool,
+                                             commitment_length: ("SIXTY_DAYS" | "ONE_YEAR" | "THREE_YEARS")
+                                           },
+                                           network_resource_arn: ::String,
+                                           ?return_reason: ::String,
+                                           ?shipping_address: {
+                                             city: ::String,
+                                             company: ::String?,
+                                             country: ::String,
+                                             email_address: ::String?,
+                                             name: ::String,
+                                             phone_number: ::String?,
+                                             postal_code: ::String,
+                                             state_or_province: ::String,
+                                             street1: ::String,
+                                             street2: ::String?,
+                                             street3: ::String?
+                                           },
+                                           update_type: ("REPLACE" | "RETURN" | "COMMITMENT")
+                                         ) -> _StartNetworkResourceUpdateResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartNetworkResourceUpdateResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateNetworkSiteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNetworkSiteResponse]
+        def network_site: () -> Types::NetworkSite
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#update_network_site-instance_method
+      def update_network_site: (
+                                 ?client_token: ::String,
+                                 ?description: ::String,
+                                 network_site_arn: ::String
+                               ) -> _UpdateNetworkSiteResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNetworkSiteResponseSuccess
+
+      interface _UpdateNetworkSitePlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNetworkSiteResponse]
+        def network_site: () -> Types::NetworkSite
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrivateNetworks/Client.html#update_network_site_plan-instance_method
+      def update_network_site_plan: (
+                                      ?client_token: ::String,
+                                      network_site_arn: ::String,
+                                      pending_plan: {
+                                        options: Array[
+                                          {
+                                            name: ::String,
+                                            value: ::String?
+                                          },
+                                        ]?,
+                                        resource_definitions: Array[
+                                          {
+                                            count: ::Integer,
+                                            options: Array[
+                                              {
+                                                name: ::String,
+                                                value: ::String?
+                                              },
+                                            ]?,
+                                            type: ("RADIO_UNIT" | "DEVICE_IDENTIFIER")
+                                          },
+                                        ]?
+                                      }
+                                    ) -> _UpdateNetworkSitePlanResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNetworkSitePlanResponseSuccess
+    end
+  end
+end
+

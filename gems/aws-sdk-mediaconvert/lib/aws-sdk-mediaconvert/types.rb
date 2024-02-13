@@ -43,13 +43,7 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] codec_profile
-    #   Specify the AAC profile. For the widest player compatibility and
-    #   where higher bitrates are acceptable: Keep the default profile, LC
-    #   (AAC-LC) For improved audio performance at lower bitrates: Choose
-    #   HEV1 or HEV2. HEV1 (AAC-HE v1) adds spectral band replication to
-    #   improve speech audio at low bitrates. HEV2 (AAC-HE v2) adds
-    #   parametric stereo, which optimizes for encoding stereo audio at very
-    #   low bitrates.
+    #   AAC Profile.
     #   @return [String]
     #
     # @!attribute [rw] coding_mode
@@ -65,11 +59,7 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] rate_control_mode
-    #   Specify the AAC rate control mode. For a constant bitrate: Choose
-    #   CBR. Your AAC output bitrate will be equal to the value that you
-    #   choose for Bitrate. For a variable bitrate: Choose VBR. Your AAC
-    #   output bitrate will vary according to your audio content and the
-    #   value that you choose for Bitrate quality.
+    #   Rate Control Mode.
     #   @return [String]
     #
     # @!attribute [rw] raw_format
@@ -79,10 +69,15 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] sample_rate
-    #   Specify the AAC sample rate in samples per second (Hz). Valid sample
-    #   rates depend on the AAC profile and Coding mode that you select. For
-    #   a list of supported sample rates, see:
-    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/aac-support.html
+    #   Specify the Sample rate in Hz. Valid sample rates depend on the
+    #   Profile and Coding mode that you select. The following list shows
+    #   valid sample rates for each Profile and Coding mode. * LC Profile,
+    #   Coding mode 1.0, 2.0, and Receiver Mix: 8000, 12000, 16000, 22050,
+    #   24000, 32000, 44100, 48000, 88200, 96000. * LC Profile, Coding mode
+    #   5.1: 32000, 44100, 48000, 96000. * HEV1 Profile, Coding mode 1.0
+    #   and Receiver Mix: 22050, 24000, 32000, 44100, 48000. * HEV1
+    #   Profile, Coding mode 2.0 and 5.1: 32000, 44100, 48000, 96000. *
+    #   HEV2 Profile, Coding mode 2.0: 22050, 24000, 32000, 44100, 48000.
     #   @return [Integer]
     #
     # @!attribute [rw] specification
@@ -91,9 +86,7 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] vbr_quality
-    #   Specify the quality of your variable bitrate (VBR) AAC audio. For a
-    #   list of approximate VBR bitrates, see:
-    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/aac-support.html#aac\_vbr
+    #   VBR Quality Level - Only used if rate\_control\_mode is VBR.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AacSettings AWS API Documentation
@@ -11276,6 +11269,26 @@ module Aws::MediaConvert
     # output more or fewer audio channels than your input audio source
     # provides.
     #
+    # @!attribute [rw] audio_description_audio_channel
+    #   Optionally specify the channel in your input that contains your
+    #   audio description audio signal. MediaConvert mixes your audio signal
+    #   across all output channels, while reducing their volume according to
+    #   your data stream. When you specify an audio description audio
+    #   channel, you must also specify an audio description data channel.
+    #   For more information about audio description signals, see the BBC
+    #   WHP 198 and 051 white papers.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] audio_description_data_channel
+    #   Optionally specify the channel in your input that contains your
+    #   audio description data stream. MediaConvert mixes your audio signal
+    #   across all output channels, while reducing their volume according to
+    #   your data stream. When you specify an audio description data
+    #   channel, you must also specify an audio description audio channel.
+    #   For more information about audio description signals, see the BBC
+    #   WHP 198 and 051 white papers.
+    #   @return [Integer]
+    #
     # @!attribute [rw] channel_mapping
     #   Channel mapping contains the group of fields that hold the remixing
     #   value for each channel, in dB. Specify remix values to indicate how
@@ -11313,6 +11326,8 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/RemixSettings AWS API Documentation
     #
     class RemixSettings < Struct.new(
+      :audio_description_audio_channel,
+      :audio_description_data_channel,
       :channel_mapping,
       :channels_in,
       :channels_out)

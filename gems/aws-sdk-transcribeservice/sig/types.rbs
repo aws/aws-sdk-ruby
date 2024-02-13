@@ -1,0 +1,971 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::TranscribeService
+  module Types
+
+    class AbsoluteTimeRange
+      attr_accessor start_time: ::Integer
+      attr_accessor end_time: ::Integer
+      attr_accessor first: ::Integer
+      attr_accessor last: ::Integer
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CallAnalyticsJob
+      attr_accessor call_analytics_job_name: ::String
+      attr_accessor call_analytics_job_status: ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor media_sample_rate_hertz: ::Integer
+      attr_accessor media_format: ("mp3" | "mp4" | "wav" | "flac" | "ogg" | "amr" | "webm" | "m4a")
+      attr_accessor media: Types::Media
+      attr_accessor transcript: Types::Transcript
+      attr_accessor start_time: ::Time
+      attr_accessor creation_time: ::Time
+      attr_accessor completion_time: ::Time
+      attr_accessor failure_reason: ::String
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor identified_language_score: ::Float
+      attr_accessor settings: Types::CallAnalyticsJobSettings
+      attr_accessor channel_definitions: ::Array[Types::ChannelDefinition]
+      SENSITIVE: []
+    end
+
+    class CallAnalyticsJobSettings
+      attr_accessor vocabulary_name: ::String
+      attr_accessor vocabulary_filter_name: ::String
+      attr_accessor vocabulary_filter_method: ("remove" | "mask" | "tag")
+      attr_accessor language_model_name: ::String
+      attr_accessor content_redaction: Types::ContentRedaction
+      attr_accessor language_options: ::Array[("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")]
+      attr_accessor language_id_settings: ::Hash[("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA"), Types::LanguageIdSettings]
+      attr_accessor summarization: Types::Summarization
+      SENSITIVE: []
+    end
+
+    class CallAnalyticsJobSummary
+      attr_accessor call_analytics_job_name: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor start_time: ::Time
+      attr_accessor completion_time: ::Time
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor call_analytics_job_status: ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class CategoryProperties
+      attr_accessor category_name: ::String
+      attr_accessor rules: ::Array[Types::Rule]
+      attr_accessor create_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor input_type: ("REAL_TIME" | "POST_CALL")
+      SENSITIVE: []
+    end
+
+    class ChannelDefinition
+      attr_accessor channel_id: ::Integer
+      attr_accessor participant_role: ("AGENT" | "CUSTOMER")
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ContentRedaction
+      attr_accessor redaction_type: ("PII")
+      attr_accessor redaction_output: ("redacted" | "redacted_and_unredacted")
+      attr_accessor pii_entity_types: ::Array[("BANK_ACCOUNT_NUMBER" | "BANK_ROUTING" | "CREDIT_DEBIT_NUMBER" | "CREDIT_DEBIT_CVV" | "CREDIT_DEBIT_EXPIRY" | "PIN" | "EMAIL" | "ADDRESS" | "NAME" | "PHONE" | "SSN" | "ALL")]
+      SENSITIVE: []
+    end
+
+    class CreateCallAnalyticsCategoryRequest
+      attr_accessor category_name: ::String
+      attr_accessor rules: ::Array[Types::Rule]
+      attr_accessor input_type: ("REAL_TIME" | "POST_CALL")
+      SENSITIVE: []
+    end
+
+    class CreateCallAnalyticsCategoryResponse
+      attr_accessor category_properties: Types::CategoryProperties
+      SENSITIVE: []
+    end
+
+    class CreateLanguageModelRequest
+      attr_accessor language_code: ("en-US" | "hi-IN" | "es-US" | "en-GB" | "en-AU" | "de-DE" | "ja-JP")
+      attr_accessor base_model_name: ("NarrowBand" | "WideBand")
+      attr_accessor model_name: ::String
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateLanguageModelResponse
+      attr_accessor language_code: ("en-US" | "hi-IN" | "es-US" | "en-GB" | "en-AU" | "de-DE" | "ja-JP")
+      attr_accessor base_model_name: ("NarrowBand" | "WideBand")
+      attr_accessor model_name: ::String
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor model_status: ("IN_PROGRESS" | "FAILED" | "COMPLETED")
+      SENSITIVE: []
+    end
+
+    class CreateMedicalVocabularyRequest
+      attr_accessor vocabulary_name: ::String
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor vocabulary_file_uri: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateMedicalVocabularyResponse
+      attr_accessor vocabulary_name: ::String
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor vocabulary_state: ("PENDING" | "READY" | "FAILED")
+      attr_accessor last_modified_time: ::Time
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVocabularyFilterRequest
+      attr_accessor vocabulary_filter_name: ::String
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor words: ::Array[::String]
+      attr_accessor vocabulary_filter_file_uri: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor data_access_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVocabularyFilterResponse
+      attr_accessor vocabulary_filter_name: ::String
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateVocabularyRequest
+      attr_accessor vocabulary_name: ::String
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor phrases: ::Array[::String]
+      attr_accessor vocabulary_file_uri: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor data_access_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVocabularyResponse
+      attr_accessor vocabulary_name: ::String
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor vocabulary_state: ("PENDING" | "READY" | "FAILED")
+      attr_accessor last_modified_time: ::Time
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCallAnalyticsCategoryRequest
+      attr_accessor category_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCallAnalyticsCategoryResponse < Aws::EmptyStructure
+    end
+
+    class DeleteCallAnalyticsJobRequest
+      attr_accessor call_analytics_job_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCallAnalyticsJobResponse < Aws::EmptyStructure
+    end
+
+    class DeleteLanguageModelRequest
+      attr_accessor model_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMedicalScribeJobRequest
+      attr_accessor medical_scribe_job_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMedicalTranscriptionJobRequest
+      attr_accessor medical_transcription_job_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMedicalVocabularyRequest
+      attr_accessor vocabulary_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTranscriptionJobRequest
+      attr_accessor transcription_job_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVocabularyFilterRequest
+      attr_accessor vocabulary_filter_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVocabularyRequest
+      attr_accessor vocabulary_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLanguageModelRequest
+      attr_accessor model_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLanguageModelResponse
+      attr_accessor language_model: Types::LanguageModel
+      SENSITIVE: []
+    end
+
+    class GetCallAnalyticsCategoryRequest
+      attr_accessor category_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCallAnalyticsCategoryResponse
+      attr_accessor category_properties: Types::CategoryProperties
+      SENSITIVE: []
+    end
+
+    class GetCallAnalyticsJobRequest
+      attr_accessor call_analytics_job_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCallAnalyticsJobResponse
+      attr_accessor call_analytics_job: Types::CallAnalyticsJob
+      SENSITIVE: []
+    end
+
+    class GetMedicalScribeJobRequest
+      attr_accessor medical_scribe_job_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetMedicalScribeJobResponse
+      attr_accessor medical_scribe_job: Types::MedicalScribeJob
+      SENSITIVE: []
+    end
+
+    class GetMedicalTranscriptionJobRequest
+      attr_accessor medical_transcription_job_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetMedicalTranscriptionJobResponse
+      attr_accessor medical_transcription_job: Types::MedicalTranscriptionJob
+      SENSITIVE: []
+    end
+
+    class GetMedicalVocabularyRequest
+      attr_accessor vocabulary_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetMedicalVocabularyResponse
+      attr_accessor vocabulary_name: ::String
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor vocabulary_state: ("PENDING" | "READY" | "FAILED")
+      attr_accessor last_modified_time: ::Time
+      attr_accessor failure_reason: ::String
+      attr_accessor download_uri: ::String
+      SENSITIVE: []
+    end
+
+    class GetTranscriptionJobRequest
+      attr_accessor transcription_job_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetTranscriptionJobResponse
+      attr_accessor transcription_job: Types::TranscriptionJob
+      SENSITIVE: []
+    end
+
+    class GetVocabularyFilterRequest
+      attr_accessor vocabulary_filter_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetVocabularyFilterResponse
+      attr_accessor vocabulary_filter_name: ::String
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor last_modified_time: ::Time
+      attr_accessor download_uri: ::String
+      SENSITIVE: []
+    end
+
+    class GetVocabularyRequest
+      attr_accessor vocabulary_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetVocabularyResponse
+      attr_accessor vocabulary_name: ::String
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor vocabulary_state: ("PENDING" | "READY" | "FAILED")
+      attr_accessor last_modified_time: ::Time
+      attr_accessor failure_reason: ::String
+      attr_accessor download_uri: ::String
+      SENSITIVE: []
+    end
+
+    class InputDataConfig
+      attr_accessor s3_uri: ::String
+      attr_accessor tuning_data_s3_uri: ::String
+      attr_accessor data_access_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InternalFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InterruptionFilter
+      attr_accessor threshold: ::Integer
+      attr_accessor participant_role: ("AGENT" | "CUSTOMER")
+      attr_accessor absolute_time_range: Types::AbsoluteTimeRange
+      attr_accessor relative_time_range: Types::RelativeTimeRange
+      attr_accessor negate: bool
+      SENSITIVE: []
+    end
+
+    class JobExecutionSettings
+      attr_accessor allow_deferred_execution: bool
+      attr_accessor data_access_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LanguageCodeItem
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor duration_in_seconds: ::Float
+      SENSITIVE: []
+    end
+
+    class LanguageIdSettings
+      attr_accessor vocabulary_name: ::String
+      attr_accessor vocabulary_filter_name: ::String
+      attr_accessor language_model_name: ::String
+      SENSITIVE: []
+    end
+
+    class LanguageModel
+      attr_accessor model_name: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor language_code: ("en-US" | "hi-IN" | "es-US" | "en-GB" | "en-AU" | "de-DE" | "ja-JP")
+      attr_accessor base_model_name: ("NarrowBand" | "WideBand")
+      attr_accessor model_status: ("IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor upgrade_availability: bool
+      attr_accessor failure_reason: ::String
+      attr_accessor input_data_config: Types::InputDataConfig
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListCallAnalyticsCategoriesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCallAnalyticsCategoriesResponse
+      attr_accessor next_token: ::String
+      attr_accessor categories: ::Array[Types::CategoryProperties]
+      SENSITIVE: []
+    end
+
+    class ListCallAnalyticsJobsRequest
+      attr_accessor status: ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor job_name_contains: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCallAnalyticsJobsResponse
+      attr_accessor status: ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor next_token: ::String
+      attr_accessor call_analytics_job_summaries: ::Array[Types::CallAnalyticsJobSummary]
+      SENSITIVE: []
+    end
+
+    class ListLanguageModelsRequest
+      attr_accessor status_equals: ("IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor name_contains: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListLanguageModelsResponse
+      attr_accessor next_token: ::String
+      attr_accessor models: ::Array[Types::LanguageModel]
+      SENSITIVE: []
+    end
+
+    class ListMedicalScribeJobsRequest
+      attr_accessor status: ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor job_name_contains: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMedicalScribeJobsResponse
+      attr_accessor status: ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor next_token: ::String
+      attr_accessor medical_scribe_job_summaries: ::Array[Types::MedicalScribeJobSummary]
+      SENSITIVE: []
+    end
+
+    class ListMedicalTranscriptionJobsRequest
+      attr_accessor status: ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor job_name_contains: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMedicalTranscriptionJobsResponse
+      attr_accessor status: ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor next_token: ::String
+      attr_accessor medical_transcription_job_summaries: ::Array[Types::MedicalTranscriptionJobSummary]
+      SENSITIVE: []
+    end
+
+    class ListMedicalVocabulariesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor state_equals: ("PENDING" | "READY" | "FAILED")
+      attr_accessor name_contains: ::String
+      SENSITIVE: []
+    end
+
+    class ListMedicalVocabulariesResponse
+      attr_accessor status: ("PENDING" | "READY" | "FAILED")
+      attr_accessor next_token: ::String
+      attr_accessor vocabularies: ::Array[Types::VocabularyInfo]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListTranscriptionJobsRequest
+      attr_accessor status: ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor job_name_contains: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTranscriptionJobsResponse
+      attr_accessor status: ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor next_token: ::String
+      attr_accessor transcription_job_summaries: ::Array[Types::TranscriptionJobSummary]
+      SENSITIVE: []
+    end
+
+    class ListVocabulariesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor state_equals: ("PENDING" | "READY" | "FAILED")
+      attr_accessor name_contains: ::String
+      SENSITIVE: []
+    end
+
+    class ListVocabulariesResponse
+      attr_accessor status: ("PENDING" | "READY" | "FAILED")
+      attr_accessor next_token: ::String
+      attr_accessor vocabularies: ::Array[Types::VocabularyInfo]
+      SENSITIVE: []
+    end
+
+    class ListVocabularyFiltersRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor name_contains: ::String
+      SENSITIVE: []
+    end
+
+    class ListVocabularyFiltersResponse
+      attr_accessor next_token: ::String
+      attr_accessor vocabulary_filters: ::Array[Types::VocabularyFilterInfo]
+      SENSITIVE: []
+    end
+
+    class Media
+      attr_accessor media_file_uri: ::String
+      attr_accessor redacted_media_file_uri: ::String
+      SENSITIVE: []
+    end
+
+    class MedicalScribeChannelDefinition
+      attr_accessor channel_id: ::Integer
+      attr_accessor participant_role: ("PATIENT" | "CLINICIAN")
+      SENSITIVE: []
+    end
+
+    class MedicalScribeJob
+      attr_accessor medical_scribe_job_name: ::String
+      attr_accessor medical_scribe_job_status: ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor language_code: ("en-US")
+      attr_accessor media: Types::Media
+      attr_accessor medical_scribe_output: Types::MedicalScribeOutput
+      attr_accessor start_time: ::Time
+      attr_accessor creation_time: ::Time
+      attr_accessor completion_time: ::Time
+      attr_accessor failure_reason: ::String
+      attr_accessor settings: Types::MedicalScribeSettings
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor channel_definitions: ::Array[Types::MedicalScribeChannelDefinition]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class MedicalScribeJobSummary
+      attr_accessor medical_scribe_job_name: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor start_time: ::Time
+      attr_accessor completion_time: ::Time
+      attr_accessor language_code: ("en-US")
+      attr_accessor medical_scribe_job_status: ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class MedicalScribeOutput
+      attr_accessor transcript_file_uri: ::String
+      attr_accessor clinical_document_uri: ::String
+      SENSITIVE: []
+    end
+
+    class MedicalScribeSettings
+      attr_accessor show_speaker_labels: bool
+      attr_accessor max_speaker_labels: ::Integer
+      attr_accessor channel_identification: bool
+      attr_accessor vocabulary_name: ::String
+      attr_accessor vocabulary_filter_name: ::String
+      attr_accessor vocabulary_filter_method: ("remove" | "mask" | "tag")
+      SENSITIVE: []
+    end
+
+    class MedicalTranscript
+      attr_accessor transcript_file_uri: ::String
+      SENSITIVE: []
+    end
+
+    class MedicalTranscriptionJob
+      attr_accessor medical_transcription_job_name: ::String
+      attr_accessor transcription_job_status: ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor media_sample_rate_hertz: ::Integer
+      attr_accessor media_format: ("mp3" | "mp4" | "wav" | "flac" | "ogg" | "amr" | "webm" | "m4a")
+      attr_accessor media: Types::Media
+      attr_accessor transcript: Types::MedicalTranscript
+      attr_accessor start_time: ::Time
+      attr_accessor creation_time: ::Time
+      attr_accessor completion_time: ::Time
+      attr_accessor failure_reason: ::String
+      attr_accessor settings: Types::MedicalTranscriptionSetting
+      attr_accessor content_identification_type: ("PHI")
+      attr_accessor specialty: ("PRIMARYCARE")
+      attr_accessor type: ("CONVERSATION" | "DICTATION")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class MedicalTranscriptionJobSummary
+      attr_accessor medical_transcription_job_name: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor start_time: ::Time
+      attr_accessor completion_time: ::Time
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor transcription_job_status: ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor failure_reason: ::String
+      attr_accessor output_location_type: ("CUSTOMER_BUCKET" | "SERVICE_BUCKET")
+      attr_accessor specialty: ("PRIMARYCARE")
+      attr_accessor content_identification_type: ("PHI")
+      attr_accessor type: ("CONVERSATION" | "DICTATION")
+      SENSITIVE: []
+    end
+
+    class MedicalTranscriptionSetting
+      attr_accessor show_speaker_labels: bool
+      attr_accessor max_speaker_labels: ::Integer
+      attr_accessor channel_identification: bool
+      attr_accessor show_alternatives: bool
+      attr_accessor max_alternatives: ::Integer
+      attr_accessor vocabulary_name: ::String
+      SENSITIVE: []
+    end
+
+    class ModelSettings
+      attr_accessor language_model_name: ::String
+      SENSITIVE: []
+    end
+
+    class NonTalkTimeFilter
+      attr_accessor threshold: ::Integer
+      attr_accessor absolute_time_range: Types::AbsoluteTimeRange
+      attr_accessor relative_time_range: Types::RelativeTimeRange
+      attr_accessor negate: bool
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RelativeTimeRange
+      attr_accessor start_percentage: ::Integer
+      attr_accessor end_percentage: ::Integer
+      attr_accessor first: ::Integer
+      attr_accessor last: ::Integer
+      SENSITIVE: []
+    end
+
+    class Rule
+      attr_accessor non_talk_time_filter: Types::NonTalkTimeFilter
+      attr_accessor interruption_filter: Types::InterruptionFilter
+      attr_accessor transcript_filter: Types::TranscriptFilter
+      attr_accessor sentiment_filter: Types::SentimentFilter
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class NonTalkTimeFilter < Rule
+      end
+      class InterruptionFilter < Rule
+      end
+      class TranscriptFilter < Rule
+      end
+      class SentimentFilter < Rule
+      end
+      class Unknown < Rule
+      end
+    end
+
+    class SentimentFilter
+      attr_accessor sentiments: ::Array[("POSITIVE" | "NEGATIVE" | "NEUTRAL" | "MIXED")]
+      attr_accessor absolute_time_range: Types::AbsoluteTimeRange
+      attr_accessor relative_time_range: Types::RelativeTimeRange
+      attr_accessor participant_role: ("AGENT" | "CUSTOMER")
+      attr_accessor negate: bool
+      SENSITIVE: []
+    end
+
+    class Settings
+      attr_accessor vocabulary_name: ::String
+      attr_accessor show_speaker_labels: bool
+      attr_accessor max_speaker_labels: ::Integer
+      attr_accessor channel_identification: bool
+      attr_accessor show_alternatives: bool
+      attr_accessor max_alternatives: ::Integer
+      attr_accessor vocabulary_filter_name: ::String
+      attr_accessor vocabulary_filter_method: ("remove" | "mask" | "tag")
+      SENSITIVE: []
+    end
+
+    class StartCallAnalyticsJobRequest
+      attr_accessor call_analytics_job_name: ::String
+      attr_accessor media: Types::Media
+      attr_accessor output_location: ::String
+      attr_accessor output_encryption_kms_key_id: ::String
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor settings: Types::CallAnalyticsJobSettings
+      attr_accessor channel_definitions: ::Array[Types::ChannelDefinition]
+      SENSITIVE: []
+    end
+
+    class StartCallAnalyticsJobResponse
+      attr_accessor call_analytics_job: Types::CallAnalyticsJob
+      SENSITIVE: []
+    end
+
+    class StartMedicalScribeJobRequest
+      attr_accessor medical_scribe_job_name: ::String
+      attr_accessor media: Types::Media
+      attr_accessor output_bucket_name: ::String
+      attr_accessor output_encryption_kms_key_id: ::String
+      attr_accessor kms_encryption_context: ::Hash[::String, ::String]
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor settings: Types::MedicalScribeSettings
+      attr_accessor channel_definitions: ::Array[Types::MedicalScribeChannelDefinition]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class StartMedicalScribeJobResponse
+      attr_accessor medical_scribe_job: Types::MedicalScribeJob
+      SENSITIVE: []
+    end
+
+    class StartMedicalTranscriptionJobRequest
+      attr_accessor medical_transcription_job_name: ::String
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor media_sample_rate_hertz: ::Integer
+      attr_accessor media_format: ("mp3" | "mp4" | "wav" | "flac" | "ogg" | "amr" | "webm" | "m4a")
+      attr_accessor media: Types::Media
+      attr_accessor output_bucket_name: ::String
+      attr_accessor output_key: ::String
+      attr_accessor output_encryption_kms_key_id: ::String
+      attr_accessor kms_encryption_context: ::Hash[::String, ::String]
+      attr_accessor settings: Types::MedicalTranscriptionSetting
+      attr_accessor content_identification_type: ("PHI")
+      attr_accessor specialty: ("PRIMARYCARE")
+      attr_accessor type: ("CONVERSATION" | "DICTATION")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class StartMedicalTranscriptionJobResponse
+      attr_accessor medical_transcription_job: Types::MedicalTranscriptionJob
+      SENSITIVE: []
+    end
+
+    class StartTranscriptionJobRequest
+      attr_accessor transcription_job_name: ::String
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor media_sample_rate_hertz: ::Integer
+      attr_accessor media_format: ("mp3" | "mp4" | "wav" | "flac" | "ogg" | "amr" | "webm" | "m4a")
+      attr_accessor media: Types::Media
+      attr_accessor output_bucket_name: ::String
+      attr_accessor output_key: ::String
+      attr_accessor output_encryption_kms_key_id: ::String
+      attr_accessor kms_encryption_context: ::Hash[::String, ::String]
+      attr_accessor settings: Types::Settings
+      attr_accessor model_settings: Types::ModelSettings
+      attr_accessor job_execution_settings: Types::JobExecutionSettings
+      attr_accessor content_redaction: Types::ContentRedaction
+      attr_accessor identify_language: bool
+      attr_accessor identify_multiple_languages: bool
+      attr_accessor language_options: ::Array[("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")]
+      attr_accessor subtitles: Types::Subtitles
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor language_id_settings: ::Hash[("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA"), Types::LanguageIdSettings]
+      attr_accessor toxicity_detection: ::Array[Types::ToxicityDetectionSettings]
+      SENSITIVE: []
+    end
+
+    class StartTranscriptionJobResponse
+      attr_accessor transcription_job: Types::TranscriptionJob
+      SENSITIVE: []
+    end
+
+    class Subtitles
+      attr_accessor formats: ::Array[("vtt" | "srt")]
+      attr_accessor output_start_index: ::Integer
+      SENSITIVE: []
+    end
+
+    class SubtitlesOutput
+      attr_accessor formats: ::Array[("vtt" | "srt")]
+      attr_accessor subtitle_file_uris: ::Array[::String]
+      attr_accessor output_start_index: ::Integer
+      SENSITIVE: []
+    end
+
+    class Summarization
+      attr_accessor generate_abstractive_summary: bool
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ToxicityDetectionSettings
+      attr_accessor toxicity_categories: ::Array[("ALL")]
+      SENSITIVE: []
+    end
+
+    class Transcript
+      attr_accessor transcript_file_uri: ::String
+      attr_accessor redacted_transcript_file_uri: ::String
+      SENSITIVE: []
+    end
+
+    class TranscriptFilter
+      attr_accessor transcript_filter_type: ("EXACT")
+      attr_accessor absolute_time_range: Types::AbsoluteTimeRange
+      attr_accessor relative_time_range: Types::RelativeTimeRange
+      attr_accessor participant_role: ("AGENT" | "CUSTOMER")
+      attr_accessor negate: bool
+      attr_accessor targets: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TranscriptionJob
+      attr_accessor transcription_job_name: ::String
+      attr_accessor transcription_job_status: ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor media_sample_rate_hertz: ::Integer
+      attr_accessor media_format: ("mp3" | "mp4" | "wav" | "flac" | "ogg" | "amr" | "webm" | "m4a")
+      attr_accessor media: Types::Media
+      attr_accessor transcript: Types::Transcript
+      attr_accessor start_time: ::Time
+      attr_accessor creation_time: ::Time
+      attr_accessor completion_time: ::Time
+      attr_accessor failure_reason: ::String
+      attr_accessor settings: Types::Settings
+      attr_accessor model_settings: Types::ModelSettings
+      attr_accessor job_execution_settings: Types::JobExecutionSettings
+      attr_accessor content_redaction: Types::ContentRedaction
+      attr_accessor identify_language: bool
+      attr_accessor identify_multiple_languages: bool
+      attr_accessor language_options: ::Array[("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")]
+      attr_accessor identified_language_score: ::Float
+      attr_accessor language_codes: ::Array[Types::LanguageCodeItem]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor subtitles: Types::SubtitlesOutput
+      attr_accessor language_id_settings: ::Hash[("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA"), Types::LanguageIdSettings]
+      attr_accessor toxicity_detection: ::Array[Types::ToxicityDetectionSettings]
+      SENSITIVE: []
+    end
+
+    class TranscriptionJobSummary
+      attr_accessor transcription_job_name: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor start_time: ::Time
+      attr_accessor completion_time: ::Time
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor transcription_job_status: ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor failure_reason: ::String
+      attr_accessor output_location_type: ("CUSTOMER_BUCKET" | "SERVICE_BUCKET")
+      attr_accessor content_redaction: Types::ContentRedaction
+      attr_accessor model_settings: Types::ModelSettings
+      attr_accessor identify_language: bool
+      attr_accessor identify_multiple_languages: bool
+      attr_accessor identified_language_score: ::Float
+      attr_accessor language_codes: ::Array[Types::LanguageCodeItem]
+      attr_accessor toxicity_detection: ::Array[Types::ToxicityDetectionSettings]
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateCallAnalyticsCategoryRequest
+      attr_accessor category_name: ::String
+      attr_accessor rules: ::Array[Types::Rule]
+      attr_accessor input_type: ("REAL_TIME" | "POST_CALL")
+      SENSITIVE: []
+    end
+
+    class UpdateCallAnalyticsCategoryResponse
+      attr_accessor category_properties: Types::CategoryProperties
+      SENSITIVE: []
+    end
+
+    class UpdateMedicalVocabularyRequest
+      attr_accessor vocabulary_name: ::String
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor vocabulary_file_uri: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateMedicalVocabularyResponse
+      attr_accessor vocabulary_name: ::String
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor last_modified_time: ::Time
+      attr_accessor vocabulary_state: ("PENDING" | "READY" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class UpdateVocabularyFilterRequest
+      attr_accessor vocabulary_filter_name: ::String
+      attr_accessor words: ::Array[::String]
+      attr_accessor vocabulary_filter_file_uri: ::String
+      attr_accessor data_access_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateVocabularyFilterResponse
+      attr_accessor vocabulary_filter_name: ::String
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateVocabularyRequest
+      attr_accessor vocabulary_name: ::String
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor phrases: ::Array[::String]
+      attr_accessor vocabulary_file_uri: ::String
+      attr_accessor data_access_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateVocabularyResponse
+      attr_accessor vocabulary_name: ::String
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor last_modified_time: ::Time
+      attr_accessor vocabulary_state: ("PENDING" | "READY" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class VocabularyFilterInfo
+      attr_accessor vocabulary_filter_name: ::String
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class VocabularyInfo
+      attr_accessor vocabulary_name: ::String
+      attr_accessor language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+      attr_accessor last_modified_time: ::Time
+      attr_accessor vocabulary_state: ("PENDING" | "READY" | "FAILED")
+      SENSITIVE: []
+    end
+  end
+end

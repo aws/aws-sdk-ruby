@@ -1,0 +1,929 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::IoTAnalytics
+  module Types
+
+    class AddAttributesActivity
+      attr_accessor name: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor next: ::String
+      SENSITIVE: []
+    end
+
+    class BatchPutMessageErrorEntry
+      attr_accessor message_id: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchPutMessageRequest
+      attr_accessor channel_name: ::String
+      attr_accessor messages: ::Array[Types::Message]
+      SENSITIVE: []
+    end
+
+    class BatchPutMessageResponse
+      attr_accessor batch_put_message_error_entries: ::Array[Types::BatchPutMessageErrorEntry]
+      SENSITIVE: []
+    end
+
+    class CancelPipelineReprocessingRequest
+      attr_accessor pipeline_name: ::String
+      attr_accessor reprocessing_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelPipelineReprocessingResponse < Aws::EmptyStructure
+    end
+
+    class Channel
+      attr_accessor name: ::String
+      attr_accessor storage: Types::ChannelStorage
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING")
+      attr_accessor retention_period: Types::RetentionPeriod
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor last_message_arrival_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ChannelActivity
+      attr_accessor name: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor next: ::String
+      SENSITIVE: []
+    end
+
+    class ChannelMessages
+      attr_accessor s3_paths: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ChannelStatistics
+      attr_accessor size: Types::EstimatedResourceSize
+      SENSITIVE: []
+    end
+
+    class ChannelStorage
+      attr_accessor service_managed_s3: Types::ServiceManagedChannelS3Storage
+      attr_accessor customer_managed_s3: Types::CustomerManagedChannelS3Storage
+      SENSITIVE: []
+    end
+
+    class ChannelStorageSummary
+      attr_accessor service_managed_s3: Types::ServiceManagedChannelS3StorageSummary
+      attr_accessor customer_managed_s3: Types::CustomerManagedChannelS3StorageSummary
+      SENSITIVE: []
+    end
+
+    class ChannelSummary
+      attr_accessor channel_name: ::String
+      attr_accessor channel_storage: Types::ChannelStorageSummary
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor last_message_arrival_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Column
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ContainerDatasetAction
+      attr_accessor image: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor resource_configuration: Types::ResourceConfiguration
+      attr_accessor variables: ::Array[Types::Variable]
+      SENSITIVE: []
+    end
+
+    class CreateChannelRequest
+      attr_accessor channel_name: ::String
+      attr_accessor channel_storage: Types::ChannelStorage
+      attr_accessor retention_period: Types::RetentionPeriod
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateChannelResponse
+      attr_accessor channel_name: ::String
+      attr_accessor channel_arn: ::String
+      attr_accessor retention_period: Types::RetentionPeriod
+      SENSITIVE: []
+    end
+
+    class CreateDatasetContentRequest
+      attr_accessor dataset_name: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDatasetContentResponse
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDatasetRequest
+      attr_accessor dataset_name: ::String
+      attr_accessor actions: ::Array[Types::DatasetAction]
+      attr_accessor triggers: ::Array[Types::DatasetTrigger]
+      attr_accessor content_delivery_rules: ::Array[Types::DatasetContentDeliveryRule]
+      attr_accessor retention_period: Types::RetentionPeriod
+      attr_accessor versioning_configuration: Types::VersioningConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor late_data_rules: ::Array[Types::LateDataRule]
+      SENSITIVE: []
+    end
+
+    class CreateDatasetResponse
+      attr_accessor dataset_name: ::String
+      attr_accessor dataset_arn: ::String
+      attr_accessor retention_period: Types::RetentionPeriod
+      SENSITIVE: []
+    end
+
+    class CreateDatastoreRequest
+      attr_accessor datastore_name: ::String
+      attr_accessor datastore_storage: Types::DatastoreStorage
+      attr_accessor retention_period: Types::RetentionPeriod
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor file_format_configuration: Types::FileFormatConfiguration
+      attr_accessor datastore_partitions: Types::DatastorePartitions
+      SENSITIVE: []
+    end
+
+    class CreateDatastoreResponse
+      attr_accessor datastore_name: ::String
+      attr_accessor datastore_arn: ::String
+      attr_accessor retention_period: Types::RetentionPeriod
+      SENSITIVE: []
+    end
+
+    class CreatePipelineRequest
+      attr_accessor pipeline_name: ::String
+      attr_accessor pipeline_activities: ::Array[Types::PipelineActivity]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreatePipelineResponse
+      attr_accessor pipeline_name: ::String
+      attr_accessor pipeline_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CustomerManagedChannelS3Storage
+      attr_accessor bucket: ::String
+      attr_accessor key_prefix: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CustomerManagedChannelS3StorageSummary
+      attr_accessor bucket: ::String
+      attr_accessor key_prefix: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CustomerManagedDatastoreS3Storage
+      attr_accessor bucket: ::String
+      attr_accessor key_prefix: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CustomerManagedDatastoreS3StorageSummary
+      attr_accessor bucket: ::String
+      attr_accessor key_prefix: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Dataset
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor actions: ::Array[Types::DatasetAction]
+      attr_accessor triggers: ::Array[Types::DatasetTrigger]
+      attr_accessor content_delivery_rules: ::Array[Types::DatasetContentDeliveryRule]
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor retention_period: Types::RetentionPeriod
+      attr_accessor versioning_configuration: Types::VersioningConfiguration
+      attr_accessor late_data_rules: ::Array[Types::LateDataRule]
+      SENSITIVE: []
+    end
+
+    class DatasetAction
+      attr_accessor action_name: ::String
+      attr_accessor query_action: Types::SqlQueryDatasetAction
+      attr_accessor container_action: Types::ContainerDatasetAction
+      SENSITIVE: []
+    end
+
+    class DatasetActionSummary
+      attr_accessor action_name: ::String
+      attr_accessor action_type: ("QUERY" | "CONTAINER")
+      SENSITIVE: []
+    end
+
+    class DatasetContentDeliveryDestination
+      attr_accessor iot_events_destination_configuration: Types::IotEventsDestinationConfiguration
+      attr_accessor s3_destination_configuration: Types::S3DestinationConfiguration
+      SENSITIVE: []
+    end
+
+    class DatasetContentDeliveryRule
+      attr_accessor entry_name: ::String
+      attr_accessor destination: Types::DatasetContentDeliveryDestination
+      SENSITIVE: []
+    end
+
+    class DatasetContentStatus
+      attr_accessor state: ("CREATING" | "SUCCEEDED" | "FAILED")
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class DatasetContentSummary
+      attr_accessor version: ::String
+      attr_accessor status: Types::DatasetContentStatus
+      attr_accessor creation_time: ::Time
+      attr_accessor schedule_time: ::Time
+      attr_accessor completion_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DatasetContentVersionValue
+      attr_accessor dataset_name: ::String
+      SENSITIVE: []
+    end
+
+    class DatasetEntry
+      attr_accessor entry_name: ::String
+      attr_accessor data_uri: ::String
+      SENSITIVE: []
+    end
+
+    class DatasetSummary
+      attr_accessor dataset_name: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor triggers: ::Array[Types::DatasetTrigger]
+      attr_accessor actions: ::Array[Types::DatasetActionSummary]
+      SENSITIVE: []
+    end
+
+    class DatasetTrigger
+      attr_accessor schedule: Types::Schedule
+      attr_accessor dataset: Types::TriggeringDataset
+      SENSITIVE: []
+    end
+
+    class Datastore
+      attr_accessor name: ::String
+      attr_accessor storage: Types::DatastoreStorage
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING")
+      attr_accessor retention_period: Types::RetentionPeriod
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor last_message_arrival_time: ::Time
+      attr_accessor file_format_configuration: Types::FileFormatConfiguration
+      attr_accessor datastore_partitions: Types::DatastorePartitions
+      SENSITIVE: []
+    end
+
+    class DatastoreActivity
+      attr_accessor name: ::String
+      attr_accessor datastore_name: ::String
+      SENSITIVE: []
+    end
+
+    class DatastoreIotSiteWiseMultiLayerStorage
+      attr_accessor customer_managed_s3_storage: Types::IotSiteWiseCustomerManagedDatastoreS3Storage
+      SENSITIVE: []
+    end
+
+    class DatastoreIotSiteWiseMultiLayerStorageSummary
+      attr_accessor customer_managed_s3_storage: Types::IotSiteWiseCustomerManagedDatastoreS3StorageSummary
+      SENSITIVE: []
+    end
+
+    class DatastorePartition
+      attr_accessor attribute_partition: Types::Partition
+      attr_accessor timestamp_partition: Types::TimestampPartition
+      SENSITIVE: []
+    end
+
+    class DatastorePartitions
+      attr_accessor partitions: ::Array[Types::DatastorePartition]
+      SENSITIVE: []
+    end
+
+    class DatastoreStatistics
+      attr_accessor size: Types::EstimatedResourceSize
+      SENSITIVE: []
+    end
+
+    class DatastoreStorage
+      attr_accessor service_managed_s3: Types::ServiceManagedDatastoreS3Storage
+      attr_accessor customer_managed_s3: Types::CustomerManagedDatastoreS3Storage
+      attr_accessor iot_site_wise_multi_layer_storage: Types::DatastoreIotSiteWiseMultiLayerStorage
+      SENSITIVE: []
+    end
+
+    class DatastoreStorageSummary
+      attr_accessor service_managed_s3: Types::ServiceManagedDatastoreS3StorageSummary
+      attr_accessor customer_managed_s3: Types::CustomerManagedDatastoreS3StorageSummary
+      attr_accessor iot_site_wise_multi_layer_storage: Types::DatastoreIotSiteWiseMultiLayerStorageSummary
+      SENSITIVE: []
+    end
+
+    class DatastoreSummary
+      attr_accessor datastore_name: ::String
+      attr_accessor datastore_storage: Types::DatastoreStorageSummary
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor last_message_arrival_time: ::Time
+      attr_accessor file_format_type: ("JSON" | "PARQUET")
+      attr_accessor datastore_partitions: Types::DatastorePartitions
+      SENSITIVE: []
+    end
+
+    class DeleteChannelRequest
+      attr_accessor channel_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDatasetContentRequest
+      attr_accessor dataset_name: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDatasetRequest
+      attr_accessor dataset_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDatastoreRequest
+      attr_accessor datastore_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePipelineRequest
+      attr_accessor pipeline_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeltaTime
+      attr_accessor offset_seconds: ::Integer
+      attr_accessor time_expression: ::String
+      SENSITIVE: []
+    end
+
+    class DeltaTimeSessionWindowConfiguration
+      attr_accessor timeout_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeChannelRequest
+      attr_accessor channel_name: ::String
+      attr_accessor include_statistics: bool
+      SENSITIVE: []
+    end
+
+    class DescribeChannelResponse
+      attr_accessor channel: Types::Channel
+      attr_accessor statistics: Types::ChannelStatistics
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetRequest
+      attr_accessor dataset_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetResponse
+      attr_accessor dataset: Types::Dataset
+      SENSITIVE: []
+    end
+
+    class DescribeDatastoreRequest
+      attr_accessor datastore_name: ::String
+      attr_accessor include_statistics: bool
+      SENSITIVE: []
+    end
+
+    class DescribeDatastoreResponse
+      attr_accessor datastore: Types::Datastore
+      attr_accessor statistics: Types::DatastoreStatistics
+      SENSITIVE: []
+    end
+
+    class DescribeLoggingOptionsRequest < Aws::EmptyStructure
+    end
+
+    class DescribeLoggingOptionsResponse
+      attr_accessor logging_options: Types::LoggingOptions
+      SENSITIVE: []
+    end
+
+    class DescribePipelineRequest
+      attr_accessor pipeline_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePipelineResponse
+      attr_accessor pipeline: Types::Pipeline
+      SENSITIVE: []
+    end
+
+    class DeviceRegistryEnrichActivity
+      attr_accessor name: ::String
+      attr_accessor attribute: ::String
+      attr_accessor thing_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor next: ::String
+      SENSITIVE: []
+    end
+
+    class DeviceShadowEnrichActivity
+      attr_accessor name: ::String
+      attr_accessor attribute: ::String
+      attr_accessor thing_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor next: ::String
+      SENSITIVE: []
+    end
+
+    class EstimatedResourceSize
+      attr_accessor estimated_size_in_bytes: ::Float
+      attr_accessor estimated_on: ::Time
+      SENSITIVE: []
+    end
+
+    class FileFormatConfiguration
+      attr_accessor json_configuration: Types::JsonConfiguration
+      attr_accessor parquet_configuration: Types::ParquetConfiguration
+      SENSITIVE: []
+    end
+
+    class FilterActivity
+      attr_accessor name: ::String
+      attr_accessor filter: ::String
+      attr_accessor next: ::String
+      SENSITIVE: []
+    end
+
+    class GetDatasetContentRequest
+      attr_accessor dataset_name: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDatasetContentResponse
+      attr_accessor entries: ::Array[Types::DatasetEntry]
+      attr_accessor timestamp: ::Time
+      attr_accessor status: Types::DatasetContentStatus
+      SENSITIVE: []
+    end
+
+    class GlueConfiguration
+      attr_accessor table_name: ::String
+      attr_accessor database_name: ::String
+      SENSITIVE: []
+    end
+
+    class InternalFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IotEventsDestinationConfiguration
+      attr_accessor input_name: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class IotSiteWiseCustomerManagedDatastoreS3Storage
+      attr_accessor bucket: ::String
+      attr_accessor key_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class IotSiteWiseCustomerManagedDatastoreS3StorageSummary
+      attr_accessor bucket: ::String
+      attr_accessor key_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class JsonConfiguration < Aws::EmptyStructure
+    end
+
+    class LambdaActivity
+      attr_accessor name: ::String
+      attr_accessor lambda_name: ::String
+      attr_accessor batch_size: ::Integer
+      attr_accessor next: ::String
+      SENSITIVE: []
+    end
+
+    class LateDataRule
+      attr_accessor rule_name: ::String
+      attr_accessor rule_configuration: Types::LateDataRuleConfiguration
+      SENSITIVE: []
+    end
+
+    class LateDataRuleConfiguration
+      attr_accessor delta_time_session_window_configuration: Types::DeltaTimeSessionWindowConfiguration
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListChannelsResponse
+      attr_accessor channel_summaries: ::Array[Types::ChannelSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatasetContentsRequest
+      attr_accessor dataset_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor scheduled_on_or_after: ::Time
+      attr_accessor scheduled_before: ::Time
+      SENSITIVE: []
+    end
+
+    class ListDatasetContentsResponse
+      attr_accessor dataset_content_summaries: ::Array[Types::DatasetContentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatasetsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDatasetsResponse
+      attr_accessor dataset_summaries: ::Array[Types::DatasetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatastoresRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDatastoresResponse
+      attr_accessor datastore_summaries: ::Array[Types::DatastoreSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPipelinesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPipelinesResponse
+      attr_accessor pipeline_summaries: ::Array[Types::PipelineSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class LoggingOptions
+      attr_accessor role_arn: ::String
+      attr_accessor level: ("ERROR")
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class MathActivity
+      attr_accessor name: ::String
+      attr_accessor attribute: ::String
+      attr_accessor math: ::String
+      attr_accessor next: ::String
+      SENSITIVE: []
+    end
+
+    class Message
+      attr_accessor message_id: ::String
+      attr_accessor payload: ::String
+      SENSITIVE: []
+    end
+
+    class OutputFileUriValue
+      attr_accessor file_name: ::String
+      SENSITIVE: []
+    end
+
+    class ParquetConfiguration
+      attr_accessor schema_definition: Types::SchemaDefinition
+      SENSITIVE: []
+    end
+
+    class Partition
+      attr_accessor attribute_name: ::String
+      SENSITIVE: []
+    end
+
+    class Pipeline
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor activities: ::Array[Types::PipelineActivity]
+      attr_accessor reprocessing_summaries: ::Array[Types::ReprocessingSummary]
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class PipelineActivity
+      attr_accessor channel: Types::ChannelActivity
+      attr_accessor lambda: Types::LambdaActivity
+      attr_accessor datastore: Types::DatastoreActivity
+      attr_accessor add_attributes: Types::AddAttributesActivity
+      attr_accessor remove_attributes: Types::RemoveAttributesActivity
+      attr_accessor select_attributes: Types::SelectAttributesActivity
+      attr_accessor filter: Types::FilterActivity
+      attr_accessor math: Types::MathActivity
+      attr_accessor device_registry_enrich: Types::DeviceRegistryEnrichActivity
+      attr_accessor device_shadow_enrich: Types::DeviceShadowEnrichActivity
+      SENSITIVE: []
+    end
+
+    class PipelineSummary
+      attr_accessor pipeline_name: ::String
+      attr_accessor reprocessing_summaries: ::Array[Types::ReprocessingSummary]
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class PutLoggingOptionsRequest
+      attr_accessor logging_options: Types::LoggingOptions
+      SENSITIVE: []
+    end
+
+    class QueryFilter
+      attr_accessor delta_time: Types::DeltaTime
+      SENSITIVE: []
+    end
+
+    class RemoveAttributesActivity
+      attr_accessor name: ::String
+      attr_accessor attributes: ::Array[::String]
+      attr_accessor next: ::String
+      SENSITIVE: []
+    end
+
+    class ReprocessingSummary
+      attr_accessor id: ::String
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "CANCELLED" | "FAILED")
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceConfiguration
+      attr_accessor compute_type: ("ACU_1" | "ACU_2")
+      attr_accessor volume_size_in_gb: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RetentionPeriod
+      attr_accessor unlimited: bool
+      attr_accessor number_of_days: ::Integer
+      SENSITIVE: []
+    end
+
+    class RunPipelineActivityRequest
+      attr_accessor pipeline_activity: Types::PipelineActivity
+      attr_accessor payloads: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RunPipelineActivityResponse
+      attr_accessor payloads: ::Array[::String]
+      attr_accessor log_result: ::String
+      SENSITIVE: []
+    end
+
+    class S3DestinationConfiguration
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      attr_accessor glue_configuration: Types::GlueConfiguration
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SampleChannelDataRequest
+      attr_accessor channel_name: ::String
+      attr_accessor max_messages: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class SampleChannelDataResponse
+      attr_accessor payloads: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Schedule
+      attr_accessor expression: ::String
+      SENSITIVE: []
+    end
+
+    class SchemaDefinition
+      attr_accessor columns: ::Array[Types::Column]
+      SENSITIVE: []
+    end
+
+    class SelectAttributesActivity
+      attr_accessor name: ::String
+      attr_accessor attributes: ::Array[::String]
+      attr_accessor next: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceManagedChannelS3Storage < Aws::EmptyStructure
+    end
+
+    class ServiceManagedChannelS3StorageSummary < Aws::EmptyStructure
+    end
+
+    class ServiceManagedDatastoreS3Storage < Aws::EmptyStructure
+    end
+
+    class ServiceManagedDatastoreS3StorageSummary < Aws::EmptyStructure
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SqlQueryDatasetAction
+      attr_accessor sql_query: ::String
+      attr_accessor filters: ::Array[Types::QueryFilter]
+      SENSITIVE: []
+    end
+
+    class StartPipelineReprocessingRequest
+      attr_accessor pipeline_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor channel_messages: Types::ChannelMessages
+      SENSITIVE: []
+    end
+
+    class StartPipelineReprocessingResponse
+      attr_accessor reprocessing_id: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TimestampPartition
+      attr_accessor attribute_name: ::String
+      attr_accessor timestamp_format: ::String
+      SENSITIVE: []
+    end
+
+    class TriggeringDataset
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateChannelRequest
+      attr_accessor channel_name: ::String
+      attr_accessor channel_storage: Types::ChannelStorage
+      attr_accessor retention_period: Types::RetentionPeriod
+      SENSITIVE: []
+    end
+
+    class UpdateDatasetRequest
+      attr_accessor dataset_name: ::String
+      attr_accessor actions: ::Array[Types::DatasetAction]
+      attr_accessor triggers: ::Array[Types::DatasetTrigger]
+      attr_accessor content_delivery_rules: ::Array[Types::DatasetContentDeliveryRule]
+      attr_accessor retention_period: Types::RetentionPeriod
+      attr_accessor versioning_configuration: Types::VersioningConfiguration
+      attr_accessor late_data_rules: ::Array[Types::LateDataRule]
+      SENSITIVE: []
+    end
+
+    class UpdateDatastoreRequest
+      attr_accessor datastore_name: ::String
+      attr_accessor retention_period: Types::RetentionPeriod
+      attr_accessor datastore_storage: Types::DatastoreStorage
+      attr_accessor file_format_configuration: Types::FileFormatConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdatePipelineRequest
+      attr_accessor pipeline_name: ::String
+      attr_accessor pipeline_activities: ::Array[Types::PipelineActivity]
+      SENSITIVE: []
+    end
+
+    class Variable
+      attr_accessor name: ::String
+      attr_accessor string_value: ::String
+      attr_accessor double_value: ::Float
+      attr_accessor dataset_content_version_value: Types::DatasetContentVersionValue
+      attr_accessor output_file_uri_value: Types::OutputFileUriValue
+      SENSITIVE: []
+    end
+
+    class VersioningConfiguration
+      attr_accessor unlimited: bool
+      attr_accessor max_versions: ::Integer
+      SENSITIVE: []
+    end
+  end
+end

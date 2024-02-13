@@ -58,3 +58,7 @@ group :benchmark do
   gem 'benchmark'
   gem 'memory_profiler'
 end
+
+group :signature do
+  gem 'rbs', platforms: :ruby
+end

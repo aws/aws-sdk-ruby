@@ -1,0 +1,901 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudWatchLogs
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?event_stream_handler: Proc,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?input_event_stream_handler: Proc,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?output_event_stream_handler: Proc,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#associate_kms_key-instance_method
+      def associate_kms_key: (
+                               ?log_group_name: ::String,
+                               kms_key_id: ::String,
+                               ?resource_identifier: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#cancel_export_task-instance_method
+      def cancel_export_task: (
+                                task_id: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CreateDeliveryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDeliveryResponse]
+        def delivery: () -> Types::Delivery
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#create_delivery-instance_method
+      def create_delivery: (
+                             delivery_source_name: ::String,
+                             delivery_destination_arn: ::String,
+                             ?tags: Hash[::String, ::String]
+                           ) -> _CreateDeliveryResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeliveryResponseSuccess
+
+      interface _CreateExportTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateExportTaskResponse]
+        def task_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#create_export_task-instance_method
+      def create_export_task: (
+                                ?task_name: ::String,
+                                log_group_name: ::String,
+                                ?log_stream_name_prefix: ::String,
+                                from: ::Integer,
+                                to: ::Integer,
+                                destination: ::String,
+                                ?destination_prefix: ::String
+                              ) -> _CreateExportTaskResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateExportTaskResponseSuccess
+
+      interface _CreateLogAnomalyDetectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLogAnomalyDetectorResponse]
+        def anomaly_detector_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#create_log_anomaly_detector-instance_method
+      def create_log_anomaly_detector: (
+                                         log_group_arn_list: Array[::String],
+                                         ?detector_name: ::String,
+                                         ?evaluation_frequency: ("ONE_MIN" | "FIVE_MIN" | "TEN_MIN" | "FIFTEEN_MIN" | "THIRTY_MIN" | "ONE_HOUR"),
+                                         ?filter_pattern: ::String,
+                                         ?kms_key_id: ::String,
+                                         ?anomaly_visibility_time: ::Integer,
+                                         ?tags: Hash[::String, ::String]
+                                       ) -> _CreateLogAnomalyDetectorResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLogAnomalyDetectorResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#create_log_group-instance_method
+      def create_log_group: (
+                              log_group_name: ::String,
+                              ?kms_key_id: ::String,
+                              ?tags: Hash[::String, ::String],
+                              ?log_group_class: ("STANDARD" | "INFREQUENT_ACCESS")
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#create_log_stream-instance_method
+      def create_log_stream: (
+                               log_group_name: ::String,
+                               log_stream_name: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#delete_account_policy-instance_method
+      def delete_account_policy: (
+                                   policy_name: ::String,
+                                   policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY")
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#delete_data_protection_policy-instance_method
+      def delete_data_protection_policy: (
+                                           log_group_identifier: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#delete_delivery-instance_method
+      def delete_delivery: (
+                             id: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#delete_delivery_destination-instance_method
+      def delete_delivery_destination: (
+                                         name: ::String
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#delete_delivery_destination_policy-instance_method
+      def delete_delivery_destination_policy: (
+                                                delivery_destination_name: ::String
+                                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#delete_delivery_source-instance_method
+      def delete_delivery_source: (
+                                    name: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#delete_destination-instance_method
+      def delete_destination: (
+                                destination_name: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#delete_log_anomaly_detector-instance_method
+      def delete_log_anomaly_detector: (
+                                         anomaly_detector_arn: ::String
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#delete_log_group-instance_method
+      def delete_log_group: (
+                              log_group_name: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#delete_log_stream-instance_method
+      def delete_log_stream: (
+                               log_group_name: ::String,
+                               log_stream_name: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#delete_metric_filter-instance_method
+      def delete_metric_filter: (
+                                  log_group_name: ::String,
+                                  filter_name: ::String
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteQueryDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteQueryDefinitionResponse]
+        def success: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#delete_query_definition-instance_method
+      def delete_query_definition: (
+                                     query_definition_id: ::String
+                                   ) -> _DeleteQueryDefinitionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteQueryDefinitionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#delete_resource_policy-instance_method
+      def delete_resource_policy: (
+                                    ?policy_name: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#delete_retention_policy-instance_method
+      def delete_retention_policy: (
+                                     log_group_name: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#delete_subscription_filter-instance_method
+      def delete_subscription_filter: (
+                                        log_group_name: ::String,
+                                        filter_name: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeAccountPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccountPoliciesResponse]
+        def account_policies: () -> ::Array[Types::AccountPolicy]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_account_policies-instance_method
+      def describe_account_policies: (
+                                       policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY"),
+                                       ?policy_name: ::String,
+                                       ?account_identifiers: Array[::String]
+                                     ) -> _DescribeAccountPoliciesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccountPoliciesResponseSuccess
+
+      interface _DescribeDeliveriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDeliveriesResponse]
+        def deliveries: () -> ::Array[Types::Delivery]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_deliveries-instance_method
+      def describe_deliveries: (
+                                 ?next_token: ::String,
+                                 ?limit: ::Integer
+                               ) -> _DescribeDeliveriesResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDeliveriesResponseSuccess
+
+      interface _DescribeDeliveryDestinationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDeliveryDestinationsResponse]
+        def delivery_destinations: () -> ::Array[Types::DeliveryDestination]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_delivery_destinations-instance_method
+      def describe_delivery_destinations: (
+                                            ?next_token: ::String,
+                                            ?limit: ::Integer
+                                          ) -> _DescribeDeliveryDestinationsResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDeliveryDestinationsResponseSuccess
+
+      interface _DescribeDeliverySourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDeliverySourcesResponse]
+        def delivery_sources: () -> ::Array[Types::DeliverySource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_delivery_sources-instance_method
+      def describe_delivery_sources: (
+                                       ?next_token: ::String,
+                                       ?limit: ::Integer
+                                     ) -> _DescribeDeliverySourcesResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDeliverySourcesResponseSuccess
+
+      interface _DescribeDestinationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDestinationsResponse]
+        def destinations: () -> ::Array[Types::Destination]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_destinations-instance_method
+      def describe_destinations: (
+                                   ?destination_name_prefix: ::String,
+                                   ?next_token: ::String,
+                                   ?limit: ::Integer
+                                 ) -> _DescribeDestinationsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDestinationsResponseSuccess
+
+      interface _DescribeExportTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeExportTasksResponse]
+        def export_tasks: () -> ::Array[Types::ExportTask]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_export_tasks-instance_method
+      def describe_export_tasks: (
+                                   ?task_id: ::String,
+                                   ?status_code: ("CANCELLED" | "COMPLETED" | "FAILED" | "PENDING" | "PENDING_CANCEL" | "RUNNING"),
+                                   ?next_token: ::String,
+                                   ?limit: ::Integer
+                                 ) -> _DescribeExportTasksResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeExportTasksResponseSuccess
+
+      interface _DescribeLogGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLogGroupsResponse]
+        def log_groups: () -> ::Array[Types::LogGroup]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_log_groups-instance_method
+      def describe_log_groups: (
+                                 ?account_identifiers: Array[::String],
+                                 ?log_group_name_prefix: ::String,
+                                 ?log_group_name_pattern: ::String,
+                                 ?next_token: ::String,
+                                 ?limit: ::Integer,
+                                 ?include_linked_accounts: bool,
+                                 ?log_group_class: ("STANDARD" | "INFREQUENT_ACCESS")
+                               ) -> _DescribeLogGroupsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLogGroupsResponseSuccess
+
+      interface _DescribeLogStreamsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLogStreamsResponse]
+        def log_streams: () -> ::Array[Types::LogStream]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_log_streams-instance_method
+      def describe_log_streams: (
+                                  ?log_group_name: ::String,
+                                  ?log_group_identifier: ::String,
+                                  ?log_stream_name_prefix: ::String,
+                                  ?order_by: ("LogStreamName" | "LastEventTime"),
+                                  ?descending: bool,
+                                  ?next_token: ::String,
+                                  ?limit: ::Integer
+                                ) -> _DescribeLogStreamsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLogStreamsResponseSuccess
+
+      interface _DescribeMetricFiltersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMetricFiltersResponse]
+        def metric_filters: () -> ::Array[Types::MetricFilter]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_metric_filters-instance_method
+      def describe_metric_filters: (
+                                     ?log_group_name: ::String,
+                                     ?filter_name_prefix: ::String,
+                                     ?next_token: ::String,
+                                     ?limit: ::Integer,
+                                     ?metric_name: ::String,
+                                     ?metric_namespace: ::String
+                                   ) -> _DescribeMetricFiltersResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMetricFiltersResponseSuccess
+
+      interface _DescribeQueriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeQueriesResponse]
+        def queries: () -> ::Array[Types::QueryInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_queries-instance_method
+      def describe_queries: (
+                              ?log_group_name: ::String,
+                              ?status: ("Scheduled" | "Running" | "Complete" | "Failed" | "Cancelled" | "Timeout" | "Unknown"),
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _DescribeQueriesResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeQueriesResponseSuccess
+
+      interface _DescribeQueryDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeQueryDefinitionsResponse]
+        def query_definitions: () -> ::Array[Types::QueryDefinition]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_query_definitions-instance_method
+      def describe_query_definitions: (
+                                        ?query_definition_name_prefix: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _DescribeQueryDefinitionsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeQueryDefinitionsResponseSuccess
+
+      interface _DescribeResourcePoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeResourcePoliciesResponse]
+        def resource_policies: () -> ::Array[Types::ResourcePolicy]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_resource_policies-instance_method
+      def describe_resource_policies: (
+                                        ?next_token: ::String,
+                                        ?limit: ::Integer
+                                      ) -> _DescribeResourcePoliciesResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeResourcePoliciesResponseSuccess
+
+      interface _DescribeSubscriptionFiltersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSubscriptionFiltersResponse]
+        def subscription_filters: () -> ::Array[Types::SubscriptionFilter]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_subscription_filters-instance_method
+      def describe_subscription_filters: (
+                                           log_group_name: ::String,
+                                           ?filter_name_prefix: ::String,
+                                           ?next_token: ::String,
+                                           ?limit: ::Integer
+                                         ) -> _DescribeSubscriptionFiltersResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSubscriptionFiltersResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#disassociate_kms_key-instance_method
+      def disassociate_kms_key: (
+                                  ?log_group_name: ::String,
+                                  ?resource_identifier: ::String
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _FilterLogEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FilterLogEventsResponse]
+        def events: () -> ::Array[Types::FilteredLogEvent]
+        def searched_log_streams: () -> ::Array[Types::SearchedLogStream]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#filter_log_events-instance_method
+      def filter_log_events: (
+                               ?log_group_name: ::String,
+                               ?log_group_identifier: ::String,
+                               ?log_stream_names: Array[::String],
+                               ?log_stream_name_prefix: ::String,
+                               ?start_time: ::Integer,
+                               ?end_time: ::Integer,
+                               ?filter_pattern: ::String,
+                               ?next_token: ::String,
+                               ?limit: ::Integer,
+                               ?interleaved: bool,
+                               ?unmask: bool
+                             ) -> _FilterLogEventsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _FilterLogEventsResponseSuccess
+
+      interface _GetDataProtectionPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataProtectionPolicyResponse]
+        def log_group_identifier: () -> ::String
+        def policy_document: () -> ::String
+        def last_updated_time: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#get_data_protection_policy-instance_method
+      def get_data_protection_policy: (
+                                        log_group_identifier: ::String
+                                      ) -> _GetDataProtectionPolicyResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataProtectionPolicyResponseSuccess
+
+      interface _GetDeliveryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeliveryResponse]
+        def delivery: () -> Types::Delivery
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#get_delivery-instance_method
+      def get_delivery: (
+                          id: ::String
+                        ) -> _GetDeliveryResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeliveryResponseSuccess
+
+      interface _GetDeliveryDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeliveryDestinationResponse]
+        def delivery_destination: () -> Types::DeliveryDestination
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#get_delivery_destination-instance_method
+      def get_delivery_destination: (
+                                      name: ::String
+                                    ) -> _GetDeliveryDestinationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeliveryDestinationResponseSuccess
+
+      interface _GetDeliveryDestinationPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeliveryDestinationPolicyResponse]
+        def policy: () -> Types::Policy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#get_delivery_destination_policy-instance_method
+      def get_delivery_destination_policy: (
+                                             delivery_destination_name: ::String
+                                           ) -> _GetDeliveryDestinationPolicyResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeliveryDestinationPolicyResponseSuccess
+
+      interface _GetDeliverySourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeliverySourceResponse]
+        def delivery_source: () -> Types::DeliverySource
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#get_delivery_source-instance_method
+      def get_delivery_source: (
+                                 name: ::String
+                               ) -> _GetDeliverySourceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeliverySourceResponseSuccess
+
+      interface _GetLogAnomalyDetectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLogAnomalyDetectorResponse]
+        def detector_name: () -> ::String
+        def log_group_arn_list: () -> ::Array[::String]
+        def evaluation_frequency: () -> ("ONE_MIN" | "FIVE_MIN" | "TEN_MIN" | "FIFTEEN_MIN" | "THIRTY_MIN" | "ONE_HOUR")
+        def filter_pattern: () -> ::String
+        def anomaly_detector_status: () -> ("INITIALIZING" | "TRAINING" | "ANALYZING" | "FAILED" | "DELETED" | "PAUSED")
+        def kms_key_id: () -> ::String
+        def creation_time_stamp: () -> ::Integer
+        def last_modified_time_stamp: () -> ::Integer
+        def anomaly_visibility_time: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#get_log_anomaly_detector-instance_method
+      def get_log_anomaly_detector: (
+                                      anomaly_detector_arn: ::String
+                                    ) -> _GetLogAnomalyDetectorResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLogAnomalyDetectorResponseSuccess
+
+      interface _GetLogEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLogEventsResponse]
+        def events: () -> ::Array[Types::OutputLogEvent]
+        def next_forward_token: () -> ::String
+        def next_backward_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#get_log_events-instance_method
+      def get_log_events: (
+                            ?log_group_name: ::String,
+                            ?log_group_identifier: ::String,
+                            log_stream_name: ::String,
+                            ?start_time: ::Integer,
+                            ?end_time: ::Integer,
+                            ?next_token: ::String,
+                            ?limit: ::Integer,
+                            ?start_from_head: bool,
+                            ?unmask: bool
+                          ) -> _GetLogEventsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLogEventsResponseSuccess
+
+      interface _GetLogGroupFieldsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLogGroupFieldsResponse]
+        def log_group_fields: () -> ::Array[Types::LogGroupField]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#get_log_group_fields-instance_method
+      def get_log_group_fields: (
+                                  ?log_group_name: ::String,
+                                  ?time: ::Integer,
+                                  ?log_group_identifier: ::String
+                                ) -> _GetLogGroupFieldsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLogGroupFieldsResponseSuccess
+
+      interface _GetLogRecordResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLogRecordResponse]
+        def log_record: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#get_log_record-instance_method
+      def get_log_record: (
+                            log_record_pointer: ::String,
+                            ?unmask: bool
+                          ) -> _GetLogRecordResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLogRecordResponseSuccess
+
+      interface _GetQueryResultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQueryResultsResponse]
+        def results: () -> ::Array[::Array[Types::ResultField]]
+        def statistics: () -> Types::QueryStatistics
+        def status: () -> ("Scheduled" | "Running" | "Complete" | "Failed" | "Cancelled" | "Timeout" | "Unknown")
+        def encryption_key: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#get_query_results-instance_method
+      def get_query_results: (
+                               query_id: ::String
+                             ) -> _GetQueryResultsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQueryResultsResponseSuccess
+
+      interface _ListAnomaliesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAnomaliesResponse]
+        def anomalies: () -> ::Array[Types::Anomaly]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#list_anomalies-instance_method
+      def list_anomalies: (
+                            ?anomaly_detector_arn: ::String,
+                            ?suppression_state: ("SUPPRESSED" | "UNSUPPRESSED"),
+                            ?limit: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListAnomaliesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAnomaliesResponseSuccess
+
+      interface _ListLogAnomalyDetectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLogAnomalyDetectorsResponse]
+        def anomaly_detectors: () -> ::Array[Types::AnomalyDetector]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#list_log_anomaly_detectors-instance_method
+      def list_log_anomaly_detectors: (
+                                        ?filter_log_group_arn: ::String,
+                                        ?limit: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListLogAnomalyDetectorsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLogAnomalyDetectorsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTagsLogGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsLogGroupResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#list_tags_log_group-instance_method
+      def list_tags_log_group: (
+                                 log_group_name: ::String
+                               ) -> _ListTagsLogGroupResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsLogGroupResponseSuccess
+
+      interface _PutAccountPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountPolicyResponse]
+        def account_policy: () -> Types::AccountPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#put_account_policy-instance_method
+      def put_account_policy: (
+                                policy_name: ::String,
+                                policy_document: ::String,
+                                policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY"),
+                                ?scope: ("ALL"),
+                                ?selection_criteria: ::String
+                              ) -> _PutAccountPolicyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountPolicyResponseSuccess
+
+      interface _PutDataProtectionPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDataProtectionPolicyResponse]
+        def log_group_identifier: () -> ::String
+        def policy_document: () -> ::String
+        def last_updated_time: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#put_data_protection_policy-instance_method
+      def put_data_protection_policy: (
+                                        log_group_identifier: ::String,
+                                        policy_document: ::String
+                                      ) -> _PutDataProtectionPolicyResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDataProtectionPolicyResponseSuccess
+
+      interface _PutDeliveryDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDeliveryDestinationResponse]
+        def delivery_destination: () -> Types::DeliveryDestination
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#put_delivery_destination-instance_method
+      def put_delivery_destination: (
+                                      name: ::String,
+                                      ?output_format: ("json" | "plain" | "w3c" | "raw" | "parquet"),
+                                      delivery_destination_configuration: {
+                                        destination_resource_arn: ::String
+                                      },
+                                      ?tags: Hash[::String, ::String]
+                                    ) -> _PutDeliveryDestinationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDeliveryDestinationResponseSuccess
+
+      interface _PutDeliveryDestinationPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDeliveryDestinationPolicyResponse]
+        def policy: () -> Types::Policy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#put_delivery_destination_policy-instance_method
+      def put_delivery_destination_policy: (
+                                             delivery_destination_name: ::String,
+                                             delivery_destination_policy: ::String
+                                           ) -> _PutDeliveryDestinationPolicyResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDeliveryDestinationPolicyResponseSuccess
+
+      interface _PutDeliverySourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDeliverySourceResponse]
+        def delivery_source: () -> Types::DeliverySource
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#put_delivery_source-instance_method
+      def put_delivery_source: (
+                                 name: ::String,
+                                 resource_arn: ::String,
+                                 log_type: ::String,
+                                 ?tags: Hash[::String, ::String]
+                               ) -> _PutDeliverySourceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDeliverySourceResponseSuccess
+
+      interface _PutDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDestinationResponse]
+        def destination: () -> Types::Destination
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#put_destination-instance_method
+      def put_destination: (
+                             destination_name: ::String,
+                             target_arn: ::String,
+                             role_arn: ::String,
+                             ?tags: Hash[::String, ::String]
+                           ) -> _PutDestinationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDestinationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#put_destination_policy-instance_method
+      def put_destination_policy: (
+                                    destination_name: ::String,
+                                    access_policy: ::String,
+                                    ?force_update: bool
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _PutLogEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutLogEventsResponse]
+        def next_sequence_token: () -> ::String
+        def rejected_log_events_info: () -> Types::RejectedLogEventsInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#put_log_events-instance_method
+      def put_log_events: (
+                            log_group_name: ::String,
+                            log_stream_name: ::String,
+                            log_events: Array[
+                              {
+                                timestamp: ::Integer,
+                                message: ::String
+                              },
+                            ],
+                            ?sequence_token: ::String
+                          ) -> _PutLogEventsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutLogEventsResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#put_metric_filter-instance_method
+      def put_metric_filter: (
+                               log_group_name: ::String,
+                               filter_name: ::String,
+                               filter_pattern: ::String,
+                               metric_transformations: Array[
+                                 {
+                                   metric_name: ::String,
+                                   metric_namespace: ::String,
+                                   metric_value: ::String,
+                                   default_value: ::Float?,
+                                   dimensions: Hash[::String, ::String]?,
+                                   unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
+                                 },
+                               ]
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _PutQueryDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutQueryDefinitionResponse]
+        def query_definition_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#put_query_definition-instance_method
+      def put_query_definition: (
+                                  name: ::String,
+                                  ?query_definition_id: ::String,
+                                  ?log_group_names: Array[::String],
+                                  query_string: ::String,
+                                  ?client_token: ::String
+                                ) -> _PutQueryDefinitionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutQueryDefinitionResponseSuccess
+
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResponse]
+        def resource_policy: () -> Types::ResourcePolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 ?policy_name: ::String,
+                                 ?policy_document: ::String
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#put_retention_policy-instance_method
+      def put_retention_policy: (
+                                  log_group_name: ::String,
+                                  retention_in_days: ::Integer
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#put_subscription_filter-instance_method
+      def put_subscription_filter: (
+                                     log_group_name: ::String,
+                                     filter_name: ::String,
+                                     filter_pattern: ::String,
+                                     destination_arn: ::String,
+                                     ?role_arn: ::String,
+                                     ?distribution: ("Random" | "ByLogStream")
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _StartLiveTailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartLiveTailResponse]
+        def response_stream: () -> Types::StartLiveTailResponseStream
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#start_live_tail-instance_method
+      def start_live_tail: (
+                             log_group_identifiers: Array[::String],
+                             ?log_stream_names: Array[::String],
+                             ?log_stream_name_prefixes: Array[::String],
+                             ?log_event_filter_pattern: ::String
+                           ) -> _StartLiveTailResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartLiveTailResponseSuccess
+
+      interface _StartQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartQueryResponse]
+        def query_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#start_query-instance_method
+      def start_query: (
+                         ?log_group_name: ::String,
+                         ?log_group_names: Array[::String],
+                         ?log_group_identifiers: Array[::String],
+                         start_time: ::Integer,
+                         end_time: ::Integer,
+                         query_string: ::String,
+                         ?limit: ::Integer
+                       ) -> _StartQueryResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartQueryResponseSuccess
+
+      interface _StopQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopQueryResponse]
+        def success: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#stop_query-instance_method
+      def stop_query: (
+                        query_id: ::String
+                      ) -> _StopQueryResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopQueryResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#tag_log_group-instance_method
+      def tag_log_group: (
+                           log_group_name: ::String,
+                           tags: Hash[::String, ::String]
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _TestMetricFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestMetricFilterResponse]
+        def matches: () -> ::Array[Types::MetricFilterMatchRecord]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#test_metric_filter-instance_method
+      def test_metric_filter: (
+                                filter_pattern: ::String,
+                                log_event_messages: Array[::String]
+                              ) -> _TestMetricFilterResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestMetricFilterResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#untag_log_group-instance_method
+      def untag_log_group: (
+                             log_group_name: ::String,
+                             tags: Array[::String]
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#update_anomaly-instance_method
+      def update_anomaly: (
+                            ?anomaly_id: ::String,
+                            ?pattern_id: ::String,
+                            anomaly_detector_arn: ::String,
+                            ?suppression_type: ("LIMITED" | "INFINITE"),
+                            ?suppression_period: {
+                              value: ::Integer?,
+                              suppression_unit: ("SECONDS" | "MINUTES" | "HOURS")?
+                            }
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#update_log_anomaly_detector-instance_method
+      def update_log_anomaly_detector: (
+                                         anomaly_detector_arn: ::String,
+                                         ?evaluation_frequency: ("ONE_MIN" | "FIVE_MIN" | "TEN_MIN" | "FIFTEEN_MIN" | "THIRTY_MIN" | "ONE_HOUR"),
+                                         ?filter_pattern: ::String,
+                                         ?anomaly_visibility_time: ::Integer,
+                                         enabled: bool
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+    end
+  end
+end
+

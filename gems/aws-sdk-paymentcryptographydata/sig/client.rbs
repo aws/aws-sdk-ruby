@@ -1,0 +1,545 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module PaymentCryptographyData
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptographyData/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _DecryptDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DecryptDataOutput]
+        def key_arn: () -> ::String
+        def key_check_value: () -> ::String
+        def plain_text: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptographyData/Client.html#decrypt_data-instance_method
+      def decrypt_data: (
+                          cipher_text: ::String,
+                          decryption_attributes: {
+                            asymmetric: {
+                              padding_type: ("PKCS1" | "OAEP_SHA1" | "OAEP_SHA256" | "OAEP_SHA512")?
+                            }?,
+                            dukpt: {
+                              dukpt_key_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?,
+                              dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE")?,
+                              initialization_vector: ::String?,
+                              key_serial_number: ::String,
+                              mode: ("ECB" | "CBC")?
+                            }?,
+                            symmetric: {
+                              initialization_vector: ::String?,
+                              mode: ("ECB" | "CBC" | "CFB" | "CFB1" | "CFB8" | "CFB64" | "CFB128" | "OFB"),
+                              padding_type: ("PKCS1" | "OAEP_SHA1" | "OAEP_SHA256" | "OAEP_SHA512")?
+                            }?
+                          },
+                          key_identifier: ::String
+                        ) -> _DecryptDataResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DecryptDataResponseSuccess
+
+      interface _EncryptDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EncryptDataOutput]
+        def cipher_text: () -> ::String
+        def key_arn: () -> ::String
+        def key_check_value: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptographyData/Client.html#encrypt_data-instance_method
+      def encrypt_data: (
+                          encryption_attributes: {
+                            asymmetric: {
+                              padding_type: ("PKCS1" | "OAEP_SHA1" | "OAEP_SHA256" | "OAEP_SHA512")?
+                            }?,
+                            dukpt: {
+                              dukpt_key_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?,
+                              dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE")?,
+                              initialization_vector: ::String?,
+                              key_serial_number: ::String,
+                              mode: ("ECB" | "CBC")?
+                            }?,
+                            symmetric: {
+                              initialization_vector: ::String?,
+                              mode: ("ECB" | "CBC" | "CFB" | "CFB1" | "CFB8" | "CFB64" | "CFB128" | "OFB"),
+                              padding_type: ("PKCS1" | "OAEP_SHA1" | "OAEP_SHA256" | "OAEP_SHA512")?
+                            }?
+                          },
+                          key_identifier: ::String,
+                          plain_text: ::String
+                        ) -> _EncryptDataResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EncryptDataResponseSuccess
+
+      interface _GenerateCardValidationDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GenerateCardValidationDataOutput]
+        def key_arn: () -> ::String
+        def key_check_value: () -> ::String
+        def validation_data: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptographyData/Client.html#generate_card_validation_data-instance_method
+      def generate_card_validation_data: (
+                                           generation_attributes: {
+                                             amex_card_security_code_version_1: {
+                                               card_expiry_date: ::String
+                                             }?,
+                                             amex_card_security_code_version_2: {
+                                               card_expiry_date: ::String,
+                                               service_code: ::String
+                                             }?,
+                                             card_holder_verification_value: {
+                                               application_transaction_counter: ::String,
+                                               pan_sequence_number: ::String,
+                                               unpredictable_number: ::String
+                                             }?,
+                                             card_verification_value_1: {
+                                               card_expiry_date: ::String,
+                                               service_code: ::String
+                                             }?,
+                                             card_verification_value_2: {
+                                               card_expiry_date: ::String
+                                             }?,
+                                             dynamic_card_verification_code: {
+                                               application_transaction_counter: ::String,
+                                               pan_sequence_number: ::String,
+                                               track_data: ::String,
+                                               unpredictable_number: ::String
+                                             }?,
+                                             dynamic_card_verification_value: {
+                                               application_transaction_counter: ::String,
+                                               card_expiry_date: ::String,
+                                               pan_sequence_number: ::String,
+                                               service_code: ::String
+                                             }?
+                                           },
+                                           key_identifier: ::String,
+                                           primary_account_number: ::String,
+                                           ?validation_data_length: ::Integer
+                                         ) -> _GenerateCardValidationDataResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GenerateCardValidationDataResponseSuccess
+
+      interface _GenerateMacResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GenerateMacOutput]
+        def key_arn: () -> ::String
+        def key_check_value: () -> ::String
+        def mac: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptographyData/Client.html#generate_mac-instance_method
+      def generate_mac: (
+                          generation_attributes: {
+                            algorithm: ("ISO9797_ALGORITHM1" | "ISO9797_ALGORITHM3" | "CMAC" | "HMAC_SHA224" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512")?,
+                            dukpt_cmac: {
+                              dukpt_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?,
+                              dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE"),
+                              key_serial_number: ::String
+                            }?,
+                            dukpt_iso_9797_algorithm_1: {
+                              dukpt_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?,
+                              dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE"),
+                              key_serial_number: ::String
+                            }?,
+                            dukpt_iso_9797_algorithm_3: {
+                              dukpt_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?,
+                              dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE"),
+                              key_serial_number: ::String
+                            }?,
+                            emv_mac: {
+                              major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B"),
+                              pan_sequence_number: ::String,
+                              primary_account_number: ::String,
+                              session_key_derivation_mode: ("EMV_COMMON_SESSION_KEY" | "EMV2000" | "AMEX" | "MASTERCARD_SESSION_KEY" | "VISA"),
+                              session_key_derivation_value: {
+                                application_cryptogram: ::String?,
+                                application_transaction_counter: ::String?
+                              }
+                            }?
+                          },
+                          key_identifier: ::String,
+                          ?mac_length: ::Integer,
+                          message_data: ::String
+                        ) -> _GenerateMacResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GenerateMacResponseSuccess
+
+      interface _GeneratePinDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GeneratePinDataOutput]
+        def encrypted_pin_block: () -> ::String
+        def encryption_key_arn: () -> ::String
+        def encryption_key_check_value: () -> ::String
+        def generation_key_arn: () -> ::String
+        def generation_key_check_value: () -> ::String
+        def pin_data: () -> Types::PinData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptographyData/Client.html#generate_pin_data-instance_method
+      def generate_pin_data: (
+                               encryption_key_identifier: ::String,
+                               generation_attributes: {
+                                 ibm_3624_natural_pin: {
+                                   decimalization_table: ::String,
+                                   pin_validation_data: ::String,
+                                   pin_validation_data_pad_character: ::String
+                                 }?,
+                                 ibm_3624_pin_from_offset: {
+                                   decimalization_table: ::String,
+                                   pin_offset: ::String,
+                                   pin_validation_data: ::String,
+                                   pin_validation_data_pad_character: ::String
+                                 }?,
+                                 ibm_3624_pin_offset: {
+                                   decimalization_table: ::String,
+                                   encrypted_pin_block: ::String,
+                                   pin_validation_data: ::String,
+                                   pin_validation_data_pad_character: ::String
+                                 }?,
+                                 ibm_3624_random_pin: {
+                                   decimalization_table: ::String,
+                                   pin_validation_data: ::String,
+                                   pin_validation_data_pad_character: ::String
+                                 }?,
+                                 visa_pin: {
+                                   pin_verification_key_index: ::Integer
+                                 }?,
+                                 visa_pin_verification_value: {
+                                   encrypted_pin_block: ::String,
+                                   pin_verification_key_index: ::Integer
+                                 }?
+                               },
+                               generation_key_identifier: ::String,
+                               pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_3"),
+                               ?pin_data_length: ::Integer,
+                               primary_account_number: ::String
+                             ) -> _GeneratePinDataResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GeneratePinDataResponseSuccess
+
+      interface _ReEncryptDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReEncryptDataOutput]
+        def cipher_text: () -> ::String
+        def key_arn: () -> ::String
+        def key_check_value: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptographyData/Client.html#re_encrypt_data-instance_method
+      def re_encrypt_data: (
+                             cipher_text: ::String,
+                             incoming_encryption_attributes: {
+                               dukpt: {
+                                 dukpt_key_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?,
+                                 dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE")?,
+                                 initialization_vector: ::String?,
+                                 key_serial_number: ::String,
+                                 mode: ("ECB" | "CBC")?
+                               }?,
+                               symmetric: {
+                                 initialization_vector: ::String?,
+                                 mode: ("ECB" | "CBC" | "CFB" | "CFB1" | "CFB8" | "CFB64" | "CFB128" | "OFB"),
+                                 padding_type: ("PKCS1" | "OAEP_SHA1" | "OAEP_SHA256" | "OAEP_SHA512")?
+                               }?
+                             },
+                             incoming_key_identifier: ::String,
+                             outgoing_encryption_attributes: {
+                               dukpt: {
+                                 dukpt_key_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?,
+                                 dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE")?,
+                                 initialization_vector: ::String?,
+                                 key_serial_number: ::String,
+                                 mode: ("ECB" | "CBC")?
+                               }?,
+                               symmetric: {
+                                 initialization_vector: ::String?,
+                                 mode: ("ECB" | "CBC" | "CFB" | "CFB1" | "CFB8" | "CFB64" | "CFB128" | "OFB"),
+                                 padding_type: ("PKCS1" | "OAEP_SHA1" | "OAEP_SHA256" | "OAEP_SHA512")?
+                               }?
+                             },
+                             outgoing_key_identifier: ::String
+                           ) -> _ReEncryptDataResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReEncryptDataResponseSuccess
+
+      interface _TranslatePinDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TranslatePinDataOutput]
+        def key_arn: () -> ::String
+        def key_check_value: () -> ::String
+        def pin_block: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptographyData/Client.html#translate_pin_data-instance_method
+      def translate_pin_data: (
+                                encrypted_pin_block: ::String,
+                                ?incoming_dukpt_attributes: {
+                                  dukpt_key_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?,
+                                  dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE")?,
+                                  key_serial_number: ::String
+                                },
+                                incoming_key_identifier: ::String,
+                                incoming_translation_attributes: {
+                                  iso_format_0: {
+                                    primary_account_number: ::String
+                                  }?,
+                                  iso_format_1: {
+                                  }?,
+                                  iso_format_3: {
+                                    primary_account_number: ::String
+                                  }?,
+                                  iso_format_4: {
+                                    primary_account_number: ::String
+                                  }?
+                                },
+                                ?outgoing_dukpt_attributes: {
+                                  dukpt_key_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?,
+                                  dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE")?,
+                                  key_serial_number: ::String
+                                },
+                                outgoing_key_identifier: ::String,
+                                outgoing_translation_attributes: {
+                                  iso_format_0: {
+                                    primary_account_number: ::String
+                                  }?,
+                                  iso_format_1: {
+                                  }?,
+                                  iso_format_3: {
+                                    primary_account_number: ::String
+                                  }?,
+                                  iso_format_4: {
+                                    primary_account_number: ::String
+                                  }?
+                                }
+                              ) -> _TranslatePinDataResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TranslatePinDataResponseSuccess
+
+      interface _VerifyAuthRequestCryptogramResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VerifyAuthRequestCryptogramOutput]
+        def auth_response_value: () -> ::String
+        def key_arn: () -> ::String
+        def key_check_value: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptographyData/Client.html#verify_auth_request_cryptogram-instance_method
+      def verify_auth_request_cryptogram: (
+                                            auth_request_cryptogram: ::String,
+                                            ?auth_response_attributes: {
+                                              arpc_method_1: {
+                                                auth_response_code: ::String
+                                              }?,
+                                              arpc_method_2: {
+                                                card_status_update: ::String,
+                                                proprietary_authentication_data: ::String?
+                                              }?
+                                            },
+                                            key_identifier: ::String,
+                                            major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B"),
+                                            session_key_derivation_attributes: {
+                                              amex: {
+                                                pan_sequence_number: ::String,
+                                                primary_account_number: ::String
+                                              }?,
+                                              emv_2000: {
+                                                application_transaction_counter: ::String,
+                                                pan_sequence_number: ::String,
+                                                primary_account_number: ::String
+                                              }?,
+                                              emv_common: {
+                                                application_transaction_counter: ::String,
+                                                pan_sequence_number: ::String,
+                                                primary_account_number: ::String
+                                              }?,
+                                              mastercard: {
+                                                application_transaction_counter: ::String,
+                                                pan_sequence_number: ::String,
+                                                primary_account_number: ::String,
+                                                unpredictable_number: ::String
+                                              }?,
+                                              visa: {
+                                                pan_sequence_number: ::String,
+                                                primary_account_number: ::String
+                                              }?
+                                            },
+                                            transaction_data: ::String
+                                          ) -> _VerifyAuthRequestCryptogramResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _VerifyAuthRequestCryptogramResponseSuccess
+
+      interface _VerifyCardValidationDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VerifyCardValidationDataOutput]
+        def key_arn: () -> ::String
+        def key_check_value: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptographyData/Client.html#verify_card_validation_data-instance_method
+      def verify_card_validation_data: (
+                                         key_identifier: ::String,
+                                         primary_account_number: ::String,
+                                         validation_data: ::String,
+                                         verification_attributes: {
+                                           amex_card_security_code_version_1: {
+                                             card_expiry_date: ::String
+                                           }?,
+                                           amex_card_security_code_version_2: {
+                                             card_expiry_date: ::String,
+                                             service_code: ::String
+                                           }?,
+                                           card_holder_verification_value: {
+                                             application_transaction_counter: ::String,
+                                             pan_sequence_number: ::String,
+                                             unpredictable_number: ::String
+                                           }?,
+                                           card_verification_value_1: {
+                                             card_expiry_date: ::String,
+                                             service_code: ::String
+                                           }?,
+                                           card_verification_value_2: {
+                                             card_expiry_date: ::String
+                                           }?,
+                                           discover_dynamic_card_verification_code: {
+                                             application_transaction_counter: ::String,
+                                             card_expiry_date: ::String,
+                                             unpredictable_number: ::String
+                                           }?,
+                                           dynamic_card_verification_code: {
+                                             application_transaction_counter: ::String,
+                                             pan_sequence_number: ::String,
+                                             track_data: ::String,
+                                             unpredictable_number: ::String
+                                           }?,
+                                           dynamic_card_verification_value: {
+                                             application_transaction_counter: ::String,
+                                             card_expiry_date: ::String,
+                                             pan_sequence_number: ::String,
+                                             service_code: ::String
+                                           }?
+                                         }
+                                       ) -> _VerifyCardValidationDataResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _VerifyCardValidationDataResponseSuccess
+
+      interface _VerifyMacResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VerifyMacOutput]
+        def key_arn: () -> ::String
+        def key_check_value: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptographyData/Client.html#verify_mac-instance_method
+      def verify_mac: (
+                        key_identifier: ::String,
+                        mac: ::String,
+                        ?mac_length: ::Integer,
+                        message_data: ::String,
+                        verification_attributes: {
+                          algorithm: ("ISO9797_ALGORITHM1" | "ISO9797_ALGORITHM3" | "CMAC" | "HMAC_SHA224" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512")?,
+                          dukpt_cmac: {
+                            dukpt_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?,
+                            dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE"),
+                            key_serial_number: ::String
+                          }?,
+                          dukpt_iso_9797_algorithm_1: {
+                            dukpt_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?,
+                            dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE"),
+                            key_serial_number: ::String
+                          }?,
+                          dukpt_iso_9797_algorithm_3: {
+                            dukpt_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?,
+                            dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE"),
+                            key_serial_number: ::String
+                          }?,
+                          emv_mac: {
+                            major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B"),
+                            pan_sequence_number: ::String,
+                            primary_account_number: ::String,
+                            session_key_derivation_mode: ("EMV_COMMON_SESSION_KEY" | "EMV2000" | "AMEX" | "MASTERCARD_SESSION_KEY" | "VISA"),
+                            session_key_derivation_value: {
+                              application_cryptogram: ::String?,
+                              application_transaction_counter: ::String?
+                            }
+                          }?
+                        }
+                      ) -> _VerifyMacResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _VerifyMacResponseSuccess
+
+      interface _VerifyPinDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VerifyPinDataOutput]
+        def encryption_key_arn: () -> ::String
+        def encryption_key_check_value: () -> ::String
+        def verification_key_arn: () -> ::String
+        def verification_key_check_value: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptographyData/Client.html#verify_pin_data-instance_method
+      def verify_pin_data: (
+                             ?dukpt_attributes: {
+                               dukpt_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256"),
+                               key_serial_number: ::String
+                             },
+                             encrypted_pin_block: ::String,
+                             encryption_key_identifier: ::String,
+                             pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_3"),
+                             ?pin_data_length: ::Integer,
+                             primary_account_number: ::String,
+                             verification_attributes: {
+                               ibm_3624_pin: {
+                                 decimalization_table: ::String,
+                                 pin_offset: ::String,
+                                 pin_validation_data: ::String,
+                                 pin_validation_data_pad_character: ::String
+                               }?,
+                               visa_pin: {
+                                 pin_verification_key_index: ::Integer,
+                                 verification_value: ::String
+                               }?
+                             },
+                             verification_key_identifier: ::String
+                           ) -> _VerifyPinDataResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _VerifyPinDataResponseSuccess
+    end
+  end
+end
+

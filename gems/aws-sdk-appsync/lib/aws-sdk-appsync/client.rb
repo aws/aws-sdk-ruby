@@ -611,6 +611,19 @@ module Aws::AppSync
     #
     #   * **R4\_8XLARGE**: A r4.8xlarge instance type.
     #
+    # @option params [String] :health_metrics_config
+    #   Controls how cache health metrics will be emitted to CloudWatch. Cache
+    #   health metrics include:
+    #
+    #   * NetworkBandwidthOutAllowanceExceeded: The number of times a
+    #     specified GraphQL operation was called.
+    #
+    #   * EngineCPUUtilization: The number of GraphQL errors that occurred
+    #     during a specified GraphQL operation.
+    #
+    #   Metrics will be recorded by API ID. You can set the value to `ENABLED`
+    #   or `DISABLED`.
+    #
     # @return [Types::CreateApiCacheResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApiCacheResponse#api_cache #api_cache} => Types::ApiCache
@@ -624,6 +637,7 @@ module Aws::AppSync
     #     at_rest_encryption_enabled: false,
     #     api_caching_behavior: "FULL_REQUEST_CACHING", # required, accepts FULL_REQUEST_CACHING, PER_RESOLVER_CACHING
     #     type: "T2_SMALL", # required, accepts T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE, SMALL, MEDIUM, LARGE, XLARGE, LARGE_2X, LARGE_4X, LARGE_8X, LARGE_12X
+    #     health_metrics_config: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @example Response structure
@@ -634,6 +648,7 @@ module Aws::AppSync
     #   resp.api_cache.at_rest_encryption_enabled #=> Boolean
     #   resp.api_cache.type #=> String, one of "T2_SMALL", "T2_MEDIUM", "R4_LARGE", "R4_XLARGE", "R4_2XLARGE", "R4_4XLARGE", "R4_8XLARGE", "SMALL", "MEDIUM", "LARGE", "XLARGE", "LARGE_2X", "LARGE_4X", "LARGE_8X", "LARGE_12X"
     #   resp.api_cache.status #=> String, one of "AVAILABLE", "CREATING", "DELETING", "MODIFYING", "FAILED"
+    #   resp.api_cache.health_metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateApiCache AWS API Documentation
     #
@@ -732,6 +747,16 @@ module Aws::AppSync
     # @option params [Types::EventBridgeDataSourceConfig] :event_bridge_config
     #   Amazon EventBridge settings.
     #
+    # @option params [String] :metrics_config
+    #   Enables or disables enhanced data source metrics for specified data
+    #   sources. Note that `metricsConfig` won't be used unless the
+    #   `dataSourceLevelMetricsBehavior` value is set to
+    #   `PER_DATA_SOURCE_METRICS`. If the `dataSourceLevelMetricsBehavior` is
+    #   set to `FULL_REQUEST_DATA_SOURCE_METRICS` instead, `metricsConfig`
+    #   will be ignored. However, you can still set its value.
+    #
+    #   `metricsConfig` can be `ENABLED` or `DISABLED`.
+    #
     # @return [Types::CreateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDataSourceResponse#data_source #data_source} => Types::DataSource
@@ -789,6 +814,7 @@ module Aws::AppSync
     #     event_bridge_config: {
     #       event_bus_arn: "String", # required
     #     },
+    #     metrics_config: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @example Response structure
@@ -821,6 +847,7 @@ module Aws::AppSync
     #   resp.data_source.relational_database_config.rds_http_endpoint_config.schema #=> String
     #   resp.data_source.relational_database_config.rds_http_endpoint_config.aws_secret_store_arn #=> String
     #   resp.data_source.event_bridge_config.event_bus_arn #=> String
+    #   resp.data_source.metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateDataSource AWS API Documentation
     #
@@ -1065,6 +1092,9 @@ module Aws::AppSync
     #   and `10000`. This field will produce a limit error if the operation
     #   falls out of bounds.
     #
+    # @option params [Types::EnhancedMetricsConfig] :enhanced_metrics_config
+    #   The `enhancedMetricsConfig` object.
+    #
     # @return [Types::CreateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGraphqlApiResponse#graphql_api #graphql_api} => Types::GraphqlApi
@@ -1128,6 +1158,11 @@ module Aws::AppSync
     #     introspection_config: "ENABLED", # accepts ENABLED, DISABLED
     #     query_depth_limit: 1,
     #     resolver_count_limit: 1,
+    #     enhanced_metrics_config: {
+    #       resolver_level_metrics_behavior: "FULL_REQUEST_RESOLVER_METRICS", # required, accepts FULL_REQUEST_RESOLVER_METRICS, PER_RESOLVER_METRICS
+    #       data_source_level_metrics_behavior: "FULL_REQUEST_DATA_SOURCE_METRICS", # required, accepts FULL_REQUEST_DATA_SOURCE_METRICS, PER_DATA_SOURCE_METRICS
+    #       operation_level_metrics_config: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     },
     #   })
     #
     # @example Response structure
@@ -1178,6 +1213,9 @@ module Aws::AppSync
     #   resp.graphql_api.introspection_config #=> String, one of "ENABLED", "DISABLED"
     #   resp.graphql_api.query_depth_limit #=> Integer
     #   resp.graphql_api.resolver_count_limit #=> Integer
+    #   resp.graphql_api.enhanced_metrics_config.resolver_level_metrics_behavior #=> String, one of "FULL_REQUEST_RESOLVER_METRICS", "PER_RESOLVER_METRICS"
+    #   resp.graphql_api.enhanced_metrics_config.data_source_level_metrics_behavior #=> String, one of "FULL_REQUEST_DATA_SOURCE_METRICS", "PER_DATA_SOURCE_METRICS"
+    #   resp.graphql_api.enhanced_metrics_config.operation_level_metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApi AWS API Documentation
     #
@@ -1255,6 +1293,16 @@ module Aws::AppSync
     #   When code is used, the `runtime` is required. The `runtime` value must
     #   be `APPSYNC_JS`.
     #
+    # @option params [String] :metrics_config
+    #   Enables or disables enhanced resolver metrics for specified resolvers.
+    #   Note that `metricsConfig` won't be used unless the
+    #   `resolverLevelMetricsBehavior` value is set to `PER_RESOLVER_METRICS`.
+    #   If the `resolverLevelMetricsBehavior` is set to
+    #   `FULL_REQUEST_RESOLVER_METRICS` instead, `metricsConfig` will be
+    #   ignored. However, you can still set its value.
+    #
+    #   `metricsConfig` can be `ENABLED` or `DISABLED`.
+    #
     # @return [Types::CreateResolverResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateResolverResponse#resolver #resolver} => Types::Resolver
@@ -1289,6 +1337,7 @@ module Aws::AppSync
     #       runtime_version: "String", # required
     #     },
     #     code: "Code",
+    #     metrics_config: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @example Response structure
@@ -1312,6 +1361,7 @@ module Aws::AppSync
     #   resp.resolver.runtime.name #=> String, one of "APPSYNC_JS"
     #   resp.resolver.runtime.runtime_version #=> String
     #   resp.resolver.code #=> String
+    #   resp.resolver.metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateResolver AWS API Documentation
     #
@@ -1857,6 +1907,7 @@ module Aws::AppSync
     #   resp.api_cache.at_rest_encryption_enabled #=> Boolean
     #   resp.api_cache.type #=> String, one of "T2_SMALL", "T2_MEDIUM", "R4_LARGE", "R4_XLARGE", "R4_2XLARGE", "R4_4XLARGE", "R4_8XLARGE", "SMALL", "MEDIUM", "LARGE", "XLARGE", "LARGE_2X", "LARGE_4X", "LARGE_8X", "LARGE_12X"
     #   resp.api_cache.status #=> String, one of "AVAILABLE", "CREATING", "DELETING", "MODIFYING", "FAILED"
+    #   resp.api_cache.health_metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetApiCache AWS API Documentation
     #
@@ -1916,6 +1967,7 @@ module Aws::AppSync
     #   resp.data_source.relational_database_config.rds_http_endpoint_config.schema #=> String
     #   resp.data_source.relational_database_config.rds_http_endpoint_config.aws_secret_store_arn #=> String
     #   resp.data_source.event_bridge_config.event_bus_arn #=> String
+    #   resp.data_source.metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetDataSource AWS API Documentation
     #
@@ -2141,6 +2193,9 @@ module Aws::AppSync
     #   resp.graphql_api.introspection_config #=> String, one of "ENABLED", "DISABLED"
     #   resp.graphql_api.query_depth_limit #=> Integer
     #   resp.graphql_api.resolver_count_limit #=> Integer
+    #   resp.graphql_api.enhanced_metrics_config.resolver_level_metrics_behavior #=> String, one of "FULL_REQUEST_RESOLVER_METRICS", "PER_RESOLVER_METRICS"
+    #   resp.graphql_api.enhanced_metrics_config.data_source_level_metrics_behavior #=> String, one of "FULL_REQUEST_DATA_SOURCE_METRICS", "PER_DATA_SOURCE_METRICS"
+    #   resp.graphql_api.enhanced_metrics_config.operation_level_metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetGraphqlApi AWS API Documentation
     #
@@ -2148,6 +2203,37 @@ module Aws::AppSync
     # @param [Hash] params ({})
     def get_graphql_api(params = {}, options = {})
       req = build_request(:get_graphql_api, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the list of environmental variable key-value pairs
+    # associated with an API by its ID value.
+    #
+    # @option params [required, String] :api_id
+    #   The ID of the API from which the environmental variable list will be
+    #   retrieved.
+    #
+    # @return [Types::GetGraphqlApiEnvironmentVariablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGraphqlApiEnvironmentVariablesResponse#environment_variables #environment_variables} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_graphql_api_environment_variables({
+    #     api_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.environment_variables #=> Hash
+    #   resp.environment_variables["EnvironmentVariableKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetGraphqlApiEnvironmentVariables AWS API Documentation
+    #
+    # @overload get_graphql_api_environment_variables(params = {})
+    # @param [Hash] params ({})
+    def get_graphql_api_environment_variables(params = {}, options = {})
+      req = build_request(:get_graphql_api_environment_variables, params)
       req.send_request(options)
     end
 
@@ -2232,6 +2318,7 @@ module Aws::AppSync
     #   resp.resolver.runtime.name #=> String, one of "APPSYNC_JS"
     #   resp.resolver.runtime.runtime_version #=> String
     #   resp.resolver.code #=> String
+    #   resp.resolver.metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetResolver AWS API Documentation
     #
@@ -2467,6 +2554,7 @@ module Aws::AppSync
     #   resp.data_sources[0].relational_database_config.rds_http_endpoint_config.schema #=> String
     #   resp.data_sources[0].relational_database_config.rds_http_endpoint_config.aws_secret_store_arn #=> String
     #   resp.data_sources[0].event_bridge_config.event_bus_arn #=> String
+    #   resp.data_sources[0].metrics_config #=> String, one of "ENABLED", "DISABLED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListDataSources AWS API Documentation
@@ -2654,6 +2742,9 @@ module Aws::AppSync
     #   resp.graphql_apis[0].introspection_config #=> String, one of "ENABLED", "DISABLED"
     #   resp.graphql_apis[0].query_depth_limit #=> Integer
     #   resp.graphql_apis[0].resolver_count_limit #=> Integer
+    #   resp.graphql_apis[0].enhanced_metrics_config.resolver_level_metrics_behavior #=> String, one of "FULL_REQUEST_RESOLVER_METRICS", "PER_RESOLVER_METRICS"
+    #   resp.graphql_apis[0].enhanced_metrics_config.data_source_level_metrics_behavior #=> String, one of "FULL_REQUEST_DATA_SOURCE_METRICS", "PER_DATA_SOURCE_METRICS"
+    #   resp.graphql_apis[0].enhanced_metrics_config.operation_level_metrics_config #=> String, one of "ENABLED", "DISABLED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListGraphqlApis AWS API Documentation
@@ -2717,6 +2808,7 @@ module Aws::AppSync
     #   resp.resolvers[0].runtime.name #=> String, one of "APPSYNC_JS"
     #   resp.resolvers[0].runtime.runtime_version #=> String
     #   resp.resolvers[0].code #=> String
+    #   resp.resolvers[0].metrics_config #=> String, one of "ENABLED", "DISABLED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolvers AWS API Documentation
@@ -2780,6 +2872,7 @@ module Aws::AppSync
     #   resp.resolvers[0].runtime.name #=> String, one of "APPSYNC_JS"
     #   resp.resolvers[0].runtime.runtime_version #=> String
     #   resp.resolvers[0].code #=> String
+    #   resp.resolvers[0].metrics_config #=> String, one of "ENABLED", "DISABLED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolversByFunction AWS API Documentation
@@ -2971,6 +3064,104 @@ module Aws::AppSync
     # @param [Hash] params ({})
     def list_types_by_association(params = {}, options = {})
       req = build_request(:list_types_by_association, params)
+      req.send_request(options)
+    end
+
+    # Creates a list of environmental variables in an API by its ID value.
+    #
+    # When creating an environmental variable, it must follow the
+    # constraints below:
+    #
+    # * Both JavaScript and VTL templates support environmental variables.
+    #
+    # * Environmental variables are not evaluated before function
+    #   invocation.
+    #
+    # * Environmental variables only support string values.
+    #
+    # * Any defined value in an environmental variable is considered a
+    #   string literal and not expanded.
+    #
+    # * Variable evaluations should ideally be performed in the function
+    #   code.
+    #
+    # When creating an environmental variable key-value pair, it must follow
+    # the additional constraints below:
+    #
+    # * Keys must begin with a letter.
+    #
+    # * Keys must be at least two characters long.
+    #
+    # * Keys can only contain letters, numbers, and the underscore character
+    #   (\_).
+    #
+    # * Values can be up to 512 characters long.
+    #
+    # * You can configure up to 50 key-value pairs in a GraphQL API.
+    #
+    # You can create a list of environmental variables by adding it to the
+    # `environmentVariables` payload as a list in the format
+    # `\{"key1":"value1","key2":"value2", …\}`. Note that each call of the
+    # `PutGraphqlApiEnvironmentVariables` action will result in the
+    # overwriting of the existing environmental variable list of that API.
+    # This means the existing environmental variables will be lost. To avoid
+    # this, you must include all existing and new environmental variables in
+    # the list each time you call this action.
+    #
+    # @option params [required, String] :api_id
+    #   The ID of the API to which the environmental variable list will be
+    #   written.
+    #
+    # @option params [required, Hash<String,String>] :environment_variables
+    #   The list of environmental variables to add to the API.
+    #
+    #   When creating an environmental variable key-value pair, it must follow
+    #   the additional constraints below:
+    #
+    #   * Keys must begin with a letter.
+    #
+    #   * Keys must be at least two characters long.
+    #
+    #   * Keys can only contain letters, numbers, and the underscore character
+    #     (\_).
+    #
+    #   * Values can be up to 512 characters long.
+    #
+    #   * You can configure up to 50 key-value pairs in a GraphQL API.
+    #
+    #   You can create a list of environmental variables by adding it to the
+    #   `environmentVariables` payload as a list in the format
+    #   `\{"key1":"value1","key2":"value2", …\}`. Note that each call of the
+    #   `PutGraphqlApiEnvironmentVariables` action will result in the
+    #   overwriting of the existing environmental variable list of that API.
+    #   This means the existing environmental variables will be lost. To avoid
+    #   this, you must include all existing and new environmental variables in
+    #   the list each time you call this action.
+    #
+    # @return [Types::PutGraphqlApiEnvironmentVariablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutGraphqlApiEnvironmentVariablesResponse#environment_variables #environment_variables} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_graphql_api_environment_variables({
+    #     api_id: "String", # required
+    #     environment_variables: { # required
+    #       "EnvironmentVariableKey" => "EnvironmentVariableValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.environment_variables #=> Hash
+    #   resp.environment_variables["EnvironmentVariableKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/PutGraphqlApiEnvironmentVariables AWS API Documentation
+    #
+    # @overload put_graphql_api_environment_variables(params = {})
+    # @param [Hash] params ({})
+    def put_graphql_api_environment_variables(params = {}, options = {})
+      req = build_request(:put_graphql_api_environment_variables, params)
       req.send_request(options)
     end
 
@@ -3196,6 +3387,19 @@ module Aws::AppSync
     #
     #   * **R4\_8XLARGE**: A r4.8xlarge instance type.
     #
+    # @option params [String] :health_metrics_config
+    #   Controls how cache health metrics will be emitted to CloudWatch. Cache
+    #   health metrics include:
+    #
+    #   * NetworkBandwidthOutAllowanceExceeded: The number of times a
+    #     specified GraphQL operation was called.
+    #
+    #   * EngineCPUUtilization: The number of GraphQL errors that occurred
+    #     during a specified GraphQL operation.
+    #
+    #   Metrics will be recorded by API ID. You can set the value to `ENABLED`
+    #   or `DISABLED`.
+    #
     # @return [Types::UpdateApiCacheResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateApiCacheResponse#api_cache #api_cache} => Types::ApiCache
@@ -3207,6 +3411,7 @@ module Aws::AppSync
     #     ttl: 1, # required
     #     api_caching_behavior: "FULL_REQUEST_CACHING", # required, accepts FULL_REQUEST_CACHING, PER_RESOLVER_CACHING
     #     type: "T2_SMALL", # required, accepts T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE, SMALL, MEDIUM, LARGE, XLARGE, LARGE_2X, LARGE_4X, LARGE_8X, LARGE_12X
+    #     health_metrics_config: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @example Response structure
@@ -3217,6 +3422,7 @@ module Aws::AppSync
     #   resp.api_cache.at_rest_encryption_enabled #=> Boolean
     #   resp.api_cache.type #=> String, one of "T2_SMALL", "T2_MEDIUM", "R4_LARGE", "R4_XLARGE", "R4_2XLARGE", "R4_4XLARGE", "R4_8XLARGE", "SMALL", "MEDIUM", "LARGE", "XLARGE", "LARGE_2X", "LARGE_4X", "LARGE_8X", "LARGE_12X"
     #   resp.api_cache.status #=> String, one of "AVAILABLE", "CREATING", "DELETING", "MODIFYING", "FAILED"
+    #   resp.api_cache.health_metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateApiCache AWS API Documentation
     #
@@ -3316,6 +3522,16 @@ module Aws::AppSync
     # @option params [Types::EventBridgeDataSourceConfig] :event_bridge_config
     #   The new Amazon EventBridge settings.
     #
+    # @option params [String] :metrics_config
+    #   Enables or disables enhanced data source metrics for specified data
+    #   sources. Note that `metricsConfig` won't be used unless the
+    #   `dataSourceLevelMetricsBehavior` value is set to
+    #   `PER_DATA_SOURCE_METRICS`. If the `dataSourceLevelMetricsBehavior` is
+    #   set to `FULL_REQUEST_DATA_SOURCE_METRICS` instead, `metricsConfig`
+    #   will be ignored. However, you can still set its value.
+    #
+    #   `metricsConfig` can be `ENABLED` or `DISABLED`.
+    #
     # @return [Types::UpdateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDataSourceResponse#data_source #data_source} => Types::DataSource
@@ -3373,6 +3589,7 @@ module Aws::AppSync
     #     event_bridge_config: {
     #       event_bus_arn: "String", # required
     #     },
+    #     metrics_config: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @example Response structure
@@ -3405,6 +3622,7 @@ module Aws::AppSync
     #   resp.data_source.relational_database_config.rds_http_endpoint_config.schema #=> String
     #   resp.data_source.relational_database_config.rds_http_endpoint_config.aws_secret_store_arn #=> String
     #   resp.data_source.event_bridge_config.event_bus_arn #=> String
+    #   resp.data_source.metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateDataSource AWS API Documentation
     #
@@ -3634,6 +3852,9 @@ module Aws::AppSync
     #   and `10000`. This field will produce a limit error if the operation
     #   falls out of bounds.
     #
+    # @option params [Types::EnhancedMetricsConfig] :enhanced_metrics_config
+    #   The `enhancedMetricsConfig` object.
+    #
     # @return [Types::UpdateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateGraphqlApiResponse#graphql_api #graphql_api} => Types::GraphqlApi
@@ -3693,6 +3914,11 @@ module Aws::AppSync
     #     introspection_config: "ENABLED", # accepts ENABLED, DISABLED
     #     query_depth_limit: 1,
     #     resolver_count_limit: 1,
+    #     enhanced_metrics_config: {
+    #       resolver_level_metrics_behavior: "FULL_REQUEST_RESOLVER_METRICS", # required, accepts FULL_REQUEST_RESOLVER_METRICS, PER_RESOLVER_METRICS
+    #       data_source_level_metrics_behavior: "FULL_REQUEST_DATA_SOURCE_METRICS", # required, accepts FULL_REQUEST_DATA_SOURCE_METRICS, PER_DATA_SOURCE_METRICS
+    #       operation_level_metrics_config: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     },
     #   })
     #
     # @example Response structure
@@ -3743,6 +3969,9 @@ module Aws::AppSync
     #   resp.graphql_api.introspection_config #=> String, one of "ENABLED", "DISABLED"
     #   resp.graphql_api.query_depth_limit #=> Integer
     #   resp.graphql_api.resolver_count_limit #=> Integer
+    #   resp.graphql_api.enhanced_metrics_config.resolver_level_metrics_behavior #=> String, one of "FULL_REQUEST_RESOLVER_METRICS", "PER_RESOLVER_METRICS"
+    #   resp.graphql_api.enhanced_metrics_config.data_source_level_metrics_behavior #=> String, one of "FULL_REQUEST_DATA_SOURCE_METRICS", "PER_DATA_SOURCE_METRICS"
+    #   resp.graphql_api.enhanced_metrics_config.operation_level_metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApi AWS API Documentation
     #
@@ -3816,6 +4045,16 @@ module Aws::AppSync
     #   When code is used, the `runtime` is required. The `runtime` value must
     #   be `APPSYNC_JS`.
     #
+    # @option params [String] :metrics_config
+    #   Enables or disables enhanced resolver metrics for specified resolvers.
+    #   Note that `metricsConfig` won't be used unless the
+    #   `resolverLevelMetricsBehavior` value is set to `PER_RESOLVER_METRICS`.
+    #   If the `resolverLevelMetricsBehavior` is set to
+    #   `FULL_REQUEST_RESOLVER_METRICS` instead, `metricsConfig` will be
+    #   ignored. However, you can still set its value.
+    #
+    #   `metricsConfig` can be `ENABLED` or `DISABLED`.
+    #
     # @return [Types::UpdateResolverResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateResolverResponse#resolver #resolver} => Types::Resolver
@@ -3850,6 +4089,7 @@ module Aws::AppSync
     #       runtime_version: "String", # required
     #     },
     #     code: "Code",
+    #     metrics_config: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @example Response structure
@@ -3873,6 +4113,7 @@ module Aws::AppSync
     #   resp.resolver.runtime.name #=> String, one of "APPSYNC_JS"
     #   resp.resolver.runtime.runtime_version #=> String
     #   resp.resolver.code #=> String
+    #   resp.resolver.metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateResolver AWS API Documentation
     #
@@ -3998,7 +4239,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

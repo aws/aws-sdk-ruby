@@ -1,0 +1,676 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ManagedBlockchain
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Accessor
+      attr_accessor id: ::String
+      attr_accessor type: ("BILLING_TOKEN")
+      attr_accessor billing_token: ::String
+      attr_accessor status: ("AVAILABLE" | "PENDING_DELETION" | "DELETED")
+      attr_accessor creation_date: ::Time
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor network_type: ("ETHEREUM_GOERLI" | "ETHEREUM_MAINNET" | "ETHEREUM_MAINNET_AND_GOERLI" | "POLYGON_MAINNET" | "POLYGON_MUMBAI")
+      SENSITIVE: []
+    end
+
+    class AccessorSummary
+      attr_accessor id: ::String
+      attr_accessor type: ("BILLING_TOKEN")
+      attr_accessor status: ("AVAILABLE" | "PENDING_DELETION" | "DELETED")
+      attr_accessor creation_date: ::Time
+      attr_accessor arn: ::String
+      attr_accessor network_type: ("ETHEREUM_GOERLI" | "ETHEREUM_MAINNET" | "ETHEREUM_MAINNET_AND_GOERLI" | "POLYGON_MAINNET" | "POLYGON_MUMBAI")
+      SENSITIVE: []
+    end
+
+    class ApprovalThresholdPolicy
+      attr_accessor threshold_percentage: ::Integer
+      attr_accessor proposal_duration_in_hours: ::Integer
+      attr_accessor threshold_comparator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUAL_TO")
+      SENSITIVE: []
+    end
+
+    class CreateAccessorInput
+      attr_accessor client_request_token: ::String
+      attr_accessor accessor_type: ("BILLING_TOKEN")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor network_type: ("ETHEREUM_GOERLI" | "ETHEREUM_MAINNET" | "ETHEREUM_MAINNET_AND_GOERLI" | "POLYGON_MAINNET" | "POLYGON_MUMBAI")
+      SENSITIVE: []
+    end
+
+    class CreateAccessorOutput
+      attr_accessor accessor_id: ::String
+      attr_accessor billing_token: ::String
+      attr_accessor network_type: ("ETHEREUM_GOERLI" | "ETHEREUM_MAINNET" | "ETHEREUM_MAINNET_AND_GOERLI" | "POLYGON_MAINNET" | "POLYGON_MUMBAI")
+      SENSITIVE: []
+    end
+
+    class CreateMemberInput
+      attr_accessor client_request_token: ::String
+      attr_accessor invitation_id: ::String
+      attr_accessor network_id: ::String
+      attr_accessor member_configuration: Types::MemberConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateMemberOutput
+      attr_accessor member_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateNetworkInput
+      attr_accessor client_request_token: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor framework: ("HYPERLEDGER_FABRIC" | "ETHEREUM")
+      attr_accessor framework_version: ::String
+      attr_accessor framework_configuration: Types::NetworkFrameworkConfiguration
+      attr_accessor voting_policy: Types::VotingPolicy
+      attr_accessor member_configuration: Types::MemberConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateNetworkOutput
+      attr_accessor network_id: ::String
+      attr_accessor member_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateNodeInput
+      attr_accessor client_request_token: ::String
+      attr_accessor network_id: ::String
+      attr_accessor member_id: ::String
+      attr_accessor node_configuration: Types::NodeConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateNodeOutput
+      attr_accessor node_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProposalInput
+      attr_accessor client_request_token: ::String
+      attr_accessor network_id: ::String
+      attr_accessor member_id: ::String
+      attr_accessor actions: Types::ProposalActions
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateProposalOutput
+      attr_accessor proposal_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessorInput
+      attr_accessor accessor_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessorOutput < Aws::EmptyStructure
+    end
+
+    class DeleteMemberInput
+      attr_accessor network_id: ::String
+      attr_accessor member_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMemberOutput < Aws::EmptyStructure
+    end
+
+    class DeleteNodeInput
+      attr_accessor network_id: ::String
+      attr_accessor member_id: ::String
+      attr_accessor node_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNodeOutput < Aws::EmptyStructure
+    end
+
+    class GetAccessorInput
+      attr_accessor accessor_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessorOutput
+      attr_accessor accessor: Types::Accessor
+      SENSITIVE: []
+    end
+
+    class GetMemberInput
+      attr_accessor network_id: ::String
+      attr_accessor member_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMemberOutput
+      attr_accessor member: Types::Member
+      SENSITIVE: []
+    end
+
+    class GetNetworkInput
+      attr_accessor network_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetNetworkOutput
+      attr_accessor network: Types::Network
+      SENSITIVE: []
+    end
+
+    class GetNodeInput
+      attr_accessor network_id: ::String
+      attr_accessor member_id: ::String
+      attr_accessor node_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetNodeOutput
+      attr_accessor node: Types::Node
+      SENSITIVE: []
+    end
+
+    class GetProposalInput
+      attr_accessor network_id: ::String
+      attr_accessor proposal_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetProposalOutput
+      attr_accessor proposal: Types::Proposal
+      SENSITIVE: []
+    end
+
+    class IllegalActionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServiceErrorException < Aws::EmptyStructure
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Invitation
+      attr_accessor invitation_id: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor expiration_date: ::Time
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "ACCEPTING" | "REJECTED" | "EXPIRED")
+      attr_accessor network_summary: Types::NetworkSummary
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class InviteAction
+      attr_accessor principal: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessorsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor network_type: ("ETHEREUM_GOERLI" | "ETHEREUM_MAINNET" | "ETHEREUM_MAINNET_AND_GOERLI" | "POLYGON_MAINNET" | "POLYGON_MUMBAI")
+      SENSITIVE: []
+    end
+
+    class ListAccessorsOutput
+      attr_accessor accessors: ::Array[Types::AccessorSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInvitationsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInvitationsOutput
+      attr_accessor invitations: ::Array[Types::Invitation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMembersInput
+      attr_accessor network_id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "CREATE_FAILED" | "UPDATING" | "DELETING" | "DELETED" | "INACCESSIBLE_ENCRYPTION_KEY")
+      attr_accessor is_owned: bool
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMembersOutput
+      attr_accessor members: ::Array[Types::MemberSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworksInput
+      attr_accessor name: ::String
+      attr_accessor framework: ("HYPERLEDGER_FABRIC" | "ETHEREUM")
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "CREATE_FAILED" | "DELETING" | "DELETED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworksOutput
+      attr_accessor networks: ::Array[Types::NetworkSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNodesInput
+      attr_accessor network_id: ::String
+      attr_accessor member_id: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "UNHEALTHY" | "CREATE_FAILED" | "UPDATING" | "DELETING" | "DELETED" | "FAILED" | "INACCESSIBLE_ENCRYPTION_KEY")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNodesOutput
+      attr_accessor nodes: ::Array[Types::NodeSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProposalVotesInput
+      attr_accessor network_id: ::String
+      attr_accessor proposal_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProposalVotesOutput
+      attr_accessor proposal_votes: ::Array[Types::VoteSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProposalsInput
+      attr_accessor network_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProposalsOutput
+      attr_accessor proposals: ::Array[Types::ProposalSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class LogConfiguration
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class LogConfigurations
+      attr_accessor cloudwatch: Types::LogConfiguration
+      SENSITIVE: []
+    end
+
+    class Member
+      attr_accessor network_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor framework_attributes: Types::MemberFrameworkAttributes
+      attr_accessor log_publishing_configuration: Types::MemberLogPublishingConfiguration
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "CREATE_FAILED" | "UPDATING" | "DELETING" | "DELETED" | "INACCESSIBLE_ENCRYPTION_KEY")
+      attr_accessor creation_date: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor arn: ::String
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class MemberConfiguration
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor framework_configuration: Types::MemberFrameworkConfiguration
+      attr_accessor log_publishing_configuration: Types::MemberLogPublishingConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class MemberFabricAttributes
+      attr_accessor admin_username: ::String
+      attr_accessor ca_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class MemberFabricConfiguration
+      attr_accessor admin_username: ::String
+      attr_accessor admin_password: ::String
+      SENSITIVE: [:admin_password]
+    end
+
+    class MemberFabricLogPublishingConfiguration
+      attr_accessor ca_logs: Types::LogConfigurations
+      SENSITIVE: []
+    end
+
+    class MemberFrameworkAttributes
+      attr_accessor fabric: Types::MemberFabricAttributes
+      SENSITIVE: []
+    end
+
+    class MemberFrameworkConfiguration
+      attr_accessor fabric: Types::MemberFabricConfiguration
+      SENSITIVE: []
+    end
+
+    class MemberLogPublishingConfiguration
+      attr_accessor fabric: Types::MemberFabricLogPublishingConfiguration
+      SENSITIVE: []
+    end
+
+    class MemberSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "CREATE_FAILED" | "UPDATING" | "DELETING" | "DELETED" | "INACCESSIBLE_ENCRYPTION_KEY")
+      attr_accessor creation_date: ::Time
+      attr_accessor is_owned: bool
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class Network
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor framework: ("HYPERLEDGER_FABRIC" | "ETHEREUM")
+      attr_accessor framework_version: ::String
+      attr_accessor framework_attributes: Types::NetworkFrameworkAttributes
+      attr_accessor vpc_endpoint_service_name: ::String
+      attr_accessor voting_policy: Types::VotingPolicy
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "CREATE_FAILED" | "DELETING" | "DELETED")
+      attr_accessor creation_date: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkEthereumAttributes
+      attr_accessor chain_id: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkFabricAttributes
+      attr_accessor ordering_service_endpoint: ::String
+      attr_accessor edition: ("STARTER" | "STANDARD")
+      SENSITIVE: []
+    end
+
+    class NetworkFabricConfiguration
+      attr_accessor edition: ("STARTER" | "STANDARD")
+      SENSITIVE: []
+    end
+
+    class NetworkFrameworkAttributes
+      attr_accessor fabric: Types::NetworkFabricAttributes
+      attr_accessor ethereum: Types::NetworkEthereumAttributes
+      SENSITIVE: []
+    end
+
+    class NetworkFrameworkConfiguration
+      attr_accessor fabric: Types::NetworkFabricConfiguration
+      SENSITIVE: []
+    end
+
+    class NetworkSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor framework: ("HYPERLEDGER_FABRIC" | "ETHEREUM")
+      attr_accessor framework_version: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "CREATE_FAILED" | "DELETING" | "DELETED")
+      attr_accessor creation_date: ::Time
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class Node
+      attr_accessor network_id: ::String
+      attr_accessor member_id: ::String
+      attr_accessor id: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor framework_attributes: Types::NodeFrameworkAttributes
+      attr_accessor log_publishing_configuration: Types::NodeLogPublishingConfiguration
+      attr_accessor state_db: ("LevelDB" | "CouchDB")
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "UNHEALTHY" | "CREATE_FAILED" | "UPDATING" | "DELETING" | "DELETED" | "FAILED" | "INACCESSIBLE_ENCRYPTION_KEY")
+      attr_accessor creation_date: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor arn: ::String
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class NodeConfiguration
+      attr_accessor instance_type: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor log_publishing_configuration: Types::NodeLogPublishingConfiguration
+      attr_accessor state_db: ("LevelDB" | "CouchDB")
+      SENSITIVE: []
+    end
+
+    class NodeEthereumAttributes
+      attr_accessor http_endpoint: ::String
+      attr_accessor web_socket_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class NodeFabricAttributes
+      attr_accessor peer_endpoint: ::String
+      attr_accessor peer_event_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class NodeFabricLogPublishingConfiguration
+      attr_accessor chaincode_logs: Types::LogConfigurations
+      attr_accessor peer_logs: Types::LogConfigurations
+      SENSITIVE: []
+    end
+
+    class NodeFrameworkAttributes
+      attr_accessor fabric: Types::NodeFabricAttributes
+      attr_accessor ethereum: Types::NodeEthereumAttributes
+      SENSITIVE: []
+    end
+
+    class NodeLogPublishingConfiguration
+      attr_accessor fabric: Types::NodeFabricLogPublishingConfiguration
+      SENSITIVE: []
+    end
+
+    class NodeSummary
+      attr_accessor id: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "UNHEALTHY" | "CREATE_FAILED" | "UPDATING" | "DELETING" | "DELETED" | "FAILED" | "INACCESSIBLE_ENCRYPTION_KEY")
+      attr_accessor creation_date: ::Time
+      attr_accessor availability_zone: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class Proposal
+      attr_accessor proposal_id: ::String
+      attr_accessor network_id: ::String
+      attr_accessor description: ::String
+      attr_accessor actions: Types::ProposalActions
+      attr_accessor proposed_by_member_id: ::String
+      attr_accessor proposed_by_member_name: ::String
+      attr_accessor status: ("IN_PROGRESS" | "APPROVED" | "REJECTED" | "EXPIRED" | "ACTION_FAILED")
+      attr_accessor creation_date: ::Time
+      attr_accessor expiration_date: ::Time
+      attr_accessor yes_vote_count: ::Integer
+      attr_accessor no_vote_count: ::Integer
+      attr_accessor outstanding_vote_count: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ProposalActions
+      attr_accessor invitations: ::Array[Types::InviteAction]
+      attr_accessor removals: ::Array[Types::RemoveAction]
+      SENSITIVE: []
+    end
+
+    class ProposalSummary
+      attr_accessor proposal_id: ::String
+      attr_accessor description: ::String
+      attr_accessor proposed_by_member_id: ::String
+      attr_accessor proposed_by_member_name: ::String
+      attr_accessor status: ("IN_PROGRESS" | "APPROVED" | "REJECTED" | "EXPIRED" | "ACTION_FAILED")
+      attr_accessor creation_date: ::Time
+      attr_accessor expiration_date: ::Time
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class RejectInvitationInput
+      attr_accessor invitation_id: ::String
+      SENSITIVE: []
+    end
+
+    class RejectInvitationOutput < Aws::EmptyStructure
+    end
+
+    class RemoveAction
+      attr_accessor member_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotReadyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException < Aws::EmptyStructure
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateMemberInput
+      attr_accessor network_id: ::String
+      attr_accessor member_id: ::String
+      attr_accessor log_publishing_configuration: Types::MemberLogPublishingConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateMemberOutput < Aws::EmptyStructure
+    end
+
+    class UpdateNodeInput
+      attr_accessor network_id: ::String
+      attr_accessor member_id: ::String
+      attr_accessor node_id: ::String
+      attr_accessor log_publishing_configuration: Types::NodeLogPublishingConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateNodeOutput < Aws::EmptyStructure
+    end
+
+    class VoteOnProposalInput
+      attr_accessor network_id: ::String
+      attr_accessor proposal_id: ::String
+      attr_accessor voter_member_id: ::String
+      attr_accessor vote: ("YES" | "NO")
+      SENSITIVE: []
+    end
+
+    class VoteOnProposalOutput < Aws::EmptyStructure
+    end
+
+    class VoteSummary
+      attr_accessor vote: ("YES" | "NO")
+      attr_accessor member_name: ::String
+      attr_accessor member_id: ::String
+      SENSITIVE: []
+    end
+
+    class VotingPolicy
+      attr_accessor approval_threshold_policy: Types::ApprovalThresholdPolicy
+      SENSITIVE: []
+    end
+  end
+end

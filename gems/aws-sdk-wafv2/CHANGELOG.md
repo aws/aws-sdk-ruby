@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2024-02-06)
+------------------
+
+* Feature - You can now delete an API key that you've created for use with your CAPTCHA JavaScript integration API.
+
+1.75.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.74.0 (2023-11-28)
 ------------------
 

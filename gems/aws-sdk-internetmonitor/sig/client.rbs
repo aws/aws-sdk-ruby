@@ -1,0 +1,318 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module InternetMonitor
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InternetMonitor/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateMonitorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMonitorOutput]
+        def arn: () -> ::String
+        def status: () -> ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InternetMonitor/Client.html#create_monitor-instance_method
+      def create_monitor: (
+                            monitor_name: ::String,
+                            ?resources: Array[::String],
+                            ?client_token: ::String,
+                            ?tags: Hash[::String, ::String],
+                            ?max_city_networks_to_monitor: ::Integer,
+                            ?internet_measurements_log_delivery: {
+                              s3_config: {
+                                bucket_name: ::String?,
+                                bucket_prefix: ::String?,
+                                log_delivery_status: ("ENABLED" | "DISABLED")?
+                              }?
+                            },
+                            ?traffic_percentage_to_monitor: ::Integer,
+                            ?health_events_config: {
+                              availability_score_threshold: ::Float?,
+                              performance_score_threshold: ::Float?,
+                              availability_local_health_events_config: {
+                                status: ("ENABLED" | "DISABLED")?,
+                                health_score_threshold: ::Float?,
+                                min_traffic_impact: ::Float?
+                              }?,
+                              performance_local_health_events_config: {
+                                status: ("ENABLED" | "DISABLED")?,
+                                health_score_threshold: ::Float?,
+                                min_traffic_impact: ::Float?
+                              }?
+                            }
+                          ) -> _CreateMonitorResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMonitorResponseSuccess
+
+      interface _DeleteMonitorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMonitorOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InternetMonitor/Client.html#delete_monitor-instance_method
+      def delete_monitor: (
+                            monitor_name: ::String
+                          ) -> _DeleteMonitorResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMonitorResponseSuccess
+
+      interface _GetHealthEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetHealthEventOutput]
+        def event_arn: () -> ::String
+        def event_id: () -> ::String
+        def started_at: () -> ::Time
+        def ended_at: () -> ::Time
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def impacted_locations: () -> ::Array[Types::ImpactedLocation]
+        def status: () -> ("ACTIVE" | "RESOLVED")
+        def percent_of_total_traffic_impacted: () -> ::Float
+        def impact_type: () -> ("AVAILABILITY" | "PERFORMANCE" | "LOCAL_AVAILABILITY" | "LOCAL_PERFORMANCE")
+        def health_score_threshold: () -> ::Float
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InternetMonitor/Client.html#get_health_event-instance_method
+      def get_health_event: (
+                              monitor_name: ::String,
+                              event_id: ::String
+                            ) -> _GetHealthEventResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHealthEventResponseSuccess
+
+      interface _GetMonitorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMonitorOutput]
+        def monitor_name: () -> ::String
+        def monitor_arn: () -> ::String
+        def resources: () -> ::Array[::String]
+        def status: () -> ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR")
+        def created_at: () -> ::Time
+        def modified_at: () -> ::Time
+        def processing_status: () -> ("OK" | "INACTIVE" | "COLLECTING_DATA" | "INSUFFICIENT_DATA" | "FAULT_SERVICE" | "FAULT_ACCESS_CLOUDWATCH")
+        def processing_status_info: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def max_city_networks_to_monitor: () -> ::Integer
+        def internet_measurements_log_delivery: () -> Types::InternetMeasurementsLogDelivery
+        def traffic_percentage_to_monitor: () -> ::Integer
+        def health_events_config: () -> Types::HealthEventsConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InternetMonitor/Client.html#get_monitor-instance_method
+      def get_monitor: (
+                         monitor_name: ::String
+                       ) -> _GetMonitorResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMonitorResponseSuccess
+
+      interface _GetQueryResultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQueryResultsOutput]
+        def fields: () -> ::Array[Types::QueryField]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InternetMonitor/Client.html#get_query_results-instance_method
+      def get_query_results: (
+                               monitor_name: ::String,
+                               query_id: ::String,
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _GetQueryResultsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQueryResultsResponseSuccess
+
+      interface _GetQueryStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQueryStatusOutput]
+        def status: () -> ("QUEUED" | "RUNNING" | "SUCCEEDED" | "FAILED" | "CANCELED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InternetMonitor/Client.html#get_query_status-instance_method
+      def get_query_status: (
+                              monitor_name: ::String,
+                              query_id: ::String
+                            ) -> _GetQueryStatusResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQueryStatusResponseSuccess
+
+      interface _ListHealthEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListHealthEventsOutput]
+        def health_events: () -> ::Array[Types::HealthEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InternetMonitor/Client.html#list_health_events-instance_method
+      def list_health_events: (
+                                monitor_name: ::String,
+                                ?start_time: ::Time,
+                                ?end_time: ::Time,
+                                ?next_token: ::String,
+                                ?max_results: ::Integer,
+                                ?event_status: ("ACTIVE" | "RESOLVED")
+                              ) -> _ListHealthEventsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHealthEventsResponseSuccess
+
+      interface _ListMonitorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMonitorsOutput]
+        def monitors: () -> ::Array[Types::Monitor]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InternetMonitor/Client.html#list_monitors-instance_method
+      def list_monitors: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer,
+                           ?monitor_status: ::String
+                         ) -> _ListMonitorsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMonitorsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InternetMonitor/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartQueryOutput]
+        def query_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InternetMonitor/Client.html#start_query-instance_method
+      def start_query: (
+                         monitor_name: ::String,
+                         start_time: ::Time,
+                         end_time: ::Time,
+                         query_type: ("MEASUREMENTS" | "TOP_LOCATIONS" | "TOP_LOCATION_DETAILS"),
+                         ?filter_parameters: Array[
+                           {
+                             field: ::String?,
+                             operator: ("EQUALS" | "NOT_EQUALS")?,
+                             values: Array[::String]?
+                           },
+                         ]
+                       ) -> _StartQueryResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartQueryResponseSuccess
+
+      interface _StopQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopQueryOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InternetMonitor/Client.html#stop_query-instance_method
+      def stop_query: (
+                        monitor_name: ::String,
+                        query_id: ::String
+                      ) -> _StopQueryResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopQueryResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InternetMonitor/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InternetMonitor/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateMonitorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMonitorOutput]
+        def monitor_arn: () -> ::String
+        def status: () -> ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/InternetMonitor/Client.html#update_monitor-instance_method
+      def update_monitor: (
+                            monitor_name: ::String,
+                            ?resources_to_add: Array[::String],
+                            ?resources_to_remove: Array[::String],
+                            ?status: ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR"),
+                            ?client_token: ::String,
+                            ?max_city_networks_to_monitor: ::Integer,
+                            ?internet_measurements_log_delivery: {
+                              s3_config: {
+                                bucket_name: ::String?,
+                                bucket_prefix: ::String?,
+                                log_delivery_status: ("ENABLED" | "DISABLED")?
+                              }?
+                            },
+                            ?traffic_percentage_to_monitor: ::Integer,
+                            ?health_events_config: {
+                              availability_score_threshold: ::Float?,
+                              performance_score_threshold: ::Float?,
+                              availability_local_health_events_config: {
+                                status: ("ENABLED" | "DISABLED")?,
+                                health_score_threshold: ::Float?,
+                                min_traffic_impact: ::Float?
+                              }?,
+                              performance_local_health_events_config: {
+                                status: ("ENABLED" | "DISABLED")?,
+                                health_score_threshold: ::Float?,
+                                min_traffic_impact: ::Float?
+                              }?
+                            }
+                          ) -> _UpdateMonitorResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMonitorResponseSuccess
+    end
+  end
+end
+

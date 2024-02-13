@@ -1,0 +1,749 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::VerifiedPermissions
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ActionIdentifier
+      attr_accessor action_type: ::String
+      attr_accessor action_id: ::String
+      SENSITIVE: [:action_type, :action_id]
+    end
+
+    class AttributeValue
+      attr_accessor boolean: bool
+      attr_accessor entity_identifier: Types::EntityIdentifier
+      attr_accessor long: ::Integer
+      attr_accessor string: ::String
+      attr_accessor set: ::Array[Types::AttributeValue]
+      attr_accessor record: ::Hash[::String, Types::AttributeValue]
+      attr_accessor unknown: untyped
+      SENSITIVE: [:boolean, :long, :string]
+
+      class Boolean < AttributeValue
+      end
+      class EntityIdentifier < AttributeValue
+      end
+      class Long < AttributeValue
+      end
+      class String < AttributeValue
+      end
+      class Set < AttributeValue
+      end
+      class Record < AttributeValue
+      end
+      class Unknown < AttributeValue
+      end
+    end
+
+    class BatchIsAuthorizedInput
+      attr_accessor policy_store_id: ::String
+      attr_accessor entities: Types::EntitiesDefinition
+      attr_accessor requests: ::Array[Types::BatchIsAuthorizedInputItem]
+      SENSITIVE: []
+    end
+
+    class BatchIsAuthorizedInputItem
+      attr_accessor principal: Types::EntityIdentifier
+      attr_accessor action: Types::ActionIdentifier
+      attr_accessor resource: Types::EntityIdentifier
+      attr_accessor context: Types::ContextDefinition
+      SENSITIVE: []
+    end
+
+    class BatchIsAuthorizedOutput
+      attr_accessor results: ::Array[Types::BatchIsAuthorizedOutputItem]
+      SENSITIVE: []
+    end
+
+    class BatchIsAuthorizedOutputItem
+      attr_accessor request: Types::BatchIsAuthorizedInputItem
+      attr_accessor decision: ("ALLOW" | "DENY")
+      attr_accessor determining_policies: ::Array[Types::DeterminingPolicyItem]
+      attr_accessor errors: ::Array[Types::EvaluationErrorItem]
+      SENSITIVE: []
+    end
+
+    class CognitoUserPoolConfiguration
+      attr_accessor user_pool_arn: ::String
+      attr_accessor client_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Configuration
+      attr_accessor cognito_user_pool_configuration: Types::CognitoUserPoolConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CognitoUserPoolConfiguration < Configuration
+      end
+      class Unknown < Configuration
+      end
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resources: ::Array[Types::ResourceConflict]
+      SENSITIVE: []
+    end
+
+    class ContextDefinition
+      attr_accessor context_map: ::Hash[::String, Types::AttributeValue]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ContextMap < ContextDefinition
+      end
+      class Unknown < ContextDefinition
+      end
+    end
+
+    class CreateIdentitySourceInput
+      attr_accessor client_token: ::String
+      attr_accessor policy_store_id: ::String
+      attr_accessor configuration: Types::Configuration
+      attr_accessor principal_entity_type: ::String
+      SENSITIVE: [:principal_entity_type]
+    end
+
+    class CreateIdentitySourceOutput
+      attr_accessor created_date: ::Time
+      attr_accessor identity_source_id: ::String
+      attr_accessor last_updated_date: ::Time
+      attr_accessor policy_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePolicyInput
+      attr_accessor client_token: ::String
+      attr_accessor policy_store_id: ::String
+      attr_accessor definition: Types::PolicyDefinition
+      SENSITIVE: []
+    end
+
+    class CreatePolicyOutput
+      attr_accessor policy_store_id: ::String
+      attr_accessor policy_id: ::String
+      attr_accessor policy_type: ("STATIC" | "TEMPLATE_LINKED")
+      attr_accessor principal: Types::EntityIdentifier
+      attr_accessor resource: Types::EntityIdentifier
+      attr_accessor created_date: ::Time
+      attr_accessor last_updated_date: ::Time
+      SENSITIVE: []
+    end
+
+    class CreatePolicyStoreInput
+      attr_accessor client_token: ::String
+      attr_accessor validation_settings: Types::ValidationSettings
+      attr_accessor description: ::String
+      SENSITIVE: [:description]
+    end
+
+    class CreatePolicyStoreOutput
+      attr_accessor policy_store_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor last_updated_date: ::Time
+      SENSITIVE: []
+    end
+
+    class CreatePolicyTemplateInput
+      attr_accessor client_token: ::String
+      attr_accessor policy_store_id: ::String
+      attr_accessor description: ::String
+      attr_accessor statement: ::String
+      SENSITIVE: [:description, :statement]
+    end
+
+    class CreatePolicyTemplateOutput
+      attr_accessor policy_store_id: ::String
+      attr_accessor policy_template_id: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor last_updated_date: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteIdentitySourceInput
+      attr_accessor policy_store_id: ::String
+      attr_accessor identity_source_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIdentitySourceOutput < Aws::EmptyStructure
+    end
+
+    class DeletePolicyInput
+      attr_accessor policy_store_id: ::String
+      attr_accessor policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePolicyOutput < Aws::EmptyStructure
+    end
+
+    class DeletePolicyStoreInput
+      attr_accessor policy_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePolicyStoreOutput < Aws::EmptyStructure
+    end
+
+    class DeletePolicyTemplateInput
+      attr_accessor policy_store_id: ::String
+      attr_accessor policy_template_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePolicyTemplateOutput < Aws::EmptyStructure
+    end
+
+    class DeterminingPolicyItem
+      attr_accessor policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class EntitiesDefinition
+      attr_accessor entity_list: ::Array[Types::EntityItem]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class EntityList < EntitiesDefinition
+      end
+      class Unknown < EntitiesDefinition
+      end
+    end
+
+    class EntityIdentifier
+      attr_accessor entity_type: ::String
+      attr_accessor entity_id: ::String
+      SENSITIVE: [:entity_type, :entity_id]
+    end
+
+    class EntityItem
+      attr_accessor identifier: Types::EntityIdentifier
+      attr_accessor attributes: ::Hash[::String, Types::AttributeValue]
+      attr_accessor parents: ::Array[Types::EntityIdentifier]
+      SENSITIVE: []
+    end
+
+    class EntityReference
+      attr_accessor unspecified: bool
+      attr_accessor identifier: Types::EntityIdentifier
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Unspecified < EntityReference
+      end
+      class Identifier < EntityReference
+      end
+      class Unknown < EntityReference
+      end
+    end
+
+    class EvaluationErrorItem
+      attr_accessor error_description: ::String
+      SENSITIVE: []
+    end
+
+    class GetIdentitySourceInput
+      attr_accessor policy_store_id: ::String
+      attr_accessor identity_source_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetIdentitySourceOutput
+      attr_accessor created_date: ::Time
+      attr_accessor details: Types::IdentitySourceDetails
+      attr_accessor identity_source_id: ::String
+      attr_accessor last_updated_date: ::Time
+      attr_accessor policy_store_id: ::String
+      attr_accessor principal_entity_type: ::String
+      SENSITIVE: [:principal_entity_type]
+    end
+
+    class GetPolicyInput
+      attr_accessor policy_store_id: ::String
+      attr_accessor policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicyOutput
+      attr_accessor policy_store_id: ::String
+      attr_accessor policy_id: ::String
+      attr_accessor policy_type: ("STATIC" | "TEMPLATE_LINKED")
+      attr_accessor principal: Types::EntityIdentifier
+      attr_accessor resource: Types::EntityIdentifier
+      attr_accessor definition: Types::PolicyDefinitionDetail
+      attr_accessor created_date: ::Time
+      attr_accessor last_updated_date: ::Time
+      SENSITIVE: []
+    end
+
+    class GetPolicyStoreInput
+      attr_accessor policy_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicyStoreOutput
+      attr_accessor policy_store_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor validation_settings: Types::ValidationSettings
+      attr_accessor created_date: ::Time
+      attr_accessor last_updated_date: ::Time
+      attr_accessor description: ::String
+      SENSITIVE: [:description]
+    end
+
+    class GetPolicyTemplateInput
+      attr_accessor policy_store_id: ::String
+      attr_accessor policy_template_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicyTemplateOutput
+      attr_accessor policy_store_id: ::String
+      attr_accessor policy_template_id: ::String
+      attr_accessor description: ::String
+      attr_accessor statement: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor last_updated_date: ::Time
+      SENSITIVE: [:description, :statement]
+    end
+
+    class GetSchemaInput
+      attr_accessor policy_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSchemaOutput
+      attr_accessor policy_store_id: ::String
+      attr_accessor schema: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor last_updated_date: ::Time
+      attr_accessor namespaces: ::Array[::String]
+      SENSITIVE: [:schema]
+    end
+
+    class IdentitySourceDetails
+      attr_accessor client_ids: ::Array[::String]
+      attr_accessor user_pool_arn: ::String
+      attr_accessor discovery_url: ::String
+      attr_accessor open_id_issuer: ("COGNITO")
+      SENSITIVE: []
+    end
+
+    class IdentitySourceFilter
+      attr_accessor principal_entity_type: ::String
+      SENSITIVE: [:principal_entity_type]
+    end
+
+    class IdentitySourceItem
+      attr_accessor created_date: ::Time
+      attr_accessor details: Types::IdentitySourceItemDetails
+      attr_accessor identity_source_id: ::String
+      attr_accessor last_updated_date: ::Time
+      attr_accessor policy_store_id: ::String
+      attr_accessor principal_entity_type: ::String
+      SENSITIVE: [:principal_entity_type]
+    end
+
+    class IdentitySourceItemDetails
+      attr_accessor client_ids: ::Array[::String]
+      attr_accessor user_pool_arn: ::String
+      attr_accessor discovery_url: ::String
+      attr_accessor open_id_issuer: ("COGNITO")
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IsAuthorizedInput
+      attr_accessor policy_store_id: ::String
+      attr_accessor principal: Types::EntityIdentifier
+      attr_accessor action: Types::ActionIdentifier
+      attr_accessor resource: Types::EntityIdentifier
+      attr_accessor context: Types::ContextDefinition
+      attr_accessor entities: Types::EntitiesDefinition
+      SENSITIVE: []
+    end
+
+    class IsAuthorizedOutput
+      attr_accessor decision: ("ALLOW" | "DENY")
+      attr_accessor determining_policies: ::Array[Types::DeterminingPolicyItem]
+      attr_accessor errors: ::Array[Types::EvaluationErrorItem]
+      SENSITIVE: []
+    end
+
+    class IsAuthorizedWithTokenInput
+      attr_accessor policy_store_id: ::String
+      attr_accessor identity_token: ::String
+      attr_accessor access_token: ::String
+      attr_accessor action: Types::ActionIdentifier
+      attr_accessor resource: Types::EntityIdentifier
+      attr_accessor context: Types::ContextDefinition
+      attr_accessor entities: Types::EntitiesDefinition
+      SENSITIVE: [:identity_token, :access_token]
+    end
+
+    class IsAuthorizedWithTokenOutput
+      attr_accessor decision: ("ALLOW" | "DENY")
+      attr_accessor determining_policies: ::Array[Types::DeterminingPolicyItem]
+      attr_accessor errors: ::Array[Types::EvaluationErrorItem]
+      SENSITIVE: []
+    end
+
+    class ListIdentitySourcesInput
+      attr_accessor policy_store_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::IdentitySourceFilter]
+      SENSITIVE: []
+    end
+
+    class ListIdentitySourcesOutput
+      attr_accessor next_token: ::String
+      attr_accessor identity_sources: ::Array[Types::IdentitySourceItem]
+      SENSITIVE: []
+    end
+
+    class ListPoliciesInput
+      attr_accessor policy_store_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filter: Types::PolicyFilter
+      SENSITIVE: []
+    end
+
+    class ListPoliciesOutput
+      attr_accessor next_token: ::String
+      attr_accessor policies: ::Array[Types::PolicyItem]
+      SENSITIVE: []
+    end
+
+    class ListPolicyStoresInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPolicyStoresOutput
+      attr_accessor next_token: ::String
+      attr_accessor policy_stores: ::Array[Types::PolicyStoreItem]
+      SENSITIVE: []
+    end
+
+    class ListPolicyTemplatesInput
+      attr_accessor policy_store_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPolicyTemplatesOutput
+      attr_accessor next_token: ::String
+      attr_accessor policy_templates: ::Array[Types::PolicyTemplateItem]
+      SENSITIVE: []
+    end
+
+    class PolicyDefinition
+      attr_accessor static: Types::StaticPolicyDefinition
+      attr_accessor template_linked: Types::TemplateLinkedPolicyDefinition
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Static < PolicyDefinition
+      end
+      class TemplateLinked < PolicyDefinition
+      end
+      class Unknown < PolicyDefinition
+      end
+    end
+
+    class PolicyDefinitionDetail
+      attr_accessor static: Types::StaticPolicyDefinitionDetail
+      attr_accessor template_linked: Types::TemplateLinkedPolicyDefinitionDetail
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Static < PolicyDefinitionDetail
+      end
+      class TemplateLinked < PolicyDefinitionDetail
+      end
+      class Unknown < PolicyDefinitionDetail
+      end
+    end
+
+    class PolicyDefinitionItem
+      attr_accessor static: Types::StaticPolicyDefinitionItem
+      attr_accessor template_linked: Types::TemplateLinkedPolicyDefinitionItem
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Static < PolicyDefinitionItem
+      end
+      class TemplateLinked < PolicyDefinitionItem
+      end
+      class Unknown < PolicyDefinitionItem
+      end
+    end
+
+    class PolicyFilter
+      attr_accessor principal: Types::EntityReference
+      attr_accessor resource: Types::EntityReference
+      attr_accessor policy_type: ("STATIC" | "TEMPLATE_LINKED")
+      attr_accessor policy_template_id: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyItem
+      attr_accessor policy_store_id: ::String
+      attr_accessor policy_id: ::String
+      attr_accessor policy_type: ("STATIC" | "TEMPLATE_LINKED")
+      attr_accessor principal: Types::EntityIdentifier
+      attr_accessor resource: Types::EntityIdentifier
+      attr_accessor definition: Types::PolicyDefinitionItem
+      attr_accessor created_date: ::Time
+      attr_accessor last_updated_date: ::Time
+      SENSITIVE: []
+    end
+
+    class PolicyStoreItem
+      attr_accessor policy_store_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor last_updated_date: ::Time
+      attr_accessor description: ::String
+      SENSITIVE: [:description]
+    end
+
+    class PolicyTemplateItem
+      attr_accessor policy_store_id: ::String
+      attr_accessor policy_template_id: ::String
+      attr_accessor description: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor last_updated_date: ::Time
+      SENSITIVE: [:description]
+    end
+
+    class PutSchemaInput
+      attr_accessor policy_store_id: ::String
+      attr_accessor definition: Types::SchemaDefinition
+      SENSITIVE: []
+    end
+
+    class PutSchemaOutput
+      attr_accessor policy_store_id: ::String
+      attr_accessor namespaces: ::Array[::String]
+      attr_accessor created_date: ::Time
+      attr_accessor last_updated_date: ::Time
+      SENSITIVE: []
+    end
+
+    class ResourceConflict
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("IDENTITY_SOURCE" | "POLICY_STORE" | "POLICY" | "POLICY_TEMPLATE" | "SCHEMA")
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("IDENTITY_SOURCE" | "POLICY_STORE" | "POLICY" | "POLICY_TEMPLATE" | "SCHEMA")
+      SENSITIVE: []
+    end
+
+    class SchemaDefinition
+      attr_accessor cedar_json: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: [:cedar_json]
+
+      class CedarJson < SchemaDefinition
+      end
+      class Unknown < SchemaDefinition
+      end
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("IDENTITY_SOURCE" | "POLICY_STORE" | "POLICY" | "POLICY_TEMPLATE" | "SCHEMA")
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class StaticPolicyDefinition
+      attr_accessor description: ::String
+      attr_accessor statement: ::String
+      SENSITIVE: [:description, :statement]
+    end
+
+    class StaticPolicyDefinitionDetail
+      attr_accessor description: ::String
+      attr_accessor statement: ::String
+      SENSITIVE: [:description, :statement]
+    end
+
+    class StaticPolicyDefinitionItem
+      attr_accessor description: ::String
+      SENSITIVE: [:description]
+    end
+
+    class TemplateLinkedPolicyDefinition
+      attr_accessor policy_template_id: ::String
+      attr_accessor principal: Types::EntityIdentifier
+      attr_accessor resource: Types::EntityIdentifier
+      SENSITIVE: []
+    end
+
+    class TemplateLinkedPolicyDefinitionDetail
+      attr_accessor policy_template_id: ::String
+      attr_accessor principal: Types::EntityIdentifier
+      attr_accessor resource: Types::EntityIdentifier
+      SENSITIVE: []
+    end
+
+    class TemplateLinkedPolicyDefinitionItem
+      attr_accessor policy_template_id: ::String
+      attr_accessor principal: Types::EntityIdentifier
+      attr_accessor resource: Types::EntityIdentifier
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCognitoUserPoolConfiguration
+      attr_accessor user_pool_arn: ::String
+      attr_accessor client_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateConfiguration
+      attr_accessor cognito_user_pool_configuration: Types::UpdateCognitoUserPoolConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CognitoUserPoolConfiguration < UpdateConfiguration
+      end
+      class Unknown < UpdateConfiguration
+      end
+    end
+
+    class UpdateIdentitySourceInput
+      attr_accessor policy_store_id: ::String
+      attr_accessor identity_source_id: ::String
+      attr_accessor update_configuration: Types::UpdateConfiguration
+      attr_accessor principal_entity_type: ::String
+      SENSITIVE: [:principal_entity_type]
+    end
+
+    class UpdateIdentitySourceOutput
+      attr_accessor created_date: ::Time
+      attr_accessor identity_source_id: ::String
+      attr_accessor last_updated_date: ::Time
+      attr_accessor policy_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePolicyDefinition
+      attr_accessor static: Types::UpdateStaticPolicyDefinition
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Static < UpdatePolicyDefinition
+      end
+      class Unknown < UpdatePolicyDefinition
+      end
+    end
+
+    class UpdatePolicyInput
+      attr_accessor policy_store_id: ::String
+      attr_accessor policy_id: ::String
+      attr_accessor definition: Types::UpdatePolicyDefinition
+      SENSITIVE: []
+    end
+
+    class UpdatePolicyOutput
+      attr_accessor policy_store_id: ::String
+      attr_accessor policy_id: ::String
+      attr_accessor policy_type: ("STATIC" | "TEMPLATE_LINKED")
+      attr_accessor principal: Types::EntityIdentifier
+      attr_accessor resource: Types::EntityIdentifier
+      attr_accessor created_date: ::Time
+      attr_accessor last_updated_date: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdatePolicyStoreInput
+      attr_accessor policy_store_id: ::String
+      attr_accessor validation_settings: Types::ValidationSettings
+      attr_accessor description: ::String
+      SENSITIVE: [:description]
+    end
+
+    class UpdatePolicyStoreOutput
+      attr_accessor policy_store_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor last_updated_date: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdatePolicyTemplateInput
+      attr_accessor policy_store_id: ::String
+      attr_accessor policy_template_id: ::String
+      attr_accessor description: ::String
+      attr_accessor statement: ::String
+      SENSITIVE: [:description, :statement]
+    end
+
+    class UpdatePolicyTemplateOutput
+      attr_accessor policy_store_id: ::String
+      attr_accessor policy_template_id: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor last_updated_date: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateStaticPolicyDefinition
+      attr_accessor description: ::String
+      attr_accessor statement: ::String
+      SENSITIVE: [:description, :statement]
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor path: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationSettings
+      attr_accessor mode: ("OFF" | "STRICT")
+      SENSITIVE: []
+    end
+  end
+end

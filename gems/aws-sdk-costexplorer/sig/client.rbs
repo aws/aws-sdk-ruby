@@ -1,0 +1,1293 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CostExplorer
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateAnomalyMonitorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAnomalyMonitorResponse]
+        def monitor_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#create_anomaly_monitor-instance_method
+      def create_anomaly_monitor: (
+                                    anomaly_monitor: {
+                                      monitor_arn: ::String?,
+                                      monitor_name: ::String,
+                                      creation_date: ::String?,
+                                      last_updated_date: ::String?,
+                                      last_evaluated_date: ::String?,
+                                      monitor_type: ("DIMENSIONAL" | "CUSTOM"),
+                                      monitor_dimension: ("SERVICE")?,
+                                      monitor_specification: {
+                                        or: Array[
+                                          untyped,
+                                        ]?,
+                                        and: Array[
+                                          untyped,
+                                        ]?,
+                                        not: untyped?,
+                                        dimensions: {
+                                          key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")?,
+                                          values: Array[::String]?,
+                                          match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                        }?,
+                                        tags: {
+                                          key: ::String?,
+                                          values: Array[::String]?,
+                                          match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                        }?,
+                                        cost_categories: {
+                                          key: ::String?,
+                                          values: Array[::String]?,
+                                          match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                        }?
+                                      }?,
+                                      dimensional_value_count: ::Integer?
+                                    },
+                                    ?resource_tags: Array[
+                                      {
+                                        key: ::String,
+                                        value: ::String
+                                      },
+                                    ]
+                                  ) -> _CreateAnomalyMonitorResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAnomalyMonitorResponseSuccess
+
+      interface _CreateAnomalySubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAnomalySubscriptionResponse]
+        def subscription_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#create_anomaly_subscription-instance_method
+      def create_anomaly_subscription: (
+                                         anomaly_subscription: {
+                                           subscription_arn: ::String?,
+                                           account_id: ::String?,
+                                           monitor_arn_list: Array[::String],
+                                           subscribers: Array[
+                                             {
+                                               address: ::String?,
+                                               type: ("EMAIL" | "SNS")?,
+                                               status: ("CONFIRMED" | "DECLINED")?
+                                             },
+                                           ],
+                                           threshold: ::Float?,
+                                           frequency: ("DAILY" | "IMMEDIATE" | "WEEKLY"),
+                                           subscription_name: ::String,
+                                           threshold_expression: {
+                                             or: Array[
+                                               untyped,
+                                             ]?,
+                                             and: Array[
+                                               untyped,
+                                             ]?,
+                                             not: untyped?,
+                                             dimensions: {
+                                               key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")?,
+                                               values: Array[::String]?,
+                                               match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                             }?,
+                                             tags: {
+                                               key: ::String?,
+                                               values: Array[::String]?,
+                                               match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                             }?,
+                                             cost_categories: {
+                                               key: ::String?,
+                                               values: Array[::String]?,
+                                               match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                             }?
+                                           }?
+                                         },
+                                         ?resource_tags: Array[
+                                           {
+                                             key: ::String,
+                                             value: ::String
+                                           },
+                                         ]
+                                       ) -> _CreateAnomalySubscriptionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAnomalySubscriptionResponseSuccess
+
+      interface _CreateCostCategoryDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCostCategoryDefinitionResponse]
+        def cost_category_arn: () -> ::String
+        def effective_start: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#create_cost_category_definition-instance_method
+      def create_cost_category_definition: (
+                                             name: ::String,
+                                             ?effective_start: ::String,
+                                             rule_version: ("CostCategoryExpression.v1"),
+                                             rules: Array[
+                                               {
+                                                 value: ::String?,
+                                                 rule: {
+                                                   or: Array[
+                                                     untyped,
+                                                   ]?,
+                                                   and: Array[
+                                                     untyped,
+                                                   ]?,
+                                                   not: untyped?,
+                                                   dimensions: {
+                                                     key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")?,
+                                                     values: Array[::String]?,
+                                                     match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                                   }?,
+                                                   tags: {
+                                                     key: ::String?,
+                                                     values: Array[::String]?,
+                                                     match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                                   }?,
+                                                   cost_categories: {
+                                                     key: ::String?,
+                                                     values: Array[::String]?,
+                                                     match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                                   }?
+                                                 }?,
+                                                 inherited_value: {
+                                                   dimension_name: ("LINKED_ACCOUNT_NAME" | "TAG")?,
+                                                   dimension_key: ::String?
+                                                 }?,
+                                                 type: ("REGULAR" | "INHERITED_VALUE")?
+                                               },
+                                             ],
+                                             ?default_value: ::String,
+                                             ?split_charge_rules: Array[
+                                               {
+                                                 source: ::String,
+                                                 targets: Array[::String],
+                                                 method: ("FIXED" | "PROPORTIONAL" | "EVEN"),
+                                                 parameters: Array[
+                                                   {
+                                                     type: ("ALLOCATION_PERCENTAGES"),
+                                                     values: Array[::String]
+                                                   },
+                                                 ]?
+                                               },
+                                             ],
+                                             ?resource_tags: Array[
+                                               {
+                                                 key: ::String,
+                                                 value: ::String
+                                               },
+                                             ]
+                                           ) -> _CreateCostCategoryDefinitionResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCostCategoryDefinitionResponseSuccess
+
+      interface _DeleteAnomalyMonitorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAnomalyMonitorResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#delete_anomaly_monitor-instance_method
+      def delete_anomaly_monitor: (
+                                    monitor_arn: ::String
+                                  ) -> _DeleteAnomalyMonitorResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAnomalyMonitorResponseSuccess
+
+      interface _DeleteAnomalySubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAnomalySubscriptionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#delete_anomaly_subscription-instance_method
+      def delete_anomaly_subscription: (
+                                         subscription_arn: ::String
+                                       ) -> _DeleteAnomalySubscriptionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAnomalySubscriptionResponseSuccess
+
+      interface _DeleteCostCategoryDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCostCategoryDefinitionResponse]
+        def cost_category_arn: () -> ::String
+        def effective_end: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#delete_cost_category_definition-instance_method
+      def delete_cost_category_definition: (
+                                             cost_category_arn: ::String
+                                           ) -> _DeleteCostCategoryDefinitionResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCostCategoryDefinitionResponseSuccess
+
+      interface _DescribeCostCategoryDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCostCategoryDefinitionResponse]
+        def cost_category: () -> Types::CostCategory
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#describe_cost_category_definition-instance_method
+      def describe_cost_category_definition: (
+                                               cost_category_arn: ::String,
+                                               ?effective_on: ::String
+                                             ) -> _DescribeCostCategoryDefinitionResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCostCategoryDefinitionResponseSuccess
+
+      interface _GetAnomaliesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAnomaliesResponse]
+        def anomalies: () -> ::Array[Types::Anomaly]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_anomalies-instance_method
+      def get_anomalies: (
+                           ?monitor_arn: ::String,
+                           date_interval: {
+                             start_date: ::String,
+                             end_date: ::String?
+                           },
+                           ?feedback: ("YES" | "NO" | "PLANNED_ACTIVITY"),
+                           ?total_impact: {
+                             numeric_operator: ("EQUAL" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN" | "LESS_THAN" | "BETWEEN"),
+                             start_value: ::Float,
+                             end_value: ::Float?
+                           },
+                           ?next_page_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _GetAnomaliesResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAnomaliesResponseSuccess
+
+      interface _GetAnomalyMonitorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAnomalyMonitorsResponse]
+        def anomaly_monitors: () -> ::Array[Types::AnomalyMonitor]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_anomaly_monitors-instance_method
+      def get_anomaly_monitors: (
+                                  ?monitor_arn_list: Array[::String],
+                                  ?next_page_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _GetAnomalyMonitorsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAnomalyMonitorsResponseSuccess
+
+      interface _GetAnomalySubscriptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAnomalySubscriptionsResponse]
+        def anomaly_subscriptions: () -> ::Array[Types::AnomalySubscription]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_anomaly_subscriptions-instance_method
+      def get_anomaly_subscriptions: (
+                                       ?subscription_arn_list: Array[::String],
+                                       ?monitor_arn: ::String,
+                                       ?next_page_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _GetAnomalySubscriptionsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAnomalySubscriptionsResponseSuccess
+
+      interface _GetCostAndUsageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCostAndUsageResponse]
+        def next_page_token: () -> ::String
+        def group_definitions: () -> ::Array[Types::GroupDefinition]
+        def results_by_time: () -> ::Array[Types::ResultByTime]
+        def dimension_value_attributes: () -> ::Array[Types::DimensionValuesWithAttributes]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_cost_and_usage-instance_method
+      def get_cost_and_usage: (
+                                time_period: {
+                                  start: ::String,
+                                  end: ::String
+                                },
+                                granularity: ("DAILY" | "MONTHLY" | "HOURLY"),
+                                ?filter: {
+                                  or: Array[
+                                    untyped,
+                                  ]?,
+                                  and: Array[
+                                    untyped,
+                                  ]?,
+                                  not: untyped?,
+                                  dimensions: {
+                                    key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")?,
+                                    values: Array[::String]?,
+                                    match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                  }?,
+                                  tags: {
+                                    key: ::String?,
+                                    values: Array[::String]?,
+                                    match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                  }?,
+                                  cost_categories: {
+                                    key: ::String?,
+                                    values: Array[::String]?,
+                                    match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                  }?
+                                },
+                                metrics: Array[::String],
+                                ?group_by: Array[
+                                  {
+                                    type: ("DIMENSION" | "TAG" | "COST_CATEGORY")?,
+                                    key: ::String?
+                                  },
+                                ],
+                                ?next_page_token: ::String
+                              ) -> _GetCostAndUsageResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCostAndUsageResponseSuccess
+
+      interface _GetCostAndUsageWithResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCostAndUsageWithResourcesResponse]
+        def next_page_token: () -> ::String
+        def group_definitions: () -> ::Array[Types::GroupDefinition]
+        def results_by_time: () -> ::Array[Types::ResultByTime]
+        def dimension_value_attributes: () -> ::Array[Types::DimensionValuesWithAttributes]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_cost_and_usage_with_resources-instance_method
+      def get_cost_and_usage_with_resources: (
+                                               time_period: {
+                                                 start: ::String,
+                                                 end: ::String
+                                               },
+                                               granularity: ("DAILY" | "MONTHLY" | "HOURLY"),
+                                               filter: {
+                                                 or: Array[
+                                                   untyped,
+                                                 ]?,
+                                                 and: Array[
+                                                   untyped,
+                                                 ]?,
+                                                 not: untyped?,
+                                                 dimensions: {
+                                                   key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")?,
+                                                   values: Array[::String]?,
+                                                   match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                                 }?,
+                                                 tags: {
+                                                   key: ::String?,
+                                                   values: Array[::String]?,
+                                                   match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                                 }?,
+                                                 cost_categories: {
+                                                   key: ::String?,
+                                                   values: Array[::String]?,
+                                                   match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                                 }?
+                                               },
+                                               ?metrics: Array[::String],
+                                               ?group_by: Array[
+                                                 {
+                                                   type: ("DIMENSION" | "TAG" | "COST_CATEGORY")?,
+                                                   key: ::String?
+                                                 },
+                                               ],
+                                               ?next_page_token: ::String
+                                             ) -> _GetCostAndUsageWithResourcesResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCostAndUsageWithResourcesResponseSuccess
+
+      interface _GetCostCategoriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCostCategoriesResponse]
+        def next_page_token: () -> ::String
+        def cost_category_names: () -> ::Array[::String]
+        def cost_category_values: () -> ::Array[::String]
+        def return_size: () -> ::Integer
+        def total_size: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_cost_categories-instance_method
+      def get_cost_categories: (
+                                 ?search_string: ::String,
+                                 time_period: {
+                                   start: ::String,
+                                   end: ::String
+                                 },
+                                 ?cost_category_name: ::String,
+                                 ?filter: {
+                                   or: Array[
+                                     untyped,
+                                   ]?,
+                                   and: Array[
+                                     untyped,
+                                   ]?,
+                                   not: untyped?,
+                                   dimensions: {
+                                     key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")?,
+                                     values: Array[::String]?,
+                                     match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                   }?,
+                                   tags: {
+                                     key: ::String?,
+                                     values: Array[::String]?,
+                                     match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                   }?,
+                                   cost_categories: {
+                                     key: ::String?,
+                                     values: Array[::String]?,
+                                     match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                   }?
+                                 },
+                                 ?sort_by: Array[
+                                   {
+                                     key: ::String,
+                                     sort_order: ("ASCENDING" | "DESCENDING")?
+                                   },
+                                 ],
+                                 ?max_results: ::Integer,
+                                 ?next_page_token: ::String
+                               ) -> _GetCostCategoriesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCostCategoriesResponseSuccess
+
+      interface _GetCostForecastResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCostForecastResponse]
+        def total: () -> Types::MetricValue
+        def forecast_results_by_time: () -> ::Array[Types::ForecastResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_cost_forecast-instance_method
+      def get_cost_forecast: (
+                               time_period: {
+                                 start: ::String,
+                                 end: ::String
+                               },
+                               metric: ("BLENDED_COST" | "UNBLENDED_COST" | "AMORTIZED_COST" | "NET_UNBLENDED_COST" | "NET_AMORTIZED_COST" | "USAGE_QUANTITY" | "NORMALIZED_USAGE_AMOUNT"),
+                               granularity: ("DAILY" | "MONTHLY" | "HOURLY"),
+                               ?filter: {
+                                 or: Array[
+                                   untyped,
+                                 ]?,
+                                 and: Array[
+                                   untyped,
+                                 ]?,
+                                 not: untyped?,
+                                 dimensions: {
+                                   key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")?,
+                                   values: Array[::String]?,
+                                   match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                 }?,
+                                 tags: {
+                                   key: ::String?,
+                                   values: Array[::String]?,
+                                   match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                 }?,
+                                 cost_categories: {
+                                   key: ::String?,
+                                   values: Array[::String]?,
+                                   match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                 }?
+                               },
+                               ?prediction_interval_level: ::Integer
+                             ) -> _GetCostForecastResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCostForecastResponseSuccess
+
+      interface _GetDimensionValuesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDimensionValuesResponse]
+        def dimension_values: () -> ::Array[Types::DimensionValuesWithAttributes]
+        def return_size: () -> ::Integer
+        def total_size: () -> ::Integer
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_dimension_values-instance_method
+      def get_dimension_values: (
+                                  ?search_string: ::String,
+                                  time_period: {
+                                    start: ::String,
+                                    end: ::String
+                                  },
+                                  dimension: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE"),
+                                  ?context: ("COST_AND_USAGE" | "RESERVATIONS" | "SAVINGS_PLANS"),
+                                  ?filter: {
+                                    or: Array[
+                                      untyped,
+                                    ]?,
+                                    and: Array[
+                                      untyped,
+                                    ]?,
+                                    not: untyped?,
+                                    dimensions: {
+                                      key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")?,
+                                      values: Array[::String]?,
+                                      match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                    }?,
+                                    tags: {
+                                      key: ::String?,
+                                      values: Array[::String]?,
+                                      match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                    }?,
+                                    cost_categories: {
+                                      key: ::String?,
+                                      values: Array[::String]?,
+                                      match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                    }?
+                                  },
+                                  ?sort_by: Array[
+                                    {
+                                      key: ::String,
+                                      sort_order: ("ASCENDING" | "DESCENDING")?
+                                    },
+                                  ],
+                                  ?max_results: ::Integer,
+                                  ?next_page_token: ::String
+                                ) -> _GetDimensionValuesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDimensionValuesResponseSuccess
+
+      interface _GetReservationCoverageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReservationCoverageResponse]
+        def coverages_by_time: () -> ::Array[Types::CoverageByTime]
+        def total: () -> Types::Coverage
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_reservation_coverage-instance_method
+      def get_reservation_coverage: (
+                                      time_period: {
+                                        start: ::String,
+                                        end: ::String
+                                      },
+                                      ?group_by: Array[
+                                        {
+                                          type: ("DIMENSION" | "TAG" | "COST_CATEGORY")?,
+                                          key: ::String?
+                                        },
+                                      ],
+                                      ?granularity: ("DAILY" | "MONTHLY" | "HOURLY"),
+                                      ?filter: {
+                                        or: Array[
+                                          untyped,
+                                        ]?,
+                                        and: Array[
+                                          untyped,
+                                        ]?,
+                                        not: untyped?,
+                                        dimensions: {
+                                          key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")?,
+                                          values: Array[::String]?,
+                                          match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                        }?,
+                                        tags: {
+                                          key: ::String?,
+                                          values: Array[::String]?,
+                                          match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                        }?,
+                                        cost_categories: {
+                                          key: ::String?,
+                                          values: Array[::String]?,
+                                          match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                        }?
+                                      },
+                                      ?metrics: Array[::String],
+                                      ?next_page_token: ::String,
+                                      ?sort_by: {
+                                        key: ::String,
+                                        sort_order: ("ASCENDING" | "DESCENDING")?
+                                      },
+                                      ?max_results: ::Integer
+                                    ) -> _GetReservationCoverageResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReservationCoverageResponseSuccess
+
+      interface _GetReservationPurchaseRecommendationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReservationPurchaseRecommendationResponse]
+        def metadata: () -> Types::ReservationPurchaseRecommendationMetadata
+        def recommendations: () -> ::Array[Types::ReservationPurchaseRecommendation]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_reservation_purchase_recommendation-instance_method
+      def get_reservation_purchase_recommendation: (
+                                                     ?account_id: ::String,
+                                                     service: ::String,
+                                                     ?filter: {
+                                                       or: Array[
+                                                         untyped,
+                                                       ]?,
+                                                       and: Array[
+                                                         untyped,
+                                                       ]?,
+                                                       not: untyped?,
+                                                       dimensions: {
+                                                         key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")?,
+                                                         values: Array[::String]?,
+                                                         match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                                       }?,
+                                                       tags: {
+                                                         key: ::String?,
+                                                         values: Array[::String]?,
+                                                         match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                                       }?,
+                                                       cost_categories: {
+                                                         key: ::String?,
+                                                         values: Array[::String]?,
+                                                         match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                                       }?
+                                                     },
+                                                     ?account_scope: ("PAYER" | "LINKED"),
+                                                     ?lookback_period_in_days: ("SEVEN_DAYS" | "THIRTY_DAYS" | "SIXTY_DAYS"),
+                                                     ?term_in_years: ("ONE_YEAR" | "THREE_YEARS"),
+                                                     ?payment_option: ("NO_UPFRONT" | "PARTIAL_UPFRONT" | "ALL_UPFRONT" | "LIGHT_UTILIZATION" | "MEDIUM_UTILIZATION" | "HEAVY_UTILIZATION"),
+                                                     ?service_specification: {
+                                                       ec2_specification: {
+                                                         offering_class: ("STANDARD" | "CONVERTIBLE")?
+                                                       }?
+                                                     },
+                                                     ?page_size: ::Integer,
+                                                     ?next_page_token: ::String
+                                                   ) -> _GetReservationPurchaseRecommendationResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReservationPurchaseRecommendationResponseSuccess
+
+      interface _GetReservationUtilizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReservationUtilizationResponse]
+        def utilizations_by_time: () -> ::Array[Types::UtilizationByTime]
+        def total: () -> Types::ReservationAggregates
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_reservation_utilization-instance_method
+      def get_reservation_utilization: (
+                                         time_period: {
+                                           start: ::String,
+                                           end: ::String
+                                         },
+                                         ?group_by: Array[
+                                           {
+                                             type: ("DIMENSION" | "TAG" | "COST_CATEGORY")?,
+                                             key: ::String?
+                                           },
+                                         ],
+                                         ?granularity: ("DAILY" | "MONTHLY" | "HOURLY"),
+                                         ?filter: {
+                                           or: Array[
+                                             untyped,
+                                           ]?,
+                                           and: Array[
+                                             untyped,
+                                           ]?,
+                                           not: untyped?,
+                                           dimensions: {
+                                             key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")?,
+                                             values: Array[::String]?,
+                                             match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                           }?,
+                                           tags: {
+                                             key: ::String?,
+                                             values: Array[::String]?,
+                                             match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                           }?,
+                                           cost_categories: {
+                                             key: ::String?,
+                                             values: Array[::String]?,
+                                             match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                           }?
+                                         },
+                                         ?sort_by: {
+                                           key: ::String,
+                                           sort_order: ("ASCENDING" | "DESCENDING")?
+                                         },
+                                         ?next_page_token: ::String,
+                                         ?max_results: ::Integer
+                                       ) -> _GetReservationUtilizationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReservationUtilizationResponseSuccess
+
+      interface _GetRightsizingRecommendationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRightsizingRecommendationResponse]
+        def metadata: () -> Types::RightsizingRecommendationMetadata
+        def summary: () -> Types::RightsizingRecommendationSummary
+        def rightsizing_recommendations: () -> ::Array[Types::RightsizingRecommendation]
+        def next_page_token: () -> ::String
+        def configuration: () -> Types::RightsizingRecommendationConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_rightsizing_recommendation-instance_method
+      def get_rightsizing_recommendation: (
+                                            ?filter: {
+                                              or: Array[
+                                                untyped,
+                                              ]?,
+                                              and: Array[
+                                                untyped,
+                                              ]?,
+                                              not: untyped?,
+                                              dimensions: {
+                                                key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")?,
+                                                values: Array[::String]?,
+                                                match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                              }?,
+                                              tags: {
+                                                key: ::String?,
+                                                values: Array[::String]?,
+                                                match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                              }?,
+                                              cost_categories: {
+                                                key: ::String?,
+                                                values: Array[::String]?,
+                                                match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                              }?
+                                            },
+                                            ?configuration: {
+                                              recommendation_target: ("SAME_INSTANCE_FAMILY" | "CROSS_INSTANCE_FAMILY"),
+                                              benefits_considered: bool
+                                            },
+                                            service: ::String,
+                                            ?page_size: ::Integer,
+                                            ?next_page_token: ::String
+                                          ) -> _GetRightsizingRecommendationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRightsizingRecommendationResponseSuccess
+
+      interface _GetSavingsPlanPurchaseRecommendationDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSavingsPlanPurchaseRecommendationDetailsResponse]
+        def recommendation_detail_id: () -> ::String
+        def recommendation_detail_data: () -> Types::RecommendationDetailData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_savings_plan_purchase_recommendation_details-instance_method
+      def get_savings_plan_purchase_recommendation_details: (
+                                                              recommendation_detail_id: ::String
+                                                            ) -> _GetSavingsPlanPurchaseRecommendationDetailsResponseSuccess
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSavingsPlanPurchaseRecommendationDetailsResponseSuccess
+
+      interface _GetSavingsPlansCoverageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSavingsPlansCoverageResponse]
+        def savings_plans_coverages: () -> ::Array[Types::SavingsPlansCoverage]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_savings_plans_coverage-instance_method
+      def get_savings_plans_coverage: (
+                                        time_period: {
+                                          start: ::String,
+                                          end: ::String
+                                        },
+                                        ?group_by: Array[
+                                          {
+                                            type: ("DIMENSION" | "TAG" | "COST_CATEGORY")?,
+                                            key: ::String?
+                                          },
+                                        ],
+                                        ?granularity: ("DAILY" | "MONTHLY" | "HOURLY"),
+                                        ?filter: {
+                                          or: Array[
+                                            untyped,
+                                          ]?,
+                                          and: Array[
+                                            untyped,
+                                          ]?,
+                                          not: untyped?,
+                                          dimensions: {
+                                            key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")?,
+                                            values: Array[::String]?,
+                                            match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                          }?,
+                                          tags: {
+                                            key: ::String?,
+                                            values: Array[::String]?,
+                                            match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                          }?,
+                                          cost_categories: {
+                                            key: ::String?,
+                                            values: Array[::String]?,
+                                            match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                          }?
+                                        },
+                                        ?metrics: Array[::String],
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer,
+                                        ?sort_by: {
+                                          key: ::String,
+                                          sort_order: ("ASCENDING" | "DESCENDING")?
+                                        }
+                                      ) -> _GetSavingsPlansCoverageResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSavingsPlansCoverageResponseSuccess
+
+      interface _GetSavingsPlansPurchaseRecommendationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSavingsPlansPurchaseRecommendationResponse]
+        def metadata: () -> Types::SavingsPlansPurchaseRecommendationMetadata
+        def savings_plans_purchase_recommendation: () -> Types::SavingsPlansPurchaseRecommendation
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_savings_plans_purchase_recommendation-instance_method
+      def get_savings_plans_purchase_recommendation: (
+                                                       savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP"),
+                                                       term_in_years: ("ONE_YEAR" | "THREE_YEARS"),
+                                                       payment_option: ("NO_UPFRONT" | "PARTIAL_UPFRONT" | "ALL_UPFRONT" | "LIGHT_UTILIZATION" | "MEDIUM_UTILIZATION" | "HEAVY_UTILIZATION"),
+                                                       ?account_scope: ("PAYER" | "LINKED"),
+                                                       ?next_page_token: ::String,
+                                                       ?page_size: ::Integer,
+                                                       lookback_period_in_days: ("SEVEN_DAYS" | "THIRTY_DAYS" | "SIXTY_DAYS"),
+                                                       ?filter: {
+                                                         or: Array[
+                                                           untyped,
+                                                         ]?,
+                                                         and: Array[
+                                                           untyped,
+                                                         ]?,
+                                                         not: untyped?,
+                                                         dimensions: {
+                                                           key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")?,
+                                                           values: Array[::String]?,
+                                                           match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                                         }?,
+                                                         tags: {
+                                                           key: ::String?,
+                                                           values: Array[::String]?,
+                                                           match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                                         }?,
+                                                         cost_categories: {
+                                                           key: ::String?,
+                                                           values: Array[::String]?,
+                                                           match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                                         }?
+                                                       }
+                                                     ) -> _GetSavingsPlansPurchaseRecommendationResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSavingsPlansPurchaseRecommendationResponseSuccess
+
+      interface _GetSavingsPlansUtilizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSavingsPlansUtilizationResponse]
+        def savings_plans_utilizations_by_time: () -> ::Array[Types::SavingsPlansUtilizationByTime]
+        def total: () -> Types::SavingsPlansUtilizationAggregates
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_savings_plans_utilization-instance_method
+      def get_savings_plans_utilization: (
+                                           time_period: {
+                                             start: ::String,
+                                             end: ::String
+                                           },
+                                           ?granularity: ("DAILY" | "MONTHLY" | "HOURLY"),
+                                           ?filter: {
+                                             or: Array[
+                                               untyped,
+                                             ]?,
+                                             and: Array[
+                                               untyped,
+                                             ]?,
+                                             not: untyped?,
+                                             dimensions: {
+                                               key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")?,
+                                               values: Array[::String]?,
+                                               match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                             }?,
+                                             tags: {
+                                               key: ::String?,
+                                               values: Array[::String]?,
+                                               match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                             }?,
+                                             cost_categories: {
+                                               key: ::String?,
+                                               values: Array[::String]?,
+                                               match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                             }?
+                                           },
+                                           ?sort_by: {
+                                             key: ::String,
+                                             sort_order: ("ASCENDING" | "DESCENDING")?
+                                           }
+                                         ) -> _GetSavingsPlansUtilizationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSavingsPlansUtilizationResponseSuccess
+
+      interface _GetSavingsPlansUtilizationDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSavingsPlansUtilizationDetailsResponse]
+        def savings_plans_utilization_details: () -> ::Array[Types::SavingsPlansUtilizationDetail]
+        def total: () -> Types::SavingsPlansUtilizationAggregates
+        def time_period: () -> Types::DateInterval
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_savings_plans_utilization_details-instance_method
+      def get_savings_plans_utilization_details: (
+                                                   time_period: {
+                                                     start: ::String,
+                                                     end: ::String
+                                                   },
+                                                   ?filter: {
+                                                     or: Array[
+                                                       untyped,
+                                                     ]?,
+                                                     and: Array[
+                                                       untyped,
+                                                     ]?,
+                                                     not: untyped?,
+                                                     dimensions: {
+                                                       key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")?,
+                                                       values: Array[::String]?,
+                                                       match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                                     }?,
+                                                     tags: {
+                                                       key: ::String?,
+                                                       values: Array[::String]?,
+                                                       match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                                     }?,
+                                                     cost_categories: {
+                                                       key: ::String?,
+                                                       values: Array[::String]?,
+                                                       match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                                     }?
+                                                   },
+                                                   ?data_type: Array[("ATTRIBUTES" | "UTILIZATION" | "AMORTIZED_COMMITMENT" | "SAVINGS")],
+                                                   ?next_token: ::String,
+                                                   ?max_results: ::Integer,
+                                                   ?sort_by: {
+                                                     key: ::String,
+                                                     sort_order: ("ASCENDING" | "DESCENDING")?
+                                                   }
+                                                 ) -> _GetSavingsPlansUtilizationDetailsResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSavingsPlansUtilizationDetailsResponseSuccess
+
+      interface _GetTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTagsResponse]
+        def next_page_token: () -> ::String
+        def tags: () -> ::Array[::String]
+        def return_size: () -> ::Integer
+        def total_size: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_tags-instance_method
+      def get_tags: (
+                      ?search_string: ::String,
+                      time_period: {
+                        start: ::String,
+                        end: ::String
+                      },
+                      ?tag_key: ::String,
+                      ?filter: {
+                        or: Array[
+                          untyped,
+                        ]?,
+                        and: Array[
+                          untyped,
+                        ]?,
+                        not: untyped?,
+                        dimensions: {
+                          key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")?,
+                          values: Array[::String]?,
+                          match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                        }?,
+                        tags: {
+                          key: ::String?,
+                          values: Array[::String]?,
+                          match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                        }?,
+                        cost_categories: {
+                          key: ::String?,
+                          values: Array[::String]?,
+                          match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                        }?
+                      },
+                      ?sort_by: Array[
+                        {
+                          key: ::String,
+                          sort_order: ("ASCENDING" | "DESCENDING")?
+                        },
+                      ],
+                      ?max_results: ::Integer,
+                      ?next_page_token: ::String
+                    ) -> _GetTagsResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTagsResponseSuccess
+
+      interface _GetUsageForecastResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUsageForecastResponse]
+        def total: () -> Types::MetricValue
+        def forecast_results_by_time: () -> ::Array[Types::ForecastResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_usage_forecast-instance_method
+      def get_usage_forecast: (
+                                time_period: {
+                                  start: ::String,
+                                  end: ::String
+                                },
+                                metric: ("BLENDED_COST" | "UNBLENDED_COST" | "AMORTIZED_COST" | "NET_UNBLENDED_COST" | "NET_AMORTIZED_COST" | "USAGE_QUANTITY" | "NORMALIZED_USAGE_AMOUNT"),
+                                granularity: ("DAILY" | "MONTHLY" | "HOURLY"),
+                                ?filter: {
+                                  or: Array[
+                                    untyped,
+                                  ]?,
+                                  and: Array[
+                                    untyped,
+                                  ]?,
+                                  not: untyped?,
+                                  dimensions: {
+                                    key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")?,
+                                    values: Array[::String]?,
+                                    match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                  }?,
+                                  tags: {
+                                    key: ::String?,
+                                    values: Array[::String]?,
+                                    match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                  }?,
+                                  cost_categories: {
+                                    key: ::String?,
+                                    values: Array[::String]?,
+                                    match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                  }?
+                                },
+                                ?prediction_interval_level: ::Integer
+                              ) -> _GetUsageForecastResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUsageForecastResponseSuccess
+
+      interface _ListCostAllocationTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCostAllocationTagsResponse]
+        def cost_allocation_tags: () -> ::Array[Types::CostAllocationTag]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#list_cost_allocation_tags-instance_method
+      def list_cost_allocation_tags: (
+                                       ?status: ("Active" | "Inactive"),
+                                       ?tag_keys: Array[::String],
+                                       ?type: ("AWSGenerated" | "UserDefined"),
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListCostAllocationTagsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCostAllocationTagsResponseSuccess
+
+      interface _ListCostCategoryDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCostCategoryDefinitionsResponse]
+        def cost_category_references: () -> ::Array[Types::CostCategoryReference]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#list_cost_category_definitions-instance_method
+      def list_cost_category_definitions: (
+                                            ?effective_on: ::String,
+                                            ?next_token: ::String,
+                                            ?max_results: ::Integer
+                                          ) -> _ListCostCategoryDefinitionsResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCostCategoryDefinitionsResponseSuccess
+
+      interface _ListSavingsPlansPurchaseRecommendationGenerationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSavingsPlansPurchaseRecommendationGenerationResponse]
+        def generation_summary_list: () -> ::Array[Types::GenerationSummary]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#list_savings_plans_purchase_recommendation_generation-instance_method
+      def list_savings_plans_purchase_recommendation_generation: (
+                                                                   ?generation_status: ("SUCCEEDED" | "PROCESSING" | "FAILED"),
+                                                                   ?recommendation_ids: Array[::String],
+                                                                   ?page_size: ::Integer,
+                                                                   ?next_page_token: ::String
+                                                                 ) -> _ListSavingsPlansPurchaseRecommendationGenerationResponseSuccess
+                                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSavingsPlansPurchaseRecommendationGenerationResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def resource_tags: () -> ::Array[Types::ResourceTag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ProvideAnomalyFeedbackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ProvideAnomalyFeedbackResponse]
+        def anomaly_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#provide_anomaly_feedback-instance_method
+      def provide_anomaly_feedback: (
+                                      anomaly_id: ::String,
+                                      feedback: ("YES" | "NO" | "PLANNED_ACTIVITY")
+                                    ) -> _ProvideAnomalyFeedbackResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ProvideAnomalyFeedbackResponseSuccess
+
+      interface _StartSavingsPlansPurchaseRecommendationGenerationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartSavingsPlansPurchaseRecommendationGenerationResponse]
+        def recommendation_id: () -> ::String
+        def generation_started_time: () -> ::String
+        def estimated_completion_time: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#start_savings_plans_purchase_recommendation_generation-instance_method
+      def start_savings_plans_purchase_recommendation_generation: (
+                                                                  ) -> _StartSavingsPlansPurchaseRecommendationGenerationResponseSuccess
+                                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSavingsPlansPurchaseRecommendationGenerationResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          resource_tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            resource_tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAnomalyMonitorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAnomalyMonitorResponse]
+        def monitor_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#update_anomaly_monitor-instance_method
+      def update_anomaly_monitor: (
+                                    monitor_arn: ::String,
+                                    ?monitor_name: ::String
+                                  ) -> _UpdateAnomalyMonitorResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAnomalyMonitorResponseSuccess
+
+      interface _UpdateAnomalySubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAnomalySubscriptionResponse]
+        def subscription_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#update_anomaly_subscription-instance_method
+      def update_anomaly_subscription: (
+                                         subscription_arn: ::String,
+                                         ?threshold: ::Float,
+                                         ?frequency: ("DAILY" | "IMMEDIATE" | "WEEKLY"),
+                                         ?monitor_arn_list: Array[::String],
+                                         ?subscribers: Array[
+                                           {
+                                             address: ::String?,
+                                             type: ("EMAIL" | "SNS")?,
+                                             status: ("CONFIRMED" | "DECLINED")?
+                                           },
+                                         ],
+                                         ?subscription_name: ::String,
+                                         ?threshold_expression: {
+                                           or: Array[
+                                             untyped,
+                                           ]?,
+                                           and: Array[
+                                             untyped,
+                                           ]?,
+                                           not: untyped?,
+                                           dimensions: {
+                                             key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")?,
+                                             values: Array[::String]?,
+                                             match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                           }?,
+                                           tags: {
+                                             key: ::String?,
+                                             values: Array[::String]?,
+                                             match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                           }?,
+                                           cost_categories: {
+                                             key: ::String?,
+                                             values: Array[::String]?,
+                                             match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                           }?
+                                         }
+                                       ) -> _UpdateAnomalySubscriptionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAnomalySubscriptionResponseSuccess
+
+      interface _UpdateCostAllocationTagsStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCostAllocationTagsStatusResponse]
+        def errors: () -> ::Array[Types::UpdateCostAllocationTagsStatusError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#update_cost_allocation_tags_status-instance_method
+      def update_cost_allocation_tags_status: (
+                                                cost_allocation_tags_status: Array[
+                                                  {
+                                                    tag_key: ::String,
+                                                    status: ("Active" | "Inactive")
+                                                  },
+                                                ]
+                                              ) -> _UpdateCostAllocationTagsStatusResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCostAllocationTagsStatusResponseSuccess
+
+      interface _UpdateCostCategoryDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCostCategoryDefinitionResponse]
+        def cost_category_arn: () -> ::String
+        def effective_start: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#update_cost_category_definition-instance_method
+      def update_cost_category_definition: (
+                                             cost_category_arn: ::String,
+                                             ?effective_start: ::String,
+                                             rule_version: ("CostCategoryExpression.v1"),
+                                             rules: Array[
+                                               {
+                                                 value: ::String?,
+                                                 rule: {
+                                                   or: Array[
+                                                     untyped,
+                                                   ]?,
+                                                   and: Array[
+                                                     untyped,
+                                                   ]?,
+                                                   not: untyped?,
+                                                   dimensions: {
+                                                     key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")?,
+                                                     values: Array[::String]?,
+                                                     match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                                   }?,
+                                                   tags: {
+                                                     key: ::String?,
+                                                     values: Array[::String]?,
+                                                     match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                                   }?,
+                                                   cost_categories: {
+                                                     key: ::String?,
+                                                     values: Array[::String]?,
+                                                     match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                                   }?
+                                                 }?,
+                                                 inherited_value: {
+                                                   dimension_name: ("LINKED_ACCOUNT_NAME" | "TAG")?,
+                                                   dimension_key: ::String?
+                                                 }?,
+                                                 type: ("REGULAR" | "INHERITED_VALUE")?
+                                               },
+                                             ],
+                                             ?default_value: ::String,
+                                             ?split_charge_rules: Array[
+                                               {
+                                                 source: ::String,
+                                                 targets: Array[::String],
+                                                 method: ("FIXED" | "PROPORTIONAL" | "EVEN"),
+                                                 parameters: Array[
+                                                   {
+                                                     type: ("ALLOCATION_PERCENTAGES"),
+                                                     values: Array[::String]
+                                                   },
+                                                 ]?
+                                               },
+                                             ]
+                                           ) -> _UpdateCostCategoryDefinitionResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCostCategoryDefinitionResponseSuccess
+    end
+  end
+end
+

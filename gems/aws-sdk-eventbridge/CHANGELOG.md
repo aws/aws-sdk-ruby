@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.56.0 (2024-01-11)
+------------------
+
+* Feature - Adding AppSync as an EventBridge Target
+
 1.55.0 (2023-12-20)
 ------------------
 

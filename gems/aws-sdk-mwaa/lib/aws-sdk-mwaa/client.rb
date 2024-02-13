@@ -732,6 +732,8 @@ module Aws::MWAA
     #
     # @return [Types::CreateWebLoginTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::CreateWebLoginTokenResponse#airflow_identity #airflow_identity} => String
+    #   * {Types::CreateWebLoginTokenResponse#iam_identity #iam_identity} => String
     #   * {Types::CreateWebLoginTokenResponse#web_server_hostname #web_server_hostname} => String
     #   * {Types::CreateWebLoginTokenResponse#web_token #web_token} => String
     #
@@ -743,6 +745,8 @@ module Aws::MWAA
     #
     # @example Response structure
     #
+    #   resp.airflow_identity #=> String
+    #   resp.iam_identity #=> String
     #   resp.web_server_hostname #=> String
     #   resp.web_token #=> String
     #
@@ -846,7 +850,7 @@ module Aws::MWAA
     #   resp.environment.source_bucket_arn #=> String
     #   resp.environment.startup_script_s3_object_version #=> String
     #   resp.environment.startup_script_s3_path #=> String
-    #   resp.environment.status #=> String, one of "CREATING", "CREATE_FAILED", "AVAILABLE", "UPDATING", "DELETING", "DELETED", "UNAVAILABLE", "UPDATE_FAILED", "ROLLING_BACK", "CREATING_SNAPSHOT", "PENDING"
+    #   resp.environment.status #=> String, one of "CREATING", "CREATE_FAILED", "AVAILABLE", "UPDATING", "DELETING", "DELETED", "UNAVAILABLE", "UPDATE_FAILED", "ROLLING_BACK", "CREATING_SNAPSHOT", "PENDING", "MAINTENANCE"
     #   resp.environment.tags #=> Hash
     #   resp.environment.tags["TagKey"] #=> String
     #   resp.environment.webserver_access_mode #=> String, one of "PRIVATE_ONLY", "PUBLIC_ONLY"
@@ -1324,7 +1328,7 @@ module Aws::MWAA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mwaa'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

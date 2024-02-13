@@ -1,0 +1,1334 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Proton
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcceptEnvironmentAccountConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptEnvironmentAccountConnectionOutput]
+        def environment_account_connection: () -> Types::EnvironmentAccountConnection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#accept_environment_account_connection-instance_method
+      def accept_environment_account_connection: (
+                                                   id: ::String
+                                                 ) -> _AcceptEnvironmentAccountConnectionResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptEnvironmentAccountConnectionResponseSuccess
+
+      interface _CancelComponentDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelComponentDeploymentOutput]
+        def component: () -> Types::Component
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#cancel_component_deployment-instance_method
+      def cancel_component_deployment: (
+                                         component_name: ::String
+                                       ) -> _CancelComponentDeploymentResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelComponentDeploymentResponseSuccess
+
+      interface _CancelEnvironmentDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelEnvironmentDeploymentOutput]
+        def environment: () -> Types::Environment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#cancel_environment_deployment-instance_method
+      def cancel_environment_deployment: (
+                                           environment_name: ::String
+                                         ) -> _CancelEnvironmentDeploymentResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelEnvironmentDeploymentResponseSuccess
+
+      interface _CancelServiceInstanceDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelServiceInstanceDeploymentOutput]
+        def service_instance: () -> Types::ServiceInstance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#cancel_service_instance_deployment-instance_method
+      def cancel_service_instance_deployment: (
+                                                service_instance_name: ::String,
+                                                service_name: ::String
+                                              ) -> _CancelServiceInstanceDeploymentResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelServiceInstanceDeploymentResponseSuccess
+
+      interface _CancelServicePipelineDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelServicePipelineDeploymentOutput]
+        def pipeline: () -> Types::ServicePipeline
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#cancel_service_pipeline_deployment-instance_method
+      def cancel_service_pipeline_deployment: (
+                                                service_name: ::String
+                                              ) -> _CancelServicePipelineDeploymentResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelServicePipelineDeploymentResponseSuccess
+
+      interface _CreateComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateComponentOutput]
+        def component: () -> Types::Component
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#create_component-instance_method
+      def create_component: (
+                              ?client_token: ::String,
+                              ?description: ::String,
+                              ?environment_name: ::String,
+                              manifest: ::String,
+                              name: ::String,
+                              ?service_instance_name: ::String,
+                              ?service_name: ::String,
+                              ?service_spec: ::String,
+                              ?tags: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String
+                                },
+                              ],
+                              template_file: ::String
+                            ) -> _CreateComponentResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateComponentResponseSuccess
+
+      interface _CreateEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEnvironmentOutput]
+        def environment: () -> Types::Environment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#create_environment-instance_method
+      def create_environment: (
+                                ?codebuild_role_arn: ::String,
+                                ?component_role_arn: ::String,
+                                ?description: ::String,
+                                ?environment_account_connection_id: ::String,
+                                name: ::String,
+                                ?proton_service_role_arn: ::String,
+                                ?provisioning_repository: {
+                                  branch: ::String,
+                                  name: ::String,
+                                  provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET")
+                                },
+                                spec: ::String,
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ],
+                                template_major_version: ::String,
+                                ?template_minor_version: ::String,
+                                template_name: ::String
+                              ) -> _CreateEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentResponseSuccess
+
+      interface _CreateEnvironmentAccountConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEnvironmentAccountConnectionOutput]
+        def environment_account_connection: () -> Types::EnvironmentAccountConnection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#create_environment_account_connection-instance_method
+      def create_environment_account_connection: (
+                                                   ?client_token: ::String,
+                                                   ?codebuild_role_arn: ::String,
+                                                   ?component_role_arn: ::String,
+                                                   environment_name: ::String,
+                                                   management_account_id: ::String,
+                                                   ?role_arn: ::String,
+                                                   ?tags: Array[
+                                                     {
+                                                       key: ::String,
+                                                       value: ::String
+                                                     },
+                                                   ]
+                                                 ) -> _CreateEnvironmentAccountConnectionResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentAccountConnectionResponseSuccess
+
+      interface _CreateEnvironmentTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEnvironmentTemplateOutput]
+        def environment_template: () -> Types::EnvironmentTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#create_environment_template-instance_method
+      def create_environment_template: (
+                                         ?description: ::String,
+                                         ?display_name: ::String,
+                                         ?encryption_key: ::String,
+                                         name: ::String,
+                                         ?provisioning: ("CUSTOMER_MANAGED"),
+                                         ?tags: Array[
+                                           {
+                                             key: ::String,
+                                             value: ::String
+                                           },
+                                         ]
+                                       ) -> _CreateEnvironmentTemplateResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentTemplateResponseSuccess
+
+      interface _CreateEnvironmentTemplateVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEnvironmentTemplateVersionOutput]
+        def environment_template_version: () -> Types::EnvironmentTemplateVersion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#create_environment_template_version-instance_method
+      def create_environment_template_version: (
+                                                 ?client_token: ::String,
+                                                 ?description: ::String,
+                                                 ?major_version: ::String,
+                                                 source: {
+                                                   s3: {
+                                                     bucket: ::String,
+                                                     key: ::String
+                                                   }?
+                                                 },
+                                                 ?tags: Array[
+                                                   {
+                                                     key: ::String,
+                                                     value: ::String
+                                                   },
+                                                 ],
+                                                 template_name: ::String
+                                               ) -> _CreateEnvironmentTemplateVersionResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentTemplateVersionResponseSuccess
+
+      interface _CreateRepositoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRepositoryOutput]
+        def repository: () -> Types::Repository
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#create_repository-instance_method
+      def create_repository: (
+                               connection_arn: ::String,
+                               ?encryption_key: ::String,
+                               name: ::String,
+                               provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET"),
+                               ?tags: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String
+                                 },
+                               ]
+                             ) -> _CreateRepositoryResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRepositoryResponseSuccess
+
+      interface _CreateServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateServiceOutput]
+        def service: () -> Types::Service
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#create_service-instance_method
+      def create_service: (
+                            ?branch_name: ::String,
+                            ?description: ::String,
+                            name: ::String,
+                            ?repository_connection_arn: ::String,
+                            ?repository_id: ::String,
+                            spec: ::String,
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ],
+                            template_major_version: ::String,
+                            ?template_minor_version: ::String,
+                            template_name: ::String
+                          ) -> _CreateServiceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceResponseSuccess
+
+      interface _CreateServiceInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateServiceInstanceOutput]
+        def service_instance: () -> Types::ServiceInstance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#create_service_instance-instance_method
+      def create_service_instance: (
+                                     ?client_token: ::String,
+                                     name: ::String,
+                                     service_name: ::String,
+                                     spec: ::String,
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       },
+                                     ],
+                                     ?template_major_version: ::String,
+                                     ?template_minor_version: ::String
+                                   ) -> _CreateServiceInstanceResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceInstanceResponseSuccess
+
+      interface _CreateServiceSyncConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateServiceSyncConfigOutput]
+        def service_sync_config: () -> Types::ServiceSyncConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#create_service_sync_config-instance_method
+      def create_service_sync_config: (
+                                        branch: ::String,
+                                        file_path: ::String,
+                                        repository_name: ::String,
+                                        repository_provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET"),
+                                        service_name: ::String
+                                      ) -> _CreateServiceSyncConfigResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceSyncConfigResponseSuccess
+
+      interface _CreateServiceTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateServiceTemplateOutput]
+        def service_template: () -> Types::ServiceTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#create_service_template-instance_method
+      def create_service_template: (
+                                     ?description: ::String,
+                                     ?display_name: ::String,
+                                     ?encryption_key: ::String,
+                                     name: ::String,
+                                     ?pipeline_provisioning: ("CUSTOMER_MANAGED"),
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       },
+                                     ]
+                                   ) -> _CreateServiceTemplateResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceTemplateResponseSuccess
+
+      interface _CreateServiceTemplateVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateServiceTemplateVersionOutput]
+        def service_template_version: () -> Types::ServiceTemplateVersion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#create_service_template_version-instance_method
+      def create_service_template_version: (
+                                             ?client_token: ::String,
+                                             compatible_environment_templates: Array[
+                                               {
+                                                 major_version: ::String,
+                                                 template_name: ::String
+                                               },
+                                             ],
+                                             ?description: ::String,
+                                             ?major_version: ::String,
+                                             source: {
+                                               s3: {
+                                                 bucket: ::String,
+                                                 key: ::String
+                                               }?
+                                             },
+                                             ?supported_component_sources: Array[("DIRECTLY_DEFINED")],
+                                             ?tags: Array[
+                                               {
+                                                 key: ::String,
+                                                 value: ::String
+                                               },
+                                             ],
+                                             template_name: ::String
+                                           ) -> _CreateServiceTemplateVersionResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceTemplateVersionResponseSuccess
+
+      interface _CreateTemplateSyncConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTemplateSyncConfigOutput]
+        def template_sync_config: () -> Types::TemplateSyncConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#create_template_sync_config-instance_method
+      def create_template_sync_config: (
+                                         branch: ::String,
+                                         repository_name: ::String,
+                                         repository_provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET"),
+                                         ?subdirectory: ::String,
+                                         template_name: ::String,
+                                         template_type: ("ENVIRONMENT" | "SERVICE")
+                                       ) -> _CreateTemplateSyncConfigResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTemplateSyncConfigResponseSuccess
+
+      interface _DeleteComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteComponentOutput]
+        def component: () -> Types::Component
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#delete_component-instance_method
+      def delete_component: (
+                              name: ::String
+                            ) -> _DeleteComponentResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteComponentResponseSuccess
+
+      interface _DeleteDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDeploymentOutput]
+        def deployment: () -> Types::Deployment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#delete_deployment-instance_method
+      def delete_deployment: (
+                               id: ::String
+                             ) -> _DeleteDeploymentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDeploymentResponseSuccess
+
+      interface _DeleteEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEnvironmentOutput]
+        def environment: () -> Types::Environment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#delete_environment-instance_method
+      def delete_environment: (
+                                name: ::String
+                              ) -> _DeleteEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEnvironmentResponseSuccess
+
+      interface _DeleteEnvironmentAccountConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEnvironmentAccountConnectionOutput]
+        def environment_account_connection: () -> Types::EnvironmentAccountConnection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#delete_environment_account_connection-instance_method
+      def delete_environment_account_connection: (
+                                                   id: ::String
+                                                 ) -> _DeleteEnvironmentAccountConnectionResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEnvironmentAccountConnectionResponseSuccess
+
+      interface _DeleteEnvironmentTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEnvironmentTemplateOutput]
+        def environment_template: () -> Types::EnvironmentTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#delete_environment_template-instance_method
+      def delete_environment_template: (
+                                         name: ::String
+                                       ) -> _DeleteEnvironmentTemplateResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEnvironmentTemplateResponseSuccess
+
+      interface _DeleteEnvironmentTemplateVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEnvironmentTemplateVersionOutput]
+        def environment_template_version: () -> Types::EnvironmentTemplateVersion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#delete_environment_template_version-instance_method
+      def delete_environment_template_version: (
+                                                 major_version: ::String,
+                                                 minor_version: ::String,
+                                                 template_name: ::String
+                                               ) -> _DeleteEnvironmentTemplateVersionResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEnvironmentTemplateVersionResponseSuccess
+
+      interface _DeleteRepositoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRepositoryOutput]
+        def repository: () -> Types::Repository
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#delete_repository-instance_method
+      def delete_repository: (
+                               name: ::String,
+                               provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET")
+                             ) -> _DeleteRepositoryResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRepositoryResponseSuccess
+
+      interface _DeleteServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteServiceOutput]
+        def service: () -> Types::Service
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#delete_service-instance_method
+      def delete_service: (
+                            name: ::String
+                          ) -> _DeleteServiceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteServiceResponseSuccess
+
+      interface _DeleteServiceSyncConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteServiceSyncConfigOutput]
+        def service_sync_config: () -> Types::ServiceSyncConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#delete_service_sync_config-instance_method
+      def delete_service_sync_config: (
+                                        service_name: ::String
+                                      ) -> _DeleteServiceSyncConfigResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteServiceSyncConfigResponseSuccess
+
+      interface _DeleteServiceTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteServiceTemplateOutput]
+        def service_template: () -> Types::ServiceTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#delete_service_template-instance_method
+      def delete_service_template: (
+                                     name: ::String
+                                   ) -> _DeleteServiceTemplateResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteServiceTemplateResponseSuccess
+
+      interface _DeleteServiceTemplateVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteServiceTemplateVersionOutput]
+        def service_template_version: () -> Types::ServiceTemplateVersion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#delete_service_template_version-instance_method
+      def delete_service_template_version: (
+                                             major_version: ::String,
+                                             minor_version: ::String,
+                                             template_name: ::String
+                                           ) -> _DeleteServiceTemplateVersionResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteServiceTemplateVersionResponseSuccess
+
+      interface _DeleteTemplateSyncConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTemplateSyncConfigOutput]
+        def template_sync_config: () -> Types::TemplateSyncConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#delete_template_sync_config-instance_method
+      def delete_template_sync_config: (
+                                         template_name: ::String,
+                                         template_type: ("ENVIRONMENT" | "SERVICE")
+                                       ) -> _DeleteTemplateSyncConfigResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTemplateSyncConfigResponseSuccess
+
+      interface _GetAccountSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountSettingsOutput]
+        def account_settings: () -> Types::AccountSettings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#get_account_settings-instance_method
+      def get_account_settings: (
+                                ) -> _GetAccountSettingsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountSettingsResponseSuccess
+
+      interface _GetComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetComponentOutput]
+        def component: () -> Types::Component
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#get_component-instance_method
+      def get_component: (
+                           name: ::String
+                         ) -> _GetComponentResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetComponentResponseSuccess
+
+      interface _GetDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeploymentOutput]
+        def deployment: () -> Types::Deployment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#get_deployment-instance_method
+      def get_deployment: (
+                            ?component_name: ::String,
+                            ?environment_name: ::String,
+                            id: ::String,
+                            ?service_instance_name: ::String,
+                            ?service_name: ::String
+                          ) -> _GetDeploymentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeploymentResponseSuccess
+
+      interface _GetEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnvironmentOutput]
+        def environment: () -> Types::Environment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#get_environment-instance_method
+      def get_environment: (
+                             name: ::String
+                           ) -> _GetEnvironmentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentResponseSuccess
+
+      interface _GetEnvironmentAccountConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnvironmentAccountConnectionOutput]
+        def environment_account_connection: () -> Types::EnvironmentAccountConnection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#get_environment_account_connection-instance_method
+      def get_environment_account_connection: (
+                                                id: ::String
+                                              ) -> _GetEnvironmentAccountConnectionResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentAccountConnectionResponseSuccess
+
+      interface _GetEnvironmentTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnvironmentTemplateOutput]
+        def environment_template: () -> Types::EnvironmentTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#get_environment_template-instance_method
+      def get_environment_template: (
+                                      name: ::String
+                                    ) -> _GetEnvironmentTemplateResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentTemplateResponseSuccess
+
+      interface _GetEnvironmentTemplateVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnvironmentTemplateVersionOutput]
+        def environment_template_version: () -> Types::EnvironmentTemplateVersion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#get_environment_template_version-instance_method
+      def get_environment_template_version: (
+                                              major_version: ::String,
+                                              minor_version: ::String,
+                                              template_name: ::String
+                                            ) -> _GetEnvironmentTemplateVersionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentTemplateVersionResponseSuccess
+
+      interface _GetRepositoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRepositoryOutput]
+        def repository: () -> Types::Repository
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#get_repository-instance_method
+      def get_repository: (
+                            name: ::String,
+                            provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET")
+                          ) -> _GetRepositoryResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRepositoryResponseSuccess
+
+      interface _GetRepositorySyncStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRepositorySyncStatusOutput]
+        def latest_sync: () -> Types::RepositorySyncAttempt
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#get_repository_sync_status-instance_method
+      def get_repository_sync_status: (
+                                        branch: ::String,
+                                        repository_name: ::String,
+                                        repository_provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET"),
+                                        sync_type: ("TEMPLATE_SYNC" | "SERVICE_SYNC")
+                                      ) -> _GetRepositorySyncStatusResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRepositorySyncStatusResponseSuccess
+
+      interface _GetResourcesSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcesSummaryOutput]
+        def counts: () -> Types::CountsSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#get_resources_summary-instance_method
+      def get_resources_summary: (
+                                 ) -> _GetResourcesSummaryResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcesSummaryResponseSuccess
+
+      interface _GetServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceOutput]
+        def service: () -> Types::Service
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#get_service-instance_method
+      def get_service: (
+                         name: ::String
+                       ) -> _GetServiceResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceResponseSuccess
+
+      interface _GetServiceInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceInstanceOutput]
+        def service_instance: () -> Types::ServiceInstance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#get_service_instance-instance_method
+      def get_service_instance: (
+                                  name: ::String,
+                                  service_name: ::String
+                                ) -> _GetServiceInstanceResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceInstanceResponseSuccess
+
+      interface _GetServiceInstanceSyncStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceInstanceSyncStatusOutput]
+        def desired_state: () -> Types::Revision
+        def latest_successful_sync: () -> Types::ResourceSyncAttempt
+        def latest_sync: () -> Types::ResourceSyncAttempt
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#get_service_instance_sync_status-instance_method
+      def get_service_instance_sync_status: (
+                                              service_instance_name: ::String,
+                                              service_name: ::String
+                                            ) -> _GetServiceInstanceSyncStatusResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceInstanceSyncStatusResponseSuccess
+
+      interface _GetServiceSyncBlockerSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceSyncBlockerSummaryOutput]
+        def service_sync_blocker_summary: () -> Types::ServiceSyncBlockerSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#get_service_sync_blocker_summary-instance_method
+      def get_service_sync_blocker_summary: (
+                                              ?service_instance_name: ::String,
+                                              service_name: ::String
+                                            ) -> _GetServiceSyncBlockerSummaryResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceSyncBlockerSummaryResponseSuccess
+
+      interface _GetServiceSyncConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceSyncConfigOutput]
+        def service_sync_config: () -> Types::ServiceSyncConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#get_service_sync_config-instance_method
+      def get_service_sync_config: (
+                                     service_name: ::String
+                                   ) -> _GetServiceSyncConfigResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceSyncConfigResponseSuccess
+
+      interface _GetServiceTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceTemplateOutput]
+        def service_template: () -> Types::ServiceTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#get_service_template-instance_method
+      def get_service_template: (
+                                  name: ::String
+                                ) -> _GetServiceTemplateResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceTemplateResponseSuccess
+
+      interface _GetServiceTemplateVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceTemplateVersionOutput]
+        def service_template_version: () -> Types::ServiceTemplateVersion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#get_service_template_version-instance_method
+      def get_service_template_version: (
+                                          major_version: ::String,
+                                          minor_version: ::String,
+                                          template_name: ::String
+                                        ) -> _GetServiceTemplateVersionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceTemplateVersionResponseSuccess
+
+      interface _GetTemplateSyncConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTemplateSyncConfigOutput]
+        def template_sync_config: () -> Types::TemplateSyncConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#get_template_sync_config-instance_method
+      def get_template_sync_config: (
+                                      template_name: ::String,
+                                      template_type: ("ENVIRONMENT" | "SERVICE")
+                                    ) -> _GetTemplateSyncConfigResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTemplateSyncConfigResponseSuccess
+
+      interface _GetTemplateSyncStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTemplateSyncStatusOutput]
+        def desired_state: () -> Types::Revision
+        def latest_successful_sync: () -> Types::ResourceSyncAttempt
+        def latest_sync: () -> Types::ResourceSyncAttempt
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#get_template_sync_status-instance_method
+      def get_template_sync_status: (
+                                      template_name: ::String,
+                                      template_type: ("ENVIRONMENT" | "SERVICE"),
+                                      template_version: ::String
+                                    ) -> _GetTemplateSyncStatusResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTemplateSyncStatusResponseSuccess
+
+      interface _ListComponentOutputsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListComponentOutputsOutput]
+        def next_token: () -> ::String
+        def outputs: () -> ::Array[Types::Output]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#list_component_outputs-instance_method
+      def list_component_outputs: (
+                                    component_name: ::String,
+                                    ?deployment_id: ::String,
+                                    ?next_token: ::String
+                                  ) -> _ListComponentOutputsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComponentOutputsResponseSuccess
+
+      interface _ListComponentProvisionedResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListComponentProvisionedResourcesOutput]
+        def next_token: () -> ::String
+        def provisioned_resources: () -> ::Array[Types::ProvisionedResource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#list_component_provisioned_resources-instance_method
+      def list_component_provisioned_resources: (
+                                                  component_name: ::String,
+                                                  ?next_token: ::String
+                                                ) -> _ListComponentProvisionedResourcesResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComponentProvisionedResourcesResponseSuccess
+
+      interface _ListComponentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListComponentsOutput]
+        def components: () -> ::Array[Types::ComponentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#list_components-instance_method
+      def list_components: (
+                             ?environment_name: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             ?service_instance_name: ::String,
+                             ?service_name: ::String
+                           ) -> _ListComponentsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComponentsResponseSuccess
+
+      interface _ListDeploymentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeploymentsOutput]
+        def deployments: () -> ::Array[Types::DeploymentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#list_deployments-instance_method
+      def list_deployments: (
+                              ?component_name: ::String,
+                              ?environment_name: ::String,
+                              ?max_results: ::Integer,
+                              ?next_token: ::String,
+                              ?service_instance_name: ::String,
+                              ?service_name: ::String
+                            ) -> _ListDeploymentsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeploymentsResponseSuccess
+
+      interface _ListEnvironmentAccountConnectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnvironmentAccountConnectionsOutput]
+        def environment_account_connections: () -> ::Array[Types::EnvironmentAccountConnectionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#list_environment_account_connections-instance_method
+      def list_environment_account_connections: (
+                                                  ?environment_name: ::String,
+                                                  ?max_results: ::Integer,
+                                                  ?next_token: ::String,
+                                                  requested_by: ("MANAGEMENT_ACCOUNT" | "ENVIRONMENT_ACCOUNT"),
+                                                  ?statuses: Array[("PENDING" | "CONNECTED" | "REJECTED")]
+                                                ) -> _ListEnvironmentAccountConnectionsResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentAccountConnectionsResponseSuccess
+
+      interface _ListEnvironmentOutputsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnvironmentOutputsOutput]
+        def next_token: () -> ::String
+        def outputs: () -> ::Array[Types::Output]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#list_environment_outputs-instance_method
+      def list_environment_outputs: (
+                                      ?deployment_id: ::String,
+                                      environment_name: ::String,
+                                      ?next_token: ::String
+                                    ) -> _ListEnvironmentOutputsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentOutputsResponseSuccess
+
+      interface _ListEnvironmentProvisionedResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnvironmentProvisionedResourcesOutput]
+        def next_token: () -> ::String
+        def provisioned_resources: () -> ::Array[Types::ProvisionedResource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#list_environment_provisioned_resources-instance_method
+      def list_environment_provisioned_resources: (
+                                                    environment_name: ::String,
+                                                    ?next_token: ::String
+                                                  ) -> _ListEnvironmentProvisionedResourcesResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentProvisionedResourcesResponseSuccess
+
+      interface _ListEnvironmentTemplateVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnvironmentTemplateVersionsOutput]
+        def next_token: () -> ::String
+        def template_versions: () -> ::Array[Types::EnvironmentTemplateVersionSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#list_environment_template_versions-instance_method
+      def list_environment_template_versions: (
+                                                ?major_version: ::String,
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String,
+                                                template_name: ::String
+                                              ) -> _ListEnvironmentTemplateVersionsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentTemplateVersionsResponseSuccess
+
+      interface _ListEnvironmentTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnvironmentTemplatesOutput]
+        def next_token: () -> ::String
+        def templates: () -> ::Array[Types::EnvironmentTemplateSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#list_environment_templates-instance_method
+      def list_environment_templates: (
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListEnvironmentTemplatesResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentTemplatesResponseSuccess
+
+      interface _ListEnvironmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnvironmentsOutput]
+        def environments: () -> ::Array[Types::EnvironmentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#list_environments-instance_method
+      def list_environments: (
+                               ?environment_templates: Array[
+                                 {
+                                   major_version: ::String,
+                                   template_name: ::String
+                                 },
+                               ],
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListEnvironmentsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentsResponseSuccess
+
+      interface _ListRepositoriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRepositoriesOutput]
+        def next_token: () -> ::String
+        def repositories: () -> ::Array[Types::RepositorySummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#list_repositories-instance_method
+      def list_repositories: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListRepositoriesResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRepositoriesResponseSuccess
+
+      interface _ListRepositorySyncDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRepositorySyncDefinitionsOutput]
+        def next_token: () -> ::String
+        def sync_definitions: () -> ::Array[Types::RepositorySyncDefinition]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#list_repository_sync_definitions-instance_method
+      def list_repository_sync_definitions: (
+                                              ?next_token: ::String,
+                                              repository_name: ::String,
+                                              repository_provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET"),
+                                              sync_type: ("TEMPLATE_SYNC" | "SERVICE_SYNC")
+                                            ) -> _ListRepositorySyncDefinitionsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRepositorySyncDefinitionsResponseSuccess
+
+      interface _ListServiceInstanceOutputsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceInstanceOutputsOutput]
+        def next_token: () -> ::String
+        def outputs: () -> ::Array[Types::Output]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#list_service_instance_outputs-instance_method
+      def list_service_instance_outputs: (
+                                           ?deployment_id: ::String,
+                                           ?next_token: ::String,
+                                           service_instance_name: ::String,
+                                           service_name: ::String
+                                         ) -> _ListServiceInstanceOutputsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceInstanceOutputsResponseSuccess
+
+      interface _ListServiceInstanceProvisionedResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceInstanceProvisionedResourcesOutput]
+        def next_token: () -> ::String
+        def provisioned_resources: () -> ::Array[Types::ProvisionedResource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#list_service_instance_provisioned_resources-instance_method
+      def list_service_instance_provisioned_resources: (
+                                                         ?next_token: ::String,
+                                                         service_instance_name: ::String,
+                                                         service_name: ::String
+                                                       ) -> _ListServiceInstanceProvisionedResourcesResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceInstanceProvisionedResourcesResponseSuccess
+
+      interface _ListServiceInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceInstancesOutput]
+        def next_token: () -> ::String
+        def service_instances: () -> ::Array[Types::ServiceInstanceSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#list_service_instances-instance_method
+      def list_service_instances: (
+                                    ?filters: Array[
+                                      {
+                                        key: ("name" | "deploymentStatus" | "templateName" | "serviceName" | "deployedTemplateVersionStatus" | "environmentName" | "lastDeploymentAttemptedAtBefore" | "lastDeploymentAttemptedAtAfter" | "createdAtBefore" | "createdAtAfter")?,
+                                        value: ::String?
+                                      },
+                                    ],
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String,
+                                    ?service_name: ::String,
+                                    ?sort_by: ("name" | "deploymentStatus" | "templateName" | "serviceName" | "environmentName" | "lastDeploymentAttemptedAt" | "createdAt"),
+                                    ?sort_order: ("ASCENDING" | "DESCENDING")
+                                  ) -> _ListServiceInstancesResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceInstancesResponseSuccess
+
+      interface _ListServicePipelineOutputsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServicePipelineOutputsOutput]
+        def next_token: () -> ::String
+        def outputs: () -> ::Array[Types::Output]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#list_service_pipeline_outputs-instance_method
+      def list_service_pipeline_outputs: (
+                                           ?deployment_id: ::String,
+                                           ?next_token: ::String,
+                                           service_name: ::String
+                                         ) -> _ListServicePipelineOutputsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServicePipelineOutputsResponseSuccess
+
+      interface _ListServicePipelineProvisionedResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServicePipelineProvisionedResourcesOutput]
+        def next_token: () -> ::String
+        def provisioned_resources: () -> ::Array[Types::ProvisionedResource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#list_service_pipeline_provisioned_resources-instance_method
+      def list_service_pipeline_provisioned_resources: (
+                                                         ?next_token: ::String,
+                                                         service_name: ::String
+                                                       ) -> _ListServicePipelineProvisionedResourcesResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServicePipelineProvisionedResourcesResponseSuccess
+
+      interface _ListServiceTemplateVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceTemplateVersionsOutput]
+        def next_token: () -> ::String
+        def template_versions: () -> ::Array[Types::ServiceTemplateVersionSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#list_service_template_versions-instance_method
+      def list_service_template_versions: (
+                                            ?major_version: ::String,
+                                            ?max_results: ::Integer,
+                                            ?next_token: ::String,
+                                            template_name: ::String
+                                          ) -> _ListServiceTemplateVersionsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceTemplateVersionsResponseSuccess
+
+      interface _ListServiceTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceTemplatesOutput]
+        def next_token: () -> ::String
+        def templates: () -> ::Array[Types::ServiceTemplateSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#list_service_templates-instance_method
+      def list_service_templates: (
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListServiceTemplatesResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceTemplatesResponseSuccess
+
+      interface _ListServicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServicesOutput]
+        def next_token: () -> ::String
+        def services: () -> ::Array[Types::ServiceSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#list_services-instance_method
+      def list_services: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListServicesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServicesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def next_token: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String,
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _NotifyResourceDeploymentStatusChangeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::NotifyResourceDeploymentStatusChangeOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#notify_resource_deployment_status_change-instance_method
+      def notify_resource_deployment_status_change: (
+                                                      ?deployment_id: ::String,
+                                                      ?outputs: Array[
+                                                        {
+                                                          key: ::String?,
+                                                          value_string: ::String?
+                                                        },
+                                                      ],
+                                                      resource_arn: ::String,
+                                                      ?status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED"),
+                                                      ?status_message: ::String
+                                                    ) -> _NotifyResourceDeploymentStatusChangeResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _NotifyResourceDeploymentStatusChangeResponseSuccess
+
+      interface _RejectEnvironmentAccountConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectEnvironmentAccountConnectionOutput]
+        def environment_account_connection: () -> Types::EnvironmentAccountConnection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#reject_environment_account_connection-instance_method
+      def reject_environment_account_connection: (
+                                                   id: ::String
+                                                 ) -> _RejectEnvironmentAccountConnectionResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectEnvironmentAccountConnectionResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAccountSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccountSettingsOutput]
+        def account_settings: () -> Types::AccountSettings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#update_account_settings-instance_method
+      def update_account_settings: (
+                                     ?delete_pipeline_provisioning_repository: bool,
+                                     ?pipeline_codebuild_role_arn: ::String,
+                                     ?pipeline_provisioning_repository: {
+                                       branch: ::String,
+                                       name: ::String,
+                                       provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET")
+                                     },
+                                     ?pipeline_service_role_arn: ::String
+                                   ) -> _UpdateAccountSettingsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccountSettingsResponseSuccess
+
+      interface _UpdateComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateComponentOutput]
+        def component: () -> Types::Component
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#update_component-instance_method
+      def update_component: (
+                              ?client_token: ::String,
+                              deployment_type: ("NONE" | "CURRENT_VERSION"),
+                              ?description: ::String,
+                              name: ::String,
+                              ?service_instance_name: ::String,
+                              ?service_name: ::String,
+                              ?service_spec: ::String,
+                              ?template_file: ::String
+                            ) -> _UpdateComponentResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateComponentResponseSuccess
+
+      interface _UpdateEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEnvironmentOutput]
+        def environment: () -> Types::Environment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#update_environment-instance_method
+      def update_environment: (
+                                ?codebuild_role_arn: ::String,
+                                ?component_role_arn: ::String,
+                                deployment_type: ("NONE" | "CURRENT_VERSION" | "MINOR_VERSION" | "MAJOR_VERSION"),
+                                ?description: ::String,
+                                ?environment_account_connection_id: ::String,
+                                name: ::String,
+                                ?proton_service_role_arn: ::String,
+                                ?provisioning_repository: {
+                                  branch: ::String,
+                                  name: ::String,
+                                  provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET")
+                                },
+                                ?spec: ::String,
+                                ?template_major_version: ::String,
+                                ?template_minor_version: ::String
+                              ) -> _UpdateEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentResponseSuccess
+
+      interface _UpdateEnvironmentAccountConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEnvironmentAccountConnectionOutput]
+        def environment_account_connection: () -> Types::EnvironmentAccountConnection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#update_environment_account_connection-instance_method
+      def update_environment_account_connection: (
+                                                   ?codebuild_role_arn: ::String,
+                                                   ?component_role_arn: ::String,
+                                                   id: ::String,
+                                                   ?role_arn: ::String
+                                                 ) -> _UpdateEnvironmentAccountConnectionResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentAccountConnectionResponseSuccess
+
+      interface _UpdateEnvironmentTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEnvironmentTemplateOutput]
+        def environment_template: () -> Types::EnvironmentTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#update_environment_template-instance_method
+      def update_environment_template: (
+                                         ?description: ::String,
+                                         ?display_name: ::String,
+                                         name: ::String
+                                       ) -> _UpdateEnvironmentTemplateResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentTemplateResponseSuccess
+
+      interface _UpdateEnvironmentTemplateVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEnvironmentTemplateVersionOutput]
+        def environment_template_version: () -> Types::EnvironmentTemplateVersion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#update_environment_template_version-instance_method
+      def update_environment_template_version: (
+                                                 ?description: ::String,
+                                                 major_version: ::String,
+                                                 minor_version: ::String,
+                                                 ?status: ("REGISTRATION_IN_PROGRESS" | "REGISTRATION_FAILED" | "DRAFT" | "PUBLISHED"),
+                                                 template_name: ::String
+                                               ) -> _UpdateEnvironmentTemplateVersionResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentTemplateVersionResponseSuccess
+
+      interface _UpdateServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateServiceOutput]
+        def service: () -> Types::Service
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#update_service-instance_method
+      def update_service: (
+                            ?description: ::String,
+                            name: ::String,
+                            ?spec: ::String
+                          ) -> _UpdateServiceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceResponseSuccess
+
+      interface _UpdateServiceInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateServiceInstanceOutput]
+        def service_instance: () -> Types::ServiceInstance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#update_service_instance-instance_method
+      def update_service_instance: (
+                                     ?client_token: ::String,
+                                     deployment_type: ("NONE" | "CURRENT_VERSION" | "MINOR_VERSION" | "MAJOR_VERSION"),
+                                     name: ::String,
+                                     service_name: ::String,
+                                     ?spec: ::String,
+                                     ?template_major_version: ::String,
+                                     ?template_minor_version: ::String
+                                   ) -> _UpdateServiceInstanceResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceInstanceResponseSuccess
+
+      interface _UpdateServicePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateServicePipelineOutput]
+        def pipeline: () -> Types::ServicePipeline
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#update_service_pipeline-instance_method
+      def update_service_pipeline: (
+                                     deployment_type: ("NONE" | "CURRENT_VERSION" | "MINOR_VERSION" | "MAJOR_VERSION"),
+                                     service_name: ::String,
+                                     spec: ::String,
+                                     ?template_major_version: ::String,
+                                     ?template_minor_version: ::String
+                                   ) -> _UpdateServicePipelineResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServicePipelineResponseSuccess
+
+      interface _UpdateServiceSyncBlockerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateServiceSyncBlockerOutput]
+        def service_instance_name: () -> ::String
+        def service_name: () -> ::String
+        def service_sync_blocker: () -> Types::SyncBlocker
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#update_service_sync_blocker-instance_method
+      def update_service_sync_blocker: (
+                                         id: ::String,
+                                         resolved_reason: ::String
+                                       ) -> _UpdateServiceSyncBlockerResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceSyncBlockerResponseSuccess
+
+      interface _UpdateServiceSyncConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateServiceSyncConfigOutput]
+        def service_sync_config: () -> Types::ServiceSyncConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#update_service_sync_config-instance_method
+      def update_service_sync_config: (
+                                        branch: ::String,
+                                        file_path: ::String,
+                                        repository_name: ::String,
+                                        repository_provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET"),
+                                        service_name: ::String
+                                      ) -> _UpdateServiceSyncConfigResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceSyncConfigResponseSuccess
+
+      interface _UpdateServiceTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateServiceTemplateOutput]
+        def service_template: () -> Types::ServiceTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#update_service_template-instance_method
+      def update_service_template: (
+                                     ?description: ::String,
+                                     ?display_name: ::String,
+                                     name: ::String
+                                   ) -> _UpdateServiceTemplateResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceTemplateResponseSuccess
+
+      interface _UpdateServiceTemplateVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateServiceTemplateVersionOutput]
+        def service_template_version: () -> Types::ServiceTemplateVersion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#update_service_template_version-instance_method
+      def update_service_template_version: (
+                                             ?compatible_environment_templates: Array[
+                                               {
+                                                 major_version: ::String,
+                                                 template_name: ::String
+                                               },
+                                             ],
+                                             ?description: ::String,
+                                             major_version: ::String,
+                                             minor_version: ::String,
+                                             ?status: ("REGISTRATION_IN_PROGRESS" | "REGISTRATION_FAILED" | "DRAFT" | "PUBLISHED"),
+                                             ?supported_component_sources: Array[("DIRECTLY_DEFINED")],
+                                             template_name: ::String
+                                           ) -> _UpdateServiceTemplateVersionResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceTemplateVersionResponseSuccess
+
+      interface _UpdateTemplateSyncConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTemplateSyncConfigOutput]
+        def template_sync_config: () -> Types::TemplateSyncConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#update_template_sync_config-instance_method
+      def update_template_sync_config: (
+                                         branch: ::String,
+                                         repository_name: ::String,
+                                         repository_provider: ("GITHUB" | "GITHUB_ENTERPRISE" | "BITBUCKET"),
+                                         ?subdirectory: ::String,
+                                         template_name: ::String,
+                                         template_type: ("ENVIRONMENT" | "SERVICE")
+                                       ) -> _UpdateTemplateSyncConfigResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTemplateSyncConfigResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Proton/Client.html#wait_until-instance_method
+      def wait_until: (:component_deleted waiter_name, 
+                    name: ::String
+                  ) -> Client::_GetComponentResponseSuccess
+                    | (:component_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetComponentResponseSuccess
+                    | (:component_deployed waiter_name, 
+                    name: ::String
+                  ) -> Client::_GetComponentResponseSuccess
+                    | (:component_deployed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetComponentResponseSuccess
+                    | (:environment_deployed waiter_name, 
+                    name: ::String
+                  ) -> Client::_GetEnvironmentResponseSuccess
+                    | (:environment_deployed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetEnvironmentResponseSuccess
+                    | (:environment_template_version_registered waiter_name, 
+                    major_version: ::String,
+                    minor_version: ::String,
+                    template_name: ::String
+                  ) -> Client::_GetEnvironmentTemplateVersionResponseSuccess
+                    | (:environment_template_version_registered waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetEnvironmentTemplateVersionResponseSuccess
+                    | (:service_created waiter_name, 
+                    name: ::String
+                  ) -> Client::_GetServiceResponseSuccess
+                    | (:service_created waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetServiceResponseSuccess
+                    | (:service_deleted waiter_name, 
+                    name: ::String
+                  ) -> Client::_GetServiceResponseSuccess
+                    | (:service_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetServiceResponseSuccess
+                    | (:service_instance_deployed waiter_name, 
+                    name: ::String,
+                    service_name: ::String
+                  ) -> Client::_GetServiceInstanceResponseSuccess
+                    | (:service_instance_deployed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetServiceInstanceResponseSuccess
+                    | (:service_pipeline_deployed waiter_name, 
+                    name: ::String
+                  ) -> Client::_GetServiceResponseSuccess
+                    | (:service_pipeline_deployed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetServiceResponseSuccess
+                    | (:service_template_version_registered waiter_name, 
+                    major_version: ::String,
+                    minor_version: ::String,
+                    template_name: ::String
+                  ) -> Client::_GetServiceTemplateVersionResponseSuccess
+                    | (:service_template_version_registered waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetServiceTemplateVersionResponseSuccess
+                    | (:service_updated waiter_name, 
+                    name: ::String
+                  ) -> Client::_GetServiceResponseSuccess
+                    | (:service_updated waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetServiceResponseSuccess
+    end
+  end
+end
+

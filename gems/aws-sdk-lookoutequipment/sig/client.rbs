@@ -1,0 +1,918 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module LookoutEquipment
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatasetResponse]
+        def dataset_name: () -> ::String
+        def dataset_arn: () -> ::String
+        def status: () -> ("CREATED" | "INGESTION_IN_PROGRESS" | "ACTIVE" | "IMPORT_IN_PROGRESS")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#create_dataset-instance_method
+      def create_dataset: (
+                            dataset_name: ::String,
+                            ?dataset_schema: {
+                              inline_data_schema: ::String?
+                            },
+                            ?server_side_kms_key_id: ::String,
+                            client_token: ::String,
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ]
+                          ) -> _CreateDatasetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetResponseSuccess
+
+      interface _CreateInferenceSchedulerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateInferenceSchedulerResponse]
+        def inference_scheduler_arn: () -> ::String
+        def inference_scheduler_name: () -> ::String
+        def status: () -> ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#create_inference_scheduler-instance_method
+      def create_inference_scheduler: (
+                                        model_name: ::String,
+                                        inference_scheduler_name: ::String,
+                                        ?data_delay_offset_in_minutes: ::Integer,
+                                        data_upload_frequency: ("PT5M" | "PT10M" | "PT15M" | "PT30M" | "PT1H"),
+                                        data_input_configuration: {
+                                          s3_input_configuration: {
+                                            bucket: ::String,
+                                            prefix: ::String?
+                                          }?,
+                                          input_time_zone_offset: ::String?,
+                                          inference_input_name_configuration: {
+                                            timestamp_format: ::String?,
+                                            component_timestamp_delimiter: ::String?
+                                          }?
+                                        },
+                                        data_output_configuration: {
+                                          s3_output_configuration: {
+                                            bucket: ::String,
+                                            prefix: ::String?
+                                          },
+                                          kms_key_id: ::String?
+                                        },
+                                        role_arn: ::String,
+                                        ?server_side_kms_key_id: ::String,
+                                        client_token: ::String,
+                                        ?tags: Array[
+                                          {
+                                            key: ::String,
+                                            value: ::String
+                                          },
+                                        ]
+                                      ) -> _CreateInferenceSchedulerResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInferenceSchedulerResponseSuccess
+
+      interface _CreateLabelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLabelResponse]
+        def label_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#create_label-instance_method
+      def create_label: (
+                          label_group_name: ::String,
+                          start_time: ::Time,
+                          end_time: ::Time,
+                          rating: ("ANOMALY" | "NO_ANOMALY" | "NEUTRAL"),
+                          ?fault_code: ::String,
+                          ?notes: ::String,
+                          ?equipment: ::String,
+                          client_token: ::String
+                        ) -> _CreateLabelResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLabelResponseSuccess
+
+      interface _CreateLabelGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLabelGroupResponse]
+        def label_group_name: () -> ::String
+        def label_group_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#create_label_group-instance_method
+      def create_label_group: (
+                                label_group_name: ::String,
+                                ?fault_codes: Array[::String],
+                                client_token: ::String,
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ]
+                              ) -> _CreateLabelGroupResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLabelGroupResponseSuccess
+
+      interface _CreateModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateModelResponse]
+        def model_arn: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#create_model-instance_method
+      def create_model: (
+                          model_name: ::String,
+                          dataset_name: ::String,
+                          ?dataset_schema: {
+                            inline_data_schema: ::String?
+                          },
+                          ?labels_input_configuration: {
+                            s3_input_configuration: {
+                              bucket: ::String,
+                              prefix: ::String?
+                            }?,
+                            label_group_name: ::String?
+                          },
+                          client_token: ::String,
+                          ?training_data_start_time: ::Time,
+                          ?training_data_end_time: ::Time,
+                          ?evaluation_data_start_time: ::Time,
+                          ?evaluation_data_end_time: ::Time,
+                          ?role_arn: ::String,
+                          ?data_pre_processing_configuration: {
+                            target_sampling_rate: ("PT1S" | "PT5S" | "PT10S" | "PT15S" | "PT30S" | "PT1M" | "PT5M" | "PT10M" | "PT15M" | "PT30M" | "PT1H")?
+                          },
+                          ?server_side_kms_key_id: ::String,
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ],
+                          ?off_condition: ::String
+                        ) -> _CreateModelResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateModelResponseSuccess
+
+      interface _CreateRetrainingSchedulerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRetrainingSchedulerResponse]
+        def model_name: () -> ::String
+        def model_arn: () -> ::String
+        def status: () -> ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#create_retraining_scheduler-instance_method
+      def create_retraining_scheduler: (
+                                         model_name: ::String,
+                                         ?retraining_start_date: ::Time,
+                                         retraining_frequency: ::String,
+                                         lookback_window: ::String,
+                                         ?promote_mode: ("MANAGED" | "MANUAL"),
+                                         client_token: ::String
+                                       ) -> _CreateRetrainingSchedulerResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRetrainingSchedulerResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#delete_dataset-instance_method
+      def delete_dataset: (
+                            dataset_name: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#delete_inference_scheduler-instance_method
+      def delete_inference_scheduler: (
+                                        inference_scheduler_name: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#delete_label-instance_method
+      def delete_label: (
+                          label_group_name: ::String,
+                          label_id: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#delete_label_group-instance_method
+      def delete_label_group: (
+                                label_group_name: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#delete_model-instance_method
+      def delete_model: (
+                          model_name: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#delete_resource_policy-instance_method
+      def delete_resource_policy: (
+                                    resource_arn: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#delete_retraining_scheduler-instance_method
+      def delete_retraining_scheduler: (
+                                         model_name: ::String
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeDataIngestionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDataIngestionJobResponse]
+        def job_id: () -> ::String
+        def dataset_arn: () -> ::String
+        def ingestion_input_configuration: () -> Types::IngestionInputConfiguration
+        def role_arn: () -> ::String
+        def created_at: () -> ::Time
+        def status: () -> ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS")
+        def failed_reason: () -> ::String
+        def data_quality_summary: () -> Types::DataQualitySummary
+        def ingested_files_summary: () -> Types::IngestedFilesSummary
+        def status_detail: () -> ::String
+        def ingested_data_size: () -> ::Integer
+        def data_start_time: () -> ::Time
+        def data_end_time: () -> ::Time
+        def source_dataset_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#describe_data_ingestion_job-instance_method
+      def describe_data_ingestion_job: (
+                                         job_id: ::String
+                                       ) -> _DescribeDataIngestionJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDataIngestionJobResponseSuccess
+
+      interface _DescribeDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDatasetResponse]
+        def dataset_name: () -> ::String
+        def dataset_arn: () -> ::String
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def status: () -> ("CREATED" | "INGESTION_IN_PROGRESS" | "ACTIVE" | "IMPORT_IN_PROGRESS")
+        def schema: () -> ::String
+        def server_side_kms_key_id: () -> ::String
+        def ingestion_input_configuration: () -> Types::IngestionInputConfiguration
+        def data_quality_summary: () -> Types::DataQualitySummary
+        def ingested_files_summary: () -> Types::IngestedFilesSummary
+        def role_arn: () -> ::String
+        def data_start_time: () -> ::Time
+        def data_end_time: () -> ::Time
+        def source_dataset_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#describe_dataset-instance_method
+      def describe_dataset: (
+                              dataset_name: ::String
+                            ) -> _DescribeDatasetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDatasetResponseSuccess
+
+      interface _DescribeInferenceSchedulerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInferenceSchedulerResponse]
+        def model_arn: () -> ::String
+        def model_name: () -> ::String
+        def inference_scheduler_name: () -> ::String
+        def inference_scheduler_arn: () -> ::String
+        def status: () -> ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+        def data_delay_offset_in_minutes: () -> ::Integer
+        def data_upload_frequency: () -> ("PT5M" | "PT10M" | "PT15M" | "PT30M" | "PT1H")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def data_input_configuration: () -> Types::InferenceInputConfiguration
+        def data_output_configuration: () -> Types::InferenceOutputConfiguration
+        def role_arn: () -> ::String
+        def server_side_kms_key_id: () -> ::String
+        def latest_inference_result: () -> ("ANOMALOUS" | "NORMAL")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#describe_inference_scheduler-instance_method
+      def describe_inference_scheduler: (
+                                          inference_scheduler_name: ::String
+                                        ) -> _DescribeInferenceSchedulerResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInferenceSchedulerResponseSuccess
+
+      interface _DescribeLabelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLabelResponse]
+        def label_group_name: () -> ::String
+        def label_group_arn: () -> ::String
+        def label_id: () -> ::String
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
+        def rating: () -> ("ANOMALY" | "NO_ANOMALY" | "NEUTRAL")
+        def fault_code: () -> ::String
+        def notes: () -> ::String
+        def equipment: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#describe_label-instance_method
+      def describe_label: (
+                            label_group_name: ::String,
+                            label_id: ::String
+                          ) -> _DescribeLabelResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLabelResponseSuccess
+
+      interface _DescribeLabelGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLabelGroupResponse]
+        def label_group_name: () -> ::String
+        def label_group_arn: () -> ::String
+        def fault_codes: () -> ::Array[::String]
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#describe_label_group-instance_method
+      def describe_label_group: (
+                                  label_group_name: ::String
+                                ) -> _DescribeLabelGroupResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLabelGroupResponseSuccess
+
+      interface _DescribeModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeModelResponse]
+        def model_name: () -> ::String
+        def model_arn: () -> ::String
+        def dataset_name: () -> ::String
+        def dataset_arn: () -> ::String
+        def schema: () -> ::String
+        def labels_input_configuration: () -> Types::LabelsInputConfiguration
+        def training_data_start_time: () -> ::Time
+        def training_data_end_time: () -> ::Time
+        def evaluation_data_start_time: () -> ::Time
+        def evaluation_data_end_time: () -> ::Time
+        def role_arn: () -> ::String
+        def data_pre_processing_configuration: () -> Types::DataPreProcessingConfiguration
+        def status: () -> ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS")
+        def training_execution_start_time: () -> ::Time
+        def training_execution_end_time: () -> ::Time
+        def failed_reason: () -> ::String
+        def model_metrics: () -> ::String
+        def last_updated_time: () -> ::Time
+        def created_at: () -> ::Time
+        def server_side_kms_key_id: () -> ::String
+        def off_condition: () -> ::String
+        def source_model_version_arn: () -> ::String
+        def import_job_start_time: () -> ::Time
+        def import_job_end_time: () -> ::Time
+        def active_model_version: () -> ::Integer
+        def active_model_version_arn: () -> ::String
+        def model_version_activated_at: () -> ::Time
+        def previous_active_model_version: () -> ::Integer
+        def previous_active_model_version_arn: () -> ::String
+        def previous_model_version_activated_at: () -> ::Time
+        def prior_model_metrics: () -> ::String
+        def latest_scheduled_retraining_failed_reason: () -> ::String
+        def latest_scheduled_retraining_status: () -> ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS" | "CANCELED")
+        def latest_scheduled_retraining_model_version: () -> ::Integer
+        def latest_scheduled_retraining_start_time: () -> ::Time
+        def latest_scheduled_retraining_available_data_in_days: () -> ::Integer
+        def next_scheduled_retraining_start_date: () -> ::Time
+        def accumulated_inference_data_start_time: () -> ::Time
+        def accumulated_inference_data_end_time: () -> ::Time
+        def retraining_scheduler_status: () -> ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#describe_model-instance_method
+      def describe_model: (
+                            model_name: ::String
+                          ) -> _DescribeModelResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeModelResponseSuccess
+
+      interface _DescribeModelVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeModelVersionResponse]
+        def model_name: () -> ::String
+        def model_arn: () -> ::String
+        def model_version: () -> ::Integer
+        def model_version_arn: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS" | "CANCELED")
+        def source_type: () -> ("TRAINING" | "RETRAINING" | "IMPORT")
+        def dataset_name: () -> ::String
+        def dataset_arn: () -> ::String
+        def schema: () -> ::String
+        def labels_input_configuration: () -> Types::LabelsInputConfiguration
+        def training_data_start_time: () -> ::Time
+        def training_data_end_time: () -> ::Time
+        def evaluation_data_start_time: () -> ::Time
+        def evaluation_data_end_time: () -> ::Time
+        def role_arn: () -> ::String
+        def data_pre_processing_configuration: () -> Types::DataPreProcessingConfiguration
+        def training_execution_start_time: () -> ::Time
+        def training_execution_end_time: () -> ::Time
+        def failed_reason: () -> ::String
+        def model_metrics: () -> ::String
+        def last_updated_time: () -> ::Time
+        def created_at: () -> ::Time
+        def server_side_kms_key_id: () -> ::String
+        def off_condition: () -> ::String
+        def source_model_version_arn: () -> ::String
+        def import_job_start_time: () -> ::Time
+        def import_job_end_time: () -> ::Time
+        def imported_data_size_in_bytes: () -> ::Integer
+        def prior_model_metrics: () -> ::String
+        def retraining_available_data_in_days: () -> ::Integer
+        def auto_promotion_result: () -> ("MODEL_PROMOTED" | "MODEL_NOT_PROMOTED" | "RETRAINING_INTERNAL_ERROR" | "RETRAINING_CUSTOMER_ERROR" | "RETRAINING_CANCELLED")
+        def auto_promotion_result_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#describe_model_version-instance_method
+      def describe_model_version: (
+                                    model_name: ::String,
+                                    model_version: ::Integer
+                                  ) -> _DescribeModelVersionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeModelVersionResponseSuccess
+
+      interface _DescribeResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeResourcePolicyResponse]
+        def policy_revision_id: () -> ::String
+        def resource_policy: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#describe_resource_policy-instance_method
+      def describe_resource_policy: (
+                                      resource_arn: ::String
+                                    ) -> _DescribeResourcePolicyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeResourcePolicyResponseSuccess
+
+      interface _DescribeRetrainingSchedulerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRetrainingSchedulerResponse]
+        def model_name: () -> ::String
+        def model_arn: () -> ::String
+        def retraining_start_date: () -> ::Time
+        def retraining_frequency: () -> ::String
+        def lookback_window: () -> ::String
+        def status: () -> ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+        def promote_mode: () -> ("MANAGED" | "MANUAL")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#describe_retraining_scheduler-instance_method
+      def describe_retraining_scheduler: (
+                                           model_name: ::String
+                                         ) -> _DescribeRetrainingSchedulerResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRetrainingSchedulerResponseSuccess
+
+      interface _ImportDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportDatasetResponse]
+        def dataset_name: () -> ::String
+        def dataset_arn: () -> ::String
+        def status: () -> ("CREATED" | "INGESTION_IN_PROGRESS" | "ACTIVE" | "IMPORT_IN_PROGRESS")
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#import_dataset-instance_method
+      def import_dataset: (
+                            source_dataset_arn: ::String,
+                            ?dataset_name: ::String,
+                            client_token: ::String,
+                            ?server_side_kms_key_id: ::String,
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ]
+                          ) -> _ImportDatasetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportDatasetResponseSuccess
+
+      interface _ImportModelVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportModelVersionResponse]
+        def model_name: () -> ::String
+        def model_arn: () -> ::String
+        def model_version_arn: () -> ::String
+        def model_version: () -> ::Integer
+        def status: () -> ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS" | "CANCELED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#import_model_version-instance_method
+      def import_model_version: (
+                                  source_model_version_arn: ::String,
+                                  ?model_name: ::String,
+                                  dataset_name: ::String,
+                                  ?labels_input_configuration: {
+                                    s3_input_configuration: {
+                                      bucket: ::String,
+                                      prefix: ::String?
+                                    }?,
+                                    label_group_name: ::String?
+                                  },
+                                  client_token: ::String,
+                                  ?role_arn: ::String,
+                                  ?server_side_kms_key_id: ::String,
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ],
+                                  ?inference_data_import_strategy: ("NO_IMPORT" | "ADD_WHEN_EMPTY" | "OVERWRITE")
+                                ) -> _ImportModelVersionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportModelVersionResponseSuccess
+
+      interface _ListDataIngestionJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataIngestionJobsResponse]
+        def next_token: () -> ::String
+        def data_ingestion_job_summaries: () -> ::Array[Types::DataIngestionJobSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#list_data_ingestion_jobs-instance_method
+      def list_data_ingestion_jobs: (
+                                      ?dataset_name: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer,
+                                      ?status: ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS")
+                                    ) -> _ListDataIngestionJobsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataIngestionJobsResponseSuccess
+
+      interface _ListDatasetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetsResponse]
+        def next_token: () -> ::String
+        def dataset_summaries: () -> ::Array[Types::DatasetSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#list_datasets-instance_method
+      def list_datasets: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer,
+                           ?dataset_name_begins_with: ::String
+                         ) -> _ListDatasetsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetsResponseSuccess
+
+      interface _ListInferenceEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInferenceEventsResponse]
+        def next_token: () -> ::String
+        def inference_event_summaries: () -> ::Array[Types::InferenceEventSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#list_inference_events-instance_method
+      def list_inference_events: (
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer,
+                                   inference_scheduler_name: ::String,
+                                   interval_start_time: ::Time,
+                                   interval_end_time: ::Time
+                                 ) -> _ListInferenceEventsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInferenceEventsResponseSuccess
+
+      interface _ListInferenceExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInferenceExecutionsResponse]
+        def next_token: () -> ::String
+        def inference_execution_summaries: () -> ::Array[Types::InferenceExecutionSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#list_inference_executions-instance_method
+      def list_inference_executions: (
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer,
+                                       inference_scheduler_name: ::String,
+                                       ?data_start_time_after: ::Time,
+                                       ?data_end_time_before: ::Time,
+                                       ?status: ("IN_PROGRESS" | "SUCCESS" | "FAILED")
+                                     ) -> _ListInferenceExecutionsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInferenceExecutionsResponseSuccess
+
+      interface _ListInferenceSchedulersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInferenceSchedulersResponse]
+        def next_token: () -> ::String
+        def inference_scheduler_summaries: () -> ::Array[Types::InferenceSchedulerSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#list_inference_schedulers-instance_method
+      def list_inference_schedulers: (
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer,
+                                       ?inference_scheduler_name_begins_with: ::String,
+                                       ?model_name: ::String,
+                                       ?status: ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+                                     ) -> _ListInferenceSchedulersResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInferenceSchedulersResponseSuccess
+
+      interface _ListLabelGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLabelGroupsResponse]
+        def next_token: () -> ::String
+        def label_group_summaries: () -> ::Array[Types::LabelGroupSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#list_label_groups-instance_method
+      def list_label_groups: (
+                               ?label_group_name_begins_with: ::String,
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListLabelGroupsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLabelGroupsResponseSuccess
+
+      interface _ListLabelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLabelsResponse]
+        def next_token: () -> ::String
+        def label_summaries: () -> ::Array[Types::LabelSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#list_labels-instance_method
+      def list_labels: (
+                         label_group_name: ::String,
+                         ?interval_start_time: ::Time,
+                         ?interval_end_time: ::Time,
+                         ?fault_code: ::String,
+                         ?equipment: ::String,
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
+                       ) -> _ListLabelsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLabelsResponseSuccess
+
+      interface _ListModelVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListModelVersionsResponse]
+        def next_token: () -> ::String
+        def model_version_summaries: () -> ::Array[Types::ModelVersionSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#list_model_versions-instance_method
+      def list_model_versions: (
+                                 model_name: ::String,
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer,
+                                 ?status: ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS" | "CANCELED"),
+                                 ?source_type: ("TRAINING" | "RETRAINING" | "IMPORT"),
+                                 ?created_at_end_time: ::Time,
+                                 ?created_at_start_time: ::Time,
+                                 ?max_model_version: ::Integer,
+                                 ?min_model_version: ::Integer
+                               ) -> _ListModelVersionsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListModelVersionsResponseSuccess
+
+      interface _ListModelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListModelsResponse]
+        def next_token: () -> ::String
+        def model_summaries: () -> ::Array[Types::ModelSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#list_models-instance_method
+      def list_models: (
+                         ?next_token: ::String,
+                         ?max_results: ::Integer,
+                         ?status: ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS"),
+                         ?model_name_begins_with: ::String,
+                         ?dataset_name_begins_with: ::String
+                       ) -> _ListModelsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListModelsResponseSuccess
+
+      interface _ListRetrainingSchedulersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRetrainingSchedulersResponse]
+        def retraining_scheduler_summaries: () -> ::Array[Types::RetrainingSchedulerSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#list_retraining_schedulers-instance_method
+      def list_retraining_schedulers: (
+                                        ?model_name_begins_with: ::String,
+                                        ?status: ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED"),
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _ListRetrainingSchedulersResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRetrainingSchedulersResponseSuccess
+
+      interface _ListSensorStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSensorStatisticsResponse]
+        def sensor_statistics_summaries: () -> ::Array[Types::SensorStatisticsSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#list_sensor_statistics-instance_method
+      def list_sensor_statistics: (
+                                    dataset_name: ::String,
+                                    ?ingestion_job_id: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListSensorStatisticsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSensorStatisticsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResponse]
+        def resource_arn: () -> ::String
+        def policy_revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 resource_arn: ::String,
+                                 resource_policy: ::String,
+                                 ?policy_revision_id: ::String,
+                                 client_token: ::String
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      interface _StartDataIngestionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDataIngestionJobResponse]
+        def job_id: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "SUCCESS" | "FAILED" | "IMPORT_IN_PROGRESS")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#start_data_ingestion_job-instance_method
+      def start_data_ingestion_job: (
+                                      dataset_name: ::String,
+                                      ingestion_input_configuration: {
+                                        s3_input_configuration: {
+                                          bucket: ::String,
+                                          prefix: ::String?,
+                                          key_pattern: ::String?
+                                        }
+                                      },
+                                      role_arn: ::String,
+                                      client_token: ::String
+                                    ) -> _StartDataIngestionJobResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDataIngestionJobResponseSuccess
+
+      interface _StartInferenceSchedulerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartInferenceSchedulerResponse]
+        def model_arn: () -> ::String
+        def model_name: () -> ::String
+        def inference_scheduler_name: () -> ::String
+        def inference_scheduler_arn: () -> ::String
+        def status: () -> ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#start_inference_scheduler-instance_method
+      def start_inference_scheduler: (
+                                       inference_scheduler_name: ::String
+                                     ) -> _StartInferenceSchedulerResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartInferenceSchedulerResponseSuccess
+
+      interface _StartRetrainingSchedulerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartRetrainingSchedulerResponse]
+        def model_name: () -> ::String
+        def model_arn: () -> ::String
+        def status: () -> ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#start_retraining_scheduler-instance_method
+      def start_retraining_scheduler: (
+                                        model_name: ::String
+                                      ) -> _StartRetrainingSchedulerResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartRetrainingSchedulerResponseSuccess
+
+      interface _StopInferenceSchedulerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopInferenceSchedulerResponse]
+        def model_arn: () -> ::String
+        def model_name: () -> ::String
+        def inference_scheduler_name: () -> ::String
+        def inference_scheduler_arn: () -> ::String
+        def status: () -> ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#stop_inference_scheduler-instance_method
+      def stop_inference_scheduler: (
+                                      inference_scheduler_name: ::String
+                                    ) -> _StopInferenceSchedulerResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopInferenceSchedulerResponseSuccess
+
+      interface _StopRetrainingSchedulerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopRetrainingSchedulerResponse]
+        def model_name: () -> ::String
+        def model_arn: () -> ::String
+        def status: () -> ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#stop_retraining_scheduler-instance_method
+      def stop_retraining_scheduler: (
+                                       model_name: ::String
+                                     ) -> _StopRetrainingSchedulerResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopRetrainingSchedulerResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateActiveModelVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateActiveModelVersionResponse]
+        def model_name: () -> ::String
+        def model_arn: () -> ::String
+        def current_active_version: () -> ::Integer
+        def previous_active_version: () -> ::Integer
+        def current_active_version_arn: () -> ::String
+        def previous_active_version_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#update_active_model_version-instance_method
+      def update_active_model_version: (
+                                         model_name: ::String,
+                                         model_version: ::Integer
+                                       ) -> _UpdateActiveModelVersionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateActiveModelVersionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#update_inference_scheduler-instance_method
+      def update_inference_scheduler: (
+                                        inference_scheduler_name: ::String,
+                                        ?data_delay_offset_in_minutes: ::Integer,
+                                        ?data_upload_frequency: ("PT5M" | "PT10M" | "PT15M" | "PT30M" | "PT1H"),
+                                        ?data_input_configuration: {
+                                          s3_input_configuration: {
+                                            bucket: ::String,
+                                            prefix: ::String?
+                                          }?,
+                                          input_time_zone_offset: ::String?,
+                                          inference_input_name_configuration: {
+                                            timestamp_format: ::String?,
+                                            component_timestamp_delimiter: ::String?
+                                          }?
+                                        },
+                                        ?data_output_configuration: {
+                                          s3_output_configuration: {
+                                            bucket: ::String,
+                                            prefix: ::String?
+                                          },
+                                          kms_key_id: ::String?
+                                        },
+                                        ?role_arn: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#update_label_group-instance_method
+      def update_label_group: (
+                                label_group_name: ::String,
+                                ?fault_codes: Array[::String]
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#update_model-instance_method
+      def update_model: (
+                          model_name: ::String,
+                          ?labels_input_configuration: {
+                            s3_input_configuration: {
+                              bucket: ::String,
+                              prefix: ::String?
+                            }?,
+                            label_group_name: ::String?
+                          },
+                          ?role_arn: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#update_retraining_scheduler-instance_method
+      def update_retraining_scheduler: (
+                                         model_name: ::String,
+                                         ?retraining_start_date: ::Time,
+                                         ?retraining_frequency: ::String,
+                                         ?lookback_window: ::String,
+                                         ?promote_mode: ("MANAGED" | "MANUAL")
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+    end
+  end
+end
+

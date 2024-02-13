@@ -1,0 +1,92 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DatabaseMigrationService
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccessDeniedFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CollectorNotFoundFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InsufficientResourceCapacityFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidCertificateFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidOperationFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidResourceStateFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidSubnet < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class KMSAccessDeniedFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class KMSDisabledFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class KMSFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class KMSInvalidStateFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class KMSKeyNotAccessibleFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class KMSNotFoundFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class KMSThrottlingFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ReplicationSubnetGroupDoesNotCoverEnoughAZs < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceAlreadyExistsFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def resource_arn: () -> ::String
+      end
+      class ResourceNotFoundFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceQuotaExceededFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class S3AccessDeniedFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class S3ResourceNotFoundFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class SNSInvalidTopicFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class SNSNoAuthorizationFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class StorageQuotaExceededFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class SubnetAlreadyInUse < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UpgradeDependencyFailureFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

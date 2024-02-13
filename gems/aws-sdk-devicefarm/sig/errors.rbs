@@ -1,0 +1,55 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DeviceFarm
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class ArgumentException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CannotDeleteException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class IdempotencyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InternalServiceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidOperationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NotEligibleException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceAccountException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TagOperationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def resource_name: () -> ::String
+      end
+      class TagPolicyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def resource_name: () -> ::String
+      end
+      class TooManyTagsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def resource_name: () -> ::String
+      end
+    end
+  end
+end

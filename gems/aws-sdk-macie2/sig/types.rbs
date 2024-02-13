@@ -1,0 +1,2000 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Macie2
+  module Types
+
+    class AcceptInvitationRequest
+      attr_accessor administrator_account_id: ::String
+      attr_accessor invitation_id: ::String
+      attr_accessor master_account: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptInvitationResponse < Aws::EmptyStructure
+    end
+
+    class AccessControlList
+      attr_accessor allows_public_read_access: bool
+      attr_accessor allows_public_write_access: bool
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccountDetail
+      attr_accessor account_id: ::String
+      attr_accessor email: ::String
+      SENSITIVE: []
+    end
+
+    class AccountLevelPermissions
+      attr_accessor block_public_access: Types::BlockPublicAccess
+      SENSITIVE: []
+    end
+
+    class AdminAccount
+      attr_accessor account_id: ::String
+      attr_accessor status: ("ENABLED" | "DISABLING_IN_PROGRESS")
+      SENSITIVE: []
+    end
+
+    class AllowListCriteria
+      attr_accessor regex: ::String
+      attr_accessor s3_words_list: Types::S3WordsList
+      SENSITIVE: []
+    end
+
+    class AllowListStatus
+      attr_accessor code: ("OK" | "S3_OBJECT_NOT_FOUND" | "S3_USER_ACCESS_DENIED" | "S3_OBJECT_ACCESS_DENIED" | "S3_THROTTLED" | "S3_OBJECT_OVERSIZE" | "S3_OBJECT_EMPTY" | "UNKNOWN_ERROR")
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class AllowListSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ApiCallDetails
+      attr_accessor api: ::String
+      attr_accessor api_service_name: ::String
+      attr_accessor first_seen: ::Time
+      attr_accessor last_seen: ::Time
+      SENSITIVE: []
+    end
+
+    class AssumedRole
+      attr_accessor access_key_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor session_context: Types::SessionContext
+      SENSITIVE: []
+    end
+
+    class AwsAccount
+      attr_accessor account_id: ::String
+      attr_accessor principal_id: ::String
+      SENSITIVE: []
+    end
+
+    class AwsService
+      attr_accessor invoked_by: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetCustomDataIdentifierSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor deleted: bool
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetCustomDataIdentifiersRequest
+      attr_accessor ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetCustomDataIdentifiersResponse
+      attr_accessor custom_data_identifiers: ::Array[Types::BatchGetCustomDataIdentifierSummary]
+      attr_accessor not_found_identifier_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BlockPublicAccess
+      attr_accessor block_public_acls: bool
+      attr_accessor block_public_policy: bool
+      attr_accessor ignore_public_acls: bool
+      attr_accessor restrict_public_buckets: bool
+      SENSITIVE: []
+    end
+
+    class BucketCountByEffectivePermission
+      attr_accessor publicly_accessible: ::Integer
+      attr_accessor publicly_readable: ::Integer
+      attr_accessor publicly_writable: ::Integer
+      attr_accessor unknown: ::Integer
+      SENSITIVE: []
+    end
+
+    class BucketCountByEncryptionType
+      attr_accessor kms_managed: ::Integer
+      attr_accessor s3_managed: ::Integer
+      attr_accessor unencrypted: ::Integer
+      attr_accessor unknown: ::Integer
+      SENSITIVE: []
+    end
+
+    class BucketCountBySharedAccessType
+      attr_accessor external: ::Integer
+      attr_accessor internal: ::Integer
+      attr_accessor not_shared: ::Integer
+      attr_accessor unknown: ::Integer
+      SENSITIVE: []
+    end
+
+    class BucketCountPolicyAllowsUnencryptedObjectUploads
+      attr_accessor allows_unencrypted_object_uploads: ::Integer
+      attr_accessor denies_unencrypted_object_uploads: ::Integer
+      attr_accessor unknown: ::Integer
+      SENSITIVE: []
+    end
+
+    class BucketCriteriaAdditionalProperties
+      attr_accessor eq: ::Array[::String]
+      attr_accessor gt: ::Integer
+      attr_accessor gte: ::Integer
+      attr_accessor lt: ::Integer
+      attr_accessor lte: ::Integer
+      attr_accessor neq: ::Array[::String]
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class BucketLevelPermissions
+      attr_accessor access_control_list: Types::AccessControlList
+      attr_accessor block_public_access: Types::BlockPublicAccess
+      attr_accessor bucket_policy: Types::BucketPolicy
+      SENSITIVE: []
+    end
+
+    class BucketMetadata
+      attr_accessor account_id: ::String
+      attr_accessor allows_unencrypted_object_uploads: ("TRUE" | "FALSE" | "UNKNOWN")
+      attr_accessor bucket_arn: ::String
+      attr_accessor bucket_created_at: ::Time
+      attr_accessor bucket_name: ::String
+      attr_accessor classifiable_object_count: ::Integer
+      attr_accessor classifiable_size_in_bytes: ::Integer
+      attr_accessor error_code: ("ACCESS_DENIED")
+      attr_accessor error_message: ::String
+      attr_accessor job_details: Types::JobDetails
+      attr_accessor last_automated_discovery_time: ::Time
+      attr_accessor last_updated: ::Time
+      attr_accessor object_count: ::Integer
+      attr_accessor object_count_by_encryption_type: Types::ObjectCountByEncryptionType
+      attr_accessor public_access: Types::BucketPublicAccess
+      attr_accessor region: ::String
+      attr_accessor replication_details: Types::ReplicationDetails
+      attr_accessor sensitivity_score: ::Integer
+      attr_accessor server_side_encryption: Types::BucketServerSideEncryption
+      attr_accessor shared_access: ("EXTERNAL" | "INTERNAL" | "NOT_SHARED" | "UNKNOWN")
+      attr_accessor size_in_bytes: ::Integer
+      attr_accessor size_in_bytes_compressed: ::Integer
+      attr_accessor tags: ::Array[Types::KeyValuePair]
+      attr_accessor unclassifiable_object_count: Types::ObjectLevelStatistics
+      attr_accessor unclassifiable_object_size_in_bytes: Types::ObjectLevelStatistics
+      attr_accessor versioning: bool
+      SENSITIVE: []
+    end
+
+    class BucketPermissionConfiguration
+      attr_accessor account_level_permissions: Types::AccountLevelPermissions
+      attr_accessor bucket_level_permissions: Types::BucketLevelPermissions
+      SENSITIVE: []
+    end
+
+    class BucketPolicy
+      attr_accessor allows_public_read_access: bool
+      attr_accessor allows_public_write_access: bool
+      SENSITIVE: []
+    end
+
+    class BucketPublicAccess
+      attr_accessor effective_permission: ("PUBLIC" | "NOT_PUBLIC" | "UNKNOWN")
+      attr_accessor permission_configuration: Types::BucketPermissionConfiguration
+      SENSITIVE: []
+    end
+
+    class BucketServerSideEncryption
+      attr_accessor kms_master_key_id: ::String
+      attr_accessor type: ("NONE" | "AES256" | "aws:kms" | "aws:kms:dsse")
+      SENSITIVE: []
+    end
+
+    class BucketSortCriteria
+      attr_accessor attribute_name: ::String
+      attr_accessor order_by: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class BucketStatisticsBySensitivity
+      attr_accessor classification_error: Types::SensitivityAggregations
+      attr_accessor not_classified: Types::SensitivityAggregations
+      attr_accessor not_sensitive: Types::SensitivityAggregations
+      attr_accessor sensitive: Types::SensitivityAggregations
+      SENSITIVE: []
+    end
+
+    class Cell
+      attr_accessor cell_reference: ::String
+      attr_accessor column: ::Integer
+      attr_accessor column_name: ::String
+      attr_accessor row: ::Integer
+      SENSITIVE: []
+    end
+
+    class ClassificationDetails
+      attr_accessor detailed_results_location: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor job_id: ::String
+      attr_accessor origin_type: ("SENSITIVE_DATA_DISCOVERY_JOB" | "AUTOMATED_SENSITIVE_DATA_DISCOVERY")
+      attr_accessor result: Types::ClassificationResult
+      SENSITIVE: []
+    end
+
+    class ClassificationExportConfiguration
+      attr_accessor s3_destination: Types::S3Destination
+      SENSITIVE: []
+    end
+
+    class ClassificationResult
+      attr_accessor additional_occurrences: bool
+      attr_accessor custom_data_identifiers: Types::CustomDataIdentifiers
+      attr_accessor mime_type: ::String
+      attr_accessor sensitive_data: ::Array[Types::SensitiveDataItem]
+      attr_accessor size_classified: ::Integer
+      attr_accessor status: Types::ClassificationResultStatus
+      SENSITIVE: []
+    end
+
+    class ClassificationResultStatus
+      attr_accessor code: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class ClassificationScopeSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAllowListRequest
+      attr_accessor client_token: ::String
+      attr_accessor criteria: Types::AllowListCriteria
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateAllowListResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateClassificationJobRequest
+      attr_accessor allow_list_ids: ::Array[::String]
+      attr_accessor client_token: ::String
+      attr_accessor custom_data_identifier_ids: ::Array[::String]
+      attr_accessor description: ::String
+      attr_accessor initial_run: bool
+      attr_accessor job_type: ("ONE_TIME" | "SCHEDULED")
+      attr_accessor managed_data_identifier_ids: ::Array[::String]
+      attr_accessor managed_data_identifier_selector: ("ALL" | "EXCLUDE" | "INCLUDE" | "NONE" | "RECOMMENDED")
+      attr_accessor name: ::String
+      attr_accessor s3_job_definition: Types::S3JobDefinition
+      attr_accessor sampling_percentage: ::Integer
+      attr_accessor schedule_frequency: Types::JobScheduleFrequency
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateClassificationJobResponse
+      attr_accessor job_arn: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCustomDataIdentifierRequest
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor ignore_words: ::Array[::String]
+      attr_accessor keywords: ::Array[::String]
+      attr_accessor maximum_match_distance: ::Integer
+      attr_accessor name: ::String
+      attr_accessor regex: ::String
+      attr_accessor severity_levels: ::Array[Types::SeverityLevel]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateCustomDataIdentifierResponse
+      attr_accessor custom_data_identifier_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFindingsFilterRequest
+      attr_accessor action: ("ARCHIVE" | "NOOP")
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor finding_criteria: Types::FindingCriteria
+      attr_accessor name: ::String
+      attr_accessor position: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateFindingsFilterResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateInvitationsRequest
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor disable_email_notification: bool
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateInvitationsResponse
+      attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class CreateMemberRequest
+      attr_accessor account: Types::AccountDetail
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateMemberResponse
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSampleFindingsRequest
+      attr_accessor finding_types: ::Array[("SensitiveData:S3Object/Multiple" | "SensitiveData:S3Object/Financial" | "SensitiveData:S3Object/Personal" | "SensitiveData:S3Object/Credentials" | "SensitiveData:S3Object/CustomIdentifier" | "Policy:IAMUser/S3BucketPublic" | "Policy:IAMUser/S3BucketSharedExternally" | "Policy:IAMUser/S3BucketReplicatedExternally" | "Policy:IAMUser/S3BucketEncryptionDisabled" | "Policy:IAMUser/S3BlockPublicAccessDisabled" | "Policy:IAMUser/S3BucketSharedWithCloudFront")]
+      SENSITIVE: []
+    end
+
+    class CreateSampleFindingsResponse < Aws::EmptyStructure
+    end
+
+    class CriteriaBlockForJob
+      attr_accessor and: ::Array[Types::CriteriaForJob]
+      SENSITIVE: []
+    end
+
+    class CriteriaForJob
+      attr_accessor simple_criterion: Types::SimpleCriterionForJob
+      attr_accessor tag_criterion: Types::TagCriterionForJob
+      SENSITIVE: []
+    end
+
+    class CriterionAdditionalProperties
+      attr_accessor eq: ::Array[::String]
+      attr_accessor eq_exact_match: ::Array[::String]
+      attr_accessor gt: ::Integer
+      attr_accessor gte: ::Integer
+      attr_accessor lt: ::Integer
+      attr_accessor lte: ::Integer
+      attr_accessor neq: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CustomDataIdentifierSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CustomDataIdentifiers
+      attr_accessor detections: ::Array[Types::CustomDetection]
+      attr_accessor total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class CustomDetection
+      attr_accessor arn: ::String
+      attr_accessor count: ::Integer
+      attr_accessor name: ::String
+      attr_accessor occurrences: Types::Occurrences
+      SENSITIVE: []
+    end
+
+    class DailySchedule < Aws::EmptyStructure
+    end
+
+    class DeclineInvitationsRequest
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeclineInvitationsResponse
+      attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class DefaultDetection
+      attr_accessor count: ::Integer
+      attr_accessor occurrences: Types::Occurrences
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAllowListRequest
+      attr_accessor id: ::String
+      attr_accessor ignore_job_checks: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAllowListResponse < Aws::EmptyStructure
+    end
+
+    class DeleteCustomDataIdentifierRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCustomDataIdentifierResponse < Aws::EmptyStructure
+    end
+
+    class DeleteFindingsFilterRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFindingsFilterResponse < Aws::EmptyStructure
+    end
+
+    class DeleteInvitationsRequest
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteInvitationsResponse
+      attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class DeleteMemberRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMemberResponse < Aws::EmptyStructure
+    end
+
+    class DescribeBucketsRequest
+      attr_accessor criteria: ::Hash[::String, Types::BucketCriteriaAdditionalProperties]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_criteria: Types::BucketSortCriteria
+      SENSITIVE: []
+    end
+
+    class DescribeBucketsResponse
+      attr_accessor buckets: ::Array[Types::BucketMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClassificationJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClassificationJobResponse
+      attr_accessor allow_list_ids: ::Array[::String]
+      attr_accessor client_token: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor custom_data_identifier_ids: ::Array[::String]
+      attr_accessor description: ::String
+      attr_accessor initial_run: bool
+      attr_accessor job_arn: ::String
+      attr_accessor job_id: ::String
+      attr_accessor job_status: ("RUNNING" | "PAUSED" | "CANCELLED" | "COMPLETE" | "IDLE" | "USER_PAUSED")
+      attr_accessor job_type: ("ONE_TIME" | "SCHEDULED")
+      attr_accessor last_run_error_status: Types::LastRunErrorStatus
+      attr_accessor last_run_time: ::Time
+      attr_accessor managed_data_identifier_ids: ::Array[::String]
+      attr_accessor managed_data_identifier_selector: ("ALL" | "EXCLUDE" | "INCLUDE" | "NONE" | "RECOMMENDED")
+      attr_accessor name: ::String
+      attr_accessor s3_job_definition: Types::S3JobDefinition
+      attr_accessor sampling_percentage: ::Integer
+      attr_accessor schedule_frequency: Types::JobScheduleFrequency
+      attr_accessor statistics: Types::Statistics
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor user_paused_details: Types::UserPausedDetails
+      SENSITIVE: []
+    end
+
+    class DescribeOrganizationConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class DescribeOrganizationConfigurationResponse
+      attr_accessor auto_enable: bool
+      attr_accessor max_account_limit_reached: bool
+      SENSITIVE: []
+    end
+
+    class DetectedDataDetails
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class Detection
+      attr_accessor arn: ::String
+      attr_accessor count: ::Integer
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor suppressed: bool
+      attr_accessor type: ("CUSTOM" | "MANAGED")
+      SENSITIVE: []
+    end
+
+    class DisableMacieRequest < Aws::EmptyStructure
+    end
+
+    class DisableMacieResponse < Aws::EmptyStructure
+    end
+
+    class DisableOrganizationAdminAccountRequest
+      attr_accessor admin_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisableOrganizationAdminAccountResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateFromAdministratorAccountRequest < Aws::EmptyStructure
+    end
+
+    class DisassociateFromAdministratorAccountResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateFromMasterAccountRequest < Aws::EmptyStructure
+    end
+
+    class DisassociateFromMasterAccountResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateMemberRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateMemberResponse < Aws::EmptyStructure
+    end
+
+    class DomainDetails
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class Empty < Aws::EmptyStructure
+    end
+
+    class EnableMacieRequest
+      attr_accessor client_token: ::String
+      attr_accessor finding_publishing_frequency: ("FIFTEEN_MINUTES" | "ONE_HOUR" | "SIX_HOURS")
+      attr_accessor status: ("PAUSED" | "ENABLED")
+      SENSITIVE: []
+    end
+
+    class EnableMacieResponse < Aws::EmptyStructure
+    end
+
+    class EnableOrganizationAdminAccountRequest
+      attr_accessor admin_account_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class EnableOrganizationAdminAccountResponse < Aws::EmptyStructure
+    end
+
+    class FederatedUser
+      attr_accessor access_key_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor session_context: Types::SessionContext
+      SENSITIVE: []
+    end
+
+    class Finding
+      attr_accessor account_id: ::String
+      attr_accessor archived: bool
+      attr_accessor category: ("CLASSIFICATION" | "POLICY")
+      attr_accessor classification_details: Types::ClassificationDetails
+      attr_accessor count: ::Integer
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor partition: ::String
+      attr_accessor policy_details: Types::PolicyDetails
+      attr_accessor region: ::String
+      attr_accessor resources_affected: Types::ResourcesAffected
+      attr_accessor sample: bool
+      attr_accessor schema_version: ::String
+      attr_accessor severity: Types::Severity
+      attr_accessor title: ::String
+      attr_accessor type: ("SensitiveData:S3Object/Multiple" | "SensitiveData:S3Object/Financial" | "SensitiveData:S3Object/Personal" | "SensitiveData:S3Object/Credentials" | "SensitiveData:S3Object/CustomIdentifier" | "Policy:IAMUser/S3BucketPublic" | "Policy:IAMUser/S3BucketSharedExternally" | "Policy:IAMUser/S3BucketReplicatedExternally" | "Policy:IAMUser/S3BucketEncryptionDisabled" | "Policy:IAMUser/S3BlockPublicAccessDisabled" | "Policy:IAMUser/S3BucketSharedWithCloudFront")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class FindingAction
+      attr_accessor action_type: ("AWS_API_CALL")
+      attr_accessor api_call_details: Types::ApiCallDetails
+      SENSITIVE: []
+    end
+
+    class FindingActor
+      attr_accessor domain_details: Types::DomainDetails
+      attr_accessor ip_address_details: Types::IpAddressDetails
+      attr_accessor user_identity: Types::UserIdentity
+      SENSITIVE: []
+    end
+
+    class FindingCriteria
+      attr_accessor criterion: ::Hash[::String, Types::CriterionAdditionalProperties]
+      SENSITIVE: []
+    end
+
+    class FindingStatisticsSortCriteria
+      attr_accessor attribute_name: ("groupKey" | "count")
+      attr_accessor order_by: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class FindingsFilterListItem
+      attr_accessor action: ("ARCHIVE" | "NOOP")
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetAdministratorAccountRequest < Aws::EmptyStructure
+    end
+
+    class GetAdministratorAccountResponse
+      attr_accessor administrator: Types::Invitation
+      SENSITIVE: []
+    end
+
+    class GetAllowListRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAllowListResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor criteria: Types::AllowListCriteria
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: Types::AllowListStatus
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetAutomatedDiscoveryConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class GetAutomatedDiscoveryConfigurationResponse
+      attr_accessor classification_scope_id: ::String
+      attr_accessor disabled_at: ::Time
+      attr_accessor first_enabled_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor sensitivity_inspection_template_id: ::String
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class GetBucketStatisticsRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBucketStatisticsResponse
+      attr_accessor bucket_count: ::Integer
+      attr_accessor bucket_count_by_effective_permission: Types::BucketCountByEffectivePermission
+      attr_accessor bucket_count_by_encryption_type: Types::BucketCountByEncryptionType
+      attr_accessor bucket_count_by_object_encryption_requirement: Types::BucketCountPolicyAllowsUnencryptedObjectUploads
+      attr_accessor bucket_count_by_shared_access_type: Types::BucketCountBySharedAccessType
+      attr_accessor bucket_statistics_by_sensitivity: Types::BucketStatisticsBySensitivity
+      attr_accessor classifiable_object_count: ::Integer
+      attr_accessor classifiable_size_in_bytes: ::Integer
+      attr_accessor last_updated: ::Time
+      attr_accessor object_count: ::Integer
+      attr_accessor size_in_bytes: ::Integer
+      attr_accessor size_in_bytes_compressed: ::Integer
+      attr_accessor unclassifiable_object_count: Types::ObjectLevelStatistics
+      attr_accessor unclassifiable_object_size_in_bytes: Types::ObjectLevelStatistics
+      SENSITIVE: []
+    end
+
+    class GetClassificationExportConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class GetClassificationExportConfigurationResponse
+      attr_accessor configuration: Types::ClassificationExportConfiguration
+      SENSITIVE: []
+    end
+
+    class GetClassificationScopeRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetClassificationScopeResponse
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor s3: Types::S3ClassificationScope
+      SENSITIVE: []
+    end
+
+    class GetCustomDataIdentifierRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCustomDataIdentifierResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor deleted: bool
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor ignore_words: ::Array[::String]
+      attr_accessor keywords: ::Array[::String]
+      attr_accessor maximum_match_distance: ::Integer
+      attr_accessor name: ::String
+      attr_accessor regex: ::String
+      attr_accessor severity_levels: ::Array[Types::SeverityLevel]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetFindingStatisticsRequest
+      attr_accessor finding_criteria: Types::FindingCriteria
+      attr_accessor group_by: ("resourcesAffected.s3Bucket.name" | "type" | "classificationDetails.jobId" | "severity.description")
+      attr_accessor size: ::Integer
+      attr_accessor sort_criteria: Types::FindingStatisticsSortCriteria
+      SENSITIVE: []
+    end
+
+    class GetFindingStatisticsResponse
+      attr_accessor counts_by_group: ::Array[Types::GroupCount]
+      SENSITIVE: []
+    end
+
+    class GetFindingsFilterRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFindingsFilterResponse
+      attr_accessor action: ("ARCHIVE" | "NOOP")
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor finding_criteria: Types::FindingCriteria
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor position: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetFindingsPublicationConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class GetFindingsPublicationConfigurationResponse
+      attr_accessor security_hub_configuration: Types::SecurityHubConfiguration
+      SENSITIVE: []
+    end
+
+    class GetFindingsRequest
+      attr_accessor finding_ids: ::Array[::String]
+      attr_accessor sort_criteria: Types::SortCriteria
+      SENSITIVE: []
+    end
+
+    class GetFindingsResponse
+      attr_accessor findings: ::Array[Types::Finding]
+      SENSITIVE: []
+    end
+
+    class GetInvitationsCountRequest < Aws::EmptyStructure
+    end
+
+    class GetInvitationsCountResponse
+      attr_accessor invitations_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetMacieSessionRequest < Aws::EmptyStructure
+    end
+
+    class GetMacieSessionResponse
+      attr_accessor created_at: ::Time
+      attr_accessor finding_publishing_frequency: ("FIFTEEN_MINUTES" | "ONE_HOUR" | "SIX_HOURS")
+      attr_accessor service_role: ::String
+      attr_accessor status: ("PAUSED" | "ENABLED")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetMasterAccountRequest < Aws::EmptyStructure
+    end
+
+    class GetMasterAccountResponse
+      attr_accessor master: Types::Invitation
+      SENSITIVE: []
+    end
+
+    class GetMemberRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMemberResponse
+      attr_accessor account_id: ::String
+      attr_accessor administrator_account_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor email: ::String
+      attr_accessor invited_at: ::Time
+      attr_accessor master_account_id: ::String
+      attr_accessor relationship_status: ("Enabled" | "Paused" | "Invited" | "Created" | "Removed" | "Resigned" | "EmailVerificationInProgress" | "EmailVerificationFailed" | "RegionDisabled" | "AccountSuspended")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetResourceProfileRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourceProfileResponse
+      attr_accessor profile_updated_at: ::Time
+      attr_accessor sensitivity_score: ::Integer
+      attr_accessor sensitivity_score_overridden: bool
+      attr_accessor statistics: Types::ResourceStatistics
+      SENSITIVE: []
+    end
+
+    class GetRevealConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class GetRevealConfigurationResponse
+      attr_accessor configuration: Types::RevealConfiguration
+      attr_accessor retrieval_configuration: Types::RetrievalConfiguration
+      SENSITIVE: []
+    end
+
+    class GetSensitiveDataOccurrencesAvailabilityRequest
+      attr_accessor finding_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSensitiveDataOccurrencesAvailabilityResponse
+      attr_accessor code: ("AVAILABLE" | "UNAVAILABLE")
+      attr_accessor reasons: ::Array[("OBJECT_EXCEEDS_SIZE_QUOTA" | "UNSUPPORTED_OBJECT_TYPE" | "UNSUPPORTED_FINDING_TYPE" | "INVALID_CLASSIFICATION_RESULT" | "OBJECT_UNAVAILABLE" | "ACCOUNT_NOT_IN_ORGANIZATION" | "MISSING_GET_MEMBER_PERMISSION" | "ROLE_TOO_PERMISSIVE" | "MEMBER_ROLE_TOO_PERMISSIVE" | "INVALID_RESULT_SIGNATURE" | "RESULT_NOT_SIGNED")]
+      SENSITIVE: []
+    end
+
+    class GetSensitiveDataOccurrencesRequest
+      attr_accessor finding_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSensitiveDataOccurrencesResponse
+      attr_accessor error: ::String
+      attr_accessor sensitive_data_occurrences: ::Hash[::String, ::Array[Types::DetectedDataDetails]]
+      attr_accessor status: ("SUCCESS" | "PROCESSING" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class GetSensitivityInspectionTemplateRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSensitivityInspectionTemplateResponse
+      attr_accessor description: ::String
+      attr_accessor excludes: Types::SensitivityInspectionTemplateExcludes
+      attr_accessor includes: Types::SensitivityInspectionTemplateIncludes
+      attr_accessor name: ::String
+      attr_accessor sensitivity_inspection_template_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetUsageStatisticsRequest
+      attr_accessor filter_by: ::Array[Types::UsageStatisticsFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_by: Types::UsageStatisticsSortBy
+      attr_accessor time_range: ("MONTH_TO_DATE" | "PAST_30_DAYS")
+      SENSITIVE: []
+    end
+
+    class GetUsageStatisticsResponse
+      attr_accessor next_token: ::String
+      attr_accessor records: ::Array[Types::UsageRecord]
+      attr_accessor time_range: ("MONTH_TO_DATE" | "PAST_30_DAYS")
+      SENSITIVE: []
+    end
+
+    class GetUsageTotalsRequest
+      attr_accessor time_range: ::String
+      SENSITIVE: []
+    end
+
+    class GetUsageTotalsResponse
+      attr_accessor time_range: ("MONTH_TO_DATE" | "PAST_30_DAYS")
+      attr_accessor usage_totals: ::Array[Types::UsageTotal]
+      SENSITIVE: []
+    end
+
+    class GroupCount
+      attr_accessor count: ::Integer
+      attr_accessor group_key: ::String
+      SENSITIVE: []
+    end
+
+    class IamUser
+      attr_accessor account_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Invitation
+      attr_accessor account_id: ::String
+      attr_accessor invitation_id: ::String
+      attr_accessor invited_at: ::Time
+      attr_accessor relationship_status: ("Enabled" | "Paused" | "Invited" | "Created" | "Removed" | "Resigned" | "EmailVerificationInProgress" | "EmailVerificationFailed" | "RegionDisabled" | "AccountSuspended")
+      SENSITIVE: []
+    end
+
+    class IpAddressDetails
+      attr_accessor ip_address_v4: ::String
+      attr_accessor ip_city: Types::IpCity
+      attr_accessor ip_country: Types::IpCountry
+      attr_accessor ip_geo_location: Types::IpGeoLocation
+      attr_accessor ip_owner: Types::IpOwner
+      SENSITIVE: []
+    end
+
+    class IpCity
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class IpCountry
+      attr_accessor code: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class IpGeoLocation
+      attr_accessor lat: ::Float
+      attr_accessor lon: ::Float
+      SENSITIVE: []
+    end
+
+    class IpOwner
+      attr_accessor asn: ::String
+      attr_accessor asn_org: ::String
+      attr_accessor isp: ::String
+      attr_accessor org: ::String
+      SENSITIVE: []
+    end
+
+    class JobDetails
+      attr_accessor is_defined_in_job: ("TRUE" | "FALSE" | "UNKNOWN")
+      attr_accessor is_monitored_by_job: ("TRUE" | "FALSE" | "UNKNOWN")
+      attr_accessor last_job_id: ::String
+      attr_accessor last_job_run_time: ::Time
+      SENSITIVE: []
+    end
+
+    class JobScheduleFrequency
+      attr_accessor daily_schedule: Types::DailySchedule
+      attr_accessor monthly_schedule: Types::MonthlySchedule
+      attr_accessor weekly_schedule: Types::WeeklySchedule
+      SENSITIVE: []
+    end
+
+    class JobScopeTerm
+      attr_accessor simple_scope_term: Types::SimpleScopeTerm
+      attr_accessor tag_scope_term: Types::TagScopeTerm
+      SENSITIVE: []
+    end
+
+    class JobScopingBlock
+      attr_accessor and: ::Array[Types::JobScopeTerm]
+      SENSITIVE: []
+    end
+
+    class JobSummary
+      attr_accessor bucket_criteria: Types::S3BucketCriteriaForJob
+      attr_accessor bucket_definitions: ::Array[Types::S3BucketDefinitionForJob]
+      attr_accessor created_at: ::Time
+      attr_accessor job_id: ::String
+      attr_accessor job_status: ("RUNNING" | "PAUSED" | "CANCELLED" | "COMPLETE" | "IDLE" | "USER_PAUSED")
+      attr_accessor job_type: ("ONE_TIME" | "SCHEDULED")
+      attr_accessor last_run_error_status: Types::LastRunErrorStatus
+      attr_accessor name: ::String
+      attr_accessor user_paused_details: Types::UserPausedDetails
+      SENSITIVE: []
+    end
+
+    class KeyValuePair
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class LastRunErrorStatus
+      attr_accessor code: ("NONE" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class ListAllowListsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAllowListsResponse
+      attr_accessor allow_lists: ::Array[Types::AllowListSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClassificationJobsRequest
+      attr_accessor filter_criteria: Types::ListJobsFilterCriteria
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_criteria: Types::ListJobsSortCriteria
+      SENSITIVE: []
+    end
+
+    class ListClassificationJobsResponse
+      attr_accessor items: ::Array[Types::JobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClassificationScopesRequest
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClassificationScopesResponse
+      attr_accessor classification_scopes: ::Array[Types::ClassificationScopeSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomDataIdentifiersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomDataIdentifiersResponse
+      attr_accessor items: ::Array[Types::CustomDataIdentifierSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFindingsFiltersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFindingsFiltersResponse
+      attr_accessor findings_filter_list_items: ::Array[Types::FindingsFilterListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFindingsRequest
+      attr_accessor finding_criteria: Types::FindingCriteria
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_criteria: Types::SortCriteria
+      SENSITIVE: []
+    end
+
+    class ListFindingsResponse
+      attr_accessor finding_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInvitationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInvitationsResponse
+      attr_accessor invitations: ::Array[Types::Invitation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobsFilterCriteria
+      attr_accessor excludes: ::Array[Types::ListJobsFilterTerm]
+      attr_accessor includes: ::Array[Types::ListJobsFilterTerm]
+      SENSITIVE: []
+    end
+
+    class ListJobsFilterTerm
+      attr_accessor comparator: ("EQ" | "GT" | "GTE" | "LT" | "LTE" | "NE" | "CONTAINS" | "STARTS_WITH")
+      attr_accessor key: ("jobType" | "jobStatus" | "createdAt" | "name")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListJobsSortCriteria
+      attr_accessor attribute_name: ("createdAt" | "jobStatus" | "name" | "jobType")
+      attr_accessor order_by: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class ListManagedDataIdentifiersRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedDataIdentifiersResponse
+      attr_accessor items: ::Array[Types::ManagedDataIdentifierSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMembersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor only_associated: ::String
+      SENSITIVE: []
+    end
+
+    class ListMembersResponse
+      attr_accessor members: ::Array[Types::Member]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOrganizationAdminAccountsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOrganizationAdminAccountsResponse
+      attr_accessor admin_accounts: ::Array[Types::AdminAccount]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceProfileArtifactsRequest
+      attr_accessor next_token: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceProfileArtifactsResponse
+      attr_accessor artifacts: ::Array[Types::ResourceProfileArtifact]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceProfileDetectionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceProfileDetectionsResponse
+      attr_accessor detections: ::Array[Types::Detection]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSensitivityInspectionTemplatesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSensitivityInspectionTemplatesResponse
+      attr_accessor next_token: ::String
+      attr_accessor sensitivity_inspection_templates: ::Array[Types::SensitivityInspectionTemplatesEntry]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ManagedDataIdentifierSummary
+      attr_accessor category: ("FINANCIAL_INFORMATION" | "PERSONAL_INFORMATION" | "CREDENTIALS" | "CUSTOM_IDENTIFIER")
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class MatchingBucket
+      attr_accessor account_id: ::String
+      attr_accessor bucket_name: ::String
+      attr_accessor classifiable_object_count: ::Integer
+      attr_accessor classifiable_size_in_bytes: ::Integer
+      attr_accessor error_code: ("ACCESS_DENIED")
+      attr_accessor error_message: ::String
+      attr_accessor job_details: Types::JobDetails
+      attr_accessor last_automated_discovery_time: ::Time
+      attr_accessor object_count: ::Integer
+      attr_accessor object_count_by_encryption_type: Types::ObjectCountByEncryptionType
+      attr_accessor sensitivity_score: ::Integer
+      attr_accessor size_in_bytes: ::Integer
+      attr_accessor size_in_bytes_compressed: ::Integer
+      attr_accessor unclassifiable_object_count: Types::ObjectLevelStatistics
+      attr_accessor unclassifiable_object_size_in_bytes: Types::ObjectLevelStatistics
+      SENSITIVE: []
+    end
+
+    class MatchingResource
+      attr_accessor matching_bucket: Types::MatchingBucket
+      SENSITIVE: []
+    end
+
+    class Member
+      attr_accessor account_id: ::String
+      attr_accessor administrator_account_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor email: ::String
+      attr_accessor invited_at: ::Time
+      attr_accessor master_account_id: ::String
+      attr_accessor relationship_status: ("Enabled" | "Paused" | "Invited" | "Created" | "Removed" | "Resigned" | "EmailVerificationInProgress" | "EmailVerificationFailed" | "RegionDisabled" | "AccountSuspended")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class MonthlySchedule
+      attr_accessor day_of_month: ::Integer
+      SENSITIVE: []
+    end
+
+    class ObjectCountByEncryptionType
+      attr_accessor customer_managed: ::Integer
+      attr_accessor kms_managed: ::Integer
+      attr_accessor s3_managed: ::Integer
+      attr_accessor unencrypted: ::Integer
+      attr_accessor unknown: ::Integer
+      SENSITIVE: []
+    end
+
+    class ObjectLevelStatistics
+      attr_accessor file_type: ::Integer
+      attr_accessor storage_class: ::Integer
+      attr_accessor total: ::Integer
+      SENSITIVE: []
+    end
+
+    class Occurrences
+      attr_accessor cells: ::Array[Types::Cell]
+      attr_accessor line_ranges: ::Array[Types::Range]
+      attr_accessor offset_ranges: ::Array[Types::Range]
+      attr_accessor pages: ::Array[Types::Page]
+      attr_accessor records: ::Array[Types::Record]
+      SENSITIVE: []
+    end
+
+    class Page
+      attr_accessor line_range: Types::Range
+      attr_accessor offset_range: Types::Range
+      attr_accessor page_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class PolicyDetails
+      attr_accessor action: Types::FindingAction
+      attr_accessor actor: Types::FindingActor
+      SENSITIVE: []
+    end
+
+    class PutClassificationExportConfigurationRequest
+      attr_accessor configuration: Types::ClassificationExportConfiguration
+      SENSITIVE: []
+    end
+
+    class PutClassificationExportConfigurationResponse
+      attr_accessor configuration: Types::ClassificationExportConfiguration
+      SENSITIVE: []
+    end
+
+    class PutFindingsPublicationConfigurationRequest
+      attr_accessor client_token: ::String
+      attr_accessor security_hub_configuration: Types::SecurityHubConfiguration
+      SENSITIVE: []
+    end
+
+    class PutFindingsPublicationConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class Range
+      attr_accessor end: ::Integer
+      attr_accessor start: ::Integer
+      attr_accessor start_column: ::Integer
+      SENSITIVE: []
+    end
+
+    class Record
+      attr_accessor json_path: ::String
+      attr_accessor record_index: ::Integer
+      SENSITIVE: []
+    end
+
+    class ReplicationDetails
+      attr_accessor replicated: bool
+      attr_accessor replicated_externally: bool
+      attr_accessor replication_accounts: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceProfileArtifact
+      attr_accessor arn: ::String
+      attr_accessor classification_result_status: ::String
+      attr_accessor sensitive: bool
+      SENSITIVE: []
+    end
+
+    class ResourceStatistics
+      attr_accessor total_bytes_classified: ::Integer
+      attr_accessor total_detections: ::Integer
+      attr_accessor total_detections_suppressed: ::Integer
+      attr_accessor total_items_classified: ::Integer
+      attr_accessor total_items_sensitive: ::Integer
+      attr_accessor total_items_skipped: ::Integer
+      attr_accessor total_items_skipped_invalid_encryption: ::Integer
+      attr_accessor total_items_skipped_invalid_kms: ::Integer
+      attr_accessor total_items_skipped_permission_denied: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResourcesAffected
+      attr_accessor s3_bucket: Types::S3Bucket
+      attr_accessor s3_object: Types::S3Object
+      SENSITIVE: []
+    end
+
+    class RetrievalConfiguration
+      attr_accessor external_id: ::String
+      attr_accessor retrieval_mode: ("CALLER_CREDENTIALS" | "ASSUME_ROLE")
+      attr_accessor role_name: ::String
+      SENSITIVE: []
+    end
+
+    class RevealConfiguration
+      attr_accessor kms_key_id: ::String
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class S3Bucket
+      attr_accessor allows_unencrypted_object_uploads: ("TRUE" | "FALSE" | "UNKNOWN")
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor default_server_side_encryption: Types::ServerSideEncryption
+      attr_accessor name: ::String
+      attr_accessor owner: Types::S3BucketOwner
+      attr_accessor public_access: Types::BucketPublicAccess
+      attr_accessor tags: ::Array[Types::KeyValuePair]
+      SENSITIVE: []
+    end
+
+    class S3BucketCriteriaForJob
+      attr_accessor excludes: Types::CriteriaBlockForJob
+      attr_accessor includes: Types::CriteriaBlockForJob
+      SENSITIVE: []
+    end
+
+    class S3BucketDefinitionForJob
+      attr_accessor account_id: ::String
+      attr_accessor buckets: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class S3BucketOwner
+      attr_accessor display_name: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class S3ClassificationScope
+      attr_accessor excludes: Types::S3ClassificationScopeExclusion
+      SENSITIVE: []
+    end
+
+    class S3ClassificationScopeExclusion
+      attr_accessor bucket_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class S3ClassificationScopeExclusionUpdate
+      attr_accessor bucket_names: ::Array[::String]
+      attr_accessor operation: ("ADD" | "REPLACE" | "REMOVE")
+      SENSITIVE: []
+    end
+
+    class S3ClassificationScopeUpdate
+      attr_accessor excludes: Types::S3ClassificationScopeExclusionUpdate
+      SENSITIVE: []
+    end
+
+    class S3Destination
+      attr_accessor bucket_name: ::String
+      attr_accessor key_prefix: ::String
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class S3JobDefinition
+      attr_accessor bucket_criteria: Types::S3BucketCriteriaForJob
+      attr_accessor bucket_definitions: ::Array[Types::S3BucketDefinitionForJob]
+      attr_accessor scoping: Types::Scoping
+      SENSITIVE: []
+    end
+
+    class S3Object
+      attr_accessor bucket_arn: ::String
+      attr_accessor e_tag: ::String
+      attr_accessor extension: ::String
+      attr_accessor key: ::String
+      attr_accessor last_modified: ::Time
+      attr_accessor path: ::String
+      attr_accessor public_access: bool
+      attr_accessor server_side_encryption: Types::ServerSideEncryption
+      attr_accessor size: ::Integer
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "INTELLIGENT_TIERING" | "DEEP_ARCHIVE" | "ONEZONE_IA" | "GLACIER" | "GLACIER_IR" | "OUTPOSTS")
+      attr_accessor tags: ::Array[Types::KeyValuePair]
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class S3WordsList
+      attr_accessor bucket_name: ::String
+      attr_accessor object_key: ::String
+      SENSITIVE: []
+    end
+
+    class Scoping
+      attr_accessor excludes: Types::JobScopingBlock
+      attr_accessor includes: Types::JobScopingBlock
+      SENSITIVE: []
+    end
+
+    class SearchResourcesBucketCriteria
+      attr_accessor excludes: Types::SearchResourcesCriteriaBlock
+      attr_accessor includes: Types::SearchResourcesCriteriaBlock
+      SENSITIVE: []
+    end
+
+    class SearchResourcesCriteria
+      attr_accessor simple_criterion: Types::SearchResourcesSimpleCriterion
+      attr_accessor tag_criterion: Types::SearchResourcesTagCriterion
+      SENSITIVE: []
+    end
+
+    class SearchResourcesCriteriaBlock
+      attr_accessor and: ::Array[Types::SearchResourcesCriteria]
+      SENSITIVE: []
+    end
+
+    class SearchResourcesRequest
+      attr_accessor bucket_criteria: Types::SearchResourcesBucketCriteria
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_criteria: Types::SearchResourcesSortCriteria
+      SENSITIVE: []
+    end
+
+    class SearchResourcesResponse
+      attr_accessor matching_resources: ::Array[Types::MatchingResource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchResourcesSimpleCriterion
+      attr_accessor comparator: ("EQ" | "NE")
+      attr_accessor key: ("ACCOUNT_ID" | "S3_BUCKET_NAME" | "S3_BUCKET_EFFECTIVE_PERMISSION" | "S3_BUCKET_SHARED_ACCESS")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SearchResourcesSortCriteria
+      attr_accessor attribute_name: ("ACCOUNT_ID" | "RESOURCE_NAME" | "S3_CLASSIFIABLE_OBJECT_COUNT" | "S3_CLASSIFIABLE_SIZE_IN_BYTES")
+      attr_accessor order_by: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class SearchResourcesTagCriterion
+      attr_accessor comparator: ("EQ" | "NE")
+      attr_accessor tag_values: ::Array[Types::SearchResourcesTagCriterionPair]
+      SENSITIVE: []
+    end
+
+    class SearchResourcesTagCriterionPair
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SecurityHubConfiguration
+      attr_accessor publish_classification_findings: bool
+      attr_accessor publish_policy_findings: bool
+      SENSITIVE: []
+    end
+
+    class SensitiveDataItem
+      attr_accessor category: ("FINANCIAL_INFORMATION" | "PERSONAL_INFORMATION" | "CREDENTIALS" | "CUSTOM_IDENTIFIER")
+      attr_accessor detections: ::Array[Types::DefaultDetection]
+      attr_accessor total_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SensitivityAggregations
+      attr_accessor classifiable_size_in_bytes: ::Integer
+      attr_accessor publicly_accessible_count: ::Integer
+      attr_accessor total_count: ::Integer
+      attr_accessor total_size_in_bytes: ::Integer
+      SENSITIVE: []
+    end
+
+    class SensitivityInspectionTemplateExcludes
+      attr_accessor managed_data_identifier_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SensitivityInspectionTemplateIncludes
+      attr_accessor allow_list_ids: ::Array[::String]
+      attr_accessor custom_data_identifier_ids: ::Array[::String]
+      attr_accessor managed_data_identifier_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SensitivityInspectionTemplatesEntry
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ServerSideEncryption
+      attr_accessor encryption_type: ("NONE" | "AES256" | "aws:kms" | "UNKNOWN" | "aws:kms:dsse")
+      attr_accessor kms_master_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceLimit
+      attr_accessor is_service_limited: bool
+      attr_accessor unit: ("TERABYTES")
+      attr_accessor value: ::Integer
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SessionContext
+      attr_accessor attributes: Types::SessionContextAttributes
+      attr_accessor session_issuer: Types::SessionIssuer
+      SENSITIVE: []
+    end
+
+    class SessionContextAttributes
+      attr_accessor creation_date: ::Time
+      attr_accessor mfa_authenticated: bool
+      SENSITIVE: []
+    end
+
+    class SessionIssuer
+      attr_accessor account_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor type: ::String
+      attr_accessor user_name: ::String
+      SENSITIVE: []
+    end
+
+    class Severity
+      attr_accessor description: ("Low" | "Medium" | "High")
+      attr_accessor score: ::Integer
+      SENSITIVE: []
+    end
+
+    class SeverityLevel
+      attr_accessor occurrences_threshold: ::Integer
+      attr_accessor severity: ("LOW" | "MEDIUM" | "HIGH")
+      SENSITIVE: []
+    end
+
+    class SimpleCriterionForJob
+      attr_accessor comparator: ("EQ" | "GT" | "GTE" | "LT" | "LTE" | "NE" | "CONTAINS" | "STARTS_WITH")
+      attr_accessor key: ("ACCOUNT_ID" | "S3_BUCKET_NAME" | "S3_BUCKET_EFFECTIVE_PERMISSION" | "S3_BUCKET_SHARED_ACCESS")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SimpleScopeTerm
+      attr_accessor comparator: ("EQ" | "GT" | "GTE" | "LT" | "LTE" | "NE" | "CONTAINS" | "STARTS_WITH")
+      attr_accessor key: ("OBJECT_EXTENSION" | "OBJECT_LAST_MODIFIED_DATE" | "OBJECT_SIZE" | "OBJECT_KEY")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SortCriteria
+      attr_accessor attribute_name: ::String
+      attr_accessor order_by: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class Statistics
+      attr_accessor approximate_number_of_objects_to_process: ::Float
+      attr_accessor number_of_runs: ::Float
+      SENSITIVE: []
+    end
+
+    class SuppressDataIdentifier
+      attr_accessor id: ::String
+      attr_accessor type: ("CUSTOM" | "MANAGED")
+      SENSITIVE: []
+    end
+
+    class TagCriterionForJob
+      attr_accessor comparator: ("EQ" | "GT" | "GTE" | "LT" | "LTE" | "NE" | "CONTAINS" | "STARTS_WITH")
+      attr_accessor tag_values: ::Array[Types::TagCriterionPairForJob]
+      SENSITIVE: []
+    end
+
+    class TagCriterionPairForJob
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TagScopeTerm
+      attr_accessor comparator: ("EQ" | "GT" | "GTE" | "LT" | "LTE" | "NE" | "CONTAINS" | "STARTS_WITH")
+      attr_accessor key: ::String
+      attr_accessor tag_values: ::Array[Types::TagValuePair]
+      attr_accessor target: ("S3_OBJECT")
+      SENSITIVE: []
+    end
+
+    class TagValuePair
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TestCustomDataIdentifierRequest
+      attr_accessor ignore_words: ::Array[::String]
+      attr_accessor keywords: ::Array[::String]
+      attr_accessor maximum_match_distance: ::Integer
+      attr_accessor regex: ::String
+      attr_accessor sample_text: ::String
+      SENSITIVE: []
+    end
+
+    class TestCustomDataIdentifierResponse
+      attr_accessor match_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnprocessableEntityException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnprocessedAccount
+      attr_accessor account_id: ::String
+      attr_accessor error_code: ("ClientError" | "InternalError")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAllowListRequest
+      attr_accessor criteria: Types::AllowListCriteria
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAllowListResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAutomatedDiscoveryConfigurationRequest
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateAutomatedDiscoveryConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateClassificationJobRequest
+      attr_accessor job_id: ::String
+      attr_accessor job_status: ("RUNNING" | "PAUSED" | "CANCELLED" | "COMPLETE" | "IDLE" | "USER_PAUSED")
+      SENSITIVE: []
+    end
+
+    class UpdateClassificationJobResponse < Aws::EmptyStructure
+    end
+
+    class UpdateClassificationScopeRequest
+      attr_accessor id: ::String
+      attr_accessor s3: Types::S3ClassificationScopeUpdate
+      SENSITIVE: []
+    end
+
+    class UpdateClassificationScopeResponse < Aws::EmptyStructure
+    end
+
+    class UpdateFindingsFilterRequest
+      attr_accessor action: ("ARCHIVE" | "NOOP")
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor finding_criteria: Types::FindingCriteria
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor position: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateFindingsFilterResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateMacieSessionRequest
+      attr_accessor finding_publishing_frequency: ("FIFTEEN_MINUTES" | "ONE_HOUR" | "SIX_HOURS")
+      attr_accessor status: ("PAUSED" | "ENABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateMacieSessionResponse < Aws::EmptyStructure
+    end
+
+    class UpdateMemberSessionRequest
+      attr_accessor id: ::String
+      attr_accessor status: ("PAUSED" | "ENABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateMemberSessionResponse < Aws::EmptyStructure
+    end
+
+    class UpdateOrganizationConfigurationRequest
+      attr_accessor auto_enable: bool
+      SENSITIVE: []
+    end
+
+    class UpdateOrganizationConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateResourceProfileDetectionsRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor suppress_data_identifiers: ::Array[Types::SuppressDataIdentifier]
+      SENSITIVE: []
+    end
+
+    class UpdateResourceProfileDetectionsResponse < Aws::EmptyStructure
+    end
+
+    class UpdateResourceProfileRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor sensitivity_score_override: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateResourceProfileResponse < Aws::EmptyStructure
+    end
+
+    class UpdateRetrievalConfiguration
+      attr_accessor retrieval_mode: ("CALLER_CREDENTIALS" | "ASSUME_ROLE")
+      attr_accessor role_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRevealConfigurationRequest
+      attr_accessor configuration: Types::RevealConfiguration
+      attr_accessor retrieval_configuration: Types::UpdateRetrievalConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateRevealConfigurationResponse
+      attr_accessor configuration: Types::RevealConfiguration
+      attr_accessor retrieval_configuration: Types::RetrievalConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateSensitivityInspectionTemplateRequest
+      attr_accessor description: ::String
+      attr_accessor excludes: Types::SensitivityInspectionTemplateExcludes
+      attr_accessor id: ::String
+      attr_accessor includes: Types::SensitivityInspectionTemplateIncludes
+      SENSITIVE: []
+    end
+
+    class UpdateSensitivityInspectionTemplateResponse < Aws::EmptyStructure
+    end
+
+    class UsageByAccount
+      attr_accessor currency: ("USD")
+      attr_accessor estimated_cost: ::String
+      attr_accessor service_limit: Types::ServiceLimit
+      attr_accessor type: ("DATA_INVENTORY_EVALUATION" | "SENSITIVE_DATA_DISCOVERY" | "AUTOMATED_SENSITIVE_DATA_DISCOVERY" | "AUTOMATED_OBJECT_MONITORING")
+      SENSITIVE: []
+    end
+
+    class UsageRecord
+      attr_accessor account_id: ::String
+      attr_accessor automated_discovery_free_trial_start_date: ::Time
+      attr_accessor free_trial_start_date: ::Time
+      attr_accessor usage: ::Array[Types::UsageByAccount]
+      SENSITIVE: []
+    end
+
+    class UsageStatisticsFilter
+      attr_accessor comparator: ("GT" | "GTE" | "LT" | "LTE" | "EQ" | "NE" | "CONTAINS")
+      attr_accessor key: ("accountId" | "serviceLimit" | "freeTrialStartDate" | "total")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UsageStatisticsSortBy
+      attr_accessor key: ("accountId" | "total" | "serviceLimitValue" | "freeTrialStartDate")
+      attr_accessor order_by: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class UsageTotal
+      attr_accessor currency: ("USD")
+      attr_accessor estimated_cost: ::String
+      attr_accessor type: ("DATA_INVENTORY_EVALUATION" | "SENSITIVE_DATA_DISCOVERY" | "AUTOMATED_SENSITIVE_DATA_DISCOVERY" | "AUTOMATED_OBJECT_MONITORING")
+      SENSITIVE: []
+    end
+
+    class UserIdentity
+      attr_accessor assumed_role: Types::AssumedRole
+      attr_accessor aws_account: Types::AwsAccount
+      attr_accessor aws_service: Types::AwsService
+      attr_accessor federated_user: Types::FederatedUser
+      attr_accessor iam_user: Types::IamUser
+      attr_accessor root: Types::UserIdentityRoot
+      attr_accessor type: ("AssumedRole" | "IAMUser" | "FederatedUser" | "Root" | "AWSAccount" | "AWSService")
+      SENSITIVE: []
+    end
+
+    class UserIdentityRoot
+      attr_accessor account_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor principal_id: ::String
+      SENSITIVE: []
+    end
+
+    class UserPausedDetails
+      attr_accessor job_expires_at: ::Time
+      attr_accessor job_imminent_expiration_health_event_arn: ::String
+      attr_accessor job_paused_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WeeklySchedule
+      attr_accessor day_of_week: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")
+      SENSITIVE: []
+    end
+  end
+end

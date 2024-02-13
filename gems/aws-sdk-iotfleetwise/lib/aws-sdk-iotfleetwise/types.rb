@@ -484,7 +484,7 @@ module Aws::IoTFleetWise
     #
     # @!attribute [rw] expression
     #   The logical expression used to recognize what data to collect. For
-    #   example, `$variable.Vehicle.OutsideAirTemperature >= 105.0`.
+    #   example, `` $variable.`Vehicle.OutsideAirTemperature` >= 105.0 ``.
     #   @return [String]
     #
     # @!attribute [rw] minimum_trigger_interval_ms
@@ -2611,10 +2611,15 @@ module Aws::IoTFleetWise
     #   The maximum number of items to return, between 1 and 100, inclusive.
     #   @return [Integer]
     #
+    # @!attribute [rw] signal_node_type
+    #   The type of node in the signal catalog.
+    #   @return [String]
+    #
     class ListSignalCatalogNodesRequest < Struct.new(
       :name,
       :next_token,
-      :max_results)
+      :max_results,
+      :signal_node_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4329,13 +4334,20 @@ module Aws::IoTFleetWise
     #   (January 1, 1970 at midnight UTC time).
     #   @return [Time]
     #
+    # @!attribute [rw] attributes
+    #   Static information about a vehicle in a key-value pair. For example:
+    #
+    #   `"engineType"` : `"1.3 L R2"`
+    #   @return [Hash<String,String>]
+    #
     class VehicleSummary < Struct.new(
       :vehicle_name,
       :arn,
       :model_manifest_arn,
       :decoder_manifest_arn,
       :creation_time,
-      :last_modification_time)
+      :last_modification_time,
+      :attributes)
       SENSITIVE = []
       include Aws::Structure
     end

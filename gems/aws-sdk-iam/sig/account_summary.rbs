@@ -1,0 +1,35 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IAM
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/AccountSummary.html
+    class AccountSummary
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/AccountSummary.html#initialize-instance_method
+      def initialize: (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/AccountSummary.html#summary_map-instance_method
+      def summary_map: () -> ::Hash[("Users" | "UsersQuota" | "Groups" | "GroupsQuota" | "ServerCertificates" | "ServerCertificatesQuota" | "UserPolicySizeQuota" | "GroupPolicySizeQuota" | "GroupsPerUserQuota" | "SigningCertificatesPerUserQuota" | "AccessKeysPerUserQuota" | "MFADevices" | "MFADevicesInUse" | "AccountMFAEnabled" | "AccountAccessKeysPresent" | "AccountSigningCertificatesPresent" | "AttachedPoliciesPerGroupQuota" | "AttachedPoliciesPerRoleQuota" | "AttachedPoliciesPerUserQuota" | "Policies" | "PoliciesQuota" | "PolicySizeQuota" | "PolicyVersionsInUse" | "PolicyVersionsInUseQuota" | "VersionsPerPolicyQuota" | "GlobalEndpointTokenVersion"), ::Integer]
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/AccountSummary.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/AccountSummary.html#data-instance_method
+      def data: () -> Types::GetAccountSummaryResponse
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/AccountSummary.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      class Collection < ::Aws::Resources::Collection[AccountSummary]
+      end
+    end
+  end
+end

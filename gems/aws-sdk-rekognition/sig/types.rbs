@@ -1,0 +1,2135 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Rekognition
+  module Types
+
+    class AccessDeniedException < Aws::EmptyStructure
+    end
+
+    class AgeRange
+      attr_accessor low: ::Integer
+      attr_accessor high: ::Integer
+      SENSITIVE: []
+    end
+
+    class Asset
+      attr_accessor ground_truth_manifest: Types::GroundTruthManifest
+      SENSITIVE: []
+    end
+
+    class AssociateFacesRequest
+      attr_accessor collection_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor face_ids: ::Array[::String]
+      attr_accessor user_match_threshold: ::Float
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateFacesResponse
+      attr_accessor associated_faces: ::Array[Types::AssociatedFace]
+      attr_accessor unsuccessful_face_associations: ::Array[Types::UnsuccessfulFaceAssociation]
+      attr_accessor user_status: ("ACTIVE" | "UPDATING" | "CREATING" | "CREATED")
+      SENSITIVE: []
+    end
+
+    class AssociatedFace
+      attr_accessor face_id: ::String
+      SENSITIVE: []
+    end
+
+    class AudioMetadata
+      attr_accessor codec: ::String
+      attr_accessor duration_millis: ::Integer
+      attr_accessor sample_rate: ::Integer
+      attr_accessor number_of_channels: ::Integer
+      SENSITIVE: []
+    end
+
+    class AuditImage
+      attr_accessor bytes: ::String
+      attr_accessor s3_object: Types::S3Object
+      attr_accessor bounding_box: Types::BoundingBox
+      SENSITIVE: [:bytes]
+    end
+
+    class Beard
+      attr_accessor value: bool
+      attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class BlackFrame
+      attr_accessor max_pixel_threshold: ::Float
+      attr_accessor min_coverage_percentage: ::Float
+      SENSITIVE: []
+    end
+
+    class BoundingBox
+      attr_accessor width: ::Float
+      attr_accessor height: ::Float
+      attr_accessor left: ::Float
+      attr_accessor top: ::Float
+      SENSITIVE: []
+    end
+
+    class Celebrity
+      attr_accessor urls: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor face: Types::ComparedFace
+      attr_accessor match_confidence: ::Float
+      attr_accessor known_gender: Types::KnownGender
+      SENSITIVE: []
+    end
+
+    class CelebrityDetail
+      attr_accessor urls: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor confidence: ::Float
+      attr_accessor bounding_box: Types::BoundingBox
+      attr_accessor face: Types::FaceDetail
+      attr_accessor known_gender: Types::KnownGender
+      SENSITIVE: []
+    end
+
+    class CelebrityRecognition
+      attr_accessor timestamp: ::Integer
+      attr_accessor celebrity: Types::CelebrityDetail
+      SENSITIVE: []
+    end
+
+    class CompareFacesMatch
+      attr_accessor similarity: ::Float
+      attr_accessor face: Types::ComparedFace
+      SENSITIVE: []
+    end
+
+    class CompareFacesRequest
+      attr_accessor source_image: Types::Image
+      attr_accessor target_image: Types::Image
+      attr_accessor similarity_threshold: ::Float
+      attr_accessor quality_filter: ("NONE" | "AUTO" | "LOW" | "MEDIUM" | "HIGH")
+      SENSITIVE: []
+    end
+
+    class CompareFacesResponse
+      attr_accessor source_image_face: Types::ComparedSourceImageFace
+      attr_accessor face_matches: ::Array[Types::CompareFacesMatch]
+      attr_accessor unmatched_faces: ::Array[Types::ComparedFace]
+      attr_accessor source_image_orientation_correction: ("ROTATE_0" | "ROTATE_90" | "ROTATE_180" | "ROTATE_270")
+      attr_accessor target_image_orientation_correction: ("ROTATE_0" | "ROTATE_90" | "ROTATE_180" | "ROTATE_270")
+      SENSITIVE: []
+    end
+
+    class ComparedFace
+      attr_accessor bounding_box: Types::BoundingBox
+      attr_accessor confidence: ::Float
+      attr_accessor landmarks: ::Array[Types::Landmark]
+      attr_accessor pose: Types::Pose
+      attr_accessor quality: Types::ImageQuality
+      attr_accessor emotions: ::Array[Types::Emotion]
+      attr_accessor smile: Types::Smile
+      SENSITIVE: []
+    end
+
+    class ComparedSourceImageFace
+      attr_accessor bounding_box: Types::BoundingBox
+      attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class ConflictException < Aws::EmptyStructure
+    end
+
+    class ConnectedHomeSettings
+      attr_accessor labels: ::Array[::String]
+      attr_accessor min_confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class ConnectedHomeSettingsForUpdate
+      attr_accessor labels: ::Array[::String]
+      attr_accessor min_confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class ContentModerationDetection
+      attr_accessor timestamp: ::Integer
+      attr_accessor moderation_label: Types::ModerationLabel
+      attr_accessor start_timestamp_millis: ::Integer
+      attr_accessor end_timestamp_millis: ::Integer
+      attr_accessor duration_millis: ::Integer
+      SENSITIVE: []
+    end
+
+    class ContentType
+      attr_accessor confidence: ::Float
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CopyProjectVersionRequest
+      attr_accessor source_project_arn: ::String
+      attr_accessor source_project_version_arn: ::String
+      attr_accessor destination_project_arn: ::String
+      attr_accessor version_name: ::String
+      attr_accessor output_config: Types::OutputConfig
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class CopyProjectVersionResponse
+      attr_accessor project_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CoversBodyPart
+      attr_accessor confidence: ::Float
+      attr_accessor value: bool
+      SENSITIVE: []
+    end
+
+    class CreateCollectionRequest
+      attr_accessor collection_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateCollectionResponse
+      attr_accessor status_code: ::Integer
+      attr_accessor collection_arn: ::String
+      attr_accessor face_model_version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDatasetRequest
+      attr_accessor dataset_source: Types::DatasetSource
+      attr_accessor dataset_type: ("TRAIN" | "TEST")
+      attr_accessor project_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDatasetResponse
+      attr_accessor dataset_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFaceLivenessSessionRequest
+      attr_accessor kms_key_id: ::String
+      attr_accessor settings: Types::CreateFaceLivenessSessionRequestSettings
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFaceLivenessSessionRequestSettings
+      attr_accessor output_config: Types::LivenessOutputConfig
+      attr_accessor audit_images_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateFaceLivenessSessionResponse
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProjectRequest
+      attr_accessor project_name: ::String
+      attr_accessor feature: ("CONTENT_MODERATION" | "CUSTOM_LABELS")
+      attr_accessor auto_update: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class CreateProjectResponse
+      attr_accessor project_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProjectVersionRequest
+      attr_accessor project_arn: ::String
+      attr_accessor version_name: ::String
+      attr_accessor output_config: Types::OutputConfig
+      attr_accessor training_data: Types::TrainingData
+      attr_accessor testing_data: Types::TestingData
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor kms_key_id: ::String
+      attr_accessor version_description: ::String
+      attr_accessor feature_config: Types::CustomizationFeatureConfig
+      SENSITIVE: []
+    end
+
+    class CreateProjectVersionResponse
+      attr_accessor project_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateStreamProcessorRequest
+      attr_accessor input: Types::StreamProcessorInput
+      attr_accessor output: Types::StreamProcessorOutput
+      attr_accessor name: ::String
+      attr_accessor settings: Types::StreamProcessorSettings
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor notification_channel: Types::StreamProcessorNotificationChannel
+      attr_accessor kms_key_id: ::String
+      attr_accessor regions_of_interest: ::Array[Types::RegionOfInterest]
+      attr_accessor data_sharing_preference: Types::StreamProcessorDataSharingPreference
+      SENSITIVE: []
+    end
+
+    class CreateStreamProcessorResponse
+      attr_accessor stream_processor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateUserRequest
+      attr_accessor collection_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateUserResponse < Aws::EmptyStructure
+    end
+
+    class CustomLabel
+      attr_accessor name: ::String
+      attr_accessor confidence: ::Float
+      attr_accessor geometry: Types::Geometry
+      SENSITIVE: []
+    end
+
+    class CustomizationFeatureConfig
+      attr_accessor content_moderation: Types::CustomizationFeatureContentModerationConfig
+      SENSITIVE: []
+    end
+
+    class CustomizationFeatureContentModerationConfig
+      attr_accessor confidence_threshold: ::Float
+      SENSITIVE: []
+    end
+
+    class DatasetChanges
+      attr_accessor ground_truth: ::String
+      SENSITIVE: []
+    end
+
+    class DatasetDescription
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED" | "DELETE_IN_PROGRESS")
+      attr_accessor status_message: ::String
+      attr_accessor status_message_code: ("SUCCESS" | "SERVICE_ERROR" | "CLIENT_ERROR")
+      attr_accessor dataset_stats: Types::DatasetStats
+      SENSITIVE: []
+    end
+
+    class DatasetLabelDescription
+      attr_accessor label_name: ::String
+      attr_accessor label_stats: Types::DatasetLabelStats
+      SENSITIVE: []
+    end
+
+    class DatasetLabelStats
+      attr_accessor entry_count: ::Integer
+      attr_accessor bounding_box_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class DatasetMetadata
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor dataset_type: ("TRAIN" | "TEST")
+      attr_accessor dataset_arn: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED" | "DELETE_IN_PROGRESS")
+      attr_accessor status_message: ::String
+      attr_accessor status_message_code: ("SUCCESS" | "SERVICE_ERROR" | "CLIENT_ERROR")
+      SENSITIVE: []
+    end
+
+    class DatasetSource
+      attr_accessor ground_truth_manifest: Types::GroundTruthManifest
+      attr_accessor dataset_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DatasetStats
+      attr_accessor labeled_entries: ::Integer
+      attr_accessor total_entries: ::Integer
+      attr_accessor total_labels: ::Integer
+      attr_accessor error_entries: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteCollectionRequest
+      attr_accessor collection_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCollectionResponse
+      attr_accessor status_code: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteDatasetRequest
+      attr_accessor dataset_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDatasetResponse < Aws::EmptyStructure
+    end
+
+    class DeleteFacesRequest
+      attr_accessor collection_id: ::String
+      attr_accessor face_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteFacesResponse
+      attr_accessor deleted_faces: ::Array[::String]
+      attr_accessor unsuccessful_face_deletions: ::Array[Types::UnsuccessfulFaceDeletion]
+      SENSITIVE: []
+    end
+
+    class DeleteProjectPolicyRequest
+      attr_accessor project_arn: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor policy_revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProjectPolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteProjectRequest
+      attr_accessor project_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProjectResponse
+      attr_accessor status: ("CREATING" | "CREATED" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class DeleteProjectVersionRequest
+      attr_accessor project_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProjectVersionResponse
+      attr_accessor status: ("TRAINING_IN_PROGRESS" | "TRAINING_COMPLETED" | "TRAINING_FAILED" | "STARTING" | "RUNNING" | "FAILED" | "STOPPING" | "STOPPED" | "DELETING" | "COPYING_IN_PROGRESS" | "COPYING_COMPLETED" | "COPYING_FAILED" | "DEPRECATED" | "EXPIRED")
+      SENSITIVE: []
+    end
+
+    class DeleteStreamProcessorRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStreamProcessorResponse < Aws::EmptyStructure
+    end
+
+    class DeleteUserRequest
+      attr_accessor collection_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserResponse < Aws::EmptyStructure
+    end
+
+    class DescribeCollectionRequest
+      attr_accessor collection_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCollectionResponse
+      attr_accessor face_count: ::Integer
+      attr_accessor face_model_version: ::String
+      attr_accessor collection_arn: ::String
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor user_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetRequest
+      attr_accessor dataset_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetResponse
+      attr_accessor dataset_description: Types::DatasetDescription
+      SENSITIVE: []
+    end
+
+    class DescribeProjectVersionsRequest
+      attr_accessor project_arn: ::String
+      attr_accessor version_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeProjectVersionsResponse
+      attr_accessor project_version_descriptions: ::Array[Types::ProjectVersionDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProjectsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor project_names: ::Array[::String]
+      attr_accessor features: ::Array[("CONTENT_MODERATION" | "CUSTOM_LABELS")]
+      SENSITIVE: []
+    end
+
+    class DescribeProjectsResponse
+      attr_accessor project_descriptions: ::Array[Types::ProjectDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStreamProcessorRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStreamProcessorResponse
+      attr_accessor name: ::String
+      attr_accessor stream_processor_arn: ::String
+      attr_accessor status: ("STOPPED" | "STARTING" | "RUNNING" | "FAILED" | "STOPPING" | "UPDATING")
+      attr_accessor status_message: ::String
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor last_update_timestamp: ::Time
+      attr_accessor input: Types::StreamProcessorInput
+      attr_accessor output: Types::StreamProcessorOutput
+      attr_accessor role_arn: ::String
+      attr_accessor settings: Types::StreamProcessorSettings
+      attr_accessor notification_channel: Types::StreamProcessorNotificationChannel
+      attr_accessor kms_key_id: ::String
+      attr_accessor regions_of_interest: ::Array[Types::RegionOfInterest]
+      attr_accessor data_sharing_preference: Types::StreamProcessorDataSharingPreference
+      SENSITIVE: []
+    end
+
+    class DetectCustomLabelsRequest
+      attr_accessor project_version_arn: ::String
+      attr_accessor image: Types::Image
+      attr_accessor max_results: ::Integer
+      attr_accessor min_confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class DetectCustomLabelsResponse
+      attr_accessor custom_labels: ::Array[Types::CustomLabel]
+      SENSITIVE: []
+    end
+
+    class DetectFacesRequest
+      attr_accessor image: Types::Image
+      attr_accessor attributes: ::Array[("DEFAULT" | "ALL" | "AGE_RANGE" | "BEARD" | "EMOTIONS" | "EYE_DIRECTION" | "EYEGLASSES" | "EYES_OPEN" | "GENDER" | "MOUTH_OPEN" | "MUSTACHE" | "FACE_OCCLUDED" | "SMILE" | "SUNGLASSES")]
+      SENSITIVE: []
+    end
+
+    class DetectFacesResponse
+      attr_accessor face_details: ::Array[Types::FaceDetail]
+      attr_accessor orientation_correction: ("ROTATE_0" | "ROTATE_90" | "ROTATE_180" | "ROTATE_270")
+      SENSITIVE: []
+    end
+
+    class DetectLabelsImageBackground
+      attr_accessor quality: Types::DetectLabelsImageQuality
+      attr_accessor dominant_colors: ::Array[Types::DominantColor]
+      SENSITIVE: []
+    end
+
+    class DetectLabelsImageForeground
+      attr_accessor quality: Types::DetectLabelsImageQuality
+      attr_accessor dominant_colors: ::Array[Types::DominantColor]
+      SENSITIVE: []
+    end
+
+    class DetectLabelsImageProperties
+      attr_accessor quality: Types::DetectLabelsImageQuality
+      attr_accessor dominant_colors: ::Array[Types::DominantColor]
+      attr_accessor foreground: Types::DetectLabelsImageForeground
+      attr_accessor background: Types::DetectLabelsImageBackground
+      SENSITIVE: []
+    end
+
+    class DetectLabelsImagePropertiesSettings
+      attr_accessor max_dominant_colors: ::Integer
+      SENSITIVE: []
+    end
+
+    class DetectLabelsImageQuality
+      attr_accessor brightness: ::Float
+      attr_accessor sharpness: ::Float
+      attr_accessor contrast: ::Float
+      SENSITIVE: []
+    end
+
+    class DetectLabelsRequest
+      attr_accessor image: Types::Image
+      attr_accessor max_labels: ::Integer
+      attr_accessor min_confidence: ::Float
+      attr_accessor features: ::Array[("GENERAL_LABELS" | "IMAGE_PROPERTIES")]
+      attr_accessor settings: Types::DetectLabelsSettings
+      SENSITIVE: []
+    end
+
+    class DetectLabelsResponse
+      attr_accessor labels: ::Array[Types::Label]
+      attr_accessor orientation_correction: ("ROTATE_0" | "ROTATE_90" | "ROTATE_180" | "ROTATE_270")
+      attr_accessor label_model_version: ::String
+      attr_accessor image_properties: Types::DetectLabelsImageProperties
+      SENSITIVE: []
+    end
+
+    class DetectLabelsSettings
+      attr_accessor general_labels: Types::GeneralLabelsSettings
+      attr_accessor image_properties: Types::DetectLabelsImagePropertiesSettings
+      SENSITIVE: []
+    end
+
+    class DetectModerationLabelsRequest
+      attr_accessor image: Types::Image
+      attr_accessor min_confidence: ::Float
+      attr_accessor human_loop_config: Types::HumanLoopConfig
+      attr_accessor project_version: ::String
+      SENSITIVE: []
+    end
+
+    class DetectModerationLabelsResponse
+      attr_accessor moderation_labels: ::Array[Types::ModerationLabel]
+      attr_accessor moderation_model_version: ::String
+      attr_accessor human_loop_activation_output: Types::HumanLoopActivationOutput
+      attr_accessor project_version: ::String
+      attr_accessor content_types: ::Array[Types::ContentType]
+      SENSITIVE: []
+    end
+
+    class DetectProtectiveEquipmentRequest
+      attr_accessor image: Types::Image
+      attr_accessor summarization_attributes: Types::ProtectiveEquipmentSummarizationAttributes
+      SENSITIVE: []
+    end
+
+    class DetectProtectiveEquipmentResponse
+      attr_accessor protective_equipment_model_version: ::String
+      attr_accessor persons: ::Array[Types::ProtectiveEquipmentPerson]
+      attr_accessor summary: Types::ProtectiveEquipmentSummary
+      SENSITIVE: []
+    end
+
+    class DetectTextFilters
+      attr_accessor word_filter: Types::DetectionFilter
+      attr_accessor regions_of_interest: ::Array[Types::RegionOfInterest]
+      SENSITIVE: []
+    end
+
+    class DetectTextRequest
+      attr_accessor image: Types::Image
+      attr_accessor filters: Types::DetectTextFilters
+      SENSITIVE: []
+    end
+
+    class DetectTextResponse
+      attr_accessor text_detections: ::Array[Types::TextDetection]
+      attr_accessor text_model_version: ::String
+      SENSITIVE: []
+    end
+
+    class DetectionFilter
+      attr_accessor min_confidence: ::Float
+      attr_accessor min_bounding_box_height: ::Float
+      attr_accessor min_bounding_box_width: ::Float
+      SENSITIVE: []
+    end
+
+    class DisassociateFacesRequest
+      attr_accessor collection_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor face_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisassociateFacesResponse
+      attr_accessor disassociated_faces: ::Array[Types::DisassociatedFace]
+      attr_accessor unsuccessful_face_disassociations: ::Array[Types::UnsuccessfulFaceDisassociation]
+      attr_accessor user_status: ("ACTIVE" | "UPDATING" | "CREATING" | "CREATED")
+      SENSITIVE: []
+    end
+
+    class DisassociatedFace
+      attr_accessor face_id: ::String
+      SENSITIVE: []
+    end
+
+    class DistributeDataset
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DistributeDatasetEntriesRequest
+      attr_accessor datasets: ::Array[Types::DistributeDataset]
+      SENSITIVE: []
+    end
+
+    class DistributeDatasetEntriesResponse < Aws::EmptyStructure
+    end
+
+    class DominantColor
+      attr_accessor red: ::Integer
+      attr_accessor blue: ::Integer
+      attr_accessor green: ::Integer
+      attr_accessor hex_code: ::String
+      attr_accessor css_color: ::String
+      attr_accessor simplified_color: ::String
+      attr_accessor pixel_percent: ::Float
+      SENSITIVE: []
+    end
+
+    class Emotion
+      attr_accessor type: ("HAPPY" | "SAD" | "ANGRY" | "CONFUSED" | "DISGUSTED" | "SURPRISED" | "CALM" | "UNKNOWN" | "FEAR")
+      attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class EquipmentDetection
+      attr_accessor bounding_box: Types::BoundingBox
+      attr_accessor confidence: ::Float
+      attr_accessor type: ("FACE_COVER" | "HAND_COVER" | "HEAD_COVER")
+      attr_accessor covers_body_part: Types::CoversBodyPart
+      SENSITIVE: []
+    end
+
+    class EvaluationResult
+      attr_accessor f1_score: ::Float
+      attr_accessor summary: Types::Summary
+      SENSITIVE: []
+    end
+
+    class EyeDirection
+      attr_accessor yaw: ::Float
+      attr_accessor pitch: ::Float
+      attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class EyeOpen
+      attr_accessor value: bool
+      attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class Eyeglasses
+      attr_accessor value: bool
+      attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class Face
+      attr_accessor face_id: ::String
+      attr_accessor bounding_box: Types::BoundingBox
+      attr_accessor image_id: ::String
+      attr_accessor external_image_id: ::String
+      attr_accessor confidence: ::Float
+      attr_accessor index_faces_model_version: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class FaceDetail
+      attr_accessor bounding_box: Types::BoundingBox
+      attr_accessor age_range: Types::AgeRange
+      attr_accessor smile: Types::Smile
+      attr_accessor eyeglasses: Types::Eyeglasses
+      attr_accessor sunglasses: Types::Sunglasses
+      attr_accessor gender: Types::Gender
+      attr_accessor beard: Types::Beard
+      attr_accessor mustache: Types::Mustache
+      attr_accessor eyes_open: Types::EyeOpen
+      attr_accessor mouth_open: Types::MouthOpen
+      attr_accessor emotions: ::Array[Types::Emotion]
+      attr_accessor landmarks: ::Array[Types::Landmark]
+      attr_accessor pose: Types::Pose
+      attr_accessor quality: Types::ImageQuality
+      attr_accessor confidence: ::Float
+      attr_accessor face_occluded: Types::FaceOccluded
+      attr_accessor eye_direction: Types::EyeDirection
+      SENSITIVE: []
+    end
+
+    class FaceDetection
+      attr_accessor timestamp: ::Integer
+      attr_accessor face: Types::FaceDetail
+      SENSITIVE: []
+    end
+
+    class FaceMatch
+      attr_accessor similarity: ::Float
+      attr_accessor face: Types::Face
+      SENSITIVE: []
+    end
+
+    class FaceOccluded
+      attr_accessor value: bool
+      attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class FaceRecord
+      attr_accessor face: Types::Face
+      attr_accessor face_detail: Types::FaceDetail
+      SENSITIVE: []
+    end
+
+    class FaceSearchSettings
+      attr_accessor collection_id: ::String
+      attr_accessor face_match_threshold: ::Float
+      SENSITIVE: []
+    end
+
+    class Gender
+      attr_accessor value: ("Male" | "Female")
+      attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class GeneralLabelsSettings
+      attr_accessor label_inclusion_filters: ::Array[::String]
+      attr_accessor label_exclusion_filters: ::Array[::String]
+      attr_accessor label_category_inclusion_filters: ::Array[::String]
+      attr_accessor label_category_exclusion_filters: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Geometry
+      attr_accessor bounding_box: Types::BoundingBox
+      attr_accessor polygon: ::Array[Types::Point]
+      SENSITIVE: []
+    end
+
+    class GetCelebrityInfoRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCelebrityInfoResponse
+      attr_accessor urls: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor known_gender: Types::KnownGender
+      SENSITIVE: []
+    end
+
+    class GetCelebrityRecognitionRequest
+      attr_accessor job_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_by: ("ID" | "TIMESTAMP")
+      SENSITIVE: []
+    end
+
+    class GetCelebrityRecognitionResponse
+      attr_accessor job_status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor video_metadata: Types::VideoMetadata
+      attr_accessor next_token: ::String
+      attr_accessor celebrities: ::Array[Types::CelebrityRecognition]
+      attr_accessor job_id: ::String
+      attr_accessor video: Types::Video
+      attr_accessor job_tag: ::String
+      SENSITIVE: []
+    end
+
+    class GetContentModerationRequest
+      attr_accessor job_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_by: ("NAME" | "TIMESTAMP")
+      attr_accessor aggregate_by: ("TIMESTAMPS" | "SEGMENTS")
+      SENSITIVE: []
+    end
+
+    class GetContentModerationRequestMetadata
+      attr_accessor sort_by: ("NAME" | "TIMESTAMP")
+      attr_accessor aggregate_by: ("TIMESTAMPS" | "SEGMENTS")
+      SENSITIVE: []
+    end
+
+    class GetContentModerationResponse
+      attr_accessor job_status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor video_metadata: Types::VideoMetadata
+      attr_accessor moderation_labels: ::Array[Types::ContentModerationDetection]
+      attr_accessor next_token: ::String
+      attr_accessor moderation_model_version: ::String
+      attr_accessor job_id: ::String
+      attr_accessor video: Types::Video
+      attr_accessor job_tag: ::String
+      attr_accessor get_request_metadata: Types::GetContentModerationRequestMetadata
+      SENSITIVE: []
+    end
+
+    class GetFaceDetectionRequest
+      attr_accessor job_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetFaceDetectionResponse
+      attr_accessor job_status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor video_metadata: Types::VideoMetadata
+      attr_accessor next_token: ::String
+      attr_accessor faces: ::Array[Types::FaceDetection]
+      attr_accessor job_id: ::String
+      attr_accessor video: Types::Video
+      attr_accessor job_tag: ::String
+      SENSITIVE: []
+    end
+
+    class GetFaceLivenessSessionResultsRequest
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFaceLivenessSessionResultsResponse
+      attr_accessor session_id: ::String
+      attr_accessor status: ("CREATED" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "EXPIRED")
+      attr_accessor confidence: ::Float
+      attr_accessor reference_image: Types::AuditImage
+      attr_accessor audit_images: ::Array[Types::AuditImage]
+      SENSITIVE: []
+    end
+
+    class GetFaceSearchRequest
+      attr_accessor job_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_by: ("INDEX" | "TIMESTAMP")
+      SENSITIVE: []
+    end
+
+    class GetFaceSearchResponse
+      attr_accessor job_status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor next_token: ::String
+      attr_accessor video_metadata: Types::VideoMetadata
+      attr_accessor persons: ::Array[Types::PersonMatch]
+      attr_accessor job_id: ::String
+      attr_accessor video: Types::Video
+      attr_accessor job_tag: ::String
+      SENSITIVE: []
+    end
+
+    class GetLabelDetectionRequest
+      attr_accessor job_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_by: ("NAME" | "TIMESTAMP")
+      attr_accessor aggregate_by: ("TIMESTAMPS" | "SEGMENTS")
+      SENSITIVE: []
+    end
+
+    class GetLabelDetectionRequestMetadata
+      attr_accessor sort_by: ("NAME" | "TIMESTAMP")
+      attr_accessor aggregate_by: ("TIMESTAMPS" | "SEGMENTS")
+      SENSITIVE: []
+    end
+
+    class GetLabelDetectionResponse
+      attr_accessor job_status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor video_metadata: Types::VideoMetadata
+      attr_accessor next_token: ::String
+      attr_accessor labels: ::Array[Types::LabelDetection]
+      attr_accessor label_model_version: ::String
+      attr_accessor job_id: ::String
+      attr_accessor video: Types::Video
+      attr_accessor job_tag: ::String
+      attr_accessor get_request_metadata: Types::GetLabelDetectionRequestMetadata
+      SENSITIVE: []
+    end
+
+    class GetMediaAnalysisJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMediaAnalysisJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_name: ::String
+      attr_accessor operations_config: Types::MediaAnalysisOperationsConfig
+      attr_accessor status: ("CREATED" | "QUEUED" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor failure_details: Types::MediaAnalysisJobFailureDetails
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor completion_timestamp: ::Time
+      attr_accessor input: Types::MediaAnalysisInput
+      attr_accessor output_config: Types::MediaAnalysisOutputConfig
+      attr_accessor kms_key_id: ::String
+      attr_accessor results: Types::MediaAnalysisResults
+      attr_accessor manifest_summary: Types::MediaAnalysisManifestSummary
+      SENSITIVE: []
+    end
+
+    class GetPersonTrackingRequest
+      attr_accessor job_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_by: ("INDEX" | "TIMESTAMP")
+      SENSITIVE: []
+    end
+
+    class GetPersonTrackingResponse
+      attr_accessor job_status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor video_metadata: Types::VideoMetadata
+      attr_accessor next_token: ::String
+      attr_accessor persons: ::Array[Types::PersonDetection]
+      attr_accessor job_id: ::String
+      attr_accessor video: Types::Video
+      attr_accessor job_tag: ::String
+      SENSITIVE: []
+    end
+
+    class GetSegmentDetectionRequest
+      attr_accessor job_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSegmentDetectionResponse
+      attr_accessor job_status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor video_metadata: ::Array[Types::VideoMetadata]
+      attr_accessor audio_metadata: ::Array[Types::AudioMetadata]
+      attr_accessor next_token: ::String
+      attr_accessor segments: ::Array[Types::SegmentDetection]
+      attr_accessor selected_segment_types: ::Array[Types::SegmentTypeInfo]
+      attr_accessor job_id: ::String
+      attr_accessor video: Types::Video
+      attr_accessor job_tag: ::String
+      SENSITIVE: []
+    end
+
+    class GetTextDetectionRequest
+      attr_accessor job_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetTextDetectionResponse
+      attr_accessor job_status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor video_metadata: Types::VideoMetadata
+      attr_accessor text_detections: ::Array[Types::TextDetectionResult]
+      attr_accessor next_token: ::String
+      attr_accessor text_model_version: ::String
+      attr_accessor job_id: ::String
+      attr_accessor video: Types::Video
+      attr_accessor job_tag: ::String
+      SENSITIVE: []
+    end
+
+    class GroundTruthManifest
+      attr_accessor s3_object: Types::S3Object
+      SENSITIVE: []
+    end
+
+    class HumanLoopActivationOutput
+      attr_accessor human_loop_arn: ::String
+      attr_accessor human_loop_activation_reasons: ::Array[::String]
+      attr_accessor human_loop_activation_conditions_evaluation_results: ::String
+      SENSITIVE: []
+    end
+
+    class HumanLoopConfig
+      attr_accessor human_loop_name: ::String
+      attr_accessor flow_definition_arn: ::String
+      attr_accessor data_attributes: Types::HumanLoopDataAttributes
+      SENSITIVE: []
+    end
+
+    class HumanLoopDataAttributes
+      attr_accessor content_classifiers: ::Array[("FreeOfPersonallyIdentifiableInformation" | "FreeOfAdultContent")]
+      SENSITIVE: []
+    end
+
+    class HumanLoopQuotaExceededException
+      attr_accessor resource_type: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class IdempotentParameterMismatchException < Aws::EmptyStructure
+    end
+
+    class Image
+      attr_accessor bytes: ::String
+      attr_accessor s3_object: Types::S3Object
+      SENSITIVE: []
+    end
+
+    class ImageQuality
+      attr_accessor brightness: ::Float
+      attr_accessor sharpness: ::Float
+      SENSITIVE: []
+    end
+
+    class ImageTooLargeException < Aws::EmptyStructure
+    end
+
+    class IndexFacesRequest
+      attr_accessor collection_id: ::String
+      attr_accessor image: Types::Image
+      attr_accessor external_image_id: ::String
+      attr_accessor detection_attributes: ::Array[("DEFAULT" | "ALL" | "AGE_RANGE" | "BEARD" | "EMOTIONS" | "EYE_DIRECTION" | "EYEGLASSES" | "EYES_OPEN" | "GENDER" | "MOUTH_OPEN" | "MUSTACHE" | "FACE_OCCLUDED" | "SMILE" | "SUNGLASSES")]
+      attr_accessor max_faces: ::Integer
+      attr_accessor quality_filter: ("NONE" | "AUTO" | "LOW" | "MEDIUM" | "HIGH")
+      SENSITIVE: []
+    end
+
+    class IndexFacesResponse
+      attr_accessor face_records: ::Array[Types::FaceRecord]
+      attr_accessor orientation_correction: ("ROTATE_0" | "ROTATE_90" | "ROTATE_180" | "ROTATE_270")
+      attr_accessor face_model_version: ::String
+      attr_accessor unindexed_faces: ::Array[Types::UnindexedFace]
+      SENSITIVE: []
+    end
+
+    class Instance
+      attr_accessor bounding_box: Types::BoundingBox
+      attr_accessor confidence: ::Float
+      attr_accessor dominant_colors: ::Array[Types::DominantColor]
+      SENSITIVE: []
+    end
+
+    class InternalServerError < Aws::EmptyStructure
+    end
+
+    class InvalidImageFormatException < Aws::EmptyStructure
+    end
+
+    class InvalidManifestException < Aws::EmptyStructure
+    end
+
+    class InvalidPaginationTokenException < Aws::EmptyStructure
+    end
+
+    class InvalidParameterException < Aws::EmptyStructure
+    end
+
+    class InvalidPolicyRevisionIdException < Aws::EmptyStructure
+    end
+
+    class InvalidS3ObjectException < Aws::EmptyStructure
+    end
+
+    class KinesisDataStream
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class KinesisVideoStream
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class KinesisVideoStreamStartSelector
+      attr_accessor producer_timestamp: ::Integer
+      attr_accessor fragment_number: ::String
+      SENSITIVE: []
+    end
+
+    class KnownGender
+      attr_accessor type: ("Male" | "Female" | "Nonbinary" | "Unlisted")
+      SENSITIVE: []
+    end
+
+    class Label
+      attr_accessor name: ::String
+      attr_accessor confidence: ::Float
+      attr_accessor instances: ::Array[Types::Instance]
+      attr_accessor parents: ::Array[Types::Parent]
+      attr_accessor aliases: ::Array[Types::LabelAlias]
+      attr_accessor categories: ::Array[Types::LabelCategory]
+      SENSITIVE: []
+    end
+
+    class LabelAlias
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class LabelCategory
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class LabelDetection
+      attr_accessor timestamp: ::Integer
+      attr_accessor label: Types::Label
+      attr_accessor start_timestamp_millis: ::Integer
+      attr_accessor end_timestamp_millis: ::Integer
+      attr_accessor duration_millis: ::Integer
+      SENSITIVE: []
+    end
+
+    class LabelDetectionSettings
+      attr_accessor general_labels: Types::GeneralLabelsSettings
+      SENSITIVE: []
+    end
+
+    class Landmark
+      attr_accessor type: ("eyeLeft" | "eyeRight" | "nose" | "mouthLeft" | "mouthRight" | "leftEyeBrowLeft" | "leftEyeBrowRight" | "leftEyeBrowUp" | "rightEyeBrowLeft" | "rightEyeBrowRight" | "rightEyeBrowUp" | "leftEyeLeft" | "leftEyeRight" | "leftEyeUp" | "leftEyeDown" | "rightEyeLeft" | "rightEyeRight" | "rightEyeUp" | "rightEyeDown" | "noseLeft" | "noseRight" | "mouthUp" | "mouthDown" | "leftPupil" | "rightPupil" | "upperJawlineLeft" | "midJawlineLeft" | "chinBottom" | "midJawlineRight" | "upperJawlineRight")
+      attr_accessor x: ::Float
+      attr_accessor y: ::Float
+      SENSITIVE: []
+    end
+
+    class LimitExceededException < Aws::EmptyStructure
+    end
+
+    class ListCollectionsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCollectionsResponse
+      attr_accessor collection_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor face_model_versions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListDatasetEntriesRequest
+      attr_accessor dataset_arn: ::String
+      attr_accessor contains_labels: ::Array[::String]
+      attr_accessor labeled: bool
+      attr_accessor source_ref_contains: ::String
+      attr_accessor has_errors: bool
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDatasetEntriesResponse
+      attr_accessor dataset_entries: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatasetLabelsRequest
+      attr_accessor dataset_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDatasetLabelsResponse
+      attr_accessor dataset_label_descriptions: ::Array[Types::DatasetLabelDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFacesRequest
+      attr_accessor collection_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor user_id: ::String
+      attr_accessor face_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListFacesResponse
+      attr_accessor faces: ::Array[Types::Face]
+      attr_accessor next_token: ::String
+      attr_accessor face_model_version: ::String
+      SENSITIVE: []
+    end
+
+    class ListMediaAnalysisJobsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMediaAnalysisJobsResponse
+      attr_accessor next_token: ::String
+      attr_accessor media_analysis_jobs: ::Array[Types::MediaAnalysisJobDescription]
+      SENSITIVE: []
+    end
+
+    class ListProjectPoliciesRequest
+      attr_accessor project_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProjectPoliciesResponse
+      attr_accessor project_policies: ::Array[Types::ProjectPolicy]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStreamProcessorsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListStreamProcessorsResponse
+      attr_accessor next_token: ::String
+      attr_accessor stream_processors: ::Array[Types::StreamProcessor]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListUsersRequest
+      attr_accessor collection_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUsersResponse
+      attr_accessor users: ::Array[Types::User]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LivenessOutputConfig
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_key_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class MalformedPolicyDocumentException < Aws::EmptyStructure
+    end
+
+    class MatchedUser
+      attr_accessor user_id: ::String
+      attr_accessor user_status: ("ACTIVE" | "UPDATING" | "CREATING" | "CREATED")
+      SENSITIVE: []
+    end
+
+    class MediaAnalysisDetectModerationLabelsConfig
+      attr_accessor min_confidence: ::Float
+      attr_accessor project_version: ::String
+      SENSITIVE: []
+    end
+
+    class MediaAnalysisInput
+      attr_accessor s3_object: Types::S3Object
+      SENSITIVE: []
+    end
+
+    class MediaAnalysisJobDescription
+      attr_accessor job_id: ::String
+      attr_accessor job_name: ::String
+      attr_accessor operations_config: Types::MediaAnalysisOperationsConfig
+      attr_accessor status: ("CREATED" | "QUEUED" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor failure_details: Types::MediaAnalysisJobFailureDetails
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor completion_timestamp: ::Time
+      attr_accessor input: Types::MediaAnalysisInput
+      attr_accessor output_config: Types::MediaAnalysisOutputConfig
+      attr_accessor kms_key_id: ::String
+      attr_accessor results: Types::MediaAnalysisResults
+      attr_accessor manifest_summary: Types::MediaAnalysisManifestSummary
+      SENSITIVE: []
+    end
+
+    class MediaAnalysisJobFailureDetails
+      attr_accessor code: ("INTERNAL_ERROR" | "INVALID_S3_OBJECT" | "INVALID_MANIFEST" | "INVALID_OUTPUT_CONFIG" | "INVALID_KMS_KEY" | "ACCESS_DENIED" | "RESOURCE_NOT_FOUND" | "RESOURCE_NOT_READY" | "THROTTLED")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MediaAnalysisManifestSummary
+      attr_accessor s3_object: Types::S3Object
+      SENSITIVE: []
+    end
+
+    class MediaAnalysisModelVersions
+      attr_accessor moderation: ::String
+      SENSITIVE: []
+    end
+
+    class MediaAnalysisOperationsConfig
+      attr_accessor detect_moderation_labels: Types::MediaAnalysisDetectModerationLabelsConfig
+      SENSITIVE: []
+    end
+
+    class MediaAnalysisOutputConfig
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_key_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class MediaAnalysisResults
+      attr_accessor s3_object: Types::S3Object
+      attr_accessor model_versions: Types::MediaAnalysisModelVersions
+      SENSITIVE: []
+    end
+
+    class ModerationLabel
+      attr_accessor confidence: ::Float
+      attr_accessor name: ::String
+      attr_accessor parent_name: ::String
+      attr_accessor taxonomy_level: ::Integer
+      SENSITIVE: []
+    end
+
+    class MouthOpen
+      attr_accessor value: bool
+      attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class Mustache
+      attr_accessor value: bool
+      attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class NotificationChannel
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class OutputConfig
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_key_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class Parent
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class PersonDetail
+      attr_accessor index: ::Integer
+      attr_accessor bounding_box: Types::BoundingBox
+      attr_accessor face: Types::FaceDetail
+      SENSITIVE: []
+    end
+
+    class PersonDetection
+      attr_accessor timestamp: ::Integer
+      attr_accessor person: Types::PersonDetail
+      SENSITIVE: []
+    end
+
+    class PersonMatch
+      attr_accessor timestamp: ::Integer
+      attr_accessor person: Types::PersonDetail
+      attr_accessor face_matches: ::Array[Types::FaceMatch]
+      SENSITIVE: []
+    end
+
+    class Point
+      attr_accessor x: ::Float
+      attr_accessor y: ::Float
+      SENSITIVE: []
+    end
+
+    class Pose
+      attr_accessor roll: ::Float
+      attr_accessor yaw: ::Float
+      attr_accessor pitch: ::Float
+      SENSITIVE: []
+    end
+
+    class ProjectDescription
+      attr_accessor project_arn: ::String
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor status: ("CREATING" | "CREATED" | "DELETING")
+      attr_accessor datasets: ::Array[Types::DatasetMetadata]
+      attr_accessor feature: ("CONTENT_MODERATION" | "CUSTOM_LABELS")
+      attr_accessor auto_update: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ProjectPolicy
+      attr_accessor project_arn: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor policy_revision_id: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ProjectVersionDescription
+      attr_accessor project_version_arn: ::String
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor min_inference_units: ::Integer
+      attr_accessor status: ("TRAINING_IN_PROGRESS" | "TRAINING_COMPLETED" | "TRAINING_FAILED" | "STARTING" | "RUNNING" | "FAILED" | "STOPPING" | "STOPPED" | "DELETING" | "COPYING_IN_PROGRESS" | "COPYING_COMPLETED" | "COPYING_FAILED" | "DEPRECATED" | "EXPIRED")
+      attr_accessor status_message: ::String
+      attr_accessor billable_training_time_in_seconds: ::Integer
+      attr_accessor training_end_timestamp: ::Time
+      attr_accessor output_config: Types::OutputConfig
+      attr_accessor training_data_result: Types::TrainingDataResult
+      attr_accessor testing_data_result: Types::TestingDataResult
+      attr_accessor evaluation_result: Types::EvaluationResult
+      attr_accessor manifest_summary: Types::GroundTruthManifest
+      attr_accessor kms_key_id: ::String
+      attr_accessor max_inference_units: ::Integer
+      attr_accessor source_project_version_arn: ::String
+      attr_accessor version_description: ::String
+      attr_accessor feature: ("CONTENT_MODERATION" | "CUSTOM_LABELS")
+      attr_accessor base_model_version: ::String
+      attr_accessor feature_config: Types::CustomizationFeatureConfig
+      SENSITIVE: []
+    end
+
+    class ProtectiveEquipmentBodyPart
+      attr_accessor name: ("FACE" | "HEAD" | "LEFT_HAND" | "RIGHT_HAND")
+      attr_accessor confidence: ::Float
+      attr_accessor equipment_detections: ::Array[Types::EquipmentDetection]
+      SENSITIVE: []
+    end
+
+    class ProtectiveEquipmentPerson
+      attr_accessor body_parts: ::Array[Types::ProtectiveEquipmentBodyPart]
+      attr_accessor bounding_box: Types::BoundingBox
+      attr_accessor confidence: ::Float
+      attr_accessor id: ::Integer
+      SENSITIVE: []
+    end
+
+    class ProtectiveEquipmentSummarizationAttributes
+      attr_accessor min_confidence: ::Float
+      attr_accessor required_equipment_types: ::Array[("FACE_COVER" | "HAND_COVER" | "HEAD_COVER")]
+      SENSITIVE: []
+    end
+
+    class ProtectiveEquipmentSummary
+      attr_accessor persons_with_required_equipment: ::Array[::Integer]
+      attr_accessor persons_without_required_equipment: ::Array[::Integer]
+      attr_accessor persons_indeterminate: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class ProvisionedThroughputExceededException < Aws::EmptyStructure
+    end
+
+    class PutProjectPolicyRequest
+      attr_accessor project_arn: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor policy_revision_id: ::String
+      attr_accessor policy_document: ::String
+      SENSITIVE: []
+    end
+
+    class PutProjectPolicyResponse
+      attr_accessor policy_revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class RecognizeCelebritiesRequest
+      attr_accessor image: Types::Image
+      SENSITIVE: []
+    end
+
+    class RecognizeCelebritiesResponse
+      attr_accessor celebrity_faces: ::Array[Types::Celebrity]
+      attr_accessor unrecognized_faces: ::Array[Types::ComparedFace]
+      attr_accessor orientation_correction: ("ROTATE_0" | "ROTATE_90" | "ROTATE_180" | "ROTATE_270")
+      SENSITIVE: []
+    end
+
+    class RegionOfInterest
+      attr_accessor bounding_box: Types::BoundingBox
+      attr_accessor polygon: ::Array[Types::Point]
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException < Aws::EmptyStructure
+    end
+
+    class ResourceInUseException < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException < Aws::EmptyStructure
+    end
+
+    class ResourceNotReadyException < Aws::EmptyStructure
+    end
+
+    class S3Destination
+      attr_accessor bucket: ::String
+      attr_accessor key_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class S3Object
+      attr_accessor bucket: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class SearchFacesByImageRequest
+      attr_accessor collection_id: ::String
+      attr_accessor image: Types::Image
+      attr_accessor max_faces: ::Integer
+      attr_accessor face_match_threshold: ::Float
+      attr_accessor quality_filter: ("NONE" | "AUTO" | "LOW" | "MEDIUM" | "HIGH")
+      SENSITIVE: []
+    end
+
+    class SearchFacesByImageResponse
+      attr_accessor searched_face_bounding_box: Types::BoundingBox
+      attr_accessor searched_face_confidence: ::Float
+      attr_accessor face_matches: ::Array[Types::FaceMatch]
+      attr_accessor face_model_version: ::String
+      SENSITIVE: []
+    end
+
+    class SearchFacesRequest
+      attr_accessor collection_id: ::String
+      attr_accessor face_id: ::String
+      attr_accessor max_faces: ::Integer
+      attr_accessor face_match_threshold: ::Float
+      SENSITIVE: []
+    end
+
+    class SearchFacesResponse
+      attr_accessor searched_face_id: ::String
+      attr_accessor face_matches: ::Array[Types::FaceMatch]
+      attr_accessor face_model_version: ::String
+      SENSITIVE: []
+    end
+
+    class SearchUsersByImageRequest
+      attr_accessor collection_id: ::String
+      attr_accessor image: Types::Image
+      attr_accessor user_match_threshold: ::Float
+      attr_accessor max_users: ::Integer
+      attr_accessor quality_filter: ("NONE" | "AUTO" | "LOW" | "MEDIUM" | "HIGH")
+      SENSITIVE: []
+    end
+
+    class SearchUsersByImageResponse
+      attr_accessor user_matches: ::Array[Types::UserMatch]
+      attr_accessor face_model_version: ::String
+      attr_accessor searched_face: Types::SearchedFaceDetails
+      attr_accessor unsearched_faces: ::Array[Types::UnsearchedFace]
+      SENSITIVE: []
+    end
+
+    class SearchUsersRequest
+      attr_accessor collection_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor face_id: ::String
+      attr_accessor user_match_threshold: ::Float
+      attr_accessor max_users: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchUsersResponse
+      attr_accessor user_matches: ::Array[Types::UserMatch]
+      attr_accessor face_model_version: ::String
+      attr_accessor searched_face: Types::SearchedFace
+      attr_accessor searched_user: Types::SearchedUser
+      SENSITIVE: []
+    end
+
+    class SearchedFace
+      attr_accessor face_id: ::String
+      SENSITIVE: []
+    end
+
+    class SearchedFaceDetails
+      attr_accessor face_detail: Types::FaceDetail
+      SENSITIVE: []
+    end
+
+    class SearchedUser
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class SegmentDetection
+      attr_accessor type: ("TECHNICAL_CUE" | "SHOT")
+      attr_accessor start_timestamp_millis: ::Integer
+      attr_accessor end_timestamp_millis: ::Integer
+      attr_accessor duration_millis: ::Integer
+      attr_accessor start_timecode_smpte: ::String
+      attr_accessor end_timecode_smpte: ::String
+      attr_accessor duration_smpte: ::String
+      attr_accessor technical_cue_segment: Types::TechnicalCueSegment
+      attr_accessor shot_segment: Types::ShotSegment
+      attr_accessor start_frame_number: ::Integer
+      attr_accessor end_frame_number: ::Integer
+      attr_accessor duration_frames: ::Integer
+      SENSITIVE: []
+    end
+
+    class SegmentTypeInfo
+      attr_accessor type: ("TECHNICAL_CUE" | "SHOT")
+      attr_accessor model_version: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException < Aws::EmptyStructure
+    end
+
+    class SessionNotFoundException < Aws::EmptyStructure
+    end
+
+    class ShotSegment
+      attr_accessor index: ::Integer
+      attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class Smile
+      attr_accessor value: bool
+      attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class StartCelebrityRecognitionRequest
+      attr_accessor video: Types::Video
+      attr_accessor client_request_token: ::String
+      attr_accessor notification_channel: Types::NotificationChannel
+      attr_accessor job_tag: ::String
+      SENSITIVE: []
+    end
+
+    class StartCelebrityRecognitionResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartContentModerationRequest
+      attr_accessor video: Types::Video
+      attr_accessor min_confidence: ::Float
+      attr_accessor client_request_token: ::String
+      attr_accessor notification_channel: Types::NotificationChannel
+      attr_accessor job_tag: ::String
+      SENSITIVE: []
+    end
+
+    class StartContentModerationResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartFaceDetectionRequest
+      attr_accessor video: Types::Video
+      attr_accessor client_request_token: ::String
+      attr_accessor notification_channel: Types::NotificationChannel
+      attr_accessor face_attributes: ("DEFAULT" | "ALL")
+      attr_accessor job_tag: ::String
+      SENSITIVE: []
+    end
+
+    class StartFaceDetectionResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartFaceSearchRequest
+      attr_accessor video: Types::Video
+      attr_accessor client_request_token: ::String
+      attr_accessor face_match_threshold: ::Float
+      attr_accessor collection_id: ::String
+      attr_accessor notification_channel: Types::NotificationChannel
+      attr_accessor job_tag: ::String
+      SENSITIVE: []
+    end
+
+    class StartFaceSearchResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartLabelDetectionRequest
+      attr_accessor video: Types::Video
+      attr_accessor client_request_token: ::String
+      attr_accessor min_confidence: ::Float
+      attr_accessor notification_channel: Types::NotificationChannel
+      attr_accessor job_tag: ::String
+      attr_accessor features: ::Array[("GENERAL_LABELS")]
+      attr_accessor settings: Types::LabelDetectionSettings
+      SENSITIVE: []
+    end
+
+    class StartLabelDetectionResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartMediaAnalysisJobRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor job_name: ::String
+      attr_accessor operations_config: Types::MediaAnalysisOperationsConfig
+      attr_accessor input: Types::MediaAnalysisInput
+      attr_accessor output_config: Types::MediaAnalysisOutputConfig
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartMediaAnalysisJobResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartPersonTrackingRequest
+      attr_accessor video: Types::Video
+      attr_accessor client_request_token: ::String
+      attr_accessor notification_channel: Types::NotificationChannel
+      attr_accessor job_tag: ::String
+      SENSITIVE: []
+    end
+
+    class StartPersonTrackingResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartProjectVersionRequest
+      attr_accessor project_version_arn: ::String
+      attr_accessor min_inference_units: ::Integer
+      attr_accessor max_inference_units: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartProjectVersionResponse
+      attr_accessor status: ("TRAINING_IN_PROGRESS" | "TRAINING_COMPLETED" | "TRAINING_FAILED" | "STARTING" | "RUNNING" | "FAILED" | "STOPPING" | "STOPPED" | "DELETING" | "COPYING_IN_PROGRESS" | "COPYING_COMPLETED" | "COPYING_FAILED" | "DEPRECATED" | "EXPIRED")
+      SENSITIVE: []
+    end
+
+    class StartSegmentDetectionFilters
+      attr_accessor technical_cue_filter: Types::StartTechnicalCueDetectionFilter
+      attr_accessor shot_filter: Types::StartShotDetectionFilter
+      SENSITIVE: []
+    end
+
+    class StartSegmentDetectionRequest
+      attr_accessor video: Types::Video
+      attr_accessor client_request_token: ::String
+      attr_accessor notification_channel: Types::NotificationChannel
+      attr_accessor job_tag: ::String
+      attr_accessor filters: Types::StartSegmentDetectionFilters
+      attr_accessor segment_types: ::Array[("TECHNICAL_CUE" | "SHOT")]
+      SENSITIVE: []
+    end
+
+    class StartSegmentDetectionResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartShotDetectionFilter
+      attr_accessor min_segment_confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class StartStreamProcessorRequest
+      attr_accessor name: ::String
+      attr_accessor start_selector: Types::StreamProcessingStartSelector
+      attr_accessor stop_selector: Types::StreamProcessingStopSelector
+      SENSITIVE: []
+    end
+
+    class StartStreamProcessorResponse
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartTechnicalCueDetectionFilter
+      attr_accessor min_segment_confidence: ::Float
+      attr_accessor black_frame: Types::BlackFrame
+      SENSITIVE: []
+    end
+
+    class StartTextDetectionFilters
+      attr_accessor word_filter: Types::DetectionFilter
+      attr_accessor regions_of_interest: ::Array[Types::RegionOfInterest]
+      SENSITIVE: []
+    end
+
+    class StartTextDetectionRequest
+      attr_accessor video: Types::Video
+      attr_accessor client_request_token: ::String
+      attr_accessor notification_channel: Types::NotificationChannel
+      attr_accessor job_tag: ::String
+      attr_accessor filters: Types::StartTextDetectionFilters
+      SENSITIVE: []
+    end
+
+    class StartTextDetectionResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopProjectVersionRequest
+      attr_accessor project_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopProjectVersionResponse
+      attr_accessor status: ("TRAINING_IN_PROGRESS" | "TRAINING_COMPLETED" | "TRAINING_FAILED" | "STARTING" | "RUNNING" | "FAILED" | "STOPPING" | "STOPPED" | "DELETING" | "COPYING_IN_PROGRESS" | "COPYING_COMPLETED" | "COPYING_FAILED" | "DEPRECATED" | "EXPIRED")
+      SENSITIVE: []
+    end
+
+    class StopStreamProcessorRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class StopStreamProcessorResponse < Aws::EmptyStructure
+    end
+
+    class StreamProcessingStartSelector
+      attr_accessor kvs_stream_start_selector: Types::KinesisVideoStreamStartSelector
+      SENSITIVE: []
+    end
+
+    class StreamProcessingStopSelector
+      attr_accessor max_duration_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class StreamProcessor
+      attr_accessor name: ::String
+      attr_accessor status: ("STOPPED" | "STARTING" | "RUNNING" | "FAILED" | "STOPPING" | "UPDATING")
+      SENSITIVE: []
+    end
+
+    class StreamProcessorDataSharingPreference
+      attr_accessor opt_in: bool
+      SENSITIVE: []
+    end
+
+    class StreamProcessorInput
+      attr_accessor kinesis_video_stream: Types::KinesisVideoStream
+      SENSITIVE: []
+    end
+
+    class StreamProcessorNotificationChannel
+      attr_accessor sns_topic_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StreamProcessorOutput
+      attr_accessor kinesis_data_stream: Types::KinesisDataStream
+      attr_accessor s3_destination: Types::S3Destination
+      SENSITIVE: []
+    end
+
+    class StreamProcessorSettings
+      attr_accessor face_search: Types::FaceSearchSettings
+      attr_accessor connected_home: Types::ConnectedHomeSettings
+      SENSITIVE: []
+    end
+
+    class StreamProcessorSettingsForUpdate
+      attr_accessor connected_home_for_update: Types::ConnectedHomeSettingsForUpdate
+      SENSITIVE: []
+    end
+
+    class Summary
+      attr_accessor s3_object: Types::S3Object
+      SENSITIVE: []
+    end
+
+    class Sunglasses
+      attr_accessor value: bool
+      attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TechnicalCueSegment
+      attr_accessor type: ("ColorBars" | "EndCredits" | "BlackFrames" | "OpeningCredits" | "StudioLogo" | "Slate" | "Content")
+      attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class TestingData
+      attr_accessor assets: ::Array[Types::Asset]
+      attr_accessor auto_create: bool
+      SENSITIVE: []
+    end
+
+    class TestingDataResult
+      attr_accessor input: Types::TestingData
+      attr_accessor output: Types::TestingData
+      attr_accessor validation: Types::ValidationData
+      SENSITIVE: []
+    end
+
+    class TextDetection
+      attr_accessor detected_text: ::String
+      attr_accessor type: ("LINE" | "WORD")
+      attr_accessor id: ::Integer
+      attr_accessor parent_id: ::Integer
+      attr_accessor confidence: ::Float
+      attr_accessor geometry: Types::Geometry
+      SENSITIVE: []
+    end
+
+    class TextDetectionResult
+      attr_accessor timestamp: ::Integer
+      attr_accessor text_detection: Types::TextDetection
+      SENSITIVE: []
+    end
+
+    class ThrottlingException < Aws::EmptyStructure
+    end
+
+    class TrainingData
+      attr_accessor assets: ::Array[Types::Asset]
+      SENSITIVE: []
+    end
+
+    class TrainingDataResult
+      attr_accessor input: Types::TrainingData
+      attr_accessor output: Types::TrainingData
+      attr_accessor validation: Types::ValidationData
+      SENSITIVE: []
+    end
+
+    class UnindexedFace
+      attr_accessor reasons: ::Array[("EXCEEDS_MAX_FACES" | "EXTREME_POSE" | "LOW_BRIGHTNESS" | "LOW_SHARPNESS" | "LOW_CONFIDENCE" | "SMALL_BOUNDING_BOX" | "LOW_FACE_QUALITY")]
+      attr_accessor face_detail: Types::FaceDetail
+      SENSITIVE: []
+    end
+
+    class UnsearchedFace
+      attr_accessor face_details: Types::FaceDetail
+      attr_accessor reasons: ::Array[("FACE_NOT_LARGEST" | "EXCEEDS_MAX_FACES" | "EXTREME_POSE" | "LOW_BRIGHTNESS" | "LOW_SHARPNESS" | "LOW_CONFIDENCE" | "SMALL_BOUNDING_BOX" | "LOW_FACE_QUALITY")]
+      SENSITIVE: []
+    end
+
+    class UnsuccessfulFaceAssociation
+      attr_accessor face_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor confidence: ::Float
+      attr_accessor reasons: ::Array[("FACE_NOT_FOUND" | "ASSOCIATED_TO_A_DIFFERENT_USER" | "LOW_MATCH_CONFIDENCE")]
+      SENSITIVE: []
+    end
+
+    class UnsuccessfulFaceDeletion
+      attr_accessor face_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor reasons: ::Array[("ASSOCIATED_TO_AN_EXISTING_USER" | "FACE_NOT_FOUND")]
+      SENSITIVE: []
+    end
+
+    class UnsuccessfulFaceDisassociation
+      attr_accessor face_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor reasons: ::Array[("FACE_NOT_FOUND" | "ASSOCIATED_TO_A_DIFFERENT_USER")]
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDatasetEntriesRequest
+      attr_accessor dataset_arn: ::String
+      attr_accessor changes: Types::DatasetChanges
+      SENSITIVE: []
+    end
+
+    class UpdateDatasetEntriesResponse < Aws::EmptyStructure
+    end
+
+    class UpdateStreamProcessorRequest
+      attr_accessor name: ::String
+      attr_accessor settings_for_update: Types::StreamProcessorSettingsForUpdate
+      attr_accessor regions_of_interest_for_update: ::Array[Types::RegionOfInterest]
+      attr_accessor data_sharing_preference_for_update: Types::StreamProcessorDataSharingPreference
+      attr_accessor parameters_to_delete: ::Array[("ConnectedHomeMinConfidence" | "RegionsOfInterest")]
+      SENSITIVE: []
+    end
+
+    class UpdateStreamProcessorResponse < Aws::EmptyStructure
+    end
+
+    class User
+      attr_accessor user_id: ::String
+      attr_accessor user_status: ("ACTIVE" | "UPDATING" | "CREATING" | "CREATED")
+      SENSITIVE: []
+    end
+
+    class UserMatch
+      attr_accessor similarity: ::Float
+      attr_accessor user: Types::MatchedUser
+      SENSITIVE: []
+    end
+
+    class ValidationData
+      attr_accessor assets: ::Array[Types::Asset]
+      SENSITIVE: []
+    end
+
+    class Video
+      attr_accessor s3_object: Types::S3Object
+      SENSITIVE: []
+    end
+
+    class VideoMetadata
+      attr_accessor codec: ::String
+      attr_accessor duration_millis: ::Integer
+      attr_accessor format: ::String
+      attr_accessor frame_rate: ::Float
+      attr_accessor frame_height: ::Integer
+      attr_accessor frame_width: ::Integer
+      attr_accessor color_range: ("FULL" | "LIMITED")
+      SENSITIVE: []
+    end
+
+    class VideoTooLargeException < Aws::EmptyStructure
+    end
+  end
+end

@@ -1,0 +1,531 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Outposts
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Address
+      attr_accessor contact_name: ::String
+      attr_accessor contact_phone_number: ::String
+      attr_accessor address_line_1: ::String
+      attr_accessor address_line_2: ::String
+      attr_accessor address_line_3: ::String
+      attr_accessor city: ::String
+      attr_accessor state_or_region: ::String
+      attr_accessor district_or_county: ::String
+      attr_accessor postal_code: ::String
+      attr_accessor country_code: ::String
+      attr_accessor municipality: ::String
+      SENSITIVE: []
+    end
+
+    class AssetInfo
+      attr_accessor asset_id: ::String
+      attr_accessor rack_id: ::String
+      attr_accessor asset_type: ("COMPUTE")
+      attr_accessor compute_attributes: Types::ComputeAttributes
+      attr_accessor asset_location: Types::AssetLocation
+      SENSITIVE: []
+    end
+
+    class AssetLocation
+      attr_accessor rack_elevation: ::Float
+      SENSITIVE: []
+    end
+
+    class CancelOrderInput
+      attr_accessor order_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelOrderOutput < Aws::EmptyStructure
+    end
+
+    class CatalogItem
+      attr_accessor catalog_item_id: ::String
+      attr_accessor item_status: ("AVAILABLE" | "DISCONTINUED")
+      attr_accessor ec2_capacities: ::Array[Types::EC2Capacity]
+      attr_accessor power_kva: ::Float
+      attr_accessor weight_lbs: ::Integer
+      attr_accessor supported_uplink_gbps: ::Array[::Integer]
+      attr_accessor supported_storage: ::Array[("EBS" | "S3")]
+      SENSITIVE: []
+    end
+
+    class ComputeAttributes
+      attr_accessor host_id: ::String
+      attr_accessor state: ("ACTIVE" | "ISOLATED" | "RETIRING")
+      attr_accessor instance_families: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("OUTPOST" | "ORDER")
+      SENSITIVE: []
+    end
+
+    class ConnectionDetails
+      attr_accessor client_public_key: ::String
+      attr_accessor server_public_key: ::String
+      attr_accessor server_endpoint: ::String
+      attr_accessor client_tunnel_address: ::String
+      attr_accessor server_tunnel_address: ::String
+      attr_accessor allowed_ips: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateOrderInput
+      attr_accessor outpost_identifier: ::String
+      attr_accessor line_items: ::Array[Types::LineItemRequest]
+      attr_accessor payment_option: ("ALL_UPFRONT" | "NO_UPFRONT" | "PARTIAL_UPFRONT")
+      attr_accessor payment_term: ("THREE_YEARS" | "ONE_YEAR")
+      SENSITIVE: []
+    end
+
+    class CreateOrderOutput
+      attr_accessor order: Types::Order
+      SENSITIVE: []
+    end
+
+    class CreateOutpostInput
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor site_id: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor supported_hardware_type: ("RACK" | "SERVER")
+      SENSITIVE: []
+    end
+
+    class CreateOutpostOutput
+      attr_accessor outpost: Types::Outpost
+      SENSITIVE: []
+    end
+
+    class CreateSiteInput
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor notes: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor operating_address: Types::Address
+      attr_accessor shipping_address: Types::Address
+      attr_accessor rack_physical_properties: Types::RackPhysicalProperties
+      SENSITIVE: []
+    end
+
+    class CreateSiteOutput
+      attr_accessor site: Types::Site
+      SENSITIVE: []
+    end
+
+    class DeleteOutpostInput
+      attr_accessor outpost_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteOutpostOutput < Aws::EmptyStructure
+    end
+
+    class DeleteSiteInput
+      attr_accessor site_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSiteOutput < Aws::EmptyStructure
+    end
+
+    class EC2Capacity
+      attr_accessor family: ::String
+      attr_accessor max_size: ::String
+      attr_accessor quantity: ::String
+      SENSITIVE: []
+    end
+
+    class GetCatalogItemInput
+      attr_accessor catalog_item_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCatalogItemOutput
+      attr_accessor catalog_item: Types::CatalogItem
+      SENSITIVE: []
+    end
+
+    class GetConnectionRequest
+      attr_accessor connection_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectionResponse
+      attr_accessor connection_id: ::String
+      attr_accessor connection_details: Types::ConnectionDetails
+      SENSITIVE: []
+    end
+
+    class GetOrderInput
+      attr_accessor order_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetOrderOutput
+      attr_accessor order: Types::Order
+      SENSITIVE: []
+    end
+
+    class GetOutpostInput
+      attr_accessor outpost_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetOutpostInstanceTypesInput
+      attr_accessor outpost_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetOutpostInstanceTypesOutput
+      attr_accessor instance_types: ::Array[Types::InstanceTypeItem]
+      attr_accessor next_token: ::String
+      attr_accessor outpost_id: ::String
+      attr_accessor outpost_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetOutpostOutput
+      attr_accessor outpost: Types::Outpost
+      SENSITIVE: []
+    end
+
+    class GetSiteAddressInput
+      attr_accessor site_id: ::String
+      attr_accessor address_type: ("SHIPPING_ADDRESS" | "OPERATING_ADDRESS")
+      SENSITIVE: []
+    end
+
+    class GetSiteAddressOutput
+      attr_accessor site_id: ::String
+      attr_accessor address_type: ("SHIPPING_ADDRESS" | "OPERATING_ADDRESS")
+      attr_accessor address: Types::Address
+      SENSITIVE: []
+    end
+
+    class GetSiteInput
+      attr_accessor site_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSiteOutput
+      attr_accessor site: Types::Site
+      SENSITIVE: []
+    end
+
+    class InstanceTypeItem
+      attr_accessor instance_type: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LineItem
+      attr_accessor catalog_item_id: ::String
+      attr_accessor line_item_id: ::String
+      attr_accessor quantity: ::Integer
+      attr_accessor status: ("PREPARING" | "BUILDING" | "SHIPPED" | "DELIVERED" | "INSTALLING" | "INSTALLED" | "ERROR" | "CANCELLED" | "REPLACED")
+      attr_accessor shipment_information: Types::ShipmentInformation
+      attr_accessor asset_information_list: ::Array[Types::LineItemAssetInformation]
+      attr_accessor previous_line_item_id: ::String
+      attr_accessor previous_order_id: ::String
+      SENSITIVE: []
+    end
+
+    class LineItemAssetInformation
+      attr_accessor asset_id: ::String
+      attr_accessor mac_address_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class LineItemRequest
+      attr_accessor catalog_item_id: ::String
+      attr_accessor quantity: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAssetsInput
+      attr_accessor outpost_identifier: ::String
+      attr_accessor host_id_filter: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor status_filter: ::Array[("ACTIVE" | "RETIRING" | "ISOLATED")]
+      SENSITIVE: []
+    end
+
+    class ListAssetsOutput
+      attr_accessor assets: ::Array[Types::AssetInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCatalogItemsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor item_class_filter: ::Array[("RACK" | "SERVER")]
+      attr_accessor supported_storage_filter: ::Array[("EBS" | "S3")]
+      attr_accessor ec2_family_filter: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListCatalogItemsOutput
+      attr_accessor catalog_items: ::Array[Types::CatalogItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOrdersInput
+      attr_accessor outpost_identifier_filter: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListOrdersOutput
+      attr_accessor orders: ::Array[Types::OrderSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOutpostsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor life_cycle_status_filter: ::Array[::String]
+      attr_accessor availability_zone_filter: ::Array[::String]
+      attr_accessor availability_zone_id_filter: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListOutpostsOutput
+      attr_accessor outposts: ::Array[Types::Outpost]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSitesInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor operating_address_country_code_filter: ::Array[::String]
+      attr_accessor operating_address_state_or_region_filter: ::Array[::String]
+      attr_accessor operating_address_city_filter: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListSitesOutput
+      attr_accessor sites: ::Array[Types::Site]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Order
+      attr_accessor outpost_id: ::String
+      attr_accessor order_id: ::String
+      attr_accessor status: ("RECEIVED" | "PENDING" | "PROCESSING" | "INSTALLING" | "FULFILLED" | "CANCELLED" | "PREPARING" | "IN_PROGRESS" | "COMPLETED" | "ERROR")
+      attr_accessor line_items: ::Array[Types::LineItem]
+      attr_accessor payment_option: ("ALL_UPFRONT" | "NO_UPFRONT" | "PARTIAL_UPFRONT")
+      attr_accessor order_submission_date: ::Time
+      attr_accessor order_fulfilled_date: ::Time
+      attr_accessor payment_term: ("THREE_YEARS" | "ONE_YEAR")
+      attr_accessor order_type: ("OUTPOST" | "REPLACEMENT")
+      SENSITIVE: []
+    end
+
+    class OrderSummary
+      attr_accessor outpost_id: ::String
+      attr_accessor order_id: ::String
+      attr_accessor order_type: ("OUTPOST" | "REPLACEMENT")
+      attr_accessor status: ("RECEIVED" | "PENDING" | "PROCESSING" | "INSTALLING" | "FULFILLED" | "CANCELLED" | "PREPARING" | "IN_PROGRESS" | "COMPLETED" | "ERROR")
+      attr_accessor line_item_counts_by_status: ::Hash[("PREPARING" | "BUILDING" | "SHIPPED" | "DELIVERED" | "INSTALLING" | "INSTALLED" | "ERROR" | "CANCELLED" | "REPLACED"), ::Integer]
+      attr_accessor order_submission_date: ::Time
+      attr_accessor order_fulfilled_date: ::Time
+      SENSITIVE: []
+    end
+
+    class Outpost
+      attr_accessor outpost_id: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor outpost_arn: ::String
+      attr_accessor site_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor life_cycle_status: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor site_arn: ::String
+      attr_accessor supported_hardware_type: ("RACK" | "SERVER")
+      SENSITIVE: []
+    end
+
+    class RackPhysicalProperties
+      attr_accessor power_draw_kva: ("POWER_5_KVA" | "POWER_10_KVA" | "POWER_15_KVA" | "POWER_30_KVA")
+      attr_accessor power_phase: ("SINGLE_PHASE" | "THREE_PHASE")
+      attr_accessor power_connector: ("L6_30P" | "IEC309" | "AH530P7W" | "AH532P6W")
+      attr_accessor power_feed_drop: ("ABOVE_RACK" | "BELOW_RACK")
+      attr_accessor uplink_gbps: ("UPLINK_1G" | "UPLINK_10G" | "UPLINK_40G" | "UPLINK_100G")
+      attr_accessor uplink_count: ("UPLINK_COUNT_1" | "UPLINK_COUNT_2" | "UPLINK_COUNT_3" | "UPLINK_COUNT_4" | "UPLINK_COUNT_5" | "UPLINK_COUNT_6" | "UPLINK_COUNT_7" | "UPLINK_COUNT_8" | "UPLINK_COUNT_12" | "UPLINK_COUNT_16")
+      attr_accessor fiber_optic_cable_type: ("SINGLE_MODE" | "MULTI_MODE")
+      attr_accessor optical_standard: ("OPTIC_10GBASE_SR" | "OPTIC_10GBASE_IR" | "OPTIC_10GBASE_LR" | "OPTIC_40GBASE_SR" | "OPTIC_40GBASE_ESR" | "OPTIC_40GBASE_IR4_LR4L" | "OPTIC_40GBASE_LR4" | "OPTIC_100GBASE_SR4" | "OPTIC_100GBASE_CWDM4" | "OPTIC_100GBASE_LR4" | "OPTIC_100G_PSM4_MSA" | "OPTIC_1000BASE_LX" | "OPTIC_1000BASE_SX")
+      attr_accessor maximum_supported_weight_lbs: ("NO_LIMIT" | "MAX_1400_LBS" | "MAX_1600_LBS" | "MAX_1800_LBS" | "MAX_2000_LBS")
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ShipmentInformation
+      attr_accessor shipment_tracking_number: ::String
+      attr_accessor shipment_carrier: ("DHL" | "DBS" | "FEDEX" | "UPS")
+      SENSITIVE: []
+    end
+
+    class Site
+      attr_accessor site_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor site_arn: ::String
+      attr_accessor notes: ::String
+      attr_accessor operating_address_country_code: ::String
+      attr_accessor operating_address_state_or_region: ::String
+      attr_accessor operating_address_city: ::String
+      attr_accessor rack_physical_properties: Types::RackPhysicalProperties
+      SENSITIVE: []
+    end
+
+    class StartConnectionRequest
+      attr_accessor device_serial_number: ::String
+      attr_accessor asset_id: ::String
+      attr_accessor client_public_key: ::String
+      attr_accessor network_interface_device_index: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartConnectionResponse
+      attr_accessor connection_id: ::String
+      attr_accessor underlay_ip_address: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateOutpostInput
+      attr_accessor outpost_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor supported_hardware_type: ("RACK" | "SERVER")
+      SENSITIVE: []
+    end
+
+    class UpdateOutpostOutput
+      attr_accessor outpost: Types::Outpost
+      SENSITIVE: []
+    end
+
+    class UpdateSiteAddressInput
+      attr_accessor site_id: ::String
+      attr_accessor address_type: ("SHIPPING_ADDRESS" | "OPERATING_ADDRESS")
+      attr_accessor address: Types::Address
+      SENSITIVE: []
+    end
+
+    class UpdateSiteAddressOutput
+      attr_accessor address_type: ("SHIPPING_ADDRESS" | "OPERATING_ADDRESS")
+      attr_accessor address: Types::Address
+      SENSITIVE: []
+    end
+
+    class UpdateSiteInput
+      attr_accessor site_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor notes: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSiteOutput
+      attr_accessor site: Types::Site
+      SENSITIVE: []
+    end
+
+    class UpdateSiteRackPhysicalPropertiesInput
+      attr_accessor site_id: ::String
+      attr_accessor power_draw_kva: ("POWER_5_KVA" | "POWER_10_KVA" | "POWER_15_KVA" | "POWER_30_KVA")
+      attr_accessor power_phase: ("SINGLE_PHASE" | "THREE_PHASE")
+      attr_accessor power_connector: ("L6_30P" | "IEC309" | "AH530P7W" | "AH532P6W")
+      attr_accessor power_feed_drop: ("ABOVE_RACK" | "BELOW_RACK")
+      attr_accessor uplink_gbps: ("UPLINK_1G" | "UPLINK_10G" | "UPLINK_40G" | "UPLINK_100G")
+      attr_accessor uplink_count: ("UPLINK_COUNT_1" | "UPLINK_COUNT_2" | "UPLINK_COUNT_3" | "UPLINK_COUNT_4" | "UPLINK_COUNT_5" | "UPLINK_COUNT_6" | "UPLINK_COUNT_7" | "UPLINK_COUNT_8" | "UPLINK_COUNT_12" | "UPLINK_COUNT_16")
+      attr_accessor fiber_optic_cable_type: ("SINGLE_MODE" | "MULTI_MODE")
+      attr_accessor optical_standard: ("OPTIC_10GBASE_SR" | "OPTIC_10GBASE_IR" | "OPTIC_10GBASE_LR" | "OPTIC_40GBASE_SR" | "OPTIC_40GBASE_ESR" | "OPTIC_40GBASE_IR4_LR4L" | "OPTIC_40GBASE_LR4" | "OPTIC_100GBASE_SR4" | "OPTIC_100GBASE_CWDM4" | "OPTIC_100GBASE_LR4" | "OPTIC_100G_PSM4_MSA" | "OPTIC_1000BASE_LX" | "OPTIC_1000BASE_SX")
+      attr_accessor maximum_supported_weight_lbs: ("NO_LIMIT" | "MAX_1400_LBS" | "MAX_1600_LBS" | "MAX_1800_LBS" | "MAX_2000_LBS")
+      SENSITIVE: []
+    end
+
+    class UpdateSiteRackPhysicalPropertiesOutput
+      attr_accessor site: Types::Site
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

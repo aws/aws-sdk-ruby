@@ -14,6 +14,7 @@ module Aws::DynamoDB
       option(
         :endpoint_provider,
         doc_type: 'Aws::DynamoDB::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -157,6 +158,8 @@ module Aws::DynamoDB
             Aws::DynamoDB::Endpoints::UpdateGlobalTableSettings.build(context)
           when :update_item
             Aws::DynamoDB::Endpoints::UpdateItem.build(context)
+          when :update_kinesis_streaming_destination
+            Aws::DynamoDB::Endpoints::UpdateKinesisStreamingDestination.build(context)
           when :update_table
             Aws::DynamoDB::Endpoints::UpdateTable.build(context)
           when :update_table_replica_auto_scaling

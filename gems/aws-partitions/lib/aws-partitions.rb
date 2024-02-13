@@ -593,6 +593,7 @@ module Aws
             'SsmSap' => 'ssm-sap',
             'States' => 'states',
             'StorageGateway' => 'storagegateway',
+            'SupplyChain' => 'scn',
             'Support' => 'support',
             'SupportApp' => 'supportapp',
             'Synthetics' => 'synthetics',

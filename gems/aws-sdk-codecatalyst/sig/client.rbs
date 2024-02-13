@@ -1,0 +1,702 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CodeCatalyst
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateAccessTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessTokenResponse]
+        def secret: () -> ::String
+        def name: () -> ::String
+        def expires_time: () -> ::Time
+        def access_token_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#create_access_token-instance_method
+      def create_access_token: (
+                                 name: ::String,
+                                 ?expires_time: ::Time
+                               ) -> _CreateAccessTokenResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessTokenResponseSuccess
+
+      interface _CreateDevEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDevEnvironmentResponse]
+        def space_name: () -> ::String
+        def project_name: () -> ::String
+        def id: () -> ::String
+        def vpc_connection_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#create_dev_environment-instance_method
+      def create_dev_environment: (
+                                    space_name: ::String,
+                                    project_name: ::String,
+                                    ?repositories: Array[
+                                      {
+                                        repository_name: ::String,
+                                        branch_name: ::String?
+                                      },
+                                    ],
+                                    ?client_token: ::String,
+                                    ?alias: ::String,
+                                    ?ides: Array[
+                                      {
+                                        runtime: ::String?,
+                                        name: ::String?
+                                      },
+                                    ],
+                                    instance_type: ("dev.standard1.small" | "dev.standard1.medium" | "dev.standard1.large" | "dev.standard1.xlarge"),
+                                    ?inactivity_timeout_minutes: ::Integer,
+                                    persistent_storage: {
+                                      size_in_gi_b: ::Integer
+                                    },
+                                    ?vpc_connection_name: ::String
+                                  ) -> _CreateDevEnvironmentResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDevEnvironmentResponseSuccess
+
+      interface _CreateProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProjectResponse]
+        def space_name: () -> ::String
+        def name: () -> ::String
+        def display_name: () -> ::String
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#create_project-instance_method
+      def create_project: (
+                            space_name: ::String,
+                            display_name: ::String,
+                            ?description: ::String
+                          ) -> _CreateProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProjectResponseSuccess
+
+      interface _CreateSourceRepositoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSourceRepositoryResponse]
+        def space_name: () -> ::String
+        def project_name: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#create_source_repository-instance_method
+      def create_source_repository: (
+                                      space_name: ::String,
+                                      project_name: ::String,
+                                      name: ::String,
+                                      ?description: ::String
+                                    ) -> _CreateSourceRepositoryResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSourceRepositoryResponseSuccess
+
+      interface _CreateSourceRepositoryBranchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSourceRepositoryBranchResponse]
+        def ref: () -> ::String
+        def name: () -> ::String
+        def last_updated_time: () -> ::Time
+        def head_commit_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#create_source_repository_branch-instance_method
+      def create_source_repository_branch: (
+                                             space_name: ::String,
+                                             project_name: ::String,
+                                             source_repository_name: ::String,
+                                             name: ::String,
+                                             ?head_commit_id: ::String
+                                           ) -> _CreateSourceRepositoryBranchResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSourceRepositoryBranchResponseSuccess
+
+      interface _DeleteAccessTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccessTokenResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#delete_access_token-instance_method
+      def delete_access_token: (
+                                 id: ::String
+                               ) -> _DeleteAccessTokenResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccessTokenResponseSuccess
+
+      interface _DeleteDevEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDevEnvironmentResponse]
+        def space_name: () -> ::String
+        def project_name: () -> ::String
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#delete_dev_environment-instance_method
+      def delete_dev_environment: (
+                                    space_name: ::String,
+                                    project_name: ::String,
+                                    id: ::String
+                                  ) -> _DeleteDevEnvironmentResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDevEnvironmentResponseSuccess
+
+      interface _DeleteProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProjectResponse]
+        def space_name: () -> ::String
+        def name: () -> ::String
+        def display_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#delete_project-instance_method
+      def delete_project: (
+                            space_name: ::String,
+                            name: ::String
+                          ) -> _DeleteProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProjectResponseSuccess
+
+      interface _DeleteSourceRepositoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSourceRepositoryResponse]
+        def space_name: () -> ::String
+        def project_name: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#delete_source_repository-instance_method
+      def delete_source_repository: (
+                                      space_name: ::String,
+                                      project_name: ::String,
+                                      name: ::String
+                                    ) -> _DeleteSourceRepositoryResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSourceRepositoryResponseSuccess
+
+      interface _DeleteSpaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSpaceResponse]
+        def name: () -> ::String
+        def display_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#delete_space-instance_method
+      def delete_space: (
+                          name: ::String
+                        ) -> _DeleteSpaceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSpaceResponseSuccess
+
+      interface _GetDevEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDevEnvironmentResponse]
+        def space_name: () -> ::String
+        def project_name: () -> ::String
+        def id: () -> ::String
+        def last_updated_time: () -> ::Time
+        def creator_id: () -> ::String
+        def status: () -> ("PENDING" | "RUNNING" | "STARTING" | "STOPPING" | "STOPPED" | "FAILED" | "DELETING" | "DELETED")
+        def status_reason: () -> ::String
+        def repositories: () -> ::Array[Types::DevEnvironmentRepositorySummary]
+        def alias: () -> ::String
+        def ides: () -> ::Array[Types::Ide]
+        def instance_type: () -> ("dev.standard1.small" | "dev.standard1.medium" | "dev.standard1.large" | "dev.standard1.xlarge")
+        def inactivity_timeout_minutes: () -> ::Integer
+        def persistent_storage: () -> Types::PersistentStorage
+        def vpc_connection_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#get_dev_environment-instance_method
+      def get_dev_environment: (
+                                 space_name: ::String,
+                                 project_name: ::String,
+                                 id: ::String
+                               ) -> _GetDevEnvironmentResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDevEnvironmentResponseSuccess
+
+      interface _GetProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProjectResponse]
+        def space_name: () -> ::String
+        def name: () -> ::String
+        def display_name: () -> ::String
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#get_project-instance_method
+      def get_project: (
+                         space_name: ::String,
+                         name: ::String
+                       ) -> _GetProjectResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProjectResponseSuccess
+
+      interface _GetSourceRepositoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSourceRepositoryResponse]
+        def space_name: () -> ::String
+        def project_name: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def last_updated_time: () -> ::Time
+        def created_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#get_source_repository-instance_method
+      def get_source_repository: (
+                                   space_name: ::String,
+                                   project_name: ::String,
+                                   name: ::String
+                                 ) -> _GetSourceRepositoryResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSourceRepositoryResponseSuccess
+
+      interface _GetSourceRepositoryCloneUrlsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSourceRepositoryCloneUrlsResponse]
+        def https: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#get_source_repository_clone_urls-instance_method
+      def get_source_repository_clone_urls: (
+                                              space_name: ::String,
+                                              project_name: ::String,
+                                              source_repository_name: ::String
+                                            ) -> _GetSourceRepositoryCloneUrlsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSourceRepositoryCloneUrlsResponseSuccess
+
+      interface _GetSpaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSpaceResponse]
+        def name: () -> ::String
+        def region_name: () -> ::String
+        def display_name: () -> ::String
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#get_space-instance_method
+      def get_space: (
+                       name: ::String
+                     ) -> _GetSpaceResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSpaceResponseSuccess
+
+      interface _GetSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSubscriptionResponse]
+        def subscription_type: () -> ::String
+        def aws_account_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#get_subscription-instance_method
+      def get_subscription: (
+                              space_name: ::String
+                            ) -> _GetSubscriptionResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSubscriptionResponseSuccess
+
+      interface _GetUserDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUserDetailsResponse]
+        def user_id: () -> ::String
+        def user_name: () -> ::String
+        def display_name: () -> ::String
+        def primary_email: () -> Types::EmailAddress
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#get_user_details-instance_method
+      def get_user_details: (
+                              ?id: ::String,
+                              ?user_name: ::String
+                            ) -> _GetUserDetailsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUserDetailsResponseSuccess
+
+      interface _GetWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkflowResponse]
+        def space_name: () -> ::String
+        def project_name: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def source_repository_name: () -> ::String
+        def source_branch_name: () -> ::String
+        def definition: () -> Types::WorkflowDefinition
+        def created_time: () -> ::Time
+        def last_updated_time: () -> ::Time
+        def run_mode: () -> ("QUEUED" | "PARALLEL" | "SUPERSEDED")
+        def status: () -> ("INVALID" | "ACTIVE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#get_workflow-instance_method
+      def get_workflow: (
+                          space_name: ::String,
+                          id: ::String,
+                          project_name: ::String
+                        ) -> _GetWorkflowResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkflowResponseSuccess
+
+      interface _GetWorkflowRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkflowRunResponse]
+        def space_name: () -> ::String
+        def project_name: () -> ::String
+        def id: () -> ::String
+        def workflow_id: () -> ::String
+        def status: () -> ("SUCCEEDED" | "FAILED" | "STOPPED" | "SUPERSEDED" | "CANCELLED" | "NOT_RUN" | "VALIDATING" | "PROVISIONING" | "IN_PROGRESS" | "STOPPING" | "ABANDONED")
+        def status_reasons: () -> ::Array[Types::WorkflowRunStatusReason]
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
+        def last_updated_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#get_workflow_run-instance_method
+      def get_workflow_run: (
+                              space_name: ::String,
+                              id: ::String,
+                              project_name: ::String
+                            ) -> _GetWorkflowRunResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkflowRunResponseSuccess
+
+      interface _ListAccessTokensResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessTokensResponse]
+        def items: () -> ::Array[Types::AccessTokenSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#list_access_tokens-instance_method
+      def list_access_tokens: (
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListAccessTokensResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessTokensResponseSuccess
+
+      interface _ListDevEnvironmentSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDevEnvironmentSessionsResponse]
+        def items: () -> ::Array[Types::DevEnvironmentSessionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#list_dev_environment_sessions-instance_method
+      def list_dev_environment_sessions: (
+                                           space_name: ::String,
+                                           project_name: ::String,
+                                           dev_environment_id: ::String,
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer
+                                         ) -> _ListDevEnvironmentSessionsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDevEnvironmentSessionsResponseSuccess
+
+      interface _ListDevEnvironmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDevEnvironmentsResponse]
+        def items: () -> ::Array[Types::DevEnvironmentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#list_dev_environments-instance_method
+      def list_dev_environments: (
+                                   space_name: ::String,
+                                   ?project_name: ::String,
+                                   ?filters: Array[
+                                     {
+                                       key: ::String,
+                                       values: Array[::String],
+                                       comparison_operator: ::String?
+                                     },
+                                   ],
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _ListDevEnvironmentsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDevEnvironmentsResponseSuccess
+
+      interface _ListEventLogsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventLogsResponse]
+        def next_token: () -> ::String
+        def items: () -> ::Array[Types::EventLogEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#list_event_logs-instance_method
+      def list_event_logs: (
+                             space_name: ::String,
+                             start_time: ::Time,
+                             end_time: ::Time,
+                             ?event_name: ::String,
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _ListEventLogsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventLogsResponseSuccess
+
+      interface _ListProjectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProjectsResponse]
+        def next_token: () -> ::String
+        def items: () -> ::Array[Types::ProjectSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#list_projects-instance_method
+      def list_projects: (
+                           space_name: ::String,
+                           ?next_token: ::String,
+                           ?max_results: ::Integer,
+                           ?filters: Array[
+                             {
+                               key: ("hasAccessTo" | "name"),
+                               values: Array[::String],
+                               comparison_operator: ("EQ" | "GT" | "GE" | "LT" | "LE" | "BEGINS_WITH")?
+                             },
+                           ]
+                         ) -> _ListProjectsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProjectsResponseSuccess
+
+      interface _ListSourceRepositoriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSourceRepositoriesResponse]
+        def items: () -> ::Array[Types::ListSourceRepositoriesItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#list_source_repositories-instance_method
+      def list_source_repositories: (
+                                      space_name: ::String,
+                                      project_name: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListSourceRepositoriesResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSourceRepositoriesResponseSuccess
+
+      interface _ListSourceRepositoryBranchesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSourceRepositoryBranchesResponse]
+        def next_token: () -> ::String
+        def items: () -> ::Array[Types::ListSourceRepositoryBranchesItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#list_source_repository_branches-instance_method
+      def list_source_repository_branches: (
+                                             space_name: ::String,
+                                             project_name: ::String,
+                                             source_repository_name: ::String,
+                                             ?next_token: ::String,
+                                             ?max_results: ::Integer
+                                           ) -> _ListSourceRepositoryBranchesResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSourceRepositoryBranchesResponseSuccess
+
+      interface _ListSpacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSpacesResponse]
+        def next_token: () -> ::String
+        def items: () -> ::Array[Types::SpaceSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#list_spaces-instance_method
+      def list_spaces: (
+                         ?next_token: ::String
+                       ) -> _ListSpacesResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSpacesResponseSuccess
+
+      interface _ListWorkflowRunsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkflowRunsResponse]
+        def next_token: () -> ::String
+        def items: () -> ::Array[Types::WorkflowRunSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#list_workflow_runs-instance_method
+      def list_workflow_runs: (
+                                space_name: ::String,
+                                ?workflow_id: ::String,
+                                project_name: ::String,
+                                ?next_token: ::String,
+                                ?max_results: ::Integer,
+                                ?sort_by: Array[
+                                  {
+                                  },
+                                ]
+                              ) -> _ListWorkflowRunsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkflowRunsResponseSuccess
+
+      interface _ListWorkflowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkflowsResponse]
+        def next_token: () -> ::String
+        def items: () -> ::Array[Types::WorkflowSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#list_workflows-instance_method
+      def list_workflows: (
+                            space_name: ::String,
+                            project_name: ::String,
+                            ?next_token: ::String,
+                            ?max_results: ::Integer,
+                            ?sort_by: Array[
+                              {
+                              },
+                            ]
+                          ) -> _ListWorkflowsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkflowsResponseSuccess
+
+      interface _StartDevEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDevEnvironmentResponse]
+        def space_name: () -> ::String
+        def project_name: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("PENDING" | "RUNNING" | "STARTING" | "STOPPING" | "STOPPED" | "FAILED" | "DELETING" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#start_dev_environment-instance_method
+      def start_dev_environment: (
+                                   space_name: ::String,
+                                   project_name: ::String,
+                                   id: ::String,
+                                   ?ides: Array[
+                                     {
+                                       runtime: ::String?,
+                                       name: ::String?
+                                     },
+                                   ],
+                                   ?instance_type: ("dev.standard1.small" | "dev.standard1.medium" | "dev.standard1.large" | "dev.standard1.xlarge"),
+                                   ?inactivity_timeout_minutes: ::Integer
+                                 ) -> _StartDevEnvironmentResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDevEnvironmentResponseSuccess
+
+      interface _StartDevEnvironmentSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDevEnvironmentSessionResponse]
+        def access_details: () -> Types::DevEnvironmentAccessDetails
+        def session_id: () -> ::String
+        def space_name: () -> ::String
+        def project_name: () -> ::String
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#start_dev_environment_session-instance_method
+      def start_dev_environment_session: (
+                                           space_name: ::String,
+                                           project_name: ::String,
+                                           id: ::String,
+                                           session_configuration: {
+                                             session_type: ("SSM" | "SSH"),
+                                             execute_command_session_configuration: {
+                                               command: ::String,
+                                               arguments: Array[::String]?
+                                             }?
+                                           }
+                                         ) -> _StartDevEnvironmentSessionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDevEnvironmentSessionResponseSuccess
+
+      interface _StartWorkflowRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartWorkflowRunResponse]
+        def space_name: () -> ::String
+        def project_name: () -> ::String
+        def id: () -> ::String
+        def workflow_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#start_workflow_run-instance_method
+      def start_workflow_run: (
+                                space_name: ::String,
+                                project_name: ::String,
+                                workflow_id: ::String,
+                                ?client_token: ::String
+                              ) -> _StartWorkflowRunResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartWorkflowRunResponseSuccess
+
+      interface _StopDevEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopDevEnvironmentResponse]
+        def space_name: () -> ::String
+        def project_name: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("PENDING" | "RUNNING" | "STARTING" | "STOPPING" | "STOPPED" | "FAILED" | "DELETING" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#stop_dev_environment-instance_method
+      def stop_dev_environment: (
+                                  space_name: ::String,
+                                  project_name: ::String,
+                                  id: ::String
+                                ) -> _StopDevEnvironmentResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopDevEnvironmentResponseSuccess
+
+      interface _StopDevEnvironmentSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopDevEnvironmentSessionResponse]
+        def space_name: () -> ::String
+        def project_name: () -> ::String
+        def id: () -> ::String
+        def session_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#stop_dev_environment_session-instance_method
+      def stop_dev_environment_session: (
+                                          space_name: ::String,
+                                          project_name: ::String,
+                                          id: ::String,
+                                          session_id: ::String
+                                        ) -> _StopDevEnvironmentSessionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopDevEnvironmentSessionResponseSuccess
+
+      interface _UpdateDevEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDevEnvironmentResponse]
+        def id: () -> ::String
+        def space_name: () -> ::String
+        def project_name: () -> ::String
+        def alias: () -> ::String
+        def ides: () -> ::Array[Types::IdeConfiguration]
+        def instance_type: () -> ("dev.standard1.small" | "dev.standard1.medium" | "dev.standard1.large" | "dev.standard1.xlarge")
+        def inactivity_timeout_minutes: () -> ::Integer
+        def client_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#update_dev_environment-instance_method
+      def update_dev_environment: (
+                                    space_name: ::String,
+                                    project_name: ::String,
+                                    id: ::String,
+                                    ?alias: ::String,
+                                    ?ides: Array[
+                                      {
+                                        runtime: ::String?,
+                                        name: ::String?
+                                      },
+                                    ],
+                                    ?instance_type: ("dev.standard1.small" | "dev.standard1.medium" | "dev.standard1.large" | "dev.standard1.xlarge"),
+                                    ?inactivity_timeout_minutes: ::Integer,
+                                    ?client_token: ::String
+                                  ) -> _UpdateDevEnvironmentResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDevEnvironmentResponseSuccess
+
+      interface _UpdateProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProjectResponse]
+        def space_name: () -> ::String
+        def name: () -> ::String
+        def display_name: () -> ::String
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#update_project-instance_method
+      def update_project: (
+                            space_name: ::String,
+                            name: ::String,
+                            ?description: ::String
+                          ) -> _UpdateProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProjectResponseSuccess
+
+      interface _UpdateSpaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSpaceResponse]
+        def name: () -> ::String
+        def display_name: () -> ::String
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#update_space-instance_method
+      def update_space: (
+                          name: ::String,
+                          ?description: ::String
+                        ) -> _UpdateSpaceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSpaceResponseSuccess
+
+      interface _VerifySessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VerifySessionResponse]
+        def identity: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeCatalyst/Client.html#verify_session-instance_method
+      def verify_session: () -> _VerifySessionResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _VerifySessionResponseSuccess
+    end
+  end
+end
+

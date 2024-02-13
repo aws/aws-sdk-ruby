@@ -1,0 +1,363 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SQS
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?verify_checksums: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#add_permission-instance_method
+      def add_permission: (
+                            queue_url: ::String,
+                            label: ::String,
+                            aws_account_ids: Array[::String],
+                            actions: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CancelMessageMoveTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelMessageMoveTaskResult]
+        def approximate_number_of_messages_moved: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#cancel_message_move_task-instance_method
+      def cancel_message_move_task: (
+                                      task_handle: ::String
+                                    ) -> _CancelMessageMoveTaskResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelMessageMoveTaskResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#change_message_visibility-instance_method
+      def change_message_visibility: (
+                                       queue_url: ::String,
+                                       receipt_handle: ::String,
+                                       visibility_timeout: ::Integer
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _ChangeMessageVisibilityBatchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ChangeMessageVisibilityBatchResult]
+        def successful: () -> ::Array[Types::ChangeMessageVisibilityBatchResultEntry]
+        def failed: () -> ::Array[Types::BatchResultErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#change_message_visibility_batch-instance_method
+      def change_message_visibility_batch: (
+                                             queue_url: ::String,
+                                             entries: Array[
+                                               {
+                                                 id: ::String,
+                                                 receipt_handle: ::String,
+                                                 visibility_timeout: ::Integer?
+                                               },
+                                             ]
+                                           ) -> _ChangeMessageVisibilityBatchResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ChangeMessageVisibilityBatchResponseSuccess
+
+      interface _CreateQueueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateQueueResult]
+        def queue_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#create_queue-instance_method
+      def create_queue: (
+                          queue_name: ::String,
+                          ?attributes: Hash[("All" | "Policy" | "VisibilityTimeout" | "MaximumMessageSize" | "MessageRetentionPeriod" | "ApproximateNumberOfMessages" | "ApproximateNumberOfMessagesNotVisible" | "CreatedTimestamp" | "LastModifiedTimestamp" | "QueueArn" | "ApproximateNumberOfMessagesDelayed" | "DelaySeconds" | "ReceiveMessageWaitTimeSeconds" | "RedrivePolicy" | "FifoQueue" | "ContentBasedDeduplication" | "KmsMasterKeyId" | "KmsDataKeyReusePeriodSeconds" | "DeduplicationScope" | "FifoThroughputLimit" | "RedriveAllowPolicy" | "SqsManagedSseEnabled"), ::String],
+                          ?tags: Hash[::String, ::String]
+                        ) -> _CreateQueueResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQueueResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#delete_message-instance_method
+      def delete_message: (
+                            queue_url: ::String,
+                            receipt_handle: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteMessageBatchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMessageBatchResult]
+        def successful: () -> ::Array[Types::DeleteMessageBatchResultEntry]
+        def failed: () -> ::Array[Types::BatchResultErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#delete_message_batch-instance_method
+      def delete_message_batch: (
+                                  queue_url: ::String,
+                                  entries: Array[
+                                    {
+                                      id: ::String,
+                                      receipt_handle: ::String
+                                    },
+                                  ]
+                                ) -> _DeleteMessageBatchResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMessageBatchResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#delete_queue-instance_method
+      def delete_queue: (
+                          queue_url: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetQueueAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQueueAttributesResult]
+        def attributes: () -> ::Hash[("All" | "Policy" | "VisibilityTimeout" | "MaximumMessageSize" | "MessageRetentionPeriod" | "ApproximateNumberOfMessages" | "ApproximateNumberOfMessagesNotVisible" | "CreatedTimestamp" | "LastModifiedTimestamp" | "QueueArn" | "ApproximateNumberOfMessagesDelayed" | "DelaySeconds" | "ReceiveMessageWaitTimeSeconds" | "RedrivePolicy" | "FifoQueue" | "ContentBasedDeduplication" | "KmsMasterKeyId" | "KmsDataKeyReusePeriodSeconds" | "DeduplicationScope" | "FifoThroughputLimit" | "RedriveAllowPolicy" | "SqsManagedSseEnabled"), ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#get_queue_attributes-instance_method
+      def get_queue_attributes: (
+                                  queue_url: ::String,
+                                  ?attribute_names: Array[("All" | "Policy" | "VisibilityTimeout" | "MaximumMessageSize" | "MessageRetentionPeriod" | "ApproximateNumberOfMessages" | "ApproximateNumberOfMessagesNotVisible" | "CreatedTimestamp" | "LastModifiedTimestamp" | "QueueArn" | "ApproximateNumberOfMessagesDelayed" | "DelaySeconds" | "ReceiveMessageWaitTimeSeconds" | "RedrivePolicy" | "FifoQueue" | "ContentBasedDeduplication" | "KmsMasterKeyId" | "KmsDataKeyReusePeriodSeconds" | "DeduplicationScope" | "FifoThroughputLimit" | "RedriveAllowPolicy" | "SqsManagedSseEnabled")]
+                                ) -> _GetQueueAttributesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQueueAttributesResponseSuccess
+
+      interface _GetQueueUrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQueueUrlResult]
+        def queue_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#get_queue_url-instance_method
+      def get_queue_url: (
+                           queue_name: ::String,
+                           ?queue_owner_aws_account_id: ::String
+                         ) -> _GetQueueUrlResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQueueUrlResponseSuccess
+
+      interface _ListDeadLetterSourceQueuesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeadLetterSourceQueuesResult]
+        def queue_urls: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#list_dead_letter_source_queues-instance_method
+      def list_dead_letter_source_queues: (
+                                            queue_url: ::String,
+                                            ?next_token: ::String,
+                                            ?max_results: ::Integer
+                                          ) -> _ListDeadLetterSourceQueuesResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeadLetterSourceQueuesResponseSuccess
+
+      interface _ListMessageMoveTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMessageMoveTasksResult]
+        def results: () -> ::Array[Types::ListMessageMoveTasksResultEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#list_message_move_tasks-instance_method
+      def list_message_move_tasks: (
+                                     source_arn: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListMessageMoveTasksResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMessageMoveTasksResponseSuccess
+
+      interface _ListQueueTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListQueueTagsResult]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#list_queue_tags-instance_method
+      def list_queue_tags: (
+                             queue_url: ::String
+                           ) -> _ListQueueTagsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQueueTagsResponseSuccess
+
+      interface _ListQueuesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListQueuesResult]
+        def queue_urls: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#list_queues-instance_method
+      def list_queues: (
+                         ?queue_name_prefix: ::String,
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
+                       ) -> _ListQueuesResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQueuesResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#purge_queue-instance_method
+      def purge_queue: (
+                         queue_url: ::String
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _ReceiveMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReceiveMessageResult]
+        def messages: () -> ::Array[Types::Message]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#receive_message-instance_method
+      def receive_message: (
+                             queue_url: ::String,
+                             ?attribute_names: Array[("All" | "Policy" | "VisibilityTimeout" | "MaximumMessageSize" | "MessageRetentionPeriod" | "ApproximateNumberOfMessages" | "ApproximateNumberOfMessagesNotVisible" | "CreatedTimestamp" | "LastModifiedTimestamp" | "QueueArn" | "ApproximateNumberOfMessagesDelayed" | "DelaySeconds" | "ReceiveMessageWaitTimeSeconds" | "RedrivePolicy" | "FifoQueue" | "ContentBasedDeduplication" | "KmsMasterKeyId" | "KmsDataKeyReusePeriodSeconds" | "DeduplicationScope" | "FifoThroughputLimit" | "RedriveAllowPolicy" | "SqsManagedSseEnabled")],
+                             ?message_attribute_names: Array[::String],
+                             ?max_number_of_messages: ::Integer,
+                             ?visibility_timeout: ::Integer,
+                             ?wait_time_seconds: ::Integer,
+                             ?receive_request_attempt_id: ::String
+                           ) -> _ReceiveMessageResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReceiveMessageResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#remove_permission-instance_method
+      def remove_permission: (
+                               queue_url: ::String,
+                               label: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _SendMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendMessageResult]
+        def md5_of_message_body: () -> ::String
+        def md5_of_message_attributes: () -> ::String
+        def md5_of_message_system_attributes: () -> ::String
+        def message_id: () -> ::String
+        def sequence_number: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#send_message-instance_method
+      def send_message: (
+                          queue_url: ::String,
+                          message_body: ::String,
+                          ?delay_seconds: ::Integer,
+                          ?message_attributes: Hash[::String, {
+                              string_value: ::String?,
+                              binary_value: ::String?,
+                              string_list_values: Array[::String]?,
+                              binary_list_values: Array[::String]?,
+                              data_type: ::String
+                            }],
+                          ?message_system_attributes: Hash[("AWSTraceHeader"), {
+                              string_value: ::String?,
+                              binary_value: ::String?,
+                              string_list_values: Array[::String]?,
+                              binary_list_values: Array[::String]?,
+                              data_type: ::String
+                            }],
+                          ?message_deduplication_id: ::String,
+                          ?message_group_id: ::String
+                        ) -> _SendMessageResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendMessageResponseSuccess
+
+      interface _SendMessageBatchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendMessageBatchResult]
+        def successful: () -> ::Array[Types::SendMessageBatchResultEntry]
+        def failed: () -> ::Array[Types::BatchResultErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#send_message_batch-instance_method
+      def send_message_batch: (
+                                queue_url: ::String,
+                                entries: Array[
+                                  {
+                                    id: ::String,
+                                    message_body: ::String,
+                                    delay_seconds: ::Integer?,
+                                    message_attributes: Hash[::String, {
+                                        string_value: ::String?,
+                                        binary_value: ::String?,
+                                        string_list_values: Array[::String]?,
+                                        binary_list_values: Array[::String]?,
+                                        data_type: ::String
+                                      }]?,
+                                    message_system_attributes: Hash[("AWSTraceHeader"), {
+                                        string_value: ::String?,
+                                        binary_value: ::String?,
+                                        string_list_values: Array[::String]?,
+                                        binary_list_values: Array[::String]?,
+                                        data_type: ::String
+                                      }]?,
+                                    message_deduplication_id: ::String?,
+                                    message_group_id: ::String?
+                                  },
+                                ]
+                              ) -> _SendMessageBatchResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendMessageBatchResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#set_queue_attributes-instance_method
+      def set_queue_attributes: (
+                                  queue_url: ::String,
+                                  attributes: Hash[("All" | "Policy" | "VisibilityTimeout" | "MaximumMessageSize" | "MessageRetentionPeriod" | "ApproximateNumberOfMessages" | "ApproximateNumberOfMessagesNotVisible" | "CreatedTimestamp" | "LastModifiedTimestamp" | "QueueArn" | "ApproximateNumberOfMessagesDelayed" | "DelaySeconds" | "ReceiveMessageWaitTimeSeconds" | "RedrivePolicy" | "FifoQueue" | "ContentBasedDeduplication" | "KmsMasterKeyId" | "KmsDataKeyReusePeriodSeconds" | "DeduplicationScope" | "FifoThroughputLimit" | "RedriveAllowPolicy" | "SqsManagedSseEnabled"), ::String]
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _StartMessageMoveTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMessageMoveTaskResult]
+        def task_handle: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#start_message_move_task-instance_method
+      def start_message_move_task: (
+                                     source_arn: ::String,
+                                     ?destination_arn: ::String,
+                                     ?max_number_of_messages_per_second: ::Integer
+                                   ) -> _StartMessageMoveTaskResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMessageMoveTaskResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#tag_queue-instance_method
+      def tag_queue: (
+                       queue_url: ::String,
+                       tags: Hash[::String, ::String]
+                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Client.html#untag_queue-instance_method
+      def untag_queue: (
+                         queue_url: ::String,
+                         tag_keys: Array[::String]
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+    end
+  end
+end
+

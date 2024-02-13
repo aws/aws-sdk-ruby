@@ -1,0 +1,1020 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Personalize
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateBatchInferenceJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBatchInferenceJobResponse]
+        def batch_inference_job_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#create_batch_inference_job-instance_method
+      def create_batch_inference_job: (
+                                        job_name: ::String,
+                                        solution_version_arn: ::String,
+                                        ?filter_arn: ::String,
+                                        ?num_results: ::Integer,
+                                        job_input: {
+                                          s3_data_source: {
+                                            path: ::String,
+                                            kms_key_arn: ::String?
+                                          }
+                                        },
+                                        job_output: {
+                                          s3_data_destination: {
+                                            path: ::String,
+                                            kms_key_arn: ::String?
+                                          }
+                                        },
+                                        role_arn: ::String,
+                                        ?batch_inference_job_config: {
+                                          item_exploration_config: Hash[::String, ::String]?
+                                        },
+                                        ?tags: Array[
+                                          {
+                                            tag_key: ::String,
+                                            tag_value: ::String
+                                          },
+                                        ],
+                                        ?batch_inference_job_mode: ("BATCH_INFERENCE" | "THEME_GENERATION"),
+                                        ?theme_generation_config: {
+                                          fields_for_theme_generation: {
+                                            item_name: ::String
+                                          }
+                                        }
+                                      ) -> _CreateBatchInferenceJobResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBatchInferenceJobResponseSuccess
+
+      interface _CreateBatchSegmentJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBatchSegmentJobResponse]
+        def batch_segment_job_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#create_batch_segment_job-instance_method
+      def create_batch_segment_job: (
+                                      job_name: ::String,
+                                      solution_version_arn: ::String,
+                                      ?filter_arn: ::String,
+                                      ?num_results: ::Integer,
+                                      job_input: {
+                                        s3_data_source: {
+                                          path: ::String,
+                                          kms_key_arn: ::String?
+                                        }
+                                      },
+                                      job_output: {
+                                        s3_data_destination: {
+                                          path: ::String,
+                                          kms_key_arn: ::String?
+                                        }
+                                      },
+                                      role_arn: ::String,
+                                      ?tags: Array[
+                                        {
+                                          tag_key: ::String,
+                                          tag_value: ::String
+                                        },
+                                      ]
+                                    ) -> _CreateBatchSegmentJobResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBatchSegmentJobResponseSuccess
+
+      interface _CreateCampaignResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCampaignResponse]
+        def campaign_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#create_campaign-instance_method
+      def create_campaign: (
+                             name: ::String,
+                             solution_version_arn: ::String,
+                             ?min_provisioned_tps: ::Integer,
+                             ?campaign_config: {
+                               item_exploration_config: Hash[::String, ::String]?,
+                               enable_metadata_with_recommendations: bool?
+                             },
+                             ?tags: Array[
+                               {
+                                 tag_key: ::String,
+                                 tag_value: ::String
+                               },
+                             ]
+                           ) -> _CreateCampaignResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCampaignResponseSuccess
+
+      interface _CreateDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatasetResponse]
+        def dataset_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#create_dataset-instance_method
+      def create_dataset: (
+                            name: ::String,
+                            schema_arn: ::String,
+                            dataset_group_arn: ::String,
+                            dataset_type: ::String,
+                            ?tags: Array[
+                              {
+                                tag_key: ::String,
+                                tag_value: ::String
+                              },
+                            ]
+                          ) -> _CreateDatasetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetResponseSuccess
+
+      interface _CreateDatasetExportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatasetExportJobResponse]
+        def dataset_export_job_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#create_dataset_export_job-instance_method
+      def create_dataset_export_job: (
+                                       job_name: ::String,
+                                       dataset_arn: ::String,
+                                       ?ingestion_mode: ("BULK" | "PUT" | "ALL"),
+                                       role_arn: ::String,
+                                       job_output: {
+                                         s3_data_destination: {
+                                           path: ::String,
+                                           kms_key_arn: ::String?
+                                         }
+                                       },
+                                       ?tags: Array[
+                                         {
+                                           tag_key: ::String,
+                                           tag_value: ::String
+                                         },
+                                       ]
+                                     ) -> _CreateDatasetExportJobResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetExportJobResponseSuccess
+
+      interface _CreateDatasetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatasetGroupResponse]
+        def dataset_group_arn: () -> ::String
+        def domain: () -> ("ECOMMERCE" | "VIDEO_ON_DEMAND")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#create_dataset_group-instance_method
+      def create_dataset_group: (
+                                  name: ::String,
+                                  ?role_arn: ::String,
+                                  ?kms_key_arn: ::String,
+                                  ?domain: ("ECOMMERCE" | "VIDEO_ON_DEMAND"),
+                                  ?tags: Array[
+                                    {
+                                      tag_key: ::String,
+                                      tag_value: ::String
+                                    },
+                                  ]
+                                ) -> _CreateDatasetGroupResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetGroupResponseSuccess
+
+      interface _CreateDatasetImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatasetImportJobResponse]
+        def dataset_import_job_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#create_dataset_import_job-instance_method
+      def create_dataset_import_job: (
+                                       job_name: ::String,
+                                       dataset_arn: ::String,
+                                       data_source: {
+                                         data_location: ::String?
+                                       },
+                                       role_arn: ::String,
+                                       ?tags: Array[
+                                         {
+                                           tag_key: ::String,
+                                           tag_value: ::String
+                                         },
+                                       ],
+                                       ?import_mode: ("FULL" | "INCREMENTAL"),
+                                       ?publish_attribution_metrics_to_s3: bool
+                                     ) -> _CreateDatasetImportJobResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetImportJobResponseSuccess
+
+      interface _CreateEventTrackerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEventTrackerResponse]
+        def event_tracker_arn: () -> ::String
+        def tracking_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#create_event_tracker-instance_method
+      def create_event_tracker: (
+                                  name: ::String,
+                                  dataset_group_arn: ::String,
+                                  ?tags: Array[
+                                    {
+                                      tag_key: ::String,
+                                      tag_value: ::String
+                                    },
+                                  ]
+                                ) -> _CreateEventTrackerResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventTrackerResponseSuccess
+
+      interface _CreateFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFilterResponse]
+        def filter_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#create_filter-instance_method
+      def create_filter: (
+                           name: ::String,
+                           dataset_group_arn: ::String,
+                           filter_expression: ::String,
+                           ?tags: Array[
+                             {
+                               tag_key: ::String,
+                               tag_value: ::String
+                             },
+                           ]
+                         ) -> _CreateFilterResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFilterResponseSuccess
+
+      interface _CreateMetricAttributionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMetricAttributionResponse]
+        def metric_attribution_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#create_metric_attribution-instance_method
+      def create_metric_attribution: (
+                                       name: ::String,
+                                       dataset_group_arn: ::String,
+                                       metrics: Array[
+                                         {
+                                           event_type: ::String,
+                                           metric_name: ::String,
+                                           expression: ::String
+                                         },
+                                       ],
+                                       metrics_output_config: {
+                                         s3_data_destination: {
+                                           path: ::String,
+                                           kms_key_arn: ::String?
+                                         }?,
+                                         role_arn: ::String
+                                       }
+                                     ) -> _CreateMetricAttributionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMetricAttributionResponseSuccess
+
+      interface _CreateRecommenderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRecommenderResponse]
+        def recommender_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#create_recommender-instance_method
+      def create_recommender: (
+                                name: ::String,
+                                dataset_group_arn: ::String,
+                                recipe_arn: ::String,
+                                ?recommender_config: {
+                                  item_exploration_config: Hash[::String, ::String]?,
+                                  min_recommendation_requests_per_second: ::Integer?,
+                                  training_data_config: {
+                                    excluded_dataset_columns: Hash[::String, Array[::String]]?
+                                  }?,
+                                  enable_metadata_with_recommendations: bool?
+                                },
+                                ?tags: Array[
+                                  {
+                                    tag_key: ::String,
+                                    tag_value: ::String
+                                  },
+                                ]
+                              ) -> _CreateRecommenderResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRecommenderResponseSuccess
+
+      interface _CreateSchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSchemaResponse]
+        def schema_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#create_schema-instance_method
+      def create_schema: (
+                           name: ::String,
+                           schema: ::String,
+                           ?domain: ("ECOMMERCE" | "VIDEO_ON_DEMAND")
+                         ) -> _CreateSchemaResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSchemaResponseSuccess
+
+      interface _CreateSolutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSolutionResponse]
+        def solution_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#create_solution-instance_method
+      def create_solution: (
+                             name: ::String,
+                             ?perform_hpo: bool,
+                             ?perform_auto_ml: bool,
+                             ?recipe_arn: ::String,
+                             dataset_group_arn: ::String,
+                             ?event_type: ::String,
+                             ?solution_config: {
+                               event_value_threshold: ::String?,
+                               hpo_config: {
+                                 hpo_objective: {
+                                   type: ::String?,
+                                   metric_name: ::String?,
+                                   metric_regex: ::String?
+                                 }?,
+                                 hpo_resource_config: {
+                                   max_number_of_training_jobs: ::String?,
+                                   max_parallel_training_jobs: ::String?
+                                 }?,
+                                 algorithm_hyper_parameter_ranges: {
+                                   integer_hyper_parameter_ranges: Array[
+                                     {
+                                       name: ::String?,
+                                       min_value: ::Integer?,
+                                       max_value: ::Integer?
+                                     },
+                                   ]?,
+                                   continuous_hyper_parameter_ranges: Array[
+                                     {
+                                       name: ::String?,
+                                       min_value: ::Float?,
+                                       max_value: ::Float?
+                                     },
+                                   ]?,
+                                   categorical_hyper_parameter_ranges: Array[
+                                     {
+                                       name: ::String?,
+                                       values: Array[::String]?
+                                     },
+                                   ]?
+                                 }?
+                               }?,
+                               algorithm_hyper_parameters: Hash[::String, ::String]?,
+                               feature_transformation_parameters: Hash[::String, ::String]?,
+                               auto_ml_config: {
+                                 metric_name: ::String?,
+                                 recipe_list: Array[::String]?
+                               }?,
+                               optimization_objective: {
+                                 item_attribute: ::String?,
+                                 objective_sensitivity: ("LOW" | "MEDIUM" | "HIGH" | "OFF")?
+                               }?,
+                               training_data_config: {
+                                 excluded_dataset_columns: Hash[::String, Array[::String]]?
+                               }?
+                             },
+                             ?tags: Array[
+                               {
+                                 tag_key: ::String,
+                                 tag_value: ::String
+                               },
+                             ]
+                           ) -> _CreateSolutionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSolutionResponseSuccess
+
+      interface _CreateSolutionVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSolutionVersionResponse]
+        def solution_version_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#create_solution_version-instance_method
+      def create_solution_version: (
+                                     ?name: ::String,
+                                     solution_arn: ::String,
+                                     ?training_mode: ("FULL" | "UPDATE"),
+                                     ?tags: Array[
+                                       {
+                                         tag_key: ::String,
+                                         tag_value: ::String
+                                       },
+                                     ]
+                                   ) -> _CreateSolutionVersionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSolutionVersionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#delete_campaign-instance_method
+      def delete_campaign: (
+                             campaign_arn: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#delete_dataset-instance_method
+      def delete_dataset: (
+                            dataset_arn: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#delete_dataset_group-instance_method
+      def delete_dataset_group: (
+                                  dataset_group_arn: ::String
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#delete_event_tracker-instance_method
+      def delete_event_tracker: (
+                                  event_tracker_arn: ::String
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#delete_filter-instance_method
+      def delete_filter: (
+                           filter_arn: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#delete_metric_attribution-instance_method
+      def delete_metric_attribution: (
+                                       metric_attribution_arn: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#delete_recommender-instance_method
+      def delete_recommender: (
+                                recommender_arn: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#delete_schema-instance_method
+      def delete_schema: (
+                           schema_arn: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#delete_solution-instance_method
+      def delete_solution: (
+                             solution_arn: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeAlgorithmResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAlgorithmResponse]
+        def algorithm: () -> Types::Algorithm
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#describe_algorithm-instance_method
+      def describe_algorithm: (
+                                algorithm_arn: ::String
+                              ) -> _DescribeAlgorithmResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAlgorithmResponseSuccess
+
+      interface _DescribeBatchInferenceJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBatchInferenceJobResponse]
+        def batch_inference_job: () -> Types::BatchInferenceJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#describe_batch_inference_job-instance_method
+      def describe_batch_inference_job: (
+                                          batch_inference_job_arn: ::String
+                                        ) -> _DescribeBatchInferenceJobResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBatchInferenceJobResponseSuccess
+
+      interface _DescribeBatchSegmentJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBatchSegmentJobResponse]
+        def batch_segment_job: () -> Types::BatchSegmentJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#describe_batch_segment_job-instance_method
+      def describe_batch_segment_job: (
+                                        batch_segment_job_arn: ::String
+                                      ) -> _DescribeBatchSegmentJobResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBatchSegmentJobResponseSuccess
+
+      interface _DescribeCampaignResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCampaignResponse]
+        def campaign: () -> Types::Campaign
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#describe_campaign-instance_method
+      def describe_campaign: (
+                               campaign_arn: ::String
+                             ) -> _DescribeCampaignResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCampaignResponseSuccess
+
+      interface _DescribeDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDatasetResponse]
+        def dataset: () -> Types::Dataset
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#describe_dataset-instance_method
+      def describe_dataset: (
+                              dataset_arn: ::String
+                            ) -> _DescribeDatasetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDatasetResponseSuccess
+
+      interface _DescribeDatasetExportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDatasetExportJobResponse]
+        def dataset_export_job: () -> Types::DatasetExportJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#describe_dataset_export_job-instance_method
+      def describe_dataset_export_job: (
+                                         dataset_export_job_arn: ::String
+                                       ) -> _DescribeDatasetExportJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDatasetExportJobResponseSuccess
+
+      interface _DescribeDatasetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDatasetGroupResponse]
+        def dataset_group: () -> Types::DatasetGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#describe_dataset_group-instance_method
+      def describe_dataset_group: (
+                                    dataset_group_arn: ::String
+                                  ) -> _DescribeDatasetGroupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDatasetGroupResponseSuccess
+
+      interface _DescribeDatasetImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDatasetImportJobResponse]
+        def dataset_import_job: () -> Types::DatasetImportJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#describe_dataset_import_job-instance_method
+      def describe_dataset_import_job: (
+                                         dataset_import_job_arn: ::String
+                                       ) -> _DescribeDatasetImportJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDatasetImportJobResponseSuccess
+
+      interface _DescribeEventTrackerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEventTrackerResponse]
+        def event_tracker: () -> Types::EventTracker
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#describe_event_tracker-instance_method
+      def describe_event_tracker: (
+                                    event_tracker_arn: ::String
+                                  ) -> _DescribeEventTrackerResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventTrackerResponseSuccess
+
+      interface _DescribeFeatureTransformationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFeatureTransformationResponse]
+        def feature_transformation: () -> Types::FeatureTransformation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#describe_feature_transformation-instance_method
+      def describe_feature_transformation: (
+                                             feature_transformation_arn: ::String
+                                           ) -> _DescribeFeatureTransformationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFeatureTransformationResponseSuccess
+
+      interface _DescribeFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFilterResponse]
+        def filter: () -> Types::Filter
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#describe_filter-instance_method
+      def describe_filter: (
+                             filter_arn: ::String
+                           ) -> _DescribeFilterResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFilterResponseSuccess
+
+      interface _DescribeMetricAttributionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMetricAttributionResponse]
+        def metric_attribution: () -> Types::MetricAttribution
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#describe_metric_attribution-instance_method
+      def describe_metric_attribution: (
+                                         metric_attribution_arn: ::String
+                                       ) -> _DescribeMetricAttributionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMetricAttributionResponseSuccess
+
+      interface _DescribeRecipeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRecipeResponse]
+        def recipe: () -> Types::Recipe
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#describe_recipe-instance_method
+      def describe_recipe: (
+                             recipe_arn: ::String
+                           ) -> _DescribeRecipeResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRecipeResponseSuccess
+
+      interface _DescribeRecommenderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRecommenderResponse]
+        def recommender: () -> Types::Recommender
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#describe_recommender-instance_method
+      def describe_recommender: (
+                                  recommender_arn: ::String
+                                ) -> _DescribeRecommenderResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRecommenderResponseSuccess
+
+      interface _DescribeSchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSchemaResponse]
+        def schema: () -> Types::DatasetSchema
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#describe_schema-instance_method
+      def describe_schema: (
+                             schema_arn: ::String
+                           ) -> _DescribeSchemaResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSchemaResponseSuccess
+
+      interface _DescribeSolutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSolutionResponse]
+        def solution: () -> Types::Solution
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#describe_solution-instance_method
+      def describe_solution: (
+                               solution_arn: ::String
+                             ) -> _DescribeSolutionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSolutionResponseSuccess
+
+      interface _DescribeSolutionVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSolutionVersionResponse]
+        def solution_version: () -> Types::SolutionVersion
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#describe_solution_version-instance_method
+      def describe_solution_version: (
+                                       solution_version_arn: ::String
+                                     ) -> _DescribeSolutionVersionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSolutionVersionResponseSuccess
+
+      interface _GetSolutionMetricsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSolutionMetricsResponse]
+        def solution_version_arn: () -> ::String
+        def metrics: () -> ::Hash[::String, ::Float]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#get_solution_metrics-instance_method
+      def get_solution_metrics: (
+                                  solution_version_arn: ::String
+                                ) -> _GetSolutionMetricsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSolutionMetricsResponseSuccess
+
+      interface _ListBatchInferenceJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBatchInferenceJobsResponse]
+        def batch_inference_jobs: () -> ::Array[Types::BatchInferenceJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#list_batch_inference_jobs-instance_method
+      def list_batch_inference_jobs: (
+                                       ?solution_version_arn: ::String,
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListBatchInferenceJobsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBatchInferenceJobsResponseSuccess
+
+      interface _ListBatchSegmentJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBatchSegmentJobsResponse]
+        def batch_segment_jobs: () -> ::Array[Types::BatchSegmentJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#list_batch_segment_jobs-instance_method
+      def list_batch_segment_jobs: (
+                                     ?solution_version_arn: ::String,
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListBatchSegmentJobsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBatchSegmentJobsResponseSuccess
+
+      interface _ListCampaignsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCampaignsResponse]
+        def campaigns: () -> ::Array[Types::CampaignSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#list_campaigns-instance_method
+      def list_campaigns: (
+                            ?solution_arn: ::String,
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListCampaignsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCampaignsResponseSuccess
+
+      interface _ListDatasetExportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetExportJobsResponse]
+        def dataset_export_jobs: () -> ::Array[Types::DatasetExportJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#list_dataset_export_jobs-instance_method
+      def list_dataset_export_jobs: (
+                                      ?dataset_arn: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListDatasetExportJobsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetExportJobsResponseSuccess
+
+      interface _ListDatasetGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetGroupsResponse]
+        def dataset_groups: () -> ::Array[Types::DatasetGroupSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#list_dataset_groups-instance_method
+      def list_dataset_groups: (
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _ListDatasetGroupsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetGroupsResponseSuccess
+
+      interface _ListDatasetImportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetImportJobsResponse]
+        def dataset_import_jobs: () -> ::Array[Types::DatasetImportJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#list_dataset_import_jobs-instance_method
+      def list_dataset_import_jobs: (
+                                      ?dataset_arn: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListDatasetImportJobsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetImportJobsResponseSuccess
+
+      interface _ListDatasetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetsResponse]
+        def datasets: () -> ::Array[Types::DatasetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#list_datasets-instance_method
+      def list_datasets: (
+                           ?dataset_group_arn: ::String,
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListDatasetsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetsResponseSuccess
+
+      interface _ListEventTrackersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventTrackersResponse]
+        def event_trackers: () -> ::Array[Types::EventTrackerSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#list_event_trackers-instance_method
+      def list_event_trackers: (
+                                 ?dataset_group_arn: ::String,
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _ListEventTrackersResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventTrackersResponseSuccess
+
+      interface _ListFiltersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFiltersResponse]
+        def filters: () -> ::Array[Types::FilterSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#list_filters-instance_method
+      def list_filters: (
+                          ?dataset_group_arn: ::String,
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
+                        ) -> _ListFiltersResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFiltersResponseSuccess
+
+      interface _ListMetricAttributionMetricsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMetricAttributionMetricsResponse]
+        def metrics: () -> ::Array[Types::MetricAttribute]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#list_metric_attribution_metrics-instance_method
+      def list_metric_attribution_metrics: (
+                                             ?metric_attribution_arn: ::String,
+                                             ?next_token: ::String,
+                                             ?max_results: ::Integer
+                                           ) -> _ListMetricAttributionMetricsResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMetricAttributionMetricsResponseSuccess
+
+      interface _ListMetricAttributionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMetricAttributionsResponse]
+        def metric_attributions: () -> ::Array[Types::MetricAttributionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#list_metric_attributions-instance_method
+      def list_metric_attributions: (
+                                      ?dataset_group_arn: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListMetricAttributionsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMetricAttributionsResponseSuccess
+
+      interface _ListRecipesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecipesResponse]
+        def recipes: () -> ::Array[Types::RecipeSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#list_recipes-instance_method
+      def list_recipes: (
+                          ?recipe_provider: ("SERVICE"),
+                          ?next_token: ::String,
+                          ?max_results: ::Integer,
+                          ?domain: ("ECOMMERCE" | "VIDEO_ON_DEMAND")
+                        ) -> _ListRecipesResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecipesResponseSuccess
+
+      interface _ListRecommendersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecommendersResponse]
+        def recommenders: () -> ::Array[Types::RecommenderSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#list_recommenders-instance_method
+      def list_recommenders: (
+                               ?dataset_group_arn: ::String,
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListRecommendersResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommendersResponseSuccess
+
+      interface _ListSchemasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSchemasResponse]
+        def schemas: () -> ::Array[Types::DatasetSchemaSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#list_schemas-instance_method
+      def list_schemas: (
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
+                        ) -> _ListSchemasResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSchemasResponseSuccess
+
+      interface _ListSolutionVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSolutionVersionsResponse]
+        def solution_versions: () -> ::Array[Types::SolutionVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#list_solution_versions-instance_method
+      def list_solution_versions: (
+                                    ?solution_arn: ::String,
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListSolutionVersionsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSolutionVersionsResponseSuccess
+
+      interface _ListSolutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSolutionsResponse]
+        def solutions: () -> ::Array[Types::SolutionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#list_solutions-instance_method
+      def list_solutions: (
+                            ?dataset_group_arn: ::String,
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListSolutionsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSolutionsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartRecommenderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartRecommenderResponse]
+        def recommender_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#start_recommender-instance_method
+      def start_recommender: (
+                               recommender_arn: ::String
+                             ) -> _StartRecommenderResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartRecommenderResponseSuccess
+
+      interface _StopRecommenderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopRecommenderResponse]
+        def recommender_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#stop_recommender-instance_method
+      def stop_recommender: (
+                              recommender_arn: ::String
+                            ) -> _StopRecommenderResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopRecommenderResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#stop_solution_version_creation-instance_method
+      def stop_solution_version_creation: (
+                                            solution_version_arn: ::String
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              tag_key: ::String,
+                              tag_value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateCampaignResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCampaignResponse]
+        def campaign_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#update_campaign-instance_method
+      def update_campaign: (
+                             campaign_arn: ::String,
+                             ?solution_version_arn: ::String,
+                             ?min_provisioned_tps: ::Integer,
+                             ?campaign_config: {
+                               item_exploration_config: Hash[::String, ::String]?,
+                               enable_metadata_with_recommendations: bool?
+                             }
+                           ) -> _UpdateCampaignResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCampaignResponseSuccess
+
+      interface _UpdateDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDatasetResponse]
+        def dataset_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#update_dataset-instance_method
+      def update_dataset: (
+                            dataset_arn: ::String,
+                            schema_arn: ::String
+                          ) -> _UpdateDatasetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDatasetResponseSuccess
+
+      interface _UpdateMetricAttributionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMetricAttributionResponse]
+        def metric_attribution_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#update_metric_attribution-instance_method
+      def update_metric_attribution: (
+                                       ?add_metrics: Array[
+                                         {
+                                           event_type: ::String,
+                                           metric_name: ::String,
+                                           expression: ::String
+                                         },
+                                       ],
+                                       ?remove_metrics: Array[::String],
+                                       ?metrics_output_config: {
+                                         s3_data_destination: {
+                                           path: ::String,
+                                           kms_key_arn: ::String?
+                                         }?,
+                                         role_arn: ::String
+                                       },
+                                       ?metric_attribution_arn: ::String
+                                     ) -> _UpdateMetricAttributionResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMetricAttributionResponseSuccess
+
+      interface _UpdateRecommenderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRecommenderResponse]
+        def recommender_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#update_recommender-instance_method
+      def update_recommender: (
+                                recommender_arn: ::String,
+                                recommender_config: {
+                                  item_exploration_config: Hash[::String, ::String]?,
+                                  min_recommendation_requests_per_second: ::Integer?,
+                                  training_data_config: {
+                                    excluded_dataset_columns: Hash[::String, Array[::String]]?
+                                  }?,
+                                  enable_metadata_with_recommendations: bool?
+                                }
+                              ) -> _UpdateRecommenderResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRecommenderResponseSuccess
+    end
+  end
+end
+

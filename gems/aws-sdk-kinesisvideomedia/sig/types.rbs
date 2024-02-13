@@ -1,0 +1,62 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::KinesisVideoMedia
+  module Types
+
+    class ClientLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectionLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetMediaInput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor start_selector: Types::StartSelector
+      SENSITIVE: []
+    end
+
+    class GetMediaOutput
+      attr_accessor content_type: ::String
+      attr_accessor payload: ::IO
+      SENSITIVE: []
+    end
+
+    class InvalidArgumentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidEndpointException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NotAuthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartSelector
+      attr_accessor start_selector_type: ("FRAGMENT_NUMBER" | "SERVER_TIMESTAMP" | "PRODUCER_TIMESTAMP" | "NOW" | "EARLIEST" | "CONTINUATION_TOKEN")
+      attr_accessor after_fragment_number: ::String
+      attr_accessor start_timestamp: ::Time
+      attr_accessor continuation_token: ::String
+      SENSITIVE: []
+    end
+  end
+end

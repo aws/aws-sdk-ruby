@@ -1,0 +1,136 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ApplicationCostProfiler
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReportDefinitionRequest
+      attr_accessor report_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReportDefinitionResult
+      attr_accessor report_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetReportDefinitionRequest
+      attr_accessor report_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetReportDefinitionResult
+      attr_accessor report_id: ::String
+      attr_accessor report_description: ::String
+      attr_accessor report_frequency: ("MONTHLY" | "DAILY" | "ALL")
+      attr_accessor format: ("CSV" | "PARQUET")
+      attr_accessor destination_s3_location: Types::S3Location
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated: ::Time
+      SENSITIVE: []
+    end
+
+    class ImportApplicationUsageRequest
+      attr_accessor source_s3_location: Types::SourceS3Location
+      SENSITIVE: []
+    end
+
+    class ImportApplicationUsageResult
+      attr_accessor import_id: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListReportDefinitionsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListReportDefinitionsResult
+      attr_accessor report_definitions: ::Array[Types::ReportDefinition]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class PutReportDefinitionRequest
+      attr_accessor report_id: ::String
+      attr_accessor report_description: ::String
+      attr_accessor report_frequency: ("MONTHLY" | "DAILY" | "ALL")
+      attr_accessor format: ("CSV" | "PARQUET")
+      attr_accessor destination_s3_location: Types::S3Location
+      SENSITIVE: []
+    end
+
+    class PutReportDefinitionResult
+      attr_accessor report_id: ::String
+      SENSITIVE: []
+    end
+
+    class ReportDefinition
+      attr_accessor report_id: ::String
+      attr_accessor report_description: ::String
+      attr_accessor report_frequency: ("MONTHLY" | "DAILY" | "ALL")
+      attr_accessor format: ("CSV" | "PARQUET")
+      attr_accessor destination_s3_location: Types::S3Location
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class S3Location
+      attr_accessor bucket: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SourceS3Location
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      attr_accessor region: ("ap-east-1" | "me-south-1" | "eu-south-1" | "af-south-1")
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateReportDefinitionRequest
+      attr_accessor report_id: ::String
+      attr_accessor report_description: ::String
+      attr_accessor report_frequency: ("MONTHLY" | "DAILY" | "ALL")
+      attr_accessor format: ("CSV" | "PARQUET")
+      attr_accessor destination_s3_location: Types::S3Location
+      SENSITIVE: []
+    end
+
+    class UpdateReportDefinitionResult
+      attr_accessor report_id: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

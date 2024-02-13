@@ -14,6 +14,7 @@ module Aws::Redshift
       option(
         :endpoint_provider,
         doc_type: 'Aws::Redshift::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -255,6 +256,8 @@ module Aws::Redshift
             Aws::Redshift::Endpoints::GetReservedNodeExchangeOfferings.build(context)
           when :get_resource_policy
             Aws::Redshift::Endpoints::GetResourcePolicy.build(context)
+          when :list_recommendations
+            Aws::Redshift::Endpoints::ListRecommendations.build(context)
           when :modify_aqua_configuration
             Aws::Redshift::Endpoints::ModifyAquaConfiguration.build(context)
           when :modify_authentication_profile

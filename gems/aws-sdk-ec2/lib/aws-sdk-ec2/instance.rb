@@ -221,7 +221,13 @@ module Aws::EC2
       data[:instance_lifecycle]
     end
 
-    # The Elastic GPU associated with the instance.
+    # Deprecated.
+    #
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    # workloads that require graphics acceleration, we recommend that you
+    # use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #  </note>
     # @return [Array<Types::ElasticGpuAssociation>]
     def elastic_gpu_associations
       data[:elastic_gpu_associations]
@@ -1088,7 +1094,9 @@ module Aws::EC2
     #   Modifies the `DeleteOnTermination` attribute for volumes that are
     #   currently attached. The volume must be owned by the caller. If no
     #   value is specified for `DeleteOnTermination`, the default is `true`
-    #   and the volume is deleted when the instance is terminated.
+    #   and the volume is deleted when the instance is terminated. You can't
+    #   modify the `DeleteOnTermination` attribute for volumes that are
+    #   attached to Fargate tasks.
     #
     #   To add instance store volumes to an Amazon EBS-backed instance, you
     #   must add them when you launch the instance. For more information, see

@@ -1,0 +1,689 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MigrationHubOrchestrator
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMigrationWorkflowRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor template_id: ::String
+      attr_accessor application_configuration_id: ::String
+      attr_accessor input_parameters: ::Hash[::String, Types::StepInput]
+      attr_accessor step_targets: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:input_parameters]
+    end
+
+    class CreateMigrationWorkflowResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor template_id: ::String
+      attr_accessor ads_application_configuration_id: ::String
+      attr_accessor workflow_inputs: ::Hash[::String, Types::StepInput]
+      attr_accessor step_targets: ::Array[::String]
+      attr_accessor status: ("CREATING" | "NOT_STARTED" | "CREATION_FAILED" | "STARTING" | "IN_PROGRESS" | "WORKFLOW_FAILED" | "PAUSED" | "PAUSING" | "PAUSING_FAILED" | "USER_ATTENTION_REQUIRED" | "DELETING" | "DELETION_FAILED" | "DELETED" | "COMPLETED")
+      attr_accessor creation_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:workflow_inputs]
+    end
+
+    class CreateWorkflowStepGroupRequest
+      attr_accessor workflow_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor next: ::Array[::String]
+      attr_accessor previous: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateWorkflowStepGroupResponse
+      attr_accessor workflow_id: ::String
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor description: ::String
+      attr_accessor tools: ::Array[Types::Tool]
+      attr_accessor next: ::Array[::String]
+      attr_accessor previous: ::Array[::String]
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateWorkflowStepRequest
+      attr_accessor name: ::String
+      attr_accessor step_group_id: ::String
+      attr_accessor workflow_id: ::String
+      attr_accessor step_action_type: ("MANUAL" | "AUTOMATED")
+      attr_accessor description: ::String
+      attr_accessor workflow_step_automation_configuration: Types::WorkflowStepAutomationConfiguration
+      attr_accessor step_target: ::Array[::String]
+      attr_accessor outputs: ::Array[Types::WorkflowStepOutput]
+      attr_accessor previous: ::Array[::String]
+      attr_accessor next: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateWorkflowStepResponse
+      attr_accessor id: ::String
+      attr_accessor step_group_id: ::String
+      attr_accessor workflow_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMigrationWorkflowRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMigrationWorkflowResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "NOT_STARTED" | "CREATION_FAILED" | "STARTING" | "IN_PROGRESS" | "WORKFLOW_FAILED" | "PAUSED" | "PAUSING" | "PAUSING_FAILED" | "USER_ATTENTION_REQUIRED" | "DELETING" | "DELETION_FAILED" | "DELETED" | "COMPLETED")
+      SENSITIVE: []
+    end
+
+    class DeleteWorkflowStepGroupRequest
+      attr_accessor workflow_id: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkflowStepGroupResponse < Aws::EmptyStructure
+    end
+
+    class DeleteWorkflowStepRequest
+      attr_accessor id: ::String
+      attr_accessor step_group_id: ::String
+      attr_accessor workflow_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkflowStepResponse < Aws::EmptyStructure
+    end
+
+    class GetMigrationWorkflowRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMigrationWorkflowResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor template_id: ::String
+      attr_accessor ads_application_configuration_id: ::String
+      attr_accessor ads_application_name: ::String
+      attr_accessor status: ("CREATING" | "NOT_STARTED" | "CREATION_FAILED" | "STARTING" | "IN_PROGRESS" | "WORKFLOW_FAILED" | "PAUSED" | "PAUSING" | "PAUSING_FAILED" | "USER_ATTENTION_REQUIRED" | "DELETING" | "DELETION_FAILED" | "DELETED" | "COMPLETED")
+      attr_accessor status_message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_start_time: ::Time
+      attr_accessor last_stop_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor tools: ::Array[Types::Tool]
+      attr_accessor total_steps: ::Integer
+      attr_accessor completed_steps: ::Integer
+      attr_accessor workflow_inputs: ::Hash[::String, Types::StepInput]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor workflow_bucket: ::String
+      SENSITIVE: [:workflow_inputs]
+    end
+
+    class GetMigrationWorkflowTemplateRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMigrationWorkflowTemplateResponse
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor inputs: ::Array[Types::TemplateInput]
+      attr_accessor tools: ::Array[Types::Tool]
+      attr_accessor status: ("CREATED")
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetTemplateStepGroupRequest
+      attr_accessor template_id: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetTemplateStepGroupResponse
+      attr_accessor template_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("AWAITING_DEPENDENCIES" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "PAUSING" | "USER_ATTENTION_REQUIRED")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor tools: ::Array[Types::Tool]
+      attr_accessor previous: ::Array[::String]
+      attr_accessor next: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetTemplateStepRequest
+      attr_accessor id: ::String
+      attr_accessor template_id: ::String
+      attr_accessor step_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetTemplateStepResponse
+      attr_accessor id: ::String
+      attr_accessor step_group_id: ::String
+      attr_accessor template_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor step_action_type: ("MANUAL" | "AUTOMATED")
+      attr_accessor creation_time: ::String
+      attr_accessor previous: ::Array[::String]
+      attr_accessor next: ::Array[::String]
+      attr_accessor outputs: ::Array[Types::StepOutput]
+      attr_accessor step_automation_configuration: Types::StepAutomationConfiguration
+      SENSITIVE: []
+    end
+
+    class GetWorkflowStepGroupRequest
+      attr_accessor id: ::String
+      attr_accessor workflow_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkflowStepGroupResponse
+      attr_accessor id: ::String
+      attr_accessor workflow_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("AWAITING_DEPENDENCIES" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "PAUSING" | "USER_ATTENTION_REQUIRED")
+      attr_accessor owner: ("AWS_MANAGED" | "CUSTOM")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor tools: ::Array[Types::Tool]
+      attr_accessor previous: ::Array[::String]
+      attr_accessor next: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetWorkflowStepRequest
+      attr_accessor workflow_id: ::String
+      attr_accessor step_group_id: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkflowStepResponse
+      attr_accessor name: ::String
+      attr_accessor step_group_id: ::String
+      attr_accessor workflow_id: ::String
+      attr_accessor step_id: ::String
+      attr_accessor description: ::String
+      attr_accessor step_action_type: ("MANUAL" | "AUTOMATED")
+      attr_accessor owner: ("AWS_MANAGED" | "CUSTOM")
+      attr_accessor workflow_step_automation_configuration: Types::WorkflowStepAutomationConfiguration
+      attr_accessor step_target: ::Array[::String]
+      attr_accessor outputs: ::Array[Types::WorkflowStepOutput]
+      attr_accessor previous: ::Array[::String]
+      attr_accessor next: ::Array[::String]
+      attr_accessor status: ("AWAITING_DEPENDENCIES" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "USER_ATTENTION_REQUIRED")
+      attr_accessor status_message: ::String
+      attr_accessor script_output_location: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor no_of_srv_completed: ::Integer
+      attr_accessor no_of_srv_failed: ::Integer
+      attr_accessor total_no_of_srv: ::Integer
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListMigrationWorkflowTemplatesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ListMigrationWorkflowTemplatesResponse
+      attr_accessor next_token: ::String
+      attr_accessor template_summary: ::Array[Types::TemplateSummary]
+      SENSITIVE: []
+    end
+
+    class ListMigrationWorkflowsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor template_id: ::String
+      attr_accessor ads_application_configuration_name: ::String
+      attr_accessor status: ("CREATING" | "NOT_STARTED" | "CREATION_FAILED" | "STARTING" | "IN_PROGRESS" | "WORKFLOW_FAILED" | "PAUSED" | "PAUSING" | "PAUSING_FAILED" | "USER_ATTENTION_REQUIRED" | "DELETING" | "DELETION_FAILED" | "DELETED" | "COMPLETED")
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ListMigrationWorkflowsResponse
+      attr_accessor next_token: ::String
+      attr_accessor migration_workflow_summary: ::Array[Types::MigrationWorkflowSummary]
+      SENSITIVE: []
+    end
+
+    class ListPluginsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPluginsResponse
+      attr_accessor next_token: ::String
+      attr_accessor plugins: ::Array[Types::PluginSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListTemplateStepGroupsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor template_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListTemplateStepGroupsResponse
+      attr_accessor next_token: ::String
+      attr_accessor template_step_group_summary: ::Array[Types::TemplateStepGroupSummary]
+      SENSITIVE: []
+    end
+
+    class ListTemplateStepsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor template_id: ::String
+      attr_accessor step_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListTemplateStepsResponse
+      attr_accessor next_token: ::String
+      attr_accessor template_step_summary_list: ::Array[Types::TemplateStepSummary]
+      SENSITIVE: []
+    end
+
+    class ListWorkflowStepGroupsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor workflow_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkflowStepGroupsResponse
+      attr_accessor next_token: ::String
+      attr_accessor workflow_step_groups_summary: ::Array[Types::WorkflowStepGroupSummary]
+      SENSITIVE: []
+    end
+
+    class ListWorkflowStepsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor workflow_id: ::String
+      attr_accessor step_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkflowStepsResponse
+      attr_accessor next_token: ::String
+      attr_accessor workflow_steps_summary: ::Array[Types::WorkflowStepSummary]
+      SENSITIVE: []
+    end
+
+    class MigrationWorkflowSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor template_id: ::String
+      attr_accessor ads_application_configuration_name: ::String
+      attr_accessor status: ("CREATING" | "NOT_STARTED" | "CREATION_FAILED" | "STARTING" | "IN_PROGRESS" | "WORKFLOW_FAILED" | "PAUSED" | "PAUSING" | "PAUSING_FAILED" | "USER_ATTENTION_REQUIRED" | "DELETING" | "DELETION_FAILED" | "DELETED" | "COMPLETED")
+      attr_accessor creation_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor status_message: ::String
+      attr_accessor completed_steps: ::Integer
+      attr_accessor total_steps: ::Integer
+      SENSITIVE: []
+    end
+
+    class PlatformCommand
+      attr_accessor linux: ::String
+      attr_accessor windows: ::String
+      SENSITIVE: []
+    end
+
+    class PlatformScriptKey
+      attr_accessor linux: ::String
+      attr_accessor windows: ::String
+      SENSITIVE: []
+    end
+
+    class PluginSummary
+      attr_accessor plugin_id: ::String
+      attr_accessor hostname: ::String
+      attr_accessor status: ("HEALTHY" | "UNHEALTHY")
+      attr_accessor ip_address: ::String
+      attr_accessor version: ::String
+      attr_accessor registered_time: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RetryWorkflowStepRequest
+      attr_accessor workflow_id: ::String
+      attr_accessor step_group_id: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class RetryWorkflowStepResponse
+      attr_accessor step_group_id: ::String
+      attr_accessor workflow_id: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("AWAITING_DEPENDENCIES" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "USER_ATTENTION_REQUIRED")
+      SENSITIVE: []
+    end
+
+    class StartMigrationWorkflowRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class StartMigrationWorkflowResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "NOT_STARTED" | "CREATION_FAILED" | "STARTING" | "IN_PROGRESS" | "WORKFLOW_FAILED" | "PAUSED" | "PAUSING" | "PAUSING_FAILED" | "USER_ATTENTION_REQUIRED" | "DELETING" | "DELETION_FAILED" | "DELETED" | "COMPLETED")
+      attr_accessor status_message: ::String
+      attr_accessor last_start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class StepAutomationConfiguration
+      attr_accessor script_location_s3_bucket: ::String
+      attr_accessor script_location_s3_key: Types::PlatformScriptKey
+      attr_accessor command: Types::PlatformCommand
+      attr_accessor run_environment: ("AWS" | "ONPREMISE")
+      attr_accessor target_type: ("SINGLE" | "ALL" | "NONE")
+      SENSITIVE: []
+    end
+
+    class StepInput
+      attr_accessor integer_value: ::Integer
+      attr_accessor string_value: ::String
+      attr_accessor list_of_strings_value: ::Array[::String]
+      attr_accessor map_of_string_value: ::Hash[::String, ::String]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class IntegerValue < StepInput
+      end
+      class StringValue < StepInput
+      end
+      class ListOfStringsValue < StepInput
+      end
+      class MapOfStringValue < StepInput
+      end
+      class Unknown < StepInput
+      end
+    end
+
+    class StepOutput
+      attr_accessor name: ::String
+      attr_accessor data_type: ("STRING" | "INTEGER" | "STRINGLIST" | "STRINGMAP")
+      attr_accessor required: bool
+      SENSITIVE: []
+    end
+
+    class StopMigrationWorkflowRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class StopMigrationWorkflowResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "NOT_STARTED" | "CREATION_FAILED" | "STARTING" | "IN_PROGRESS" | "WORKFLOW_FAILED" | "PAUSED" | "PAUSING" | "PAUSING_FAILED" | "USER_ATTENTION_REQUIRED" | "DELETING" | "DELETION_FAILED" | "DELETED" | "COMPLETED")
+      attr_accessor status_message: ::String
+      attr_accessor last_stop_time: ::Time
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TemplateInput
+      attr_accessor input_name: ::String
+      attr_accessor data_type: ("STRING" | "INTEGER" | "STRINGLIST" | "STRINGMAP")
+      attr_accessor required: bool
+      SENSITIVE: []
+    end
+
+    class TemplateStepGroupSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor previous: ::Array[::String]
+      attr_accessor next: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TemplateStepSummary
+      attr_accessor id: ::String
+      attr_accessor step_group_id: ::String
+      attr_accessor template_id: ::String
+      attr_accessor name: ::String
+      attr_accessor step_action_type: ("MANUAL" | "AUTOMATED")
+      attr_accessor target_type: ("SINGLE" | "ALL" | "NONE")
+      attr_accessor owner: ("AWS_MANAGED" | "CUSTOM")
+      attr_accessor previous: ::Array[::String]
+      attr_accessor next: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TemplateSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Tool
+      attr_accessor name: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateMigrationWorkflowRequest
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor input_parameters: ::Hash[::String, Types::StepInput]
+      attr_accessor step_targets: ::Array[::String]
+      SENSITIVE: [:input_parameters]
+    end
+
+    class UpdateMigrationWorkflowResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor template_id: ::String
+      attr_accessor ads_application_configuration_id: ::String
+      attr_accessor workflow_inputs: ::Hash[::String, Types::StepInput]
+      attr_accessor step_targets: ::Array[::String]
+      attr_accessor status: ("CREATING" | "NOT_STARTED" | "CREATION_FAILED" | "STARTING" | "IN_PROGRESS" | "WORKFLOW_FAILED" | "PAUSED" | "PAUSING" | "PAUSING_FAILED" | "USER_ATTENTION_REQUIRED" | "DELETING" | "DELETION_FAILED" | "DELETED" | "COMPLETED")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:workflow_inputs]
+    end
+
+    class UpdateWorkflowStepGroupRequest
+      attr_accessor workflow_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor next: ::Array[::String]
+      attr_accessor previous: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateWorkflowStepGroupResponse
+      attr_accessor workflow_id: ::String
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor description: ::String
+      attr_accessor tools: ::Array[Types::Tool]
+      attr_accessor next: ::Array[::String]
+      attr_accessor previous: ::Array[::String]
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateWorkflowStepRequest
+      attr_accessor id: ::String
+      attr_accessor step_group_id: ::String
+      attr_accessor workflow_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor step_action_type: ("MANUAL" | "AUTOMATED")
+      attr_accessor workflow_step_automation_configuration: Types::WorkflowStepAutomationConfiguration
+      attr_accessor step_target: ::Array[::String]
+      attr_accessor outputs: ::Array[Types::WorkflowStepOutput]
+      attr_accessor previous: ::Array[::String]
+      attr_accessor next: ::Array[::String]
+      attr_accessor status: ("AWAITING_DEPENDENCIES" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "USER_ATTENTION_REQUIRED")
+      SENSITIVE: []
+    end
+
+    class UpdateWorkflowStepResponse
+      attr_accessor id: ::String
+      attr_accessor step_group_id: ::String
+      attr_accessor workflow_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowStepAutomationConfiguration
+      attr_accessor script_location_s3_bucket: ::String
+      attr_accessor script_location_s3_key: Types::PlatformScriptKey
+      attr_accessor command: Types::PlatformCommand
+      attr_accessor run_environment: ("AWS" | "ONPREMISE")
+      attr_accessor target_type: ("SINGLE" | "ALL" | "NONE")
+      SENSITIVE: []
+    end
+
+    class WorkflowStepGroupSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor owner: ("AWS_MANAGED" | "CUSTOM")
+      attr_accessor status: ("AWAITING_DEPENDENCIES" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "PAUSING" | "USER_ATTENTION_REQUIRED")
+      attr_accessor previous: ::Array[::String]
+      attr_accessor next: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class WorkflowStepOutput
+      attr_accessor name: ::String
+      attr_accessor data_type: ("STRING" | "INTEGER" | "STRINGLIST" | "STRINGMAP")
+      attr_accessor required: bool
+      attr_accessor value: Types::WorkflowStepOutputUnion
+      SENSITIVE: []
+    end
+
+    class WorkflowStepOutputUnion
+      attr_accessor integer_value: ::Integer
+      attr_accessor string_value: ::String
+      attr_accessor list_of_string_value: ::Array[::String]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class IntegerValue < WorkflowStepOutputUnion
+      end
+      class StringValue < WorkflowStepOutputUnion
+      end
+      class ListOfStringValue < WorkflowStepOutputUnion
+      end
+      class Unknown < WorkflowStepOutputUnion
+      end
+    end
+
+    class WorkflowStepSummary
+      attr_accessor step_id: ::String
+      attr_accessor name: ::String
+      attr_accessor step_action_type: ("MANUAL" | "AUTOMATED")
+      attr_accessor owner: ("AWS_MANAGED" | "CUSTOM")
+      attr_accessor previous: ::Array[::String]
+      attr_accessor next: ::Array[::String]
+      attr_accessor status: ("AWAITING_DEPENDENCIES" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "USER_ATTENTION_REQUIRED")
+      attr_accessor status_message: ::String
+      attr_accessor no_of_srv_completed: ::Integer
+      attr_accessor no_of_srv_failed: ::Integer
+      attr_accessor total_no_of_srv: ::Integer
+      attr_accessor description: ::String
+      attr_accessor script_location: ::String
+      SENSITIVE: []
+    end
+  end
+end
