@@ -96,6 +96,16 @@ module Aws
                                ) -> _DeleteLandingZoneResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLandingZoneResponseSuccess
 
+      interface _DisableBaselineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableBaselineOutput]
+        def operation_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#disable_baseline-instance_method
+      def disable_baseline: (
+                              enabled_baseline_identifier: ::String
+                            ) -> _DisableBaselineResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableBaselineResponseSuccess
+
       interface _DisableControlResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisableControlOutput]
         def operation_identifier: () -> ::String
@@ -106,6 +116,27 @@ module Aws
                              target_identifier: ::String
                            ) -> _DisableControlResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableControlResponseSuccess
+
+      interface _EnableBaselineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableBaselineOutput]
+        def arn: () -> ::String
+        def operation_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#enable_baseline-instance_method
+      def enable_baseline: (
+                             baseline_identifier: ::String,
+                             baseline_version: ::String,
+                             ?parameters: Array[
+                               {
+                                 key: ::String,
+                                 value: {
+                                 }
+                               },
+                             ],
+                             ?tags: Hash[::String, ::String],
+                             target_identifier: ::String
+                           ) -> _EnableBaselineResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableBaselineResponseSuccess
 
       interface _EnableControlResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::EnableControlOutput]
@@ -127,6 +158,28 @@ module Aws
                           ) -> _EnableControlResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableControlResponseSuccess
 
+      interface _GetBaselineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBaselineOutput]
+        def arn: () -> ::String
+        def description: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#get_baseline-instance_method
+      def get_baseline: (
+                          baseline_identifier: ::String
+                        ) -> _GetBaselineResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBaselineResponseSuccess
+
+      interface _GetBaselineOperationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBaselineOperationOutput]
+        def baseline_operation: () -> Types::BaselineOperation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#get_baseline_operation-instance_method
+      def get_baseline_operation: (
+                                    operation_identifier: ::String
+                                  ) -> _GetBaselineOperationResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBaselineOperationResponseSuccess
+
       interface _GetControlOperationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetControlOperationOutput]
         def control_operation: () -> Types::ControlOperation
@@ -136,6 +189,16 @@ module Aws
                                    operation_identifier: ::String
                                  ) -> _GetControlOperationResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetControlOperationResponseSuccess
+
+      interface _GetEnabledBaselineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnabledBaselineOutput]
+        def enabled_baseline_details: () -> Types::EnabledBaselineDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#get_enabled_baseline-instance_method
+      def get_enabled_baseline: (
+                                  enabled_baseline_identifier: ::String
+                                ) -> _GetEnabledBaselineResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnabledBaselineResponseSuccess
 
       interface _GetEnabledControlResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetEnabledControlOutput]
@@ -166,6 +229,34 @@ module Aws
                                         operation_identifier: ::String
                                       ) -> _GetLandingZoneOperationResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLandingZoneOperationResponseSuccess
+
+      interface _ListBaselinesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBaselinesOutput]
+        def baselines: () -> ::Array[Types::BaselineSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#list_baselines-instance_method
+      def list_baselines: (
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListBaselinesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBaselinesResponseSuccess
+
+      interface _ListEnabledBaselinesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnabledBaselinesOutput]
+        def enabled_baselines: () -> ::Array[Types::EnabledBaselineSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#list_enabled_baselines-instance_method
+      def list_enabled_baselines: (
+                                    ?filter: {
+                                      baseline_identifiers: Array[::String]?,
+                                      target_identifiers: Array[::String]?
+                                    },
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListEnabledBaselinesResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnabledBaselinesResponseSuccess
 
       interface _ListEnabledControlsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListEnabledControlsOutput]
@@ -202,6 +293,16 @@ module Aws
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
+      interface _ResetEnabledBaselineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResetEnabledBaselineOutput]
+        def operation_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#reset_enabled_baseline-instance_method
+      def reset_enabled_baseline: (
+                                    enabled_baseline_identifier: ::String
+                                  ) -> _ResetEnabledBaselineResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetEnabledBaselineResponseSuccess
+
       interface _ResetLandingZoneResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ResetLandingZoneOutput]
         def operation_identifier: () -> ::String
@@ -231,6 +332,24 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateEnabledBaselineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEnabledBaselineOutput]
+        def operation_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#update_enabled_baseline-instance_method
+      def update_enabled_baseline: (
+                                     baseline_version: ::String,
+                                     enabled_baseline_identifier: ::String,
+                                     ?parameters: Array[
+                                       {
+                                         key: ::String,
+                                         value: {
+                                         }
+                                       },
+                                     ]
+                                   ) -> _UpdateEnabledBaselineResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnabledBaselineResponseSuccess
 
       interface _UpdateEnabledControlResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEnabledControlOutput]

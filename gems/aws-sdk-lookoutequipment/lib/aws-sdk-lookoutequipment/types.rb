@@ -470,6 +470,12 @@ module Aws::LookoutEquipment
     #   not use data from this asset for training, evaluation, or inference.
     #   @return [String]
     #
+    # @!attribute [rw] model_diagnostics_output_configuration
+    #   The Amazon S3 location where you want Amazon Lookout for Equipment
+    #   to save the pointwise model diagnostics. You must also specify the
+    #   `RoleArn` request parameter.
+    #   @return [Types::ModelDiagnosticsOutputConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/CreateModelRequest AWS API Documentation
     #
     class CreateModelRequest < Struct.new(
@@ -486,7 +492,8 @@ module Aws::LookoutEquipment
       :data_pre_processing_configuration,
       :server_side_kms_key_id,
       :tags,
-      :off_condition)
+      :off_condition,
+      :model_diagnostics_output_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1513,6 +1520,11 @@ module Aws::LookoutEquipment
     #   Indicates the status of the retraining scheduler.
     #   @return [String]
     #
+    # @!attribute [rw] model_diagnostics_output_configuration
+    #   Configuration information for the model's pointwise model
+    #   diagnostics.
+    #   @return [Types::ModelDiagnosticsOutputConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeModelResponse AWS API Documentation
     #
     class DescribeModelResponse < Struct.new(
@@ -1555,7 +1567,8 @@ module Aws::LookoutEquipment
       :next_scheduled_retraining_start_date,
       :accumulated_inference_data_start_time,
       :accumulated_inference_data_end_time,
-      :retraining_scheduler_status)
+      :retraining_scheduler_status,
+      :model_diagnostics_output_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1750,6 +1763,16 @@ module Aws::LookoutEquipment
     #   than the previous model.
     #   @return [String]
     #
+    # @!attribute [rw] model_diagnostics_output_configuration
+    #   The Amazon S3 location where Amazon Lookout for Equipment saves the
+    #   pointwise model diagnostics for the model version.
+    #   @return [Types::ModelDiagnosticsOutputConfiguration]
+    #
+    # @!attribute [rw] model_diagnostics_results_object
+    #   The Amazon S3 output prefix for where Lookout for Equipment saves
+    #   the pointwise model diagnostics for the model version.
+    #   @return [Types::S3Object]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeModelVersionResponse AWS API Documentation
     #
     class DescribeModelVersionResponse < Struct.new(
@@ -1784,7 +1807,9 @@ module Aws::LookoutEquipment
       :prior_model_metrics,
       :retraining_available_data_in_days,
       :auto_promotion_result,
-      :auto_promotion_result_reason)
+      :auto_promotion_result_reason,
+      :model_diagnostics_output_configuration,
+      :model_diagnostics_results_object)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2502,7 +2527,7 @@ module Aws::LookoutEquipment
     #
     # @!attribute [rw] sensors_with_short_date_range
     #   Parameter that describes the total number of sensors that have a
-    #   short date range of less than 90 days of data overall.
+    #   short date range of less than 14 days of data overall.
     #   @return [Types::SensorsWithShortDateRange]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/InsufficientSensorData AWS API Documentation
@@ -2898,6 +2923,13 @@ module Aws::LookoutEquipment
     #   executions returned from the `ListInferenceExecutions` operation,
     #   including model used, inference scheduler, data configuration, and
     #   so on.
+    #
+    #   <note markdown="1"> If you don't supply the `InferenceSchedulerName` request parameter,
+    #   or if you supply the name of an inference scheduler that doesn't
+    #   exist, `ListInferenceExecutions` returns an empty array in
+    #   `InferenceExecutionSummaries`.
+    #
+    #    </note>
     #   @return [Array<Types::InferenceExecutionSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListInferenceExecutionsResponse AWS API Documentation
@@ -3004,7 +3036,7 @@ module Aws::LookoutEquipment
     end
 
     # @!attribute [rw] label_group_name
-    #   Retruns the name of the label group.
+    #   Returns the name of the label group.
     #   @return [String]
     #
     # @!attribute [rw] interval_start_time
@@ -3055,6 +3087,12 @@ module Aws::LookoutEquipment
     #
     # @!attribute [rw] label_summaries
     #   A summary of the items in the label group.
+    #
+    #   <note markdown="1"> If you don't supply the `LabelGroupName` request parameter, or if
+    #   you supply the name of a label group that doesn't exist,
+    #   `ListLabels` returns an empty array in `LabelSummaries`.
+    #
+    #    </note>
     #   @return [Array<Types::LabelSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListLabelsResponse AWS API Documentation
@@ -3137,6 +3175,12 @@ module Aws::LookoutEquipment
     # @!attribute [rw] model_version_summaries
     #   Provides information on the specified model version, including the
     #   created time, model and dataset ARNs, and status.
+    #
+    #   <note markdown="1"> If you don't supply the `ModelName` request parameter, or if you
+    #   supply the name of a model that doesn't exist, `ListModelVersions`
+    #   returns an empty array in `ModelVersionSummaries`.
+    #
+    #    </note>
     #   @return [Array<Types::ModelVersionSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListModelVersionsResponse AWS API Documentation
@@ -3366,6 +3410,60 @@ module Aws::LookoutEquipment
       include Aws::Structure
     end
 
+    # Output configuration information for the pointwise model diagnostics
+    # for an Amazon Lookout for Equipment model.
+    #
+    # @!attribute [rw] s3_output_configuration
+    #   The Amazon S3 location for the pointwise model diagnostics.
+    #   @return [Types::ModelDiagnosticsS3OutputConfiguration]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Web Services Key Management Service (KMS) key identifier
+    #   to encrypt the pointwise model diagnostics files.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ModelDiagnosticsOutputConfiguration AWS API Documentation
+    #
+    class ModelDiagnosticsOutputConfiguration < Struct.new(
+      :s3_output_configuration,
+      :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon S3 location for the pointwise model diagnostics for an
+    # Amazon Lookout for Equipment model.
+    #
+    # @!attribute [rw] bucket
+    #   The name of the Amazon S3 bucket where the pointwise model
+    #   diagnostics are located. You must be the owner of the Amazon S3
+    #   bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The Amazon S3 prefix for the location of the pointwise model
+    #   diagnostics. The prefix specifies the folder and evaluation result
+    #   file name. (`bucket`).
+    #
+    #   When you call `CreateModel` or `UpdateModel`, specify the path
+    #   within the bucket that you want Lookout for Equipment to save the
+    #   model to. During training, Lookout for Equipment creates the model
+    #   evaluation model as a compressed JSON file with the name
+    #   `model_diagnostics_results.json.gz`.
+    #
+    #   When you call `DescribeModel` or `DescribeModelVersion`, `prefix`
+    #   contains the file path and filename of the model evaluation file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ModelDiagnosticsS3OutputConfiguration AWS API Documentation
+    #
+    class ModelDiagnosticsS3OutputConfiguration < Struct.new(
+      :bucket,
+      :prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about the specified machine learning model,
     # including dataset and model names and ARNs, as well as status.
     #
@@ -3433,6 +3531,11 @@ module Aws::LookoutEquipment
     #   Indicates the status of the retraining scheduler.
     #   @return [String]
     #
+    # @!attribute [rw] model_diagnostics_output_configuration
+    #   Output configuration information for the pointwise model diagnostics
+    #   for an Amazon Lookout for Equipment model.
+    #   @return [Types::ModelDiagnosticsOutputConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ModelSummary AWS API Documentation
     #
     class ModelSummary < Struct.new(
@@ -3448,7 +3551,8 @@ module Aws::LookoutEquipment
       :latest_scheduled_retraining_model_version,
       :latest_scheduled_retraining_start_time,
       :next_scheduled_retraining_start_date,
-      :retraining_scheduler_status)
+      :retraining_scheduler_status,
+      :model_diagnostics_output_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3761,7 +3865,7 @@ module Aws::LookoutEquipment
     # range.
     #
     # @!attribute [rw] affected_sensor_count
-    #   Indicates the number of sensors that have less than 90 days of data.
+    #   Indicates the number of sensors that have less than 14 days of data.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/SensorsWithShortDateRange AWS API Documentation
@@ -4241,12 +4345,19 @@ module Aws::LookoutEquipment
     #   The ARN of the model to update.
     #   @return [String]
     #
+    # @!attribute [rw] model_diagnostics_output_configuration
+    #   The Amazon S3 location where you want Amazon Lookout for Equipment
+    #   to save the pointwise model diagnostics for the model. You must also
+    #   specify the `RoleArn` request parameter.
+    #   @return [Types::ModelDiagnosticsOutputConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/UpdateModelRequest AWS API Documentation
     #
     class UpdateModelRequest < Struct.new(
       :model_name,
       :labels_input_configuration,
-      :role_arn)
+      :role_arn,
+      :model_diagnostics_output_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

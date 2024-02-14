@@ -209,7 +209,14 @@ module Aws
                               value: ::String
                             },
                           ],
-                          ?off_condition: ::String
+                          ?off_condition: ::String,
+                          ?model_diagnostics_output_configuration: {
+                            s3_output_configuration: {
+                              bucket: ::String,
+                              prefix: ::String?
+                            },
+                            kms_key_id: ::String?
+                          }
                         ) -> _CreateModelResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateModelResponseSuccess
 
@@ -418,6 +425,7 @@ module Aws
         def accumulated_inference_data_start_time: () -> ::Time
         def accumulated_inference_data_end_time: () -> ::Time
         def retraining_scheduler_status: () -> ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+        def model_diagnostics_output_configuration: () -> Types::ModelDiagnosticsOutputConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#describe_model-instance_method
       def describe_model: (
@@ -459,6 +467,8 @@ module Aws
         def retraining_available_data_in_days: () -> ::Integer
         def auto_promotion_result: () -> ("MODEL_PROMOTED" | "MODEL_NOT_PROMOTED" | "RETRAINING_INTERNAL_ERROR" | "RETRAINING_CUSTOMER_ERROR" | "RETRAINING_CANCELLED")
         def auto_promotion_result_reason: () -> ::String
+        def model_diagnostics_output_configuration: () -> Types::ModelDiagnosticsOutputConfiguration
+        def model_diagnostics_results_object: () -> Types::S3Object
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#describe_model_version-instance_method
       def describe_model_version: (
@@ -899,7 +909,14 @@ module Aws
                             }?,
                             label_group_name: ::String?
                           },
-                          ?role_arn: ::String
+                          ?role_arn: ::String,
+                          ?model_diagnostics_output_configuration: {
+                            s3_output_configuration: {
+                              bucket: ::String,
+                              prefix: ::String?
+                            },
+                            kms_key_id: ::String?
+                          }
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2024-02-14)
+------------------
+
+* Feature - Adds support for new Baseline and EnabledBaseline APIs for automating multi-account governance.
+
 1.17.0 (2024-01-26)
 ------------------
 

@@ -8,7 +8,6 @@
 # WARNING ABOUT GENERATED CODE
 
 
-require 'aws-sigv4'
 require 'aws-sdk-core'
 
 require_relative 'aws-sdk-s3control/types'
@@ -52,6 +51,6 @@ require_relative 'aws-sdk-s3control/customizations'
 # @!group service
 module Aws::S3Control
 
-  GEM_VERSION = '1.77.0'
+  GEM_VERSION = '1.78.0'
 
 end

@@ -23,6 +23,74 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
+    # An object of shape `BaselineOperation`, returning details about the
+    # specified `Baseline` operation ID.
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the operation (if applicable), in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] operation_identifier
+    #   The identifier of the specified operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_type
+    #   An enumerated type (`enum`) with possible values of
+    #   `ENABLE_BASELINE`, `DISABLE_BASELINE`, `UPDATE_ENABLED_BASELINE`, or
+    #   `RESET_ENABLED_BASELINE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the operation, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   An enumerated type (`enum`) with possible values of `SUCCEEDED`,
+    #   `FAILED`, or `IN_PROGRESS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A status message that gives more information about the operation's
+    #   status, if applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/BaselineOperation AWS API Documentation
+    #
+    class BaselineOperation < Struct.new(
+      :end_time,
+      :operation_identifier,
+      :operation_type,
+      :start_time,
+      :status,
+      :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns a summary of information about a `Baseline` object.
+    #
+    # @!attribute [rw] arn
+    #   The full ARN of a Baseline.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A summary description of a Baseline.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The human-readable name of a Baseline.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/BaselineSummary AWS API Documentation
+    #
+    class BaselineSummary < Struct.new(
+      :arn,
+      :description,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Updating or deleting the resource can cause an inconsistent state.
     #
     # @!attribute [rw] message
@@ -72,13 +140,12 @@ module Aws::ControlTower
     end
 
     # @!attribute [rw] manifest
-    #   The manifest JSON file is a text file that describes your Amazon Web
-    #   Services resources. For examples, review [Launch your landing
-    #   zone][1].
+    #   The manifest.yaml file is a text file that describes your Amazon Web
+    #   Services resources. For examples, review [The manifest file][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch
+    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] tags
@@ -144,11 +211,38 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
+    # @!attribute [rw] enabled_baseline_identifier
+    #   Identifier of the `EnabledBaseline` resource to be deactivated, in
+    #   ARN format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/DisableBaselineInput AWS API Documentation
+    #
+    class DisableBaselineInput < Struct.new(
+      :enabled_baseline_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_identifier
+    #   The ID (in UUID format) of the asynchronous `DisableBaseline`
+    #   operation. This `operationIdentifier` is used to track status
+    #   through calls to the `GetBaselineOperation` API.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/DisableBaselineOutput AWS API Documentation
+    #
+    class DisableBaselineOutput < Struct.new(
+      :operation_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] control_identifier
     #   The ARN of the control. Only **Strongly recommended** and
     #   **Elective** controls are permitted, with the exception of the
-    #   **landing zone Region deny** control. For information on how to find
-    #   the `controlIdentifier`, see [the overview page][1].
+    #   **Region deny** control. For information on how to find the
+    #   `controlIdentifier`, see [the overview page][1].
     #
     #
     #
@@ -223,11 +317,64 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
+    # @!attribute [rw] baseline_identifier
+    #   The ARN of the baseline to be enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] baseline_version
+    #   The specific version to be enabled of the specified baseline.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   A list of `key-value` objects that specify enablement parameters,
+    #   where `key` is a string and `value` is a document of any type.
+    #   @return [Array<Types::EnabledBaselineParameter>]
+    #
+    # @!attribute [rw] tags
+    #   Tags associated with input to `EnableBaseline`.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] target_identifier
+    #   The ARN of the target on which the baseline will be enabled. Only
+    #   OUs are supported as targets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnableBaselineInput AWS API Documentation
+    #
+    class EnableBaselineInput < Struct.new(
+      :baseline_identifier,
+      :baseline_version,
+      :parameters,
+      :tags,
+      :target_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the `EnabledBaseline` resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_identifier
+    #   The ID (in UUID format) of the asynchronous `EnableBaseline`
+    #   operation. This `operationIdentifier` is used to track status
+    #   through calls to the `GetBaselineOperation` API.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnableBaselineOutput AWS API Documentation
+    #
+    class EnableBaselineOutput < Struct.new(
+      :arn,
+      :operation_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] control_identifier
     #   The ARN of the control. Only **Strongly recommended** and
     #   **Elective** controls are permitted, with the exception of the
-    #   **landing zone Region deny** control. For information on how to find
-    #   the `controlIdentifier`, see [the overview page][1].
+    #   **Region deny** control. For information on how to find the
+    #   `controlIdentifier`, see [the overview page][1].
     #
     #
     #
@@ -235,7 +382,8 @@ module Aws::ControlTower
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   An array of `EnabledControlParameter` objects
+    #   A list of input parameter values, which are specified to configure
+    #   the control when you enable it.
     #   @return [Array<Types::EnabledControlParameter>]
     #
     # @!attribute [rw] tags
@@ -276,6 +424,143 @@ module Aws::ControlTower
     class EnableControlOutput < Struct.new(
       :arn,
       :operation_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of the `EnabledBaseline` resource.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the `EnabledBaseline` resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] baseline_identifier
+    #   The specific `Baseline` enabled as part of the `EnabledBaseline`
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] baseline_version
+    #   The enabled version of the `Baseline`.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   Shows the parameters that are applied when enabling this `Baseline`.
+    #   @return [Array<Types::EnabledBaselineParameterSummary>]
+    #
+    # @!attribute [rw] status_summary
+    #   The deployment summary of the enabled control.
+    #   @return [Types::EnablementStatusSummary]
+    #
+    # @!attribute [rw] target_identifier
+    #   The target on which to enable the `Baseline`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledBaselineDetails AWS API Documentation
+    #
+    class EnabledBaselineDetails < Struct.new(
+      :arn,
+      :baseline_identifier,
+      :baseline_version,
+      :parameters,
+      :status_summary,
+      :target_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter applied on the `ListEnabledBaseline` operation. Allowed
+    # filters are `baselineIdentifiers` and `targetIdentifiers`. The filter
+    # can be applied for either, or both.
+    #
+    # @!attribute [rw] baseline_identifiers
+    #   Identifiers for the `Baseline` objects returned as part of the
+    #   filter operation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] target_identifiers
+    #   Identifiers for the targets of the `Baseline` filter operation.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledBaselineFilter AWS API Documentation
+    #
+    class EnabledBaselineFilter < Struct.new(
+      :baseline_identifiers,
+      :target_identifiers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A key-value parameter to an `EnabledBaseline` resource.
+    #
+    # @!attribute [rw] key
+    #   A string denoting the parameter key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A low-level `Document` object of any type (for example, a Java
+    #   Object).
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledBaselineParameter AWS API Documentation
+    #
+    class EnabledBaselineParameter < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary of an applied parameter to an `EnabledBaseline` resource.
+    #
+    # @!attribute [rw] key
+    #   A string denoting the parameter key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A low-level document object of any type (for example, a Java
+    #   Object).
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledBaselineParameterSummary AWS API Documentation
+    #
+    class EnabledBaselineParameterSummary < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns a summary of information about an `EnabledBaseline` object.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the `EnabledBaseline` resource
+    #   @return [String]
+    #
+    # @!attribute [rw] baseline_identifier
+    #   The specific baseline that is enabled as part of the
+    #   `EnabledBaseline` resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] baseline_version
+    #   The enabled version of the baseline.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_summary
+    #   The deployment summary of the enabled control.
+    #   @return [Types::EnablementStatusSummary]
+    #
+    # @!attribute [rw] target_identifier
+    #   The target upon which the baseline is enabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledBaselineSummary AWS API Documentation
+    #
+    class EnabledBaselineSummary < Struct.new(
+      :arn,
+      :baseline_identifier,
+      :baseline_version,
+      :status_summary,
+      :target_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -334,17 +619,15 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
-    # A set of parameters that configure the behavior of the enabled
-    # control. A key/value pair, where `Key` is of type `String` and `Value`
-    # is of type `Document`.
+    # A key/value pair, where `Key` is of type `String` and `Value` is of
+    # type `Document`.
     #
     # @!attribute [rw] key
-    #   The key of a key/value pair. It is of type `string`.
+    #   The key of a key/value pair.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of a key/value pair. It can be of type `array` `string`,
-    #   `number`, `object`, or `boolean`.
+    #   The value of a key/value pair.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledControlParameter AWS API Documentation
@@ -438,6 +721,66 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
+    # @!attribute [rw] baseline_identifier
+    #   The ARN of the `Baseline` resource to be retrieved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/GetBaselineInput AWS API Documentation
+    #
+    class GetBaselineInput < Struct.new(
+      :baseline_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_identifier
+    #   The operation ID returned from mutating asynchronous APIs (Enable,
+    #   Disable, Update, Reset).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/GetBaselineOperationInput AWS API Documentation
+    #
+    class GetBaselineOperationInput < Struct.new(
+      :operation_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] baseline_operation
+    #   A `baselineOperation` object that shows information about the
+    #   specified operation ID.
+    #   @return [Types::BaselineOperation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/GetBaselineOperationOutput AWS API Documentation
+    #
+    class GetBaselineOperationOutput < Struct.new(
+      :baseline_operation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The baseline ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the baseline.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A user-friendly name for the baseline.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/GetBaselineOutput AWS API Documentation
+    #
+    class GetBaselineOutput < Struct.new(
+      :arn,
+      :description,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] operation_identifier
     #   The ID of the asynchronous operation, which is used to track status.
     #   The operation is available for 90 days.
@@ -459,6 +802,31 @@ module Aws::ControlTower
     #
     class GetControlOperationOutput < Struct.new(
       :control_operation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] enabled_baseline_identifier
+    #   Identifier of the `EnabledBaseline` resource to be retrieved, in ARN
+    #   format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/GetEnabledBaselineInput AWS API Documentation
+    #
+    class GetEnabledBaselineInput < Struct.new(
+      :enabled_baseline_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] enabled_baseline_details
+    #   Details of the `EnabledBaseline` resource.
+    #   @return [Types::EnabledBaselineDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/GetEnabledBaselineOutput AWS API Documentation
+    #
+    class GetEnabledBaselineOutput < Struct.new(
+      :enabled_baseline_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -563,12 +931,13 @@ module Aws::ControlTower
     #   @return [String]
     #
     # @!attribute [rw] manifest
-    #   The landing zone manifest JSON text file that specifies the landing
-    #   zone configurations.
+    #   The landing zone `manifest.yaml` text file that specifies the
+    #   landing zone configurations.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] status
-    #   The landing zone deployment status.
+    #   The landing zone deployment status. One of `ACTIVE`, `PROCESSING`,
+    #   `FAILED`.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -676,6 +1045,81 @@ module Aws::ControlTower
     #
     class LandingZoneSummary < Struct.new(
       :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be shown.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListBaselinesInput AWS API Documentation
+    #
+    class ListBaselinesInput < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] baselines
+    #   A list of `Baseline` object details.
+    #   @return [Array<Types::BaselineSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListBaselinesOutput AWS API Documentation
+    #
+    class ListBaselinesOutput < Struct.new(
+      :baselines,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filter
+    #   A filter applied on the `ListEnabledBaseline` operation. Allowed
+    #   filters are `baselineIdentifiers` and `targetIdentifiers`. The
+    #   filter can be applied for either, or both.
+    #   @return [Types::EnabledBaselineFilter]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be shown.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListEnabledBaselinesInput AWS API Documentation
+    #
+    class ListEnabledBaselinesInput < Struct.new(
+      :filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] enabled_baselines
+    #   Retuens a list of summaries of `EnabledBaseline` resources.
+    #   @return [Array<Types::EnabledBaselineSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListEnabledBaselinesOutput AWS API Documentation
+    #
+    class ListEnabledBaselinesOutput < Struct.new(
+      :enabled_baselines,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -811,6 +1255,33 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
+    # @!attribute [rw] enabled_baseline_identifier
+    #   Specifies the ID of the `EnabledBaseline` resource to be re-enabled,
+    #   in ARN format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ResetEnabledBaselineInput AWS API Documentation
+    #
+    class ResetEnabledBaselineInput < Struct.new(
+      :enabled_baseline_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_identifier
+    #   The ID (in UUID format) of the asynchronous `ResetEnabledBaseline`
+    #   operation. This `operationIdentifier` is used to track status
+    #   through calls to the `GetBaselineOperation` API.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ResetEnabledBaselineOutput AWS API Documentation
+    #
+    class ResetEnabledBaselineOutput < Struct.new(
+      :operation_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] landing_zone_identifier
     #   The unique identifier of the landing zone.
     #   @return [String]
@@ -895,7 +1366,7 @@ module Aws::ControlTower
     #   @return [String]
     #
     # @!attribute [rw] retry_after_seconds
-    #   The number of seconds to wait before retrying.
+    #   The number of seconds the caller should wait before retrying.
     #   @return [Integer]
     #
     # @!attribute [rw] service_code
@@ -934,6 +1405,43 @@ module Aws::ControlTower
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] baseline_version
+    #   Specifies the new `Baseline` version, to which the `EnabledBaseline`
+    #   should be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_baseline_identifier
+    #   Specifies the `EnabledBaseline` resource to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   Parameters to apply when making an update.
+    #   @return [Array<Types::EnabledBaselineParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/UpdateEnabledBaselineInput AWS API Documentation
+    #
+    class UpdateEnabledBaselineInput < Struct.new(
+      :baseline_version,
+      :enabled_baseline_identifier,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_identifier
+    #   The ID (in UUID format) of the asynchronous `UpdateEnabledBaseline`
+    #   operation. This `operationIdentifier` is used to track status
+    #   through calls to the `GetBaselineOperation` API.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/UpdateEnabledBaselineOutput AWS API Documentation
+    #
+    class UpdateEnabledBaselineOutput < Struct.new(
+      :operation_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] enabled_control_identifier
     #   The ARN of the enabled control that will be updated.
     #   @return [String]
@@ -969,13 +1477,12 @@ module Aws::ControlTower
     #   @return [String]
     #
     # @!attribute [rw] manifest
-    #   The manifest JSON file is a text file that describes your Amazon Web
-    #   Services resources. For examples, review [Launch your landing
-    #   zone][1].
+    #   The `manifest.yaml` file is a text file that describes your Amazon
+    #   Web Services resources. For examples, review [The manifest file][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch
+    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] version

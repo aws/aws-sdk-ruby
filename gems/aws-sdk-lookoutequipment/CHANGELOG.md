@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2024-02-14)
+------------------
+
+* Feature - This feature allows customers to see pointwise model diagnostics results for their models.
+
 1.27.0 (2024-01-26)
 ------------------
 

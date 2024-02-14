@@ -393,9 +393,8 @@ module Aws::ControlTower
     # parameters specified in the manifest JSON file.
     #
     # @option params [required, Hash,Array,String,Numeric,Boolean] :manifest
-    #   The manifest JSON file is a text file that describes your Amazon Web
-    #   Services resources. For examples, review [Launch your landing
-    #   zone][1].
+    #   The manifest.yaml file is a text file that describes your Amazon Web
+    #   Services resources. For examples, review [The manifest file][1].
     #
     #   Document type used to carry open content
     #   (Hash,Array,String,Numeric,Boolean). A document type value is
@@ -404,7 +403,7 @@ module Aws::ControlTower
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch
+    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file
     #
     # @option params [Hash<String,String>] :tags
     #   Tags to be applied to the landing zone.
@@ -472,11 +471,43 @@ module Aws::ControlTower
       req.send_request(options)
     end
 
+    # Disable an `EnabledBaseline` resource on the specified Target. This
+    # API starts an asynchronous operation to remove all resources deployed
+    # as part of the baseline enablement. The resource will vary depending
+    # on the enabled baseline.
+    #
+    # @option params [required, String] :enabled_baseline_identifier
+    #   Identifier of the `EnabledBaseline` resource to be deactivated, in ARN
+    #   format.
+    #
+    # @return [Types::DisableBaselineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisableBaselineOutput#operation_identifier #operation_identifier} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_baseline({
+    #     enabled_baseline_identifier: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/DisableBaseline AWS API Documentation
+    #
+    # @overload disable_baseline(params = {})
+    # @param [Hash] params ({})
+    def disable_baseline(params = {}, options = {})
+      req = build_request(:disable_baseline, params)
+      req.send_request(options)
+    end
+
     # This API call turns off a control. It starts an asynchronous operation
-    # that deletes Amazon Web Services resources on the specified
-    # organizational unit and the accounts it contains. The resources will
-    # vary according to the control that you specify. For usage examples,
-    # see [ *the Amazon Web Services Control Tower User Guide* ][1].
+    # that deletes AWS resources on the specified organizational unit and
+    # the accounts it contains. The resources will vary according to the
+    # control that you specify. For usage examples, see [ *the Amazon Web
+    # Services Control Tower User Guide* ][1].
     #
     #
     #
@@ -484,9 +515,9 @@ module Aws::ControlTower
     #
     # @option params [required, String] :control_identifier
     #   The ARN of the control. Only **Strongly recommended** and **Elective**
-    #   controls are permitted, with the exception of the **landing zone
-    #   Region deny** control. For information on how to find the
-    #   `controlIdentifier`, see [the overview page][1].
+    #   controls are permitted, with the exception of the **Region deny**
+    #   control. For information on how to find the `controlIdentifier`, see
+    #   [the overview page][1].
     #
     #
     #
@@ -524,6 +555,64 @@ module Aws::ControlTower
       req.send_request(options)
     end
 
+    # Enable (apply) a `Baseline` to a Target. This API starts an
+    # asynchronous operation to deploy resources specified by the `Baseline`
+    # to the specified Target.
+    #
+    # @option params [required, String] :baseline_identifier
+    #   The ARN of the baseline to be enabled.
+    #
+    # @option params [required, String] :baseline_version
+    #   The specific version to be enabled of the specified baseline.
+    #
+    # @option params [Array<Types::EnabledBaselineParameter>] :parameters
+    #   A list of `key-value` objects that specify enablement parameters,
+    #   where `key` is a string and `value` is a document of any type.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags associated with input to `EnableBaseline`.
+    #
+    # @option params [required, String] :target_identifier
+    #   The ARN of the target on which the baseline will be enabled. Only OUs
+    #   are supported as targets.
+    #
+    # @return [Types::EnableBaselineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableBaselineOutput#arn #arn} => String
+    #   * {Types::EnableBaselineOutput#operation_identifier #operation_identifier} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_baseline({
+    #     baseline_identifier: "Arn", # required
+    #     baseline_version: "BaselineVersion", # required
+    #     parameters: [
+    #       {
+    #         key: "String", # required
+    #         value: { # required
+    #         },
+    #       },
+    #     ],
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     target_identifier: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.operation_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnableBaseline AWS API Documentation
+    #
+    # @overload enable_baseline(params = {})
+    # @param [Hash] params ({})
+    def enable_baseline(params = {}, options = {})
+      req = build_request(:enable_baseline, params)
+      req.send_request(options)
+    end
+
     # This API call activates a control. It starts an asynchronous operation
     # that creates Amazon Web Services resources on the specified
     # organizational unit and the accounts it contains. The resources
@@ -537,16 +626,17 @@ module Aws::ControlTower
     #
     # @option params [required, String] :control_identifier
     #   The ARN of the control. Only **Strongly recommended** and **Elective**
-    #   controls are permitted, with the exception of the **landing zone
-    #   Region deny** control. For information on how to find the
-    #   `controlIdentifier`, see [the overview page][1].
+    #   controls are permitted, with the exception of the **Region deny**
+    #   control. For information on how to find the `controlIdentifier`, see
+    #   [the overview page][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
     #
     # @option params [Array<Types::EnabledControlParameter>] :parameters
-    #   An array of `EnabledControlParameter` objects
+    #   A list of input parameter values, which are specified to configure the
+    #   control when you enable it.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags to be applied to the `EnabledControl` resource.
@@ -595,6 +685,76 @@ module Aws::ControlTower
       req.send_request(options)
     end
 
+    # Retrieve details about an existing `Baseline` resource by specifying
+    # its identifier.
+    #
+    # @option params [required, String] :baseline_identifier
+    #   The ARN of the `Baseline` resource to be retrieved.
+    #
+    # @return [Types::GetBaselineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBaselineOutput#arn #arn} => String
+    #   * {Types::GetBaselineOutput#description #description} => String
+    #   * {Types::GetBaselineOutput#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_baseline({
+    #     baseline_identifier: "BaselineArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.description #=> String
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/GetBaseline AWS API Documentation
+    #
+    # @overload get_baseline(params = {})
+    # @param [Hash] params ({})
+    def get_baseline(params = {}, options = {})
+      req = build_request(:get_baseline, params)
+      req.send_request(options)
+    end
+
+    # Returns the details of an asynchronous baseline operation, as
+    # initiated by any of these APIs: `EnableBaseline`, `DisableBaseline`,
+    # `UpdateEnabledBaseline`, `ResetEnabledBaseline`. A status message is
+    # displayed in case of operation failure.
+    #
+    # @option params [required, String] :operation_identifier
+    #   The operation ID returned from mutating asynchronous APIs (Enable,
+    #   Disable, Update, Reset).
+    #
+    # @return [Types::GetBaselineOperationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBaselineOperationOutput#baseline_operation #baseline_operation} => Types::BaselineOperation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_baseline_operation({
+    #     operation_identifier: "OperationIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.baseline_operation.end_time #=> Time
+    #   resp.baseline_operation.operation_identifier #=> String
+    #   resp.baseline_operation.operation_type #=> String, one of "ENABLE_BASELINE", "DISABLE_BASELINE", "UPDATE_ENABLED_BASELINE", "RESET_ENABLED_BASELINE"
+    #   resp.baseline_operation.start_time #=> Time
+    #   resp.baseline_operation.status #=> String, one of "SUCCEEDED", "FAILED", "IN_PROGRESS"
+    #   resp.baseline_operation.status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/GetBaselineOperation AWS API Documentation
+    #
+    # @overload get_baseline_operation(params = {})
+    # @param [Hash] params ({})
+    def get_baseline_operation(params = {}, options = {})
+      req = build_request(:get_baseline_operation, params)
+      req.send_request(options)
+    end
+
     # Returns the status of a particular `EnableControl` or `DisableControl`
     # operation. Displays a message in case of error. Details for an
     # operation are available for 90 days. For usage examples, see [ *the
@@ -632,6 +792,43 @@ module Aws::ControlTower
     # @param [Hash] params ({})
     def get_control_operation(params = {}, options = {})
       req = build_request(:get_control_operation, params)
+      req.send_request(options)
+    end
+
+    # Retrieve details of an `EnabledBaseline` resource by specifying its
+    # identifier.
+    #
+    # @option params [required, String] :enabled_baseline_identifier
+    #   Identifier of the `EnabledBaseline` resource to be retrieved, in ARN
+    #   format.
+    #
+    # @return [Types::GetEnabledBaselineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEnabledBaselineOutput#enabled_baseline_details #enabled_baseline_details} => Types::EnabledBaselineDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_enabled_baseline({
+    #     enabled_baseline_identifier: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.enabled_baseline_details.arn #=> String
+    #   resp.enabled_baseline_details.baseline_identifier #=> String
+    #   resp.enabled_baseline_details.baseline_version #=> String
+    #   resp.enabled_baseline_details.parameters #=> Array
+    #   resp.enabled_baseline_details.parameters[0].key #=> String
+    #   resp.enabled_baseline_details.status_summary.last_operation_identifier #=> String
+    #   resp.enabled_baseline_details.status_summary.status #=> String, one of "SUCCEEDED", "FAILED", "UNDER_CHANGE"
+    #   resp.enabled_baseline_details.target_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/GetEnabledBaseline AWS API Documentation
+    #
+    # @overload get_enabled_baseline(params = {})
+    # @param [Hash] params ({})
+    def get_enabled_baseline(params = {}, options = {})
+      req = build_request(:get_enabled_baseline, params)
       req.send_request(options)
     end
 
@@ -740,6 +937,98 @@ module Aws::ControlTower
     # @param [Hash] params ({})
     def get_landing_zone_operation(params = {}, options = {})
       req = build_request(:get_landing_zone_operation, params)
+      req.send_request(options)
+    end
+
+    # Returns a summary list of all available baselines.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be shown.
+    #
+    # @option params [String] :next_token
+    #   A pagination token.
+    #
+    # @return [Types::ListBaselinesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBaselinesOutput#baselines #baselines} => Array&lt;Types::BaselineSummary&gt;
+    #   * {Types::ListBaselinesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_baselines({
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.baselines #=> Array
+    #   resp.baselines[0].arn #=> String
+    #   resp.baselines[0].description #=> String
+    #   resp.baselines[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListBaselines AWS API Documentation
+    #
+    # @overload list_baselines(params = {})
+    # @param [Hash] params ({})
+    def list_baselines(params = {}, options = {})
+      req = build_request(:list_baselines, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of summaries describing `EnabledBaseline` resources.
+    # You can filter the list by the corresponding `Baseline` or `Target` of
+    # the `EnabledBaseline` resources.
+    #
+    # @option params [Types::EnabledBaselineFilter] :filter
+    #   A filter applied on the `ListEnabledBaseline` operation. Allowed
+    #   filters are `baselineIdentifiers` and `targetIdentifiers`. The filter
+    #   can be applied for either, or both.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be shown.
+    #
+    # @option params [String] :next_token
+    #   A pagination token.
+    #
+    # @return [Types::ListEnabledBaselinesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEnabledBaselinesOutput#enabled_baselines #enabled_baselines} => Array&lt;Types::EnabledBaselineSummary&gt;
+    #   * {Types::ListEnabledBaselinesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_enabled_baselines({
+    #     filter: {
+    #       baseline_identifiers: ["Arn"],
+    #       target_identifiers: ["Arn"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "ListEnabledBaselinesNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.enabled_baselines #=> Array
+    #   resp.enabled_baselines[0].arn #=> String
+    #   resp.enabled_baselines[0].baseline_identifier #=> String
+    #   resp.enabled_baselines[0].baseline_version #=> String
+    #   resp.enabled_baselines[0].status_summary.last_operation_identifier #=> String
+    #   resp.enabled_baselines[0].status_summary.status #=> String, one of "SUCCEEDED", "FAILED", "UNDER_CHANGE"
+    #   resp.enabled_baselines[0].target_identifier #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListEnabledBaselines AWS API Documentation
+    #
+    # @overload list_enabled_baselines(params = {})
+    # @param [Hash] params ({})
+    def list_enabled_baselines(params = {}, options = {})
+      req = build_request(:list_enabled_baselines, params)
       req.send_request(options)
     end
 
@@ -879,6 +1168,37 @@ module Aws::ControlTower
       req.send_request(options)
     end
 
+    # Re-enables an `EnabledBaseline` resource. For example, this API can
+    # re-apply the existing `Baseline` after a new member account is moved
+    # to the target OU.
+    #
+    # @option params [required, String] :enabled_baseline_identifier
+    #   Specifies the ID of the `EnabledBaseline` resource to be re-enabled,
+    #   in ARN format.
+    #
+    # @return [Types::ResetEnabledBaselineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResetEnabledBaselineOutput#operation_identifier #operation_identifier} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reset_enabled_baseline({
+    #     enabled_baseline_identifier: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ResetEnabledBaseline AWS API Documentation
+    #
+    # @overload reset_enabled_baseline(params = {})
+    # @param [Hash] params ({})
+    def reset_enabled_baseline(params = {}, options = {})
+      req = build_request(:reset_enabled_baseline, params)
+      req.send_request(options)
+    end
+
     # This API call resets a landing zone. It starts an asynchronous
     # operation that resets the landing zone to the parameters specified in
     # its original configuration.
@@ -973,6 +1293,50 @@ module Aws::ControlTower
       req.send_request(options)
     end
 
+    # Updates an `EnabledBaseline` resource's applied parameters or
+    # version.
+    #
+    # @option params [required, String] :baseline_version
+    #   Specifies the new `Baseline` version, to which the `EnabledBaseline`
+    #   should be updated.
+    #
+    # @option params [required, String] :enabled_baseline_identifier
+    #   Specifies the `EnabledBaseline` resource to be updated.
+    #
+    # @option params [Array<Types::EnabledBaselineParameter>] :parameters
+    #   Parameters to apply when making an update.
+    #
+    # @return [Types::UpdateEnabledBaselineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateEnabledBaselineOutput#operation_identifier #operation_identifier} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_enabled_baseline({
+    #     baseline_version: "BaselineVersion", # required
+    #     enabled_baseline_identifier: "Arn", # required
+    #     parameters: [
+    #       {
+    #         key: "String", # required
+    #         value: { # required
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_identifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/UpdateEnabledBaseline AWS API Documentation
+    #
+    # @overload update_enabled_baseline(params = {})
+    # @param [Hash] params ({})
+    def update_enabled_baseline(params = {}, options = {})
+      req = build_request(:update_enabled_baseline, params)
+      req.send_request(options)
+    end
+
     # Updates the configuration of an already enabled control.
     #
     # If the enabled control shows an `EnablementStatus` of SUCCEEDED,
@@ -1040,9 +1404,8 @@ module Aws::ControlTower
     #   The unique identifier of the landing zone.
     #
     # @option params [required, Hash,Array,String,Numeric,Boolean] :manifest
-    #   The manifest JSON file is a text file that describes your Amazon Web
-    #   Services resources. For examples, review [Launch your landing
-    #   zone][1].
+    #   The `manifest.yaml` file is a text file that describes your Amazon Web
+    #   Services resources. For examples, review [The manifest file][1].
     #
     #   Document type used to carry open content
     #   (Hash,Array,String,Numeric,Boolean). A document type value is
@@ -1051,7 +1414,7 @@ module Aws::ControlTower
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch
+    #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/the-manifest-file
     #
     # @option params [required, String] :version
     #   The landing zone version, for example, 3.2.
@@ -1095,7 +1458,7 @@ module Aws::ControlTower
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-controltower'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

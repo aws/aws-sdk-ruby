@@ -1068,8 +1068,8 @@ module Aws::QBusiness
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_BatchPutDocument.html
-    # [2]: https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_CreateDataSource.html
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_BatchPutDocument.html
+    # [2]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_CreateDataSource.html
     #
     # @option params [required, String] :application_id
     #   The identifier of the Amazon Q application using the index.
@@ -1258,6 +1258,27 @@ module Aws::QBusiness
     #         index_id: "KendraIndexId", # required
     #       },
     #       native_index_configuration: {
+    #         boosting_override: {
+    #           "DocumentAttributeKey" => {
+    #             date_configuration: {
+    #               boosting_duration_in_seconds: 1,
+    #               boosting_level: "NONE", # required, accepts NONE, LOW, MEDIUM, HIGH, VERY_HIGH
+    #             },
+    #             number_configuration: {
+    #               boosting_level: "NONE", # required, accepts NONE, LOW, MEDIUM, HIGH, VERY_HIGH
+    #               boosting_type: "PRIORITIZE_LARGER_VALUES", # accepts PRIORITIZE_LARGER_VALUES, PRIORITIZE_SMALLER_VALUES
+    #             },
+    #             string_configuration: {
+    #               attribute_value_boosting: {
+    #                 "String" => "LOW", # accepts LOW, MEDIUM, HIGH, VERY_HIGH
+    #               },
+    #               boosting_level: "NONE", # required, accepts NONE, LOW, MEDIUM, HIGH, VERY_HIGH
+    #             },
+    #             string_list_configuration: {
+    #               boosting_level: "NONE", # required, accepts NONE, LOW, MEDIUM, HIGH, VERY_HIGH
+    #             },
+    #           },
+    #         },
     #         index_id: "IndexId", # required
     #       },
     #     },
@@ -2114,6 +2135,15 @@ module Aws::QBusiness
     #
     #   resp.application_id #=> String
     #   resp.configuration.kendra_index_configuration.index_id #=> String
+    #   resp.configuration.native_index_configuration.boosting_override #=> Hash
+    #   resp.configuration.native_index_configuration.boosting_override["DocumentAttributeKey"].date_configuration.boosting_duration_in_seconds #=> Integer
+    #   resp.configuration.native_index_configuration.boosting_override["DocumentAttributeKey"].date_configuration.boosting_level #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH", "VERY_HIGH"
+    #   resp.configuration.native_index_configuration.boosting_override["DocumentAttributeKey"].number_configuration.boosting_level #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH", "VERY_HIGH"
+    #   resp.configuration.native_index_configuration.boosting_override["DocumentAttributeKey"].number_configuration.boosting_type #=> String, one of "PRIORITIZE_LARGER_VALUES", "PRIORITIZE_SMALLER_VALUES"
+    #   resp.configuration.native_index_configuration.boosting_override["DocumentAttributeKey"].string_configuration.attribute_value_boosting #=> Hash
+    #   resp.configuration.native_index_configuration.boosting_override["DocumentAttributeKey"].string_configuration.attribute_value_boosting["String"] #=> String, one of "LOW", "MEDIUM", "HIGH", "VERY_HIGH"
+    #   resp.configuration.native_index_configuration.boosting_override["DocumentAttributeKey"].string_configuration.boosting_level #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH", "VERY_HIGH"
+    #   resp.configuration.native_index_configuration.boosting_override["DocumentAttributeKey"].string_list_configuration.boosting_level #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH", "VERY_HIGH"
     #   resp.configuration.native_index_configuration.index_id #=> String
     #   resp.created_at #=> Time
     #   resp.display_name #=> String
@@ -2912,7 +2942,7 @@ module Aws::QBusiness
     #     message_id: "SystemMessageId", # required
     #     message_usefulness: {
     #       comment: "MessageUsefulnessComment",
-    #       reason: "NOT_FACTUALLY_CORRECT", # accepts NOT_FACTUALLY_CORRECT, HARMFUL_OR_UNSAFE, INCORRECT_OR_MISSING_SOURCES, NOT_HELPFUL, FACTUALLY_CORRECT, COMPLETE, RELEVANT_SOURCES, HELPFUL
+    #       reason: "NOT_FACTUALLY_CORRECT", # accepts NOT_FACTUALLY_CORRECT, HARMFUL_OR_UNSAFE, INCORRECT_OR_MISSING_SOURCES, NOT_HELPFUL, FACTUALLY_CORRECT, COMPLETE, RELEVANT_SOURCES, HELPFUL, NOT_BASED_ON_DOCUMENTS, NOT_COMPLETE, NOT_CONCISE, OTHER
     #       submitted_at: Time.now, # required
     #       usefulness: "USEFUL", # required, accepts USEFUL, NOT_USEFUL
     #     },
@@ -3582,6 +3612,27 @@ module Aws::QBusiness
     #         index_id: "KendraIndexId", # required
     #       },
     #       native_index_configuration: {
+    #         boosting_override: {
+    #           "DocumentAttributeKey" => {
+    #             date_configuration: {
+    #               boosting_duration_in_seconds: 1,
+    #               boosting_level: "NONE", # required, accepts NONE, LOW, MEDIUM, HIGH, VERY_HIGH
+    #             },
+    #             number_configuration: {
+    #               boosting_level: "NONE", # required, accepts NONE, LOW, MEDIUM, HIGH, VERY_HIGH
+    #               boosting_type: "PRIORITIZE_LARGER_VALUES", # accepts PRIORITIZE_LARGER_VALUES, PRIORITIZE_SMALLER_VALUES
+    #             },
+    #             string_configuration: {
+    #               attribute_value_boosting: {
+    #                 "String" => "LOW", # accepts LOW, MEDIUM, HIGH, VERY_HIGH
+    #               },
+    #               boosting_level: "NONE", # required, accepts NONE, LOW, MEDIUM, HIGH, VERY_HIGH
+    #             },
+    #             string_list_configuration: {
+    #               boosting_level: "NONE", # required, accepts NONE, LOW, MEDIUM, HIGH, VERY_HIGH
+    #             },
+    #           },
+    #         },
     #         index_id: "IndexId", # required
     #       },
     #     },
@@ -3733,7 +3784,7 @@ module Aws::QBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-qbusiness'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -8,6 +8,7 @@
 # WARNING ABOUT GENERATED CODE
 
 
+require 'bigdecimal'
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -52,6 +53,6 @@ require_relative 'aws-sdk-dynamodbstreams/customizations'
 # @!group service
 module Aws::DynamoDBStreams
 
-  GEM_VERSION = '1.53.0'
+  GEM_VERSION = '1.54.0'
 
 end
