@@ -36,14 +36,13 @@ module Aws
         @s3_client = options.delete(:s3_client)
         @sts_client = options.delete(:sts_client)
         @fallback = options.delete(:fallback) || false
-        @caching = options.delete(:caching) || true
-        @options = options
+        @caching = options.delete(:caching) != false
+        @s3_control_clients = {}
+        @bucket_region_cache = BUCKET_REGIONS # shared cache with s3_signer
         return unless @caching
 
         @credentials_cache = ACCESS_GRANTS_CREDENTIALS_CACHE
         @account_id_cache = ACCESS_GRANTS_ACCOUNT_ID_CACHE
-        @bucket_region_cache = BUCKET_REGIONS # shared cache with s3_signer
-        @s3_control_client_cache = {}
       end
 
       def access_grants_credentials_for(options = {})
@@ -72,7 +71,7 @@ module Aws
       private
 
       def s3_control_client(bucket_region)
-        @s3_control_client_cache[bucket_region] ||= begin
+        @s3_control_clients[bucket_region] ||= begin
           credentials = s3_client.config.credentials
           config = { credentials: credentials }.merge(@s3_control_options)
           Aws::S3Control::Client.new(config.merge(
@@ -140,8 +139,7 @@ module Aws
           target: target,
           account_id: account_id_for_access_grants(target, credentials),
           permission: permission,
-          client: client,
-          **@options
+          client: client
         )
       end
 
@@ -176,11 +174,8 @@ module Aws
 
       def bucket_region_for_access_grants(target)
         bucket = bucket_name_from(target)
-        if @caching
-          cached_bucket_region_for(bucket)
-        else
-          new_bucket_region_for(bucket)
-        end
+        # regardless of caching option, bucket region cache is always shared
+        cached_bucket_region_for(bucket)
       end
 
       def cached_bucket_region_for(bucket)
