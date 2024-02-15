@@ -6,7 +6,7 @@ module Aws
       # @api private
       class AccessGrants < Seahorse::Client::Plugin
         option(
-          :s3_access_grants,
+          :access_grants,
           default: false,
           doc_type: 'Boolean',
           docstring: <<-DOCS)
@@ -19,7 +19,7 @@ Control using the `get_data_access` API.
           doc_type: 'Aws::S3::AccessGrantsCredentialsProvider',
           rbs_type: 'untyped',
           docstring: <<-DOCS) do |_cfg|
-When `s3_access_grants` is `true`, this option can be used to provide
+When `access_grants` is `true`, this option can be used to provide
 additional options to the credentials provider, including a privilege
 setting, caching, and fallback behavior.
           DOCS
@@ -72,13 +72,12 @@ setting, caching, and fallback behavior.
           end
 
           def s3_express_endpoint?(context)
-            props = context[:endpoint_properties]
-            props['backend'] == 'S3Express'
+            context[:endpoint_properties]['backend'] == 'S3Express'
           end
         end
 
         def add_handlers(handlers,config)
-          handlers.add(Handler) if config.s3_access_grants
+          handlers.add(Handler) if config.access_grants
         end
 
         def after_initialize(client)

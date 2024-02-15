@@ -54,6 +54,17 @@ module Aws
           expect(client.config.express_credentials_provider)
             .to be_a(Aws::S3::ExpressCredentialsProvider)
         end
+
+        it 'can use a configured provider' do
+          provider = Aws::S3::ExpressCredentialsProvider.new
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-west-2',
+            express_credentials_provider: provider
+          )
+          expect(client.config.express_credentials_provider)
+            .to be(provider)
+        end
       end
 
       it 'sets the client as the client to create sessions' do
