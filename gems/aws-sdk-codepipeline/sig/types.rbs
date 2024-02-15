@@ -70,6 +70,7 @@ module Aws::CodePipeline
       attr_accessor role_arn: ::String
       attr_accessor region: ::String
       attr_accessor namespace: ::String
+      attr_accessor timeout_in_minutes: ::Integer
       SENSITIVE: []
     end
 

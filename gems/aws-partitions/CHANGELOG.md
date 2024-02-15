@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.892.0 (2024-02-15)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::Artifact`.
+
 1.891.0 (2024-02-14)
 ------------------
 

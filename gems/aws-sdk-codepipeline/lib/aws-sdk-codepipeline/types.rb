@@ -276,6 +276,17 @@ module Aws::CodePipeline
     #   produced as output by this action fall under this namespace.
     #   @return [String]
     #
+    # @!attribute [rw] timeout_in_minutes
+    #   A timeout duration in minutes that can be applied against the
+    #   ActionType’s default timeout value specified in [Quotas for
+    #   CodePipeline ][1]. This attribute is available only to the manual
+    #   approval ActionType.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/limits.html
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionDeclaration AWS API Documentation
     #
     class ActionDeclaration < Struct.new(
@@ -287,7 +298,8 @@ module Aws::CodePipeline
       :input_artifacts,
       :role_arn,
       :region,
-      :namespace)
+      :namespace,
+      :timeout_in_minutes)
       SENSITIVE = []
       include Aws::Structure
     end

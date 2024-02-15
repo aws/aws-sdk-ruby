@@ -411,6 +411,7 @@ module Aws::GuardDuty
     SecurityContext = Shapes::StructureShape.new(name: 'SecurityContext')
     SecurityGroup = Shapes::StructureShape.new(name: 'SecurityGroup')
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
+    SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     Service = Shapes::StructureShape.new(name: 'Service')
     ServiceAdditionalInfo = Shapes::StructureShape.new(name: 'ServiceAdditionalInfo')
     SessionNameList = Shapes::ListShape.new(name: 'SessionNameList')
@@ -1524,7 +1525,7 @@ module Aws::GuardDuty
     ListThreatIntelSetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListThreatIntelSetsResponse.struct_class = Types::ListThreatIntelSetsResponse
 
-    LocalIpDetails.add_member(:ip_address_v4, Shapes::ShapeRef.new(shape: String, location_name: "ipAddressV4"))
+    LocalIpDetails.add_member(:ip_address_v4, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "ipAddressV4"))
     LocalIpDetails.struct_class = Types::LocalIpDetails
 
     LocalPortDetails.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "port"))
@@ -1620,7 +1621,7 @@ module Aws::GuardDuty
     NetworkInterface.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: Ipv6Addresses, location_name: "ipv6Addresses"))
     NetworkInterface.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, location_name: "networkInterfaceId"))
     NetworkInterface.add_member(:private_dns_name, Shapes::ShapeRef.new(shape: String, location_name: "privateDnsName"))
-    NetworkInterface.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "privateIpAddress"))
+    NetworkInterface.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "privateIpAddress"))
     NetworkInterface.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: PrivateIpAddresses, location_name: "privateIpAddresses"))
     NetworkInterface.add_member(:public_dns_name, Shapes::ShapeRef.new(shape: String, location_name: "publicDnsName"))
     NetworkInterface.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "publicIp"))
@@ -1759,7 +1760,7 @@ module Aws::GuardDuty
     PortProbeDetails.member = Shapes::ShapeRef.new(shape: PortProbeDetail)
 
     PrivateIpAddressDetails.add_member(:private_dns_name, Shapes::ShapeRef.new(shape: String, location_name: "privateDnsName"))
-    PrivateIpAddressDetails.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "privateIpAddress"))
+    PrivateIpAddressDetails.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "privateIpAddress"))
     PrivateIpAddressDetails.struct_class = Types::PrivateIpAddressDetails
 
     PrivateIpAddresses.member = Shapes::ShapeRef.new(shape: PrivateIpAddressDetails)
@@ -1815,7 +1816,7 @@ module Aws::GuardDuty
     RemoteIpDetails.add_member(:city, Shapes::ShapeRef.new(shape: City, location_name: "city"))
     RemoteIpDetails.add_member(:country, Shapes::ShapeRef.new(shape: Country, location_name: "country"))
     RemoteIpDetails.add_member(:geo_location, Shapes::ShapeRef.new(shape: GeoLocation, location_name: "geoLocation"))
-    RemoteIpDetails.add_member(:ip_address_v4, Shapes::ShapeRef.new(shape: String, location_name: "ipAddressV4"))
+    RemoteIpDetails.add_member(:ip_address_v4, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "ipAddressV4"))
     RemoteIpDetails.add_member(:organization, Shapes::ShapeRef.new(shape: Organization, location_name: "organization"))
     RemoteIpDetails.struct_class = Types::RemoteIpDetails
 

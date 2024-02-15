@@ -2527,6 +2527,14 @@ module Aws::GuardDuty
     # Lists Amazon GuardDuty findings statistics for the specified detector
     # ID.
     #
+    # There might be regional differences because some flags might not be
+    # available in all the Regions where GuardDuty is currently supported.
+    # For more information, see [Regions and endpoints][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
+    #
     # @option params [required, String] :detector_id
     #   The ID of the detector that specifies the GuardDuty service whose
     #   findings' statistics you want to retrieve.
@@ -3315,7 +3323,15 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Lists Amazon GuardDuty findings for the specified detector ID.
+    # Lists GuardDuty findings for the specified detector ID.
+    #
+    # There might be regional differences because some flags might not be
+    # available in all the Regions where GuardDuty is currently supported.
+    # For more information, see [Regions and endpoints][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
     #
     # @option params [required, String] :detector_id
     #   The ID of the detector that specifies the GuardDuty service whose
@@ -4033,7 +4049,7 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Updates the Amazon GuardDuty detector specified by the detectorId.
+    # Updates the GuardDuty detector specified by the detectorId.
     #
     # There might be regional differences because some data sources might
     # not be available in all the Amazon Web Services Regions where

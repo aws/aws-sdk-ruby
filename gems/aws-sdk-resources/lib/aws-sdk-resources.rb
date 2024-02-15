@@ -31,6 +31,7 @@ module Aws
   autoload :ApplicationCostProfiler, 'aws-sdk-applicationcostprofiler'
   autoload :ApplicationDiscoveryService, 'aws-sdk-applicationdiscoveryservice'
   autoload :ApplicationInsights, 'aws-sdk-applicationinsights'
+  autoload :Artifact, 'aws-sdk-artifact'
   autoload :Athena, 'aws-sdk-athena'
   autoload :AuditManager, 'aws-sdk-auditmanager'
   autoload :AugmentedAIRuntime, 'aws-sdk-augmentedairuntime'

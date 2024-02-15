@@ -678,6 +678,7 @@ module Aws::CodePipeline
     #               role_arn: "RoleArn",
     #               region: "AWSRegionName",
     #               namespace: "ActionNamespace",
+    #               timeout_in_minutes: 1,
     #             },
     #           ],
     #         },
@@ -772,6 +773,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].role_arn #=> String
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
+    #   resp.pipeline.stages[0].actions[0].timeout_in_minutes #=> Integer
     #   resp.pipeline.version #=> Integer
     #   resp.pipeline.execution_mode #=> String, one of "QUEUED", "SUPERSEDED", "PARALLEL"
     #   resp.pipeline.pipeline_type #=> String, one of "V1", "V2"
@@ -1222,6 +1224,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].role_arn #=> String
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
+    #   resp.pipeline.stages[0].actions[0].timeout_in_minutes #=> Integer
     #   resp.pipeline.version #=> Integer
     #   resp.pipeline.execution_mode #=> String, one of "QUEUED", "SUPERSEDED", "PARALLEL"
     #   resp.pipeline.pipeline_type #=> String, one of "V1", "V2"
@@ -2729,6 +2732,7 @@ module Aws::CodePipeline
     #               role_arn: "RoleArn",
     #               region: "AWSRegionName",
     #               namespace: "ActionNamespace",
+    #               timeout_in_minutes: 1,
     #             },
     #           ],
     #         },
@@ -2817,6 +2821,7 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].role_arn #=> String
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
+    #   resp.pipeline.stages[0].actions[0].timeout_in_minutes #=> Integer
     #   resp.pipeline.version #=> Integer
     #   resp.pipeline.execution_mode #=> String, one of "QUEUED", "SUPERSEDED", "PARALLEL"
     #   resp.pipeline.pipeline_type #=> String, one of "V1", "V2"

@@ -198,7 +198,8 @@ module Aws
                                        ]?,
                                        role_arn: ::String?,
                                        region: ::String?,
-                                       namespace: ::String?
+                                       namespace: ::String?,
+                                       timeout_in_minutes: ::Integer?
                                      },
                                    ]
                                  },
@@ -819,7 +820,8 @@ module Aws
                                        ]?,
                                        role_arn: ::String?,
                                        region: ::String?,
-                                       namespace: ::String?
+                                       namespace: ::String?,
+                                       timeout_in_minutes: ::Integer?
                                      },
                                    ]
                                  },

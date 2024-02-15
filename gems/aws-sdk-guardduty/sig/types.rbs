@@ -51,7 +51,7 @@ module Aws::GuardDuty
     class AccountDetail
       attr_accessor account_id: ::String
       attr_accessor email: ::String
-      SENSITIVE: []
+      SENSITIVE: [:email]
     end
 
     class AccountFreeTrialInfo
@@ -1325,7 +1325,7 @@ module Aws::GuardDuty
 
     class LocalIpDetails
       attr_accessor ip_address_v4: ::String
-      SENSITIVE: []
+      SENSITIVE: [:ip_address_v4]
     end
 
     class LocalPortDetails
@@ -1375,7 +1375,7 @@ module Aws::GuardDuty
       attr_accessor invited_at: ::String
       attr_accessor updated_at: ::String
       attr_accessor administrator_id: ::String
-      SENSITIVE: []
+      SENSITIVE: [:email]
     end
 
     class MemberAdditionalConfiguration
@@ -1435,7 +1435,7 @@ module Aws::GuardDuty
       attr_accessor security_groups: ::Array[Types::SecurityGroup]
       attr_accessor subnet_id: ::String
       attr_accessor vpc_id: ::String
-      SENSITIVE: []
+      SENSITIVE: [:private_ip_address]
     end
 
     class Observations
@@ -1606,7 +1606,7 @@ module Aws::GuardDuty
     class PrivateIpAddressDetails
       attr_accessor private_dns_name: ::String
       attr_accessor private_ip_address: ::String
-      SENSITIVE: []
+      SENSITIVE: [:private_ip_address]
     end
 
     class ProcessDetails
@@ -1675,7 +1675,7 @@ module Aws::GuardDuty
       attr_accessor geo_location: Types::GeoLocation
       attr_accessor ip_address_v4: ::String
       attr_accessor organization: Types::Organization
-      SENSITIVE: []
+      SENSITIVE: [:ip_address_v4]
     end
 
     class RemotePortDetails

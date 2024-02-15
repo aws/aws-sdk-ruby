@@ -134,6 +134,7 @@ module Aws::HealthLake
       attr_accessor datastore_id: ::String
       attr_accessor input_data_config: Types::InputDataConfig
       attr_accessor job_output_data_config: Types::OutputDataConfig
+      attr_accessor job_progress_report: Types::JobProgressReport
       attr_accessor data_access_role_arn: ::String
       attr_accessor message: ::String
       SENSITIVE: []
@@ -152,6 +153,18 @@ module Aws::HealthLake
 
     class InternalServerException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JobProgressReport
+      attr_accessor total_number_of_scanned_files: ::Integer
+      attr_accessor total_size_of_scanned_files_in_mb: ::Float
+      attr_accessor total_number_of_imported_files: ::Integer
+      attr_accessor total_number_of_resources_scanned: ::Integer
+      attr_accessor total_number_of_resources_imported: ::Integer
+      attr_accessor total_number_of_resources_with_customer_error: ::Integer
+      attr_accessor total_number_of_files_read_with_customer_error: ::Integer
+      attr_accessor throughput: ::Float
       SENSITIVE: []
     end
 

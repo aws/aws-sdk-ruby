@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2024-02-15)
+------------------
+
+* Feature - Adds additional supported instance types.
+
 1.37.0 (2024-02-06)
 ------------------
 

@@ -30287,9 +30287,12 @@ module Aws::SageMaker
     # Provides information about the location that is configured for storing
     # model artifacts.
     #
-    # Model artifacts are the output that results from training a model, and
+    # Model artifacts are outputs that result from training a model. They
     # typically consist of trained parameters, a model definition that
-    # describes how to compute inferences, and other metadata.
+    # describes how to compute inferences, and other metadata. A SageMaker
+    # container stores your trained model artifacts in the `/opt/ml/model`
+    # directory. After training has completed, by default, these artifacts
+    # are uploaded to your Amazon S3 bucket as compressed files.
     #
     # @!attribute [rw] s3_model_artifacts
     #   The path of the S3 object that contains the model artifacts. For
@@ -42816,6 +42819,32 @@ module Aws::SageMaker
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateClusterResponse AWS API Documentation
     #
     class UpdateClusterResponse < Struct.new(
+      :cluster_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   Specify the name or the Amazon Resource Name (ARN) of the SageMaker
+    #   HyperPod cluster you want to update for security patching.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateClusterSoftwareRequest AWS API Documentation
+    #
+    class UpdateClusterSoftwareRequest < Struct.new(
+      :cluster_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster
+    #   being updated for security patching.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateClusterSoftwareResponse AWS API Documentation
+    #
+    class UpdateClusterSoftwareResponse < Struct.new(
       :cluster_arn)
       SENSITIVE = []
       include Aws::Structure

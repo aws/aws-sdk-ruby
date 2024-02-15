@@ -333,6 +333,7 @@ RubyGems.org page under "LINKS" section.
 | AWS AppSync                                           | Aws::AppSync                             | aws-sdk-appsync                             | 2017-07-25  |
 | AWS Application Cost Profiler                         | Aws::ApplicationCostProfiler             | aws-sdk-applicationcostprofiler             | 2020-09-10  |
 | AWS Application Discovery Service                     | Aws::ApplicationDiscoveryService         | aws-sdk-applicationdiscoveryservice         | 2015-11-01  |
+| AWS Artifact                                          | Aws::Artifact                            | aws-sdk-artifact                            | 2018-05-10  |
 | AWS Audit Manager                                     | Aws::AuditManager                        | aws-sdk-auditmanager                        | 2017-07-25  |
 | AWS Auto Scaling Plans                                | Aws::AutoScalingPlans                    | aws-sdk-autoscalingplans                    | 2018-01-06  |
 | AWS B2B Data Interchange                              | Aws::B2bi                                | aws-sdk-b2bi                                | 2022-06-23  |

@@ -7524,6 +7524,16 @@ module Aws
                           ) -> _UpdateClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterResponseSuccess
 
+      interface _UpdateClusterSoftwareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClusterSoftwareResponse]
+        def cluster_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#update_cluster_software-instance_method
+      def update_cluster_software: (
+                                     cluster_name: ::String
+                                   ) -> _UpdateClusterSoftwareResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterSoftwareResponseSuccess
+
       interface _UpdateCodeRepositoryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCodeRepositoryOutput]
         def code_repository_arn: () -> ::String

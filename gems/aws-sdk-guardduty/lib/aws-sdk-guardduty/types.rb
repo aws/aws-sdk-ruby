@@ -151,7 +151,7 @@ module Aws::GuardDuty
     class AccountDetail < Struct.new(
       :account_id,
       :email)
-      SENSITIVE = []
+      SENSITIVE = [:email]
       include Aws::Structure
     end
 
@@ -5029,7 +5029,7 @@ module Aws::GuardDuty
     #
     class LocalIpDetails < Struct.new(
       :ip_address_v4)
-      SENSITIVE = []
+      SENSITIVE = [:ip_address_v4]
       include Aws::Structure
     end
 
@@ -5212,7 +5212,7 @@ module Aws::GuardDuty
       :invited_at,
       :updated_at,
       :administrator_id)
-      SENSITIVE = []
+      SENSITIVE = [:email]
       include Aws::Structure
     end
 
@@ -5445,7 +5445,7 @@ module Aws::GuardDuty
       :security_groups,
       :subnet_id,
       :vpc_id)
-      SENSITIVE = []
+      SENSITIVE = [:private_ip_address]
       include Aws::Structure
     end
 
@@ -6108,7 +6108,7 @@ module Aws::GuardDuty
     class PrivateIpAddressDetails < Struct.new(
       :private_dns_name,
       :private_ip_address)
-      SENSITIVE = []
+      SENSITIVE = [:private_ip_address]
       include Aws::Structure
     end
 
@@ -6381,7 +6381,7 @@ module Aws::GuardDuty
       :geo_location,
       :ip_address_v4,
       :organization)
-      SENSITIVE = []
+      SENSITIVE = [:ip_address_v4]
       include Aws::Structure
     end
 

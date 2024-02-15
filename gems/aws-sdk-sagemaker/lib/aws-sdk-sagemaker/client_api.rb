@@ -2132,6 +2132,8 @@ module Aws::SageMaker
     UpdateArtifactResponse = Shapes::StructureShape.new(name: 'UpdateArtifactResponse')
     UpdateClusterRequest = Shapes::StructureShape.new(name: 'UpdateClusterRequest')
     UpdateClusterResponse = Shapes::StructureShape.new(name: 'UpdateClusterResponse')
+    UpdateClusterSoftwareRequest = Shapes::StructureShape.new(name: 'UpdateClusterSoftwareRequest')
+    UpdateClusterSoftwareResponse = Shapes::StructureShape.new(name: 'UpdateClusterSoftwareResponse')
     UpdateCodeRepositoryInput = Shapes::StructureShape.new(name: 'UpdateCodeRepositoryInput')
     UpdateCodeRepositoryOutput = Shapes::StructureShape.new(name: 'UpdateCodeRepositoryOutput')
     UpdateContextRequest = Shapes::StructureShape.new(name: 'UpdateContextRequest')
@@ -9479,6 +9481,12 @@ module Aws::SageMaker
     UpdateClusterResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
     UpdateClusterResponse.struct_class = Types::UpdateClusterResponse
 
+    UpdateClusterSoftwareRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterNameOrArn, required: true, location_name: "ClusterName"))
+    UpdateClusterSoftwareRequest.struct_class = Types::UpdateClusterSoftwareRequest
+
+    UpdateClusterSoftwareResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
+    UpdateClusterSoftwareResponse.struct_class = Types::UpdateClusterSoftwareResponse
+
     UpdateCodeRepositoryInput.add_member(:code_repository_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "CodeRepositoryName"))
     UpdateCodeRepositoryInput.add_member(:git_config, Shapes::ShapeRef.new(shape: GitConfigForUpdate, location_name: "GitConfig"))
     UpdateCodeRepositoryInput.struct_class = Types::UpdateCodeRepositoryInput
@@ -12916,6 +12924,16 @@ module Aws::SageMaker
         o.input = Shapes::ShapeRef.new(shape: UpdateClusterRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateClusterResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_cluster_software, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateClusterSoftware"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateClusterSoftwareRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateClusterSoftwareResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)

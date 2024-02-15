@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2024-02-15)
+------------------
+
+* Feature - Doc only updates for content enhancement
+
 1.45.0 (2024-01-26)
 ------------------
 

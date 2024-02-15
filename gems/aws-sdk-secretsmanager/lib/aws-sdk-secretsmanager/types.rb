@@ -574,7 +574,9 @@ module Aws::SecretsManager
     # @!attribute [rw] next_rotation_date
     #   The next rotation is scheduled to occur on or before this date. If
     #   the secret isn't configured for rotation or rotation has been
-    #   disabled, Secrets Manager returns null.
+    #   disabled, Secrets Manager returns null. If rotation fails, Secrets
+    #   Manager retries the entire rotation process multiple times. If
+    #   rotation is unsuccessful, this date may be in the past.
     #   @return [Time]
     #
     # @!attribute [rw] tags

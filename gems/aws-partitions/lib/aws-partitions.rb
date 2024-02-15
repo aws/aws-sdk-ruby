@@ -270,6 +270,7 @@ module Aws
             'ApplicationCostProfiler' => 'application-cost-profiler',
             'ApplicationDiscoveryService' => 'discovery',
             'ApplicationInsights' => 'applicationinsights',
+            'Artifact' => 'artifact',
             'Athena' => 'athena',
             'AuditManager' => 'auditmanager',
             'AugmentedAIRuntime' => 'a2i-runtime.sagemaker',

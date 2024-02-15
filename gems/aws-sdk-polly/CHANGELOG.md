@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2024-02-15)
+------------------
+
+* Feature - Amazon Polly adds 1 new voice - Burcu (tr-TR)
+
 1.81.0 (2024-01-26)
 ------------------
 

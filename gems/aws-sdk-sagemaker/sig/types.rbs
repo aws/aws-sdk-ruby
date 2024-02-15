@@ -8875,6 +8875,16 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class UpdateClusterSoftwareRequest
+      attr_accessor cluster_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateClusterSoftwareResponse
+      attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
     class UpdateCodeRepositoryInput
       attr_accessor code_repository_name: ::String
       attr_accessor git_config: Types::GitConfigForUpdate

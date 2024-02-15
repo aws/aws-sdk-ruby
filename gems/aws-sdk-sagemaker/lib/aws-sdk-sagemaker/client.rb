@@ -23264,7 +23264,7 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Update a SageMaker HyperPod cluster.
+    # Updates a SageMaker HyperPod cluster.
     #
     # @option params [required, String] :cluster_name
     #   Specify the name of the SageMaker HyperPod cluster you want to update.
@@ -23305,6 +23305,41 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def update_cluster(params = {}, options = {})
       req = build_request(:update_cluster, params)
+      req.send_request(options)
+    end
+
+    # Updates the platform software of a SageMaker HyperPod cluster for
+    # security patching. To learn how to use this API, see [Update the
+    # SageMaker HyperPod platform software of a cluster][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-operate.html#sagemaker-hyperpod-operate-cli-command-update-cluster-software
+    #
+    # @option params [required, String] :cluster_name
+    #   Specify the name or the Amazon Resource Name (ARN) of the SageMaker
+    #   HyperPod cluster you want to update for security patching.
+    #
+    # @return [Types::UpdateClusterSoftwareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateClusterSoftwareResponse#cluster_arn #cluster_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cluster_software({
+    #     cluster_name: "ClusterNameOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateClusterSoftware AWS API Documentation
+    #
+    # @overload update_cluster_software(params = {})
+    # @param [Hash] params ({})
+    def update_cluster_software(params = {}, options = {})
+      req = build_request(:update_cluster_software, params)
       req.send_request(options)
     end
 

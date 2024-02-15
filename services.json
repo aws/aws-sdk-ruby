@@ -81,6 +81,9 @@
   "ApplicationInsights": {
     "models": "application-insights/2018-11-25"
   },
+  "Artifact": {
+    "models": "artifact/2018-05-10"
+  },
   "Athena": {
     "models": "athena/2017-05-18"
   },

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.186.0 (2024-02-15)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-artifact` gem.
+
 3.185.0 (2024-01-12)
 ------------------
 

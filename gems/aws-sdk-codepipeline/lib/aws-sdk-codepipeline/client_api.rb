@@ -51,6 +51,7 @@ module Aws::CodePipeline
     ActionRunOrder = Shapes::IntegerShape.new(name: 'ActionRunOrder')
     ActionState = Shapes::StructureShape.new(name: 'ActionState')
     ActionStateList = Shapes::ListShape.new(name: 'ActionStateList')
+    ActionTimeout = Shapes::IntegerShape.new(name: 'ActionTimeout')
     ActionType = Shapes::StructureShape.new(name: 'ActionType')
     ActionTypeAlreadyExistsException = Shapes::StructureShape.new(name: 'ActionTypeAlreadyExistsException')
     ActionTypeArtifactDetails = Shapes::StructureShape.new(name: 'ActionTypeArtifactDetails')
@@ -418,6 +419,7 @@ module Aws::CodePipeline
     ActionDeclaration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     ActionDeclaration.add_member(:region, Shapes::ShapeRef.new(shape: AWSRegionName, location_name: "region"))
     ActionDeclaration.add_member(:namespace, Shapes::ShapeRef.new(shape: ActionNamespace, location_name: "namespace"))
+    ActionDeclaration.add_member(:timeout_in_minutes, Shapes::ShapeRef.new(shape: ActionTimeout, location_name: "timeoutInMinutes"))
     ActionDeclaration.struct_class = Types::ActionDeclaration
 
     ActionExecution.add_member(:action_execution_id, Shapes::ShapeRef.new(shape: ActionExecutionId, location_name: "actionExecutionId"))
