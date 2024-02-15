@@ -354,6 +354,12 @@ module Aws::QBusiness
       SENSITIVE: []
     end
 
+    class DateAttributeBoostingConfiguration
+      attr_accessor boosting_duration_in_seconds: ::Integer
+      attr_accessor boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")
+      SENSITIVE: []
+    end
+
     class DeleteApplicationRequest
       attr_accessor application_id: ::String
       SENSITIVE: []
@@ -466,6 +472,26 @@ module Aws::QBusiness
       attr_accessor name: ::String
       attr_accessor value: Types::DocumentAttributeValue
       SENSITIVE: []
+    end
+
+    class DocumentAttributeBoostingConfiguration
+      attr_accessor date_configuration: Types::DateAttributeBoostingConfiguration
+      attr_accessor number_configuration: Types::NumberAttributeBoostingConfiguration
+      attr_accessor string_configuration: Types::StringAttributeBoostingConfiguration
+      attr_accessor string_list_configuration: Types::StringListAttributeBoostingConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DateConfiguration < DocumentAttributeBoostingConfiguration
+      end
+      class NumberConfiguration < DocumentAttributeBoostingConfiguration
+      end
+      class StringConfiguration < DocumentAttributeBoostingConfiguration
+      end
+      class StringListConfiguration < DocumentAttributeBoostingConfiguration
+      end
+      class Unknown < DocumentAttributeBoostingConfiguration
+      end
     end
 
     class DocumentAttributeCondition
@@ -994,14 +1020,21 @@ module Aws::QBusiness
 
     class MessageUsefulnessFeedback
       attr_accessor comment: ::String
-      attr_accessor reason: ("NOT_FACTUALLY_CORRECT" | "HARMFUL_OR_UNSAFE" | "INCORRECT_OR_MISSING_SOURCES" | "NOT_HELPFUL" | "FACTUALLY_CORRECT" | "COMPLETE" | "RELEVANT_SOURCES" | "HELPFUL")
+      attr_accessor reason: ("NOT_FACTUALLY_CORRECT" | "HARMFUL_OR_UNSAFE" | "INCORRECT_OR_MISSING_SOURCES" | "NOT_HELPFUL" | "FACTUALLY_CORRECT" | "COMPLETE" | "RELEVANT_SOURCES" | "HELPFUL" | "NOT_BASED_ON_DOCUMENTS" | "NOT_COMPLETE" | "NOT_CONCISE" | "OTHER")
       attr_accessor submitted_at: ::Time
       attr_accessor usefulness: ("USEFUL" | "NOT_USEFUL")
       SENSITIVE: []
     end
 
     class NativeIndexConfiguration
+      attr_accessor boosting_override: ::Hash[::String, Types::DocumentAttributeBoostingConfiguration]
       attr_accessor index_id: ::String
+      SENSITIVE: []
+    end
+
+    class NumberAttributeBoostingConfiguration
+      attr_accessor boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")
+      attr_accessor boosting_type: ("PRIORITIZE_LARGER_VALUES" | "PRIORITIZE_SMALLER_VALUES")
       SENSITIVE: []
     end
 
@@ -1190,6 +1223,17 @@ module Aws::QBusiness
     end
 
     class StopDataSourceSyncJobResponse < Aws::EmptyStructure
+    end
+
+    class StringAttributeBoostingConfiguration
+      attr_accessor attribute_value_boosting: ::Hash[::String, ("LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")]
+      attr_accessor boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")
+      SENSITIVE: []
+    end
+
+    class StringListAttributeBoostingConfiguration
+      attr_accessor boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")
+      SENSITIVE: []
     end
 
     class Tag

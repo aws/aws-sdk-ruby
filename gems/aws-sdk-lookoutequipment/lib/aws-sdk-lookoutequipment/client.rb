@@ -805,6 +805,11 @@ module Aws::LookoutEquipment
     #   off. As long as this condition is met, Lookout for Equipment will not
     #   use data from this asset for training, evaluation, or inference.
     #
+    # @option params [Types::ModelDiagnosticsOutputConfiguration] :model_diagnostics_output_configuration
+    #   The Amazon S3 location where you want Amazon Lookout for Equipment to
+    #   save the pointwise model diagnostics. You must also specify the
+    #   `RoleArn` request parameter.
+    #
     # @return [Types::CreateModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateModelResponse#model_arn #model_arn} => String
@@ -842,6 +847,13 @@ module Aws::LookoutEquipment
     #       },
     #     ],
     #     off_condition: "OffCondition",
+    #     model_diagnostics_output_configuration: {
+    #       s3_output_configuration: { # required
+    #         bucket: "S3Bucket", # required
+    #         prefix: "S3Prefix",
+    #       },
+    #       kms_key_id: "NameOrArn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1483,6 +1495,7 @@ module Aws::LookoutEquipment
     #   * {Types::DescribeModelResponse#accumulated_inference_data_start_time #accumulated_inference_data_start_time} => Time
     #   * {Types::DescribeModelResponse#accumulated_inference_data_end_time #accumulated_inference_data_end_time} => Time
     #   * {Types::DescribeModelResponse#retraining_scheduler_status #retraining_scheduler_status} => String
+    #   * {Types::DescribeModelResponse#model_diagnostics_output_configuration #model_diagnostics_output_configuration} => Types::ModelDiagnosticsOutputConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -1534,6 +1547,9 @@ module Aws::LookoutEquipment
     #   resp.accumulated_inference_data_start_time #=> Time
     #   resp.accumulated_inference_data_end_time #=> Time
     #   resp.retraining_scheduler_status #=> String, one of "PENDING", "RUNNING", "STOPPING", "STOPPED"
+    #   resp.model_diagnostics_output_configuration.s3_output_configuration.bucket #=> String
+    #   resp.model_diagnostics_output_configuration.s3_output_configuration.prefix #=> String
+    #   resp.model_diagnostics_output_configuration.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeModel AWS API Documentation
     #
@@ -1586,6 +1602,8 @@ module Aws::LookoutEquipment
     #   * {Types::DescribeModelVersionResponse#retraining_available_data_in_days #retraining_available_data_in_days} => Integer
     #   * {Types::DescribeModelVersionResponse#auto_promotion_result #auto_promotion_result} => String
     #   * {Types::DescribeModelVersionResponse#auto_promotion_result_reason #auto_promotion_result_reason} => String
+    #   * {Types::DescribeModelVersionResponse#model_diagnostics_output_configuration #model_diagnostics_output_configuration} => Types::ModelDiagnosticsOutputConfiguration
+    #   * {Types::DescribeModelVersionResponse#model_diagnostics_results_object #model_diagnostics_results_object} => Types::S3Object
     #
     # @example Request syntax with placeholder values
     #
@@ -1630,6 +1648,11 @@ module Aws::LookoutEquipment
     #   resp.retraining_available_data_in_days #=> Integer
     #   resp.auto_promotion_result #=> String, one of "MODEL_PROMOTED", "MODEL_NOT_PROMOTED", "RETRAINING_INTERNAL_ERROR", "RETRAINING_CUSTOMER_ERROR", "RETRAINING_CANCELLED"
     #   resp.auto_promotion_result_reason #=> String
+    #   resp.model_diagnostics_output_configuration.s3_output_configuration.bucket #=> String
+    #   resp.model_diagnostics_output_configuration.s3_output_configuration.prefix #=> String
+    #   resp.model_diagnostics_output_configuration.kms_key_id #=> String
+    #   resp.model_diagnostics_results_object.bucket #=> String
+    #   resp.model_diagnostics_results_object.key #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeModelVersion AWS API Documentation
     #
@@ -2243,7 +2266,7 @@ module Aws::LookoutEquipment
     # Provides a list of labels.
     #
     # @option params [required, String] :label_group_name
-    #   Retruns the name of the label group.
+    #   Returns the name of the label group.
     #
     # @option params [Time,DateTime,Date,Integer,String] :interval_start_time
     #   Returns all the labels with a end time equal to or later than the
@@ -2442,6 +2465,9 @@ module Aws::LookoutEquipment
     #   resp.model_summaries[0].latest_scheduled_retraining_start_time #=> Time
     #   resp.model_summaries[0].next_scheduled_retraining_start_date #=> Time
     #   resp.model_summaries[0].retraining_scheduler_status #=> String, one of "PENDING", "RUNNING", "STOPPING", "STOPPED"
+    #   resp.model_summaries[0].model_diagnostics_output_configuration.s3_output_configuration.bucket #=> String
+    #   resp.model_summaries[0].model_diagnostics_output_configuration.s3_output_configuration.prefix #=> String
+    #   resp.model_summaries[0].model_diagnostics_output_configuration.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListModels AWS API Documentation
     #
@@ -3139,6 +3165,11 @@ module Aws::LookoutEquipment
     # @option params [String] :role_arn
     #   The ARN of the model to update.
     #
+    # @option params [Types::ModelDiagnosticsOutputConfiguration] :model_diagnostics_output_configuration
+    #   The Amazon S3 location where you want Amazon Lookout for Equipment to
+    #   save the pointwise model diagnostics for the model. You must also
+    #   specify the `RoleArn` request parameter.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -3163,6 +3194,13 @@ module Aws::LookoutEquipment
     #       label_group_name: "LabelGroupName",
     #     },
     #     role_arn: "IamRoleArn",
+    #     model_diagnostics_output_configuration: {
+    #       s3_output_configuration: { # required
+    #         bucket: "S3Bucket", # required
+    #         prefix: "S3Prefix",
+    #       },
+    #       kms_key_id: "NameOrArn",
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/UpdateModel AWS API Documentation
@@ -3256,7 +3294,7 @@ module Aws::LookoutEquipment
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutequipment'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

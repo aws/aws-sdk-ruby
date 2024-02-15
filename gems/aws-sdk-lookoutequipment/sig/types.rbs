@@ -113,6 +113,7 @@ module Aws::LookoutEquipment
       attr_accessor server_side_kms_key_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor off_condition: ::String
+      attr_accessor model_diagnostics_output_configuration: Types::ModelDiagnosticsOutputConfiguration
       SENSITIVE: []
     end
 
@@ -360,6 +361,7 @@ module Aws::LookoutEquipment
       attr_accessor accumulated_inference_data_start_time: ::Time
       attr_accessor accumulated_inference_data_end_time: ::Time
       attr_accessor retraining_scheduler_status: ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      attr_accessor model_diagnostics_output_configuration: Types::ModelDiagnosticsOutputConfiguration
       SENSITIVE: []
     end
 
@@ -402,6 +404,8 @@ module Aws::LookoutEquipment
       attr_accessor retraining_available_data_in_days: ::Integer
       attr_accessor auto_promotion_result: ("MODEL_PROMOTED" | "MODEL_NOT_PROMOTED" | "RETRAINING_INTERNAL_ERROR" | "RETRAINING_CUSTOMER_ERROR" | "RETRAINING_CANCELLED")
       attr_accessor auto_promotion_result_reason: ::String
+      attr_accessor model_diagnostics_output_configuration: Types::ModelDiagnosticsOutputConfiguration
+      attr_accessor model_diagnostics_results_object: Types::S3Object
       SENSITIVE: []
     end
 
@@ -813,6 +817,18 @@ module Aws::LookoutEquipment
       SENSITIVE: []
     end
 
+    class ModelDiagnosticsOutputConfiguration
+      attr_accessor s3_output_configuration: Types::ModelDiagnosticsS3OutputConfiguration
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class ModelDiagnosticsS3OutputConfiguration
+      attr_accessor bucket: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
     class ModelSummary
       attr_accessor model_name: ::String
       attr_accessor model_arn: ::String
@@ -827,6 +843,7 @@ module Aws::LookoutEquipment
       attr_accessor latest_scheduled_retraining_start_time: ::Time
       attr_accessor next_scheduled_retraining_start_date: ::Time
       attr_accessor retraining_scheduler_status: ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+      attr_accessor model_diagnostics_output_configuration: Types::ModelDiagnosticsOutputConfiguration
       SENSITIVE: []
     end
 
@@ -1050,6 +1067,7 @@ module Aws::LookoutEquipment
       attr_accessor model_name: ::String
       attr_accessor labels_input_configuration: Types::LabelsInputConfiguration
       attr_accessor role_arn: ::String
+      attr_accessor model_diagnostics_output_configuration: Types::ModelDiagnosticsOutputConfiguration
       SENSITIVE: []
     end
 

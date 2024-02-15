@@ -60,6 +60,7 @@ module Aws::QBusiness
     BlockedPhrasesConfiguration = Shapes::StructureShape.new(name: 'BlockedPhrasesConfiguration')
     BlockedPhrasesConfigurationUpdate = Shapes::StructureShape.new(name: 'BlockedPhrasesConfigurationUpdate')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BoostingDurationInSeconds = Shapes::IntegerShape.new(name: 'BoostingDurationInSeconds')
     ChatSyncInput = Shapes::StructureShape.new(name: 'ChatSyncInput')
     ChatSyncOutput = Shapes::StructureShape.new(name: 'ChatSyncOutput')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
@@ -100,6 +101,7 @@ module Aws::QBusiness
     DataSourceUserId = Shapes::StringShape.new(name: 'DataSourceUserId')
     DataSourceVpcConfiguration = Shapes::StructureShape.new(name: 'DataSourceVpcConfiguration')
     DataSources = Shapes::ListShape.new(name: 'DataSources')
+    DateAttributeBoostingConfiguration = Shapes::StructureShape.new(name: 'DateAttributeBoostingConfiguration')
     DeleteApplicationRequest = Shapes::StructureShape.new(name: 'DeleteApplicationRequest')
     DeleteApplicationResponse = Shapes::StructureShape.new(name: 'DeleteApplicationResponse')
     DeleteChatControlsConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteChatControlsConfigurationRequest')
@@ -125,6 +127,9 @@ module Aws::QBusiness
     Description = Shapes::StringShape.new(name: 'Description')
     Document = Shapes::StructureShape.new(name: 'Document')
     DocumentAttribute = Shapes::StructureShape.new(name: 'DocumentAttribute')
+    DocumentAttributeBoostingConfiguration = Shapes::UnionShape.new(name: 'DocumentAttributeBoostingConfiguration')
+    DocumentAttributeBoostingLevel = Shapes::StringShape.new(name: 'DocumentAttributeBoostingLevel')
+    DocumentAttributeBoostingOverrideMap = Shapes::MapShape.new(name: 'DocumentAttributeBoostingOverrideMap')
     DocumentAttributeCondition = Shapes::StructureShape.new(name: 'DocumentAttributeCondition')
     DocumentAttributeConfiguration = Shapes::StructureShape.new(name: 'DocumentAttributeConfiguration')
     DocumentAttributeConfigurations = Shapes::ListShape.new(name: 'DocumentAttributeConfigurations')
@@ -255,6 +260,8 @@ module Aws::QBusiness
     MetricValue = Shapes::StringShape.new(name: 'MetricValue')
     NativeIndexConfiguration = Shapes::StructureShape.new(name: 'NativeIndexConfiguration')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NumberAttributeBoostingConfiguration = Shapes::StructureShape.new(name: 'NumberAttributeBoostingConfiguration')
+    NumberAttributeBoostingType = Shapes::StringShape.new(name: 'NumberAttributeBoostingType')
     OAuth2ClientCredentialConfiguration = Shapes::StructureShape.new(name: 'OAuth2ClientCredentialConfiguration')
     Plugin = Shapes::StructureShape.new(name: 'Plugin')
     PluginArn = Shapes::StringShape.new(name: 'PluginArn')
@@ -305,6 +312,10 @@ module Aws::QBusiness
     StopDataSourceSyncJobRequest = Shapes::StructureShape.new(name: 'StopDataSourceSyncJobRequest')
     StopDataSourceSyncJobResponse = Shapes::StructureShape.new(name: 'StopDataSourceSyncJobResponse')
     String = Shapes::StringShape.new(name: 'String')
+    StringAttributeBoostingConfiguration = Shapes::StructureShape.new(name: 'StringAttributeBoostingConfiguration')
+    StringAttributeValueBoosting = Shapes::MapShape.new(name: 'StringAttributeValueBoosting')
+    StringAttributeValueBoostingLevel = Shapes::StringShape.new(name: 'StringAttributeValueBoostingLevel')
+    StringListAttributeBoostingConfiguration = Shapes::StructureShape.new(name: 'StringListAttributeBoostingConfiguration')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
     SyncSchedule = Shapes::StringShape.new(name: 'SyncSchedule')
@@ -655,6 +666,10 @@ module Aws::QBusiness
 
     DataSources.member = Shapes::ShapeRef.new(shape: DataSource)
 
+    DateAttributeBoostingConfiguration.add_member(:boosting_duration_in_seconds, Shapes::ShapeRef.new(shape: BoostingDurationInSeconds, location_name: "boostingDurationInSeconds"))
+    DateAttributeBoostingConfiguration.add_member(:boosting_level, Shapes::ShapeRef.new(shape: DocumentAttributeBoostingLevel, required: true, location_name: "boostingLevel"))
+    DateAttributeBoostingConfiguration.struct_class = Types::DateAttributeBoostingConfiguration
+
     DeleteApplicationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
     DeleteApplicationRequest.struct_class = Types::DeleteApplicationRequest
 
@@ -734,6 +749,21 @@ module Aws::QBusiness
     DocumentAttribute.add_member(:name, Shapes::ShapeRef.new(shape: DocumentAttributeKey, required: true, location_name: "name"))
     DocumentAttribute.add_member(:value, Shapes::ShapeRef.new(shape: DocumentAttributeValue, required: true, location_name: "value"))
     DocumentAttribute.struct_class = Types::DocumentAttribute
+
+    DocumentAttributeBoostingConfiguration.add_member(:date_configuration, Shapes::ShapeRef.new(shape: DateAttributeBoostingConfiguration, location_name: "dateConfiguration"))
+    DocumentAttributeBoostingConfiguration.add_member(:number_configuration, Shapes::ShapeRef.new(shape: NumberAttributeBoostingConfiguration, location_name: "numberConfiguration"))
+    DocumentAttributeBoostingConfiguration.add_member(:string_configuration, Shapes::ShapeRef.new(shape: StringAttributeBoostingConfiguration, location_name: "stringConfiguration"))
+    DocumentAttributeBoostingConfiguration.add_member(:string_list_configuration, Shapes::ShapeRef.new(shape: StringListAttributeBoostingConfiguration, location_name: "stringListConfiguration"))
+    DocumentAttributeBoostingConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DocumentAttributeBoostingConfiguration.add_member_subclass(:date_configuration, Types::DocumentAttributeBoostingConfiguration::DateConfiguration)
+    DocumentAttributeBoostingConfiguration.add_member_subclass(:number_configuration, Types::DocumentAttributeBoostingConfiguration::NumberConfiguration)
+    DocumentAttributeBoostingConfiguration.add_member_subclass(:string_configuration, Types::DocumentAttributeBoostingConfiguration::StringConfiguration)
+    DocumentAttributeBoostingConfiguration.add_member_subclass(:string_list_configuration, Types::DocumentAttributeBoostingConfiguration::StringListConfiguration)
+    DocumentAttributeBoostingConfiguration.add_member_subclass(:unknown, Types::DocumentAttributeBoostingConfiguration::Unknown)
+    DocumentAttributeBoostingConfiguration.struct_class = Types::DocumentAttributeBoostingConfiguration
+
+    DocumentAttributeBoostingOverrideMap.key = Shapes::ShapeRef.new(shape: DocumentAttributeKey)
+    DocumentAttributeBoostingOverrideMap.value = Shapes::ShapeRef.new(shape: DocumentAttributeBoostingConfiguration)
 
     DocumentAttributeCondition.add_member(:key, Shapes::ShapeRef.new(shape: DocumentAttributeKey, required: true, location_name: "key"))
     DocumentAttributeCondition.add_member(:operator, Shapes::ShapeRef.new(shape: DocumentEnrichmentConditionOperator, required: true, location_name: "operator"))
@@ -1151,8 +1181,13 @@ module Aws::QBusiness
 
     Messages.member = Shapes::ShapeRef.new(shape: Message)
 
+    NativeIndexConfiguration.add_member(:boosting_override, Shapes::ShapeRef.new(shape: DocumentAttributeBoostingOverrideMap, location_name: "boostingOverride"))
     NativeIndexConfiguration.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "indexId"))
     NativeIndexConfiguration.struct_class = Types::NativeIndexConfiguration
+
+    NumberAttributeBoostingConfiguration.add_member(:boosting_level, Shapes::ShapeRef.new(shape: DocumentAttributeBoostingLevel, required: true, location_name: "boostingLevel"))
+    NumberAttributeBoostingConfiguration.add_member(:boosting_type, Shapes::ShapeRef.new(shape: NumberAttributeBoostingType, location_name: "boostingType"))
+    NumberAttributeBoostingConfiguration.struct_class = Types::NumberAttributeBoostingConfiguration
 
     OAuth2ClientCredentialConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     OAuth2ClientCredentialConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "secretArn"))
@@ -1294,6 +1329,16 @@ module Aws::QBusiness
     StopDataSourceSyncJobRequest.struct_class = Types::StopDataSourceSyncJobRequest
 
     StopDataSourceSyncJobResponse.struct_class = Types::StopDataSourceSyncJobResponse
+
+    StringAttributeBoostingConfiguration.add_member(:attribute_value_boosting, Shapes::ShapeRef.new(shape: StringAttributeValueBoosting, location_name: "attributeValueBoosting"))
+    StringAttributeBoostingConfiguration.add_member(:boosting_level, Shapes::ShapeRef.new(shape: DocumentAttributeBoostingLevel, required: true, location_name: "boostingLevel"))
+    StringAttributeBoostingConfiguration.struct_class = Types::StringAttributeBoostingConfiguration
+
+    StringAttributeValueBoosting.key = Shapes::ShapeRef.new(shape: String)
+    StringAttributeValueBoosting.value = Shapes::ShapeRef.new(shape: StringAttributeValueBoostingLevel)
+
+    StringListAttributeBoostingConfiguration.add_member(:boosting_level, Shapes::ShapeRef.new(shape: DocumentAttributeBoostingLevel, required: true, location_name: "boostingLevel"))
+    StringListAttributeBoostingConfiguration.struct_class = Types::StringListAttributeBoostingConfiguration
 
     SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
 

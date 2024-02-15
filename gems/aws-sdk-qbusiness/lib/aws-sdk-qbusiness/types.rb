@@ -312,8 +312,8 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # Enables filtering of Amazon Q web experience responses based on
-    # document attributes or metadata fields.
+    # Enables filtering of responses based on document attributes or
+    # metadata fields.
     #
     # @!attribute [rw] and_all_filters
     #   Performs a logical `AND` operation on all supplied filters.
@@ -1386,6 +1386,33 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
+    # Provides information on boosting `DATE` type document attributes.
+    #
+    # For more information on how boosting document attributes work in
+    # Amazon Q, see [Boosting using document attributes][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html
+    #
+    # @!attribute [rw] boosting_duration_in_seconds
+    #   Specifies the duration, in seconds, of a boost applies to a `DATE`
+    #   type document attribute.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] boosting_level
+    #   Specifies how much a document attribute is boosted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/DateAttributeBoostingConfiguration AWS API Documentation
+    #
+    class DateAttributeBoostingConfiguration < Struct.new(
+      :boosting_duration_in_seconds,
+      :boosting_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] application_id
     #   The identifier of the Amazon Q application.
     #   @return [String]
@@ -1707,6 +1734,69 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
+    # Provides information on boosting supported Amazon Q document attribute
+    # types. When an end user chat query matches document attributes that
+    # have been boosted, Amazon Q prioritizes generating responses from
+    # content that matches the boosted document attributes.
+    #
+    # <note markdown="1"> For `STRING` and `STRING_LIST` type document attributes to be used for
+    # boosting on the console and the API, they must be enabled for search
+    # using the [DocumentAttributeConfiguration][1] object of the
+    # [UpdateIndex][2] API. If you haven't enabled searching on these
+    # attributes, you can't boost attributes of these data types on either
+    # the console or the API.
+    #
+    #  </note>
+    #
+    # For more information on how boosting document attributes work in
+    # Amazon Q, see [Boosting using document attributes][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeConfiguration.html
+    # [2]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_UpdateIndex.html
+    # [3]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html
+    #
+    # @note DocumentAttributeBoostingConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note DocumentAttributeBoostingConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DocumentAttributeBoostingConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] date_configuration
+    #   Provides information on boosting `DATE` type document attributes.
+    #   @return [Types::DateAttributeBoostingConfiguration]
+    #
+    # @!attribute [rw] number_configuration
+    #   Provides information on boosting `NUMBER` type document attributes.
+    #   @return [Types::NumberAttributeBoostingConfiguration]
+    #
+    # @!attribute [rw] string_configuration
+    #   Provides information on boosting `STRING` type document attributes.
+    #   @return [Types::StringAttributeBoostingConfiguration]
+    #
+    # @!attribute [rw] string_list_configuration
+    #   Provides information on boosting `STRING_LIST` type document
+    #   attributes.
+    #   @return [Types::StringListAttributeBoostingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/DocumentAttributeBoostingConfiguration AWS API Documentation
+    #
+    class DocumentAttributeBoostingConfiguration < Struct.new(
+      :date_configuration,
+      :number_configuration,
+      :string_configuration,
+      :string_list_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DateConfiguration < DocumentAttributeBoostingConfiguration; end
+      class NumberConfiguration < DocumentAttributeBoostingConfiguration; end
+      class StringConfiguration < DocumentAttributeBoostingConfiguration; end
+      class StringListConfiguration < DocumentAttributeBoostingConfiguration; end
+      class Unknown < DocumentAttributeBoostingConfiguration; end
+    end
+
     # The condition used for the target document attribute or metadata field
     # when ingesting documents into Amazon Q. You use this with [
     # `DocumentAttributeTarget` ][1] to apply the condition.
@@ -1726,7 +1816,7 @@ module Aws::QBusiness
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_DocumentAttributeTarget.html
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeTarget.html
     #
     # @!attribute [rw] key
     #   The identifier of the document attribute used for the condition.
@@ -1818,8 +1908,8 @@ module Aws::QBusiness
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_DocumentAttributeTarget.html
-    # [2]: https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_DocumentAttributeCondition.html
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeTarget.html
+    # [2]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeCondition.html
     #
     # @!attribute [rw] attribute_value_operator
     #   `TRUE` to delete the existing target value for your specified target
@@ -1996,7 +2086,7 @@ module Aws::QBusiness
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_CustomDocumentEnrichmentConfiguration.html
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentEnrichmentConfiguration.html
     #   [2]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html
     #   @return [Types::HookConfiguration]
     #
@@ -2020,7 +2110,7 @@ module Aws::QBusiness
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_CustomDocumentEnrichmentConfiguration.html
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentEnrichmentConfiguration.html
     #   [2]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html
     #   @return [Types::HookConfiguration]
     #
@@ -2881,7 +2971,7 @@ module Aws::QBusiness
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_CustomDocumentEnrichmentConfiguration.html
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentEnrichmentConfiguration.html
     # [2]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html
     #
     # @!attribute [rw] invocation_condition
@@ -3004,7 +3094,7 @@ module Aws::QBusiness
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_HookConfiguration.html
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_HookConfiguration.html
     # [2]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html
     #
     # @!attribute [rw] condition
@@ -3027,7 +3117,7 @@ module Aws::QBusiness
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_DocumentAttributeTarget.html
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeTarget.html
     #   @return [Types::DocumentAttributeCondition]
     #
     # @!attribute [rw] document_content_operator
@@ -3056,8 +3146,8 @@ module Aws::QBusiness
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_DocumentAttributeTarget.html
-    #   [2]: https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_DocumentAttributeCondition.html
+    #   [1]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeTarget.html
+    #   [2]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeCondition.html
     #   @return [Types::DocumentAttributeTarget]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/InlineDocumentEnrichmentConfiguration AWS API Documentation
@@ -3831,6 +3921,11 @@ module Aws::QBusiness
 
     # Configuration information for an Amazon Q index.
     #
+    # @!attribute [rw] boosting_override
+    #   Overrides the default boosts applied by Amazon Q to supported
+    #   document attribute data types.
+    #   @return [Hash<String,Types::DocumentAttributeBoostingConfiguration>]
+    #
     # @!attribute [rw] index_id
     #   The identifier for the Amazon Q index.
     #   @return [String]
@@ -3838,7 +3933,35 @@ module Aws::QBusiness
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/NativeIndexConfiguration AWS API Documentation
     #
     class NativeIndexConfiguration < Struct.new(
+      :boosting_override,
       :index_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information on boosting `NUMBER` type document attributes.
+    #
+    # For more information on how boosting document attributes work in
+    # Amazon Q, see [Boosting using document attributes][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html
+    #
+    # @!attribute [rw] boosting_level
+    #   Specifies the duration, in seconds, of a boost applies to a `NUMBER`
+    #   type document attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] boosting_type
+    #   Specifies how much a document attribute is boosted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/NumberAttributeBoostingConfiguration AWS API Documentation
+    #
+    class NumberAttributeBoostingConfiguration < Struct.new(
+      :boosting_level,
+      :boosting_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4224,7 +4347,7 @@ module Aws::QBusiness
     #   @return [Types::RuleConfiguration]
     #
     # @!attribute [rw] rule_type
-    #   The type fo rule.
+    #   The type of rule.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/Rule AWS API Documentation
@@ -4451,6 +4574,77 @@ module Aws::QBusiness
     #
     class StopDataSourceSyncJobResponse < Aws::EmptyStructure; end
 
+    # Provides information on boosting `STRING` type document attributes.
+    #
+    # <note markdown="1"> For `STRING` and `STRING_LIST` type document attributes to be used for
+    # boosting on the console and the API, they must be enabled for search
+    # using the [DocumentAttributeConfiguration][1] object of the
+    # [UpdateIndex][2] API. If you haven't enabled searching on these
+    # attributes, you can't boost attributes of these data types on either
+    # the console or the API.
+    #
+    #  </note>
+    #
+    # For more information on how boosting document attributes work in
+    # Amazon Q, see [Boosting using document attributes][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeConfiguration.html
+    # [2]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_UpdateIndex.html
+    # [3]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html
+    #
+    # @!attribute [rw] attribute_value_boosting
+    #   Specifies specific values of a `STRING` type document attribute
+    #   being boosted.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] boosting_level
+    #   Specifies how much a document attribute is boosted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/StringAttributeBoostingConfiguration AWS API Documentation
+    #
+    class StringAttributeBoostingConfiguration < Struct.new(
+      :attribute_value_boosting,
+      :boosting_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information on boosting `STRING_LIST` type document
+    # attributes.
+    #
+    # <note markdown="1"> For `STRING` and `STRING_LIST` type document attributes to be used for
+    # boosting on the console and the API, they must be enabled for search
+    # using the [DocumentAttributeConfiguration][1] object of the
+    # [UpdateIndex][2] API. If you haven't enabled searching on these
+    # attributes, you can't boost attributes of these data types on either
+    # the console or the API.
+    #
+    #  </note>
+    #
+    # For more information on how boosting document attributes work in
+    # Amazon Q, see [Boosting using document attributes][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeConfiguration.html
+    # [2]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_UpdateIndex.html
+    # [3]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html
+    #
+    # @!attribute [rw] boosting_level
+    #   Specifies how much a document attribute is boosted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/StringListAttributeBoostingConfiguration AWS API Documentation
+    #
+    class StringListAttributeBoostingConfiguration < Struct.new(
+      :boosting_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A list of key/value pairs that identify an index, FAQ, or data source.
     # Tag keys and values can consist of Unicode letters, digits, white
     # space, and any of the following symbols: \_ . : / = + - @.
@@ -4556,9 +4750,9 @@ module Aws::QBusiness
     # The topic specific controls configured for an Amazon Q application.
     #
     # @!attribute [rw] description
-    #   A description for your topic control configuration. Use this outline
-    #   how the large language model (LLM) should use this topic control
-    #   configuration.
+    #   A description for your topic control configuration. Use this to
+    #   outline how the large language model (LLM) should use this topic
+    #   control configuration.
     #   @return [String]
     #
     # @!attribute [rw] example_chat_messages

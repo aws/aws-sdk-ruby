@@ -494,6 +494,23 @@ module Aws
                                   index_id: ::String
                                 }?,
                                 native_index_configuration: {
+                                  boosting_override: Hash[::String, {
+                                      date_configuration: {
+                                        boosting_duration_in_seconds: ::Integer?,
+                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")
+                                      }?,
+                                      number_configuration: {
+                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH"),
+                                        boosting_type: ("PRIORITIZE_LARGER_VALUES" | "PRIORITIZE_SMALLER_VALUES")?
+                                      }?,
+                                      string_configuration: {
+                                        attribute_value_boosting: Hash[::String, ("LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")]?,
+                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")
+                                      }?,
+                                      string_list_configuration: {
+                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")
+                                      }?
+                                    }]?,
                                   index_id: ::String
                                 }?
                               },
@@ -993,7 +1010,7 @@ module Aws
                           message_id: ::String,
                           ?message_usefulness: {
                             comment: ::String?,
-                            reason: ("NOT_FACTUALLY_CORRECT" | "HARMFUL_OR_UNSAFE" | "INCORRECT_OR_MISSING_SOURCES" | "NOT_HELPFUL" | "FACTUALLY_CORRECT" | "COMPLETE" | "RELEVANT_SOURCES" | "HELPFUL")?,
+                            reason: ("NOT_FACTUALLY_CORRECT" | "HARMFUL_OR_UNSAFE" | "INCORRECT_OR_MISSING_SOURCES" | "NOT_HELPFUL" | "FACTUALLY_CORRECT" | "COMPLETE" | "RELEVANT_SOURCES" | "HELPFUL" | "NOT_BASED_ON_DOCUMENTS" | "NOT_COMPLETE" | "NOT_CONCISE" | "OTHER")?,
                             submitted_at: ::Time,
                             usefulness: ("USEFUL" | "NOT_USEFUL")
                           },
@@ -1307,6 +1324,23 @@ module Aws
                                   index_id: ::String
                                 }?,
                                 native_index_configuration: {
+                                  boosting_override: Hash[::String, {
+                                      date_configuration: {
+                                        boosting_duration_in_seconds: ::Integer?,
+                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")
+                                      }?,
+                                      number_configuration: {
+                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH"),
+                                        boosting_type: ("PRIORITIZE_LARGER_VALUES" | "PRIORITIZE_SMALLER_VALUES")?
+                                      }?,
+                                      string_configuration: {
+                                        attribute_value_boosting: Hash[::String, ("LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")]?,
+                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")
+                                      }?,
+                                      string_list_configuration: {
+                                        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH")
+                                      }?
+                                    }]?,
                                   index_id: ::String
                                 }?
                               },

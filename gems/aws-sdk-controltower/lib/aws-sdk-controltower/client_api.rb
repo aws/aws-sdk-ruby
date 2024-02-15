@@ -15,6 +15,13 @@ module Aws::ControlTower
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    BaselineArn = Shapes::StringShape.new(name: 'BaselineArn')
+    BaselineOperation = Shapes::StructureShape.new(name: 'BaselineOperation')
+    BaselineOperationStatus = Shapes::StringShape.new(name: 'BaselineOperationStatus')
+    BaselineOperationType = Shapes::StringShape.new(name: 'BaselineOperationType')
+    BaselineSummary = Shapes::StructureShape.new(name: 'BaselineSummary')
+    BaselineVersion = Shapes::StringShape.new(name: 'BaselineVersion')
+    Baselines = Shapes::ListShape.new(name: 'Baselines')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ControlIdentifier = Shapes::StringShape.new(name: 'ControlIdentifier')
     ControlOperation = Shapes::StructureShape.new(name: 'ControlOperation')
@@ -24,13 +31,28 @@ module Aws::ControlTower
     CreateLandingZoneOutput = Shapes::StructureShape.new(name: 'CreateLandingZoneOutput')
     DeleteLandingZoneInput = Shapes::StructureShape.new(name: 'DeleteLandingZoneInput')
     DeleteLandingZoneOutput = Shapes::StructureShape.new(name: 'DeleteLandingZoneOutput')
+    DisableBaselineInput = Shapes::StructureShape.new(name: 'DisableBaselineInput')
+    DisableBaselineOutput = Shapes::StructureShape.new(name: 'DisableBaselineOutput')
     DisableControlInput = Shapes::StructureShape.new(name: 'DisableControlInput')
     DisableControlOutput = Shapes::StructureShape.new(name: 'DisableControlOutput')
     Document = Shapes::DocumentShape.new(name: 'Document', document: true)
     DriftStatus = Shapes::StringShape.new(name: 'DriftStatus')
     DriftStatusSummary = Shapes::StructureShape.new(name: 'DriftStatusSummary')
+    EnableBaselineInput = Shapes::StructureShape.new(name: 'EnableBaselineInput')
+    EnableBaselineOutput = Shapes::StructureShape.new(name: 'EnableBaselineOutput')
     EnableControlInput = Shapes::StructureShape.new(name: 'EnableControlInput')
     EnableControlOutput = Shapes::StructureShape.new(name: 'EnableControlOutput')
+    EnabledBaselineBaselineIdentifiers = Shapes::ListShape.new(name: 'EnabledBaselineBaselineIdentifiers')
+    EnabledBaselineDetails = Shapes::StructureShape.new(name: 'EnabledBaselineDetails')
+    EnabledBaselineFilter = Shapes::StructureShape.new(name: 'EnabledBaselineFilter')
+    EnabledBaselineParameter = Shapes::StructureShape.new(name: 'EnabledBaselineParameter')
+    EnabledBaselineParameterDocument = Shapes::DocumentShape.new(name: 'EnabledBaselineParameterDocument', document: true)
+    EnabledBaselineParameterSummaries = Shapes::ListShape.new(name: 'EnabledBaselineParameterSummaries')
+    EnabledBaselineParameterSummary = Shapes::StructureShape.new(name: 'EnabledBaselineParameterSummary')
+    EnabledBaselineParameters = Shapes::ListShape.new(name: 'EnabledBaselineParameters')
+    EnabledBaselineSummary = Shapes::StructureShape.new(name: 'EnabledBaselineSummary')
+    EnabledBaselineTargetIdentifiers = Shapes::ListShape.new(name: 'EnabledBaselineTargetIdentifiers')
+    EnabledBaselines = Shapes::ListShape.new(name: 'EnabledBaselines')
     EnabledControlDetails = Shapes::StructureShape.new(name: 'EnabledControlDetails')
     EnabledControlParameter = Shapes::StructureShape.new(name: 'EnabledControlParameter')
     EnabledControlParameterSummaries = Shapes::ListShape.new(name: 'EnabledControlParameterSummaries')
@@ -40,8 +62,14 @@ module Aws::ControlTower
     EnabledControls = Shapes::ListShape.new(name: 'EnabledControls')
     EnablementStatus = Shapes::StringShape.new(name: 'EnablementStatus')
     EnablementStatusSummary = Shapes::StructureShape.new(name: 'EnablementStatusSummary')
+    GetBaselineInput = Shapes::StructureShape.new(name: 'GetBaselineInput')
+    GetBaselineOperationInput = Shapes::StructureShape.new(name: 'GetBaselineOperationInput')
+    GetBaselineOperationOutput = Shapes::StructureShape.new(name: 'GetBaselineOperationOutput')
+    GetBaselineOutput = Shapes::StructureShape.new(name: 'GetBaselineOutput')
     GetControlOperationInput = Shapes::StructureShape.new(name: 'GetControlOperationInput')
     GetControlOperationOutput = Shapes::StructureShape.new(name: 'GetControlOperationOutput')
+    GetEnabledBaselineInput = Shapes::StructureShape.new(name: 'GetEnabledBaselineInput')
+    GetEnabledBaselineOutput = Shapes::StructureShape.new(name: 'GetEnabledBaselineOutput')
     GetEnabledControlInput = Shapes::StructureShape.new(name: 'GetEnabledControlInput')
     GetEnabledControlOutput = Shapes::StructureShape.new(name: 'GetEnabledControlOutput')
     GetLandingZoneInput = Shapes::StructureShape.new(name: 'GetLandingZoneInput')
@@ -59,6 +87,13 @@ module Aws::ControlTower
     LandingZoneStatus = Shapes::StringShape.new(name: 'LandingZoneStatus')
     LandingZoneSummary = Shapes::StructureShape.new(name: 'LandingZoneSummary')
     LandingZoneVersion = Shapes::StringShape.new(name: 'LandingZoneVersion')
+    ListBaselinesInput = Shapes::StructureShape.new(name: 'ListBaselinesInput')
+    ListBaselinesMaxResults = Shapes::IntegerShape.new(name: 'ListBaselinesMaxResults')
+    ListBaselinesOutput = Shapes::StructureShape.new(name: 'ListBaselinesOutput')
+    ListEnabledBaselinesInput = Shapes::StructureShape.new(name: 'ListEnabledBaselinesInput')
+    ListEnabledBaselinesMaxResults = Shapes::IntegerShape.new(name: 'ListEnabledBaselinesMaxResults')
+    ListEnabledBaselinesNextToken = Shapes::StringShape.new(name: 'ListEnabledBaselinesNextToken')
+    ListEnabledBaselinesOutput = Shapes::StructureShape.new(name: 'ListEnabledBaselinesOutput')
     ListEnabledControlsInput = Shapes::StructureShape.new(name: 'ListEnabledControlsInput')
     ListEnabledControlsOutput = Shapes::StructureShape.new(name: 'ListEnabledControlsOutput')
     ListLandingZonesInput = Shapes::StructureShape.new(name: 'ListLandingZonesInput')
@@ -72,6 +107,8 @@ module Aws::ControlTower
     OperationIdentifier = Shapes::StringShape.new(name: 'OperationIdentifier')
     Region = Shapes::StructureShape.new(name: 'Region')
     RegionName = Shapes::StringShape.new(name: 'RegionName')
+    ResetEnabledBaselineInput = Shapes::StructureShape.new(name: 'ResetEnabledBaselineInput')
+    ResetEnabledBaselineOutput = Shapes::StructureShape.new(name: 'ResetEnabledBaselineOutput')
     ResetLandingZoneInput = Shapes::StructureShape.new(name: 'ResetLandingZoneInput')
     ResetLandingZoneOutput = Shapes::StructureShape.new(name: 'ResetLandingZoneOutput')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -90,6 +127,8 @@ module Aws::ControlTower
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
+    UpdateEnabledBaselineInput = Shapes::StructureShape.new(name: 'UpdateEnabledBaselineInput')
+    UpdateEnabledBaselineOutput = Shapes::StructureShape.new(name: 'UpdateEnabledBaselineOutput')
     UpdateEnabledControlInput = Shapes::StructureShape.new(name: 'UpdateEnabledControlInput')
     UpdateEnabledControlOutput = Shapes::StructureShape.new(name: 'UpdateEnabledControlOutput')
     UpdateLandingZoneInput = Shapes::StructureShape.new(name: 'UpdateLandingZoneInput')
@@ -98,6 +137,21 @@ module Aws::ControlTower
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    BaselineOperation.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
+    BaselineOperation.add_member(:operation_identifier, Shapes::ShapeRef.new(shape: OperationIdentifier, location_name: "operationIdentifier"))
+    BaselineOperation.add_member(:operation_type, Shapes::ShapeRef.new(shape: BaselineOperationType, location_name: "operationType"))
+    BaselineOperation.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
+    BaselineOperation.add_member(:status, Shapes::ShapeRef.new(shape: BaselineOperationStatus, location_name: "status"))
+    BaselineOperation.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    BaselineOperation.struct_class = Types::BaselineOperation
+
+    BaselineSummary.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "arn"))
+    BaselineSummary.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    BaselineSummary.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    BaselineSummary.struct_class = Types::BaselineSummary
+
+    Baselines.member = Shapes::ShapeRef.new(shape: BaselineSummary)
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
@@ -124,6 +178,12 @@ module Aws::ControlTower
     DeleteLandingZoneOutput.add_member(:operation_identifier, Shapes::ShapeRef.new(shape: OperationIdentifier, required: true, location_name: "operationIdentifier"))
     DeleteLandingZoneOutput.struct_class = Types::DeleteLandingZoneOutput
 
+    DisableBaselineInput.add_member(:enabled_baseline_identifier, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "enabledBaselineIdentifier"))
+    DisableBaselineInput.struct_class = Types::DisableBaselineInput
+
+    DisableBaselineOutput.add_member(:operation_identifier, Shapes::ShapeRef.new(shape: OperationIdentifier, required: true, location_name: "operationIdentifier"))
+    DisableBaselineOutput.struct_class = Types::DisableBaselineOutput
+
     DisableControlInput.add_member(:control_identifier, Shapes::ShapeRef.new(shape: ControlIdentifier, required: true, location_name: "controlIdentifier"))
     DisableControlInput.add_member(:target_identifier, Shapes::ShapeRef.new(shape: TargetIdentifier, required: true, location_name: "targetIdentifier"))
     DisableControlInput.struct_class = Types::DisableControlInput
@@ -134,6 +194,17 @@ module Aws::ControlTower
     DriftStatusSummary.add_member(:drift_status, Shapes::ShapeRef.new(shape: DriftStatus, location_name: "driftStatus"))
     DriftStatusSummary.struct_class = Types::DriftStatusSummary
 
+    EnableBaselineInput.add_member(:baseline_identifier, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "baselineIdentifier"))
+    EnableBaselineInput.add_member(:baseline_version, Shapes::ShapeRef.new(shape: BaselineVersion, required: true, location_name: "baselineVersion"))
+    EnableBaselineInput.add_member(:parameters, Shapes::ShapeRef.new(shape: EnabledBaselineParameters, location_name: "parameters"))
+    EnableBaselineInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    EnableBaselineInput.add_member(:target_identifier, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "targetIdentifier"))
+    EnableBaselineInput.struct_class = Types::EnableBaselineInput
+
+    EnableBaselineOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
+    EnableBaselineOutput.add_member(:operation_identifier, Shapes::ShapeRef.new(shape: OperationIdentifier, required: true, location_name: "operationIdentifier"))
+    EnableBaselineOutput.struct_class = Types::EnableBaselineOutput
+
     EnableControlInput.add_member(:control_identifier, Shapes::ShapeRef.new(shape: ControlIdentifier, required: true, location_name: "controlIdentifier"))
     EnableControlInput.add_member(:parameters, Shapes::ShapeRef.new(shape: EnabledControlParameters, location_name: "parameters"))
     EnableControlInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -143,6 +214,43 @@ module Aws::ControlTower
     EnableControlOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     EnableControlOutput.add_member(:operation_identifier, Shapes::ShapeRef.new(shape: OperationIdentifier, required: true, location_name: "operationIdentifier"))
     EnableControlOutput.struct_class = Types::EnableControlOutput
+
+    EnabledBaselineBaselineIdentifiers.member = Shapes::ShapeRef.new(shape: Arn)
+
+    EnabledBaselineDetails.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
+    EnabledBaselineDetails.add_member(:baseline_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "baselineIdentifier"))
+    EnabledBaselineDetails.add_member(:baseline_version, Shapes::ShapeRef.new(shape: String, location_name: "baselineVersion"))
+    EnabledBaselineDetails.add_member(:parameters, Shapes::ShapeRef.new(shape: EnabledBaselineParameterSummaries, location_name: "parameters"))
+    EnabledBaselineDetails.add_member(:status_summary, Shapes::ShapeRef.new(shape: EnablementStatusSummary, required: true, location_name: "statusSummary"))
+    EnabledBaselineDetails.add_member(:target_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "targetIdentifier"))
+    EnabledBaselineDetails.struct_class = Types::EnabledBaselineDetails
+
+    EnabledBaselineFilter.add_member(:baseline_identifiers, Shapes::ShapeRef.new(shape: EnabledBaselineBaselineIdentifiers, location_name: "baselineIdentifiers"))
+    EnabledBaselineFilter.add_member(:target_identifiers, Shapes::ShapeRef.new(shape: EnabledBaselineTargetIdentifiers, location_name: "targetIdentifiers"))
+    EnabledBaselineFilter.struct_class = Types::EnabledBaselineFilter
+
+    EnabledBaselineParameter.add_member(:key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "key"))
+    EnabledBaselineParameter.add_member(:value, Shapes::ShapeRef.new(shape: EnabledBaselineParameterDocument, required: true, location_name: "value"))
+    EnabledBaselineParameter.struct_class = Types::EnabledBaselineParameter
+
+    EnabledBaselineParameterSummaries.member = Shapes::ShapeRef.new(shape: EnabledBaselineParameterSummary)
+
+    EnabledBaselineParameterSummary.add_member(:key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "key"))
+    EnabledBaselineParameterSummary.add_member(:value, Shapes::ShapeRef.new(shape: EnabledBaselineParameterDocument, required: true, location_name: "value"))
+    EnabledBaselineParameterSummary.struct_class = Types::EnabledBaselineParameterSummary
+
+    EnabledBaselineParameters.member = Shapes::ShapeRef.new(shape: EnabledBaselineParameter)
+
+    EnabledBaselineSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
+    EnabledBaselineSummary.add_member(:baseline_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "baselineIdentifier"))
+    EnabledBaselineSummary.add_member(:baseline_version, Shapes::ShapeRef.new(shape: String, location_name: "baselineVersion"))
+    EnabledBaselineSummary.add_member(:status_summary, Shapes::ShapeRef.new(shape: EnablementStatusSummary, required: true, location_name: "statusSummary"))
+    EnabledBaselineSummary.add_member(:target_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "targetIdentifier"))
+    EnabledBaselineSummary.struct_class = Types::EnabledBaselineSummary
+
+    EnabledBaselineTargetIdentifiers.member = Shapes::ShapeRef.new(shape: Arn)
+
+    EnabledBaselines.member = Shapes::ShapeRef.new(shape: EnabledBaselineSummary)
 
     EnabledControlDetails.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     EnabledControlDetails.add_member(:control_identifier, Shapes::ShapeRef.new(shape: ControlIdentifier, location_name: "controlIdentifier"))
@@ -178,11 +286,31 @@ module Aws::ControlTower
     EnablementStatusSummary.add_member(:status, Shapes::ShapeRef.new(shape: EnablementStatus, location_name: "status"))
     EnablementStatusSummary.struct_class = Types::EnablementStatusSummary
 
+    GetBaselineInput.add_member(:baseline_identifier, Shapes::ShapeRef.new(shape: BaselineArn, required: true, location_name: "baselineIdentifier"))
+    GetBaselineInput.struct_class = Types::GetBaselineInput
+
+    GetBaselineOperationInput.add_member(:operation_identifier, Shapes::ShapeRef.new(shape: OperationIdentifier, required: true, location_name: "operationIdentifier"))
+    GetBaselineOperationInput.struct_class = Types::GetBaselineOperationInput
+
+    GetBaselineOperationOutput.add_member(:baseline_operation, Shapes::ShapeRef.new(shape: BaselineOperation, required: true, location_name: "baselineOperation"))
+    GetBaselineOperationOutput.struct_class = Types::GetBaselineOperationOutput
+
+    GetBaselineOutput.add_member(:arn, Shapes::ShapeRef.new(shape: BaselineArn, required: true, location_name: "arn"))
+    GetBaselineOutput.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    GetBaselineOutput.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    GetBaselineOutput.struct_class = Types::GetBaselineOutput
+
     GetControlOperationInput.add_member(:operation_identifier, Shapes::ShapeRef.new(shape: OperationIdentifier, required: true, location_name: "operationIdentifier"))
     GetControlOperationInput.struct_class = Types::GetControlOperationInput
 
     GetControlOperationOutput.add_member(:control_operation, Shapes::ShapeRef.new(shape: ControlOperation, required: true, location_name: "controlOperation"))
     GetControlOperationOutput.struct_class = Types::GetControlOperationOutput
+
+    GetEnabledBaselineInput.add_member(:enabled_baseline_identifier, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "enabledBaselineIdentifier"))
+    GetEnabledBaselineInput.struct_class = Types::GetEnabledBaselineInput
+
+    GetEnabledBaselineOutput.add_member(:enabled_baseline_details, Shapes::ShapeRef.new(shape: EnabledBaselineDetails, location_name: "enabledBaselineDetails"))
+    GetEnabledBaselineOutput.struct_class = Types::GetEnabledBaselineOutput
 
     GetEnabledControlInput.add_member(:enabled_control_identifier, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "enabledControlIdentifier"))
     GetEnabledControlInput.struct_class = Types::GetEnabledControlInput
@@ -226,6 +354,23 @@ module Aws::ControlTower
     LandingZoneSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     LandingZoneSummary.struct_class = Types::LandingZoneSummary
 
+    ListBaselinesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListBaselinesMaxResults, location_name: "maxResults"))
+    ListBaselinesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListBaselinesInput.struct_class = Types::ListBaselinesInput
+
+    ListBaselinesOutput.add_member(:baselines, Shapes::ShapeRef.new(shape: Baselines, required: true, location_name: "baselines"))
+    ListBaselinesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListBaselinesOutput.struct_class = Types::ListBaselinesOutput
+
+    ListEnabledBaselinesInput.add_member(:filter, Shapes::ShapeRef.new(shape: EnabledBaselineFilter, location_name: "filter"))
+    ListEnabledBaselinesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListEnabledBaselinesMaxResults, location_name: "maxResults"))
+    ListEnabledBaselinesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListEnabledBaselinesNextToken, location_name: "nextToken"))
+    ListEnabledBaselinesInput.struct_class = Types::ListEnabledBaselinesInput
+
+    ListEnabledBaselinesOutput.add_member(:enabled_baselines, Shapes::ShapeRef.new(shape: EnabledBaselines, required: true, location_name: "enabledBaselines"))
+    ListEnabledBaselinesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListEnabledBaselinesNextToken, location_name: "nextToken"))
+    ListEnabledBaselinesOutput.struct_class = Types::ListEnabledBaselinesOutput
+
     ListEnabledControlsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListEnabledControlsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListEnabledControlsInput.add_member(:target_identifier, Shapes::ShapeRef.new(shape: TargetIdentifier, required: true, location_name: "targetIdentifier"))
@@ -253,6 +398,12 @@ module Aws::ControlTower
 
     Region.add_member(:name, Shapes::ShapeRef.new(shape: RegionName, location_name: "name"))
     Region.struct_class = Types::Region
+
+    ResetEnabledBaselineInput.add_member(:enabled_baseline_identifier, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "enabledBaselineIdentifier"))
+    ResetEnabledBaselineInput.struct_class = Types::ResetEnabledBaselineInput
+
+    ResetEnabledBaselineOutput.add_member(:operation_identifier, Shapes::ShapeRef.new(shape: OperationIdentifier, required: true, location_name: "operationIdentifier"))
+    ResetEnabledBaselineOutput.struct_class = Types::ResetEnabledBaselineOutput
 
     ResetLandingZoneInput.add_member(:landing_zone_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "landingZoneIdentifier"))
     ResetLandingZoneInput.struct_class = Types::ResetLandingZoneInput
@@ -290,6 +441,14 @@ module Aws::ControlTower
     UntagResourceInput.struct_class = Types::UntagResourceInput
 
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
+
+    UpdateEnabledBaselineInput.add_member(:baseline_version, Shapes::ShapeRef.new(shape: BaselineVersion, required: true, location_name: "baselineVersion"))
+    UpdateEnabledBaselineInput.add_member(:enabled_baseline_identifier, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "enabledBaselineIdentifier"))
+    UpdateEnabledBaselineInput.add_member(:parameters, Shapes::ShapeRef.new(shape: EnabledBaselineParameters, location_name: "parameters"))
+    UpdateEnabledBaselineInput.struct_class = Types::UpdateEnabledBaselineInput
+
+    UpdateEnabledBaselineOutput.add_member(:operation_identifier, Shapes::ShapeRef.new(shape: OperationIdentifier, required: true, location_name: "operationIdentifier"))
+    UpdateEnabledBaselineOutput.struct_class = Types::UpdateEnabledBaselineOutput
 
     UpdateEnabledControlInput.add_member(:enabled_control_identifier, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "enabledControlIdentifier"))
     UpdateEnabledControlInput.add_member(:parameters, Shapes::ShapeRef.new(shape: EnabledControlParameters, required: true, location_name: "parameters"))
@@ -354,12 +513,42 @@ module Aws::ControlTower
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:disable_baseline, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableBaseline"
+        o.http_method = "POST"
+        o.http_request_uri = "/disable-baseline"
+        o.input = Shapes::ShapeRef.new(shape: DisableBaselineInput)
+        o.output = Shapes::ShapeRef.new(shape: DisableBaselineOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:disable_control, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisableControl"
         o.http_method = "POST"
         o.http_request_uri = "/disable-control"
         o.input = Shapes::ShapeRef.new(shape: DisableControlInput)
         o.output = Shapes::ShapeRef.new(shape: DisableControlOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:enable_baseline, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableBaseline"
+        o.http_method = "POST"
+        o.http_request_uri = "/enable-baseline"
+        o.input = Shapes::ShapeRef.new(shape: EnableBaselineInput)
+        o.output = Shapes::ShapeRef.new(shape: EnableBaselineOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -384,12 +573,51 @@ module Aws::ControlTower
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:get_baseline, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBaseline"
+        o.http_method = "POST"
+        o.http_request_uri = "/get-baseline"
+        o.input = Shapes::ShapeRef.new(shape: GetBaselineInput)
+        o.output = Shapes::ShapeRef.new(shape: GetBaselineOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_baseline_operation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBaselineOperation"
+        o.http_method = "POST"
+        o.http_request_uri = "/get-baseline-operation"
+        o.input = Shapes::ShapeRef.new(shape: GetBaselineOperationInput)
+        o.output = Shapes::ShapeRef.new(shape: GetBaselineOperationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:get_control_operation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetControlOperation"
         o.http_method = "POST"
         o.http_request_uri = "/get-control-operation"
         o.input = Shapes::ShapeRef.new(shape: GetControlOperationInput)
         o.output = Shapes::ShapeRef.new(shape: GetControlOperationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_enabled_baseline, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEnabledBaseline"
+        o.http_method = "POST"
+        o.http_request_uri = "/get-enabled-baseline"
+        o.input = Shapes::ShapeRef.new(shape: GetEnabledBaselineInput)
+        o.output = Shapes::ShapeRef.new(shape: GetEnabledBaselineOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -434,6 +662,42 @@ module Aws::ControlTower
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:list_baselines, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBaselines"
+        o.http_method = "POST"
+        o.http_request_uri = "/list-baselines"
+        o.input = Shapes::ShapeRef.new(shape: ListBaselinesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListBaselinesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_enabled_baselines, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEnabledBaselines"
+        o.http_method = "POST"
+        o.http_request_uri = "/list-enabled-baselines"
+        o.input = Shapes::ShapeRef.new(shape: ListEnabledBaselinesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListEnabledBaselinesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_enabled_controls, Seahorse::Model::Operation.new.tap do |o|
@@ -484,6 +748,21 @@ module Aws::ControlTower
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:reset_enabled_baseline, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResetEnabledBaseline"
+        o.http_method = "POST"
+        o.http_request_uri = "/reset-enabled-baseline"
+        o.input = Shapes::ShapeRef.new(shape: ResetEnabledBaselineInput)
+        o.output = Shapes::ShapeRef.new(shape: ResetEnabledBaselineOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:reset_landing_zone, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ResetLandingZone"
         o.http_method = "POST"
@@ -517,6 +796,21 @@ module Aws::ControlTower
         o.output = Shapes::ShapeRef.new(shape: UntagResourceOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_enabled_baseline, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateEnabledBaseline"
+        o.http_method = "POST"
+        o.http_request_uri = "/update-enabled-baseline"
+        o.input = Shapes::ShapeRef.new(shape: UpdateEnabledBaselineInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateEnabledBaselineOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 

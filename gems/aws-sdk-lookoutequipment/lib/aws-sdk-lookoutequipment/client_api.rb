@@ -160,6 +160,8 @@ module Aws::LookoutEquipment
     MissingCompleteSensorData = Shapes::StructureShape.new(name: 'MissingCompleteSensorData')
     MissingSensorData = Shapes::StructureShape.new(name: 'MissingSensorData')
     ModelArn = Shapes::StringShape.new(name: 'ModelArn')
+    ModelDiagnosticsOutputConfiguration = Shapes::StructureShape.new(name: 'ModelDiagnosticsOutputConfiguration')
+    ModelDiagnosticsS3OutputConfiguration = Shapes::StructureShape.new(name: 'ModelDiagnosticsS3OutputConfiguration')
     ModelMetrics = Shapes::StringShape.new(name: 'ModelMetrics')
     ModelName = Shapes::StringShape.new(name: 'ModelName')
     ModelPromoteMode = Shapes::StringShape.new(name: 'ModelPromoteMode')
@@ -310,6 +312,7 @@ module Aws::LookoutEquipment
     CreateModelRequest.add_member(:server_side_kms_key_id, Shapes::ShapeRef.new(shape: NameOrArn, location_name: "ServerSideKmsKeyId"))
     CreateModelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateModelRequest.add_member(:off_condition, Shapes::ShapeRef.new(shape: OffCondition, location_name: "OffCondition"))
+    CreateModelRequest.add_member(:model_diagnostics_output_configuration, Shapes::ShapeRef.new(shape: ModelDiagnosticsOutputConfiguration, location_name: "ModelDiagnosticsOutputConfiguration"))
     CreateModelRequest.struct_class = Types::CreateModelRequest
 
     CreateModelResponse.add_member(:model_arn, Shapes::ShapeRef.new(shape: ModelArn, location_name: "ModelArn"))
@@ -507,6 +510,7 @@ module Aws::LookoutEquipment
     DescribeModelResponse.add_member(:accumulated_inference_data_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "AccumulatedInferenceDataStartTime"))
     DescribeModelResponse.add_member(:accumulated_inference_data_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "AccumulatedInferenceDataEndTime"))
     DescribeModelResponse.add_member(:retraining_scheduler_status, Shapes::ShapeRef.new(shape: RetrainingSchedulerStatus, location_name: "RetrainingSchedulerStatus"))
+    DescribeModelResponse.add_member(:model_diagnostics_output_configuration, Shapes::ShapeRef.new(shape: ModelDiagnosticsOutputConfiguration, location_name: "ModelDiagnosticsOutputConfiguration"))
     DescribeModelResponse.struct_class = Types::DescribeModelResponse
 
     DescribeModelVersionRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
@@ -545,6 +549,8 @@ module Aws::LookoutEquipment
     DescribeModelVersionResponse.add_member(:retraining_available_data_in_days, Shapes::ShapeRef.new(shape: Integer, location_name: "RetrainingAvailableDataInDays"))
     DescribeModelVersionResponse.add_member(:auto_promotion_result, Shapes::ShapeRef.new(shape: AutoPromotionResult, location_name: "AutoPromotionResult"))
     DescribeModelVersionResponse.add_member(:auto_promotion_result_reason, Shapes::ShapeRef.new(shape: AutoPromotionResultReason, location_name: "AutoPromotionResultReason"))
+    DescribeModelVersionResponse.add_member(:model_diagnostics_output_configuration, Shapes::ShapeRef.new(shape: ModelDiagnosticsOutputConfiguration, location_name: "ModelDiagnosticsOutputConfiguration"))
+    DescribeModelVersionResponse.add_member(:model_diagnostics_results_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "ModelDiagnosticsResultsObject"))
     DescribeModelVersionResponse.struct_class = Types::DescribeModelVersionResponse
 
     DescribeResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
@@ -861,6 +867,14 @@ module Aws::LookoutEquipment
     MissingSensorData.add_member(:total_number_of_missing_values, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "TotalNumberOfMissingValues"))
     MissingSensorData.struct_class = Types::MissingSensorData
 
+    ModelDiagnosticsOutputConfiguration.add_member(:s3_output_configuration, Shapes::ShapeRef.new(shape: ModelDiagnosticsS3OutputConfiguration, required: true, location_name: "S3OutputConfiguration"))
+    ModelDiagnosticsOutputConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NameOrArn, location_name: "KmsKeyId"))
+    ModelDiagnosticsOutputConfiguration.struct_class = Types::ModelDiagnosticsOutputConfiguration
+
+    ModelDiagnosticsS3OutputConfiguration.add_member(:bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "Bucket"))
+    ModelDiagnosticsS3OutputConfiguration.add_member(:prefix, Shapes::ShapeRef.new(shape: S3Prefix, location_name: "Prefix"))
+    ModelDiagnosticsS3OutputConfiguration.struct_class = Types::ModelDiagnosticsS3OutputConfiguration
+
     ModelSummaries.member = Shapes::ShapeRef.new(shape: ModelSummary)
 
     ModelSummary.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
@@ -876,6 +890,7 @@ module Aws::LookoutEquipment
     ModelSummary.add_member(:latest_scheduled_retraining_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LatestScheduledRetrainingStartTime"))
     ModelSummary.add_member(:next_scheduled_retraining_start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "NextScheduledRetrainingStartDate"))
     ModelSummary.add_member(:retraining_scheduler_status, Shapes::ShapeRef.new(shape: RetrainingSchedulerStatus, location_name: "RetrainingSchedulerStatus"))
+    ModelSummary.add_member(:model_diagnostics_output_configuration, Shapes::ShapeRef.new(shape: ModelDiagnosticsOutputConfiguration, location_name: "ModelDiagnosticsOutputConfiguration"))
     ModelSummary.struct_class = Types::ModelSummary
 
     ModelVersionSummaries.member = Shapes::ShapeRef.new(shape: ModelVersionSummary)
@@ -1045,6 +1060,7 @@ module Aws::LookoutEquipment
     UpdateModelRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
     UpdateModelRequest.add_member(:labels_input_configuration, Shapes::ShapeRef.new(shape: LabelsInputConfiguration, location_name: "LabelsInputConfiguration"))
     UpdateModelRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "RoleArn"))
+    UpdateModelRequest.add_member(:model_diagnostics_output_configuration, Shapes::ShapeRef.new(shape: ModelDiagnosticsOutputConfiguration, location_name: "ModelDiagnosticsOutputConfiguration"))
     UpdateModelRequest.struct_class = Types::UpdateModelRequest
 
     UpdateRetrainingSchedulerRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))

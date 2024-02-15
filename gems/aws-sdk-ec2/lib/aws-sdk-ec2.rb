@@ -8,8 +8,8 @@
 # WARNING ABOUT GENERATED CODE
 
 
-require 'aws-sigv4'
 require 'aws-sdk-core'
+require 'aws-sigv4'
 
 require_relative 'aws-sdk-ec2/types'
 require_relative 'aws-sdk-ec2/client_api'
@@ -76,6 +76,6 @@ require_relative 'aws-sdk-ec2/customizations'
 # @!group service
 module Aws::EC2
 
-  GEM_VERSION = '1.437.0'
+  GEM_VERSION = '1.438.0'
 
 end
