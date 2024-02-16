@@ -238,7 +238,7 @@ module Aws::SNS
     #
     #   topic.publish({
     #     target_arn: "String",
-    #     phone_number: "String",
+    #     phone_number: "PhoneNumber",
     #     message: "message", # required
     #     subject: "subject",
     #     message_structure: "messageStructure",

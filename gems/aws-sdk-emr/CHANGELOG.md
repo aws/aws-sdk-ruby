@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2024-02-16)
+------------------
+
+* Feature - adds fine grained control over Unhealthy Node Replacement to Amazon ElasticMapReduce
+
 1.83.0 (2024-01-26)
 ------------------
 

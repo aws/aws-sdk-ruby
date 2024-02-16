@@ -350,6 +350,8 @@ module Aws::Firehose
       attr_accessor s3_backup_configuration: Types::S3DestinationConfiguration
       attr_accessor data_format_conversion_configuration: Types::DataFormatConversionConfiguration
       attr_accessor dynamic_partitioning_configuration: Types::DynamicPartitioningConfiguration
+      attr_accessor file_extension: ::String
+      attr_accessor custom_time_zone: ::String
       SENSITIVE: []
     end
 
@@ -367,6 +369,8 @@ module Aws::Firehose
       attr_accessor s3_backup_description: Types::S3DestinationDescription
       attr_accessor data_format_conversion_configuration: Types::DataFormatConversionConfiguration
       attr_accessor dynamic_partitioning_configuration: Types::DynamicPartitioningConfiguration
+      attr_accessor file_extension: ::String
+      attr_accessor custom_time_zone: ::String
       SENSITIVE: []
     end
 
@@ -384,6 +388,8 @@ module Aws::Firehose
       attr_accessor s3_backup_update: Types::S3DestinationUpdate
       attr_accessor data_format_conversion_configuration: Types::DataFormatConversionConfiguration
       attr_accessor dynamic_partitioning_configuration: Types::DynamicPartitioningConfiguration
+      attr_accessor file_extension: ::String
+      attr_accessor custom_time_zone: ::String
       SENSITIVE: []
     end
 
@@ -391,6 +397,17 @@ module Aws::Firehose
       attr_accessor type: ("RETIRE_KMS_GRANT_FAILED" | "CREATE_KMS_GRANT_FAILED" | "KMS_ACCESS_DENIED" | "DISABLED_KMS_KEY" | "INVALID_KMS_KEY" | "KMS_KEY_NOT_FOUND" | "KMS_OPT_IN_REQUIRED" | "CREATE_ENI_FAILED" | "DELETE_ENI_FAILED" | "SUBNET_NOT_FOUND" | "SECURITY_GROUP_NOT_FOUND" | "ENI_ACCESS_DENIED" | "SUBNET_ACCESS_DENIED" | "SECURITY_GROUP_ACCESS_DENIED" | "UNKNOWN_ERROR")
       attr_accessor details: ::String
       SENSITIVE: []
+    end
+
+    class GetKinesisStreamInput
+      attr_accessor delivery_stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetKinesisStreamOutput
+      attr_accessor kinesis_stream_arn: ::String
+      attr_accessor credentials_for_reading_kinesis_stream: Types::SessionCredentials
+      SENSITIVE: [:credentials_for_reading_kinesis_stream]
     end
 
     class HiveJsonSerDe
@@ -492,6 +509,12 @@ module Aws::Firehose
     class InvalidSourceException
       attr_accessor code: ::String
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidStreamTypeException
+      attr_accessor message: ::String
+      attr_accessor source: ::String
       SENSITIVE: []
     end
 
@@ -602,13 +625,13 @@ module Aws::Firehose
     end
 
     class Processor
-      attr_accessor type: ("RecordDeAggregation" | "Decompression" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord")
+      attr_accessor type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord")
       attr_accessor parameters: ::Array[Types::ProcessorParameter]
       SENSITIVE: []
     end
 
     class ProcessorParameter
-      attr_accessor parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat")
+      attr_accessor parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction")
       attr_accessor parameter_value: ::String
       SENSITIVE: []
     end
@@ -769,6 +792,14 @@ module Aws::Firehose
     class ServiceUnavailableException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class SessionCredentials
+      attr_accessor access_key_id: ::String
+      attr_accessor secret_access_key: ::String
+      attr_accessor session_token: ::String
+      attr_accessor expiration: ::Time
+      SENSITIVE: [:access_key_id, :secret_access_key, :session_token]
     end
 
     class SnowflakeDestinationConfiguration
@@ -939,6 +970,56 @@ module Aws::Firehose
     end
 
     class TagDeliveryStreamOutput < Aws::EmptyStructure
+    end
+
+    class TagrisAccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagrisInternalServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagrisInvalidArnException
+      attr_accessor message: ::String
+      attr_accessor sweep_list_item: Types::TagrisSweepListItem
+      SENSITIVE: []
+    end
+
+    class TagrisInvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagrisPartialResourcesExistResultsException
+      attr_accessor message: ::String
+      attr_accessor resource_existence_information: ::Hash[::String, ("ACTIVE" | "NOT_ACTIVE")]
+      SENSITIVE: []
+    end
+
+    class TagrisSweepListItem
+      attr_accessor tagris_account_id: ::String
+      attr_accessor tagris_amazon_resource_name: ::String
+      attr_accessor tagris_internal_id: ::String
+      attr_accessor tagris_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class TagrisThrottledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagrisVerifyResourcesExistInput
+      attr_accessor tagris_sweep_list: ::Array[Types::TagrisSweepListItem]
+      SENSITIVE: []
+    end
+
+    class TagrisVerifyResourcesExistOutput
+      attr_accessor tagris_sweep_list_result: ::Hash[::String, ("ACTIVE" | "NOT_ACTIVE")]
+      SENSITIVE: []
     end
 
     class UntagDeliveryStreamInput

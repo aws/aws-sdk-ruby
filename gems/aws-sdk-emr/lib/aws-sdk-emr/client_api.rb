@@ -286,6 +286,7 @@ module Aws::EMR
     SessionMappingSummaryList = Shapes::ListShape.new(name: 'SessionMappingSummaryList')
     SetKeepJobFlowAliveWhenNoStepsInput = Shapes::StructureShape.new(name: 'SetKeepJobFlowAliveWhenNoStepsInput')
     SetTerminationProtectionInput = Shapes::StructureShape.new(name: 'SetTerminationProtectionInput')
+    SetUnhealthyNodeReplacementInput = Shapes::StructureShape.new(name: 'SetUnhealthyNodeReplacementInput')
     SetVisibleToAllUsersInput = Shapes::StructureShape.new(name: 'SetVisibleToAllUsersInput')
     ShrinkPolicy = Shapes::StructureShape.new(name: 'ShrinkPolicy')
     SimpleScalingPolicyConfiguration = Shapes::StructureShape.new(name: 'SimpleScalingPolicyConfiguration')
@@ -461,6 +462,7 @@ module Aws::EMR
     Cluster.add_member(:release_label, Shapes::ShapeRef.new(shape: String, location_name: "ReleaseLabel"))
     Cluster.add_member(:auto_terminate, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoTerminate"))
     Cluster.add_member(:termination_protected, Shapes::ShapeRef.new(shape: Boolean, location_name: "TerminationProtected"))
+    Cluster.add_member(:unhealthy_node_replacement, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "UnhealthyNodeReplacement"))
     Cluster.add_member(:visible_to_all_users, Shapes::ShapeRef.new(shape: Boolean, location_name: "VisibleToAllUsers"))
     Cluster.add_member(:applications, Shapes::ShapeRef.new(shape: ApplicationList, location_name: "Applications"))
     Cluster.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -996,6 +998,7 @@ module Aws::EMR
     JobFlowInstancesConfig.add_member(:placement, Shapes::ShapeRef.new(shape: PlacementType, location_name: "Placement"))
     JobFlowInstancesConfig.add_member(:keep_job_flow_alive_when_no_steps, Shapes::ShapeRef.new(shape: Boolean, location_name: "KeepJobFlowAliveWhenNoSteps"))
     JobFlowInstancesConfig.add_member(:termination_protected, Shapes::ShapeRef.new(shape: Boolean, location_name: "TerminationProtected"))
+    JobFlowInstancesConfig.add_member(:unhealthy_node_replacement, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "UnhealthyNodeReplacement"))
     JobFlowInstancesConfig.add_member(:hadoop_version, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "HadoopVersion"))
     JobFlowInstancesConfig.add_member(:ec2_subnet_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Ec2SubnetId"))
     JobFlowInstancesConfig.add_member(:ec2_subnet_ids, Shapes::ShapeRef.new(shape: XmlStringMaxLen256List, location_name: "Ec2SubnetIds"))
@@ -1018,6 +1021,7 @@ module Aws::EMR
     JobFlowInstancesDetail.add_member(:placement, Shapes::ShapeRef.new(shape: PlacementType, location_name: "Placement"))
     JobFlowInstancesDetail.add_member(:keep_job_flow_alive_when_no_steps, Shapes::ShapeRef.new(shape: Boolean, location_name: "KeepJobFlowAliveWhenNoSteps"))
     JobFlowInstancesDetail.add_member(:termination_protected, Shapes::ShapeRef.new(shape: Boolean, location_name: "TerminationProtected"))
+    JobFlowInstancesDetail.add_member(:unhealthy_node_replacement, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "UnhealthyNodeReplacement"))
     JobFlowInstancesDetail.add_member(:hadoop_version, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "HadoopVersion"))
     JobFlowInstancesDetail.struct_class = Types::JobFlowInstancesDetail
 
@@ -1397,6 +1401,10 @@ module Aws::EMR
     SetTerminationProtectionInput.add_member(:job_flow_ids, Shapes::ShapeRef.new(shape: XmlStringList, required: true, location_name: "JobFlowIds"))
     SetTerminationProtectionInput.add_member(:termination_protected, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "TerminationProtected"))
     SetTerminationProtectionInput.struct_class = Types::SetTerminationProtectionInput
+
+    SetUnhealthyNodeReplacementInput.add_member(:job_flow_ids, Shapes::ShapeRef.new(shape: XmlStringList, required: true, location_name: "JobFlowIds"))
+    SetUnhealthyNodeReplacementInput.add_member(:unhealthy_node_replacement, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "UnhealthyNodeReplacement"))
+    SetUnhealthyNodeReplacementInput.struct_class = Types::SetUnhealthyNodeReplacementInput
 
     SetVisibleToAllUsersInput.add_member(:job_flow_ids, Shapes::ShapeRef.new(shape: XmlStringList, required: true, location_name: "JobFlowIds"))
     SetVisibleToAllUsersInput.add_member(:visible_to_all_users, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "VisibleToAllUsers"))
@@ -2146,6 +2154,15 @@ module Aws::EMR
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: SetTerminationProtectionInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:set_unhealthy_node_replacement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SetUnhealthyNodeReplacement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SetUnhealthyNodeReplacementInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)

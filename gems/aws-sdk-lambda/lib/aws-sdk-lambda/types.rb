@@ -658,11 +658,16 @@ module Aws::Lambda
     #   * **Amazon Simple Queue Service** – The ARN of the queue.
     #
     #   * **Amazon Managed Streaming for Apache Kafka** – The ARN of the
-    #     cluster.
+    #     cluster or the ARN of the VPC connection (for [cross-account event
+    #     source mappings][1]).
     #
     #   * **Amazon MQ** – The ARN of the broker.
     #
     #   * **Amazon DocumentDB** – The ARN of the DocumentDB change stream.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc
     #   @return [String]
     #
     # @!attribute [rw] function_name
@@ -763,8 +768,9 @@ module Aws::Lambda
     #   @return [Time]
     #
     # @!attribute [rw] destination_config
-    #   (Kinesis and DynamoDB Streams only) A standard Amazon SQS queue or
-    #   standard Amazon SNS topic destination for discarded records.
+    #   (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Kafka only)
+    #   A configuration object that specifies the destination of an event
+    #   after Lambda processes it.
     #   @return [Types::DestinationConfig]
     #
     # @!attribute [rw] maximum_record_age_in_seconds
@@ -1049,6 +1055,12 @@ module Aws::Lambda
     # @!attribute [rw] ephemeral_storage
     #   The size of the function's `/tmp` directory in MB. The default
     #   value is 512, but can be any whole number between 512 and 10,240 MB.
+    #   For more information, see [Configuring ephemeral storage
+    #   (console)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage
     #   @return [Types::EphemeralStorage]
     #
     # @!attribute [rw] snap_start
@@ -1764,7 +1776,12 @@ module Aws::Lambda
     end
 
     # The size of the function's `/tmp` directory in MB. The default value
-    # is 512, but it can be any whole number between 512 and 10,240 MB.
+    # is 512, but can be any whole number between 512 and 10,240 MB. For
+    # more information, see [Configuring ephemeral storage (console)][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage
     #
     # @!attribute [rw] size
     #   The size of the function's `/tmp` directory.
@@ -2299,8 +2316,14 @@ module Aws::Lambda
     #   @return [Array<String>]
     #
     # @!attribute [rw] ephemeral_storage
-    #   The size of the function’s `/tmp` directory in MB. The default value
-    #   is 512, but it can be any whole number between 512 and 10,240 MB.
+    #   The size of the function's `/tmp` directory in MB. The default
+    #   value is 512, but can be any whole number between 512 and 10,240 MB.
+    #   For more information, see [Configuring ephemeral storage
+    #   (console)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage
     #   @return [Types::EphemeralStorage]
     #
     # @!attribute [rw] snap_start
@@ -3457,7 +3480,9 @@ module Aws::Lambda
     #
     # @!attribute [rw] client_context
     #   Up to 3,583 bytes of base64-encoded data about the invoking client
-    #   to pass to the function in the context object.
+    #   to pass to the function in the context object. Lambda passes the
+    #   `ClientContext` object to your function for synchronous invocations
+    #   only.
     #   @return [String]
     #
     # @!attribute [rw] payload
@@ -4078,11 +4103,16 @@ module Aws::Lambda
     #   * **Amazon Simple Queue Service** – The ARN of the queue.
     #
     #   * **Amazon Managed Streaming for Apache Kafka** – The ARN of the
-    #     cluster.
+    #     cluster or the ARN of the VPC connection (for [cross-account event
+    #     source mappings][1]).
     #
     #   * **Amazon MQ** – The ARN of the broker.
     #
     #   * **Amazon DocumentDB** – The ARN of the DocumentDB change stream.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc
     #   @return [String]
     #
     # @!attribute [rw] function_name
@@ -4345,7 +4375,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] compatible_runtime
-    #   A runtime identifier. For example, `go1.x`.
+    #   A runtime identifier. For example, `java21`.
     #
     #   The following list includes deprecated runtimes. For more
     #   information, see [Runtime deprecation policy][1].
@@ -4406,7 +4436,7 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] compatible_runtime
-    #   A runtime identifier. For example, `go1.x`.
+    #   A runtime identifier. For example, `java21`.
     #
     #   The following list includes deprecated runtimes. For more
     #   information, see [Runtime deprecation policy][1].
@@ -4603,13 +4633,15 @@ module Aws::Lambda
     # @!attribute [rw] application_log_level
     #   Set this property to filter the application logs for your function
     #   that Lambda sends to CloudWatch. Lambda only sends application logs
-    #   at the selected level and lower.
+    #   at the selected level of detail and lower, where `TRACE` is the
+    #   highest level and `FATAL` is the lowest.
     #   @return [String]
     #
     # @!attribute [rw] system_log_level
     #   Set this property to filter the system logs for your function that
     #   Lambda sends to CloudWatch. Lambda only sends system logs at the
-    #   selected level and lower.
+    #   selected level of detail and lower, where `DEBUG` is the highest
+    #   level and `WARN` is the lowest.
     #   @return [String]
     #
     # @!attribute [rw] log_group
@@ -4634,6 +4666,25 @@ module Aws::Lambda
     #
     # @!attribute [rw] destination
     #   The Amazon Resource Name (ARN) of the destination resource.
+    #
+    #   To retain records of [asynchronous invocations][1], you can
+    #   configure an Amazon SNS topic, Amazon SQS queue, Lambda function, or
+    #   Amazon EventBridge event bus as the destination.
+    #
+    #   To retain records of failed invocations from [Kinesis and DynamoDB
+    #   event sources][2], you can configure an Amazon SNS topic or Amazon
+    #   SQS queue as the destination.
+    #
+    #   To retain records of failed invocations from [self-managed Kafka][3]
+    #   or [Amazon MSK][4], you can configure an Amazon SNS topic or Amazon
+    #   SQS queue as the destination.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#event-source-mapping-destinations
+    #   [3]: https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-smaa-onfailure-destination
+    #   [4]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-onfailure-destination
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/OnFailure AWS API Documentation
@@ -6063,8 +6114,9 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] destination_config
-    #   (Kinesis and DynamoDB Streams only) A standard Amazon SQS queue or
-    #   standard Amazon SNS topic destination for discarded records.
+    #   (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Kafka only)
+    #   A configuration object that specifies the destination of an event
+    #   after Lambda processes it.
     #   @return [Types::DestinationConfig]
     #
     # @!attribute [rw] maximum_record_age_in_seconds
@@ -6380,6 +6432,12 @@ module Aws::Lambda
     # @!attribute [rw] ephemeral_storage
     #   The size of the function's `/tmp` directory in MB. The default
     #   value is 512, but can be any whole number between 512 and 10,240 MB.
+    #   For more information, see [Configuring ephemeral storage
+    #   (console)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage
     #   @return [Types::EphemeralStorage]
     #
     # @!attribute [rw] snap_start

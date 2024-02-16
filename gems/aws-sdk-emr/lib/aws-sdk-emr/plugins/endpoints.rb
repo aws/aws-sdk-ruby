@@ -156,6 +156,8 @@ module Aws::EMR
             Aws::EMR::Endpoints::SetKeepJobFlowAliveWhenNoSteps.build(context)
           when :set_termination_protection
             Aws::EMR::Endpoints::SetTerminationProtection.build(context)
+          when :set_unhealthy_node_replacement
+            Aws::EMR::Endpoints::SetUnhealthyNodeReplacement.build(context)
           when :set_visible_to_all_users
             Aws::EMR::Endpoints::SetVisibleToAllUsers.build(context)
           when :start_notebook_execution

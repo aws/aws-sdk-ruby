@@ -1008,6 +1008,7 @@ module Aws
                             }?,
                             keep_job_flow_alive_when_no_steps: bool?,
                             termination_protected: bool?,
+                            unhealthy_node_replacement: bool?,
                             hadoop_version: ::String?,
                             ec2_subnet_id: ::String?,
                             ec2_subnet_ids: Array[::String]?,
@@ -1125,6 +1126,13 @@ module Aws
                                         termination_protected: bool
                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#set_unhealthy_node_replacement-instance_method
+      def set_unhealthy_node_replacement: (
+                                            job_flow_ids: Array[::String],
+                                            unhealthy_node_replacement: bool
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#set_visible_to_all_users-instance_method
       def set_visible_to_all_users: (

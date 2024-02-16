@@ -1187,6 +1187,7 @@ module Aws::EMR
     #   resp.cluster.release_label #=> String
     #   resp.cluster.auto_terminate #=> Boolean
     #   resp.cluster.termination_protected #=> Boolean
+    #   resp.cluster.unhealthy_node_replacement #=> Boolean
     #   resp.cluster.visible_to_all_users #=> Boolean
     #   resp.cluster.applications #=> Array
     #   resp.cluster.applications[0].name #=> String
@@ -1332,6 +1333,7 @@ module Aws::EMR
     #   resp.job_flows[0].instances.placement.availability_zones[0] #=> String
     #   resp.job_flows[0].instances.keep_job_flow_alive_when_no_steps #=> Boolean
     #   resp.job_flows[0].instances.termination_protected #=> Boolean
+    #   resp.job_flows[0].instances.unhealthy_node_replacement #=> Boolean
     #   resp.job_flows[0].instances.hadoop_version #=> String
     #   resp.job_flows[0].steps #=> Array
     #   resp.job_flows[0].steps[0].step_config.name #=> String
@@ -3542,6 +3544,7 @@ module Aws::EMR
     #       },
     #       keep_job_flow_alive_when_no_steps: false,
     #       termination_protected: false,
+    #       unhealthy_node_replacement: false,
     #       hadoop_version: "XmlStringMaxLen256",
     #       ec2_subnet_id: "XmlStringMaxLen256",
     #       ec2_subnet_ids: ["XmlStringMaxLen256"],
@@ -3730,7 +3733,7 @@ module Aws::EMR
     # flow by a subsequent call to `SetTerminationProtection` in which you
     # set the value to `false`.
     #
-    # For more information, see[Managing Cluster Termination][1] in the
+    # For more information, see [Managing Cluster Termination][1] in the
     # *Amazon EMR Management Guide*.
     #
     #
@@ -3762,6 +3765,54 @@ module Aws::EMR
     # @param [Hash] params ({})
     def set_termination_protection(params = {}, options = {})
       req = build_request(:set_termination_protection, params)
+      req.send_request(options)
+    end
+
+    # Specify whether to enable unhealthy node replacement, which lets
+    # Amazon EMR gracefully replace core nodes on a cluster if any nodes
+    # become unhealthy. For example, a node becomes unhealthy if disk usage
+    # is above 90%. If unhealthy node replacement is on and
+    # `TerminationProtected` are off, Amazon EMR immediately terminates the
+    # unhealthy core nodes. To use unhealthy node replacement and retain
+    # unhealthy core nodes, use to turn on termination protection. In such
+    # cases, Amazon EMR adds the unhealthy nodes to a denylist, reducing job
+    # interruptions and failures.
+    #
+    # If unhealthy node replacement is on, Amazon EMR notifies YARN and
+    # other applications on the cluster to stop scheduling tasks with these
+    # nodes, moves the data, and then terminates the nodes.
+    #
+    # For more information, see [graceful node replacement][1] in the
+    # *Amazon EMR Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_UnhealthyNodeReplacement.html
+    #
+    # @option params [required, Array<String>] :job_flow_ids
+    #   The list of strings that uniquely identify the clusters for which to
+    #   turn on unhealthy node replacement. You can get these identifiers by
+    #   running the RunJobFlow or the DescribeJobFlows operations.
+    #
+    # @option params [required, Boolean] :unhealthy_node_replacement
+    #   Indicates whether to turn on or turn off graceful unhealthy node
+    #   replacement.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_unhealthy_node_replacement({
+    #     job_flow_ids: ["XmlString"], # required
+    #     unhealthy_node_replacement: false, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetUnhealthyNodeReplacement AWS API Documentation
+    #
+    # @overload set_unhealthy_node_replacement(params = {})
+    # @param [Hash] params ({})
+    def set_unhealthy_node_replacement(params = {}, options = {})
+      req = build_request(:set_unhealthy_node_replacement, params)
       req.send_request(options)
     end
 
@@ -4096,7 +4147,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

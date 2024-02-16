@@ -161,6 +161,7 @@ module Aws::EMR
       attr_accessor release_label: ::String
       attr_accessor auto_terminate: bool
       attr_accessor termination_protected: bool
+      attr_accessor unhealthy_node_replacement: bool
       attr_accessor visible_to_all_users: bool
       attr_accessor applications: ::Array[Types::Application]
       attr_accessor tags: ::Array[Types::Tag]
@@ -801,6 +802,7 @@ module Aws::EMR
       attr_accessor placement: Types::PlacementType
       attr_accessor keep_job_flow_alive_when_no_steps: bool
       attr_accessor termination_protected: bool
+      attr_accessor unhealthy_node_replacement: bool
       attr_accessor hadoop_version: ::String
       attr_accessor ec2_subnet_id: ::String
       attr_accessor ec2_subnet_ids: ::Array[::String]
@@ -825,6 +827,7 @@ module Aws::EMR
       attr_accessor placement: Types::PlacementType
       attr_accessor keep_job_flow_alive_when_no_steps: bool
       attr_accessor termination_protected: bool
+      attr_accessor unhealthy_node_replacement: bool
       attr_accessor hadoop_version: ::String
       SENSITIVE: []
     end
@@ -1322,6 +1325,12 @@ module Aws::EMR
     class SetTerminationProtectionInput
       attr_accessor job_flow_ids: ::Array[::String]
       attr_accessor termination_protected: bool
+      SENSITIVE: []
+    end
+
+    class SetUnhealthyNodeReplacementInput
+      attr_accessor job_flow_ids: ::Array[::String]
+      attr_accessor unhealthy_node_replacement: bool
       SENSITIVE: []
     end
 

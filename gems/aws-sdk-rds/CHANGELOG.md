@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.217.0 (2024-02-16)
+------------------
+
+* Feature - Doc only update for a valid option in DB parameter group
+
 1.216.0 (2024-02-14)
 ------------------
 

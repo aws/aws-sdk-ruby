@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2024-02-16)
+------------------
+
+* Feature - Doc only update to GetTranscript API reference guide to inform users about presence of events in the chat transcript.
+
 1.40.0 (2024-01-26)
 ------------------
 

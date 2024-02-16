@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2024-02-16)
+------------------
+
+* Feature - This release adds support for Data Message Extraction for decompressed CloudWatch logs, and to use a custom file extension or time zone for S3 destinations.
+
 1.63.0 (2024-01-26)
 ------------------
 

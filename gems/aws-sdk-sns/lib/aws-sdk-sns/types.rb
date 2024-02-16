@@ -123,7 +123,7 @@ module Aws::SNS
     #
     class CheckIfPhoneNumberIsOptedOutInput < Struct.new(
       :phone_number)
-      SENSITIVE = []
+      SENSITIVE = [:phone_number]
       include Aws::Structure
     end
 
@@ -232,7 +232,8 @@ module Aws::SNS
     #   @return [String]
     #
     # @!attribute [rw] attributes
-    #   For a list of attributes, see [SetPlatformApplicationAttributes][1].
+    #   For a list of attributes, see [ `SetPlatformApplicationAttributes`
+    #   ][1].
     #
     #
     #
@@ -252,7 +253,7 @@ module Aws::SNS
     # Response from CreatePlatformApplication action.
     #
     # @!attribute [rw] platform_application_arn
-    #   PlatformApplicationArn is returned.
+    #   `PlatformApplicationArn` is returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformApplicationResponse AWS API Documentation
@@ -266,7 +267,7 @@ module Aws::SNS
     # Input for CreatePlatformEndpoint action.
     #
     # @!attribute [rw] platform_application_arn
-    #   PlatformApplicationArn returned from CreatePlatformApplication is
+    #   `PlatformApplicationArn` returned from CreatePlatformApplication is
     #   used to create a an endpoint.
     #   @return [String]
     #
@@ -286,7 +287,7 @@ module Aws::SNS
     #   @return [String]
     #
     # @!attribute [rw] attributes
-    #   For a list of attributes, see [SetEndpointAttributes][1].
+    #   For a list of attributes, see [ `SetEndpointAttributes` ][1].
     #
     #
     #
@@ -320,7 +321,7 @@ module Aws::SNS
     class CreateSMSSandboxPhoneNumberInput < Struct.new(
       :phone_number,
       :language_code)
-      SENSITIVE = []
+      SENSITIVE = [:phone_number]
       include Aws::Structure
     end
 
@@ -462,10 +463,10 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Input for DeleteEndpoint action.
+    # Input for `DeleteEndpoint` action.
     #
     # @!attribute [rw] endpoint_arn
-    #   EndpointArn of endpoint to delete.
+    #   `EndpointArn` of endpoint to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteEndpointInput AWS API Documentation
@@ -476,10 +477,10 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Input for DeletePlatformApplication action.
+    # Input for `DeletePlatformApplication` action.
     #
     # @!attribute [rw] platform_application_arn
-    #   PlatformApplicationArn of platform application object to delete.
+    #   `PlatformApplicationArn` of platform application object to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeletePlatformApplicationInput AWS API Documentation
@@ -498,7 +499,7 @@ module Aws::SNS
     #
     class DeleteSMSSandboxPhoneNumberInput < Struct.new(
       :phone_number)
-      SENSITIVE = []
+      SENSITIVE = [:phone_number]
       include Aws::Structure
     end
 
@@ -611,10 +612,10 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Input for GetEndpointAttributes action.
+    # Input for `GetEndpointAttributes` action.
     #
     # @!attribute [rw] endpoint_arn
-    #   EndpointArn for GetEndpointAttributes input.
+    #   `EndpointArn` for `GetEndpointAttributes` input.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetEndpointAttributesInput AWS API Documentation
@@ -625,7 +626,7 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Response from GetEndpointAttributes of the EndpointArn.
+    # Response from `GetEndpointAttributes` of the `EndpointArn`.
     #
     # @!attribute [rw] attributes
     #   Attributes include the following:
@@ -657,10 +658,10 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Input for GetPlatformApplicationAttributes action.
+    # Input for `GetPlatformApplicationAttributes` action.
     #
     # @!attribute [rw] platform_application_arn
-    #   PlatformApplicationArn for GetPlatformApplicationAttributesInput.
+    #   `PlatformApplicationArn` for GetPlatformApplicationAttributesInput.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetPlatformApplicationAttributesInput AWS API Documentation
@@ -671,7 +672,7 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Response for GetPlatformApplicationAttributes action.
+    # Response for `GetPlatformApplicationAttributes` action.
     #
     # @!attribute [rw] attributes
     #   Attributes include the following:
@@ -684,6 +685,14 @@ module Aws::SNS
     #
     #   * `ApplePlatformBundleID` – The app identifier used to configure
     #     token-based authentication.
+    #
+    #   * `AuthenticationMethod` – Returns the credential type used when
+    #     sending push notifications from application to APNS/APNS\_Sandbox,
+    #     or application to GCM.
+    #
+    #     * APNS – Returns the token or certificate.
+    #
+    #     * GCM – Returns the token or key.
     #
     #   * `EventEndpointCreated` – Topic ARN to which EndpointCreated event
     #     notifications should be sent.
@@ -1157,16 +1166,16 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Input for ListEndpointsByPlatformApplication action.
+    # Input for `ListEndpointsByPlatformApplication` action.
     #
     # @!attribute [rw] platform_application_arn
-    #   PlatformApplicationArn for ListEndpointsByPlatformApplicationInput
-    #   action.
+    #   `PlatformApplicationArn` for
+    #   `ListEndpointsByPlatformApplicationInput` action.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   NextToken string is used when calling
-    #   ListEndpointsByPlatformApplication action to retrieve additional
+    #   `NextToken` string is used when calling
+    #   `ListEndpointsByPlatformApplication` action to retrieve additional
     #   records that are available after the first page results.
     #   @return [String]
     #
@@ -1179,16 +1188,16 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Response for ListEndpointsByPlatformApplication action.
+    # Response for `ListEndpointsByPlatformApplication` action.
     #
     # @!attribute [rw] endpoints
-    #   Endpoints returned for ListEndpointsByPlatformApplication action.
+    #   Endpoints returned for `ListEndpointsByPlatformApplication` action.
     #   @return [Array<Types::Endpoint>]
     #
     # @!attribute [rw] next_token
-    #   NextToken string is returned when calling
-    #   ListEndpointsByPlatformApplication action if additional records are
-    #   available after the first page results.
+    #   `NextToken` string is returned when calling
+    #   `ListEndpointsByPlatformApplication` action if additional records
+    #   are available after the first page results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListEndpointsByPlatformApplicationResponse AWS API Documentation
@@ -1276,10 +1285,10 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Input for ListPlatformApplications action.
+    # Input for `ListPlatformApplications` action.
     #
     # @!attribute [rw] next_token
-    #   NextToken string is used when calling ListPlatformApplications
+    #   `NextToken` string is used when calling `ListPlatformApplications`
     #   action to retrieve additional records that are available after the
     #   first page results.
     #   @return [String]
@@ -1292,17 +1301,17 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Response for ListPlatformApplications action.
+    # Response for `ListPlatformApplications` action.
     #
     # @!attribute [rw] platform_applications
-    #   Platform applications returned when calling ListPlatformApplications
-    #   action.
+    #   Platform applications returned when calling
+    #   `ListPlatformApplications` action.
     #   @return [Array<Types::PlatformApplication>]
     #
     # @!attribute [rw] next_token
-    #   NextToken string is returned when calling ListPlatformApplications
-    #   action if additional records are available after the first page
-    #   results.
+    #   `NextToken` string is returned when calling
+    #   `ListPlatformApplications` action if additional records are
+    #   available after the first page results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPlatformApplicationsResponse AWS API Documentation
@@ -1555,7 +1564,7 @@ module Aws::SNS
     #
     class OptInPhoneNumberInput < Struct.new(
       :phone_number)
-      SENSITIVE = []
+      SENSITIVE = [:phone_number]
       include Aws::Structure
     end
 
@@ -1616,7 +1625,7 @@ module Aws::SNS
       :iso_2_country_code,
       :route_type,
       :number_capabilities)
-      SENSITIVE = []
+      SENSITIVE = [:phone_number]
       include Aws::Structure
     end
 
@@ -2020,7 +2029,7 @@ module Aws::SNS
       :message_attributes,
       :message_deduplication_id,
       :message_group_id)
-      SENSITIVE = []
+      SENSITIVE = [:phone_number]
       include Aws::Structure
     end
 
@@ -2156,14 +2165,14 @@ module Aws::SNS
     class SMSSandboxPhoneNumber < Struct.new(
       :phone_number,
       :status)
-      SENSITIVE = []
+      SENSITIVE = [:phone_number]
       include Aws::Structure
     end
 
-    # Input for SetEndpointAttributes action.
+    # Input for `SetEndpointAttributes` action.
     #
     # @!attribute [rw] endpoint_arn
-    #   EndpointArn used for SetEndpointAttributes action.
+    #   EndpointArn used for `SetEndpointAttributes` action.
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -2194,10 +2203,11 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Input for SetPlatformApplicationAttributes action.
+    # Input for `SetPlatformApplicationAttributes` action.
     #
     # @!attribute [rw] platform_application_arn
-    #   PlatformApplicationArn for SetPlatformApplicationAttributes action.
+    #   `PlatformApplicationArn` for `SetPlatformApplicationAttributes`
+    #   action.
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -2215,8 +2225,17 @@ module Aws::SNS
     #     * For Apple Services using token credentials, `PlatformCredential`
     #       is signing key.
     #
-    #     * For GCM (Firebase Cloud Messaging), `PlatformCredential` is API
-    #       key.
+    #     * For GCM (Firebase Cloud Messaging) using key credentials, there
+    #       is no `PlatformPrincipal`. The `PlatformCredential` is `API
+    #       key`.
+    #
+    #     * For GCM (Firebase Cloud Messaging) using token credentials,
+    #       there is no `PlatformPrincipal`. The `PlatformCredential` is a
+    #       JSON formatted private key file. When using the Amazon Web
+    #       Services CLI, the file must be in string format and special
+    #       characters must be ignored. To format the file correctly, Amazon
+    #       SNS recommends using the following command: `` SERVICE_JSON=`jq
+    #       @json <<< cat service.json` ``.
     #   ^
     #
     #   * `PlatformPrincipal` – The principal received from the notification
@@ -3099,7 +3118,7 @@ module Aws::SNS
     class VerifySMSSandboxPhoneNumberInput < Struct.new(
       :phone_number,
       :one_time_password)
-      SENSITIVE = []
+      SENSITIVE = [:phone_number]
       include Aws::Structure
     end
 

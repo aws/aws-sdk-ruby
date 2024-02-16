@@ -25,6 +25,10 @@ module Aws
         def code: () -> ::String
         def message: () -> ::String
       end
+      class InvalidStreamTypeException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def source: () -> ::String
+      end
       class LimitExceededException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
@@ -35,6 +39,26 @@ module Aws
         def message: () -> ::String
       end
       class ServiceUnavailableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TagrisAccessDeniedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TagrisInternalServiceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TagrisInvalidArnException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def sweep_list_item: () -> ::String
+      end
+      class TagrisInvalidParameterException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TagrisPartialResourcesExistResultsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def resource_existence_information: () -> ::String
+      end
+      class TagrisThrottledException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
     end

@@ -156,7 +156,8 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 letters, numbers, or hyphens.
+    #   * Must contain from 1 to 63 (for Aurora DB clusters) or 1 to 52 (for
+    #     Multi-AZ DB clusters) letters, numbers, or hyphens.
     #
     #   * First character must be a letter.
     #
@@ -938,7 +939,7 @@ module Aws::RDS
     #
     #   **RDS for PostgreSQL**
     #
-    #   Example: `postgres12`
+    #   Example: `postgres13`
     #
     #   To list all of the available parameter group families for a DB engine,
     #   use the following command:

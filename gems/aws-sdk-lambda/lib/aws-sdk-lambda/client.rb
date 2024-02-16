@@ -828,11 +828,16 @@ module Aws::Lambda
     #   * **Amazon Simple Queue Service** – The ARN of the queue.
     #
     #   * **Amazon Managed Streaming for Apache Kafka** – The ARN of the
-    #     cluster.
+    #     cluster or the ARN of the VPC connection (for [cross-account event
+    #     source mappings][1]).
     #
     #   * **Amazon MQ** – The ARN of the broker.
     #
     #   * **Amazon DocumentDB** – The ARN of the DocumentDB change stream.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function.
@@ -922,8 +927,9 @@ module Aws::Lambda
     #   start reading. `StartingPositionTimestamp` cannot be in the future.
     #
     # @option params [Types::DestinationConfig] :destination_config
-    #   (Kinesis and DynamoDB Streams only) A standard Amazon SQS queue or
-    #   standard Amazon SNS topic destination for discarded records.
+    #   (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Kafka only) A
+    #   configuration object that specifies the destination of an event after
+    #   Lambda processes it.
     #
     # @option params [Integer] :maximum_record_age_in_seconds
     #   (Kinesis and DynamoDB Streams only) Discard records older than the
@@ -1354,7 +1360,12 @@ module Aws::Lambda
     #
     # @option params [Types::EphemeralStorage] :ephemeral_storage
     #   The size of the function's `/tmp` directory in MB. The default value
-    #   is 512, but can be any whole number between 512 and 10,240 MB.
+    #   is 512, but can be any whole number between 512 and 10,240 MB. For
+    #   more information, see [Configuring ephemeral storage (console)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage
     #
     # @option params [Types::SnapStart] :snap_start
     #   The function's [SnapStart][1] setting.
@@ -3217,7 +3228,9 @@ module Aws::Lambda
     #
     # @option params [String] :client_context
     #   Up to 3,583 bytes of base64-encoded data about the invoking client to
-    #   pass to the function in the context object.
+    #   pass to the function in the context object. Lambda passes the
+    #   `ClientContext` object to your function for synchronous invocations
+    #   only.
     #
     # @option params [String, StringIO, File] :payload
     #   The JSON that you want to provide to your Lambda function as input.
@@ -3269,6 +3282,12 @@ module Aws::Lambda
     # For asynchronous function invocation, use Invoke.
     #
     # Invokes a function asynchronously.
+    #
+    # <note markdown="1"> If you do use the InvokeAsync action, note that it doesn't support
+    # the use of X-Ray active tracing. Trace ID is not propagated to the
+    # function, even if X-Ray active tracing is turned on.
+    #
+    #  </note>
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function.
@@ -3659,11 +3678,16 @@ module Aws::Lambda
     #   * **Amazon Simple Queue Service** – The ARN of the queue.
     #
     #   * **Amazon Managed Streaming for Apache Kafka** – The ARN of the
-    #     cluster.
+    #     cluster or the ARN of the VPC connection (for [cross-account event
+    #     source mappings][1]).
     #
     #   * **Amazon MQ** – The ARN of the broker.
     #
     #   * **Amazon DocumentDB** – The ARN of the DocumentDB change stream.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc
     #
     # @option params [String] :function_name
     #   The name of the Lambda function.
@@ -4076,7 +4100,7 @@ module Aws::Lambda
     # [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
     #
     # @option params [String] :compatible_runtime
-    #   A runtime identifier. For example, `go1.x`.
+    #   A runtime identifier. For example, `java21`.
     #
     #   The following list includes deprecated runtimes. For more information,
     #   see [Runtime deprecation policy][1].
@@ -4154,7 +4178,7 @@ module Aws::Lambda
     # [3]: https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html
     #
     # @option params [String] :compatible_runtime
-    #   A runtime identifier. For example, `go1.x`.
+    #   A runtime identifier. For example, `java21`.
     #
     #   The following list includes deprecated runtimes. For more information,
     #   see [Runtime deprecation policy][1].
@@ -5532,8 +5556,9 @@ module Aws::Lambda
     #   `MaximumBatchingWindowInSeconds` to at least 1.
     #
     # @option params [Types::DestinationConfig] :destination_config
-    #   (Kinesis and DynamoDB Streams only) A standard Amazon SQS queue or
-    #   standard Amazon SNS topic destination for discarded records.
+    #   (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Kafka only) A
+    #   configuration object that specifies the destination of an event after
+    #   Lambda processes it.
     #
     # @option params [Integer] :maximum_record_age_in_seconds
     #   (Kinesis and DynamoDB Streams only) Discard records older than the
@@ -6081,7 +6106,12 @@ module Aws::Lambda
     #
     # @option params [Types::EphemeralStorage] :ephemeral_storage
     #   The size of the function's `/tmp` directory in MB. The default value
-    #   is 512, but can be any whole number between 512 and 10,240 MB.
+    #   is 512, but can be any whole number between 512 and 10,240 MB. For
+    #   more information, see [Configuring ephemeral storage (console)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage
     #
     # @option params [Types::SnapStart] :snap_start
     #   The function's [SnapStart][1] setting.
@@ -6477,7 +6507,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.114.0'
+      context[:gem_version] = '1.115.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

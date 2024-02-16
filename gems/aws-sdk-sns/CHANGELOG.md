@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2024-02-16)
+------------------
+
+* Feature - This release marks phone numbers as sensitive inputs.
+
 1.71.0 (2024-01-26)
 ------------------
 

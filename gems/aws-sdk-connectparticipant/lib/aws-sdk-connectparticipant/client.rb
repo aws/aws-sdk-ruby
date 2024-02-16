@@ -389,7 +389,9 @@ module Aws::ConnectParticipant
     # @!group API Operations
 
     # Allows you to confirm that the attachment has been uploaded using the
-    # pre-signed URL provided in StartAttachmentUpload API.
+    # pre-signed URL provided in StartAttachmentUpload API. A conflict
+    # exception is thrown when an attachment with that identifier is already
+    # being uploaded.
     #
     # <note markdown="1"> `ConnectionToken` is used for invoking this API instead of
     # `ParticipantToken`.
@@ -678,6 +680,20 @@ module Aws::ConnectParticipant
     # attachments. For information about accessing past chat contact
     # transcripts for a persistent chat, see [Enable persistent chat][1].
     #
+    # If you have a process that consumes events in the transcript of an
+    # chat that has ended, note that chat transcripts contain the following
+    # event content types if the event has occurred during the chat session:
+    #
+    # * `application/vnd.amazonaws.connect.event.participant.left`
+    #
+    # * `application/vnd.amazonaws.connect.event.participant.joined`
+    #
+    # * `application/vnd.amazonaws.connect.event.chat.ended`
+    #
+    # * `application/vnd.amazonaws.connect.event.transfer.succeeded`
+    #
+    # * `application/vnd.amazonaws.connect.event.transfer.failed`
+    #
     # <note markdown="1"> `ConnectionToken` is used for invoking this API instead of
     # `ParticipantToken`.
     #
@@ -776,7 +792,17 @@ module Aws::ConnectParticipant
       req.send_request(options)
     end
 
-    # Sends an event.
+    # <note markdown="1"> The `application/vnd.amazonaws.connect.event.connection.acknowledged`
+    # ContentType will no longer be supported starting December 31, 2024.
+    # This event has been migrated to the [CreateParticipantConnection][1]
+    # API using the `ConnectParticipant` field.
+    #
+    #  </note>
+    #
+    # Sends an event. Message receipts are not supported when there are more
+    # than two active participants in the chat. Using the SendEvent API for
+    # message receipts when a supervisor is barged-in will result in a
+    # conflict exception.
     #
     # <note markdown="1"> `ConnectionToken` is used for invoking this API instead of
     # `ParticipantToken`.
@@ -784,11 +810,12 @@ module Aws::ConnectParticipant
     #  </note>
     #
     # The Amazon Connect Participant Service APIs do not use [Signature
-    # Version 4 authentication][1].
+    # Version 4 authentication][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    # [1]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
+    # [2]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
     # @option params [required, String] :content_type
     #   The content type of the request. Supported types are:
@@ -796,6 +823,7 @@ module Aws::ConnectParticipant
     #   * application/vnd.amazonaws.connect.event.typing
     #
     #   * application/vnd.amazonaws.connect.event.connection.acknowledged
+    #     (will be deprecated on December 31, 2024)
     #
     #   * application/vnd.amazonaws.connect.event.message.delivered
     #
@@ -1022,7 +1050,7 @@ module Aws::ConnectParticipant
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectparticipant'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

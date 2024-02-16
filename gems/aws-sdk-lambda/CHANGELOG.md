@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2024-02-16)
+------------------
+
+* Feature - Documentation-only updates for Lambda to clarify a number of existing actions and properties.
+
 1.114.0 (2024-01-26)
 ------------------
 

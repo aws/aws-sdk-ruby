@@ -643,6 +643,11 @@ module Aws::EMR
     #   intervention, or in the event of a cluster error.
     #   @return [Boolean]
     #
+    # @!attribute [rw] unhealthy_node_replacement
+    #   Indicates whether Amazon EMR should gracefully replace Amazon EC2
+    #   core instances that have degraded within the cluster.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] visible_to_all_users
     #   Indicates whether the cluster is visible to IAM principals in the
     #   Amazon Web Services account associated with the cluster. When
@@ -803,6 +808,7 @@ module Aws::EMR
       :release_label,
       :auto_terminate,
       :termination_protected,
+      :unhealthy_node_replacement,
       :visible_to_all_users,
       :applications,
       :tags,
@@ -3575,6 +3581,11 @@ module Aws::EMR
     #   in the event of a job-flow error.
     #   @return [Boolean]
     #
+    # @!attribute [rw] unhealthy_node_replacement
+    #   Indicates whether Amazon EMR should gracefully replace core nodes
+    #   that have degraded within the cluster.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] hadoop_version
     #   Applies only to Amazon EMR release versions earlier than 4.0. The
     #   Hadoop version for the cluster. Valid inputs are "0.18" (no longer
@@ -3644,6 +3655,7 @@ module Aws::EMR
       :placement,
       :keep_job_flow_alive_when_no_steps,
       :termination_protected,
+      :unhealthy_node_replacement,
       :hadoop_version,
       :ec2_subnet_id,
       :ec2_subnet_ids,
@@ -3723,6 +3735,11 @@ module Aws::EMR
     #   the event of a job-flow error.
     #   @return [Boolean]
     #
+    # @!attribute [rw] unhealthy_node_replacement
+    #   Indicates whether Amazon EMR should gracefully replace core nodes
+    #   that have degraded within the cluster.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] hadoop_version
     #   The Hadoop version for the cluster.
     #   @return [String]
@@ -3742,6 +3759,7 @@ module Aws::EMR
       :placement,
       :keep_job_flow_alive_when_no_steps,
       :termination_protected,
+      :unhealthy_node_replacement,
       :hadoop_version)
       SENSITIVE = []
       include Aws::Structure
@@ -5888,6 +5906,26 @@ module Aws::EMR
     class SetTerminationProtectionInput < Struct.new(
       :job_flow_ids,
       :termination_protected)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_flow_ids
+    #   The list of strings that uniquely identify the clusters for which to
+    #   turn on unhealthy node replacement. You can get these identifiers by
+    #   running the RunJobFlow or the DescribeJobFlows operations.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] unhealthy_node_replacement
+    #   Indicates whether to turn on or turn off graceful unhealthy node
+    #   replacement.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetUnhealthyNodeReplacementInput AWS API Documentation
+    #
+    class SetUnhealthyNodeReplacementInput < Struct.new(
+      :job_flow_ids,
+      :unhealthy_node_replacement)
       SENSITIVE = []
       include Aws::Structure
     end

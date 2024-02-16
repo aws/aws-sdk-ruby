@@ -535,8 +535,15 @@ module Aws::SNS
     #   `PlatformPrincipal` is `signing key ID` and `PlatformCredential` is
     #   `signing key`.
     #
-    # * For `GCM` (Firebase Cloud Messaging), there is no
-    #   `PlatformPrincipal` and the `PlatformCredential` is `API key`.
+    # * For GCM (Firebase Cloud Messaging) using key credentials, there is
+    #   no `PlatformPrincipal`. The `PlatformCredential` is `API key`.
+    #
+    # * For GCM (Firebase Cloud Messaging) using token credentials, there is
+    #   no `PlatformPrincipal`. The `PlatformCredential` is a JSON formatted
+    #   private key file. When using the Amazon Web Services CLI, the file
+    #   must be in string format and special characters must be ignored. To
+    #   format the file correctly, Amazon SNS recommends using the following
+    #   command: `` SERVICE_JSON=`jq @json <<< cat service.json` ``.
     #
     # * For `MPNS`, `PlatformPrincipal` is `TLS certificate` and
     #   `PlatformCredential` is `private key`.
@@ -558,7 +565,8 @@ module Aws::SNS
     #   (Firebase Cloud Messaging).
     #
     # @option params [required, Hash<String,String>] :attributes
-    #   For a list of attributes, see [SetPlatformApplicationAttributes][1].
+    #   For a list of attributes, see [ `SetPlatformApplicationAttributes`
+    #   ][1].
     #
     #
     #
@@ -614,8 +622,8 @@ module Aws::SNS
     # [2]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePushBaiduEndpoint.html
     #
     # @option params [required, String] :platform_application_arn
-    #   PlatformApplicationArn returned from CreatePlatformApplication is used
-    #   to create a an endpoint.
+    #   `PlatformApplicationArn` returned from CreatePlatformApplication is
+    #   used to create a an endpoint.
     #
     # @option params [required, String] :token
     #   Unique identifier created by the notification service for an app on a
@@ -630,7 +638,7 @@ module Aws::SNS
     #   not use this data. The data must be in UTF-8 format and less than 2KB.
     #
     # @option params [Hash<String,String>] :attributes
-    #   For a list of attributes, see [SetEndpointAttributes][1].
+    #   For a list of attributes, see [ `SetEndpointAttributes` ][1].
     #
     #
     #
@@ -864,7 +872,7 @@ module Aws::SNS
     # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
     #
     # @option params [required, String] :endpoint_arn
-    #   EndpointArn of endpoint to delete.
+    #   `EndpointArn` of endpoint to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -893,7 +901,7 @@ module Aws::SNS
     # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
     #
     # @option params [required, String] :platform_application_arn
-    #   PlatformApplicationArn of platform application object to delete.
+    #   `PlatformApplicationArn` of platform application object to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1020,7 +1028,7 @@ module Aws::SNS
     # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
     #
     # @option params [required, String] :endpoint_arn
-    #   EndpointArn for GetEndpointAttributes input.
+    #   `EndpointArn` for `GetEndpointAttributes` input.
     #
     # @return [Types::GetEndpointAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1056,7 +1064,7 @@ module Aws::SNS
     # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
     #
     # @option params [required, String] :platform_application_arn
-    #   PlatformApplicationArn for GetPlatformApplicationAttributesInput.
+    #   `PlatformApplicationArn` for GetPlatformApplicationAttributesInput.
     #
     # @return [Types::GetPlatformApplicationAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1235,12 +1243,12 @@ module Aws::SNS
     # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
     #
     # @option params [required, String] :platform_application_arn
-    #   PlatformApplicationArn for ListEndpointsByPlatformApplicationInput
+    #   `PlatformApplicationArn` for `ListEndpointsByPlatformApplicationInput`
     #   action.
     #
     # @option params [String] :next_token
-    #   NextToken string is used when calling
-    #   ListEndpointsByPlatformApplication action to retrieve additional
+    #   `NextToken` string is used when calling
+    #   `ListEndpointsByPlatformApplication` action to retrieve additional
     #   records that are available after the first page results.
     #
     # @return [Types::ListEndpointsByPlatformApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1386,9 +1394,9 @@ module Aws::SNS
     # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
     #
     # @option params [String] :next_token
-    #   NextToken string is used when calling ListPlatformApplications action
-    #   to retrieve additional records that are available after the first page
-    #   results.
+    #   `NextToken` string is used when calling `ListPlatformApplications`
+    #   action to retrieve additional records that are available after the
+    #   first page results.
     #
     # @return [Types::ListPlatformApplicationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1829,7 +1837,7 @@ module Aws::SNS
     #   resp = client.publish({
     #     topic_arn: "topicARN",
     #     target_arn: "String",
-    #     phone_number: "String",
+    #     phone_number: "PhoneNumber",
     #     message: "message", # required
     #     subject: "subject",
     #     message_structure: "messageStructure",
@@ -2025,7 +2033,7 @@ module Aws::SNS
     # [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
     #
     # @option params [required, String] :endpoint_arn
-    #   EndpointArn used for SetEndpointAttributes action.
+    #   EndpointArn used for `SetEndpointAttributes` action.
     #
     # @option params [required, Hash<String,String>] :attributes
     #   A map of the endpoint attributes. Attributes in this map include the
@@ -2078,7 +2086,8 @@ module Aws::SNS
     # [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html
     #
     # @option params [required, String] :platform_application_arn
-    #   PlatformApplicationArn for SetPlatformApplicationAttributes action.
+    #   `PlatformApplicationArn` for `SetPlatformApplicationAttributes`
+    #   action.
     #
     # @option params [required, Hash<String,String>] :attributes
     #   A map of the platform application attributes. Attributes in this map
@@ -2095,8 +2104,16 @@ module Aws::SNS
     #     * For Apple Services using token credentials, `PlatformCredential`
     #       is signing key.
     #
-    #     * For GCM (Firebase Cloud Messaging), `PlatformCredential` is API
-    #       key.
+    #     * For GCM (Firebase Cloud Messaging) using key credentials, there is
+    #       no `PlatformPrincipal`. The `PlatformCredential` is `API key`.
+    #
+    #     * For GCM (Firebase Cloud Messaging) using token credentials, there
+    #       is no `PlatformPrincipal`. The `PlatformCredential` is a JSON
+    #       formatted private key file. When using the Amazon Web Services
+    #       CLI, the file must be in string format and special characters must
+    #       be ignored. To format the file correctly, Amazon SNS recommends
+    #       using the following command: `` SERVICE_JSON=`jq @json <<< cat
+    #       service.json` ``.
     #   ^
     #
     #   * `PlatformPrincipal` – The principal received from the notification
@@ -2917,7 +2934,7 @@ module Aws::SNS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sns'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

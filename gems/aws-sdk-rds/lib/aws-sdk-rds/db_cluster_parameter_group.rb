@@ -227,7 +227,7 @@ module Aws::RDS
     #
     #   **RDS for PostgreSQL**
     #
-    #   Example: `postgres12`
+    #   Example: `postgres13`
     #
     #   To list all of the available parameter group families for a DB engine,
     #   use the following command:

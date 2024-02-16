@@ -64,6 +64,8 @@ module Aws::Firehose
             Aws::Firehose::Endpoints::DeleteDeliveryStream.build(context)
           when :describe_delivery_stream
             Aws::Firehose::Endpoints::DescribeDeliveryStream.build(context)
+          when :get_kinesis_stream
+            Aws::Firehose::Endpoints::GetKinesisStream.build(context)
           when :list_delivery_streams
             Aws::Firehose::Endpoints::ListDeliveryStreams.build(context)
           when :list_tags_for_delivery_stream
@@ -82,6 +84,8 @@ module Aws::Firehose
             Aws::Firehose::Endpoints::UntagDeliveryStream.build(context)
           when :update_destination
             Aws::Firehose::Endpoints::UpdateDestination.build(context)
+          when :verify_resources_exist_for_tagris
+            Aws::Firehose::Endpoints::VerifyResourcesExistForTagris.build(context)
           end
         end
       end
