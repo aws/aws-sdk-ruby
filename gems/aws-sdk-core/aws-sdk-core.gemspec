@@ -16,7 +16,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-partitions', '~> 1', '>= 1.651.0') # necessary for new endpoint resolution
   spec.add_dependency('aws-sigv4', '~> 1.8') # necessary for s3 express auth
   spec.add_dependency('aws-eventstream', '~> 1', '>= 1.3.0') # necessary for binary eventstream
-  spec.add_dependency('base64') # necessary for base64 encoding/decoding
 
   spec.metadata = {
     'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-core',

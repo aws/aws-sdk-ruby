@@ -371,19 +371,13 @@
       "Aws::DynamoDB::Plugins::ExtendedRetries",
       "Aws::DynamoDB::Plugins::SimpleAttributes",
       "Aws::DynamoDB::Plugins::CRC32Validation"
-    ],
-    "dependencies": {
-      "bigdecimal": null
-    }
+    ]
   },
   "DynamoDBStreams": {
     "models": "streams.dynamodb/2012-08-10",
     "addPlugins": [
       "Aws::DynamoDBStreams::Plugins::SimpleAttributes"
-    ],
-    "dependencies": {
-      "bigdecimal": null
-    }
+    ]
   },
   "EBS": {
     "models": "ebs/2019-11-02"
