@@ -876,6 +876,11 @@ module Aws::Amplify
     #   The required AWS Identity and Access Management (IAM) service role for
     #   the Amazon Resource Name (ARN) for automatically creating subdomains.
     #
+    # @option params [Types::CertificateSettings] :certificate_settings
+    #   The type of SSL/TLS certificate to use for your custom domain. If you
+    #   don't specify a certificate type, Amplify uses the default
+    #   certificate that it provisions and manages for you.
+    #
     # @return [Types::CreateDomainAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainAssociationResult#domain_association #domain_association} => Types::DomainAssociation
@@ -894,6 +899,10 @@ module Aws::Amplify
     #     ],
     #     auto_sub_domain_creation_patterns: ["AutoSubDomainCreationPattern"],
     #     auto_sub_domain_iam_role: "AutoSubDomainIAMRole",
+    #     certificate_settings: {
+    #       type: "AMPLIFY_MANAGED", # required, accepts AMPLIFY_MANAGED, CUSTOM
+    #       custom_certificate_arn: "CertificateArn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -904,7 +913,8 @@ module Aws::Amplify
     #   resp.domain_association.auto_sub_domain_creation_patterns #=> Array
     #   resp.domain_association.auto_sub_domain_creation_patterns[0] #=> String
     #   resp.domain_association.auto_sub_domain_iam_role #=> String
-    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.update_status #=> String, one of "REQUESTING_CERTIFICATE", "PENDING_VERIFICATION", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.domain_association.status_reason #=> String
     #   resp.domain_association.certificate_verification_dns_record #=> String
     #   resp.domain_association.sub_domains #=> Array
@@ -912,6 +922,9 @@ module Aws::Amplify
     #   resp.domain_association.sub_domains[0].sub_domain_setting.branch_name #=> String
     #   resp.domain_association.sub_domains[0].verified #=> Boolean
     #   resp.domain_association.sub_domains[0].dns_record #=> String
+    #   resp.domain_association.certificate.type #=> String, one of "AMPLIFY_MANAGED", "CUSTOM"
+    #   resp.domain_association.certificate.custom_certificate_arn #=> String
+    #   resp.domain_association.certificate.certificate_verification_dns_record #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateDomainAssociation AWS API Documentation
     #
@@ -1162,7 +1175,8 @@ module Aws::Amplify
     #   resp.domain_association.auto_sub_domain_creation_patterns #=> Array
     #   resp.domain_association.auto_sub_domain_creation_patterns[0] #=> String
     #   resp.domain_association.auto_sub_domain_iam_role #=> String
-    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.update_status #=> String, one of "REQUESTING_CERTIFICATE", "PENDING_VERIFICATION", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.domain_association.status_reason #=> String
     #   resp.domain_association.certificate_verification_dns_record #=> String
     #   resp.domain_association.sub_domains #=> Array
@@ -1170,6 +1184,9 @@ module Aws::Amplify
     #   resp.domain_association.sub_domains[0].sub_domain_setting.branch_name #=> String
     #   resp.domain_association.sub_domains[0].verified #=> Boolean
     #   resp.domain_association.sub_domains[0].dns_record #=> String
+    #   resp.domain_association.certificate.type #=> String, one of "AMPLIFY_MANAGED", "CUSTOM"
+    #   resp.domain_association.certificate.custom_certificate_arn #=> String
+    #   resp.domain_association.certificate.certificate_verification_dns_record #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteDomainAssociation AWS API Documentation
     #
@@ -1529,7 +1546,8 @@ module Aws::Amplify
     #   resp.domain_association.auto_sub_domain_creation_patterns #=> Array
     #   resp.domain_association.auto_sub_domain_creation_patterns[0] #=> String
     #   resp.domain_association.auto_sub_domain_iam_role #=> String
-    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.update_status #=> String, one of "REQUESTING_CERTIFICATE", "PENDING_VERIFICATION", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.domain_association.status_reason #=> String
     #   resp.domain_association.certificate_verification_dns_record #=> String
     #   resp.domain_association.sub_domains #=> Array
@@ -1537,6 +1555,9 @@ module Aws::Amplify
     #   resp.domain_association.sub_domains[0].sub_domain_setting.branch_name #=> String
     #   resp.domain_association.sub_domains[0].verified #=> Boolean
     #   resp.domain_association.sub_domains[0].dns_record #=> String
+    #   resp.domain_association.certificate.type #=> String, one of "AMPLIFY_MANAGED", "CUSTOM"
+    #   resp.domain_association.certificate.custom_certificate_arn #=> String
+    #   resp.domain_association.certificate.certificate_verification_dns_record #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetDomainAssociation AWS API Documentation
     #
@@ -1931,7 +1952,8 @@ module Aws::Amplify
     #   resp.domain_associations[0].auto_sub_domain_creation_patterns #=> Array
     #   resp.domain_associations[0].auto_sub_domain_creation_patterns[0] #=> String
     #   resp.domain_associations[0].auto_sub_domain_iam_role #=> String
-    #   resp.domain_associations[0].domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_associations[0].domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_associations[0].update_status #=> String, one of "REQUESTING_CERTIFICATE", "PENDING_VERIFICATION", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.domain_associations[0].status_reason #=> String
     #   resp.domain_associations[0].certificate_verification_dns_record #=> String
     #   resp.domain_associations[0].sub_domains #=> Array
@@ -1939,6 +1961,9 @@ module Aws::Amplify
     #   resp.domain_associations[0].sub_domains[0].sub_domain_setting.branch_name #=> String
     #   resp.domain_associations[0].sub_domains[0].verified #=> Boolean
     #   resp.domain_associations[0].sub_domains[0].dns_record #=> String
+    #   resp.domain_associations[0].certificate.type #=> String, one of "AMPLIFY_MANAGED", "CUSTOM"
+    #   resp.domain_associations[0].certificate.custom_certificate_arn #=> String
+    #   resp.domain_associations[0].certificate.certificate_verification_dns_record #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListDomainAssociations AWS API Documentation
@@ -2682,6 +2707,9 @@ module Aws::Amplify
     #   The required AWS Identity and Access Management (IAM) service role for
     #   the Amazon Resource Name (ARN) for automatically creating subdomains.
     #
+    # @option params [Types::CertificateSettings] :certificate_settings
+    #   The type of SSL/TLS certificate to use for your custom domain.
+    #
     # @return [Types::UpdateDomainAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDomainAssociationResult#domain_association #domain_association} => Types::DomainAssociation
@@ -2700,6 +2728,10 @@ module Aws::Amplify
     #     ],
     #     auto_sub_domain_creation_patterns: ["AutoSubDomainCreationPattern"],
     #     auto_sub_domain_iam_role: "AutoSubDomainIAMRole",
+    #     certificate_settings: {
+    #       type: "AMPLIFY_MANAGED", # required, accepts AMPLIFY_MANAGED, CUSTOM
+    #       custom_certificate_arn: "CertificateArn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2710,7 +2742,8 @@ module Aws::Amplify
     #   resp.domain_association.auto_sub_domain_creation_patterns #=> Array
     #   resp.domain_association.auto_sub_domain_creation_patterns[0] #=> String
     #   resp.domain_association.auto_sub_domain_iam_role #=> String
-    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.update_status #=> String, one of "REQUESTING_CERTIFICATE", "PENDING_VERIFICATION", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.domain_association.status_reason #=> String
     #   resp.domain_association.certificate_verification_dns_record #=> String
     #   resp.domain_association.sub_domains #=> Array
@@ -2718,6 +2751,9 @@ module Aws::Amplify
     #   resp.domain_association.sub_domains[0].sub_domain_setting.branch_name #=> String
     #   resp.domain_association.sub_domains[0].verified #=> Boolean
     #   resp.domain_association.sub_domains[0].dns_record #=> String
+    #   resp.domain_association.certificate.type #=> String, one of "AMPLIFY_MANAGED", "CUSTOM"
+    #   resp.domain_association.certificate.custom_certificate_arn #=> String
+    #   resp.domain_association.certificate.certificate_verification_dns_record #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateDomainAssociation AWS API Documentation
     #

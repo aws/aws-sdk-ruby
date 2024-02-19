@@ -818,7 +818,7 @@ module Aws::MediaTailor
     #           },
     #         ],
     #         message_type: "SPLICE_INSERT", # accepts SPLICE_INSERT, TIME_SIGNAL
-    #         offset_millis: 1,
+    #         offset_millis: 1, # required
     #         slate: {
     #           source_location_name: "__string",
     #           vod_source_name: "__string",
@@ -2878,7 +2878,7 @@ module Aws::MediaTailor
     #           },
     #         ],
     #         message_type: "SPLICE_INSERT", # accepts SPLICE_INSERT, TIME_SIGNAL
-    #         offset_millis: 1,
+    #         offset_millis: 1, # required
     #         slate: {
     #           source_location_name: "__string",
     #           vod_source_name: "__string",

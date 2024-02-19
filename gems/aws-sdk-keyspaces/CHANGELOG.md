@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2024-02-19)
+------------------
+
+* Feature - Documentation updates for Amazon Keyspaces
+
 1.17.0 (2024-01-26)
 ------------------
 

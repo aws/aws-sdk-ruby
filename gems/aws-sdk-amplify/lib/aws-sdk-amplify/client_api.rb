@@ -44,6 +44,10 @@ module Aws::Amplify
     BranchName = Shapes::StringShape.new(name: 'BranchName')
     Branches = Shapes::ListShape.new(name: 'Branches')
     BuildSpec = Shapes::StringShape.new(name: 'BuildSpec')
+    Certificate = Shapes::StructureShape.new(name: 'Certificate')
+    CertificateArn = Shapes::StringShape.new(name: 'CertificateArn')
+    CertificateSettings = Shapes::StructureShape.new(name: 'CertificateSettings')
+    CertificateType = Shapes::StringShape.new(name: 'CertificateType')
     CertificateVerificationDNSRecord = Shapes::StringShape.new(name: 'CertificateVerificationDNSRecord')
     Code = Shapes::StringShape.new(name: 'Code')
     CommitId = Shapes::StringShape.new(name: 'CommitId')
@@ -214,6 +218,7 @@ module Aws::Amplify
     UpdateBranchResult = Shapes::StructureShape.new(name: 'UpdateBranchResult')
     UpdateDomainAssociationRequest = Shapes::StructureShape.new(name: 'UpdateDomainAssociationRequest')
     UpdateDomainAssociationResult = Shapes::StructureShape.new(name: 'UpdateDomainAssociationResult')
+    UpdateStatus = Shapes::StringShape.new(name: 'UpdateStatus')
     UpdateTime = Shapes::TimestampShape.new(name: 'UpdateTime')
     UpdateWebhookRequest = Shapes::StructureShape.new(name: 'UpdateWebhookRequest')
     UpdateWebhookResult = Shapes::StructureShape.new(name: 'UpdateWebhookResult')
@@ -325,6 +330,15 @@ module Aws::Amplify
 
     Branches.member = Shapes::ShapeRef.new(shape: Branch)
 
+    Certificate.add_member(:type, Shapes::ShapeRef.new(shape: CertificateType, required: true, location_name: "type"))
+    Certificate.add_member(:custom_certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "customCertificateArn"))
+    Certificate.add_member(:certificate_verification_dns_record, Shapes::ShapeRef.new(shape: CertificateVerificationDNSRecord, location_name: "certificateVerificationDNSRecord"))
+    Certificate.struct_class = Types::Certificate
+
+    CertificateSettings.add_member(:type, Shapes::ShapeRef.new(shape: CertificateType, required: true, location_name: "type"))
+    CertificateSettings.add_member(:custom_certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "customCertificateArn"))
+    CertificateSettings.struct_class = Types::CertificateSettings
+
     CreateAppRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateAppRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateAppRequest.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, location_name: "repository"))
@@ -398,6 +412,7 @@ module Aws::Amplify
     CreateDomainAssociationRequest.add_member(:sub_domain_settings, Shapes::ShapeRef.new(shape: SubDomainSettings, required: true, location_name: "subDomainSettings"))
     CreateDomainAssociationRequest.add_member(:auto_sub_domain_creation_patterns, Shapes::ShapeRef.new(shape: AutoSubDomainCreationPatterns, location_name: "autoSubDomainCreationPatterns"))
     CreateDomainAssociationRequest.add_member(:auto_sub_domain_iam_role, Shapes::ShapeRef.new(shape: AutoSubDomainIAMRole, location_name: "autoSubDomainIAMRole"))
+    CreateDomainAssociationRequest.add_member(:certificate_settings, Shapes::ShapeRef.new(shape: CertificateSettings, location_name: "certificateSettings"))
     CreateDomainAssociationRequest.struct_class = Types::CreateDomainAssociationRequest
 
     CreateDomainAssociationResult.add_member(:domain_association, Shapes::ShapeRef.new(shape: DomainAssociation, required: true, location_name: "domainAssociation"))
@@ -471,9 +486,11 @@ module Aws::Amplify
     DomainAssociation.add_member(:auto_sub_domain_creation_patterns, Shapes::ShapeRef.new(shape: AutoSubDomainCreationPatterns, location_name: "autoSubDomainCreationPatterns"))
     DomainAssociation.add_member(:auto_sub_domain_iam_role, Shapes::ShapeRef.new(shape: AutoSubDomainIAMRole, location_name: "autoSubDomainIAMRole"))
     DomainAssociation.add_member(:domain_status, Shapes::ShapeRef.new(shape: DomainStatus, required: true, location_name: "domainStatus"))
+    DomainAssociation.add_member(:update_status, Shapes::ShapeRef.new(shape: UpdateStatus, location_name: "updateStatus"))
     DomainAssociation.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReason, required: true, location_name: "statusReason"))
     DomainAssociation.add_member(:certificate_verification_dns_record, Shapes::ShapeRef.new(shape: CertificateVerificationDNSRecord, location_name: "certificateVerificationDNSRecord"))
     DomainAssociation.add_member(:sub_domains, Shapes::ShapeRef.new(shape: SubDomains, required: true, location_name: "subDomains"))
+    DomainAssociation.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, location_name: "certificate"))
     DomainAssociation.struct_class = Types::DomainAssociation
 
     DomainAssociations.member = Shapes::ShapeRef.new(shape: DomainAssociation)
@@ -786,6 +803,7 @@ module Aws::Amplify
     UpdateDomainAssociationRequest.add_member(:sub_domain_settings, Shapes::ShapeRef.new(shape: SubDomainSettings, location_name: "subDomainSettings"))
     UpdateDomainAssociationRequest.add_member(:auto_sub_domain_creation_patterns, Shapes::ShapeRef.new(shape: AutoSubDomainCreationPatterns, location_name: "autoSubDomainCreationPatterns"))
     UpdateDomainAssociationRequest.add_member(:auto_sub_domain_iam_role, Shapes::ShapeRef.new(shape: AutoSubDomainIAMRole, location_name: "autoSubDomainIAMRole"))
+    UpdateDomainAssociationRequest.add_member(:certificate_settings, Shapes::ShapeRef.new(shape: CertificateSettings, location_name: "certificateSettings"))
     UpdateDomainAssociationRequest.struct_class = Types::UpdateDomainAssociationRequest
 
     UpdateDomainAssociationResult.add_member(:domain_association, Shapes::ShapeRef.new(shape: DomainAssociation, required: true, location_name: "domainAssociation"))

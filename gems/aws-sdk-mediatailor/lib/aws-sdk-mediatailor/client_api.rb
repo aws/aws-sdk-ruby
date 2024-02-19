@@ -203,7 +203,7 @@ module Aws::MediaTailor
 
     AdBreak.add_member(:ad_break_metadata, Shapes::ShapeRef.new(shape: AdBreakMetadataList, location_name: "AdBreakMetadata"))
     AdBreak.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
-    AdBreak.add_member(:offset_millis, Shapes::ShapeRef.new(shape: __long, location_name: "OffsetMillis"))
+    AdBreak.add_member(:offset_millis, Shapes::ShapeRef.new(shape: __long, required: true, location_name: "OffsetMillis"))
     AdBreak.add_member(:slate, Shapes::ShapeRef.new(shape: SlateSource, location_name: "Slate"))
     AdBreak.add_member(:splice_insert_message, Shapes::ShapeRef.new(shape: SpliceInsertMessage, location_name: "SpliceInsertMessage"))
     AdBreak.add_member(:time_signal_message, Shapes::ShapeRef.new(shape: TimeSignalMessage, location_name: "TimeSignalMessage"))

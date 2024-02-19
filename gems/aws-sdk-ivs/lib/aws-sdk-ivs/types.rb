@@ -241,8 +241,7 @@ module Aws::IVS
     # @!attribute [rw] latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live
     #   video up to Full HD. Use `LOW` for near-real-time interaction with
-    #   viewers. Default: `LOW`. (Note: In the Amazon IVS console, `LOW` and
-    #   `NORMAL` correspond to Ultra-low and Standard, respectively.)
+    #   viewers. Default: `LOW`.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -345,8 +344,7 @@ module Aws::IVS
     # @!attribute [rw] latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live
     #   video up to Full HD. Use `LOW` for near-real-time interaction with
-    #   viewers. Default: `LOW`. (Note: In the Amazon IVS console, `LOW` and
-    #   `NORMAL` correspond to Ultra-low and Standard, respectively.)
+    #   viewers. Default: `LOW`.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -437,8 +435,7 @@ module Aws::IVS
     # @!attribute [rw] latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live
     #   video up to Full HD. Use `LOW` for near-real-time interaction with
-    #   viewers. (Note: In the Amazon IVS console, `LOW` and `NORMAL`
-    #   correspond to Ultra-low and Standard, respectively.) Default: `LOW`.
+    #   viewers. Default: `LOW`.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2245,8 +2242,7 @@ module Aws::IVS
     # @!attribute [rw] latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live
     #   video up to Full HD. Use `LOW` for near-real-time interaction with
-    #   viewers. (Note: In the Amazon IVS console, `LOW` and `NORMAL`
-    #   correspond to Ultra-low and Standard, respectively.)
+    #   viewers.
     #   @return [String]
     #
     # @!attribute [rw] name

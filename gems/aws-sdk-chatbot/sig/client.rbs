@@ -1,0 +1,364 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Chatbot
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateChimeWebhookConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChimeWebhookConfigurationResult]
+        def webhook_configuration: () -> Types::ChimeWebhookConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#create_chime_webhook_configuration-instance_method
+      def create_chime_webhook_configuration: (
+                                                webhook_description: ::String,
+                                                webhook_url: ::String,
+                                                sns_topic_arns: Array[::String],
+                                                iam_role_arn: ::String,
+                                                configuration_name: ::String,
+                                                ?logging_level: ::String
+                                              ) -> _CreateChimeWebhookConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChimeWebhookConfigurationResponseSuccess
+
+      interface _CreateMicrosoftTeamsChannelConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTeamsChannelConfigurationResult]
+        def channel_configuration: () -> Types::TeamsChannelConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#create_microsoft_teams_channel_configuration-instance_method
+      def create_microsoft_teams_channel_configuration: (
+                                                          channel_id: ::String,
+                                                          ?channel_name: ::String,
+                                                          team_id: ::String,
+                                                          ?team_name: ::String,
+                                                          tenant_id: ::String,
+                                                          ?sns_topic_arns: Array[::String],
+                                                          iam_role_arn: ::String,
+                                                          configuration_name: ::String,
+                                                          ?logging_level: ::String,
+                                                          ?guardrail_policy_arns: Array[::String],
+                                                          ?user_authorization_required: bool
+                                                        ) -> _CreateMicrosoftTeamsChannelConfigurationResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMicrosoftTeamsChannelConfigurationResponseSuccess
+
+      interface _CreateSlackChannelConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSlackChannelConfigurationResult]
+        def channel_configuration: () -> Types::SlackChannelConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#create_slack_channel_configuration-instance_method
+      def create_slack_channel_configuration: (
+                                                slack_team_id: ::String,
+                                                slack_channel_id: ::String,
+                                                ?slack_channel_name: ::String,
+                                                ?sns_topic_arns: Array[::String],
+                                                iam_role_arn: ::String,
+                                                configuration_name: ::String,
+                                                ?logging_level: ::String,
+                                                ?guardrail_policy_arns: Array[::String],
+                                                ?user_authorization_required: bool
+                                              ) -> _CreateSlackChannelConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSlackChannelConfigurationResponseSuccess
+
+      interface _DeleteChimeWebhookConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteChimeWebhookConfigurationResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#delete_chime_webhook_configuration-instance_method
+      def delete_chime_webhook_configuration: (
+                                                chat_configuration_arn: ::String
+                                              ) -> _DeleteChimeWebhookConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteChimeWebhookConfigurationResponseSuccess
+
+      interface _DeleteMicrosoftTeamsChannelConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTeamsChannelConfigurationResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#delete_microsoft_teams_channel_configuration-instance_method
+      def delete_microsoft_teams_channel_configuration: (
+                                                          chat_configuration_arn: ::String
+                                                        ) -> _DeleteMicrosoftTeamsChannelConfigurationResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMicrosoftTeamsChannelConfigurationResponseSuccess
+
+      interface _DeleteMicrosoftTeamsConfiguredTeamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTeamsConfiguredTeamResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#delete_microsoft_teams_configured_team-instance_method
+      def delete_microsoft_teams_configured_team: (
+                                                    team_id: ::String
+                                                  ) -> _DeleteMicrosoftTeamsConfiguredTeamResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMicrosoftTeamsConfiguredTeamResponseSuccess
+
+      interface _DeleteMicrosoftTeamsUserIdentityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMicrosoftTeamsUserIdentityResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#delete_microsoft_teams_user_identity-instance_method
+      def delete_microsoft_teams_user_identity: (
+                                                  chat_configuration_arn: ::String,
+                                                  user_id: ::String
+                                                ) -> _DeleteMicrosoftTeamsUserIdentityResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMicrosoftTeamsUserIdentityResponseSuccess
+
+      interface _DeleteSlackChannelConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSlackChannelConfigurationResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#delete_slack_channel_configuration-instance_method
+      def delete_slack_channel_configuration: (
+                                                chat_configuration_arn: ::String
+                                              ) -> _DeleteSlackChannelConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSlackChannelConfigurationResponseSuccess
+
+      interface _DeleteSlackUserIdentityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSlackUserIdentityResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#delete_slack_user_identity-instance_method
+      def delete_slack_user_identity: (
+                                        chat_configuration_arn: ::String,
+                                        slack_team_id: ::String,
+                                        slack_user_id: ::String
+                                      ) -> _DeleteSlackUserIdentityResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSlackUserIdentityResponseSuccess
+
+      interface _DeleteSlackWorkspaceAuthorizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSlackWorkspaceAuthorizationResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#delete_slack_workspace_authorization-instance_method
+      def delete_slack_workspace_authorization: (
+                                                  slack_team_id: ::String
+                                                ) -> _DeleteSlackWorkspaceAuthorizationResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSlackWorkspaceAuthorizationResponseSuccess
+
+      interface _DescribeChimeWebhookConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChimeWebhookConfigurationsResult]
+        def next_token: () -> ::String
+        def webhook_configurations: () -> ::Array[Types::ChimeWebhookConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#describe_chime_webhook_configurations-instance_method
+      def describe_chime_webhook_configurations: (
+                                                   ?max_results: ::Integer,
+                                                   ?next_token: ::String,
+                                                   ?chat_configuration_arn: ::String
+                                                 ) -> _DescribeChimeWebhookConfigurationsResponseSuccess
+                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChimeWebhookConfigurationsResponseSuccess
+
+      interface _DescribeSlackChannelConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSlackChannelConfigurationsResult]
+        def next_token: () -> ::String
+        def slack_channel_configurations: () -> ::Array[Types::SlackChannelConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#describe_slack_channel_configurations-instance_method
+      def describe_slack_channel_configurations: (
+                                                   ?max_results: ::Integer,
+                                                   ?next_token: ::String,
+                                                   ?chat_configuration_arn: ::String
+                                                 ) -> _DescribeSlackChannelConfigurationsResponseSuccess
+                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSlackChannelConfigurationsResponseSuccess
+
+      interface _DescribeSlackUserIdentitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSlackUserIdentitiesResult]
+        def slack_user_identities: () -> ::Array[Types::SlackUserIdentity]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#describe_slack_user_identities-instance_method
+      def describe_slack_user_identities: (
+                                            ?chat_configuration_arn: ::String,
+                                            ?next_token: ::String,
+                                            ?max_results: ::Integer
+                                          ) -> _DescribeSlackUserIdentitiesResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSlackUserIdentitiesResponseSuccess
+
+      interface _DescribeSlackWorkspacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSlackWorkspacesResult]
+        def slack_workspaces: () -> ::Array[Types::SlackWorkspace]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#describe_slack_workspaces-instance_method
+      def describe_slack_workspaces: (
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _DescribeSlackWorkspacesResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSlackWorkspacesResponseSuccess
+
+      interface _GetAccountPreferencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountPreferencesResult]
+        def account_preferences: () -> Types::AccountPreferences
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#get_account_preferences-instance_method
+      def get_account_preferences: (
+                                   ) -> _GetAccountPreferencesResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountPreferencesResponseSuccess
+
+      interface _GetMicrosoftTeamsChannelConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTeamsChannelConfigurationResult]
+        def channel_configuration: () -> Types::TeamsChannelConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#get_microsoft_teams_channel_configuration-instance_method
+      def get_microsoft_teams_channel_configuration: (
+                                                       chat_configuration_arn: ::String
+                                                     ) -> _GetMicrosoftTeamsChannelConfigurationResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMicrosoftTeamsChannelConfigurationResponseSuccess
+
+      interface _ListMicrosoftTeamsChannelConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTeamsChannelConfigurationsResult]
+        def next_token: () -> ::String
+        def team_channel_configurations: () -> ::Array[Types::TeamsChannelConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#list_microsoft_teams_channel_configurations-instance_method
+      def list_microsoft_teams_channel_configurations: (
+                                                         ?max_results: ::Integer,
+                                                         ?next_token: ::String,
+                                                         ?team_id: ::String
+                                                       ) -> _ListMicrosoftTeamsChannelConfigurationsResponseSuccess
+                                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMicrosoftTeamsChannelConfigurationsResponseSuccess
+
+      interface _ListMicrosoftTeamsConfiguredTeamsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMicrosoftTeamsConfiguredTeamsResult]
+        def configured_teams: () -> ::Array[Types::ConfiguredTeam]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#list_microsoft_teams_configured_teams-instance_method
+      def list_microsoft_teams_configured_teams: (
+                                                   ?max_results: ::Integer,
+                                                   ?next_token: ::String
+                                                 ) -> _ListMicrosoftTeamsConfiguredTeamsResponseSuccess
+                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMicrosoftTeamsConfiguredTeamsResponseSuccess
+
+      interface _ListMicrosoftTeamsUserIdentitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMicrosoftTeamsUserIdentitiesResult]
+        def teams_user_identities: () -> ::Array[Types::TeamsUserIdentity]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#list_microsoft_teams_user_identities-instance_method
+      def list_microsoft_teams_user_identities: (
+                                                  ?chat_configuration_arn: ::String,
+                                                  ?next_token: ::String,
+                                                  ?max_results: ::Integer
+                                                ) -> _ListMicrosoftTeamsUserIdentitiesResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMicrosoftTeamsUserIdentitiesResponseSuccess
+
+      interface _UpdateAccountPreferencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccountPreferencesResult]
+        def account_preferences: () -> Types::AccountPreferences
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#update_account_preferences-instance_method
+      def update_account_preferences: (
+                                        ?user_authorization_required: bool,
+                                        ?training_data_collection_enabled: bool
+                                      ) -> _UpdateAccountPreferencesResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccountPreferencesResponseSuccess
+
+      interface _UpdateChimeWebhookConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateChimeWebhookConfigurationResult]
+        def webhook_configuration: () -> Types::ChimeWebhookConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#update_chime_webhook_configuration-instance_method
+      def update_chime_webhook_configuration: (
+                                                chat_configuration_arn: ::String,
+                                                ?webhook_description: ::String,
+                                                ?webhook_url: ::String,
+                                                ?sns_topic_arns: Array[::String],
+                                                ?iam_role_arn: ::String,
+                                                ?logging_level: ::String
+                                              ) -> _UpdateChimeWebhookConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChimeWebhookConfigurationResponseSuccess
+
+      interface _UpdateMicrosoftTeamsChannelConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTeamsChannelConfigurationResult]
+        def channel_configuration: () -> Types::TeamsChannelConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#update_microsoft_teams_channel_configuration-instance_method
+      def update_microsoft_teams_channel_configuration: (
+                                                          chat_configuration_arn: ::String,
+                                                          channel_id: ::String,
+                                                          ?channel_name: ::String,
+                                                          ?sns_topic_arns: Array[::String],
+                                                          ?iam_role_arn: ::String,
+                                                          ?logging_level: ::String,
+                                                          ?guardrail_policy_arns: Array[::String],
+                                                          ?user_authorization_required: bool
+                                                        ) -> _UpdateMicrosoftTeamsChannelConfigurationResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMicrosoftTeamsChannelConfigurationResponseSuccess
+
+      interface _UpdateSlackChannelConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSlackChannelConfigurationResult]
+        def channel_configuration: () -> Types::SlackChannelConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Chatbot/Client.html#update_slack_channel_configuration-instance_method
+      def update_slack_channel_configuration: (
+                                                chat_configuration_arn: ::String,
+                                                slack_channel_id: ::String,
+                                                ?slack_channel_name: ::String,
+                                                ?sns_topic_arns: Array[::String],
+                                                ?iam_role_arn: ::String,
+                                                ?logging_level: ::String,
+                                                ?guardrail_policy_arns: Array[::String],
+                                                ?user_authorization_required: bool
+                                              ) -> _UpdateSlackChannelConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSlackChannelConfigurationResponseSuccess
+    end
+  end
+end
+

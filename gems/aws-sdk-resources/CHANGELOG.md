@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.187.0 (2024-02-19)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-chatbot` gem.
+
 3.186.0 (2024-02-15)
 ------------------
 

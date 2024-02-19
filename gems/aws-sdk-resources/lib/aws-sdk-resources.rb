@@ -50,6 +50,7 @@ module Aws
   autoload :BillingConductor, 'aws-sdk-billingconductor'
   autoload :Braket, 'aws-sdk-braket'
   autoload :Budgets, 'aws-sdk-budgets'
+  autoload :Chatbot, 'aws-sdk-chatbot'
   autoload :Chime, 'aws-sdk-chime'
   autoload :ChimeSDKIdentity, 'aws-sdk-chimesdkidentity'
   autoload :ChimeSDKMediaPipelines, 'aws-sdk-chimesdkmediapipelines'

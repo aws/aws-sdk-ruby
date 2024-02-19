@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.894.0 (2024-02-19)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::Chatbot`.
+
 1.893.0 (2024-02-16)
 ------------------
 

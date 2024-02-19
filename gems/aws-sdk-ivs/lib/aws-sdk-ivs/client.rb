@@ -523,8 +523,7 @@ module Aws::IVS
     # @option params [String] :latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live video
     #   up to Full HD. Use `LOW` for near-real-time interaction with viewers.
-    #   (Note: In the Amazon IVS console, `LOW` and `NORMAL` correspond to
-    #   Ultra-low and Standard, respectively.) Default: `LOW`.
+    #   Default: `LOW`.
     #
     # @option params [String] :name
     #   Channel name.
@@ -1924,8 +1923,6 @@ module Aws::IVS
     # @option params [String] :latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live video
     #   up to Full HD. Use `LOW` for near-real-time interaction with viewers.
-    #   (Note: In the Amazon IVS console, `LOW` and `NORMAL` correspond to
-    #   Ultra-low and Standard, respectively.)
     #
     # @option params [String] :name
     #   Channel name.

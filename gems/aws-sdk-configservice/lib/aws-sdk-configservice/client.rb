@@ -2045,7 +2045,7 @@ module Aws::ConfigService
     # Config rule names. It is only applicable, when you request all the
     # organization Config rules.
     #
-    #  *For accounts within an organzation*
+    #  *For accounts within an organization*
     #
     #  If you deploy an organizational rule or conformance pack in an
     # organization administrator account, and then establish a delegated
@@ -2214,7 +2214,7 @@ module Aws::ConfigService
     # conformance packs names. They are only applicable, when you request
     # all the organization conformance packs.
     #
-    #  *For accounts within an organzation*
+    #  *For accounts within an organization*
     #
     #  If you deploy an organizational rule or conformance pack in an
     # organization administrator account, and then establish a delegated
@@ -4991,7 +4991,9 @@ module Aws::ConfigService
     # target (SSM document) must exist and have permissions to use the
     # target.
     #
-    # <note markdown="1"> If you make backward incompatible changes to the SSM document, you
+    # <note markdown="1"> **Be aware of backward incompatible changes**
+    #
+    #  If you make backward incompatible changes to the SSM document, you
     # must call this again to ensure the remediations can run.
     #
     #  This API does not support adding remediation configurations for
@@ -5001,7 +5003,9 @@ module Aws::ConfigService
     #
     #  </note>
     #
-    # <note markdown="1"> For manual remediation configuration, you need to provide a value for
+    # <note markdown="1"> **Required fields**
+    #
+    #  For manual remediation configuration, you need to provide a value for
     # `automationAssumeRole` or use a value in the `assumeRole`field to
     # remediate your resources. The SSM automation document can use either
     # as long as it maps to a valid parameter.
@@ -5012,6 +5016,28 @@ module Aws::ConfigService
     # resources.
     #
     #  </note>
+    #
+    # <note markdown="1"> **Auto remediation can be initiated even for compliant resources**
+    #
+    #  If you enable auto remediation for a specific Config rule using the
+    # [PutRemediationConfigurations][1] API or the Config console, it
+    # initiates the remediation process for all non-compliant resources for
+    # that specific rule. The auto remediation process relies on the
+    # compliance data snapshot which is captured on a periodic basis. Any
+    # non-compliant resource that is updated between the snapshot schedule
+    # will continue to be remediated based on the last known compliance data
+    # snapshot.
+    #
+    #  This means that in some cases auto remediation can be initiated even
+    # for compliant resources, since the bootstrap processor uses a database
+    # that can have stale evaluation results based on the last known
+    # compliance data snapshot.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/config/latest/APIReference/emAPI_PutRemediationConfigurations.html
     #
     # @option params [required, Array<Types::RemediationConfiguration>] :remediation_configurations
     #   A list of remediation configuration objects.
@@ -5091,13 +5117,17 @@ module Aws::ConfigService
     # updates an existing exception for a specified resource with a
     # specified Config rule.
     #
-    # <note markdown="1"> Config generates a remediation exception when a problem occurs running
+    # <note markdown="1"> **Exceptions block auto remediation**
+    #
+    #  Config generates a remediation exception when a problem occurs running
     # a remediation action for a specified resource. Remediation exceptions
     # blocks auto-remediation until the exception is cleared.
     #
     #  </note>
     #
-    # <note markdown="1"> When placing an exception on an Amazon Web Services resource, it is
+    # <note markdown="1"> **Manual remediation is recommended when placing an exception**
+    #
+    #  When placing an exception on an Amazon Web Services resource, it is
     # recommended that remediation is set as manual remediation until the
     # given Config rule for the specified resource evaluates the resource as
     # `NON_COMPLIANT`. Once the resource has been evaluated as
@@ -5109,7 +5139,9 @@ module Aws::ConfigService
     #
     #  </note>
     #
-    # <note markdown="1"> Placing an exception can only be performed on resources that are
+    # <note markdown="1"> **Exceptions can only be performed on non-compliant resources**
+    #
+    #  Placing an exception can only be performed on resources that are
     # `NON_COMPLIANT`. If you use this API for `COMPLIANT` resources or
     # resources that are `NOT_APPLICABLE`, a remediation exception will not
     # be generated. For more information on the conditions that initiate the
@@ -5118,9 +5150,28 @@ module Aws::ConfigService
     #
     #  </note>
     #
+    # <note markdown="1"> **Auto remediation can be initiated even for compliant resources**
+    #
+    #  If you enable auto remediation for a specific Config rule using the
+    # [PutRemediationConfigurations][2] API or the Config console, it
+    # initiates the remediation process for all non-compliant resources for
+    # that specific rule. The auto remediation process relies on the
+    # compliance data snapshot which is captured on a periodic basis. Any
+    # non-compliant resource that is updated between the snapshot schedule
+    # will continue to be remediated based on the last known compliance data
+    # snapshot.
+    #
+    #  This means that in some cases auto remediation can be initiated even
+    # for compliant resources, since the bootstrap processor uses a database
+    # that can have stale evaluation results based on the last known
+    # compliance data snapshot.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/config/latest/developerguide/config-concepts.html#aws-config-rules
+    # [2]: https://docs.aws.amazon.com/config/latest/APIReference/emAPI_PutRemediationConfigurations.html
     #
     # @option params [required, String] :config_rule_name
     #   The name of the Config rule for which you want to create remediation

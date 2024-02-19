@@ -987,6 +987,17 @@ module Aws::Keyspaces
     # capacity automatically with Amazon Keyspaces auto scaling][1] in the
     # *Amazon Keyspaces Developer Guide*.
     #
+    # `GetTableAutoScalingSettings` can't be used as an action in an IAM
+    # policy.
+    #
+    # To define permissions for `GetTableAutoScalingSettings`, you must
+    # allow the following two actions in the IAM policy statement's
+    # `Action` element:
+    #
+    # * `application-autoscaling:DescribeScalableTargets`
+    #
+    # * `application-autoscaling:DescribeScalingPolicies`
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html
@@ -1765,7 +1776,7 @@ module Aws::Keyspaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-keyspaces'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

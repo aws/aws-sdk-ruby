@@ -138,6 +138,9 @@
   "Budgets": {
     "models": "budgets/2016-10-20"
   },
+  "Chatbot": {
+    "models": "chatbot/2017-10-11"
+  },
   "Chime": {
     "models": "chime/2018-05-01"
   },

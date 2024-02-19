@@ -224,7 +224,7 @@ module Aws
                                   },
                                 ]?,
                                 message_type: ("SPLICE_INSERT" | "TIME_SIGNAL")?,
-                                offset_millis: ::Integer?,
+                                offset_millis: ::Integer,
                                 slate: {
                                   source_location_name: ::String?,
                                   vod_source_name: ::String?
@@ -868,7 +868,7 @@ module Aws
                                   },
                                 ]?,
                                 message_type: ("SPLICE_INSERT" | "TIME_SIGNAL")?,
-                                offset_millis: ::Integer?,
+                                offset_millis: ::Integer,
                                 slate: {
                                   source_location_name: ::String?,
                                   vod_source_name: ::String?

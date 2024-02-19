@@ -289,6 +289,7 @@ module Aws
             'BillingConductor' => 'billingconductor',
             'Braket' => 'braket',
             'Budgets' => 'budgets',
+            'Chatbot' => 'chatbot',
             'Chime' => 'chime',
             'ChimeSDKIdentity' => 'identity-chime',
             'ChimeSDKMediaPipelines' => 'media-pipelines-chime',
