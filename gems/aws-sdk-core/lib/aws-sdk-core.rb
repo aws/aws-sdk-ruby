@@ -96,6 +96,7 @@ require_relative 'aws-sdk-core/client_side_monitoring/publisher'
 require_relative 'aws-sdk-core/arn'
 require_relative 'aws-sdk-core/arn_parser'
 require_relative 'aws-sdk-core/ec2_metadata'
+require_relative 'aws-sdk-core/lru_cache'
 
 # dynamic endpoints
 require_relative 'aws-sdk-core/endpoints'

@@ -2,16 +2,23 @@
 
 module Aws
   module S3
+    # @api private
+    EXPRESS_CREDENTIALS_CACHE = LRUCache.new
+
     # Returns Credentials class for S3 Express. Accepts CreateSession
     # params as options. See {Client#create_session} for details.
     class ExpressCredentialsProvider
       # @param [Hash] options
-      # @option options [Client] :client The S3 client used to create the session.
+      # @option options [Client] :client The S3 client used to create the
+      #  session.
       # @option options [String] :session_mode (see: {Client#create_session})
+      # @option options [Boolean] :caching (true) When true, credentials will
+      #  be cached.
       # @option options [Callable] :before_refresh Proc called before
       #   credentials are refreshed.
       def initialize(options = {})
         @client = options.delete(:client)
+        @caching = options.delete(:caching) || true
         @options = options
         @cache = EXPRESS_CREDENTIALS_CACHE
       end

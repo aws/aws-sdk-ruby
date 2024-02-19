@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add an API private cache for S3 Express and Access Grants.
+
 3.191.2 (2024-02-14)
 ------------------
 

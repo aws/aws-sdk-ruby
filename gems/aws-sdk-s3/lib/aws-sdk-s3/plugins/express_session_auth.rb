@@ -31,7 +31,7 @@ for different buckets.
           def call(context)
             if (props = context[:endpoint_properties])
               # S3 Express endpoint - turn off md5 and enable crc32 default
-              if (backend = props['backend']) && backend == 'S3Express'
+              if props['backend'] == 'S3Express'
                 if context.operation_name == :put_object || checksum_required?(context)
                   context[:default_request_checksum_algorithm] = 'CRC32'
                 end
